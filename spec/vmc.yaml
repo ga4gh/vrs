@@ -1,0 +1,261 @@
+swagger: "2.0"
+
+info:
+  title: "Variation Modelling Collaboration"
+  description: |
+    Standardized exchange of biological sequence variation
+    This file may be referenced directly in clients and servers as
+    (URL TBD)
+  version: "0.0"
+  contact:
+    name: "Variation Modelling Collaboration"
+    url: "https://github.com/ga4gh/vmc"
+    email: "vmc-contributors@genomicsandhealth.org"
+externalDocs: 
+  description: "VMC Home"
+  url: "https://github.com/ga4gh/vmc"
+basePath: "/0"
+schemes:
+- "https"
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /alleles/{allele_id}:
+    get:
+      tags: ["Genetic States"]
+      summary: "Get specific Allele by Id"
+      description: "Returns the specified Allele"
+      operationId: "controller.allele_get"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "allele_id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Allele"
+        "404":
+          description: "allele_id does not exist"
+
+  /alleles/:
+    get:
+      tags: ["Genetic States"]
+      operationId: "controller.alleles_get"
+      summary: "Browse alleles"
+      description: "Returns a paginated set of Alleles for a query, or all Alleles"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Allele"
+            xml:
+              name: "Alleles"
+              wrapped: true
+        "404":
+          description: "allele_id doesn't exist"
+    post:
+      tags: ["Genetic States"]
+      description: "Adds a new allele"
+      operationId: "controller.alleles_post"
+      parameters:
+      - name: allele
+        in: "body"
+        description: "Allele to create"
+        required: false
+        schema:
+          $ref: "#/definitions/Allele"
+      responses:
+        "204":
+          description: "Allele created"
+          schema:
+            $ref: "#/definitions/Allele"
+        "400":
+          description: "Your allele smells"
+
+  /locations/:
+    get:
+      tags: ["Positions"]
+      operationId: "controller.locations_get"
+      summary: "Browse locations"
+      description: "Returns a paginated set of Locations for a query, or all Locations"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Location"
+            xml:
+              name: "Locations"
+              wrapped: true
+        "404":
+          description: "location_id doesn't exist"
+    post:
+      tags: ["Locations"]
+      description: "Adds a new location"
+      operationId: "controller.locations_post"
+      parameters:
+      - name: location
+        in: "body"
+        description: "Location to create"
+        required: false
+        schema:
+          $ref: "#/definitions/Location"
+      responses:
+        "204":
+          description: "Location created"
+          schema:
+            $ref: "#/definitions/Location"
+        "400":
+          description: "Your location smells"
+
+
+definitions:
+  Completeness:
+    type: "string"
+    description: |
+      Declares the `completeness` of haplotype or genotype definitions. Possible values and meanings are:
+        * unknown: presence of in-phase alleles is unknown
+        * unspecified: in-phase changes exist but are unspecified
+        * complete: haplotype declares complete set of observed sequence changes
+    enum:
+    - "UNKNOWN"
+    - "UNSPECIFIED"
+    - "COMPLETE"
+  Sequence:
+    type: "string"
+  Id:
+    type: "string"
+    description: |
+      **Biological definition:** A unique identifier for an object, such
+      as a sequence or allele, that is assigned by an organization or
+      algorithm. This identifier may be used to lookup additional data
+      in the named resource.
+
+      **Computational definition:** An Identifier consists of a namespace,
+      which identifies an external database, and an identifier in that
+      external database. Identifiers are represented as a Uniform
+      Resource Identifier (URI) character string.
+    xml:
+      attribute: true
+  Identifier:
+    type: "object"
+    required:
+    - "accession"
+    - "namespace"
+    properties:
+      namespace:
+        type: "string"
+        example: "NCBI"
+        description: "authority"
+      accession:
+        type: "string"
+        example: "ENST000001234.5"
+        description: "unique key within namespace"
+  Interval:
+    type: "object"
+    required:
+    - "end"
+    - "start"
+    properties:
+      start:
+        type: "integer"
+      end:
+        type: "integer"
+    example:
+      start: 5
+      end: 5
+  Location:
+    type: "object"
+    required:
+    - "interval"
+    - "sequence_id"
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+      sequence_id:
+        $ref: "#/definitions/Id"
+      interval:
+        $ref: "#/definitions/Interval"
+  Allele:
+    type: "object"
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+      location_id:
+        $ref: "#/definitions/Id"
+      replacement:
+        $ref: "#/definitions/Sequence"
+    example:
+      id: "A001"
+      location_id: "L001"
+      replacement: "ACGT"
+    xml:
+      name: "Allele"
+  Haplotype:
+    type: "object"
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+      completness:
+        $ref: "#/definitions/Completeness"
+      allele_ids:
+        type: "array"
+        items:
+          $ref: "#/definitions/Id"
+  Genotype:
+    type: "object"
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+      completness:
+        $ref: "#/definitions/Completeness"
+      haplotype_ids:
+        type: "array"
+        items:
+          $ref: "#/definitions/Id"
+  DateTime:
+    type: "string"
+    format: "date-time"
+  Meta:
+    type: "object"
+    properties:
+      version:
+        type: "string"
+        default: "0"
+      date:
+        $ref: "#/definitions/DateTime"
+  VMCBundle:
+    type: "object"
+    properties:
+      meta:
+        $ref: "#/definitions/Meta"
+      alleles:
+        type: "array"
+        items:
+          $ref: "#/definitions/Allele"
+      haplotypes:
+        type: "array"
+        items:
+          $ref: "#/definitions/Haplotype"
+      genotypes:
+        type: "array"
+        items:
+          $ref: "#/definitions/Genotype"
+      Identifers:
+        type: "array"
+        items:
+          $ref: "#/definitions/Identifier"

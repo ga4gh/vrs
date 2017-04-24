@@ -1,0 +1,11 @@
+certifi
+connexion == 1.0.129
+pip
+python_dateutil == 2.6.0
+requests
+setuptools >= 21.0.0
+urllib3
+
+ipython
+jupyter
+attrdict
