@@ -1,11 +1,7 @@
-certifi
 connexion == 1.0.129
-pip
-python_dateutil == 2.6.0
-requests
+pip >= 9
 setuptools >= 21.0.0
-urllib3
 
 ipython
 jupyter
-attrdict
+bravado
