@@ -40,10 +40,9 @@ paths:
         "200":
           description: "successful operation"
           schema:
-            $ref: "#/definitions/VMCBundle"
+            $ref: "#/definitions/GeneticStates"
         "404":
           description: "allele_id does not exist"
-
   /alleles/:
     get:
       tags: ["Genetic States"]
@@ -56,12 +55,7 @@ paths:
         "200":
           description: "successful operation"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/VMCBundle"
-            xml:
-              name: "Alleles"
-              wrapped: true
+            $ref: "#/definitions/GeneticStates"
         "404":
           description: "allele_id doesn't exist"
     post:
@@ -84,7 +78,7 @@ paths:
           description: "Your allele smells"
   /locations/:
     get:
-      tags: ["Positions"]
+      tags: ["Locations"]
       operationId: "controller.locations_get"
       summary: "Browse locations"
       description: "Returns a paginated set of Locations for a query, or all Locations"
@@ -121,7 +115,6 @@ paths:
         "400":
           description: "Your location smells"
 
-
 definitions:
   Completeness:
     type: "string"
@@ -137,8 +130,20 @@ definitions:
   Sequence:
     type: "string"
   Id:
+    description: |
+      A string that uniquely identifies a specific instance of an
+      object within a document.
+
+      __Implementation Guidance__
+      * Ids are opaque: there is no formatting or content requirement
+        other than corresponding uniquely to object instances.
+      * Implementations MAY change internal identifiers at any time.
+      * Recipients SHALL NOT persist Ids received from other sources.
     type: "string"
-    example: examplefromdef
+    example: "X0123abcd"
+    xml:
+      attribute: true
+  Identifier:
     description: |
       **Biological definition:** A unique identifier for an object, such
       as a sequence or allele, that is assigned by an organization or
@@ -149,13 +154,7 @@ definitions:
       which identifies an external database, and an identifier in that
       external database. Identifiers are represented as a Uniform
       Resource Identifier (URI) character string.
-    xml:
-      attribute: true
-  Identifier:
     type: "object"
-    required:
-    - "accession"
-    - "namespace"
     properties:
       namespace:
         type: "string"
@@ -163,26 +162,11 @@ definitions:
         description: "authority"
       accession:
         type: "string"
-        example: "ENST000001234.5"
+        example: "NM_000551.3"
         description: "unique key within namespace"
-  IdIdentifiersMap:
-    type: "object"
-    additionalProperties:
-      type: "array"
-      items:
-        $ref: "#/definitions/Identifier"
-    example:
-      foo:
-      - namespace: NCBI
-        accession: NM_000551.2
-      - namespace: ENST
-        accession: BLAHBLAH
-      bar:
-      - namespace: NCBI
-        accession: NM_000551.2
-      - namespace: ENST
-        accession: BLAHBLAH
-        
+    required:
+    - "accession"
+    - "namespace"
   Interval:
     type: "object"
     required:
@@ -208,6 +192,12 @@ definitions:
         $ref: "#/definitions/Id"
       interval:
         $ref: "#/definitions/Interval"
+    example:
+      id: "L001a"
+      sequence_id: "S01ab"
+      interval:
+        start: 22
+        end: 23
   Allele:
     type: "object"
     properties:
@@ -218,9 +208,9 @@ definitions:
       replacement:
         $ref: "#/definitions/Sequence"
     example:
-      id: "A001"
-      location_id: "L001"
-      replacement: "ACGT"
+      id: "A03bc"
+      location_id: "L001a"
+      replacement: "A"
     xml:
       name: "Allele"
   Haplotype:
@@ -256,11 +246,33 @@ definitions:
         default: "0"
       date:
         $ref: "#/definitions/DateTime"
-  VMCBundle:
+  IdIdentifiersMap:
+    type: "object"
+    additionalProperties:
+      type: "array"
+      items:
+        $ref: "#/definitions/Identifier"
+    example:
+      foo:
+      - namespace: NCBI
+        accession: NM_000551.2
+      - namespace: ENST
+        accession: BLAHBLAH
+      bar:
+      - namespace: NCBI
+        accession: NM_000551.2
+      - namespace: ENST
+        accession: BLAHBLAH
+  GeneticStates:
+    title: GeneticStates
     type: "object"
     properties:
       meta:
         $ref: "#/definitions/Meta"
+      locations:
+        type: "array"
+        items:
+          $ref: "#/definitions/Location"
       alleles:
         type: "array"
         items:
