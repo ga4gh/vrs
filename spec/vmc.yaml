@@ -28,7 +28,6 @@ paths:
       tags: ["Genetic States"]
       summary: "Get specific Allele by Id"
       description: "Returns the specified Allele"
-      operationId: "controller.allele_get"
       produces:
       - "application/json"
       parameters:
@@ -46,7 +45,6 @@ paths:
   /alleles/:
     get:
       tags: ["Genetic States"]
-      operationId: "controller.alleles_get"
       summary: "Browse alleles"
       description: "Returns a paginated set of Alleles for a query, or all Alleles"
       produces:
@@ -61,7 +59,6 @@ paths:
     post:
       tags: ["Genetic States"]
       description: "Adds a new allele"
-      operationId: "controller.alleles_post"
       parameters:
       - name: allele
         in: "body"
@@ -79,7 +76,6 @@ paths:
   /locations/:
     get:
       tags: ["Locations"]
-      operationId: "controller.locations_get"
       summary: "Browse locations"
       description: "Returns a paginated set of Locations for a query, or all Locations"
       produces:
@@ -99,7 +95,6 @@ paths:
     post:
       tags: ["Locations"]
       description: "Adds a new location"
-      operationId: "controller.locations_post"
       parameters:
       - name: location
         in: "body"
@@ -240,7 +235,7 @@ definitions:
       date:
         $ref: "#/definitions/DateTime"
   IdIdentifiersMap:
-    description: A map of <Id, Identifiers[]>.
+    description: "A map of <Id, Identifiers[]>."
     type: "object"
     additionalProperties:
       type: "array"
@@ -253,11 +248,11 @@ definitions:
       - namespace: ENST
         accession: BLAHBLAH
       "H19f4":
-      - namespace: 
-        accession: APOE:ε1
+      - namespace: whoknows
+        accession: APOE-ε1
       "H1220":
-      - namespace: 
-        accession: APOE:ε2
+      - namespace: whoknows
+        accession: APOE-ε2
   GeneticStates:
     title: GeneticStates
     description: A collection of Location, Allele, Haplotype, Genotype, and IdIdentiferMap records.
