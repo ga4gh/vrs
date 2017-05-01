@@ -118,42 +118,21 @@ paths:
 definitions:
   Completeness:
     type: "string"
-    description: |
-      Declares the `completeness` of haplotype or genotype definitions. Possible values and meanings are:
-        * unknown: presence of in-phase alleles is unknown
-        * unspecified: in-phase changes exist but are unspecified
-        * complete: haplotype declares complete set of observed sequence changes
+    description: Declares the `completeness` of haplotype or genotype definitions.
     enum:
     - "UNKNOWN"
-    - "UNSPECIFIED"
+    - "PARTIAL"
     - "COMPLETE"
   Sequence:
     type: "string"
   Id:
-    description: |
-      A string that uniquely identifies a specific instance of an
-      object within a document.
-
-      __Implementation Guidance__
-      * Ids are opaque: there is no formatting or content requirement
-        other than corresponding uniquely to object instances.
-      * Implementations MAY change internal identifiers at any time.
-      * Recipients SHALL NOT persist Ids received from other sources.
+    description: Uniquely identifies a specific instance of an object within a document.
     type: "string"
     example: "X0123abcd"
     xml:
       attribute: true
   Identifier:
-    description: |
-      **Biological definition:** A unique identifier for an object, such
-      as a sequence or allele, that is assigned by an organization or
-      algorithm. This identifier may be used to lookup additional data
-      in the named resource.
-
-      **Computational definition:** An Identifier consists of a namespace,
-      which identifies an external database, and an identifier in that
-      external database. Identifiers are represented as a Uniform
-      Resource Identifier (URI) character string.
+    description: A <namespace,accession> pair that refers to an object.
     type: "object"
     properties:
       namespace:
@@ -168,6 +147,7 @@ definitions:
     - "accession"
     - "namespace"
   Interval:
+    description: A <start,end> position pair, using interbase coordinates.
     type: "object"
     required:
     - "end"
@@ -181,6 +161,7 @@ definitions:
       start: 5
       end: 5
   Location:
+    description: An Interval on a Sequence.
     type: "object"
     required:
     - "interval"
@@ -199,10 +180,12 @@ definitions:
         start: 22
         end: 23
   Allele:
+    description: A contiguous change at a Location.
     type: "object"
     properties:
       id:
         $ref: "#/definitions/Id"
+        readOnly: true
       location_id:
         $ref: "#/definitions/Id"
       replacement:
@@ -214,6 +197,7 @@ definitions:
     xml:
       name: "Allele"
   Haplotype:
+    description: A set of zero or more Alleles on a single instance of a Sequence.
     type: "object"
     properties:
       id:
@@ -224,7 +208,12 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/Id"
+    example:
+      id: "Ha0f9"
+      completeness: "PARTIAL"
+      allele_ids: ["A0123", "A0124"]
   Genotype:
+    description: A list of Haplotypes.
     type: "object"
     properties:
       id:
@@ -235,6 +224,10 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/Id"
+    example:
+      id: "G310a"
+      completeness: "COMPLETE"
+      haplotype_ids: ["H1220", "H19f4"]
   DateTime:
     type: "string"
     format: "date-time"
@@ -247,24 +240,27 @@ definitions:
       date:
         $ref: "#/definitions/DateTime"
   IdIdentifiersMap:
+    description: A map of <Id, Identifiers[]>.
     type: "object"
     additionalProperties:
       type: "array"
       items:
         $ref: "#/definitions/Identifier"
     example:
-      foo:
+      "S491f":
       - namespace: NCBI
         accession: NM_000551.2
       - namespace: ENST
         accession: BLAHBLAH
-      bar:
-      - namespace: NCBI
-        accession: NM_000551.2
-      - namespace: ENST
-        accession: BLAHBLAH
+      "H19f4":
+      - namespace: 
+        accession: APOE:ε1
+      "H1220":
+      - namespace: 
+        accession: APOE:ε2
   GeneticStates:
     title: GeneticStates
+    description: A collection of Location, Allele, Haplotype, Genotype, and IdIdentiferMap records.
     type: "object"
     properties:
       meta:

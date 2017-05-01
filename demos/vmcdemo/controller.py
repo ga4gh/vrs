@@ -11,7 +11,6 @@ class DB:
     haplotypes = {}
     genotypes = {}
 
-
 db = DB()
 
 
