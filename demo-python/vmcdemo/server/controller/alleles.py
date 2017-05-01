@@ -1,11 +1,11 @@
-#import uuid
-
 from ..db import db
 from ... import models
 
 
 def get(**kwargs):
-    return list(db.alleles.values())[0].marshal(), 200
+    alleles = list(db.alleles.values())
+    allele0 = alleles[0]
+    return allele0.marshal(), 200
 
 
 def search(**kwargs):
@@ -13,6 +13,6 @@ def search(**kwargs):
 
 
 def post(**allele_data):
-    allele = models.Allele(**allele_data)
+    allele = models.Allele(**allele_data["allele"])
     db.alleles[allele.id] = allele
     return allele.marshal(), 200
