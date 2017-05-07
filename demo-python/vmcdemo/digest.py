@@ -25,7 +25,7 @@ def digest(o):
     return truncated_digest(format(o).encode("UTF-8"), digest_size=24)
 
 
-def digest_identifier(o):
+def global_identifier(o):
     if isinstance(o, models.Location):
         return models.Identifier(namespace="VL", accession=digest(o))
     if isinstance(o, models.Allele):

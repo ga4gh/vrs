@@ -6,3 +6,5 @@ ipython
 jupyter
 bravado
 sqlitedict
+biocommons.seqrepo
+bioutils

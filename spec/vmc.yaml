@@ -11,17 +11,23 @@ info:
     name: "Variation Modelling Collaboration"
     url: "https://github.com/ga4gh/vmc"
     email: "vmc-contributors@genomicsandhealth.org"
+
 externalDocs: 
   description: "VMC Home"
   url: "https://github.com/ga4gh/vmc"
+
 basePath: "/0"
+
 schemes:
 - "https"
 - "http"
+
 consumes:
 - "application/json"
+
 produces:
 - "application/json"
+
 paths:
   /alleles/{allele_id}:
     get:
@@ -111,21 +117,18 @@ paths:
           description: "Your location smells"
 
 definitions:
-  Completeness:
+  # Basic types
+  DateTime:
     type: "string"
-    description: Declares the `completeness` of haplotype or genotype definitions.
-    enum:
-    - "UNKNOWN"
-    - "PARTIAL"
-    - "COMPLETE"
-  Sequence:
-    type: "string"
+    format: "date-time"
+
   Id:
     description: Uniquely identifies a specific instance of an object within a document.
     type: "string"
     example: "X0123abcd"
     xml:
       attribute: true
+
   Identifier:
     description: A <namespace,accession> pair that refers to an object.
     type: "object"
@@ -141,12 +144,23 @@ definitions:
     required:
     - "accession"
     - "namespace"
+
+  Meta:
+    type: "object"
+    properties:
+      version:
+        type: "string"
+        default: "0"
+      date:
+        $ref: "#/definitions/DateTime"
+
+  # Sequence, Positions, Locations
+  Sequence:
+    type: "string"
+
   Interval:
     description: A <start,end> position pair, using interbase coordinates.
     type: "object"
-    required:
-    - "end"
-    - "start"
     properties:
       start:
         type: "integer"
@@ -155,25 +169,58 @@ definitions:
     example:
       start: 5
       end: 5
+    required:
+    - "end"
+    - "start"
+
   Location:
     description: An Interval on a Sequence.
     type: "object"
-    required:
-    - "interval"
-    - "sequence_id"
     properties:
       id:
         $ref: "#/definitions/Id"
       sequence_id:
         $ref: "#/definitions/Id"
-      interval:
-        $ref: "#/definitions/Interval"
+      position:
+        $ref: "#/definitions/Position"
+    required:
+    - "position"
+    - "sequence_id"
     example:
       id: "L001a"
       sequence_id: "S01ab"
       interval:
         start: 22
         end: 23
+
+  Position:
+    type: "object"
+    properties:
+      type:
+        $ref: "#/definitions/PositionType"
+      value:
+        type: "object"
+    required:
+    - type
+    - value
+    example:
+      type: "INTERVAL"
+      value:
+        start: 42
+        end: 42
+
+  PositionType:
+    type: "string"
+    description: Type of position or coordinate within a sequence
+    enum:
+    - "INTERVAL"
+    # later possibilities:
+    # - "BASEOFFSET"   # As in hgvs c.
+    # - "FUZZY"        # e.g., left-of, right-of, +/-, etc; Consider FALDO
+    # - "EXON"         # whole exon ranges (e.g., exons 3-5) (need intronic?)
+    # - "BAND"         # e.g., 11q22.12
+
+  # Genetic States
   Allele:
     description: A contiguous change at a Location.
     type: "object"
@@ -183,14 +230,34 @@ definitions:
         readOnly: true
       location_id:
         $ref: "#/definitions/Id"
-      replacement:
-        $ref: "#/definitions/Sequence"
+      type:
+        $ref: "#/definitions/AlleleType"
+      state:
+        type: "object"
     example:
       id: "A03bc"
       location_id: "L001a"
-      replacement: "A"
+      type: "SEQUENCE"
+      state:
+        sequence: "A"
     xml:
       name: "Allele"
+
+  AlleleType:
+    type: "string"
+    enum:
+    - "SEQUENCE"
+    # later:
+    # - "CNV"
+
+  Completeness:
+    type: "string"
+    description: Declares the `completeness` of haplotype or genotype definitions.
+    enum:
+    - "UNKNOWN"
+    - "PARTIAL"
+    - "COMPLETE"
+
   Haplotype:
     description: A set of zero or more Alleles on a single instance of a Sequence.
     type: "object"
@@ -207,6 +274,7 @@ definitions:
       id: "Ha0f9"
       completeness: "PARTIAL"
       allele_ids: ["A0123", "A0124"]
+
   Genotype:
     description: A list of Haplotypes.
     type: "object"
@@ -223,36 +291,7 @@ definitions:
       id: "G310a"
       completeness: "COMPLETE"
       haplotype_ids: ["H1220", "H19f4"]
-  DateTime:
-    type: "string"
-    format: "date-time"
-  Meta:
-    type: "object"
-    properties:
-      version:
-        type: "string"
-        default: "0"
-      date:
-        $ref: "#/definitions/DateTime"
-  IdIdentifiersMap:
-    description: "A map of <Id, Identifiers[]>."
-    type: "object"
-    additionalProperties:
-      type: "array"
-      items:
-        $ref: "#/definitions/Identifier"
-    example:
-      "S491f":
-      - namespace: NCBI
-        accession: NM_000551.2
-      - namespace: ENST
-        accession: BLAHBLAH
-      "H19f4":
-      - namespace: whoknows
-        accession: APOE-ε1
-      "H1220":
-      - namespace: whoknows
-        accession: APOE-ε2
+
   GeneticStates:
     title: GeneticStates
     description: A collection of Location, Allele, Haplotype, Genotype, and IdIdentiferMap records.
@@ -278,3 +317,24 @@ definitions:
           $ref: "#/definitions/Genotype"
       ididentifers:
         $ref: "#/definitions/IdIdentifiersMap"
+
+  # Naming
+  IdIdentifiersMap:
+    description: "A map of <Id, Identifiers[]>."
+    type: "object"
+    additionalProperties:
+      type: "array"
+      items:
+        $ref: "#/definitions/Identifier"
+    example:
+      "S491f":
+      - namespace: NCBI
+        accession: NM_000551.2
+      - namespace: ENST
+        accession: BLAHBLAH
+      "H19f4":
+      - namespace: whoknows
+        accession: APOE-ε1
+      "H1220":
+      - namespace: whoknows
+        accession: APOE-ε2
