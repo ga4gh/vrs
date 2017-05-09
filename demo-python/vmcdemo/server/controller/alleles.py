@@ -14,7 +14,11 @@ def search(**kwargs):
 
 
 def post(**allele_data):
-    allele = models.Allele(**allele_data["allele"])
-    allele.id = digest.format(digest.digest_identifier(allele))
+    allele = models.Allele(
+        location_id=allele_data["allele"]["location_id"],
+        type=allele_data["allele"]["type"],
+        state=models.AlleleSequence(**allele_data["allele"]["state"])
+        )
+    allele.id = digest.format(digest.computed_identifier(allele))
     db.alleles[allele.id] = allele
     return allele.marshal(), 200

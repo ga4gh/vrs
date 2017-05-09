@@ -18,3 +18,10 @@ for classname, classdef in spec.definitions.items():
     classdef.__module__ = __name__
     setattr(sys.modules[__name__], classname, classdef)
 
+
+def unmarshal_Location(d):
+    """unmarshal Location object from dictionary d"""
+    
+    Location(id=d["id"],
+             sequence_id=d["sequence_id"],
+             

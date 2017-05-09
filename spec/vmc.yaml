@@ -31,7 +31,7 @@ produces:
 paths:
   /alleles/{allele_id}:
     get:
-      tags: ["Genetic States"]
+      tags: ["Alleles"]
       summary: "Get specific Allele by Id"
       description: "Returns the specified Allele"
       produces:
@@ -45,12 +45,12 @@ paths:
         "200":
           description: "successful operation"
           schema:
-            $ref: "#/definitions/GeneticStates"
+            $ref: "#/definitions/VMCBundle"
         "404":
           description: "allele_id does not exist"
   /alleles/:
     get:
-      tags: ["Genetic States"]
+      tags: ["Alleles"]
       summary: "Browse alleles"
       description: "Returns a paginated set of Alleles for a query, or all Alleles"
       produces:
@@ -59,11 +59,11 @@ paths:
         "200":
           description: "successful operation"
           schema:
-            $ref: "#/definitions/GeneticStates"
+            $ref: "#/definitions/VMCBundle"
         "404":
           description: "allele_id doesn't exist"
     post:
-      tags: ["Genetic States"]
+      tags: ["Alleles"]
       description: "Adds a new allele"
       parameters:
       - name: allele
@@ -79,6 +79,7 @@ paths:
             $ref: "#/definitions/Allele"
         "400":
           description: "Your allele smells"
+
   /locations/:
     get:
       tags: ["Locations"]
@@ -116,6 +117,18 @@ paths:
         "400":
           description: "Your location smells"
 
+  /vmcbundle/:
+    get:
+      tags: ["VMCBundle"]
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/VMCBundle"
+
+
 definitions:
   # Basic types
   DateTime:
@@ -151,7 +164,7 @@ definitions:
       version:
         type: "string"
         default: "0"
-      date:
+      generated_at:
         $ref: "#/definitions/DateTime"
 
   # Sequence, Positions, Locations
@@ -167,8 +180,8 @@ definitions:
       end:
         type: "integer"
     example:
-      start: 5
-      end: 5
+      start: 42
+      end: 42
     required:
     - "end"
     - "start"
@@ -187,8 +200,8 @@ definitions:
     - "position"
     - "sequence_id"
     example:
-      id: "L001a"
-      sequence_id: "S01ab"
+      id: "VMC:GL01234"
+      sequence_id: "VMC:GS01234"
       interval:
         start: 22
         end: 23
@@ -227,7 +240,6 @@ definitions:
     properties:
       id:
         $ref: "#/definitions/Id"
-        readOnly: true
       location_id:
         $ref: "#/definitions/Id"
       type:
@@ -236,7 +248,7 @@ definitions:
         type: "object"
     example:
       id: "A03bc"
-      location_id: "L001a"
+      location_id: "VMC:GL_01234"
       type: "SEQUENCE"
       state:
         sequence: "A"
@@ -249,6 +261,14 @@ definitions:
     - "SEQUENCE"
     # later:
     # - "CNV"
+
+  AlleleSequence:
+    type: "object"
+    properties:
+      sequence:
+        type: "string"
+    required:
+    - "sequence"
 
   Completeness:
     type: "string"
@@ -271,7 +291,6 @@ definitions:
         items:
           $ref: "#/definitions/Id"
     example:
-      id: "Ha0f9"
       completeness: "PARTIAL"
       allele_ids: ["A0123", "A0124"]
 
@@ -292,9 +311,11 @@ definitions:
       completeness: "COMPLETE"
       haplotype_ids: ["H1220", "H19f4"]
 
-  GeneticStates:
-    title: GeneticStates
-    description: A collection of Location, Allele, Haplotype, Genotype, and IdIdentiferMap records.
+  VMCBundle:
+    title: VMCBundle
+    description: |
+      A complete and consistent collection of Location, Allele,
+      Haplotype, Genotype, and IdIdentiferMap records.
     type: "object"
     properties:
       meta:
@@ -315,8 +336,15 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/Genotype"
-      ididentifers:
+      ididentifiers:
         $ref: "#/definitions/IdIdentifiersMap"
+    required:
+    - meta
+    - locations
+    - alleles
+    - haplotypes
+    - genotypes
+    - ididentifiers
 
   # Naming
   IdIdentifiersMap:
