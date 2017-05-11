@@ -1,48 +1,50 @@
-from biocommons.seqrepo import SeqRepo
+"""Provides format and digest functions for VMC objects
+
+A VMC digest is computed using a `truncated_digest` (see below) on a
+well-prescribed serialization of an object.
+
+To compute the digest of an object:
+
+* If an object has an id and it begins with "VMC:", it is assumed to
+  be a VMC digest; that id is returned as is.
+
+* If the object has an id that does not begin with "VMC:", the VMC
+  digest is computed using the truncated_digest on the serialization
+  of the current object.
+
+* If the object does not have an id propoerty, the fields are
+  serialized and returned (not 
+
+To serialize an object, all properties except the `id` field are
+formatted as strings and concatenated, separated by a colon.  When a
+property to be serialized is an object, 
+
+"""
+
+
 from bioutils.digests import truncated_digest
 
 from . import models
 
+abc = models
+
 namespace = "VMC"
 namespacec = namespace + ":"
+model_prefixes = {
+    # GS: Sequence does not have a model
+    models.Location: "L",
+    models.Allele: "A",
+    models.Haplotype: "H",
+    models.Genotype: "G",
+}
 
 
-def _get_identifier(iim, id):
-    if id not in iim:
-        raise RuntimeError("referenced id {id} not in IdIdentitiferMap".format(id=id))
-    identifiers = [i for i in iim[id] if i.namespace == namespace]
-    if len(identifiers) == 0:
-        raise RuntimeError("No identifiers for {id} in namespace {ns}".format(id=id, ns=namespace))
-    if len(identifiers) > 1:
-        raise RuntimeError("Multiple identifiers for {id} in namespace {ns}".format(id=id, ns=namespace))
-    return identifiers[0]
 
-
-def format(o):
-    if isinstance(o, models.Identifier):
-        return "{o.namespace}:{o.accession}".format(o=o)
-
-    if isinstance(o, models.Interval):
-        return "{o.start}:{o.end}".format(o=o)
-
-    if isinstance(o, models.Position):
-        return "{o.type}:{ov}".format(o=o, ov=format(o.value))
-
-    if isinstance(o, models.Location):
-        return "{o.sequence_id}:{op}".format(o=o, op=format(o.position))
-
-    if isinstance(o, models.AlleleSequence):
-        return o.sequence
-
-    if isinstance(o, models.Allele):
-        return "{o.location_id}:{o.type}:{s}".format(o=o, s=format(o.state))
-
-    raise Exception("Unknown type " + str(type(o)))
-
-
-def digest(s):
-    return truncated_digest(s.encode("UTF-8"), digest_size=24)
-
+def computed_id(o):
+    if o.id is not None and o.id.startswith(namespacec):
+        return o.id
+    ident = computed_identifier(o)
+    return serialize(ident)
 
 
 def computed_identifier(o):
@@ -51,34 +53,52 @@ def computed_identifier(o):
     """
 
     if o.id is not None and o.id.startswith(namespacec):
-        return o.id
+        return models.Identifier(o.id.split(":"))
 
-    model_prefixes = {
-        models.Location: "GL",
-        models.Allele: "GL",
-        models.Haplotype: "GL",
-        models.Genotype: "GL",
-    }
-
-    return models.Identifier(namespace=namespace,
-                             accession="{}_{}".format(model_prefixes[type(o)], digest(format(o))))
+    accession = "{ns}_{d}".format(ns=model_prefixes[type(o)], d=digest(o))
+    return models.Identifier(namespace=namespace, accession=accession)
 
 
-if __name__ == "__main__":
-    iim = {
-        "VMC:GS01234": [
-            models.Identifier(namespace="NCBI", accession="NM_0123.4"),
-            models.Identifier(namespace="VMC", accession="GS01234")
-        ],
-        "VMC:GS0": [
-            models.Identifier(namespace="VMC", accession="GS0"),
-            models.Identifier(namespace="VMC", accession="GS00")
-        ],
-    }
-        
-    i = models.Interval(start=42, end=42)
-    p = models.Position(type="INTERVAL", value=i)
-    l = models.Location(sequence_id="VMC:GS01234", position=p)
-    a = models.Allele(location_id=l, type="SEQUENCE", state=models.AlleleSequence(sequence="A"))
+def digest(o):
+    s = serialize(o)
+    return truncated_digest(s.encode("UTF-8"), digest_size=24)
 
-    import IPython; IPython.embed()	  ### TODO: Remove IPython.embed()
+
+def serialize(o, iim=None, namespace="VMC"):
+    if iim is None:
+        def _map_id(id):
+            return id
+    else:
+        def _map_id(id):
+            return iim[id]
+
+    # isinstance() fails here because nested classes are coerced into
+    # the `abc` namespace.  (I don't completely understand why this
+    # happens. We'll use the class "basename".
+    t = o.__class__.__name__
+
+    if t == "Identifier":
+        return "{o.namespace}:{o.accession}".format(o=o)
+
+    if t == "Interval":
+        return "<{t}:{o.start}:{o.end}>".format(t=t, o=o)
+
+    if t == "Location":
+        return "<{t}:{id}:{pos}>".format(t=t, id=_map_id(o.sequence_id), pos=serialize(o.position))
+
+    if t == "Allele":
+        return "<{t}:{id}:{o.state}>".format(t=t, id=_map_id(o.location_id), o=o)
+
+    if t == "Haplotype":
+        ids = sorted(_map_id(str(i)).encode("UTF-8") for i in o.allele_ids)
+        return "<{t}:{o.completeness}:[{ids}]>".format(t=t, o=o, ids=";".join(i.decode("UTF-8") for i in ids))
+
+    if t == "Genotype":
+        ids = sorted(_map_id(str(i)).encode("UTF-8") for i in o.haplotype_ids)
+        return "<{t}:{o.completeness}:[{ids}]>".format(t=t, o=o, ids=";".join(i.decode("UTF-8") for i in ids))
+
+    raise Exception("Unknown type: " + t)
+
+
+
+

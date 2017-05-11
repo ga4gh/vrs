@@ -145,16 +145,12 @@ definitions:
         $ref: "#/definitions/Id"
       location_id:
         $ref: "#/definitions/Id"
-      type:
-        $ref: "#/definitions/AlleleType"
       state:
-        type: "object"
+        type: "string"
     example:
       id: "A03bc"
       location_id: "VMC:GL_01234"
-      type: "SEQUENCE"
-      state:
-        sequence: "A"
+      state: "A"
     xml:
       name: "Allele"
   
