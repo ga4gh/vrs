@@ -1,0 +1,9 @@
+#!/usr/bin/env python
+
+import json
+import sys
+import yaml
+
+# I randomly discovered that indent=3, sort_keys=True sorts $schema to
+# the top. I have no idea if that's intentional behavior.
+json.dump(yaml.load(sys.stdin), sys.stdout, indent=3, sort_keys=True)

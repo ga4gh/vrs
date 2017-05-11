@@ -1,0 +1,238 @@
+# when editing:
+# ls -1 *.yaml | entr make
+
+$schema: "http://json-schema.org/schema#"
+title: VMCBundle
+
+type: "object"
+
+properties:
+  meta:
+    $ref: "#/definitions/Meta"
+  locations:
+    type: "array"
+    items:
+      $ref: "#/definitions/Location"
+  alleles:
+    type: "array"
+    items:
+      $ref: "#/definitions/Allele"
+  haplotypes:
+    type: "array"
+    items:
+      $ref: "#/definitions/Haplotype"
+  genotypes:
+    type: "array"
+    items:
+      $ref: "#/definitions/Genotype"
+#  ididentifiers:
+#    $ref: "#/definitions/IdIdentifiersMap"
+
+x-required:
+- meta
+- locations
+- alleles
+- haplotypes
+- genotypes
+#- ididentifiers
+  
+
+definitions:
+  # Basic types
+  DateTime:
+    type: "string"
+    format: "date-time"
+  
+  Id:
+    description: Uniquely identifies a specific instance of an object within a document.
+    type: "string"
+    example: "X0123abcd"
+    xml:
+      attribute: true
+  
+  Identifier:
+    description: A <namespace,accession> pair that refers to an object.
+    type: "object"
+    properties:
+      namespace:
+        type: "string"
+        example: "NCBI"
+        description: "authority"
+      accession:
+        type: "string"
+        example: "NM_000551.3"
+        description: "unique key within namespace"
+    required:
+    - "accession"
+    - "namespace"
+  
+  Meta:
+    type: "object"
+    properties:
+      version:
+        type: "string"
+        default: "0"
+      generated_at:
+        $ref: "#/definitions/DateTime"
+  
+  # Sequence, Positions, Locations
+  Sequence:
+    type: "string"
+  
+  Interval:
+    description: A <start,end> position pair, using interbase coordinates.
+    type: "object"
+    properties:
+      start:
+        type: "integer"
+      end:
+        type: "integer"
+    example:
+      start: 42
+      end: 42
+    required:
+    - "end"
+    - "start"
+    additionalProperties: false
+
+  Intronic:
+    description: |
+      A position relative to another position, used with intronic
+      positions relative to exon boundary
+    type: "object"
+    properties:
+      base:
+        type: "integer"
+      offset:
+        type: "integer"
+    required:
+    - base
+    - offset
+    additionalProperties: false
+
+  Position:
+    type: "object"
+    oneOf:
+    - $ref: "#/definitions/Interval"
+    - $ref: "#/definitions/Intronic"
+  
+  Location:
+    description: An Interval on a Sequence.
+    type: "object"
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+      sequence_id:
+        $ref: "#/definitions/Id"
+      position:
+        $ref: "#/definitions/Position"
+    required:
+    - "position"
+    - "sequence_id"
+    example:
+      id: "VMC:GL01234"
+      sequence_id: "VMC:GS01234"
+      interval:
+        start: 22
+        end: 23
+  
+  # Genetic States
+  Allele:
+    description: A contiguous change at a Location.
+    type: "object"
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+      location_id:
+        $ref: "#/definitions/Id"
+      type:
+        $ref: "#/definitions/AlleleType"
+      state:
+        type: "object"
+    example:
+      id: "A03bc"
+      location_id: "VMC:GL_01234"
+      type: "SEQUENCE"
+      state:
+        sequence: "A"
+    xml:
+      name: "Allele"
+  
+  AlleleType:
+    type: "string"
+    enum:
+    - "SEQUENCE"
+    # later:
+    # - "CNV"
+  
+  AlleleSequence:
+    type: "object"
+    properties:
+      sequence:
+        type: "string"
+    required:
+    - "sequence"
+  
+  Completeness:
+    type: "string"
+    description: Declares the `completeness` of haplotype or genotype definitions.
+    enum:
+    - "UNKNOWN"
+    - "PARTIAL"
+    - "COMPLETE"
+  
+  Haplotype:
+    description: A set of zero or more Alleles on a single instance of a Sequence.
+    type: "object"
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+      completness:
+        $ref: "#/definitions/Completeness"
+      allele_ids:
+        type: "array"
+        items:
+          $ref: "#/definitions/Id"
+    example:
+      completeness: "PARTIAL"
+      allele_ids: ["A0123", "A0124"]
+  
+  Genotype:
+    description: A list of Haplotypes.
+    type: "object"
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+      completness:
+        $ref: "#/definitions/Completeness"
+      haplotype_ids:
+        type: "array"
+        items:
+          $ref: "#/definitions/Id"
+    example:
+      id: "G310a"
+      completeness: "COMPLETE"
+      haplotype_ids: ["H1220", "H19f4"]
+  
+  # Naming
+  IdIdentifiersMap:
+    description: "A map of <Id, Identifiers[]>."
+    type: "object"
+    patternProperties:
+      "^.":
+        type: "array"
+        items:
+          $ref: "#/definitions/Identifier"
+    example:
+      "S491f":
+      - namespace: NCBI
+        accession: NM_000551.2
+      - namespace: ENST
+        accession: BLAHBLAH
+      "H19f4":
+      - namespace: whoknows
+        accession: APOE-ε1
+      "H1220":
+      - namespace: whoknows
+        accession: APOE-ε2
+      
