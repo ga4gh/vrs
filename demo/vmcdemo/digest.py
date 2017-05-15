@@ -80,6 +80,11 @@ def serialize(o, iim=None, namespace="VMC"):
     if t == "Identifier":
         return "{o.namespace}:{o.accession}".format(o=o)
 
+    if t == "Position":
+        if o.interval is not None:
+            return serialize(o.interval)
+        raise Exception("Position isn't an interval ?!")
+
     if t == "Interval":
         return "<{t}:{o.start}:{o.end}>".format(t=t, o=o)
 

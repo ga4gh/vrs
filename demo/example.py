@@ -14,7 +14,9 @@ if __name__ == "__main__":
 
     i = models.Interval(start=42, end=42)
 
-    l = models.Location(sequence_id="VMC:GS_01234", position=i)
+    p = models.Position(interval=i)
+
+    l = models.Location(sequence_id="VMC:GS_01234", position=p)
     l.id = computed_id(l)
     print("{} -> {}".format(serialize(l), l.id))
 

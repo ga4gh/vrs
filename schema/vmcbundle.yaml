@@ -64,6 +64,7 @@ definitions:
         type: "string"
         example: "NM_000551.3"
         description: "unique key within namespace"
+    additionalProperties: false
     required:
     - "accession"
     - "namespace"
@@ -76,7 +77,7 @@ definitions:
         default: "0"
       generated_at:
         $ref: "#/definitions/DateTime"
-  
+
   # Sequence, Positions, Locations
   Sequence:
     type: "string"
@@ -114,9 +115,10 @@ definitions:
 
   Position:
     type: "object"
-    oneOf:
-    - $ref: "#/definitions/Interval"
-    - $ref: "#/definitions/Intronic"
+    properties:
+      interval:
+        $ref: "#/definitions/Interval"
+    additionalProperties: false
   
   Location:
     description: An Interval on a Sequence.
@@ -128,6 +130,7 @@ definitions:
         $ref: "#/definitions/Id"
       position:
         $ref: "#/definitions/Position"
+    additionalProperties: false
     required:
     - "position"
     - "sequence_id"
@@ -149,6 +152,7 @@ definitions:
         $ref: "#/definitions/Id"
       state:
         type: "string"
+    additionalProperties: false
     example:
       id: "A03bc"
       location_id: "VMC:GL_01234"
@@ -170,12 +174,13 @@ definitions:
     properties:
       id:
         $ref: "#/definitions/Id"
-      completness:
+      completeness:
         $ref: "#/definitions/Completeness"
       allele_ids:
         type: "array"
         items:
           $ref: "#/definitions/Id"
+    additionalProperties: false
     example:
       completeness: "PARTIAL"
       allele_ids: ["A0123", "A0124"]
@@ -186,12 +191,13 @@ definitions:
     properties:
       id:
         $ref: "#/definitions/Id"
-      completness:
+      completeness:
         $ref: "#/definitions/Completeness"
       haplotype_ids:
         type: "array"
         items:
           $ref: "#/definitions/Id"
+    additionalProperties: false
     example:
       id: "G310a"
       completeness: "COMPLETE"
@@ -206,6 +212,7 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/Identifier"
+    additionalProperties: false
     example:
       "S491f":
       - namespace: NCBI
