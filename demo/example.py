@@ -5,13 +5,6 @@ from vmcdemo import models, computed_id, serialize
 
 
 if __name__ == "__main__":
-    identifiers = {
-        "VMC:GS_01234": [
-            models.Identifier(namespace="NCBI", accession="NM_0123.4"),
-            models.Identifier(namespace="VMC", accession="GS_01234")
-        ]
-    }
-
     i = models.Interval(start=42, end=42)
 
     p = models.Position(interval=i)
@@ -40,6 +33,16 @@ if __name__ == "__main__":
     print("{} -> {}".format(serialize(g), g.id))
 
     genotypes = {g.id: g.as_dict()}
+
+    identifiers = {
+        "VMC:GS_01234": [
+            models.Identifier(namespace="NCBI", accession="NM_0123.4"),
+            models.Identifier(namespace="VMC", accession="GS_01234")
+        ],
+        "VMC:GL_72pn8Yi-9WyoreirKOH7bc-Vx_Jjkdp_": [
+            models.Identifier(namespace="dbSNP", accession="rs12345"),
+        ]
+    }
 
     b = models.Vmcbundle(
         meta=models.Meta(

@@ -32,10 +32,10 @@ namespace = "VMC"
 namespacec = namespace + ":"
 model_prefixes = {
     # GS: Sequence does not have a model
-    models.Location: "L",
-    models.Allele: "A",
-    models.Haplotype: "H",
-    models.Genotype: "G",
+    models.Location: "GL",
+    models.Allele: "GA",
+    models.Haplotype: "GH",
+    models.Genotype: "GG",
 }
 
 
@@ -64,13 +64,10 @@ def digest(o):
     return truncated_digest(s.encode("UTF-8"), digest_size=24)
 
 
-def serialize(o, iim=None, namespace="VMC"):
-    if iim is None:
-        def _map_id(id):
-            return id
-    else:
-        def _map_id(id):
-            return iim[id]
+def serialize(o, namespace="VMC"):
+    def _map_id(id):
+        assert id.startswith(namespace + ":")
+        return id
 
     # isinstance() fails here because nested classes are coerced into
     # the `abc` namespace.  (I don't completely understand why this
