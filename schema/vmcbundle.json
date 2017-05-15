@@ -1,302 +1,290 @@
 {
-   "$schema": "http://json-schema.org/schema#",
+   "$schema": "http://json-schema.org/schema#", 
+   "additionalProperties": false, 
    "definitions": {
       "Allele": {
-         "description": "A contiguous change at a Location.",
+         "description": "A contiguous change at a Location.", 
          "example": {
-            "id": "A03bc",
-            "location_id": "VMC:GL_01234",
+            "id": "A03bc", 
+            "location_id": "VMC:GL_01234", 
             "state": "A"
-         },
+         }, 
          "properties": {
             "id": {
                "$ref": "#/definitions/Id"
-            },
+            }, 
             "location_id": {
                "$ref": "#/definitions/Id"
-            },
+            }, 
             "state": {
                "type": "string"
             }
-         },
-         "type": "object",
+         }, 
+         "type": "object", 
          "xml": {
             "name": "Allele"
          }
-      },
-      "AlleleSequence": {
-         "properties": {
-            "sequence": {
-               "type": "string"
-            }
-         },
-         "required": [
-            "sequence"
-         ],
-         "type": "object"
-      },
-      "AlleleType": {
-         "enum": [
-            "SEQUENCE"
-         ],
-         "type": "string"
-      },
+      }, 
       "Completeness": {
-         "description": "Declares the `completeness` of haplotype or genotype definitions.",
+         "description": "Declares the `completeness` of haplotype or genotype definitions.", 
          "enum": [
-            "UNKNOWN",
-            "PARTIAL",
+            "UNKNOWN", 
+            "PARTIAL", 
             "COMPLETE"
-         ],
+         ], 
          "type": "string"
-      },
+      }, 
       "DateTime": {
-         "format": "date-time",
+         "format": "date-time", 
          "type": "string"
-      },
+      }, 
       "Genotype": {
-         "description": "A list of Haplotypes.",
+         "description": "A list of Haplotypes.", 
          "example": {
-            "completeness": "COMPLETE",
+            "completeness": "COMPLETE", 
             "haplotype_ids": [
-               "H1220",
+               "H1220", 
                "H19f4"
-            ],
+            ], 
             "id": "G310a"
-         },
+         }, 
          "properties": {
             "completness": {
                "$ref": "#/definitions/Completeness"
-            },
+            }, 
             "haplotype_ids": {
                "items": {
                   "$ref": "#/definitions/Id"
-               },
+               }, 
                "type": "array"
-            },
+            }, 
             "id": {
                "$ref": "#/definitions/Id"
             }
-         },
+         }, 
          "type": "object"
-      },
+      }, 
       "Haplotype": {
-         "description": "A set of zero or more Alleles on a single instance of a Sequence.",
+         "description": "A set of zero or more Alleles on a single instance of a Sequence.", 
          "example": {
             "allele_ids": [
-               "A0123",
+               "A0123", 
                "A0124"
-            ],
+            ], 
             "completeness": "PARTIAL"
-         },
+         }, 
          "properties": {
             "allele_ids": {
                "items": {
                   "$ref": "#/definitions/Id"
-               },
+               }, 
                "type": "array"
-            },
+            }, 
             "completness": {
                "$ref": "#/definitions/Completeness"
-            },
+            }, 
             "id": {
                "$ref": "#/definitions/Id"
             }
-         },
+         }, 
          "type": "object"
-      },
+      }, 
       "Id": {
-         "description": "Uniquely identifies a specific instance of an object within a document.",
-         "example": "X0123abcd",
-         "type": "string",
+         "description": "Uniquely identifies a specific instance of an object within a document.", 
+         "example": "X0123abcd", 
+         "type": "string", 
          "xml": {
             "attribute": true
          }
-      },
-      "IdIdentifiersMap": {
-         "description": "A map of <Id, Identifiers[]>.",
+      }, 
+      "Identifier": {
+         "description": "A <namespace,accession> pair that refers to an object.", 
+         "properties": {
+            "accession": {
+               "description": "unique key within namespace", 
+               "example": "NM_000551.3", 
+               "type": "string"
+            }, 
+            "namespace": {
+               "description": "authority", 
+               "example": "NCBI", 
+               "type": "string"
+            }
+         }, 
+         "required": [
+            "accession", 
+            "namespace"
+         ], 
+         "type": "object"
+      }, 
+      "Identifiers": {
+         "description": "A list of Identifiers", 
          "example": {
             "H1220": [
                {
-                  "accession": "APOE-\u03b52",
+                  "accession": "APOE-\u03b52", 
                   "namespace": "whoknows"
                }
-            ],
+            ], 
             "H19f4": [
                {
-                  "accession": "APOE-\u03b51",
+                  "accession": "APOE-\u03b51", 
                   "namespace": "whoknows"
                }
-            ],
+            ], 
             "S491f": [
                {
-                  "accession": "NM_000551.2",
+                  "accession": "NM_000551.2", 
                   "namespace": "NCBI"
-               },
+               }, 
                {
-                  "accession": "BLAHBLAH",
+                  "accession": "BLAHBLAH", 
                   "namespace": "ENST"
                }
             ]
-         },
+         }, 
          "patternProperties": {
             "^.": {
                "items": {
                   "$ref": "#/definitions/Identifier"
-               },
+               }, 
                "type": "array"
             }
-         },
+         }, 
          "type": "object"
-      },
-      "Identifier": {
-         "description": "A <namespace,accession> pair that refers to an object.",
-         "properties": {
-            "accession": {
-               "description": "unique key within namespace",
-               "example": "NM_000551.3",
-               "type": "string"
-            },
-            "namespace": {
-               "description": "authority",
-               "example": "NCBI",
-               "type": "string"
-            }
-         },
-         "required": [
-            "accession",
-            "namespace"
-         ],
-         "type": "object"
-      },
+      }, 
       "Interval": {
-         "additionalProperties": false,
-         "description": "A <start,end> position pair, using interbase coordinates.",
+         "additionalProperties": false, 
+         "description": "A <start,end> position pair, using interbase coordinates.", 
          "example": {
-            "end": 42,
+            "end": 42, 
             "start": 42
-         },
+         }, 
          "properties": {
             "end": {
                "type": "integer"
-            },
+            }, 
             "start": {
                "type": "integer"
             }
-         },
+         }, 
          "required": [
-            "end",
+            "end", 
             "start"
-         ],
+         ], 
          "type": "object"
-      },
+      }, 
       "Intronic": {
-         "additionalProperties": false,
-         "description": "A position relative to another position, used with intronic\npositions relative to exon boundary\n",
+         "additionalProperties": false, 
+         "description": "A position relative to another position, used with intronic\npositions relative to exon boundary\n", 
          "properties": {
             "base": {
                "type": "integer"
-            },
+            }, 
             "offset": {
                "type": "integer"
             }
-         },
+         }, 
          "required": [
-            "base",
+            "base", 
             "offset"
-         ],
+         ], 
          "type": "object"
-      },
+      }, 
       "Location": {
-         "description": "An Interval on a Sequence.",
+         "description": "An Interval on a Sequence.", 
          "example": {
-            "id": "VMC:GL01234",
+            "id": "VMC:GL01234", 
             "interval": {
-               "end": 23,
+               "end": 23, 
                "start": 22
-            },
+            }, 
             "sequence_id": "VMC:GS01234"
-         },
+         }, 
          "properties": {
             "id": {
                "$ref": "#/definitions/Id"
-            },
+            }, 
             "position": {
                "$ref": "#/definitions/Position"
-            },
+            }, 
             "sequence_id": {
                "$ref": "#/definitions/Id"
             }
-         },
+         }, 
          "required": [
-            "position",
+            "position", 
             "sequence_id"
-         ],
+         ], 
          "type": "object"
-      },
+      }, 
       "Meta": {
          "properties": {
             "generated_at": {
                "$ref": "#/definitions/DateTime"
-            },
+            }, 
             "version": {
-               "default": "0",
+               "default": "0", 
                "type": "string"
             }
-         },
+         }, 
          "type": "object"
-      },
+      }, 
       "Position": {
          "oneOf": [
             {
                "$ref": "#/definitions/Interval"
-            },
+            }, 
             {
                "$ref": "#/definitions/Intronic"
             }
-         ],
+         ], 
          "type": "object"
-      },
+      }, 
       "Sequence": {
          "type": "string"
       }
-   },
+   }, 
    "properties": {
       "alleles": {
          "items": {
             "$ref": "#/definitions/Allele"
-         },
+         }, 
          "type": "array"
-      },
+      }, 
       "genotypes": {
          "items": {
             "$ref": "#/definitions/Genotype"
-         },
+         }, 
          "type": "array"
-      },
+      }, 
       "haplotypes": {
          "items": {
             "$ref": "#/definitions/Haplotype"
-         },
+         }, 
          "type": "array"
-      },
+      }, 
+      "identifiers": {
+         "$ref": "#/definitions/Identifiers"
+      }, 
       "locations": {
          "items": {
             "$ref": "#/definitions/Location"
-         },
+         }, 
          "type": "array"
-      },
+      }, 
       "meta": {
          "$ref": "#/definitions/Meta"
       }
-   },
-   "title": "VMCBundle",
-   "type": "object",
-   "x-required": [
-      "meta",
-      "locations",
-      "alleles",
-      "haplotypes",
-      "genotypes"
-   ]
+   }, 
+   "required": [
+      "meta", 
+      "locations", 
+      "alleles", 
+      "haplotypes", 
+      "genotypes", 
+      "identifiers"
+   ], 
+   "title": "VMCBundle", 
+   "type": "object"
 }

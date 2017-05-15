@@ -25,17 +25,19 @@ properties:
     type: "array"
     items:
       $ref: "#/definitions/Genotype"
-#  ididentifiers:
-#    $ref: "#/definitions/IdIdentifiersMap"
+  identifiers:
+    $ref: "#/definitions/Identifiers"
 
-x-required:
+required:
 - meta
 - locations
 - alleles
 - haplotypes
 - genotypes
-#- ididentifiers
+- identifiers
   
+additionalProperties: false
+
 
 definitions:
   # Basic types
@@ -154,21 +156,6 @@ definitions:
     xml:
       name: "Allele"
   
-  AlleleType:
-    type: "string"
-    enum:
-    - "SEQUENCE"
-    # later:
-    # - "CNV"
-  
-  AlleleSequence:
-    type: "object"
-    properties:
-      sequence:
-        type: "string"
-    required:
-    - "sequence"
-  
   Completeness:
     type: "string"
     description: Declares the `completeness` of haplotype or genotype definitions.
@@ -211,8 +198,8 @@ definitions:
       haplotype_ids: ["H1220", "H19f4"]
   
   # Naming
-  IdIdentifiersMap:
-    description: "A map of <Id, Identifiers[]>."
+  Identifiers:
+    description: "A list of Identifiers"
     type: "object"
     patternProperties:
       "^.":
