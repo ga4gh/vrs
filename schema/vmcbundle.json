@@ -251,31 +251,24 @@
    },
    "properties": {
       "alleles": {
-         "items": {
-            "$ref": "#/definitions/Allele"
-         },
-         "type": "array"
+         "type": "object"
       },
       "genotypes": {
-         "items": {
-            "$ref": "#/definitions/Genotype"
-         },
-         "type": "array"
+         "type": "object"
       },
       "haplotypes": {
-         "items": {
-            "$ref": "#/definitions/Haplotype"
-         },
-         "type": "array"
+         "type": "object"
       },
       "identifiers": {
          "$ref": "#/definitions/Identifiers"
       },
       "locations": {
-         "items": {
-            "$ref": "#/definitions/Location"
+         "patternProperties": {
+            "^.": {
+               "$ref": "#/definitions/Location"
+            }
          },
-         "type": "array"
+         "type": "object"
       },
       "meta": {
          "$ref": "#/definitions/Meta"

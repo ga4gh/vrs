@@ -10,21 +10,16 @@ properties:
   meta:
     $ref: "#/definitions/Meta"
   locations:
-    type: "array"
-    items:
-      $ref: "#/definitions/Location"
+    type: "object"
+    patternProperties:
+      ^.:
+        $ref: "#/definitions/Location"
   alleles:
-    type: "array"
-    items:
-      $ref: "#/definitions/Allele"
+    type: "object"
   haplotypes:
-    type: "array"
-    items:
-      $ref: "#/definitions/Haplotype"
+    type: "object"
   genotypes:
-    type: "array"
-    items:
-      $ref: "#/definitions/Genotype"
+    type: "object"
   identifiers:
     $ref: "#/definitions/Identifiers"
 
