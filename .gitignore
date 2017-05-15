@@ -1,5 +1,6 @@
-venv
+*-checkpoint.ipynb
+*.orig
+*~
 __pycache__
 doc
-*~
-*.orig
+venv
