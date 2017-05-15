@@ -62,7 +62,6 @@ definitions:
     additionalProperties: false
     required:
     - "accession"
-    - "namespace"
   
   Meta:
     type: "object"

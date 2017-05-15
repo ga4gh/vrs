@@ -116,8 +116,7 @@
             }
          },
          "required": [
-            "accession",
-            "namespace"
+            "accession"
          ],
          "type": "object"
       },
