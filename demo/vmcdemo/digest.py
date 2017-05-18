@@ -77,16 +77,11 @@ def serialize(o, namespace="VMC"):
     if t == "Identifier":
         return "{o.namespace}:{o.accession}".format(o=o)
 
-    if t == "Position":
-        if o.interval is not None:
-            return serialize(o.interval)
-        raise Exception("Position isn't an interval ?!")
-
     if t == "Interval":
         return "<{t}:{o.start}:{o.end}>".format(t=t, o=o)
 
     if t == "Location":
-        return "<{t}:{id}:{pos}>".format(t=t, id=_map_id(o.sequence_id), pos=serialize(o.position))
+        return "<{t}:{id}:{ival}>".format(t=t, id=_map_id(o.sequence_id), ival=serialize(o.interval))
 
     if t == "Allele":
         return "<{t}:{id}:{o.state}>".format(t=t, id=_map_id(o.location_id), o=o)

@@ -178,23 +178,6 @@
          ],
          "type": "object"
       },
-      "Intronic": {
-         "additionalProperties": false,
-         "description": "A position relative to another position, used with intronic\npositions relative to exon boundary\n",
-         "properties": {
-            "base": {
-               "type": "integer"
-            },
-            "offset": {
-               "type": "integer"
-            }
-         },
-         "required": [
-            "base",
-            "offset"
-         ],
-         "type": "object"
-      },
       "Location": {
          "additionalProperties": false,
          "description": "An Interval on a Sequence.",
@@ -210,15 +193,15 @@
             "id": {
                "$ref": "#/definitions/Id"
             },
-            "position": {
-               "$ref": "#/definitions/Position"
+            "interval": {
+               "$ref": "#/definitions/Interval"
             },
             "sequence_id": {
                "$ref": "#/definitions/Id"
             }
          },
          "required": [
-            "position",
+            "interval",
             "sequence_id"
          ],
          "type": "object"
@@ -231,15 +214,6 @@
             "version": {
                "default": "0",
                "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "Position": {
-         "additionalProperties": false,
-         "properties": {
-            "interval": {
-               "$ref": "#/definitions/Interval"
             }
          },
          "type": "object"

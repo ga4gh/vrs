@@ -7,9 +7,7 @@ from vmcdemo import models, computed_id, serialize
 if __name__ == "__main__":
     i = models.Interval(start=42, end=42)
 
-    p = models.Position(interval=i)
-
-    l = models.Location(sequence_id="VMC:GS_01234", position=p)
+    l = models.Location(sequence_id="VMC:GS_01234", interval=i)
     l.id = computed_id(l)
     print("{} -> {}".format(serialize(l), l.id))
     locations = {l.id: l.as_dict()}

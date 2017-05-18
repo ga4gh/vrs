@@ -72,7 +72,7 @@ definitions:
       generated_at:
         $ref: "#/definitions/DateTime"
 
-  # Sequence, Positions, Locations
+  # Sequence, Interval, Locations
   Sequence:
     type: "string"
   
@@ -92,28 +92,6 @@ definitions:
     - "start"
     additionalProperties: false
 
-  Intronic:
-    description: |
-      A position relative to another position, used with intronic
-      positions relative to exon boundary
-    type: "object"
-    properties:
-      base:
-        type: "integer"
-      offset:
-        type: "integer"
-    required:
-    - base
-    - offset
-    additionalProperties: false
-
-  Position:
-    type: "object"
-    properties:
-      interval:
-        $ref: "#/definitions/Interval"
-    additionalProperties: false
-  
   Location:
     description: An Interval on a Sequence.
     type: "object"
@@ -122,11 +100,11 @@ definitions:
         $ref: "#/definitions/Id"
       sequence_id:
         $ref: "#/definitions/Id"
-      position:
-        $ref: "#/definitions/Position"
+      interval:
+        $ref: "#/definitions/Interval"
     additionalProperties: false
     required:
-    - "position"
+    - "interval"
     - "sequence_id"
     example:
       id: "VMC:GL01234"
