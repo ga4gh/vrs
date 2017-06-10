@@ -5,7 +5,6 @@ ipython
 jupyter
 
 biocommons.seqrepo
-bioutils
 jsonschema
 python-jsonschema-objects
 sqlitedict
