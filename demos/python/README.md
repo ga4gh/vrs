@@ -1,7 +1,30 @@
 # Python VMC Demo
 
-`make venv` — builds virtual environment necessary for demo
+All of the following must be executed in this directory (i.e., `vmc/demos/python/`).
 
-`jupyter notebook --notebook-dir notebooks` — starts notebook server
-and opens in browser
+
+## Setup
+
+### One-time setup
+
+Build virtual environment necessary for demo
+
+    $ make venv
+
+### Per-session setup
+
+    $ source venv/bin/activate
+	
+
+## Demos
+
+### Notebook demo
+
+Start notebook server and open in browser:
+
+	$ jupyter notebook --notebook-dir notebooks
+
+Then select one of the demos.  (Note: the `notebooks/vmcdemo`
+directory is necessary to make the demo code available.  It does not
+contain notebooks.)
 
