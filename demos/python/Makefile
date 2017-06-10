@@ -9,7 +9,7 @@ default:
 venv: FORCE
 	rm -fr $@
 	pyvenv $@
-	. $@/bin/activate; pip install -U -r reqs
+	. $@/bin/activate; pip install -U -r requirements.txt
 
 
 
