@@ -31,11 +31,13 @@ def get_vmc_sequence_id(ir):
 
     """
 
-    r = _sr.aliases.find_aliases(namespace=ir.namespace.lower(), alias=ir.accession).fetchone()
+    r = _sr.aliases.find_aliases(namespace=ir.namespace, alias=ir.accession).fetchone()
     if r is None:
         raise KeyError(ir)
 
-    # TODO: Important: we're peeking inside the seqrepo *internal*
-    # id. This is fragile. Use the GS id instead (which happens to be
-    # computed in the same way).
-    return "VMC:GS_" + r["seq_id"]
+    rows = _sr.aliases.find_aliases(seq_id=r["seq_id"], namespace="VMC").fetchall()
+    if len(r) == 0:
+        raise RuntimeError("No VMC digest for {ir}".format(ir=ir))
+    r = rows[0]
+
+    return "{r[namespace]}:{r[alias]}".format(r=r)
