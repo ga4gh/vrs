@@ -1,5 +1,10 @@
 """vmcdemo models, defined at runtime from the spec
 
+**This file should not be imported directly.**
+
+vmcdemo.__init__ exports all symbols for external users. Please see
+that file.
+
 """
 
 import os
