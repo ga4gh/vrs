@@ -20,7 +20,7 @@ formatted as strings and concatenated, separated by a colon.  When a
 property to be serialized is an object, 
 
 
-The computed_identifer is functionally this:
+The computed_identifier is functionally this:
 
   ci = computed_identifier(obj)
 
@@ -80,7 +80,7 @@ def id_to_ir(id):
     For the VMC demo, we're going to assume that the computed
     identifier is used as the id, and therefore we can just assert
     that the id begins with the "VMC:" and then return a synthesized
-    Identifer.
+    Identifier.
 
     If an implementation uses a different internal id, this function
     needs to be changed.
