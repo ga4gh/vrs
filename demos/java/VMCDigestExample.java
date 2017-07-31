@@ -59,8 +59,11 @@ class VMCDigestExample {
     }
 
     private static String base64us(byte[] bytes) {
-	// returns B64us String for bytes
+	// returns URL-Safe Base64 encoded String for bytes
+	// https://tools.ietf.org/html/rfc3548#section-4
+	// getUrlEncoder().encodeToString(bytes) is comparable to
+	// Python's base64.urlsafe_b64encode(bytes)
 	return Base64.getUrlEncoder().encodeToString(bytes);
     }
 
-}
+
