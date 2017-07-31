@@ -11,11 +11,9 @@ in biological sequences.
 * Gil Alterovitz, Harvard Medical School/Boston Children’s Hospital, FHIR Genomics
 * Larry Babb, Sunquest, ClinGen
 * Karen Eilbeck, University of Utah
-* Gaston Fiore, Boston Children’s Hospital, FHIR Genomics
 * Bob Freimuth, Mayo Clinic, ClinGen, HL7/FHIR
 * Reece Hart, Invitae, GA4GH
 * Sarah Hunt, Ensembl
-* Brett Johnson, BCH, GA4GH, HL7/FHIR
 * David Kreda, Harvard Medical School, FHIR Genomics
 * Jennifer Lee, NCBI, ClinVar
 * Peter Robinson, Jackson Laboratory, HPO
