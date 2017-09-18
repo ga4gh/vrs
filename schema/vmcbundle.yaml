@@ -1,0 +1,202 @@
+# when editing:
+# ls -1 *.yaml | entr make
+
+$schema: "http://json-schema.org/schema#"
+title: VMCBundle
+
+type: "object"
+
+properties:
+  meta:
+    $ref: "#/definitions/Meta"
+  locations:
+    type: "object"
+    patternProperties:
+      ^.:
+        $ref: "#/definitions/Location"
+  alleles:
+    type: "object"
+  haplotypes:
+    type: "object"
+  genotypes:
+    type: "object"
+  identifiers:
+    $ref: "#/definitions/Identifiers"
+
+required:
+- meta
+- locations
+- alleles
+- haplotypes
+- genotypes
+- identifiers
+  
+additionalProperties: false
+
+
+definitions:
+  # Basic types
+  DateTime:
+    type: "string"
+    format: "date-time"
+  
+  Id:
+    description: Uniquely identifies a specific instance of an object within a document.
+    type: "string"
+    example: "X0123abcd"
+    xml:
+      attribute: true
+  
+  Identifier:
+    description: A <namespace,accession> pair that refers to an object.
+    type: "object"
+    properties:
+      namespace:
+        type: "string"
+        example: "NCBI"
+        description: "authority"
+      accession:
+        type: "string"
+        example: "NM_000551.3"
+        description: "unique key within namespace"
+    additionalProperties: false
+    required:
+    - "accession"
+  
+  Meta:
+    # TODO: version regexp ^\d+\.\d+$
+    # describe semantics
+    type: "object"
+    properties:
+      version:
+        type: "string"
+        default: "0"
+      generated_at:
+        $ref: "#/definitions/DateTime"
+
+  # Sequence, Interval, Locations
+  Sequence:
+    type: "string"
+  
+  Interval:
+    description: A <start,end> position pair, using interbase coordinates.
+    type: "object"
+    properties:
+      start:
+        type: "integer"
+      end:
+        type: "integer"
+    example:
+      start: 42
+      end: 42
+    required:
+    - "end"
+    - "start"
+    additionalProperties: false
+
+  Location:
+    description: An Interval on a Sequence.
+    type: "object"
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+      sequence_id:
+        $ref: "#/definitions/Id"
+      interval:
+        $ref: "#/definitions/Interval"
+    additionalProperties: false
+    required:
+    - "interval"
+    - "sequence_id"
+    example:
+      id: "VMC:GL01234"
+      sequence_id: "VMC:GS01234"
+      interval:
+        start: 22
+        end: 23
+  
+  # Genetic States
+  Allele:
+    description: A contiguous change at a Location.
+    type: "object"
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+      location_id:
+        $ref: "#/definitions/Id"
+      state:
+        type: "string"
+    additionalProperties: false
+    example:
+      id: "A03bc"
+      location_id: "VMC:GL_01234"
+      state: "A"
+    xml:
+      name: "Allele"
+  
+  Completeness:
+    type: "string"
+    description: Declares the `completeness` of haplotype or genotype definitions.
+    enum:
+    - "UNKNOWN"
+    - "PARTIAL"
+    - "COMPLETE"
+  
+  Haplotype:
+    description: A set of zero or more Alleles on a single instance of a Sequence.
+    type: "object"
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+      completeness:
+        $ref: "#/definitions/Completeness"
+      allele_ids:
+        type: "array"
+        items:
+          $ref: "#/definitions/Id"
+    additionalProperties: false
+    example:
+      completeness: "PARTIAL"
+      allele_ids: ["A0123", "A0124"]
+  
+  Genotype:
+    description: A list of Haplotypes.
+    type: "object"
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+      completeness:
+        $ref: "#/definitions/Completeness"
+      haplotype_ids:
+        type: "array"
+        items:
+          $ref: "#/definitions/Id"
+    additionalProperties: false
+    example:
+      id: "G310a"
+      completeness: "COMPLETE"
+      haplotype_ids: ["H1220", "H19f4"]
+  
+  # Naming
+  Identifiers:
+    description: "A list of Identifiers"
+    type: "object"
+    patternProperties:
+      "^.":
+        type: "array"
+        items:
+          $ref: "#/definitions/Identifier"
+    additionalProperties: false
+    example:
+      "S491f":
+      - namespace: NCBI
+        accession: NM_000551.2
+      - namespace: ENST
+        accession: BLAHBLAH
+      "H19f4":
+      - namespace: whoknows
+        accession: APOE-ε1
+      "H1220":
+      - namespace: whoknows
+        accession: APOE-ε2
+      

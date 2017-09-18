@@ -1,0 +1,10 @@
+pip >= 9
+setuptools >= 21.0.0
+
+ipython
+jupyter
+
+biocommons.seqrepo
+jsonschema
+python-jsonschema-objects
+sqlitedict
