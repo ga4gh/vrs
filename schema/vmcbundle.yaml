@@ -64,6 +64,8 @@ definitions:
     - "accession"
   
   Meta:
+    # TODO: version regexp ^\d+\.\d+$
+    # describe semantics
     type: "object"
     properties:
       version:
