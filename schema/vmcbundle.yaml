@@ -16,10 +16,19 @@ properties:
         $ref: "#/definitions/Location"
   alleles:
     type: "object"
+    patternProperties:
+      ^.:
+        $ref: "#/definitions/Allele"
   haplotypes:
     type: "object"
+    patternProperties:
+      ^.:
+        $ref: "#/definitions/Haplotype"
   genotypes:
     type: "object"
+    patternProperties:
+      ^.:
+        $ref: "#/definitions/Genotype"
   identifiers:
     $ref: "#/definitions/Identifiers"
 

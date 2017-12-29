@@ -224,12 +224,27 @@
    },
    "properties": {
       "alleles": {
+         "patternProperties": {
+            "^.": {
+               "$ref": "#/definitions/Allele"
+            }
+         },
          "type": "object"
       },
       "genotypes": {
+         "patternProperties": {
+            "^.": {
+               "$ref": "#/definitions/Genotype"
+            }
+         },
          "type": "object"
       },
       "haplotypes": {
+         "patternProperties": {
+            "^.": {
+               "$ref": "#/definitions/Haplotype"
+            }
+         },
          "type": "object"
       },
       "identifiers": {
