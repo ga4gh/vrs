@@ -1,8 +1,9 @@
 *-checkpoint.ipynb
+*.class
 *.orig
 *~
 __pycache__
-doc
-venv
 archive
 demos/python/notebooks/ApoE Example.vmc.json
+doc
+venv

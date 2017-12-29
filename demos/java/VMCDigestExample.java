@@ -23,14 +23,14 @@ import java.util.Arrays;
 import java.util.Base64;
 
 class VMCDigestExample {  
-    public static void main(String args[]){  
+    public static void main(String args[]) {
 	Object o = null;
 	String ser = serialize(o);
 	byte[] serb = ser.getBytes(US_ASCII);
 	String vmcdigest = base64us(sha512t24(serb));
 	System.out.println("ser = " + ser);
 	System.out.println("vmc digest = " + vmcdigest);
-    }  
+    }
 
     public static String serialize(Object o) {
 	// This is a mock function to return an example serialization.
@@ -65,5 +65,4 @@ class VMCDigestExample {
 	// Python's base64.urlsafe_b64encode(bytes)
 	return Base64.getUrlEncoder().encodeToString(bytes);
     }
-
-
+}
