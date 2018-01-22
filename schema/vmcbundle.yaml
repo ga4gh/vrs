@@ -70,6 +70,7 @@ definitions:
         description: "unique key within namespace"
     additionalProperties: false
     required:
+    - "namespace"
     - "accession"
   
   Meta:
@@ -156,6 +157,8 @@ definitions:
     type: "object"
     properties:
       id:
+        $ref: "#/definitions/Id"
+      location_id:
         $ref: "#/definitions/Id"
       completeness:
         $ref: "#/definitions/Completeness"

@@ -88,6 +88,9 @@
             },
             "id": {
                "$ref": "#/definitions/Id"
+            },
+            "location_id": {
+               "$ref": "#/definitions/Id"
             }
          },
          "type": "object"
@@ -116,6 +119,7 @@
             }
          },
          "required": [
+            "namespace",
             "accession"
          ],
          "type": "object"
