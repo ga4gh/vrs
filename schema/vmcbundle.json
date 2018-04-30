@@ -235,6 +235,15 @@
          },
          "type": "object"
       },
+      "curie_prefix_map": {
+         "description": "maps CURIE prefixes to IRIs",
+         "patternProperties": {
+            "^.": {
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
       "genotypes": {
          "patternProperties": {
             "^.": {

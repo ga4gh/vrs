@@ -31,6 +31,12 @@ properties:
         $ref: "#/definitions/Genotype"
   identifiers:
     $ref: "#/definitions/Identifiers"
+  curie_prefix_map:
+    description: maps CURIE prefixes to IRIs
+    type: "object"
+    patternProperties:
+      ^.:
+        type: string
 
 required:
 - meta
