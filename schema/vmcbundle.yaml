@@ -52,7 +52,7 @@ definitions:
   Id:
     description: Uniquely identifies a specific instance of an object within a document.
     type: "string"
-    example: "X0123abcd"
+    example: "NCBI:NM_000551.3"
     xml:
       attribute: true
   

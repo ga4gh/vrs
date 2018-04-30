@@ -97,7 +97,7 @@
       },
       "Id": {
          "description": "Uniquely identifies a specific instance of an object within a document.",
-         "example": "X0123abcd",
+         "example": "NCBI:NM_000551.3",
          "type": "string",
          "xml": {
             "attribute": true
