@@ -1,0 +1,55 @@
+truncated_digest:
+  -
+    # >>> _truncated_digest(b"", digest_size=24)
+    # b'z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXc'
+    in:
+      blob: ""
+      digest_size: 24
+    out:
+      z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXc
+  -
+    # >>> _truncated_digest(b"", digest_size=18)
+    # b'z4PhNX7vuL3xVChQ1m2AB9Yg'
+    in:
+      blob: ""
+      digest_size: 18
+    out:
+      z4PhNX7vuL3xVChQ1m2AB9Yg
+  -
+    # >>> _truncated_digest(b"", digest_size=9)
+    # b'z4PhNX7vuL3x'
+    in:
+      blob: ""
+      digest_size: 9
+    out:
+      z4PhNX7vuL3x
+      
+  -
+    # >>> _truncated_digest(b"ACGT", digest_size=24)
+    # b'aKF498dAxcJAqme6QYQ7EZ07-fiw8Kw2'
+    in:
+      blob: ACGT
+      digest_size: 24
+    out:
+      aKF498dAxcJAqme6QYQ7EZ07-fiw8Kw2
+
+Interval:
+  -
+    in:
+      start: 10
+      end: 11
+    out:
+      serialize: <Interval|10|11>
+
+
+Location:
+  - 
+    in:
+      sequence_id: "VMC:GS_e6QYQ7498dAxcJAqmEZ07-fiw8Kw2aKF"
+      interval:
+        start: 10
+        end: 11
+    out:
+      serialize: <Location|VMC:GS_e6QYQ7498dAxcJAqmEZ07-fiw8Kw2aKF|<Interval|10|11>>
+      computed_id: VMC:GL_WkM8p1jyBFZdgrmUSex7OnIcciOL_R6i
+      
