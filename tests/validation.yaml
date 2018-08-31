@@ -43,19 +43,19 @@ Interval:
       start: 44908683
       end: 44908684
     out:
-      serialize: <Interval|44908683|44908684>
+      serialize: "<Interval|44908683|44908684>"
 
 
 Location:
   - 
     in:
-      sequence_id: VMC:GS_IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+      sequence_id: "VMC:GS_IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"
       interval:
         start: 44908683
         end: 44908684
     out:
-      serialize: <Location|VMC:GS_IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl|<Interval|44908683|44908684>>
-      computed_id: VMC:GL_L1IS6jOwSUsOpKihGRcqxHul1IwbV-1s
+      serialize: "<Location|VMC:GS_IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl|<Interval|44908683|44908684>>"
+      computed_id: "VMC:GL_L1IS6jOwSUsOpKihGRcqxHul1IwbV-1s"
 
 Allele:
   -
