@@ -1,3 +1,6 @@
+# Validation Tests
+# These are taken from the Quick Start Jupyter notebook
+
 truncated_digest:
   -
     # >>> _truncated_digest(b"", digest_size=24)
@@ -33,23 +36,54 @@ truncated_digest:
     out:
       aKF498dAxcJAqme6QYQ7EZ07-fiw8Kw2
 
+
 Interval:
   -
     in:
-      start: 10
-      end: 11
+      start: 44908683
+      end: 44908684
     out:
-      serialize: <Interval|10|11>
+      serialize: <Interval|44908683|44908684>
 
 
 Location:
   - 
     in:
-      sequence_id: "VMC:GS_e6QYQ7498dAxcJAqmEZ07-fiw8Kw2aKF"
+      sequence_id: VMC:GS_IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
       interval:
-        start: 10
-        end: 11
+        start: 44908683
+        end: 44908684
     out:
-      serialize: <Location|VMC:GS_e6QYQ7498dAxcJAqmEZ07-fiw8Kw2aKF|<Interval|10|11>>
-      computed_id: VMC:GL_WkM8p1jyBFZdgrmUSex7OnIcciOL_R6i
-      
+      serialize: <Location|VMC:GS_IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl|<Interval|44908683|44908684>>
+      computed_id: VMC:GL_L1IS6jOwSUsOpKihGRcqxHul1IwbV-1s
+
+Allele:
+  -
+    in:
+      location_id: "VMC:GL_L1IS6jOwSUsOpKihGRcqxHul1IwbV-1s"
+      state: C
+    out:
+      serialize: "<Allele|VMC:GL_L1IS6jOwSUsOpKihGRcqxHul1IwbV-1s|C>"
+      computed_id: "VMC:GA_zsJuMckKGajqHCl16sxKQJtBMjGrFHHZ"
+
+Haplotype:
+  -
+    in:
+      allele_ids:
+        - "VMC:GA_zsJuMckKGajqHCl16sxKQJtBMjGrFHHZ"
+        - "VMC:GA__8rLiy7YkQDNy-t536RpVFGxIDiWLr6J"
+      completeness: COMPLETE
+    out:
+      serialize: "<Haplotype||COMPLETE|[VMC:GA__8rLiy7YkQDNy-t536RpVFGxIDiWLr6J;VMC:GA_zsJuMckKGajqHCl16sxKQJtBMjGrFHHZ]>"
+      computed_id: "VMC:GH_xk_4sKZKfwD7ol3H89mDShrBT3dfu5Aq"
+
+Genotype:
+  -
+    in:
+      haplotype_ids:
+        - VMC:GH_xk_4sKZKfwD7ol3H89mDShrBT3dfu5Aq
+        - VMC:GH_xk_4sKZKfwD7ol3H89mDShrBT3dfu5Aq
+      completeness: COMPLETE
+    out:
+      serialize: "<Genotype|COMPLETE|[VMC:GH_xk_4sKZKfwD7ol3H89mDShrBT3dfu5Aq;VMC:GH_xk_4sKZKfwD7ol3H89mDShrBT3dfu5Aq]>"
+      computed_id: "VMC:GG_Pv97fICMeVRmowtCwioFpoFmrsOkZ7es"
