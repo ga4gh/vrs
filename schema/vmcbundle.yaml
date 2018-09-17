@@ -68,7 +68,7 @@ definitions:
     properties:
       namespace:
         type: "string"
-        example: "NCBI"
+        example: "refseq"
         description: "authority"
       accession:
         type: "string"
@@ -203,7 +203,7 @@ definitions:
       "^.":
         type: "array"
         items:
-          $ref: "#/definitions/Identifier"
+          type: "string"
     additionalProperties: false
     example:
       "S491f":
