@@ -1,40 +1,23 @@
 # Validation Tests
 # These are taken from the Quick Start Jupyter notebook
 
-truncated_digest:
+digest:
   -
-    # >>> _truncated_digest(b"", digest_size=24)
-    # b'z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXc'
     in:
-      blob: ""
-      digest_size: 24
+      o: ""
     out:
-      z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXc
+      digest: z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXc
   -
-    # >>> _truncated_digest(b"", digest_size=18)
-    # b'z4PhNX7vuL3xVChQ1m2AB9Yg'
     in:
-      blob: ""
-      digest_size: 18
+      o: ""
+      digest_size: 12
     out:
-      z4PhNX7vuL3xVChQ1m2AB9Yg
+      digest: z4PhNX7vuL3xVChQ
   -
-    # >>> _truncated_digest(b"", digest_size=9)
-    # b'z4PhNX7vuL3x'
     in:
-      blob: ""
-      digest_size: 9
+      o: ACGT
     out:
-      z4PhNX7vuL3x
-      
-  -
-    # >>> _truncated_digest(b"ACGT", digest_size=24)
-    # b'aKF498dAxcJAqme6QYQ7EZ07-fiw8Kw2'
-    in:
-      blob: ACGT
-      digest_size: 24
-    out:
-      aKF498dAxcJAqme6QYQ7EZ07-fiw8Kw2
+      digest: aKF498dAxcJAqme6QYQ7EZ07-fiw8Kw2
 
 
 Interval:
