@@ -203,7 +203,7 @@ definitions:
       "^.":
         type: "array"
         items:
-          type: "string"
+          $ref: "#/definitions/Identifier"
     additionalProperties: false
     example:
       "S491f":
