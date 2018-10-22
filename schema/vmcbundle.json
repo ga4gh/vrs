@@ -154,7 +154,7 @@
          "patternProperties": {
             "^.": {
                "items": {
-                  "$ref": "#/definitions/Identifier"
+                  "type": "string"
                },
                "type": "array"
             }
