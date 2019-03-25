@@ -6,4 +6,4 @@ import yaml
 
 # I randomly discovered that indent=3, sort_keys=True sorts $schema to
 # the top. I have no idea if that's intentional behavior.
-json.dump(yaml.load(sys.stdin), sys.stdout, indent=3, sort_keys=True)
+json.dump(yaml.load(sys.stdin, Loader=yaml.SafeLoader), sys.stdout, indent=3, sort_keys=True)

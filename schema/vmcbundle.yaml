@@ -11,32 +11,32 @@ properties:
     $ref: "#/definitions/Meta"
   locations:
     type: "object"
-    patternProperties:
-      ^.:
-        $ref: "#/definitions/Location"
+#    patternProperties:
+#      ^.:
+#        $ref: "#/definitions/Location"
   alleles:
     type: "object"
-    patternProperties:
-      ^.:
-        $ref: "#/definitions/Allele"
+#    patternProperties:
+#      ^.:
+#        $ref: "#/definitions/Allele"
   haplotypes:
     type: "object"
-    patternProperties:
-      ^.:
-        $ref: "#/definitions/Haplotype"
+#    patternProperties:
+#      ^.:
+#        $ref: "#/definitions/Haplotype"
   genotypes:
     type: "object"
-    patternProperties:
-      ^.:
-        $ref: "#/definitions/Genotype"
+#    patternProperties:
+#      ^.:
+#        $ref: "#/definitions/Genotype"
   identifiers:
     $ref: "#/definitions/Identifiers"
   curie_prefix_map:
     description: maps CURIE prefixes to IRIs
     type: "object"
-    patternProperties:
-      ^.:
-        type: string
+#    patternProperties:
+#      ^.:
+#        type: string
 
 required:
 - meta
@@ -95,41 +95,99 @@ definitions:
     type: "string"
   
   Interval:
-    description: A <start,end> position pair, using interbase coordinates.
-    type: "object"
-    properties:
-      start:
-        type: "integer"
-      end:
-        type: "integer"
-    example:
-      start: 42
-      end: 42
-    required:
-    - "end"
-    - "start"
-    additionalProperties: false
+    allOf:
+      - $ref: '#/internal/PositionBase'
+      - type: object
+        properties:
+          type:
+            type: string
+            #enum: ["Interval"]
+          start:
+            type: integer
+            nullable: true
+          end:
+            type: integer
+            nullable: true
+        additionalProperties: false
+        required:
+          - start
+          - end
+        example:
+          type: "Interval"
+          start: 11
+          end: 22
 
   Location:
-    description: An Interval on a Sequence.
-    type: "object"
+    type: object
     properties:
       id:
-        $ref: "#/definitions/Id"
+        type: string
+        example: "GL_tnVGwWWN0L_fEYK4hGF1Tzm7JULAkm2Z"
       sequence_id:
-        $ref: "#/definitions/Id"
+        type: string
+        example: "GS_ss8r_wB0-b9r44TQTMmVTI92884QvBiB"
       interval:
         $ref: "#/definitions/Interval"
-    additionalProperties: false
-    required:
-    - "interval"
-    - "sequence_id"
+# TODO:
+#      position:
+#        $ref: "#/definitions/Position"
+
+  NestedInterval:
+    allOf:
+      - $ref: '#/internal/PositionBase'
+      - type: object
+        properties:
+          type:
+            type: string
+            #enum: ["NestedInterval"]
+          inner:
+            $ref: '#/definitions/Interval'
+          outer:
+            $ref: '#/definitions/Interval'
     example:
-      id: "VMC:GL01234"
-      sequence_id: "VMC:GS01234"
-      interval:
-        start: 22
-        end: 23
+      type: NestedInterval
+      outer:
+        type: Interval
+        start: 20
+        end: 39
+      inner:
+        type: Interval
+        start: 29
+        end: 30
+    
+  Position:
+    description: >-
+      A Position represents a span of sequence.  Positions are
+      always represented by contiguous spans using interbase
+      coordinates.
+    oneOf:
+    - $ref: '#/definitions/Interval'
+    - $ref: '#/definitions/NestedInterval'
+    - $ref: '#/definitions/RangedInterval'
+
+  RangedInterval:
+    allOf:
+      - $ref: '#/internal/PositionBase'
+      - type: object
+        properties:
+          type:
+            type: string
+            #enum: ["RangedInterval"]
+          start:
+            $ref: '#/definitions/Interval'
+          end:
+            $ref: '#/definitions/Interval'
+    example:
+      type: RangedInterval
+      start:
+        type: Interval
+        start: 20
+        end: 29
+      end:
+        type: Interval
+        start: 30
+        end: 39
+
   
   # Genetic States
   Allele:
@@ -144,7 +202,7 @@ definitions:
         type: "string"
     additionalProperties: false
     example:
-      id: "A03bc"
+      id: "VMC:GA_012abc"
       location_id: "VMC:GL_01234"
       state: "A"
     xml:
@@ -195,15 +253,44 @@ definitions:
       completeness: "COMPLETE"
       haplotype_ids: ["H1220", "H19f4"]
   
+
+  TextVariation:
+    type: object
+    allOf:
+      - $ref: '#/internal/IdentifiableObject'
+      - type: object
+        properties:
+          type:
+            type: string
+            #enum: ["TextVariation"]
+          definition:
+            type: string
+            description: >-
+              The textual representation of variation as provided by the client.
+          parsed_variation_id:
+            type: string
+            description: Id for parsed variation, if exists
+
+  Variation:
+    type: object
+    properties:
+      id:
+        type: string
+      type:
+        type: string
+        enum: ["Text", "SequenceVariation"]
+
+
+
   # Naming
   Identifiers:
     description: "A list of Identifiers"
     type: "object"
-    patternProperties:
-      "^.":
-        type: "array"
-        items:
-          type: "string"
+#    patternProperties:
+#      "^.":
+#        type: "array"
+#        items:
+#          type: "string"
     additionalProperties: false
     example:
       "S491f":
@@ -218,3 +305,20 @@ definitions:
       - namespace: whoknows
         accession: APOE-ε2
       
+internal:
+  # x-bases stores reusable base definitions of schemas
+  # They are not intended to be used in isolation.
+  IdentifiableObject:
+    type: object
+    properties:
+      id:
+        type: string
+
+  PositionBase:
+    type: object
+    properties:
+      type:
+        type: string
+        enum: ["Interval", "NestedInterval", "RangedInterval"]
+#    required:
+#      - type

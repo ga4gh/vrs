@@ -6,7 +6,7 @@
          "additionalProperties": false,
          "description": "A contiguous change at a Location.",
          "example": {
-            "id": "A03bc",
+            "id": "VMC:GA_012abc",
             "location_id": "VMC:GL_01234",
             "state": "A"
          },
@@ -151,63 +151,55 @@
                }
             ]
          },
-         "patternProperties": {
-            "^.": {
-               "items": {
-                  "type": "string"
-               },
-               "type": "array"
-            }
-         },
          "type": "object"
       },
       "Interval": {
-         "additionalProperties": false,
-         "description": "A <start,end> position pair, using interbase coordinates.",
-         "example": {
-            "end": 42,
-            "start": 42
-         },
-         "properties": {
-            "end": {
-               "type": "integer"
+         "allOf": [
+            {
+               "$ref": "#/internal/PositionBase"
             },
-            "start": {
-               "type": "integer"
+            {
+               "additionalProperties": false,
+               "example": {
+                  "end": 22,
+                  "start": 11,
+                  "type": "Interval"
+               },
+               "properties": {
+                  "end": {
+                     "nullable": true,
+                     "type": "integer"
+                  },
+                  "start": {
+                     "nullable": true,
+                     "type": "integer"
+                  },
+                  "type": {
+                     "type": "string"
+                  }
+               },
+               "required": [
+                  "start",
+                  "end"
+               ],
+               "type": "object"
             }
-         },
-         "required": [
-            "end",
-            "start"
-         ],
-         "type": "object"
+         ]
       },
       "Location": {
-         "additionalProperties": false,
-         "description": "An Interval on a Sequence.",
-         "example": {
-            "id": "VMC:GL01234",
-            "interval": {
-               "end": 23,
-               "start": 22
-            },
-            "sequence_id": "VMC:GS01234"
-         },
          "properties": {
             "id": {
-               "$ref": "#/definitions/Id"
+               "example": "GL_tnVGwWWN0L_fEYK4hGF1Tzm7JULAkm2Z",
+               "type": "string"
             },
             "interval": {
                "$ref": "#/definitions/Interval"
             },
             "sequence_id": {
-               "$ref": "#/definitions/Id"
+               "example": "GS_ss8r_wB0-b9r44TQTMmVTI92884QvBiB",
+               "type": "string"
             }
          },
-         "required": [
-            "interval",
-            "sequence_id"
-         ],
          "type": "object"
       },
       "Meta": {
@@ -222,53 +214,172 @@
          },
          "type": "object"
       },
+      "NestedInterval": {
+         "allOf": [
+            {
+               "$ref": "#/internal/PositionBase"
+            },
+            {
+               "properties": {
+                  "inner": {
+                     "$ref": "#/definitions/Interval"
+                  },
+                  "outer": {
+                     "$ref": "#/definitions/Interval"
+                  },
+                  "type": {
+                     "type": "string"
+                  }
+               },
+               "type": "object"
+            }
+         ],
+         "example": {
+            "inner": {
+               "end": 30,
+               "start": 29,
+               "type": "Interval"
+            },
+            "outer": {
+               "end": 39,
+               "start": 20,
+               "type": "Interval"
+            },
+            "type": "NestedInterval"
+         }
+      },
+      "Position": {
+         "description": "A Position represents a span of sequence.  Positions are always represented by contiguous spans using interbase coordinates.",
+         "oneOf": [
+            {
+               "$ref": "#/definitions/Interval"
+            },
+            {
+               "$ref": "#/definitions/NestedInterval"
+            },
+            {
+               "$ref": "#/definitions/RangedInterval"
+            }
+         ]
+      },
+      "RangedInterval": {
+         "allOf": [
+            {
+               "$ref": "#/internal/PositionBase"
+            },
+            {
+               "properties": {
+                  "end": {
+                     "$ref": "#/definitions/Interval"
+                  },
+                  "start": {
+                     "$ref": "#/definitions/Interval"
+                  },
+                  "type": {
+                     "type": "string"
+                  }
+               },
+               "type": "object"
+            }
+         ],
+         "example": {
+            "end": {
+               "end": 39,
+               "start": 30,
+               "type": "Interval"
+            },
+            "start": {
+               "end": 29,
+               "start": 20,
+               "type": "Interval"
+            },
+            "type": "RangedInterval"
+         }
+      },
       "Sequence": {
          "type": "string"
-      }
-   },
-   "properties": {
-      "alleles": {
-         "patternProperties": {
-            "^.": {
-               "$ref": "#/definitions/Allele"
+      },
+      "TextVariation": {
+         "allOf": [
+            {
+               "$ref": "#/internal/IdentifiableObject"
+            },
+            {
+               "properties": {
+                  "definition": {
+                     "description": "The textual representation of variation as provided by the client.",
+                     "type": "string"
+                  },
+                  "parsed_variation_id": {
+                     "description": "Id for parsed variation, if exists",
+                     "type": "string"
+                  },
+                  "type": {
+                     "type": "string"
+                  }
+               },
+               "type": "object"
+            }
+         ],
+         "type": "object"
+      },
+      "Variation": {
+         "properties": {
+            "id": {
+               "type": "string"
+            },
+            "type": {
+               "enum": [
+                  "Text",
+                  "SequenceVariation"
+               ],
+               "type": "string"
             }
          },
          "type": "object"
-      },
-      "curie_prefix_map": {
-         "description": "maps CURIE prefixes to IRIs",
-         "patternProperties": {
-            "^.": {
+      }
+   },
+   "internal": {
+      "IdentifiableObject": {
+         "properties": {
+            "id": {
                "type": "string"
             }
          },
          "type": "object"
       },
-      "genotypes": {
-         "patternProperties": {
-            "^.": {
-               "$ref": "#/definitions/Genotype"
+      "PositionBase": {
+         "properties": {
+            "type": {
+               "enum": [
+                  "Interval",
+                  "NestedInterval",
+                  "RangedInterval"
+               ],
+               "type": "string"
             }
          },
          "type": "object"
+      }
+   },
+   "properties": {
+      "alleles": {
+         "type": "object"
+      },
+      "curie_prefix_map": {
+         "description": "maps CURIE prefixes to IRIs",
+         "type": "object"
+      },
+      "genotypes": {
+         "type": "object"
       },
       "haplotypes": {
-         "patternProperties": {
-            "^.": {
-               "$ref": "#/definitions/Haplotype"
-            }
-         },
          "type": "object"
       },
       "identifiers": {
          "$ref": "#/definitions/Identifiers"
       },
       "locations": {
-         "patternProperties": {
-            "^.": {
-               "$ref": "#/definitions/Location"
-            }
-         },
          "type": "object"
       },
       "meta": {
