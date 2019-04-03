@@ -305,15 +305,16 @@
             },
             {
                "properties": {
+                  "@type": {
+                     "default": "TextVariation",
+                     "type": "string"
+                  },
                   "definition": {
                      "description": "The textual representation of variation as provided by the client.",
                      "type": "string"
                   },
                   "forward": {
                      "$ref": "#/internal/Forward"
-                  },
-                  "type": {
-                     "type": "string"
                   }
                },
                "type": "object"

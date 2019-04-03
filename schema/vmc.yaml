@@ -219,7 +219,7 @@ definitions:
         properties:
           type:
             type: string
-            #enum: ["TextVariation"]
+            default: "TextVariation"
           definition:
             type: string
             description: >-
@@ -234,7 +234,7 @@ definitions:
         type: string
       type:
         type: string
-        enum: ["Text", "SequenceVariation"]
+        enum: ["TextVariation", "SequenceVariation"]
 
 
   VMCBundle:
@@ -304,6 +304,27 @@ definitions:
         accession: APOE-ε2
       
 internal:
+  # Positions
+  # * Cytoband
+  # * SimplePosition
+  # * BaseOffsetPosition
+  # * Gene
+  # * ExonIntronPosition
+  # * RelativePosition (left of, right of)
+  #
+  # Regions
+  # * Interval
+  # * RangedInterval
+  # * NestedInterval
+  # * CytobandInterval
+  # * BaseOffsetInterval
+  #
+  # Locations
+  # * SequenceLocation (seq id, Position|Region)
+  # * GeneLocation (gene, assy)
+  # * CytoLocation (assy, cyto interval)
+  # * IntronExonLocation (tx, iep, iep)
+
   # x-bases stores reusable base definitions of schemas
   # They are not intended to be used in isolation.
   Forward:
