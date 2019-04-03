@@ -309,9 +309,8 @@
                      "description": "The textual representation of variation as provided by the client.",
                      "type": "string"
                   },
-                  "parsed_variation_id": {
-                     "description": "Id for parsed variation, if exists",
-                     "type": "string"
+                  "forward": {
+                     "$ref": "#/internal/Forward"
                   },
                   "type": {
                      "type": "string"
@@ -375,6 +374,20 @@
       }
    },
    "internal": {
+      "Forward": {
+         "properties": {
+            "id": {
+               "type": "string"
+            },
+            "reason": {
+               "enum": [
+                  "PARSED_RECORD_AVAILABLE"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
       "IdentifiableObject": {
          "properties": {
             "id": {
