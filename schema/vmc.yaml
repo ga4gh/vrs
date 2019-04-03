@@ -2,51 +2,8 @@
 # ls -1 *.yaml | entr make
 
 $schema: "http://json-schema.org/schema#"
-title: VMCBundle
-
+title: VMC Definitions
 type: "object"
-
-properties:
-  meta:
-    $ref: "#/definitions/Meta"
-  locations:
-    type: "object"
-#    patternProperties:
-#      ^.:
-#        $ref: "#/definitions/Location"
-  alleles:
-    type: "object"
-#    patternProperties:
-#      ^.:
-#        $ref: "#/definitions/Allele"
-  haplotypes:
-    type: "object"
-#    patternProperties:
-#      ^.:
-#        $ref: "#/definitions/Haplotype"
-  genotypes:
-    type: "object"
-#    patternProperties:
-#      ^.:
-#        $ref: "#/definitions/Genotype"
-  identifiers:
-    $ref: "#/definitions/Identifiers"
-  curie_prefix_map:
-    description: maps CURIE prefixes to IRIs
-    type: "object"
-#    patternProperties:
-#      ^.:
-#        type: string
-
-required:
-- meta
-- locations
-- alleles
-- haplotypes
-- genotypes
-- identifiers
-  
-additionalProperties: false
 
 
 definitions:
@@ -280,6 +237,48 @@ definitions:
         type: string
         enum: ["Text", "SequenceVariation"]
 
+
+  VMCBundle:
+    type: "object"
+    properties:
+      meta:
+        $ref: "#/definitions/Meta"
+      locations:
+        type: "object"
+    #    patternProperties:
+    #      ^.:
+    #        $ref: "#/definitions/Location"
+      alleles:
+        type: "object"
+    #    patternProperties:
+    #      ^.:
+    #        $ref: "#/definitions/Allele"
+      haplotypes:
+        type: "object"
+    #    patternProperties:
+    #      ^.:
+    #        $ref: "#/definitions/Haplotype"
+      genotypes:
+        type: "object"
+    #    patternProperties:
+    #      ^.:
+    #        $ref: "#/definitions/Genotype"
+      identifiers:
+        $ref: "#/definitions/Identifiers"
+      curie_prefix_map:
+        description: maps CURIE prefixes to IRIs
+        type: "object"
+    #    patternProperties:
+    #      ^.:
+    #        type: string
+    required:
+    - meta
+    - locations
+    - alleles
+    - haplotypes
+    - genotypes
+    - identifiers
+    additionalProperties: false
 
 
   # Naming

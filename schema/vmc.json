@@ -1,6 +1,5 @@
 {
    "$schema": "http://json-schema.org/schema#",
-   "additionalProperties": false,
    "definitions": {
       "Allele": {
          "additionalProperties": false,
@@ -323,6 +322,42 @@
          ],
          "type": "object"
       },
+      "VMCBundle": {
+         "additionalProperties": false,
+         "properties": {
+            "alleles": {
+               "type": "object"
+            },
+            "curie_prefix_map": {
+               "description": "maps CURIE prefixes to IRIs",
+               "type": "object"
+            },
+            "genotypes": {
+               "type": "object"
+            },
+            "haplotypes": {
+               "type": "object"
+            },
+            "identifiers": {
+               "$ref": "#/definitions/Identifiers"
+            },
+            "locations": {
+               "type": "object"
+            },
+            "meta": {
+               "$ref": "#/definitions/Meta"
+            }
+         },
+         "required": [
+            "meta",
+            "locations",
+            "alleles",
+            "haplotypes",
+            "genotypes",
+            "identifiers"
+         ],
+         "type": "object"
+      },
       "Variation": {
          "properties": {
             "id": {
@@ -362,38 +397,6 @@
          "type": "object"
       }
    },
-   "properties": {
-      "alleles": {
-         "type": "object"
-      },
-      "curie_prefix_map": {
-         "description": "maps CURIE prefixes to IRIs",
-         "type": "object"
-      },
-      "genotypes": {
-         "type": "object"
-      },
-      "haplotypes": {
-         "type": "object"
-      },
-      "identifiers": {
-         "$ref": "#/definitions/Identifiers"
-      },
-      "locations": {
-         "type": "object"
-      },
-      "meta": {
-         "$ref": "#/definitions/Meta"
-      }
-   },
-   "required": [
-      "meta",
-      "locations",
-      "alleles",
-      "haplotypes",
-      "genotypes",
-      "identifiers"
-   ],
-   "title": "VMCBundle",
+   "title": "VMC Definitions",
    "type": "object"
 }
