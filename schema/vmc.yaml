@@ -1,5 +1,5 @@
 # when editing:
-# ls -1 *.yaml | entr make
+# ls -1 *.yaml | entr -n make &
 
 $schema: "http://json-schema.org/schema#"
 title: VMC Definitions
@@ -224,8 +224,8 @@ definitions:
             type: string
             description: >-
               The textual representation of variation as provided by the client.
-          forward:
-            $ref: '#/internal/Forward'
+          related:
+            $ref: '#/internal/RelatedVariation'
 
   Variation:
     type: object
@@ -242,31 +242,38 @@ definitions:
     properties:
       meta:
         $ref: "#/definitions/Meta"
+        default: {}
       locations:
         type: "object"
+        default: {}
     #    patternProperties:
     #      ^.:
     #        $ref: "#/definitions/Location"
       alleles:
         type: "object"
+        default: {}
     #    patternProperties:
     #      ^.:
     #        $ref: "#/definitions/Allele"
       haplotypes:
         type: "object"
+        default: {}
     #    patternProperties:
     #      ^.:
     #        $ref: "#/definitions/Haplotype"
       genotypes:
         type: "object"
+        default: {}
     #    patternProperties:
     #      ^.:
     #        $ref: "#/definitions/Genotype"
       identifiers:
         $ref: "#/definitions/Identifiers"
-      curie_prefix_map:
+        default: {}
+      curie_map:
         description: maps CURIE prefixes to IRIs
         type: "object"
+        default: {}
     #    patternProperties:
     #      ^.:
     #        type: string
@@ -277,6 +284,7 @@ definitions:
     - haplotypes
     - genotypes
     - identifiers
+    - curie_map
     additionalProperties: false
 
 
@@ -327,15 +335,15 @@ internal:
 
   # x-bases stores reusable base definitions of schemas
   # They are not intended to be used in isolation.
-  Forward:
+  RelatedVariation:
     type: object
     properties:
       id:
         type: string
-      reason:
+      relationship:
         type: string
         enum:
-          - PARSED_RECORD_AVAILABLE
+          - PARSED_VARIATION
 
   IdentifiableObject:
     type: object

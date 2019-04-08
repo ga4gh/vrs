@@ -305,16 +305,16 @@
             },
             {
                "properties": {
-                  "@type": {
-                     "default": "TextVariation",
-                     "type": "string"
-                  },
                   "definition": {
                      "description": "The textual representation of variation as provided by the client.",
                      "type": "string"
                   },
-                  "forward": {
-                     "$ref": "#/internal/Forward"
+                  "related": {
+                     "$ref": "#/internal/RelatedVariation"
+                  },
+                  "type": {
+                     "default": "TextVariation",
+                     "type": "string"
                   }
                },
                "type": "object"
@@ -326,26 +326,33 @@
          "additionalProperties": false,
          "properties": {
             "alleles": {
+               "default": {},
                "type": "object"
             },
-            "curie_prefix_map": {
+            "curie_map": {
+               "default": {},
                "description": "maps CURIE prefixes to IRIs",
                "type": "object"
             },
             "genotypes": {
+               "default": {},
                "type": "object"
             },
             "haplotypes": {
+               "default": {},
                "type": "object"
             },
             "identifiers": {
-               "$ref": "#/definitions/Identifiers"
+               "$ref": "#/definitions/Identifiers",
+               "default": {}
             },
             "locations": {
+               "default": {},
                "type": "object"
             },
             "meta": {
-               "$ref": "#/definitions/Meta"
+               "$ref": "#/definitions/Meta",
+               "default": {}
             }
          },
          "required": [
@@ -354,7 +361,8 @@
             "alleles",
             "haplotypes",
             "genotypes",
-            "identifiers"
+            "identifiers",
+            "curie_map"
          ],
          "type": "object"
       },
@@ -365,7 +373,7 @@
             },
             "type": {
                "enum": [
-                  "Text",
+                  "TextVariation",
                   "SequenceVariation"
                ],
                "type": "string"
@@ -375,20 +383,6 @@
       }
    },
    "internal": {
-      "Forward": {
-         "properties": {
-            "id": {
-               "type": "string"
-            },
-            "reason": {
-               "enum": [
-                  "PARSED_RECORD_AVAILABLE"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
       "IdentifiableObject": {
          "properties": {
             "id": {
@@ -404,6 +398,20 @@
                   "Interval",
                   "NestedInterval",
                   "RangedInterval"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "RelatedVariation": {
+         "properties": {
+            "id": {
+               "type": "string"
+            },
+            "relationship": {
+               "enum": [
+                  "PARSED_VARIATION"
                ],
                "type": "string"
             }
