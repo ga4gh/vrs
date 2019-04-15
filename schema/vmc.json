@@ -3,7 +3,7 @@
    "definitions": {
       "Allele": {
          "additionalProperties": false,
-         "description": "A contiguous change at a Location.",
+         "description": "An assertion of a sequence state at a Location.",
          "example": {
             "id": "VMC:GA_012abc",
             "location_id": "VMC:GL_01234",
@@ -13,6 +13,9 @@
             "id": {
                "$ref": "#/definitions/Id"
             },
+            "location": {
+               "$ref": "#/definitions/Location"
+            },
             "location_id": {
                "$ref": "#/definitions/Id"
             },
@@ -20,10 +23,32 @@
                "type": "string"
             }
          },
+         "title": "Allele",
          "type": "object",
          "xml": {
             "name": "Allele"
          }
+      },
+      "CURIE": {
+         "additionalProperties": false,
+         "description": "A W3C CURIE <namespace,reference> pair that refers to an object. See https://www.w3.org/TR/curie/.",
+         "properties": {
+            "prefix": {
+               "description": "The namespace, naming scheme, or naming authority that provides scope for keys within it.",
+               "example": "refseq",
+               "type": "string"
+            },
+            "reference": {
+               "description": "A unique key within the CURIE `prefix` (namespace). ",
+               "example": "NM_000551.3",
+               "type": "string"
+            }
+         },
+         "required": [
+            "prefix",
+            "reference"
+         ],
+         "type": "object"
       },
       "Completeness": {
          "description": "Declares the `completeness` of haplotype or genotype definitions.",
@@ -63,6 +88,7 @@
                "$ref": "#/definitions/Id"
             }
          },
+         "title": "Genotype",
          "type": "object"
       },
       "Haplotype": {
@@ -92,6 +118,7 @@
                "$ref": "#/definitions/Id"
             }
          },
+         "title": "Haplotype",
          "type": "object"
       },
       "Id": {
@@ -174,6 +201,10 @@
                      "type": "integer"
                   },
                   "type": {
+                     "default": "Interval",
+                     "enum": [
+                        "Interval"
+                     ],
                      "type": "string"
                   }
                },
@@ -199,6 +230,7 @@
                "type": "string"
             }
          },
+         "title": "Location",
          "type": "object"
       },
       "Meta": {
@@ -227,6 +259,10 @@
                      "$ref": "#/definitions/Interval"
                   },
                   "type": {
+                     "default": "NestedInterval",
+                     "enum": [
+                        "NestedInterval"
+                     ],
                      "type": "string"
                   }
                },
@@ -249,6 +285,9 @@
       },
       "Position": {
          "description": "A Position represents a span of sequence.  Positions are always represented by contiguous spans using interbase coordinates.",
+         "discriminator": {
+            "propertyName": "type"
+         },
          "oneOf": [
             {
                "$ref": "#/definitions/Interval"
@@ -275,6 +314,10 @@
                      "$ref": "#/definitions/Interval"
                   },
                   "type": {
+                     "default": "RangedInterval",
+                     "enum": [
+                        "RangedInterval"
+                     ],
                      "type": "string"
                   }
                },
@@ -419,6 +462,6 @@
          "type": "object"
       }
    },
-   "title": "VMC Definitions",
+   "title": "VMCDefinitions",
    "type": "object"
 }

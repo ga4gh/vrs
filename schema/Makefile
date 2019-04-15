@@ -9,3 +9,6 @@ all: ${JSONS}
 
 %.json: %.yaml
 	./y2j <$< >$@
+
+watch:
+	-while true; do ls -1 *.yaml | entr -dn make; done

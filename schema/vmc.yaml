@@ -2,7 +2,7 @@
 # ls -1 *.yaml | entr -n make &
 
 $schema: "http://json-schema.org/schema#"
-title: VMC Definitions
+title: VMCDefinitions
 type: "object"
 
 
@@ -36,6 +36,28 @@ definitions:
     - "namespace"
     - "accession"
   
+  CURIE:
+    description: >-
+      A W3C CURIE <namespace,reference> pair that refers to an object.
+      See https://www.w3.org/TR/curie/.
+    type: "object"
+    properties:
+      prefix:
+        type: "string"
+        example: "refseq"
+        description: >-
+          The namespace, naming scheme, or naming authority that
+          provides scope for keys within it.
+      reference:
+        type: "string"
+        example: "NM_000551.3"
+        description: >-
+          A unique key within the CURIE `prefix` (namespace). 
+    additionalProperties: false
+    required:
+    - prefix
+    - reference
+  
   Meta:
     # TODO: version regexp ^\d+\.\d+$
     # describe semantics
@@ -58,7 +80,8 @@ definitions:
         properties:
           type:
             type: string
-            #enum: ["Interval"]
+            enum: ["Interval"]
+            default: Interval
           start:
             type: integer
             nullable: true
@@ -74,21 +97,6 @@ definitions:
           start: 11
           end: 22
 
-  Location:
-    type: object
-    properties:
-      id:
-        type: string
-        example: "GL_tnVGwWWN0L_fEYK4hGF1Tzm7JULAkm2Z"
-      sequence_id:
-        type: string
-        example: "GS_ss8r_wB0-b9r44TQTMmVTI92884QvBiB"
-      interval:
-        $ref: "#/definitions/Interval"
-# TODO:
-#      position:
-#        $ref: "#/definitions/Position"
-
   NestedInterval:
     allOf:
       - $ref: '#/internal/PositionBase'
@@ -96,7 +104,8 @@ definitions:
         properties:
           type:
             type: string
-            #enum: ["NestedInterval"]
+            enum: ["NestedInterval"]
+            default: NestedInterval
           inner:
             $ref: '#/definitions/Interval'
           outer:
@@ -118,9 +127,11 @@ definitions:
       always represented by contiguous spans using interbase
       coordinates.
     oneOf:
-    - $ref: '#/definitions/Interval'
-    - $ref: '#/definitions/NestedInterval'
-    - $ref: '#/definitions/RangedInterval'
+      - $ref: '#/definitions/Interval'
+      - $ref: '#/definitions/NestedInterval'
+      - $ref: '#/definitions/RangedInterval'
+    discriminator:
+      propertyName: type
 
   RangedInterval:
     allOf:
@@ -129,7 +140,8 @@ definitions:
         properties:
           type:
             type: string
-            #enum: ["RangedInterval"]
+            enum: ["RangedInterval"]
+            default: RangedInterval
           start:
             $ref: '#/definitions/Interval'
           end:
@@ -145,18 +157,40 @@ definitions:
         start: 30
         end: 39
 
+
+
+  Location:
+    title: Location
+    type: object
+    properties:
+      id:
+        type: string
+        example: "GL_tnVGwWWN0L_fEYK4hGF1Tzm7JULAkm2Z"
+      sequence_id:
+        type: string
+        example: "GS_ss8r_wB0-b9r44TQTMmVTI92884QvBiB"
+      interval:
+        $ref: "#/definitions/Interval"
+# TODO:
+#      position:
+#        $ref: "#/definitions/Position"
+
   
   # Genetic States
   Allele:
-    description: A contiguous change at a Location.
+    title: "Allele"
+    description: An assertion of a sequence state at a Location.
     type: "object"
     properties:
       id:
         $ref: "#/definitions/Id"
+      location:
+        $ref: "#/definitions/Location"
       location_id:
         $ref: "#/definitions/Id"
       state:
         type: "string"
+    # TODO: Add constraint for exactly one of location | location_id
     additionalProperties: false
     example:
       id: "VMC:GA_012abc"
@@ -174,6 +208,7 @@ definitions:
     - "COMPLETE"
   
   Haplotype:
+    title: Haplotype
     description: A set of zero or more Alleles on a single instance of a Sequence.
     type: "object"
     properties:
@@ -193,6 +228,7 @@ definitions:
       allele_ids: ["A0123", "A0124"]
   
   Genotype:
+    title: Genotype
     description: A list of Haplotypes.
     type: "object"
     properties:
@@ -312,27 +348,6 @@ definitions:
         accession: APOE-ε2
       
 internal:
-  # Positions
-  # * Cytoband
-  # * SimplePosition
-  # * BaseOffsetPosition
-  # * Gene
-  # * ExonIntronPosition
-  # * RelativePosition (left of, right of)
-  #
-  # Regions
-  # * Interval
-  # * RangedInterval
-  # * NestedInterval
-  # * CytobandInterval
-  # * BaseOffsetInterval
-  #
-  # Locations
-  # * SequenceLocation (seq id, Position|Region)
-  # * GeneLocation (gene, assy)
-  # * CytoLocation (assy, cyto interval)
-  # * IntronExonLocation (tx, iep, iep)
-
   # x-bases stores reusable base definitions of schemas
   # They are not intended to be used in isolation.
   RelatedVariation:
@@ -359,3 +374,39 @@ internal:
         enum: ["Interval", "NestedInterval", "RangedInterval"]
 #    required:
 #      - type
+
+
+  # Basic stuff
+  # * CURIE
+  # 
+  # Positions
+  # * SimplePosition
+  # * BaseOffsetPosition
+  # * Cytoband
+  # * Gene
+  # * ExonIntronPosition
+  # * RelativePosition (left of, right of)
+  #
+  # Regions
+  # * Interval
+  # * BaseOffsetInterval
+  # * RangedInterval
+  # * NestedInterval
+  # * CytobandInterval
+  #
+  # Locations
+  # * SequenceLocation (seq id, Position|Region)
+  # * GeneLocation (gene, assy)
+  # * CytoLocation (assy, cyto interval)
+  # * IntronExonLocation (tx, iep, iep)
+  #
+  # Variation
+  # * Allele: SequenceLocation, State
+  # * CopyNumberVariation: (source) location, 
+  # * Translocation: two locations
+  #
+  # Containers
+  # * Haplotype := [Alleles]
+  # * Genotype := [Haplotypes]
+  # * VariationSet
+  # * Profile := flexible any of above
