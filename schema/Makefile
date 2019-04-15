@@ -10,5 +10,10 @@ all: ${JSONS}
 %.json: %.yaml
 	./y2j <$< >$@
 
+## # npm install -g json-dereference-cli
+## %.json: %.yaml
+## 	json-dereference -s $< -o $@
+
+
 watch:
-	-while true; do ls -1 *.yaml | entr -dn make; done
+	-while true; do ls -1 *.yaml | entr -dn make vmc.json; done
