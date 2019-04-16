@@ -23,7 +23,6 @@
                "type": "string"
             }
          },
-         "title": "Allele",
          "type": "object",
          "xml": {
             "name": "Allele"
@@ -88,7 +87,6 @@
                "$ref": "#/definitions/Id"
             }
          },
-         "title": "Genotype",
          "type": "object"
       },
       "Haplotype": {
@@ -118,7 +116,6 @@
                "$ref": "#/definitions/Id"
             }
          },
-         "title": "Haplotype",
          "type": "object"
       },
       "Id": {
@@ -230,7 +227,6 @@
                "type": "string"
             }
          },
-         "title": "Location",
          "type": "object"
       },
       "Meta": {

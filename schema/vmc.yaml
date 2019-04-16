@@ -160,7 +160,6 @@ definitions:
 
 
   Location:
-    title: Location
     type: object
     properties:
       id:
@@ -178,7 +177,6 @@ definitions:
   
   # Genetic States
   Allele:
-    title: "Allele"
     description: An assertion of a sequence state at a Location.
     type: "object"
     properties:
@@ -208,7 +206,6 @@ definitions:
     - "COMPLETE"
   
   Haplotype:
-    title: Haplotype
     description: A set of zero or more Alleles on a single instance of a Sequence.
     type: "object"
     properties:
@@ -228,7 +225,6 @@ definitions:
       allele_ids: ["A0123", "A0124"]
   
   Genotype:
-    title: Genotype
     description: A list of Haplotypes.
     type: "object"
     properties:
