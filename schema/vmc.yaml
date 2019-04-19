@@ -7,20 +7,298 @@ type: "object"
 
 
 definitions:
-  # Basic types
+  # VR definitions are presented top-down.  Everything rolls up to
+  # Variation, which is a polymorphic abstraction of many kinds of
+  # variation.
+
+  ############################################################################
+  # Variation
+  Variation:
+    description: >-
+      A polymorphic representation of variation
+    oneOf:
+      - $ref: '#/definitions/Text'
+      - $ref: '#/definitions/Allele'
+      # - $ref: '#/definitions/Haplotype'
+      # - $ref: '#/definitions/Genotype'
+      # - $ref: '#/definitions/BinaryVariation'
+      - $ref: '#/definitions/VariationSet'
+    discriminator:
+      propertyName: type
+
+  Text:
+    type: object
+    properties:
+      type:
+        type: string
+        enum: ["Text"]
+        default: "Text"
+      id:
+        $ref: "#/definitions/Id"
+      definition:
+        type: string
+        description: >-
+          The textual representation of variation as provided by the client.
+
+  Allele:
+    description: An assertion of a sequence state at a Location.
+    type: "object"
+    properties:
+      type:
+        type: string
+        enum: ["Allele"]
+        default: "Allele"
+      id:
+        $ref: "#/definitions/Id"
+      location:
+        $ref: "#/definitions/Location"
+      location_id:
+        $ref: "#/definitions/Id"
+      state:
+        type: "string"
+    # TODO: Add constraint for exactly one of location | location_id
+    additionalProperties: false
+    example:
+      id: "VMC:GA_012abc"
+      location_id: "VMC:GL_01234"
+      state: "A"
+      type: "Allele"
+    xml:
+      name: "Allele"
+  
+  Haplotype:
+    description: A set of zero or more Alleles on a single instance of a Sequence.
+    type: "object"
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+      location_id:
+        $ref: "#/definitions/Id"
+      completeness:
+        $ref: "#/enums/Completeness"
+      allele_ids:
+        type: "array"
+        items:
+          $ref: "#/definitions/Id"
+    additionalProperties: false
+    example:
+      completeness: "PARTIAL"
+      allele_ids: ["A0123", "A0124"]
+  
+  Genotype:
+    description: A list of Haplotypes.
+    type: "object"
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+      completeness:
+        $ref: "#/enums/Completeness"
+      haplotypes:
+        type: "array"
+        items:
+          $ref: "#/definitions/Haplotype"
+      haplotype_ids:
+        type: "array"
+        items:
+          $ref: "#/definitions/Id"
+    additionalProperties: false
+    example:
+      id: "G310a"
+      completeness: "COMPLETE"
+      haplotype_ids: ["H1220", "H19f4"]
+
+  VariationSet:
+    description: >-
+      A set of variation
+    type: "object"
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+      elements:
+        type: array
+        items:
+          $ref: "#/definitions/Id"
+
+
+  ############################################################################
+  # Locations
+  # * SequenceLocation (seq id, Position|Region)
+  # * GeneLocation (gene, assy)
+  # * CytoLocation (assy, cyto interval)
+  # * IntronExonLocation (tx, iep, iep)
+
+  Location:
+    description: >-
+      A Location represents a span on a specific sequence.
+    oneOf:
+      - $ref: '#/definitions/SequenceLocation'
+      - $ref: '#/definitions/GeneLocation'
+      - $ref: '#/definitions/CytobandLocation'
+    discriminator:
+      propertyName: type
+  
+  SequenceLocation:
+    type: object
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+      sequence_id:
+        type: string
+        example: "GS_ss8r_wB0-b9r44TQTMmVTI92884QvBiB"
+      region:
+        $ref: "#/definitions/Region"
+
+  GeneLocation:
+    type: object
+    properties:
+      id:
+        $ref: "#/definitions/Id"
+      gene:
+        $ref: "#/definitions/GeneSymbol"
+
+  CytobandLocation:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+        enum: ["CytobandLocation"]
+        default: "CytobandLocation"
+      id:
+        $ref: "#/definitions/Id"
+      chr:
+        type: "string"
+      start:
+        $ref: "#/definitions/Cytoband"
+      end:
+        $ref: "#/definitions/Cytoband"
+        nullable: true
+        default: null
+    additionalProperties: false
+    required:
+      - "type"
+      - "chr"
+      - "start"
+    example:
+      type: "CytobandLocation"
+      chr: "11"
+      start: "q22.3"
+      end: "q23.1"
+    
+
+  ############################################################################
+  # Region
+  # * SimpleRegion
+  # * RangedRegion
+  # * NestedRegion
+  # * TODO: ComplexRegion
+  # * TODO: CytobandRegion
+
+  Region:
+    description: >-
+      A Region represents a span of sequence.  Positions are
+      always represented by contiguous spans using interbase
+      coordinates.
+
+      This definition of Region is intended to be compatible with that
+      in Sequence Ontolgy
+      ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)),
+      with the exception that the GA4GH VR Region may be
+      zero-width. The SO definition is for an "extent greater than
+      zero".
+    oneOf:
+      - $ref: '#/definitions/SimpleRegion'
+      - $ref: '#/definitions/NestedRegion'
+      - $ref: '#/definitions/RangedRegion'
+      # - $ref: '#/definitions/ComplexRegion'
+    discriminator:
+      propertyName: type
+
+  SimpleRegion:
+    type: object
+    properties:
+      type:
+        type: string
+        enum: ["SimpleRegion"]
+        default: SimpleRegion
+      start:
+        type: integer
+        nullable: true
+      end:
+        type: integer
+        nullable: true
+    additionalProperties: false
+    required:
+      - start
+      - end
+    example:
+      type: "SimpleRegion"
+      start: 11
+      end: 22
+
+  NestedRegion:
+    type: object
+    properties:
+      type:
+        type: string
+        enum: ["NestedRegion"]
+        default: NestedRegion
+      inner:
+        $ref: '#/definitions/SimpleRegion'
+      outer:
+        $ref: '#/definitions/SimpleRegion'
+    example:
+      type: NestedRegion
+      inner:
+        type: SimpleRegion
+        start: 29
+        end: 30
+      outer:
+        type: SimpleRegion
+        start: 20
+        end: 39
+    
+  RangedRegion:
+    properties:
+      type:
+        type: string
+        enum: ["RangedRegion"]
+        default: RangedRegion
+      start:
+        $ref: '#/definitions/SimpleRegion'
+      end:
+        $ref: '#/definitions/SimpleRegion'
+    example:
+      type: RangedRegion
+      start:
+        type: SimpleRegion
+        start: 20
+        end: 29
+      end:
+        type: SimpleRegion
+        start: 30
+        end: 39
+
+
+  ############################################################################
+  # "Basic" types
+  # These types are used solely within other definitions.
+
   DateTime:
     type: "string"
     format: "date-time"
   
   Id:
-    description: Uniquely identifies a specific instance of an object within a document.
+    description: >-
+      Uniquely identifies a specific instance of an object within a
+      document.
     type: "string"
-    example: "NCBI:NM_000551.3"
+    example: "01340adf981as0"
     xml:
       attribute: true
   
   Identifier:
-    description: A <namespace,accession> pair that refers to an object.
+    description: >-
+      A <namespace,accession> pair that refers to an object.
     type: "object"
     properties:
       namespace:
@@ -36,7 +314,7 @@ definitions:
     - "namespace"
     - "accession"
   
-  CURIE:
+  CURIE_structure:
     description: >-
       A W3C CURIE <namespace,reference> pair that refers to an object.
       See https://www.w3.org/TR/curie/.
@@ -55,8 +333,15 @@ definitions:
           A unique key within the CURIE `prefix` (namespace). 
     additionalProperties: false
     required:
-    - prefix
-    - reference
+      - "prefix"
+      - "reference"
+  
+  CURIE:
+    description: >-
+      A W3C CURIE "namespace:reference" string that refers to an object.
+      See https://www.w3.org/TR/curie/.
+    type: "string"
+    pattern: '^\w+:\w+$'
   
   Meta:
     # TODO: version regexp ^\d+\.\d+$
@@ -69,206 +354,28 @@ definitions:
       generated_at:
         $ref: "#/definitions/DateTime"
 
-  # Sequence, Interval, Locations
-  Sequence:
-    type: "string"
-  
-  Interval:
-    allOf:
-      - $ref: '#/internal/PositionBase'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum: ["Interval"]
-            default: Interval
-          start:
-            type: integer
-            nullable: true
-          end:
-            type: integer
-            nullable: true
-        additionalProperties: false
-        required:
-          - start
-          - end
-        example:
-          type: "Interval"
-          start: 11
-          end: 22
-
-  NestedInterval:
-    allOf:
-      - $ref: '#/internal/PositionBase'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum: ["NestedInterval"]
-            default: NestedInterval
-          inner:
-            $ref: '#/definitions/Interval'
-          outer:
-            $ref: '#/definitions/Interval'
-    example:
-      type: NestedInterval
-      outer:
-        type: Interval
-        start: 20
-        end: 39
-      inner:
-        type: Interval
-        start: 29
-        end: 30
-    
-  Position:
-    description: >-
-      A Position represents a span of sequence.  Positions are
-      always represented by contiguous spans using interbase
-      coordinates.
-    oneOf:
-      - $ref: '#/definitions/Interval'
-      - $ref: '#/definitions/NestedInterval'
-      - $ref: '#/definitions/RangedInterval'
-    discriminator:
-      propertyName: type
-
-  RangedInterval:
-    allOf:
-      - $ref: '#/internal/PositionBase'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum: ["RangedInterval"]
-            default: RangedInterval
-          start:
-            $ref: '#/definitions/Interval'
-          end:
-            $ref: '#/definitions/Interval'
-    example:
-      type: RangedInterval
-      start:
-        type: Interval
-        start: 20
-        end: 29
-      end:
-        type: Interval
-        start: 30
-        end: 39
-
-
-
-  Location:
+  RelatedVariation:
     type: object
     properties:
       id:
+        $ref: "#/definitions/Id"
+      relationship:
         type: string
-        example: "GL_tnVGwWWN0L_fEYK4hGF1Tzm7JULAkm2Z"
-      sequence_id:
-        type: string
-        example: "GS_ss8r_wB0-b9r44TQTMmVTI92884QvBiB"
-      interval:
-        $ref: "#/definitions/Interval"
-# TODO:
-#      position:
-#        $ref: "#/definitions/Position"
+        enum:
+          - PARSED_VARIATION
 
-  
-  # Genetic States
-  Allele:
-    description: An assertion of a sequence state at a Location.
-    type: "object"
-    properties:
-      id:
-        $ref: "#/definitions/Id"
-      location:
-        $ref: "#/definitions/Location"
-      location_id:
-        $ref: "#/definitions/Id"
-      state:
-        type: "string"
-    # TODO: Add constraint for exactly one of location | location_id
-    additionalProperties: false
-    example:
-      id: "VMC:GA_012abc"
-      location_id: "VMC:GL_01234"
-      state: "A"
-    xml:
-      name: "Allele"
-  
-  Completeness:
-    type: "string"
-    description: Declares the `completeness` of haplotype or genotype definitions.
-    enum:
-    - "UNKNOWN"
-    - "PARTIAL"
-    - "COMPLETE"
-  
-  Haplotype:
-    description: A set of zero or more Alleles on a single instance of a Sequence.
-    type: "object"
-    properties:
-      id:
-        $ref: "#/definitions/Id"
-      location_id:
-        $ref: "#/definitions/Id"
-      completeness:
-        $ref: "#/definitions/Completeness"
-      allele_ids:
-        type: "array"
-        items:
-          $ref: "#/definitions/Id"
-    additionalProperties: false
-    example:
-      completeness: "PARTIAL"
-      allele_ids: ["A0123", "A0124"]
-  
-  Genotype:
-    description: A list of Haplotypes.
-    type: "object"
-    properties:
-      id:
-        $ref: "#/definitions/Id"
-      completeness:
-        $ref: "#/definitions/Completeness"
-      haplotype_ids:
-        type: "array"
-        items:
-          $ref: "#/definitions/Id"
-    additionalProperties: false
-    example:
-      id: "G310a"
-      completeness: "COMPLETE"
-      haplotype_ids: ["H1220", "H19f4"]
-  
-
-  TextVariation:
-    type: object
-    allOf:
-      - $ref: '#/internal/IdentifiableObject'
-      - type: object
-        properties:
-          type:
-            type: string
-            default: "TextVariation"
-          definition:
-            type: string
-            description: >-
-              The textual representation of variation as provided by the client.
-          related:
-            $ref: '#/internal/RelatedVariation'
-
-  Variation:
-    type: object
-    properties:
-      id:
-        type: string
-      type:
-        type: string
-        enum: ["TextVariation", "SequenceVariation"]
+  Cytoband:
+    type: string
+    pattern: '^[pq][1-9][0-9]*(\.[1-9][0-9]*)?$'
+    example: 'q22.3'
+      
+  GeneSymbol:
+    type: string
+    pattern: '^[A-Z][A-Za-z0-9]+$'
+    example: 'BRCA1'
 
 
+  ############################################################################
   VMCBundle:
     type: "object"
     properties:
@@ -319,8 +426,6 @@ definitions:
     - curie_map
     additionalProperties: false
 
-
-  # Naming
   Identifiers:
     description: "A list of Identifiers"
     type: "object"
@@ -343,66 +448,25 @@ definitions:
       - namespace: whoknows
         accession: APOE-ε2
       
-internal:
+
+enums:
   # x-bases stores reusable base definitions of schemas
   # They are not intended to be used in isolation.
-  RelatedVariation:
-    type: object
-    properties:
-      id:
-        type: string
-      relationship:
-        type: string
-        enum:
-          - PARSED_VARIATION
+  Completeness:
+    type: "string"
+    description: >-
+      Declares the `completeness` of a Haplotype or Genotype
+      definition.  See descriptions in those schemas for additional
+      information.
+      * COMPLETE: The definition is complete. All data are included
+        for the covered assay.
+      * PARTIAL: The definition is intentionally incomplete, typically
+        to protect information.  Declaring partial variation allows
+        data submitters to convey that data are missing.
+      * UNKNOWN: The definition is not known to be either COMPLETE or
+        PARTIAL.
+    enum:
+    - "UNKNOWN"
+    - "PARTIAL"
+    - "COMPLETE"
 
-  IdentifiableObject:
-    type: object
-    properties:
-      id:
-        type: string
-
-  PositionBase:
-    type: object
-    properties:
-      type:
-        type: string
-        enum: ["Interval", "NestedInterval", "RangedInterval"]
-#    required:
-#      - type
-
-
-  # Basic stuff
-  # * CURIE
-  # 
-  # Positions
-  # * SimplePosition
-  # * BaseOffsetPosition
-  # * Cytoband
-  # * Gene
-  # * ExonIntronPosition
-  # * RelativePosition (left of, right of)
-  #
-  # Regions
-  # * Interval
-  # * BaseOffsetInterval
-  # * RangedInterval
-  # * NestedInterval
-  # * CytobandInterval
-  #
-  # Locations
-  # * SequenceLocation (seq id, Position|Region)
-  # * GeneLocation (gene, assy)
-  # * CytoLocation (assy, cyto interval)
-  # * IntronExonLocation (tx, iep, iep)
-  #
-  # Variation
-  # * Allele: SequenceLocation, State
-  # * CopyNumberVariation: (source) location, 
-  # * Translocation: two locations
-  #
-  # Containers
-  # * Haplotype := [Alleles]
-  # * Genotype := [Haplotypes]
-  # * VariationSet
-  # * Profile := flexible any of above

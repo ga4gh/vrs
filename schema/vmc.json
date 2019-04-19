@@ -7,7 +7,8 @@
          "example": {
             "id": "VMC:GA_012abc",
             "location_id": "VMC:GL_01234",
-            "state": "A"
+            "state": "A",
+            "type": "Allele"
          },
          "properties": {
             "id": {
@@ -21,6 +22,13 @@
             },
             "state": {
                "type": "string"
+            },
+            "type": {
+               "default": "Allele",
+               "enum": [
+                  "Allele"
+               ],
+               "type": "string"
             }
          },
          "type": "object",
@@ -29,6 +37,11 @@
          }
       },
       "CURIE": {
+         "description": "A W3C CURIE \"namespace:reference\" string that refers to an object. See https://www.w3.org/TR/curie/.",
+         "pattern": "^\\w+:\\w+$",
+         "type": "string"
+      },
+      "CURIE_structure": {
          "additionalProperties": false,
          "description": "A W3C CURIE <namespace,reference> pair that refers to an object. See https://www.w3.org/TR/curie/.",
          "properties": {
@@ -49,17 +62,67 @@
          ],
          "type": "object"
       },
-      "Completeness": {
-         "description": "Declares the `completeness` of haplotype or genotype definitions.",
-         "enum": [
-            "UNKNOWN",
-            "PARTIAL",
-            "COMPLETE"
-         ],
+      "Cytoband": {
+         "example": "q22.3",
+         "pattern": "^[pq][1-9][0-9]*(\\.[1-9][0-9]*)?$",
          "type": "string"
+      },
+      "CytobandLocation": {
+         "additionalProperties": false,
+         "example": {
+            "chr": "11",
+            "end": "q23.1",
+            "start": "q22.3",
+            "type": "CytobandLocation"
+         },
+         "properties": {
+            "chr": {
+               "type": "string"
+            },
+            "end": {
+               "$ref": "#/definitions/Cytoband",
+               "default": null,
+               "nullable": true
+            },
+            "id": {
+               "$ref": "#/definitions/Id"
+            },
+            "start": {
+               "$ref": "#/definitions/Cytoband"
+            },
+            "type": {
+               "default": "CytobandLocation",
+               "enum": [
+                  "CytobandLocation"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "chr",
+            "start"
+         ],
+         "type": "object"
       },
       "DateTime": {
          "format": "date-time",
+         "type": "string"
+      },
+      "GeneLocation": {
+         "properties": {
+            "gene": {
+               "$ref": "#/definitions/GeneSymbol"
+            },
+            "id": {
+               "$ref": "#/definitions/Id"
+            }
+         },
+         "type": "object"
+      },
+      "GeneSymbol": {
+         "example": "BRCA1",
+         "pattern": "^[A-Z][A-Za-z0-9]+$",
          "type": "string"
       },
       "Genotype": {
@@ -75,11 +138,17 @@
          },
          "properties": {
             "completeness": {
-               "$ref": "#/definitions/Completeness"
+               "$ref": "#/enums/Completeness"
             },
             "haplotype_ids": {
                "items": {
                   "$ref": "#/definitions/Id"
+               },
+               "type": "array"
+            },
+            "haplotypes": {
+               "items": {
+                  "$ref": "#/definitions/Haplotype"
                },
                "type": "array"
             },
@@ -107,7 +176,7 @@
                "type": "array"
             },
             "completeness": {
-               "$ref": "#/definitions/Completeness"
+               "$ref": "#/enums/Completeness"
             },
             "id": {
                "$ref": "#/definitions/Id"
@@ -120,7 +189,7 @@
       },
       "Id": {
          "description": "Uniquely identifies a specific instance of an object within a document.",
-         "example": "NCBI:NM_000551.3",
+         "example": "01340adf981as0",
          "type": "string",
          "xml": {
             "attribute": true
@@ -176,58 +245,22 @@
          },
          "type": "object"
       },
-      "Interval": {
-         "allOf": [
+      "Location": {
+         "description": "A Location represents a span on a specific sequence.",
+         "discriminator": {
+            "propertyName": "type"
+         },
+         "oneOf": [
             {
-               "$ref": "#/internal/PositionBase"
+               "$ref": "#/definitions/SequenceLocation"
             },
             {
-               "additionalProperties": false,
-               "example": {
-                  "end": 22,
-                  "start": 11,
-                  "type": "Interval"
-               },
-               "properties": {
-                  "end": {
-                     "nullable": true,
-                     "type": "integer"
-                  },
-                  "start": {
-                     "nullable": true,
-                     "type": "integer"
-                  },
-                  "type": {
-                     "default": "Interval",
-                     "enum": [
-                        "Interval"
-                     ],
-                     "type": "string"
-                  }
-               },
-               "required": [
-                  "start",
-                  "end"
-               ],
-               "type": "object"
+               "$ref": "#/definitions/GeneLocation"
+            },
+            {
+               "$ref": "#/definitions/CytobandLocation"
             }
          ]
-      },
-      "Location": {
-         "properties": {
-            "id": {
-               "example": "GL_tnVGwWWN0L_fEYK4hGF1Tzm7JULAkm2Z",
-               "type": "string"
-            },
-            "interval": {
-               "$ref": "#/definitions/Interval"
-            },
-            "sequence_id": {
-               "example": "GS_ss8r_wB0-b9r44TQTMmVTI92884QvBiB",
-               "type": "string"
-            }
-         },
-         "type": "object"
       },
       "Meta": {
          "properties": {
@@ -241,124 +274,160 @@
          },
          "type": "object"
       },
-      "NestedInterval": {
-         "allOf": [
-            {
-               "$ref": "#/internal/PositionBase"
-            },
-            {
-               "properties": {
-                  "inner": {
-                     "$ref": "#/definitions/Interval"
-                  },
-                  "outer": {
-                     "$ref": "#/definitions/Interval"
-                  },
-                  "type": {
-                     "default": "NestedInterval",
-                     "enum": [
-                        "NestedInterval"
-                     ],
-                     "type": "string"
-                  }
-               },
-               "type": "object"
-            }
-         ],
+      "NestedRegion": {
          "example": {
             "inner": {
                "end": 30,
                "start": 29,
-               "type": "Interval"
+               "type": "SimpleRegion"
             },
             "outer": {
                "end": 39,
                "start": 20,
-               "type": "Interval"
+               "type": "SimpleRegion"
             },
-            "type": "NestedInterval"
+            "type": "NestedRegion"
+         },
+         "properties": {
+            "inner": {
+               "$ref": "#/definitions/SimpleRegion"
+            },
+            "outer": {
+               "$ref": "#/definitions/SimpleRegion"
+            },
+            "type": {
+               "default": "NestedRegion",
+               "enum": [
+                  "NestedRegion"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "RangedRegion": {
+         "example": {
+            "end": {
+               "end": 39,
+               "start": 30,
+               "type": "SimpleRegion"
+            },
+            "start": {
+               "end": 29,
+               "start": 20,
+               "type": "SimpleRegion"
+            },
+            "type": "RangedRegion"
+         },
+         "properties": {
+            "end": {
+               "$ref": "#/definitions/SimpleRegion"
+            },
+            "start": {
+               "$ref": "#/definitions/SimpleRegion"
+            },
+            "type": {
+               "default": "RangedRegion",
+               "enum": [
+                  "RangedRegion"
+               ],
+               "type": "string"
+            }
          }
       },
-      "Position": {
-         "description": "A Position represents a span of sequence.  Positions are always represented by contiguous spans using interbase coordinates.",
+      "Region": {
+         "description": "A Region represents a span of sequence.  Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of Region is intended to be compatible with that in Sequence Ontolgy ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VR Region may be zero-width. The SO definition is for an \"extent greater than zero\".",
          "discriminator": {
             "propertyName": "type"
          },
          "oneOf": [
             {
-               "$ref": "#/definitions/Interval"
+               "$ref": "#/definitions/SimpleRegion"
             },
             {
-               "$ref": "#/definitions/NestedInterval"
+               "$ref": "#/definitions/NestedRegion"
             },
             {
-               "$ref": "#/definitions/RangedInterval"
+               "$ref": "#/definitions/RangedRegion"
             }
          ]
       },
-      "RangedInterval": {
-         "allOf": [
-            {
-               "$ref": "#/internal/PositionBase"
+      "RelatedVariation": {
+         "properties": {
+            "id": {
+               "$ref": "#/definitions/Id"
             },
-            {
-               "properties": {
-                  "end": {
-                     "$ref": "#/definitions/Interval"
-                  },
-                  "start": {
-                     "$ref": "#/definitions/Interval"
-                  },
-                  "type": {
-                     "default": "RangedInterval",
-                     "enum": [
-                        "RangedInterval"
-                     ],
-                     "type": "string"
-                  }
-               },
-               "type": "object"
+            "relationship": {
+               "enum": [
+                  "PARSED_VARIATION"
+               ],
+               "type": "string"
             }
-         ],
+         },
+         "type": "object"
+      },
+      "SequenceLocation": {
+         "properties": {
+            "id": {
+               "$ref": "#/definitions/Id"
+            },
+            "region": {
+               "$ref": "#/definitions/Region"
+            },
+            "sequence_id": {
+               "example": "GS_ss8r_wB0-b9r44TQTMmVTI92884QvBiB",
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "SimpleRegion": {
+         "additionalProperties": false,
          "example": {
+            "end": 22,
+            "start": 11,
+            "type": "SimpleRegion"
+         },
+         "properties": {
             "end": {
-               "end": 39,
-               "start": 30,
-               "type": "Interval"
+               "nullable": true,
+               "type": "integer"
             },
             "start": {
-               "end": 29,
-               "start": 20,
-               "type": "Interval"
+               "nullable": true,
+               "type": "integer"
             },
-            "type": "RangedInterval"
-         }
-      },
-      "Sequence": {
-         "type": "string"
-      },
-      "TextVariation": {
-         "allOf": [
-            {
-               "$ref": "#/internal/IdentifiableObject"
-            },
-            {
-               "properties": {
-                  "definition": {
-                     "description": "The textual representation of variation as provided by the client.",
-                     "type": "string"
-                  },
-                  "related": {
-                     "$ref": "#/internal/RelatedVariation"
-                  },
-                  "type": {
-                     "default": "TextVariation",
-                     "type": "string"
-                  }
-               },
-               "type": "object"
+            "type": {
+               "default": "SimpleRegion",
+               "enum": [
+                  "SimpleRegion"
+               ],
+               "type": "string"
             }
+         },
+         "required": [
+            "start",
+            "end"
          ],
+         "type": "object"
+      },
+      "Text": {
+         "properties": {
+            "definition": {
+               "description": "The textual representation of variation as provided by the client.",
+               "type": "string"
+            },
+            "id": {
+               "$ref": "#/definitions/Id"
+            },
+            "type": {
+               "default": "Text",
+               "enum": [
+                  "Text"
+               ],
+               "type": "string"
+            }
+         },
          "type": "object"
       },
       "VMCBundle": {
@@ -406,56 +475,47 @@
          "type": "object"
       },
       "Variation": {
-         "properties": {
-            "id": {
-               "type": "string"
+         "description": "A polymorphic representation of variation",
+         "discriminator": {
+            "propertyName": "type"
+         },
+         "oneOf": [
+            {
+               "$ref": "#/definitions/Text"
             },
-            "type": {
-               "enum": [
-                  "TextVariation",
-                  "SequenceVariation"
-               ],
-               "type": "string"
+            {
+               "$ref": "#/definitions/Allele"
+            },
+            {
+               "$ref": "#/definitions/VariationSet"
+            }
+         ]
+      },
+      "VariationSet": {
+         "description": "A set of variation",
+         "properties": {
+            "elements": {
+               "items": {
+                  "$ref": "#/definitions/Id"
+               },
+               "type": "array"
+            },
+            "id": {
+               "$ref": "#/definitions/Id"
             }
          },
          "type": "object"
       }
    },
-   "internal": {
-      "IdentifiableObject": {
-         "properties": {
-            "id": {
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "PositionBase": {
-         "properties": {
-            "type": {
-               "enum": [
-                  "Interval",
-                  "NestedInterval",
-                  "RangedInterval"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "RelatedVariation": {
-         "properties": {
-            "id": {
-               "type": "string"
-            },
-            "relationship": {
-               "enum": [
-                  "PARSED_VARIATION"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
+   "enums": {
+      "Completeness": {
+         "description": "Declares the `completeness` of a Haplotype or Genotype definition.  See descriptions in those schemas for additional information. * COMPLETE: The definition is complete. All data are included\n  for the covered assay.\n* PARTIAL: The definition is intentionally incomplete, typically\n  to protect information.  Declaring partial variation allows\n  data submitters to convey that data are missing.\n* UNKNOWN: The definition is not known to be either COMPLETE or\n  PARTIAL.",
+         "enum": [
+            "UNKNOWN",
+            "PARTIAL",
+            "COMPLETE"
+         ],
+         "type": "string"
       }
    },
    "title": "VMCDefinitions",
