@@ -112,10 +112,17 @@
       "GeneLocation": {
          "properties": {
             "gene": {
-               "$ref": "#/definitions/GeneSymbol"
+               "$ref": "#/definitions/CURIE"
             },
             "id": {
                "$ref": "#/definitions/Id"
+            },
+            "type": {
+               "default": "GeneLocation",
+               "enum": [
+                  "GeneLocation"
+               ],
+               "type": "string"
             }
          },
          "type": "object"

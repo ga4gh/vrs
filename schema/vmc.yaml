@@ -122,10 +122,6 @@ definitions:
 
   ############################################################################
   # Locations
-  # * SequenceLocation (seq id, Position|Region)
-  # * GeneLocation (gene, assy)
-  # * CytoLocation (assy, cyto interval)
-  # * IntronExonLocation (tx, iep, iep)
 
   Location:
     description: >-
@@ -134,6 +130,7 @@ definitions:
       - $ref: '#/definitions/SequenceLocation'
       - $ref: '#/definitions/GeneLocation'
       - $ref: '#/definitions/CytobandLocation'
+      #- $ref: '#/definitions/ExonIntronLocation'
     discriminator:
       propertyName: type
   
@@ -151,10 +148,14 @@ definitions:
   GeneLocation:
     type: object
     properties:
+      type:
+        type: "string"
+        enum: ["GeneLocation"]
+        default: "GeneLocation"
       id:
         $ref: "#/definitions/Id"
       gene:
-        $ref: "#/definitions/GeneSymbol"
+        $ref: "#/definitions/CURIE"
 
   CytobandLocation:
     type: "object"
