@@ -161,6 +161,13 @@
             },
             "id": {
                "$ref": "#/definitions/Id"
+            },
+            "type": {
+               "default": "Genotype",
+               "enum": [
+                  "Genotype"
+               ],
+               "type": "string"
             }
          },
          "type": "object"
@@ -190,6 +197,13 @@
             },
             "location_id": {
                "$ref": "#/definitions/Id"
+            },
+            "type": {
+               "default": "Haplotype",
+               "enum": [
+                  "Haplotype"
+               ],
+               "type": "string"
             }
          },
          "type": "object"
@@ -384,6 +398,13 @@
             "sequence_id": {
                "example": "GS_ss8r_wB0-b9r44TQTMmVTI92884QvBiB",
                "type": "string"
+            },
+            "type": {
+               "default": "SequenceLocation",
+               "enum": [
+                  "SequenceLocation"
+               ],
+               "type": "string"
             }
          },
          "type": "object"
@@ -529,6 +550,13 @@
                   "type": "object"
                },
                "type": "array"
+            },
+            "type": {
+               "default": "VariationSet",
+               "enum": [
+                  "VariationSet"
+               ],
+               "type": "string"
             }
          },
          "type": "object"

@@ -70,6 +70,10 @@ definitions:
     description: A set of zero or more Alleles on a single instance of a Sequence.
     type: "object"
     properties:
+      type:
+        type: string
+        enum: ["Haplotype"]
+        default: "Haplotype"
       id:
         $ref: "#/definitions/Id"
       location_id:
@@ -89,6 +93,10 @@ definitions:
     description: A list of Haplotypes.
     type: "object"
     properties:
+      type:
+        type: string
+        enum: ["Genotype"]
+        default: "Genotype"
       id:
         $ref: "#/definitions/Id"
       completeness:
@@ -112,6 +120,10 @@ definitions:
       A set of variation
     type: "object"
     properties:
+      type:
+        type: string
+        enum: ["VariationSet"]
+        default: "VariationSet"
       id:
         $ref: "#/definitions/Id"
       members:
@@ -146,13 +158,17 @@ definitions:
       - $ref: '#/definitions/SequenceLocation'
       - $ref: '#/definitions/GeneLocation'
       - $ref: '#/definitions/CytobandLocation'
-      #- $ref: '#/definitions/ExonIntronLocation'
+      # - $ref: '#/definitions/FeatureLocation'  # for exons, introns, CDS, PFAM domains, ...
     discriminator:
       propertyName: type
   
   SequenceLocation:
     type: object
     properties:
+      type:
+        type: string
+        enum: ["SequenceLocation"]
+        default: "SequenceLocation"
       id:
         $ref: "#/definitions/Id"
       sequence_id:
