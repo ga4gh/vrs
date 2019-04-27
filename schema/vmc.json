@@ -430,7 +430,8 @@
             "type": "SequenceState"
          },
          "properties": {
-            "state": {
+            "sequence": {
+               "nullable": false,
                "type": "string"
             },
             "type": {
@@ -443,7 +444,7 @@
          },
          "required": [
             "type",
-            "state"
+            "sequence"
          ],
          "type": "object"
       },

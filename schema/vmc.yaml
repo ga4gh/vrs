@@ -340,11 +340,12 @@ definitions:
         type: string
         enum: ["SequenceState"]
         default: SequenceState
-      state:
+      sequence:
         type: string
+        nullable: false
     required:
       - type
-      - state
+      - sequence
     example:
       type: SequenceState
 
