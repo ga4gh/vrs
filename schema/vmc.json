@@ -21,7 +21,7 @@
                "$ref": "#/definitions/Id"
             },
             "state": {
-               "type": "string"
+               "$ref": "#/definitions/State"
             },
             "type": {
                "default": "Allele",
@@ -36,31 +36,47 @@
             "name": "Allele"
          }
       },
-      "CURIE": {
-         "description": "A W3C CURIE \"namespace:reference\" string that refers to an object. See https://www.w3.org/TR/curie/.",
-         "pattern": "^\\w+:\\w+$",
-         "type": "string"
-      },
-      "CURIE_structure": {
-         "additionalProperties": false,
-         "description": "A W3C CURIE <namespace,reference> pair that refers to an object. See https://www.w3.org/TR/curie/.",
+      "CNVState": {
+         "example": {
+            "type": "CNVState"
+         },
          "properties": {
-            "prefix": {
-               "description": "The namespace, naming scheme, or naming authority that provides scope for keys within it.",
-               "example": "refseq",
+            "copy_measure": {
+               "enum": [
+                  "TOTAL",
+                  "RELATIVE"
+               ],
                "type": "string"
             },
-            "reference": {
-               "description": "A unique key within the CURIE `prefix` (namespace). ",
-               "example": "NM_000551.3",
+            "location": {
+               "$ref": "#/definitions/Location"
+            },
+            "location_id": {
+               "$ref": "#/definitions/Id"
+            },
+            "max_copies": {
+               "type": "integer"
+            },
+            "min_copies": {
+               "type": "integer"
+            },
+            "type": {
+               "default": "CNVState",
+               "enum": [
+                  "CNVState"
+               ],
                "type": "string"
             }
          },
          "required": [
-            "prefix",
-            "reference"
+            "type"
          ],
          "type": "object"
+      },
+      "CURIE": {
+         "description": "A W3C CURIE \"namespace:reference\" string that refers to an object. See https://www.w3.org/TR/curie/.",
+         "pattern": "^\\w+:\\w+$",
+         "type": "string"
       },
       "Cytoband": {
          "example": "q22.3",
@@ -409,6 +425,28 @@
          },
          "type": "object"
       },
+      "SequenceState": {
+         "example": {
+            "type": "SequenceState"
+         },
+         "properties": {
+            "state": {
+               "type": "string"
+            },
+            "type": {
+               "default": "SequenceState",
+               "enum": [
+                  "SequenceState"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "state"
+         ],
+         "type": "object"
+      },
       "SimpleRegion": {
          "additionalProperties": false,
          "example": {
@@ -437,6 +475,58 @@
             "start",
             "end"
          ],
+         "type": "object"
+      },
+      "State": {
+         "oneOf": [
+            {
+               "$ref": "#/definitions/SequenceState"
+            },
+            {
+               "$ref": "#/definitions/CNVState"
+            }
+         ]
+      },
+      "StaticVariationSet": {
+         "description": "A set of variation defined by ids",
+         "example": {
+            "member_ids": [
+               "VMC:GX_zQuUXqiP_YpP_uODT4PcfNIYoOPdYjC-",
+               "VMC:GX_jzmI29gA7-Rs7pRkeCj0mOp1Zsxan2Sc",
+               "VMC:GX_3NoEdRUAnX2AMdug2XoisbEi-GR7wB1x",
+               "VMC:GX_OWpaUYPJgLq8ZTPDbyCId6cgYPWjtrRK",
+               "VMC:GX_ltc3Iah3Iy5X_A06NGMla76bmPGSbMj9",
+               "VMC:GX_yss8NB_TDAnwyWX7ImXKTnroBYAN_d1O",
+               "VMC:GX_X3t0_U_rG5EfNUEYZb3zmulRYcdZ9RD2",
+               "VMC:GX_bD4JRdGKbwCOKh3ou8fPS2i9gD1Ojf7z",
+               "VMC:GX_1DHFMjTlO0Ju1cg5sa8vP2o1HSPiSR7t",
+               "VMC:GX_TvaAqwD_MduWohVGP4i2Tze4bieA-Kny"
+            ]
+         },
+         "properties": {
+            "id": {
+               "$ref": "#/definitions/Id"
+            },
+            "member_ids": {
+               "items": {
+                  "$ref": "#/definitions/Id"
+               },
+               "type": "array"
+            },
+            "members": {
+               "items": {
+                  "type": "object"
+               },
+               "type": "array"
+            },
+            "type": {
+               "default": "VariationSet",
+               "enum": [
+                  "VariationSet"
+               ],
+               "type": "string"
+            }
+         },
          "type": "object"
       },
       "Text": {
@@ -515,51 +605,19 @@
                "$ref": "#/definitions/Allele"
             },
             {
-               "$ref": "#/definitions/VariationSet"
+               "$ref": "#/definitions/Haplotype"
+            },
+            {
+               "$ref": "#/definitions/Genotype"
             }
          ]
       },
       "VariationSet": {
-         "description": "A set of variation",
-         "example": {
-            "member_ids": [
-               "VMC:GX_zQuUXqiP_YpP_uODT4PcfNIYoOPdYjC-",
-               "VMC:GX_jzmI29gA7-Rs7pRkeCj0mOp1Zsxan2Sc",
-               "VMC:GX_3NoEdRUAnX2AMdug2XoisbEi-GR7wB1x",
-               "VMC:GX_OWpaUYPJgLq8ZTPDbyCId6cgYPWjtrRK",
-               "VMC:GX_ltc3Iah3Iy5X_A06NGMla76bmPGSbMj9",
-               "VMC:GX_yss8NB_TDAnwyWX7ImXKTnroBYAN_d1O",
-               "VMC:GX_X3t0_U_rG5EfNUEYZb3zmulRYcdZ9RD2",
-               "VMC:GX_bD4JRdGKbwCOKh3ou8fPS2i9gD1Ojf7z",
-               "VMC:GX_1DHFMjTlO0Ju1cg5sa8vP2o1HSPiSR7t",
-               "VMC:GX_TvaAqwD_MduWohVGP4i2Tze4bieA-Kny"
-            ]
-         },
-         "properties": {
-            "id": {
-               "$ref": "#/definitions/Id"
-            },
-            "member_ids": {
-               "items": {
-                  "$ref": "#/definitions/Id"
-               },
-               "type": "array"
-            },
-            "members": {
-               "items": {
-                  "type": "object"
-               },
-               "type": "array"
-            },
-            "type": {
-               "default": "VariationSet",
-               "enum": [
-                  "VariationSet"
-               ],
-               "type": "string"
+         "oneOf": [
+            {
+               "$ref": "#/definitions/StaticVariationSet"
             }
-         },
-         "type": "object"
+         ]
       }
    },
    "enums": {
@@ -574,5 +632,27 @@
       }
    },
    "title": "VMCDefinitions",
-   "type": "object"
+   "type": "object",
+   "x-scraps": {
+      "CURIE_structure": null,
+      "additionalProperties": false,
+      "description": "A W3C CURIE <namespace,reference> pair that refers to an object. See https://www.w3.org/TR/curie/.",
+      "properties": {
+         "prefix": {
+            "description": "The namespace, naming scheme, or naming authority that provides scope for keys within it.",
+            "example": "refseq",
+            "type": "string"
+         },
+         "reference": {
+            "description": "A unique key within the CURIE `prefix` (namespace). ",
+            "example": "NM_000551.3",
+            "type": "string"
+         }
+      },
+      "required": [
+         "prefix",
+         "reference"
+      ],
+      "type": "object"
+   }
 }

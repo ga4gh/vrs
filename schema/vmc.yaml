@@ -19,10 +19,9 @@ definitions:
     oneOf:
       - $ref: '#/definitions/Text'
       - $ref: '#/definitions/Allele'
-      # - $ref: '#/definitions/Haplotype'
-      # - $ref: '#/definitions/Genotype'
-      # - $ref: '#/definitions/BinaryVariation'
-      - $ref: '#/definitions/VariationSet'
+      - $ref: '#/definitions/Haplotype'
+      - $ref: '#/definitions/Genotype'
+      # - $ref: '#/definitions/Translocation'
     discriminator:
       propertyName: type
 
@@ -55,7 +54,12 @@ definitions:
       location_id:
         $ref: "#/definitions/Id"
       state:
-        type: "string"
+        $ref: "#/definitions/State"
+        #oneOf:
+        #  - type: string
+        #  - $ref: "#/definitions/State"
+
+
     # TODO: Add constraint for exactly one of location | location_id
     additionalProperties: false
     example:
@@ -115,9 +119,18 @@ definitions:
       completeness: "COMPLETE"
       haplotype_ids: ["H1220", "H19f4"]
 
+
+  ############################################################################
+  # VariationSet
+
   VariationSet:
+    oneOf:
+      - $ref: '#/definitions/StaticVariationSet'
+      #- $ref: '#/definitions/ExpansionVariationSet'
+
+  StaticVariationSet:
     description: >-
-      A set of variation
+      A set of variation defined by ids
     type: "object"
     properties:
       type:
@@ -223,8 +236,8 @@ definitions:
   # * SimpleRegion
   # * RangedRegion
   # * NestedRegion
-  # * TODO: ComplexRegion
-  # * TODO: CytobandRegion
+  # * TODO: ConfidenceIntervalRegion (a la VCF)
+  # * TODO: ComplexRegion (a la FALDO)
 
   Region:
     description: >-
@@ -313,6 +326,53 @@ definitions:
 
 
   ############################################################################
+  # States
+
+  State:
+    oneOf:
+      - $ref: '#/definitions/SequenceState'
+      - $ref: '#/definitions/CNVState'
+  
+  SequenceState:
+    type: object
+    properties:
+      type:
+        type: string
+        enum: ["SequenceState"]
+        default: SequenceState
+      state:
+        type: string
+    required:
+      - type
+      - state
+    example:
+      type: SequenceState
+
+  CNVState:
+    type: object
+    properties:
+      type:
+        type: string
+        enum: ["CNVState"]
+        default: CNVState
+      location:
+        $ref: "#/definitions/Location"
+      location_id:
+        $ref: "#/definitions/Id"
+      min_copies:
+        type: integer
+      max_copies:
+        type: integer
+      copy_measure:
+        type: string
+        enum: ["TOTAL", "RELATIVE"]
+    required:
+      - type
+    example:
+      type: CNVState
+        
+
+  ############################################################################
   # "Basic" types
   # These types are used solely within other definitions.
 
@@ -346,28 +406,6 @@ definitions:
     required:
     - "namespace"
     - "accession"
-  
-  CURIE_structure:
-    description: >-
-      A W3C CURIE <namespace,reference> pair that refers to an object.
-      See https://www.w3.org/TR/curie/.
-    type: "object"
-    properties:
-      prefix:
-        type: "string"
-        example: "refseq"
-        description: >-
-          The namespace, naming scheme, or naming authority that
-          provides scope for keys within it.
-      reference:
-        type: "string"
-        example: "NM_000551.3"
-        description: >-
-          A unique key within the CURIE `prefix` (namespace). 
-    additionalProperties: false
-    required:
-      - "prefix"
-      - "reference"
   
   CURIE:
     description: >-
@@ -503,3 +541,28 @@ enums:
     - "PARTIAL"
     - "COMPLETE"
 
+
+
+x-scraps:
+    CURIE_structure:
+    description: >-
+      A W3C CURIE <namespace,reference> pair that refers to an object.
+      See https://www.w3.org/TR/curie/.
+    type: "object"
+    properties:
+      prefix:
+        type: "string"
+        example: "refseq"
+        description: >-
+          The namespace, naming scheme, or naming authority that
+          provides scope for keys within it.
+      reference:
+        type: "string"
+        example: "NM_000551.3"
+        description: >-
+          A unique key within the CURIE `prefix` (namespace). 
+    additionalProperties: false
+    required:
+      - "prefix"
+      - "reference"
+  
