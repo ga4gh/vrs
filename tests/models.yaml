@@ -1,13 +1,14 @@
 # Validation tests for objects
 # See notebooks/appendices/Validation%20Tests.ipynb
 
-Interval:
+SimpleRegion:
   -
     in:
-      start: 44908683
-      end: 44908684
+      start: 18130917
+      end: 18130918
     out:
-      serialize: "<Interval|44908683|44908684>"
+      serialize_vmc: <SimpleRegion|18130917|18130918>
+      serialize_cj: '{"end":18130918,"start":18130917,"type":"SimpleRegion"}'
 
 
 Location:
@@ -18,7 +19,7 @@ Location:
         start: 44908683
         end: 44908684
     out:
-      serialize: "<Location|VMC:GS_IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl|<Interval|44908683|44908684>>"
+      serialize_vmc: "<Location|VMC:GS_IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl|<Interval|44908683|44908684>>"
       computed_id: "VMC:GL_L1IS6jOwSUsOpKihGRcqxHul1IwbV-1s"
 
 Allele:
@@ -27,7 +28,7 @@ Allele:
       location_id: "VMC:GL_L1IS6jOwSUsOpKihGRcqxHul1IwbV-1s"
       state: C
     out:
-      serialize: "<Allele|VMC:GL_L1IS6jOwSUsOpKihGRcqxHul1IwbV-1s|C>"
+      serialize_vmc: "<Allele|VMC:GL_L1IS6jOwSUsOpKihGRcqxHul1IwbV-1s|C>"
       computed_id: "VMC:GA_zsJuMckKGajqHCl16sxKQJtBMjGrFHHZ"
 
 Haplotype:
@@ -38,7 +39,7 @@ Haplotype:
         - "VMC:GA__8rLiy7YkQDNy-t536RpVFGxIDiWLr6J"
       completeness: "COMPLETE"
     out:
-      serialize: "<Haplotype||COMPLETE|[VMC:GA__8rLiy7YkQDNy-t536RpVFGxIDiWLr6J;VMC:GA_zsJuMckKGajqHCl16sxKQJtBMjGrFHHZ]>"
+      serialize_vmc: "<Haplotype||COMPLETE|[VMC:GA__8rLiy7YkQDNy-t536RpVFGxIDiWLr6J;VMC:GA_zsJuMckKGajqHCl16sxKQJtBMjGrFHHZ]>"
       computed_id: "VMC:GH_xk_4sKZKfwD7ol3H89mDShrBT3dfu5Aq"
 
 Genotype:
@@ -49,5 +50,5 @@ Genotype:
         - "VMC:GH_xk_4sKZKfwD7ol3H89mDShrBT3dfu5Aq"
       completeness: "COMPLETE"
     out:
-      serialize: "<Genotype|COMPLETE|[VMC:GH_xk_4sKZKfwD7ol3H89mDShrBT3dfu5Aq;VMC:GH_xk_4sKZKfwD7ol3H89mDShrBT3dfu5Aq]>"
+      serialize_vmc: "<Genotype|COMPLETE|[VMC:GH_xk_4sKZKfwD7ol3H89mDShrBT3dfu5Aq;VMC:GH_xk_4sKZKfwD7ol3H89mDShrBT3dfu5Aq]>"
       computed_id: "VMC:GG_Pv97fICMeVRmowtCwioFpoFmrsOkZ7es"
