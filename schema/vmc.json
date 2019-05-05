@@ -282,6 +282,20 @@
          },
          "type": "object"
       },
+      "Interval": {
+         "description": "A Interval represents a span of sequence.  Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of Interval is intended to be compatible with that in Sequence Ontolgy ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VR Interval may be zero-width. The SO definition is for an \"extent greater than zero\".",
+         "discriminator": {
+            "propertyName": "type"
+         },
+         "oneOf": [
+            {
+               "$ref": "#/definitions/SimpleInterval"
+            },
+            {
+               "$ref": "#/definitions/NestedInterval"
+            }
+         ]
+      },
       "Location": {
          "description": "A Location represents a span on a specific sequence.",
          "discriminator": {
@@ -311,83 +325,36 @@
          },
          "type": "object"
       },
-      "NestedRegion": {
+      "NestedInterval": {
          "example": {
             "inner": {
                "end": 30,
                "start": 29,
-               "type": "SimpleRegion"
+               "type": "SimpleInterval"
             },
             "outer": {
                "end": 39,
                "start": 20,
-               "type": "SimpleRegion"
+               "type": "SimpleInterval"
             },
-            "type": "NestedRegion"
+            "type": "NestedInterval"
          },
          "properties": {
             "inner": {
-               "$ref": "#/definitions/SimpleRegion"
+               "$ref": "#/definitions/SimpleInterval"
             },
             "outer": {
-               "$ref": "#/definitions/SimpleRegion"
+               "$ref": "#/definitions/SimpleInterval"
             },
             "type": {
-               "default": "NestedRegion",
+               "default": "NestedInterval",
                "enum": [
-                  "NestedRegion"
+                  "NestedInterval"
                ],
                "type": "string"
             }
          },
          "type": "object"
-      },
-      "RangedRegion": {
-         "example": {
-            "end": {
-               "end": 39,
-               "start": 30,
-               "type": "SimpleRegion"
-            },
-            "start": {
-               "end": 29,
-               "start": 20,
-               "type": "SimpleRegion"
-            },
-            "type": "RangedRegion"
-         },
-         "properties": {
-            "end": {
-               "$ref": "#/definitions/SimpleRegion"
-            },
-            "start": {
-               "$ref": "#/definitions/SimpleRegion"
-            },
-            "type": {
-               "default": "RangedRegion",
-               "enum": [
-                  "RangedRegion"
-               ],
-               "type": "string"
-            }
-         }
-      },
-      "Region": {
-         "description": "A Region represents a span of sequence.  Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of Region is intended to be compatible with that in Sequence Ontolgy ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VR Region may be zero-width. The SO definition is for an \"extent greater than zero\".",
-         "discriminator": {
-            "propertyName": "type"
-         },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/SimpleRegion"
-            },
-            {
-               "$ref": "#/definitions/NestedRegion"
-            },
-            {
-               "$ref": "#/definitions/RangedRegion"
-            }
-         ]
       },
       "RelatedVariation": {
          "properties": {
@@ -408,8 +375,8 @@
             "id": {
                "$ref": "#/definitions/Id"
             },
-            "region": {
-               "$ref": "#/definitions/Region"
+            "interval": {
+               "$ref": "#/definitions/Interval"
             },
             "sequence_id": {
                "example": "GS_ss8r_wB0-b9r44TQTMmVTI92884QvBiB",
@@ -448,12 +415,12 @@
          ],
          "type": "object"
       },
-      "SimpleRegion": {
+      "SimpleInterval": {
          "additionalProperties": false,
          "example": {
             "end": 22,
             "start": 11,
-            "type": "SimpleRegion"
+            "type": "SimpleInterval"
          },
          "properties": {
             "end": {
@@ -465,9 +432,9 @@
                "type": "integer"
             },
             "type": {
-               "default": "SimpleRegion",
+               "default": "SimpleInterval",
                "enum": [
-                  "SimpleRegion"
+                  "SimpleInterval"
                ],
                "type": "string"
             }
@@ -632,7 +599,7 @@
          "type": "string"
       }
    },
-   "title": "VMCDefinitions",
+   "title": "GA4GH-VR-Definitions",
    "type": "object",
    "x-scraps": {
       "CURIE_structure": null,

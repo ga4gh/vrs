@@ -1,17 +1,17 @@
 # Validation tests for objects
 # See notebooks/appendices/Validation%20Tests.ipynb
 
-SimpleRegion:
+SimpleInterval:
   -
     in:
       start: 18130917
       end: 18130918
     out:
-      serialize_vmc: <SimpleRegion|18130917|18130918>
-      serialize_cj: '{"end":18130918,"start":18130917,"type":"SimpleRegion"}'
+      serialize_vmc: <SimpleInterval|18130917|18130918>
+      serialize_cj: '{"end":18130918,"start":18130917,"type":"SimpleInterval"}'
 
 
-Location:
+SequenceLocation:
   - 
     in:
       sequence_id: "VMC:GS_IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"

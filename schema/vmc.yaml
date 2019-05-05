@@ -2,7 +2,7 @@
 # ls -1 *.yaml | entr -n make &
 
 $schema: "http://json-schema.org/schema#"
-title: VMCDefinitions
+title: "GA4GH-VR-Definitions"
 type: "object"
 
 
@@ -17,11 +17,11 @@ definitions:
     description: >-
       A polymorphic representation of variation
     oneOf:
-      - $ref: '#/definitions/Text'
-      - $ref: '#/definitions/Allele'
-      - $ref: '#/definitions/Haplotype'
-      - $ref: '#/definitions/Genotype'
-      # - $ref: '#/definitions/Translocation'
+      - $ref: "#/definitions/Text"
+      - $ref: "#/definitions/Allele"
+      - $ref: "#/definitions/Haplotype"
+      - $ref: "#/definitions/Genotype"
+      # - $ref: "#/definitions/Translocation"
     discriminator:
       propertyName: type
 
@@ -125,8 +125,8 @@ definitions:
 
   VariationSet:
     oneOf:
-      - $ref: '#/definitions/StaticVariationSet'
-      #- $ref: '#/definitions/ExpansionVariationSet'
+      - $ref: "#/definitions/StaticVariationSet"
+      #- $ref: "#/definitions/ExpansionVariationSet"
 
   StaticVariationSet:
     description: >-
@@ -168,10 +168,10 @@ definitions:
     description: >-
       A Location represents a span on a specific sequence.
     oneOf:
-      - $ref: '#/definitions/SequenceLocation'
-      - $ref: '#/definitions/GeneLocation'
-      - $ref: '#/definitions/CytobandLocation'
-      # - $ref: '#/definitions/FeatureLocation'  # for exons, introns, CDS, PFAM domains, ...
+      - $ref: "#/definitions/SequenceLocation"
+      - $ref: "#/definitions/GeneLocation"
+      - $ref: "#/definitions/CytobandLocation"
+      # - $ref: "#/definitions/FeatureLocation"  # for exons, introns, CDS, PFAM domains, ...
     discriminator:
       propertyName: type
   
@@ -187,8 +187,8 @@ definitions:
       sequence_id:
         type: string
         example: "GS_ss8r_wB0-b9r44TQTMmVTI92884QvBiB"
-      region:
-        $ref: "#/definitions/Region"
+      interval:
+        $ref: "#/definitions/Interval"
 
   GeneLocation:
     type: object
@@ -232,40 +232,38 @@ definitions:
     
 
   ############################################################################
-  # Region
-  # * SimpleRegion
-  # * RangedRegion
-  # * NestedRegion
-  # * TODO: ConfidenceIntervalRegion (a la VCF)
-  # * TODO: ComplexRegion (a la FALDO)
+  # Interval
+  # * SimpleInterval
+  # * NestedInterval
+  # * TODO: ConfidenceIntervalInterval (a la VCF)
+  # * TODO: ComplexInterval (a la FALDO)
 
-  Region:
+  Interval:
     description: >-
-      A Region represents a span of sequence.  Positions are
+      A Interval represents a span of sequence.  Positions are
       always represented by contiguous spans using interbase
       coordinates.
 
-      This definition of Region is intended to be compatible with that
+      This definition of Interval is intended to be compatible with that
       in Sequence Ontolgy
       ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)),
-      with the exception that the GA4GH VR Region may be
+      with the exception that the GA4GH VR Interval may be
       zero-width. The SO definition is for an "extent greater than
       zero".
     oneOf:
-      - $ref: '#/definitions/SimpleRegion'
-      - $ref: '#/definitions/NestedRegion'
-      - $ref: '#/definitions/RangedRegion'
-      # - $ref: '#/definitions/ComplexRegion'
+      - $ref: '#/definitions/SimpleInterval'
+      - $ref: '#/definitions/NestedInterval'
+      # - $ref: '#/definitions/ComplexInterval'
     discriminator:
       propertyName: type
 
-  SimpleRegion:
+  SimpleInterval:
     type: object
     properties:
       type:
         type: string
-        enum: ["SimpleRegion"]
-        default: SimpleRegion
+        enum: ["SimpleInterval"]
+        default: SimpleInterval
       start:
         type: integer
         nullable: true
@@ -277,61 +275,40 @@ definitions:
       - start
       - end
     example:
-      type: "SimpleRegion"
+      type: "SimpleInterval"
       start: 11
       end: 22
 
-  NestedRegion:
+  NestedInterval:
     type: object
     properties:
       type:
         type: string
-        enum: ["NestedRegion"]
-        default: NestedRegion
+        enum: ["NestedInterval"]
+        default: NestedInterval
       inner:
-        $ref: '#/definitions/SimpleRegion'
+        $ref: '#/definitions/SimpleInterval'
       outer:
-        $ref: '#/definitions/SimpleRegion'
+        $ref: '#/definitions/SimpleInterval'
     example:
-      type: NestedRegion
+      type: NestedInterval
       inner:
-        type: SimpleRegion
+        type: SimpleInterval
         start: 29
         end: 30
       outer:
-        type: SimpleRegion
+        type: SimpleInterval
         start: 20
         end: 39
     
-  RangedRegion:
-    properties:
-      type:
-        type: string
-        enum: ["RangedRegion"]
-        default: RangedRegion
-      start:
-        $ref: '#/definitions/SimpleRegion'
-      end:
-        $ref: '#/definitions/SimpleRegion'
-    example:
-      type: RangedRegion
-      start:
-        type: SimpleRegion
-        start: 20
-        end: 29
-      end:
-        type: SimpleRegion
-        start: 30
-        end: 39
-
 
   ############################################################################
   # States
 
   State:
     oneOf:
-      - $ref: '#/definitions/SequenceState'
-      - $ref: '#/definitions/CNVState'
+      - $ref: "#/definitions/SequenceState"
+      - $ref: "#/definitions/CNVState"
   
   SequenceState:
     type: object
@@ -439,12 +416,12 @@ definitions:
   Cytoband:
     type: string
     pattern: '^[pq][1-9][0-9]*(\.[1-9][0-9]*)?$'
-    example: 'q22.3'
+    example: "q22.3"
       
   GeneSymbol:
     type: string
     pattern: '^[A-Z][A-Za-z0-9]+$'
-    example: 'BRCA1'
+    example: "BRCA1"
 
 
   ############################################################################
