@@ -5,9 +5,12 @@
          "additionalProperties": false,
          "description": "An assertion of a sequence state at a Location.",
          "example": {
-            "id": "VMC:GA_012abc",
-            "location_id": "VMC:GL_01234",
-            "state": "A",
+            "id": "allele/23cd",
+            "location_id": "location/01ab",
+            "state": {
+               "sequence": "A",
+               "type": "SequenceState"
+            },
             "type": "Allele"
          },
          "properties": {
@@ -31,13 +34,11 @@
                "type": "string"
             }
          },
-         "type": "object",
-         "xml": {
-            "name": "Allele"
-         }
+         "type": "object"
       },
       "CNVState": {
          "example": {
+            "location_id": "location/fg45",
             "type": "CNVState"
          },
          "properties": {
@@ -75,6 +76,7 @@
       },
       "CURIE": {
          "description": "A W3C CURIE \"namespace:reference\" string that refers to an object. See https://www.w3.org/TR/curie/.",
+         "example": "ga4gh:allele/01234abcde",
          "pattern": "^\\w+:\\w+$",
          "type": "string"
       },
@@ -126,9 +128,15 @@
          "type": "string"
       },
       "GeneLocation": {
+         "example": {
+            "gene": "ncbigene:1493",
+            "id": "location/47",
+            "type": "GeneLocation"
+         },
          "properties": {
             "gene": {
-               "$ref": "#/definitions/CURIE"
+               "$ref": "#/definitions/CURIE",
+               "description": "See https://www.ebi.ac.uk/miriam/main/datatypes/MIR:00000069"
             },
             "id": {
                "$ref": "#/definitions/Id"
@@ -154,10 +162,10 @@
          "example": {
             "completeness": "COMPLETE",
             "haplotype_ids": [
-               "H1220",
-               "H19f4"
+               "haplotype/15",
+               "haplotype/42"
             ],
-            "id": "G310a"
+            "id": "genotype/33"
          },
          "properties": {
             "completeness": {
@@ -193,15 +201,23 @@
          "description": "A set of zero or more Alleles on a single instance of a Sequence.",
          "example": {
             "allele_ids": [
-               "A0123",
-               "A0124"
+               "allele/10",
+               "allele/9"
             ],
-            "completeness": "PARTIAL"
+            "completeness": "PARTIAL",
+            "id": "haplotype/22",
+            "type": "Haplotype"
          },
          "properties": {
             "allele_ids": {
                "items": {
                   "$ref": "#/definitions/Id"
+               },
+               "type": "array"
+            },
+            "alleles": {
+               "items": {
+                  "$ref": "#/definitions/Allele"
                },
                "type": "array"
             },
@@ -227,10 +243,7 @@
       "Id": {
          "description": "Uniquely identifies a specific instance of an object within a document.",
          "example": "01340adf981as0",
-         "type": "string",
-         "xml": {
-            "attribute": true
-         }
+         "type": "string"
       },
       "Identifier": {
          "additionalProperties": false,
@@ -329,12 +342,12 @@
          "example": {
             "inner": {
                "end": 30,
-               "start": 29,
+               "start": 20,
                "type": "SimpleInterval"
             },
             "outer": {
-               "end": 39,
-               "start": 20,
+               "end": 40,
+               "start": 10,
                "type": "SimpleInterval"
             },
             "type": "NestedInterval"
@@ -394,6 +407,7 @@
       },
       "SequenceState": {
          "example": {
+            "sequence": "C",
             "type": "SequenceState"
          },
          "properties": {
@@ -498,9 +512,14 @@
          "type": "object"
       },
       "Text": {
+         "example": {
+            "definition": "CTLA4, disruption of transmembrane domain",
+            "id": "text/012abc",
+            "type": "Text"
+         },
          "properties": {
             "definition": {
-               "description": "The textual representation of variation as provided by the client.",
+               "description": "An textual representation of variation intended to capture variation descriptions that cannot be parsed, but still treated as variation.",
                "type": "string"
             },
             "id": {

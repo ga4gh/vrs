@@ -1,5 +1,18 @@
-# when editing:
-# ls -1 *.yaml | entr -n make &
+# VR uses yaml as the source document for json schema
+#
+# To convert vr.yaml to vr.json:
+#   make vr.json
+# You'll probably have to `pip install pyyaml` first.
+#
+# To watch for changes and update automatically:
+#   make watch &
+
+
+# TODO: double-check `required` elements
+
+# Q: Should CURIE references be based on abstract or concrete class
+# names? e.g., variation/abc123 or allele/abc123?
+
 
 $schema: "http://json-schema.org/schema#"
 title: "GA4GH-VR-Definitions"
@@ -37,7 +50,13 @@ definitions:
       definition:
         type: string
         description: >-
-          The textual representation of variation as provided by the client.
+          An textual representation of variation intended to capture
+          variation descriptions that cannot be parsed, but still
+          treated as variation.
+    example:
+      type: Text
+      id: "text/012abc"
+      definition: "CTLA4, disruption of transmembrane domain"
 
   Allele:
     description: An assertion of a sequence state at a Location.
@@ -55,20 +74,14 @@ definitions:
         $ref: "#/definitions/Id"
       state:
         $ref: "#/definitions/State"
-        #oneOf:
-        #  - type: string
-        #  - $ref: "#/definitions/State"
-
-
-    # TODO: Add constraint for exactly one of location | location_id
     additionalProperties: false
     example:
-      id: "VMC:GA_012abc"
-      location_id: "VMC:GL_01234"
-      state: "A"
       type: "Allele"
-    xml:
-      name: "Allele"
+      id: "allele/23cd"
+      location_id: "location/01ab"
+      state:
+        type: SequenceState
+        sequence: "A"
   
   Haplotype:
     description: A set of zero or more Alleles on a single instance of a Sequence.
@@ -84,14 +97,20 @@ definitions:
         $ref: "#/definitions/Id"
       completeness:
         $ref: "#/enums/Completeness"
+      alleles:
+        type: "array"
+        items:
+          $ref: "#/definitions/Allele"
       allele_ids:
         type: "array"
         items:
           $ref: "#/definitions/Id"
     additionalProperties: false
     example:
+      type: Haplotype
+      id: "haplotype/22"
       completeness: "PARTIAL"
-      allele_ids: ["A0123", "A0124"]
+      allele_ids: ["allele/10", "allele/9"]
   
   Genotype:
     description: A list of Haplotypes.
@@ -115,9 +134,9 @@ definitions:
           $ref: "#/definitions/Id"
     additionalProperties: false
     example:
-      id: "G310a"
+      id: "genotype/33"
       completeness: "COMPLETE"
-      haplotype_ids: ["H1220", "H19f4"]
+      haplotype_ids: ["haplotype/15", "haplotype/42"]
 
 
   ############################################################################
@@ -201,6 +220,11 @@ definitions:
         $ref: "#/definitions/Id"
       gene:
         $ref: "#/definitions/CURIE"
+        description: See https://www.ebi.ac.uk/miriam/main/datatypes/MIR:00000069
+    example:
+      type: "GeneLocation"
+      id: "location/47"
+      gene: "ncbigene:1493"
 
   CytobandLocation:
     type: "object"
@@ -294,12 +318,12 @@ definitions:
       type: NestedInterval
       inner:
         type: SimpleInterval
-        start: 29
+        start: 20
         end: 30
       outer:
         type: SimpleInterval
-        start: 20
-        end: 39
+        start: 10
+        end: 40
     
 
   ############################################################################
@@ -325,6 +349,7 @@ definitions:
       - sequence
     example:
       type: SequenceState
+      sequence: C
 
   CNVState:
     type: object
@@ -348,7 +373,8 @@ definitions:
       - type
     example:
       type: CNVState
-        
+      location_id: "location/fg45"
+      
 
   ############################################################################
   # "Basic" types
@@ -364,8 +390,6 @@ definitions:
       document.
     type: "string"
     example: "01340adf981as0"
-    xml:
-      attribute: true
   
   Identifier:
     description: >-
@@ -391,6 +415,7 @@ definitions:
       See https://www.w3.org/TR/curie/.
     type: "string"
     pattern: '^\w+:\w+$'
+    example: "ga4gh:allele/01234abcde"      
   
   Meta:
     # TODO: version regexp ^\d+\.\d+$
