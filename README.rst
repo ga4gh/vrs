@@ -1,9 +1,9 @@
 Mission
 !!!!!!!
 
-The GA4GH Variation Representation model and accompanying
-specification aim to provide a comprehensive coverage for all types of
-biological sequence variation.
+The `GA4GH <https://www.ga4gh.org/>`__ Variation Representation model
+and accompanying specification aim to provide a comprehensive coverage
+for all types of biological sequence variation.
 
 Specific goals for the project
 
@@ -19,12 +19,16 @@ Specific goals for the project
   <https://github.com/ga4gh/vr-python>`__.
 
 
+The VR model is the product of the GA4GH `Variation Representation
+<https://ga4gh-gks.github.io/variant_representation.html>`__ group.
+
+
 
 History
 !!!!!!!
 
 .. image:: https://github.com/ga4gh/vmc/wiki/media/flower.png
-   :width: 200px
+   :width: 150px
    :align: right
 
 The genesis of the GA4GH VR project was the Variation Modelling
