@@ -1,0 +1,11 @@
+Here are some tips for writing RST in this repo:
+
+* RST headings are made by adding a line with symbols.  The symbols
+  don't matter.  In this repo, the convention is the order of
+  shift-number punctuation on a US keyboard -- !, @, #, $ -- which
+  correspondes to heading level 1, 2, 3, 4.
+
+* When making a large group of docs, create a directory, put an
+  index.rst within it, and refer to `dir/index` in the parent
+  index.rst file.  See index.rst and classes/index.rst for an example.
+

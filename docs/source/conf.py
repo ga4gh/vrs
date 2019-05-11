@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'vr-schema'
-copyright = '2019, Global Alliance for Genomic Health'
+copyright = '2019, GA4GH'
 author = 'Committers'
 
 

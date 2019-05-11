@@ -1,9 +1,1 @@
-*-checkpoint.ipynb
-*.class
-*.orig
-*~
-__pycache__
-archive
-demos/python/notebooks/ApoE Example.vmc.json
-doc
-venv
+docs/build
