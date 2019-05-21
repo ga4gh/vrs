@@ -8,12 +8,6 @@
 #   make watch &
 
 
-# TODO: double-check `required` and `additionalProperties` definitions
-
-# Q: Should CURIE references be based on abstract or concrete class
-# names? e.g., variation/abc123 or allele/abc123?
-
-
 $schema: "http://json-schema.org/schema#"
 title: "GA4GH-VR-Definitions"
 type: "object"
@@ -32,9 +26,6 @@ definitions:
     oneOf:
       - $ref: "#/definitions/Text"
       - $ref: "#/definitions/Allele"
-      - $ref: "#/definitions/Haplotype"
-      - $ref: "#/definitions/Genotype"
-      # - $ref: "#/definitions/Translocation"
     discriminator:
       propertyName: type
 
@@ -82,105 +73,6 @@ definitions:
       state:
         type: SequenceState
         sequence: "A"
-  
-  Haplotype:
-    description: A set of zero or more Alleles on a single instance of a Sequence.
-    type: "object"
-    properties:
-      type:
-        type: string
-        enum: ["Haplotype"]
-        default: "Haplotype"
-      id:
-        $ref: "#/definitions/Id"
-      location:
-        $ref: "#/definitions/Location"
-      location_id:
-        $ref: "#/definitions/Id"
-      completeness:
-        $ref: "#/enums/Completeness"
-      alleles:
-        type: "array"
-        items:
-          $ref: "#/definitions/Allele"
-      allele_ids:
-        type: "array"
-        items:
-          $ref: "#/definitions/Id"
-    additionalProperties: false
-    example:
-      type: Haplotype
-      id: "haplotype/22"
-      completeness: "PARTIAL"
-      allele_ids: ["allele/10", "allele/9"]
-  
-  Genotype:
-    description: A list of Haplotypes.
-    type: "object"
-    properties:
-      type:
-        type: string
-        enum: ["Genotype"]
-        default: "Genotype"
-      id:
-        $ref: "#/definitions/Id"
-      completeness:
-        $ref: "#/enums/Completeness"
-      haplotypes:
-        type: "array"
-        items:
-          $ref: "#/definitions/Haplotype"
-      haplotype_ids:
-        type: "array"
-        items:
-          $ref: "#/definitions/Id"
-    additionalProperties: false
-    example:
-      id: "genotype/33"
-      completeness: "COMPLETE"
-      haplotype_ids: ["haplotype/15", "haplotype/42"]
-
-
-  ############################################################################
-  # VariationSet
-
-  VariationSet:
-    oneOf:
-      - $ref: "#/definitions/StaticVariationSet"
-      #- $ref: "#/definitions/ExpansionVariationSet"
-
-  StaticVariationSet:
-    description: >-
-      A set of variation defined by ids
-    type: "object"
-    properties:
-      type:
-        type: string
-        enum: ["VariationSet"]
-        default: "VariationSet"
-      id:
-        $ref: "#/definitions/Id"
-      members:
-        type: array
-        items:
-          type: object
-      member_ids:
-        type: array
-        items:
-          $ref: "#/definitions/Id"
-    example:
-      member_ids:
-        - VMC:GX_zQuUXqiP_YpP_uODT4PcfNIYoOPdYjC-
-        - VMC:GX_jzmI29gA7-Rs7pRkeCj0mOp1Zsxan2Sc
-        - VMC:GX_3NoEdRUAnX2AMdug2XoisbEi-GR7wB1x
-        - VMC:GX_OWpaUYPJgLq8ZTPDbyCId6cgYPWjtrRK
-        - VMC:GX_ltc3Iah3Iy5X_A06NGMla76bmPGSbMj9
-        - VMC:GX_yss8NB_TDAnwyWX7ImXKTnroBYAN_d1O
-        - VMC:GX_X3t0_U_rG5EfNUEYZb3zmulRYcdZ9RD2
-        - VMC:GX_bD4JRdGKbwCOKh3ou8fPS2i9gD1Ojf7z
-        - VMC:GX_1DHFMjTlO0Ju1cg5sa8vP2o1HSPiSR7t
-        - VMC:GX_TvaAqwD_MduWohVGP4i2Tze4bieA-Kny
-
 
   ############################################################################
   # Locations
@@ -192,7 +84,6 @@ definitions:
       - $ref: "#/definitions/SequenceLocation"
       - $ref: "#/definitions/GeneLocation"
       - $ref: "#/definitions/CytobandLocation"
-      # - $ref: "#/definitions/FeatureLocation"  # for exons, introns, CDS, PFAM domains, ...
     discriminator:
       propertyName: type
   
@@ -326,7 +217,6 @@ definitions:
         type: SimpleInterval
         start: 10
         end: 40
-    
 
   ############################################################################
   # States
@@ -334,7 +224,6 @@ definitions:
   State:
     oneOf:
       - $ref: "#/definitions/SequenceState"
-      - $ref: "#/definitions/CNVState"
   
   SequenceState:
     type: object
@@ -351,32 +240,7 @@ definitions:
       - sequence
     example:
       type: SequenceState
-      sequence: C
-
-  CNVState:
-    type: object
-    properties:
-      type:
-        type: string
-        enum: ["CNVState"]
-        default: CNVState
-      location:
-        $ref: "#/definitions/Location"
-      location_id:
-        $ref: "#/definitions/Id"
-      min_copies:
-        type: integer
-      max_copies:
-        type: integer
-      copy_measure:
-        type: string
-        enum: ["TOTAL", "RELATIVE"]
-    required:
-      - type
-    example:
-      type: CNVState
-      location_id: "location/fg45"
-      
+      sequence: C      
 
   ############################################################################
   # "Basic" types
@@ -430,27 +294,6 @@ definitions:
     type: "string"
     pattern: '^\w+:\w+$'
     example: "ga4gh:allele/01234abcde"      
-  
-  Meta:
-    # TODO: version regexp ^\d+\.\d+$
-    # describe semantics
-    type: "object"
-    properties:
-      version:
-        type: "string"
-        default: "0"
-      generated_at:
-        $ref: "#/definitions/DateTime"
-
-  RelatedVariation:
-    type: object
-    properties:
-      id:
-        $ref: "#/definitions/Id"
-      relationship:
-        type: string
-        enum:
-          - PARSED_VARIATION
 
   Cytoband:
     type: string
@@ -461,69 +304,3 @@ definitions:
     type: string
     pattern: '^[A-Z][A-Za-z0-9]+$'
     example: "BRCA1"
-
-
-  ############################################################################
-  Bundle:
-    type: "object"
-    properties:
-      locations:
-        type: "object"
-        default: {}
-        patternProperties:
-          ^.:
-            $ref: "#/definitions/Location"
-      alleles:
-        type: "object"
-        default: {}
-        patternProperties:
-          ^.:
-            $ref: "#/definitions/Allele"
-      haplotypes:
-        type: "object"
-        default: {}
-        patternProperties:
-          ^.:
-            $ref: "#/definitions/Haplotype"
-      genotypes:
-        type: "object"
-        default: {}
-        patternProperties:
-          ^.:
-            $ref: "#/definitions/Genotype"
-      identifiers:
-        $ref: "#/definitions/Identifiers"
-        default: {}
-    additionalProperties: false
-
-  Identifiers:
-    description: "A list of Identifiers"
-    type: "object"
-    patternProperties:
-      "^.":
-        type: "array"
-        items:
-          "$ref": "#/definitions/CURIE"
-    additionalProperties: false
-      
-
-enums:
-  # x-bases stores reusable base definitions of schemas
-  # They are not intended to be used in isolation.
-  Completeness:
-    type: "string"
-    description: >-
-      Declares the `completeness` of a Haplotype or Genotype
-      definition.  See descriptions in those schemas for additional
-      information.
-      * COMPLETE: The definition is complete. All data are included
-        for the covered assay.
-      * PARTIAL: The definition is intentionally incomplete, typically
-        to protect information.  Declaring partial variation allows
-        data submitters to convey that data are missing.
-      * UNKNOWN: The definition is not known to be either COMPLETE or
-        PARTIAL.
-    enum:
-    - "UNKNOWN"
-    - "PARTIAL"
-    - "COMPLETE"
