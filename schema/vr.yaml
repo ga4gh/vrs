@@ -8,7 +8,7 @@
 #   make watch &
 
 
-# TODO: double-check `required` elements
+# TODO: double-check `required` and `additionalProperties` definitions
 
 # Q: Should CURIE references be based on abstract or concrete class
 # names? e.g., variation/abc123 or allele/abc123?
@@ -93,6 +93,8 @@ definitions:
         default: "Haplotype"
       id:
         $ref: "#/definitions/Id"
+      location:
+        $ref: "#/definitions/Location"
       location_id:
         $ref: "#/definitions/Id"
       completeness:
@@ -411,8 +413,20 @@ definitions:
   
   CURIE:
     description: >-
-      A W3C CURIE "namespace:reference" string that refers to an object.
-      See https://www.w3.org/TR/curie/.
+      A string that references an object using [W3C Compact URI
+      (CURIE)](https://www.w3.org/TR/curie/) syntax.
+
+      A CURIE is a URI. As a URI, it MAY locate objects (as with http
+      references), but it may also merely name objects uniquely.  VR
+      uses CURIEs primarily as a naming mechanism.  Implementations
+      are expected to provide CURIE resolution mechanisms.
+
+      String CURIEs are represented as `namespace`:`reference`. VR
+      uses W3C CURIE nomenclature; some specifications use home-grown
+      names for the same concepts.
+
+      `namespace` SHOULD be defined in identifiers.org, or,
+      alteratively, provided by a map of CURIE URLs.
     type: "string"
     pattern: '^\w+:\w+$'
     example: "ga4gh:allele/01234abcde"      
@@ -450,77 +464,47 @@ definitions:
 
 
   ############################################################################
-  VMCBundle:
+  Bundle:
     type: "object"
     properties:
-      meta:
-        $ref: "#/definitions/Meta"
-        default: {}
       locations:
         type: "object"
         default: {}
-    #    patternProperties:
-    #      ^.:
-    #        $ref: "#/definitions/Location"
+        patternProperties:
+          ^.:
+            $ref: "#/definitions/Location"
       alleles:
         type: "object"
         default: {}
-    #    patternProperties:
-    #      ^.:
-    #        $ref: "#/definitions/Allele"
+        patternProperties:
+          ^.:
+            $ref: "#/definitions/Allele"
       haplotypes:
         type: "object"
         default: {}
-    #    patternProperties:
-    #      ^.:
-    #        $ref: "#/definitions/Haplotype"
+        patternProperties:
+          ^.:
+            $ref: "#/definitions/Haplotype"
       genotypes:
         type: "object"
         default: {}
-    #    patternProperties:
-    #      ^.:
-    #        $ref: "#/definitions/Genotype"
+        patternProperties:
+          ^.:
+            $ref: "#/definitions/Genotype"
       identifiers:
         $ref: "#/definitions/Identifiers"
         default: {}
-      curie_map:
-        description: maps CURIE prefixes to IRIs
-        type: "object"
-        default: {}
-    #    patternProperties:
-    #      ^.:
-    #        type: string
-    required:
-    - meta
-    - locations
-    - alleles
-    - haplotypes
-    - genotypes
-    - identifiers
-    - curie_map
     additionalProperties: false
 
   Identifiers:
     description: "A list of Identifiers"
     type: "object"
-#    patternProperties:
-#      "^.":
-#        type: "array"
-#        items:
-#          type: "string"
+    patternProperties:
+      "^.":
+        type: "array"
+        items:
+          "$ref": "#/definitions/CURIE"
     additionalProperties: false
-    example:
-      "S491f":
-      - namespace: NCBI
-        accession: NM_000551.2
-      - namespace: ENST
-        accession: BLAHBLAH
-      "H19f4":
-      - namespace: whoknows
-        accession: APOE-ε1
-      "H1220":
-      - namespace: whoknows
-        accession: APOE-ε2
       
 
 enums:
@@ -543,29 +527,3 @@ enums:
     - "UNKNOWN"
     - "PARTIAL"
     - "COMPLETE"
-
-
-
-x-scraps:
-    CURIE_structure:
-    description: >-
-      A W3C CURIE <namespace,reference> pair that refers to an object.
-      See https://www.w3.org/TR/curie/.
-    type: "object"
-    properties:
-      prefix:
-        type: "string"
-        example: "refseq"
-        description: >-
-          The namespace, naming scheme, or naming authority that
-          provides scope for keys within it.
-      reference:
-        type: "string"
-        example: "NM_000551.3"
-        description: >-
-          A unique key within the CURIE `prefix` (namespace). 
-    additionalProperties: false
-    required:
-      - "prefix"
-      - "reference"
-  

@@ -36,6 +36,52 @@
          },
          "type": "object"
       },
+      "Bundle": {
+         "additionalProperties": false,
+         "properties": {
+            "alleles": {
+               "default": {},
+               "patternProperties": {
+                  "^.": {
+                     "$ref": "#/definitions/Allele"
+                  }
+               },
+               "type": "object"
+            },
+            "genotypes": {
+               "default": {},
+               "patternProperties": {
+                  "^.": {
+                     "$ref": "#/definitions/Genotype"
+                  }
+               },
+               "type": "object"
+            },
+            "haplotypes": {
+               "default": {},
+               "patternProperties": {
+                  "^.": {
+                     "$ref": "#/definitions/Haplotype"
+                  }
+               },
+               "type": "object"
+            },
+            "identifiers": {
+               "$ref": "#/definitions/Identifiers",
+               "default": {}
+            },
+            "locations": {
+               "default": {},
+               "patternProperties": {
+                  "^.": {
+                     "$ref": "#/definitions/Location"
+                  }
+               },
+               "type": "object"
+            }
+         },
+         "type": "object"
+      },
       "CNVState": {
          "example": {
             "location_id": "location/fg45",
@@ -75,7 +121,7 @@
          "type": "object"
       },
       "CURIE": {
-         "description": "A W3C CURIE \"namespace:reference\" string that refers to an object. See https://www.w3.org/TR/curie/.",
+         "description": "A string that references an object using [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.\nA CURIE is a URI. As a URI, it MAY locate objects (as with http references), but it may also merely name objects uniquely.  VR uses CURIEs primarily as a naming mechanism.  Implementations are expected to provide CURIE resolution mechanisms.\nString CURIEs are represented as `namespace`:`reference`. VR uses W3C CURIE nomenclature; some specifications use home-grown names for the same concepts.\n`namespace` SHOULD be defined in identifiers.org, or, alteratively, provided by a map of CURIE URLs.",
          "example": "ga4gh:allele/01234abcde",
          "pattern": "^\\w+:\\w+$",
          "type": "string"
@@ -227,6 +273,9 @@
             "id": {
                "$ref": "#/definitions/Id"
             },
+            "location": {
+               "$ref": "#/definitions/Location"
+            },
             "location_id": {
                "$ref": "#/definitions/Id"
             },
@@ -269,29 +318,13 @@
       "Identifiers": {
          "additionalProperties": false,
          "description": "A list of Identifiers",
-         "example": {
-            "H1220": [
-               {
-                  "accession": "APOE-\u03b52",
-                  "namespace": "whoknows"
-               }
-            ],
-            "H19f4": [
-               {
-                  "accession": "APOE-\u03b51",
-                  "namespace": "whoknows"
-               }
-            ],
-            "S491f": [
-               {
-                  "accession": "NM_000551.2",
-                  "namespace": "NCBI"
+         "patternProperties": {
+            "^.": {
+               "items": {
+                  "$ref": "#/definitions/CURIE"
                },
-               {
-                  "accession": "BLAHBLAH",
-                  "namespace": "ENST"
-               }
-            ]
+               "type": "array"
+            }
          },
          "type": "object"
       },
@@ -535,50 +568,6 @@
          },
          "type": "object"
       },
-      "VMCBundle": {
-         "additionalProperties": false,
-         "properties": {
-            "alleles": {
-               "default": {},
-               "type": "object"
-            },
-            "curie_map": {
-               "default": {},
-               "description": "maps CURIE prefixes to IRIs",
-               "type": "object"
-            },
-            "genotypes": {
-               "default": {},
-               "type": "object"
-            },
-            "haplotypes": {
-               "default": {},
-               "type": "object"
-            },
-            "identifiers": {
-               "$ref": "#/definitions/Identifiers",
-               "default": {}
-            },
-            "locations": {
-               "default": {},
-               "type": "object"
-            },
-            "meta": {
-               "$ref": "#/definitions/Meta",
-               "default": {}
-            }
-         },
-         "required": [
-            "meta",
-            "locations",
-            "alleles",
-            "haplotypes",
-            "genotypes",
-            "identifiers",
-            "curie_map"
-         ],
-         "type": "object"
-      },
       "Variation": {
          "description": "A polymorphic representation of variation",
          "discriminator": {
@@ -619,27 +608,5 @@
       }
    },
    "title": "GA4GH-VR-Definitions",
-   "type": "object",
-   "x-scraps": {
-      "CURIE_structure": null,
-      "additionalProperties": false,
-      "description": "A W3C CURIE <namespace,reference> pair that refers to an object. See https://www.w3.org/TR/curie/.",
-      "properties": {
-         "prefix": {
-            "description": "The namespace, naming scheme, or naming authority that provides scope for keys within it.",
-            "example": "refseq",
-            "type": "string"
-         },
-         "reference": {
-            "description": "A unique key within the CURIE `prefix` (namespace). ",
-            "example": "NM_000551.3",
-            "type": "string"
-         }
-      },
-      "required": [
-         "prefix",
-         "reference"
-      ],
-      "type": "object"
-   }
+   "type": "object"
 }
