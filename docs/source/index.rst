@@ -6,11 +6,6 @@ Variation Representation Schema
    :caption: Contents:
 
    intro
-   impl/index
-   spec/index
-   examples/index
-   appendices/index
-   about/index
    
 
 Indices and tables
