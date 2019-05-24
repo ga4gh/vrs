@@ -36,90 +36,6 @@
          },
          "type": "object"
       },
-      "Bundle": {
-         "additionalProperties": false,
-         "properties": {
-            "alleles": {
-               "default": {},
-               "patternProperties": {
-                  "^.": {
-                     "$ref": "#/definitions/Allele"
-                  }
-               },
-               "type": "object"
-            },
-            "genotypes": {
-               "default": {},
-               "patternProperties": {
-                  "^.": {
-                     "$ref": "#/definitions/Genotype"
-                  }
-               },
-               "type": "object"
-            },
-            "haplotypes": {
-               "default": {},
-               "patternProperties": {
-                  "^.": {
-                     "$ref": "#/definitions/Haplotype"
-                  }
-               },
-               "type": "object"
-            },
-            "identifiers": {
-               "$ref": "#/definitions/Identifiers",
-               "default": {}
-            },
-            "locations": {
-               "default": {},
-               "patternProperties": {
-                  "^.": {
-                     "$ref": "#/definitions/Location"
-                  }
-               },
-               "type": "object"
-            }
-         },
-         "type": "object"
-      },
-      "CNVState": {
-         "example": {
-            "location_id": "location/fg45",
-            "type": "CNVState"
-         },
-         "properties": {
-            "copy_measure": {
-               "enum": [
-                  "TOTAL",
-                  "RELATIVE"
-               ],
-               "type": "string"
-            },
-            "location": {
-               "$ref": "#/definitions/Location"
-            },
-            "location_id": {
-               "$ref": "#/definitions/Id"
-            },
-            "max_copies": {
-               "type": "integer"
-            },
-            "min_copies": {
-               "type": "integer"
-            },
-            "type": {
-               "default": "CNVState",
-               "enum": [
-                  "CNVState"
-               ],
-               "type": "string"
-            }
-         },
-         "required": [
-            "type"
-         ],
-         "type": "object"
-      },
       "CURIE": {
          "description": "A string that references an object using [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.\nA CURIE is a URI. As a URI, it MAY locate objects (as with http references), but it may also merely name objects uniquely.  VR uses CURIEs primarily as a naming mechanism.  Implementations are expected to provide CURIE resolution mechanisms.\nString CURIEs are represented as `namespace`:`reference`. VR uses W3C CURIE nomenclature; some specifications use home-grown names for the same concepts.\n`namespace` SHOULD be defined in identifiers.org, or, alteratively, provided by a map of CURIE URLs.",
          "example": "ga4gh:allele/01234abcde",
@@ -202,93 +118,6 @@
          "pattern": "^[A-Z][A-Za-z0-9]+$",
          "type": "string"
       },
-      "Genotype": {
-         "additionalProperties": false,
-         "description": "A list of Haplotypes.",
-         "example": {
-            "completeness": "COMPLETE",
-            "haplotype_ids": [
-               "haplotype/15",
-               "haplotype/42"
-            ],
-            "id": "genotype/33"
-         },
-         "properties": {
-            "completeness": {
-               "$ref": "#/enums/Completeness"
-            },
-            "haplotype_ids": {
-               "items": {
-                  "$ref": "#/definitions/Id"
-               },
-               "type": "array"
-            },
-            "haplotypes": {
-               "items": {
-                  "$ref": "#/definitions/Haplotype"
-               },
-               "type": "array"
-            },
-            "id": {
-               "$ref": "#/definitions/Id"
-            },
-            "type": {
-               "default": "Genotype",
-               "enum": [
-                  "Genotype"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "Haplotype": {
-         "additionalProperties": false,
-         "description": "A set of zero or more Alleles on a single instance of a Sequence.",
-         "example": {
-            "allele_ids": [
-               "allele/10",
-               "allele/9"
-            ],
-            "completeness": "PARTIAL",
-            "id": "haplotype/22",
-            "type": "Haplotype"
-         },
-         "properties": {
-            "allele_ids": {
-               "items": {
-                  "$ref": "#/definitions/Id"
-               },
-               "type": "array"
-            },
-            "alleles": {
-               "items": {
-                  "$ref": "#/definitions/Allele"
-               },
-               "type": "array"
-            },
-            "completeness": {
-               "$ref": "#/enums/Completeness"
-            },
-            "id": {
-               "$ref": "#/definitions/Id"
-            },
-            "location": {
-               "$ref": "#/definitions/Location"
-            },
-            "location_id": {
-               "$ref": "#/definitions/Id"
-            },
-            "type": {
-               "default": "Haplotype",
-               "enum": [
-                  "Haplotype"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
       "Id": {
          "description": "Uniquely identifies a specific instance of an object within a document.",
          "example": "01340adf981as0",
@@ -313,19 +142,6 @@
             "namespace",
             "accession"
          ],
-         "type": "object"
-      },
-      "Identifiers": {
-         "additionalProperties": false,
-         "description": "A list of Identifiers",
-         "patternProperties": {
-            "^.": {
-               "items": {
-                  "$ref": "#/definitions/CURIE"
-               },
-               "type": "array"
-            }
-         },
          "type": "object"
       },
       "Interval": {
@@ -359,18 +175,6 @@
             }
          ]
       },
-      "Meta": {
-         "properties": {
-            "generated_at": {
-               "$ref": "#/definitions/DateTime"
-            },
-            "version": {
-               "default": "0",
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
       "NestedInterval": {
          "example": {
             "inner": {
@@ -396,20 +200,6 @@
                "default": "NestedInterval",
                "enum": [
                   "NestedInterval"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "RelatedVariation": {
-         "properties": {
-            "id": {
-               "$ref": "#/definitions/Id"
-            },
-            "relationship": {
-               "enum": [
-                  "PARSED_VARIATION"
                ],
                "type": "string"
             }
@@ -496,53 +286,8 @@
          "oneOf": [
             {
                "$ref": "#/definitions/SequenceState"
-            },
-            {
-               "$ref": "#/definitions/CNVState"
             }
          ]
-      },
-      "StaticVariationSet": {
-         "description": "A set of variation defined by ids",
-         "example": {
-            "member_ids": [
-               "VMC:GX_zQuUXqiP_YpP_uODT4PcfNIYoOPdYjC-",
-               "VMC:GX_jzmI29gA7-Rs7pRkeCj0mOp1Zsxan2Sc",
-               "VMC:GX_3NoEdRUAnX2AMdug2XoisbEi-GR7wB1x",
-               "VMC:GX_OWpaUYPJgLq8ZTPDbyCId6cgYPWjtrRK",
-               "VMC:GX_ltc3Iah3Iy5X_A06NGMla76bmPGSbMj9",
-               "VMC:GX_yss8NB_TDAnwyWX7ImXKTnroBYAN_d1O",
-               "VMC:GX_X3t0_U_rG5EfNUEYZb3zmulRYcdZ9RD2",
-               "VMC:GX_bD4JRdGKbwCOKh3ou8fPS2i9gD1Ojf7z",
-               "VMC:GX_1DHFMjTlO0Ju1cg5sa8vP2o1HSPiSR7t",
-               "VMC:GX_TvaAqwD_MduWohVGP4i2Tze4bieA-Kny"
-            ]
-         },
-         "properties": {
-            "id": {
-               "$ref": "#/definitions/Id"
-            },
-            "member_ids": {
-               "items": {
-                  "$ref": "#/definitions/Id"
-               },
-               "type": "array"
-            },
-            "members": {
-               "items": {
-                  "type": "object"
-               },
-               "type": "array"
-            },
-            "type": {
-               "default": "VariationSet",
-               "enum": [
-                  "VariationSet"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
       },
       "Text": {
          "example": {
@@ -579,32 +324,8 @@
             },
             {
                "$ref": "#/definitions/Allele"
-            },
-            {
-               "$ref": "#/definitions/Haplotype"
-            },
-            {
-               "$ref": "#/definitions/Genotype"
             }
          ]
-      },
-      "VariationSet": {
-         "oneOf": [
-            {
-               "$ref": "#/definitions/StaticVariationSet"
-            }
-         ]
-      }
-   },
-   "enums": {
-      "Completeness": {
-         "description": "Declares the `completeness` of a Haplotype or Genotype definition.  See descriptions in those schemas for additional information. * COMPLETE: The definition is complete. All data are included\n  for the covered assay.\n* PARTIAL: The definition is intentionally incomplete, typically\n  to protect information.  Declaring partial variation allows\n  data submitters to convey that data are missing.\n* UNKNOWN: The definition is not known to be either COMPLETE or\n  PARTIAL.",
-         "enum": [
-            "UNKNOWN",
-            "PARTIAL",
-            "COMPLETE"
-         ],
-         "type": "string"
       }
    },
    "title": "GA4GH-VR-Definitions",

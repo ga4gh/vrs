@@ -1,7 +1,7 @@
 # Validation tests for utilities
 # see notebooks/appendices/Validation%20Tests.ipynb
 
-get_vmc_sequence_identifier:
+get_vr_sequence_identifier:
   -
     in:
       identifier: "RefSeq:NC_000019.10"

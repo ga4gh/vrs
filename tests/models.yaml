@@ -30,25 +30,3 @@ Allele:
     out:
       serialize_vmc: "<Allele|VMC:GL_L1IS6jOwSUsOpKihGRcqxHul1IwbV-1s|C>"
       computed_id: "VMC:GA_zsJuMckKGajqHCl16sxKQJtBMjGrFHHZ"
-
-Haplotype:
-  -
-    in:
-      allele_ids:
-        - "VMC:GA_zsJuMckKGajqHCl16sxKQJtBMjGrFHHZ"
-        - "VMC:GA__8rLiy7YkQDNy-t536RpVFGxIDiWLr6J"
-      completeness: "COMPLETE"
-    out:
-      serialize_vmc: "<Haplotype||COMPLETE|[VMC:GA__8rLiy7YkQDNy-t536RpVFGxIDiWLr6J;VMC:GA_zsJuMckKGajqHCl16sxKQJtBMjGrFHHZ]>"
-      computed_id: "VMC:GH_xk_4sKZKfwD7ol3H89mDShrBT3dfu5Aq"
-
-Genotype:
-  -
-    in:
-      haplotype_ids:
-        - "VMC:GH_xk_4sKZKfwD7ol3H89mDShrBT3dfu5Aq"
-        - "VMC:GH_xk_4sKZKfwD7ol3H89mDShrBT3dfu5Aq"
-      completeness: "COMPLETE"
-    out:
-      serialize_vmc: "<Genotype|COMPLETE|[VMC:GH_xk_4sKZKfwD7ol3H89mDShrBT3dfu5Aq;VMC:GH_xk_4sKZKfwD7ol3H89mDShrBT3dfu5Aq]>"
-      computed_id: "VMC:GG_Pv97fICMeVRmowtCwioFpoFmrsOkZ7es"
