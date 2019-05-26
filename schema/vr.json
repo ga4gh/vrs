@@ -4,24 +4,12 @@
       "Allele": {
          "additionalProperties": false,
          "description": "An assertion of a sequence state at a Location.",
-         "example": {
-            "id": "allele/23cd",
-            "location_id": "location/01ab",
-            "state": {
-               "sequence": "A",
-               "type": "SequenceState"
-            },
-            "type": "Allele"
-         },
          "properties": {
             "id": {
                "$ref": "#/definitions/Id"
             },
             "location": {
                "$ref": "#/definitions/Location"
-            },
-            "location_id": {
-               "$ref": "#/definitions/Id"
             },
             "state": {
                "$ref": "#/definitions/State"
@@ -66,10 +54,6 @@
                },
                "type": "object"
             },
-            "identifiers": {
-               "$ref": "#/definitions/Identifiers",
-               "default": {}
-            },
             "locations": {
                "default": {},
                "patternProperties": {
@@ -83,10 +67,6 @@
          "type": "object"
       },
       "CNVState": {
-         "example": {
-            "location_id": "location/fg45",
-            "type": "CNVState"
-         },
          "properties": {
             "copy_measure": {
                "enum": [
@@ -97,9 +77,6 @@
             },
             "location": {
                "$ref": "#/definitions/Location"
-            },
-            "location_id": {
-               "$ref": "#/definitions/Id"
             },
             "max_copies": {
                "type": "integer"
@@ -133,12 +110,6 @@
       },
       "CytobandLocation": {
          "additionalProperties": false,
-         "example": {
-            "chr": "11",
-            "end": "q23.1",
-            "start": "q22.3",
-            "type": "CytobandLocation"
-         },
          "properties": {
             "chr": {
                "type": "string"
@@ -174,11 +145,6 @@
          "type": "string"
       },
       "GeneLocation": {
-         "example": {
-            "gene": "ncbigene:1493",
-            "id": "location/47",
-            "type": "GeneLocation"
-         },
          "properties": {
             "gene": {
                "$ref": "#/definitions/CURIE",
@@ -205,23 +171,9 @@
       "Genotype": {
          "additionalProperties": false,
          "description": "A list of Haplotypes.",
-         "example": {
-            "completeness": "COMPLETE",
-            "haplotype_ids": [
-               "haplotype/15",
-               "haplotype/42"
-            ],
-            "id": "genotype/33"
-         },
          "properties": {
             "completeness": {
                "$ref": "#/enums/Completeness"
-            },
-            "haplotype_ids": {
-               "items": {
-                  "$ref": "#/definitions/Id"
-               },
-               "type": "array"
             },
             "haplotypes": {
                "items": {
@@ -245,22 +197,7 @@
       "Haplotype": {
          "additionalProperties": false,
          "description": "A set of zero or more Alleles on a single instance of a Sequence.",
-         "example": {
-            "allele_ids": [
-               "allele/10",
-               "allele/9"
-            ],
-            "completeness": "PARTIAL",
-            "id": "haplotype/22",
-            "type": "Haplotype"
-         },
          "properties": {
-            "allele_ids": {
-               "items": {
-                  "$ref": "#/definitions/Id"
-               },
-               "type": "array"
-            },
             "alleles": {
                "items": {
                   "$ref": "#/definitions/Allele"
@@ -275,9 +212,6 @@
             },
             "location": {
                "$ref": "#/definitions/Location"
-            },
-            "location_id": {
-               "$ref": "#/definitions/Id"
             },
             "type": {
                "default": "Haplotype",
@@ -313,19 +247,6 @@
             "namespace",
             "accession"
          ],
-         "type": "object"
-      },
-      "Identifiers": {
-         "additionalProperties": false,
-         "description": "A list of Identifiers",
-         "patternProperties": {
-            "^.": {
-               "items": {
-                  "$ref": "#/definitions/CURIE"
-               },
-               "type": "array"
-            }
-         },
          "type": "object"
       },
       "Interval": {
@@ -425,7 +346,6 @@
                "$ref": "#/definitions/Interval"
             },
             "sequence_id": {
-               "example": "GS_ss8r_wB0-b9r44TQTMmVTI92884QvBiB",
                "type": "string"
             },
             "type": {
@@ -504,29 +424,9 @@
       },
       "StaticVariationSet": {
          "description": "A set of variation defined by ids",
-         "example": {
-            "member_ids": [
-               "VMC:GX_zQuUXqiP_YpP_uODT4PcfNIYoOPdYjC-",
-               "VMC:GX_jzmI29gA7-Rs7pRkeCj0mOp1Zsxan2Sc",
-               "VMC:GX_3NoEdRUAnX2AMdug2XoisbEi-GR7wB1x",
-               "VMC:GX_OWpaUYPJgLq8ZTPDbyCId6cgYPWjtrRK",
-               "VMC:GX_ltc3Iah3Iy5X_A06NGMla76bmPGSbMj9",
-               "VMC:GX_yss8NB_TDAnwyWX7ImXKTnroBYAN_d1O",
-               "VMC:GX_X3t0_U_rG5EfNUEYZb3zmulRYcdZ9RD2",
-               "VMC:GX_bD4JRdGKbwCOKh3ou8fPS2i9gD1Ojf7z",
-               "VMC:GX_1DHFMjTlO0Ju1cg5sa8vP2o1HSPiSR7t",
-               "VMC:GX_TvaAqwD_MduWohVGP4i2Tze4bieA-Kny"
-            ]
-         },
          "properties": {
             "id": {
                "$ref": "#/definitions/Id"
-            },
-            "member_ids": {
-               "items": {
-                  "$ref": "#/definitions/Id"
-               },
-               "type": "array"
             },
             "members": {
                "items": {
@@ -545,11 +445,6 @@
          "type": "object"
       },
       "Text": {
-         "example": {
-            "definition": "CTLA4, disruption of transmembrane domain",
-            "id": "text/012abc",
-            "type": "Text"
-         },
          "properties": {
             "definition": {
                "description": "An textual representation of variation intended to capture variation descriptions that cannot be parsed, but still treated as variation.",

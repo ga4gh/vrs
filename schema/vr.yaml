@@ -16,7 +16,7 @@
 
 $schema: "http://json-schema.org/schema#"
 title: "GA4GH-VR-Definitions"
-type: "object"
+type: object
 
 
 definitions:
@@ -43,8 +43,8 @@ definitions:
     properties:
       type:
         type: string
-        enum: ["Text"]
-        default: "Text"
+        enum: [Text]
+        default: Text
       id:
         $ref: "#/definitions/Id"
       definition:
@@ -53,92 +53,60 @@ definitions:
           An textual representation of variation intended to capture
           variation descriptions that cannot be parsed, but still
           treated as variation.
-    example:
-      type: Text
-      id: "text/012abc"
-      definition: "CTLA4, disruption of transmembrane domain"
 
   Allele:
     description: An assertion of a sequence state at a Location.
-    type: "object"
+    type: object
     properties:
       type:
         type: string
-        enum: ["Allele"]
-        default: "Allele"
+        enum: [Allele]
+        default: Allele
       id:
         $ref: "#/definitions/Id"
       location:
         $ref: "#/definitions/Location"
-      location_id:
-        $ref: "#/definitions/Id"
       state:
         $ref: "#/definitions/State"
     additionalProperties: false
-    example:
-      type: "Allele"
-      id: "allele/23cd"
-      location_id: "location/01ab"
-      state:
-        type: SequenceState
-        sequence: "A"
   
   Haplotype:
     description: A set of zero or more Alleles on a single instance of a Sequence.
-    type: "object"
+    type: object
     properties:
       type:
         type: string
-        enum: ["Haplotype"]
-        default: "Haplotype"
+        enum: [Haplotype]
+        default: Haplotype
       id:
         $ref: "#/definitions/Id"
       location:
         $ref: "#/definitions/Location"
-      location_id:
-        $ref: "#/definitions/Id"
       completeness:
         $ref: "#/enums/Completeness"
       alleles:
-        type: "array"
+        type: array
         items:
           $ref: "#/definitions/Allele"
-      allele_ids:
-        type: "array"
-        items:
-          $ref: "#/definitions/Id"
     additionalProperties: false
-    example:
-      type: Haplotype
-      id: "haplotype/22"
-      completeness: "PARTIAL"
-      allele_ids: ["allele/10", "allele/9"]
   
   Genotype:
     description: A list of Haplotypes.
-    type: "object"
+    type: object
     properties:
       type:
         type: string
-        enum: ["Genotype"]
-        default: "Genotype"
+        enum: [Genotype]
+        default: Genotype
       id:
         $ref: "#/definitions/Id"
       completeness:
         $ref: "#/enums/Completeness"
       haplotypes:
-        type: "array"
+        type: array
         items:
           $ref: "#/definitions/Haplotype"
-      haplotype_ids:
-        type: "array"
-        items:
-          $ref: "#/definitions/Id"
     additionalProperties: false
-    example:
-      id: "genotype/33"
-      completeness: "COMPLETE"
-      haplotype_ids: ["haplotype/15", "haplotype/42"]
 
 
   ############################################################################
@@ -152,34 +120,18 @@ definitions:
   StaticVariationSet:
     description: >-
       A set of variation defined by ids
-    type: "object"
+    type: object
     properties:
       type:
         type: string
-        enum: ["VariationSet"]
-        default: "VariationSet"
+        enum: [VariationSet]
+        default: VariationSet
       id:
         $ref: "#/definitions/Id"
       members:
         type: array
         items:
           type: object
-      member_ids:
-        type: array
-        items:
-          $ref: "#/definitions/Id"
-    example:
-      member_ids:
-        - VMC:GX_zQuUXqiP_YpP_uODT4PcfNIYoOPdYjC-
-        - VMC:GX_jzmI29gA7-Rs7pRkeCj0mOp1Zsxan2Sc
-        - VMC:GX_3NoEdRUAnX2AMdug2XoisbEi-GR7wB1x
-        - VMC:GX_OWpaUYPJgLq8ZTPDbyCId6cgYPWjtrRK
-        - VMC:GX_ltc3Iah3Iy5X_A06NGMla76bmPGSbMj9
-        - VMC:GX_yss8NB_TDAnwyWX7ImXKTnroBYAN_d1O
-        - VMC:GX_X3t0_U_rG5EfNUEYZb3zmulRYcdZ9RD2
-        - VMC:GX_bD4JRdGKbwCOKh3ou8fPS2i9gD1Ojf7z
-        - VMC:GX_1DHFMjTlO0Ju1cg5sa8vP2o1HSPiSR7t
-        - VMC:GX_TvaAqwD_MduWohVGP4i2Tze4bieA-Kny
 
 
   ############################################################################
@@ -201,13 +153,12 @@ definitions:
     properties:
       type:
         type: string
-        enum: ["SequenceLocation"]
-        default: "SequenceLocation"
+        enum: [SequenceLocation]
+        default: SequenceLocation
       id:
         $ref: "#/definitions/Id"
       sequence_id:
         type: string
-        example: "GS_ss8r_wB0-b9r44TQTMmVTI92884QvBiB"
       interval:
         $ref: "#/definitions/Interval"
 
@@ -215,30 +166,26 @@ definitions:
     type: object
     properties:
       type:
-        type: "string"
-        enum: ["GeneLocation"]
-        default: "GeneLocation"
+        type: string
+        enum: [GeneLocation]
+        default: GeneLocation
       id:
         $ref: "#/definitions/Id"
       gene:
         $ref: "#/definitions/CURIE"
         description: See https://www.ebi.ac.uk/miriam/main/datatypes/MIR:00000069
-    example:
-      type: "GeneLocation"
-      id: "location/47"
-      gene: "ncbigene:1493"
 
   CytobandLocation:
-    type: "object"
+    type: object
     properties:
       type:
-        type: "string"
-        enum: ["CytobandLocation"]
-        default: "CytobandLocation"
+        type: string
+        enum: [CytobandLocation]
+        default: CytobandLocation
       id:
         $ref: "#/definitions/Id"
       chr:
-        type: "string"
+        type: string
       start:
         $ref: "#/definitions/Cytoband"
       end:
@@ -247,14 +194,9 @@ definitions:
         default: null
     additionalProperties: false
     required:
-      - "type"
-      - "chr"
-      - "start"
-    example:
-      type: "CytobandLocation"
-      chr: "11"
-      start: "q22.3"
-      end: "q23.1"
+      - type
+      - chr
+      - start
     
 
   ############################################################################
@@ -288,7 +230,7 @@ definitions:
     properties:
       type:
         type: string
-        enum: ["SimpleInterval"]
+        enum: [SimpleInterval]
         default: SimpleInterval
       start:
         type: integer
@@ -301,7 +243,7 @@ definitions:
       - start
       - end
     example:
-      type: "SimpleInterval"
+      type: SimpleInterval
       start: 11
       end: 22
 
@@ -310,7 +252,7 @@ definitions:
     properties:
       type:
         type: string
-        enum: ["NestedInterval"]
+        enum: [NestedInterval]
         default: NestedInterval
       inner:
         $ref: '#/definitions/SimpleInterval'
@@ -341,7 +283,7 @@ definitions:
     properties:
       type:
         type: string
-        enum: ["SequenceState"]
+        enum: [SequenceState]
         default: SequenceState
       sequence:
         type: string
@@ -358,58 +300,53 @@ definitions:
     properties:
       type:
         type: string
-        enum: ["CNVState"]
+        enum: [CNVState]
         default: CNVState
       location:
         $ref: "#/definitions/Location"
-      location_id:
-        $ref: "#/definitions/Id"
       min_copies:
         type: integer
       max_copies:
         type: integer
       copy_measure:
         type: string
-        enum: ["TOTAL", "RELATIVE"]
+        enum: [TOTAL, RELATIVE]
     required:
       - type
-    example:
-      type: CNVState
-      location_id: "location/fg45"
       
 
   ############################################################################
-  # "Basic" types
+  # Basic types
   # These types are used solely within other definitions.
 
   DateTime:
-    type: "string"
+    type: string
     format: "date-time"
   
   Id:
     description: >-
       Uniquely identifies a specific instance of an object within a
       document.
-    type: "string"
+    type: string
     example: "01340adf981as0"
   
   Identifier:
     description: >-
       A <namespace,accession> pair that refers to an object.
-    type: "object"
+    type: object
     properties:
       namespace:
-        type: "string"
-        example: "refseq"
-        description: "authority"
+        type: string
+        example: refseq
+        description: authority
       accession:
-        type: "string"
+        type: string
         example: "NM_000551.3"
         description: "unique key within namespace"
     additionalProperties: false
     required:
-    - "namespace"
-    - "accession"
+    - namespace
+    - accession
   
   CURIE:
     description: >-
@@ -427,17 +364,17 @@ definitions:
 
       `namespace` SHOULD be defined in identifiers.org, or,
       alteratively, provided by a map of CURIE URLs.
-    type: "string"
+    type: string
     pattern: '^\w+:\w+$'
     example: "ga4gh:allele/01234abcde"      
   
   Meta:
     # TODO: version regexp ^\d+\.\d+$
     # describe semantics
-    type: "object"
+    type: object
     properties:
       version:
-        type: "string"
+        type: string
         default: "0"
       generated_at:
         $ref: "#/definitions/DateTime"
@@ -465,53 +402,38 @@ definitions:
 
   ############################################################################
   Bundle:
-    type: "object"
+    type: object
     properties:
       locations:
-        type: "object"
+        type: object
         default: {}
         patternProperties:
           ^.:
             $ref: "#/definitions/Location"
       alleles:
-        type: "object"
+        type: object
         default: {}
         patternProperties:
           ^.:
             $ref: "#/definitions/Allele"
       haplotypes:
-        type: "object"
+        type: object
         default: {}
         patternProperties:
           ^.:
             $ref: "#/definitions/Haplotype"
       genotypes:
-        type: "object"
+        type: object
         default: {}
         patternProperties:
           ^.:
             $ref: "#/definitions/Genotype"
-      identifiers:
-        $ref: "#/definitions/Identifiers"
-        default: {}
     additionalProperties: false
 
-  Identifiers:
-    description: "A list of Identifiers"
-    type: "object"
-    patternProperties:
-      "^.":
-        type: "array"
-        items:
-          "$ref": "#/definitions/CURIE"
-    additionalProperties: false
-      
 
 enums:
-  # x-bases stores reusable base definitions of schemas
-  # They are not intended to be used in isolation.
   Completeness:
-    type: "string"
+    type: string
     description: >-
       Declares the `completeness` of a Haplotype or Genotype
       definition.  See descriptions in those schemas for additional
@@ -524,6 +446,6 @@ enums:
       * UNKNOWN: The definition is not known to be either COMPLETE or
         PARTIAL.
     enum:
-    - "UNKNOWN"
-    - "PARTIAL"
-    - "COMPLETE"
+    - UNKNOWN
+    - PARTIAL
+    - COMPLETE
