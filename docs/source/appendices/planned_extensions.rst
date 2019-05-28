@@ -1,4 +1,10 @@
+##################
 Planned Extensions
-==================
+##################
 
-Hi there.
+.. _var-sets:
+
+Variant sets
+------------
+
+TODO: Describe upcoming additions of hap/gen objects, variationsets

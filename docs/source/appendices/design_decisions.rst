@@ -13,7 +13,7 @@ VR contributors confronted numerous trade-offs in developing this specification.
 
 Allele Rather than Variant
 ---------------------------
-The most primitive sequence assertion in VR is the :term:`Allele` entity. Colloquially, the words "allele" and "variant" have similar meanings and they are often used interchangeably. However, the VR contributors believe that it is essential to distinguish the state of the sequence from the change between states of a sequence. It is imperative that precise terms are used when modeling data. Therefore, within VR, Allele refers to a state and "variant" refers to the change from one Allele to another.
+The most primitive sequence assertion in VR is the :ref:`Allele` entity. Colloquially, the words "allele" and "variant" have similar meanings and they are often used interchangeably. However, the VR contributors believe that it is essential to distinguish the state of the sequence from the change between states of a sequence. It is imperative that precise terms are used when modeling data. Therefore, within VR, Allele refers to a state and "variant" refers to the change from one Allele to another.
 
 The word "variant", which implies change, makes it awkward to refer to the (unchanged) reference allele. Some systems will use an HGVS-like syntax (e.g., NC_000019.10:g.44906586G>G or NC_000019.10:g.44906586=) when referring to an unchanged residue. In some cases, such "variants" are even associated with allele frequencies. Similarly, a predicted consequence is better associated with an allele than with a variant.
 
@@ -21,6 +21,9 @@ The word "variant", which implies change, makes it awkward to refer to the (unch
 
 Alleles are Right Normalized
 ----------------------------
+
+**TODO: update to discuss our WIP of SPDI algorithm (BOCA)**
+
 In order to standardize the presentation of sequence variation, the VR specification requires that Alleles be right normalized (aka shifted or shuffled) using the `vt algorithm`_. Furthermore, normalization rules should be identical for all sequence types; although this need not be a strict requirement, there is no reason to normalize in different directions based on sequence type.
 
 The choice of algorithm was relatively straightforward: vt is well-documented, published, easily understood, easily implemented, and covers a wide-range of cases.
