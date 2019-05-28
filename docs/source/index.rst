@@ -40,3 +40,4 @@ New to VR-Schema? Start :doc:`here <terms_and_model>`, or browse the Specificati
    terms_and_model
    computed_identifiers
    appendices/design_decisions
+   appendices/planned_extensions
