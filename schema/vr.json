@@ -4,24 +4,12 @@
       "Allele": {
          "additionalProperties": false,
          "description": "An assertion of a sequence state at a Location.",
-         "example": {
-            "id": "allele/23cd",
-            "location_id": "location/01ab",
-            "state": {
-               "sequence": "A",
-               "type": "SequenceState"
-            },
-            "type": "Allele"
-         },
          "properties": {
             "id": {
                "$ref": "#/definitions/Id"
             },
             "location": {
                "$ref": "#/definitions/Location"
-            },
-            "location_id": {
-               "$ref": "#/definitions/Id"
             },
             "state": {
                "$ref": "#/definitions/State"
@@ -49,12 +37,6 @@
       },
       "CytobandLocation": {
          "additionalProperties": false,
-         "example": {
-            "chr": "11",
-            "end": "q23.1",
-            "start": "q22.3",
-            "type": "CytobandLocation"
-         },
          "properties": {
             "chr": {
                "type": "string"
@@ -90,11 +72,6 @@
          "type": "string"
       },
       "GeneLocation": {
-         "example": {
-            "gene": "ncbigene:1493",
-            "id": "location/47",
-            "type": "GeneLocation"
-         },
          "properties": {
             "gene": {
                "$ref": "#/definitions/CURIE",
@@ -215,7 +192,6 @@
                "$ref": "#/definitions/Interval"
             },
             "sequence_id": {
-               "example": "GS_ss8r_wB0-b9r44TQTMmVTI92884QvBiB",
                "type": "string"
             },
             "type": {
@@ -290,11 +266,6 @@
          ]
       },
       "Text": {
-         "example": {
-            "definition": "CTLA4, disruption of transmembrane domain",
-            "id": "text/012abc",
-            "type": "Text"
-         },
          "properties": {
             "definition": {
                "description": "An textual representation of variation intended to capture variation descriptions that cannot be parsed, but still treated as variation.",
