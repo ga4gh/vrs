@@ -1,5 +1,6 @@
+################
 Design Decisions
-================
+################
 
 VR contributors confronted numerous trade-offs in developing this specification. As these trade-offs may not be apparent to outside readers, this section highlights the most significant ones and the rationale for our design decisions, including:
 
@@ -11,16 +12,18 @@ VR contributors confronted numerous trade-offs in developing this specification.
 
 .. _use-allele:
 
+**************************
 Allele Rather than Variant
----------------------------
+**************************
 The most primitive sequence assertion in VR is the :ref:`Allele` entity. Colloquially, the words "allele" and "variant" have similar meanings and they are often used interchangeably. However, the VR contributors believe that it is essential to distinguish the state of the sequence from the change between states of a sequence. It is imperative that precise terms are used when modeling data. Therefore, within VR, Allele refers to a state and "variant" refers to the change from one Allele to another.
 
 The word "variant", which implies change, makes it awkward to refer to the (unchanged) reference allele. Some systems will use an HGVS-like syntax (e.g., NC_000019.10:g.44906586G>G or NC_000019.10:g.44906586=) when referring to an unchanged residue. In some cases, such "variants" are even associated with allele frequencies. Similarly, a predicted consequence is better associated with an allele than with a variant.
 
 .. _right-normalize:
 
+****************************
 Alleles are Right Normalized
-----------------------------
+****************************
 
 **TODO: update to discuss our WIP of SPDI algorithm (BOCA)**
 
@@ -38,8 +41,9 @@ While consistency with Alleles written according HGVS recommendations was not a 
 
 .. _interbase-coords:
 
+*********************
 Interbase Coordinates
----------------------
+*********************
 
 Sequence ranges use an interbase coordinate system. Interbase coordinate conventions are used in this terminology because they provide conceptual consistency that is not possible with residue-based systems.
 
@@ -51,8 +55,9 @@ For example, interval coordinates are interpreted as exclusive coordinates for i
 
 .. _modeling-language:
 
+*****************
 Modeling Language
------------------
+*****************
 
 The VR collaborators investigated numerous options for modeling data, generating code, and writing the wire protocol. Required and desired selection criteria included:
 
@@ -71,8 +76,9 @@ Initial versions of the VR logical model were implemented in UML, protobuf, and 
 
 .. _custom-serialization:
 
+**********************
 Serialization Strategy
-----------------------
+**********************
 
 There are many packages and proposals that aspire to a canonical form for json in many languages. Despite this, there are no ratified or *de facto* winners. Many packages have similar names, which makes it difficult to discern whether they are related or not (often not). Although some packages look like good single-language candidates, none are ready for multi-language use. Many seem abandoned. The need for a canonical json form is evident, and there was at least one proposal for an ECMA standard.
 
