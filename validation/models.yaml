@@ -19,11 +19,11 @@ NestedInterval:
         type: SimpleInterval
       outer:
         end: 39
-        start: 30
+        start: 20
         type: SimpleInterval
       type: NestedInterval
     out:
-      serialize: '{"inner":{"end":30,"start":29,"type":"SimpleInterval"},"outer":{"end":39,"start":30,"type":"SimpleInterval"},"type":"NestedInterval"}'
+      serialize: '{"inner":{"end":30,"start":29,"type":"SimpleInterval"},"outer":{"end":39,"start":20,"type":"SimpleInterval"},"type":"NestedInterval"}'
 
 SequenceLocation:
   - 
@@ -45,13 +45,13 @@ SequenceLocation:
           type: SimpleInterval
         outer:
           end: 39
-          start: 30
+          start: 20
           type: SimpleInterval
         type: NestedInterval
       sequence_id: NM_0001234.5
       type: SequenceLocation
     out:
-      serialize: '{"interval":{"inner":{"end":30,"start":29,"type":"SimpleInterval"},"outer":{"end":39,"start":30,"type":"SimpleInterval"},"type":"NestedInterval"},"sequence_id":"NM_0001234.5","type":"SequenceLocation"}'
+      serialize: '{"interval":{"inner":{"end":30,"start":29,"type":"SimpleInterval"},"outer":{"end":39,"start":20,"type":"SimpleInterval"},"type":"NestedInterval"},"sequence_id":"NM_0001234.5","type":"SequenceLocation"}'
 
 Allele:
   -
