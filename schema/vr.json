@@ -30,69 +30,8 @@
          "pattern": "^\\w+:\\w+$",
          "type": "string"
       },
-      "Cytoband": {
-         "example": "q22.3",
-         "pattern": "^[pq][1-9][0-9]*(\\.[1-9][0-9]*)?$",
-         "type": "string"
-      },
-      "CytobandLocation": {
-         "additionalProperties": false,
-         "properties": {
-            "chr": {
-               "type": "string"
-            },
-            "end": {
-               "$ref": "#/definitions/Cytoband",
-               "default": null,
-               "nullable": true
-            },
-            "id": {
-               "$ref": "#/definitions/Id"
-            },
-            "start": {
-               "$ref": "#/definitions/Cytoband"
-            },
-            "type": {
-               "default": "CytobandLocation",
-               "enum": [
-                  "CytobandLocation"
-               ],
-               "type": "string"
-            }
-         },
-         "required": [
-            "type",
-            "chr",
-            "start"
-         ],
-         "type": "object"
-      },
       "DateTime": {
          "format": "date-time",
-         "type": "string"
-      },
-      "GeneLocation": {
-         "properties": {
-            "gene": {
-               "$ref": "#/definitions/CURIE",
-               "description": "See https://www.ebi.ac.uk/miriam/main/datatypes/MIR:00000069"
-            },
-            "id": {
-               "$ref": "#/definitions/Id"
-            },
-            "type": {
-               "default": "GeneLocation",
-               "enum": [
-                  "GeneLocation"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "GeneSymbol": {
-         "example": "BRCA1",
-         "pattern": "^[A-Z][A-Za-z0-9]+$",
          "type": "string"
       },
       "Id": {
@@ -143,12 +82,6 @@
          "oneOf": [
             {
                "$ref": "#/definitions/SequenceLocation"
-            },
-            {
-               "$ref": "#/definitions/GeneLocation"
-            },
-            {
-               "$ref": "#/definitions/CytobandLocation"
             }
          ]
       },

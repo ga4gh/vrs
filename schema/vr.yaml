@@ -9,9 +9,8 @@
 
 
 $schema: "http://json-schema.org/schema#"
-title: GA4GH-VR-Definitions
+title: "GA4GH-VR-Definitions"
 type: object
-
 
 definitions:
   # VR definitions are presented top-down.  Everything rolls up to
@@ -70,8 +69,6 @@ definitions:
       A Location represents a span on a specific sequence.
     oneOf:
       - $ref: "#/definitions/SequenceLocation"
-      - $ref: "#/definitions/GeneLocation"
-      - $ref: "#/definitions/CytobandLocation"
     discriminator:
       propertyName: type
   
@@ -89,49 +86,10 @@ definitions:
       interval:
         $ref: "#/definitions/Interval"
 
-  GeneLocation:
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [GeneLocation]
-        default: GeneLocation
-      id:
-        $ref: "#/definitions/Id"
-      gene:
-        $ref: "#/definitions/CURIE"
-        description: See https://www.ebi.ac.uk/miriam/main/datatypes/MIR:00000069
-
-  CytobandLocation:
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [CytobandLocation]
-        default: CytobandLocation
-      id:
-        $ref: "#/definitions/Id"
-      chr:
-        type: string
-      start:
-        $ref: "#/definitions/Cytoband"
-      end:
-        $ref: "#/definitions/Cytoband"
-        nullable: true
-        default: null
-    additionalProperties: false
-    required:
-      - type
-      - chr
-      - start
-    
-
   ############################################################################
   # Interval
   # * SimpleInterval
   # * NestedInterval
-  # * TODO: ConfidenceIntervalInterval (a la VCF)
-  # * TODO: ComplexInterval (a la FALDO)
 
   Interval:
     description: >-
@@ -148,7 +106,6 @@ definitions:
     oneOf:
       - $ref: '#/definitions/SimpleInterval'
       - $ref: '#/definitions/NestedInterval'
-      # - $ref: '#/definitions/ComplexInterval'
     discriminator:
       propertyName: type
 
@@ -218,7 +175,7 @@ definitions:
       - sequence
     example:
       type: SequenceState
-      sequence: C      
+      sequence: C
 
   ############################################################################
   # Basic types
@@ -272,13 +229,3 @@ definitions:
     type: string
     pattern: '^\w+:\w+$'
     example: "ga4gh:allele/01234abcde"      
-
-  Cytoband:
-    type: string
-    pattern: '^[pq][1-9][0-9]*(\.[1-9][0-9]*)?$'
-    example: "q22.3"
-      
-  GeneSymbol:
-    type: string
-    pattern: '^[A-Z][A-Za-z0-9]+$'
-    example: "BRCA1"
