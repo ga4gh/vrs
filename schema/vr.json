@@ -30,18 +30,8 @@
          "pattern": "^\\w+:\\w+$",
          "type": "string"
       },
-      "Cytoband": {
-         "example": "q22.3",
-         "pattern": "^[pq][1-9][0-9]*(\\.[1-9][0-9]*)?$",
-         "type": "string"
-      },
       "DateTime": {
          "format": "date-time",
-         "type": "string"
-      },
-      "GeneSymbol": {
-         "example": "BRCA1",
-         "pattern": "^[A-Z][A-Za-z0-9]+$",
          "type": "string"
       },
       "Id": {
