@@ -86,7 +86,6 @@ definitions:
       interval:
         $ref: "#/definitions/Interval"
 
-
   ############################################################################
   # Interval
   # * SimpleInterval
