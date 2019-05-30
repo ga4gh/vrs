@@ -40,6 +40,8 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
+# TODO directive output
+todo_include_todos = True
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -47,6 +49,7 @@ exclude_patterns = []
 # a list of builtin themes.
 #
 html_theme = 'alabaster'
+html_logo = 'images/GA-logo.svg'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

@@ -36,10 +36,13 @@ New to VR-Spec? Start :doc:`here <terms_and_model/terms_and_model>`, or browse t
 
 .. toctree::
    :maxdepth: 4
-   :caption: Specification
+   :caption: VR Specification
 
    terms_and_model/terms_and_model
    schema
    computed_identifiers
+   implementations
+   appendices/release_cycle
    appendices/design_decisions
    appendices/planned_extensions
+   appendices/todo

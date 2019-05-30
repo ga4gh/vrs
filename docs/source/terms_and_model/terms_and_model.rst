@@ -130,6 +130,7 @@ Composite concepts
 These abstract classes and their concrete child classes are described in the following documents.
 
 .. todo::
+
    Insert model diagram and create subdocs for Variation / Location / State / Interval
 
 .. toctree::

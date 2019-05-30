@@ -30,10 +30,12 @@ Allele
    interval, :ref:`Interval`, required, Position of feature on reference sequence specified by sequence_id.
 
 .. todo::
+
    Finish Allele
 
 ************
 Text Variant
 ************
 .. todo::
+
    Finish Text Variant
