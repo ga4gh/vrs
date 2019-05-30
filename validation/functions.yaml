@@ -1,20 +1,14 @@
 # Validation tests for VR-schema functions
 # See notebooks/appendices/Validation%20Tests.ipynb
 
-digest:
+ga4gh_digest:
   -
     in:
-      o: ""
+      blob: ""
     out:
       digest: "z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXc"
   -
     in:
-      o: ""
-      digest_size: 12
-    out:
-      digest: "z4PhNX7vuL3xVChQ"
-  -
-    in:
-      o: "ACGT"
+      blob: "ACGT"
     out:
       digest: "aKF498dAxcJAqme6QYQ7EZ07-fiw8Kw2"
