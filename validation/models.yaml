@@ -4,29 +4,86 @@
 SimpleInterval:
   -
     in:
-      start: 18130917
-      end: 18130918
+      end: 43
+      start: 42
+      type: SimpleInterval
     out:
-      serialize_vmc: <SimpleInterval|18130917|18130918>
-      serialize_cj: '{"end":18130918,"start":18130917,"type":"SimpleInterval"}'
+      serialize: '{"end":43,"start":42,"type":"SimpleInterval"}'
 
+NestedInterval:
+  -
+    in:
+      inner:
+        end: 30
+        start: 29
+        type: SimpleInterval
+      outer:
+        end: 39
+        start: 30
+        type: SimpleInterval
+      type: NestedInterval
+    out:
+      serialize: '{"inner":{"end":30,"start":29,"type":"SimpleInterval"},"outer":{"end":39,"start":30,"type":"SimpleInterval"},"type":"NestedInterval"}'
 
 SequenceLocation:
   - 
     in:
-      sequence_id: "VMC:GS_IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"
       interval:
-        start: 44908683
-        end: 44908684
+        end: 43
+        start: 42
+        type: SimpleInterval
+      sequence_id: NM_0001234.5
+      type: SequenceLocation
     out:
-      serialize_vmc: "<Location|VMC:GS_IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl|<Interval|44908683|44908684>>"
-      computed_id: "VMC:GL_L1IS6jOwSUsOpKihGRcqxHul1IwbV-1s"
+      serialize: '{"interval":{"end":43,"start":42,"type":"SimpleInterval"},"sequence_id":"NM_0001234.5","type":"SequenceLocation"}'
+  -
+    in:
+      interval:
+        inner:
+          end: 30
+          start: 29
+          type: SimpleInterval
+        outer:
+          end: 39
+          start: 30
+          type: SimpleInterval
+        type: NestedInterval
+      sequence_id: NM_0001234.5
+      type: SequenceLocation
+    out:
+      serialize: '{"interval":{"inner":{"end":30,"start":29,"type":"SimpleInterval"},"outer":{"end":39,"start":30,"type":"SimpleInterval"},"type":"NestedInterval"},"sequence_id":"NM_0001234.5","type":"SequenceLocation"}'
+
+CytobandLocation:
+  -
+    in:
+      chr: '11'
+      end: q23.1
+      start: q22.3
+      type: CytobandLocation
+    out:
+      serialize: '{"chr":"11","end":"q23.1","start":"q22.3","type":"CytobandLocation"}'
+
+GeneLocation:
+  -
+    in:
+      gene: HGNC:MSH2
+      type: GeneLocation
+    out:
+      serialize: '{"gene":"HGNC:MSH2","type":"GeneLocation"}'
 
 Allele:
   -
     in:
-      location_id: "VMC:GL_L1IS6jOwSUsOpKihGRcqxHul1IwbV-1s"
-      state: C
+      location:
+        interval:
+          end: 43
+          start: 42
+          type: SimpleInterval
+        sequence_id: NM_0001234.5
+        type: SequenceLocation
+      state:
+        sequence: A
+        type: SequenceState
+      type: Allele
     out:
-      serialize_vmc: "<Allele|VMC:GL_L1IS6jOwSUsOpKihGRcqxHul1IwbV-1s|C>"
-      computed_id: "VMC:GA_zsJuMckKGajqHCl16sxKQJtBMjGrFHHZ"
+      serialize: '{"location":"ga4gh:SL8KJJStVL_dJigtK_AHyVp5AAipy1pMh8","state":{"sequence":"A","type":"SequenceState"},"type":"Allele"}'
