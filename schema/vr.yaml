@@ -37,7 +37,7 @@ definitions:
         enum: [Text]
         default: Text
       id:
-        $ref: "#/definitions/Id"
+        $ref: "#/definitions/Identifier"
       definition:
         type: string
         description: >-
@@ -54,7 +54,7 @@ definitions:
         enum: [Allele]
         default: Allele
       id:
-        $ref: "#/definitions/Id"
+        $ref: "#/definitions/Identifier"
       location:
         $ref: "#/definitions/Location"
       state:
@@ -80,7 +80,7 @@ definitions:
         enum: [SequenceLocation]
         default: SequenceLocation
       id:
-        $ref: "#/definitions/Id"
+        $ref: "#/definitions/Identifier"
       sequence_id:
         type: string
       interval:
@@ -185,47 +185,32 @@ definitions:
     type: string
     format: "date-time"
   
-  Id:
-    description: >-
-      Uniquely identifies a specific instance of an object within a
-      document.
-    type: string
-    example: "01340adf981as0"
-  
   Identifier:
-    description: >-
-      A <namespace,accession> pair that refers to an object.
-    type: object
-    properties:
-      namespace:
-        type: string
-        example: refseq
-        description: authority
-      accession:
-        type: string
-        example: "NM_000551.3"
-        description: "unique key within namespace"
-    additionalProperties: false
-    required:
-    - namespace
-    - accession
-  
+    $ref: "#/definitions/CURIE"
+
   CURIE:
     description: >-
-      A string that references an object using [W3C Compact URI
-      (CURIE)](https://www.w3.org/TR/curie/) syntax.
+      A string that refers to an object uniquely.
 
-      A CURIE is a URI. As a URI, it MAY locate objects (as with http
-      references), but it may also merely name objects uniquely.  VR
-      uses CURIEs primarily as a naming mechanism.  Implementations
-      are expected to provide CURIE resolution mechanisms.
+      VR Identifiers use [W3C Compact URI
+      (CURIE)](https://www.w3.org/TR/curie/) syntax.  
 
-      String CURIEs are represented as `namespace`:`reference`. VR
-      uses W3C CURIE nomenclature; some specifications use home-grown
-      names for the same concepts.
+      String CURIEs are represented as `prefix`:`reference` (W3C
+      terminology), but often referred to as `namespace`:`accession`
+      colloquially for historical reasons.  The `prefix` SHOULD be
+      defined in identifiers.org and is case-sensitive.  The
+      `reference` component is an unconstrained string.
 
-      `namespace` SHOULD be defined in identifiers.org, or,
-      alteratively, provided by a map of CURIE URLs.
+      A CURIE is a URI.  URIs may *locate* objects (i.e., specify
+      where to retrieve them) or *name* objects conceptually.  VR uses
+      CURIEs primarily as a naming mechanism.
+
+      Implementations MAY provide CURIE resolution mechanisms for
+      prefixes to make these objects locatable.
+
+      VR implementations may use internal ids, but these should NOT be
+      exposed to clients.
+
     type: string
     pattern: '^\w+:\w+$'
-    example: "ga4gh:allele/01234abcde"      
+    example: "ga4gh:GA01234abcde"      

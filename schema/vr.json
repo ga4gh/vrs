@@ -6,7 +6,7 @@
          "description": "An assertion of a sequence state at a Location.",
          "properties": {
             "id": {
-               "$ref": "#/definitions/Id"
+               "$ref": "#/definitions/Identifier"
             },
             "location": {
                "$ref": "#/definitions/Location"
@@ -25,8 +25,8 @@
          "type": "object"
       },
       "CURIE": {
-         "description": "A string that references an object using [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.\nA CURIE is a URI. As a URI, it MAY locate objects (as with http references), but it may also merely name objects uniquely.  VR uses CURIEs primarily as a naming mechanism.  Implementations are expected to provide CURIE resolution mechanisms.\nString CURIEs are represented as `namespace`:`reference`. VR uses W3C CURIE nomenclature; some specifications use home-grown names for the same concepts.\n`namespace` SHOULD be defined in identifiers.org, or, alteratively, provided by a map of CURIE URLs.",
-         "example": "ga4gh:allele/01234abcde",
+         "description": "A string that refers to an object uniquely.\nVR Identifiers use [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.  \nString CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` colloquially for historical reasons.  The `prefix` SHOULD be defined in identifiers.org and is case-sensitive.  The `reference` component is an unconstrained string.\nA CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VR uses CURIEs primarily as a naming mechanism.\nImplementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable.\nVR implementations may use internal ids, but these should NOT be exposed to clients.",
+         "example": "ga4gh:GA01234abcde",
          "pattern": "^\\w+:\\w+$",
          "type": "string"
       },
@@ -34,31 +34,8 @@
          "format": "date-time",
          "type": "string"
       },
-      "Id": {
-         "description": "Uniquely identifies a specific instance of an object within a document.",
-         "example": "01340adf981as0",
-         "type": "string"
-      },
       "Identifier": {
-         "additionalProperties": false,
-         "description": "A <namespace,accession> pair that refers to an object.",
-         "properties": {
-            "accession": {
-               "description": "unique key within namespace",
-               "example": "NM_000551.3",
-               "type": "string"
-            },
-            "namespace": {
-               "description": "authority",
-               "example": "refseq",
-               "type": "string"
-            }
-         },
-         "required": [
-            "namespace",
-            "accession"
-         ],
-         "type": "object"
+         "$ref": "#/definitions/CURIE"
       },
       "Interval": {
          "description": "A Interval represents a span of sequence.  Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of Interval is intended to be compatible with that in Sequence Ontolgy ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VR Interval may be zero-width. The SO definition is for an \"extent greater than zero\".",
@@ -119,7 +96,7 @@
       "SequenceLocation": {
          "properties": {
             "id": {
-               "$ref": "#/definitions/Id"
+               "$ref": "#/definitions/Identifier"
             },
             "interval": {
                "$ref": "#/definitions/Interval"
@@ -205,7 +182,7 @@
                "type": "string"
             },
             "id": {
-               "$ref": "#/definitions/Id"
+               "$ref": "#/definitions/Identifier"
             },
             "type": {
                "default": "Text",
