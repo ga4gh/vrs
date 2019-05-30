@@ -53,24 +53,6 @@ SequenceLocation:
     out:
       serialize: '{"interval":{"inner":{"end":30,"start":29,"type":"SimpleInterval"},"outer":{"end":39,"start":30,"type":"SimpleInterval"},"type":"NestedInterval"},"sequence_id":"NM_0001234.5","type":"SequenceLocation"}'
 
-CytobandLocation:
-  -
-    in:
-      chr: '11'
-      end: q23.1
-      start: q22.3
-      type: CytobandLocation
-    out:
-      serialize: '{"chr":"11","end":"q23.1","start":"q22.3","type":"CytobandLocation"}'
-
-GeneLocation:
-  -
-    in:
-      gene: HGNC:MSH2
-      type: GeneLocation
-    out:
-      serialize: '{"gene":"HGNC:MSH2","type":"GeneLocation"}'
-
 Allele:
   -
     in:
