@@ -32,13 +32,14 @@ Here we document the primary contributions of this specification for variant rep
   The machine readable schema definitions and example code are available online at the VR-Spec
   repository (https://github.com/ga4gh/vr-schema).
 
-New to VR-Spec? Start :doc:`here <terms_and_model>`, or browse the Specification below.
+New to VR-Spec? Start :doc:`here <terms_and_model/terms_and_model>`, or browse the Specification below.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :caption: Specification
 
-   terms_and_model
+   terms_and_model/terms_and_model
+   schema
    computed_identifiers
    appendices/design_decisions
    appendices/planned_extensions

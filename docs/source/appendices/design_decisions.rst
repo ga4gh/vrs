@@ -39,7 +39,7 @@ Several factors contributed to requiring right alignment in VR:
 While consistency with Alleles written according HGVS recommendations was not a factor, it is an advantage of this design choice.
 
 
-.. _interbase-coords:
+.. _interbase-coordinates-design:
 
 *********************
 Interbase Coordinates
