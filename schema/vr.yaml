@@ -212,5 +212,5 @@ definitions:
       exposed to clients.
 
     type: string
-    pattern: '^\w+:\w+$'
+    pattern: '^\w[^:]+:.+$'
     example: "ga4gh:GA01234abcde"      
