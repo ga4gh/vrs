@@ -101,7 +101,7 @@ Sequence
 
 **Information model**
 
-A Sequence is a string, constrained by characters representing IUPAC nucleic acid or amino acid codes.
+A Sequence is a string, constrained to contain only characters representing IUPAC nucleic acid or amino acid codes.
 
 **Implementation guidance**
 
