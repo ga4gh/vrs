@@ -11,16 +11,53 @@ Planned Extensions
 
 .. _var-sets:
 
-************
-Variant sets
-************
+**************
+Variation Sets
+**************
 
-.. todo::
 
-   Describe upcoming additions of hap/gen objects, variationsets
+
+**************************
+Planned Variation Concepts
+**************************
+
+Haplotypes
+==========
+
+Genotypes
+=========
+
+Translocations
+==============
 
 .. _planned-locations:
 
-*********
-Locations
-*********
+*************************
+Planned Location Concepts
+*************************
+
+CytobandLocation
+================
+
+GeneLocation
+============
+
+LocationRule
+============
+
+**********************
+Planned State Concepts
+**********************
+
+CNVState
+========
+
+StateRule
+=========
+
+*************************
+Planned Interval Concepts
+*************************
+
+ComplexInterval
+===============
