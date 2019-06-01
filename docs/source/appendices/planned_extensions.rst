@@ -45,6 +45,8 @@ GeneLocation
 LocationRule
 ============
 
+.. _planned-states:
+
 **********************
 Planned State Concepts
 **********************
@@ -54,6 +56,8 @@ CNVState
 
 StateRule
 =========
+
+.. _planned-intervals:
 
 *************************
 Planned Interval Concepts
