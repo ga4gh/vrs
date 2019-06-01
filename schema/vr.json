@@ -6,7 +6,7 @@
          "description": "An assertion of a sequence state at a Location.",
          "properties": {
             "id": {
-               "$ref": "#/definitions/Identifier"
+               "$ref": "#/definitions/Id"
             },
             "location": {
                "$ref": "#/definitions/Location"
@@ -24,18 +24,14 @@
          },
          "type": "object"
       },
-      "CURIE": {
-         "description": "A string that refers to an object uniquely.\nVR Identifiers use [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.  \nString CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` colloquially for historical reasons.  The `prefix` SHOULD be defined in identifiers.org and is case-sensitive.  The `reference` component is an unconstrained string.\nA CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VR uses CURIEs primarily as a naming mechanism.\nImplementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable.\nVR implementations may use internal ids, but these should NOT be exposed to clients.",
-         "example": "ga4gh:GA01234abcde",
-         "pattern": "^\\w[^:]+:.+$",
-         "type": "string"
-      },
       "DateTime": {
          "format": "date-time",
          "type": "string"
       },
-      "Identifier": {
-         "$ref": "#/definitions/CURIE"
+      "Id": {
+         "description": "A string that refers to an object uniquely.  The lifetime and scope of an id is defined by the sender.\nVR does not impose any contraints on strings used as ids in messages. However, to maximize sharability of data, the VR Specification RECOMMENDS that implementations use [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.\nString CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially.\nThe VR specification also RECOMMENDS that `prefix` be defined in identifiers.org.\nThe `reference` component is an unconstrained string.\nA CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VR uses CURIEs primarily as a naming mechanism.\nImplementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable.\nUsing internal ids in public messages is strongly discouraged.",
+         "example": "ga4gh:GA/01234abcde",
+         "type": "string"
       },
       "Interval": {
          "description": "A Interval represents a span of sequence.  Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of Interval is intended to be compatible with that in Sequence Ontolgy ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VR Interval may be zero-width. The SO definition is for an \"extent greater than zero\".",
@@ -96,7 +92,7 @@
       "SequenceLocation": {
          "properties": {
             "id": {
-               "$ref": "#/definitions/Identifier"
+               "$ref": "#/definitions/Id"
             },
             "interval": {
                "$ref": "#/definitions/Interval"
@@ -182,7 +178,7 @@
                "type": "string"
             },
             "id": {
-               "$ref": "#/definitions/Identifier"
+               "$ref": "#/definitions/Id"
             },
             "type": {
                "default": "Text",
