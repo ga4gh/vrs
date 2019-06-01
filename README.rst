@@ -27,7 +27,7 @@ The VR model is the product of the GA4GH `Variation Representation
 History
 !!!!!!!
 
-.. image:: https://github.com/ga4gh/vmc/wiki/media/flower.png
+.. image:: https://github.com/ga4gh/vr-schema/wiki/media/flower.png
    :width: 150px
    :align: right
 
