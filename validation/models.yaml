@@ -68,4 +68,4 @@ Allele:
         type: SequenceState
       type: Allele
     out:
-      serialize: '{"location":"ga4gh:SL8KJJStVL_dJigtK_AHyVp5AAipy1pMh8","state":{"sequence":"A","type":"SequenceState"},"type":"Allele"}'
+      serialize: '{"location":"ga4gh:SL/8KJJStVL_dJigtK_AHyVp5AAipy1pMh8","state":{"sequence":"A","type":"SequenceState"},"type":"Allele"}'
