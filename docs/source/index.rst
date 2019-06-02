@@ -4,11 +4,11 @@ Variation Representation
 
 Maximizing the personal, public, research, and clinical value of genomic information will require
 that clinicians, researchers, and testing laboratories exchange genetic variation data reliably.
-The Variant Representation Specification (VR-Spec)–written by a partnership among national information
+The Variation Representation Specification (VR-Spec)–written by a partnership among national information
 resource providers, major public initiatives, and diagnostic testing laboratories–is a proposed
 open (Apache 2.0) specification to standardize the exchange of variation data.
 
-Here we document the primary contributions of this specification for variant representation:
+Here we document the primary contributions of this specification for variation representation:
 
 * **Terminology and information model.** Definitions for biological terms may be abstract or
   intentionally ambiguous, often accurately reflecting scientific uncertainty or understanding at
