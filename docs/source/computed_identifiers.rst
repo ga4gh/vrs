@@ -1,10 +1,10 @@
 Computed Identifiers
-####################
+!!!!!!!!!!!!!!!!!!!!
 
 .. _normalization:
 
 Normalization
-*************
+@@@@@@@@@@@@@
 
 .. todo::
 
@@ -12,9 +12,9 @@ Normalization
 
 .. _serialization:
 
-*************
+@@@@@@@@@@@@@
 Serialization
-*************
+@@@@@@@@@@@@@
 
 .. todo::
 
@@ -22,9 +22,9 @@ Serialization
 
 :ref:`Read here <custom-serialization>` for more details on our decision to implement a custom serialization strategy.
 
-*************
+@@@@@@@@@@@@@
 GA4GH Digest
-*************
+@@@@@@@@@@@@@
 
 .. todo::
 

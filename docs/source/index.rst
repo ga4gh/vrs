@@ -1,5 +1,5 @@
-Variation Representation
-########################
+Introduction
+!!!!!!!!!!!!
 
 Maximizing the personal, public, research, and clinical value of genomic information will require
 that clinicians, researchers, and testing laboratories exchange genetic variation data reliably.

@@ -1,5 +1,5 @@
 Planned Extensions
-##################
+!!!!!!!!!!!!!!!!!!
 
 .. todo::
 
@@ -8,7 +8,7 @@ Planned Extensions
 .. _var-sets:
 
 Variant sets
-************
+@@@@@@@@@@@@
 
 .. todo::
 
@@ -17,4 +17,4 @@ Variant sets
 .. _planned-locations:
 
 Locations
-*********
+@@@@@@@@@

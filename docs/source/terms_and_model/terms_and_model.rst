@@ -1,18 +1,52 @@
 Teminology & Information Model
-##############################
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-When biologists define terms in order to describe phenomena and observations, they rely on a background of human experience and intelligence for interpretation. Definitions may be abstract, perhaps correctly reflecting uncertainty of our understanding at the time. Unfortunately, such terms are not readily translatable into an unambiguous representation of knowledge.
+When biologists define terms in order to describe phenomena and
+observations, they rely on a background of human experience and
+intelligence for interpretation. Definitions may be abstract, perhaps
+correctly reflecting uncertainty of our understanding at the
+time. Unfortunately, such terms are not readily translatable into an
+unambiguous representation of knowledge.
 
-For example, "allele" might refer to "an alternative form of a gene or locus" [`Wikipedia`_], "one of two or more forms of the DNA sequence of a particular gene" [`ISOGG`_], or one of a set of coexisting sequence alleles of a gene [`Sequence Ontology`_]. Even for human interpretation, these definitions are inconsistent: does the definition describe a precise sequence change or a qualitative one? In addition, all three definitions are inconsistent with the practical need for a way to describe sequence changes outside regions associated with genes.
+For example, "allele" might refer to "an alternative form of a gene or
+locus" [`Wikipedia`_], "one of two or more forms of the DNA sequence
+of a particular gene" [`ISOGG`_], or "one of a set of coexisting
+sequence alleles of a gene" [`Sequence Ontology`_]. Even for human
+interpretation, these definitions are inconsistent: does the
+definition describe a precise sequence change or a qualitative one? In
+addition, all three definitions are inconsistent with the practical
+need for a way to describe sequence changes outside regions associated
+with genes.
 
-**The computational representation of biological concepts requires translating precise biological definitions into data structures that can be used by implementers.** This translation should result in a representation of information that is consistent with conventional biological understanding, and, ideally, be able to accommodate future data as well. The resulting *computational representation* of information should also be cognizant of computational performance, the minimization of opportunities for misunderstanding, and ease of manipulating and transforming data.
+**The computational representation of biological concepts requires
+translating precise biological definitions into data structures that
+can be used by implementers.** This translation should result in a
+representation of information that is consistent with conventional
+biological understanding, and, ideally, be able to accommodate future
+data as well. The resulting *computational representation* of
+information should also be cognizant of computational performance, the
+minimization of opportunities for misunderstanding, and ease of
+manipulating and transforming data.
 
-Accordingly, for each term we define below, we begin by describing the term as used by biologists (**biological definition**) as available. When a term has multiple biological definitions, we explicitly choose one of them for the purposes of this specification. We then provide a computer modeling definition (**computational definition**) that reformulates the biological definition in terms of information content. We then translate each of these computational definitions into precise specifications for representing information (**logical model**). Terms are ordered "bottom-up" so that definitions depend only on previously-defined terms.
+Accordingly, for each term we define below, we begin by describing the
+term as used by biologists (**biological definition**) as
+available. When a term has multiple biological definitions, we
+explicitly choose one of them for the purposes of this
+specification. We then provide a computer modeling definition
+(**computational definition**) that reformulates the biological
+definition in terms of information content. We then translate each of
+these computational definitions into precise specifications for
+representing information (**logical model**). Terms are ordered
+"bottom-up" so that definitions depend only on previously-defined
+terms.
 
-.. note:: The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in `RFC 2119`_.
+.. note:: The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",
+          "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described
+          in `RFC 2119`_.
+
 
 Primitive concepts
-******************
+@@@@@@@@@@@@@@@@@@
 
 .. _id:
 
@@ -25,19 +59,30 @@ Id
 **Implementation guidance**
 
 * Ids are opaque byte-strings: there are no formatting, content, or character set constraints.
-* A `FHIR Id`_, which is limited to 64 characters from a restricted character set, may be used as a VR Id.
-* Ids must correspond 1:1 to object instances: An id refers to exactly one object, and an object has only one id. Therefore, equivalence of objects implies equivalence of ids, and vice versa.
-* Implementations MAY change internal identifiers at any time. Therefore, receiving systems SHOULD NOT persist Ids from remote sources. Instead, Identifiers (below) should be used for communication between systems.
-* Ids are not locatable references. An Id may not be used to retrieve objects from remote databases. Instead, Identifiers should be used for retrieval.
-* The VR specification requires a canonical ordering (sorting) of Ids. Sorting a list of Ids MUST be performed using the C locale or, equivalently, by first encoding Ids as ASCII.
+* A `FHIR Id`_, which is limited to 64 characters from a restricted character set, may be used as a
+  VR Id.
+* Ids must correspond 1:1 to object instances: An id refers to exactly one object, and an object has
+  only one id. Therefore, equivalence of objects implies equivalence of ids, and vice versa.
+* Implementations MAY change internal identifiers at any time. Therefore, receiving systems SHOULD
+  NOT persist Ids from remote sources. Instead, Identifiers (below) should be used for communication
+  between systems.
+* Ids are not locatable references. An Id may not be used to retrieve objects from remote
+  databases. Instead, Identifiers should be used for retrieval.
+* The VR specification requires a canonical ordering (sorting) of Ids. Sorting a list of Ids MUST be
+  performed using the C locale or, equivalently, by first encoding Ids as ASCII.
 
 .. _identifier:
 
 Identifier
 ==========
-**Biological definition:** An identifier for an object, such as a :ref:`Sequence` or :ref:`Allele`, that is assigned by an organization or algorithm. The identifier may be used to name data in order to reference it, or to locate data in order to retrieve it from its source.
 
-**Computational definition:** A VR Identifier is represented using a `Compact URI (CURIE)`_, a W3C standard, with a *prefix* and *reference* that correspond to a namespace and local identifier within that namespace.
+**Biological definition:** An identifier for an object, such as a :ref:`Sequence` or :ref:`Allele`,
+that is assigned by an or ganization or algorithm. The identifier may be used to name data in order
+to reference it, or to locate data in order to retrieve it from its source.
+
+**Computational definition:** A VR Identifier is represented using a `Compact URI (CURIE)`_, a W3C
+ standard, with a *prefix* and *reference* that correspond to a namespace and local identifier
+ within that namespace.
 
 **Information model**
 
@@ -51,10 +96,14 @@ Identifier
 
 **Implementation guidance**
 
-* CURIEs may be represented as structured data objects or as strings. The two forms are deterministically convertible as defined in the CURIE specification.
+* CURIEs may be represented as structured data objects or as strings. The two forms are
+  deterministically convertible as defined in the CURIE specification.
 * Within VR models, CURIEs MUST be represented as objects.
 * Implementations MAY display to users, and accept from users, CURIEs represented as strings.
-* The CURIE specification requires the use of a map from each prefix value to a URI template, shown below. URIs are generated from the CURIE map by substituting {reference} in the URI, if it exists, with the CURIE reference. This mapping provides URIs to descriptive information for a prefix rather than to structured data.
+* The CURIE specification requires the use of a map from each prefix value to a URI template, shown
+  below. URIs are generated from the CURIE map by substituting {reference} in the URI, if it exists,
+  with the CURIE reference. This mapping provides URIs to descriptive information for a prefix
+  rather than to structured data.
 
 .. csv-table::
    :header: prefix, mapped URI template
@@ -69,17 +118,28 @@ Identifier
    VR,      https://github.com/ga4gh/vr-schema
 
 * Implementations MAY provide additional mappings in the VR Bundle.
-* Implementations SHALL use prefix and reference, and the Identifiers derived from them, verbatim. These entities MAY NOT be modified in any way; for example, they may not be case folded or modified by the addition of prefixes or suffixes.
-* CURIEs and `FHIR Business Identifiers`_ are convertible:  For the purposes of interoperability with FHIR, the Identifier namespace and accession SHALL map, using the CURIE prefix map, to the system and value components of a FHIR Identifier.
-* It is essential for the durability of information that an Identifier refer to exactly one object for all time. (For example a Sequence reference should refer to only one Sequence.) Implementations may assume this uniqueness, but adherence is the responsibility of source databases. For this reason, databases (or versions of databases) that do not provide this guarantee SHALL NOT be used with the VR data model.
+* Implementations SHALL use prefix and reference, and the Identifiers derived from them,
+  verbatim. These entities MAY NOT be modified in any way; for example, they may not be case folded
+  or modified by the addition of prefixes or suffixes.
+* CURIEs and `FHIR Business Identifiers`_ are convertible: For the purposes of interoperability with
+  FHIR, the Identifier namespace and accession SHALL map, using the CURIE prefix map, to the system
+  and value components of a FHIR Identifier.
+* It is essential for the durability of information that an Identifier refer to exactly one object
+  for all time. (For example a Sequence reference should refer to only one Sequence.)
+  Implementations may assume this uniqueness, but adherence is the responsibility of source
+  databases. For this reason, databases (or versions of databases) that do not provide this
+  guarantee SHALL NOT be used with the VR data model.
 
 .. _residue:
 
 Residue
 =======
-**Biological definition:** A residue refers to a specific `monomer`_ within the `polymeric chain`_ of a `protein`_ or `nucleic acid`_ (Source: `Wikipedia Residue page`_).
 
-**Computational definition:** Specific residues (i.e., molecular species) as well as categories or groupings of these ("ambiguity codes") are represented using one-letter IUPAC abbreviations.
+**Biological definition:** A residue refers to a specific `monomer`_ within the `polymeric chain`_
+ of a `protein`_ or `nucleic acid`_ (Source: `Wikipedia Residue page`_).
+
+**Computational definition:** Specific residues (i.e., molecular species) as well as categories or
+ groupings of these ("ambiguity codes") are represented using one-letter IUPAC abbreviations.
 
 .. _interbase-coordinates:
 
@@ -87,7 +147,10 @@ Interbase Coordinates
 =====================
 **Biological definition:** None
 
-**Computational definition:** Interbase coordinates refer to the zero-width points before and after :ref:`residues <Residue>`. An interval of interbase coordinates permits referring to any span, including an empty span, before, within, or after a sequence. See :ref:`interbase-coordinates-design` for more details on this design choice.
+**Computational definition:** Interbase coordinates refer to the zero-width points before and after
+ :ref:`residues <Residue>`. An interval of interbase coordinates permits referring to any span,
+ including an empty span, before, within, or after a sequence. See
+ :ref:`interbase-coordinates-design` for more details on this design choice.
 
 .. _sequence:
 
@@ -95,32 +158,48 @@ Sequence
 ========
 **Biological definition:** A contiguous, linear polymer of nucleic acid or amino acid residues.
 
-**Computational definition:** A character string of :ref:`Residues <Residue>` that represents a biological sequence using the conventional sequence order (5'-to-3' for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequences.
+**Computational definition:** A character string of :ref:`Residues <Residue>` that represents a
+ biological sequence using the conventional sequence order (5'-to-3' for nucleic acid sequences, and
+ amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequences.
 
 **Information model**
 
-A Sequence is a string, constrained to contain only characters representing IUPAC nucleic acid or amino acid codes.
+A Sequence is a string, constrained to contain only characters representing IUPAC nucleic acid or
+amino acid codes.
 
 **Implementation guidance**
 
-* Sequences MAY be empty (zero-length) strings. Empty sequences are used as the replacement Sequence for deletion Alleles.
+* Sequences MAY be empty (zero-length) strings. Empty sequences are used as the replacement Sequence
+  for deletion Alleles.
 * Sequences MUST consist of only uppercase IUPAC abbreviations, including ambiguity codes.
 
 **Notes**
 
-* A Sequence provides a stable coordinate system by which an :ref:`Allele` may be located and interpreted.
-* A Sequence may have several roles. A “reference sequence” is any Sequence used to define an :ref:`Allele`. A Sequence that replaces another Sequence is called a “replacement sequence”.
-* In some contexts outside the VR specification, “reference sequence” may refer to a member of set of sequences that comprise a genome assembly. In the VR specification, any sequence may be a “reference sequence”, including those in a genome assembly.
-* For the purposes of representing sequence variation, it is not necessary that Sequences be “typed” (i.e., DNA, RNA, or AA).
+* A Sequence provides a stable coordinate system by which an :ref:`Allele` may be located and
+  interpreted.
+* A Sequence may have several roles. A “reference sequence” is any Sequence used to define an
+  :ref:`Allele`. A Sequence that replaces another Sequence is called a “replacement sequence”.
+* In some contexts outside the VR specification, “reference sequence” may refer to a member of set
+  of sequences that comprise a genome assembly. In the VR specification, any sequence may be a
+  “reference sequence”, including those in a genome assembly.
+* For the purposes of representing sequence variation, it is not necessary that Sequences be “typed”
+  (i.e., DNA, RNA, or AA).
 
-******************
+@@@@@@@@@@@@@@@@@@
 Composite concepts
-******************
+@@@@@@@@@@@@@@@@@@
 
 .. figure:: ../images/object_graph.png
    :align: left
 
-   The VR Schema requires the use of multiple composite objects, which are grouped under four abstract classes: :ref:`Variation`, :ref:`Location`, :ref:`State`, and :ref:`Interval`. These classes and their relationships to the representation of Variation are illustrated here. All classes have a string `type`. Dashed borders denote abstract classes. Abstract classes are not instantiated. Thin solid borders denote classes that may be instantiated but are not identifiable. Bold borders denote identifiable objects (i.e., may be serialized and identified by computed identifier). Solid arrow lines denoted inheritance. Subclasses inherit all attributes from their parent. Inherited attributes are not shown.
+The VR Schema requires the use of multiple composite objects, which are grouped under four abstract
+classes: :ref:`Variation`, :ref:`Location`, :ref:`State`, and :ref:`Interval`. These classes and
+their relationships to the representation of Variation are illustrated here. All classes have a
+string `type`. Dashed borders denote abstract classes. Abstract classes are not instantiated. Thin
+solid borders denote classes that may be instantiated but are not identifiable. Bold borders denote
+identifiable objects (i.e., may be serialized and identified by computed identifier). Solid arrow
+lines denoted inheritance. Subclasses inherit all attributes from their parent. Inherited attributes
+are not shown.
 
 
 
