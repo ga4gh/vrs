@@ -1,0 +1,71 @@
+# Validation tests for objects
+# See notebooks/appendices/Validation%20Tests.ipynb
+
+SimpleInterval:
+  -
+    in:
+      end: 43
+      start: 42
+      type: SimpleInterval
+    out:
+      serialize: '{"end":43,"start":42,"type":"SimpleInterval"}'
+
+NestedInterval:
+  -
+    in:
+      inner:
+        end: 30
+        start: 29
+        type: SimpleInterval
+      outer:
+        end: 39
+        start: 20
+        type: SimpleInterval
+      type: NestedInterval
+    out:
+      serialize: '{"inner":{"end":30,"start":29,"type":"SimpleInterval"},"outer":{"end":39,"start":20,"type":"SimpleInterval"},"type":"NestedInterval"}'
+
+SequenceLocation:
+  - 
+    in:
+      interval:
+        end: 43
+        start: 42
+        type: SimpleInterval
+      sequence_id: NM_0001234.5
+      type: SequenceLocation
+    out:
+      serialize: '{"interval":{"end":43,"start":42,"type":"SimpleInterval"},"sequence_id":"NM_0001234.5","type":"SequenceLocation"}'
+  -
+    in:
+      interval:
+        inner:
+          end: 30
+          start: 29
+          type: SimpleInterval
+        outer:
+          end: 39
+          start: 20
+          type: SimpleInterval
+        type: NestedInterval
+      sequence_id: NM_0001234.5
+      type: SequenceLocation
+    out:
+      serialize: '{"interval":{"inner":{"end":30,"start":29,"type":"SimpleInterval"},"outer":{"end":39,"start":20,"type":"SimpleInterval"},"type":"NestedInterval"},"sequence_id":"NM_0001234.5","type":"SequenceLocation"}'
+
+Allele:
+  -
+    in:
+      location:
+        interval:
+          end: 43
+          start: 42
+          type: SimpleInterval
+        sequence_id: NM_0001234.5
+        type: SequenceLocation
+      state:
+        sequence: A
+        type: SequenceState
+      type: Allele
+    out:
+      serialize: '{"location":"ga4gh:SL/8KJJStVL_dJigtK_AHyVp5AAipy1pMh8","state":{"sequence":"A","type":"SequenceState"},"type":"Allele"}'

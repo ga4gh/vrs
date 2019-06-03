@@ -1,10 +1,10 @@
-Appendices
-!!!!!!!!!!
-
-Incorporate appendices from VMC spec
+Appendicies
+@@@@@@@@@@@
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
-   
+   development_process
+   design_decisions
+   future_plans
+   todo

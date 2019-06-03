@@ -24,230 +24,14 @@
          },
          "type": "object"
       },
-      "Bundle": {
-         "additionalProperties": false,
-         "properties": {
-            "alleles": {
-               "default": {},
-               "patternProperties": {
-                  "^.": {
-                     "$ref": "#/definitions/Allele"
-                  }
-               },
-               "type": "object"
-            },
-            "genotypes": {
-               "default": {},
-               "patternProperties": {
-                  "^.": {
-                     "$ref": "#/definitions/Genotype"
-                  }
-               },
-               "type": "object"
-            },
-            "haplotypes": {
-               "default": {},
-               "patternProperties": {
-                  "^.": {
-                     "$ref": "#/definitions/Haplotype"
-                  }
-               },
-               "type": "object"
-            },
-            "locations": {
-               "default": {},
-               "patternProperties": {
-                  "^.": {
-                     "$ref": "#/definitions/Location"
-                  }
-               },
-               "type": "object"
-            }
-         },
-         "type": "object"
-      },
-      "CNVState": {
-         "properties": {
-            "copy_measure": {
-               "enum": [
-                  "TOTAL",
-                  "RELATIVE"
-               ],
-               "type": "string"
-            },
-            "location": {
-               "$ref": "#/definitions/Location"
-            },
-            "max_copies": {
-               "type": "integer"
-            },
-            "min_copies": {
-               "type": "integer"
-            },
-            "type": {
-               "default": "CNVState",
-               "enum": [
-                  "CNVState"
-               ],
-               "type": "string"
-            }
-         },
-         "required": [
-            "type"
-         ],
-         "type": "object"
-      },
-      "CURIE": {
-         "description": "A string that references an object using [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.\nA CURIE is a URI. As a URI, it MAY locate objects (as with http references), but it may also merely name objects uniquely.  VR uses CURIEs primarily as a naming mechanism.  Implementations are expected to provide CURIE resolution mechanisms.\nString CURIEs are represented as `namespace`:`reference`. VR uses W3C CURIE nomenclature; some specifications use home-grown names for the same concepts.\n`namespace` SHOULD be defined in identifiers.org, or, alteratively, provided by a map of CURIE URLs.",
-         "example": "ga4gh:allele/01234abcde",
-         "pattern": "^\\w+:\\w+$",
-         "type": "string"
-      },
-      "Cytoband": {
-         "example": "q22.3",
-         "pattern": "^[pq][1-9][0-9]*(\\.[1-9][0-9]*)?$",
-         "type": "string"
-      },
-      "CytobandLocation": {
-         "additionalProperties": false,
-         "properties": {
-            "chr": {
-               "type": "string"
-            },
-            "end": {
-               "$ref": "#/definitions/Cytoband",
-               "default": null,
-               "nullable": true
-            },
-            "id": {
-               "$ref": "#/definitions/Id"
-            },
-            "start": {
-               "$ref": "#/definitions/Cytoband"
-            },
-            "type": {
-               "default": "CytobandLocation",
-               "enum": [
-                  "CytobandLocation"
-               ],
-               "type": "string"
-            }
-         },
-         "required": [
-            "type",
-            "chr",
-            "start"
-         ],
-         "type": "object"
-      },
       "DateTime": {
          "format": "date-time",
          "type": "string"
       },
-      "GeneLocation": {
-         "properties": {
-            "gene": {
-               "$ref": "#/definitions/CURIE",
-               "description": "See https://www.ebi.ac.uk/miriam/main/datatypes/MIR:00000069"
-            },
-            "id": {
-               "$ref": "#/definitions/Id"
-            },
-            "type": {
-               "default": "GeneLocation",
-               "enum": [
-                  "GeneLocation"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "GeneSymbol": {
-         "example": "BRCA1",
-         "pattern": "^[A-Z][A-Za-z0-9]+$",
-         "type": "string"
-      },
-      "Genotype": {
-         "additionalProperties": false,
-         "description": "A list of Haplotypes.",
-         "properties": {
-            "completeness": {
-               "$ref": "#/enums/Completeness"
-            },
-            "haplotypes": {
-               "items": {
-                  "$ref": "#/definitions/Haplotype"
-               },
-               "type": "array"
-            },
-            "id": {
-               "$ref": "#/definitions/Id"
-            },
-            "type": {
-               "default": "Genotype",
-               "enum": [
-                  "Genotype"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "Haplotype": {
-         "additionalProperties": false,
-         "description": "A set of zero or more Alleles on a single instance of a Sequence.",
-         "properties": {
-            "alleles": {
-               "items": {
-                  "$ref": "#/definitions/Allele"
-               },
-               "type": "array"
-            },
-            "completeness": {
-               "$ref": "#/enums/Completeness"
-            },
-            "id": {
-               "$ref": "#/definitions/Id"
-            },
-            "location": {
-               "$ref": "#/definitions/Location"
-            },
-            "type": {
-               "default": "Haplotype",
-               "enum": [
-                  "Haplotype"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
       "Id": {
-         "description": "Uniquely identifies a specific instance of an object within a document.",
-         "example": "01340adf981as0",
+         "description": "A string that refers to an object uniquely.  The lifetime and scope of an id is defined by the sender.\nVR does not impose any contraints on strings used as ids in messages. However, to maximize sharability of data, the VR Specification RECOMMENDS that implementations use [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.\nString CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially.\nThe VR specification also RECOMMENDS that `prefix` be defined in identifiers.org.\nThe `reference` component is an unconstrained string.\nA CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VR uses CURIEs primarily as a naming mechanism.\nImplementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable.\nUsing internal ids in public messages is strongly discouraged.",
+         "example": "ga4gh:GA/01234abcde",
          "type": "string"
-      },
-      "Identifier": {
-         "additionalProperties": false,
-         "description": "A <namespace,accession> pair that refers to an object.",
-         "properties": {
-            "accession": {
-               "description": "unique key within namespace",
-               "example": "NM_000551.3",
-               "type": "string"
-            },
-            "namespace": {
-               "description": "authority",
-               "example": "refseq",
-               "type": "string"
-            }
-         },
-         "required": [
-            "namespace",
-            "accession"
-         ],
-         "type": "object"
       },
       "Interval": {
          "description": "A Interval represents a span of sequence.  Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of Interval is intended to be compatible with that in Sequence Ontolgy ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VR Interval may be zero-width. The SO definition is for an \"extent greater than zero\".",
@@ -271,26 +55,8 @@
          "oneOf": [
             {
                "$ref": "#/definitions/SequenceLocation"
-            },
-            {
-               "$ref": "#/definitions/GeneLocation"
-            },
-            {
-               "$ref": "#/definitions/CytobandLocation"
             }
          ]
-      },
-      "Meta": {
-         "properties": {
-            "generated_at": {
-               "$ref": "#/definitions/DateTime"
-            },
-            "version": {
-               "default": "0",
-               "type": "string"
-            }
-         },
-         "type": "object"
       },
       "NestedInterval": {
          "example": {
@@ -317,20 +83,6 @@
                "default": "NestedInterval",
                "enum": [
                   "NestedInterval"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "RelatedVariation": {
-         "properties": {
-            "id": {
-               "$ref": "#/definitions/Id"
-            },
-            "relationship": {
-               "enum": [
-                  "PARSED_VARIATION"
                ],
                "type": "string"
             }
@@ -416,33 +168,8 @@
          "oneOf": [
             {
                "$ref": "#/definitions/SequenceState"
-            },
-            {
-               "$ref": "#/definitions/CNVState"
             }
          ]
-      },
-      "StaticVariationSet": {
-         "description": "A set of variation defined by ids",
-         "properties": {
-            "id": {
-               "$ref": "#/definitions/Id"
-            },
-            "members": {
-               "items": {
-                  "type": "object"
-               },
-               "type": "array"
-            },
-            "type": {
-               "default": "VariationSet",
-               "enum": [
-                  "VariationSet"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
       },
       "Text": {
          "properties": {
@@ -474,32 +201,8 @@
             },
             {
                "$ref": "#/definitions/Allele"
-            },
-            {
-               "$ref": "#/definitions/Haplotype"
-            },
-            {
-               "$ref": "#/definitions/Genotype"
             }
          ]
-      },
-      "VariationSet": {
-         "oneOf": [
-            {
-               "$ref": "#/definitions/StaticVariationSet"
-            }
-         ]
-      }
-   },
-   "enums": {
-      "Completeness": {
-         "description": "Declares the `completeness` of a Haplotype or Genotype definition.  See descriptions in those schemas for additional information. * COMPLETE: The definition is complete. All data are included\n  for the covered assay.\n* PARTIAL: The definition is intentionally incomplete, typically\n  to protect information.  Declaring partial variation allows\n  data submitters to convey that data are missing.\n* UNKNOWN: The definition is not known to be either COMPLETE or\n  PARTIAL.",
-         "enum": [
-            "UNKNOWN",
-            "PARTIAL",
-            "COMPLETE"
-         ],
-         "type": "string"
       }
    },
    "title": "GA4GH-VR-Definitions",

@@ -1,9 +1,0 @@
-# Validation tests for utilities
-# see notebooks/appendices/Validation%20Tests.ipynb
-
-get_vmc_sequence_identifier:
-  -
-    in:
-      identifier: "RefSeq:NC_000019.10"
-    out:
-      identifier: "VMC:GS_IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"

@@ -1,0 +1,31 @@
+# Validation tests for VR-schema functions
+# See notebooks/appendices/Validation%20Tests.ipynb
+
+ga4gh_digest:
+  -
+    in:
+      blob: ""
+    out: "z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXc"
+  -
+    in:
+      blob: "ACGT"
+    out: "aKF498dAxcJAqme6QYQ7EZ07-fiw8Kw2"
+
+
+translate_sequence_identifier:
+  -
+    in:
+      identifier: "NC_000019.10"
+    out:
+      identifier: "ga4gh:SQ/IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"
+  -
+    in:
+      identifier: "refseq:NC_000019.10"
+    out:
+      identifier: "ga4gh:SQ/IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"
+  -
+    in:
+      identifier: "GRCh38:19"
+    out:
+      identifier: "ga4gh:SQ/IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"
+    

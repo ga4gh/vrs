@@ -8,16 +8,9 @@
 #   make watch &
 
 
-# TODO: double-check `required` and `additionalProperties` definitions
-
-# Q: Should CURIE references be based on abstract or concrete class
-# names? e.g., variation/abc123 or allele/abc123?
-
-
 $schema: "http://json-schema.org/schema#"
 title: "GA4GH-VR-Definitions"
 type: object
-
 
 definitions:
   # VR definitions are presented top-down.  Everything rolls up to
@@ -32,9 +25,7 @@ definitions:
     oneOf:
       - $ref: "#/definitions/Text"
       - $ref: "#/definitions/Allele"
-      - $ref: "#/definitions/Haplotype"
-      - $ref: "#/definitions/Genotype"
-      # - $ref: "#/definitions/Translocation"
+      # future expansion of variation types will go here
     discriminator:
       propertyName: type
 
@@ -69,70 +60,6 @@ definitions:
       state:
         $ref: "#/definitions/State"
     additionalProperties: false
-  
-  Haplotype:
-    description: A set of zero or more Alleles on a single instance of a Sequence.
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [Haplotype]
-        default: Haplotype
-      id:
-        $ref: "#/definitions/Id"
-      location:
-        $ref: "#/definitions/Location"
-      completeness:
-        $ref: "#/enums/Completeness"
-      alleles:
-        type: array
-        items:
-          $ref: "#/definitions/Allele"
-    additionalProperties: false
-  
-  Genotype:
-    description: A list of Haplotypes.
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [Genotype]
-        default: Genotype
-      id:
-        $ref: "#/definitions/Id"
-      completeness:
-        $ref: "#/enums/Completeness"
-      haplotypes:
-        type: array
-        items:
-          $ref: "#/definitions/Haplotype"
-    additionalProperties: false
-
-
-  ############################################################################
-  # VariationSet
-
-  VariationSet:
-    oneOf:
-      - $ref: "#/definitions/StaticVariationSet"
-      #- $ref: "#/definitions/ExpansionVariationSet"
-
-  StaticVariationSet:
-    description: >-
-      A set of variation defined by ids
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [VariationSet]
-        default: VariationSet
-      id:
-        $ref: "#/definitions/Id"
-      members:
-        type: array
-        items:
-          type: object
-
 
   ############################################################################
   # Locations
@@ -142,9 +69,6 @@ definitions:
       A Location represents a span on a specific sequence.
     oneOf:
       - $ref: "#/definitions/SequenceLocation"
-      - $ref: "#/definitions/GeneLocation"
-      - $ref: "#/definitions/CytobandLocation"
-      # - $ref: "#/definitions/FeatureLocation"  # for exons, introns, CDS, PFAM domains, ...
     discriminator:
       propertyName: type
   
@@ -162,49 +86,10 @@ definitions:
       interval:
         $ref: "#/definitions/Interval"
 
-  GeneLocation:
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [GeneLocation]
-        default: GeneLocation
-      id:
-        $ref: "#/definitions/Id"
-      gene:
-        $ref: "#/definitions/CURIE"
-        description: See https://www.ebi.ac.uk/miriam/main/datatypes/MIR:00000069
-
-  CytobandLocation:
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [CytobandLocation]
-        default: CytobandLocation
-      id:
-        $ref: "#/definitions/Id"
-      chr:
-        type: string
-      start:
-        $ref: "#/definitions/Cytoband"
-      end:
-        $ref: "#/definitions/Cytoband"
-        nullable: true
-        default: null
-    additionalProperties: false
-    required:
-      - type
-      - chr
-      - start
-    
-
   ############################################################################
   # Interval
   # * SimpleInterval
   # * NestedInterval
-  # * TODO: ConfidenceIntervalInterval (a la VCF)
-  # * TODO: ComplexInterval (a la FALDO)
 
   Interval:
     description: >-
@@ -221,7 +106,6 @@ definitions:
     oneOf:
       - $ref: '#/definitions/SimpleInterval'
       - $ref: '#/definitions/NestedInterval'
-      # - $ref: '#/definitions/ComplexInterval'
     discriminator:
       propertyName: type
 
@@ -268,7 +152,6 @@ definitions:
         type: SimpleInterval
         start: 10
         end: 40
-    
 
   ############################################################################
   # States
@@ -276,7 +159,6 @@ definitions:
   State:
     oneOf:
       - $ref: "#/definitions/SequenceState"
-      - $ref: "#/definitions/CNVState"
   
   SequenceState:
     type: object
@@ -295,26 +177,6 @@ definitions:
       type: SequenceState
       sequence: C
 
-  CNVState:
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [CNVState]
-        default: CNVState
-      location:
-        $ref: "#/definitions/Location"
-      min_copies:
-        type: integer
-      max_copies:
-        type: integer
-      copy_measure:
-        type: string
-        enum: [TOTAL, RELATIVE]
-    required:
-      - type
-      
-
   ############################################################################
   # Basic types
   # These types are used solely within other definitions.
@@ -325,127 +187,32 @@ definitions:
   
   Id:
     description: >-
-      Uniquely identifies a specific instance of an object within a
-      document.
+      A string that refers to an object uniquely.  The lifetime and
+      scope of an id is defined by the sender.
+
+      VR does not impose any contraints on strings used as ids in
+      messages. However, to maximize sharability of data, the VR
+      Specification RECOMMENDS that implementations use [W3C Compact
+      URI (CURIE)](https://www.w3.org/TR/curie/) syntax.
+
+      String CURIEs are represented as `prefix`:`reference` (W3C
+      terminology), but often referred to as `namespace`:`accession`
+      or `namespace`:`local id` colloquially.
+
+      The VR specification also RECOMMENDS that `prefix` be defined in
+      identifiers.org.
+
+      The `reference` component is an unconstrained string.
+
+      A CURIE is a URI.  URIs may *locate* objects (i.e., specify
+      where to retrieve them) or *name* objects conceptually.  VR uses
+      CURIEs primarily as a naming mechanism.
+
+      Implementations MAY provide CURIE resolution mechanisms for
+      prefixes to make these objects locatable.
+
+      Using internal ids in public messages is strongly discouraged.
+
     type: string
-    example: "01340adf981as0"
-  
-  Identifier:
-    description: >-
-      A <namespace,accession> pair that refers to an object.
-    type: object
-    properties:
-      namespace:
-        type: string
-        example: refseq
-        description: authority
-      accession:
-        type: string
-        example: "NM_000551.3"
-        description: "unique key within namespace"
-    additionalProperties: false
-    required:
-    - namespace
-    - accession
-  
-  CURIE:
-    description: >-
-      A string that references an object using [W3C Compact URI
-      (CURIE)](https://www.w3.org/TR/curie/) syntax.
-
-      A CURIE is a URI. As a URI, it MAY locate objects (as with http
-      references), but it may also merely name objects uniquely.  VR
-      uses CURIEs primarily as a naming mechanism.  Implementations
-      are expected to provide CURIE resolution mechanisms.
-
-      String CURIEs are represented as `namespace`:`reference`. VR
-      uses W3C CURIE nomenclature; some specifications use home-grown
-      names for the same concepts.
-
-      `namespace` SHOULD be defined in identifiers.org, or,
-      alteratively, provided by a map of CURIE URLs.
-    type: string
-    pattern: '^\w+:\w+$'
-    example: "ga4gh:allele/01234abcde"      
-  
-  Meta:
-    # TODO: version regexp ^\d+\.\d+$
-    # describe semantics
-    type: object
-    properties:
-      version:
-        type: string
-        default: "0"
-      generated_at:
-        $ref: "#/definitions/DateTime"
-
-  RelatedVariation:
-    type: object
-    properties:
-      id:
-        $ref: "#/definitions/Id"
-      relationship:
-        type: string
-        enum:
-          - PARSED_VARIATION
-
-  Cytoband:
-    type: string
-    pattern: '^[pq][1-9][0-9]*(\.[1-9][0-9]*)?$'
-    example: "q22.3"
-      
-  GeneSymbol:
-    type: string
-    pattern: '^[A-Z][A-Za-z0-9]+$'
-    example: "BRCA1"
-
-
-  ############################################################################
-  Bundle:
-    type: object
-    properties:
-      locations:
-        type: object
-        default: {}
-        patternProperties:
-          ^.:
-            $ref: "#/definitions/Location"
-      alleles:
-        type: object
-        default: {}
-        patternProperties:
-          ^.:
-            $ref: "#/definitions/Allele"
-      haplotypes:
-        type: object
-        default: {}
-        patternProperties:
-          ^.:
-            $ref: "#/definitions/Haplotype"
-      genotypes:
-        type: object
-        default: {}
-        patternProperties:
-          ^.:
-            $ref: "#/definitions/Genotype"
-    additionalProperties: false
-
-
-enums:
-  Completeness:
-    type: string
-    description: >-
-      Declares the `completeness` of a Haplotype or Genotype
-      definition.  See descriptions in those schemas for additional
-      information.
-      * COMPLETE: The definition is complete. All data are included
-        for the covered assay.
-      * PARTIAL: The definition is intentionally incomplete, typically
-        to protect information.  Declaring partial variation allows
-        data submitters to convey that data are missing.
-      * UNKNOWN: The definition is not known to be either COMPLETE or
-        PARTIAL.
-    enum:
-    - UNKNOWN
-    - PARTIAL
-    - COMPLETE
+    #pattern: '^\w[^:]+:.+$'
+    example: "ga4gh:GA/01234abcde"      
