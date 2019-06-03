@@ -1,9 +1,10 @@
 Mission
 !!!!!!!
 
-The `GA4GH <https://www.ga4gh.org/>`__ Variation Representation model
-and accompanying specification aim to provide a comprehensive coverage
-for all types of biological sequence variation.
+The `GA4GH <https://www.ga4gh.org/>`__ `Variation Representation
+Specification <https://vr-spec.readthedocs.io/>`__ and accompanying
+specification aim to provide a comprehensive coverage for all types of
+biological sequence variation.
 
 Specific goals for the project
 
