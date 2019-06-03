@@ -1,4 +1,3 @@
-##############################
 Teminology & Information Model
 ##############################
 
@@ -12,7 +11,6 @@ Accordingly, for each term we define below, we begin by describing the term as u
 
 .. note:: The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in `RFC 2119`_.
 
-******************
 Primitive concepts
 ******************
 

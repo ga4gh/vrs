@@ -1,4 +1,3 @@
-##################
 Planned Extensions
 ##################
 
@@ -8,7 +7,6 @@ Planned Extensions
 
 .. _var-sets:
 
-************
 Variant sets
 ************
 
@@ -18,6 +16,5 @@ Variant sets
 
 .. _planned-locations:
 
-*********
 Locations
 *********

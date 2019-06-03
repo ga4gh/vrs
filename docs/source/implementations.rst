@@ -1,8 +1,6 @@
-###############
 Implementations
 ###############
 
-***********************
 ClinGen Allele Registry
 ***********************
 
@@ -10,7 +8,6 @@ ClinGen Allele Registry
 
    Implementation notes for Allele Registry
 
-****
 VICC
 ****
 

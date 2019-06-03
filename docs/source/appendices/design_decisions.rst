@@ -1,4 +1,3 @@
-################
 Design Decisions
 ################
 
@@ -12,7 +11,6 @@ VR contributors confronted numerous trade-offs in developing this specification.
 
 .. _use-allele:
 
-**************************
 Allele Rather than Variant
 **************************
 The most primitive sequence assertion in VR is the :ref:`Allele` entity. Colloquially, the words "allele" and "variant" have similar meanings and they are often used interchangeably. However, the VR contributors believe that it is essential to distinguish the state of the sequence from the change between states of a sequence. It is imperative that precise terms are used when modeling data. Therefore, within VR, Allele refers to a state and "variant" refers to the change from one Allele to another.
@@ -41,7 +39,6 @@ While consistency with Alleles written according HGVS recommendations was not a 
 
 .. _interbase-coordinates-design:
 
-*********************
 Interbase Coordinates
 *********************
 

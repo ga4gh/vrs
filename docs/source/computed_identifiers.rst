@@ -1,10 +1,8 @@
-####################
 Computed Identifiers
 ####################
 
 .. _normalization:
 
-*************
 Normalization
 *************
 

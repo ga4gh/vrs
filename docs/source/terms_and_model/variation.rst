@@ -1,6 +1,5 @@
 .. _variation:
 
-#########
 Variation
 #########
 
@@ -11,7 +10,6 @@ This is the variation definition.
 
 .. _allele:
 
-******
 Allele
 ******
 **Biological definition:** One of a number of alternative forms of the same gene or same genetic locus. In the context of biological sequences, “allele” refers to a set of specific changes within a :ref:`Sequence`, including sets with zero (no change), one change (a simple allele), or multiple changes (:ref:`var-sets`). In the context of VR, Allele refers to a Sequence or Sequence change with respect to a reference sequence.

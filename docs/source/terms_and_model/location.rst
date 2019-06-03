@@ -1,6 +1,5 @@
 .. _location:
 
-########
 Location
 ########
 **Biological definition:** As used by biologists, the precision of “location” (or “locus”) varies widely; examples include chromosomal bands, named genomic features (e.g., genes, exons, or markers), or specific positions on a reference sequence.
@@ -9,7 +8,6 @@ Location
 
 .. _sequence-location:
 
-****************
 SequenceLocation
 ****************
 
