@@ -55,7 +55,7 @@ As a product of the Genomic Knowledge Standards (GKS) Work Stream, project leade
 
 Project Maintainers
 ===================
-Project maintainers are the leads of the GKS Variant Representation working group:
+Project maintainers are the leads of the GKS Variation Representation working group:
 
 * Larry Babb (@larrybabb)
 * Reece Hart (@reece)
