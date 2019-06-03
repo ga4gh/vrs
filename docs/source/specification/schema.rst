@@ -1,5 +1,5 @@
 Schema
-!!!!!!
+@@@@@@
 
 `JSON Schema <../../schema/vr.json>`_
 

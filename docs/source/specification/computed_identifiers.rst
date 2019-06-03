@@ -1,10 +1,10 @@
 Computed Identifiers
-!!!!!!!!!!!!!!!!!!!!
+####################
 
 .. _normalization:
 
 Normalization
-@@@@@@@@@@@@@
+#############
 
 .. todo::
 
@@ -12,9 +12,9 @@ Normalization
 
 .. _serialization:
 
-@@@@@@@@@@@@@
+
 Serialization
-@@@@@@@@@@@@@
+#############
 
 .. todo::
 
@@ -22,9 +22,9 @@ Serialization
 
 :ref:`Read here <custom-serialization>` for more details on our decision to implement a custom serialization strategy.
 
-@@@@@@@@@@@@@
+
 GA4GH Digest
-@@@@@@@@@@@@@
+############
 
 .. todo::
 
@@ -32,6 +32,8 @@ GA4GH Digest
 
 .. todo::
 
-   Add in sequence prefixes from code, prefixes are described as exactly two characters (no underscore, see row 1 from `this comment`_)
+   Add in sequence prefixes from code, prefixes are described as
+   exactly two characters (no underscore, see row 1 from `this
+   comment`_)
 
 .. _this comment: https://github.com/ga4gh/vr-schema/issues/32#issuecomment-479179902
