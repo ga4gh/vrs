@@ -61,8 +61,23 @@ interval (e.g., due to one or more indels).
 * The VMC definition of Allele applies to all Sequence types (DNA, RNA, AA).
 
 
-Text Variant
-@@@@@@@@@@@@
-.. todo::
+.. _text:
 
-   Finish Text Variant
+Text Variation
+@@@@@@@@@@@@@@
+
+**Biological definition:** None.
+
+**Computational definition:** The Text class is intended to capture textual descriptions of variation that cannot be parsed by other Variation subclasses, but are still treated as variation.
+
+**Implementation guidance**
+
+* An implementation MUST represent Variation with subclasses other than Text if possible.
+* An implementation SHOULD define or adopt conventions for defining the strings stored in Text.definition.
+* If a future version of VR-Spec is adopted by an implementation and the new version enables defining existing Text objects under a different Variation subclass, the implementation MUST construct a new object under the other Variation subclass. In such a case, an implementation SHOULD persist the original Text object and respond to queries matching the Text object with the new object.
+
+**Notes**
+
+* Additional Variation subclasses are continually under consideration. Please open a `GitHub issue`_ if you would like to propose a Variation subclass to cover a needed variation representation.
+
+.. _GitHub issue: https://github.com/ga4gh/vr-spec/issues
