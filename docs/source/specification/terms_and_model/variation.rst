@@ -56,7 +56,7 @@ interval (e.g., due to one or more indels).
 * The terms "allele" and "variant" are often used interchangeably, although this use may mask subtle distinctions made by some users.
    * In the genetics community, "allele" may also refer to a haplotype.
    * "Allele" connotes a state whereas "variant" connotes a change between states. This distinction makes it awkward to use variant to refer to the concept of an unchanged position in a Sequence and was one of the factors that influenced the preference of “Allele” over “Variant” as the primary subject of annotations.
-   * See :ref:`Use “Allele” rather than “Variant” <use-allele>` for more discussion.
+   * See :ref:`Use “Allele” rather than “Variant” <use-allele>` for further details.
 * When a trait has a known genetic basis, it is typically represented computationally as an association with an Allele.
 * The VMC definition of Allele applies to all Sequence types (DNA, RNA, AA).
 
