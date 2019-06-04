@@ -4,7 +4,7 @@ Computed Identifiers
 .. _normalization:
 
 Normalization
-#############
+*************
 
 .. todo::
 
@@ -14,7 +14,7 @@ Normalization
 
 
 Serialization
-#############
+*************
 
 .. todo::
 
@@ -24,7 +24,7 @@ Serialization
 
 
 GA4GH Digest
-############
+************
 
 .. todo::
 
