@@ -1,5 +1,5 @@
 Future Plans
-############
+!!!!!!!!!!!!
 
 .. figure:: ../images/planned_extensions_graph.png
    :align: left
@@ -11,54 +11,59 @@ Future Plans
 .. _var-sets:
 
 Variation Sets
-**************
+@@@@@@@@@@@@@@
 
 
 Planned Variation Concepts
-**************************
+@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
 Haplotypes
-==========
+##########
 
 Genotypes
-=========
+#########
 
 Translocations
-==============
+##############
 
 .. _planned-locations:
 
 
 Planned Location Concepts
-*************************
+@@@@@@@@@@@@@@@@@@@@@@@@@
 
 CytobandLocation
-================
+################
 
 GeneLocation
-============
+############
 
 LocationRule
-============
+############
 
 .. _planned-states:
 
 
 Planned State Concepts
-**********************
+@@@@@@@@@@@@@@@@@@@@@@
 
 CNVState
-========
+########
 
 StateRule
-=========
+#########
 
 .. _planned-intervals:
 
 
 Planned Interval Concepts
-*************************
+@@@@@@@@@@@@@@@@@@@@@@@@@
 
 ComplexInterval
-===============
+###############
+
+.. _non-sequence-variation:
+
+Non-sequence Variation
+######################
