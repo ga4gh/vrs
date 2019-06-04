@@ -185,11 +185,10 @@ amino acid codes.
 * For the purposes of representing sequence variation, it is not necessary that Sequences be “typed”
   (i.e., DNA, RNA, or AA).
 
-@@@@@@@@@@@@@@@@@@
 Composite concepts
 @@@@@@@@@@@@@@@@@@
 
-.. figure:: ../images/object_graph.png
+.. figure:: ../../images/object_graph.png
    :align: left
 
 The VR Schema requires the use of multiple composite objects, which are grouped under four abstract
@@ -201,14 +200,7 @@ identifiable objects (i.e., may be serialized and identified by computed identif
 lines denoted inheritance. Subclasses inherit all attributes from their parent. Inherited attributes
 are not shown.
 
-
-
-
 These abstract classes and their concrete child classes are described in the following documents.
-
-.. todo::
-
-   Insert model diagram and create subdocs for Variation / Location / State / Interval
 
 .. toctree::
    :maxdepth: 2
