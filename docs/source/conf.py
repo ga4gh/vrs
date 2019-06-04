@@ -20,6 +20,8 @@
 project = 'vr-schema'
 copyright = '2019, GA4GH'
 author = 'Committers'
+version = '1.0'
+release = '1.0.0-alpha.1'
 
 master_doc = 'index'
 
