@@ -1,5 +1,5 @@
 Design Decisions
-@@@@@@@@@@@@@@@@
+!!!!!!!!!!!!!!!!
 
 VR contributors confronted numerous trade-offs in developing this
 specification. As these trade-offs may not be apparent to outside
@@ -15,7 +15,7 @@ rationale for our design decisions, including:
 .. _use-allele:
 
 Allele Rather than Variant
-$$$$$$$$$$$$$$$$$$$$$$$$$$
+@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 The most primitive sequence assertion in VR is the :ref:`Allele`
 entity. Colloquially, the words "allele" and "variant" have similar
@@ -36,7 +36,7 @@ consequence is better associated with an allele than with a variant.
 .. _right-normalize:
 
 Alleles are Right Normalized
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 **TODO: update to discuss our WIP of SPDI algorithm (BOCA)**
 
@@ -86,7 +86,7 @@ Several factors contributed to requiring right alignment in VR:
 .. _interbase-coordinates-design:
 
 Interbase Coordinates
-$$$$$$$$$$$$$$$$$$$$$
+@@@@@@@@@@@@@@@@@@@@@
 
 Sequence ranges use an interbase coordinate system. Interbase
 coordinate conventions are used in this terminology because they
@@ -117,9 +117,8 @@ coupling of distinct concepts.
 
 .. _modeling-language:
 
-
 Modeling Language
-$$$$$$$$$$$$$$$$$
+@@@@@@@@@@@@@@@@@
 
 The VR collaborators investigated numerous options for modeling data,
 generating code, and writing the wire protocol. Required and desired
@@ -144,9 +143,8 @@ other protocols.
 
 .. _custom-serialization:
 
-
 Serialization Strategy
-$$$$$$$$$$$$$$$$$$$$$$
+@@@@@@@@@@@@@@@@@@@@@@
 
 There are many packages and proposals that aspire to a canonical form
 for json in many languages. Despite this, there are no ratified or *de

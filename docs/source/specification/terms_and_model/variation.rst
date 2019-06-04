@@ -12,6 +12,7 @@ This is the variation definition.
 
 Allele
 @@@@@@
+
 **Biological definition:** One of a number of alternative forms of the
 same gene or same genetic locus. In the context of biological
 sequences, “allele” refers to a set of specific changes within a
