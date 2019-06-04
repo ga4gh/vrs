@@ -1,6 +1,5 @@
-##################
-Planned Extensions
-##################
+Future Plans
+############
 
 .. figure:: ../images/planned_extensions_graph.png
    :align: left
@@ -11,15 +10,13 @@ Planned Extensions
 
 .. _var-sets:
 
-**************
 Variation Sets
 **************
 
 
-
-**************************
 Planned Variation Concepts
 **************************
+
 
 Haplotypes
 ==========
@@ -32,7 +29,7 @@ Translocations
 
 .. _planned-locations:
 
-*************************
+
 Planned Location Concepts
 *************************
 
@@ -47,7 +44,7 @@ LocationRule
 
 .. _planned-states:
 
-**********************
+
 Planned State Concepts
 **********************
 
@@ -59,7 +56,7 @@ StateRule
 
 .. _planned-intervals:
 
-*************************
+
 Planned Interval Concepts
 *************************
 
