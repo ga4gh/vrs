@@ -36,4 +36,4 @@ GA4GH Digest
    exactly two characters (no underscore, see row 1 from `this
    comment`_)
 
-.. _this comment: https://github.com/ga4gh/vr-schema/issues/32#issuecomment-479179902
+.. _this comment: https://github.com/ga4gh/vr-spec/issues/32#issuecomment-479179902

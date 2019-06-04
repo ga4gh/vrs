@@ -35,5 +35,5 @@ Here we document the primary contributions of this specification for variation r
   data sharing.
 
 The machine readable schema definitions and example code are available online at the VR-Spec
-repository (https://github.com/ga4gh/vr-schema).
+repository (https://github.com/ga4gh/vr-spec).
 

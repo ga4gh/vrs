@@ -4,8 +4,8 @@ Development Process
 Versioning
 ##########
 
-VR-Schema will follow GA4GH `recommendation for semantic versioning`_
-with semver 2.0. The VR-Schema GitHub repository will maintain the
+VR-Spec will follow GA4GH `recommendation for semantic versioning`_
+with semver 2.0. The VR-Spec GitHub repository will maintain the
 latest development code on the master branch for community review (see
 :ref:`Release Cycle <release-cycle>`).
 
@@ -17,13 +17,13 @@ Release Cycle
 Planned Features
 $$$$$$$$$$$$$$$$
 Feature requests from the community are made through the generation of
-`GitHub issues on the VR-Schema repository`_, which are open for
+`GitHub issues on the VR-Spec repository`_, which are open for
 public review and discussion. Feature requests identified to support
-an unmet need by the existing VR-Schema are scheduled for discussion
+an unmet need by the existing VR-Spec are scheduled for discussion
 in our weekly VR calls. These discussions are used to inform whether
 or not a feature will be planned for development. The :ref:`Project
 Leadership <project-leadership>` is responsible for making the final
-determination on whether a feature is to be added to the VR-Schema.
+determination on whether a feature is to be added to VR-Spec.
 
 Requirements Gathering
 $$$$$$$$$$$$$$$$$$$$$$
@@ -53,7 +53,7 @@ reviewed version.
 
 After passing review, new minor versions are released to
 production. If any features in the reviewed version are deemed to be
-significant additions to the schema by the Project Leadership, or if
+significant additions to the specification by the Project Leadership, or if
 it is a major version change, instead a release candidate version will
 be released and submitted for GA4GH product approval. After approval,
 the new version is released to production.
@@ -89,6 +89,6 @@ Project maintainers are the leads of the GKS Variation Representation working gr
 
 
 .. _recommendation for semantic versioning: https://docs.google.com/document/d/1UUJSnsPw32W5r1jaJ0vI11X0LLLygpAC9TNosjSge_w/edit#heading=h.h5gpuoaxcrgy
-.. _GitHub issues on the VR-Schema repository: https://github.com/ga4gh/vr-schema/issues
-.. _example requirement issues: https://github.com/ga4gh/vr-schema/labels/requirements
+.. _GitHub issues on the VR-Spec repository: https://github.com/ga4gh/vr-spec/issues
+.. _example requirement issues: https://github.com/ga4gh/vr-spec/labels/requirements
 .. _Work Stream leadership: https://ga4gh-gks.github.io/

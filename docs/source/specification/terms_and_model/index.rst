@@ -115,7 +115,7 @@ to reference it, or to locate data in order to retrieve it from its source.
    GRCh38,  https://www.ncbi.nlm.nih.gov/grc/human
    LRG,     http://ftp.ebi.ac.uk/pub/databases/lrgex/{reference}.xml
    NCBI,    https://www.ncbi.nlm.nih.gov/gquery/?term={reference}
-   VR,      https://github.com/ga4gh/vr-schema
+   VR,      https://github.com/ga4gh/vr-spec
 
 * Implementations MAY provide additional mappings in the VR Bundle.
 * Implementations SHALL use prefix and reference, and the Identifiers derived from them,
