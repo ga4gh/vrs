@@ -49,54 +49,33 @@ when referring to an unchanged residue. In some cases, such "variants"
 are even associated with allele frequencies. Similarly, a predicted
 consequence is better associated with an allele than with a variant.
 
-.. _right-normalize:
+.. _fully-justified:
 
-Alleles are Right Normalized
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-**TODO: update to discuss our WIP of SPDI algorithm (BOCA)**
+Alleles are Fully Justified
+@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 In order to standardize the presentation of sequence variation, the VR
-specification requires that Alleles be right normalized (aka shifted
-or shuffled) using the `vt algorithm`_. Furthermore, normalization
-rules should be identical for all sequence types; although this need
-not be a strict requirement, there is no reason to normalize in
-different directions based on sequence type.
+specification requires that Alleles be fully justified from the description
+of the NCBI `Variant Overprecision Correction Algorithm (VOCA)`_. Furthermore,
+normalization rules should be identical for all sequence types; although this
+need not be a strict requirement, there is no reason to normalize using
+different strategies based on sequence type.
 
-The choice of algorithm was relatively straightforward: vt is
-well-documented, published, easily understood, easily implemented, and
-covers a wide-range of cases.
+The choice of algorithm was relatively straightforward: VOCA is
+published, easily understood, easily implemented, and
+covers a wide range of cases.
 
-The choice to right normalize is more contentious. The HGVS
-nomenclature recommendations, originally published in 1998, require
-that alleles be right normalized `(3' rule)`_ on all sequence
+The choice to fully justify is a departure from other common variation
+formats. The HGVS nomenclature recommendations, originally published in
+1998, require that alleles be right normalized `(3' rule)`_ on all sequence
 types. The Variant Call Format (VCF), released as a PDF specification
 in 2009, made the conflicting choice to write variants `left (5')
-normalized`_ and anchored with the previous nucleotide.
+normalized`_ and anchored to the previous nucleotide.
 
-Several factors contributed to requiring right alignment in VR:
-
-* Right-normalized alleles on transcript and protein sequences are
-  likely closer to their biological consequences than their
-  left-normalized counterparts. By convention, sequences are written
-  in the order of biological processing: 5'-to-3' for genomic
-  sequences and for transcript sequences (regardless of strand), and
-  N-to-C for protein sequences. Broadly speaking and with exceptions,
-  the consequences of variation occur on the downstream end of
-  processing. For example, a right-shifted insertion allele that
-  induces a downstream stop codon is always closer to the consequence
-  (termination of transcription) than its left-shifted counterpart.
-
-* Related to, but distinct from, the above factor is that it is often
-  easier for humans to understand certain sequence changes at their
-  downstream locations. For example, most biologists likely imagine a
-  trinucleotide repeat as extending from the downstream end rather
-  than being inserted upstream. While the information content is
-  clearly the same regardless of the mechanism or representation,
-  there is nonetheless a strong bias toward envisioning variation on
-  the rightmost position.  While consistency with Alleles written
-  according HGVS recommendations was not a factor, it is an advantage
-  of this design choice.
+Fully-justified alleles represent an alternate approach. A fully-justified
+representation does not make an arbitrary choice of where a variant truly
+occurs in a low-complexity region, but rather describes the final and
+unambiguous state of the resultant sequence.
 
 
 .. _interbase-coordinates-design:
@@ -175,7 +154,8 @@ Therefore, we implemented our own :ref:`serialization format
 <serialization>`, which is very similar to `Gibson Canonical JSON`_
 (not to be confused with `OLPC Canonical JSON`_).
 
-.. _vt algorithm: https://genome.sph.umich.edu/wiki/Variant_Normalization#Algorithm_for_Normalization
+.. _Variant Overprecision Correction Algorithm (VOCA): https://www.biorxiv.org/content/10.1101/537449v3.full
+.. _SPDI variant data model: https://www.biorxiv.org/content/10.1101/537449v3.full
 .. _(3' rule): https://varnomen.hgvs.org/recommendations/general/
 .. _left (5') normalized: https://genome.sph.umich.edu/wiki/Variant_Normalization#Definition
 .. _Gibson Canonical JSON: http://gibson042.github.io/canonicaljson-spec/
