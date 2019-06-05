@@ -3,7 +3,7 @@ ClinGen Allele Registry
 
 ClinGen Allele Registry provides identifiers for more than 900 million variants. Each identifier (canonical allele identifiers: CAIds) is an abstract concept which represents a group of identical variants based on alignment. Identifiers are retrievable irrespective of the reference sequence and normalization status.
 
-As a driver project for GA4GH, allele registry implements two standards: RefGet and VR. The API endpoints that support data retrieval in this two key standards are summarized in the following table.
+As a Driver Project for GA4GH, allele registry implements two standards: RefGet and VR. The API endpoints that support data retrieval in this two key standards are summarized in the following table.
 
 **HOST**: https//reg.clinicalgenome.org/
 
