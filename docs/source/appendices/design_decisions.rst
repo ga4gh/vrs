@@ -54,10 +54,10 @@ consequence is better associated with an allele than with a variant.
 Alleles are Fully Justified
 @@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-In order to standardize the presentation of sequence variation, the VR
-specification requires that Alleles be fully justified from the description
+In order to standardize the presentation of sequence variation, computed ids from
+the VR specification require that Alleles be fully justified from the description
 of the NCBI `Variant Overprecision Correction Algorithm (VOCA)`_. Furthermore,
-normalization rules should be identical for all sequence types; although this
+normalization rules must be identical for all sequence types; although this
 need not be a strict requirement, there is no reason to normalize using
 different strategies based on sequence type.
 
