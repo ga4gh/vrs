@@ -1,16 +1,5 @@
-Implementations
-!!!!!!!!!!!!!!!
-
-Reference Implementation
-@@@@@@@@@@@@@@@@@@@@@@@@
-
-:ref:`vr-python` is a Python library that implements all of the
-features of the specification and provides addition tools, such
-as conversion from HGVS, SPDI, Beacon, and VCF.
-
-
 ClinGen Allele Registry
-@@@@@@@@@@@@@@@@@@@@@@@
+!!!!!!!!!!!!!!!!!!!!!!!
 
 ClinGen Allele Registry provides identifiers for more than 900 million variants. Each identifier (canonical allele identifiers: CAIds) is an abstract concept which represents a group of identical variants based on alignment. Identifiers are retrievable irrespective of the reference sequence and normalization status.
 
@@ -31,16 +20,3 @@ As a driver project for GA4GH, allele registry implements two standards: RefGet 
 The GA4GH identifiers for allele (ga4gh/allele:vYfm5TA_F-_BtIGjfzjGOj8b6IK5hCTx) and sequence (e.g. ga4gh/refget:vYfm5TA_F-_BtIGjfzjGOj8b6IK5hCTx) are retrievable from the human readable variant centric pages following GA4GH icon next to sequence and HGVS expressions.
 
 Documentation of service is provided in the link available through registry landing page (https://reg.clinicalgenome.org).
-
-
-VICC
-@@@@
-
-.. todo::
-
-   Implementation notes for VICC
-
-BRCA Exchange
-@@@@@@@@@@@@@
-
-BRCA Exchange proposes an API endpoint which will share the variant list in VR JSON model.  Behind the scenes, all variants will be represented according to VR specification, in a separate table of the BRCA Exchange database, and the contents of this table will be served by the BRCA Exchange API.  A stand-alone executable will leverage these data to integrate the BRCA Exchange variant set with the ClinGen allele registry.
