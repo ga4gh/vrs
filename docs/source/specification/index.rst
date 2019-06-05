@@ -7,5 +7,5 @@ Specification
 
    terms_and_model/index
    schema
-   algorithms/index
+   computed_identifiers/index
    examples

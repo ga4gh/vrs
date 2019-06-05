@@ -64,7 +64,7 @@ A string that uniquely identifies a specific instance of an object within a docu
 **Implementation guidance**
 
 * Ids are opaque byte-strings: there are no formatting, content, or character set constraints.
-* This specification RECOMMENDS using :ref:`Computed Identifiers <generating-computed-identifiers>` as ids.
+* This specification RECOMMENDS using :ref:`computed-identifiers` as ids.
 * A `FHIR Id`_, which is limited to 64 characters from a restricted character set, may be used as a
   VR Id.
 * Ids must correspond 1:1 to object instances: An id refers to exactly one object, and an object has
