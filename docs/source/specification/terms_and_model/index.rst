@@ -59,76 +59,17 @@ Id
 **Implementation guidance**
 
 * Ids are opaque byte-strings: there are no formatting, content, or character set constraints.
+* This specification RECOMMENDS using :ref:`Computed Identifiers <generating-computed-identifiers>` as ids.
 * A `FHIR Id`_, which is limited to 64 characters from a restricted character set, may be used as a
   VR Id.
 * Ids must correspond 1:1 to object instances: An id refers to exactly one object, and an object has
   only one id. Therefore, equivalence of objects implies equivalence of ids, and vice versa.
-* Implementations MAY change internal identifiers at any time. Therefore, receiving systems SHOULD
-  NOT persist Ids from remote sources. Instead, Identifiers (below) should be used for communication
-  between systems.
+* Implementations MAY change ids at any time. Therefore, receiving systems SHOULD
+  NOT persist Ids from remote sources.
 * Ids are not locatable references. An Id may not be used to retrieve objects from remote
   databases. Instead, Identifiers should be used for retrieval.
 * The VR specification requires a canonical ordering (sorting) of Ids. Sorting a list of Ids MUST be
   performed using the C locale or, equivalently, by first encoding Ids as ASCII.
-
-.. _identifier:
-
-Identifier
-==========
-
-**Biological definition:** An identifier for an object, such as a :ref:`Sequence` or :ref:`Allele`,
-that is assigned by an or ganization or algorithm. The identifier may be used to name data in order
-to reference it, or to locate data in order to retrieve it from its source.
-
-**Computational definition:** A VR Identifier is represented using a `Compact URI (CURIE)`_, a W3C
- standard, with a *prefix* and *reference* that correspond to a namespace and local identifier
- within that namespace.
-
-**Information model**
-
-.. csv-table::
-   :header: Field, Type, Label, Description
-   :align: left
-   :widths: 12, 9, 10, 30
-
-   prefix, string, required, Namespace for the identifier
-   reference, string, required, Unique key within prefix namespace
-
-**Implementation guidance**
-
-* CURIEs may be represented as structured data objects or as strings. The two forms are
-  deterministically convertible as defined in the CURIE specification.
-* Within VR models, CURIEs MUST be represented as objects.
-* Implementations MAY display to users, and accept from users, CURIEs represented as strings.
-* The CURIE specification requires the use of a map from each prefix value to a URI template, shown
-  below. URIs are generated from the CURIE map by substituting {reference} in the URI, if it exists,
-  with the CURIE reference. This mapping provides URIs to descriptive information for a prefix
-  rather than to structured data.
-
-.. csv-table::
-   :header: prefix, mapped URI template
-   :align: left
-   :widths: 15, 85
-
-   Ensembl, https://www.ensembl.org/Multi/Search/Results?q={reference}
-   GRCh37,  https://www.ncbi.nlm.nih.gov/grc/human
-   GRCh38,  https://www.ncbi.nlm.nih.gov/grc/human
-   LRG,     http://ftp.ebi.ac.uk/pub/databases/lrgex/{reference}.xml
-   NCBI,    https://www.ncbi.nlm.nih.gov/gquery/?term={reference}
-   VR,      https://github.com/ga4gh/vr-spec
-
-* Implementations MAY provide additional mappings in the VR Bundle.
-* Implementations SHALL use prefix and reference, and the Identifiers derived from them,
-  verbatim. These entities MAY NOT be modified in any way; for example, they may not be case folded
-  or modified by the addition of prefixes or suffixes.
-* CURIEs and `FHIR Business Identifiers`_ are convertible: For the purposes of interoperability with
-  FHIR, the Identifier namespace and accession SHALL map, using the CURIE prefix map, to the system
-  and value components of a FHIR Identifier.
-* It is essential for the durability of information that an Identifier refer to exactly one object
-  for all time. (For example a Sequence reference should refer to only one Sequence.)
-  Implementations may assume this uniqueness, but adherence is the responsibility of source
-  databases. For this reason, databases (or versions of databases) that do not provide this
-  guarantee SHALL NOT be used with the VR data model.
 
 .. _residue:
 
