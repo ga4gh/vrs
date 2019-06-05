@@ -13,16 +13,15 @@ This is the variation definition.
 Allele
 @@@@@@
 
-Biological definition
----------------------
+**Biological definition**
+
 One of a number of alternative forms of the same gene or same genetic locus. In the context of biological sequences, “allele” refers to a set of specific changes within a :ref:`Sequence`, including sets with zero (no change), one change (a simple allele), or multiple changes (:ref:`var-sets`). In the context of VR, Allele refers to a Sequence or Sequence change with respect to a reference sequence.
 
-Computational definition
-------------------------
+**Computational definition**
+
 An Allele is a specific, single, and contiguous :ref:`Sequence` at a :ref:`Location`. Each alternative Sequence may be empty, shorter, longer, or the same length as the interval (e.g., due to one or more indels).
 
-Information model
------------------
+**Information model**
 
 .. csv-table::
    :header: Field, Type, Label, Description
@@ -33,16 +32,14 @@ Information model
    location_id, :ref:`Id`, required, An id mapping to the Identifier of the external database Sequence
    interval, :ref:`Interval`, required, Position of feature on reference sequence specified by sequence_id.
 
-Implementation guidance
------------------------
+**Implementation guidance**
 
 * Implementations MUST require that interval.end ≤ sequence_length when the Sequence length is known.
 * The implementation MAY infer the Sequence by location_id and the Sequence State type, and ensure compatibility between them. This behavior is not included in the specification.
 * Alleles are equal only if the component fields are equal: at the same location and with the same state.
 * Alleles may have multiple related representations on the same Sequence type due to shifting (aka shuffling, normalization). A future version of VMC will provide a general framework for flexibly declaring various notions of pairwise Allele relationships.
 
-Notes
------
+**Notes**
 
 * When the alternate Sequence is the same length as the interval, the lengths of the reference Sequence and imputed Sequence are the same. (Here, imputed sequence means the sequence derived by applying the Allele to the reference sequence.) When the replacement Sequence is shorter than the length of the interval, the imputed Sequence is shorter than the reference Sequence, and conversely for replacements that are larger than the interval.
 * When the replacement is “” (the empty string), the Allele refers to a deletion at this location.
@@ -63,23 +60,21 @@ Notes
 Text Variation
 @@@@@@@@@@@@@@
 
-Biological definition
----------------------
+**Biological definition**
+
 None
 
-Computational definition
-------------------------
+**Computational definition**
+
 The Text class is intended to capture textual descriptions of variation that cannot be parsed by other Variation subclasses, but are still treated as variation.
 
-Implementation guidance
------------------------
+**Implementation guidance**
 
 * An implementation MUST represent Variation with subclasses other than Text if possible.
 * An implementation SHOULD define or adopt conventions for defining the strings stored in Text.definition.
 * If a future version of VR-Spec is adopted by an implementation and the new version enables defining existing Text objects under a different Variation subclass, the implementation MUST construct a new object under the other Variation subclass. In such a case, an implementation SHOULD persist the original Text object and respond to queries matching the Text object with the new object.
 
-Notes
------
+**Notes**
 
 * Additional Variation subclasses are continually under consideration. Please open a `GitHub issue`_ if you would like to propose a Variation subclass to cover a needed variation representation.
 

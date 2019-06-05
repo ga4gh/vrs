@@ -53,16 +53,15 @@ Primitive concepts
 Id
 ==
 
-Biological definition
----------------------
+**Biological definition**
+
 None.
 
-Computational definition
-------------------------
+**Computational definition**
+
 A string that uniquely identifies a specific instance of an object within a document.
 
-Implementation guidance
------------------------
+**Implementation guidance**
 
 * Ids are opaque byte-strings: there are no formatting, content, or character set constraints.
 * This specification RECOMMENDS using :ref:`Computed Identifiers <generating-computed-identifiers>` as ids.
@@ -82,12 +81,12 @@ Implementation guidance
 Residue
 =======
 
-Biological definition
----------------------
+**Biological definition**
+
 A residue refers to a specific `monomer`_ within the `polymeric chain`_ of a `protein`_ or `nucleic acid`_ (Source: `Wikipedia Residue page`_).
 
-Computational definition
-------------------------
+**Computational definition**
+
 Specific residues (i.e., molecular species) as well as categories or groupings of these ("ambiguity codes") are represented using one-letter IUPAC abbreviations.
 
 .. _interbase-coordinates:
@@ -95,12 +94,12 @@ Specific residues (i.e., molecular species) as well as categories or groupings o
 Interbase Coordinates
 =====================
 
-Biological definition
----------------------
+**Biological definition**
+
 None.
 
-Computational definition
-------------------------
+**Computational definition**
+
 Interbase coordinates refer to the zero-width points before and after :ref:`residues <Residue>`. An interval of interbase coordinates permits referring to any span, including an empty span, before, within, or after a sequence. See :ref:`interbase-coordinates-design` for more details on this design choice.
 
 .. _sequence:
@@ -108,29 +107,27 @@ Interbase coordinates refer to the zero-width points before and after :ref:`resi
 Sequence
 ========
 
-Biological definition
----------------------
+**Biological definition**
+
 A contiguous, linear polymer of nucleic acid or amino acid
  residues.
 
-Computational definition
-------------------------
+**Computational definition**
+
 A character string of :ref:`Residues <Residue>` that represents a biological sequence using the conventional sequence order (5'-to-3' for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequences.
 
-Information model
------------------
+**Information model**
+
 A Sequence is a string, constrained to contain only characters representing IUPAC nucleic acid or
 amino acid codes.
 
-Implementation guidance
------------------------
+**Implementation guidance**
 
 * Sequences MAY be empty (zero-length) strings. Empty sequences are used as the replacement Sequence
   for deletion Alleles.
 * Sequences MUST consist of only uppercase IUPAC abbreviations, including ambiguity codes.
 
-Notes
------
+**Notes**
 
 * A Sequence provides a stable coordinate system by which an :ref:`Allele` may be located and
   interpreted.
