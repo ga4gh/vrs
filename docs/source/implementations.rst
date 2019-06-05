@@ -4,7 +4,9 @@ Implementations
 Reference Implementation
 @@@@@@@@@@@@@@@@@@@@@@@@
 
-vr-python
+:ref:`vr-python` is a Python library that implements all of the
+features of the specification and provides addition tools, such
+as conversion from HGVS, SPDI, Beacon, and VCF.
 
 
 ClinGen Allele Registry

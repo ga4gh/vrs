@@ -10,7 +10,7 @@ implementation that promotes adoption of the standard.
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    introduction
    specification/index
