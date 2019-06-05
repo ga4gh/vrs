@@ -1,15 +1,16 @@
 .. _vr-python:
 
-vr-python: VR Reference Implementation
+VR-python Reference Implementation
 ======================================
 
 The GA4GH Variation Representation Specification consists of two
 components: a JSON schema that describes the structure of data, and
 conventions for how to use that structure to improve the consistency of
 sequence variation shared in the community. A reference implementation
-in Python accompanies the specification and is demonstrated in this
+in Python (vr-python; `GitHub`_) accompanies the specification and is demonstrated in this
 notebook.
 
+.. _GitHub: https://github.com/ga4gh/vr-python
 
 Using the Reference Implementation
 ----------------------------------
