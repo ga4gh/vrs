@@ -40,7 +40,7 @@ interval (e.g., due to one or more indels).
 **Implementation guidance**
 
 * Implementations MUST require that interval.end ≤ sequence_length when the Sequence length is known.
-* The implementation MAY infer the Sequence type of Sequence reference by location_id and the type of Sequence in state, and ensure compatibility between them. This behavior is not included in the specification.
+* The implementation MAY infer the Sequence by location_id and the Sequence State type, and ensure compatibility between them. This behavior is not included in the specification.
 * Alleles are equal only if the component fields are equal: at the same location and with the same state.
 * Alleles may have multiple related representations on the same Sequence type due to shifting (aka shuffling, normalization). A future version of VMC will provide a general framework for flexibly declaring various notions of pairwise Allele relationships.
 * Implementations MUST report variation right normalized. See :ref:`the rationale for right normalization <right-normalize>`.
