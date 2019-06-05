@@ -5,8 +5,7 @@ Normalization
 
 The VR Spec RECOMMENDS that Alleles at precise locations be normalized
 to an fully-justified ("expanded") form.  Implementations MUST use
-fully justified variation when using the VR :ref:`Computed
-Identifiers`.
+fully justified variation when :ref:`generating-computed-identifiers`.
 
 Conceptually, fully justified variation is expanded to the outer
 bounds of left- and right- shuffling.  As a result, fully justified

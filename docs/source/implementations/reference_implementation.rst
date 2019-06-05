@@ -475,8 +475,8 @@ class that facilitates using other data sources.
       'RefSeq:NM_000551.3',
       'SEGUID:T12L0p2X5E8DbnL0+SwI4Wc1S6g',
       'SHA1:4f5d8bd29d97e44f036e72f4f92c08e167354ba8',
-      'VMC:GS_v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_',
-      'ga4gh:SQ/v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_',
+      'VMC:GS_v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C\_',
+      'ga4gh:SQ/v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C\_',
       'TRUNC512:bff413735a7e31461d82b46fe0b313e81c9720eb1dc370bf',
       'gi:319655736'],
      'alphabet': 'ACGT',
@@ -491,7 +491,7 @@ class that facilitates using other data sources.
 
 .. parsed-literal::
 
-    2019-06-04 12:23:21 snafu ga4gh.vr.extras.dataproxy[23085] INFO Fetching http://localhost:5000/seqrepo/1/sequence/VMC:GS_v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_
+    2019-06-04 12:23:21 snafu ga4gh.vr.extras.dataproxy[23085] INFO Fetching http://localhost:5000/seqrepo/1/sequence/VMC:GS_v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C\_
 
 
 
