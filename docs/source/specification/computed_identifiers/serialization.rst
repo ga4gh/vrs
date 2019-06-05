@@ -39,8 +39,7 @@ The second step is to serialize the message content as JSON that:
 
 
 
-References
-$$$$$$$$$$
+**References**
 
 .. [1] `Gibson Canonical JSON <http://gibson042.github.io/canonicaljson-spec/>`__
 .. [2] `OLPC Canonical JSON <http://wiki.laptop.org/go/Canonical_JSON>`__
