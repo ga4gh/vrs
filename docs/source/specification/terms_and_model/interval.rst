@@ -7,13 +7,18 @@ Interval
 
    Update to include simple interval and nested interval
 
-**Biological definition:** None.
+Biological definition
+---------------------
+None.
 
-**Computational definition:** Two integers that define the start and
+Computational definition
+------------------------
+Two integers that define the start and
  end positions of a range of residues, possibly with length zero, and
  specified using interbase coordinates.
 
-**Information model**
+Information model
+-----------------
 
 .. csv-table::
    :header: Field, Type, Label, Description
@@ -22,13 +27,15 @@ Interval
    start, uint64, required, start position
    end, uint64, required, end position
 
-**Implementation guidance**
+Implementation guidance
+-----------------------
 
 * Implementations MUST require that 0 ≤ start ≤ end. In the case of
   double-stranded DNA, this constraint holds even when a feature is on
   the complementary strand.
 
-**Notes**
+Notes
+-----
 
 * VR uses Interbase coordinates because they provide conceptual
   consistency that is not possible with residue-based systems (see
@@ -52,7 +59,8 @@ Interval
   equal (the equality condition is required to handle the case of two
   identical zero-width Intervals).
 
-**Examples**
+Examples
+--------
 
 * <start, end>=<*0,0*> refers to the point with width zero before the first residue.
 * <start, end>=<*i,i+1*> refers to the *i+1th* (1-based) residue.

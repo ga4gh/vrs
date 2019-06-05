@@ -3,9 +3,13 @@
 State
 !!!!!
 
-**Biological definition:** None.
+Biological definition
+---------------------
+None.
 
-**Computational definition:** The *State* is one of two primary components
+Computational definition
+------------------------
+The *State* is one of two primary components
 specifying a VR :ref:`Allele` (in addition to :ref:`Location`), and is
 the designated component for representing change (or non-change) of the
 features indicated by the Allele Location. As an abstract class, State
