@@ -197,7 +197,9 @@ An Allele is an asserion of a SequenceState at a Location. The many
 possible Location and SequenceState classes enable the representation of
 many kinds of Variation.
 
-“Simple” sequence replacements
+.. _simple-sequence-replacements:
+
+"Simple" sequence replacements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This case covers any “ref-alt” style variation, which includes SNVs,
