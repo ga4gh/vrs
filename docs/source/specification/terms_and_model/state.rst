@@ -17,3 +17,5 @@ variation, rule-based variation, and more (see :ref:`planned-states`).
 
 SequenceState
 @@@@@@@@@@@@@
+
+.. todo:: Write up SequenceState documentation
