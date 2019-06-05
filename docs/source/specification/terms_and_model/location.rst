@@ -9,7 +9,7 @@ As used by biologists, the precision of “location” (or “locus”) varies w
 
 **Computational definition**
 
-A Location is an abstract class that refer to contiguous regions of biological sequences. Universally, a Location is an identifiable position or region on a :ref:`Sequence`, defined by a Sequence :ref:`Id` and related information, which varies by Location subclass. Concrete types of Locations are described below. The most common Location is a :ref:`SequenceLocation <sequence-location>`, i.e., a Location based on a named sequence and an Interval on that sequence. Additional planned location classes (see :ref:`planned-locations`) may also be conceptual or symbolic locations, such as a cytoband region or a gene. Any of these may be used as the Location for Variation.
+The `Location` abstract class refers to contiguous regions of biological sequences. Universally, a Location is an identifiable position or region on a :ref:`Sequence`, defined by a Sequence :ref:`Id` and related information, which varies by Location subclass. Concrete types of Locations are described below. The most common Location is a :ref:`sequence-location`, i.e., a Location based on a named sequence and an Interval on that sequence. Additional :ref:`planned-locations` may also be conceptual or symbolic locations, such as a cytoband region or a gene. Any of these may be used as the Location for Variation.
 
 .. _sequence-location:
 
@@ -18,7 +18,7 @@ SequenceLocation
 
 **Computational definition**
 
-A Location subclass for describing a defined Interval over a named sequence.
+A Location subclass for describing a defined :ref:`Interval` over a named :ref:`Sequence`.
 
 **Information model**
 
@@ -37,7 +37,7 @@ A Location subclass for describing a defined Interval over a named sequence.
    * 0 ≤ *interval.start* ≤ *interval.end* ≤ *n*
    * interbase coordinate 0 refers to the point before the start of the Sequence
    * interbase coordinate n refers to the point after the end of the Sequence.
-* VR requires that coordinates refer to valid Sequence. VR does not
+* Coordinates MUST refer to valid Sequence. VR does not
   support referring to intronic positions within a transcript
   sequence, extrapolations beyond the ends of sequences, or other
   implied sequence.
