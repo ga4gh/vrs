@@ -3,10 +3,13 @@
 Variation
 !!!!!!!!!
 
-This is the variation definition.
+**Biological definition**
 
-.. todo::
-   Describe Variation
+In biology, variation is often used to mean `genetic variation`_, describing the differences observed in DNA among individuals.
+
+**Computational definition**
+
+The *Variation* abstract class is the top-level object in the :ref:`VR Object Graph <vr-object-graph>` and represents the concept of a molecular state observation. The representation and types of molecular states are widely varied, and there are several :ref:`planned-variation` currently under consideration to capture this diversity. The primary Variation subclass defined by the VR |version| specification is the :ref:`Allele`, with the :ref:`text` subclass for capturing other Variations that are not yet covered.
 
 .. _allele:
 
@@ -57,8 +60,8 @@ An Allele is a specific, single, and contiguous :ref:`Sequence` at a :ref:`Locat
 
 .. _text:
 
-Text Variation
-@@@@@@@@@@@@@@
+Text
+@@@@
 
 **Biological definition**
 
@@ -66,7 +69,7 @@ None
 
 **Computational definition**
 
-The Text class is intended to capture textual descriptions of variation that cannot be parsed by other Variation subclasses, but are still treated as variation.
+The *Text* subclass of :ref:`Variation` is intended to capture textual descriptions of variation that cannot be parsed by other Variation subclasses, but are still treated as variation.
 
 **Implementation guidance**
 
@@ -79,3 +82,4 @@ The Text class is intended to capture textual descriptions of variation that can
 * Additional Variation subclasses are continually under consideration. Please open a `GitHub issue`_ if you would like to propose a Variation subclass to cover a needed variation representation.
 
 .. _GitHub issue: https://github.com/ga4gh/vr-spec/issues
+.. _genetic variation: https://en.wikipedia.org/wiki/Genetic_variation
