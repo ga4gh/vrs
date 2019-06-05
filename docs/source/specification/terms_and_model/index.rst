@@ -109,8 +109,7 @@ Sequence
 
 **Biological definition**
 
-A contiguous, linear polymer of nucleic acid or amino acid
- residues.
+A contiguous, linear polymer of nucleic acid or amino acid residues.
 
 **Computational definition**
 

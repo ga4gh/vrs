@@ -82,6 +82,8 @@ on a named sequence and an Interval on that sequence. Locations may also
 be conceptual or symbolic locations, such as a cytoband region or a
 gene. Any of these may be used as the Location for Variation.
 
+.. _simple-interval-example:
+
 SimpleInterval
 ^^^^^^^^^^^^^^
 
@@ -97,7 +99,7 @@ SimpleInterval
 
     {'end': 43, 'start': 42, 'type': 'SimpleInterval'}
 
-
+.. _nested-interval-example:
 
 NestedInterval
 ^^^^^^^^^^^^^^
