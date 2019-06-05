@@ -22,7 +22,7 @@ with genes.
 translating precise biological definitions into data structures that
 can be used by implementers.** This translation should result in a
 representation of information that is consistent with conventional
-biological understanding, and, ideally, be able to accommodate future
+biological understanding and, ideally, be able to accommodate future
 data as well. The resulting *computational representation* of
 information should also be cognizant of computational performance, the
 minimization of opportunities for misunderstanding, and ease of
@@ -67,12 +67,12 @@ A string that uniquely identifies a specific instance of an object within a docu
 * This specification RECOMMENDS using :ref:`computed-identifiers` as ids.
 * A `FHIR Id`_, which is limited to 64 characters from a restricted character set, may be used as a
   VR Id.
-* Ids must correspond 1:1 to object instances: An id refers to exactly one object, and an object has
+* Ids MUST correspond 1:1 to object instances: An id refers to exactly one object, and an object has
   only one id. Therefore, equivalence of objects implies equivalence of ids, and vice versa.
 * Implementations MAY change ids at any time. Therefore, receiving systems SHOULD
   NOT persist Ids from remote sources.
-* Ids are not locatable references. An Id may not be used to retrieve objects from remote
-  databases. Instead, Identifiers should be used for retrieval.
+* Ids are not locatable references. An Id MAY NOT be used to retrieve objects from remote
+  databases. Instead, Identifiers SHOULD be used for retrieval.
 * The VR specification requires a canonical ordering (sorting) of Ids. Sorting a list of Ids MUST be
   performed using the C locale or, equivalently, by first encoding Ids as ASCII.
 

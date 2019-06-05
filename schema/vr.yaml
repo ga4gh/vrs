@@ -93,12 +93,12 @@ definitions:
 
   Interval:
     description: >-
-      A Interval represents a span of sequence.  Positions are
+      An Interval represents a span of sequence. Positions are
       always represented by contiguous spans using interbase
       coordinates.
 
       This definition of Interval is intended to be compatible with that
-      in Sequence Ontolgy
+      in Sequence Ontology
       ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)),
       with the exception that the GA4GH VR Interval may be
       zero-width. The SO definition is for an "extent greater than
