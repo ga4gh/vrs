@@ -3,7 +3,7 @@ Specification
 
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 5
 
    terms_and_model/index
    schema
