@@ -13,9 +13,7 @@ None.
 
 **Computational definition**
 
-Two integers that define the start and
- end positions of a range of residues, possibly with length zero, and
- specified using interbase coordinates.
+Two integers that define the start and end positions of a range of residues, possibly with length zero, and specified using interbase coordinates.
 
 **Information model**
 
@@ -28,9 +26,7 @@ Two integers that define the start and
 
 **Implementation guidance**
 
-* Implementations MUST require that 0 ≤ start ≤ end. In the case of
-  double-stranded DNA, this constraint holds even when a feature is on
-  the complementary strand.
+* Implementations MUST require that 0 ≤ start ≤ end. In the case of double-stranded DNA, this constraint holds even when a feature is on the complementary strand.
 
 **Notes**
 
