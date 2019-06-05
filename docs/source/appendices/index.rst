@@ -7,4 +7,3 @@ Appendices
    development_process
    design_decisions
    future_plans
-   todo
