@@ -60,4 +60,4 @@ Interval
 * See `Interbase Interval tests`_ in the VR-python repo for a diagram and examples.
 
 .. _will need to convert: https://www.biostars.org/p/84686/
-.. _Interbase Interval tests: https://github.com/ga4gh/vr-python/blob/master/notebooks/appendices/Interbase%20Interval%20tests.ipynb
+.. _Interbase Interval tests: https://github.com/ga4gh/vr-python/blob/master/notebooks/archive/Interbase%20Interval%20tests.ipynb
