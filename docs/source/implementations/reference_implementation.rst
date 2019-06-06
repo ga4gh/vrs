@@ -306,18 +306,16 @@ on-the-fly computations.
 
     ((18, 18), ('', 'AC'))
 
+.. _digest-example:
 
-
-ga4gh_digest()
+digest()
 ~~~~~~~~~~~~~~
 
-The ``ga4gh_digest`` is a convention for constructing unique identifiers
-from binary objects (as from serialization) using well-known SHA512
-hashing and Base64 (i.e., base64url) encoding.
+The ``digest`` is a convention for constructing unique identifiers from binary objects (as from serialization) using well-known SHA512 hashing and base64url encoding.
 
 .. code:: ipython3
 
-    ga4gh_digest(b"")
+    digest(b"")
 
 
 
@@ -330,7 +328,7 @@ hashing and Base64 (i.e., base64url) encoding.
 
 .. code:: ipython3
 
-    ga4gh_digest(b"ACGT")
+    digest(b"ACGT")
 
 
 
