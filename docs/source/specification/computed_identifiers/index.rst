@@ -23,7 +23,7 @@ To generate a VR Computed Indentifier, an implementation:
 * MUST serialize the object into a binary string as described in :ref:`serialization`
 * MUST generate a digest as described in :ref:`ga4gh-digest`
 * MUST construct a CURIE Identifier as described in :ref:`identification`
-* MAY NOT use any other normalization, serialization, or digest
+* MUST NOT use any other normalization, serialization, or digest
   mechanism to generate a GA4GH Computed Identifier.
 
 

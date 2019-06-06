@@ -3,11 +3,7 @@
 Serialization
 @@@@@@@@@@@@@
 
-In the context of generating a Computed Identifier, serialization
-converts a VR object into a binary representation.  Because the result
-will be used to generate a digest, it is critical that VR
-implementations serialize data identically.  The VR-Spec provides
-validation tests to ensure compliance.
+In the context of generating a Computed Identifier, serialization converts a VR object into a binary representation.  Because the result will be used to generate a digest, VR implementations MUST serialize data identically.  The VR-Spec provides validation tests to ensure compliance.
 
 The criteria for the VR serialization method was that it must be
 relatively easy and reliable to implement in any common computer
