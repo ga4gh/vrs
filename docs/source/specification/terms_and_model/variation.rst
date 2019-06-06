@@ -31,7 +31,7 @@ An Allele is a specific, single, and contiguous :ref:`Sequence` at a :ref:`Locat
    :align: left
    :widths: 12, 9, 10, 30
 
-   id, :ref:`Id`, optional, Location Id; must be unique within document
+   id, :ref:`Id`, optional, Allele identifier; must be unique within document
    location, :ref:`Location`, required, Where Allele is located
    state, :ref:`State`, required, Sequence at location_id
 
