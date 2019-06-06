@@ -45,7 +45,7 @@ terms.
           in `RFC 2119`_.
 
 
-Primitive concepts
+Primitive Concepts
 @@@@@@@@@@@@@@@@@@
 
 .. _id:
@@ -138,7 +138,7 @@ amino acid codes.
 * For the purposes of representing sequence variation, it is not necessary that Sequences be “typed”
   (i.e., DNA, RNA, or AA).
 
-Composite concepts
+Composite Concepts
 @@@@@@@@@@@@@@@@@@
 
 .. _vr-object-graph:
