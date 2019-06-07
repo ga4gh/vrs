@@ -76,6 +76,9 @@ A string that uniquely identifies a specific instance of an object within a docu
 * The VR specification requires a canonical ordering (sorting) of Ids. Sorting a list of Ids MUST be
   performed using the C locale or, equivalently, by first encoding Ids as ASCII.
 
+.. warning::
+   Implementation guidance on persisting ids in currently under evaluation and is subject to change prior to PRC submission. Please review accordingly, and contribute to the discussion at: https://github.com/ga4gh/vr-spec/issues/81
+
 .. _residue:
 
 Residue
