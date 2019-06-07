@@ -25,6 +25,13 @@ release = '1.0.0-alpha.1'
 
 master_doc = 'index'
 
+# -- Schema doc paths --------------------------------------------------------
+
+rst_epilog = """
+.. |vr_json| replace:: `vr.json <https://raw.githubusercontent.com/ga4gh/vr-spec/{0}/schema/vr.json>`__
+.. |vr_yaml| replace:: `vr.yaml <https://raw.githubusercontent.com/ga4gh/vr-spec/{0}/schema/vr.yaml>`__
+""".format(release)
+
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
