@@ -95,4 +95,3 @@ An :ref:`Interval` comprised of an *inner* and *outer* :ref:`SimpleInterval`. Th
 * See :ref:`example <nested-interval-example>` in the reference implementation documentation.
 
 .. _will need to convert: https://www.biostars.org/p/84686/
-.. _Interbase Interval tests: https://github.com/ga4gh/vr-python/blob/master/notebooks/archive/Interbase%20Interval%20tests.ipynb
