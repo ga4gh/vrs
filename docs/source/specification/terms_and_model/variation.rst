@@ -9,7 +9,7 @@ In biology, variation is often used to mean `genetic variation`_, describing the
 
 **Computational definition**
 
-The *Variation* abstract class is the top-level object in the :ref:`VR Object Graph <vr-object-graph>` and represents the concept of a molecular state observation. The representation and types of molecular states are widely varied, and there are several :ref:`planned-variation` currently under consideration to capture this diversity. The primary Variation subclass defined by the VR |version| specification is the :ref:`Allele`, with the :ref:`text` subclass for capturing other Variations that are not yet covered.
+The *Variation* abstract class is the top-level object in the :ref:`vr-schema-diagram` and represents the concept of a molecular state observation. The representation and types of molecular states are widely varied, and there are several :ref:`planned-variation` currently under consideration to capture this diversity. The primary Variation subclass defined by the VR |version| specification is the :ref:`Allele`, with the :ref:`text` subclass for capturing other Variations that are not yet covered.
 
 .. _allele:
 
