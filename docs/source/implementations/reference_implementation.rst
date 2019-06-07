@@ -69,7 +69,7 @@ The top-level classes in VR are *identifiable*, meaning that VR
 prescribes how implementations can compute globally-consistent
 identifiers from the data.
 
-See this figure for a schematic representation.
+See the :ref:`vr-object-graph` for a schematic representation.
 
 Locations
 ~~~~~~~~~
