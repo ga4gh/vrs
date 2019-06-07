@@ -66,7 +66,7 @@ state of a sequence or conceptual region Future kinds of Variation will
 support haplotypes, genotypes, and translocations/fusions.
 
 The top-level classes in VR are *identifiable*, meaning that VR
-proscribes how implementations can compute globally-consistent
+prescribes how implementations can compute globally-consistent
 identifiers from the data.
 
 See this figure for a schematic representation.
