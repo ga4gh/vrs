@@ -32,7 +32,7 @@ The *SequenceState* class specifically captures :ref:`sequence` changes over a d
    :widths: 12, 9, 10, 30
 
    id, :ref:`Id`, optional, State Id; must be unique within document
-   type, :ref:`string`, required, State type; must be set to 'SequenceState'
+   type, string, required, State type; must be set to 'SequenceState'
    sequence, :ref:`Sequence`, required, The sequence that is to be used as the state for other types.
    
 **Examples**
