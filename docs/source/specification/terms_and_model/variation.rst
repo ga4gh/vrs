@@ -40,7 +40,7 @@ An Allele is a specific, single, and contiguous :ref:`Sequence` at a :ref:`Locat
 * Implementations MUST require that interval.end ≤ sequence_length when the Sequence length is known.
 * The implementation MAY infer the Sequence by location_id and the Sequence State type, and ensure compatibility between them. This behavior is not included in the specification.
 * Alleles are equal only if the component fields are equal: at the same location and with the same state.
-* Alleles may have multiple related representations on the same Sequence type due to shifting (aka shuffling, normalization). A future version of VMC will provide a general framework for flexibly declaring various notions of pairwise Allele relationships.
+* Alleles may have multiple related representations on the same Sequence type due to shifting (aka shuffling, normalization). A future version of this specification will provide a general framework for flexibly declaring various notions of pairwise Allele relationships.
 
 **Notes**
 
@@ -55,7 +55,7 @@ An Allele is a specific, single, and contiguous :ref:`Sequence` at a :ref:`Locat
    * "Allele" connotes a state whereas "variant" connotes a change between states. This distinction makes it awkward to use variant to refer to the concept of an unchanged position in a Sequence and was one of the factors that influenced the preference of “Allele” over “Variant” as the primary subject of annotations.
    * See :ref:`Use “Allele” rather than “Variant” <use-allele>` for further details.
 * When a trait has a known genetic basis, it is typically represented computationally as an association with an Allele.
-* The VMC definition of Allele applies to all Sequence types (DNA, RNA, AA).
+* This specification's definition of Allele applies to all Sequence types (DNA, RNA, AA).
 
 
 .. _text:
