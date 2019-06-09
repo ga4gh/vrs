@@ -9,7 +9,7 @@ rationale for our design decisions, including:
 * Use “Allele” rather than “Variant”
 * Alleles must be right normalized
 * Sequence ranges use an interbase coordinate system
-* Modeling Language
+* Modelling Language
 * Serialization Options
 
 .. _use-variation:
@@ -38,7 +38,7 @@ entity. Colloquially, the words "allele" and "variant" have similar
 meanings and they are often used interchangeably. However, the VR
 contributors believe that it is essential to distinguish the state of
 the sequence from the change between states of a sequence. It is
-imperative that precise terms are used when modeling data. Therefore,
+imperative that precise terms are used when modelling data. Therefore,
 within VR, Allele refers to a state and "variant" refers to the change
 from one Allele to another.
 
@@ -110,12 +110,12 @@ substitutions and deletions; in effect, the interpretation of
 coordinates depends on the variant type, which is an unfortunate
 coupling of distinct concepts.
 
-.. _modeling-language:
+.. _modelling-language:
 
-Modeling Language
+Modelling Language
 @@@@@@@@@@@@@@@@@
 
-The VR collaborators investigated numerous options for modeling data,
+The VR collaborators investigated numerous options for modelling data,
 generating code, and writing the wire protocol. Required and desired
 selection criteria included:
 
