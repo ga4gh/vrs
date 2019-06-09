@@ -101,6 +101,7 @@ A specific combination of non-overlapping Alleles that co-occur on the same refe
 .. csv-table::
    :header: Field, Type, Label, Description
    :align: left
+   :widths: auto
 
    id, :ref:`Id`, optional, Variation Id; must be unique within document
    type, :ref:`string`, required, Variation type; must be set to 'Haplotype'
