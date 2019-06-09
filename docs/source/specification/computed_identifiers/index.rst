@@ -17,7 +17,7 @@ algorithms, the SHA-512 hash function, which generates a binary digest
 from binary data, and Base64 URL encoding, which encodes binary data
 using printable characters.
 
-To generate a VR Computed Indentifier, an implementation:
+To generate a VR Computed Identifier, an implementation:
 
 * MUST normalize the Allele, if the object is an Allele, as described in :ref:`normalization`
 * MUST serialize the object into a binary string as described in :ref:`serialization`
