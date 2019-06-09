@@ -32,7 +32,7 @@ An Allele is a specific, single, and contiguous :ref:`Sequence` at a :ref:`Locat
    :widths: 12, 9, 10, 30
 
    id, :ref:`Id`, optional, Variation Id; must be unique within document
-   type, :ref:`string`, required, Variation type; must be set to 'Allele'
+   type, string, required, Variation type; must be set to 'Allele'
    location, :ref:`Location`, required, Where Allele is located
    state, :ref:`State`, required, State at location
 
@@ -80,8 +80,8 @@ The *Text* subclass of :ref:`Variation` is intended to capture textual descripti
    :widths: 12, 9, 10, 30
 
    id, :ref:`Id`, optional, Variation Id; must be unique within document
-   type, :ref:`string`, required, Variation type; must be set to 'Text'
-   sequence, :ref:`string`, required, The textual variation representation not parseable by other subclasses of Variation.
+   type, string, required, Variation type; must be set to 'Text'
+   sequence, string, required, The textual variation representation not parseable by other subclasses of Variation.
 
 **Implementation guidance**
 
