@@ -16,6 +16,10 @@ The `Location` abstract class refers to contiguous regions of biological sequenc
 SequenceLocation
 @@@@@@@@@@@@@@@@
 
+**Biological definition**
+
+None
+
 **Computational definition**
 
 A Location subclass for describing a defined :ref:`Interval` over a named :ref:`Sequence`.
@@ -28,6 +32,7 @@ A Location subclass for describing a defined :ref:`Interval` over a named :ref:`
    :widths: 12, 9, 10, 30
 
    id, :ref:`Id`, optional, Location Id; must be unique within document
+   type, :ref:`string`, required, must be set to 'SequenceLocation'
    sequence_id, :ref:`Id`, required, An id mapping to the Identifier of the external database Sequence
    interval, :ref:`Interval`, required, Position of feature on reference sequence specified by sequence_id.
 
