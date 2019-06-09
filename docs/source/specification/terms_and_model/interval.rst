@@ -9,7 +9,7 @@ None.
 
 **Computational definition**
 
-The *Interval* abstract class defines a range on a :ref:`sequence`, possibly with length zero, and specified using interbase coordinates. Intervals may be a :ref:`SimpleInterval` with a single start and end coordinate, or a :ref:`NestedInterval` of two :ref:`SimpleIntervals <SimpleInterval>` for describing fuzzy endpoint ranges.
+The *Interval* abstract class defines a range on a :ref:`sequence`, possibly with length zero, and specified using interbase coordinates. An Interval may be a :ref:`SimpleInterval` with a single start and end coordinate. Additional :ref:`planned-intervals` may also be nested or complex intervals, for use in describing fuzzy endpoint and more complex ranges. Any of these may be used as the Interval for Location.
 
 .. _SimpleInterval:
 
@@ -26,6 +26,7 @@ An :ref:`Interval` with a single start and end coordinate.
    :header: Field, Type, Label, Description
    :align: left
 
+   type, string, required, Interval type; must be set to 'SimpleInterval'
    start, uint64, required, start position
    end, uint64, required, end position
 
@@ -63,35 +64,3 @@ An :ref:`Interval` with a single start and end coordinate.
 * <start, end>=<*i,i+1*> refers to the *i+1th* (1-based) residue.
 * <start, end>=<*N,N*> refers to the position after the last residue for Sequence of length *N*.
 * See :ref:`example <simple-interval-example>` in the reference implementation documentation.
-
-.. _NestedInterval:
-
-NestedInterval
-@@@@@@@@@@@@@@
-
-.. warning::
-   The NestedInterval is used to support Variations that are not part of the version |version| VR-Spec, and thus are subject to removal before PRC submission. Please review and comment on this at https://github.com/ga4gh/vr-spec/issues/76.
-
-**Computational definition**
-
-An :ref:`Interval` comprised of an *inner* and *outer* :ref:`SimpleInterval`. The *NestedInterval* allows for the definition of "fuzzy" range endpoints by designating a potentially included region (the *outer* SimpleInterval) and required included region (the *inner* SimpleInterval).
-
-**Information model**
-
-.. csv-table::
-   :header: Field, Type, Label, Description
-   :align: left
-
-   inner, :ref:`SimpleInterval`, required, known interval
-   outer, :ref:`SimpleInterval`, required, potential interval
-
-**Implementation guidance**
-
-* Implementations MUST require that 0 ≤ outer.start ≤ inner.start ≤ inner.end ≤ outer.end. In the case of double-stranded DNA, this constraint holds even when a feature is on the complementary strand.
-
-
-**Examples**
-
-* See :ref:`example <nested-interval-example>` in the reference implementation documentation.
-
-.. _will need to convert: https://www.biostars.org/p/84686/
