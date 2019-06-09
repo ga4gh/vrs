@@ -195,7 +195,7 @@ descriptions of variation.
 Alleles
 ~~~~~~~
 
-An Allele is an asserion of a SequenceState at a Location. The many
+An Allele is an assertion of a SequenceState at a Location. The many
 possible Location and SequenceState classes enable the representation of
 many kinds of Variation.
 
