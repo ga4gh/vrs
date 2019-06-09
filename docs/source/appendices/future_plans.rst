@@ -61,6 +61,36 @@ StateRule
 Planned Interval Concepts
 @@@@@@@@@@@@@@@@@@@@@@@@@
 
+.. _NestedInterval:
+
+NestedInterval
+@@@@@@@@@@@@@@
+
+**Computational definition**
+
+An :ref:`Interval` comprised of an *inner* and *outer* :ref:`SimpleInterval`. The *NestedInterval* allows for the definition of "fuzzy" range endpoints by designating a potentially included region (the *outer* SimpleInterval) and required included region (the *inner* SimpleInterval).
+
+**Information model**
+
+.. csv-table::
+   :header: Field, Type, Label, Description
+   :align: left
+
+   type, :ref:`string`, required, Interval type; must be set to 'NestedInterval'
+   inner, :ref:`SimpleInterval`, required, known interval
+   outer, :ref:`SimpleInterval`, required, potential interval
+
+**Implementation guidance**
+
+* Implementations MUST require that 0 ≤ outer.start ≤ inner.start ≤ inner.end ≤ outer.end. In the case of double-stranded DNA, this constraint holds even when a feature is on the complementary strand.
+
+
+**Examples**
+
+* See :ref:`example <nested-interval-example>` in the reference implementation documentation.
+
+.. _will need to convert: https://www.biostars.org/p/84686/
+
 ComplexInterval
 ###############
 
