@@ -105,7 +105,7 @@ A specific combination of non-overlapping Alleles that co-occur on the same refe
    id, :ref:`Id`, optional, Variation Id; must be unique within document
    type, :ref:`string`, required, Variation type; must be set to 'Haplotype'
    location, :ref:`Location`, required, Where Haplotype is located
-   completeness, :ref:`enum`, required, Declaration of completeness of the Haplotype definition. Values are: UNKNOWN: Other in-phase Alleles may exist, PARTIAL: Other in-phase Alleles exist but are unspecified, COMPLETE: The Haplotype declares a complete set of Alleles.
+   completeness, :ref:`enum`, required, Declaration of completeness of the Haplotype definition. Values are: **UNKNOWN**: Other in-phase Alleles may exist. **PARTIAL**: Other in-phase Alleles exist but are unspecified. **COMPLETE**: The Haplotype declares a complete set of Alleles.
    allele_ids, :ref:`Id[]`, required, List of Alleles that comprise this Haplotype
 
 **Implementation guidance**
