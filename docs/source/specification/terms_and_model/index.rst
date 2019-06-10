@@ -158,10 +158,10 @@ These abstract classes and their concrete child classes are described in the fol
 .. toctree::
    :maxdepth: 2
 
-   variation
-   location
-   state
    interval
+   state
+   location
+   variation
 
 .. _Wikipedia: https://en.wikipedia.org/wiki/Allele
 .. _ISOGG: https://isogg.org/wiki/Allele
