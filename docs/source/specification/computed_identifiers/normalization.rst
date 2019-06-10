@@ -3,7 +3,7 @@
 Normalization
 !!!!!!!!!!!!!
 
-The VR Spec RECOMMENDS that Alleles at precise locations be normalized
+The VR-Spec RECOMMENDS that Alleles at precise locations be normalized
 to an fully-justified ("expanded") form.  Implementations MUST use
 fully justified variation when generating :ref:`computed-identifiers`.
 
