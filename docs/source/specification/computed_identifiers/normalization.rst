@@ -3,15 +3,16 @@
 Normalization
 !!!!!!!!!!!!!
 
-The VR-Spec RECOMMENDS that Alleles at precise locations be normalized
-to an fully-justified ("expanded") form.  Implementations MUST use
-fully justified variation when generating :ref:`computed-identifiers`.
+VR Spec implementations MUST normalize Alleles to a fully justified
+("expanded") form when generating :ref:`computed-identifiers`. The VR
+Spec RECOMMENDS that Alleles at precise locations are also normalized
+to a fully justified form.
 
 Conceptually, fully justified variation is expanded to the outer
-bounds of left- and right- shuffling.  As a result, fully justified
-variation describes the unambiguous state of the resulting sequence.
+bounds of left- and right- shuffling. As a result, it describes the
+unambiguous state of the resulting sequence.
 
-The process for fully justifying a two alleles (reference sequence and
+The process for fully justifying two alleles (reference sequence and
 alternate sequence) at an interval is:
 
 * Trim common suffixes, if any, common to both allele sequences. Adjust the
