@@ -3,7 +3,7 @@ Future Plans
 
 As part of publishing this specification, we now describe our next steps, which include expanding the specification for important additional use cases even while we begin the equally crucial work of encouraging stakeholders to embrace the VR-Spec and work toward standardizing the exchange of variation data.
 
-Below is an illustration of planned components for the VR Schema.
+Below is an illustration of planned concepts for the VR Schema.
 
 
 .. figure:: ../images/planned_extensions_graph.png
@@ -11,16 +11,19 @@ Below is an illustration of planned components for the VR Schema.
 
    **An illustration of planned components for the VR Schema.** Version 1.0 components are colored green. Components that are undergoing testing and evaluation and are candidates for the next release cycle are colored yellow. Components that are planned but still undergoing requirement gathering and initial development are colored red. The VR Schema requires the use of multiple composite objects, which are grouped under four abstract classes: :ref:`Variation`, :ref:`Location`, :ref:`State`, and :ref:`Interval`. These classes and their relationships to the representation of Variation are illustrated here. All classes have a string type. Dashed borders denote abstract classes. Abstract classes are not instantiated. Thin solid borders denote classes that may be instantiated but are not identifiable. Bold borders denote identifiable objects (i.e., may be serialized and identified by computed identifier). Solid arrow lines denoted inheritance. Subclasses inherit all attributes from their parent. Inherited attributes are not shown.
 
+.. _planned-concepts:
+
+Planned Concepts
+@@@@@@@@@@@@@@@@
 
 .. _planned-intervals:
 
-Planned Interval Concepts
-@@@@@@@@@@@@@@@@@@@@@@@@@
+Interval (Planned)
+##################
 
-.. _NestedInterval:
 
 NestedInterval
-@@@@@@@@@@@@@@
+==============
 
 **Biological definition**
 
@@ -52,41 +55,41 @@ An :ref:`Interval` comprised of an *inner* and *outer* :ref:`SimpleInterval`. Th
 .. _will need to convert: https://www.biostars.org/p/84686/
 
 ComplexInterval
-###############
+===============
 
 .. _planned-states:
 
-Planned State Concepts
-@@@@@@@@@@@@@@@@@@@@@@
+State (Planned)
+###############
 
 CNVState
-########
+========
 
 StateRule
-#########
+=========
 
 .. _planned-locations:
 
-Planned Location Concepts
-@@@@@@@@@@@@@@@@@@@@@@@@@
+Location (Planned)
+##################
 
 CytobandLocation
-################
+================
 
 GeneLocation
-############
+============
 
 LocationRule
-############
+============
 
 .. _planned-variation:
 
-Planned Variation Concepts
-@@@@@@@@@@@@@@@@@@@@@@@@@@
+Variation (Planned)
+###################
 
 
 Haplotypes
-##########
+==========
 
 **Biological definition**
 
@@ -146,7 +149,7 @@ A specific combination of non-overlapping :ref:`Allele`s that co-occur on the sa
 * GENO: `Haplotype (GENO:0000871) <http://purl.obolibrary.org/obo/GENO_0000871>`__ - A set of two or more sequence alterations on the same chromosomal strand that tend to be transmitted together.
 
 Genotypes
-#########
+=========
 
 **Biological definition**
 
@@ -182,7 +185,8 @@ A list of Haplotypes.
 **Notes**
 
 * The term "genotype" has two, related definitions in common use. The narrower definition is a set of alleles observed at a single location and with a ploidy of two, such as a pair of single residue variants on an autosome. The broader, generalized definition is a set of alleles at multiple locations and/or with ploidy other than two.The VR-Spec Genotype entity is based on this broader definition.
-* The term "diplotype" is often used to refer to two haplotypes. The VR-Spec Genotype entity subsumes the conventional definition of diplotype. Therefore, the VR-Spec model does not include an explicit entity for diplotypes. See Genotypes represent collections of in-phase alleles with arbitrary ploidy in the Appendix for a discussion.
+* The term "diplotype" is often used to refer to two haplotypes. The VR-Spec Genotype entity subsumes the conventional definition of diplotype. Therefore, the VR-Spec model does not include an explicit entity for diplotypes. See `Genotypes represent collections of in-phase alleles with arbitrary ploidy`__ in the Appendix for a discussion.
+__ genotypes-represent-haplotypes-with-arbitrary-ploidy_
 * The VR-SPec model makes no assumptions about ploidy of an organism or individual. The number of Haplotypes in a Genotype is the observed ploidy of the individual.
 * In diploid organisms, there are typically two instances of each autosomal chromosome, and therefore two instances of sequence at a particular location. Thus, Genotypes will often list two Haplotypes. In the case of haploid chromosomes or haploinsufficiency, the Genotype consists of a single Haplotype.
 * A consequence of the computational definition is that Haplotypes at overlapping or adjacent intervals may not be included in the same Genotype. However, two or more Alleles may always be rewritten as an equivalent Allele with a common sequence and interval context.
@@ -193,15 +197,7 @@ A list of Haplotypes.
 SO: `Genotype (SO:0001027) <http://www.sequenceontology.org/browser/current_svn/term/SO:0001027>`__ — A genotype is a variant genome, complete or incomplete.
 
 Translocations
-##############
-
-.. _var-sets:
-
-Variation Sets
-@@@@@@@@@@@@@@
-
-StaticVariationSets
-####################
+==============
 
 .. _non-sequence-variation:
 
@@ -211,5 +207,32 @@ Non-sequence Variation
 .. warning::
    Not sure what this is.
 
+.. _planned-var-sets:
 
+Variation Sets (Planned)
+########################
+
+StaticVariationSets
+===================
+
+
+.. _planned-design-decisions:
+
+Planned Design Decisions
+@@@@@@@@@@@@@@@@@@@@@@@@
+
+The sections below are the planned trade-offs discussed and being considered for `design decisions`_ under the `Future Plans`_. 
+
+.. _genotypes-represent-haplotypes-with-arbitrary-ploidy:
+
+Genotypes represent Haplotypes with arbitrary ploidy
+####################################################
+
+The VR-Spec defines Haplotypes as a list of Alleles, and Genotypes as a list of Haplotypes. In essence, Haplotypes and Genotypes represent two distinct dimensions of containment: Haplotypes represent the "in phase" relationship of Alleles while Genotypes represents sets of Haplotypes of arbitrary ploidy.
+
+There are two important consequences of these definitions:
+There is no single-location Genotype. Users of SNP data will be familiar with representations like rs7412 C/C, which indicates the diploid state at a position. In the VR-Spec, this is merely a special case of a Genotype with two Haplotypes, each of which is defined with only one Allele (the same Allele in this case).
+The VR-Spec does not define a diplotype type. A diplotype is a special case of a VR-Spec Genotype with exactly two Haplotypes. In practice, software data types that assume a ploidy of 2 make it very difficult to represent haploid states, copy number loss, and copy number gain, all of which occur when representing human data. In addition, assuming ploidy=2 makes software incompatible with organisms with other ploidy. The VR-Spec makes no assumptions about "normal" ploidy.
+
+In other words, the VR-SPec does not represent single-position Genotypes or diplotypes because both concepts are subsumed by the Allele, Haplotype, and Genotypes entities.
 
