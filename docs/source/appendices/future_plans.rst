@@ -118,12 +118,12 @@ Additional :ref:`Location` concepts that are being planned for future considerat
 CytobandLocation
 ================
 
-.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/98
+.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/100
 
 GeneLocation
 ============
 
-.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/99
+.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/101
 
 **Biological definition**
 
@@ -150,7 +150,7 @@ TODO
 LocationRule
 ============
 
-.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/100
+.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/102
 
 .. _planned-variation:
 
