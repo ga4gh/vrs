@@ -81,7 +81,7 @@ The *Text* subclass of :ref:`Variation` is intended to capture textual descripti
 
    id, :ref:`Id`, optional, Variation Id; must be unique within document
    type, string, required, Variation type; must be set to 'Text'
-   sequence, string, required, The textual variation representation not parseable by other subclasses of Variation.
+   definition, string, required, The textual variation representation not parsable by other subclasses of Variation.
 
 **Implementation guidance**
 
