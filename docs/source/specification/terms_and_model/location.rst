@@ -42,7 +42,7 @@ A Location subclass for describing a defined :ref:`Interval` over a named :ref:`
    * 0 ≤ *interval.start* ≤ *interval.end* ≤ *n*
    * interbase coordinate 0 refers to the point before the start of the Sequence
    * interbase coordinate n refers to the point after the end of the Sequence.
-* Coordinates MUST refer to valid Sequence. VR does not
+* Coordinates MUST refer to a valid Sequence. VR does not
   support referring to intronic positions within a transcript
   sequence, extrapolations beyond the ends of sequences, or other
   implied sequence.
