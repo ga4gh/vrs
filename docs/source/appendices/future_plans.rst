@@ -270,22 +270,26 @@ SO: `Genotype (SO:0001027) <http://www.sequenceontology.org/browser/current_svn/
 Translocations
 ==============
 
+.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/103
+
 .. _non-sequence-variation:
 
 Non-sequence Variation
 ======================
 
-.. warning::
-   Not sure what this is.
+.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/104
 
 .. _planned-var-sets:
 
 Variation Sets (Planned)
 ########################
 
+TODO
+
 StaticVariationSets
 ===================
 
+.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/105
 
 .. _planned-design-decisions:
 
