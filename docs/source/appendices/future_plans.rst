@@ -16,11 +16,20 @@ Below is an illustration of planned concepts for the VR Schema.
 Planned Concepts
 @@@@@@@@@@@@@@@@
 
+The VR-Spec covers a fundamental subset of data types to represent variation, thus far predominantly related to the replacement of sequences in a reference. Increasing its applicability will require supporting more complex types of variation, including:
+
+* copy number variants and structural variants, including inversions and translocations 
+* DNA segment variation, such as "fuzzy" intervals that provide boundaries on imprecise coordinates, including context intervals in which boundaries are defined by sequence context, and feature intervals in which sequence features such as introns and exons are identifiable.
+* mosaicism and chimerism
+
+The following sections provide a preview of planned concepts under way to address a broader representation of variation.
+
 .. _planned-intervals:
 
 Interval (Planned)
 ##################
 
+Additional :ref:`Interval` concepts that are being planned for future consideration in the specification. See :ref:`Interval` for more information.
 
 NestedInterval
 ==============
@@ -47,7 +56,6 @@ An :ref:`Interval` comprised of an *inner* and *outer* :ref:`SimpleInterval`. Th
 
 * Implementations MUST require that 0 ≤ outer.start ≤ inner.start ≤ inner.end ≤ outer.end. In the case of double-stranded DNA, this constraint holds even when a feature is on the complementary strand.
 
-
 **Examples**
 
 * See :ref:`example <nested-interval-example>` in the reference implementation documentation.
@@ -57,36 +65,99 @@ An :ref:`Interval` comprised of an *inner* and *outer* :ref:`SimpleInterval`. Th
 ComplexInterval
 ===============
 
+.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/95
+          
 .. _planned-states:
 
 State (Planned)
 ###############
 
+Additional :ref:`State` concepts that are being planned for future consideration in the specification. See :ref:`State` for more information.
+
 CNVState
 ========
 
+.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/96
+
+**Biological definition**
+
+TODO
+
+**Computational definition**
+
+TODO
+
+**Information model**
+
+.. csv-table::
+   :header: Field, Type, Label, Description
+   :align: left
+
+   id, :ref:`Id`, optional, State id; must be unique within document 
+   type, string, required, State type; must be set to 'CNVState'
+   location, :ref:`Location`, required, The Location that is copied.
+   min_copies, int, required, The minimum number of copies
+   max_copies, int, required, The maximum number of copies
+
+**Implementation guidance**
+
+TODO
+
 StateRule
 =========
+
+.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/97
 
 .. _planned-locations:
 
 Location (Planned)
 ##################
 
+Additional :ref:`Location` concepts that are being planned for future consideration in the specification. See :ref:`Location` for more information.
+
 CytobandLocation
 ================
+
+.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/98
 
 GeneLocation
 ============
 
+.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/99
+
+**Biological definition**
+
+TODO
+
+**Computational definition**
+
+TODO
+
+**Information model**
+
+.. csv-table::
+   :header: Field, Type, Label, Description
+   :align: left
+
+   id, :ref:`Id`, optional, Location id; must be unique within document 
+   type, string, required, Location type; must be set to 'GeneLocation'
+   gene_id, :ref:`Id`, required, The gene location from a public trusted authority.
+
+**Implementation guidance**
+
+TODO
+
 LocationRule
 ============
+
+.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/100
 
 .. _planned-variation:
 
 Variation (Planned)
 ###################
 
+Additional :ref:`Variation` concepts that are being planned for future consideration in the specification. See :ref:`Variation` for more information.
 
 Haplotypes
 ==========
@@ -117,7 +188,7 @@ A specific combination of non-overlapping :ref:`Allele`s that co-occur on the sa
 |               |                 |          | * PARTIAL: Other in-phase Alleles exist but are unspecified.  |
 |               |                 |          | * COMPLETE: The Haplotype declares a complete set of Alleles. |
 +---------------+-----------------+----------+---------------------------------------------------------------+
-| allele_ids    | :ref:`Id[]`     | required | List of Alleles that comprise this Haplotype                  |
+| alleles       | :ref:`Id`[]     | required | List of Alleles that comprise this Haplotype                  |
 +---------------+-----------------+----------+---------------------------------------------------------------+
 
 **Implementation guidance**
@@ -174,7 +245,7 @@ A list of Haplotypes.
 |               |                 |          | * PARTIAL: Other Haplotypes exist but are unspecified.              |
 |               |                 |          | * COMPLETE: The Genotype declares a complete set of Haplotypes.     |
 +---------------+-----------------+----------+---------------------------------------------------------------------+
-| haplotype_ids | :ref:`Id[]`     | required | List of Haplotypes; length must agree with ploidy of genomic region |
+| haplotypes    | :ref:`Id`[]     | required | List of Haplotypes; length must agree with ploidy of genomic region |
 +---------------+-----------------+----------+---------------------------------------------------------------------+
 
 **Implementation guidance**
