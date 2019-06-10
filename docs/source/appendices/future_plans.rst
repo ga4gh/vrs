@@ -103,10 +103,10 @@ TODO
 
 TODO
 
-StateRule
+RuleState
 =========
 
-.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/97
+The *RuleState* class is designed to allow capture of States that are based on a categorical rule, as opposed to an instance of categorization. This type of variation is frequently attached to annotations extracted from the literature or generated in a study of multiple variations that exhibit a shared underlying property, such as a specific type of disruptive mutation or predicted phenotypic impact. The intent of this state is to capture the sentiment behind such statements without explicitly defining sets of variations that meet the categorical criteria.
 
 .. _planned-locations:
 
