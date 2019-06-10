@@ -221,7 +221,7 @@ StaticVariationSets
 Planned Design Decisions
 @@@@@@@@@@@@@@@@@@@@@@@@
 
-The sections below are the planned trade-offs discussed and being considered as the planned :ref:`Design Decisions` for the :ref:`Planned Concepts`. 
+The sections below are the planned trade-offs discussed and being considered as the planned :ref:`design decisions` for the :ref:`planned concepts <planned-concepts>`. 
 
 .. _genotypes-represent-haplotypes-with-arbitrary-ploidy:
 
