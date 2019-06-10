@@ -71,8 +71,6 @@ A string that uniquely identifies a specific instance of an object within a docu
   only one id. Therefore, equivalence of objects implies equivalence of ids, and vice versa.
 * Implementations MAY change ids at any time. Therefore, receiving systems SHOULD
   NOT persist Ids from remote sources.
-* Ids are not locatable references. An Id MAY NOT be used to retrieve objects from remote
-  databases. Instead, Identifiers SHOULD be used for retrieval.
 * The VR specification requires a canonical ordering (sorting) of Ids. Sorting a list of Ids MUST be
   performed using the C locale or, equivalently, by first encoding Ids as ASCII.
 
