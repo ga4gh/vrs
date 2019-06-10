@@ -202,7 +202,7 @@ Translocations
 .. _non-sequence-variation:
 
 Non-sequence Variation
-######################
+======================
 
 .. warning::
    Not sure what this is.
@@ -221,7 +221,7 @@ StaticVariationSets
 Planned Design Decisions
 @@@@@@@@@@@@@@@@@@@@@@@@
 
-The sections below are the planned trade-offs discussed and being considered for `design decisions`_ under the `Future Plans`_. 
+The sections below are the planned trade-offs discussed and being considered as the planned :ref:`Design Decisions` for the :ref:`Planned Concepts`. 
 
 .. _genotypes-represent-haplotypes-with-arbitrary-ploidy:
 
