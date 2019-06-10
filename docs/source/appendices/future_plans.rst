@@ -188,7 +188,7 @@ A specific combination of non-overlapping :ref:`Allele`s that co-occur on the sa
 |               |                 |          | * PARTIAL: Other in-phase Alleles exist but are unspecified.  |
 |               |                 |          | * COMPLETE: The Haplotype declares a complete set of Alleles. |
 +---------------+-----------------+----------+---------------------------------------------------------------+
-| alleles       | :ref:`Id`[]     | required | List of Alleles that comprise this Haplotype                  |
+| alleles       | :ref:`Id[] <Id>`| required | List of Alleles that comprise this Haplotype                  |
 +---------------+-----------------+----------+---------------------------------------------------------------+
 
 **Implementation guidance**
@@ -232,21 +232,21 @@ A list of Haplotypes.
 
 **Information model**
 
-+---------------+-----------------+----------+---------------------------------------------------------------------+
-| Field         | Type            | Label    | Description                                                         |
-+===============+=================+==========+=====================================================================+
-| id            | :ref:`Id`       | optional | Variation Id; must be unique within document                        |
-+---------------+-----------------+----------+---------------------------------------------------------------------+
-| type          | string          | required | Variation type; must be set to 'Genotype'                           |
-+---------------+-----------------+----------+---------------------------------------------------------------------+
-| completeness  | enum            | required | Declaration of completeness of the Genotype definition. Values are: |
-|               |                 |          |                                                                     |
-|               |                 |          | * UNKNOWN: Other Haplotypes may exist.                              |
-|               |                 |          | * PARTIAL: Other Haplotypes exist but are unspecified.              |
-|               |                 |          | * COMPLETE: The Genotype declares a complete set of Haplotypes.     |
-+---------------+-----------------+----------+---------------------------------------------------------------------+
-| haplotypes    | :ref:`Id`[]     | required | List of Haplotypes; length must agree with ploidy of genomic region |
-+---------------+-----------------+----------+---------------------------------------------------------------------+
++---------------+------------------+----------+---------------------------------------------------------------------+
+| Field         | Type             | Label    | Description                                                         |
++===============+==================+==========+=====================================================================+
+| id            | :ref:`Id`        | optional | Variation Id; must be unique within document                        |
++---------------+------------------+----------+---------------------------------------------------------------------+
+| type          | string           | required | Variation type; must be set to 'Genotype'                           |
++---------------+------------------+----------+---------------------------------------------------------------------+
+| completeness  | enum             | required | Declaration of completeness of the Genotype definition. Values are: |
+|               |                  |          |                                                                     |
+|               |                  |          | * UNKNOWN: Other Haplotypes may exist.                              |
+|               |                  |          | * PARTIAL: Other Haplotypes exist but are unspecified.              |
+|               |                  |          | * COMPLETE: The Genotype declares a complete set of Haplotypes.     |
++---------------+------------------+----------+---------------------------------------------------------------------+
+| haplotypes    | :ref:`Id[] <Id>` | required | List of Haplotypes; length must agree with ploidy of genomic region |
++---------------+------------------+----------+---------------------------------------------------------------------+
 
 **Implementation guidance**
 
