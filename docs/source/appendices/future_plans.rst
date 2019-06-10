@@ -77,11 +77,11 @@ Additional :ref:`State` concepts that are being planned for future consideration
 CNVState
 ========
 
-.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/96
-
 **Biological definition**
 
-TODO
+.. todo::
+
+   Biological definition of CNVState. The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/96
 
 **Computational definition**
 
@@ -168,7 +168,7 @@ A specific combination of Alleles that occur together on single sequence in one 
 
 **Computational definition**
 
-A specific combination of non-overlapping :ref:`Allele`s that co-occur on the same reference sequence.
+A specific combination of non-overlapping :ref:`Alleles <allele>` that co-occur on the same reference sequence.
 
 **Information model**
 
@@ -188,7 +188,7 @@ A specific combination of non-overlapping :ref:`Allele`s that co-occur on the sa
 |               |                 |          | * PARTIAL: Other in-phase Alleles exist but are unspecified.  |
 |               |                 |          | * COMPLETE: The Haplotype declares a complete set of Alleles. |
 +---------------+-----------------+----------+---------------------------------------------------------------+
-| alleles       | :ref:`Id`[]     | required | List of Alleles that comprise this Haplotype                  |
+| alleles       | :ref:`Id` []    | required | List of Alleles that comprise this Haplotype                  |
 +---------------+-----------------+----------+---------------------------------------------------------------+
 
 **Implementation guidance**
@@ -245,7 +245,7 @@ A list of Haplotypes.
 |               |                 |          | * PARTIAL: Other Haplotypes exist but are unspecified.              |
 |               |                 |          | * COMPLETE: The Genotype declares a complete set of Haplotypes.     |
 +---------------+-----------------+----------+---------------------------------------------------------------------+
-| haplotypes    | :ref:`Id`[]     | required | List of Haplotypes; length must agree with ploidy of genomic region |
+| haplotypes    | :ref:`Id` []    | required | List of Haplotypes; length must agree with ploidy of genomic region |
 +---------------+-----------------+----------+---------------------------------------------------------------------+
 
 **Implementation guidance**
@@ -256,8 +256,7 @@ A list of Haplotypes.
 **Notes**
 
 * The term "genotype" has two, related definitions in common use. The narrower definition is a set of alleles observed at a single location and with a ploidy of two, such as a pair of single residue variants on an autosome. The broader, generalized definition is a set of alleles at multiple locations and/or with ploidy other than two.The VR-Spec Genotype entity is based on this broader definition.
-* The term "diplotype" is often used to refer to two haplotypes. The VR-Spec Genotype entity subsumes the conventional definition of diplotype. Therefore, the VR-Spec model does not include an explicit entity for diplotypes. See `Genotypes represent collections of in-phase alleles with arbitrary ploidy`__ in the Appendix for a discussion.
-__ genotypes-represent-haplotypes-with-arbitrary-ploidy_
+* The term "diplotype" is often used to refer to two haplotypes. The VR-Spec Genotype entity subsumes the conventional definition of diplotype. Therefore, the VR-Spec model does not include an explicit entity for diplotypes. See :ref:`genotypes-represent-haplotypes-with-arbitrary-ploidy` in the Appendix for a discussion.
 * The VR-SPec model makes no assumptions about ploidy of an organism or individual. The number of Haplotypes in a Genotype is the observed ploidy of the individual.
 * In diploid organisms, there are typically two instances of each autosomal chromosome, and therefore two instances of sequence at a particular location. Thus, Genotypes will often list two Haplotypes. In the case of haploid chromosomes or haploinsufficiency, the Genotype consists of a single Haplotype.
 * A consequence of the computational definition is that Haplotypes at overlapping or adjacent intervals may not be included in the same Genotype. However, two or more Alleles may always be rewritten as an equivalent Allele with a common sequence and interval context.
@@ -296,7 +295,7 @@ StaticVariationSets
 Planned Design Decisions
 @@@@@@@@@@@@@@@@@@@@@@@@
 
-The sections below are the planned trade-offs discussed and being considered as the :ref:`design decisions <design_decisions>` for the :ref:`planned concepts <planned-concepts>`. 
+The sections below are the planned trade-offs discussed and being considered as the :ref:`design decisions <design-decisions>` for the :ref:`planned concepts <planned-concepts>`.
 
 .. _genotypes-represent-haplotypes-with-arbitrary-ploidy:
 

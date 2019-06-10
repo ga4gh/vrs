@@ -9,7 +9,7 @@ None.
 
 **Computational definition**
 
-The *Interval* abstract class defines a range on a :ref:`sequence`, possibly with length zero, and specified using :ref:`interbase coordinates`. An Interval may be a :ref:`SimpleInterval` with a single start and end coordinate. Additional :ref:`planned-intervals` may also be nested or complex intervals, for use in describing fuzzy endpoint and more complex ranges. Any of these may be used as the Interval for Location.
+The *Interval* abstract class defines a range on a :ref:`sequence`, possibly with length zero, and specified using :ref:`interbase-coordinates`. An Interval may be a :ref:`SimpleInterval` with a single start and end coordinate. Additional :ref:`planned-intervals` may also be nested or complex intervals, for use in describing fuzzy endpoint and more complex ranges. Any of these may be used as the Interval for Location.
 
 .. _SimpleInterval:
 
@@ -39,7 +39,7 @@ An :ref:`Interval` with a single start and end coordinate.
 * VR uses Interbase coordinates because they provide conceptual
   consistency that is not possible with residue-based systems (see
   :ref:`rationale <interbase-coordinates-design>`). Implementations
-  `will need to convert`_ between interbase and 1-based inclusive
+  will need to convert between interbase and 1-based inclusive
   residue coordinates familiar to most human users.
 * Interbase coordinates start at 0 (zero).
 * The length of an interval is *end - start*.
@@ -64,3 +64,4 @@ An :ref:`Interval` with a single start and end coordinate.
 * <start, end>=<*i,i+1*> refers to the *i+1th* (1-based) residue.
 * <start, end>=<*N,N*> refers to the position after the last residue for Sequence of length *N*.
 * See :ref:`example <simple-interval-example>` in the reference implementation documentation.
+

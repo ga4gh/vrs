@@ -1,3 +1,5 @@
+.. _design-decisions:
+
 Design Decisions
 !!!!!!!!!!!!!!!!
 
@@ -114,7 +116,7 @@ coupling of distinct concepts.
 .. _modelling-language:
 
 Modelling Language
-@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@
 
 The VR collaborators investigated numerous options for modelling data,
 generating code, and writing the wire protocol. Required and desired

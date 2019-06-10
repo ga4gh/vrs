@@ -1,5 +1,5 @@
 Terminology & Information Model
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 When biologists define terms in order to describe phenomena and
 observations, they rely on a background of human experience and
