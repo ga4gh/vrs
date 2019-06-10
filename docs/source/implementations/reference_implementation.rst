@@ -53,17 +53,19 @@ The top-level VR classes are Location and Variation. A Location
 describes *where* an event occurs. Variation describes an event at a
 Location. Location and Variation are *abstract* objects — their purpose
 is to provide a framework for the way we think about variation, but they
-doen’t represent any particular instance themselves.
+don’t represent any particular instance themselves.
 
 Currently, there is only one Location class: SequenceLocation, which
 defines a precise span on a named sequence. Future Location classes will
 include Cytoband Locations, Gene Locations, as well as SequenceLocations
 using fuzzy and/or intronic coordinates.
 
-There are two Variation subclasses: \* Text – a blob of text, used when
-a textual representation is not (yet) parseable \* Allele – contiguous
-state of a sequence or conceptual region Future kinds of Variation will
-support haplotypes, genotypes, and translocations/fusions.
+There are two Variation subclasses: 
+
+* **Text** – a blob of text, used when a textual representation is not (yet) parseable. 
+* **Allele** – contiguous state of a sequence or conceptual region.
+
+Future kinds of Variation will support haplotypes, genotypes, and translocations/fusions.
 
 The top-level classes in VR are *identifiable*, meaning that VR
 prescribes how implementations can compute globally-consistent
@@ -205,7 +207,7 @@ many kinds of Variation.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This case covers any “ref-alt” style variation, which includes SNVs,
-MNVs, del, ins, and delins.
+MNVs, del, ins and delins.
 
 .. code:: ipython3
 
@@ -251,7 +253,7 @@ normalize()
 
 VR Spec RECOMMENDS that variation is reported as “expanded” alleles.
 Expanded alleles capture the entire region of insertion/deletion
-amiguity, thereby facilitating comparisons that would otherwise require
+ambiguity, thereby facilitating comparisons that would otherwise require
 on-the-fly computations.
 
 .. code:: ipython3
@@ -352,7 +354,7 @@ Importantly, serialization replaces inline identifiable objects with
 their identifiers. See the ``location`` property in the ``Allele``
 example below.
 
-The VR serialization is based on a JSON canonincialization scheme
+The VR serialization is based on a JSON canonicalization scheme
 consistent with several existing proposals. See the spec for details.
 
 .. raw:: html
@@ -444,7 +446,7 @@ Data Proxy
 VR implementations will need access to sequences and sequence
 identifiers. Sequences are used during normalization and, as shown
 below, during conversions with other formats. Sequence identifiers are
-necessary in order to translate identfiers from common forms to a
+necessary in order to translate identifiers from common forms to a
 digest-based form. The VR specification leaves the choice of those data
 sources to the implementations. One source is
 `SeqRepo <https://github.com/biocommons/biocommons.seqrepo/>`__, which
