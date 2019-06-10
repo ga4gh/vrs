@@ -27,7 +27,7 @@ nucleotide / amino acid sequence. "Variation", in contrast, captures
 other classes of molecular variation, including epigenetic alteration and
 transcript abundance. Capturing these other classes of variation is a
 :ref:`future goal <non-sequence-variation>` of the VR-Spec, as there are
-many annotations that require these variation classes as the subject of
+many annotations that will require these variation classes as the subject.
 
 .. _use-allele:
 
