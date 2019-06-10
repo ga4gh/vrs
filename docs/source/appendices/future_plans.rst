@@ -85,7 +85,9 @@ CNVState
 
 **Computational definition**
 
-TODO
+.. todo::
+
+   Computational definition of CNVState.
 
 **Information model**
 
@@ -101,7 +103,9 @@ TODO
 
 **Implementation guidance**
 
-TODO
+.. todo::
+
+   Add implementation guidance for CNVState
 
 RuleState
 =========
@@ -123,15 +127,17 @@ CytobandLocation
 GeneLocation
 ============
 
-.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/101
-
 **Biological definition**
 
-TODO
+.. todo::
+
+   Add implementation guidance for GeneLocation. The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/101
 
 **Computational definition**
 
-TODO
+.. todo::
+
+   Add computational definition for GeneLocation.
 
 **Information model**
 
@@ -145,12 +151,16 @@ TODO
 
 **Implementation guidance**
 
-TODO
+.. todo::
+
+   Add implementation guidance for GeneLocation.
 
 LocationRule
 ============
 
-.. note:: The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/102
+.. todo::
+
+   Finish this section. The open doc issue for this can be found at https://github.com/ga4gh/vr-spec/issues/102
 
 .. _planned-variation:
 
