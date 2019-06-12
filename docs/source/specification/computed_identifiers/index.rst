@@ -12,7 +12,7 @@ Digest algorithm obviates centralized registration services, allows
 computational pipelines to generate ids in isolation of other systems,
 and makes it easier for distributed groups to share data.
 
-The VR Computed Identifer algorithm uses two well-established standard
+The VR Computed Identifier algorithm uses two well-established standard
 algorithms, the SHA-512 hash function, which generates a binary digest
 from binary data, and Base64 URL encoding, which encodes binary data
 using printable characters.
