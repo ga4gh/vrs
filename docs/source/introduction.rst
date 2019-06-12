@@ -22,11 +22,11 @@ Here we document the primary contributions of this specification for variation r
   OpenAPI, and GraphQL). The schema repository includes language-agnostic tests for ensuring schema
   compliance in downstream implementations.
 * **Conventions that promote reliable data sharing.** The VR-Spec recommends conventions regarding
-  the use of the schema and that facilitate data sharing.  In particular, the VR-Spec recommends
+  the use of the schema and that facilitate data sharing.  For example, the VR-Spec recommends
   using fully justified allele normalization using an algorithm inspired by `NCBI's SPDI project
   <https://www.biorxiv.org/content/10.1101/537449v1>`__.
 * **Globally unique computed identifiers.** This specification also recommends a specific algorithm
-  for constructing distributed and globally-unique identifiers for genetic states. Importantly, this
+  for constructing distributed and globally-unique identifiers for molecular variation. Importantly, this
   algorithm enables data providers and consumers to computationally generate consistent, globally
   unique identifiers for variation without a central authority.
 * **A reference implementation.** We provide a Python package (`vr-python
