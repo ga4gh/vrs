@@ -1,210 +1,210 @@
 {
-   "$schema": "http://json-schema.org/schema#",
+   "$schema": "http://json-schema.org/schema#", 
    "definitions": {
       "Allele": {
-         "additionalProperties": false,
-         "description": "An assertion of a sequence state at a Location.",
+         "additionalProperties": false, 
+         "description": "An assertion of a sequence state at a Location.", 
          "properties": {
             "id": {
                "$ref": "#/definitions/Id"
-            },
+            }, 
             "location": {
                "$ref": "#/definitions/Location"
-            },
+            }, 
             "state": {
                "$ref": "#/definitions/State"
-            },
+            }, 
             "type": {
-               "default": "Allele",
+               "default": "Allele", 
                "enum": [
                   "Allele"
-               ],
+               ], 
                "type": "string"
             }
-         },
+         }, 
          "type": "object"
-      },
+      }, 
       "DateTime": {
-         "format": "date-time",
+         "format": "date-time", 
          "type": "string"
-      },
+      }, 
       "Id": {
-         "description": "A string that refers to an object uniquely.  The lifetime and scope of an id is defined by the sender.\nVR does not impose any contraints on strings used as ids in messages. However, to maximize sharability of data, the VR Specification RECOMMENDS that implementations use [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.\nString CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially.\nThe VR specification also RECOMMENDS that `prefix` be defined in identifiers.org.\nThe `reference` component is an unconstrained string.\nA CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VR uses CURIEs primarily as a naming mechanism.\nImplementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable.\nUsing internal ids in public messages is strongly discouraged.",
-         "example": "ga4gh:GA/01234abcde",
+         "description": "A string that refers to an object uniquely.  The lifetime and scope of an id is defined by the sender.\nVR does not impose any contraints on strings used as ids in messages. However, to maximize sharability of data, the VR Specification RECOMMENDS that implementations use [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.\nString CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially.\nThe VR specification also RECOMMENDS that `prefix` be defined in identifiers.org.\nThe `reference` component is an unconstrained string.\nA CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VR uses CURIEs primarily as a naming mechanism.\nImplementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable.\nUsing internal ids in public messages is strongly discouraged.", 
+         "example": "ga4gh:GA/01234abcde", 
          "type": "string"
-      },
+      }, 
       "Interval": {
-         "description": "An Interval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of Interval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VR Interval may be zero-width. The SO definition is for an \"extent greater than zero\".",
+         "description": "An Interval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of Interval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VR Interval may be zero-width. The SO definition is for an \"extent greater than zero\".", 
          "discriminator": {
             "propertyName": "type"
-         },
+         }, 
          "oneOf": [
             {
                "$ref": "#/definitions/SimpleInterval"
-            },
+            }, 
             {
                "$ref": "#/definitions/NestedInterval"
             }
          ]
-      },
+      }, 
       "Location": {
-         "description": "A Location represents a span on a specific sequence.",
+         "description": "A Location represents a span on a specific sequence.", 
          "discriminator": {
             "propertyName": "type"
-         },
+         }, 
          "oneOf": [
             {
                "$ref": "#/definitions/SequenceLocation"
             }
          ]
-      },
+      }, 
       "NestedInterval": {
          "example": {
             "inner": {
-               "end": 30,
-               "start": 20,
+               "end": 30, 
+               "start": 20, 
                "type": "SimpleInterval"
-            },
+            }, 
             "outer": {
-               "end": 40,
-               "start": 10,
+               "end": 40, 
+               "start": 10, 
                "type": "SimpleInterval"
-            },
+            }, 
             "type": "NestedInterval"
-         },
+         }, 
          "properties": {
             "inner": {
                "$ref": "#/definitions/SimpleInterval"
-            },
+            }, 
             "outer": {
                "$ref": "#/definitions/SimpleInterval"
-            },
+            }, 
             "type": {
-               "default": "NestedInterval",
+               "default": "NestedInterval", 
                "enum": [
                   "NestedInterval"
-               ],
+               ], 
                "type": "string"
             }
-         },
+         }, 
          "type": "object"
-      },
+      }, 
       "SequenceLocation": {
          "properties": {
             "id": {
                "$ref": "#/definitions/Id"
-            },
+            }, 
             "interval": {
                "$ref": "#/definitions/Interval"
-            },
+            }, 
             "sequence_id": {
-               "type": "string"
-            },
+               "type": "#/definitions/Id"
+            }, 
             "type": {
-               "default": "SequenceLocation",
+               "default": "SequenceLocation", 
                "enum": [
                   "SequenceLocation"
-               ],
+               ], 
                "type": "string"
             }
-         },
+         }, 
          "type": "object"
-      },
+      }, 
       "SequenceState": {
          "example": {
-            "sequence": "C",
+            "sequence": "C", 
             "type": "SequenceState"
-         },
+         }, 
          "properties": {
             "sequence": {
-               "nullable": false,
+               "nullable": false, 
                "type": "string"
-            },
+            }, 
             "type": {
-               "default": "SequenceState",
+               "default": "SequenceState", 
                "enum": [
                   "SequenceState"
-               ],
+               ], 
                "type": "string"
             }
-         },
+         }, 
          "required": [
-            "type",
+            "type", 
             "sequence"
-         ],
+         ], 
          "type": "object"
-      },
+      }, 
       "SimpleInterval": {
-         "additionalProperties": false,
+         "additionalProperties": false, 
          "example": {
-            "end": 22,
-            "start": 11,
+            "end": 22, 
+            "start": 11, 
             "type": "SimpleInterval"
-         },
+         }, 
          "properties": {
             "end": {
-               "nullable": true,
+               "nullable": true, 
                "type": "integer"
-            },
+            }, 
             "start": {
-               "nullable": true,
+               "nullable": true, 
                "type": "integer"
-            },
+            }, 
             "type": {
-               "default": "SimpleInterval",
+               "default": "SimpleInterval", 
                "enum": [
                   "SimpleInterval"
-               ],
+               ], 
                "type": "string"
             }
-         },
+         }, 
          "required": [
-            "start",
+            "start", 
             "end"
-         ],
+         ], 
          "type": "object"
-      },
+      }, 
       "State": {
          "oneOf": [
             {
                "$ref": "#/definitions/SequenceState"
             }
          ]
-      },
+      }, 
       "Text": {
          "properties": {
             "definition": {
-               "description": "An textual representation of variation intended to capture variation descriptions that cannot be parsed, but still treated as variation.",
+               "description": "An textual representation of variation intended to capture variation descriptions that cannot be parsed, but still treated as variation.", 
                "type": "string"
-            },
+            }, 
             "id": {
                "$ref": "#/definitions/Id"
-            },
+            }, 
             "type": {
-               "default": "Text",
+               "default": "Text", 
                "enum": [
                   "Text"
-               ],
+               ], 
                "type": "string"
             }
-         },
+         }, 
          "type": "object"
-      },
+      }, 
       "Variation": {
-         "description": "A polymorphic representation of variation",
+         "description": "A polymorphic representation of variation", 
          "discriminator": {
             "propertyName": "type"
-         },
+         }, 
          "oneOf": [
             {
                "$ref": "#/definitions/Text"
-            },
+            }, 
             {
                "$ref": "#/definitions/Allele"
             }
          ]
       }
-   },
-   "title": "GA4GH-VR-Definitions",
+   }, 
+   "title": "GA4GH-VR-Definitions", 
    "type": "object"
 }
