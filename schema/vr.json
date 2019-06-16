@@ -98,7 +98,7 @@
                "$ref": "#/definitions/Interval"
             },
             "sequence_id": {
-               "type": "#/definitions/Id"
+               "$ref": "#/definitions/Id"
             },
             "type": {
                "default": "SequenceLocation",

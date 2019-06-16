@@ -82,7 +82,7 @@ definitions:
       id:
         $ref: "#/definitions/Id"
       sequence_id:
-        type: "#/definitions/Id"
+        $ref: "#/definitions/Id"
       interval:
         $ref: "#/definitions/Interval"
 
