@@ -22,7 +22,7 @@ None.
 
 **Computational definition**
 
-The *SequenceState* class specifically captures :ref:`sequence` changes over a defined :ref:`Location`. This is the State class to use for representing "ref-alt" style variation, including SNVs, MNVs, del, ins, and delins.
+The *SequenceState* class specifically captures a :ref:`sequence` as a :ref:`State`. This is the State class to use for representing "ref-alt" style variation, including SNVs, MNVs, del, ins, and delins.
 
 **Information model**
 
