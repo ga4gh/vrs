@@ -9,7 +9,13 @@ None.
 
 **Computational definition**
 
-The *Interval* abstract class defines a range on a :ref:`sequence`, possibly with length zero, and specified using :ref:`interbase-coordinates`. An Interval may be a :ref:`SimpleInterval` with a single start and end coordinate. Additional :ref:`planned-intervals` may also be nested or complex intervals, for use in describing fuzzy endpoint and more complex ranges. Any of these may be used as the Interval for Location.
+The *Interval* abstract class defines a range on a :ref:`sequence`,
+possibly with length zero, and specified using
+:ref:`interbase-coordinates`. An Interval may be a
+:ref:`SimpleInterval` with a single start and end coordinate.
+:ref:`Future Location and Interval types <planned-locations>` will
+enable other methods for describing where :ref:`variation` occurs. Any
+of these may be used as the Interval for Location.
 
 .. _SimpleInterval:
 

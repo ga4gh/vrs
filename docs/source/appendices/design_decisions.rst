@@ -23,13 +23,13 @@ Variation Rather than Variant
 The abstract :ref:`Variation` class is intentionally not labeled
 "Variant", despite this being the primary term used in other molecular
 variation exchange formats (e.g. Variant Call Format, HGVS Sequence
-Variant Nomenclature). This is because the term "Variant" as used in the
-Genetics community is intended to describe discrete changes in
+Variant Nomenclature). This is because the term "Variant" as used in
+the Genetics community is intended to describe discrete changes in
 nucleotide / amino acid sequence. "Variation", in contrast, captures
-other classes of molecular variation, including epigenetic alteration and
-transcript abundance. Capturing these other classes of variation is a
-:ref:`future goal <non-sequence-variation>` of the VR-Spec, as there are
-many annotations that will require these variation classes as the subject.
+other classes of molecular variation, including epigenetic alteration
+and transcript abundance. Capturing these other classes of variation
+is a `future goal <future_plans>` of the VR-Spec, as there are many
+annotations that will require these variation classes as the subject.
 
 .. _use-allele:
 
