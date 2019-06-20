@@ -68,14 +68,14 @@ $$$$$$$$$$$$$$$$$$
 As a product of the Genomic Knowledge Standards (GKS) Work Stream,
 project leadership is comprised of the `Work Stream leadership`_:
 
-* Alex Wagner (@ahwagner)
-* Andy Yates (@andrewyatz)
-* Bob Freimuth (@rrfreimuth)
-* Javier Lopez (@javild)
-* Larry Babb (@larrybabb)
-* Matt Brush (@mbrush)
-* Melissa Konopko (@MKonopko)
-* Reece Hart (@reece)
+* Alex Wagner (`@ahwagner <https://github.com/ahwagner>`__)
+* Andy Yates (`@andrewyatz <https://github.com/andrewyatz>`__)
+* Bob Freimuth (`@rrfreimuth <https://github.com/rrfreimuth>`__)
+* Javier Lopez (`@javild <https://github.com/javild>`__)
+* Larry Babb (`@larrybabb <https://github.com/larrybabb>`__)
+* Matt Brush (`@mbrush <https://github.com/mbrush>`__)
+* Melissa Konopko (`@MKonopko <https://github.com/MKonopko>`__)
+* Reece Hart (`@reece <https://github.com/reece>`__)
 
 .. _project-maintainers:
 
@@ -83,9 +83,9 @@ Project Maintainers
 $$$$$$$$$$$$$$$$$$$
 Project maintainers are the leads of the GKS Variation Representation working group:
 
-* Alex Wagner (@ahwagner)
-* Larry Babb (@larrybabb)
-* Reece Hart (@reece)
+* Alex Wagner (`@ahwagner <https://github.com/ahwagner>`__)
+* Larry Babb (`@larrybabb <https://github.com/larrybabb>`__)
+* Reece Hart (`@reece <https://github.com/reece>`__)
 
 
 .. _recommendation for semantic versioning: https://docs.google.com/document/d/1UUJSnsPw32W5r1jaJ0vI11X0LLLygpAC9TNosjSge_w/edit#heading=h.h5gpuoaxcrgy
