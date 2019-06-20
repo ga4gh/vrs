@@ -17,15 +17,15 @@ translate_sequence_identifier:
     in:
       identifier: "NC_000019.10"
     out:
-      identifier: "ga4gh:SQ/IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"
+      identifier: "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"
   -
     in:
       identifier: "refseq:NC_000019.10"
     out:
-      identifier: "ga4gh:SQ/IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"
+      identifier: "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"
   -
     in:
       identifier: "GRCh38:19"
     out:
-      identifier: "ga4gh:SQ/IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"
+      identifier: "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"
     

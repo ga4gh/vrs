@@ -10,11 +10,11 @@ Identification
 The final process of generating a Computed Identifier is to assemble a
 CURIE-formatted identifier as follows:
 
-    "ga4gh" ":" <prefix> "/" <digest>
+    "ga4gh" ":" <prefix> "." <digest>
 
 Example::
 
-    ga4gh:SQ/v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_
+    ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_
 
 
 .. csv-table::

@@ -215,4 +215,4 @@ definitions:
 
     type: string
     #pattern: '^\w[^:]+:.+$'
-    example: "ga4gh:GA/01234abcde"      
+    example: "ga4gh:GA.01234abcde"      

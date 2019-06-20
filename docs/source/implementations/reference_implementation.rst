@@ -143,7 +143,7 @@ SequenceLocation
 
 .. parsed-literal::
 
-    {'id': 'ga4gh:SL/8KJJStVL_dJigtK_AHyVp5AAipy1pMh8',
+    {'id': 'ga4gh:SL.8KJJStVL_dJigtK_AHyVp5AAipy1pMh8',
      'interval': {'end': 43, 'start': 42, 'type': 'SimpleInterval'},
      'sequence_id': 'NM_0001234.5',
      'type': 'SequenceLocation'}
@@ -163,7 +163,7 @@ SequenceLocation
 
 .. parsed-literal::
 
-    {'id': 'ga4gh:SL/FdTUSDxD1Ja0jNLCTUHlzONhozgEuEvq',
+    {'id': 'ga4gh:SL.FdTUSDxD1Ja0jNLCTUHlzONhozgEuEvq',
      'interval': {'inner': {'end': 30, 'start': 29, 'type': 'SimpleInterval'},
       'outer': {'end': 39, 'start': 20, 'type': 'SimpleInterval'},
       'type': 'NestedInterval'},
@@ -221,8 +221,8 @@ MNVs, del, ins and delins.
 
 .. parsed-literal::
 
-    {'id': 'ga4gh:VA/Zp8e9tUGfwiTRfIIij7INFQKa_Hc4ep9',
-     'location': {'id': 'ga4gh:SL/8KJJStVL_dJigtK_AHyVp5AAipy1pMh8',
+    {'id': 'ga4gh:VA.Zp8e9tUGfwiTRfIIij7INFQKa_Hc4ep9',
+     'location': {'id': 'ga4gh:SL.8KJJStVL_dJigtK_AHyVp5AAipy1pMh8',
       'interval': {'end': 43, 'start': 42, 'type': 'SimpleInterval'},
       'sequence_id': 'NM_0001234.5',
       'type': 'SequenceLocation'},
@@ -375,8 +375,8 @@ consistent with several existing proposals. See the spec for details.
 
 .. parsed-literal::
 
-    {'id': 'ga4gh:VA/Zp8e9tUGfwiTRfIIij7INFQKa_Hc4ep9',
-     'location': {'id': 'ga4gh:SL/8KJJStVL_dJigtK_AHyVp5AAipy1pMh8',
+    {'id': 'ga4gh:VA.Zp8e9tUGfwiTRfIIij7INFQKa_Hc4ep9',
+     'location': {'id': 'ga4gh:SL.8KJJStVL_dJigtK_AHyVp5AAipy1pMh8',
       'interval': {'end': 43, 'start': 42, 'type': 'SimpleInterval'},
       'sequence_id': 'NM_0001234.5',
       'type': 'SequenceLocation'},
@@ -396,7 +396,7 @@ consistent with several existing proposals. See the spec for details.
 
 .. parsed-literal::
 
-    b'{"location":"ga4gh:SL/8KJJStVL_dJigtK_AHyVp5AAipy1pMh8","state":{"sequence":"A","type":"SequenceState"},"type":"Allele"}'
+    b'{"location":"ga4gh:SL.8KJJStVL_dJigtK_AHyVp5AAipy1pMh8","state":{"sequence":"A","type":"SequenceState"},"type":"Allele"}'
 
 
 
@@ -431,7 +431,7 @@ objects by prefixing a VR digest with a type-specific code.
 
 .. parsed-literal::
 
-    'ga4gh:VA/Zp8e9tUGfwiTRfIIij7INFQKa_Hc4ep9'
+    'ga4gh:VA.Zp8e9tUGfwiTRfIIij7INFQKa_Hc4ep9'
 
 
 
@@ -481,7 +481,7 @@ class that facilitates using other data sources.
       'SEGUID:T12L0p2X5E8DbnL0+SwI4Wc1S6g',
       'SHA1:4f5d8bd29d97e44f036e72f4f92c08e167354ba8',
       'VMC:GS_v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C\_',
-      'ga4gh:SQ/v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C\_',
+      'ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C\_',
       'TRUNC512:bff413735a7e31461d82b46fe0b313e81c9720eb1dc370bf',
       'gi:319655736'],
      'alphabet': 'ACGT',
@@ -491,7 +491,7 @@ class that facilitates using other data sources.
 
 .. code:: ipython3
 
-    dp.get_sequence("ga4gh:SQ/v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_", start=0, end=50) + "..."
+    dp.get_sequence("ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_", start=0, end=50) + "..."
 
 
 .. parsed-literal::
@@ -554,8 +554,8 @@ representations.
 
 .. parsed-literal::
 
-    {'id': 'ga4gh:VA/xlv08oyqHKbmkP7mW38FwIf9scOrogMW',
-     'location': {'id': 'ga4gh:SL/0FXQTd1CoM6ElQtD7qK1Ge6XGYhH6OZt',
+    {'id': 'ga4gh:VA.xlv08oyqHKbmkP7mW38FwIf9scOrogMW',
+     'location': {'id': 'ga4gh:SL.0FXQTd1CoM6ElQtD7qK1Ge6XGYhH6OZt',
       'interval': {'end': 32936732, 'start': 32936731, 'type': 'SimpleInterval'},
       'sequence_id': 'ga4gh:SQ_0wi-qoDrvram155UmcSC-zA5ZK4fpLT',
       'type': 'SequenceLocation'},
@@ -580,8 +580,8 @@ representations.
 
 .. parsed-literal::
 
-    {'id': 'ga4gh:VA/xlv08oyqHKbmkP7mW38FwIf9scOrogMW',
-     'location': {'id': 'ga4gh:SL/0FXQTd1CoM6ElQtD7qK1Ge6XGYhH6OZt',
+    {'id': 'ga4gh:VA.xlv08oyqHKbmkP7mW38FwIf9scOrogMW',
+     'location': {'id': 'ga4gh:SL.0FXQTd1CoM6ElQtD7qK1Ge6XGYhH6OZt',
       'interval': {'end': 32936732, 'start': 32936731, 'type': 'SimpleInterval'},
       'sequence_id': 'ga4gh:SQ_0wi-qoDrvram155UmcSC-zA5ZK4fpLT',
       'type': 'SequenceLocation'},
@@ -601,8 +601,8 @@ representations.
 
 .. parsed-literal::
 
-    {'id': 'ga4gh:VA/xlv08oyqHKbmkP7mW38FwIf9scOrogMW',
-     'location': {'id': 'ga4gh:SL/0FXQTd1CoM6ElQtD7qK1Ge6XGYhH6OZt',
+    {'id': 'ga4gh:VA.xlv08oyqHKbmkP7mW38FwIf9scOrogMW',
+     'location': {'id': 'ga4gh:SL.0FXQTd1CoM6ElQtD7qK1Ge6XGYhH6OZt',
       'interval': {'end': 32936732, 'start': 32936731, 'type': 'SimpleInterval'},
       'sequence_id': 'ga4gh:SQ_0wi-qoDrvram155UmcSC-zA5ZK4fpLT',
       'type': 'SequenceLocation'},
@@ -621,8 +621,8 @@ representations.
 
 .. parsed-literal::
 
-    {'id': 'ga4gh:VA/xlv08oyqHKbmkP7mW38FwIf9scOrogMW',
-     'location': {'id': 'ga4gh:SL/0FXQTd1CoM6ElQtD7qK1Ge6XGYhH6OZt',
+    {'id': 'ga4gh:VA.xlv08oyqHKbmkP7mW38FwIf9scOrogMW',
+     'location': {'id': 'ga4gh:SL.0FXQTd1CoM6ElQtD7qK1Ge6XGYhH6OZt',
       'interval': {'end': 32936732, 'start': 32936731, 'type': 'SimpleInterval'},
       'sequence_id': 'ga4gh:SQ_0wi-qoDrvram155UmcSC-zA5ZK4fpLT',
       'type': 'SequenceLocation'},
