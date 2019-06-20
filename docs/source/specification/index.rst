@@ -9,3 +9,4 @@ Specification
    schema
    computed_identifiers/index
    examples
+   design_decisions

@@ -408,8 +408,8 @@ VR-Spec definition.
 
 **Computational definition**
 
-A joining of two sequences is defined by two :ref:`Locations` and an
-indication of the join "pattern" (advice needed on conventional
+A joining of two sequences is defined by two :ref:`Location` objects
+and an indication of the join "pattern" (advice needed on conventional
 terminology, if any).
 
 **Information model**
