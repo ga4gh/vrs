@@ -95,11 +95,24 @@ ComplexInterval
 
 .. note:: This concept is being refined. Please comment at https://github.com/ga4gh/vr-spec/issues/95
           
+**Biological definition**
+
+**Computational definition**
+
+**Information model**
+
 
 CytobandLocation
 ################
 
 .. note:: This concept is being refined. Please comment at https://github.com/ga4gh/vr-spec/issues/100
+
+**Biological definition**
+
+**Computational definition**
+
+**Information model**
+
 
 GeneLocation
 ############
@@ -385,6 +398,27 @@ Translocations
 ##############
 
 .. note:: This concept is being refined. Please comment at https://github.com/ga4gh/vr-spec/issues/103
+
+**Biological definition**
+
+The aberrant joining of two segments of DNA that are not typically
+contiguous.  In the context of joining two distinct coding sequences,
+translocations result in a gene fusion, which is also covered by this
+VR-Spec definition.
+
+**Computational definition**
+
+A joining of two sequences is defined by two :ref:`Locations` and an
+indication of the join "pattern" (advice needed on conventional
+terminology, if any).
+
+**Information model**
+
+Under consideration. See https://github.com/ga4gh/vr-spec/issues/103. 
+
+**Examples**
+
+t(9;22)(q34;q11) in BCR-ABL
 
 
 .. _planned-variation-sets:
