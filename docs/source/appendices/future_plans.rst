@@ -414,7 +414,7 @@ terminology, if any).
 
 **Information model**
 
-Under consideration. See https://github.com/ga4gh/vr-spec/issues/103. 
+Under consideration. See https://github.com/ga4gh/vr-spec/issues/28. 
 
 **Examples**
 
