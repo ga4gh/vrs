@@ -5,11 +5,28 @@ Location
 
 **Biological definition**
 
-As used by biologists, the precision of “location” (or “locus”) varies widely; examples include chromosomal bands, named genomic features (e.g., genes, exons, or markers), or specific positions on a reference sequence.
+As used by biologists, the precision of “location” (or “locus”) varies
+widely, ranging from precise start and end numerical coordinates
+defining a Location, to bounded regions of a sequence, to conceptual
+references to named genomic features (e.g., chromosomal bands, genes,
+exons) as proxies for the Locations on an implied reference sequence.
 
 **Computational definition**
 
-The `Location` abstract class refers to contiguous regions of biological sequences. Universally, a Location is an identifiable position or region on a :ref:`Sequence`, defined by a Sequence :ref:`Id` and related information, which varies by Location subclass. Concrete types of Locations are described below. The most common Location is a :ref:`sequence-location`, i.e., a Location based on a named sequence and an Interval on that sequence. Additional :ref:`planned-locations` may also be conceptual or symbolic locations, such as a cytoband region or a gene. Any of these may be used as the Location for Variation.
+The `Location` abstract class refers to position of a contiguous
+segment of a biological sequence.  The most common and concrete
+Location is a :ref:`sequence-location`, i.e., a Location based on a
+named sequence and an Interval on that sequence. Additional
+:ref:`planned-locations` may also be conceptual or symbolic locations,
+such as a cytoband region or a gene. Any of these may be used as the
+Location for Variation.
+
+**Implementation Guidance**
+
+* Location refers to a position.  Although it may imply a sequence,
+  the two concepts are not interchangable, especially when the
+  location is non-specific (e.g., a range) or symbolic (a gene).
+
 
 .. _sequence-location:
 
@@ -22,7 +39,8 @@ None
 
 **Computational definition**
 
-A Location subclass for describing a defined :ref:`Interval` over a named :ref:`Sequence`.
+A Location subclass for describing a defined :ref:`Interval` over a
+named :ref:`Sequence`.
 
 **Information model**
 
@@ -42,10 +60,10 @@ A Location subclass for describing a defined :ref:`Interval` over a named :ref:`
    * 0 ≤ *interval.start* ≤ *interval.end* ≤ *n*
    * interbase coordinate 0 refers to the point before the start of the Sequence
    * interbase coordinate n refers to the point after the end of the Sequence.
-* Coordinates MUST refer to a valid Sequence. VR does not
-  support referring to intronic positions within a transcript
-  sequence, extrapolations beyond the ends of sequences, or other
-  implied sequence.
+* Coordinates MUST refer to a valid Sequence. VR does not support
+  referring to intronic positions within a transcript sequence,
+  extrapolations beyond the ends of sequences, or other implied
+  sequence.
 
 .. important:: HGVS permits variants that refer to non-existent
                sequence. Examples include coordinates extrapolated
