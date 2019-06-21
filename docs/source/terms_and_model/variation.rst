@@ -27,11 +27,10 @@ Allele
 **Biological definition**
 
 One of a number of alternative forms of the same gene or same genetic
-locus. In the context of biological sequences, “allele” refers to a
-set of specific changes within a :ref:`Sequence`, including sets with
-zero (no change), one change (a simple allele), or multiple changes
-(:ref:`planned-variation-sets`). In the context of VR, Allele refers
-to a Sequence or Sequence change with respect to a reference sequence.
+locus. In the context of biological sequences, “allele” refers to one
+of a set of specific changes within a :ref:`Sequence`. In the context
+of VR, Allele refers to a Sequence or Sequence change with respect to
+a reference sequence, without regard to genes or other features.
 
 **Computational definition**
 
@@ -56,9 +55,9 @@ indels).
 
 * Implementations MUST require that interval.end ≤ sequence_length
   when the Sequence length is known.
-* The implementation MAY infer the Sequence by location_id and the
-  Sequence State type, and ensure compatibility between them. This
-  behavior is not included in the specification.
+* Implementations MAY choose to provide a mechanism for ensuring that
+  the type of sequence and the content of the state are compatible, but
+  such behavior is not provided by the specification.
 * Alleles are equal only if the component fields are equal: at the
   same location and with the same state.
 * Alleles may have multiple related representations on the same
@@ -84,10 +83,6 @@ indels).
 * The Allele entity is based on Sequence and is intended to be used
   for intragenic and extragenic variation. Alleles are not explicitly
   associated with genes or other features.
-* Alleles may have multiple representations on the same Sequence type
-  due to shifting (aka shuffling, normalization). Fully resolving such
-  equivalences is beyond the scope of the first phase of this
-  specification.
 * Biologically, referring to Alleles is typically meaningful only in
   the context of empirical alternatives. For modelling purposes,
   Alleles may exist as a result of biological observation or
