@@ -14,6 +14,6 @@ implementation that promotes adoption of the standard.
 
    introduction
    specification/index
-   implementations/index
+   implementations
    appendices/index
    contacts
