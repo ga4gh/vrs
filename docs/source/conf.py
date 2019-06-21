@@ -11,19 +11,31 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
+import re
+import subprocess
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
+
+def _get_git_tag():
+    res = subprocess.run("git describe --tags --always".split(), capture_output=True)
+    tag = res.stdout.decode().strip()
+    return tag
+
+def _parse_release_as_version(rls):
+    m = re.match("^(\d+\.\d+)", rls)
+    if m:
+        return m.group(1)
+    return "unknown"
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'vr-schema'
+project = 'vr-spec'
 copyright = '2019, GA4GH'
 author = 'Committers'
-version = '1.0'
-release = '1.0.0-alpha.1'
-
 master_doc = 'index'
+release = _get_git_tag()
+version = _parse_release_as_version(release)
 
 # -- Schema doc paths --------------------------------------------------------
 
