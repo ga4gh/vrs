@@ -9,17 +9,17 @@
 |Robert Freimuth  | Mayo Clinic, ClinGen, GKS work stream lead |
 |Matt Brush       | OHSU, Monarch Initiative |
 |Javier Lopez     | Genomics England |
-|PENDING Melissa Konopko    | GA4GH |
-|Ronak Y. Patel | Baylor College Of Medicine, ClinGen |
+|Melissa Konopko    | GA4GH |
+|Ronak Y. Patel     | Baylor College Of Medicine, ClinGen |
 |Cristina Yenyxe González | EMBL-EBI, EGA/ENA/EVA |
-|Chris Bizon      | UNC-CH, ClinGen |
-|PENDING Shawn Rynearson | UCGD |
-|Tristan Nelson | Geisinger, ClinGen |
-|PENDING Melissa Cline | UCSC, BRCA Exchange |
-|Brad Holmes      | NCBI/NLM/NIH |
-|Eric Moyer      | NCBI/NLM/NIH |
-|Christa Lese Martin | Geisinger, ClinGen |
-|PENDING Jennifer Lee | NCI |
+|Chris Bizon        | UNC-CH, ClinGen |
+|Shawn Rynearson    | UCGD, U of U |
+|Tristan Nelson     | Geisinger, ClinGen |
+|Melissa Cline      | UCSC, BRCA Exchange |
+|Brad Holmes        | NCBI/NLM/NIH |
+|Eric Moyer         | NCBI/NLM/NIH |
+|Christa Lese Martin| Geisinger, ClinGen |
+|Jennifer Lee       | NCI |
 
 
 
