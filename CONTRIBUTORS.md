@@ -10,15 +10,15 @@
 |Matt Brush       | OHSU, Monarch Initiative |
 |Javier Lopez     | Genomics England |
 |PENDING Melissa Konopko    | GA4GH |
-|PENDING Ronak Y. Patel | Baylor, ClinGen |
+|Ronak Y. Patel | Baylor College Of Medicine, ClinGen |
 |Cristina Yenyxe González | EMBL-EBI, EGA/ENA/EVA |
 |Chris Bizon      | UNC-CH, ClinGen |
 |PENDING Shawn Rynearson | UCGD |
-|PENDING Tristan Nelson | Geisinger, ClinGen |
+|Tristan Nelson | Geisinger, ClinGen |
 |PENDING Melissa Cline | UCSC, BRCA Exchange |
 |Brad Holmes      | NCBI/NLM/NIH |
 |Eric Moyer      | NCBI/NLM/NIH |
-|PENDING Christa Lese Martin | Geisinger, ClinGen |
+|Christa Lese Martin | Geisinger, ClinGen |
 |PENDING Jennifer Lee | NCI |
 
 
