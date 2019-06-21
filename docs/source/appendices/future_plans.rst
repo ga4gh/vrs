@@ -101,13 +101,19 @@ ComplexInterval
 CytobandLocation
 ################
 
-.. note:: This concept is being refined. Please comment at https://github.com/ga4gh/vr-spec/issues/100
-
 **Biological definition**
+
+Imprecise chromosomal locations based on chromosomal staining.
 
 **Computational definition**
 
+Cytogenetic bands are defined by a chromosome name, band, and
+sub-band. In VR-Spec, a cytogenetic location is an interval on a
+single chromsome with a start and end band and subband.
+
 **Information model**
+
+Under development.
 
 
 GeneLocation
