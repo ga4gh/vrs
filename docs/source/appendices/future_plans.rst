@@ -84,11 +84,7 @@ region (the *outer* SimpleInterval) and required included region (the
   inner.end ≤ outer.end`. In the case of double-stranded DNA, this
   constraint holds even when a feature is on the complementary strand.
 
-**Examples**
 
-* See :ref:`example <nested-interval-example>` in the reference implementation documentation.
-
-.. _will need to convert: https://www.biostars.org/p/84686/
 
 ComplexInterval
 ###############
@@ -117,16 +113,14 @@ CytobandLocation
 GeneLocation
 ############
 
-.. note:: This concept is being refined. Please comment at https://github.com/ga4gh/vr-spec/issues/101
-
 **Biological definition**
 
 The symbolic location of a gene.
 
 **Computational definition**
 
-The gene location is made by reference to a gene identifier from NCBI,
-Ensembl, HGNC, or other public trusted authority. 
+A gene location is made by reference to a gene identifier from NCBI,
+Ensembl, HGNC, or other public trusted authority.
 
 **Information model**
 
@@ -134,14 +128,21 @@ Ensembl, HGNC, or other public trusted authority.
    :header: Field, Type, Label, Description
    :align: left
 
-   id, :ref:`Id`, optional, Location id; must be unique within document 
-   type, string, required, Location type; must be set to 'GeneLocation'
-   gene_id, :ref:`Id`, required, The gene location from a public trusted authority.
+   id, :ref:`Id`, optional, Location id; must be unique within
+   document type, string, required, Location type; must be set to
+   'GeneLocation' gene_id, :ref:`Id`, required, CURIE-formatted gene identifier using NCBI numeric gene id.
+
+**Notes**
+
+* `gene_id` must be specified as a CURIE, using a CURIE prefix of
+  `"NCBI"` and CURIE reference with the numeric gene id. Other trusted
+  authorities may be permitted in future releases.
 
 **Implementation guidance**
 
 * GeneLocations may be converted to :ref:`sequence-location` using
-  external data. The source of such data is implementation-dependent.
+  external data. The source of such data and mechanism for
+  implementation is not defined by this specification.
 
 
 .. _planned-states:
