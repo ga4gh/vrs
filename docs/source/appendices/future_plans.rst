@@ -89,13 +89,19 @@ region (the *outer* SimpleInterval) and required included region (the
 ComplexInterval
 ###############
 
-.. note:: This concept is being refined. Please comment at https://github.com/ga4gh/vr-spec/issues/95
-          
 **Biological definition**
+
+Representation of complex coordinates based on relative locations or
+offsets from a known location. Examples include "left of" a given
+position and intronic positions measured from intron-exon junctions.
 
 **Computational definition**
 
+Under development.
+
 **Information model**
+
+Under development.
 
 
 CytobandLocation
