@@ -1,9 +1,21 @@
-.. _curie-spec: https://www.w3.org/TR/curie/
+.. _Compact URI (CURIE): https://www.w3.org/TR/curie/
+.. _FHIR Business Identifiers: https://www.hl7.org/fhir/datatypes.html#identifier
+.. _FHIR Id: http://build.fhir.org/datatypes.html#id
 .. _HGVS: http://www.hgvs.org/
+.. _ISOGG: https://isogg.org/wiki/Allele
+.. _RFC 2119: https://www.ietf.org/rfc/rfc2119.txt
 .. _SHA-512: https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf
+.. _Sequence Ontology: http://www.sequenceontology.org/browser/current_svn/term/SO:0001023
+.. _Wikipedia Residue page: https://en.wikipedia.org/wiki/Residue_%28chemistry%29
+.. _Wikipedia: https://en.wikipedia.org/wiki/Allele
 .. _base64url: https://tools.ietf.org/html/rfc4648#section-5
 .. _biocommons: https://biocommons.org/
+.. _curie-spec: https://www.w3.org/TR/curie/
 .. _ga4gh: http://genomicsandhealth.org/
+.. _monomer: https://en.wikipedia.org/wiki/Monomer
+.. _nucleic acid: https://en.wikipedia.org/wiki/Nucleic_acid
+.. _polymeric chain: https://en.wikipedia.org/wiki/Polymer
+.. _protein: https://en.wikipedia.org/wiki/Protein
 
 .. |vr_json| replace:: `vr.json <https://raw.githubusercontent.com/ga4gh/vr-spec/{release}/schema/vr.json>`__
 .. |vr_yaml| replace:: `vr.yaml <https://raw.githubusercontent.com/ga4gh/vr-spec/{release}/schema/vr.yaml>`__

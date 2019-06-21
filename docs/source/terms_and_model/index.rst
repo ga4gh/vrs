@@ -144,32 +144,8 @@ amino acid codes.
   necessary that Sequences be explicitly “typed” (i.e., DNA, RNA, or
   AA).
 
-Composite Concepts
-@@@@@@@@@@@@@@@@@@
-
-.. _vr-schema-diagram:
-
-.. figure:: ../images/object_graph.png
-   :align: left
-
-   **VR Schema Diagram**
-
-   The VR Schema requires the use of multiple composite objects, which
-   are grouped under four abstract classes: :ref:`Variation`,
-   :ref:`Location`, :ref:`State`, and :ref:`Interval`. These classes
-   and their relationships to the representation of Variation are
-   illustrated here. All classes have a string `type`. Dashed borders
-   denote abstract classes. Abstract classes are not
-   instantiated. Thin solid borders denote classes that may be
-   instantiated but are not identifiable. Bold borders denote
-   identifiable objects (i.e., may be serialized and identified by
-   computed identifier). Solid arrow lines denoted
-   inheritance. Subclasses inherit all attributes from their
-   parent. Inherited attributes are not shown.
 
 
-
-These abstract classes and their concrete child classes are described in the following documents.
 
 .. toctree::
    :maxdepth: 2
@@ -179,15 +155,3 @@ These abstract classes and their concrete child classes are described in the fol
    location
    variation
 
-.. _Wikipedia: https://en.wikipedia.org/wiki/Allele
-.. _ISOGG: https://isogg.org/wiki/Allele
-.. _Sequence Ontology: http://www.sequenceontology.org/browser/current_svn/term/SO:0001023
-.. _RFC 2119: https://www.ietf.org/rfc/rfc2119.txt
-.. _FHIR Id: http://build.fhir.org/datatypes.html#id
-.. _Compact URI (CURIE): https://www.w3.org/TR/curie/
-.. _FHIR Business Identifiers: https://www.hl7.org/fhir/datatypes.html#identifier
-.. _monomer: https://en.wikipedia.org/wiki/Monomer
-.. _polymeric chain: https://en.wikipedia.org/wiki/Polymer
-.. _protein: https://en.wikipedia.org/wiki/Protein
-.. _nucleic acid: https://en.wikipedia.org/wiki/Nucleic_acid
-.. _Wikipedia Residue page: https://en.wikipedia.org/wiki/Residue_%28chemistry%29
