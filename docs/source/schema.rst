@@ -1,8 +1,10 @@
 Schema
 @@@@@@
 
-The Schema is maintained as a JSON Schema in the VR-Spec repository, and is generated from a parent source document.
+The machine readable VR Specification is written using `JSON Schema
+<https://json-schema.org/>`_.
 
-View the |version| JSON Schema: |vr_json|
+The schema itself is written in YAML (|vr_yaml|) and converted to JSON
+(|vr_json|).  Version |version| is current.
 
-Or the YAML source document: |vr_yaml|
+Contributions to the schema should be written in the YAML version.
