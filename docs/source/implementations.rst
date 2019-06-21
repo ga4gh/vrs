@@ -1,7 +1,15 @@
 Implementations
 !!!!!!!!!!!!!!!
 
-The following packages and services implement VR-Spec.
+----
+
+Libraries
+@@@@@@@@@
+
+Libraries facilitate the use of the VR Spec, but do not implement a
+particular use or application.  Although there is only one library
+currently, it is expected that others will eventually appear as
+VR Spec is adopted.
 
 
 .. _impl-vr-python:
@@ -10,7 +18,19 @@ vr-python: GA4GH VR Reference Implementation
 ############################################
 
 `vr-python <https://github.com/ga4gh/vr-python/>`__ is the reference
-implementation for the GA4GH VR Spec.
+implementation for the GA4GH VR Spec.  It supports all types covered
+by the VR Spec, implements Allele normalization and computed
+identifier generation, and provides "extra" features such as
+translation from HGVS, SPDI, and VCF formats.
+
+----
+
+Applications and Web Services
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Applications implement VR Spec to support specific use cases.
+Projects known to implement VR Spec are listed below. Descriptions are
+provided by the application authors.
 
 
 .. _impl-allele-registry:
