@@ -1,7 +1,7 @@
 Examples
 !!!!!!!!
 
-Example usage of the VR-Spec is documented in the :ref:`vr-python`.
+Example usage of the VR-Spec is documented in the :ref:`impl-vr-python`.
 
 .. todo::
 

@@ -3,45 +3,62 @@
 Normalization
 !!!!!!!!!!!!!
 
-VR Spec implementations MUST normalize Alleles to a fully justified
-("expanded") form when generating :ref:`computed-identifiers`. The VR
-Spec RECOMMENDS that Alleles at precise locations are also normalized
-to a fully justified form.
+Certain insertion or deletion alleles may be represented ambiguously
+when using conventional sequence normalization, resulting in
+significant challenges when comparing such alleles.
 
-Conceptually, fully justified variation is expanded to the outer
-bounds of left- and right- shuffling. As a result, it describes the
-unambiguous state of the resulting sequence.
+The VR Spec describes a "fully-justified" normalization algorithm
+inspired by NCBI's Variant Overprecision Correction Algorithm [1]_.
+Fully-justified normalization expands such ambiguous representation
+over the entire region of ambiguity, resulting in an *unambiguous*
+representation that may be readily compared with other alleles.
+
+The VR Spec RECOMMENDS that Alleles at precise locations are
+normalized to a fully justified form unless there is a compelling
+reason to do otherwise.
 
 The process for fully justifying two alleles (reference sequence and
-alternate sequence) at an interval is:
+alternate sequence) at an interval is outlined below.
 
-* Trim common suffixes, if any, common to both allele sequences. Adjust the
-  interval end position to be consistent with the reduced allele
-  lengths.
-* Trim common prefixes, if any, common to both allele sequences. Adjust the
-  interval start position to be consistent with the reduced allele
-  lengths.
-* If neither allele is empty, the allele pairs represent a alleles
-  that do not have common prefixes or suffixes.  Normalization is not
-  applicable and the trimmed alleles are returned.
-* If exactly one of the alleles is empty, they represent an insertion
-  or deletion and are normalized as below. 
-* Right extension: The non-empty sequence is iteratively circularly
-  permuted rightward n-steps until the next allele residue does not
-  match the next reference sequence residue. The interval end is
-  adjusted rightward by n residues and the corresponding sequence is
-  appeneded to both alleles.
-* Left extension: Similar to right extension, but the non-empty
-  allele is circularly permuted leftward, the interval start is
-  adjusted by the number of steps, and corresponding sequence is
-  prepended to both alleles.
+1. Trim sequences:
+  * Remove suffixes common to all alleles, if any. Decrement
+    the interval end position by the length of the trimmed suffix.
+  * Remove prefixes common to all alleles, if any. Increment
+    the interval start position by the length of the trimmed prefix.
+  * If neither allele is empty, the allele pairs represent a alleles
+    that do not have common prefixes or suffixes.  Normalization is not
+    applicable and the trimmed alleles are returned.
+2. Determine bounds of ambiguity:
+  * Left roll: While the terminal base of all non-empty alleles is
+    equal to the base *prior* to the current position, circularly
+    permute all alleles *rightward* and move the current position
+    *leftward*. When the terminating, return `left_roll`, the number
+    of steps rolled leftward.
+  * Right roll: Symmetric case of left roll, returning `right_roll`,
+    the number of steps rolled rightward.
+3. Update position and alleles: 
+  * To each trimmed allele, prepend the `left_roll` bases prior to the
+    trimmed allele position and append the `right_roll` bases after
+    the trimmed allele position.
+  * Expand the trimmed allele position by decrementing the start by
+    `left_roll` and incrementing the end by `right_roll`.
 
-This process results in normalization that is similar to NCBI's
-Variant Overprecision Correction Algorithm [1]_.
+
+.. _normalization-diagram:
+
+.. figure:: ../../images/justified-normalization.png
+   :align: left
+
+   **VR Justified Normalization**
+
+   Demonstration of fully justifying an insertion allele.
+
 
 
 **References**
 
-.. [1] Bradley Holmes, J., Moyer, E., Phan, L., Maglott, D. & Kattman, B. L. *SPDI: Data Model for Variants and Applications at NCBI.* bioRxiv 537449 (2019). `doi:10.1101/537449`_
+.. [1] Bradley Holmes, J., Moyer, E., Phan, L., Maglott, D. &
+       Kattman, B. L. *SPDI: Data Model for Variants and Applications
+       at NCBI.* bioRxiv 537449 (2019). `doi:10.1101/537449`_
 
 .. _doi:10.1101/537449: https://doi.org/10.1101/537449
