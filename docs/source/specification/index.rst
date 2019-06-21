@@ -7,6 +7,6 @@ Specification
 
    terms_and_model/index
    schema
-   computed_identifiers/index
+   algorithms/index
    examples
    design_decisions
