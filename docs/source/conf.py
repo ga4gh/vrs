@@ -10,7 +10,7 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
+import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
@@ -27,10 +27,8 @@ master_doc = 'index'
 
 # -- Schema doc paths --------------------------------------------------------
 
-rst_epilog = """
-.. |vr_json| replace:: `vr.json <https://raw.githubusercontent.com/ga4gh/vr-spec/{0}/schema/vr.json>`__
-.. |vr_yaml| replace:: `vr.yaml <https://raw.githubusercontent.com/ga4gh/vr-spec/{0}/schema/vr.yaml>`__
-""".format(release)
+rst_epilog_fn = os.path.join(os.path.dirname(__file__), 'rst_epilog')
+rst_epilog = open(rst_epilog_fn).read().format(release=release)
 
 # -- General configuration ---------------------------------------------------
 

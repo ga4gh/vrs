@@ -89,6 +89,3 @@ For example::
 	  standard, documentation and type prefixes would moved from
 	  the VR specification to a separate repository for GA4GH-wide
 	  use.
-
-
-.. _curie-spec: https://www.w3.org/TR/curie/

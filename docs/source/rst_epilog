@@ -1,0 +1,15 @@
+.. _curie-spec: https://www.w3.org/TR/curie/
+.. _HGVS: http://www.hgvs.org/
+.. _SHA-512: https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf
+.. _base64url: https://tools.ietf.org/html/rfc4648#section-5
+.. _biocommons: https://biocommons.org/
+.. _ga4gh: http://genomicsandhealth.org/
+
+.. |vr_json| replace:: `vr.json <https://raw.githubusercontent.com/ga4gh/vr-spec/{release}/schema/vr.json>`__
+.. |vr_yaml| replace:: `vr.yaml <https://raw.githubusercontent.com/ga4gh/vr-spec/{release}/schema/vr.yaml>`__
+
+.. |eg| replace:: *e.g.,*
+.. |ie| replace:: *i.e.,*
+
+
+
