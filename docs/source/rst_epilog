@@ -6,6 +6,7 @@
 .. _RFC 2119: https://www.ietf.org/rfc/rfc2119.txt
 .. _SHA-512: https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf
 .. _Sequence Ontology: http://www.sequenceontology.org/browser/current_svn/term/SO:0001023
+.. _Equivalence Function: https://en.wikipedia.org/wiki/Equivalence_relation
 .. _Wikipedia Residue page: https://en.wikipedia.org/wiki/Residue_%28chemistry%29
 .. _Wikipedia: https://en.wikipedia.org/wiki/Allele
 .. _base64url: https://tools.ietf.org/html/rfc4648#section-5

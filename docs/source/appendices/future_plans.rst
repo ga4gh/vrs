@@ -450,10 +450,11 @@ t(9;22)(q34;q11) in BCR-ABL
 Variation Sets
 @@@@@@@@@@@@@@
 
-.. note:: This concept is being refined. Please comment at https://github.com/ga4gh/vr-spec/issues/104
+.. note:: The VR Spec anticipates the need for sets of variation.
+          Sets may be static (immutable) or dynamic (changeable), and
+          might be defined manually, by an `equivalence function`, or
+          by an expansion functions.  Furthermore, equivalence and
+          expansion functions might be user-defined.  This concept is
+          being refined. Please comment at
+          https://github.com/ga4gh/vr-spec/issues/15
 
-
-StaticVariationSets
-###################
-
-.. note:: This concept is being refined. Please comment at https://github.com/ga4gh/vr-spec/issues/105
