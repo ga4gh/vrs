@@ -1,19 +1,13 @@
 Implementations
 !!!!!!!!!!!!!!!
 
-The following packages implement VR-Spec:
-
-.. csv-table::
-   :header: Package, Description
-
-   `vr-python`, GA4GH Reference Implementation
-
+The following packages and services implement VR-Spec.
 
 
 .. _impl-vr-python:
 
-vr-python
-#########
+vr-python: GA4GH VR Reference Implementation
+############################################
 
 `vr-python <https://github.com/ga4gh/vr-python/>`__ is the reference
 implementation for the GA4GH VR Spec.
