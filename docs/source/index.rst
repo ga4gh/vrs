@@ -13,7 +13,12 @@ implementation that promotes adoption of the standard.
    :maxdepth: 3
 
    introduction
-   specification/index
+   terms_and_model/index
+   schema
+   algorithms/index
+   examples
+   design_decisions
    implementations
    appendices/index
    contacts
+

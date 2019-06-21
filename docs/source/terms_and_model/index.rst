@@ -145,7 +145,7 @@ Composite Concepts
 
 .. _vr-schema-diagram:
 
-.. figure:: ../../images/object_graph.png
+.. figure:: ../images/object_graph.png
    :align: left
 
    **VR Schema Diagram**

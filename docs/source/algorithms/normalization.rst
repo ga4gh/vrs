@@ -51,7 +51,7 @@ alternate sequence) at an interval is outlined below.
 
 .. _normalization-diagram:
 
-.. figure:: ../../images/allele-normalization.png
+.. figure:: ../images/allele-normalization.png
    :align: left
 
    **VR Justified Normalization**
