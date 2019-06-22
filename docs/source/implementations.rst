@@ -84,15 +84,21 @@ VICC Meta-knowledgebase
 
 The Variant Interpretation for Cancer Consortium (VICC;
 https://cancervariants.org) has a collection of ~20K clinical
-interpretations describing ~3,500 somatic variations and variation
+interpretations associated with ~3,500 somatic variations and variation
 classes in a harmonized meta-knowledgebase [1]_ (see documentation at
 http://docs.cancervariants.org). Each interpretation is be linked to
 one or more variations or a variation class.
 
-As a Driver Project for GA4GH, the VICC is contributing to and/or
+As a Driver Project for GA4GH, VICC is contributing to and/or
 adopting three GA4GH standards: VR, Variant Annotation (VA), and the
-Data Use Ontology (DUO). The VICC will support queries on VR computed
+Data Use Ontology (DUO). VICC supports queries on VR all computed
 identifiers at the searchAssociations endpoint (`vicc-docs`_).
+Features associated with each interpretation are represented as VR-spec
+objects.
+
+Example queries:
+- https://search.cancervariants.org/api/v1/associations?size=10&from=1&q=ga4gh:VA.mJbjSsW541oOsOtBoX36Mppr6hMjbjFr
+- https://search.cancervariants.org/api/v1/associations?size=10&from=1&q=ga4gh:SL.gJeEs42k4qeXOKy9CJ515c0v2HTu8s4K
 
 **References:**
 
