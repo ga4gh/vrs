@@ -6,8 +6,12 @@ The VMC Digest uses a truncated SHA-512 digest as an identifier for
 Location, Allele, Haplotype, and Genotype objects. This notebook
 discusses the choice of SHA-512 and the truncation length.
 
-.. note:: |ccby| This analysis is provided by Reece Hart under a
-          Creative Commons CC-BY License.
+.. note:: This page was converted from the `Truncated Digest Collision
+	  Analysis notebook
+	  <https://github.com/ga4gh/vr-python/blob/master/notebooks/appendices/Truncated%20Digest%20Collision%20Analysis.ipynb>`__.
+
+	  |ccby| Reece Hart
+
 
 
 Conclusions
@@ -280,7 +284,7 @@ probability of digest collisions.
    * - Taylor approximation on #1
      - :math:`e^{-m(m-1)/2s}`
      - :math:`1-P'` 
-     - :math:`m \ll l s`
+     - :math:`m \ll s`
      - [1]
    * - Taylor approximation on #2
      - :math:`1 - \frac{m(m-1)}{2s}`
@@ -409,5 +413,6 @@ is approximately equivalent to:
 
 
 
-.. |ccby| image:: https://licensebuttons.net/l/by/3.0/88x31.png
-    :target: https://creativecommons.org/licenses/by/4.0
+.. |ccby| image:: /images/CC-BY.png
+   :height: 20px
+   :target: https://creativecommons.org/licenses/by/4.0
