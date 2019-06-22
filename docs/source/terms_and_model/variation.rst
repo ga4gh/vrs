@@ -66,8 +66,8 @@ indels).
   normalization <normalization>` whenever possible to facilitate
   comparisons of variation in regions of representational ambiguity.
 * Implementations MUST normalize Alleles using :ref:`"justified"
-  normalization <normalization>` when generating
-  :ref:`computed-identifiers`.
+  normalization <normalization>` when generating a
+  :ref:`computed-identifier`.
 
 **Notes**
 

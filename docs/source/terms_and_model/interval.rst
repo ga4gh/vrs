@@ -69,5 +69,5 @@ An :ref:`Interval` with a single start and end coordinate.
 * <start, end>=<*0,0*> refers to the point with width zero before the first residue.
 * <start, end>=<*i,i+1*> refers to the *i+1th* (1-based) residue.
 * <start, end>=<*N,N*> refers to the position after the last residue for Sequence of length *N*.
-* See :ref:`example <simple-interval-example>` in the reference implementation documentation.
+* See example notebooks in the :ref:`reference implementation documentation <impl-vr-python>`.
 

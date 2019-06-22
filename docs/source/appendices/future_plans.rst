@@ -15,7 +15,7 @@ require supporting more complex types of variation, including:
 * copy number variation
 * structural variation
 * mosaicism and chimerism
-* rule-base variation
+* rule-based variation
 
 .. figure:: ../images/planned_extensions_graph.png
    :align: left
@@ -457,4 +457,3 @@ Variation Sets
           expansion functions might be user-defined.  This concept is
           being refined. Please comment at
           https://github.com/ga4gh/vr-spec/issues/15
-

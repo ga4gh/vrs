@@ -46,4 +46,4 @@ The *SequenceState* class specifically captures a :ref:`sequence` as a
    
 **Examples**
 
-* See :ref:`example usage <simple-sequence-replacements>` in the reference implementation documentation.
+* See example usage in the `reference implementation documentation <impl-vr-python>`.

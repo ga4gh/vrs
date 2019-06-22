@@ -65,8 +65,7 @@ specific instance of an object within a document.
 
 **Implementation guidance**
 
-* This specification RECOMMENDS using :ref:`computed-identifiers` as
-  Ids.
+* This specification RECOMMENDS using a :ref:`computed-identifier` for each id.
 * When an appropriate namespace exists at identifiers.org, that
   namespace MUST be used verbatim (case sensitive).
 

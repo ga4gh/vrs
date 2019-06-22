@@ -63,7 +63,6 @@ The API endpoints that support data retrieval in this two key standards are summ
 Support for GA4GH refget and VR specs provided in ClinGen Allele Registry through implementation that is independent from VR-Python. Support for this community standards is implemented in ClinGen Allele Registry through extension of code written in C++.
 
 
-
 .. _impl-brca-exchange:
 
 BRCA Exchange
@@ -76,8 +75,6 @@ BRCA Exchange database, and the contents of this table will be served
 by the BRCA Exchange API.  A stand-alone executable will leverage
 these data to integrate the BRCA Exchange variant set with the ClinGen
 allele registry.
-
-
 
 
 .. _impl-vicc:
