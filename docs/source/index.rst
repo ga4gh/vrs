@@ -13,7 +13,7 @@ implementation that promotes adoption of the standard.
    :maxdepth: 3
 
    introduction
-   terms_and_model/index
+   terms_and_model
    schema
    algorithms/index
    design_decisions
