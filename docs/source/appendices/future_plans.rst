@@ -447,6 +447,34 @@ t(9;22)(q34;q11) in BCR-ABL
 
 .. _planned-variation-sets:
 
+Rule-based Variation
+@@@@@@@@@@@@@@@@@@@@
+
+Some variations are defined by categorical concepts, rather than specific
+locations and states. These variations go by many terms, including
+*categorical variants*, *bucket variants*, *container variants*, or
+*variant classes*. These forms of variation are not described by any
+broadly-recognized variation format, but modeling them is a key requirement
+for the representation of aggregate variation descriptions as commonly
+found in biomedical literature. Our future work will focus on the formal
+specification for representing these variations with sets of rules, which
+we currently call *Rule-based Variation*.
+
+RuleLocation
+############
+
+RuleLocation is a subclass of :ref:`location` intended to capture locations
+defined by rules instead of specific contiguous sequences. This includes
+locations defined by sequence characteristics, e.g. *microsatellite
+regions*.
+
+RuleState
+#########
+
+RuleState is a subclass of :ref:`state` intended to capture states defined
+by categorical rules instead of sequence states. This includes *gain- /
+loss-of-function*, *oncogenic*, and *truncating* variation.
+
 Variation Sets
 @@@@@@@@@@@@@@
 
