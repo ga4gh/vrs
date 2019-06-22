@@ -19,7 +19,12 @@ vr-python: GA4GH VR Reference Implementation
 implementation for the GA4GH VR Spec.  It supports all types covered
 by the VR Spec, implements Allele normalization and computed
 identifier generation, and provides "extra" features such as
-translation from HGVS, SPDI, and VCF formats.
+translation from HGVS, SPDI, and VCF formats.  The `Overview
+<https://github.com/ga4gh/vr-python/blob/master/notebooks/Overview.ipynb>`__
+and `Extras
+<https://github.com/ga4gh/vr-python/blob/master/notebooks/Extras.ipynb>`__
+Jupyter notebooks provide usage examples.
+
 
 ----
 
