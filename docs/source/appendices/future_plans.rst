@@ -392,29 +392,29 @@ SO: `Genotype (SO:0001027)
 .. _genotypes-represent-haplotypes-with-arbitrary-ploidy:
 
 .. note:: Genotypes represent Haplotypes with arbitrary ploidy
-	  The VR-Spec defines Haplotypes as a list of Alleles, and Genotypes as
-	  a list of Haplotypes. In essence, Haplotypes and Genotypes represent
-	  two distinct dimensions of containment: Haplotypes represent the "in
-	  phase" relationship of Alleles while Genotypes represents sets of
-	  Haplotypes of arbitrary ploidy.
-	  
-	  There are two important consequences of these definitions: There is no
-	  single-location Genotype. Users of SNP data will be familiar with
-	  representations like rs7412 C/C, which indicates the diploid state at
-	  a position. In the VR-Spec, this is merely a special case of a
-	  Genotype with two Haplotypes, each of which is defined with only one
-	  Allele (the same Allele in this case).  The VR-Spec does not define a
-	  diplotype type. A diplotype is a special case of a VR-Spec Genotype
-	  with exactly two Haplotypes. In practice, software data types that
-	  assume a ploidy of 2 make it very difficult to represent haploid
-	  states, copy number loss, and copy number gain, all of which occur
-	  when representing human data. In addition, assuming ploidy=2 makes
-	  software incompatible with organisms with other ploidy. The VR-Spec
-	  makes no assumptions about "normal" ploidy.
-	  
-	  In other words, the VR-SPec does not represent single-position
-	  Genotypes or diplotypes because both concepts are subsumed by the
-	  Allele, Haplotype, and Genotypes entities.
+     The VR-Spec defines Haplotypes as a list of Alleles, and Genotypes as
+     a list of Haplotypes. In essence, Haplotypes and Genotypes represent
+     two distinct dimensions of containment: Haplotypes represent the "in
+     phase" relationship of Alleles while Genotypes represents sets of
+     Haplotypes of arbitrary ploidy.
+
+     There are two important consequences of these definitions: There is no
+     single-location Genotype. Users of SNP data will be familiar with
+     representations like rs7412 C/C, which indicates the diploid state at
+     a position. In the VR-Spec, this is merely a special case of a
+     Genotype with two Haplotypes, each of which is defined with only one
+     Allele (the same Allele in this case).  The VR-Spec does not define a
+     diplotype type. A diplotype is a special case of a VR-Spec Genotype
+     with exactly two Haplotypes. In practice, software data types that
+     assume a ploidy of 2 make it very difficult to represent haploid
+     states, copy number loss, and copy number gain, all of which occur
+     when representing human data. In addition, assuming ploidy=2 makes
+     software incompatible with organisms with other ploidy. The VR-Spec
+     makes no assumptions about "normal" ploidy.
+
+     In other words, the VR-SPec does not represent single-position
+     Genotypes or diplotypes because both concepts are subsumed by the
+     Allele, Haplotype, and Genotypes entities.
 
 
 
