@@ -1,3 +1,4 @@
+.. _truncated-digest-collision-analysis:
 
 Truncated Digest Collision Analysis
 ===================================

@@ -7,7 +7,8 @@ Computing digests for identifiable VR objects consists of three steps:
 
 1. Compute the `SHA-512`_ digest of a binary object.
 2. Truncate the digest to the left-most 24 bytes (192 bits).  See
-   `FIPS-180 <SHA-512>`_ page 27 for details.
+   :ref:`truncated-digest-collision-analysis` for the rationale for 24
+   bytes.
 3. Encode the truncated digest as a base64url_ ASCII string.
 
 
