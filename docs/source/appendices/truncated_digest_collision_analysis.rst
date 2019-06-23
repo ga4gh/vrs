@@ -2,25 +2,23 @@
 Truncated Digest Collision Analysis
 ===================================
 
-The VMC Digest uses a truncated SHA-512 digest as an identifier for
-Location, Allele, Haplotype, and Genotype objects. This notebook
-discusses the choice of SHA-512 and the truncation length.
+The GA4GH Digest uses a truncated SHA-512 digst in order to generate a
+unique identifier based on data that defines the object. This notebook
+discusses the choice of SHA-512 over other digest methods and the choice
+of truncation length.
 
-.. note:: This page was converted from the `Truncated Digest Collision
-	  Analysis notebook
-	  <https://github.com/ga4gh/vr-python/blob/master/notebooks/appendices/Truncated%20Digest%20Collision%20Analysis.ipynb>`__.
-
-	  |ccby| Reece Hart
-
-
+Source: Reece Hart,
+`CC-BY <https://creativecommons.org/licenses/by/4.0/>`__
 
 Conclusions
 -----------
 
--  For Python-based implementations (written in C), SHA-512 is
-   substantially slower than SHA-1 and is on par with other digests.
--  24 bytes of key is *ample* for sequence variation. Arguably, we could
-   choose much smaller.
+-  The computational time for SHA-512 is similar to that of other digest
+   methods. Given that it is believed to distribute input bits more
+   uniformly with no increased computational cost, it should be
+   preferred for our use (and likely most uses).
+-  24 bytes (192 bits) of digest is *ample* for VR uses. Arguably, we
+   could choose much smaller without significant risk of collision.
 
 .. code:: ipython3
 
@@ -30,7 +28,7 @@ Conclusions
     
     from IPython.display import display, Markdown
     
-    from vmc.extra.utils import _format_time
+    from ga4gh.vr.extras.utils import _format_time
     
     algorithms = {'sha512', 'sha1', 'sha256', 'md5', 'sha224', 'sha384'}
 
@@ -91,24 +89,24 @@ basis for the Truncated Digest.
 +-----------+---------+---------+---------+--------+---------+
 | algorithm | 100     | 1000    | 10000   | 100000 | 1000000 |
 +===========+=========+=========+=========+========+=========+
-| md5       | 1.58 ms | 3.55 ms | 19.1 ms | 145 ms | 1.44 s  |
+| md5       | 1.23 ms | 2.7 ms  | 17.6 ms | 147 ms | 1.46 s  |
 +-----------+---------+---------+---------+--------+---------+
-| sha1      | 1.08 ms | 1.98 ms | 11.3 ms | 102 ms | 1.01 s  |
+| sha1      | 1.24 ms | 2.28 ms | 12.4 ms | 110 ms | 1.08 s  |
 +-----------+---------+---------+---------+--------+---------+
-| sha224    | 1.17 ms | 3.16 ms | 23.1 ms | 220 ms | 2.34 s  |
+| sha224    | 1.51 ms | 3.66 ms | 25.2 ms | 235 ms | 2.33 s  |
 +-----------+---------+---------+---------+--------+---------+
-| sha256    | 1.3 ms  | 3.58 ms | 30.2 ms | 256 ms | 2.52 s  |
+| sha256    | 1.51 ms | 3.62 ms | 25.6 ms | 241 ms | 2.55 s  |
 +-----------+---------+---------+---------+--------+---------+
-| sha384    | 1.19 ms | 3.36 ms | 20.9 ms | 168 ms | 1.63 s  |
+| sha384    | 1.46 ms | 4.01 ms | 18.9 ms | 168 ms | 1.71 s  |
 +-----------+---------+---------+---------+--------+---------+
-| sha512    | 1.15 ms | 2.57 ms | 16.1 ms | 149 ms | 1.47 s  |
+| sha512    | 1.47 ms | 3.13 ms | 18.3 ms | 165 ms | 1.63 s  |
 +-----------+---------+---------+---------+--------+---------+
 
 
-**Conclusion: For Python-based implementations (written in C), SHA-512
-is substantially slower than SHA-1 and is on par with other digests.**
+**Conclusion: SHA-512 computational time is similar to that of other
+digest methods.**
 
-This is result was not initially expected. On further research, there is
+This is result was not expected initially. On further research, there is
 a clear explanation: The SHA-2 series of digests (which includes
 SHA-224, SHA-256, SHA-384, and SHA-512) is defined using 64-bit
 operations. When an implementation is optimized for 64-bit systems (as
@@ -135,24 +133,24 @@ collision probability and corpus size.
 
 Throughout the following, we’ll use these variables:
 
- * :math:`P` = Probability of collision
- * :math:`P'` = Probability of no collision
- * :math:`b` = digest size, in bits
- * :math:`s` = digest space size, :math:`s = 2^b`
- * :math:`m` = number of messages in corpus
+-  :math:`P` = Probability of collision
+-  :math:`P'` = Probability of no collision
+-  :math:`b` = digest size, in bits
+-  :math:`s` = digest space size, :math:`s = 2^b`
+-  :math:`m` = number of messages in corpus
 
 The length of individual messages is irrelevant.
 
 References
 ~~~~~~~~~~
 
-| [1] http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf
-| [2] https://tools.ietf.org/html/rfc3548#section-4
-| [3] http://stackoverflow.com/a/4014407/342839
-| [4] http://stackoverflow.com/a/22029380/342839
-| [5] http://preshing.com/20110504/hash-collision-probabilities/
-| [6] https://en.wikipedia.org/wiki/Birthday_problem
-| [7] https://en.wikipedia.org/wiki/Birthday_attack
+-  [1] http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf
+-  [2] https://tools.ietf.org/html/rfc3548#section-4
+-  [3] http://stackoverflow.com/a/4014407/342839
+-  [4] http://stackoverflow.com/a/22029380/342839
+-  [5] http://preshing.com/20110504/hash-collision-probabilities/
+-  [6] https://en.wikipedia.org/wiki/Birthday_problem
+-  [7] https://en.wikipedia.org/wiki/Birthday_attack
 
 Background: The Birthday Problem
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -181,13 +179,11 @@ among :math:`s` possible values without a collision.
 
 Continuing this logic, we have:
 
-.. math:: P' = \prod_\nolimits{i=0}^{m-1} \frac{(s-i)}{s}
+.. math:: P' = \prod\nolimits_{i=0}^{m-1} \frac{(s-i)}{s}
 
 or, equivalently,
 
 .. math:: P' = \frac{s!}{s^m \cdot (s-m)!}
-
-.
 
 When the size of the corpus becomes greater than the size of the digest
 space, the probability of uniques is zero by the pigeonhole principle.
@@ -195,12 +191,12 @@ Formally, the above equation becomes:
 
 .. math::
 
-    
+
    P' = \left\{
            \begin{array}{ll}
-               1 & \text{if }m = 0 \\
-               \prod_\nolimits{i=0}^{m-1} \frac{(s-i)}{s} & \text{if }1 \le m\le s\\
-               0 & \text{if }m \gt s
+               1    &    \text{if }m = 0 \\
+               \prod\nolimits_{i=0}^{m-1} \frac{(s-i)}{s}    &    \text{if }1 \le m\le s\\
+               0    &    \text{if }m \gt s
            \end{array}
         \right.
 
@@ -227,7 +223,7 @@ Taylor expansion, where :math:`x = -i/s` (⇒ :math:`m \ll s`):
 
 
    \begin{split}
-   P' & \approx \prod_\nolimits{i=0}^{m-1} e^{-i/s} \\
+   P' & \approx \prod\nolimits_{i=0}^{m-1} e^{-i/s} \\
       & = e^{-m(m-1)/2s}
    \end{split}
 
@@ -264,8 +260,8 @@ yield
 Summary of equations
 ~~~~~~~~~~~~~~~~~~~~
 
-We may now summarize equations often seen online to analyze the
-probability of digest collisions.
+We may now summarize equations to approximate the probability of digest
+collisions.
 
 .. list-table:: Summary of Equations
    :header-rows: 1
@@ -297,12 +293,17 @@ probability of digest collisions.
      - (same)
      - [2] (where :math:`s=2^n`)
 
-| [1] https://en.wikipedia.org/wiki/Birthday_problem
-| [2] http://preshing.com/20110504/hash-collision-probabilities/
+-  [1] https://en.wikipedia.org/wiki/Birthday_problem
+-  [2] http://preshing.com/20110504/hash-collision-probabilities/
 
+--------------
 
-Analyzing digest size
-~~~~~~~~~~~~~~~~~~~~~
+Choosing a digest size
+----------------------
+
+Now, we turn the problem around: **What digest length :math:`b`
+corresponds with a collision probability less than :math:`P` for
+:math:`m` messages?**
 
 From the above summary, we have :math:`P = m^2 / 2s` for
 :math:`m \ll s`. Rewriting with :math:`s=2^b`, we have the probability
@@ -314,7 +315,7 @@ is:
 Note that the collision probability depends on the number of messages,
 but not their size.
 
-Solving for the number of messages:
+Solving for the number of messages (not used further in this analysis):
 
 .. math:: m(b, P) = \sqrt{P * 2^{b+1}}
 
@@ -377,9 +378,13 @@ is approximately equivalent to:
     for n_m in m_bins:
         table_rows += [["{:g}".format(n_m)] + [B(P, n_m) for P in P_bins]]
     table = "\n".join(["|".join(map(str,row)) for row in table_rows])
-    display(Markdown(table))
+    table_header = "### digest length (bytes) required for expected collision probability $P$ over $m$ messages \n"
+    display(Markdown(table_header +  table))
 
 
+
+digest length (bytes) required for expected collision probability :math:`P` over :math:`m` messages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
 | #m  | P<= | P<= | P<= | P<= | P<= | P<= | P<= | P<= | P<= | P<= | P<= |
@@ -411,8 +416,3 @@ is approximately equivalent to:
 | 30  |     |     |     |     |     |     |     |     |     |     |     |
 +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
 
-
-
-.. |ccby| image:: /images/CC-BY.png
-   :height: 20px
-   :target: https://creativecommons.org/licenses/by/4.0
