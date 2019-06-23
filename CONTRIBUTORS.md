@@ -32,13 +32,14 @@ absorbed into the GA4GH and underwent a major membership change.
 GA4GH's VR-Spec borrowed heavily from the VMC effort.  We thank the
 following VMC Collaborators for their contributions.
 
-* Gil Alterovitz, Harvard Medical School/Boston Children’s Hospital, FHIR Genomics
-* Larry Babb, Sunquest, ClinGen
-* Karen Eilbeck, University of Utah
 * Bob Freimuth, Mayo Clinic, ClinGen, HL7/FHIR
+* Larry Babb, Sunquest, ClinGen
 * Reece Hart, Invitae, GA4GH, chair
-* Sarah Hunt, Ensembl
+
 * David Kreda, Harvard Medical School, FHIR Genomics
+* Gil Alterovitz, Harvard Medical School/Boston Children’s Hospital, FHIR Genomics
 * Jennifer Lee, NCBI, ClinVar
+* Karen Eilbeck, University of Utah
 * Peter Robinson, Jackson Laboratory, HPO
+* Sarah Hunt, Ensembl
 * Shawn Rynearson, University of Utah, UCGD
