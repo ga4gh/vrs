@@ -77,7 +77,7 @@ For example::
 
 .. note:: **Proposal for GA4GH-wide use**
 
-	  The Variation Representation team created the computed
+      The Variation Representation team created the computed
           identifier scheme for VR objects.  However, this scheme is
           applicable and useful to the entire GA4GH ecosystem.  As a
           result, we are proposing that the computed identifier scheme
@@ -85,7 +85,7 @@ For example::
           standard.  For this reason, we have adopted the use of the
           `ga4gh` prefix above. 
 
-	  If the Computed Identifier scheme is adopted as a GA4GH-wide
-	  standard, documentation and type prefixes would moved from
-	  the VR specification to a separate repository for GA4GH-wide
-	  use.
+      If the Computed Identifier scheme is adopted as a GA4GH-wide
+      standard, documentation and type prefixes would moved from
+      the VR specification to a separate repository for GA4GH-wide
+      use.
