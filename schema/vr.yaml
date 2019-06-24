@@ -1,13 +1,3 @@
-# VR uses yaml as the source document for json schema
-#
-# To convert vr.yaml to vr.json:
-#   make vr.json
-# You'll probably have to `pip install pyyaml` first.
-#
-# To watch for changes and update automatically:
-#   make watch &
-
-
 $schema: "http://json-schema.org/schema#"
 title: "GA4GH-VR-Definitions"
 type: object

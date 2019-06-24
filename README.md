@@ -7,7 +7,7 @@ national information resource providers, major international public
 initiatives, and diagnostic testing laboratories.
 
 
-Specific goals for the project:
+# Specific goals:
 
 * Develop common language- and protocol-neutral information models and
   nomenclature for biological sequence variation.
@@ -25,3 +25,29 @@ Specific goals for the project:
 
 The VR model is the product of the GA4GH `Variation Representation
 <https://ga4gh-gks.github.io/variant_representation.html>`__ group.
+
+
+
+# Using the schema
+
+The schema is available in the `schema/` directory, in both yaml and
+json versions.  It conforms to json schema draft-07.  For a list of
+libraries that support json schema, see [JSON
+Schema>Implementations](https://json-schema.org/implementations.html).
+
+
+
+# Contributing to the schema
+
+VR uses yaml as the source document for json schema
+
+To convert vr.yaml to vr.json:
+
+    make vr.json
+
+You'll probably have to `pip install pyyaml` first.
+
+To watch for changes and update automatically:
+
+    make watch &
+
