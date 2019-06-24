@@ -62,7 +62,7 @@ Type prefixes used by VR are:
    VT, Text
    VH, (reserved) Haplotype
    VG, (reserved) Genotype
-   VT, (reserved) Translocation
+   VX, (reserved) Translocation
 
 For example::
 
