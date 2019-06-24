@@ -19,5 +19,3 @@ implementation that promotes adoption of the standard.
    design_decisions
    implementations
    appendices/index
-   contacts
-
