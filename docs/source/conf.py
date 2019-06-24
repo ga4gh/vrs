@@ -35,7 +35,8 @@ copyright = '2019, GA4GH'
 author = 'Committers'
 master_doc = 'index'
 release = _get_git_tag()
-version = _parse_release_as_version(release)
+version = release
+# version = _parse_release_as_version(release)
 
 # -- Schema doc paths --------------------------------------------------------
 
