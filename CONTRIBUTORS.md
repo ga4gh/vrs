@@ -32,9 +32,9 @@ absorbed into the GA4GH and underwent a major membership change.
 GA4GH's VR-Spec borrowed heavily from the VMC effort.  We thank the
 following VMC Collaborators for their contributions.
 
-* Bob Freimuth, Mayo Clinic, ClinGen, HL7/FHIR
-* Larry Babb, Sunquest, ClinGen
 * Reece Hart, Invitae, GA4GH, chair
+* Larry Babb, Sunquest, ClinGen
+* Bob Freimuth, Mayo Clinic, ClinGen, HL7/FHIR
 
 * David Kreda, Harvard Medical School, FHIR Genomics
 * Gil Alterovitz, Harvard Medical School/Boston Children’s Hospital, FHIR Genomics
