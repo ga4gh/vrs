@@ -34,9 +34,10 @@ project = 'vr-spec'
 copyright = '2019, GA4GH'
 author = 'Committers'
 master_doc = 'index'
-release = _get_git_tag()
-version = release
+#release = _get_git_tag()
 # version = _parse_release_as_version(release)
+release = "6.7.8-dev.1"
+version = release
 
 # -- Schema doc paths --------------------------------------------------------
 
