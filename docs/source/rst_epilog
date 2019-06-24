@@ -18,6 +18,7 @@
 .. _polymeric chain: https://en.wikipedia.org/wiki/Polymer
 .. _protein: https://en.wikipedia.org/wiki/Protein
 
+.. |vr-python| replace:: `vr-python <https://github/ga4gh/vr-python/>`__
 .. |vr_json| replace:: `vr.json <https://raw.githubusercontent.com/ga4gh/vr-spec/{release}/schema/vr.json>`__
 .. |vr_yaml| replace:: `vr.yaml <https://raw.githubusercontent.com/ga4gh/vr-spec/{release}/schema/vr.yaml>`__
 
