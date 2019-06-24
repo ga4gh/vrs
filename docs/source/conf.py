@@ -30,10 +30,11 @@ def _parse_release_as_version(rls):
 
 # -- Project information -----------------------------------------------------
 
-project = 'vr-spec'
+project = 'GA4GH Variation Representation Specification'
 copyright = '2019, GA4GH'
 author = 'Committers'
 master_doc = 'index'
+# N.B. RTD ignores these values. :-/
 release = _get_git_tag()
 version = _parse_release_as_version(release)
 
