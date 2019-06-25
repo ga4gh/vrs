@@ -30,16 +30,10 @@ All publicly available functionality is accessed by importing from
 .. raw:: html
 
    <div>
-
-::
-
    <div style="border-radius: 10px; width: 80%; margin: 0 auto; padding: 5px; border: 2pt solid #660000; color: #660000; background: #f4cccc;">
    <span style="font-size: 200%">⚠</span> Import only from <code>ga4gh.vr</code>.
            Submodules contain implementation details that are likely to change without notice.
    </div>
-
-.. raw:: html
-
    </div>
 
 .. code:: ipython3
@@ -114,9 +108,16 @@ SequenceLocation
 
 .. code:: ipython3
 
+    # Implementations are responsible for providing a mechanism to convert
+    # conventional sequence accessions to ga4gh sequence references.
+    # See Extras notebook for an example.
+    sequence_id = "ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_"
+
+.. code:: ipython3
+
     # A SequenceLocation based on a SimpleInterval
     sequence_location_si = models.SequenceLocation(
-        sequence_id="refseq:NM_0001234.5",
+        sequence_id=sequence_id,
         interval=simple_interval)
     ga4gh_identify(sequence_location_si)
     sequence_location_si.as_dict()
@@ -126,9 +127,9 @@ SequenceLocation
 
 .. parsed-literal::
 
-    {'id': 'ga4gh:SL.UqdjWOolIz8Vxd5b14eVND0vw88q0vqr',
+    {'id': 'ga4gh:SL.v__fHi86NVjkAHVlswpvQfcY0W5nG0Dk',
      'interval': {'end': 43, 'start': 42, 'type': 'SimpleInterval'},
-     'sequence_id': 'refseq:NM_0001234.5',
+     'sequence_id': 'ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_',
      'type': 'SequenceLocation'}
 
 
@@ -208,10 +209,10 @@ MNVs, del, ins, and delins.
 
 .. parsed-literal::
 
-    {'id': 'ga4gh:VA.C0e28xlAfc9LVvCj_2092gF28UbtP3oX',
-     'location': {'id': 'ga4gh:SL.UqdjWOolIz8Vxd5b14eVND0vw88q0vqr',
+    {'id': 'ga4gh:VA.weKX1iFVAnAa-jXQ4T8RijCcIlDnAaIe',
+     'location': {'id': 'ga4gh:SL.v__fHi86NVjkAHVlswpvQfcY0W5nG0Dk',
       'interval': {'end': 43, 'start': 42, 'type': 'SimpleInterval'},
-      'sequence_id': 'refseq:NM_0001234.5',
+      'sequence_id': 'ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_',
       'type': 'SequenceLocation'},
      'state': {'sequence': 'A', 'type': 'SequenceState'},
      'type': 'Allele'}
@@ -349,15 +350,9 @@ property in the ``Allele`` example below.
 .. raw:: html
 
    <div>
-
-::
-
    <div style="border-radius: 10px; width: 80%; margin: 0 auto; padding: 5px; border: 2pt solid #660000; color: #660000; background: #f4cccc;">
        <span style="font-size: 200%">⚠</span> Although JSON serialization and GA4GH canonical JSON serialization appear similar, they are NOT interchangeable and will generated different digests. GA4GH identifiers are defined <i>only</i> when used with GA4GH serialization process.
    </div>
-
-.. raw:: html
-
    </div>
 
 .. code:: ipython3
@@ -371,10 +366,10 @@ property in the ``Allele`` example below.
 
 .. parsed-literal::
 
-    {'id': 'ga4gh:VA.C0e28xlAfc9LVvCj_2092gF28UbtP3oX',
-     'location': {'id': 'ga4gh:SL.UqdjWOolIz8Vxd5b14eVND0vw88q0vqr',
+    {'id': 'ga4gh:VA.weKX1iFVAnAa-jXQ4T8RijCcIlDnAaIe',
+     'location': {'id': 'ga4gh:SL.v__fHi86NVjkAHVlswpvQfcY0W5nG0Dk',
       'interval': {'end': 43, 'start': 42, 'type': 'SimpleInterval'},
-      'sequence_id': 'refseq:NM_0001234.5',
+      'sequence_id': 'ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_',
       'type': 'SequenceLocation'},
      'state': {'sequence': 'A', 'type': 'SequenceState'},
      'type': 'Allele'}
@@ -392,7 +387,7 @@ property in the ``Allele`` example below.
 
 .. parsed-literal::
 
-    b'{"location":"UqdjWOolIz8Vxd5b14eVND0vw88q0vqr","state":{"sequence":"A","type":"SequenceState"},"type":"Allele"}'
+    b'{"location":"v__fHi86NVjkAHVlswpvQfcY0W5nG0Dk","state":{"sequence":"A","type":"SequenceState"},"type":"Allele"}'
 
 
 
@@ -412,7 +407,7 @@ objects by prefixing a VR digest with a type-specific code.
 
 .. parsed-literal::
 
-    'C0e28xlAfc9LVvCj_2092gF28UbtP3oX'
+    'weKX1iFVAnAa-jXQ4T8RijCcIlDnAaIe'
 
 
 
@@ -427,6 +422,6 @@ objects by prefixing a VR digest with a type-specific code.
 
 .. parsed-literal::
 
-    'ga4gh:VA.C0e28xlAfc9LVvCj_2092gF28UbtP3oX'
+    'ga4gh:VA.weKX1iFVAnAa-jXQ4T8RijCcIlDnAaIe'
 
 

@@ -186,7 +186,9 @@ An :ref:`Interval` with a single start and end coordinate.
 
 **Implementation guidance**
 
-* Implementations MUST require that 0 ≤ start ≤ end. In the case of double-stranded DNA, this constraint holds even when a feature is on the complementary strand.
+* Implementations MUST require that 0 ≤ start ≤ end. In the case of
+  double-stranded DNA, this constraint holds even when a feature is on
+  the complementary strand.
 
 **Notes**
 
@@ -211,13 +213,16 @@ An :ref:`Interval` with a single start and end coordinate.
 * Two intervals a and b *coincide* if they intersect or if they are
   equal (the equality condition is required to handle the case of two
   identical zero-width Intervals).
-
-**Examples**
-
 * <start, end>=<*0,0*> refers to the point with width zero before the first residue.
 * <start, end>=<*i,i+1*> refers to the *i+1th* (1-based) residue.
 * <start, end>=<*N,N*> refers to the position after the last residue for Sequence of length *N*.
 * See example notebooks in the :ref:`reference implementation documentation <impl-vr-python>`.
+
+**Example**
+
+.. parsed-literal::
+
+    {'end': 43, 'start': 42, 'type': 'SimpleInterval'}
 
 
 .. _state:
@@ -266,9 +271,9 @@ The *SequenceState* class specifically captures a :ref:`sequence` as a
    type, string, required, State type; must be set to 'SequenceState'
    sequence, :ref:`Sequence`, required, The sequence that is to be used as the state for other types.
 
-**Examples**
+**Example**
 
-* See example usage in the `reference implementation documentation <impl-vr-python>`.
+
 
 .. _location:
 
@@ -298,6 +303,14 @@ Location for Variation.
 * Location refers to a position.  Although it may imply a sequence,
   the two concepts are not interchangable, especially when the
   location is non-specific (e.g., a range) or symbolic (a gene).
+
+**Example**
+
+.. parsed-literal::
+
+    {'interval': {'end': 43, 'start': 42, 'type': 'SimpleInterval'},
+     'sequence_id': 'refseq:NM_0001234.5',
+     'type': 'SequenceLocation'}
 
 
 .. _sequence-location:

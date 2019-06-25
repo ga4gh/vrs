@@ -53,13 +53,6 @@ RefGet: `spec <https://samtools.github.io/hts-specs/refget.html>`__ \|
 
 .. parsed-literal::
 
-    2019-06-24 10:39:08 snafu ga4gh.vr.extras.dataproxy[4281] INFO Fetching http://localhost:5000/seqrepo/1/metadata/RefSeq:NM_000551.3
-
-
-
-
-.. parsed-literal::
-
     {'added': '2016-08-24T05:03:11Z',
      'aliases': ['MD5:215137b1973c1a5afcf86be7d999574a',
       'RefSeq:NM_000551.3',
@@ -81,13 +74,6 @@ RefGet: `spec <https://samtools.github.io/hts-specs/refget.html>`__ \|
 
 .. parsed-literal::
 
-    2019-06-24 10:39:08 snafu ga4gh.vr.extras.dataproxy[4281] INFO Fetching http://localhost:5000/seqrepo/1/sequence/VMC:GS_v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_
-
-
-
-
-.. parsed-literal::
-
     'CCTCGCCTCCGTTACAACGGCCTACGGTGCTGGAGGATCCTTCTGCGCAC...'
 
 
@@ -101,15 +87,9 @@ representations.
 .. raw:: html
 
    <div>
-
-::
-
    <div style="border-radius: 10px; width: 80%; margin: 0 auto; padding: 5px; background: #d9ead3; border: 2pt solid #274e13; color: #274e13">
    <span style="font-size: 200%">🚀</span> The examples below use the same variant in 4 formats: HGVS, beacon, spdi, and VCF/gnomAD. Notice that the resulting Allele objects and computed identifiers are identical.</b>
    </div>
-
-.. raw:: html
-
    </div>
 
 .. code:: ipython3
@@ -118,23 +98,10 @@ representations.
     tlr = Translator(data_proxy=dp)
 
 
-.. parsed-literal::
-
-    2019-06-24 10:39:08 snafu hgvs[4281] INFO hgvs 1.3.0.post0; released: False
-
-
 .. code:: ipython3
 
     a = tlr.from_hgvs("NC_000013.11:g.32936732G>C")
     a.as_dict()
-
-
-.. parsed-literal::
-
-    2019-06-24 10:39:08 snafu ga4gh.vr.extras.translator[4281] INFO Creating  parser
-    2019-06-24 10:39:10 snafu ga4gh.vr.extras.dataproxy[4281] INFO Fetching http://localhost:5000/seqrepo/1/metadata/RefSeq:NC_000013.11
-
-
 
 
 .. parsed-literal::
@@ -154,13 +121,6 @@ representations.
     # from_beacon: Translate from beacon's form
     a = tlr.from_beacon("13 : 32936732 G > C")
     a.as_dict()
-
-
-.. parsed-literal::
-
-    2019-06-24 10:39:10 snafu ga4gh.vr.extras.dataproxy[4281] INFO Fetching http://localhost:5000/seqrepo/1/metadata/GRCh38:13
-
-
 
 
 .. parsed-literal::
@@ -258,12 +218,6 @@ VR.
         display(HTML("<table>" + "".join(table_blocks) + "</table>"))
 
 
-.. parsed-literal::
-
-    2019-06-24 10:39:10 snafu ga4gh.vr.extras.dataproxy[4281] INFO Fetching http://localhost:5000/seqrepo/1/sequence/NC_000013.11
-
-
-
 .. raw:: html
 
     <table><tr style='background:#ffc'> <th colspan=2 style='text-align:left'><pre>NC_000013.11:g.32936732C=</pre></th> </tr><tr> <th>json</th> <td style='text-align:left'><pre>{'id': 'ga4gh:VA.n9ax-9x6gOC0OEt73VMYqCBfqfxG1XUH',
@@ -275,12 +229,6 @@ VR.
                   'type': 'SequenceLocation'},
      'state': {'sequence': 'C', 'type': 'SequenceState'},
      'type': 'Allele'}</pre></td> </tr><tr> <th>ga4gh identifier</th> <td style='text-align:left'><pre>ga4gh:VA.n9ax-9x6gOC0OEt73VMYqCBfqfxG1XUH</pre></td> </tr><tr> <th>ga4gh serialization (allele)</th> <td style='text-align:left'><pre>b'{"location":"v9K0mcjQVugxTDIcdi7GBJ_R6fZ1lsYq","state":{"sequence":"C","type":"SequenceState"},"type":"Allele"}'</pre></td> </tr><tr> <th>ga4gh serialization (location)</th> <td style='text-align:left'><pre>b'{"interval":{"end":32936732,"start":32936731,"type":"SimpleInterval"},"sequence_id":"_0wi-qoDrvram155UmcSC-zA5ZK4fpLT","type":"SequenceLocation"}'</pre></td> </tr></table>
-
-
-.. parsed-literal::
-
-    2019-06-24 10:39:10 snafu ga4gh.vr.extras.dataproxy[4281] INFO Fetching http://localhost:5000/seqrepo/1/metadata/RefSeq:NC_000007.14
-
 
 
 .. raw:: html
