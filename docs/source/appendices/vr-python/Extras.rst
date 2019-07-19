@@ -50,8 +50,7 @@ RefGet: `spec <https://samtools.github.io/hts-specs/refget.html>`__ \|
 
     dp.get_metadata("refseq:NM_000551.3")
 
-
-.. parsed-literal::
+.. code:: python
 
     {'added': '2016-08-24T05:03:11Z',
      'aliases': ['MD5:215137b1973c1a5afcf86be7d999574a',
@@ -72,7 +71,7 @@ RefGet: `spec <https://samtools.github.io/hts-specs/refget.html>`__ \|
     dp.get_sequence("ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_", start=0, end=50) + "..."
 
 
-.. parsed-literal::
+.. code:: python
 
     'CCTCGCCTCCGTTACAACGGCCTACGGTGCTGGAGGATCCTTCTGCGCAC...'
 
@@ -104,7 +103,8 @@ representations.
     a.as_dict()
 
 
-.. parsed-literal::
+.. code:: python
+
 
     {'id': 'ga4gh:VA.n9ax-9x6gOC0OEt73VMYqCBfqfxG1XUH',
      'location': {'id': 'ga4gh:SL.v9K0mcjQVugxTDIcdi7GBJ_R6fZ1lsYq',
@@ -123,7 +123,7 @@ representations.
     a.as_dict()
 
 
-.. parsed-literal::
+.. code:: python
 
     {'id': 'ga4gh:VA.n9ax-9x6gOC0OEt73VMYqCBfqfxG1XUH',
      'location': {'id': 'ga4gh:SL.v9K0mcjQVugxTDIcdi7GBJ_R6fZ1lsYq',
@@ -144,7 +144,7 @@ representations.
 
 
 
-.. parsed-literal::
+.. code:: python
 
     {'id': 'ga4gh:VA.n9ax-9x6gOC0OEt73VMYqCBfqfxG1XUH',
      'location': {'id': 'ga4gh:SL.v9K0mcjQVugxTDIcdi7GBJ_R6fZ1lsYq',
@@ -162,9 +162,7 @@ representations.
     a.as_dict()
 
 
-
-
-.. parsed-literal::
+.. code:: python
 
     {'id': 'ga4gh:VA.n9ax-9x6gOC0OEt73VMYqCBfqfxG1XUH',
      'location': {'id': 'ga4gh:SL.v9K0mcjQVugxTDIcdi7GBJ_R6fZ1lsYq',
