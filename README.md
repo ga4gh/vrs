@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/67005248.svg)](https://zenodo.org/badge/latestdoi/67005248)
+
 The [GA4GH](https://www.ga4gh.org/) [Variation Representation
 Specification](https://vr-spec.readthedocs.io/) provides a
 comprehensive framework for the computational representation of
@@ -50,4 +52,3 @@ You'll probably have to `pip install pyyaml` first.
 To watch for changes and update automatically:
 
     make watch &
-
