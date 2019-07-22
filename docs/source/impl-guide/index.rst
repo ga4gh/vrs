@@ -1,9 +1,9 @@
-.. _algorithms:
+.. _impl-guide:
 
-Algorithms
-!!!!!!!!!!
+Implementation Guide
+!!!!!!!!!!!!!!!!!!!!
 
-The VR Specification REQUIRES implementation of the following
+Implementations of the VR Specification will require the following
 algorithms:
 
 * :ref:`normalization`: Expands Alleles to the maximal region of
@@ -24,8 +24,8 @@ algorithms:
    :hidden:
    :maxdepth: 1
 
-   digest
-   computed_identifier
    normalization
+   digest
    serialization
+   computed_identifier
   
