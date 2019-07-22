@@ -15,7 +15,6 @@ implementation that promotes adoption of the standard.
    introduction
    terms_and_model
    schema
-   algorithms/index
-   design_decisions
+   impl-guide/index
    implementations
    appendices/index
