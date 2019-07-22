@@ -6,6 +6,10 @@ collaboration among [contributors](CONTRIBUTORS.md) representing
 national information resource providers, major international public
 initiatives, and diagnostic testing laboratories.
 
+Note: vr-spec is under very active development.  The priorities and
+roadmap are available at the [VR 2019
+Project](https://github.com/orgs/ga4gh/projects/5).
+
 
 # Specific goals:
 
