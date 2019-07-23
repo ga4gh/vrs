@@ -8,4 +8,5 @@ Appendices
    vr-python/index
    truncated_digest_collision_analysis
    development_process
+   glossary
    future_plans
