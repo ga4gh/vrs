@@ -1,5 +1,13 @@
 .. _computed-identifiers:
 
+.. note:: This section depends on :ref:`ga4gh-identifiers`, which is
+          submitted concurrently.  Based on conversations with GA4GH
+          leadership, we have assumed acceptance of the proposal when
+          writing this section.  In the event that the proposal is not
+          accepted, this section will be modified as described in
+          :ref:`ga4gh-ir-contingency`.
+
+
 Computed Identifiers
 !!!!!!!!!!!!!!!!!!!!
 
@@ -14,9 +22,10 @@ makes it easier for distributed groups to share data.
 
 A VR Computed Identifier is computed as follows:
 
-* :ref:`Serialize <serialization>` the object into binary data.
-* :ref:`Generate a digest <digest>` from the binary data.
-* :ref:`Construct an identifier` based on the digest and object type.
+* :ref:`Normalize the object <normalization>` if the object is an Allele
+* :ref:`Serialize the object <serialize>` into binary data.
+* :ref:`Generate a truncated digest <digest>` from the binary data.
+* :ref:`Construct an identifier <identify>` based on the digest and object type.
 
 The following diagram depicts the operations necessary to generate a
 computed identifier.  These operations are described in detail in the
@@ -33,16 +42,34 @@ subsequent sections.
    italics.  The yellow, green, and blue boxes, corresponding to the
    ``ga4gh_digest``, ``vr_digest``, and ``vr_identify`` functions
    respectively, depict the dependencies among functions.
-   ``SHA512t192`` is :ref:`SHA-512` truncated at 192 bits using the
-   systematic name recommended by SHA-512.  base64url_ is the
-   official name of the :ref:`Base64` encoding variant that uses a URL-safe
-   character set.
+   ``SHA512/192`` is :ref:`SHA-512` truncated at 192 bits using the
+   systematic name recommended by SHA-512 (§5.3.6).  base64url_ is the
+   official name of the variant of :ref:`Base64` encoding that uses a
+   URL-safe character set.
 
    [`figure source <https://www.draw.io/?page-id=M8V1EMsVyfZQDDbK8gNL&title=VR%20diagrams.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fharts.net%2Fuc%3Fid%3D1Qimkvi-Fnd1hhuixbd6aU4Se6zr5Nc1h%26export%3Ddownload>`__]
 
 
+The VR Computed Identifier algorithm applies only to *identifiable*
+objects, that is, objects with an `id` property.
 
-.. _serialization:
+In addition, the VR Computed Identifier is explicitly NOT defined
+(that is, invalid) if used with any other normalization,
+serialization, or digest mechanism to generate a GA4GH Computed
+Identifier.
+
+.. important:: VR identifiers are defined only when all nested objects
+	       are identified with ``ga4gh.vr`` identifiers.
+	       Generating VR identifiers using objects referenced
+	       within any other namespace is not compliant with this
+	       specification.  In particular, it is not compliant to
+	       generate VR identifiers using sequences referenced with
+	       RefSeq, Ensembl, or other accession outside the
+	       ``ga4gh.vr`` namespace.
+
+
+
+.. _serialize:
 
 VR Serialization
 @@@@@@@@@@@@@@@@
@@ -71,14 +98,16 @@ forward compatible with the process described here.
 The first step in serialization is to generate message content. To do
 so, implementations MUST:
 
+    * ensure that objects are referenced with identifiers in the
+      ``ga4gh.vr`` namespace.
     * replace nested identifiable objects (i.e., objects that have id
       properties) with their corresponding *digests*
     * order arrays of digests and ids by Unicode Character Set values
     * filter out id fields
     * filter out fields with null values
 
-The second step is to JSON serialize the message
-content subject to the following REQUIREMENTS:
+The second step is to JSON serialize the message content with the
+following REQUIRED constraints:
 
     * encode the serialization in UTF-8
     * exclude insignificant whitespace, as defined in `RFC8259§2
@@ -92,45 +121,56 @@ relatively easy and reliable to implement in any common computer
 language.
 
 
+.. _digest:
 
-.. _ga4gh-digest:
+Truncated Digest
+@@@@@@@@@@@@@@@@
 
-Digest
-@@@@@@
+The Truncated Digest algorithm computes an ASCII digest from binary
+data.  The method uses two well-established standard algorithms, the
+`SHA-512`_ hash function, which generates a binary digest from binary
+data, and `Base64`_ URL encoding, which encodes binary data using
+printable characters.  Computing the Truncated Digest for binary data
+consists of three steps:
 
-Computing digests for identifiable VR objects consists of three steps:
-
-1. Compute the `SHA-512`_ digest of a binary object.
+1. Compute the `SHA-512`_ digest of a binary data.
 2. Truncate the digest to the left-most 24 bytes (192 bits).  See
    :ref:`truncated-digest-collision-analysis` for the rationale for 24
    bytes.
 3. Encode the truncated digest as a base64url_ ASCII string.
 
 
+
 .. code-block:: python
 
    >>> import base64, hashlib
-   >>> blob = b"ACGT"
-   >>> digest = hashlib.sha512(blob).digest()
-   >>> digest
-   b'h\xa1x\xf7\xc7@\xc5\xc2@\xaag\xbaA\x84;\x11\x9d;\xf9\xf8 ...
-   >>> base64.urlsafe_b64encode(digest[:24]).decode("ASCII")
+   >>> def truncated_digest(blob): 
+           digest = hashlib.sha512(blob).digest() 
+           tdigest = digest[:24] 
+           tdigest_b64u = base64.urlsafe_b64encode(tdigest).decode("ASCII") 
+           return tdigest_b64u 
+   >>> truncated_digest(b"ACGT")
    'aKF498dAxcJAqme6QYQ7EZ07-fiw8Kw2'
 
 
-
-.. _ga4gh-identifier:
+.. _identify:
 
 Identifier Construction
 @@@@@@@@@@@@@@@@@@@@@@@
 
-A `W3C CURIE <curie-spec>`_ format has the form::
+
+The final step of generating a computed identifier for a VR object is
+to generate a `W3C CURIE <curie-spec>`_ formatted identifier, which
+has the form::
 
     prefix ":" reference
 
 The GA4GH VR Spec constructs computed identifiers as follows::
 
-    "ga4gh" ":" <type_prefix> "." <digest>
+    "ga4gh" ":" type_prefix "." <digest>
+
+.. note:: Do not confuse the W3C CURIE ``prefix`` ("ga4gh" in this
+          case) with a prefix used to indicate type.
 
 Type prefixes used by VR are:
 
@@ -151,16 +191,17 @@ For example::
     ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_
 
 
-.. note:: Do not confuse the W3C CURIE `prefix` ("ga4gh" in this case)
-          with a prefix used to indicate type.
 
+.. _ga4gh-ir-contingency:
+   
+Identifier Standard, Plan B
+@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+In the event that :ref:`ga4gh-identifiers` is not accepted, the
+following changes will be made to this section of the specification:
 
-
-
-
-
-
+* prefix
+* GA4GH GKS team will assume responsibility for managing prefixes
 
 
 ----
@@ -170,49 +211,4 @@ For example::
 .. [Gibson] `Gibson Canonical JSON <http://gibson042.github.io/canonicaljson-spec/>`__
 .. [OLPC] `OLPC Canonical JSON <http://wiki.laptop.org/go/Canonical_JSON>`__
 .. [JCS] `JSON Canonicalization Scheme <https://tools.ietf.org/html/draft-rundgren-json-canonicalization-scheme-05>`__
-
-----
-
-scraps
-
-* if the object is an Allele, normalize as described in
-  :ref:`normalization`
-
-The VR Computed Identifier algorithm applies only to *identifiable*
-objects, that is, objects with an `id` property.  In addition, the
-algorithm is defined only when nested objects use `ga4gh` identifiers.
-For example, generating a Computed Identifier for an Allele requires a
-Computed Identifier for the embedded location, which requires that the
-reference sequence is defined using a Computed Identifier.
-
-
-In addition, the VR Computed Identifier is explicitly NOT defined
-(that is, invalid) if used with any other normalization,
-serialization, or digest mechanism to generate a GA4GH Computed
-Identifier.
-
-
-
-.. note:: **Proposal for GA4GH-wide use**
-
-   The Variation Representation team created the computed
-   identifier scheme for VR objects.  However, this scheme is
-   applicable and useful to the entire GA4GH ecosystem.  As a
-   result, we are proposing that the computed identifier scheme
-   described here be considered for adoption as a GA4GH-wide
-   standard.  For this reason, we have adopted the use of the
-   `ga4gh` prefix above. 
-
-   If the Computed Identifier scheme is adopted as a GA4GH-wide
-   standard, documentation and type prefixes would moved from the VR
-   specification to a separate repository for GA4GH-wide use.
-
-
-
-The VR Computed Identifier algorithm uses two well-established
-standard algorithms, the SHA-512 hash function, which generates a
-binary digest from binary data, and Base64 URL encoding, which encodes
-binary data using printable characters.
-
-
 
