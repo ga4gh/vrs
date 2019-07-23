@@ -31,7 +31,7 @@ def _parse_release_as_version(rls):
 # -- Project information -----------------------------------------------------
 
 project = 'GA4GH Variation Representation Specification'
-copyright = '2019, GA4GH'
+copyright = '2019, GA4GH VR Contributors'
 author = 'Committers'
 master_doc = 'index'
 # N.B. RTD ignores these values. :-/
