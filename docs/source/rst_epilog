@@ -18,9 +18,11 @@
 .. _polymeric chain: https://en.wikipedia.org/wiki/Polymer
 .. _protein: https://en.wikipedia.org/wiki/Protein
 
-.. |vr-python| replace:: `vr-python <https://github/ga4gh/vr-python/>`__
+.. |vr-python| replace:: `vr-python <https://github.com/ga4gh/vr-python/>`__
 .. |vr_json| replace:: `vr.json <https://raw.githubusercontent.com/ga4gh/vr-spec/{release}/schema/vr.json>`__
 .. |vr_yaml| replace:: `vr.yaml <https://raw.githubusercontent.com/ga4gh/vr-spec/{release}/schema/vr.yaml>`__
+.. |seqrepo| replace:: `SeqRepo <https://github.com/biocommons/biocommons.seqrepo/>`__
+.. |seqrepo_rs| replace:: `SeqRepo REST Service <https://github.com/biocommons/seqrepo-rest-service/>`__
 
 .. |eg| replace:: *e.g.,*
 .. |ie| replace:: *i.e.,*
