@@ -39,6 +39,7 @@ Data Services
 The following tables summarizes data required in the above contexts:
 
 .. list-table:: Data Service Desciptions
+   :class: reece-wrap
    :widths: auto
    :header-rows: 1
 
