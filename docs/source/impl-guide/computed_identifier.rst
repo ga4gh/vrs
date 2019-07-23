@@ -29,7 +29,14 @@ subsequent sections.
 
    **Serialization, Digest, and Computed Identifier Operations**
 
-   TODO: Write caption
+   Entities are shown in gray boxes. Functions are denoted by bold
+   italics.  The yellow, green, and blue boxes, corresponding to the
+   ``ga4gh_digest``, ``vr_digest``, and ``vr_identify`` functions
+   respectively, depict the dependencies among functions.
+   ``SHA512t192`` is :ref:`SHA-512` truncated at 192 bits using the
+   systematic name recommended by SHA-512.  base64url_ is the
+   official name of the :ref:`Base64` encoding variant that uses a URL-safe
+   character set.
 
    [`figure source <https://www.draw.io/?page-id=M8V1EMsVyfZQDDbK8gNL&title=VR%20diagrams.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fharts.net%2Fuc%3Fid%3D1Qimkvi-Fnd1hhuixbd6aU4Se6zr5Nc1h%26export%3Ddownload>`__]
 
@@ -40,52 +47,50 @@ subsequent sections.
 VR Serialization
 @@@@@@@@@@@@@@@@
 
-.. important:: This section discusses VR Serialization.  Although VR
-   serialization and JSON serialization appear similar, they are NOT
-   interchangeable.
+.. important:: Do not confuse VR serialization with other
+   serialization formats, including JSON serialization used to
+   transmit VR messages.  Although VR and JSON serializations appear
+   similar, they are NOT interchangeable. A VR object might have many
+   valid JSON serializations, but it will have only one valid VR
+   serialization.
 
-
-In the context of generating a Computed Identifier, serialization
-converts a VR object into a binary representation.  Because the result
-will be used to generate a digest, VR implementations MUST serialize
-data identically.  The VR-Spec provides validation tests to ensure
+VR serialization converts a VR object into a binary representation in
+preparation for computing a digest of the object.  The VR
+serialization specification ensures that all implementations serialize
+variation objects identically, and therefore that the digests will
+also be identical.  |vr-spec| provides validation tests to ensure
 compliance.
+
+Although several proposals exist for serializing arbitrary data in a
+consistent manner ([Gibson]_, [OLPC]_, [JCS]_), none have been
+ratified. As a result, |vr-spec| defines a custom serialization format
+that is consistent with these proposals but does not rely on them for
+definition; it is hoped that a future ratified standard will be
+forward compatible with the process described here.
+
+The first step in serialization is to generate message content. To do
+so, implementations MUST:
+
+    * replace nested identifiable objects (i.e., objects that have id
+      properties) with their corresponding *digests*
+    * order arrays of digests and ids by Unicode Character Set values
+    * filter out id fields
+    * filter out fields with null values
+
+The second step is to JSON serialize the message
+content subject to the following REQUIREMENTS:
+
+    * encode the serialization in UTF-8
+    * exclude insignificant whitespace, as defined in `RFC8259§2
+      <https://tools.ietf.org/html/rfc8259#section-2>`__
+    * order all keys by Unicode Character Set values
+    * use two-char escape codes when available, as defined in
+      `RFC8259§7 <https://tools.ietf.org/html/rfc8259#section-7>`__
 
 The criteria for the VR serialization method was that it must be
 relatively easy and reliable to implement in any common computer
-language.  Although several proposals exist ([1]_, [2]_, [3]_) for
-serializing arbitrary data in a consistent manner, none have been
-ratified. As a result, VR-Spec defines a custom serialization format
-that is consistent with these proposals but does not rely on them for
-definition.
+language.
 
-The first step in serialization is to generate message content that:
-
-    * MUST replace nested identifiable objects (i.e., objects that
-      have id properties) with their corresponding ids
-    * MUST order arrays of Ids by Unicode Character Set values
-    * MUST require that all arrays of ids are CURIE formatted and use the
-      `ga4gh` namespace prefix
-    * MUST NOT include id fields
-    * MUST NOT include null values
-
-
-The second step is to serialize the message content as JSON that:
-
-    * MUST be encoded in UTF-8
-    * MUST NOT include insignificant whitespace, as defined in `RFC8259§2
-      <https://tools.ietf.org/html/rfc8259#section-2>`__
-    * MUST order all keys by Unicode Character Set values
-    * MUST use two-char escapes when available, as defined in `RFC8259§7
-      <https://tools.ietf.org/html/rfc8259#section-7>`__
-
-
-
-**References**
-
-.. [1] `Gibson Canonical JSON <http://gibson042.github.io/canonicaljson-spec/>`__
-.. [2] `OLPC Canonical JSON <http://wiki.laptop.org/go/Canonical_JSON>`__
-.. [3] `JSON Canonicalization Scheme <https://tools.ietf.org/html/draft-rundgren-json-canonicalization-scheme-05>`__
 
 
 .. _ga4gh-digest:
@@ -160,6 +165,14 @@ For example::
 
 ----
 
+**References**
+
+.. [Gibson] `Gibson Canonical JSON <http://gibson042.github.io/canonicaljson-spec/>`__
+.. [OLPC] `OLPC Canonical JSON <http://wiki.laptop.org/go/Canonical_JSON>`__
+.. [JCS] `JSON Canonicalization Scheme <https://tools.ietf.org/html/draft-rundgren-json-canonicalization-scheme-05>`__
+
+----
+
 scraps
 
 * if the object is an Allele, normalize as described in
@@ -200,4 +213,6 @@ The VR Computed Identifier algorithm uses two well-established
 standard algorithms, the SHA-512 hash function, which generates a
 binary digest from binary data, and Base64 URL encoding, which encodes
 binary data using printable characters.
+
+
 

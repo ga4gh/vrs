@@ -11,8 +11,7 @@ required for implementations of the VR Specification.
   section provides guidance on the abstract functionality that is
   required in order to implement VR.
 * :ref:`normalization`: Expands Alleles to the maximal region of
-  representational ambiguity.  (Conventional left and right shuffling
-  is insufficient for compliance with the specification.)
+  representational ambiguity.
 * :ref:`computed-identifiers`: Generate globally unique identifiers
   based solely on the variation definition.
 
