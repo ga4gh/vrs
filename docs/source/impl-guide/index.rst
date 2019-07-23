@@ -3,9 +3,8 @@
 Implementation Guide
 !!!!!!!!!!!!!!!!!!!!
 
-This section discusses topics that implementations of the VR
-Specification must address.
-
+This section discusses topics relevant to implementations of the VR
+Specification.
 
 * :ref:`data-proxy`: All implementations will require access to
   sequences and sequence accessions. The Data Proxy section provides
@@ -14,14 +13,8 @@ Specification must address.
 * :ref:`normalization`: Expands Alleles to the maximal region of
   representational ambiguity.  (Conventional left and right shuffling
   is insufficient for compliance with the specification.)
-* :ref:`digest`: A convention for constructing and representing
-  digests from binary data for the purposes of constructing an
-  identifier.
-* :ref:`serialization`: Converts objects into canonical binary
-  forms in order to generate consistent digests across implementations
-  and computing languages.
-* :ref:`computed-identifier`: A proposed string format for object
-  identifiers across all GA4GH products.
+* :ref:`computed-identifiers`: Generate globally unique identifiers
+  based solely on the variation definition.
 
 
 
@@ -31,7 +24,5 @@ Specification must address.
 
    data_proxy
    normalization
-   digest
-   serialization
    computed_identifier
   
