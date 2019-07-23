@@ -1,17 +1,3 @@
-.. note:: **Proposal for GA4GH-wide use**
-   The Variation Representation team created the computed
-   identifier scheme for VR objects.  However, this scheme is
-   applicable and useful to the entire GA4GH ecosystem.  As a
-   result, we are proposing that the computed identifier scheme
-   described here be considered for adoption as a GA4GH-wide
-   standard.  For this reason, we have adopted the use of the
-   `ga4gh` prefix above. 
-
-   If the Computed Identifier scheme is adopted as a GA4GH-wide
-   standard, documentation and type prefixes would moved from the VR
-   specification to a separate repository for GA4GH-wide use.
-
-
 .. _computed-identifiers:
 
 Computed Identifiers
@@ -26,22 +12,17 @@ algorithm obviates centralized registration services, allows
 computational pipelines to generate "private" ids efficiently, and
 makes it easier for distributed groups to share data.
 
-The VR Computed Identifier algorithm uses two well-established
-standard algorithms, the SHA-512 hash function, which generates a
-binary digest from binary data, and Base64 URL encoding, which encodes
-binary data using printable characters.  A VR Computed Identifier is
-computed as follows:
+A VR Computed Identifier is computed as follows:
 
-* serialize the object into abinary data
-* generate a text digest from the binary data
-* construct a CURIE identifier based on the digest and object type
-
+* :ref:`Serialize <serialization>` the object into binary data.
+* :ref:`Generate a digest <digest>` from the binary data.
+* :ref:`Construct an identifier` based on the digest and object type.
 
 The following diagram depicts the operations necessary to generate a
 computed identifier.  These operations are described in detail in the
 subsequent sections.
 
-.. _vr-schema-diagram:
+.. _ser-dig-id:
 
 .. figure:: ../images/id-dig-ser.png
    :align: left
@@ -54,12 +35,15 @@ subsequent sections.
 
 
 
-
-
 .. _serialization:
 
-Serialization
-@@@@@@@@@@@@@
+VR Serialization
+@@@@@@@@@@@@@@@@
+
+.. important:: This section discusses VR Serialization.  Although VR
+   serialization and JSON serialization appear similar, they are NOT
+   interchangeable.
+
 
 In the context of generating a Computed Identifier, serialization
 converts a VR object into a binary representation.  Because the result
@@ -69,11 +53,11 @@ compliance.
 
 The criteria for the VR serialization method was that it must be
 relatively easy and reliable to implement in any common computer
-language.  Although several proposals exist [1]_:superscript:`,`
-[2]_:superscript:`,` [3]_ for serializing arbitrary data in a
-consistent manner, none have been ratified. As a result, VR-Spec
-defines a custom serialization format that is consistent with these
-proposals but does not rely on them for definition.
+language.  Although several proposals exist ([1]_, [2]_, [3]_) for
+serializing arbitrary data in a consistent manner, none have been
+ratified. As a result, VR-Spec defines a custom serialization format
+that is consistent with these proposals but does not rely on them for
+definition.
 
 The first step in serialization is to generate message content that:
 
@@ -104,6 +88,7 @@ The second step is to serialize the message content as JSON that:
 .. [3] `JSON Canonicalization Scheme <https://tools.ietf.org/html/draft-rundgren-json-canonicalization-scheme-05>`__
 
 
+.. _ga4gh-digest:
 
 Digest
 @@@@@@
@@ -128,6 +113,8 @@ Computing digests for identifiable VR objects consists of three steps:
    'aKF498dAxcJAqme6QYQ7EZ07-fiw8Kw2'
 
 
+
+.. _ga4gh-identifier:
 
 Identifier Construction
 @@@@@@@@@@@@@@@@@@@@@@@
@@ -190,4 +177,27 @@ In addition, the VR Computed Identifier is explicitly NOT defined
 (that is, invalid) if used with any other normalization,
 serialization, or digest mechanism to generate a GA4GH Computed
 Identifier.
+
+
+
+.. note:: **Proposal for GA4GH-wide use**
+
+   The Variation Representation team created the computed
+   identifier scheme for VR objects.  However, this scheme is
+   applicable and useful to the entire GA4GH ecosystem.  As a
+   result, we are proposing that the computed identifier scheme
+   described here be considered for adoption as a GA4GH-wide
+   standard.  For this reason, we have adopted the use of the
+   `ga4gh` prefix above. 
+
+   If the Computed Identifier scheme is adopted as a GA4GH-wide
+   standard, documentation and type prefixes would moved from the VR
+   specification to a separate repository for GA4GH-wide use.
+
+
+
+The VR Computed Identifier algorithm uses two well-established
+standard algorithms, the SHA-512 hash function, which generates a
+binary digest from binary data, and Base64 URL encoding, which encodes
+binary data using printable characters.
 
