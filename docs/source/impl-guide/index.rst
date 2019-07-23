@@ -3,9 +3,14 @@
 Implementation Guide
 !!!!!!!!!!!!!!!!!!!!
 
-Implementations of the VR Specification will require the following
-algorithms:
+This section discusses topics that implementations of the VR
+Specification must address.
 
+
+* :ref:`data-proxy`: All implementations will require access to
+  sequences and sequence accessions. The Data Proxy section provides
+  guidance on the abstract functionality that is required in order to
+  implement VR.
 * :ref:`normalization`: Expands Alleles to the maximal region of
   representational ambiguity.  (Conventional left and right shuffling
   is insufficient for compliance with the specification.)
@@ -24,6 +29,7 @@ algorithms:
    :hidden:
    :maxdepth: 1
 
+   data_proxy
    normalization
    digest
    serialization
