@@ -6,7 +6,9 @@
           approved and have therefore assumed acceptance when writing
           this section.  In the event that the proposal is not
           accepted, this section will be modified as described in
-          :ref:`plan-b`.
+          :ref:`plan-b`.  Because identifiers created through this
+          proposal are expected to be durable, it is critical for
+          GA4GH to make a long-term decision regarding identifiers.
 
 
 Computed Identifiers
