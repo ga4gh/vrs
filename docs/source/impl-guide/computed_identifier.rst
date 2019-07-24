@@ -1,5 +1,8 @@
 .. _computed-identifiers:
 
+Computed Identifiers
+!!!!!!!!!!!!!!!!!!!!
+
 .. note:: This section depends on the :ref:`ga4gh-identifiers`, which
           is submitted concurrently.  Based on conversations with
           GA4GH technical leaders, we expect that the proposal will be
@@ -10,9 +13,6 @@
           proposal are expected to be durable, it is critical for
           GA4GH to make a long-term decision regarding identifiers.
 
-
-Computed Identifiers
-!!!!!!!!!!!!!!!!!!!!
 
 The VR-Spec provides an algorithmic solution to deterministically
 generate a globally unique identifier from a VR object itself. All
