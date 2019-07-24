@@ -9,9 +9,10 @@ Computed Identifiers
           approved and have therefore assumed acceptance when writing
           this section.  In the event that the proposal is not
           accepted, this section will be modified as described in
-          :ref:`plan-b`.  Because identifiers created through this
-          proposal are expected to be durable, it is critical for
-          GA4GH to make a long-term decision regarding identifiers.
+          :ref:`plan-b`.  Because identifiers created
+          through this proposal are expected to be durable, it is
+          critical for GA4GH to make a long-term decision regarding
+          identifiers.
 
 
 The VR-Spec provides an algorithmic solution to deterministically
@@ -197,8 +198,8 @@ For example::
 
 .. _plan-b:
    
-Plan B
-@@@@@@
+Namespace Contingency Plan
+@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 In the event that :ref:`ga4gh-identifiers` is not accepted, the
 following changes will be made to this section of the specification:
@@ -208,7 +209,6 @@ following changes will be made to this section of the specification:
 * The GA4GH VR team will manage prefixes.
 
 All other aspects of the computed identifier scheme will remain intact.
-
 
 
 ----
