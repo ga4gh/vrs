@@ -1,11 +1,12 @@
 .. _computed-identifiers:
 
-.. note:: This section depends on :ref:`ga4gh-identifiers`, which is
-          submitted concurrently.  Based on conversations with GA4GH
-          leadership, we have assumed acceptance of the proposal when
-          writing this section.  In the event that the proposal is not
+.. note:: This section depends on the :ref:`ga4gh-identifiers`, which
+          is submitted concurrently.  Based on conversations with
+          GA4GH technical leaders, we expect that the proposal will be
+          approved and have therefore assumed acceptance when writing
+          this section.  In the event that the proposal is not
           accepted, this section will be modified as described in
-          :ref:`ga4gh-ir-contingency`.
+          :ref:`plan-b`.
 
 
 Computed Identifiers
@@ -37,35 +38,35 @@ subsequent sections.
    :align: left
 
    **Serialization, Digest, and Computed Identifier Operations**
-
    Entities are shown in gray boxes. Functions are denoted by bold
    italics.  The yellow, green, and blue boxes, corresponding to the
-   ``ga4gh_digest``, ``vr_digest``, and ``vr_identify`` functions
+   ``sha512t24u``, ``vr_digest``, and ``vr_identify`` functions
    respectively, depict the dependencies among functions.
    ``SHA512/192`` is :ref:`SHA-512` truncated at 192 bits using the
    systematic name recommended by SHA-512 (§5.3.6).  base64url_ is the
    official name of the variant of :ref:`Base64` encoding that uses a
-   URL-safe character set.
+   URL-safe character set. [`figure source
+   <https://www.draw.io/?page-id=M8V1EMsVyfZQDDbK8gNL&title=VR%20diagrams.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fharts.net%2Fuc%3Fid%3D1Qimkvi-Fnd1hhuixbd6aU4Se6zr5Nc1h%26export%3Ddownload>`__]
 
-   [`figure source <https://www.draw.io/?page-id=M8V1EMsVyfZQDDbK8gNL&title=VR%20diagrams.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fharts.net%2Fuc%3Fid%3D1Qimkvi-Fnd1hhuixbd6aU4Se6zr5Nc1h%26export%3Ddownload>`__]
 
+Requirements
+@@@@@@@@@@@@
 
-The VR Computed Identifier algorithm applies only to *identifiable*
-objects, that is, objects with an `id` property.
+Implementations MUST adhere to the following requirements:
 
-In addition, the VR Computed Identifier is explicitly NOT defined
-(that is, invalid) if used with any other normalization,
-serialization, or digest mechanism to generate a GA4GH Computed
-Identifier.
+* The VR Computed Identifier algorithm applies only to *identifiable*
+  objects, that is, objects with an `id` property.
 
-.. important:: VR identifiers are defined only when all nested objects
-	       are identified with ``ga4gh.vr`` identifiers.
-	       Generating VR identifiers using objects referenced
-	       within any other namespace is not compliant with this
-	       specification.  In particular, it is not compliant to
-	       generate VR identifiers using sequences referenced with
-	       RefSeq, Ensembl, or other accession outside the
-	       ``ga4gh.vr`` namespace.
+* The VR Computed Identifier is NOT defined if used with any other
+  normalization, serialization, or digest mechanism to generate a
+  GA4GH Computed Identifier.
+
+* VR Computed Identifiers are defined only when all nested objects are
+  identified with ``ga4gh.vr`` identifiers.  Generating VR identifiers
+  using objects referenced within any other namespace is not compliant
+  with this specification. In particular, it is not compliant to
+  generate VR identifiers using sequences referenced with RefSeq,
+  Ensembl, or other accession outside the `ga4gh.vr`` namespace.
 
 
 
@@ -123,8 +124,8 @@ language.
 
 .. _digest:
 
-Truncated Digest
-@@@@@@@@@@@@@@@@
+Truncated Digest (sha512t24u)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 The Truncated Digest algorithm computes an ASCII digest from binary
 data.  The method uses two well-established standard algorithms, the
@@ -169,8 +170,8 @@ The GA4GH VR Spec constructs computed identifiers as follows::
 
     "ga4gh" ":" type_prefix "." <digest>
 
-.. note:: Do not confuse the W3C CURIE ``prefix`` ("ga4gh" in this
-          case) with a prefix used to indicate type.
+.. note:: Do not confuse the W3C CURIE ``prefix`` ("ga4gh") with the
+          type prefix.
 
 Type prefixes used by VR are:
 
@@ -192,16 +193,20 @@ For example::
 
 
 
-.. _ga4gh-ir-contingency:
+.. _plan-b:
    
-Identifier Standard, Plan B
-@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Plan B
+@@@@@@
 
 In the event that :ref:`ga4gh-identifiers` is not accepted, the
 following changes will be made to this section of the specification:
 
-* prefix
-* GA4GH GKS team will assume responsibility for managing prefixes
+* The namespace (CURIE prefix) will become ``ga4gh.vr``.
+
+* The GA4GH VR team will manage prefixes.
+
+All other aspects of the computed identifier scheme will remain intact.
+
 
 
 ----
