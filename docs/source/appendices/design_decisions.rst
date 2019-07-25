@@ -154,7 +154,7 @@ abandoned. The need for a canonical json form is evident, and there
 was at least one proposal for an ECMA standard.
 
 Therefore, we implemented our own :ref:`serialization format
-<serialize>`, which is very similar to `Gibson Canonical JSON`_
+<serialization>`, which is very similar to `Gibson Canonical JSON`_
 (not to be confused with `OLPC Canonical JSON`_).
 
 .. _Variant Overprecision Correction Algorithm (VOCA): https://www.biorxiv.org/content/10.1101/537449v3.full

@@ -29,7 +29,7 @@ A VR Computed Identifier for a VR concept is computed as follows:
 * if the object is a :ref:`sequence`, encode using UTF-8
 * if the object is an :ref:`allele`, :ref:`normalize <normalization>` it
 * :ref:`Serialize the object <serialization>` into binary data.
-* :ref:`Generate a truncated digest <digest>` from the binary data.
+* :ref:`Generate a truncated digest <truncated-digest>` from the binary data.
 * :ref:`Construct an identifier <identify>` based on the digest and object type.
 
 The following diagram depicts the operations necessary to generate a
@@ -45,9 +45,9 @@ subsequent sections.
    italics.  The yellow, green, and blue boxes, corresponding to the
    ``sha512t24u``, ``vr_digest``, and ``vr_identify`` functions
    respectively, depict the dependencies among functions.
-   ``SHA512/192`` is :ref:`SHA-512` truncated at 192 bits using the
+   ``SHA512/192`` is `SHA-512`_ truncated at 192 bits using the
    systematic name recommended by SHA-512 (§5.3.6).  base64url_ is the
-   official name of the variant of :ref:`Base64` encoding that uses a
+   official name of the variant of `Base64`_ encoding that uses a
    URL-safe character set. [`figure source
    <https://www.draw.io/?page-id=M8V1EMsVyfZQDDbK8gNL&title=VR%20diagrams.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fharts.net%2Fuc%3Fid%3D1Qimkvi-Fnd1hhuixbd6aU4Se6zr5Nc1h%26export%3Ddownload>`__]
 
@@ -73,7 +73,7 @@ Implementations MUST adhere to the following requirements:
 
 
 
-.. _serialize:
+.. _serialization:
 
 VR Serialization
 @@@@@@@@@@@@@@@@
@@ -131,7 +131,7 @@ relatively easy and reliable to implement in any common computer
 language.
 
 
-.. _digest:
+.. _truncated-digest:
 
 Truncated Digest (sha512t24u)
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@

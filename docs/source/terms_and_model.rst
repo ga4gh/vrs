@@ -65,7 +65,7 @@ specific instance of an object within a document.
 
 **Implementation guidance**
 
-* This specification RECOMMENDS using a :ref:`computed-identifier` for each id.
+* This specification RECOMMENDS using a :ref:`computed-identifiers` for each id.
 * When an appropriate namespace exists at [identifiers.org](http://identifiers.org/), that
   namespace MUST be used verbatim (case sensitive).
 
@@ -426,7 +426,7 @@ indels).
   comparisons of variation in regions of representational ambiguity.
 * Implementations MUST normalize Alleles using :ref:`"justified"
   normalization <normalization>` when generating a
-  :ref:`computed-identifier`.
+  :ref:`computed-identifiers`.
 
 **Notes**
 
