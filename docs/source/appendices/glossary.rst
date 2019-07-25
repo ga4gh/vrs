@@ -9,6 +9,9 @@ Glossary
 .. glossary::
    :sorted:
 
+   accession
+      def
+
    Base64
    base64url
       def
@@ -16,9 +19,15 @@ Glossary
    computed identifier
       This is a test
 
+   CURIE
+      def
+
    digest
    ga4gh_digest
       synonym test
+
+   identifier
+      def
 
    serialize
       def
