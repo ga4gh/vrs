@@ -304,14 +304,6 @@ Location for Variation.
   the two concepts are not interchangable, especially when the
   location is non-specific (e.g., a range) or symbolic (a gene).
 
-**Example**
-
-.. parsed-literal::
-
-    {'interval': {'end': 43, 'start': 42, 'type': 'SimpleInterval'},
-     'sequence_id': 'refseq:NM_0001234.5',
-     'type': 'SequenceLocation'}
-
 
 .. _sequence-location:
 
@@ -357,6 +349,15 @@ named :ref:`Sequence`.
                and must be projected to a genomic reference in order
                to be represented.
 
+**Example**
+
+.. parsed-literal::
+
+    {'interval': {'end': 43, 'start': 42, 'type': 'SimpleInterval'},
+     'sequence_id': 'refseq:NM_0001234.5',
+     'type': 'SequenceLocation'}
+     
+     
 .. _variation:
 
 Variation
