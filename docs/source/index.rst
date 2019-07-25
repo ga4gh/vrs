@@ -10,12 +10,12 @@ implementation that promotes adoption of the standard.
 
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
+   :includehidden:
 
    introduction
    terms_and_model
    schema
-   algorithms/index
-   design_decisions
+   impl-guide/index
    implementations
    appendices/index
