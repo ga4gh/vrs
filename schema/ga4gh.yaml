@@ -1,0 +1,24 @@
+identifiers:
+  # CURIE identifiers have this structure:
+  #   prefix ":" reference
+  #
+  # VR identifiers follow this pattern, with this revised nomenclature
+  # and structure:
+  #   namespace ":" type_prefix "." digest
+
+  namespace: ga4gh
+  curie_sep: ':'
+  ref_sep: '.'
+
+  # 1:1 map from VR types to prefixes
+  type_prefix_map:
+    Allele: VA
+    CytobandLocation: CL
+    CytobandLocation: GL
+    Genotype: VG
+    Haplotype: VH
+    Sequence: SQ
+    SequenceLocation: SL
+    Text: VT
+
+  regexp: '^ga4gh:(?P<type>[^.]+)\.(?P<digest>.+)$'
