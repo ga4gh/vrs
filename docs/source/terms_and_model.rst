@@ -100,7 +100,12 @@ None.
 
 **Computational definition**
 
-Interbase coordinates refer to the zero-width points before and after :ref:`residues <Residue>`. An interval of interbase coordinates permits referring to any span, including an empty span, before, within, or after a sequence. See :ref:`interbase-coordinates-design` for more details on this design choice.
+Interbase coordinates refer to the zero-width points before and after
+:ref:`residues <Residue>`. An interval of interbase coordinates
+permits referring to any span, including an empty span, before,
+within, or after a sequence. See :ref:`interbase-coordinates-design`
+for more details on this design choice.  Interbase coordinates are
+always zero-based.
 
 
 .. _sequence:
