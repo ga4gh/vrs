@@ -24,11 +24,12 @@ algorithm obviates centralized registration services, allows
 computational pipelines to generate "private" ids efficiently, and
 makes it easier for distributed groups to share data.
 
-A VR Computed Identifier is computed as follows:
+A VR Computed Identifier for a VR concept is computed as follows:
 
-* :ref:`Normalize the object <normalization>` if the object is an Allele
-* :ref:`Serialize the object <serialize>` into binary data.
-* :ref:`Generate a truncated digest <digest>` from the binary data.
+* if the object is a :ref:`sequence`, encode using UTF-8
+* if the object is an :ref:`allele`, :ref:`normalize <normalization>` it
+* :ref:`Serialize the object <serialization>` into binary data.
+* :ref:`Generate a truncated digest <truncated-digest>` from the binary data.
 * :ref:`Construct an identifier <identify>` based on the digest and object type.
 
 The following diagram depicts the operations necessary to generate a
@@ -36,7 +37,6 @@ computed identifier.  These operations are described in detail in the
 subsequent sections.
 
 .. _ser-dig-id:
-
 .. figure:: ../images/id-dig-ser.png
    :align: left
 
@@ -45,9 +45,9 @@ subsequent sections.
    italics.  The yellow, green, and blue boxes, corresponding to the
    ``sha512t24u``, ``vr_digest``, and ``vr_identify`` functions
    respectively, depict the dependencies among functions.
-   ``SHA512/192`` is :ref:`SHA-512` truncated at 192 bits using the
+   ``SHA512/192`` is `SHA-512`_ truncated at 192 bits using the
    systematic name recommended by SHA-512 (§5.3.6).  base64url_ is the
-   official name of the variant of :ref:`Base64` encoding that uses a
+   official name of the variant of `Base64`_ encoding that uses a
    URL-safe character set. [`figure source
    <https://www.draw.io/?page-id=M8V1EMsVyfZQDDbK8gNL&title=VR%20diagrams.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fharts.net%2Fuc%3Fid%3D1Qimkvi-Fnd1hhuixbd6aU4Se6zr5Nc1h%26export%3Ddownload>`__]
 
@@ -65,15 +65,15 @@ Implementations MUST adhere to the following requirements:
   GA4GH Computed Identifier.
 
 * VR Computed Identifiers are defined only when all nested objects are
-  identified with ``ga4gh.vr`` identifiers.  Generating VR identifiers
+  identified with ``ga4gh`` identifiers.  Generating VR identifiers
   using objects referenced within any other namespace is not compliant
   with this specification. In particular, it is not compliant to
   generate VR identifiers using sequences referenced with RefSeq,
-  Ensembl, or other accession outside the `ga4gh.vr`` namespace.
+  Ensembl, or other accession outside the `ga4gh`` namespace.
 
 
 
-.. _serialize:
+.. _serialization:
 
 VR Serialization
 @@@@@@@@@@@@@@@@
@@ -99,11 +99,17 @@ that is consistent with these proposals but does not rely on them for
 definition; it is hoped that a future ratified standard will be
 forward compatible with the process described here.
 
-The first step in serialization is to generate message content. To do
-so, implementations MUST:
+The first step in serialization is to generate message content.  If
+the object is a string representing a :ref:`sequence`, the
+serialization is the UTF-8 encoding of the string.  Because this is a
+common operation, implementations are strongly encouraged to
+precompute GA4GH sequence identifiers as described in
+:ref:`required-data`.
+
+If the object is a composite VR object, implementations MUST:
 
     * ensure that objects are referenced with identifiers in the
-      ``ga4gh.vr`` namespace.
+      ``ga4gh`` namespace
     * replace nested identifiable objects (i.e., objects that have id
       properties) with their corresponding *digests*
     * order arrays of digests and ids by Unicode Character Set values
@@ -125,7 +131,7 @@ relatively easy and reliable to implement in any common computer
 language.
 
 
-.. _digest:
+.. _truncated-digest:
 
 Truncated Digest (sha512t24u)
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -178,21 +184,29 @@ The GA4GH VR Spec constructs computed identifiers as follows::
 
 Type prefixes used by VR are:
 
+.. _type_prefixes:
 .. csv-table::
    :header: type_prefix, VR Spec class name
    :align: left
 
    SQ, Sequence
    VA, Allele
-   VL, Location
+   VSL, Sequence Location
    VT, Text
-   VH, (reserved) Haplotype
-   VG, (reserved) Genotype
-   VX, (reserved) Translocation
+   (reserved), 
+   VCL, Cytoband Location
+   VGL, Gene Location
+   VH, Haplotype
+   VG, Genotype
+   VX, Translocation
 
 For example::
 
     ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_
+
+
+.. todo:: update code to reflect these suffixes. See
+          https://github.com/ga4gh/vr-python/issues/31
 
 
 
