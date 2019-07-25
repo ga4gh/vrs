@@ -61,6 +61,10 @@ The following tables summarizes data required in the above contexts:
      - Conversion to/from other formats
 
 
+.. note:: Construction of the GA4GH computed identifier for a sequence
+          is described in :doc:`computed_identifier`.
+
+
 
 Suggested Implementation
 @@@@@@@@@@@@@@@@@@@@@@@@
@@ -89,3 +93,7 @@ using a local |seqrepo| instance backend and using a |seqrepo_rs|
 backend.  A GA4GH refget implementation has been started, but is
 pending interface changes to support lookup using primary database
 accesssions.
+
+.. todo:: Add examples for each based on VR Python
+
+
