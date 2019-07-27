@@ -32,10 +32,10 @@ Glossary
    serialize
       def
 
-   vr_digest
+   ga4gh_digest
       def
 
-   vr_identify
+   ga4gh_identify
       def
 
    SHA512

@@ -43,7 +43,7 @@ subsequent sections.
    **Serialization, Digest, and Computed Identifier Operations**
    Entities are shown in gray boxes. Functions are denoted by bold
    italics.  The yellow, green, and blue boxes, corresponding to the
-   ``sha512t24u``, ``vr_digest``, and ``vr_identify`` functions
+   ``sha512t24u``, ``ga4gh_digest``, and ``ga4gh_identify`` functions
    respectively, depict the dependencies among functions.
    ``SHA512/192`` is `SHA-512`_ truncated at 192 bits using the
    systematic name recommended by SHA-512 (§5.3.6).  base64url_ is the
@@ -220,7 +220,10 @@ following changes will be made to this section of the specification:
 
 * The namespace (CURIE prefix) will become ``ga4gh.vr``.
 
-* The GA4GH VR team will manage prefixes.
+* In the function names `ga4gh_digest`, `ga4gh_identify`, and
+  `ga4gh_serialize`, `ga4gh` will be replaced with `vr`.
+
+* The GA4GH VR team will manage type prefixes.
 
 All other aspects of the computed identifier scheme will remain intact.
 
