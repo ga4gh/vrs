@@ -26,10 +26,14 @@ makes it easier for distributed groups to share data.
 
 A VR Computed Identifier for a VR concept is computed as follows:
 
-* if the object is a :ref:`sequence`, encode using UTF-8
-* if the object is an :ref:`allele`, :ref:`normalize <normalization>` it
-* :ref:`Serialize the object <digest-serialization>` into binary data.
+* If the object is an :ref:`allele`, :ref:`normalize <normalization>` it.
+
+* Generate binary data to digest. If the object is a :ref:`sequence`
+  string, encode it using UTF-8.  Otherwise, serialize the object
+  using :ref:`Digest Serialization <digest-serialization>`.
+
 * :ref:`Generate a truncated digest <truncated-digest>` from the binary data.
+
 * :ref:`Construct an identifier <identify>` based on the digest and object type.
 
 The following diagram depicts the operations necessary to generate a
@@ -57,9 +61,6 @@ Requirements
 
 Implementations MUST adhere to the following requirements:
 
-* The VR Computed Identifier algorithm applies only to *identifiable*
-  objects, that is, objects with an `id` property.
-
 * The VR Computed Identifier is NOT defined if used with any other
   normalization, serialization, or digest mechanism to generate a
   GA4GH Computed Identifier.
@@ -67,10 +68,13 @@ Implementations MUST adhere to the following requirements:
 * VR Computed Identifiers are defined only when all nested objects are
   identified with ``ga4gh`` identifiers.  Generating VR identifiers
   using objects referenced within any other namespace is not compliant
-  with this specification. In particular, it is not compliant to
-  generate VR identifiers using sequences referenced with RefSeq,
-  Ensembl, or other accession outside the `ga4gh`` namespace.
+  with this specification. 
 
+.. important:: The above requirement means that *sequences must be
+               identified with GA4GH computed identifiers* based on
+               the sequence digest.  Implementations that use other
+               sequence identifiers are NOT compliant with this
+               specification.
 
 
 .. _digest-serialization:
@@ -112,7 +116,7 @@ If the object is a composite VR object, implementations MUST:
     * replace nested identifiable objects (i.e., objects that have id
       properties) with their corresponding *digests*
     * order arrays of digests and ids by Unicode Character Set values
-    * filter out id fields
+    * filter out fields that start with underscore (e.g., `_digest`)
     * filter out fields with null values
 
 The second step is to JSON serialize the message content with the
