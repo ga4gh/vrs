@@ -16,13 +16,17 @@ identifiers:
 
   # 1:1 map from VR types to prefixes
   type_prefix_map:
-    Allele: VA
-    CytobandLocation: CL
-    CytobandLocation: GL
-    Genotype: VG
-    Haplotype: VH
+    # global objects
     Sequence: SQ
-    SequenceLocation: SL
+
+    # Variation 
+    Allele: VA
+    SequenceLocation: VSL
     Text: VT
+    # CytobandLocation: VCL
+    # GeneLocation: VGL
+    # Genotype: VG
+    # Haplotype: VH
+
 
   regexp: '^ga4gh:(?P<type>[^.]+)\.(?P<digest>.+)$'

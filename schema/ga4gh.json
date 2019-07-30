@@ -6,11 +6,8 @@
       "regexp": "^ga4gh:(?P<type>[^.]+)\\.(?P<digest>.+)$",
       "type_prefix_map": {
          "Allele": "VA",
-         "CytobandLocation": "GL",
-         "Genotype": "VG",
-         "Haplotype": "VH",
          "Sequence": "SQ",
-         "SequenceLocation": "SL",
+         "SequenceLocation": "VSL",
          "Text": "VT"
       }
    }
