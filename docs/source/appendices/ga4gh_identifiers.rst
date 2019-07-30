@@ -57,3 +57,8 @@ system for adminstering entity type prefixes.
 * identifier GA4GH Identifier
 * namespace
 * type prefix administration
+
+
+.. todo:: add section administration of standard and prefixes
+
+.. todo:: move prefixes here

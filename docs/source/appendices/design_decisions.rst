@@ -139,7 +139,7 @@ our schema in JSON Schema. Nonetheless, it is anticipated that some
 adopters of the VR logical model may implement the specification in
 other protocols.
 
-.. _custom-serialization:
+.. _dd-digest-serialization:
 
 Serialization Strategy
 @@@@@@@@@@@@@@@@@@@@@@
@@ -154,8 +154,8 @@ abandoned. The need for a canonical json form is evident, and there
 was at least one proposal for an ECMA standard.
 
 Therefore, we implemented our own :ref:`serialization format
-<serialization>`, which is very similar to `Gibson Canonical JSON`_
-(not to be confused with `OLPC Canonical JSON`_).
+<digest-serialization>`, which is very similar to `Gibson Canonical
+JSON`_ (not to be confused with `OLPC Canonical JSON`_).
 
 .. _Variant Overprecision Correction Algorithm (VOCA): https://www.biorxiv.org/content/10.1101/537449v3.full
 .. _SPDI variant data model: https://www.biorxiv.org/content/10.1101/537449v3.full

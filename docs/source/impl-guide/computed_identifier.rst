@@ -28,7 +28,7 @@ A VR Computed Identifier for a VR concept is computed as follows:
 
 * if the object is a :ref:`sequence`, encode using UTF-8
 * if the object is an :ref:`allele`, :ref:`normalize <normalization>` it
-* :ref:`Serialize the object <serialization>` into binary data.
+* :ref:`Serialize the object <digest-serialization>` into binary data.
 * :ref:`Generate a truncated digest <truncated-digest>` from the binary data.
 * :ref:`Construct an identifier <identify>` based on the digest and object type.
 
@@ -73,24 +73,23 @@ Implementations MUST adhere to the following requirements:
 
 
 
-.. _serialization:
+.. _digest-serialization:
 
-VR Serialization
-@@@@@@@@@@@@@@@@
+Digest Serialization
+@@@@@@@@@@@@@@@@@@@@
 
-.. important:: Do not confuse VR serialization with other
-   serialization formats, including JSON serialization used to
-   transmit VR messages.  Although VR and JSON serializations appear
-   similar, they are NOT interchangeable. A VR object might have many
-   valid JSON serializations, but it will have only one valid VR
-   serialization.
-
-VR serialization converts a VR object into a binary representation in
-preparation for computing a digest of the object.  The VR
-serialization specification ensures that all implementations serialize
+Digest serialization converts a VR object into a binary representation
+in preparation for computing a digest of the object.  The Digest
+Serialization specification ensures that all implementations serialize
 variation objects identically, and therefore that the digests will
 also be identical.  |vr-spec| provides validation tests to ensure
 compliance.
+
+.. important:: Do not confuse Digest Serialization with JSON
+               serialization or other serialization forms.  Although
+               Digest Serialization and JSON serialization appear
+               similar, they are NOT interchangeable and will generate
+               different GA4GH Digests.  
 
 Although several proposals exist for serializing arbitrary data in a
 consistent manner ([Gibson]_, [OLPC]_, [JCS]_), none have been
@@ -126,7 +125,7 @@ following REQUIRED constraints:
     * use two-char escape codes when available, as defined in
       `RFC8259§7 <https://tools.ietf.org/html/rfc8259#section-7>`__
 
-The criteria for the VR serialization method was that it must be
+The criteria for the digest serialization method was that it must be
 relatively easy and reliable to implement in any common computer
 language.
 
@@ -136,12 +135,14 @@ language.
 Truncated Digest (sha512t24u)
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-The Truncated Digest algorithm computes an ASCII digest from binary
-data.  The method uses two well-established standard algorithms, the
-`SHA-512`_ hash function, which generates a binary digest from binary
-data, and `Base64`_ URL encoding, which encodes binary data using
-printable characters.  Computing the Truncated Digest for binary data
-consists of three steps:
+The sha512t24u truncated digest algorithm computes an ASCII digest
+from binary data.  The method uses two well-established standard
+algorithms, the `SHA-512`_ hash function, which generates a binary
+digest from binary data, and `Base64`_ URL encoding, which encodes
+binary data using printable characters.
+
+Computing the sha512t24u truncated digest for binary data consists of
+three steps:
 
 1. Compute the `SHA-512`_ digest of a binary data.
 2. Truncate the digest to the left-most 24 bytes (192 bits).  See
@@ -154,12 +155,12 @@ consists of three steps:
 .. code-block:: python
 
    >>> import base64, hashlib
-   >>> def truncated_digest(blob): 
+   >>> def sha512t24u(blob): 
            digest = hashlib.sha512(blob).digest() 
            tdigest = digest[:24] 
            tdigest_b64u = base64.urlsafe_b64encode(tdigest).decode("ASCII") 
            return tdigest_b64u 
-   >>> truncated_digest(b"ACGT")
+   >>> sha512t24u(b"ACGT")
    'aKF498dAxcJAqme6QYQ7EZ07-fiw8Kw2'
 
 
@@ -193,21 +194,10 @@ Type prefixes used by VR are:
    VA, Allele
    VSL, Sequence Location
    VT, Text
-   (reserved), 
-   VCL, Cytoband Location
-   VGL, Gene Location
-   VH, Haplotype
-   VG, Genotype
-   VX, Translocation
 
 For example::
 
     ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_
-
-
-.. todo:: update code to reflect these suffixes. See
-          https://github.com/ga4gh/vr-python/issues/31
-
 
 
 .. _plan-b:
