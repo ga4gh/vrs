@@ -31,7 +31,7 @@ definitions:
         enum: [Text]
         default: Text
       _digest:
-        $ref: "#/definitions/Digest"
+        $ref: "#/definitions/B64UDigest"
       _id:
         $ref: "#/definitions/Id"
       definition:
@@ -51,7 +51,7 @@ definitions:
         enum: [Allele]
         default: Allele
       _digest:
-        $ref: "#/definitions/Digest"
+        $ref: "#/definitions/B64UDigest"
       _id:
         $ref: "#/definitions/Id"
       location:
@@ -81,7 +81,7 @@ definitions:
         enum: [SequenceLocation]
         default: SequenceLocation
       _digest:
-        $ref: "#/definitions/Digest"
+        $ref: "#/definitions/B64UDigest"
       _id:
         $ref: "#/definitions/Id"
       sequence_id:
@@ -195,7 +195,7 @@ definitions:
     type: string
     format: "date-time"
   
-  Digest:
+  B64UDigest:
     additionalProperties: false
     description: >-
       A [base64url](https://tools.ietf.org/html/rfc4648#section-5)
@@ -236,5 +236,5 @@ definitions:
       Using internal ids in public messages is strongly discouraged.
 
     type: string
-    #pattern: '^\w[^:]+:.+$'
+    pattern: '^\w[^:]+:.+$'
     example: "ga4gh:GA.01234abcde"      

@@ -6,7 +6,7 @@
          "description": "An assertion of a sequence state at a Location.",
          "properties": {
             "_digest": {
-               "$ref": "#/definitions/Digest"
+               "$ref": "#/definitions/B64UDigest"
             },
             "_id": {
                "$ref": "#/definitions/Id"
@@ -27,22 +27,23 @@
          },
          "type": "object"
       },
-      "DateTime": {
-         "additionalProperties": false,
-         "format": "date-time",
-         "type": "string"
-      },
-      "Digest": {
+      "B64UDigest": {
          "additionalProperties": false,
          "description": "A [base64url](https://tools.ietf.org/html/rfc4648#section-5) encoded string. See the [VR Specification](https://vr-spec.readthedocs.io) for details.",
          "example": "_ABC-abc-123_",
          "pattern": "^[-_A-Za-z0-9]+$",
          "type": "string"
       },
+      "DateTime": {
+         "additionalProperties": false,
+         "format": "date-time",
+         "type": "string"
+      },
       "Id": {
          "additionalProperties": false,
          "description": "A string that refers to an object uniquely.  The lifetime and scope of an id is defined by the sender.\nVR does not impose any contraints on strings used as ids in messages. However, to maximize sharability of data, the VR Specification RECOMMENDS that implementations use [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.\nString CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially.\nThe VR specification also RECOMMENDS that `prefix` be defined in identifiers.org.\nThe `reference` component is an unconstrained string.\nA CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VR uses CURIEs primarily as a naming mechanism.\nImplementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable.\nUsing internal ids in public messages is strongly discouraged.",
          "example": "ga4gh:GA.01234abcde",
+         "pattern": "^\\w[^:]+:.+$",
          "type": "string"
       },
       "Interval": {
@@ -108,7 +109,7 @@
          "additionalProperties": false,
          "properties": {
             "_digest": {
-               "$ref": "#/definitions/Digest"
+               "$ref": "#/definitions/B64UDigest"
             },
             "_id": {
                "$ref": "#/definitions/Id"
@@ -195,7 +196,7 @@
          "additionalProperties": false,
          "properties": {
             "_digest": {
-               "$ref": "#/definitions/Digest"
+               "$ref": "#/definitions/B64UDigest"
             },
             "_id": {
                "$ref": "#/definitions/Id"
