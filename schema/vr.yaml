@@ -33,7 +33,7 @@ definitions:
       _digest:
         $ref: "#/definitions/B64UDigest"
       _id:
-        $ref: "#/definitions/Id"
+        $ref: "#/definitions/CURIE"
       definition:
         type: string
         description: >-
@@ -53,7 +53,7 @@ definitions:
       _digest:
         $ref: "#/definitions/B64UDigest"
       _id:
-        $ref: "#/definitions/Id"
+        $ref: "#/definitions/CURIE"
       location:
         $ref: "#/definitions/Location"
       state:
@@ -83,9 +83,9 @@ definitions:
       _digest:
         $ref: "#/definitions/B64UDigest"
       _id:
-        $ref: "#/definitions/Id"
+        $ref: "#/definitions/CURIE"
       sequence_id:
-        $ref: "#/definitions/Id"
+        $ref: "#/definitions/CURIE"
       interval:
         $ref: "#/definitions/Interval"
 
@@ -206,7 +206,7 @@ definitions:
     pattern: '^[-_A-Za-z0-9]+$'
     example: "_ABC-abc-123_"      
 
-  Id:
+  CURIE:
     additionalProperties: false
     description: >-
       A string that refers to an object uniquely.  The lifetime and
