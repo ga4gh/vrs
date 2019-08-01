@@ -100,7 +100,12 @@ None.
 
 **Computational definition**
 
-Interbase coordinates refer to the zero-width points before and after :ref:`residues <Residue>`. An interval of interbase coordinates permits referring to any span, including an empty span, before, within, or after a sequence. See :ref:`interbase-coordinates-design` for more details on this design choice.
+Interbase coordinates refer to the zero-width points before and after
+:ref:`residues <Residue>`. An interval of interbase coordinates
+permits referring to any span, including an empty span, before,
+within, or after a sequence. See :ref:`interbase-coordinates-design`
+for more details on this design choice.  Interbase coordinates are
+always zero-based.
 
 
 .. _sequence:
@@ -304,14 +309,6 @@ Location for Variation.
   the two concepts are not interchangable, especially when the
   location is non-specific (e.g., a range) or symbolic (a gene).
 
-**Example**
-
-.. parsed-literal::
-
-    {'interval': {'end': 43, 'start': 42, 'type': 'SimpleInterval'},
-     'sequence_id': 'refseq:NM_0001234.5',
-     'type': 'SequenceLocation'}
-
 
 .. _sequence-location:
 
@@ -357,6 +354,15 @@ named :ref:`Sequence`.
                and must be projected to a genomic reference in order
                to be represented.
 
+**Example**
+
+.. parsed-literal::
+
+    {'interval': {'end': 43, 'start': 42, 'type': 'SimpleInterval'},
+     'sequence_id': 'refseq:NM_0001234.5',
+     'type': 'SequenceLocation'}
+     
+     
 .. _variation:
 
 Variation

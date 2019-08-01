@@ -1,7 +1,7 @@
 # Validation tests for VR-schema functions
 # See notebooks/appendices/Validation%20Tests.ipynb
 
-ga4gh_digest:
+sha512t24u:
   -
     in:
       blob: ""

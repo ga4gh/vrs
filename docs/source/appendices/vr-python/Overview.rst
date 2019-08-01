@@ -351,7 +351,7 @@ property in the ``Allele`` example below.
 
    <div>
    <div style="border-radius: 10px; width: 80%; margin: 0 auto; padding: 5px; border: 2pt solid #660000; color: #660000; background: #f4cccc;">
-       <span style="font-size: 200%">⚠</span> Although JSON serialization and GA4GH canonical JSON serialization appear similar, they are NOT interchangeable and will generated different digests. GA4GH identifiers are defined <i>only</i> when used with GA4GH serialization process.
+       <span style="font-size: 200%">⚠</span> Although JSON serialization and GA4GH Digest Serialization appear similar, they are NOT interchangeable and will generated different digests. GA4GH identifiers are defined <i>only</i> when used with GA4GH serialization process.
    </div>
    </div>
 

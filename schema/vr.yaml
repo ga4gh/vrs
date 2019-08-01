@@ -7,9 +7,12 @@ definitions:
   # Variation, which is a polymorphic abstraction of many kinds of
   # variation.
 
+
   ############################################################################
   # Variation
+
   Variation:
+    additionalProperties: false
     description: >-
       A polymorphic representation of variation
     oneOf:
@@ -20,14 +23,17 @@ definitions:
       propertyName: type
 
   Text:
+    additionalProperties: false
     type: object
     properties:
       type:
         type: string
         enum: [Text]
         default: Text
-      id:
-        $ref: "#/definitions/Id"
+      _digest:
+        $ref: "#/definitions/B64UDigest"
+      _id:
+        $ref: "#/definitions/CURIE"
       definition:
         type: string
         description: >-
@@ -36,6 +42,7 @@ definitions:
           treated as variation.
 
   Allele:
+    additionalProperties: false
     description: An assertion of a sequence state at a Location.
     type: object
     properties:
@@ -43,18 +50,21 @@ definitions:
         type: string
         enum: [Allele]
         default: Allele
-      id:
-        $ref: "#/definitions/Id"
+      _digest:
+        $ref: "#/definitions/B64UDigest"
+      _id:
+        $ref: "#/definitions/CURIE"
       location:
         $ref: "#/definitions/Location"
       state:
         $ref: "#/definitions/State"
-    additionalProperties: false
+
 
   ############################################################################
   # Locations
 
   Location:
+    additionalProperties: false
     description: >-
       A Location represents a span on a specific sequence.
     oneOf:
@@ -63,18 +73,22 @@ definitions:
       propertyName: type
   
   SequenceLocation:
+    additionalProperties: false
     type: object
     properties:
       type:
         type: string
         enum: [SequenceLocation]
         default: SequenceLocation
-      id:
-        $ref: "#/definitions/Id"
+      _digest:
+        $ref: "#/definitions/B64UDigest"
+      _id:
+        $ref: "#/definitions/CURIE"
       sequence_id:
-        $ref: "#/definitions/Id"
+        $ref: "#/definitions/CURIE"
       interval:
         $ref: "#/definitions/Interval"
+
 
   ############################################################################
   # Interval
@@ -82,6 +96,7 @@ definitions:
   # * NestedInterval
 
   Interval:
+    additionalProperties: false
     description: >-
       An Interval represents a span of sequence. Positions are
       always represented by contiguous spans using interbase
@@ -100,6 +115,7 @@ definitions:
       propertyName: type
 
   SimpleInterval:
+    additionalProperties: false
     type: object
     properties:
       type:
@@ -112,7 +128,6 @@ definitions:
       end:
         type: integer
         nullable: true
-    additionalProperties: false
     required:
       - start
       - end
@@ -122,6 +137,7 @@ definitions:
       end: 22
 
   NestedInterval:
+    additionalProperties: false
     type: object
     properties:
       type:
@@ -143,6 +159,7 @@ definitions:
         start: 10
         end: 40
 
+
   ############################################################################
   # States
 
@@ -151,6 +168,7 @@ definitions:
       - $ref: "#/definitions/SequenceState"
   
   SequenceState:
+    additionalProperties: false
     type: object
     properties:
       type:
@@ -167,15 +185,29 @@ definitions:
       type: SequenceState
       sequence: C
 
+
   ############################################################################
   # Basic types
   # These types are used solely within other definitions.
 
   DateTime:
+    additionalProperties: false
     type: string
     format: "date-time"
   
-  Id:
+  B64UDigest:
+    additionalProperties: false
+    description: >-
+      A [base64url](https://tools.ietf.org/html/rfc4648#section-5)
+      encoded string. See the [VR
+      Specification](https://vr-spec.readthedocs.io) for details.
+
+    type: string
+    pattern: '^[-_A-Za-z0-9]+$'
+    example: "_ABC-abc-123_"      
+
+  CURIE:
+    additionalProperties: false
     description: >-
       A string that refers to an object uniquely.  The lifetime and
       scope of an id is defined by the sender.
@@ -204,5 +236,5 @@ definitions:
       Using internal ids in public messages is strongly discouraged.
 
     type: string
-    #pattern: '^\w[^:]+:.+$'
+    pattern: '^\w[^:]+:.+$'
     example: "ga4gh:GA.01234abcde"      

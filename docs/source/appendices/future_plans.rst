@@ -17,7 +17,7 @@ require supporting more complex types of variation, including:
 * mosaicism and chimerism
 * rule-based variation
 
-.. figure:: ../images/planned_extensions_graph.png
+.. figure:: ../images/schema-future.png
    :align: left
 
    **An illustration of planned components for the VR Schema.**

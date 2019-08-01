@@ -1,0 +1,14 @@
+{
+   "identifiers": {
+      "curie_sep": ":",
+      "namespace": "ga4gh",
+      "ref_sep": ".",
+      "regexp": "^ga4gh:(?P<type>[^.]+)\\.(?P<digest>.+)$",
+      "type_prefix_map": {
+         "Allele": "VA",
+         "Sequence": "SQ",
+         "SequenceLocation": "VSL",
+         "Text": "VT"
+      }
+   }
+}

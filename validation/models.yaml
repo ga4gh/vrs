@@ -8,7 +8,7 @@ SimpleInterval:
       start: 42
       type: SimpleInterval
     out:
-      serialize: '{"end":43,"start":42,"type":"SimpleInterval"}'
+      serialize: '{"end":44908822,"start":44908821,"type":"SimpleInterval"}'
 
 NestedInterval:
   -
@@ -32,10 +32,10 @@ SequenceLocation:
         end: 43
         start: 42
         type: SimpleInterval
-      sequence_id: NM_0001234.5
+      sequence_id: refseq:NM_0001234.5
       type: SequenceLocation
     out:
-      serialize: '{"interval":{"end":43,"start":42,"type":"SimpleInterval"},"sequence_id":"NM_0001234.5","type":"SequenceLocation"}'
+      serialize: '{"interval":{"end":43,"start":42,"type":"SimpleInterval"},"sequence_id":"refseq:NM_0001234.5","type":"SequenceLocation"}'
   -
     in:
       interval:
@@ -48,10 +48,10 @@ SequenceLocation:
           start: 20
           type: SimpleInterval
         type: NestedInterval
-      sequence_id: NM_0001234.5
+      sequence_id: refseq:NM_0001234.5
       type: SequenceLocation
     out:
-      serialize: '{"interval":{"inner":{"end":30,"start":29,"type":"SimpleInterval"},"outer":{"end":39,"start":20,"type":"SimpleInterval"},"type":"NestedInterval"},"sequence_id":"NM_0001234.5","type":"SequenceLocation"}'
+      serialize: '{"interval":{"inner":{"end":30,"start":29,"type":"SimpleInterval"},"outer":{"end":39,"start":20,"type":"SimpleInterval"},"type":"NestedInterval"},"sequence_id":"refseq:NM_0001234.5","type":"SequenceLocation"}'
 
 Allele:
   -
@@ -61,11 +61,11 @@ Allele:
           end: 43
           start: 42
           type: SimpleInterval
-        sequence_id: NM_0001234.5
+        sequence_id: refseq:NM_0001234.5
         type: SequenceLocation
       state:
         sequence: A
         type: SequenceState
       type: Allele
     out:
-      serialize: '{"location":"8KJJStVL_dJigtK_AHyVp5AAipy1pMh8","state":{"sequence":"A","type":"SequenceState"},"type":"Allele"}'
+      serialize: '{"location":"UqdjWOolIz8Vxd5b14eVND0vw88q0vqr","state":{"sequence":"A","type":"SequenceState"},"type":"Allele"}'

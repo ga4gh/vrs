@@ -1,0 +1,32 @@
+# This file provides parameters for GA4GH specifications.
+# See https://github.com/ga4gh/vr-spec
+
+
+identifiers:
+  # CURIE identifiers have this structure:
+  #   prefix ":" reference
+  #
+  # VR identifiers follow the CURIE pattern, with this revised
+  # nomenclature and structure:
+  #   namespace ":" type_prefix "." digest
+
+  namespace: ga4gh
+  curie_sep: ':'
+  ref_sep: '.'
+
+  # 1:1 map from VR types to prefixes
+  type_prefix_map:
+    # global objects
+    Sequence: SQ
+
+    # Variation 
+    Allele: VA
+    SequenceLocation: VSL
+    Text: VT
+    # CytobandLocation: VCL
+    # GeneLocation: VGL
+    # Genotype: VG
+    # Haplotype: VH
+
+
+  regexp: '^ga4gh:(?P<type>[^.]+)\.(?P<digest>.+)$'

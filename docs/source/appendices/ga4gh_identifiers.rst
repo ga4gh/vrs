@@ -33,27 +33,67 @@ obviating centralized identifier systems and enabling identifiers to
 be used in isolated settings such as clinical labs. 
 
 The computed identifier mechanism is broadly applicable and useful to
-the entire GA4GH ecosystem.  As a result, we are proposing that the
-computed identifier scheme described in the VR specification be
-considered for adoption as a GA4GH-wide standard.
+the entire GA4GH ecosystem.  Adopting a common identifier scheme will
+make interoperability of GA4GH entities more obvious to consumers,
+will enable the entire organization to share common entity definitions
+(such as sequence identifiers), and will enable all GA4GH products to
+share tooling that manipulate identified data.  In short, it provides
+an important consistency within the GA4GH ecosystem.
 
-Adopting a common identifier scheme will make interoperability of
-GA4GH entities more obvious to consumers, will enable the entire
-organization to share common entity definitions (such as sequence
-identifiers), and will enable all GA4GH products to share tooling that
-manipulate identified data.  In short, it provides an important
-consistency within the GA4GH ecosystem.
+As a result, we are proposing that the computed identifier scheme
+described in the VR specification be considered for adoption as a
+GA4GH-wide standard.  If the proposal is accepted by the GA4GH
+executive committee, the current VR proposal will stand as-is; if the
+proposal is rejected, the VR proposal will be modified to rescope the
+computed identifier mechanism to VR and under admininstration of the
+VR team.
+
 
 
 Proposal
 @@@@@@@@
 
-The GA4GH computed identifier proposal consists of a truncated digest,
-syntax for a GA4GH identifier, declaration of the namespace, and a
-system for adminstering entity type prefixes.
+The following algorithmic processes, described in depth in the VR
+:ref:`computed_identifier` proposal, are included in this proposal by
+reference:
 
-* seralization
-* truncated digest
-* identifier GA4GH Identifier
-* namespace
-* type prefix administration
+* **GA4GH Digest Serialization** is the process of converting an
+  object to a canonical binary form based on JSON and inspired by
+  similar (but unratified) JSON standards.  This serialization for is
+  used only for the purposes of computing a digest.
+* **GA4GH Truncated Digest** is a convention for using `SHA-512`_,
+  truncated to 24 bytes, and encoding using `base64url`_.
+* **GA4GH Identification** is the CURIE-based syntax for constructing
+  a namespaced and typed identifier for an object.
+
+
+Type Prefixes
+@@@@@@@@@@@@@
+
+A GA4GH identifier is proposed to be constructed according to this syntax::
+
+  "ga4gh" ":" type_prefix "." digest
+
+The `digest` is computed as described above. The type_prefix is a
+short alphanumeric code that corresponds to the type of object being
+represented.  If this propsal is accepted, this "type prefix map"
+would be administered by GA4GH.  (Currently, this map is maintained in
+a YAML file within the vr-spec repository, but it would be relocated
+on approval of this proposal.)
+
+We propose the following guidelines for type prefixes:
+
+* Prefixes should be short, approximately 2-4 characters.
+* Prefixes should be for concrete types, not polymorphic parent classes.
+* A prefix should map 1:1 with a schema types.
+* Variation Representation types should start with V.
+* Variation Annotation types should start with A.
+
+
+Administration
+@@@@@@@@@@@@@@
+
+If accepted, administration of these guidelines should be transferred
+to a technical steering committee.  If not accepted, the VR team will
+assume administration of the existing prefixes.
+

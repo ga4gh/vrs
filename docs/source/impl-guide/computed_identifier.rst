@@ -26,10 +26,14 @@ makes it easier for distributed groups to share data.
 
 A VR Computed Identifier for a VR concept is computed as follows:
 
-* if the object is a :ref:`sequence`, encode using UTF-8
-* if the object is an :ref:`allele`, :ref:`normalize <normalization>` it
-* :ref:`Serialize the object <serialization>` into binary data.
+* If the object is an :ref:`allele`, :ref:`normalize <normalization>` it.
+
+* Generate binary data to digest. If the object is a :ref:`sequence`
+  string, encode it using UTF-8.  Otherwise, serialize the object
+  using :ref:`Digest Serialization <digest-serialization>`.
+
 * :ref:`Generate a truncated digest <truncated-digest>` from the binary data.
+
 * :ref:`Construct an identifier <identify>` based on the digest and object type.
 
 The following diagram depicts the operations necessary to generate a
@@ -43,7 +47,7 @@ subsequent sections.
    **Serialization, Digest, and Computed Identifier Operations**
    Entities are shown in gray boxes. Functions are denoted by bold
    italics.  The yellow, green, and blue boxes, corresponding to the
-   ``sha512t24u``, ``vr_digest``, and ``vr_identify`` functions
+   ``sha512t24u``, ``ga4gh_digest``, and ``ga4gh_identify`` functions
    respectively, depict the dependencies among functions.
    ``SHA512/192`` is `SHA-512`_ truncated at 192 bits using the
    systematic name recommended by SHA-512 (§5.3.6).  base64url_ is the
@@ -57,9 +61,6 @@ Requirements
 
 Implementations MUST adhere to the following requirements:
 
-* The VR Computed Identifier algorithm applies only to *identifiable*
-  objects, that is, objects with an `id` property.
-
 * The VR Computed Identifier is NOT defined if used with any other
   normalization, serialization, or digest mechanism to generate a
   GA4GH Computed Identifier.
@@ -67,30 +68,32 @@ Implementations MUST adhere to the following requirements:
 * VR Computed Identifiers are defined only when all nested objects are
   identified with ``ga4gh`` identifiers.  Generating VR identifiers
   using objects referenced within any other namespace is not compliant
-  with this specification. In particular, it is not compliant to
-  generate VR identifiers using sequences referenced with RefSeq,
-  Ensembl, or other accession outside the `ga4gh`` namespace.
+  with this specification. 
+
+.. important:: The above requirement means that *sequences must be
+               identified with GA4GH computed identifiers* based on
+               the sequence digest.  Implementations that use other
+               sequence identifiers are NOT compliant with this
+               specification.
 
 
+.. _digest-serialization:
 
-.. _serialization:
+Digest Serialization
+@@@@@@@@@@@@@@@@@@@@
 
-VR Serialization
-@@@@@@@@@@@@@@@@
-
-.. important:: Do not confuse VR serialization with other
-   serialization formats, including JSON serialization used to
-   transmit VR messages.  Although VR and JSON serializations appear
-   similar, they are NOT interchangeable. A VR object might have many
-   valid JSON serializations, but it will have only one valid VR
-   serialization.
-
-VR serialization converts a VR object into a binary representation in
-preparation for computing a digest of the object.  The VR
-serialization specification ensures that all implementations serialize
+Digest serialization converts a VR object into a binary representation
+in preparation for computing a digest of the object.  The Digest
+Serialization specification ensures that all implementations serialize
 variation objects identically, and therefore that the digests will
 also be identical.  |vr-spec| provides validation tests to ensure
 compliance.
+
+.. important:: Do not confuse Digest Serialization with JSON
+               serialization or other serialization forms.  Although
+               Digest Serialization and JSON serialization appear
+               similar, they are NOT interchangeable and will generate
+               different GA4GH Digests.  
 
 Although several proposals exist for serializing arbitrary data in a
 consistent manner ([Gibson]_, [OLPC]_, [JCS]_), none have been
@@ -113,7 +116,7 @@ If the object is a composite VR object, implementations MUST:
     * replace nested identifiable objects (i.e., objects that have id
       properties) with their corresponding *digests*
     * order arrays of digests and ids by Unicode Character Set values
-    * filter out id fields
+    * filter out fields that start with underscore (e.g., `_digest`)
     * filter out fields with null values
 
 The second step is to JSON serialize the message content with the
@@ -126,7 +129,7 @@ following REQUIRED constraints:
     * use two-char escape codes when available, as defined in
       `RFC8259§7 <https://tools.ietf.org/html/rfc8259#section-7>`__
 
-The criteria for the VR serialization method was that it must be
+The criteria for the digest serialization method was that it must be
 relatively easy and reliable to implement in any common computer
 language.
 
@@ -136,12 +139,14 @@ language.
 Truncated Digest (sha512t24u)
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-The Truncated Digest algorithm computes an ASCII digest from binary
-data.  The method uses two well-established standard algorithms, the
-`SHA-512`_ hash function, which generates a binary digest from binary
-data, and `Base64`_ URL encoding, which encodes binary data using
-printable characters.  Computing the Truncated Digest for binary data
-consists of three steps:
+The sha512t24u truncated digest algorithm computes an ASCII digest
+from binary data.  The method uses two well-established standard
+algorithms, the `SHA-512`_ hash function, which generates a binary
+digest from binary data, and `Base64`_ URL encoding, which encodes
+binary data using printable characters.
+
+Computing the sha512t24u truncated digest for binary data consists of
+three steps:
 
 1. Compute the `SHA-512`_ digest of a binary data.
 2. Truncate the digest to the left-most 24 bytes (192 bits).  See
@@ -154,12 +159,12 @@ consists of three steps:
 .. code-block:: python
 
    >>> import base64, hashlib
-   >>> def truncated_digest(blob): 
+   >>> def sha512t24u(blob): 
            digest = hashlib.sha512(blob).digest() 
            tdigest = digest[:24] 
            tdigest_b64u = base64.urlsafe_b64encode(tdigest).decode("ASCII") 
            return tdigest_b64u 
-   >>> truncated_digest(b"ACGT")
+   >>> sha512t24u(b"ACGT")
    'aKF498dAxcJAqme6QYQ7EZ07-fiw8Kw2'
 
 
@@ -193,21 +198,10 @@ Type prefixes used by VR are:
    VA, Allele
    VSL, Sequence Location
    VT, Text
-   (reserved), 
-   VCL, Cytoband Location
-   VGL, Gene Location
-   VH, Haplotype
-   VG, Genotype
-   VX, Translocation
 
 For example::
 
     ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_
-
-
-.. todo:: update code to reflect these suffixes. See
-          https://github.com/ga4gh/vr-python/issues/31
-
 
 
 .. _plan-b:
@@ -220,7 +214,10 @@ following changes will be made to this section of the specification:
 
 * The namespace (CURIE prefix) will become ``ga4gh.vr``.
 
-* The GA4GH VR team will manage prefixes.
+* In the function names `ga4gh_digest`, `ga4gh_identify`, and
+  `ga4gh_serialize`, `ga4gh` will be replaced with `vr`.
+
+* The GA4GH VR team will manage type prefixes.
 
 All other aspects of the computed identifier scheme will remain intact.
 

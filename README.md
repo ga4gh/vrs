@@ -9,6 +9,10 @@ national information resource providers, major international public
 initiatives, and diagnostic testing laboratories.
 
 
+> **NOTE:** vr-spec is under very active development.  The priorities
+and roadmap are available at the [VR 2019 Project](https://github.com/orgs/ga4gh/projects/5).
+
+
 # Specific goals:
 
 * Develop common language- and protocol-neutral information models and
@@ -25,8 +29,8 @@ initiatives, and diagnostic testing laboratories.
   tests](https://github.com/ga4gh/vr-spec/tests/validation) to ensure
   consistency of implementations.
 
-The VR model is the product of the GA4GH `Variation Representation
-<https://ga4gh-gks.github.io/variant_representation.html>`__ group.
+The VR model is the product of the [GA4GH Variation Representation
+group](https://ga4gh-gks.github.io/variant_representation.html).
 
 
 

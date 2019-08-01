@@ -5,7 +5,10 @@
          "additionalProperties": false,
          "description": "An assertion of a sequence state at a Location.",
          "properties": {
-            "id": {
+            "_digest": {
+               "$ref": "#/definitions/B64UDigest"
+            },
+            "_id": {
                "$ref": "#/definitions/Id"
             },
             "location": {
@@ -24,16 +27,27 @@
          },
          "type": "object"
       },
+      "B64UDigest": {
+         "additionalProperties": false,
+         "description": "A [base64url](https://tools.ietf.org/html/rfc4648#section-5) encoded string. See the [VR Specification](https://vr-spec.readthedocs.io) for details.",
+         "example": "_ABC-abc-123_",
+         "pattern": "^[-_A-Za-z0-9]+$",
+         "type": "string"
+      },
       "DateTime": {
+         "additionalProperties": false,
          "format": "date-time",
          "type": "string"
       },
       "Id": {
+         "additionalProperties": false,
          "description": "A string that refers to an object uniquely.  The lifetime and scope of an id is defined by the sender.\nVR does not impose any contraints on strings used as ids in messages. However, to maximize sharability of data, the VR Specification RECOMMENDS that implementations use [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.\nString CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially.\nThe VR specification also RECOMMENDS that `prefix` be defined in identifiers.org.\nThe `reference` component is an unconstrained string.\nA CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VR uses CURIEs primarily as a naming mechanism.\nImplementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable.\nUsing internal ids in public messages is strongly discouraged.",
          "example": "ga4gh:GA.01234abcde",
+         "pattern": "^\\w[^:]+:.+$",
          "type": "string"
       },
       "Interval": {
+         "additionalProperties": false,
          "description": "An Interval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of Interval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VR Interval may be zero-width. The SO definition is for an \"extent greater than zero\".",
          "discriminator": {
             "propertyName": "type"
@@ -48,6 +62,7 @@
          ]
       },
       "Location": {
+         "additionalProperties": false,
          "description": "A Location represents a span on a specific sequence.",
          "discriminator": {
             "propertyName": "type"
@@ -59,6 +74,7 @@
          ]
       },
       "NestedInterval": {
+         "additionalProperties": false,
          "example": {
             "inner": {
                "end": 30,
@@ -90,8 +106,12 @@
          "type": "object"
       },
       "SequenceLocation": {
+         "additionalProperties": false,
          "properties": {
-            "id": {
+            "_digest": {
+               "$ref": "#/definitions/B64UDigest"
+            },
+            "_id": {
                "$ref": "#/definitions/Id"
             },
             "interval": {
@@ -111,6 +131,7 @@
          "type": "object"
       },
       "SequenceState": {
+         "additionalProperties": false,
          "example": {
             "sequence": "C",
             "type": "SequenceState"
@@ -172,13 +193,17 @@
          ]
       },
       "Text": {
+         "additionalProperties": false,
          "properties": {
+            "_digest": {
+               "$ref": "#/definitions/B64UDigest"
+            },
+            "_id": {
+               "$ref": "#/definitions/Id"
+            },
             "definition": {
                "description": "An textual representation of variation intended to capture variation descriptions that cannot be parsed, but still treated as variation.",
                "type": "string"
-            },
-            "id": {
-               "$ref": "#/definitions/Id"
             },
             "type": {
                "default": "Text",
@@ -191,6 +216,7 @@
          "type": "object"
       },
       "Variation": {
+         "additionalProperties": false,
          "description": "A polymorphic representation of variation",
          "discriminator": {
             "propertyName": "type"
