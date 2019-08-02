@@ -12,18 +12,20 @@ VR Spec is adopted.
 
 .. _impl-vr-python:
 
-vr-python: GA4GH VR Reference Implementation
-############################################
+vr-python: GA4GH VR Python Implementation
+#########################################
 
-`vr-python <https://github.com/ga4gh/vr-python/>`__ is the reference
-implementation for the GA4GH VR Spec.  It supports all types covered
-by the VR Spec, implements Allele normalization and computed
-identifier generation, and provides "extra" features such as
-translation from HGVS, SPDI, and VCF formats.  The `Overview
+The |vr-python| is an implementation for the GA4GH VR Spec.  It
+supports all types covered by the VR Spec, implements Allele
+normalization and computed identifier generation, and provides "extra"
+features such as translation from HGVS, SPDI, and VCF formats.  The
+`Overview
 <https://github.com/ga4gh/vr-python/blob/master/notebooks/Overview.ipynb>`__
 and `Extras
 <https://github.com/ga4gh/vr-python/blob/master/notebooks/Extras.ipynb>`__
 Jupyter notebooks provide usage examples.
+
+|VR-Spec| may be used without using the Python implementation.
 
 
 ----
@@ -41,11 +43,18 @@ provided by the application authors.
 ClinGen Allele Registry
 #######################
 
-ClinGen Allele Registry [1]_ provides identifiers for more than 900 million variants. Each identifier (canonical allele identifiers: CAIds) is an abstract concept which represents a group of identical variants based on alignment. Identifiers are retrievable irrespective of the reference sequence and normalization status.
+ClinGen Allele Registry [1]_ provides identifiers for more than 900
+million variants. Each identifier (canonical allele identifiers:
+CAIds) is an abstract concept which represents a group of identical
+variants based on alignment. Identifiers are retrievable irrespective
+of the reference sequence and normalization status.
 
-As a Driver Project for GA4GH, `ClinGen Allele Registry <https://reg.clinicalgenome.org>`__ implements two standards: RefGet and VR in the first implementation.
+As a Driver Project for GA4GH, `ClinGen Allele Registry
+<https://reg.clinicalgenome.org>`__ implements two standards: RefGet
+and VR in the first implementation.
 
-The API endpoints that support data retrieval in this two key standards are summarized in the following table.
+The API endpoints that support data retrieval in this two key
+standards are summarized in the following table.
 
 **HOST**: `https//reg.clinicalgenome.org/ <https://reg.clinicalgenome.org>`__
 
@@ -60,7 +69,10 @@ The API endpoints that support data retrieval in this two key standards are summ
    **VR**,,,
    [GET] /vrAllele?hgvs={hgvs}, hgvs => HGVS expression, VR v1.0, `/vrAllele?hgvs=NC_000007.14:g.55181320A>T <https://reg.clinicalgenome.org/vrAllele?hgvs=NC_000007.14:g.55181320A%3ET>`__  `/vrAllele?hgvs=NC_000007.14:g.55181220del <https://reg.clinicalgenome.org/vrAllele?hgvs=NC_000007.14:g.55181220del>`__
 
-Support for GA4GH refget and VR specs provided in ClinGen Allele Registry is independent from VR-Python. Support for this community standards is implemented in ClinGen Allele Registry through extension of code written in C++.
+Support for GA4GH refget and VR specs provided in ClinGen Allele
+Registry is independent from VR-Python. Support for this community
+standards is implemented in ClinGen Allele Registry through extension
+of code written in C++.
 
 
 .. _impl-brca-exchange:
@@ -103,8 +115,12 @@ Example queries:
 
 **References:**
 
-.. [1] Wagner, A.H., et al. *A harmonized meta-knowledgebase of clinical interpretations of cancer genomic variants.* bioRxiv 366856 (2018). `doi:10.1101/366856`_
-.. [2] Pawliczek P, Patel RY, et al. *ClinGen Allele Registry links information about genetic variants.* Hum Mutat 11 (2018). `doi:10.1002/humu.23637`_
+.. [1] Wagner, A.H., et al. *A harmonized meta-knowledgebase of
+       clinical interpretations of cancer genomic variants.* bioRxiv
+       366856 (2018). `doi:10.1101/366856`_
+.. [2] Pawliczek P, Patel RY, et al. *ClinGen Allele Registry links
+       information about genetic variants.* Hum Mutat 11
+       (2018). `doi:10.1002/humu.23637`_
 
 .. _vicc-docs: https://search.cancervariants.org/api/v1/ui/#!/Associations/searchAssociations
 .. _doi:10.1101/366856: https://doi.org/10.1101/366856

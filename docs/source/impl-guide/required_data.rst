@@ -88,11 +88,10 @@ The DataProxy interface defines three methods:
   sequence identifier, return all aliases in the specified
   namespace. Zero or more aliases may be returned.
 
-The VR Reference Implementation implements the DataProxy interface
-using a local |seqrepo| instance backend and using a |seqrepo_rs|
-backend.  A GA4GH refget implementation has been started, but is
-pending interface changes to support lookup using primary database
-accesssions.
+|vr-python| implements the DataProxy interface using a local |seqrepo|
+instance backend and using a |seqrepo_rs| backend.  A GA4GH refget
+implementation has been started, but is pending interface changes to
+support lookup using primary database accesssions.
 
 .. todo:: Add examples for each based on VR Python
 

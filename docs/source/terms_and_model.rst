@@ -131,19 +131,21 @@ amino acid codes.
 
 **Implementation guidance**
 
-* Sequences MAY be empty (zero-length) strings. Empty sequences are used as the replacement Sequence
-  for deletion Alleles.
+* Sequences MAY be empty (zero-length) strings. Empty sequences are used as the
+  replacement Sequence for deletion Alleles.
 * Sequences MUST consist of only uppercase IUPAC abbreviations, including ambiguity codes.
 
 **Notes**
 
 * A Sequence provides a stable coordinate system by which an :ref:`Allele` may be located and
   interpreted.
-* A Sequence may have several roles. A “reference sequence” is any Sequence used to define an
-  :ref:`Allele`. A Sequence that replaces another Sequence is called a “replacement sequence”.
-* In some contexts outside the VR specification, “reference sequence” may refer to a member of set
-  of sequences that comprise a genome assembly. In the VR specification, any sequence may be a
-  “reference sequence”, including those in a genome assembly.
+* A Sequence may have several roles. A “reference sequence” is any Sequence used
+  to define an :ref:`Allele`. A Sequence that replaces another Sequence is
+  called a “replacement sequence”.
+* In some contexts outside the VR specification, “reference sequence” may refer
+  to a member of set of sequences that comprise a genome assembly. In the VR
+  specification, any sequence may be a “reference sequence”, including those in
+  a genome assembly.
 * For the purposes of representing sequence variation, it is not
   necessary that Sequences be explicitly “typed” (i.e., DNA, RNA, or
   AA).
@@ -221,7 +223,7 @@ An :ref:`Interval` with a single start and end coordinate.
 * <start, end>=<*0,0*> refers to the point with width zero before the first residue.
 * <start, end>=<*i,i+1*> refers to the *i+1th* (1-based) residue.
 * <start, end>=<*N,N*> refers to the position after the last residue for Sequence of length *N*.
-* See example notebooks in the :ref:`reference implementation documentation <impl-vr-python>`.
+* See example notebooks in |vr-python|.
 
 **Example**
 
