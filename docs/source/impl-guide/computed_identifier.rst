@@ -133,6 +133,46 @@ The criteria for the digest serialization method was that it must be
 relatively easy and reliable to implement in any common computer
 language.
 
+.. code:: ipython3
+
+    allele = models.Allele(location=models.SequenceLocation(
+        sequence_id="ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+        interval=simple_interval),
+        state=models.SequenceState(sequence="T"))
+    ga4gh_serialize(allele)
+
+Gives the following *binary* (UTF-8 encoded) data:
+
+.. parsed-literal::
+
+    {"location":"u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx","state":{"sequence":"T","type":"SequenceState"},"type":"Allele"}
+
+For comparison, here is one of many possible JSON serializations of the same object:
+
+.. code:: ipython3
+
+    allele.for_json()
+
+.. parsed-literal::
+
+    {
+      "location": {
+        "interval": {
+          "end": 44908822,
+          "start": 44908821,
+          "type": "SimpleInterval"
+        },
+        "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+        "type": "SequenceLocation"
+      },
+      "state": {
+        "sequence": "T",
+        "type": "SequenceState"
+      },
+      "type": "Allele"
+    }
+    
+
 
 .. _truncated-digest:
 
@@ -199,9 +239,11 @@ Type prefixes used by VR are:
    VSL, Sequence Location
    VT, Text
 
-For example::
+For example, the identifer for the allele example under :ref:`digest-serialization` gives:
 
-    ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_
+.. parsed-literal::
+
+    ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_
 
 
 .. _plan-b:

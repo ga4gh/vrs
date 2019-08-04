@@ -45,6 +45,11 @@ depend only on previously-defined terms.
           "OPTIONAL" in this document are to be interpreted as
           described in `RFC 2119`_.
 
+.. todo:: add note about _ prefix
+
+.. todo:: id attributes -> _digest, _id attributes
+
+----
 
 Primitive Concepts
 @@@@@@@@@@@@@@@@@@
@@ -66,8 +71,21 @@ specific instance of an object within a document.
 **Implementation guidance**
 
 * This specification RECOMMENDS using a :ref:`computed-identifiers` for each id.
-* When an appropriate namespace exists at [identifiers.org](http://identifiers.org/), that
-  namespace MUST be used verbatim (case sensitive).
+* When an appropriate namespace exists at `identifiers.org
+  <http://identifiers.org/>`__, that namespace MUST be used verbatim.
+* Identifiers are case-sensitive.
+* The VR data schema permits any CURIE identifier to be used when
+  representing data.
+* Implementations MUST use ga4gh sequence identifiers when
+  constructing :ref:`computed identifiers <computed-identifiers>` for VR objects.
+
+**Example**
+
+Identifiers for GRCh38 chromosome 19::
+
+    ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+    refseq:NC_000019.10
+    grch38:19
 
 
 .. _residue:
@@ -87,25 +105,6 @@ A character representing a specific residue (i.e., molecular species)
 or groupings of these ("ambiguity codes"), using `one-letter IUPAC
 abbreviations <https://www.genome.jp/kegg/catalog/codes1.html>`_ for
 nucleic acids and amino acids.
-
-
-.. _interbase-coordinates:
-
-Interbase Coordinates
-#####################
-
-**Biological definition**
-
-None.
-
-**Computational definition**
-
-Interbase coordinates refer to the zero-width points before and after
-:ref:`residues <Residue>`. An interval of interbase coordinates
-permits referring to any span, including an empty span, before,
-within, or after a sequence. See :ref:`interbase-coordinates-design`
-for more details on this design choice.  Interbase coordinates are
-always zero-based.
 
 
 .. _sequence:
@@ -134,9 +133,6 @@ amino acid codes.
 * Sequences MAY be empty (zero-length) strings. Empty sequences are used as the
   replacement Sequence for deletion Alleles.
 * Sequences MUST consist of only uppercase IUPAC abbreviations, including ambiguity codes.
-
-**Notes**
-
 * A Sequence provides a stable coordinate system by which an :ref:`Allele` may be located and
   interpreted.
 * A Sequence may have several roles. A “reference sequence” is any Sequence used
@@ -150,13 +146,16 @@ amino acid codes.
   necessary that Sequences be explicitly “typed” (i.e., DNA, RNA, or
   AA).
 
+
+----
+
 Composite Concepts
 @@@@@@@@@@@@@@@@@@
 
 .. _interval:
 
-Interval
-########
+Interval (Abstract Class)
+#########################
 
 **Biological definition**
 
@@ -171,6 +170,22 @@ possibly with length zero, and specified using
 :ref:`Future Location and Interval types <planned-locations>` will
 enable other methods for describing where :ref:`variation` occurs. Any
 of these may be used as the Interval for Location.
+
+
+.. _interbase-coordinates:
+
+.. sidebar:: VR Uses Interbase Coordinates 
+
+   **GA4GH VR uses interbase coordinates when referring to spans of
+   sequence.**
+   
+   Interbase coordinates refer to the zero-width points before and
+   after :ref:`residues <Residue>`. An interval of interbase
+   coordinates permits referring to any span, including an empty span,
+   before, within, or after a sequence. See
+   :ref:`interbase-coordinates-design` for more details on this design
+   choice.  Interbase coordinates are always zero-based.
+
 
 .. _SimpleInterval:
 
@@ -196,9 +211,6 @@ An :ref:`Interval` with a single start and end coordinate.
 * Implementations MUST require that 0 ≤ start ≤ end. In the case of
   double-stranded DNA, this constraint holds even when a feature is on
   the complementary strand.
-
-**Notes**
-
 * VR uses Interbase coordinates because they provide conceptual
   consistency that is not possible with residue-based systems (see
   :ref:`rationale <interbase-coordinates-design>`). Implementations
@@ -229,63 +241,18 @@ An :ref:`Interval` with a single start and end coordinate.
 
 .. parsed-literal::
 
-    {'end': 43, 'start': 42, 'type': 'SimpleInterval'}
-
+    {
+      "end": 44908822,
+      "start": 44908821,
+      "type": "SimpleInterval"
+    }
 
 .. _state:
 
-State
-#####
-
-**Biological definition**
-
-None.
-
-**Computational definition**
-
-*State* objects are one of two primary components specifying a VR
-:ref:`Allele` (in addition to :ref:`Location`), and the designated
-components for representing change (or non-change) of the features
-indicated by the Allele Location. As an abstract class, State may
-encompass concrete :ref:`sequence` changes (see :ref:`SequenceState
-<sequence-state>`), complex translocations, copy number changes,
-expression variation, rule-based variation, and more (see
-:ref:`planned-states`).
-
-.. _sequence-state:
-
-SequenceState
-$$$$$$$$$$$$$
-
-**Biological definition**
-
-None.
-
-**Computational definition**
-
-The *SequenceState* class specifically captures a :ref:`sequence` as a
-:ref:`State`. This is the State class to use for representing
-"ref-alt" style variation, including SNVs, MNVs, del, ins, and delins.
-
-**Information model**
-
-.. csv-table::
-   :header: Field, Type, Label, Description
-   :align: left
-   :widths: 12, 9, 10, 30
-
-   id, :ref:`Id`, optional, State Id; must be unique within document
-   type, string, required, State type; must be set to 'SequenceState'
-   sequence, :ref:`Sequence`, required, The sequence that is to be used as the state for other types.
-
-**Example**
-
-
-
 .. _location:
 
-Location
-########
+Location (Abstract Class)
+#########################
 
 **Biological definition**
 
@@ -360,11 +327,70 @@ named :ref:`Sequence`.
 
 .. parsed-literal::
 
-    {'interval': {'end': 43, 'start': 42, 'type': 'SimpleInterval'},
-     'sequence_id': 'refseq:NM_0001234.5',
-     'type': 'SequenceLocation'}
+    {
+      "interval": {
+        "end": 44908822,
+        "start": 44908821,
+        "type": "SimpleInterval"
+      },
+      "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+      "type": "SequenceLocation"
+    }
      
-     
+
+State (Abstract Class)
+######################
+
+**Biological definition**
+
+None.
+
+**Computational definition**
+
+*State* objects are one of two primary components specifying a VR
+:ref:`Allele` (in addition to :ref:`Location`), and the designated
+components for representing change (or non-change) of the features
+indicated by the Allele Location. As an abstract class, State may
+encompass concrete :ref:`sequence` changes (see :ref:`SequenceState
+<sequence-state>`), complex translocations, copy number changes,
+expression variation, rule-based variation, and more (see
+:ref:`planned-states`).
+
+.. _sequence-state:
+
+SequenceState
+$$$$$$$$$$$$$
+
+**Biological definition**
+
+None.
+
+**Computational definition**
+
+The *SequenceState* class specifically captures a :ref:`sequence` as a
+:ref:`State`. This is the State class to use for representing
+"ref-alt" style variation, including SNVs, MNVs, del, ins, and delins.
+
+**Information model**
+
+.. csv-table::
+   :header: Field, Type, Label, Description
+   :align: left
+   :widths: 12, 9, 10, 30
+
+   id, :ref:`Id`, optional, State Id; must be unique within document
+   type, string, required, State type; must be set to 'SequenceState'
+   sequence, :ref:`Sequence`, required, The sequence that is to be used as the state for other types.
+
+**Example**
+
+.. parsed-literal::
+
+    {
+      "sequence": "T",
+      "type": "SequenceState"
+    }
+
 .. _variation:
 
 Variation
@@ -435,9 +461,6 @@ indels).
 * Implementations MUST normalize Alleles using :ref:`"justified"
   normalization <normalization>` when generating a
   :ref:`computed-identifiers`.
-
-**Notes**
-
 * When the alternate Sequence is the same length as the interval, the
   lengths of the reference Sequence and imputed Sequence are the
   same. (Here, imputed sequence means the sequence derived by applying
@@ -474,6 +497,27 @@ indels).
   computationally as an association with an Allele.
 * This specification's definition of Allele applies to all Sequence
   types (DNA, RNA, AA).
+
+**Example**
+
+.. parsed-literal::
+
+    {
+       "location": {
+          "interval": {
+             "end": 44908822,
+             "start": 44908821,
+             "type": "SimpleInterval"
+          },
+          "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+          "type": "SequenceLocation"
+       },
+       "state": {
+          "sequence": "T",
+          "type": "SequenceState"
+       },
+       "type": "Allele"
+    }
 
 
 .. _text:
@@ -514,13 +558,18 @@ subclasses, but are still treated as variation.
   new object under the other Variation subclass. In such a case, an
   implementation SHOULD persist the original Text object and respond
   to queries matching the Text object with the new object.
-
-**Notes**
-
 * Additional Variation subclasses are continually under
   consideration. Please open a `GitHub issue`_ if you would like to
   propose a Variation subclass to cover a needed variation
   representation.
+
+**Example**
+
+    {
+      "definition": "APOE loss",
+      "type": "Text"
+    }
+
 
 .. _GitHub issue: https://github.com/ga4gh/vr-spec/issues
 .. _genetic variation: https://en.wikipedia.org/wiki/Genetic_variation
