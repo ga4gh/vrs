@@ -1,6 +1,10 @@
 # Validation tests for VR-schema functions
 # See notebooks/appendices/Validation%20Tests.ipynb
 
+# top-level keys are function names
+# in subkey contains key-value pairs of constructor arguments
+# out subkey contains output of function on "in" arguments
+
 sha512t24u:
   -
     in:
@@ -10,22 +14,3 @@ sha512t24u:
     in:
       blob: "ACGT"
     out: "aKF498dAxcJAqme6QYQ7EZ07-fiw8Kw2"
-
-
-translate_sequence_identifier:
-  -
-    in:
-      identifier: "NC_000019.10"
-    out:
-      identifier: "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"
-  -
-    in:
-      identifier: "refseq:NC_000019.10"
-    out:
-      identifier: "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"
-  -
-    in:
-      identifier: "GRCh38:19"
-    out:
-      identifier: "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"
-    
