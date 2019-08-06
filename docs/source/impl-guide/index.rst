@@ -23,5 +23,5 @@ required for implementations of the VR Specification.
 
    required_data
    normalization
-   computed_identifier
+   computed_identifiers
   
