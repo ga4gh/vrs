@@ -220,7 +220,7 @@ has the form::
 
     prefix ":" reference
 
-The GA4GH VR Spec constructs computed identifiers as follows::
+The GA4GH VR-Spec constructs computed identifiers as follows::
 
     "ga4gh" ":" type_prefix "." <digest>
 
