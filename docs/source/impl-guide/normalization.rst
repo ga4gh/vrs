@@ -61,9 +61,9 @@ alternate sequence) at an interval is outlined below.
       -  | Interbase Position
          | and Alleles
       -  | Resulting Allele Set
-         | (Invariant: All alleles result in the
-         | same empirical sequence change.)
-   *  -  0. Given allele S:g.5_6delinsCAGCA with reference sequence S = TCAGCAGCT
+         | (All alleles in this column result
+	 | in the same empirical sequence change.)
+   *  -  0. Given allele ``S:g.5_6delinsCAGCA`` defined on reference sequence S=TCAGCAGCT
       -  | (4,6)
          | (“CA”, “CAGCA”)
       -  .. math:: TCAG \Bigl[ \frac{CA}{CAGCA} \Bigr] GCT
@@ -76,7 +76,7 @@ alternate sequence) at an interval is outlined below.
             Equivalently in this case, CA prefix or CA suffix could be removed.
       -  | (5,5)
          | (“”, “AGC”)
-      -  .. math:: TCAGC \Bigl[ \frac{}{AGC} \Bigr] AGCT ①
+      -  .. math:: TCAGC \Bigl[ \frac{}{AGC} \Bigr] AGCT  ①
    *  -  2. Condition: One allele must be empty.
 
             If the reference allele is empty, the allele set represents an insertion in the reference.
@@ -98,11 +98,11 @@ alternate sequence) at an interval is outlined below.
       -  | (1,1)
          | (“”, “CAG”)
       -  .. math::
-            TCAGC \Bigl[ \frac{}{AGC} \Bigr] AGCT ①,\\
-            TCAG \Bigl[ \frac{}{CAG} \Bigr] CAGCT,   \\
-            TCA \Bigl[ \frac{}{GCA} \Bigr] GCAGCT,   \\
-            TC \Bigl[ \frac{}{AGC} \Bigr] AGCAGCT,   \\
-            T \Bigl[ \frac{}{CAG} \Bigr] CAGCAGCT,   \\
+            TCAGC \Bigl[ \frac{}{AGC} \Bigr] AGCT ①\\
+            TCAG \Bigl[ \frac{}{CAG} \Bigr] CAGCT   \\
+            TCA \Bigl[ \frac{}{GCA} \Bigr] GCAGCT   \\
+            TC \Bigl[ \frac{}{AGC} \Bigr] AGCAGCT   \\
+            T \Bigl[ \frac{}{CAG} \Bigr] CAGCAGCT   \\
             \Rightarrow left\_roll = 4
    *  -  4. Roll Right
 
@@ -110,10 +110,10 @@ alternate sequence) at an interval is outlined below.
       -  | (8,8)
          | (“”, “AGC”)
       -  .. math::
-            TCAGC \Bigl[ \frac{}{AGC} \Bigr] AGCT ①,\\
-            TCAGCA \Bigl[ \frac{}{GCA} \Bigr] GCT,   \\
-            TCAGCAG \Bigl[ \frac{}{CAG} \Bigr] CT,   \\
-            TCAGCAGC \Bigl[ \frac{}{AGC} \Bigr] T,   \\
+            TCAGC \Bigl[ \frac{}{AGC} \Bigr] AGCT ①\\
+            TCAGCA \Bigl[ \frac{}{GCA} \Bigr] GCT   \\
+            TCAGCAG \Bigl[ \frac{}{CAG} \Bigr] CT   \\
+            TCAGCAGC \Bigl[ \frac{}{AGC} \Bigr] T   \\
             \Rightarrow right\_roll = 3
    *  -  5. Update position and alleles to fully justify within region of ambiguity.
 
@@ -127,7 +127,7 @@ alternate sequence) at an interval is outlined below.
          | (“CAGCAGC”,
          | “CAGCAGCAGC”)
       -  .. math::
-            TCAGC \Bigl[ \frac{}{AGC} \Bigr] AGCT ①,\\
+            TCAGC \Bigl[ \frac{}{AGC} \Bigr] AGCT ①\\
             T \Bigl[ \frac{CAGCAGC}{CAGCAGCAGC} \Bigr] T
 
 **References**
