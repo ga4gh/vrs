@@ -478,7 +478,7 @@ loss-of-function*, *oncogenic*, and *truncating* variation.
 Variation Sets
 @@@@@@@@@@@@@@
 
-.. note:: The VR Spec anticipates the need for sets of variation.
+.. note:: The VR-Spec anticipates the need for sets of variation.
           Sets may be static (immutable) or dynamic (changeable), and
           might be defined manually, by an `equivalence function`, or
           by an expansion functions.  Furthermore, equivalence and

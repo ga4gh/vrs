@@ -239,7 +239,7 @@ algorithmic functions. They are:
 normalize()
 ~~~~~~~~~~~
 
-VR Spec RECOMMENDS that variation is reported as “expanded” alleles.
+VR-Spec RECOMMENDS that variation is reported as “expanded” alleles.
 Expanded alleles capture the entire region of insertion/deletion
 amiguity, thereby facilitating comparisons that would otherwise require
 on-the-fly computations.
