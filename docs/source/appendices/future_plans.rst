@@ -70,13 +70,28 @@ region (the *outer* SimpleInterval) and required included region (the
 
 **Information model**
 
-.. csv-table::
-   :header: Field, Type, Label, Description
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
    :align: left
+   :widths: auto
 
-   type, string, required, Interval type; must be set to 'NestedInterval'
-   inner, :ref:`SimpleInterval`, required, known interval
-   outer, :ref:`SimpleInterval`, required, potential interval
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - Interval type; must be set to '**NestedInterval**'
+   * - inner
+     - :ref:`SimpleInterval`
+     - 1..1
+     - known interval
+   * - outer
+     - :ref:`SimpleInterval`
+     - 1..1
+     - potential interval
 
 **Implementation guidance**
 
@@ -136,13 +151,32 @@ Ensembl, HGNC, or other public trusted authority.
 
 **Information model**
 
-.. csv-table::
-   :header: Field, Type, Label, Description
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
    :align: left
+   :widths: auto
 
-   id, :ref:`Id`, optional, Location id; must be unique within
-   document type, string, required, Location type; must be set to
-   'GeneLocation' gene_id, :ref:`Id`, required, CURIE-formatted gene identifier using NCBI numeric gene id.
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _digest
+     - :ref:`B64UDigest <b64udigest>`
+     - 0..1
+     - The :ref:`truncated-digest` for the GeneLocation.
+   * - _id
+     - :ref:`CURIE <id>`
+     - 0..1
+     - Location Id; must be unique within document
+   * - type
+     - string
+     - 1..1
+     - Location type; must be set to '**GeneLocation**'
+   * - gene_id
+     - :ref:`CURIE <id>`
+     - 1..1
+     - CURIE-formatted gene identifier using NCBI numeric gene id.
 
 **Notes**
 
@@ -163,7 +197,7 @@ State Classes
 @@@@@@@@@@@@@
 
 Additional :ref:`State` concepts that are being planned for future
-consideration in the specification. 
+consideration in the specification.
 
 
 .. _planned-cnvstate:
@@ -187,15 +221,32 @@ Under development.
 
 **Information model**
 
-.. csv-table::
-   :header: Field, Type, Label, Description
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
    :align: left
+   :widths: auto
 
-   id, :ref:`Id`, optional, State id; must be unique within document 
-   type, string, required, State type; must be set to 'CNVState'
-   location, :ref:`Location`, the Location of the copy (`null` if unknown)
-   min_copies, int, required, The minimum number of copies
-   max_copies, int, required, The maximum number of copies
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - State type; must be set to '**CNVState**'
+   * - location
+     - :ref:`Location`
+     - 1..1
+     - the Location of the copy ('**null**' if unknown)
+   * - min_copies
+     - int
+     - 1..1
+     - The minimum number of copies
+   * - max_copies
+     - int
+     - 1..1
+     - The maximum number of copies
 
 
 .. _planned-variation:
@@ -222,24 +273,47 @@ co-occur on the same reference sequence.
 
 **Information model**
 
-+---------------+-----------------+----------+---------------------------------------------------------------+
-| Field         | Type            | Label    | Description                                                   |
-+===============+=================+==========+===============================================================+
-| id            | :ref:`Id`       | optional | Variation Id; must be unique within document                  |
-+---------------+-----------------+----------+---------------------------------------------------------------+
-| type          | string          | required |Variation type; must be set to 'Haplotype'                     |
-+---------------+-----------------+----------+---------------------------------------------------------------+
-| location      | :ref:`Location` | required | Where Haplotype is located                                    |
-+---------------+-----------------+----------+---------------------------------------------------------------+
-| completeness  | enum            | required | Declaration of completeness of the Haplotype definition.      |
-|               |                 |          | Values are:                                                   |
-|               |                 |          |                                                               |
-|               |                 |          | * UNKNOWN: Other in-phase Alleles may exist.                  |
-|               |                 |          | * PARTIAL: Other in-phase Alleles exist but are unspecified.  |
-|               |                 |          | * COMPLETE: The Haplotype declares a complete set of Alleles. |
-+---------------+-----------------+----------+---------------------------------------------------------------+
-| alleles       | :ref:`Id[] <Id>`| required | List of Alleles that comprise this Haplotype                  |
-+---------------+-----------------+----------+---------------------------------------------------------------+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _digest
+     - :ref:`B64UDigest <b64udigest>`
+     - 0..1
+     - The :ref:`truncated-digest` for the Haplotype.
+   * - _id
+     - :ref:`CURIE <id>`
+     - 0..1
+     - Variation Id; must be unique within document
+   * - type
+     - string
+     - 1..1
+     - Variation type; must be set to '**Haplotype**'
+   * - location
+     - :ref:`Location`
+     - 1..1
+     - Where Haplotype is located
+   * - completeness
+     - enum
+     - 1..1
+     - Declaration of completeness of the Haplotype definition.
+       Values are:
+
+       * UNKNOWN: Other in-phase Alleles may exist.
+       * PARTIAL: Other in-phase Alleles exist but are unspecified.
+       * COMPLETE: The Haplotype declares a complete set of Alleles.
+
+   * - alleles
+     - :ref:`CURIE[] <id>`
+     - 2..*
+     - List of Alleles that comprise this Haplotype
+
 
 **Implementation guidance**
 
@@ -255,7 +329,7 @@ co-occur on the same reference sequence.
   deletions by other “upstream” Alleles within the Haplotype.
 * When reporting an Haplotype, completeness MUST be set according to
   these criteria:
-  
+
   * "COMPLETE" only if the entire reference sequence was assayed and
     all in-phase Alleles are reported in this Haplotype.
   * "PARTIAL" only if the entire reference sequence was assayed,
@@ -280,7 +354,7 @@ co-occur on the same reference sequence.
   instances of covalently bonded sequences.)
 * Haplotypes are often given names, such as ApoE3 or A*33:01 for
   convenience.
-  
+
    * Examples: `A*33:01:01 (IMGT/HLA)
      <https://www.ebi.ac.uk/cgi-bin/ipd/imgt/hla/get_allele_hgvs.cgi?A*33:01:01>`__
 * When used to report Haplotypes, the completeness property enables
@@ -328,21 +402,42 @@ A list of Haplotypes.
 
 **Information model**
 
-+---------------+------------------+----------+---------------------------------------------------------------------+
-| Field         | Type             | Label    | Description                                                         |
-+===============+==================+==========+=====================================================================+
-| id            | :ref:`Id`        | optional | Variation Id; must be unique within document                        |
-+---------------+------------------+----------+---------------------------------------------------------------------+
-| type          | string           | required | Variation type; must be set to 'Genotype'                           |
-+---------------+------------------+----------+---------------------------------------------------------------------+
-| completeness  | enum             | required | Declaration of completeness of the Genotype definition. Values are: |
-|               |                  |          |                                                                     |
-|               |                  |          | * UNKNOWN: Other Haplotypes may exist.                              |
-|               |                  |          | * PARTIAL: Other Haplotypes exist but are unspecified.              |
-|               |                  |          | * COMPLETE: The Genotype declares a complete set of Haplotypes.     |
-+---------------+------------------+----------+---------------------------------------------------------------------+
-| haplotypes    | :ref:`Id[] <Id>` | required | List of Haplotypes; length must agree with ploidy of genomic region |
-+---------------+------------------+----------+---------------------------------------------------------------------+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _digest
+     - :ref:`B64UDigest <b64udigest>`
+     - 0..1
+     - The :ref:`truncated-digest` for the Genotype.
+   * - _id
+     - :ref:`CURIE <id>`
+     - 0..1
+     - Variation Id; must be unique within document
+   * - type
+     - string
+     - 1..1
+     - Variation type; must be set to '**Genotype**'
+   * - completeness
+     - enum
+     - 1..1
+     - Declaration of completeness of the Haplotype definition.
+       Values are:
+
+       * UNKNOWN: Other Haplotypes may exist.
+       * PARTIAL: Other Haplotypes exist but are unspecified.
+       * COMPLETE: The Genotype declares a complete set of Haplotypes.
+
+   * - haplotypes
+     - :ref:`CURIE[] <id>`
+     - 2..*
+     - List of Haplotypes; length must agree with ploidy of genomic region
 
 **Implementation guidance**
 
@@ -438,7 +533,7 @@ terminology, if any).
 
 **Information model**
 
-Under consideration. See https://github.com/ga4gh/vr-spec/issues/28. 
+Under consideration. See https://github.com/ga4gh/vr-spec/issues/28.
 
 **Examples**
 
