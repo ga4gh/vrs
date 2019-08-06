@@ -97,7 +97,7 @@ None.
 
 **Computational definition**
 
-A `CURIE <curie-spec>`__ formatted string that uniquely identifies a
+A `CURIE <https://www.w3.org/TR/curie/>`__ formatted string that uniquely identifies a
 specific instance of an object within a document.
 
 **Implementation guidance**
