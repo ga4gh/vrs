@@ -173,9 +173,9 @@ definitions:
   B64UDigest:
     additionalProperties: false
     description: >-
-      A [base64url](https://tools.ietf.org/html/rfc4648#section-5)
-      encoded string. See the [VR
-      Specification](https://vr-spec.readthedocs.io) for details.
+      A digest encoded using the
+      [base64url](https://tools.ietf.org/html/rfc4648#section-5)
+      character set.
 
     type: string
     pattern: '^[-_A-Za-z0-9]+$'

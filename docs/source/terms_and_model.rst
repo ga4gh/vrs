@@ -53,10 +53,9 @@ Primitive Concepts
 @@@@@@@@@@@@@@@@@@
 
 .. _b64udigest:
-.. _digest:
 
-_digest
-#######
+B64UDigest
+##########
 
 **Biological definition**
 
@@ -64,32 +63,29 @@ None.
 
 **Computational definition**
 
-A `base64url <https://tools.ietf.org/html/rfc4648#section-5>`_ encoded string
-referred to as a **B64UDigest**.
-
-The **B64UDigest** is further constrained to a
-`sha512t24u truncated digest <truncated-digest>`_ string that uniquely identifies
-the instance of the object concept with which it is associated.
-
-.. note:: *_digest* is a building block for creating globally unique identifiers.
-
+A string that is constrained to represent `base64url
+<https://tools.ietf.org/html/rfc4648#section-5>`_ encoded data.
 
 **Implementation guidance**
 
-* The _digest MUST be derived by :ref:`digest-serialization`.
-* _digests are case-sensitive.
-* Implementations MUST replace nested identifiable objects wit their corresponding
-  digests when constructing :ref:`computed-identifiers` for
-  VR objects (including sequences identifier *sequence_id*).
+* A ``B64UDigest`` is the encoding used for globally unique
+  identifiers. See :ref:`computed-identifiers` for details.
+* A ``B64UDigest`` is case-sensitive. Implementations MUST NOT alter
+  ``V64UDigest`` strings in any way.
+* In VR-Spec, the ``B64UDigest`` is primirily used to store
+  `sha512t24u truncated digest <truncated-digest>`_ values.
+* Implementations MUST replace nested identifiable objects with their
+  corresponding digests when constructing :doc:`computed-identifier`
+  for VR objects (including sequences identifier *sequence_id*).
 
 **Example**
 
 see :ref:`Digest Serialization Examples <digest-serialization-example>`
 
-.. _id:
+.. _curie:
 
-_id
-###
+CURIE
+#####
 
 **Biological definition**
 
@@ -97,19 +93,22 @@ None.
 
 **Computational definition**
 
-A `CURIE <https://www.w3.org/TR/curie/>`__ formatted string that uniquely identifies a
-specific instance of an object within a document.
-
+A `CURIE <https://www.w3.org/TR/curie/>`__ formatted string.  A CURIE
+string has the structure ``prefix``:``reference`` (W3C Terminology).
+ 
 **Implementation guidance**
 
-* This specification RECOMMENDS using a :ref:`computed-identifiers` for each *_id*.
+* CURIE-formatted identifiers are used as global identifiers of GA4GH
+  VR objects.  This specification RECOMMENDS using a
+  :ref:`computed-identifiers` to construct globally unique identifiers
+  for objects.  These identifiers are recommended for use within *and*
+  between systems.
+* CURIE-formatted identifiers are also used for references to data
+  outside the scope of this specification, such as reference
+  sequences.
 * When an appropriate namespace exists at `identifiers.org
   <http://identifiers.org/>`__, that namespace MUST be used verbatim.
 * Identifiers are case-sensitive.
-* The VR data schema permits any CURIE identifier to be used when
-  representing data.
-* Implementations MUST use ga4gh sequence identifiers when
-  constructing :ref:`computed-identifiers` for VR objects.
 
 **Example**
 
@@ -118,6 +117,9 @@ Identifiers for GRCh38 chromosome 19::
     ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
     refseq:NC_000019.10
     grch38:19
+
+See :ref:`identify` for examples of CURIE-based identifiers for VR
+objects.
 
 
 .. _residue:
@@ -350,11 +352,11 @@ named :ref:`Sequence`.
      - Limits
      - Description
    * - _digest
-     - :ref:`B64UDigest <b64udigest>`
+     - :ref:`b64udigest`
      - 0..1
      - The :ref:`truncated-digest` for the SequenceLocation.
    * - _id
-     - :ref:`CURIE <id>`
+     - :ref:`CURIE`
      - 0..1
      - Location Id; must be unique within document
    * - type
@@ -362,7 +364,7 @@ named :ref:`Sequence`.
      - 1..1
      - Location type; must be set to '**SequenceLocation**'
    * - sequence_id
-     - :ref:`CURIE <id>`
+     - :ref:`CURIE`
      - 1..1
      - An id mapping to the :ref:`computed-identifiers` of the external database Sequence containing the sequence to be located.
    * - interval
@@ -520,11 +522,11 @@ indels).
      - Limits
      - Description
    * - _digest
-     - :ref:`B64UDigest <b64udigest>`
+     - :ref:`b64udigest`
      - 0..1
      - The :ref:`truncated-digest` for the Allele Variation.
    * - _id
-     - :ref:`CURIE <id>`
+     - :ref:`CURIE`
      - 0..1
      - Variation Id; must be unique within document
    * - type
@@ -644,11 +646,11 @@ subclasses, but are still treated as variation.
      - Limits
      - Description
    * - _digest
-     - :ref:`B64UDigest <b64udigest>`
+     - :ref:`b64udigest`
      - 0..1
      - The :ref:`truncated-digest` for the Text Variation.
    * - _id
-     - :ref:`CURIE <id>`
+     - :ref:`CURIE`
      - 0..1
      - Variation Id; must be unique within document
    * - type
