@@ -71,7 +71,7 @@ definitions:
       - $ref: "#/definitions/SequenceLocation"
     discriminator:
       propertyName: type
-  
+
   SequenceLocation:
     additionalProperties: false
     type: object
@@ -93,7 +93,6 @@ definitions:
   ############################################################################
   # Interval
   # * SimpleInterval
-  # * NestedInterval
 
   Interval:
     additionalProperties: false
@@ -110,7 +109,6 @@ definitions:
       zero".
     oneOf:
       - $ref: '#/definitions/SimpleInterval'
-      - $ref: '#/definitions/NestedInterval'
     discriminator:
       propertyName: type
 
@@ -136,29 +134,6 @@ definitions:
       start: 11
       end: 22
 
-  NestedInterval:
-    additionalProperties: false
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [NestedInterval]
-        default: NestedInterval
-      inner:
-        $ref: '#/definitions/SimpleInterval'
-      outer:
-        $ref: '#/definitions/SimpleInterval'
-    example:
-      type: NestedInterval
-      inner:
-        type: SimpleInterval
-        start: 20
-        end: 30
-      outer:
-        type: SimpleInterval
-        start: 10
-        end: 40
-
 
   ############################################################################
   # States
@@ -166,7 +141,7 @@ definitions:
   State:
     oneOf:
       - $ref: "#/definitions/SequenceState"
-  
+
   SequenceState:
     additionalProperties: false
     type: object
@@ -194,7 +169,7 @@ definitions:
     additionalProperties: false
     type: string
     format: "date-time"
-  
+
   B64UDigest:
     additionalProperties: false
     description: >-
@@ -204,7 +179,7 @@ definitions:
 
     type: string
     pattern: '^[-_A-Za-z0-9]+$'
-    example: "_ABC-abc-123_"      
+    example: "_ABC-abc-123_"
 
   CURIE:
     additionalProperties: false
@@ -237,4 +212,4 @@ definitions:
 
     type: string
     pattern: '^\w[^:]+:.+$'
-    example: "ga4gh:GA.01234abcde"      
+    example: "ga4gh:GA.01234abcde"

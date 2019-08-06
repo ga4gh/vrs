@@ -133,6 +133,10 @@ The criteria for the digest serialization method was that it must be
 relatively easy and reliable to implement in any common computer
 language.
 
+.. _digest-serialization-example:
+
+**Example**
+
 .. code:: ipython3
 
     allele = models.Allele(location=models.SequenceLocation(

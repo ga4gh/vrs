@@ -47,17 +47,16 @@ depend only on previously-defined terms.
 
 .. todo:: add note about _ prefix
 
-.. todo:: id attributes -> _digest, _id attributes
-
 ----
 
 Primitive Concepts
 @@@@@@@@@@@@@@@@@@
 
-.. _id:
+.. _b64udigest:
+.. _digest:
 
-Id
-##
+_digest
+#######
 
 **Biological definition**
 
@@ -65,19 +64,52 @@ None.
 
 **Computational definition**
 
-A `CURIE-formatted <curie-spec>`_ string that uniquely identifies a
+A `base64url <https://tools.ietf.org/html/rfc4648#section-5>`_ encoded string
+referred to as a **B64UDigest**.
+
+The **B64UDigest** is further constrained to a
+`sha512t24u truncated digest <truncated-digest>`_ string that uniquely identifies
+the instance of the object concept with which it is associated.
+
+.. note:: *_digest* is a building block for creating globally unique identifiers.
+
+
+**Implementation guidance**
+
+* The _digest MUST be derived by :ref:`digest-serialization`.
+* _digests are case-sensitive.
+* Implementations MUST replace nested identifiable objects wit their corresponding
+  digests when constructing :ref:`computed-identifiers` for
+  VR objects (including sequences identifier *sequence_id*).
+
+**Example**
+
+see :ref:`Digest Serialization Examples <digest-serialization-example>`
+
+.. _id:
+
+_id
+###
+
+**Biological definition**
+
+None.
+
+**Computational definition**
+
+A `CURIE <curie-spec>`__ formatted string that uniquely identifies a
 specific instance of an object within a document.
 
 **Implementation guidance**
 
-* This specification RECOMMENDS using a :ref:`computed-identifiers` for each id.
+* This specification RECOMMENDS using a :ref:`computed-identifiers` for each *_id*.
 * When an appropriate namespace exists at `identifiers.org
   <http://identifiers.org/>`__, that namespace MUST be used verbatim.
 * Identifiers are case-sensitive.
 * The VR data schema permits any CURIE identifier to be used when
   representing data.
 * Implementations MUST use ga4gh sequence identifiers when
-  constructing :ref:`computed identifiers <computed-identifiers>` for VR objects.
+  constructing :ref:`computed-identifiers` for VR objects.
 
 **Example**
 
@@ -165,20 +197,17 @@ None.
 
 The *Interval* abstract class defines a range on a :ref:`sequence`,
 possibly with length zero, and specified using
-:ref:`interbase-coordinates`. An Interval may be a
+:ref:`interbase-coordinates-design`. An Interval may be a
 :ref:`SimpleInterval` with a single start and end coordinate.
 :ref:`Future Location and Interval types <planned-locations>` will
 enable other methods for describing where :ref:`variation` occurs. Any
 of these may be used as the Interval for Location.
 
-
-.. _interbase-coordinates:
-
-.. sidebar:: VR Uses Interbase Coordinates 
+.. sidebar:: VR Uses Interbase Coordinates
 
    **GA4GH VR uses interbase coordinates when referring to spans of
    sequence.**
-   
+
    Interbase coordinates refer to the zero-width points before and
    after :ref:`residues <Residue>`. An interval of interbase
    coordinates permits referring to any span, including an empty span,
@@ -198,13 +227,28 @@ An :ref:`Interval` with a single start and end coordinate.
 
 **Information model**
 
-.. csv-table::
-   :header: Field, Type, Label, Description
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
    :align: left
+   :widths: auto
 
-   type, string, required, Interval type; must be set to 'SimpleInterval'
-   start, uint64, required, start position
-   end, uint64, required, end position
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - Interval type; must be set to '**SimpleInterval**'
+   * - start
+     - uint64
+     - 1..1
+     - start position
+   * - end
+     - uint64
+     - 1..1
+     - end position
 
 **Implementation guidance**
 
@@ -295,15 +339,36 @@ named :ref:`Sequence`.
 
 **Information model**
 
-.. csv-table::
-   :header: Field, Type, Label, Description
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
    :align: left
-   :widths: 12, 9, 10, 30
+   :widths: auto
 
-   id, :ref:`Id`, optional, Location Id; must be unique within document
-   type, string, required, Location type; must be set to 'SequenceLocation'
-   sequence_id, :ref:`Id`, required, An id mapping to the Identifier of the external database Sequence
-   interval, :ref:`Interval`, required, Position of feature on reference sequence specified by sequence_id.
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _digest
+     - :ref:`B64UDigest <b64udigest>`
+     - 0..1
+     - The :ref:`truncated-digest` for the SequenceLocation.
+   * - _id
+     - :ref:`CURIE <id>`
+     - 0..1
+     - Location Id; must be unique within document
+   * - type
+     - string
+     - 1..1
+     - Location type; must be set to '**SequenceLocation**'
+   * - sequence_id
+     - :ref:`CURIE <id>`
+     - 1..1
+     - An id mapping to the :ref:`computed-identifiers` of the external database Sequence containing the sequence to be located.
+   * - interval
+     - :ref:`Interval`
+     - 1..1
+     - Position of feature on reference sequence specified by sequence_id.
 
 **Implementation guidance**
 
@@ -336,7 +401,7 @@ named :ref:`Sequence`.
       "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
       "type": "SequenceLocation"
     }
-     
+
 
 State (Abstract Class)
 ######################
@@ -373,14 +438,24 @@ The *SequenceState* class specifically captures a :ref:`sequence` as a
 
 **Information model**
 
-.. csv-table::
-   :header: Field, Type, Label, Description
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
    :align: left
-   :widths: 12, 9, 10, 30
+   :widths: auto
 
-   id, :ref:`Id`, optional, State Id; must be unique within document
-   type, string, required, State type; must be set to 'SequenceState'
-   sequence, :ref:`Sequence`, required, The sequence that is to be used as the state for other types.
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - State type; must be set to '**SequenceState**'
+   * - sequence
+     - string
+     - 1..1
+     - The string of sequence residues that is to be used as the state for other types.
 
 **Example**
 
@@ -434,15 +509,36 @@ indels).
 
 **Information model**
 
-.. csv-table::
-   :header: Field, Type, Label, Description
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
    :align: left
-   :widths: 12, 9, 10, 30
+   :widths: auto
 
-   id, :ref:`Id`, optional, Variation Id; must be unique within document
-   type, string, required, Variation type; must be set to 'Allele'
-   location, :ref:`Location`, required, Where Allele is located
-   state, :ref:`State`, required, State at location
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _digest
+     - :ref:`B64UDigest <b64udigest>`
+     - 0..1
+     - The :ref:`truncated-digest` for the Allele Variation.
+   * - _id
+     - :ref:`CURIE <id>`
+     - 0..1
+     - Variation Id; must be unique within document
+   * - type
+     - string
+     - 1..1
+     - Variation type; must be set to '**Allele**'
+   * - location
+     - :ref:`Location`
+     - 1..1
+     - Where Allele is located
+   * - state
+     - :ref:`State`
+     - 1..1
+     - State at location
 
 **Implementation guidance**
 
@@ -537,14 +633,32 @@ subclasses, but are still treated as variation.
 
 **Information model**
 
-.. csv-table::
-   :header: Field, Type, Label, Description
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
    :align: left
-   :widths: 12, 9, 10, 30
+   :widths: auto
 
-   id, :ref:`Id`, optional, Variation Id; must be unique within document
-   type, string, required, Variation type; must be set to 'Text'
-   definition, string, required, The textual variation representation not parsable by other subclasses of Variation.
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _digest
+     - :ref:`B64UDigest <b64udigest>`
+     - 0..1
+     - The :ref:`truncated-digest` for the Text Variation.
+   * - _id
+     - :ref:`CURIE <id>`
+     - 0..1
+     - Variation Id; must be unique within document
+   * - type
+     - string
+     - 1..1
+     - Variation type; must be set to '**Text**'
+   * - definition
+     - string
+     - 1..1
+     - The textual variation representation not parsable by other subclasses of Variation.
 
 **Implementation guidance**
 
@@ -564,6 +678,8 @@ subclasses, but are still treated as variation.
   representation.
 
 **Example**
+
+.. parsed-literal::
 
     {
       "definition": "APOE loss",
