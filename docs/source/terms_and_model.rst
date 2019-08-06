@@ -75,7 +75,7 @@ A string that is constrained to represent `base64url
 * In VR-Spec, the ``B64UDigest`` is primirily used to store
   `sha512t24u truncated digest <truncated-digest>`_ values.
 * Implementations MUST replace nested identifiable objects with their
-  corresponding digests when constructing :doc:`computed-identifier`
+  corresponding digests when constructing :ref:`computed-identifiers`
   for VR objects (including sequences identifier *sequence_id*).
 
 **Example**

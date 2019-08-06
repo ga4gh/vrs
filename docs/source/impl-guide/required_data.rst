@@ -62,7 +62,7 @@ The following tables summarizes data required in the above contexts:
 
 
 .. note:: Construction of the GA4GH computed identifier for a sequence
-          is described in :doc:`computed_identifier`.
+          is described in :ref:`computed-identifiers`.
 
 
 

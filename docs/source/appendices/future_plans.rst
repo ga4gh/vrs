@@ -166,7 +166,7 @@ Ensembl, HGNC, or other public trusted authority.
      - 0..1
      - The :ref:`truncated-digest` for the GeneLocation.
    * - _id
-     - :ref:`CURIE <id>`
+     - :ref:`CURIE`
      - 0..1
      - Location Id; must be unique within document
    * - type
@@ -174,7 +174,7 @@ Ensembl, HGNC, or other public trusted authority.
      - 1..1
      - Location type; must be set to '**GeneLocation**'
    * - gene_id
-     - :ref:`CURIE <id>`
+     - :ref:`CURIE`
      - 1..1
      - CURIE-formatted gene identifier using NCBI numeric gene id.
 
@@ -288,7 +288,7 @@ co-occur on the same reference sequence.
      - 0..1
      - The :ref:`truncated-digest` for the Haplotype.
    * - _id
-     - :ref:`CURIE <id>`
+     - :ref:`CURIE`
      - 0..1
      - Variation Id; must be unique within document
    * - type
@@ -310,9 +310,9 @@ co-occur on the same reference sequence.
        * COMPLETE: The Haplotype declares a complete set of Alleles.
 
    * - alleles
-     - :ref:`CURIE[] <id>`
+     - :ref:`CURIE[] <CURIE>`
      - 2..*
-     - List of Alleles that comprise this Haplotype
+     - List of Alleles that comprise this Haplotype.
 
 
 **Implementation guidance**
@@ -417,7 +417,7 @@ A list of Haplotypes.
      - 0..1
      - The :ref:`truncated-digest` for the Genotype.
    * - _id
-     - :ref:`CURIE <id>`
+     - :ref:`CURIE`
      - 0..1
      - Variation Id; must be unique within document
    * - type
@@ -435,7 +435,7 @@ A list of Haplotypes.
        * COMPLETE: The Genotype declares a complete set of Haplotypes.
 
    * - haplotypes
-     - :ref:`CURIE[] <id>`
+     - :ref:`CURIE[] <CURIE>`
      - 2..*
      - List of Haplotypes; length must agree with ploidy of genomic region
 
