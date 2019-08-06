@@ -412,7 +412,7 @@ SO: `Genotype (SO:0001027)
      software incompatible with organisms with other ploidy. The VR-Spec
      makes no assumptions about "normal" ploidy.
 
-     In other words, the VR-SPec does not represent single-position
+     In other words, the VR-Spec does not represent single-position
      Genotypes or diplotypes because both concepts are subsumed by the
      Allele, Haplotype, and Genotypes entities.
 
