@@ -3,7 +3,7 @@
 Truncated Digest Collision Analysis
 ===================================
 
-The GA4GH Digest uses a truncated SHA-512 digst in order to generate a
+The GA4GH Digest uses a truncated SHA-512 digest in order to generate a
 unique identifier based on data that defines the object. This notebook
 discusses the choice of SHA-512 over other digest methods and the choice
 of truncation length.
@@ -256,7 +256,6 @@ yield
 
 .. math:: P' \approx 1-m^2/2s
 
-.
 
 Summary of equations
 ~~~~~~~~~~~~~~~~~~~~
@@ -302,9 +301,9 @@ collisions.
 Choosing a digest size
 ----------------------
 
-Now, we turn the problem around: **What digest length :math:`b`
+Now, we turn the problem around: What digest length :math:`b`
 corresponds with a collision probability less than :math:`P` for
-:math:`m` messages?**
+:math:`m` messages?
 
 From the above summary, we have :math:`P = m^2 / 2s` for
 :math:`m \ll s`. Rewriting with :math:`s=2^b`, we have the probability
