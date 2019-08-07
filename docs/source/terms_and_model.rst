@@ -242,7 +242,7 @@ An :ref:`Interval` with a single start and end coordinate.
    * - type
      - string
      - 1..1
-     - Interval type; must be set to '**SimpleInterval**'
+     - Interval type; MUST be set to '**SimpleInterval**'
    * - start
      - uint64
      - 1..1
@@ -356,11 +356,11 @@ named :ref:`Sequence`.
    * - _id
      - :ref:`CURIE`
      - 0..1
-     - Location Id; must be unique within document
+     - Location Id; MUST be unique within document
    * - type
      - string
      - 1..1
-     - Location type; must be set to '**SequenceLocation**'
+     - Location type; MUST be set to '**SequenceLocation**'
    * - sequence_id
      - :ref:`CURIE`
      - 1..1
@@ -385,7 +385,7 @@ named :ref:`Sequence`.
                sequence. Examples include coordinates extrapolated
                beyond the bounds of a transcript and intronic
                sequence. Such variants are not representable using VR
-               and must be projected to a genomic reference in order
+               and MUST be projected to a genomic reference in order
                to be represented.
 
 **Example**
@@ -452,7 +452,7 @@ The *SequenceState* class specifically captures a :ref:`sequence` as a
    * - type
      - string
      - 1..1
-     - State type; must be set to '**SequenceState**'
+     - State type; MUST be set to '**SequenceState**'
    * - sequence
      - string
      - 1..1
@@ -527,11 +527,11 @@ indels).
    * - _id
      - :ref:`CURIE`
      - 0..1
-     - Variation Id; must be unique within document
+     - Variation Id; MUST be unique within document
    * - type
      - string
      - 1..1
-     - Variation type; must be set to '**Allele**'
+     - Variation type; MUST be set to '**Allele**'
    * - location
      - :ref:`Location`
      - 1..1
@@ -651,11 +651,11 @@ subclasses, but are still treated as variation.
    * - _id
      - :ref:`CURIE`
      - 0..1
-     - Variation Id; must be unique within document
+     - Variation Id; MUST be unique within document
    * - type
      - string
      - 1..1
-     - Variation type; must be set to '**Text**'
+     - Variation type; MUST be set to '**Text**'
    * - definition
      - string
      - 1..1

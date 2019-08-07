@@ -70,7 +70,7 @@ Implementations MUST adhere to the following requirements:
   using objects referenced within any other namespace is not compliant
   with this specification.
 
-.. important:: The above requirement means that *sequences must be
+.. important:: The above requirement means that *sequences MUST be
                identified with GA4GH computed identifiers* based on
                the sequence digest.  Implementations that use other
                sequence identifiers are NOT compliant with this

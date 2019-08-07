@@ -83,7 +83,7 @@ region (the *outer* SimpleInterval) and required included region (the
    * - type
      - string
      - 1..1
-     - Interval type; must be set to '**NestedInterval**'
+     - Interval type; MUST be set to '**NestedInterval**'
    * - inner
      - :ref:`SimpleInterval`
      - 1..1
@@ -168,11 +168,11 @@ Ensembl, HGNC, or other public trusted authority.
    * - _id
      - :ref:`CURIE`
      - 0..1
-     - Location Id; must be unique within document
+     - Location Id; MUST be unique within document
    * - type
      - string
      - 1..1
-     - Location type; must be set to '**GeneLocation**'
+     - Location type; MUST be set to '**GeneLocation**'
    * - gene_id
      - :ref:`CURIE`
      - 1..1
@@ -180,7 +180,7 @@ Ensembl, HGNC, or other public trusted authority.
 
 **Notes**
 
-* `gene_id` must be specified as a CURIE, using a CURIE prefix of
+* `gene_id` MUST be specified as a CURIE, using a CURIE prefix of
   `"NCBI"` and CURIE reference with the numeric gene id. Other trusted
   authorities may be permitted in future releases.
 
@@ -234,7 +234,7 @@ Under development.
    * - type
      - string
      - 1..1
-     - State type; must be set to '**CNVState**'
+     - State type; MUST be set to '**CNVState**'
    * - location
      - :ref:`Location`
      - 1..1
@@ -290,11 +290,11 @@ co-occur on the same reference sequence.
    * - _id
      - :ref:`CURIE`
      - 0..1
-     - Variation Id; must be unique within document
+     - Variation Id; MUST be unique within document
    * - type
      - string
      - 1..1
-     - Variation type; must be set to '**Haplotype**'
+     - Variation type; MUST be set to '**Haplotype**'
    * - location
      - :ref:`Location`
      - 1..1
@@ -419,11 +419,11 @@ A list of Haplotypes.
    * - _id
      - :ref:`CURIE`
      - 0..1
-     - Variation Id; must be unique within document
+     - Variation Id; MUST be unique within document
    * - type
      - string
      - 1..1
-     - Variation type; must be set to '**Genotype**'
+     - Variation type; MUST be set to '**Genotype**'
    * - completeness
      - enum
      - 1..1
@@ -437,7 +437,7 @@ A list of Haplotypes.
    * - haplotypes
      - :ref:`CURIE[] <CURIE>`
      - 2..*
-     - List of Haplotypes; length must agree with ploidy of genomic region
+     - List of Haplotypes; length MUST agree with ploidy of genomic region
 
 **Implementation guidance**
 
