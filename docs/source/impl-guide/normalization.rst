@@ -35,7 +35,7 @@ alternate sequence) at an interval is outlined below.
    * Left roll: While the terminal base of all non-empty alleles is
      equal to the base *prior* to the current position, circularly
      permute all alleles *rightward* and move the current position
-     *leftward*. When the terminating, return `left_roll`, the number
+     *leftward*. When terminating, return `left_roll`, the number
      of steps rolled leftward.
    * Right roll: Symmetric case of left roll, returning `right_roll`,
      the number of steps rolled rightward.
@@ -56,6 +56,7 @@ alternate sequence) at an interval is outlined below.
    :class: reece-wrap
    :header-rows: 1
    :widths: 40 15 20
+   :align: left
 
    *  -  Steps
       -  | Interbase Position
