@@ -73,7 +73,7 @@ A string that is constrained to represent `base64url
 * A ``B64UDigest`` is case-sensitive. Implementations MUST NOT alter
   ``B64UDigest`` strings in any way.
 * In VR-Spec, the ``B64UDigest`` is primarily used to store
-  `sha512t24u truncated digest <truncated-digest>`_ values.
+  :ref:`sha512t24u truncated digest <truncated-digest>` values.
 * Implementations MUST replace nested identifiable objects with their
   corresponding digests when constructing :ref:`computed-identifiers`
   for VR objects (including sequences identifier *sequence_id*).
