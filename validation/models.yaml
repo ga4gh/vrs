@@ -14,20 +14,20 @@ SimpleInterval:
     out:
       ga4gh_serialize: '{"end":44908822,"start":44908821,"type":"SimpleInterval"}'
 
-NestedInterval:
-  -
-    in:
-      inner:
-        end: 44908821
-        start: 44908796
-        type: SimpleInterval
-      outer:
-        end: 44908847
-        start: 44908822
-        type: SimpleInterval
-      type: NestedInterval
-    out:
-      ga4gh_serialize: '{"inner":{"end":44908821,"start":44908796,"type":"SimpleInterval"},"outer":{"end":44908847,"start":44908822,"type":"SimpleInterval"},"type":"NestedInterval"}'
+# NestedInterval:
+#   -
+#     in:
+#       inner:
+#         end: 44908821
+#         start: 44908796
+#         type: SimpleInterval
+#       outer:
+#         end: 44908847
+#         start: 44908822
+#         type: SimpleInterval
+#       type: NestedInterval
+#     out:
+#       ga4gh_serialize: '{"inner":{"end":44908821,"start":44908796,"type":"SimpleInterval"},"outer":{"end":44908847,"start":44908822,"type":"SimpleInterval"},"type":"NestedInterval"}'
 
 SequenceLocation:
   -
@@ -45,19 +45,15 @@ SequenceLocation:
   -
     in:
       interval:
-        inner:
-          end: 44908821
-          start: 44908796
-          type: SimpleInterval
-        outer:
-          end: 44908847
-          start: 44908822
-          type: SimpleInterval
-        type: NestedInterval
+        end: 44908822
+        start: 44908821
+        type: SimpleInterval
       sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
       type: SequenceLocation
     out:
-      ga4gh_serialize: '{"interval":{"inner":{"end":44908821,"start":44908796,"type":"SimpleInterval"},"outer":{"end":44908847,"start":44908822,"type":"SimpleInterval"},"type":"NestedInterval"},"sequence_id":"IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl","type":"SequenceLocation"}'
+      ga4gh_digest: u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx
+      ga4gh_identify: ga4gh:VSL.u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx
+      ga4gh_serialize: '{"interval":{"end":44908822,"start":44908821,"type":"SimpleInterval"},"sequence_id":"IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl","type":"SequenceLocation"}'
 
 Allele:
   -
