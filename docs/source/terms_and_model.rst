@@ -71,7 +71,7 @@ A string that is constrained to represent `base64url
 * A ``B64UDigest`` is the encoding used for globally unique
   identifiers. See :ref:`computed-identifiers` for details.
 * A ``B64UDigest`` is case-sensitive. Implementations MUST NOT alter
-  ``V64UDigest`` strings in any way.
+  ``B64UDigest`` strings in any way.
 * In VR-Spec, the ``B64UDigest`` is primarily used to store
   `sha512t24u truncated digest <truncated-digest>`_ values.
 * Implementations MUST replace nested identifiable objects with their
@@ -293,8 +293,6 @@ An :ref:`Interval` with a single start and end coordinate.
       "type": "SimpleInterval"
     }
 
-.. _state:
-
 .. _location:
 
 Location (Abstract Class)
@@ -404,6 +402,7 @@ named :ref:`Sequence`.
       "type": "SequenceLocation"
     }
 
+.. state:
 
 State (Abstract Class)
 ######################
