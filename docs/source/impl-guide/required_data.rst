@@ -17,13 +17,13 @@ Contexts
 @@@@@@@@
 
 * **Conversion from other variant formats** When converting from other
-  variation formats, implementations must translate primary database
+  variation formats, implementations MUST translate primary database
   accessions or identifiers (|eg| ``NM_000551.3`` or
   ``refseq:NM_000551.3``) to a GA4GH VR sequence identifier (
   ``ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_``)
 
 * **Conversion to other variant formats** When converting to other
-  variation formats, implementations are likely to translate GA4GH VR
+  variation formats, implementations SHOULD translate GA4GH VR
   sequence identifier ( ``ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_``)
   to primary database identifiers (``refseq:NM_000551.3``) that will
   be more readily recognized by users.

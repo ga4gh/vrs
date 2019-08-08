@@ -12,7 +12,7 @@ Overview
 
    **VR Schema Diagram**
 
-   The VR Schema requires the use of multiple composite objects, which
+   The VR Schema describes multiple composite objects, which
    are grouped under four abstract classes: :ref:`Variation`,
    :ref:`Location`, :ref:`State`, and :ref:`Interval`. These classes
    and their relationships to the representation of Variation are
@@ -37,4 +37,4 @@ The machine readable VR Specification is written using `JSON Schema
 The schema itself is written in YAML (|vr_yaml|) and converted to JSON
 (|vr_json|).  Version |version| is current.
 
-Contributions to the schema should be written in the YAML version.
+Contributions to the schema MUST be written in the YAML document.

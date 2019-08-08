@@ -4,7 +4,7 @@ Implementation Guide
 !!!!!!!!!!!!!!!!!!!!
 
 This section describes the data and algorithmic components that are
-required for implementations of the VR Specification.
+REQUIRED for implementations of the VR Specification.
 
 * :ref:`required-data`: All implementations will require access to
   sequences and sequence accessions. The Required External Data
