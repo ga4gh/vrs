@@ -254,7 +254,7 @@ An :ref:`Interval` with a single start and end coordinate.
 
 **Implementation guidance**
 
-* Implementations MUST require that 0 ≤ start ≤ end. In the case of
+* Implementations MUST enforce values 0 ≤ start ≤ end. In the case of
   double-stranded DNA, this constraint holds even when a feature is on
   the complementary strand.
 * VR uses Interbase coordinates because they provide conceptual
@@ -276,7 +276,7 @@ An :ref:`Interval` with a single start and end coordinate.
    * a.start < b.start < a.end OR
    * a.start < b.end < a.end
 * Two intervals a and b *coincide* if they intersect or if they are
-  equal (the equality condition is required to handle the case of two
+  equal (the equality condition is REQUIRED to handle the case of two
   identical zero-width Intervals).
 * <start, end>=<*0,0*> refers to the point with width zero before the first residue.
 * <start, end>=<*i,i+1*> refers to the *i+1th* (1-based) residue.
@@ -543,7 +543,7 @@ indels).
 
 **Implementation guidance**
 
-* Implementations MUST require that interval.end ≤ sequence_length
+* Implementations MUST enforce values interval.end ≤ sequence_length
   when the Sequence length is known.
 * Implementations MAY choose to provide a mechanism for ensuring that
   the type of sequence and the content of the state are compatible, but

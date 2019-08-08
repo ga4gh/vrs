@@ -95,7 +95,7 @@ region (the *outer* SimpleInterval) and required included region (the
 
 **Implementation guidance**
 
-* Implementations MUST require that `0 ≤ outer.start ≤ inner.start ≤
+* Implementations MUST enforce values `0 ≤ outer.start ≤ inner.start ≤
   inner.end ≤ outer.end`. In the case of double-stranded DNA, this
   constraint holds even when a feature is on the complementary strand.
 
