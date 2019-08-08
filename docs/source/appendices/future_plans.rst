@@ -335,7 +335,7 @@ co-occur on the same reference sequence.
   * "PARTIAL" only if the entire reference sequence was assayed,
     other in-phase Alleles exist, and are NOT reported in this
     Haplotype. This is an assertion of unreported variation.
-  * "UNKNOWN" otherwise. This value is the default and should be used
+  * "UNKNOWN" otherwise. This value is the default and SHOULD be used
     if neither "COMPLETE" nor "PARTIAL" applies. These cases include,
     but are not limited to, assays that do not fully cover the
     reference sequence and an unwillingness by the reporter to

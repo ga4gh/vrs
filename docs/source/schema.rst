@@ -37,4 +37,4 @@ The machine readable VR Specification is written using `JSON Schema
 The schema itself is written in YAML (|vr_yaml|) and converted to JSON
 (|vr_json|).  Version |version| is current.
 
-Contributions to the schema should be written in the YAML version.
+Contributions to the schema MUST be written in the YAML document.
