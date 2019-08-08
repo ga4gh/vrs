@@ -6,7 +6,7 @@ Proposal for GA4GH-wide Computed Identifier Standard
 This appendix describes a proposal for creating a GA4GH-wide standard
 for serializing data, computing digests on serialized data, and
 constructing CURIE identifiers from the digests.  Essentially, it is a
-generalization of the :doc:`../impl-guide/computed_identifier` section.
+generalization of the :ref:`computed-identifiers` section.
 
 This standard is proposed now because the VR Specification needs a
 well-defined mechanism for generating identifiers.  Changing the
@@ -54,7 +54,7 @@ Proposal
 @@@@@@@@
 
 The following algorithmic processes, described in depth in the VR
-:ref:`computed_identifier` proposal, are included in this proposal by
+:ref:`computed-identifiers` proposal, are included in this proposal by
 reference:
 
 * **GA4GH Digest Serialization** is the process of converting an

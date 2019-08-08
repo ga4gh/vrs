@@ -3,7 +3,7 @@
 Required External Data
 !!!!!!!!!!!!!!!!!!!!!!
 
-All VR Spec implementations will require external data regarding
+All VR-Spec implementations will require external data regarding
 sequences and sequence metadata.  The choices of data sources and
 access methods are left to implementations.  This section provides
 guidance about how to implement required data and helps implementers
@@ -62,7 +62,7 @@ The following tables summarizes data required in the above contexts:
 
 
 .. note:: Construction of the GA4GH computed identifier for a sequence
-          is described in :doc:`computed_identifier`.
+          is described in :ref:`computed-identifiers`.
 
 
 
@@ -88,11 +88,10 @@ The DataProxy interface defines three methods:
   sequence identifier, return all aliases in the specified
   namespace. Zero or more aliases may be returned.
 
-The VR Reference Implementation implements the DataProxy interface
-using a local |seqrepo| instance backend and using a |seqrepo_rs|
-backend.  A GA4GH refget implementation has been started, but is
-pending interface changes to support lookup using primary database
-accesssions.
+|vr-python| implements the DataProxy interface using a local |seqrepo|
+instance backend and using a |seqrepo_rs| backend.  A GA4GH refget
+implementation has been started, but is pending interface changes to
+support lookup using primary database accesssions.
 
 .. todo:: Add examples for each based on VR Python
 

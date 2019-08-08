@@ -1,71 +1,75 @@
 # Validation tests for objects
 # See notebooks/appendices/Validation%20Tests.ipynb
 
+# top-level keys are class names
+# in subkey contains key-value pairs of constructor arguments
+# out subkey contains key-value pairs of function and output
+
 SimpleInterval:
   -
     in:
-      end: 43
-      start: 42
+      end: 44908822
+      start: 44908821
       type: SimpleInterval
     out:
-      serialize: '{"end":44908822,"start":44908821,"type":"SimpleInterval"}'
+      ga4gh_serialize: '{"end":44908822,"start":44908821,"type":"SimpleInterval"}'
 
-NestedInterval:
-  -
-    in:
-      inner:
-        end: 30
-        start: 29
-        type: SimpleInterval
-      outer:
-        end: 39
-        start: 20
-        type: SimpleInterval
-      type: NestedInterval
-    out:
-      serialize: '{"inner":{"end":30,"start":29,"type":"SimpleInterval"},"outer":{"end":39,"start":20,"type":"SimpleInterval"},"type":"NestedInterval"}'
+# NestedInterval:
+#   -
+#     in:
+#       inner:
+#         end: 44908821
+#         start: 44908796
+#         type: SimpleInterval
+#       outer:
+#         end: 44908847
+#         start: 44908822
+#         type: SimpleInterval
+#       type: NestedInterval
+#     out:
+#       ga4gh_serialize: '{"inner":{"end":44908821,"start":44908796,"type":"SimpleInterval"},"outer":{"end":44908847,"start":44908822,"type":"SimpleInterval"},"type":"NestedInterval"}'
 
 SequenceLocation:
-  - 
-    in:
-      interval:
-        end: 43
-        start: 42
-        type: SimpleInterval
-      sequence_id: refseq:NM_0001234.5
-      type: SequenceLocation
-    out:
-      serialize: '{"interval":{"end":43,"start":42,"type":"SimpleInterval"},"sequence_id":"refseq:NM_0001234.5","type":"SequenceLocation"}'
   -
     in:
       interval:
-        inner:
-          end: 30
-          start: 29
-          type: SimpleInterval
-        outer:
-          end: 39
-          start: 20
-          type: SimpleInterval
-        type: NestedInterval
-      sequence_id: refseq:NM_0001234.5
+        end: 44908822
+        start: 44908821
+        type: SimpleInterval
+      sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
       type: SequenceLocation
     out:
-      serialize: '{"interval":{"inner":{"end":30,"start":29,"type":"SimpleInterval"},"outer":{"end":39,"start":20,"type":"SimpleInterval"},"type":"NestedInterval"},"sequence_id":"refseq:NM_0001234.5","type":"SequenceLocation"}'
+      ga4gh_serialize: '{"interval":{"end":44908822,"start":44908821,"type":"SimpleInterval"},"sequence_id":"IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl","type":"SequenceLocation"}'
+
+SequenceLocation:
+  -
+    in:
+      interval:
+        end: 44908822
+        start: 44908821
+        type: SimpleInterval
+      sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+      type: SequenceLocation
+    out:
+      ga4gh_digest: u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx
+      ga4gh_identify: ga4gh:VSL.u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx
+      ga4gh_serialize: '{"interval":{"end":44908822,"start":44908821,"type":"SimpleInterval"},"sequence_id":"IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl","type":"SequenceLocation"}'
 
 Allele:
   -
     in:
       location:
         interval:
-          end: 43
-          start: 42
+          end: 44908822
+          start: 44908821
           type: SimpleInterval
-        sequence_id: refseq:NM_0001234.5
+        sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
         type: SequenceLocation
       state:
-        sequence: A
+        sequence: T
         type: SequenceState
       type: Allele
     out:
-      serialize: '{"location":"UqdjWOolIz8Vxd5b14eVND0vw88q0vqr","state":{"sequence":"A","type":"SequenceState"},"type":"Allele"}'
+      ga4gh_digest: EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_
+      ga4gh_identify: ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_
+      ga4gh_serialize: '{"location":"u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx","state":{"sequence":"T","type":"SequenceState"},"type":"Allele"}'

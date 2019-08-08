@@ -68,7 +68,7 @@ Implementations MUST adhere to the following requirements:
 * VR Computed Identifiers are defined only when all nested objects are
   identified with ``ga4gh`` identifiers.  Generating VR identifiers
   using objects referenced within any other namespace is not compliant
-  with this specification. 
+  with this specification.
 
 .. important:: The above requirement means that *sequences must be
                identified with GA4GH computed identifiers* based on
@@ -93,7 +93,7 @@ compliance.
                serialization or other serialization forms.  Although
                Digest Serialization and JSON serialization appear
                similar, they are NOT interchangeable and will generate
-               different GA4GH Digests.  
+               different GA4GH Digests.
 
 Although several proposals exist for serializing arbitrary data in a
 consistent manner ([Gibson]_, [OLPC]_, [JCS]_), none have been
@@ -133,6 +133,50 @@ The criteria for the digest serialization method was that it must be
 relatively easy and reliable to implement in any common computer
 language.
 
+.. _digest-serialization-example:
+
+**Example**
+
+.. code:: ipython3
+
+    allele = models.Allele(location=models.SequenceLocation(
+        sequence_id="ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+        interval=simple_interval),
+        state=models.SequenceState(sequence="T"))
+    ga4gh_serialize(allele)
+
+Gives the following *binary* (UTF-8 encoded) data:
+
+.. parsed-literal::
+
+    {"location":"u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx","state":{"sequence":"T","type":"SequenceState"},"type":"Allele"}
+
+For comparison, here is one of many possible JSON serializations of the same object:
+
+.. code:: ipython3
+
+    allele.for_json()
+
+.. parsed-literal::
+
+    {
+      "location": {
+        "interval": {
+          "end": 44908822,
+          "start": 44908821,
+          "type": "SimpleInterval"
+        },
+        "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+        "type": "SequenceLocation"
+      },
+      "state": {
+        "sequence": "T",
+        "type": "SequenceState"
+      },
+      "type": "Allele"
+    }
+
+
 
 .. _truncated-digest:
 
@@ -159,11 +203,11 @@ three steps:
 .. code-block:: python
 
    >>> import base64, hashlib
-   >>> def sha512t24u(blob): 
-           digest = hashlib.sha512(blob).digest() 
-           tdigest = digest[:24] 
-           tdigest_b64u = base64.urlsafe_b64encode(tdigest).decode("ASCII") 
-           return tdigest_b64u 
+   >>> def sha512t24u(blob):
+           digest = hashlib.sha512(blob).digest()
+           tdigest = digest[:24]
+           tdigest_b64u = base64.urlsafe_b64encode(tdigest).decode("ASCII")
+           return tdigest_b64u
    >>> sha512t24u(b"ACGT")
    'aKF498dAxcJAqme6QYQ7EZ07-fiw8Kw2'
 
@@ -175,12 +219,12 @@ Identifier Construction
 
 
 The final step of generating a computed identifier for a VR object is
-to generate a `W3C CURIE <curie-spec>`_ formatted identifier, which
+to generate a `W3C CURIE <https://www.w3.org/TR/curie/>`__ formatted identifier, which
 has the form::
 
     prefix ":" reference
 
-The GA4GH VR Spec constructs computed identifiers as follows::
+The GA4GH VR-Spec constructs computed identifiers as follows::
 
     "ga4gh" ":" type_prefix "." <digest>
 
@@ -199,13 +243,15 @@ Type prefixes used by VR are:
    VSL, Sequence Location
    VT, Text
 
-For example::
+For example, the identifer for the allele example under :ref:`digest-serialization` gives:
 
-    ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_
+.. parsed-literal::
+
+   ga4gh\:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH\_
 
 
 .. _plan-b:
-   
+
 Namespace Contingency Plan
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -229,4 +275,3 @@ All other aspects of the computed identifier scheme will remain intact.
 .. [Gibson] `Gibson Canonical JSON <http://gibson042.github.io/canonicaljson-spec/>`__
 .. [OLPC] `OLPC Canonical JSON <http://wiki.laptop.org/go/Canonical_JSON>`__
 .. [JCS] `JSON Canonicalization Scheme <https://tools.ietf.org/html/draft-rundgren-json-canonicalization-scheme-05>`__
-

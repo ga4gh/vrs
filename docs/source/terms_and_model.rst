@@ -45,14 +45,17 @@ depend only on previously-defined terms.
           "OPTIONAL" in this document are to be interpreted as
           described in `RFC 2119`_.
 
+.. todo:: add note about _ prefix
+
+----
 
 Primitive Concepts
 @@@@@@@@@@@@@@@@@@
 
-.. _id:
+.. _b64udigest:
 
-Id
-##
+B64UDigest
+##########
 
 **Biological definition**
 
@@ -60,14 +63,63 @@ None.
 
 **Computational definition**
 
-A `CURIE-formatted <curie-spec>`_ string that uniquely identifies a
-specific instance of an object within a document.
+A string that is constrained to represent `base64url
+<https://tools.ietf.org/html/rfc4648#section-5>`_ encoded data.
 
 **Implementation guidance**
 
-* This specification RECOMMENDS using a :ref:`computed-identifiers` for each id.
-* When an appropriate namespace exists at [identifiers.org](http://identifiers.org/), that
-  namespace MUST be used verbatim (case sensitive).
+* A ``B64UDigest`` is the encoding used for globally unique
+  identifiers. See :ref:`computed-identifiers` for details.
+* A ``B64UDigest`` is case-sensitive. Implementations MUST NOT alter
+  ``B64UDigest`` strings in any way.
+* In VR-Spec, the ``B64UDigest`` is primarily used to store
+  :ref:`sha512t24u truncated digest <truncated-digest>` values.
+* Implementations MUST replace nested identifiable objects with their
+  corresponding digests when constructing :ref:`computed-identifiers`
+  for VR objects (including sequences identifier *sequence_id*).
+
+**Example**
+
+see :ref:`Digest Serialization Examples <digest-serialization-example>`
+
+.. _curie:
+
+CURIE
+#####
+
+**Biological definition**
+
+None.
+
+**Computational definition**
+
+A `CURIE <https://www.w3.org/TR/curie/>`__ formatted string.  A CURIE
+string has the structure ``prefix``:``reference`` (W3C Terminology).
+ 
+**Implementation guidance**
+
+* CURIE-formatted identifiers are used as global identifiers of GA4GH
+  VR objects.  This specification RECOMMENDS using a
+  :ref:`computed-identifiers` to construct globally unique identifiers
+  for objects.  These identifiers are recommended for use within *and*
+  between systems.
+* CURIE-formatted identifiers are also used for references to data
+  outside the scope of this specification, such as reference
+  sequences.
+* When an appropriate namespace exists at `identifiers.org
+  <http://identifiers.org/>`__, that namespace MUST be used verbatim.
+* Identifiers are case-sensitive.
+
+**Example**
+
+Identifiers for GRCh38 chromosome 19::
+
+    ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+    refseq:NC_000019.10
+    grch38:19
+
+See :ref:`identify` for examples of CURIE-based identifiers for VR
+objects.
 
 
 .. _residue:
@@ -87,25 +139,6 @@ A character representing a specific residue (i.e., molecular species)
 or groupings of these ("ambiguity codes"), using `one-letter IUPAC
 abbreviations <https://www.genome.jp/kegg/catalog/codes1.html>`_ for
 nucleic acids and amino acids.
-
-
-.. _interbase-coordinates:
-
-Interbase Coordinates
-#####################
-
-**Biological definition**
-
-None.
-
-**Computational definition**
-
-Interbase coordinates refer to the zero-width points before and after
-:ref:`residues <Residue>`. An interval of interbase coordinates
-permits referring to any span, including an empty span, before,
-within, or after a sequence. See :ref:`interbase-coordinates-design`
-for more details on this design choice.  Interbase coordinates are
-always zero-based.
 
 
 .. _sequence:
@@ -131,30 +164,32 @@ amino acid codes.
 
 **Implementation guidance**
 
-* Sequences MAY be empty (zero-length) strings. Empty sequences are used as the replacement Sequence
-  for deletion Alleles.
+* Sequences MAY be empty (zero-length) strings. Empty sequences are used as the
+  replacement Sequence for deletion Alleles.
 * Sequences MUST consist of only uppercase IUPAC abbreviations, including ambiguity codes.
-
-**Notes**
-
 * A Sequence provides a stable coordinate system by which an :ref:`Allele` may be located and
   interpreted.
-* A Sequence may have several roles. A “reference sequence” is any Sequence used to define an
-  :ref:`Allele`. A Sequence that replaces another Sequence is called a “replacement sequence”.
-* In some contexts outside the VR specification, “reference sequence” may refer to a member of set
-  of sequences that comprise a genome assembly. In the VR specification, any sequence may be a
-  “reference sequence”, including those in a genome assembly.
+* A Sequence may have several roles. A “reference sequence” is any Sequence used
+  to define an :ref:`Allele`. A Sequence that replaces another Sequence is
+  called a “replacement sequence”.
+* In some contexts outside the VR specification, “reference sequence” may refer
+  to a member of set of sequences that comprise a genome assembly. In the VR
+  specification, any sequence may be a “reference sequence”, including those in
+  a genome assembly.
 * For the purposes of representing sequence variation, it is not
   necessary that Sequences be explicitly “typed” (i.e., DNA, RNA, or
   AA).
+
+
+----
 
 Composite Concepts
 @@@@@@@@@@@@@@@@@@
 
 .. _interval:
 
-Interval
-########
+Interval (Abstract Class)
+#########################
 
 **Biological definition**
 
@@ -164,11 +199,24 @@ None.
 
 The *Interval* abstract class defines a range on a :ref:`sequence`,
 possibly with length zero, and specified using
-:ref:`interbase-coordinates`. An Interval may be a
+:ref:`interbase-coordinates-design`. An Interval may be a
 :ref:`SimpleInterval` with a single start and end coordinate.
 :ref:`Future Location and Interval types <planned-locations>` will
 enable other methods for describing where :ref:`variation` occurs. Any
 of these may be used as the Interval for Location.
+
+.. sidebar:: VR Uses Interbase Coordinates
+
+   **GA4GH VR uses interbase coordinates when referring to spans of
+   sequence.**
+
+   Interbase coordinates refer to the zero-width points before and
+   after :ref:`residues <Residue>`. An interval of interbase
+   coordinates permits referring to any span, including an empty span,
+   before, within, or after a sequence. See
+   :ref:`interbase-coordinates-design` for more details on this design
+   choice.  Interbase coordinates are always zero-based.
+
 
 .. _SimpleInterval:
 
@@ -181,22 +229,34 @@ An :ref:`Interval` with a single start and end coordinate.
 
 **Information model**
 
-.. csv-table::
-   :header: Field, Type, Label, Description
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
    :align: left
+   :widths: auto
 
-   type, string, required, Interval type; must be set to 'SimpleInterval'
-   start, uint64, required, start position
-   end, uint64, required, end position
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - Interval type; must be set to '**SimpleInterval**'
+   * - start
+     - uint64
+     - 1..1
+     - start position
+   * - end
+     - uint64
+     - 1..1
+     - end position
 
 **Implementation guidance**
 
 * Implementations MUST require that 0 ≤ start ≤ end. In the case of
   double-stranded DNA, this constraint holds even when a feature is on
   the complementary strand.
-
-**Notes**
-
 * VR uses Interbase coordinates because they provide conceptual
   consistency that is not possible with residue-based systems (see
   :ref:`rationale <interbase-coordinates-design>`). Implementations
@@ -221,69 +281,22 @@ An :ref:`Interval` with a single start and end coordinate.
 * <start, end>=<*0,0*> refers to the point with width zero before the first residue.
 * <start, end>=<*i,i+1*> refers to the *i+1th* (1-based) residue.
 * <start, end>=<*N,N*> refers to the position after the last residue for Sequence of length *N*.
-* See example notebooks in the :ref:`reference implementation documentation <impl-vr-python>`.
+* See example notebooks in |vr-python|.
 
 **Example**
 
 .. parsed-literal::
 
-    {'end': 43, 'start': 42, 'type': 'SimpleInterval'}
-
-
-.. _state:
-
-State
-#####
-
-**Biological definition**
-
-None.
-
-**Computational definition**
-
-*State* objects are one of two primary components specifying a VR
-:ref:`Allele` (in addition to :ref:`Location`), and the designated
-components for representing change (or non-change) of the features
-indicated by the Allele Location. As an abstract class, State may
-encompass concrete :ref:`sequence` changes (see :ref:`SequenceState
-<sequence-state>`), complex translocations, copy number changes,
-expression variation, rule-based variation, and more (see
-:ref:`planned-states`).
-
-.. _sequence-state:
-
-SequenceState
-$$$$$$$$$$$$$
-
-**Biological definition**
-
-None.
-
-**Computational definition**
-
-The *SequenceState* class specifically captures a :ref:`sequence` as a
-:ref:`State`. This is the State class to use for representing
-"ref-alt" style variation, including SNVs, MNVs, del, ins, and delins.
-
-**Information model**
-
-.. csv-table::
-   :header: Field, Type, Label, Description
-   :align: left
-   :widths: 12, 9, 10, 30
-
-   id, :ref:`Id`, optional, State Id; must be unique within document
-   type, string, required, State type; must be set to 'SequenceState'
-   sequence, :ref:`Sequence`, required, The sequence that is to be used as the state for other types.
-
-**Example**
-
-
+    {
+      "end": 44908822,
+      "start": 44908821,
+      "type": "SimpleInterval"
+    }
 
 .. _location:
 
-Location
-########
+Location (Abstract Class)
+#########################
 
 **Biological definition**
 
@@ -326,15 +339,36 @@ named :ref:`Sequence`.
 
 **Information model**
 
-.. csv-table::
-   :header: Field, Type, Label, Description
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
    :align: left
-   :widths: 12, 9, 10, 30
+   :widths: auto
 
-   id, :ref:`Id`, optional, Location Id; must be unique within document
-   type, string, required, Location type; must be set to 'SequenceLocation'
-   sequence_id, :ref:`Id`, required, An id mapping to the Identifier of the external database Sequence
-   interval, :ref:`Interval`, required, Position of feature on reference sequence specified by sequence_id.
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _digest
+     - :ref:`b64udigest`
+     - 0..1
+     - The :ref:`truncated-digest` for the SequenceLocation.
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Location Id; must be unique within document
+   * - type
+     - string
+     - 1..1
+     - Location type; must be set to '**SequenceLocation**'
+   * - sequence_id
+     - :ref:`CURIE`
+     - 1..1
+     - An id mapping to the :ref:`computed-identifiers` of the external database Sequence containing the sequence to be located.
+   * - interval
+     - :ref:`Interval`
+     - 1..1
+     - Position of feature on reference sequence specified by sequence_id.
 
 **Implementation guidance**
 
@@ -358,11 +392,81 @@ named :ref:`Sequence`.
 
 .. parsed-literal::
 
-    {'interval': {'end': 43, 'start': 42, 'type': 'SimpleInterval'},
-     'sequence_id': 'refseq:NM_0001234.5',
-     'type': 'SequenceLocation'}
-     
-     
+    {
+      "interval": {
+        "end": 44908822,
+        "start": 44908821,
+        "type": "SimpleInterval"
+      },
+      "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+      "type": "SequenceLocation"
+    }
+
+.. state:
+
+State (Abstract Class)
+######################
+
+**Biological definition**
+
+None.
+
+**Computational definition**
+
+*State* objects are one of two primary components specifying a VR
+:ref:`Allele` (in addition to :ref:`Location`), and the designated
+components for representing change (or non-change) of the features
+indicated by the Allele Location. As an abstract class, State may
+encompass concrete :ref:`sequence` changes (see :ref:`SequenceState
+<sequence-state>`), complex translocations, copy number changes,
+expression variation, rule-based variation, and more (see
+:ref:`planned-states`).
+
+.. _sequence-state:
+
+SequenceState
+$$$$$$$$$$$$$
+
+**Biological definition**
+
+None.
+
+**Computational definition**
+
+The *SequenceState* class specifically captures a :ref:`sequence` as a
+:ref:`State`. This is the State class to use for representing
+"ref-alt" style variation, including SNVs, MNVs, del, ins, and delins.
+
+**Information model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - State type; must be set to '**SequenceState**'
+   * - sequence
+     - string
+     - 1..1
+     - The string of sequence residues that is to be used as the state for other types.
+
+**Example**
+
+.. parsed-literal::
+
+    {
+      "sequence": "T",
+      "type": "SequenceState"
+    }
+
 .. _variation:
 
 Variation
@@ -406,15 +510,36 @@ indels).
 
 **Information model**
 
-.. csv-table::
-   :header: Field, Type, Label, Description
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
    :align: left
-   :widths: 12, 9, 10, 30
+   :widths: auto
 
-   id, :ref:`Id`, optional, Variation Id; must be unique within document
-   type, string, required, Variation type; must be set to 'Allele'
-   location, :ref:`Location`, required, Where Allele is located
-   state, :ref:`State`, required, State at location
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _digest
+     - :ref:`b64udigest`
+     - 0..1
+     - The :ref:`truncated-digest` for the Allele Variation.
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Variation Id; must be unique within document
+   * - type
+     - string
+     - 1..1
+     - Variation type; must be set to '**Allele**'
+   * - location
+     - :ref:`Location`
+     - 1..1
+     - Where Allele is located
+   * - state
+     - :ref:`State`
+     - 1..1
+     - State at location
 
 **Implementation guidance**
 
@@ -433,9 +558,6 @@ indels).
 * Implementations MUST normalize Alleles using :ref:`"justified"
   normalization <normalization>` when generating a
   :ref:`computed-identifiers`.
-
-**Notes**
-
 * When the alternate Sequence is the same length as the interval, the
   lengths of the reference Sequence and imputed Sequence are the
   same. (Here, imputed sequence means the sequence derived by applying
@@ -473,6 +595,27 @@ indels).
 * This specification's definition of Allele applies to all Sequence
   types (DNA, RNA, AA).
 
+**Example**
+
+.. parsed-literal::
+
+    {
+       "location": {
+          "interval": {
+             "end": 44908822,
+             "start": 44908821,
+             "type": "SimpleInterval"
+          },
+          "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+          "type": "SequenceLocation"
+       },
+       "state": {
+          "sequence": "T",
+          "type": "SequenceState"
+       },
+       "type": "Allele"
+    }
+
 
 .. _text:
 
@@ -491,14 +634,32 @@ subclasses, but are still treated as variation.
 
 **Information model**
 
-.. csv-table::
-   :header: Field, Type, Label, Description
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
    :align: left
-   :widths: 12, 9, 10, 30
+   :widths: auto
 
-   id, :ref:`Id`, optional, Variation Id; must be unique within document
-   type, string, required, Variation type; must be set to 'Text'
-   definition, string, required, The textual variation representation not parsable by other subclasses of Variation.
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _digest
+     - :ref:`b64udigest`
+     - 0..1
+     - The :ref:`truncated-digest` for the Text Variation.
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Variation Id; must be unique within document
+   * - type
+     - string
+     - 1..1
+     - Variation type; must be set to '**Text**'
+   * - definition
+     - string
+     - 1..1
+     - The textual variation representation not parsable by other subclasses of Variation.
 
 **Implementation guidance**
 
@@ -512,13 +673,20 @@ subclasses, but are still treated as variation.
   new object under the other Variation subclass. In such a case, an
   implementation SHOULD persist the original Text object and respond
   to queries matching the Text object with the new object.
-
-**Notes**
-
 * Additional Variation subclasses are continually under
   consideration. Please open a `GitHub issue`_ if you would like to
   propose a Variation subclass to cover a needed variation
   representation.
+
+**Example**
+
+.. parsed-literal::
+
+    {
+      "definition": "APOE loss",
+      "type": "Text"
+    }
+
 
 .. _GitHub issue: https://github.com/ga4gh/vr-spec/issues
 .. _genetic variation: https://en.wikipedia.org/wiki/Genetic_variation

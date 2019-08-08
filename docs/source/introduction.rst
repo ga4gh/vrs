@@ -29,10 +29,12 @@ Here we document the primary contributions of this specification for variation r
   for constructing distributed and globally-unique identifiers for molecular variation. Importantly, this
   algorithm enables data providers and consumers to computationally generate consistent, globally
   unique identifiers for variation without a central authority.
-* **A reference implementation.** We provide a Python package (`vr-python
-  <https://github.com/ga4gh/vr-python/>`__) that implements the above schema and algorithms, and
-  supports translation of existing variant representation schemes into VR-Spec for use in genomic
-  data sharing.
+* **A Python implementation.** We provide a Python package (`vr-python
+  <https://github.com/ga4gh/vr-python/>`__) that demonstrates the
+  above schema and algorithms, and supports translation of existing
+  variant representation schemes into VR-Spec for use in genomic data
+  sharing.  It may be the used as the basis for development in Python,
+  but it is not required in order to use the VR Specification.
 
 The machine readable schema definitions and example code are available online at the VR-Spec
 repository (https://github.com/ga4gh/vr-spec).
