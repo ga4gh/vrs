@@ -101,7 +101,7 @@ string has the structure ``prefix``:``reference`` (W3C Terminology).
 * CURIE-formatted identifiers are used as global identifiers of GA4GH
   VR objects.  This specification RECOMMENDS using a
   :ref:`computed-identifiers` to construct globally unique identifiers
-  for objects.  These identifiers are recommended for use within *and*
+  for objects.  These identifiers are RECOMMENDED for use within *and*
   between systems.
 * CURIE-formatted identifiers are also used for references to data
   outside the scope of this specification, such as reference
