@@ -167,9 +167,9 @@ amino acid codes.
 * Sequences MAY be empty (zero-length) strings. Empty sequences are used as the
   replacement Sequence for deletion Alleles.
 * Sequences MUST consist of only uppercase IUPAC abbreviations, including ambiguity codes.
-* A Sequence provides a stable coordinate system by which an :ref:`Allele` may be located and
+* A Sequence provides a stable coordinate system by which an :ref:`Allele` MAY be located and
   interpreted.
-* A Sequence may have several roles. A “reference sequence” is any Sequence used
+* A Sequence MAY have several roles. A “reference sequence” is any Sequence used
   to define an :ref:`Allele`. A Sequence that replaces another Sequence is
   called a “replacement sequence”.
 * In some contexts outside the VR specification, “reference sequence” may refer
@@ -199,11 +199,11 @@ None.
 
 The *Interval* abstract class defines a range on a :ref:`sequence`,
 possibly with length zero, and specified using
-:ref:`interbase-coordinates-design`. An Interval may be a
+:ref:`interbase-coordinates-design`. An Interval MAY be a
 :ref:`SimpleInterval` with a single start and end coordinate.
 :ref:`Future Location and Interval types <planned-locations>` will
 enable other methods for describing where :ref:`variation` occurs. Any
-of these may be used as the Interval for Location.
+of these MAY be used as the Interval for Location.
 
 .. sidebar:: VR Uses Interbase Coordinates
 
@@ -265,7 +265,7 @@ An :ref:`Interval` with a single start and end coordinate.
 * Interbase coordinates start at 0 (zero).
 * The length of an interval is *end - start*.
 * An interval in which start == end is a zero width point between two residues.
-* An interval of length == 1 may be colloquially referred to as a position.
+* An interval of length == 1 MAY be colloquially referred to as a position.
 * Two intervals are *equal* if the their start and end coordinates are equal.
 * Two intervals *intersect* if the start or end coordinate of one is
   strictly between the start and end coordinates of the other. That
@@ -318,7 +318,7 @@ Location for Variation.
 
 **Implementation Guidance**
 
-* Location refers to a position.  Although it may imply a sequence,
+* Location refers to a position.  Although it MAY imply a sequence,
   the two concepts are not interchangable, especially when the
   location is non-specific (e.g., a range) or symbolic (a gene).
 
@@ -550,7 +550,7 @@ indels).
   such behavior is not provided by the specification.
 * Alleles are equal only if the component fields are equal: at the
   same location and with the same state.
-* Alleles may have multiple related representations on the same
+* Alleles MAY have multiple related representations on the same
   Sequence type due to normalization differences.
 * Implementations SHOULD normalize Alleles using :ref:`"justified"
   normalization <normalization>` whenever possible to facilitate
@@ -572,7 +572,7 @@ indels).
   associated with genes or other features.
 * Biologically, referring to Alleles is typically meaningful only in
   the context of empirical alternatives. For modelling purposes,
-  Alleles may exist as a result of biological observation or
+  Alleles MAY exist as a result of biological observation or
   computational simulation, i.e., virtual Alleles.
 * “Single, contiguous” refers the representation of the Allele, not
   the biological mechanism by which it was created. For instance, two

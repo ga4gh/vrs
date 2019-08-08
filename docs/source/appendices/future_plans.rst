@@ -182,11 +182,11 @@ Ensembl, HGNC, or other public trusted authority.
 
 * `gene_id` MUST be specified as a CURIE, using a CURIE prefix of
   `"NCBI"` and CURIE reference with the numeric gene id. Other trusted
-  authorities may be permitted in future releases.
+  authorities MAY be permitted in future releases.
 
 **Implementation guidance**
 
-* GeneLocations may be converted to :ref:`sequence-location` using
+* GeneLocations MAY be converted to :ref:`sequence-location` using
   external data. The source of such data and mechanism for
   implementation is not defined by this specification.
 
@@ -211,7 +211,7 @@ CNVState
 
 Variations in the number of copies of a segment of DNA.  Copy number
 variations cover copy losses or gains and at known or unknown
-locations (including tandem repeats).  Variations may occur at precise
+locations (including tandem repeats).  Variations MAY occur at precise
 SequenceLocations, within nested intervals, or at GeneLocations.
 There is no lower or upper bound on CNV sizes.
 
@@ -317,7 +317,7 @@ co-occur on the same reference sequence.
 
 **Implementation guidance**
 
-* The Haplotype location (as specified by the location_id) may refer
+* The Haplotype location (as specified by the location_id) MAY refer
   to a subsequence of the reference sequence, such as a subsequence of
   an entire chromosome.
 * All Alleles in a Haplotype MUST be defined on the same reference
@@ -366,7 +366,7 @@ co-occur on the same reference sequence.
   implementations to permit (PARTIAL) or preclude (COMPLETE) the
   existence of other variation when matching a Haplotype to a set of
   observed Alleles.
-* Data consumers may wish to use the completeness property in order to
+* Data consumers MAY wish to use the completeness property in order to
   provide accurate context for Allele interpretation or to select data
   used in association studies.
 
@@ -376,7 +376,7 @@ co-occur on the same reference sequence.
   is a combination of alleles (DNA sequences) at different places (
   `loci <http://isogg.org/wiki/Locus>`__) on the `chromosome
   <http://isogg.org/wiki/Chromosome>`__ that are transmitted
-  together. A haplotype may be one locus, several loci, or an entire
+  together. A haplotype MAY be one locus, several loci, or an entire
   chromosome depending on the number of recombination events that have
   occurred between a given set of loci.
 * SO: `haplotype (SO:0001024)
@@ -470,8 +470,8 @@ A list of Haplotypes.
   Haplotypes. In the case of haploid chromosomes or
   haploinsufficiency, the Genotype consists of a single Haplotype.
 * A consequence of the computational definition is that Haplotypes at
-  overlapping or adjacent intervals may not be included in the same
-  Genotype. However, two or more Alleles may always be rewritten as an
+  overlapping or adjacent intervals MUST NOT be included in the same
+  Genotype. However, two or more Alleles MAY always be rewritten as an
   equivalent Allele with a common sequence and interval context.
 * The rationale for permitting Genotypes with Haplotypes defined on
   different reference sequences is to enable the accurate
@@ -574,7 +574,7 @@ Variation Sets
 @@@@@@@@@@@@@@
 
 .. note:: The VR-Spec anticipates the need for sets of variation.
-          Sets may be static (immutable) or dynamic (changeable), and
+          Sets MAY be static (immutable) or dynamic (changeable), and
           might be defined manually, by an `equivalence function`, or
           by an expansion functions.  Furthermore, equivalence and
           expansion functions might be user-defined.  This concept is

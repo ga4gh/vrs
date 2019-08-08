@@ -34,9 +34,9 @@ constructed (see `example requirement issues`_).
 Feature Development
 $$$$$$$$$$$$$$$$$$$
 Features will be developed to meet gathered requirements. Features
-ready for public review may be merged into the master branch by pull
+ready for public review MAY be merged into the master branch by pull
 request through review and approval by at least one (non-authoring)
-:ref:`Project Maintainer <project-maintainers>`. Merged commits may be
+:ref:`Project Maintainer <project-maintainers>`. Merged commits MAY be
 tagged as alpha releases when needed.
 
 Version Review and Release
