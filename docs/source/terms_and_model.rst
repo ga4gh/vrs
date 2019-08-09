@@ -402,7 +402,7 @@ named :ref:`Sequence`.
       "type": "SequenceLocation"
     }
 
-.. state:
+.. _state:
 
 State (Abstract Class)
 ######################
