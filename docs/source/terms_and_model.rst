@@ -45,7 +45,7 @@ depend only on previously-defined terms.
           "OPTIONAL" in this document are to be interpreted as
           described in `RFC 2119`_.
 
-.. todo:: add note about _ prefix
+.. todo:: add note about _ prefix (see https://github.com/ga4gh/vr-spec/issues/157).
 
 ----
 

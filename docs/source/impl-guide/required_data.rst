@@ -93,6 +93,6 @@ instance backend and using a |seqrepo_rs| backend.  A GA4GH refget
 implementation has been started, but is pending interface changes to
 support lookup using primary database accesssions.
 
-.. todo:: Add examples for each based on VR Python
+.. todo:: Add examples for each based on VR Python (see https://github.com/ga4gh/vr-spec/issues/128)
 
 
