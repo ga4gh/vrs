@@ -29,7 +29,7 @@ Contexts
   be more readily recognized by users.
 
 * **Normalization** During :ref:`normalization`, implementations will
-  need access to sequence length (metadata) and sequence contexts. 
+  need access to sequence length and sequence contexts. 
 
 
 
@@ -93,6 +93,45 @@ instance backend and using a |seqrepo_rs| backend.  A GA4GH refget
 implementation has been started, but is pending interface changes to
 support lookup using primary database accesssions.
 
-.. todo:: Add examples for each based on VR Python (see https://github.com/ga4gh/vr-spec/issues/128)
+Examples
+########
 
+The following examples are taken from |notebooks|:
 
+.. code:: ipython3
+
+    from ga4gh.vr.extras.dataproxy import SeqRepoRESTDataProxy
+    seqrepo_rest_service_url = "http://localhost:5000/seqrepo"
+    dp = SeqRepoRESTDataProxy(base_url=seqrepo_rest_service_url)
+
+    def get_sequence(identifier, start=None, end=None):
+        """returns sequence for given identifier, optionally limited
+        to interbase <start, end> interval"""
+        return dp.get_sequence(identifier, start, end)
+    def get_sequence_length(identifier):
+        """return length of given sequence identifier"""
+        return dp.get_metadata(identifier)["length"]
+    def translate_sequence_identifier(identifier, namespace):
+        """return for given identifier, return *list* of equivalent identifiers in given namespace"""
+        return dp.translate_sequence_identifier(identifier, namespace)
+
+.. code:: ipython3
+
+    get_sequence_length("ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl")
+    58617616
+
+.. code:: ipython3
+
+    start, end = 44908821-25, 44908822+25
+    get_sequence("ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl", start, end)
+    'CCGCGATGCCGATGACCTGCAGAAGCGCCTGGCAGTGTACCAGGCCGGGGC'
+
+.. code:: ipython3
+
+    translate_sequence_identifier("GRCh38:19", "ga4gh")
+    ['ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl']
+
+.. code:: ipython3
+
+    translate_sequence_identifier("ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl", "GRCh38")
+    ['GRCh38:19', 'GRCh38:chr19']
