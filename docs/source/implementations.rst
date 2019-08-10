@@ -23,7 +23,7 @@ features such as translation from HGVS, SPDI, and VCF formats.  See
 <https://github.com/ga4gh/vr-python/blob/master/notebooks>`__ for
 usage examples.
 
-|VR-Spec| may be used without using the Python implementation.
+|VR-Spec| MAY be used without using the Python implementation.
 
 
 ----

@@ -83,7 +83,7 @@ region (the *outer* SimpleInterval) and required included region (the
    * - type
      - string
      - 1..1
-     - Interval type; must be set to '**NestedInterval**'
+     - Interval type; MUST be set to '**NestedInterval**'
    * - inner
      - :ref:`SimpleInterval`
      - 1..1
@@ -95,7 +95,7 @@ region (the *outer* SimpleInterval) and required included region (the
 
 **Implementation guidance**
 
-* Implementations MUST require that `0 ≤ outer.start ≤ inner.start ≤
+* Implementations MUST enforce values `0 ≤ outer.start ≤ inner.start ≤
   inner.end ≤ outer.end`. In the case of double-stranded DNA, this
   constraint holds even when a feature is on the complementary strand.
 
@@ -168,11 +168,11 @@ Ensembl, HGNC, or other public trusted authority.
    * - _id
      - :ref:`CURIE`
      - 0..1
-     - Location Id; must be unique within document
+     - Location Id; MUST be unique within document
    * - type
      - string
      - 1..1
-     - Location type; must be set to '**GeneLocation**'
+     - Location type; MUST be set to '**GeneLocation**'
    * - gene_id
      - :ref:`CURIE`
      - 1..1
@@ -180,13 +180,13 @@ Ensembl, HGNC, or other public trusted authority.
 
 **Notes**
 
-* `gene_id` must be specified as a CURIE, using a CURIE prefix of
+* `gene_id` MUST be specified as a CURIE, using a CURIE prefix of
   `"NCBI"` and CURIE reference with the numeric gene id. Other trusted
-  authorities may be permitted in future releases.
+  authorities MAY be permitted in future releases.
 
 **Implementation guidance**
 
-* GeneLocations may be converted to :ref:`sequence-location` using
+* GeneLocations MAY be converted to :ref:`sequence-location` using
   external data. The source of such data and mechanism for
   implementation is not defined by this specification.
 
@@ -211,7 +211,7 @@ CNVState
 
 Variations in the number of copies of a segment of DNA.  Copy number
 variations cover copy losses or gains and at known or unknown
-locations (including tandem repeats).  Variations may occur at precise
+locations (including tandem repeats).  Variations MAY occur at precise
 SequenceLocations, within nested intervals, or at GeneLocations.
 There is no lower or upper bound on CNV sizes.
 
@@ -234,7 +234,7 @@ Under development.
    * - type
      - string
      - 1..1
-     - State type; must be set to '**CNVState**'
+     - State type; MUST be set to '**CNVState**'
    * - location
      - :ref:`Location`
      - 1..1
@@ -290,11 +290,11 @@ co-occur on the same reference sequence.
    * - _id
      - :ref:`CURIE`
      - 0..1
-     - Variation Id; must be unique within document
+     - Variation Id; MUST be unique within document
    * - type
      - string
      - 1..1
-     - Variation type; must be set to '**Haplotype**'
+     - Variation type; MUST be set to '**Haplotype**'
    * - location
      - :ref:`Location`
      - 1..1
@@ -317,7 +317,7 @@ co-occur on the same reference sequence.
 
 **Implementation guidance**
 
-* The Haplotype location (as specified by the location_id) may refer
+* The Haplotype location (as specified by the location_id) MAY refer
   to a subsequence of the reference sequence, such as a subsequence of
   an entire chromosome.
 * All Alleles in a Haplotype MUST be defined on the same reference
@@ -335,7 +335,7 @@ co-occur on the same reference sequence.
   * "PARTIAL" only if the entire reference sequence was assayed,
     other in-phase Alleles exist, and are NOT reported in this
     Haplotype. This is an assertion of unreported variation.
-  * "UNKNOWN" otherwise. This value is the default and should be used
+  * "UNKNOWN" otherwise. This value is the default and SHOULD be used
     if neither "COMPLETE" nor "PARTIAL" applies. These cases include,
     but are not limited to, assays that do not fully cover the
     reference sequence and an unwillingness by the reporter to
@@ -366,7 +366,7 @@ co-occur on the same reference sequence.
   implementations to permit (PARTIAL) or preclude (COMPLETE) the
   existence of other variation when matching a Haplotype to a set of
   observed Alleles.
-* Data consumers may wish to use the completeness property in order to
+* Data consumers MAY wish to use the completeness property in order to
   provide accurate context for Allele interpretation or to select data
   used in association studies.
 
@@ -376,7 +376,7 @@ co-occur on the same reference sequence.
   is a combination of alleles (DNA sequences) at different places (
   `loci <http://isogg.org/wiki/Locus>`__) on the `chromosome
   <http://isogg.org/wiki/Chromosome>`__ that are transmitted
-  together. A haplotype may be one locus, several loci, or an entire
+  together. A haplotype MAY be one locus, several loci, or an entire
   chromosome depending on the number of recombination events that have
   occurred between a given set of loci.
 * SO: `haplotype (SO:0001024)
@@ -419,11 +419,11 @@ A list of Haplotypes.
    * - _id
      - :ref:`CURIE`
      - 0..1
-     - Variation Id; must be unique within document
+     - Variation Id; MUST be unique within document
    * - type
      - string
      - 1..1
-     - Variation type; must be set to '**Genotype**'
+     - Variation type; MUST be set to '**Genotype**'
    * - completeness
      - enum
      - 1..1
@@ -437,7 +437,7 @@ A list of Haplotypes.
    * - haplotypes
      - :ref:`CURIE[] <CURIE>`
      - 2..*
-     - List of Haplotypes; length must agree with ploidy of genomic region
+     - List of Haplotypes; length MUST agree with ploidy of genomic region
 
 **Implementation guidance**
 
@@ -470,8 +470,8 @@ A list of Haplotypes.
   Haplotypes. In the case of haploid chromosomes or
   haploinsufficiency, the Genotype consists of a single Haplotype.
 * A consequence of the computational definition is that Haplotypes at
-  overlapping or adjacent intervals may not be included in the same
-  Genotype. However, two or more Alleles may always be rewritten as an
+  overlapping or adjacent intervals MUST NOT be included in the same
+  Genotype. However, two or more Alleles MAY always be rewritten as an
   equivalent Allele with a common sequence and interval context.
 * The rationale for permitting Genotypes with Haplotypes defined on
   different reference sequences is to enable the accurate
@@ -574,7 +574,7 @@ Variation Sets
 @@@@@@@@@@@@@@
 
 .. note:: The VR-Spec anticipates the need for sets of variation.
-          Sets may be static (immutable) or dynamic (changeable), and
+          Sets MAY be static (immutable) or dynamic (changeable), and
           might be defined manually, by an `equivalence function`, or
           by an expansion functions.  Furthermore, equivalence and
           expansion functions might be user-defined.  This concept is

@@ -101,7 +101,7 @@ string has the structure ``prefix``:``reference`` (W3C Terminology).
 * CURIE-formatted identifiers are used as global identifiers of GA4GH
   VR objects.  This specification RECOMMENDS using a
   :ref:`computed-identifiers` to construct globally unique identifiers
-  for objects.  These identifiers are recommended for use within *and*
+  for objects.  These identifiers are RECOMMENDED for use within *and*
   between systems.
 * CURIE-formatted identifiers are also used for references to data
   outside the scope of this specification, such as reference
@@ -167,9 +167,9 @@ amino acid codes.
 * Sequences MAY be empty (zero-length) strings. Empty sequences are used as the
   replacement Sequence for deletion Alleles.
 * Sequences MUST consist of only uppercase IUPAC abbreviations, including ambiguity codes.
-* A Sequence provides a stable coordinate system by which an :ref:`Allele` may be located and
+* A Sequence provides a stable coordinate system by which an :ref:`Allele` MAY be located and
   interpreted.
-* A Sequence may have several roles. A “reference sequence” is any Sequence used
+* A Sequence MAY have several roles. A “reference sequence” is any Sequence used
   to define an :ref:`Allele`. A Sequence that replaces another Sequence is
   called a “replacement sequence”.
 * In some contexts outside the VR specification, “reference sequence” may refer
@@ -199,11 +199,11 @@ None.
 
 The *Interval* abstract class defines a range on a :ref:`sequence`,
 possibly with length zero, and specified using
-:ref:`interbase-coordinates-design`. An Interval may be a
+:ref:`interbase-coordinates-design`. An Interval MAY be a
 :ref:`SimpleInterval` with a single start and end coordinate.
 :ref:`Future Location and Interval types <planned-locations>` will
 enable other methods for describing where :ref:`variation` occurs. Any
-of these may be used as the Interval for Location.
+of these MAY be used as the Interval for Location.
 
 .. sidebar:: VR Uses Interbase Coordinates
 
@@ -242,7 +242,7 @@ An :ref:`Interval` with a single start and end coordinate.
    * - type
      - string
      - 1..1
-     - Interval type; must be set to '**SimpleInterval**'
+     - Interval type; MUST be set to '**SimpleInterval**'
    * - start
      - uint64
      - 1..1
@@ -254,7 +254,7 @@ An :ref:`Interval` with a single start and end coordinate.
 
 **Implementation guidance**
 
-* Implementations MUST require that 0 ≤ start ≤ end. In the case of
+* Implementations MUST enforce values 0 ≤ start ≤ end. In the case of
   double-stranded DNA, this constraint holds even when a feature is on
   the complementary strand.
 * VR uses Interbase coordinates because they provide conceptual
@@ -265,7 +265,7 @@ An :ref:`Interval` with a single start and end coordinate.
 * Interbase coordinates start at 0 (zero).
 * The length of an interval is *end - start*.
 * An interval in which start == end is a zero width point between two residues.
-* An interval of length == 1 may be colloquially referred to as a position.
+* An interval of length == 1 MAY be colloquially referred to as a position.
 * Two intervals are *equal* if the their start and end coordinates are equal.
 * Two intervals *intersect* if the start or end coordinate of one is
   strictly between the start and end coordinates of the other. That
@@ -276,7 +276,7 @@ An :ref:`Interval` with a single start and end coordinate.
    * a.start < b.start < a.end OR
    * a.start < b.end < a.end
 * Two intervals a and b *coincide* if they intersect or if they are
-  equal (the equality condition is required to handle the case of two
+  equal (the equality condition is REQUIRED to handle the case of two
   identical zero-width Intervals).
 * <start, end>=<*0,0*> refers to the point with width zero before the first residue.
 * <start, end>=<*i,i+1*> refers to the *i+1th* (1-based) residue.
@@ -318,7 +318,7 @@ Location for Variation.
 
 **Implementation Guidance**
 
-* Location refers to a position.  Although it may imply a sequence,
+* Location refers to a position.  Although it MAY imply a sequence,
   the two concepts are not interchangable, especially when the
   location is non-specific (e.g., a range) or symbolic (a gene).
 
@@ -356,11 +356,11 @@ named :ref:`Sequence`.
    * - _id
      - :ref:`CURIE`
      - 0..1
-     - Location Id; must be unique within document
+     - Location Id; MUST be unique within document
    * - type
      - string
      - 1..1
-     - Location type; must be set to '**SequenceLocation**'
+     - Location type; MUST be set to '**SequenceLocation**'
    * - sequence_id
      - :ref:`CURIE`
      - 1..1
@@ -385,7 +385,7 @@ named :ref:`Sequence`.
                sequence. Examples include coordinates extrapolated
                beyond the bounds of a transcript and intronic
                sequence. Such variants are not representable using VR
-               and must be projected to a genomic reference in order
+               and MUST be projected to a genomic reference in order
                to be represented.
 
 **Example**
@@ -452,7 +452,7 @@ The *SequenceState* class specifically captures a :ref:`sequence` as a
    * - type
      - string
      - 1..1
-     - State type; must be set to '**SequenceState**'
+     - State type; MUST be set to '**SequenceState**'
    * - sequence
      - string
      - 1..1
@@ -527,11 +527,11 @@ indels).
    * - _id
      - :ref:`CURIE`
      - 0..1
-     - Variation Id; must be unique within document
+     - Variation Id; MUST be unique within document
    * - type
      - string
      - 1..1
-     - Variation type; must be set to '**Allele**'
+     - Variation type; MUST be set to '**Allele**'
    * - location
      - :ref:`Location`
      - 1..1
@@ -543,14 +543,14 @@ indels).
 
 **Implementation guidance**
 
-* Implementations MUST require that interval.end ≤ sequence_length
+* Implementations MUST enforce values interval.end ≤ sequence_length
   when the Sequence length is known.
 * Implementations MAY choose to provide a mechanism for ensuring that
   the type of sequence and the content of the state are compatible, but
   such behavior is not provided by the specification.
 * Alleles are equal only if the component fields are equal: at the
   same location and with the same state.
-* Alleles may have multiple related representations on the same
+* Alleles MAY have multiple related representations on the same
   Sequence type due to normalization differences.
 * Implementations SHOULD normalize Alleles using :ref:`"justified"
   normalization <normalization>` whenever possible to facilitate
@@ -572,7 +572,7 @@ indels).
   associated with genes or other features.
 * Biologically, referring to Alleles is typically meaningful only in
   the context of empirical alternatives. For modelling purposes,
-  Alleles may exist as a result of biological observation or
+  Alleles MAY exist as a result of biological observation or
   computational simulation, i.e., virtual Alleles.
 * “Single, contiguous” refers the representation of the Allele, not
   the biological mechanism by which it was created. For instance, two
@@ -651,11 +651,11 @@ subclasses, but are still treated as variation.
    * - _id
      - :ref:`CURIE`
      - 0..1
-     - Variation Id; must be unique within document
+     - Variation Id; MUST be unique within document
    * - type
      - string
      - 1..1
-     - Variation type; must be set to '**Text**'
+     - Variation type; MUST be set to '**Text**'
    * - definition
      - string
      - 1..1

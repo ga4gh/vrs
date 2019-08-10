@@ -83,11 +83,11 @@ on approval of this proposal.)
 
 We propose the following guidelines for type prefixes:
 
-* Prefixes should be short, approximately 2-4 characters.
-* Prefixes should be for concrete types, not polymorphic parent classes.
-* A prefix should map 1:1 with a schema types.
-* Variation Representation types should start with V.
-* Variation Annotation types should start with A.
+* Prefixes SHOULD be short, approximately 2-4 characters.
+* Prefixes SHOULD be for concrete types, not polymorphic parent classes.
+* A prefix MUST map 1:1 with a schema type.
+* Variation Representation types SHOULD start with V.
+* Variation Annotation types SHOULD start with A.
 
 
 Administration
