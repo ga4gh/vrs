@@ -45,8 +45,26 @@ depend only on previously-defined terms.
           "OPTIONAL" in this document are to be interpreted as
           described in `RFC 2119`_.
 
-.. todo:: add note about _ prefix
 
+Data Model Notes and Principles
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+* VR uses `snake_case
+  <https://simple.wikipedia.org/wiki/Snake_case>`__ to represent
+  compound words.  Although the schema is currently JSON-based (which
+  would typically use camelCase), VR itself is intended to be neutral
+  with respect to languages and database.
+
+* VR objects are `value objects
+  <https://en.wikipedia.org/wiki/Value_object>`__.  Two objects are
+  considered equal if and only if their respective attributes are
+  equal.
+
+* VR attributes use a leading underscore to represent optional
+  attributes that are not part of the value object.  Such attributes
+  are not considered when evaluating equality or creating computed
+  identifiers.
+  
 ----
 
 Primitive Concepts
@@ -402,7 +420,7 @@ named :ref:`Sequence`.
       "type": "SequenceLocation"
     }
 
-.. state:
+.. _state:
 
 State (Abstract Class)
 ######################
