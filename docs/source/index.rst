@@ -17,5 +17,4 @@ implementation that promotes adoption of the standard.
    terms_and_model
    schema
    impl-guide/index
-   implementations
    appendices/index
