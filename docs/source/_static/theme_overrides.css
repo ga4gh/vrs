@@ -11,3 +11,14 @@
       overflow: visible !important;
    }
 }
+
+
+
+h2 {
+    color: #2980B9;
+    text-decoration: underline;
+}
+
+h3 {
+    color: #888;
+}

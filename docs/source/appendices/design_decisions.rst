@@ -8,13 +8,6 @@ specification. As these trade-offs may not be apparent to outside
 readers, this section highlights the most significant ones and the
 rationale for our design decisions, including:
 
-* Use “Variation” rather than “Variant”
-* Use “Allele” rather than “Variant”
-* Alleles are fully justified
-* Sequence ranges use an interbase coordinate system
-* Modelling Language
-* Serialization Options
-
 .. _use-variation:
 
 Variation Rather than Variant

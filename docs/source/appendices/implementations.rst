@@ -1,6 +1,13 @@
 Implementations
 !!!!!!!!!!!!!!!
 
+The libraries and applications listed below have implemented the GA4GH
+Variation Representation Specification to store and exchange variation
+data. They are listed here to demonstrate VR utility and as a resource
+for those considering implementing VR-Spec. These packages are not
+supported by GA4GH.
+
+
 Libraries
 @@@@@@@@@
 
