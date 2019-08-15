@@ -58,13 +58,16 @@ Data Model Notes and Principles
 * VR objects are `value objects
   <https://en.wikipedia.org/wiki/Value_object>`__.  Two objects are
   considered equal if and only if their respective attributes are
-  equal.
+  equal.  As value objects, VR objects are used as primitive types and
+  SHOULD NOT be used as containers for related data.  Instead, related
+  data should be associated with VR objects through identifiers.  See
+  :ref:`computed-identifiers`.
 
 * VR attributes use a leading underscore to represent optional
   attributes that are not part of the value object.  Such attributes
   are not considered when evaluating equality or creating computed
   identifiers.
-  
+
 
 Primitive Concepts
 @@@@@@@@@@@@@@@@@@
