@@ -42,7 +42,6 @@ subsequent sections.
 
 .. _ser-dig-id:
 .. figure:: ../images/id-dig-ser.png
-   :align: left
 
    **Serialization, Digest, and Computed Identifier Operations**
    Entities are shown in gray boxes. Functions are denoted by bold
