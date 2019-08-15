@@ -33,8 +33,6 @@ usage examples.
 |VR-Spec| MAY be used without using the Python implementation.
 
 
-----
-
 Applications and Web Services
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

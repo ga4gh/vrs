@@ -65,7 +65,6 @@ Data Model Notes and Principles
   are not considered when evaluating equality or creating computed
   identifiers.
   
-----
 
 Primitive Concepts
 @@@@@@@@@@@@@@@@@@
@@ -199,7 +198,6 @@ amino acid codes.
   AA).
 
 
-----
 
 Composite Concepts
 @@@@@@@@@@@@@@@@@@

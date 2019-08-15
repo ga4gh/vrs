@@ -268,9 +268,9 @@ following changes will be made to this section of the specification:
 All other aspects of the computed identifier scheme will remain intact.
 
 
-----
 
-**References**
+References
+@@@@@@@@@@
 
 .. [Gibson] `Gibson Canonical JSON <http://gibson042.github.io/canonicaljson-spec/>`__
 .. [OLPC] `OLPC Canonical JSON <http://wiki.laptop.org/go/Canonical_JSON>`__
