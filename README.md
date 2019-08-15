@@ -23,9 +23,9 @@ and roadmap are available at the [VR 2019 Project](https://github.com/orgs/ga4gh
   representational ambiguity.
 * Define a globally unique *computed identifier* for covered data
   classes.
-* Develop a [reference
-  implementation](https://github.com/ga4gh/vr-python) to facilitate
-  adoption and [validation
+* Develop an [implementation](https://github.com/ga4gh/vr-python) to
+  facilitate adoption.
+* Develop [validation
   tests](https://github.com/ga4gh/vr-spec/tests/validation) to ensure
   consistency of implementations.
 

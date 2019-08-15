@@ -33,7 +33,7 @@ Here we document the primary contributions of this specification for variation r
   <https://github.com/ga4gh/vr-python/>`__) that demonstrates the
   above schema and algorithms, and supports translation of existing
   variant representation schemes into VR-Spec for use in genomic data
-  sharing.  It may be the used as the basis for development in Python,
+  sharing.  It may be used as the basis for development in Python,
   but it is not required in order to use the VR Specification.
 
 The machine readable schema definitions and example code are available online at the VR-Spec
