@@ -54,6 +54,11 @@ subsequent sections.
    URL-safe character set. [`figure source
    <https://www.draw.io/?page-id=M8V1EMsVyfZQDDbK8gNL&title=VR%20diagrams.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fharts.net%2Fuc%3Fid%3D1Qimkvi-Fnd1hhuixbd6aU4Se6zr5Nc1h%26export%3Ddownload>`__]
 
+.. note:: Most implementation users will need only the
+	  `ga4gh_identify` function.  We describe the
+	  `ga4gh_serialize`, `ga4gh_digest`, and `sha512t24u`
+	  functions here primarily for implementers.
+
 
 Requirements
 @@@@@@@@@@@@

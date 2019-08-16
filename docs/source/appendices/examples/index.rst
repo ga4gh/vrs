@@ -8,5 +8,5 @@ repository.
 .. toctree::
    :maxdepth: 2
 
-   hgvs-translation
+   HGVS Translation <hgvs-translation>
    associating-annotations
