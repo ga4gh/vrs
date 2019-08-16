@@ -1,10 +1,28 @@
 .. _hgvs-translation:
 
+Constructing a VR Allele
+!!!!!!!!!!!!!!!!!!!!!!!!
+
+This example walks through how an Allele may be constructed, with
+note given to important components and characteristics of the model.
+
+1. Begin with a variant to represent
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+In our example, we will use an HGVS string, which is a common form
+for compact and human-readable representiation of sequence variation.
+However, this is used as a proxy for _any_ form of variation that is
+representable by the VR-Spec :ref:`variation` class.
+
+
+Translating HGVS using VR-Python
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 This example demonstrates the mechanics of translating an HGVS
-expression to a VR representation for educational purposes. Users who
+expression to a VR representation for educational purposes, using
+the :ref:`VR-Python implementation <impl-vr-python>`. Users who
 wish to translate HGVS or other expressions routinely should consider
-using the ga4gh.vr.extras.translator of the :ref:`VR-Python
-<impl-vr-python>` package.
+using the ga4gh.vr.extras.translator (see :ref:`below <vr-extras>`).
 
 .. code:: ipython3
 
@@ -120,9 +138,10 @@ using the ga4gh.vr.extras.translator of the :ref:`VR-Python
      'id': 'ga4gh:VA.n9ax-9x6gOC0OEt73VMYqCBfqfxG1XUH'}
 
 
+.. _vr-extras:
 
 Using ga4gh.vr.extras.translator
-================================
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 The VR Translator imports HGVS, SPDI, Beacon, and VCF formats, and
 appropriate handles more complex cases than shown above.
