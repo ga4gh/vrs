@@ -10,5 +10,4 @@ Appendices
    ga4gh_identifiers
    implementations
    truncated_digest_collision_analysis
-   examples/index
    

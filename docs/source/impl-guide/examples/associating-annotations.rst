@@ -3,7 +3,7 @@
 Associating Annotions with VR Objects
 =====================================
 
-This notebook demonstrates how to associate information with VR objects.
+This example demonstrates how to associate information with VR objects.
 
 Information is never embedded within VR objects. Instead, it is
 associated with those objects by means of their ids. This approach to

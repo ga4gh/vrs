@@ -1,9 +1,10 @@
 .. _hgvs-translation:
 
-This notebook demonstrates the mechanics of translating an HGVS
+This example demonstrates the mechanics of translating an HGVS
 expression to a VR representation for educational purposes. Users who
-wish to translate HGVS or other expressions routinely should use
-ga4gh.vr.extras.translator.
+wish to translate HGVS or other expressions routinely should consider
+using the ga4gh.vr.extras.translator of the :ref:`VR-Python
+<impl-vr-python>` package.
 
 .. code:: ipython3
 
