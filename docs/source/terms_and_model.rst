@@ -63,6 +63,14 @@ Data Model Notes and Principles
   data should be associated with VR objects through identifiers.  See
   :ref:`computed-identifiers`.
 
+* Error handling is intentionally unspecified and delegated to
+  implementation.  The VR-Spec provides foundational data types that
+  enable significant flexibility.  Except where required by this
+  specification, implementations may choose whether and how to
+  validate data.  For example, implementations MAY choose to validate
+  that particular combinations of objects are compatible, but such
+  validation is not required.
+
 * We recognize that a common desire may be to have human-readable
   identifiers associated with VR objects. We recommend using the _id
   field (see :ref:`optional-attributes` below) to create a lookup for
@@ -141,17 +149,21 @@ string has the structure ``prefix``:``reference`` (W3C Terminology).
  
 **Implementation guidance**
 
-* CURIE-formatted identifiers are used as global identifiers of GA4GH
-  VR objects.  This specification RECOMMENDS using a
-  :ref:`computed-identifiers` to construct globally unique identifiers
-  for objects.  These identifiers are RECOMMENDED for use within *and*
-  between systems.
-* CURIE-formatted identifiers are also used for references to data
-  outside the scope of this specification, such as reference
-  sequences.
-* When an appropriate namespace exists at `identifiers.org
-  <http://identifiers.org/>`__, that namespace MUST be used verbatim.
-* Identifiers are case-sensitive.
+* All identifiers in VR-Spec MUST be a valid |curie|, regardless of
+  whether the identifier refers to GA4GH VR objects or external data.
+* For GA4GH VR Objects, this specification RECOMMENDS using globally
+  unique :ref:`computed-identifiers` for use within *and* between
+  systems.
+* For external data, CURIE-formatted identifiers MUST be used.  When
+  an appropriate namespace exists at `identifiers.org
+  <http://identifiers.org/>`__, that namespace MUST be used.  When an
+  appropriate namespace does not exist at `identifiers.org
+  <http://identifiers.org/>`__, support is implementation-dependent.
+  That is, implementations MAY choose whether and how to support
+  informal or local namespaces.
+* Implemantions MUST use CURIE identifiers verbatim and MUST NOT be
+  modified in any way (e.g., case-folding).  Implementations MUST NOT
+  expose partial (parsed) identifiers to any client.
 
 **Example**
 
@@ -587,9 +599,6 @@ indels).
 
 * Implementations MUST enforce values interval.end ≤ sequence_length
   when the Sequence length is known.
-* Implementations MAY choose to provide a mechanism for ensuring that
-  the type of sequence and the content of the state are compatible, but
-  such behavior is not provided by the specification.
 * Alleles are equal only if the component fields are equal: at the
   same location and with the same state.
 * Alleles MAY have multiple related representations on the same
