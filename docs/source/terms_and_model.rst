@@ -63,6 +63,16 @@ Data Model Notes and Principles
   data should be associated with VR objects through identifiers.  See
   :ref:`computed-identifiers`.
 
+* We recognize that a common desire may be to have human-readable
+  identifiers associated with VR objects. We recommend using the _id
+  field (see :ref:`optional-attributes` below) to create a lookup for
+  any such identifiers (see :ref:`example usage
+  <associating-annotations>`), and provide reference methods for
+  creating VR identifiers from other common variant formats (see the
+  :ref:`HGVS translation example <hgvs-translation>`).
+
+
+.. _optional-attributes:
 
 Optional Attributes
 @@@@@@@@@@@@@@@@@@@

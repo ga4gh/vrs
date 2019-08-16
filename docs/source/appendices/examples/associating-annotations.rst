@@ -1,3 +1,4 @@
+.. _associating-annotations:
 
 Associating Annotions with VR Objects
 =====================================
@@ -112,8 +113,8 @@ data sources.
           },
           "type": "Allele"
         },
-        "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_": {
-          "_digest": "EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_",
+        "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH\_": {
+          "_digest": "EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH\_",
           "location": {
             "_digest": "u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx",
             "interval": {
@@ -169,13 +170,13 @@ data sources.
       },
       "hgvs_names": {
         "ga4gh:VA.UUvQpMYU5x8XXBS-RhBhmipTWe2AALzj": "NC_000019.10:g.44908822=",
-        "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_": "NC_000019.10:g.44908822C>T",
+        "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH\_": "NC_000019.10:g.44908822C>T",
         "ga4gh:VA.LQrGFIOAP8wEAybwNBo8pJ3yIG7tXWoh": "NC_000019.10:g.44908684=",
         "ga4gh:VA.iXjilHZiyCEoD3wVMPMXG3B8BtYfL88H": "NC_000019.10:g.44908684T>C"
       },
       "rs_names": {
         "ga4gh:VA.UUvQpMYU5x8XXBS-RhBhmipTWe2AALzj": "rs7412C",
-        "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_": "rs7412T",
+        "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH\_": "rs7412T",
         "ga4gh:VA.LQrGFIOAP8wEAybwNBo8pJ3yIG7tXWoh": "rs429358C",
         "ga4gh:VA.iXjilHZiyCEoD3wVMPMXG3B8BtYfL88H": "rs429358T"
       },
@@ -183,7 +184,7 @@ data sources.
         "gnomad": {
           "global": {
             "ga4gh:VA.UUvQpMYU5x8XXBS-RhBhmipTWe2AALzj": 0.9385,
-            "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_": 0.0615,
+            "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH\_": 0.0615,
             "ga4gh:VA.LQrGFIOAP8wEAybwNBo8pJ3yIG7tXWoh": 0.1385,
             "ga4gh:VA.iXjilHZiyCEoD3wVMPMXG3B8BtYfL88H": 0.8615
           }
