@@ -42,7 +42,6 @@ subsequent sections.
 
 .. _ser-dig-id:
 .. figure:: ../images/id-dig-ser.png
-   :align: left
 
    **Serialization, Digest, and Computed Identifier Operations**
    Entities are shown in gray boxes. Functions are denoted by bold
@@ -55,26 +54,34 @@ subsequent sections.
    URL-safe character set. [`figure source
    <https://www.draw.io/?page-id=M8V1EMsVyfZQDDbK8gNL&title=VR%20diagrams.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fharts.net%2Fuc%3Fid%3D1Qimkvi-Fnd1hhuixbd6aU4Se6zr5Nc1h%26export%3Ddownload>`__]
 
+.. note:: Most implementation users will need only the
+	  `ga4gh_identify` function.  We describe the
+	  `ga4gh_serialize`, `ga4gh_digest`, and `sha512t24u`
+	  functions here primarily for implementers.
+
 
 Requirements
 @@@@@@@@@@@@
 
 Implementations MUST adhere to the following requirements:
 
-* The VR Computed Identifier is NOT defined if used with any other
+* Implementations MUST use the normalization, serialization, and
+  digest mechanisms described in this section when generating GA4GH
+  Computed Identifiers.  Implementations MUST NOT use any other
   normalization, serialization, or digest mechanism to generate a
   GA4GH Computed Identifier.
 
-* VR Computed Identifiers are defined only when all nested objects are
-  identified with ``ga4gh`` identifiers.  Generating VR identifiers
-  using objects referenced within any other namespace is not compliant
-  with this specification.
+* Implementations MUST ensure that all nested objects are identified
+  with GA4GH Computed Identifiers.  Implementations MAY NOT reference
+  nested objects using identifiers in any namespace other than
+  ``ga4gh``.
 
-.. important:: The above requirement means that *sequences MUST be
-               identified with GA4GH computed identifiers* based on
-               the sequence digest.  Implementations that use other
-               sequence identifiers are NOT compliant with this
-               specification.
+.. note:: The GA4GH schema MAY be used with identifiers from any
+          namespace. For example, a SequenceLocation may be defined
+          using a `sequence_id` = ``refseq:NC_000019.10``.  However,
+          an implementation of the Computed Identifier algorithm MUST
+          first translate sequence accessions to GA4GH ``SQ``
+          accessions to be compliant with this specification.
 
 
 .. _digest-serialization:
@@ -228,7 +235,7 @@ The GA4GH VR-Spec constructs computed identifiers as follows::
 
     "ga4gh" ":" type_prefix "." <digest>
 
-.. note:: Do not confuse the W3C CURIE ``prefix`` ("ga4gh") with the
+.. warning:: Do not confuse the W3C CURIE ``prefix`` ("ga4gh") with the
           type prefix.
 
 Type prefixes used by VR are:
@@ -268,9 +275,9 @@ following changes will be made to this section of the specification:
 All other aspects of the computed identifier scheme will remain intact.
 
 
-----
 
-**References**
+References
+@@@@@@@@@@
 
 .. [Gibson] `Gibson Canonical JSON <http://gibson042.github.io/canonicaljson-spec/>`__
 .. [OLPC] `OLPC Canonical JSON <http://wiki.laptop.org/go/Canonical_JSON>`__

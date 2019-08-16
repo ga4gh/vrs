@@ -55,4 +55,19 @@ You'll probably have to `pip install pyyaml` first.
 
 To watch for changes and update automatically:
 
-    make watch &
+    make -C schema watch &
+
+
+# Contributing docs
+
+The VR specification documentation is written in reStructuredText and
+located in `docs/source/`.  Commits to this repo are built
+automatically at `vr-spec.readthedocs.io`__. 
+
+To build documentation locally, type:
+
+    make -C docs clean watch &
+	
+Then, open `docs/build/html/index.html`.  The above make command
+should build docs when source changes. (Some types of changes require
+recleaning and building.)

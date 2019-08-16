@@ -8,7 +8,6 @@ Overview
 .. _vr-schema-diagram:
 
 .. figure:: images/schema-current.png
-   :align: left
 
    **VR Schema Diagram**
 

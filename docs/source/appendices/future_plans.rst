@@ -18,7 +18,6 @@ require supporting more complex types of variation, including:
 * rule-based variation
 
 .. figure:: ../images/schema-future.png
-   :align: left
 
    **An illustration of planned components for the VR Schema.**
    Version 1.0 components are colored green. Components that are

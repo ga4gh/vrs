@@ -58,14 +58,29 @@ Data Model Notes and Principles
 * VR objects are `value objects
   <https://en.wikipedia.org/wiki/Value_object>`__.  Two objects are
   considered equal if and only if their respective attributes are
-  equal.
+  equal.  As value objects, VR objects are used as primitive types and
+  SHOULD NOT be used as containers for related data.  Instead, related
+  data should be associated with VR objects through identifiers.  See
+  :ref:`computed-identifiers`.
+
+
+Optional Attributes
+@@@@@@@@@@@@@@@@@@@
 
 * VR attributes use a leading underscore to represent optional
   attributes that are not part of the value object.  Such attributes
   are not considered when evaluating equality or creating computed
-  identifiers.
-  
-----
+  identifiers. Two such attributes are currently in use by the
+  specification, `_id` and `_digest`.
+
+* The `_id` attribute is available to identifiable objects, and MAY be
+  used by an implementation to store the identifier for a VR object.
+  If used, the stored `_id` element MUST be a :ref:`ga4gh identifier <identify>`.
+
+* The `_digest` attribute is available to in identifiable objects, and
+  MAY be used by an implementation to store the :ref:`truncated-digest`
+  for constructing digests of parent objects.
+
 
 Primitive Concepts
 @@@@@@@@@@@@@@@@@@
@@ -199,7 +214,6 @@ amino acid codes.
   AA).
 
 
-----
 
 Composite Concepts
 @@@@@@@@@@@@@@@@@@
