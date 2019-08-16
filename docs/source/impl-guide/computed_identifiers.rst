@@ -77,10 +77,6 @@ Implementations MUST adhere to the following requirements:
           an implementation of the Computed Identifier algorithm MUST
           first translate sequence accessions to GA4GH ``SQ``
           accessions to be compliant with this specification.
-          Similarly, other identifiers MAY be used in the `_id` slot
-          of identifiable objects, but MUST be translated to the
-          appropriate `ga4gh` namespaced identifiers if referenced
-          for digest computation.
 
 
 .. _digest-serialization:
@@ -234,7 +230,7 @@ The GA4GH VR-Spec constructs computed identifiers as follows::
 
     "ga4gh" ":" type_prefix "." <digest>
 
-.. note:: Do not confuse the W3C CURIE ``prefix`` ("ga4gh") with the
+.. warning:: Do not confuse the W3C CURIE ``prefix`` ("ga4gh") with the
           type prefix.
 
 Type prefixes used by VR are:
