@@ -1,3 +1,4 @@
+.. _associating-annotations:
 
 Associating Annotions with VR Objects
 =====================================

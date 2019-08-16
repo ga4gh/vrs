@@ -1,3 +1,4 @@
+.. _hgvs-translation:
 
 This notebook demonstrates the mechanics of translating an HGVS
 expression to a VR representation for educational purposes. Users who
