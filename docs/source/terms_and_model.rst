@@ -103,35 +103,6 @@ Optional Attributes
 Primitive Concepts
 @@@@@@@@@@@@@@@@@@
 
-.. _b64udigest:
-
-B64UDigest
-##########
-
-**Biological definition**
-
-None.
-
-**Computational definition**
-
-A string that is constrained to represent `base64url
-<https://tools.ietf.org/html/rfc4648#section-5>`_ encoded data.
-
-**Implementation guidance**
-
-* A ``B64UDigest`` is the encoding used for globally unique
-  identifiers. See :ref:`computed-identifiers` for details.
-* A ``B64UDigest`` is case-sensitive. Implementations MUST NOT alter
-  ``B64UDigest`` strings in any way.
-* In VR-Spec, the ``B64UDigest`` is primarily used to store
-  :ref:`sha512t24u truncated digest <truncated-digest>` values.
-* Implementations MUST replace nested identifiable objects with their
-  corresponding digests when constructing :ref:`computed-identifiers`
-  for VR objects (including sequences identifier *sequence_id*).
-
-**Example**
-
-see :ref:`Digest Serialization Examples <digest-serialization-example>`
 
 .. _curie:
 
@@ -403,10 +374,6 @@ named :ref:`Sequence`.
      - Type
      - Limits
      - Description
-   * - _digest
-     - :ref:`b64udigest`
-     - 0..1
-     - The :ref:`truncated-digest` for the SequenceLocation.
    * - _id
      - :ref:`CURIE`
      - 0..1
@@ -574,10 +541,6 @@ indels).
      - Type
      - Limits
      - Description
-   * - _digest
-     - :ref:`b64udigest`
-     - 0..1
-     - The :ref:`truncated-digest` for the Allele Variation.
    * - _id
      - :ref:`CURIE`
      - 0..1
@@ -695,10 +658,6 @@ subclasses, but are still treated as variation.
      - Type
      - Limits
      - Description
-   * - _digest
-     - :ref:`b64udigest`
-     - 0..1
-     - The :ref:`truncated-digest` for the Text Variation.
    * - _id
      - :ref:`CURIE`
      - 0..1
