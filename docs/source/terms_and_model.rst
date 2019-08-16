@@ -94,8 +94,8 @@ Optional Attributes
 * The `_id` attribute is available to identifiable objects, and MAY be
   used by an implementation to store the identifier for a VR object.
   If used, the stored `_id` element MUST be a :ref:`curie`. If used for
-  creating a :ref:`truncated-digest` for parent objects, this must be
-  a :ref:`GA4GH Computed Identifier <identify>`.
+  creating a :ref:`truncated-digest` for parent objects, the stored
+  element must be a :ref:`GA4GH Computed Identifier <identify>`.
 
 
 Primitive Concepts
