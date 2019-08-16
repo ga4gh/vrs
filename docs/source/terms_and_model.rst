@@ -77,8 +77,8 @@ Optional Attributes
   used by an implementation to store the identifier for a VR object.
   If used, the stored `_id` element MUST be a :ref:`ga4gh identifier <identify>`.
 
-* The `_digest` attribute is found in identifiable objects, and MAY
-  by used by an implementation to store the :ref:`truncated-digest`
+* The `_digest` attribute is available to in identifiable objects, and
+  MAY be used by an implementation to store the :ref:`truncated-digest`
   for constructing digests of parent objects.
 
 
