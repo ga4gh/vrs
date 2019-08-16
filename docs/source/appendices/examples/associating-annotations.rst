@@ -96,9 +96,7 @@ data sources.
     {
       "alleles": {
         "ga4gh:VA.UUvQpMYU5x8XXBS-RhBhmipTWe2AALzj": {
-          "_digest": "UUvQpMYU5x8XXBS-RhBhmipTWe2AALzj",
           "location": {
-            "_digest": "u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx",
             "interval": {
               "end": 44908822,
               "start": 44908821,
@@ -114,9 +112,7 @@ data sources.
           "type": "Allele"
         },
         "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH\_": {
-          "_digest": "EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH\_",
           "location": {
-            "_digest": "u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx",
             "interval": {
               "end": 44908822,
               "start": 44908821,
@@ -132,9 +128,7 @@ data sources.
           "type": "Allele"
         },
         "ga4gh:VA.LQrGFIOAP8wEAybwNBo8pJ3yIG7tXWoh": {
-          "_digest": "LQrGFIOAP8wEAybwNBo8pJ3yIG7tXWoh",
           "location": {
-            "_digest": "emmUme_DvPnWg476971oqQpVPXkQU9YF",
             "interval": {
               "end": 44908684,
               "start": 44908683,
@@ -150,9 +144,7 @@ data sources.
           "type": "Allele"
         },
         "ga4gh:VA.iXjilHZiyCEoD3wVMPMXG3B8BtYfL88H": {
-          "_digest": "iXjilHZiyCEoD3wVMPMXG3B8BtYfL88H",
           "location": {
-            "_digest": "emmUme_DvPnWg476971oqQpVPXkQU9YF",
             "interval": {
               "end": 44908684,
               "start": 44908683,

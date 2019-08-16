@@ -110,8 +110,7 @@ ga4gh.vr.extras.translator.
 
 .. parsed-literal::
 
-    {'_digest': 'n9ax-9x6gOC0OEt73VMYqCBfqfxG1XUH',
-     'location': {'_digest': 'v9K0mcjQVugxTDIcdi7GBJ_R6fZ1lsYq',
+    {'location': {
       'interval': {'end': 32936732, 'start': 32936731, 'type': 'SimpleInterval'},
       'sequence_id': 'ga4gh:SQ._0wi-qoDrvram155UmcSC-zA5ZK4fpLT',
       'type': 'SequenceLocation'},
@@ -139,8 +138,7 @@ appropriate handles more complex cases than shown above.
 
 .. parsed-literal::
 
-    {'_digest': 'n9ax-9x6gOC0OEt73VMYqCBfqfxG1XUH',
-     'location': {'_digest': 'v9K0mcjQVugxTDIcdi7GBJ_R6fZ1lsYq',
+    {'location': {
       'interval': {'end': 32936732, 'start': 32936731, 'type': 'SimpleInterval'},
       'sequence_id': 'ga4gh:SQ._0wi-qoDrvram155UmcSC-zA5ZK4fpLT',
       'type': 'SequenceLocation'},

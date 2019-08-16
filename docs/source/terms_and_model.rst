@@ -88,16 +88,14 @@ Optional Attributes
 * VR attributes use a leading underscore to represent optional
   attributes that are not part of the value object.  Such attributes
   are not considered when evaluating equality or creating computed
-  identifiers. Two such attributes are currently in use by the
-  specification, `_id` and `_digest`.
+  identifiers. Currently, the only such attribute in the specification
+  is the `_id` attribute.
 
 * The `_id` attribute is available to identifiable objects, and MAY be
   used by an implementation to store the identifier for a VR object.
-  If used, the stored `_id` element MUST be a :ref:`ga4gh identifier <identify>`.
-
-* The `_digest` attribute is available to in identifiable objects, and
-  MAY be used by an implementation to store the :ref:`truncated-digest`
-  for constructing digests of parent objects.
+  If used, the stored `_id` element MUST be a :ref:`curie`. If used for
+  creating a :ref:`truncated-digest` for parent objects, this must be
+  a :ref:`GA4GH Computed Identifier <identify>`.
 
 
 Primitive Concepts
