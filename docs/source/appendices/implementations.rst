@@ -83,7 +83,7 @@ of code written in C++.
 BRCA Exchange
 #############
 
-BRCA Exchange proposes an API endpoint which will share the variant
+BRCA Exchange [2]_ proposes an API endpoint which will share the variant
 list in VR JSON model.  Behind the scenes, all variants will be
 represented according to VR specification, in a separate table of the
 BRCA Exchange database, and the contents of this table will be served
@@ -100,7 +100,7 @@ VICC Meta-knowledgebase
 The Variant Interpretation for Cancer Consortium (VICC;
 https://cancervariants.org) has a collection of ~20K clinical
 interpretations associated with ~3,500 somatic variations and variation
-classes in a harmonized meta-knowledgebase [2]_ (see documentation at
+classes in a harmonized meta-knowledgebase [3]_ (see documentation at
 http://docs.cancervariants.org). Each interpretation is be linked to
 one or more variations or a variation class.
 
@@ -118,13 +118,17 @@ Example queries:
 
 **References:**
 
-.. [1] Wagner, A.H., et al. *A harmonized meta-knowledgebase of
-       clinical interpretations of cancer genomic variants.* bioRxiv
-       366856 (2018). `doi:10.1101/366856`_
-.. [2] Pawliczek P, Patel RY, et al. *ClinGen Allele Registry links
+.. [1] Pawliczek P, Patel RY, et al. *ClinGen Allele Registry links
        information about genetic variants.* Hum Mutat 11
        (2018). `doi:10.1002/humu.23637`_
+.. [2] Cline, M.S., et al.  *BRCA Challenge: BRCA Exchange as a global resource for
+       variants in BRCA1 and BRCA2.* PLoS Genet. 2018 Dec 26;14(12):e1007752.
+       `doi:10.1371/journal.pgen.1007752`_
+.. [3] Wagner, A.H., et al. *A harmonized meta-knowledgebase of
+       clinical interpretations of cancer genomic variants.* bioRxiv
+       366856 (2018). `doi:10.1101/366856`_
 
 .. _vicc-docs: https://search.cancervariants.org/api/v1/ui/#!/Associations/searchAssociations
 .. _doi:10.1101/366856: https://doi.org/10.1101/366856
 .. _doi:10.1002/humu.23637: https://onlinelibrary.wiley.com/doi/full/10.1002/humu.23637
+.. _doi:10.1371/journal.pgen.1007752: https://www.doi.org/10.1371/journal.pgen.1007752

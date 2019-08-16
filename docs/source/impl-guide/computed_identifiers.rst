@@ -74,9 +74,9 @@ Implementations MUST adhere to the following requirements:
 .. note:: The GA4GH schema MAY be used with identifiers from any
           namespace. For example, a SequenceLocation may be defined
           using a `sequence_id` = ``refseq:NC_000019.10``.  However,
-          an implementation of the Computed Identifier algorithm is
-          compliant only when it translates sequence accessions to
-          GA4GH ``SQ`` accessions.
+          an implementation of the Computed Identifier algorithm MUST
+          first translate sequence accessions to GA4GH ``SQ``
+          accessions to be compliant with this specification.
 
 
 .. _digest-serialization:
@@ -230,7 +230,7 @@ The GA4GH VR-Spec constructs computed identifiers as follows::
 
     "ga4gh" ":" type_prefix "." <digest>
 
-.. note:: Do not confuse the W3C CURIE ``prefix`` ("ga4gh") with the
+.. warning:: Do not confuse the W3C CURIE ``prefix`` ("ga4gh") with the
           type prefix.
 
 Type prefixes used by VR are:
