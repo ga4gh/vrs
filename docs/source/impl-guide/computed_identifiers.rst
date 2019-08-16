@@ -74,9 +74,13 @@ Implementations MUST adhere to the following requirements:
 .. note:: The GA4GH schema MAY be used with identifiers from any
           namespace. For example, a SequenceLocation may be defined
           using a `sequence_id` = ``refseq:NC_000019.10``.  However,
-          an implementation of the Computed Identifier algorithm is
-          compliant only when it translates sequence accessions to
-          GA4GH ``SQ`` accessions.
+          an implementation of the Computed Identifier algorithm MUST
+          first translate sequence accessions to GA4GH ``SQ``
+          accessions to be compliant with this specification.
+          Similarly, other identifiers MAY be used in the `_id` slot
+          of identifiable objects, but MUST be translated to the
+          appropriate `ga4gh` namespaced identifiers before digest
+          computation.
 
 
 .. _digest-serialization:
