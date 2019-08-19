@@ -77,7 +77,7 @@ Data Model Notes and Principles
   any such identifiers (see :ref:`example usage
   <associating-annotations>`), and provide reference methods for
   creating VR identifiers from other common variant formats (see the
-  :ref:`HGVS translation example <hgvs-translation>`).
+  :ref:`HGVS translation example <example>`).
 
 
 .. _optional-attributes:
