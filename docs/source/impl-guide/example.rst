@@ -221,7 +221,7 @@ following computed identifier for our example::
 
 Variation and Location objects contain an OPTIONAL ``_id`` attribute
 which implementations may use to store any CURIE-formatted identifier.
-If an implementation returns a computed identifier with objects, the
+*If* an implementation returns a computed identifier with objects, the
 object might look like the following:
 
 .. code-block:: json
@@ -243,3 +243,31 @@ object might look like the following:
     },
     "type": "Allele"
   }
+
+This example provides a full VR-compliant Allele with a computed identifier.
+
+.. note:: The ``_id`` attribute is optional.  If it is used, the value
+          MUST be a CURIE, but it does NOT need to be a GA4GH Computed
+          Identifier.  Applications MAY choose to implement their own
+          identifier scheme for private or public use.  For example,
+          the above ``_id`` could be a serial number assigned by an
+          application, such as ``acmecorp:v0000123``.
+
+
+What's Next?
+@@@@@@@@@@@@
+
+This example has shown a full example for a relatively simple case.
+VR provides a framework that will enable much more complex variation.
+Please see :ref:`future-plans` for a discussion of variation classes
+that are intened in the near future.
+
+The :ref:`implementations` section lists libraries and packages that
+implement VR-Spec.
+
+VR objects are `value objects
+<https://en.wikipedia.org/wiki/Value_object>`__.  An important
+consequence of this design choice is that data should be associated
+*with* VR objects via their identifiers rather than embedded *within*
+those objects.  The appendix contains an example of :ref:`associating
+annotations with variation <associating-annotations>`.
