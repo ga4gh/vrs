@@ -4,15 +4,16 @@ Computed Identifiers
 !!!!!!!!!!!!!!!!!!!!
 
 .. note:: This section depends on the :ref:`ga4gh-identifiers`, which
-          is submitted concurrently.  Based on conversations with
-          GA4GH technical leaders, we expect that the proposal will be
-          approved and have therefore assumed acceptance when writing
-          this section.  In the event that the proposal is not
-          accepted, this section will be modified as described in
-          :ref:`plan-b`.  Because identifiers created
-          through this proposal are expected to be durable, it is
-          critical for GA4GH to make a long-term decision regarding
-          identifiers.
+          is under discussion.  Based on conversations with GA4GH
+          technical leaders, the proposal is expected to be approved
+          and, therefore, this VR proposal assumes the use of the
+          ``ga4gh`` prefix.
+
+	  In the event that the proposal is not accepted, this section
+          will be modified as described in :ref:`plan-b`.  Because
+          identifiers created through this proposal are expected to be
+          durable, it is critical for GA4GH to make a long-term
+          decision regarding identifiers.
 
 
 The VR-Spec provides an algorithmic solution to deterministically
@@ -265,7 +266,7 @@ Namespace Contingency Plan
 In the event that :ref:`ga4gh-identifiers` is not accepted, the
 following changes will be made to this section of the specification:
 
-* The namespace (CURIE prefix) will become ``ga4gh.vr``.
+* The namespace (CURIE prefix) will become ``vr``.
 
 * In the function names `ga4gh_digest`, `ga4gh_identify`, and
   `ga4gh_serialize`, `ga4gh` will be replaced with `vr`.
