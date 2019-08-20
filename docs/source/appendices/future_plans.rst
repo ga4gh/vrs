@@ -1,3 +1,5 @@
+.. _future-plans:
+
 Future Plans
 !!!!!!!!!!!!
 
@@ -160,10 +162,6 @@ Ensembl, HGNC, or other public trusted authority.
      - Type
      - Limits
      - Description
-   * - _digest
-     - :ref:`B64UDigest <b64udigest>`
-     - 0..1
-     - The :ref:`truncated-digest` for the GeneLocation.
    * - _id
      - :ref:`CURIE`
      - 0..1
@@ -282,10 +280,6 @@ co-occur on the same reference sequence.
      - Type
      - Limits
      - Description
-   * - _digest
-     - :ref:`B64UDigest <b64udigest>`
-     - 0..1
-     - The :ref:`truncated-digest` for the Haplotype.
    * - _id
      - :ref:`CURIE`
      - 0..1
@@ -411,10 +405,6 @@ A list of Haplotypes.
      - Type
      - Limits
      - Description
-   * - _digest
-     - :ref:`B64UDigest <b64udigest>`
-     - 0..1
-     - The :ref:`truncated-digest` for the Genotype.
    * - _id
      - :ref:`CURIE`
      - 0..1

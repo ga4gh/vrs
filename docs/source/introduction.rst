@@ -39,3 +39,4 @@ Here we document the primary contributions of this specification for variation r
 The machine readable schema definitions and example code are available online at the VR-Spec
 repository (https://github.com/ga4gh/vr-spec).
 
+Readers may wish to view a :ref:`complete example <example>` before reading the specification.

@@ -30,8 +30,6 @@ definitions:
         type: string
         enum: [Text]
         default: Text
-      _digest:
-        $ref: "#/definitions/B64UDigest"
       _id:
         $ref: "#/definitions/CURIE"
       definition:
@@ -50,8 +48,6 @@ definitions:
         type: string
         enum: [Allele]
         default: Allele
-      _digest:
-        $ref: "#/definitions/B64UDigest"
       _id:
         $ref: "#/definitions/CURIE"
       location:
@@ -80,8 +76,6 @@ definitions:
         type: string
         enum: [SequenceLocation]
         default: SequenceLocation
-      _digest:
-        $ref: "#/definitions/B64UDigest"
       _id:
         $ref: "#/definitions/CURIE"
       sequence_id:
@@ -169,17 +163,6 @@ definitions:
     additionalProperties: false
     type: string
     format: "date-time"
-
-  B64UDigest:
-    additionalProperties: false
-    description: >-
-      A digest encoded using the
-      [base64url](https://tools.ietf.org/html/rfc4648#section-5)
-      character set.
-
-    type: string
-    pattern: '^[-_A-Za-z0-9]+$'
-    example: "_ABC-abc-123_"
 
   CURIE:
     additionalProperties: false

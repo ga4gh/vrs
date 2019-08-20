@@ -5,9 +5,6 @@
          "additionalProperties": false,
          "description": "An assertion of a sequence state at a Location.",
          "properties": {
-            "_digest": {
-               "$ref": "#/definitions/B64UDigest"
-            },
             "_id": {
                "$ref": "#/definitions/CURIE"
             },
@@ -26,13 +23,6 @@
             }
          },
          "type": "object"
-      },
-      "B64UDigest": {
-         "additionalProperties": false,
-         "description": "A digest encoded using the [base64url](https://tools.ietf.org/html/rfc4648#section-5) character set.",
-         "example": "_ABC-abc-123_",
-         "pattern": "^[-_A-Za-z0-9]+$",
-         "type": "string"
       },
       "CURIE": {
          "additionalProperties": false,
@@ -73,9 +63,6 @@
       "SequenceLocation": {
          "additionalProperties": false,
          "properties": {
-            "_digest": {
-               "$ref": "#/definitions/B64UDigest"
-            },
             "_id": {
                "$ref": "#/definitions/CURIE"
             },
@@ -160,9 +147,6 @@
       "Text": {
          "additionalProperties": false,
          "properties": {
-            "_digest": {
-               "$ref": "#/definitions/B64UDigest"
-            },
             "_id": {
                "$ref": "#/definitions/CURIE"
             },

@@ -123,7 +123,7 @@ If the object is a composite VR object, implementations MUST:
     * replace nested identifiable objects (i.e., objects that have id
       properties) with their corresponding *digests*
     * order arrays of digests and ids by Unicode Character Set values
-    * filter out fields that start with underscore (e.g., `_digest`)
+    * filter out fields that start with underscore (e.g., `_id`)
     * filter out fields with null values
 
 The second step is to JSON serialize the message content with the

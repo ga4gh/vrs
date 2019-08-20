@@ -1,8 +1,11 @@
+.. _associating-annotations:
 
 Associating Annotions with VR Objects
 =====================================
 
-This notebook demonstrates how to associate information with VR objects.
+This example demonstrates how to associate information with VR
+objects.  Although the examples use the |vr-python| library, the
+principles apply regardless of implementation.
 
 Information is never embedded within VR objects. Instead, it is
 associated with those objects by means of their ids. This approach to
@@ -95,9 +98,7 @@ data sources.
     {
       "alleles": {
         "ga4gh:VA.UUvQpMYU5x8XXBS-RhBhmipTWe2AALzj": {
-          "_digest": "UUvQpMYU5x8XXBS-RhBhmipTWe2AALzj",
           "location": {
-            "_digest": "u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx",
             "interval": {
               "end": 44908822,
               "start": 44908821,
@@ -112,10 +113,8 @@ data sources.
           },
           "type": "Allele"
         },
-        "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_": {
-          "_digest": "EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_",
+        "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH\_": {
           "location": {
-            "_digest": "u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx",
             "interval": {
               "end": 44908822,
               "start": 44908821,
@@ -131,9 +130,7 @@ data sources.
           "type": "Allele"
         },
         "ga4gh:VA.LQrGFIOAP8wEAybwNBo8pJ3yIG7tXWoh": {
-          "_digest": "LQrGFIOAP8wEAybwNBo8pJ3yIG7tXWoh",
           "location": {
-            "_digest": "emmUme_DvPnWg476971oqQpVPXkQU9YF",
             "interval": {
               "end": 44908684,
               "start": 44908683,
@@ -149,9 +146,7 @@ data sources.
           "type": "Allele"
         },
         "ga4gh:VA.iXjilHZiyCEoD3wVMPMXG3B8BtYfL88H": {
-          "_digest": "iXjilHZiyCEoD3wVMPMXG3B8BtYfL88H",
           "location": {
-            "_digest": "emmUme_DvPnWg476971oqQpVPXkQU9YF",
             "interval": {
               "end": 44908684,
               "start": 44908683,
@@ -169,13 +164,13 @@ data sources.
       },
       "hgvs_names": {
         "ga4gh:VA.UUvQpMYU5x8XXBS-RhBhmipTWe2AALzj": "NC_000019.10:g.44908822=",
-        "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_": "NC_000019.10:g.44908822C>T",
+        "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH\_": "NC_000019.10:g.44908822C>T",
         "ga4gh:VA.LQrGFIOAP8wEAybwNBo8pJ3yIG7tXWoh": "NC_000019.10:g.44908684=",
         "ga4gh:VA.iXjilHZiyCEoD3wVMPMXG3B8BtYfL88H": "NC_000019.10:g.44908684T>C"
       },
       "rs_names": {
         "ga4gh:VA.UUvQpMYU5x8XXBS-RhBhmipTWe2AALzj": "rs7412C",
-        "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_": "rs7412T",
+        "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH\_": "rs7412T",
         "ga4gh:VA.LQrGFIOAP8wEAybwNBo8pJ3yIG7tXWoh": "rs429358C",
         "ga4gh:VA.iXjilHZiyCEoD3wVMPMXG3B8BtYfL88H": "rs429358T"
       },
@@ -183,7 +178,7 @@ data sources.
         "gnomad": {
           "global": {
             "ga4gh:VA.UUvQpMYU5x8XXBS-RhBhmipTWe2AALzj": 0.9385,
-            "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_": 0.0615,
+            "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH\_": 0.0615,
             "ga4gh:VA.LQrGFIOAP8wEAybwNBo8pJ3yIG7tXWoh": 0.1385,
             "ga4gh:VA.iXjilHZiyCEoD3wVMPMXG3B8BtYfL88H": 0.8615
           }
