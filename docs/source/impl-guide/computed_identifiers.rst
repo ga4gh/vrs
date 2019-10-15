@@ -3,18 +3,6 @@
 Computed Identifiers
 !!!!!!!!!!!!!!!!!!!!
 
-.. note:: This section depends on the :ref:`ga4gh-identifiers`, which
-          is submitted concurrently.  Based on conversations with
-          GA4GH technical leaders, we expect that the proposal will be
-          approved and have therefore assumed acceptance when writing
-          this section.  In the event that the proposal is not
-          accepted, this section will be modified as described in
-          :ref:`plan-b`.  Because identifiers created
-          through this proposal are expected to be durable, it is
-          critical for GA4GH to make a long-term decision regarding
-          identifiers.
-
-
 The VR-Spec provides an algorithmic solution to deterministically
 generate a globally unique identifier from a VR object itself. All
 valid implementations of the VR Computed Identifier will generate the
@@ -256,23 +244,6 @@ For example, the identifer for the allele example under :ref:`digest-serializati
 
    ga4gh\:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH\_
 
-
-.. _plan-b:
-
-Namespace Contingency Plan
-@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-In the event that :ref:`ga4gh-identifiers` is not accepted, the
-following changes will be made to this section of the specification:
-
-* The namespace (CURIE prefix) will become ``ga4gh.vr``.
-
-* In the function names `ga4gh_digest`, `ga4gh_identify`, and
-  `ga4gh_serialize`, `ga4gh` will be replaced with `vr`.
-
-* The GA4GH VR team will manage type prefixes.
-
-All other aspects of the computed identifier scheme will remain intact.
 
 
 
