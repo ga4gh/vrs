@@ -7,8 +7,8 @@
 # To watch for changes and update automatically:
 #   make watch &
 
-
-$schema: "http://json-schema.org/schema#"
+# https://json-schema.org/understanding-json-schema/reference/schema.html
+$schema: "http://json-schema.org/draft-04/schema"
 title: "GA4GH-VR-Definitions"
 type: object
 

@@ -26,9 +26,8 @@ Translate HGVS to VR
    discriminate polymorphic objects.
 
 
-The `HGVS <http://varnomen.hgvs.org>`_ string
-``NC_000013.11:g.32936732G>C`` represents a single base substitution
-on the reference sequence `NC_000013.11
+The `hgvs`_ string ``NC_000013.11:g.32936732G>C`` represents a single
+base substitution on the reference sequence `NC_000013.11
 <https://www.ncbi.nlm.nih.gov/nuccore/NC_000013.11>`_ (human
 chromosome 13, assembly GRCh38) at position 32936732 from the
 reference nucleotide ``G`` to ``C``.

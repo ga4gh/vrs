@@ -233,7 +233,7 @@ to a single exponent of a summation of :math:`-i/s` terms, factoring out
 :math:`1/s`, and using the series sum equivalence
 :math:`\sum\nolimits_{j=0}^{n} j = n(n+1)/2` for :math:`n\ge0`.)
 
-Appriximation #2: Taylor approximation of P’
+Approximation #2: Taylor approximation of P’
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The above result for :math:`P'` is also amenable to Taylor
