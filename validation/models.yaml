@@ -73,3 +73,15 @@ Allele:
       ga4gh_digest: EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_
       ga4gh_identify: ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_
       ga4gh_serialize: '{"location":"u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx","state":{"sequence":"T","type":"SequenceState"},"type":"Allele"}'
+
+  -
+    in:
+      location: ga4gh:VSL.u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx
+      state:
+        sequence: T
+        type: SequenceState
+      type: Allele
+    out:
+      ga4gh_digest: EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_
+      ga4gh_identify: ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_
+      ga4gh_serialize: '{"location":"u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx","state":{"sequence":"T","type":"SequenceState"},"type":"Allele"}'
