@@ -11,10 +11,10 @@
             "location": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Location"
+                     "$ref": "#/definitions/CURIE"
                   },
                   {
-                     "$ref": "#/definitions/CURIE"
+                     "$ref": "#/definitions/Location"
                   }
                ]
             },

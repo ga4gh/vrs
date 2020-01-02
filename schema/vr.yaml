@@ -62,8 +62,8 @@ definitions:
         $ref: "#/definitions/CURIE"
       location:
         oneOf:
-          - $ref: "#/definitions/Location"
           - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Location"
       state:
         $ref: "#/definitions/State"
 
