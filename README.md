@@ -10,7 +10,8 @@ initiatives, and diagnostic testing laboratories.
 
 
 > **NOTE:** vr-spec is under very active development.  The priorities
-and roadmap are available at the [VR 2019 Project](https://github.com/orgs/ga4gh/projects/5).
+> and roadmap are available at the [VR 2019
+> Project](https://github.com/orgs/ga4gh/projects/5).
 
 
 # Specific goals:
@@ -23,8 +24,6 @@ and roadmap are available at the [VR 2019 Project](https://github.com/orgs/ga4gh
   representational ambiguity.
 * Define a globally unique *computed identifier* for covered data
   classes.
-* Develop an [implementation](https://github.com/ga4gh/vr-python) to
-  facilitate adoption.
 * Develop [validation
   tests](https://github.com/ga4gh/vr-spec/tests/validation) to ensure
   consistency of implementations.
@@ -32,6 +31,9 @@ and roadmap are available at the [VR 2019 Project](https://github.com/orgs/ga4gh
 The VR model is the product of the [GA4GH Variation Representation
 group](https://ga4gh-gks.github.io/variant_representation.html).
 
+
+> **SEE ALSO**: See [vr-python](https://github.com/ga4gh/vr-python)
+> for an implementation and Jupyter notebooks.
 
 
 # Using the schema
