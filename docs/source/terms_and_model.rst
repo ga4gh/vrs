@@ -522,7 +522,7 @@ a reference sequence, without regard to genes or other features.
 
 **Computational definition**
 
-An Allele is a specific, single, and contiguous :ref:`Sequence` at a
+An Allele is a single and contiguous :ref:`Sequence` at a
 :ref:`Location`. Each alternative Sequence may be empty, shorter,
 longer, or the same length as the interval (e.g., due to one or more
 indels).
