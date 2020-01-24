@@ -435,10 +435,9 @@ None.
 *State* objects are one of two primary components specifying a VR
 :ref:`Allele` (in addition to :ref:`Location`), and the designated
 components for representing change (or non-change) of the features
-indicated by the Allele Location. As an abstract class, State may
-encompass concrete :ref:`sequence` changes (see :ref:`SequenceState
-<sequence-state>`), complex translocations, copy number changes,
-expression variation, rule-based variation, and more (see
+indicated by the Allele Location. As an abstract class, State currently
+encompasses single and contiguous :ref:`sequence` changes (see :ref:`SequenceState
+<sequence-state>`), with additional types under consideration (see
 :ref:`planned-states`).
 
 .. _sequence-state:
