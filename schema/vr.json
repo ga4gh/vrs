@@ -19,7 +19,14 @@
                "$ref": "#/definitions/CURIE"
             },
             "location": {
-               "$ref": "#/definitions/Location"
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/CURIE"
+                  },
+                  {
+                     "$ref": "#/definitions/Location"
+                  }
+               ]
             },
             "state": {
                "$ref": "#/definitions/State"

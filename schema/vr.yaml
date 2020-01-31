@@ -32,7 +32,6 @@ definitions:
   #    +- Future: Genotype (Set of Haplotypes)
 
 
-
   ############################################################################
   # Locations
 
@@ -165,7 +164,9 @@ definitions:
         enum: [Allele]
         default: Allele
       location:
-        $ref: "#/definitions/Location"
+        oneOf:
+          - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Location"
       state:
         $ref: "#/definitions/State"
 
