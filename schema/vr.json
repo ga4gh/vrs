@@ -76,9 +76,17 @@
             },
             "members": {
                "items": {
-                  "$ref": "#/definitions/DiscreteVariation"
+                  "oneOf": [
+                     {
+                        "$ref": "#/definitions/DiscreteVariation"
+                     },
+                     {
+                        "$ref": "#/definitions/CURIE"
+                     }
+                  ]
                },
-               "type": "array"
+               "type": "array",
+               "uniqueItems": true
             },
             "type": {
                "default": "DiscreteVariationSet",
@@ -102,14 +110,29 @@
                "default": "UNKNOWN"
             },
             "location": {
-               "$ref": "#/definitions/Location",
-               "default": null
+               "default": null,
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/CURIE"
+                  },
+                  {
+                     "$ref": "#/definitions/Location"
+                  }
+               ]
             },
             "members": {
                "items": {
-                  "$ref": "#/definitions/DiscreteVariation"
+                  "oneOf": [
+                     {
+                        "$ref": "#/definitions/DiscreteVariation"
+                     },
+                     {
+                        "$ref": "#/definitions/CURIE"
+                     }
+                  ]
                },
-               "type": "array"
+               "type": "array",
+               "uniqueItems": true
             },
             "type": {
                "default": "Haplotype",

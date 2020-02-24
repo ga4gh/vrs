@@ -220,10 +220,14 @@ definitions:
         default: "DiscreteVariationSet"
       members:
         type: array
+        uniqueItems: true
         items:
-          $ref: "#/definitions/DiscreteVariation"
+          oneOf:
+            - $ref: "#/definitions/DiscreteVariation"
+            - $ref: "#/definitions/CURIE"
 
   Haplotype:
+    additionalProperties: false
     description: >-
       A set of zero or more Variation instances on a single instance of a Sequence.
     type: "object"
@@ -235,16 +239,21 @@ definitions:
         enum: ["Haplotype"]
         default: "Haplotype"
       location:
-        $ref: "#/definitions/Location"
+        oneOf:
+          - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Location"
         default: null
       completeness:
         $ref: "#/enums/Completeness"
         default: "UNKNOWN"
       members:
         type: array
+        uniqueItems: true
         items:
-          $ref: "#/definitions/DiscreteVariation"
-    additionalProperties: false
+          oneOf:
+            - $ref: "#/definitions/DiscreteVariation"
+            - $ref: "#/definitions/CURIE"
+
 
   ############################################################################
   # Basic types
