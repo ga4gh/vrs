@@ -76,9 +76,47 @@ definitions:
     description: >-
       A Location represents a span on a specific sequence.
     oneOf:
+      - $ref: "#/definitions/CytobandLocation"
+      - $ref: "#/definitions/GeneLocation"
       - $ref: "#/definitions/SequenceLocation"
     discriminator:
       propertyName: type
+
+  CytobandLocation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [CytobandLocation]
+        default: CytobandLocation
+      _id:
+        $ref: "#/definitions/CURIE"
+      chr:
+        type: string
+      start:
+        $ref: "#/definitions/Cytoband"
+      end:
+        $ref: "#/definitions/Cytoband"
+        nullable: true
+        default: null
+    additionalProperties: false
+    required:
+      - type
+      - chr
+      - start
+    
+  GeneLocation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [GeneLocation]
+        default: GeneLocation
+      _id:
+        $ref: "#/definitions/CURIE"
+      gene:
+        $ref: "#/definitions/CURIE"
+        description: See https://www.ebi.ac.uk/miriam/main/datatypes/MIR:00000069
 
   SequenceLocation:
     additionalProperties: false
@@ -171,6 +209,16 @@ definitions:
   # Basic types
   # These types are used solely within other definitions.
 
+  Cytoband:
+    type: string
+    pattern: '^[pq][1-9][0-9]*(\.[1-9][0-9]*)?$'
+    example: "q22.3"
+      
+  GeneSymbol:
+    type: string
+    pattern: '^[A-Z][A-Za-z0-9]+$'
+    example: "BRCA1"
+
   DateTime:
     additionalProperties: false
     type: string
@@ -208,3 +256,5 @@ definitions:
     type: string
     pattern: '^\w[^:]+:.+$'
     example: "ga4gh:GA.01234abcde"
+
+    

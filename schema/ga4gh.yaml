@@ -23,7 +23,7 @@ identifiers:
     Allele: VA
     SequenceLocation: VSL
     Text: VT
-    # CytobandLocation: VCL
+    CytobandLocation: VCL
     # GeneLocation: VGL
     # Genotype: VG
     # Haplotype: VH
