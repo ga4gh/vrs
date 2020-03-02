@@ -360,7 +360,7 @@ is approximately equivalent to:
         Assumes m << 2^b.
         
         """
-        b = math.log2(m / P) - 1
+        b = math.log2(m**2 / P) - 1
         if b < 5 + math.log2(m):
             return "-"
         return b2B3(b)
