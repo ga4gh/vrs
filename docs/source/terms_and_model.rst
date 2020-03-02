@@ -206,21 +206,8 @@ amino acid codes.
 
 
 
-.. todo:: restructure to be similar to
-          https://github.com/ga4gh/vr-spec/issues/116. i.e., something like:
-	  |  Location
-	  |  Variation
-	  |  +- ...
-	  |  +- DiscreteLocation
-	  |     +- Allele
-	  |     +- (Translocation)
-	  |  +- AggregateVariation
-	  |     +- VariationSet
-	  
-
-
-Composite Concepts
-@@@@@@@@@@@@@@@@@@
+Locations
+@@@@@@@@@
 
 .. _interval:
 
@@ -499,10 +486,37 @@ The *SequenceState* class specifically captures a :ref:`sequence` as a
       "type": "SequenceState"
     }
 
+
 .. _variation:
 
 Variation
-#########
+@@@@@@@@@
+
+
+.. note:: consider restructure to be similar to
+	  https://github.com/ga4gh/vr-spec/issues/116. i.e., something like:
+
+	  |  Location
+	  |  Variation
+	  |  +- ...
+	  |  +- DiscreteLocation
+	  |     +- Allele
+	  |     +- (Translocation)
+	  |  +- AggregateVariation
+	  |     +- VariationSet
+
+	  A key question is whether the documentation outline should
+	  reflect the class hierarchy.
+
+	  Also, the need for Discrete Variation, as well as the term
+	  itself, are being debated.
+
+	  
+
+.. _discrete_variation:
+
+Discrete Variation
+@@@@@@@@@@@@@@@@@@
 
 **Biological definition**
 
@@ -520,10 +534,11 @@ subclass defined by the VR |version| specification is the
 :ref:`Allele`, with the :ref:`text` subclass for capturing other
 Variations that are not yet covered.
 
+
 .. _allele:
 
 Allele
-$$$$$$
+######
 
 **Biological definition**
 
@@ -645,7 +660,7 @@ indels).
 .. _text:
 
 Text
-$$$$
+####
 
 **Biological definition**
 
@@ -713,9 +728,12 @@ subclasses, but are still treated as variation.
 .. _genetic variation: https://en.wikipedia.org/wiki/Genetic_variation
 
 
+Aggregate Variation
+@@@@@@@@@@@@@@@@@@@
 
-Variation Set
-@@@@@@@@@@@@@
+
+Discrete Variation Set
+######################
 
 **Biological definition**
 
@@ -758,7 +776,7 @@ An unconstrained set of Variation.
 
 
 Haplotype
-@@@@@@@@@
+#########
 
 **Biological definition**
 
@@ -862,6 +880,7 @@ same reference sequence.
   used in association studies.
 
 **Sources**
+
 * ISOGG: Haplotype — A haplotype is a combination of alleles (DNA
   sequences) at different places (loci) on the chromosome that are
   transmitted together. A haplotype may be one locus, several loci, or
