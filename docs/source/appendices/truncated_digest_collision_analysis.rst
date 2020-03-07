@@ -1,7 +1,7 @@
 .. _truncated-digest-collision-analysis:
 
-Truncated Digest Collision Analysis
-===================================
+Truncated Digest Timing and Collision Analysis
+==============================================
 
 The GA4GH Digest uses a truncated SHA-512 digest in order to generate a
 unique identifier based on data that defines the object. This notebook
@@ -33,7 +33,6 @@ Conclusions
     
     algorithms = {'sha512', 'sha1', 'sha256', 'md5', 'sha224', 'sha384'}
 
---------------
 
 Digest Timing
 -------------
@@ -87,24 +86,19 @@ basis for the Truncated Digest.
 
 
 
-+-----------+---------+---------+---------+--------+---------+
-| algorithm | 100     | 1000    | 10000   | 100000 | 1000000 |
-+===========+=========+=========+=========+========+=========+
-| md5       | 1.23 ms | 2.7 ms  | 17.6 ms | 147 ms | 1.46 s  |
-+-----------+---------+---------+---------+--------+---------+
-| sha1      | 1.24 ms | 2.28 ms | 12.4 ms | 110 ms | 1.08 s  |
-+-----------+---------+---------+---------+--------+---------+
-| sha224    | 1.51 ms | 3.66 ms | 25.2 ms | 235 ms | 2.33 s  |
-+-----------+---------+---------+---------+--------+---------+
-| sha256    | 1.51 ms | 3.62 ms | 25.6 ms | 241 ms | 2.55 s  |
-+-----------+---------+---------+---------+--------+---------+
-| sha384    | 1.46 ms | 4.01 ms | 18.9 ms | 168 ms | 1.71 s  |
-+-----------+---------+---------+---------+--------+---------+
-| sha512    | 1.47 ms | 3.13 ms | 18.3 ms | 165 ms | 1.63 s  |
-+-----------+---------+---------+---------+--------+---------+
+========= ======= ======= ======= ====== =======
+algorithm 100     1000    10000   100000 1000000
+========= ======= ======= ======= ====== =======
+md5       1.02 ms 2.51 ms 23.4 ms 145 ms 1.44 s
+sha1      1.02 ms 1.91 ms 11.3 ms 101 ms 1 s
+sha224    1.21 ms 3.16 ms 23.1 ms 224 ms 2.2 s
+sha256    1.18 ms 3.29 ms 23.3 ms 223 ms 2.2 s
+sha384    1.17 ms 2.54 ms 16 ms   150 ms 1.47 s
+sha512    1.2 ms  2.55 ms 16.1 ms 148 ms 1.47 s
+========= ======= ======= ======= ====== =======
 
 
-**Conclusion: SHA-512 computational time is similar to that of other
+**Conclusion: SHA-512 computational time is comparable to that of other
 digest methods.**
 
 This is result was not expected initially. On further research, there is
@@ -116,7 +110,6 @@ compared to 32-bit systems and digests that use 32-bit operations. SHA-2
 digests are indeed much slower than SHA-1 and MD5 on 32-bit systems, but
 such legacy platforms is not relevant to the Truncated Digest.
 
---------------
 
 Collision Analysis
 ------------------
@@ -296,14 +289,14 @@ collisions.
 -  [1] https://en.wikipedia.org/wiki/Birthday_problem
 -  [2] http://preshing.com/20110504/hash-collision-probabilities/
 
---------------
 
 Choosing a digest size
 ----------------------
 
-Now, we turn the problem around: What digest length :math:`b`
-corresponds with a collision probability less than :math:`P` for
-:math:`m` messages?
+Now, we turn the problem around:
+
+   **What digest length :math:`b` is required to achieve a collision
+   probability less than :math:`P` for :math:`m` messages?**
 
 From the above summary, we have :math:`P = m^2 / 2s` for
 :math:`m \ll s`. Rewriting with :math:`s=2^b`, we have the probability
@@ -314,10 +307,6 @@ is:
 
 Note that the collision probability depends on the number of messages,
 but not their size.
-
-Solving for the number of messages (not used further in this analysis):
-
-.. math:: m(b, P) = \sqrt{P * 2^{b+1}}
 
 Solving for the minimum number of *bits* :math:`b` as a function of an
 expected number of sequences :math:`m` and a desired tolerance for
@@ -341,6 +330,15 @@ is approximately equivalent to:
 
 .. math:: b \ge 5 + log_2 m
 
+For completeness:
+~~~~~~~~~~~~~~~~~
+
+Solving for the number of messages:
+
+.. math:: m(b, P) = \sqrt{P * 2^{b+1}}
+
+This equation is not used further in this analysis.
+
 .. code:: ipython3
 
     def b2B3(b):
@@ -360,7 +358,7 @@ is approximately equivalent to:
         Assumes m << 2^b.
         
         """
-        b = math.log2(m / P) - 1
+        b = math.log2(m**2 / P) - 1
         if b < 5 + math.log2(m):
             return "-"
         return b2B3(b)
@@ -391,28 +389,29 @@ digest length (bytes) required for expected collision probability :math:`P` over
 |     | 1e- | 1e- | 1e- | 1e- | 1e- | 1e- | 1e- | 1e- | 1e- | 0.0 | 0.5 |
 |     | 30  | 27  | 24  | 21  | 18  | 15  | 12  | 09  | 06  | 01  |     |
 +=====+=====+=====+=====+=====+=====+=====+=====+=====+=====+=====+=====+
-| 1e+ | 15  | 15  | 15  | 12  | 12  | 9   | 9   | 9   | 6   | 6   | -   |
+| 1e+ | 18  | 18  | 15  | 15  | 15  | 12  | 12  | 9   | 9   | 9   | 6   |
 | 06  |     |     |     |     |     |     |     |     |     |     |     |
 +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 1e+ | 18  | 15  | 15  | 15  | 12  | 12  | 9   | 9   | 9   | 6   | -   |
+| 1e+ | 21  | 21  | 18  | 18  | 15  | 15  | 15  | 12  | 12  | 9   | 9   |
 | 09  |     |     |     |     |     |     |     |     |     |     |     |
 +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 1e+ | 18  | 18  | 15  | 15  | 15  | 12  | 12  | 9   | 9   | 9   | -   |
+| 1e+ | 24  | 24  | 21  | 21  | 18  | 18  | 15  | 15  | 15  | 12  | 12  |
 | 12  |     |     |     |     |     |     |     |     |     |     |     |
 +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 1e+ | 21  | 18  | 18  | 15  | 15  | 15  | 12  | 12  | 9   | 9   | -   |
+| 1e+ | 27  | 24  | 24  | 24  | 21  | 21  | 18  | 18  | 15  | 15  | 15  |
 | 15  |     |     |     |     |     |     |     |     |     |     |     |
 +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 1e+ | 21  | 21  | 18  | 18  | 15  | 15  | 15  | 12  | 12  | 9   | -   |
+| 1e+ | 30  | 27  | 27  | 24  | 24  | 24  | 21  | 21  | 18  | 18  | 15  |
 | 18  |     |     |     |     |     |     |     |     |     |     |     |
 +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 1e+ | 24  | 21  | 21  | 18  | 18  | 15  | 15  | 15  | 12  | 12  | -   |
+| 1e+ | 30  | 30  | 30  | 27  | 27  | 24  | 24  | 24  | 21  | 21  | 18  |
 | 21  |     |     |     |     |     |     |     |     |     |     |     |
 +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 1e+ | 24  | 24  | 21  | 21  | 18  | 18  | 15  | 15  | 15  | 12  | -   |
+| 1e+ | 33  | 33  | 30  | 30  | 30  | 27  | 27  | 24  | 24  | 24  | 21  |
 | 24  |     |     |     |     |     |     |     |     |     |     |     |
 +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-| 1e+ | 27  | 24  | 24  | 24  | 21  | 21  | 18  | 18  | 15  | 15  | -   |
+| 1e+ | 39  | 39  | 36  | 36  | 33  | 33  | 30  | 30  | 30  | 27  | 27  |
 | 30  |     |     |     |     |     |     |     |     |     |     |     |
 +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+
 
