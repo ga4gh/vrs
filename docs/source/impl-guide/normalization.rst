@@ -135,6 +135,6 @@ alternate sequence) at an interval is outlined below.
 
 .. [1] Holmes, J. B., Moyer, E., Phan, L., Maglott, D. &
        Kattman, B. L. *SPDI: Data Model for Variants and Applications
-       at NCBI.* bioRxiv 537449 (2019). `doi:10.1101/537449`_
+       at NCBI.* Bioinformatics (2020 March 15). `doi:10.1093/bioinformatics/btz856`_
 
-.. _doi:10.1101/537449: https://doi.org/10.1101/537449
+.. _doi:10.1093/bioinformatics/btz856: https://doi.org/10.1093/bioinformatics/btz856
