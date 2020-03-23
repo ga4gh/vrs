@@ -46,6 +46,8 @@ definitions:
 
   SequenceLocation:
     additionalProperties: false
+    description: >-
+      A segment of a reference sequence
     type: object
     properties:
       _id:
@@ -204,8 +206,7 @@ definitions:
     oneOf:
       - $ref: "#/definitions/DiscreteVariationSet"
       - $ref: "#/definitions/Haplotype"
-      #- $ref: "#/definitions/VariationSet"
-      #- $ref: "#/definitions/Genotype"
+      - $ref: "#/definitions/Genotype"
 
   DiscreteVariationSet:
     description: >-
@@ -253,6 +254,28 @@ definitions:
           oneOf:
             - $ref: "#/definitions/DiscreteVariation"
             - $ref: "#/definitions/CURIE"
+
+  Genotype:
+    additionalProperties: false
+    description: A list of Haplotypes.
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [Genotype]
+        default: Genotype
+      id:
+        $ref: "#/definitions/Id"
+      completeness:
+        $ref: "#/enums/Completeness"
+      members:
+        type: array
+        uniqueItems: true
+        items:
+          oneOf:
+            - $ref: "#/definitions/Haplotype"
+            - $ref: "#/definitions/CURIE"
+
 
 
   ############################################################################

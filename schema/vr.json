@@ -8,6 +8,9 @@
             },
             {
                "$ref": "#/definitions/Haplotype"
+            },
+            {
+               "$ref": "#/definitions/Genotype"
             }
          ]
       },
@@ -98,6 +101,40 @@
          },
          "type": "object"
       },
+      "Genotype": {
+         "additionalProperties": false,
+         "description": "A list of Haplotypes.",
+         "properties": {
+            "completeness": {
+               "$ref": "#/enums/Completeness"
+            },
+            "id": {
+               "$ref": "#/definitions/Id"
+            },
+            "members": {
+               "items": {
+                  "oneOf": [
+                     {
+                        "$ref": "#/definitions/Haplotype"
+                     },
+                     {
+                        "$ref": "#/definitions/CURIE"
+                     }
+                  ]
+               },
+               "type": "array",
+               "uniqueItems": true
+            },
+            "type": {
+               "default": "Genotype",
+               "enum": [
+                  "Genotype"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
       "Haplotype": {
          "additionalProperties": false,
          "description": "A set of zero or more Variation instances on a single instance of a Sequence.",
@@ -170,6 +207,7 @@
       },
       "SequenceLocation": {
          "additionalProperties": false,
+         "description": "A segment of a reference sequence",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
