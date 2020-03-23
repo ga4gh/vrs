@@ -21,14 +21,14 @@ identifiers:
 
     # Variation 
     Allele: VA
+    DiscreteVariationSet: DVS
+    Genotype: VG
+    Haplotype: VH
     SequenceLocation: VSL
     Text: VT
-    DiscreteVariationSet: DVS
     # VariationSet: VS
     # CytobandLocation: VCL
     # GeneLocation: VGL
-    # Genotype: VG
-    Haplotype: VH
 
 
   regexp: '^ga4gh:(?P<type>[^.]+)\.(?P<digest>.+)$'

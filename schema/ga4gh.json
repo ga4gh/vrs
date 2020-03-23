@@ -7,6 +7,8 @@
       "type_prefix_map": {
          "Allele": "VA",
          "DiscreteVariationSet": "DVS",
+         "Genotype": "VG",
+         "Haplotype": "VH",
          "Sequence": "SQ",
          "SequenceLocation": "VSL",
          "Text": "VT"

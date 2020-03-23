@@ -105,11 +105,11 @@
          "additionalProperties": false,
          "description": "A list of Haplotypes.",
          "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
             "completeness": {
                "$ref": "#/enums/Completeness"
-            },
-            "id": {
-               "$ref": "#/definitions/Id"
             },
             "members": {
                "items": {
@@ -122,8 +122,7 @@
                      }
                   ]
                },
-               "type": "array",
-               "uniqueItems": true
+               "type": "array"
             },
             "type": {
                "default": "Genotype",

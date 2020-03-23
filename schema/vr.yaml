@@ -264,13 +264,12 @@ definitions:
         type: string
         enum: [Genotype]
         default: Genotype
-      id:
-        $ref: "#/definitions/Id"
+      _id:
+        $ref: "#/definitions/CURIE"
       completeness:
         $ref: "#/enums/Completeness"
       members:
         type: array
-        uniqueItems: true
         items:
           oneOf:
             - $ref: "#/definitions/Haplotype"
