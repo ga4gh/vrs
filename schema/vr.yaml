@@ -22,15 +22,9 @@ definitions:
   #    +- SequenceLocation
   #    
   #    Variation
-  #    +- DiscreteVariation
-  #       +- Allele
-  #       +- Future: Translocation
-  #
-  #    AggregateVariation
-  #    +- DiscreteVariationSet
-  #       +- Haplotype (i.e., ISA DiscreteVariationSet + new attrs, with constraints)
-  #    +- Future: Genotype (Set of Haplotypes)
-
+  #    +- Allele
+  #    +- Text
+  #    +- VariationSet
 
   ############################################################################
   # Locations
@@ -113,29 +107,14 @@ definitions:
   Variation:
     additionalProperties: false
     description: >-
-      A polymorphic representation of Discrete Variation and Aggregate
-      Variation
+      The root class of all Variation types
     oneOf:
-      - $ref: "#/definitions/DiscreteVariation"
-      - $ref: "#/definitions/AggregateVariation"
-    discriminator:
-      propertyName: type
-
-
-
-  ############################################################################
-  # DiscreteVariation
-
-  DiscreteVariation:
-    additionalProperties: false
-    description: >-
-      A polymorphic representation of variation
-    oneOf:
-      - $ref: "#/definitions/Text"
       - $ref: "#/definitions/Allele"
-      # future expansion of variation types will go here
+      - $ref: "#/definitions/Text"
+      - $ref: "#/definitions/VariationSet"
     discriminator:
       propertyName: type
+
 
   Text:
     additionalProperties: false
@@ -173,6 +152,26 @@ definitions:
         $ref: "#/definitions/State"
 
 
+  VariationSet:
+    description: >-
+      A set of Variation
+    type: "object"
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: ["VariationSet"]
+        default: "VariationSet"
+      members:
+        type: array
+        uniqueItems: true
+        items:
+          oneOf:
+            - $ref: "#/definitions/Variation"
+            - $ref: "#/definitions/CURIE"
+
+
   ############################################################################
   # States
 
@@ -197,84 +196,6 @@ definitions:
     example:
       type: SequenceState
       sequence: C
-
-
-  ############################################################################
-  # AggregateVariation
-
-  AggregateVariation:
-    oneOf:
-      - $ref: "#/definitions/DiscreteVariationSet"
-      - $ref: "#/definitions/Haplotype"
-      - $ref: "#/definitions/Genotype"
-
-  DiscreteVariationSet:
-    description: >-
-      A set of DiscreteVariation
-    type: "object"
-    properties:
-      _id:
-        $ref: "#/definitions/CURIE"
-      type:
-        type: string
-        enum: ["DiscreteVariationSet"]
-        default: "DiscreteVariationSet"
-      members:
-        type: array
-        uniqueItems: true
-        items:
-          oneOf:
-            - $ref: "#/definitions/DiscreteVariation"
-            - $ref: "#/definitions/CURIE"
-
-  Haplotype:
-    additionalProperties: false
-    description: >-
-      A set of zero or more Variation instances on a single instance of a Sequence.
-    type: "object"
-    properties:
-      _id:
-        $ref: "#/definitions/CURIE"
-      type:
-        type: string
-        enum: ["Haplotype"]
-        default: "Haplotype"
-      location:
-        oneOf:
-          - $ref: "#/definitions/CURIE"
-          - $ref: "#/definitions/Location"
-        default: null
-      completeness:
-        $ref: "#/enums/Completeness"
-        default: "UNKNOWN"
-      members:
-        type: array
-        uniqueItems: true
-        items:
-          oneOf:
-            - $ref: "#/definitions/DiscreteVariation"
-            - $ref: "#/definitions/CURIE"
-
-  Genotype:
-    additionalProperties: false
-    description: A list of Haplotypes.
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [Genotype]
-        default: Genotype
-      _id:
-        $ref: "#/definitions/CURIE"
-      completeness:
-        $ref: "#/enums/Completeness"
-      members:
-        type: array
-        items:
-          oneOf:
-            - $ref: "#/definitions/Haplotype"
-            - $ref: "#/definitions/CURIE"
-
 
 
   ############################################################################
@@ -318,25 +239,3 @@ definitions:
     type: string
     pattern: '^\w[^:]+:.+$'
     example: "ga4gh:GA.01234abcde"
-
-############################################################################
-# Enumeration types
-
-enums:
-  Completeness:
-    type: string
-    description: >-
-      Declares the `completeness` of a Haplotype or Genotype
-      definition.  See descriptions in those schemas for additional
-      information.
-      * COMPLETE: The definition is complete. All data are included
-        for the covered assay.
-      * PARTIAL: The definition is intentionally incomplete, typically
-        to protect information.  Declaring partial variation allows
-        data submitters to convey that data are missing.
-      * UNKNOWN: The definition is not known to be either COMPLETE or
-        PARTIAL.
-    enum:
-    - UNKNOWN
-    - PARTIAL
-    - COMPLETE

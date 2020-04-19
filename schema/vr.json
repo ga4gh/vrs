@@ -1,19 +1,6 @@
 {
    "$schema": "http://json-schema.org/draft-04/schema",
    "definitions": {
-      "AggregateVariation": {
-         "oneOf": [
-            {
-               "$ref": "#/definitions/DiscreteVariationSet"
-            },
-            {
-               "$ref": "#/definitions/Haplotype"
-            },
-            {
-               "$ref": "#/definitions/Genotype"
-            }
-         ]
-      },
       "Allele": {
          "additionalProperties": false,
          "description": "An assertion of a sequence state at a Location.",
@@ -55,130 +42,6 @@
          "additionalProperties": false,
          "format": "date-time",
          "type": "string"
-      },
-      "DiscreteVariation": {
-         "additionalProperties": false,
-         "description": "A polymorphic representation of variation",
-         "discriminator": {
-            "propertyName": "type"
-         },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/Text"
-            },
-            {
-               "$ref": "#/definitions/Allele"
-            }
-         ]
-      },
-      "DiscreteVariationSet": {
-         "description": "A set of DiscreteVariation",
-         "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "members": {
-               "items": {
-                  "oneOf": [
-                     {
-                        "$ref": "#/definitions/DiscreteVariation"
-                     },
-                     {
-                        "$ref": "#/definitions/CURIE"
-                     }
-                  ]
-               },
-               "type": "array",
-               "uniqueItems": true
-            },
-            "type": {
-               "default": "DiscreteVariationSet",
-               "enum": [
-                  "DiscreteVariationSet"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "Genotype": {
-         "additionalProperties": false,
-         "description": "A list of Haplotypes.",
-         "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "completeness": {
-               "$ref": "#/enums/Completeness"
-            },
-            "members": {
-               "items": {
-                  "oneOf": [
-                     {
-                        "$ref": "#/definitions/Haplotype"
-                     },
-                     {
-                        "$ref": "#/definitions/CURIE"
-                     }
-                  ]
-               },
-               "type": "array"
-            },
-            "type": {
-               "default": "Genotype",
-               "enum": [
-                  "Genotype"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "Haplotype": {
-         "additionalProperties": false,
-         "description": "A set of zero or more Variation instances on a single instance of a Sequence.",
-         "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "completeness": {
-               "$ref": "#/enums/Completeness",
-               "default": "UNKNOWN"
-            },
-            "location": {
-               "default": null,
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/CURIE"
-                  },
-                  {
-                     "$ref": "#/definitions/Location"
-                  }
-               ]
-            },
-            "members": {
-               "items": {
-                  "oneOf": [
-                     {
-                        "$ref": "#/definitions/DiscreteVariation"
-                     },
-                     {
-                        "$ref": "#/definitions/CURIE"
-                     }
-                  ]
-               },
-               "type": "array",
-               "uniqueItems": true
-            },
-            "type": {
-               "default": "Haplotype",
-               "enum": [
-                  "Haplotype"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
       },
       "Interval": {
          "additionalProperties": false,
@@ -311,29 +174,51 @@
       },
       "Variation": {
          "additionalProperties": false,
-         "description": "A polymorphic representation of Discrete Variation and Aggregate Variation",
+         "description": "The root class of all Variation types",
          "discriminator": {
             "propertyName": "type"
          },
          "oneOf": [
             {
-               "$ref": "#/definitions/DiscreteVariation"
+               "$ref": "#/definitions/Allele"
             },
             {
-               "$ref": "#/definitions/AggregateVariation"
+               "$ref": "#/definitions/Text"
+            },
+            {
+               "$ref": "#/definitions/VariationSet"
             }
          ]
-      }
-   },
-   "enums": {
-      "Completeness": {
-         "description": "Declares the `completeness` of a Haplotype or Genotype definition.  See descriptions in those schemas for additional information. * COMPLETE: The definition is complete. All data are included\n  for the covered assay.\n* PARTIAL: The definition is intentionally incomplete, typically\n  to protect information.  Declaring partial variation allows\n  data submitters to convey that data are missing.\n* UNKNOWN: The definition is not known to be either COMPLETE or\n  PARTIAL.",
-         "enum": [
-            "UNKNOWN",
-            "PARTIAL",
-            "COMPLETE"
-         ],
-         "type": "string"
+      },
+      "VariationSet": {
+         "description": "A set of Variation",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "members": {
+               "items": {
+                  "oneOf": [
+                     {
+                        "$ref": "#/definitions/Variation"
+                     },
+                     {
+                        "$ref": "#/definitions/CURIE"
+                     }
+                  ]
+               },
+               "type": "array",
+               "uniqueItems": true
+            },
+            "type": {
+               "default": "VariationSet",
+               "enum": [
+                  "VariationSet"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
       }
    },
    "title": "GA4GH-VR-Definitions",
