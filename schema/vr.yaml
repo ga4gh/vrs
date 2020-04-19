@@ -67,6 +67,54 @@ definitions:
       state:
         $ref: "#/definitions/State"
 
+  Haplotype:
+    additionalProperties: false
+    description: >-
+      A set of zero or more Variation instances on a single instance of a Sequence.
+    type: "object"
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: ["Haplotype"]
+        default: "Haplotype"
+      location:
+        oneOf:
+          - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Location"
+        default: null
+      completeness:
+        $ref: "#/enums/Completeness"
+        default: "UNKNOWN"
+      members:
+        type: array
+        uniqueItems: true
+        items:
+          oneOf:
+            - $ref: "#/definitions/DiscreteVariation"
+            - $ref: "#/definitions/CURIE"
+
+  Genotype:
+    additionalProperties: false
+    description: A list of Haplotypes.
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [Genotype]
+        default: Genotype
+      _id:
+        $ref: "#/definitions/CURIE"
+      completeness:
+        $ref: "#/enums/Completeness"
+      members:
+        type: array
+        items:
+          oneOf:
+            - $ref: "#/definitions/Haplotype"
+            - $ref: "#/definitions/CURIE"
+
 
   ############################################################################
   # Locations

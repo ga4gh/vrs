@@ -43,6 +43,85 @@
          "format": "date-time",
          "type": "string"
       },
+      "Genotype": {
+         "additionalProperties": false,
+         "description": "A list of Haplotypes.",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "completeness": {
+               "$ref": "#/enums/Completeness"
+            },
+            "members": {
+               "items": {
+                  "oneOf": [
+                     {
+                        "$ref": "#/definitions/Haplotype"
+                     },
+                     {
+                        "$ref": "#/definitions/CURIE"
+                     }
+                  ]
+               },
+               "type": "array"
+            },
+            "type": {
+               "default": "Genotype",
+               "enum": [
+                  "Genotype"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "Haplotype": {
+         "additionalProperties": false,
+         "description": "A set of zero or more Variation instances on a single instance of a Sequence.",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "completeness": {
+               "$ref": "#/enums/Completeness",
+               "default": "UNKNOWN"
+            },
+            "location": {
+               "default": null,
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/CURIE"
+                  },
+                  {
+                     "$ref": "#/definitions/Location"
+                  }
+               ]
+            },
+            "members": {
+               "items": {
+                  "oneOf": [
+                     {
+                        "$ref": "#/definitions/DiscreteVariation"
+                     },
+                     {
+                        "$ref": "#/definitions/CURIE"
+                     }
+                  ]
+               },
+               "type": "array",
+               "uniqueItems": true
+            },
+            "type": {
+               "default": "Haplotype",
+               "enum": [
+                  "Haplotype"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
       "Interval": {
          "additionalProperties": false,
          "description": "An Interval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of Interval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VR Interval may be zero-width. The SO definition is for an \"extent greater than zero\".",
