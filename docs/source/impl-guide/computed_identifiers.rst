@@ -235,6 +235,7 @@ Type prefixes used by VR are:
 
    SQ, Sequence
    VA, Allele
+   VS, VariationSet
    VSL, Sequence Location
    VT, Text
 

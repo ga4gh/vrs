@@ -732,7 +732,7 @@ An unconstrained set of Variation objects or references.
    * - _id
      - :ref:`CURIE`
      - 0..1
-     - Variation Id
+     - Identifier of the VariationSet.
    * - type
      - string
      - 1..1
@@ -740,18 +740,23 @@ An unconstrained set of Variation objects or references.
    * - members
      - :ref:`Variation`\[] or :ref:`CURIE`\[]
      - 0..*
-     - List of Variation. Attribute is required, but MAY be empty.
+     - List of Variation objects or identifiers. Attribute is
+       required, but MAY be empty.
 
 
 **Implementation Guidance**
 
+* The VariationSet identifier MAY be computed as described in
+  :ref:`computed-identifiers`, in which case the identifier
+  effectively refers to a static set because a different set of
+  members would geneate a different identifier.
+* CURIEs MAY refer to entities outside the `ga4gh` namespace.
+  However, objects that use non-`ga4gh` identifiers MAY NOT use the
+  :ref:`computed-identifiers` mechanism.
 * Do not use VariationSet for Haplotypes or Genotypes. VRS will soon
   (2020 Q2?) support dedicated classes that will provide appropriate
   constraints for these data.
 * Elements of `members` must be subclasses of Variation, which permits
-  sets to be nested.  Recursive sets are not meaningful and
-  unsupported; the behavior of such sets is implementation dependent. 
-
-
-
-  
+  sets to be nested.
+* Recursive sets are not meaningful and are not supported.
+* VariationSets may be empty.
