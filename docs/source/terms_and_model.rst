@@ -710,11 +710,12 @@ Variation Set
 
 **Biological definition**
 
-None.
+Sets of variation are used widely, such as sets of variants in dbSNP
+or ClinVar that might be related by function. 
 
 **Computational definition**
 
-An unconstrained set of Variation.
+An unconstrained set of Variation objects or references.
 
 **Information model**
 
@@ -744,7 +745,12 @@ An unconstrained set of Variation.
 
 **Implementation Guidance**
 
-* Elements of `members` must be subclasses of DiscreteVariation.
+* Do not use VariationSet for Haplotypes or Genotypes. VRS will soon
+  (2020 Q2?) support dedicated classes that will provide appropriate
+  constraints for these data.
+* Elements of `members` must be subclasses of Variation, which permits
+  sets to be nested.  Recursive sets are not meaningful and
+  unsupported; the behavior of such sets is implementation dependent. 
 
 
 
