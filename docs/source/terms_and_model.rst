@@ -705,8 +705,8 @@ subclasses, but are still treated as variation.
 .. _genetic variation: https://en.wikipedia.org/wiki/Genetic_variation
 
 
-Variation Set
-#############
+VariationSet
+############
 
 **Biological definition**
 
@@ -749,7 +749,7 @@ An unconstrained set of Variation objects or references.
 * The VariationSet identifier MAY be computed as described in
   :ref:`computed-identifiers`, in which case the identifier
   effectively refers to a static set because a different set of
-  members would geneate a different identifier.
+  members would generate a different identifier.
 * `members` may be specified as Variation objects or CURIE
   identifiers.
 * CURIEs MAY refer to entities outside the `ga4gh` namespace.

@@ -313,13 +313,3 @@ RuleState is a subclass of :ref:`state` intended to capture states defined
 by categorical rules instead of sequence states. This includes *gain- /
 loss-of-function*, *oncogenic*, and *truncating* variation.
 
-Variation Sets
-@@@@@@@@@@@@@@
-
-.. note:: The VR-Spec anticipates the need for sets of variation.
-          Sets MAY be static (immutable) or dynamic (changeable), and
-          might be defined manually, by an `equivalence function`, or
-          by an expansion functions.  Furthermore, equivalence and
-          expansion functions might be user-defined.  This concept is
-          being refined. Please comment at
-          https://github.com/ga4gh/vr-spec/issues/15
