@@ -435,10 +435,9 @@ None.
 *State* objects are one of two primary components specifying a VR
 :ref:`Allele` (in addition to :ref:`Location`), and the designated
 components for representing change (or non-change) of the features
-indicated by the Allele Location. As an abstract class, State may
-encompass concrete :ref:`sequence` changes (see :ref:`SequenceState
-<sequence-state>`), complex translocations, copy number changes,
-expression variation, rule-based variation, and more (see
+indicated by the Allele Location. As an abstract class, State currently
+encompasses single and contiguous :ref:`sequence` changes (see :ref:`SequenceState
+<sequence-state>`), with additional types under consideration (see
 :ref:`planned-states`).
 
 .. _sequence-state:
@@ -527,10 +526,8 @@ a reference sequence, without regard to genes or other features.
 
 **Computational definition**
 
-An Allele is a specific, single, and contiguous :ref:`Sequence` at a
-:ref:`Location`. Each alternative Sequence may be empty, shorter,
-longer, or the same length as the interval (e.g., due to one or more
-indels).
+An Allele is an assertion of the :ref:`State <State>` of a biological
+sequence at a :ref:`Location <Location>`.
 
 **Information model**
 
@@ -563,6 +560,11 @@ indels).
 
 **Implementation guidance**
 
+* The :ref:`State <State>` and :ref:`Location <Location>` subclasses
+  respectively represent diverse kinds of sequence changes and
+  mechanisms for describing the locations of those changes, including
+  varying levels of precision of sequence location and categories of
+  sequence changes.
 * Implementations MUST enforce values interval.end ≤ sequence_length
   when the Sequence length is known.
 * Alleles are equal only if the component fields are equal: at the

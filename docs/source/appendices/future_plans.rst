@@ -20,7 +20,8 @@ require supporting more complex types of variation, including:
 
 .. figure:: ../images/schema-future.png
 
-   **An illustration of planned components for the VR Schema.**
+   An illustration of planned components for the VR Schema.
+
    Version 1.0 components are colored green. Components that are
    undergoing testing and evaluation and are candidates for the next
    release cycle are colored yellow. Components that are planned but
