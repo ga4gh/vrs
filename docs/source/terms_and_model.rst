@@ -750,9 +750,15 @@ An unconstrained set of Variation objects or references.
   :ref:`computed-identifiers`, in which case the identifier
   effectively refers to a static set because a different set of
   members would geneate a different identifier.
+* `members` may be specified as Variation objects or CURIE
+  identifiers.
 * CURIEs MAY refer to entities outside the `ga4gh` namespace.
   However, objects that use non-`ga4gh` identifiers MAY NOT use the
   :ref:`computed-identifiers` mechanism.
+* VariationSet identifiers computed using the GA4GH
+  `:ref:`computed-identifiers` process do *not* depend on whether the
+  Variation objects are inlined or referenced, and do *not* depened on
+  the order of members.
 * Do not use VariationSet for Haplotypes or Genotypes. VRS will soon
   (2020 Q2?) support dedicated classes that will provide appropriate
   constraints for these data.
@@ -760,3 +766,82 @@ An unconstrained set of Variation objects or references.
   sets to be nested.
 * Recursive sets are not meaningful and are not supported.
 * VariationSets may be empty.
+
+**Example**
+
+Inlined Variation objects:
+
+.. parsed-literal::
+
+  {
+    "members": [
+      {
+        "location": {
+          "interval": {
+            "end": 11,
+            "start": 10,
+            "type": "SimpleInterval"
+          },
+          "sequence_id": "ga4gh:SQ.01234abcde",
+          "type": "SequenceLocation"
+        },
+        "state": {
+          "sequence": "C",
+          "type": "SequenceState"
+        },
+        "type": "Allele"
+      },
+      {
+        "location": {
+          "interval": {
+            "end": 21,
+            "start": 20,
+            "type": "SimpleInterval"
+          },
+          "sequence_id": "ga4gh:SQ.01234abcde",
+          "type": "SequenceLocation"
+        },
+        "state": {
+          "sequence": "C",
+          "type": "SequenceState"
+        },
+        "type": "Allele"
+      },
+      {
+        "location": {
+          "interval": {
+            "end": 31,
+            "start": 30,
+            "type": "SimpleInterval"
+          },
+          "sequence_id": "ga4gh:SQ.01234abcde",
+          "type": "SequenceLocation"
+        },
+        "state": {
+          "sequence": "C",
+          "type": "SequenceState"
+        },
+        "type": "Allele"
+      }
+    ],
+    "type": "VariationSet"
+  }
+
+
+Referenced Variation objects:
+
+.. parsed-literal::
+
+  {
+    "members": [
+      "ga4gh:VA.6xjH0Ikz88s7MhcyN5GJTa1p712-M10W",
+      "ga4gh:VA.7k2lyIsIsoBgRFPlfnIOeCeEgj_2BO7F",
+      "ga4gh:VA.ikcK330gH3bYO2sw9QcTsoptTFnk_Xjh"
+    ],
+    "type": "VariationSet"
+  }
+
+The GA4GH computed identifier for these sets is
+`ga4gh:VS.WVC_R7OJ688EQX3NrgpJfsf_ctQUsVP3`, regardless of the whether
+the Variation objects are inlined or referenced, and regardless of
+order. See :ref:`computed-identifiers` for more information.
