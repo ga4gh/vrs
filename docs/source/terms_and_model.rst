@@ -758,7 +758,7 @@ An unconstrained set of Variation objects or references.
   However, objects that use non-`ga4gh` identifiers MAY NOT use the
   :ref:`computed-identifiers` mechanism.
 * VariationSet identifiers computed using the GA4GH
-  `:ref:`computed-identifiers` process do *not* depend on whether the
+  :ref:`computed-identifiers` process do *not* depend on whether the
   Variation objects are inlined or referenced, and do *not* depened on
   the order of members.
 * Do not use VariationSet for Haplotypes or Genotypes. VRS will soon
