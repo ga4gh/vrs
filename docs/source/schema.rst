@@ -9,9 +9,9 @@ Overview
 
 .. figure:: images/schema-current.png
 
-   **VR Schema Diagram**
+   **VRS Schema Diagram**
 
-   The VR Schema describes multiple composite objects, which
+   The VRS Schema describes multiple composite objects, which
    are grouped under four abstract classes: :ref:`Variation`,
    :ref:`Location`, :ref:`State`, and :ref:`Interval`. These classes
    and their relationships to the representation of Variation are
@@ -30,7 +30,7 @@ Overview
 Machine Readable Specifications
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-The machine readable VR Specification is written using `JSON Schema
+The machine readable VRS Specification is written using `JSON Schema
 <https://json-schema.org/>`_.
 
 The schema itself is written in YAML (|vr_yaml|) and converted to JSON

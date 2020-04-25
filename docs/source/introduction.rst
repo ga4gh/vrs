@@ -34,7 +34,7 @@ Here we document the primary contributions of this specification for variation r
   above schema and algorithms, and supports translation of existing
   variant representation schemes into VRS for use in genomic data
   sharing.  It may be used as the basis for development in Python,
-  but it is not required in order to use the VR Specification.
+  but it is not required in order to use VRS.
 
 The machine readable schema definitions and example code are available online at the VRS
 repository (https://github.com/ga4gh/vr-spec).

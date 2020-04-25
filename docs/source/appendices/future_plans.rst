@@ -21,12 +21,12 @@ require supporting more complex types of variation, including:
 
 .. figure:: ../images/schema-future.png
 
-   **An illustration of planned components for the VR Schema.**
+   **An illustration of planned components for the VRS Schema.**
    Version 1.0 components are colored green. Components that are
    undergoing testing and evaluation and are candidates for the next
    release cycle are colored yellow. Components that are planned but
    still undergoing requirement gathering and initial development are
-   colored red. The VR Schema requires the use of multiple composite
+   colored red. The VRS Schema requires the use of multiple composite
    objects, which are grouped under four abstract classes:
    :ref:`Variation`, :ref:`Location`, :ref:`State`, and
    :ref:`Interval`. These classes and their relationships to the

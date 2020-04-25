@@ -52,7 +52,7 @@ alternate sequence) at an interval is outlined below.
 .. _normalization-diagram:
 
 .. list-table::
-     **VR Justified Normalization** A demonstration of fully justifying an insertion allele.
+     **VRS Justified Normalization** A demonstration of fully justifying an insertion allele.
    :class: reece-wrap
    :header-rows: 1
    :widths: 40 15 20
