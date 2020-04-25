@@ -1,5 +1,5 @@
 {
-   "$schema": "http://json-schema.org/schema#",
+   "$schema": "http://json-schema.org/draft-04/schema",
    "definitions": {
       "Allele": {
          "additionalProperties": false,
@@ -9,7 +9,14 @@
                "$ref": "#/definitions/CURIE"
             },
             "location": {
-               "$ref": "#/definitions/Location"
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/CURIE"
+                  },
+                  {
+                     "$ref": "#/definitions/Location"
+                  }
+               ]
             },
             "state": {
                "$ref": "#/definitions/State"
