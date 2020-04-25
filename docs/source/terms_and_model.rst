@@ -206,8 +206,8 @@ amino acid codes.
 
 
 
-Locations
-@@@@@@@@@
+Non-variation classes
+@@@@@@@@@@@@@@@@@@@@@@
 
 .. _interval:
 
