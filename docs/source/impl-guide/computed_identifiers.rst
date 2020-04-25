@@ -31,7 +31,8 @@ subsequent sections.
 .. _ser-dig-id:
 .. figure:: ../images/id-dig-ser.png
 
-   **Serialization, Digest, and Computed Identifier Operations**
+   Serialization, Digest, and Computed Identifier Operations
+
    Entities are shown in gray boxes. Functions are denoted by bold
    italics.  The yellow, green, and blue boxes, corresponding to the
    ``sha512t24u``, ``ga4gh_digest``, and ``ga4gh_identify`` functions
@@ -43,8 +44,8 @@ subsequent sections.
    <https://www.draw.io/?page-id=M8V1EMsVyfZQDDbK8gNL&title=VR%20diagrams.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fharts.net%2Fuc%3Fid%3D1Qimkvi-Fnd1hhuixbd6aU4Se6zr5Nc1h%26export%3Ddownload>`__]
 
 .. note:: Most implementation users will need only the
-	  `ga4gh_identify` function.  We describe the
-	  `ga4gh_serialize`, `ga4gh_digest`, and `sha512t24u`
+	  ``ga4gh_identify`` function.  We describe the
+	  ``ga4gh_serialize``, ``ga4gh_digest``, and ``sha512t24u``
 	  functions here primarily for implementers.
 
 
@@ -235,6 +236,7 @@ Type prefixes used by VR are:
 
    SQ, Sequence
    VA, Allele
+   VS, VariationSet
    VSL, Sequence Location
    VT, Text
 

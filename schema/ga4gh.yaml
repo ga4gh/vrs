@@ -21,10 +21,12 @@ identifiers:
 
     # Variation 
     Allele: VA
-    SequenceLocation: VSL
+    VariationSet: VS
     Text: VT
     Genotype: VG
     Haplotype: VH
+
+    SequenceLocation: VSL
     # CytobandLocation: VCL
     # GeneLocation: VGL
 

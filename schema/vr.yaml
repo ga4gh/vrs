@@ -19,104 +19,6 @@ definitions:
 
 
   ############################################################################
-  # Variation
-
-  Variation:
-    additionalProperties: false
-    description: >-
-      A polymorphic representation of variation
-    oneOf:
-      - $ref: "#/definitions/Text"
-      - $ref: "#/definitions/Allele"
-      # future expansion of variation types will go here
-    discriminator:
-      propertyName: type
-
-  Text:
-    additionalProperties: false
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [Text]
-        default: Text
-      _id:
-        $ref: "#/definitions/CURIE"
-      definition:
-        type: string
-        description: >-
-          An textual representation of variation intended to capture
-          variation descriptions that cannot be parsed, but still
-          treated as variation.
-
-  Allele:
-    additionalProperties: false
-    description: An assertion of a sequence state at a Location.
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [Allele]
-        default: Allele
-      _id:
-        $ref: "#/definitions/CURIE"
-      location:
-        oneOf:
-          - $ref: "#/definitions/CURIE"
-          - $ref: "#/definitions/Location"
-      state:
-        $ref: "#/definitions/State"
-
-  Haplotype:
-    additionalProperties: false
-    description: >-
-      A set of zero or more Variation instances on a single instance of a Sequence.
-    type: "object"
-    properties:
-      _id:
-        $ref: "#/definitions/CURIE"
-      type:
-        type: string
-        enum: ["Haplotype"]
-        default: "Haplotype"
-      location:
-        oneOf:
-          - $ref: "#/definitions/CURIE"
-          - $ref: "#/definitions/Location"
-        default: null
-      completeness:
-        $ref: "#/enums/Completeness"
-        default: "UNKNOWN"
-      members:
-        type: array
-        uniqueItems: true
-        items:
-          oneOf:
-            - $ref: "#/definitions/DiscreteVariation"
-            - $ref: "#/definitions/CURIE"
-
-  Genotype:
-    additionalProperties: false
-    description: A list of Haplotypes.
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [Genotype]
-        default: Genotype
-      _id:
-        $ref: "#/definitions/CURIE"
-      completeness:
-        $ref: "#/enums/Completeness"
-      members:
-        type: array
-        items:
-          oneOf:
-            - $ref: "#/definitions/Haplotype"
-            - $ref: "#/definitions/CURIE"
-
-
-  ############################################################################
   # Locations
 
   Location:
@@ -130,14 +32,16 @@ definitions:
 
   SequenceLocation:
     additionalProperties: false
+    description: >-
+      A segment of a reference sequence
     type: object
     properties:
+      _id:
+        $ref: "#/definitions/CURIE"
       type:
         type: string
         enum: [SequenceLocation]
         default: SequenceLocation
-      _id:
-        $ref: "#/definitions/CURIE"
       sequence_id:
         $ref: "#/definitions/CURIE"
       interval:
@@ -187,6 +91,126 @@ definitions:
       type: SimpleInterval
       start: 11
       end: 22
+
+
+  ############################################################################
+  # Variation
+
+  Variation:
+    additionalProperties: false
+    description: >-
+      The root class of all Variation types
+    oneOf:
+      - $ref: "#/definitions/Allele"
+      - $ref: "#/definitions/Text"
+      - $ref: "#/definitions/VariationSet"
+    discriminator:
+      propertyName: type
+
+
+  Text:
+    additionalProperties: false
+    type: object
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [Text]
+        default: Text
+      definition:
+        type: string
+        description: >-
+          An textual representation of variation intended to capture
+          variation descriptions that cannot be parsed, but still
+          treated as variation.
+
+  Allele:
+    additionalProperties: false
+    description: An assertion of a sequence state at a Location.
+    type: object
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [Allele]
+        default: Allele
+      location:
+        oneOf:
+          - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Location"
+      state:
+        $ref: "#/definitions/State"
+
+
+  VariationSet:
+    description: >-
+      A set of Variation
+    type: "object"
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: ["VariationSet"]
+        default: "VariationSet"
+      members:
+        type: array
+        uniqueItems: true
+        items:
+          oneOf:
+            - $ref: "#/definitions/Variation"
+            - $ref: "#/definitions/CURIE"
+
+
+  Haplotype:
+    additionalProperties: false
+    description: >-
+      A set of zero or more Variation instances on a single instance of a Sequence.
+    type: "object"
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: ["Haplotype"]
+        default: "Haplotype"
+      location:
+        oneOf:
+          - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Location"
+        default: null
+      completeness:
+        $ref: "#/enums/Completeness"
+        default: "UNKNOWN"
+      members:
+        type: array
+        uniqueItems: true
+        items:
+          oneOf:
+            - $ref: "#/definitions/DiscreteVariation"
+            - $ref: "#/definitions/CURIE"
+
+  Genotype:
+    additionalProperties: false
+    description: A list of Haplotypes.
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [Genotype]
+        default: Genotype
+      _id:
+        $ref: "#/definitions/CURIE"
+      completeness:
+        $ref: "#/enums/Completeness"
+      members:
+        type: array
+        items:
+          oneOf:
+            - $ref: "#/definitions/Haplotype"
+            - $ref: "#/definitions/CURIE"
 
 
   ############################################################################

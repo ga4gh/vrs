@@ -20,7 +20,8 @@ require supporting more complex types of variation, including:
 
 .. figure:: ../images/schema-future.png
 
-   **An illustration of planned components for the VR Schema.**
+   An illustration of planned components for the VR Schema.
+
    Version 1.0 components are colored green. Components that are
    undergoing testing and evaluation and are candidates for the next
    release cycle are colored yellow. Components that are planned but
@@ -312,13 +313,3 @@ RuleState is a subclass of :ref:`state` intended to capture states defined
 by categorical rules instead of sequence states. This includes *gain- /
 loss-of-function*, *oncogenic*, and *truncating* variation.
 
-Variation Sets
-@@@@@@@@@@@@@@
-
-.. note:: The VR-Spec anticipates the need for sets of variation.
-          Sets MAY be static (immutable) or dynamic (changeable), and
-          might be defined manually, by an `equivalence function`, or
-          by an expansion functions.  Furthermore, equivalence and
-          expansion functions might be user-defined.  This concept is
-          being refined. Please comment at
-          https://github.com/ga4gh/vr-spec/issues/15

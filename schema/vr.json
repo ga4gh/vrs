@@ -148,6 +148,7 @@
       },
       "SequenceLocation": {
          "additionalProperties": false,
+         "description": "A segment of a reference sequence",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
@@ -252,18 +253,51 @@
       },
       "Variation": {
          "additionalProperties": false,
-         "description": "A polymorphic representation of variation",
+         "description": "The root class of all Variation types",
          "discriminator": {
             "propertyName": "type"
          },
          "oneOf": [
             {
+               "$ref": "#/definitions/Allele"
+            },
+            {
                "$ref": "#/definitions/Text"
             },
             {
-               "$ref": "#/definitions/Allele"
+               "$ref": "#/definitions/VariationSet"
             }
          ]
+      },
+      "VariationSet": {
+         "description": "A set of Variation",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "members": {
+               "items": {
+                  "oneOf": [
+                     {
+                        "$ref": "#/definitions/Variation"
+                     },
+                     {
+                        "$ref": "#/definitions/CURIE"
+                     }
+                  ]
+               },
+               "type": "array",
+               "uniqueItems": true
+            },
+            "type": {
+               "default": "VariationSet",
+               "enum": [
+                  "VariationSet"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
       }
    },
    "title": "GA4GH-VR-Definitions",
