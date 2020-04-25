@@ -761,9 +761,6 @@ An unconstrained set of Variation objects or references.
   :ref:`computed-identifiers` process do *not* depend on whether the
   Variation objects are inlined or referenced, and do *not* depend on
   the order of members.
-* Do not use VariationSet for Haplotypes or Genotypes. VRS will soon
-  (2020 Q2?) support dedicated classes that will provide appropriate
-  constraints for these data.
 * Elements of `members` must be subclasses of Variation, which permits
   sets to be nested.
 * Recursive sets are not meaningful and are not supported.
