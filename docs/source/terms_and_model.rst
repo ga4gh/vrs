@@ -64,7 +64,7 @@ Data Model Notes and Principles
   :ref:`computed-identifiers`.
 
 * Error handling is intentionally unspecified and delegated to
-  implementation.  The VR-Spec provides foundational data types that
+  implementation.  VRS provides foundational data types that
   enable significant flexibility.  Except where required by this
   specification, implementations may choose whether and how to
   validate data.  For example, implementations MAY choose to validate
@@ -118,7 +118,7 @@ string has the structure ``prefix``:``reference`` (W3C Terminology).
  
 **Implementation guidance**
 
-* All identifiers in VR-Spec MUST be a valid |curie|, regardless of
+* All identifiers in VRS MUST be a valid |curie|, regardless of
   whether the identifier refers to GA4GH VR objects or external data.
 * For GA4GH VR Objects, this specification RECOMMENDS using globally
   unique :ref:`computed-identifiers` for use within *and* between
@@ -675,7 +675,7 @@ subclasses, but are still treated as variation.
   than Text if possible.
 * An implementation SHOULD define or adopt conventions for defining
   the strings stored in Text.definition.
-* If a future version of VR-Spec is adopted by an implementation and
+* If a future version of VRS is adopted by an implementation and
   the new version enables defining existing Text objects under a
   different Variation subclass, the implementation MUST construct a
   new object under the other Variation subclass. In such a case, an

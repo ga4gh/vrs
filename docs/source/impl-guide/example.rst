@@ -131,7 +131,7 @@ VR JSON Schema.
 Generate a computed identifer
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-A key feature of VR-Spec is an easily-implemented algorithm to
+A key feature of VRS is an easily-implemented algorithm to
 generate computed, digest-based identifiers for variation objects.
 This algorithm permits organizations to generate the same identifier
 for the same allele without prior coordination, which in turn
@@ -262,7 +262,7 @@ Please see :ref:`future-plans` for a discussion of variation classes
 that are intened in the near future.
 
 The :ref:`implementations` section lists libraries and packages that
-implement VR-Spec.
+implement VRS.
 
 VR objects are `value objects
 <https://en.wikipedia.org/wiki/Value_object>`__.  An important

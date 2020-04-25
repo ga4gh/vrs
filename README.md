@@ -3,13 +3,13 @@
 The [GA4GH](https://www.ga4gh.org/) [Variation Representation
 Specification](https://vr-spec.readthedocs.io/) provides a
 comprehensive framework for the computational representation of
-biological sequence variation.  VR-Spec is the result of a
+biological sequence variation.  VRS is the result of a
 collaboration among [contributors](CONTRIBUTORS.md) representing
 national information resource providers, major international public
 initiatives, and diagnostic testing laboratories.
 
 
-> **NOTE:** vr-spec is under very active development.  The priorities
+> **NOTE:** VRS is under very active development.  The priorities
 > and roadmap are available at the [VR 2019
 > Project](https://github.com/orgs/ga4gh/projects/5).
 

@@ -78,7 +78,7 @@ The `digest` is computed as described above. The type_prefix is a
 short alphanumeric code that corresponds to the type of object being
 represented.  If this propsal is accepted, this "type prefix map"
 would be administered by GA4GH.  (Currently, this map is maintained in
-a YAML file within the vr-spec repository, but it would be relocated
+a YAML file within the VRS repository, but it would be relocated
 on approval of this proposal.)
 
 We propose the following guidelines for type prefixes:

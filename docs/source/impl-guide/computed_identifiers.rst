@@ -3,7 +3,7 @@
 Computed Identifiers
 !!!!!!!!!!!!!!!!!!!!
 
-The VR-Spec provides an algorithmic solution to deterministically
+VRS provides an algorithmic solution to deterministically
 generate a globally unique identifier from a VR object itself. All
 valid implementations of the VR Computed Identifier will generate the
 same identifier when the objects are identical, and will generate
@@ -81,7 +81,7 @@ Digest serialization converts a VR object into a binary representation
 in preparation for computing a digest of the object.  The Digest
 Serialization specification ensures that all implementations serialize
 variation objects identically, and therefore that the digests will
-also be identical.  |vr-spec| provides validation tests to ensure
+also be identical.  |VRS| provides validation tests to ensure
 compliance.
 
 .. important:: Do not confuse Digest Serialization with JSON
@@ -92,7 +92,7 @@ compliance.
 
 Although several proposals exist for serializing arbitrary data in a
 consistent manner ([Gibson]_, [OLPC]_, [JCS]_), none have been
-ratified. As a result, |vr-spec| defines a custom serialization format
+ratified. As a result, |VRS| defines a custom serialization format
 that is consistent with these proposals but does not rely on them for
 definition; it is hoped that a future ratified standard will be
 forward compatible with the process described here.
@@ -219,7 +219,7 @@ has the form::
 
     prefix ":" reference
 
-The GA4GH VR-Spec constructs computed identifiers as follows::
+The GA4GH VRS constructs computed identifiers as follows::
 
     "ga4gh" ":" type_prefix "." <digest>
 

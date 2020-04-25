@@ -21,7 +21,7 @@ the Genetics community is intended to describe discrete changes in
 nucleotide / amino acid sequence. "Variation", in contrast, captures
 other classes of molecular variation, including epigenetic alteration
 and transcript abundance. Capturing these other classes of variation
-is a :doc:`future goal <future_plans>` of the VR-Spec, as there are many
+is a :doc:`future goal <future_plans>` of VRS, as there are many
 annotations that will require these variation classes as the subject.
 
 .. _use-allele:

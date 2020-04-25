@@ -5,18 +5,18 @@ Implementations
 
 The libraries and applications listed below have implemented the GA4GH
 Variation Representation Specification to store and exchange variation
-data. They are listed here to demonstrate VR utility and as a resource
-for those considering implementing VR-Spec. These packages are not
+data. They are listed here to demonstrate utility and as a resource
+for those considering implementing VRS. These packages are not
 supported by GA4GH.
 
 
 Libraries
 @@@@@@@@@
 
-Libraries facilitate the use of the VR-Spec, but do not implement a
+Libraries facilitate the use of the VRS, but do not implement a
 particular use or application.  Although there is only one library
 currently, it is expected that others will eventually appear as
-VR-Spec is adopted.
+VRS is adopted.
 
 
 .. _impl-vr-python:
@@ -24,22 +24,22 @@ VR-Spec is adopted.
 vr-python: GA4GH VR Python Implementation
 #########################################
 
-The |vr-python| is an implementation for the GA4GH VR-Spec.  It
-supports all types covered by the VR-Spec, implements Allele
+The |vr-python| is an implementation for the GA4GH VRS.  It
+supports all types covered by the VRS, implements Allele
 normalization and computed identifier generation, and provides "extra"
 features such as translation from HGVS, SPDI, and VCF formats.  See
 `vr-python notebooks
 <https://github.com/ga4gh/vr-python/blob/master/notebooks>`__ for
 usage examples.
 
-|VR-Spec| MAY be used without using the Python implementation.
+|VRS| MAY be used without using the Python implementation.
 
 
 Applications and Web Services
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-Applications implement VR-Spec to support specific use cases.
-Projects known to implement VR-Spec are listed below. Descriptions are
+Applications implement VRS to support specific use cases.
+Projects known to implement VRS are listed below. Descriptions are
 provided by the application authors.
 
 
@@ -110,7 +110,7 @@ As a Driver Project for GA4GH, VICC is contributing to and/or
 adopting three GA4GH standards: VR, Variant Annotation (VA), and the
 Data Use Ontology (DUO). VICC supports queries on all VR computed
 identifiers at the searchAssociations endpoint (`vicc-docs`_).
-Features associated with each interpretation are represented as VR-spec
+Features associated with each interpretation are represented as VRS
 objects.
 
 Example queries:

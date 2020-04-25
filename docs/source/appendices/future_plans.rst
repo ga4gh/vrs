@@ -6,7 +6,7 @@ Future Plans
 Overview
 @@@@@@@@
 
-The VR-Spec covers a fundamental subset of data types to represent
+VRS covers a fundamental subset of data types to represent
 variation, thus far predominantly related to the replacement of a
 subsequence in a reference sequence. Increasing its applicability will
 require supporting more complex types of variation, including:
@@ -48,7 +48,7 @@ to address a broader representation of variation.
 Intervals and Locations
 @@@@@@@@@@@@@@@@@@@@@@@
 
-VR-Spec uses :ref:`Interval` and :ref:`Location` subclasses to define
+VRS uses :ref:`Interval` and :ref:`Location` subclasses to define
 where variation occurs.  The schema is designed to be extensible to
 new kinds of Intervals and Locations in order to support, for example,
 fuzzy coordinates or feature-based locations.
@@ -130,7 +130,7 @@ Imprecise chromosomal locations based on chromosomal staining.
 **Computational definition**
 
 Cytogenetic bands are defined by a chromosome name, band, and
-sub-band. In VR-Spec, a cytogenetic location is an interval on a
+sub-band. In VRS, a cytogenetic location is an interval on a
 single chromsome with a start and end band and subband.
 
 **Information model**
@@ -443,14 +443,14 @@ A list of Haplotypes.
   location and with a ploidy of two, such as a pair of single residue
   variants on an autosome. The broader, generalized definition is a
   set of alleles at multiple locations and/or with ploidy other than
-  two.The VR-Spec Genotype entity is based on this broader definition.
+  two.The VRS Genotype entity is based on this broader definition.
 * The term "diplotype" is often used to refer to two haplotypes. The
-  VR-Spec Genotype entity subsumes the conventional definition of
-  diplotype. Therefore, the VR-Spec model does not include an explicit
+  VRS Genotype entity subsumes the conventional definition of
+  diplotype. Therefore, the VRS model does not include an explicit
   entity for diplotypes. See :ref:`this note
   <genotypes-represent-haplotypes-with-arbitrary-ploidy>` for a
   discussion.
-* The VR-SPec model makes no assumptions about ploidy of an organism
+* The VRS model makes no assumptions about ploidy of an organism
   or individual. The number of Haplotypes in a Genotype is the
   observed ploidy of the individual.
 * In diploid organisms, there are typically two instances of each
@@ -476,7 +476,7 @@ SO: `Genotype (SO:0001027)
 .. _genotypes-represent-haplotypes-with-arbitrary-ploidy:
 
 .. note:: Genotypes represent Haplotypes with arbitrary ploidy
-     The VR-Spec defines Haplotypes as a list of Alleles, and Genotypes as
+     The VRS defines Haplotypes as a list of Alleles, and Genotypes as
      a list of Haplotypes. In essence, Haplotypes and Genotypes represent
      two distinct dimensions of containment: Haplotypes represent the "in
      phase" relationship of Alleles while Genotypes represents sets of
@@ -485,18 +485,18 @@ SO: `Genotype (SO:0001027)
      There are two important consequences of these definitions: There is no
      single-location Genotype. Users of SNP data will be familiar with
      representations like rs7412 C/C, which indicates the diploid state at
-     a position. In the VR-Spec, this is merely a special case of a
+     a position. In VRS, this is merely a special case of a
      Genotype with two Haplotypes, each of which is defined with only one
-     Allele (the same Allele in this case).  The VR-Spec does not define a
-     diplotype type. A diplotype is a special case of a VR-Spec Genotype
+     Allele (the same Allele in this case).  VRS does not define a
+     diplotype type. A diplotype is a special case of a VRS Genotype
      with exactly two Haplotypes. In practice, software data types that
      assume a ploidy of 2 make it very difficult to represent haploid
      states, copy number loss, and copy number gain, all of which occur
      when representing human data. In addition, assuming ploidy=2 makes
-     software incompatible with organisms with other ploidy. The VR-Spec
+     software incompatible with organisms with other ploidy. VRS
      makes no assumptions about "normal" ploidy.
 
-     In other words, the VR-Spec does not represent single-position
+     In other words, VRS does not represent single-position
      Genotypes or diplotypes because both concepts are subsumed by the
      Allele, Haplotype, and Genotypes entities.
 
@@ -512,7 +512,7 @@ Translocations
 The aberrant joining of two segments of DNA that are not typically
 contiguous.  In the context of joining two distinct coding sequences,
 translocations result in a gene fusion, which is also covered by this
-VR-Spec definition.
+VRS definition.
 
 **Computational definition**
 
@@ -562,7 +562,7 @@ loss-of-function*, *oncogenic*, and *truncating* variation.
 Variation Sets
 @@@@@@@@@@@@@@
 
-.. note:: The VR-Spec anticipates the need for sets of variation.
+.. note:: VRS anticipates the need for sets of variation.
           Sets MAY be static (immutable) or dynamic (changeable), and
           might be defined manually, by an `equivalence function`, or
           by an expansion functions.  Furthermore, equivalence and

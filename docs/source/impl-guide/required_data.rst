@@ -3,7 +3,7 @@
 Required External Data
 !!!!!!!!!!!!!!!!!!!!!!
 
-All VR-Spec implementations will require external data regarding
+All VRS implementations will require external data regarding
 sequences and sequence metadata.  The choices of data sources and
 access methods are left to implementations.  This section provides
 guidance about how to implement required data and helps implementers
