@@ -17,7 +17,10 @@ import subprocess
 # sys.path.insert(0, os.path.abspath('.'))
 
 def _get_git_tag():
-    res = subprocess.run("git describe --tags --always".split(), capture_output=True)
+    res = subprocess.run("git describe --tags --exact-match".split(), capture_output=True)
+    if res.stderr.decode().startswith("fatal"):
+        # if no exact tag, then get branch
+        res = subprocess.run("git rev-parse --abbrev-ref HEAD".split(), capture_output=True)
     tag = res.stdout.decode().strip()
     return tag
 
@@ -25,7 +28,7 @@ def _parse_release_as_version(rls):
     m = re.match("^(\d+\.\d+)", rls)
     if m:
         return m.group(1)
-    return "unknown"
+    return rls
 
 
 # -- Project information -----------------------------------------------------

@@ -24,3 +24,40 @@ h3 {
     color: #888;
     text-decoration: underline;
 }
+
+div.figure {
+    border: thin solid #6ab0de;
+    padding: 2px;
+}
+
+div.figure img {
+    margin-bottom: 5px;
+}
+
+div.figure p.caption::before {
+    content: "Figure: "
+}
+
+div.figure p.caption {
+    background: #e7f2fa;
+    line-height: unset;
+    margin: unset;
+    padding: 3px;
+    font-weight: bold;
+}
+
+div.figure div.legend {
+    background: #e7f2fa;
+    padding: 3px;
+}
+
+div.figure div.legend p {
+    font-size: smaller;
+    line-height: unset;
+    margin-bottom: 10px;
+}
+
+div.figure div.legend p:last-child {
+    margin-bottom: 0px;
+}
+    
