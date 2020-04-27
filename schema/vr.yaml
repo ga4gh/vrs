@@ -189,7 +189,7 @@ definitions:
         uniqueItems: true
         items:
           oneOf:
-            - $ref: "#/definitions/DiscreteVariation"
+            - $ref: "#/definitions/Allele"
             - $ref: "#/definitions/CURIE"
 
   Genotype:
@@ -280,3 +280,27 @@ definitions:
     type: string
     pattern: '^\w[^:]+:.+$'
     example: "ga4gh:GA.01234abcde"
+
+
+############################################################################
+# Enumeration types
+
+enums:
+  Completeness:
+    type: string
+    description: >-
+      Declares the `completeness` of a Haplotype or Genotype
+      definition.  See descriptions in those schemas for additional
+      information.
+      * COMPLETE: The definition is complete. All data are included
+        for the covered assay.
+      * PARTIAL: The definition is intentionally incomplete, typically
+        to protect information.  Declaring partial variation allows
+        data submitters to convey that data are missing.
+      * UNKNOWN: The definition is not known to be either COMPLETE or
+        PARTIAL.
+    default: "UNKNOWN"
+    enum:
+    - UNKNOWN
+    - PARTIAL
+    - COMPLETE

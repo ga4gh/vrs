@@ -706,7 +706,7 @@ subclasses, but are still treated as variation.
 .. _haplotype:
 
 Haplotype
-$$$$$$$$$
+#########
 
 **Biological definition**
 
@@ -828,7 +828,7 @@ same reference sequence.
 .. _genotype:
 
 Genotype
-$$$$$$$$
+########
 
 **Biological definition**
 
