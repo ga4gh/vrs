@@ -167,7 +167,7 @@ definitions:
   Haplotype:
     additionalProperties: false
     description: >-
-      A set of zero or more Variation instances on a single instance of a Sequence.
+      A set of zero or more Alleles
     type: "object"
     properties:
       _id:
@@ -181,9 +181,6 @@ definitions:
           - $ref: "#/definitions/CURIE"
           - $ref: "#/definitions/Location"
         default: null
-      completeness:
-        $ref: "#/enums/Completeness"
-        default: "UNKNOWN"
       members:
         type: array
         uniqueItems: true
@@ -194,17 +191,15 @@ definitions:
 
   Genotype:
     additionalProperties: false
-    description: A list of Haplotypes.
+    description: A set of Haplotypes.
     type: object
     properties:
-      type:
-        type: string
-        enum: [Genotype]
-        default: Genotype
       _id:
         $ref: "#/definitions/CURIE"
-      completeness:
-        $ref: "#/enums/Completeness"
+      type:
+        type: string
+        enum: ["Genotype"]
+        default: "Genotype"
       members:
         type: array
         items:
