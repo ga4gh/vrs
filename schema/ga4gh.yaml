@@ -24,7 +24,7 @@ identifiers:
     SequenceLocation: VSL
     Text: VT
     CytobandLocation: VCL
-    # GeneLocation: VGL
+    GeneLocation: VGL
     # Genotype: VG
     # Haplotype: VH
 
