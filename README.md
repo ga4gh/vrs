@@ -64,7 +64,7 @@ To watch for changes and update automatically:
 
 The VR specification documentation is written in reStructuredText and
 located in `docs/source/`.  Commits to this repo are built
-automatically at `vr-spec.readthedocs.io`__. 
+automatically at `vr-spec.readthedocs.io`. 
 
 To build documentation locally, type:
 
