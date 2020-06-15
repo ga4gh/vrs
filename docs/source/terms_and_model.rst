@@ -353,7 +353,7 @@ $$$$$$$$$$$$$$$$
 
 **Biological definition**
 
-The coordinates of a span of sequence.
+A specified subsequence within another sequence that is used as a reference sequence.
 
 **Computational definition**
 
