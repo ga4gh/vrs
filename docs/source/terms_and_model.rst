@@ -354,15 +354,12 @@ $$$$$$$$$$$$$$$$
 **Biological definition**
 
 Cytobands (cytological bands) are patterns observed on metahphase
-chromosomes after Giemsa staining. They correspond to relatively large
-regions of a chromsome. Cytobands were used as low-resolution
-representations of chromosomal location before nucleotide-level
-resolution became available.
+chromosomes after staining with dye. 
 
 **Computational definition**
 
 A CytobandLocation is a :ref:`Location` that is defined by a named
-chromosomal band within a species.  A CytobandLocation conceptually
+chromosomal band within a species.  Conceptually, a CytobandLocation
 represents a family of :ref:`SequenceLocations` within a species.
 
 **Information model**
@@ -405,17 +402,23 @@ represents a family of :ref:`SequenceLocations` within a species.
 
 **Implementation guidance**
 
+* CytobandLocation is intended to enable the representation of
+  cytogenetic results from karyotyping or low-resolution molecular
+  methods.  Precise :ref:`SequenceLocations` should be preferred when
+  known.
 * `species` is specified using the NCBI taxonomy.  The CURIE prefix
   MUST be `taxonomy`, corresponding to the `NCBI taxonomy prefix at
   identifiers.org
   <https://registry.identifiers.org/registry/taxonomy>`__.
-* Valid values and syntactic structure of `chromosome`, `start`, and
-  `end` depend on species. Therefore, VRS does not constrain these
-  values in the model, except for the guidelines below.
-* `chromosome` must be an official primary name from `NCBI Assembly
-  <https://www.ncbi.nlm.nih.gov/assembly>`__.
-* For Humans, valid chromosome names are 1..22, X, Y and bands are
-  denoted by the arm (`p` or `q`) and position (e.g., `22` or `22.3`).
+* Valid values for, and syntactic structure of, `chromosome`, `start`,
+  and `end` depend on the species.  Therefore, VRS does not constrain
+  these values in the model, except for the guidelines below.
+* `chromosome` MUST be an official primary name from `NCBI Assembly
+  <https://www.ncbi.nlm.nih.gov/assembly>`__.  For Humans, valid
+  chromosome names are 1..22, X, Y.
+* `start` and `end` SHOULD be values that are conventional for the
+  species. For Humans, bands are denoted by the arm (`p` or `q`) and
+  position (e.g., `22` or `22.3`). See example.
 * Implementations may wish to convert CytobandLocations to
   SequenceLocations.  Recommended data for this operation are
   available at `https://ftp.ncbi.nlm.nih.gov/pub/gdp/`__ and
@@ -442,12 +445,13 @@ $$$$$$$$$$$$$$$$
 
 **Biological definition**
 
-A GeneLocation is a conceptual location of a gene that represents a
-family of locations across all sequence types.
+The location of a gene is the imprecise conceptual location of a gene
+feature on a named archetypal chromosome.
 
 **Computational definition**
 
-TODO
+GeneLocation is a proxy for a reference to a gene feature defined by
+an external organization.
 
 **Information model**
 
@@ -472,14 +476,27 @@ TODO
    * - gene
      - :ref:`CURIE`
      - 1..1
-     - An id mapping to the :ref:`computed-identifiers` of the external database Sequence containing the sequence to be located.
+     - An id mapping to the :ref:`computed-identifiers` of the
+       external database Sequence containing the sequence to be
+       located.
 
 **Implementation guidance**
 
-* 
+* The intention of GeneLocation is to represent the conceptual
+  location of a named gene.  A GeneLocation may be thought of as
+  representing a family of precise :ref:`SequenceLocations` on
+  distinct sequences.
+* Implementations SHOULD use one of the following namespaces:
+  `ncbigene <https://registry.identifiers.org/registry/ncbigene>`__,
+  `hgnc <https://registry.identifiers.org/registry/hgnc>`__, `vgnc
+  <https://registry.identifiers.org/registry/vgnc>`__, `ensembl
+  <https://registry.identifiers.org/registry/ensembl>`__.  Other
+  namespaces may be used as necessary.
 
 
 **Example**
+
+The following examples all refer to the Human BRCA1 gene:
 
 .. parsed-literal::
 
@@ -488,7 +505,17 @@ TODO
      'type': 'GeneLocation'
    }
 
+   {
+     'gene': 'hgnc:1100',
+     'type': 'GeneLocation'
+   }
 
+   {
+     'gene': 'ensembl:ENSG00000012048',
+     'type': 'GeneLocation'
+   }
+
+   
 .. _sequence-location:
 
 SequenceLocation
