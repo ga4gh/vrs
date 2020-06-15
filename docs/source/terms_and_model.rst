@@ -419,8 +419,11 @@ represents a family of :ref:`SequenceLocations` within a species.
 * `start` and `end` SHOULD be values that are conventional for the
   species. For Humans, bands are denoted by the arm (`p` or `q`) and
   position (e.g., `22` or `22.3`). See example.
-* Implementations may wish to convert CytobandLocations to
-  SequenceLocations.  Recommended data for this operation are
+* When `end` is provided, `CytobandLocation` is effectively a
+  contiguous interval of cytobands. There is no distinct class for
+  cytoband intervals.
+* Prescribing the conversion of CytobandLocations to SequenceLocations
+  is out-of-scope for VRS.  Recommended data for this operation are
   available at `https://ftp.ncbi.nlm.nih.gov/pub/gdp/`__ and
   `genome.ucsc.edu`__.
 
@@ -486,12 +489,19 @@ an external organization.
   location of a named gene.  A GeneLocation may be thought of as
   representing a family of precise :ref:`SequenceLocations` on
   distinct sequences.
+* Implements MUST NOT use a gene symbol (e.g., "BRCA1") to define a
+  GeneLocation.
 * Implementations SHOULD use one of the following namespaces:
   `ncbigene <https://registry.identifiers.org/registry/ncbigene>`__,
-  `hgnc <https://registry.identifiers.org/registry/hgnc>`__, `vgnc
-  <https://registry.identifiers.org/registry/vgnc>`__, `ensembl
-  <https://registry.identifiers.org/registry/ensembl>`__.  Other
-  namespaces may be used as necessary.
+  `hgnc <https://registry.identifiers.org/registry/hgnc>`__,
+  `vgnc <https://registry.identifiers.org/registry/vgnc>`__,
+  `mgi <https://registry.identifiers.org/registry/mgi>`__,  
+  `ensembl <https://registry.identifiers.org/registry/ensembl>`__.
+  Other namespaces may be used as necessary.
+* A gene is specific to a species.  Gene orthologs have distinct
+  records in the recommended databases.  For example, the BRCA1 gene
+  in humans and the Brca1 gene in mouse are orthologs and have
+  distinct records in the previously recommended gene databases.
 
 
 **Example**
