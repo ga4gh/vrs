@@ -353,11 +353,11 @@ $$$$$$$$$$$$$$$$
 
 **Biological definition**
 
-None
+The coordinates of a span of sequence.
 
 **Computational definition**
 
-A Location subclass for describing a defined :ref:`Interval` over a
+A Location subclass for describing a defined :ref:`Interval` on a
 named :ref:`Sequence`.
 
 **Information model**
