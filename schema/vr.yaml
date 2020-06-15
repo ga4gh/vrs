@@ -91,6 +91,8 @@ definitions:
         default: CytobandLocation
       _id:
         $ref: "#/definitions/CURIE"
+      species:
+        $ref: "#/definitions/CURIE"
       chr:
         type: string
       start:
@@ -254,7 +256,5 @@ definitions:
       Using internal ids in public messages is strongly discouraged.
 
     type: string
-    pattern: '^\w[^:]+:.+$'
-    example: "ga4gh:GA.01234abcde"
-
-    
+    pattern: '^\w[^:]*:.+$'
+    example: "ensembl:ENSG00000139618"
