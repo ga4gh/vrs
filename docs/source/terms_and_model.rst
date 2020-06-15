@@ -346,6 +346,149 @@ Location for Variation.
   location is non-specific (e.g., a range) or symbolic (a gene).
 
 
+.. _cytoband_location:
+
+CytobandLocation
+$$$$$$$$$$$$$$$$
+
+**Biological definition**
+
+Cytobands (cytological bands) are patterns observed on metahphase
+chromosomes after Giemsa staining. They correspond to relatively large
+regions of a chromsome. Cytobands were used as low-resolution
+representations of chromosomal location before nucleotide-level
+resolution became available.
+
+**Computational definition**
+
+A CytobandLocation is a :ref:`Location` that is defined by a named
+chromosomal band within a species.  A CytobandLocation conceptually
+represents a family of :ref:`SequenceLocations` within a species.
+
+**Information model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Location Id; MUST be unique within document
+   * - type
+     - string
+     - 1..1
+     - Location type; MUST be set to **'CytobandLocation'**
+   * - species
+     - :ref:`CURIE`
+     - 1..1
+     - An external reference to a species taxonomy.  See Implementation Guidance, below.
+   * - chromsome
+     - string
+     - 1..1
+     - The symbolic chromosome name
+   * - start
+     - string
+     - 1..1
+     - The chromosmal band name of the start
+   * - end
+     - string
+     - 0..1
+     - The end chromosomal band name; if null, end is presumed to equal `start`.
+
+
+**Implementation guidance**
+
+* `species` is specified using the NCBI taxonomy.  The CURIE prefix
+  MUST be `taxonomy`, corresponding to the `NCBI taxonomy prefix at
+  identifiers.org
+  <https://registry.identifiers.org/registry/taxonomy>`__.
+* Valid values and syntactic structure of `chromosome`, `start`, and
+  `end` depend on species. Therefore, VRS does not constrain these
+  values in the model, except for the guidelines below.
+* `chromosome` must be an official primary name from `NCBI Assembly
+  <https://www.ncbi.nlm.nih.gov/assembly>`__.
+* For Humans, valid chromosome names are 1..22, X, Y and bands are
+  denoted by the arm (`p` or `q`) and position (e.g., `22` or `22.3`).
+* Implementations may wish to convert CytobandLocations to
+  SequenceLocations.  Recommended data for this operation are
+  available at `https://ftp.ncbi.nlm.nih.gov/pub/gdp/`__ and
+  `genome.ucsc.edu`__.
+
+
+**Example**
+
+.. parsed-literal::
+
+   {
+     'chr': '11',
+     'end': 'q22.3',
+     'species': 'taxonomy:9606',
+     'start': 'q22.2',
+     'type': 'CytobandLocation'
+   }
+
+
+.. _gene_location:
+
+GeneLocation
+$$$$$$$$$$$$$$$$
+
+**Biological definition**
+
+A GeneLocation is a conceptual location of a gene that represents a
+family of locations across all sequence types.
+
+**Computational definition**
+
+TODO
+
+**Information model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Location Id; MUST be unique within document
+   * - type
+     - string
+     - 1..1
+     - Location type; MUST be set to **`GeneLocation`**
+   * - gene
+     - :ref:`CURIE`
+     - 1..1
+     - An id mapping to the :ref:`computed-identifiers` of the external database Sequence containing the sequence to be located.
+
+**Implementation guidance**
+
+* 
+
+
+**Example**
+
+.. parsed-literal::
+
+   {
+     'gene': 'ncbigene:672',
+     'type': 'GeneLocation'
+   }
+
+
 .. _sequence-location:
 
 SequenceLocation
@@ -421,6 +564,9 @@ named :ref:`Sequence`.
       "type": "SequenceLocation"
     }
 
+
+
+
 .. _state:
 
 State (Abstract Class)
@@ -486,6 +632,7 @@ The *SequenceState* class specifically captures a :ref:`sequence` as a
       "type": "SequenceState"
     }
 
+
 .. _variation:
 
 Variation
@@ -506,6 +653,7 @@ consideration to capture this diversity. The primary Variation
 subclass defined by the VR |version| specification is the
 :ref:`Allele`, with the :ref:`text` subclass for capturing other
 Variations that are not yet covered.
+
 
 .. _allele:
 
