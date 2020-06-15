@@ -9,31 +9,35 @@ Overview
 
 .. figure:: images/schema-current.png
 
-   **VR Schema Diagram**
+   Variation Representation Specfication (VRS) Schema Diagram
 
-   The VR Schema describes multiple composite objects, which
-   are grouped under four abstract classes: :ref:`Variation`,
-   :ref:`Location`, :ref:`State`, and :ref:`Interval`. These classes
-   and their relationships to the representation of Variation are
-   illustrated here. All classes have a string `type`. Dashed borders
-   denote abstract classes. Abstract classes are not
-   instantiated. Thin solid borders denote classes that may be
-   instantiated but are not identifiable. Bold borders denote
-   identifiable objects (i.e., may be serialized and identified by
-   computed identifier). Solid arrow lines denoted
-   inheritance. Subclasses inherit all attributes from their
-   parent. Inherited attributes are not shown.  These abstract classes
-   and their concrete child classes are described in the following
-   documents.
+   VRS describes several classes for representing biological sequence
+   variation.  Classes are shown as boxes. Inheritance and composition
+   are shown with lines connecting classes.  Dashed borders denote
+   abstract classes, which are not instantiated.  Four abstract
+   classes -- :ref:`Variation`, :ref:`Location`, :ref:`State`, and
+   :ref:`Interval` -- enable specializations of concepts in this and
+   future versions of VRS.  Bold borders denote identifiable classes
+   -- that may be referenced with an identifier.  Identifiable objects
+   have an optional `_id` attribute.  Thin solid borders denote
+   classes that not identifiable; these classes exist only to
+   structure data within identifiable classes.  All classes have a
+   string `type`.  Dashed arrow lines denote inheritance; subclasses
+   inherit all attributes from their parent.  Inherited attributes are
+   not shown in this diagram.  Solid lines with diamonds denote
+   composition of one class with objects from another. An asterisk on
+   a class attribute definition denotes an attribute that may contain
+   either the object or a CURIE identifier to that object.
 
 
 Machine Readable Specifications
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-The machine readable VR Specification is written using `JSON Schema
+The machine readable VRS Specification is written using `JSON Schema
 <https://json-schema.org/>`_.
 
 The schema itself is written in YAML (|vr_yaml|) and converted to JSON
-(|vr_json|).  Version |version| is current.
+(|vr_json|).
 
 Contributions to the schema MUST be written in the YAML document.
+ 

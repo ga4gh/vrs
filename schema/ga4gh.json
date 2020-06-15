@@ -10,7 +10,8 @@
          "GeneLocation": "VGL",
          "Sequence": "SQ",
          "SequenceLocation": "VSL",
-         "Text": "VT"
+         "Text": "VT",
+         "VariationSet": "VS"
       }
    }
 }
