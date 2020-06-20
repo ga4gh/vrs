@@ -448,8 +448,10 @@ $$$$$$$$$$$$$$$$
 
 **Biological definition**
 
-The location of a gene is the imprecise conceptual location of a gene
-feature on a named archetypal chromosome.
+A gene is a conceptual chromosomal region that is associated with 
+a biological function or trait. A GeneLocation is a Location within a gene,
+defined by regions such as a functional domain or exons, up to and
+including the entire gene.
 
 **Computational definition**
 
