@@ -455,8 +455,8 @@ including the entire gene.
 
 **Computational definition**
 
-GeneLocation is a proxy for a reference to a gene feature defined by
-an external organization.
+A :ref:`Location` subclass for describing a defined :ref:`Region` on a
+gene.
 
 **Information model**
 
