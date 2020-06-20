@@ -478,7 +478,7 @@ gene.
      - string
      - 1..1
      - Location type; MUST be set to **`GeneLocation`**
-   * - gene
+   * - gene_id
      - :ref:`CURIE`
      - 1..1
      - An id mapping to the :ref:`computed-identifiers` of the
