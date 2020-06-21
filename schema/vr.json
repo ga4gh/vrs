@@ -38,12 +38,7 @@
          "pattern": "^\\w[^:]*:.+$",
          "type": "string"
       },
-      "Cytoband": {
-         "example": "q22.3",
-         "pattern": "^[pq][1-9][0-9]*(\\.[1-9][0-9]*)?$",
-         "type": "string"
-      },
-      "CytobandLocation": {
+      "ChromosomeLocation": {
          "additionalProperties": false,
          "properties": {
             "_id": {
@@ -57,16 +52,16 @@
                "default": null,
                "nullable": true
             },
-            "species": {
+            "species_id": {
                "$ref": "#/definitions/CURIE"
             },
             "start": {
                "$ref": "#/definitions/Cytoband"
             },
             "type": {
-               "default": "CytobandLocation",
+               "default": "ChromosomeLocation",
                "enum": [
-                  "CytobandLocation"
+                  "ChromosomeLocation"
                ],
                "type": "string"
             }
@@ -78,6 +73,11 @@
          ],
          "type": "object"
       },
+      "Cytoband": {
+         "example": "q22.3",
+         "pattern": "^[pq][1-9][0-9]*(\\.[1-9][0-9]*)?$",
+         "type": "string"
+      },
       "DateTime": {
          "additionalProperties": false,
          "format": "date-time",
@@ -88,7 +88,7 @@
             "_id": {
                "$ref": "#/definitions/CURIE"
             },
-            "gene": {
+            "gene_id": {
                "$ref": "#/definitions/CURIE",
                "description": "See https://www.ebi.ac.uk/miriam/main/datatypes/MIR:00000069"
             },
@@ -127,7 +127,7 @@
          },
          "oneOf": [
             {
-               "$ref": "#/definitions/CytobandLocation"
+               "$ref": "#/definitions/ChromosomeLocation"
             },
             {
                "$ref": "#/definitions/GeneLocation"
