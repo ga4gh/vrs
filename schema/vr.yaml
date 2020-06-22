@@ -77,6 +77,9 @@ definitions:
       gene_id:
         $ref: "#/definitions/CURIE"
         description: See https://www.ebi.ac.uk/miriam/main/datatypes/MIR:00000069
+      region:
+        type: string
+        default: null
 
   SequenceLocation:
     additionalProperties: false
@@ -244,13 +247,7 @@ definitions:
 
   Cytoband:
     type: string
-    pattern: '^[pq][1-9][0-9]*(\.[1-9][0-9]*)?$'
     example: "q22.3"
-      
-  GeneSymbol:
-    type: string
-    pattern: '^[A-Z][A-Za-z0-9]+$'
-    example: "BRCA1"
 
   DateTime:
     additionalProperties: false

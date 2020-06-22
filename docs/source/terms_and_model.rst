@@ -346,21 +346,23 @@ Location for Variation.
   location is non-specific (e.g., a range) or symbolic (a gene).
 
 
-.. _cytoband_location:
+.. _chromosome_location:
 
-CytobandLocation
-$$$$$$$$$$$$$$$$
+ChromosomeLocation
+$$$$$$$$$$$$$$$$$$$$
 
 **Biological definition**
 
-Cytobands (cytological bands) are patterns observed on metahphase
-chromosomes after staining with dye. 
+Imprecise chromosomal locations based on named landmarks assayed
+through chromosomal staining, FISH, recombination studies, or other
+low-resolution methods.
 
 **Computational definition**
 
-A CytobandLocation is a :ref:`Location` that is defined by a named
-chromosomal band within a species.  Conceptually, a CytobandLocation
-represents a family of :ref:`SequenceLocations` within a species.
+A ChromosomeLocation is a :ref:`Location` that is defined by a named
+chromosomal band within a species.  Conceptually, a ChromosomeLocation
+represents a family of :ref:`SequenceLocations` on distinct
+:ref:`Sequence` entities.
 
 **Information model**
 
@@ -381,7 +383,7 @@ represents a family of :ref:`SequenceLocations` within a species.
    * - type
      - string
      - 1..1
-     - Location type; MUST be set to **'CytobandLocation'**
+     - Location type; MUST be set to **'ChromosomeLocation'**
    * - species
      - :ref:`CURIE`
      - 1..1
@@ -402,7 +404,7 @@ represents a family of :ref:`SequenceLocations` within a species.
 
 **Implementation guidance**
 
-* CytobandLocation is intended to enable the representation of
+* ChromosomeLocation is intended to enable the representation of
   cytogenetic results from karyotyping or low-resolution molecular
   methods.  Precise :ref:`SequenceLocations` should be preferred when
   known.
@@ -419,13 +421,14 @@ represents a family of :ref:`SequenceLocations` within a species.
 * `start` and `end` SHOULD be values that are conventional for the
   species. For Humans, bands are denoted by the arm (`p` or `q`) and
   position (e.g., `22` or `22.3`). See example.
-* When `end` is provided, `CytobandLocation` is effectively a
+* When `end` is provided, `ChromosomeLocation` is effectively a
   contiguous interval of cytobands. There is no distinct class for
   cytoband intervals.
-* Prescribing the conversion of CytobandLocations to SequenceLocations
+* Prescribing the conversion of ChromosomeLocations to SequenceLocations
   is out-of-scope for VRS.  Recommended data for this operation are
   available at `https://ftp.ncbi.nlm.nih.gov/pub/gdp/`__ and
   `genome.ucsc.edu`__.
+* TODO: start, end alpha sorted
 
 
 **Example**
@@ -437,7 +440,7 @@ represents a family of :ref:`SequenceLocations` within a species.
      'end': 'q22.3',
      'species': 'taxonomy:9606',
      'start': 'q22.2',
-     'type': 'CytobandLocation'
+     'type': 'ChromosomeLocation'
    }
 
 
@@ -445,6 +448,7 @@ represents a family of :ref:`SequenceLocations` within a species.
 
 GeneLocation
 $$$$$$$$$$$$$$$$
+
 
 **Biological definition**
 
@@ -504,6 +508,9 @@ gene.
   records in the recommended databases.  For example, the BRCA1 gene
   in humans and the Brca1 gene in mouse are orthologs and have
   distinct records in the previously recommended gene databases.
+* GeneLocations MAY be converted to :ref:`sequence-location` using
+  external data. The source of such data and mechanism for
+  implementation is not defined by this specification.
 
 
 **Example**
