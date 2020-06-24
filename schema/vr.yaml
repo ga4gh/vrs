@@ -34,9 +34,26 @@ definitions:
     description: >-
       A Location represents a span on a specific sequence.
     oneOf:
+         - $ref: "#/definitions/GeneLocation"
       - $ref: "#/definitions/SequenceLocation"
     discriminator:
       propertyName: type
+
+  GeneLocation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [GeneLocation]
+        default: GeneLocation
+      _id:
+        $ref: "#/definitions/CURIE"
+      gene_id:
+        $ref: "#/definitions/CURIE"
+        description: See https://www.ebi.ac.uk/miriam/main/datatypes/MIR:00000069
+      region:
+        type: string
+        default: null
 
   SequenceLocation:
     additionalProperties: false

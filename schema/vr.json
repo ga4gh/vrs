@@ -34,13 +34,77 @@
       "CURIE": {
          "additionalProperties": false,
          "description": "A string that refers to an object uniquely.  The lifetime and scope of an id is defined by the sender.\nVR does not impose any contraints on strings used as ids in messages. However, to maximize sharability of data, the VR Specification RECOMMENDS that implementations use [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.\nString CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially.\nThe VR specification also RECOMMENDS that `prefix` be defined in identifiers.org.\nThe `reference` component is an unconstrained string.\nA CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VR uses CURIEs primarily as a naming mechanism.\nImplementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable.\nUsing internal ids in public messages is strongly discouraged.",
-         "example": "ga4gh:GA.01234abcde",
-         "pattern": "^\\w[^:]+:.+$",
+         "example": "ensembl:ENSG00000139618",
+         "pattern": "^\\w[^:]*:.+$",
+         "type": "string"
+      },
+      "ChromosomeLocation": {
+         "additionalProperties": false,
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "chr": {
+               "type": "string"
+            },
+            "end": {
+               "$ref": "#/definitions/Cytoband",
+               "default": null,
+               "nullable": true
+            },
+            "species_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "start": {
+               "$ref": "#/definitions/Cytoband"
+            },
+            "type": {
+               "default": "ChromosomeLocation",
+               "enum": [
+                  "ChromosomeLocation"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "chr",
+            "start"
+         ],
+         "type": "object"
+      },
+      "Cytoband": {
+         "example": "q22.3",
+         "pattern": "^[pq][1-9][0-9]*(\\.[1-9][0-9]*)?$",
          "type": "string"
       },
       "DateTime": {
          "additionalProperties": false,
          "format": "date-time",
+         "type": "string"
+      },
+      "GeneLocation": {
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "gene_id": {
+               "$ref": "#/definitions/CURIE",
+               "description": "See https://www.ebi.ac.uk/miriam/main/datatypes/MIR:00000069"
+            },
+            "type": {
+               "default": "GeneLocation",
+               "enum": [
+                  "GeneLocation"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "GeneSymbol": {
+         "example": "BRCA1",
+         "pattern": "^[A-Z][A-Za-z0-9]+$",
          "type": "string"
       },
       "Interval": {
@@ -62,6 +126,12 @@
             "propertyName": "type"
          },
          "oneOf": [
+            {
+               "$ref": "#/definitions/ChromosomeLocation"
+            },
+            {
+               "$ref": "#/definitions/GeneLocation"
+            },
             {
                "$ref": "#/definitions/SequenceLocation"
             }
