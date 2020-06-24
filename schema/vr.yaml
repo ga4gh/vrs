@@ -189,24 +189,6 @@ definitions:
             - $ref: "#/definitions/Allele"
             - $ref: "#/definitions/CURIE"
 
-  Genotype:
-    additionalProperties: false
-    description: A set of Haplotypes.
-    type: object
-    properties:
-      _id:
-        $ref: "#/definitions/CURIE"
-      type:
-        type: string
-        enum: ["Genotype"]
-        default: "Genotype"
-      members:
-        type: array
-        items:
-          oneOf:
-            - $ref: "#/definitions/Haplotype"
-            - $ref: "#/definitions/CURIE"
-
 
   ############################################################################
   # States

@@ -23,7 +23,7 @@ identifiers:
     Allele: VA
     VariationSet: VS
     Text: VT
-    Genotype: VG
+    # Genotype: VG
     Haplotype: VH
 
     SequenceLocation: VSL
