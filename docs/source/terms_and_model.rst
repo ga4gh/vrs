@@ -398,7 +398,7 @@ represents a family of :ref:`SequenceLocations` on distinct
      - The chromosmal band name of the start
    * - end
      - string
-     - 0..1
+     - 1..1
      - The end chromosomal band name; if null, end is presumed to equal `start`.
 
 
@@ -407,7 +407,7 @@ represents a family of :ref:`SequenceLocations` on distinct
 * ChromosomeLocation is intended to enable the representation of
   cytogenetic results from karyotyping or low-resolution molecular
   methods.  Precise :ref:`SequenceLocations` should be preferred when
-  known.
+  nucleotide-scale location is known.
 * `species` is specified using the NCBI taxonomy.  The CURIE prefix
   MUST be `taxonomy`, corresponding to the `NCBI taxonomy prefix at
   identifiers.org
@@ -421,14 +421,22 @@ represents a family of :ref:`SequenceLocations` on distinct
 * `start` and `end` SHOULD be values that are conventional for the
   species. For Humans, bands are denoted by the arm (`p` or `q`) and
   position (e.g., `22` or `22.3`). See example.
-* When `end` is provided, `ChromosomeLocation` is effectively a
-  contiguous interval of cytobands. There is no distinct class for
-  cytoband intervals.
-* Prescribing the conversion of ChromosomeLocations to SequenceLocations
-  is out-of-scope for VRS.  Recommended data for this operation are
-  available at `https://ftp.ncbi.nlm.nih.gov/pub/gdp/`__ and
-  `genome.ucsc.edu`__.
-* TODO: start, end alpha sorted
+* Regardless of species, `start` and `end` should be sorted
+  alphanumerically so that `start` < `end`.
+* `end` must be specified, even when `start` and `end` are identical.
+* Prescribing the conversion of ChromosomeLocations to
+  SequenceLocations is out-of-scope for VRS.  Recommended data for
+  this operation are available at `NCBI GDP
+  <https://ftp.ncbi.nlm.nih.gov/pub/gdp/>`__, `UCSC GRCh37 (hg19)
+  <http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/cytoBand.txt.gz>`__,
+  `UCSC GRCh38 (hg38)
+  <http://hgdownload.cse.ucsc.edu/goldenPath/hg38/database/cytoBand.txt.gz>`__,
+  and `bioutils (Python)
+  <https://bioutils.readthedocs.io/en/stable/reference/bioutils.cytobands.html>`__.
+* Design decision: The tuple <species,chromosome name> is used to
+  refer an archetypal chromosome for the species.  WikiData and MESH
+  provide similar definitions, but didn't provide sufficient benefit
+  to merit the added complexity in VRS.
 
 
 **Example**
