@@ -120,6 +120,56 @@ Under development.
 Under development.
 
 
+GeneLocation
+############
+
+**Biological definition**
+
+The symbolic location of a gene.
+
+**Computational definition**
+
+A gene location is made by reference to a gene identifier from NCBI,
+Ensembl, HGNC, or other public trusted authority.
+
+**Information model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Location Id; MUST be unique within document
+   * - type
+     - string
+     - 1..1
+     - Location type; MUST be set to '**GeneLocation**'
+   * - gene_id
+     - :ref:`CURIE`
+     - 1..1
+     - CURIE-formatted gene identifier using NCBI numeric gene id.
+
+**Notes**
+
+* `gene_id` MUST be specified as a CURIE, using a CURIE prefix of
+  `"NCBI"` and CURIE reference with the numeric gene id. Other trusted
+  authorities MAY be permitted in future releases.
+
+**Implementation guidance**
+
+* GeneLocations MAY be converted to :ref:`sequence-location` using
+  external data. The source of such data and mechanism for
+  implementation is not defined by this specification.
+
+
 .. _planned-states:
 
 State Classes

@@ -28,7 +28,7 @@ identifiers:
 
     SequenceLocation: VSL
     ChromosomeLocation: VCL
-    GeneLocation: VGL
+    # GeneLocation: VGL
 
 
   regexp: '^ga4gh:(?P<type>[^.]+)\.(?P<digest>.+)$'

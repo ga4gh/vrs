@@ -75,36 +75,11 @@
       },
       "Cytoband": {
          "example": "q22.3",
-         "pattern": "^[pq][1-9][0-9]*(\\.[1-9][0-9]*)?$",
          "type": "string"
       },
       "DateTime": {
          "additionalProperties": false,
          "format": "date-time",
-         "type": "string"
-      },
-      "GeneLocation": {
-         "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "gene_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "See https://www.ebi.ac.uk/miriam/main/datatypes/MIR:00000069"
-            },
-            "type": {
-               "default": "GeneLocation",
-               "enum": [
-                  "GeneLocation"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "GeneSymbol": {
-         "example": "BRCA1",
-         "pattern": "^[A-Z][A-Za-z0-9]+$",
          "type": "string"
       },
       "Interval": {
@@ -128,9 +103,6 @@
          "oneOf": [
             {
                "$ref": "#/definitions/ChromosomeLocation"
-            },
-            {
-               "$ref": "#/definitions/GeneLocation"
             },
             {
                "$ref": "#/definitions/SequenceLocation"
