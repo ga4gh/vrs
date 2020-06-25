@@ -421,9 +421,6 @@ represents a family of :ref:`SequenceLocation` on distinct
 * `start` and `end` SHOULD be values that are conventional for the
   species. For Humans, bands are denoted by the arm (`p` or `q`) and
   position (e.g., `22` or `22.3`). See example.
-* Regardless of species, `start` and `end` should be sorted
-  alphanumerically so that `start` < `end`.
-* `end` must be specified, even when `start` and `end` are identical.
 * Prescribing the conversion of ChromosomeLocations to
   SequenceLocations is out-of-scope for VRS.  Recommended data for
   this operation are available at `NCBI GDP
@@ -440,6 +437,11 @@ represents a family of :ref:`SequenceLocation` on distinct
   <https://meshb.nlm.nih.gov/record/ui?ui=D002878>`__, but don't
   provide sufficient benefit to merit the added complexity in VRS at
   this time.
+* TBD: Ordering. ① Regardless of species, `start` and `end`
+  should be sorted alphanumerically so that `start` < `end`. OR ② `start`
+  and `end` should be ordered according to conventions for the
+  species.  For human chrosomosomes, ISCN conventions should be used.
+* TBD: `end` must be specified, even when `start` and `end` are identical.
 
 
 **Example**
