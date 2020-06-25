@@ -18,6 +18,7 @@
 .. _nucleic acid: https://en.wikipedia.org/wiki/Nucleic_acid
 .. _polymeric chain: https://en.wikipedia.org/wiki/Polymer
 .. _protein: https://en.wikipedia.org/wiki/Protein
+.. _github-issues: https://github.com/ga4gh/vr-spec/issues
 
 .. |vr-spec| replace:: `VR Specification <https://github.com/ga4gh/vr-python/>`__
 .. |vr-python| replace:: `GA4GH VR Python Implementation <https://github.com/ga4gh/vr-python/>`__

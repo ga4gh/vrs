@@ -496,8 +496,9 @@ both current and future.  Variation subclasses are:
 
 **Biological definition**
 
-In biology, variation is often used to mean `genetic variation`_,
-describing the differences observed in DNA among individuals.
+In biology, variation is often used to mean *sequence* variation,
+describing the differences observed in DNA or AA bases among
+individuals.
 
 **Computational definition**
 
@@ -689,7 +690,7 @@ subclasses, but are still treated as variation.
   implementation SHOULD persist the original Text object and respond
   to queries matching the Text object with the new object.
 * Additional Variation subclasses are continually under
-  consideration. Please open a `GitHub issue`_ if you would like to
+  consideration. Please open a `github issue <github-issues>`_ if you would like to
   propose a Variation subclass to cover a needed variation
   representation.
 
@@ -738,22 +739,8 @@ same reference sequence.
      - string
      - 1..1
      - Variation type; MUST be "Haplotype" (default)
-   * - location
-     - :ref:`CURIE`
-     - 0..1
-     - Where Haplotype is located.
-   * - completeness
-     - enum
-     - 1..1
-     - Declaration of completeness of the Haplotype definition.
-       
-       Permitted values:
-         • "UNKNOWN": Other in-phase Alleles may exist (default).
-         • "COMPLETE": All variation observed
-         • "PARTIAL": Other in-phase variation is known to exist but is not included
-
    * - members
-     - :ref:`Variation`\[] or :ref:`CURIE`\[]
+     - :ref:`Allele`\[] | :ref:`CURIE`\[]
      - 0..*
      - List of Discrete Variation, or identifiers of Discrete
        Variation, that comprise this Haplotype
@@ -823,6 +810,13 @@ same reference sequence.
 * GENO: Haplotype (GENO:0000871) - A set of two or more sequence
   alterations on the same chromosomal strand that tend to be
   transmitted together.
+
+**Examples**
+
+- assertion of no change over region of chromosome
+- n positions by array
+- n positions by sequencing
+
 
 
 VariationSet
