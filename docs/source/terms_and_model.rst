@@ -361,7 +361,7 @@ low-resolution methods.
 
 A ChromosomeLocation is a :ref:`Location` that is defined by a named
 chromosomal band within a species.  Conceptually, a ChromosomeLocation
-represents a family of :ref:`SequenceLocations` on distinct
+represents a family of :ref:`SequenceLocation` on distinct
 :ref:`Sequence` entities.
 
 **Information model**
@@ -406,7 +406,7 @@ represents a family of :ref:`SequenceLocations` on distinct
 
 * ChromosomeLocation is intended to enable the representation of
   cytogenetic results from karyotyping or low-resolution molecular
-  methods.  Precise :ref:`SequenceLocations` should be preferred when
+  methods.  Precise :ref:`SequenceLocation` should be preferred when
   nucleotide-scale location is known.
 * `species` is specified using the NCBI taxonomy.  The CURIE prefix
   MUST be `taxonomy`, corresponding to the `NCBI taxonomy prefix at
@@ -435,8 +435,11 @@ represents a family of :ref:`SequenceLocations` on distinct
   <https://bioutils.readthedocs.io/en/stable/reference/bioutils.cytobands.html>`__.
 * Design decision: The tuple <species,chromosome name> is used to
   refer an archetypal chromosome for the species.  WikiData and MESH
-  provide similar definitions, but didn't provide sufficient benefit
-  to merit the added complexity in VRS.
+  provide similar definitions (e.g., Human Chr 1 at `WikiData
+  <https://www.wikidata.org/wiki/Q430258>`__ and `MESH
+  <https://meshb.nlm.nih.gov/record/ui?ui=D002878>`__, but don't
+  provide sufficient benefit to merit the added complexity in VRS at
+  this time.
 
 
 **Example**
@@ -453,6 +456,7 @@ represents a family of :ref:`SequenceLocations` on distinct
 
 
 .. _sequence-location:
+.. _sequencelocation:
 
 SequenceLocation
 $$$$$$$$$$$$$$$$
