@@ -7,13 +7,13 @@ Certain insertion or deletion alleles may be represented ambiguously
 when using conventional sequence normalization, resulting in
 significant challenges when comparing such alleles.
 
-The VR-Spec describes a "fully-justified" normalization algorithm
+VRS describes a "fully-justified" normalization algorithm
 inspired by NCBI's Variant Overprecision Correction Algorithm [1]_.
 Fully-justified normalization expands such ambiguous representation
 over the entire region of ambiguity, resulting in an *unambiguous*
 representation that may be readily compared with other alleles.
 
-The VR-Spec RECOMMENDS that Alleles at precise locations are
+VRS RECOMMENDS that Alleles at precise locations are
 normalized to a fully justified form unless there is a compelling
 reason to do otherwise.
 
@@ -52,7 +52,7 @@ alternate sequence) at an interval is outlined below.
 .. _normalization-diagram:
 
 .. list-table::
-     **VR Justified Normalization** A demonstration of fully justifying an insertion allele.
+     **VRS Justified Normalization** A demonstration of fully justifying an insertion allele.
    :class: reece-wrap
    :header-rows: 1
    :widths: 40 15 20
@@ -135,6 +135,6 @@ alternate sequence) at an interval is outlined below.
 
 .. [1] Holmes, J. B., Moyer, E., Phan, L., Maglott, D. &
        Kattman, B. L. *SPDI: Data Model for Variants and Applications
-       at NCBI.* bioRxiv 537449 (2019). `doi:10.1101/537449`_
+       at NCBI.* Bioinformatics (2020 March 15). `doi:10.1093/bioinformatics/btz856`_
 
-.. _doi:10.1101/537449: https://doi.org/10.1101/537449
+.. _doi:10.1093/bioinformatics/btz856: https://doi.org/10.1093/bioinformatics/btz856

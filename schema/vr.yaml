@@ -13,60 +13,18 @@ title: "GA4GH-VR-Definitions"
 type: object
 
 definitions:
-  # VR definitions are presented top-down.  Everything rolls up to
-  # Variation, which is a polymorphic abstraction of many kinds of
-  # variation.
-
-
-  ############################################################################
-  # Variation
-
-  Variation:
-    additionalProperties: false
-    description: >-
-      A polymorphic representation of variation
-    oneOf:
-      - $ref: "#/definitions/Text"
-      - $ref: "#/definitions/Allele"
-      # future expansion of variation types will go here
-    discriminator:
-      propertyName: type
-
-  Text:
-    additionalProperties: false
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [Text]
-        default: Text
-      _id:
-        $ref: "#/definitions/CURIE"
-      definition:
-        type: string
-        description: >-
-          An textual representation of variation intended to capture
-          variation descriptions that cannot be parsed, but still
-          treated as variation.
-
-  Allele:
-    additionalProperties: false
-    description: An assertion of a sequence state at a Location.
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [Allele]
-        default: Allele
-      _id:
-        $ref: "#/definitions/CURIE"
-      location:
-        oneOf:
-          - $ref: "#/definitions/CURIE"
-          - $ref: "#/definitions/Location"
-      state:
-        $ref: "#/definitions/State"
-
+  # VR definitions are presented top-down.  The Conceptual structure is:
+  #
+  #    Interval
+  #    +- SimpleInterval
+  #
+  #    Location
+  #    +- SequenceLocation
+  #    
+  #    Variation
+  #    +- Allele
+  #    +- Text
+  #    +- VariationSet
 
   ############################################################################
   # Locations
@@ -82,14 +40,16 @@ definitions:
 
   SequenceLocation:
     additionalProperties: false
+    description: >-
+      A segment of a reference sequence
     type: object
     properties:
+      _id:
+        $ref: "#/definitions/CURIE"
       type:
         type: string
         enum: [SequenceLocation]
         default: SequenceLocation
-      _id:
-        $ref: "#/definitions/CURIE"
       sequence_id:
         $ref: "#/definitions/CURIE"
       interval:
@@ -139,6 +99,77 @@ definitions:
       type: SimpleInterval
       start: 11
       end: 22
+
+
+  ############################################################################
+  # Variation
+
+  Variation:
+    additionalProperties: false
+    description: >-
+      The root class of all Variation types
+    oneOf:
+      - $ref: "#/definitions/Allele"
+      - $ref: "#/definitions/Text"
+      - $ref: "#/definitions/VariationSet"
+    discriminator:
+      propertyName: type
+
+
+  Text:
+    additionalProperties: false
+    type: object
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [Text]
+        default: Text
+      definition:
+        type: string
+        description: >-
+          An textual representation of variation intended to capture
+          variation descriptions that cannot be parsed, but still
+          treated as variation.
+
+  Allele:
+    additionalProperties: false
+    description: An assertion of a sequence state at a Location.
+    type: object
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [Allele]
+        default: Allele
+      location:
+        oneOf:
+          - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Location"
+      state:
+        $ref: "#/definitions/State"
+
+
+  VariationSet:
+    description: >-
+      A set of Variation
+    type: "object"
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: ["VariationSet"]
+        default: "VariationSet"
+      members:
+        type: array
+        uniqueItems: true
+        items:
+          oneOf:
+            - $ref: "#/definitions/Variation"
+            - $ref: "#/definitions/CURIE"
 
 
   ############################################################################
