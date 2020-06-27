@@ -20,7 +20,7 @@
 .. _protein: https://en.wikipedia.org/wiki/Protein
 .. _github-issues: https://github.com/ga4gh/vr-spec/issues
 
-.. |vr-spec| replace:: `VR Specification <https://github.com/ga4gh/vr-python/>`__
+.. |vrs| replace:: `VRS <https://github.com/ga4gh/vr-python/>`__
 .. |vr-python| replace:: `GA4GH VR Python Implementation <https://github.com/ga4gh/vr-python/>`__
 .. |vr_json| replace:: :download:`vr.json <_static/vr.json>`
 .. |vr_yaml| replace:: :download:`vr.yaml <_static/vr.yaml>`
