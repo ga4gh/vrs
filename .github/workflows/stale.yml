@@ -13,10 +13,10 @@ jobs:
     - uses: actions/stale@v1
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-        stale-issue-label: stale-issue
+        stale-issue-label: Stale
         stale-issue-message: >-
           This issue was marked stale due to inactivity.
-        stale-pr-label: stale-pr
+        stale-pr-label: Stale
         stale-pr-message: >-
           This pull request was marked stale due to inactivity.
         days-before-stale: 60
