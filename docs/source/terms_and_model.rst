@@ -349,7 +349,7 @@ Location for Variation.
 .. _chromosome_location:
 
 ChromosomeLocation
-$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$
 
 **Biological definition**
 
@@ -416,12 +416,23 @@ chromosomal band within a species.
 * `chromosome` MUST be an official primary name from `NCBI Assembly
   <https://www.ncbi.nlm.nih.gov/assembly>`__.  For Humans, valid
   chromosome names are 1..22, X, Y.
-* `start` and `end` SHOULD be values that are conventional for the
-  species. For Humans, bands are denoted by the arm (`p` or `q`) and
-  position (e.g., `22` or `22.3`). See example.
+* `end` must be specified, even when `start` and `end` are identical.
+* `start` and `end` SHOULD use syntax and ordering conventions
+  appropriate for the species.
+
+  * For humans, ISCN conventions MUST be used. Bands are denoted by
+    the arm ("p" or "q") and position (e.g., "22", "22.3", or the
+    symbolic values "cen", "tel", or "ter"). If `start` and `end` are
+    on different arms, they should correspond to the p-arm and q-arm
+    locations respectively. If `start` and `end` are on the same arm,
+    `start` should be the more centromeric position (i.e., with lower
+    band and sub-band numbers).
+
 * Prescribing the conversion of ChromosomeLocation instances to
-  SequenceLocation instances is out-of-scope for VRS.  Recommended
-  data for this operation are available at `NCBI GDP
+  SequenceLocation instances is out-of-scope for VRS.  When converting
+  `start` and `end` to SequenceLocations, the positions should be
+  interpreted as inclusive ranges that cover the maximal extent of the
+  region.  Data for this operation are available at `NCBI GDP
   <https://ftp.ncbi.nlm.nih.gov/pub/gdp/>`__, `UCSC GRCh37 (hg19)
   <http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/cytoBand.txt.gz>`__,
   `UCSC GRCh38 (hg38)
@@ -430,11 +441,6 @@ chromosomal band within a species.
   <https://bioutils.readthedocs.io/en/stable/reference/bioutils.cytobands.html>`__.
 * See also the rationale
   for :ref:`dd-not-using-external-chromosome-declarations`.
-* TBD: Ordering. ① Regardless of species, `start` and `end`
-  should be sorted alphanumerically so that `start` < `end`. OR ② `start`
-  and `end` should be ordered according to conventions for the
-  species.  For human chromosomes, ISCN conventions should be used.
-* TBD: `end` must be specified, even when `start` and `end` are identical.
 
 
 **Example**
