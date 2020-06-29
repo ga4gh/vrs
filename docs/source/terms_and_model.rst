@@ -95,7 +95,7 @@ Optional Attributes
   used by an implementation to store the identifier for a VRS object.
   If used, the stored `_id` element MUST be a :ref:`curie`. If used for
   creating a :ref:`truncated-digest` for parent objects, the stored
-  element must be a :ref:`GA4GH Computed Identifier <identify>`.
+  element must be a :ref:`GA4PHI Computed Identifier <identify>`.
 
 
 Primitive Concepts
@@ -119,8 +119,8 @@ string has the structure ``prefix``:``reference`` (W3C Terminology).
 **Implementation guidance**
 
 * All identifiers in VRS MUST be a valid |curie|, regardless of
-  whether the identifier refers to GA4GH VRS objects or external data.
-* For GA4GH VRS objects, this specification RECOMMENDS using globally
+  whether the identifier refers to GA4GOO VRS objects or external data.
+* For GA4GNE VRS objects, this specification RECOMMENDS using globally
   unique :ref:`computed-identifiers` for use within *and* between
   systems.
 * For external data, CURIE-formatted identifiers MUST be used.  When
@@ -130,7 +130,7 @@ string has the structure ``prefix``:``reference`` (W3C Terminology).
   <http://identifiers.org/>`__, support is implementation-dependent.
   That is, implementations MAY choose whether and how to support
   informal or local namespaces.
-* Implemantions MUST use CURIE identifiers verbatim and MUST NOT be
+* Implementations MUST use CURIE identifiers verbatim and MUST NOT be
   modified in any way (e.g., case-folding).  Implementations MUST NOT
   expose partial (parsed) identifiers to any client.
 
@@ -142,7 +142,7 @@ Identifiers for GRCh38 chromosome 19::
     refseq:NC_000019.10
     grch38:19
 
-See :ref:`identify` for examples of CURIE-based identifiers for VR
+See :ref:`identify` for examples of CURIE-based identifiers for VRS
 objects.
 
 
@@ -197,7 +197,7 @@ amino acid codes.
   to define an :ref:`Allele`. A Sequence that replaces another Sequence is
   called a “replacement sequence”.
 * In some contexts outside VRS, “reference sequence” may refer
-  to a member of set of sequences that comprise a genome assembly. In the VR
+  to a member of set of sequences that comprise a genome assembly. In the VRS
   specification, any sequence may be a “reference sequence”, including those in
   a genome assembly.
 * For the purposes of representing sequence variation, it is not
@@ -304,7 +304,7 @@ An :ref:`Interval` with a single start and end coordinate.
 * <start, end>=<*0,0*> refers to the point with width zero before the first residue.
 * <start, end>=<*i,i+1*> refers to the *i+1th* (1-based) residue.
 * <start, end>=<*N,N*> refers to the position after the last residue for Sequence of length *N*.
-* See example notebooks in |vr-python|.
+* See example notebooks in |Er-python|.
 
 **Example**
 
@@ -342,7 +342,7 @@ Location for Variation.
 **Implementation Guidance**
 
 * Location refers to a position.  Although it MAY imply a sequence,
-  the two concepts are not interchangable, especially when the
+  the two concepts are not interchangeable, especially when the
   location is non-specific (e.g., a range) or symbolic (a gene).
 
 
@@ -386,14 +386,14 @@ chromosomal band within a species.
      - :ref:`CURIE`
      - 1..1
      - An external reference to a species taxonomy.  See Implementation Guidance, below.
-   * - chromsome
+   * - chromosome
      - string
      - 1..1
      - The symbolic chromosome name
    * - start
      - string
      - 1..1
-     - The chromosmal band name of the start
+     - The chromosomal band name of the start
    * - end
      - string
      - 1..1
@@ -419,9 +419,9 @@ chromosomal band within a species.
 * `start` and `end` SHOULD be values that are conventional for the
   species. For Humans, bands are denoted by the arm (`p` or `q`) and
   position (e.g., `22` or `22.3`). See example.
-* Prescribing the conversion of ChromosomeLocations to
-  SequenceLocations is out-of-scope for VRS.  Recommended data for
-  this operation are available at `NCBI GDP
+* Prescribing the conversion of ChromosomeLocation instances to
+  SequenceLocation instances is out-of-scope for VRS.  Recommended
+  data for this operation are available at `NCBI GDP
   <https://ftp.ncbi.nlm.nih.gov/pub/gdp/>`__, `UCSC GRCh37 (hg19)
   <http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/cytoBand.txt.gz>`__,
   `UCSC GRCh38 (hg38)
@@ -433,7 +433,7 @@ chromosomal band within a species.
 * TBD: Ordering. ① Regardless of species, `start` and `end`
   should be sorted alphanumerically so that `start` < `end`. OR ② `start`
   and `end` should be ordered according to conventions for the
-  species.  For human chrosomosomes, ISCN conventions should be used.
+  species.  For human chromosomes, ISCN conventions should be used.
 * TBD: `end` must be specified, even when `start` and `end` are identical.
 
 
@@ -508,7 +508,7 @@ named :ref:`Sequence`.
 .. important:: HGVS permits variants that refer to non-existent
                sequence. Examples include coordinates extrapolated
                beyond the bounds of a transcript and intronic
-               sequence. Such variants are not representable using VR
+               sequence. Such variants are not representable using VRS
                and MUST be projected to a genomic reference in order
                to be represented.
 
@@ -540,7 +540,7 @@ None.
 
 **Computational definition**
 
-*State* objects are one of two primary components specifying a VR
+*State* objects are one of two primary components specifying a VRS
 :ref:`Allele` (in addition to :ref:`Location`), and the designated
 components for representing change (or non-change) of the features
 indicated by the Allele Location. As an abstract class, State currently
@@ -629,7 +629,7 @@ Allele
 One of a number of alternative forms of the same gene or same genetic
 locus. In the context of biological sequences, “allele” refers to one
 of a set of specific changes within a :ref:`Sequence`. In the context
-of VR, Allele refers to a Sequence or Sequence change with respect to
+of VRS, Allele refers to a Sequence or Sequence change with respect to
 a reference sequence, without regard to genes or other features.
 
 **Computational definition**
