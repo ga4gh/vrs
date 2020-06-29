@@ -360,9 +360,7 @@ low-resolution methods.
 **Computational definition**
 
 A ChromosomeLocation is a :ref:`Location` that is defined by a named
-chromosomal band within a species.  Conceptually, a ChromosomeLocation
-represents a family of :ref:`SequenceLocation` on distinct
-:ref:`Sequence` entities.
+chromosomal band within a species.
 
 **Information model**
 
