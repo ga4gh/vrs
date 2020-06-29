@@ -428,13 +428,8 @@ chromosomal band within a species.
   <http://hgdownload.cse.ucsc.edu/goldenPath/hg38/database/cytoBand.txt.gz>`__,
   and `bioutils (Python)
   <https://bioutils.readthedocs.io/en/stable/reference/bioutils.cytobands.html>`__.
-* Design decision: The tuple <species,chromosome name> is used to
-  refer an archetypal chromosome for the species.  WikiData and MESH
-  provide similar definitions (e.g., Human Chr 1 at `WikiData
-  <https://www.wikidata.org/wiki/Q430258>`__ and `MESH
-  <https://meshb.nlm.nih.gov/record/ui?ui=D002878>`__, but don't
-  provide sufficient benefit to merit the added complexity in VRS at
-  this time.
+* See also the rationale
+  for :ref:`dd-not-using-external-chromosome-declarations`.
 * TBD: Ordering. ① Regardless of species, `start` and `end`
   should be sorted alphanumerically so that `start` < `end`. OR ② `start`
   and `end` should be ordered according to conventions for the
