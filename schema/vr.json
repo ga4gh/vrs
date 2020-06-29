@@ -48,9 +48,7 @@
                "type": "string"
             },
             "end": {
-               "$ref": "#/definitions/Cytoband",
-               "default": null,
-               "nullable": true
+               "$ref": "#/definitions/Cytoband"
             },
             "species_id": {
                "$ref": "#/definitions/CURIE"
@@ -68,8 +66,10 @@
          },
          "required": [
             "type",
+            "species_id",
             "chr",
-            "start"
+            "start",
+            "end"
          ],
          "type": "object"
       },

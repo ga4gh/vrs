@@ -346,7 +346,7 @@ Location for Variation.
   location is non-specific (e.g., a range) or symbolic (a gene).
 
 
-.. _chromosome_location:
+.. _chromosome-location:
 
 ChromosomeLocation
 $$$$$$$$$$$$$$$$$$
@@ -386,18 +386,18 @@ chromosomal band within a species.
      - :ref:`CURIE`
      - 1..1
      - An external reference to a species taxonomy.  See Implementation Guidance, below.
-   * - chromosome
+   * - chr
      - string
      - 1..1
      - The symbolic chromosome name
    * - start
      - string
      - 1..1
-     - The chromosomal band name of the start
+     - The start chromosomal band name
    * - end
      - string
      - 1..1
-     - The end chromosomal band name; if null, end is presumed to equal `start`.
+     - The end chromosomal band name
 
 
 **Implementation guidance**
@@ -423,14 +423,14 @@ chromosomal band within a species.
   * For humans, ISCN conventions MUST be used. Bands are denoted by
     the arm ("p" or "q") and position (e.g., "22", "22.3", or the
     symbolic values "cen", "tel", or "ter"). If `start` and `end` are
-    on different arms, they should correspond to the p-arm and q-arm
+    on different arms, they SHOULD correspond to the p-arm and q-arm
     locations respectively. If `start` and `end` are on the same arm,
-    `start` should be the more centromeric position (i.e., with lower
+    `start` SHOULD be the more centromeric position (i.e., with lower
     band and sub-band numbers).
 
 * Prescribing the conversion of ChromosomeLocation instances to
   SequenceLocation instances is out-of-scope for VRS.  When converting
-  `start` and `end` to SequenceLocations, the positions should be
+  `start` and `end` to SequenceLocations, the positions MUST be
   interpreted as inclusive ranges that cover the maximal extent of the
   region.  Data for this operation are available at `NCBI GDP
   <https://ftp.ncbi.nlm.nih.gov/pub/gdp/>`__, `UCSC GRCh37 (hg19)

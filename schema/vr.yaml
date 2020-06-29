@@ -56,13 +56,13 @@ definitions:
         $ref: "#/definitions/Cytoband"
       end:
         $ref: "#/definitions/Cytoband"
-        nullable: true
-        default: null
     additionalProperties: false
     required:
       - type
+      - species_id
       - chr
       - start
+      - end
     
   SequenceLocation:
     additionalProperties: false
