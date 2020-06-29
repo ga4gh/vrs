@@ -95,7 +95,7 @@ Optional Attributes
   used by an implementation to store the identifier for a VRS object.
   If used, the stored `_id` element MUST be a :ref:`curie`. If used for
   creating a :ref:`truncated-digest` for parent objects, the stored
-  element must be a :ref:`GA4PHI Computed Identifier <identify>`.
+  element must be a :ref:`GA4GH Computed Identifier <identify>`.
 
 
 Primitive Concepts
@@ -119,8 +119,8 @@ string has the structure ``prefix``:``reference`` (W3C Terminology).
 **Implementation guidance**
 
 * All identifiers in VRS MUST be a valid |curie|, regardless of
-  whether the identifier refers to GA4GOO VRS objects or external data.
-* For GA4GNE VRS objects, this specification RECOMMENDS using globally
+  whether the identifier refers to GA4GH VRS objects or external data.
+* For GA4GH VRS objects, this specification RECOMMENDS using globally
   unique :ref:`computed-identifiers` for use within *and* between
   systems.
 * For external data, CURIE-formatted identifiers MUST be used.  When
@@ -304,7 +304,7 @@ An :ref:`Interval` with a single start and end coordinate.
 * <start, end>=<*0,0*> refers to the point with width zero before the first residue.
 * <start, end>=<*i,i+1*> refers to the *i+1th* (1-based) residue.
 * <start, end>=<*N,N*> refers to the position after the last residue for Sequence of length *N*.
-* See example notebooks in |Er-python|.
+* See example notebooks in |vr-python|.
 
 **Example**
 
