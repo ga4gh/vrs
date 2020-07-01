@@ -413,7 +413,7 @@ chromosomal band within a species.
   these values in the model, except for the guidelines below.
 * `chromosome` MUST be an official primary name from `NCBI Assembly
   <https://www.ncbi.nlm.nih.gov/assembly>`__.  For Humans, valid
-  chromosome names are 1..22, X, Y.
+  chromosome names are 1..22, X, Y (case-sensitive).
 * `end` must be specified, even when `start` and `end` are identical.
 * `start` and `end` SHOULD use syntax and ordering conventions
   appropriate for the species.
