@@ -409,7 +409,7 @@ chromosomal band within a species.
 * `species` is specified using the NCBI taxonomy.  The CURIE prefix
   MUST be `taxonomy`, corresponding to the `NCBI taxonomy prefix at
   identifiers.org
-  <https://registry.identifiers.org/registry/taxonomy>`__.
+  <https://registry.identifiers.org/registry/taxonomy>`__, and the CURIE reference MUST be an NCBI taxonomy identifier (e.g., 9606 for Homo sapiens).
 * Valid values for, and syntactic structure of, `chromosome`, `start`,
   and `end` depend on the species.  Therefore, VRS does not constrain
   these values in the model, except for the guidelines below.
