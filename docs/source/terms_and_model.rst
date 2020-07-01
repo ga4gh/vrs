@@ -353,9 +353,7 @@ $$$$$$$$$$$$$$$$$$
 
 **Biological definition**
 
-Imprecise chromosomal locations based on named landmarks assayed
-through chromosomal staining, FISH, recombination studies, or other
-low-resolution methods.
+Imprecise chromosomal locations based on named landmarks.
 
 **Computational definition**
 
