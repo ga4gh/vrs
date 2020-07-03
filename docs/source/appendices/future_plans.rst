@@ -120,24 +120,6 @@ Under development.
 Under development.
 
 
-CytobandLocation
-################
-
-**Biological definition**
-
-Imprecise chromosomal locations based on chromosomal staining.
-
-**Computational definition**
-
-Cytogenetic bands are defined by a chromosome name, band, and
-sub-band. In VRS, a cytogenetic location is an interval on a
-single chromsome with a start and end band and subband.
-
-**Information model**
-
-Under development.
-
-
 GeneLocation
 ############
 

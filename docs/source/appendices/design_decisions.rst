@@ -156,3 +156,22 @@ JSON`_ (not to be confused with `OLPC Canonical JSON`_).
 .. _left (5') normalized: https://genome.sph.umich.edu/wiki/Variant_Normalization#Definition
 .. _Gibson Canonical JSON: http://gibson042.github.io/canonicaljson-spec/
 .. _OLPC Canonical JSON: http://wiki.laptop.org/go/Canonical_JSON
+
+
+
+.. _dd-not-using-external-chromosome-declarations:
+
+Not using External Chromosome Declarations
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+In :ref:`ChromosomeLocation <chromosome-location>`, the tuple <species,chromosome name>
+refers an archetypal chromosome for the species.  `WikiData
+<https://www.wikidata.org/>`_ and `MeSH
+<https://www.ncbi.nlm.nih.gov/mesh/>`_ provide such definitions (e.g.,
+Human Chr 1 at `WikiData <https://www.wikidata.org/wiki/Q430258>`__
+and `MeSH <https://meshb.nlm.nih.gov/record/ui?ui=D002878>`__) and
+were considered, and rejected, for use in VRS. Both ontologies were
+anticipated to increase complexity that was not justified by the
+benefit to VRS.  In addition, data in WikiData are crowd-sourced and
+therefore potentially unstable, and the species coverage in MeSH was
+insufficient for anticipated VRS uses.
