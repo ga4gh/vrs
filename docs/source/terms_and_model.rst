@@ -427,7 +427,7 @@ Imprecise chromosomal locations based on named landmarks.
 **Computational definition**
 
 A ChromosomeLocation is a :ref:`Location` that is defined by a named
-chromosomal band within a species.
+chromosomal features.
 
 **Information model**
 
@@ -444,7 +444,7 @@ chromosomal band within a species.
    * - _id
      - :ref:`CURIE`
      - 0..1
-     - Location Id; MUST be unique within document
+     - Location id; MUST be unique within document
    * - type
      - string
      - 1..1
@@ -471,7 +471,7 @@ chromosomal band within a species.
   Precise :ref:`SequenceLocation` should be preferred when
   nucleotide-scale location is known.
 * `species` is specified using the NCBI taxonomy.  The CURIE prefix
-  MUST be `taxonomy`, corresponding to the `NCBI taxonomy prefix at
+  MUST be "taxonomy", corresponding to the `NCBI taxonomy prefix at
   identifiers.org
   <https://registry.identifiers.org/registry/taxonomy>`__, and the
   CURIE reference MUST be an NCBI taxonomy identifier (e.g., 9606 for
