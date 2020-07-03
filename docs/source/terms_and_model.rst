@@ -388,49 +388,51 @@ chromosomal band within a species.
      - string
      - 1..1
      - The symbolic chromosome name
-   * - start
-     - string
+   * - interval
+     - :ref:`NamedInterval`
      - 1..1
-     - The start chromosomal band name
-   * - end
-     - string
-     - 1..1
-     - The end chromosomal band name
+     - The chromosome region based on feature names
 
 
 **Implementation guidance**
 
 * ChromosomeLocation is intended to enable the representation of
   cytogenetic results from karyotyping or low-resolution molecular
-  methods.  Precise :ref:`SequenceLocation` should be preferred when
+  methods, particularly those found in older scientific literature.
+  Precise :ref:`SequenceLocation` should be preferred when
   nucleotide-scale location is known.
 * `species` is specified using the NCBI taxonomy.  The CURIE prefix
   MUST be `taxonomy`, corresponding to the `NCBI taxonomy prefix at
   identifiers.org
-  <https://registry.identifiers.org/registry/taxonomy>`__, and the CURIE reference MUST be an NCBI taxonomy identifier (e.g., 9606 for Homo sapiens).
-* Valid values for, and syntactic structure of, `chromosome`, `start`,
-  and `end` depend on the species.  Therefore, VRS does not constrain
-  these values in the model, except for the guidelines below.
-* `chromosome` MUST be an official primary name from `NCBI Assembly
+  <https://registry.identifiers.org/registry/taxonomy>`__, and the
+  CURIE reference MUST be an NCBI taxonomy identifier (e.g., 9606 for
+  Homo sapiens).
+* `chromosome` is an archetypal chromosome name. Valid values for, and
+  the syntactic structure of, `chromosome` depends on the species.
+  `chromosome` MUST be an official sequence name from `NCBI Assembly
   <https://www.ncbi.nlm.nih.gov/assembly>`__.  For Humans, valid
   chromosome names are 1..22, X, Y (case-sensitive).
-* `end` must be specified, even when `start` and `end` are identical.
-* `start` and `end` SHOULD use syntax and ordering conventions
-  appropriate for the species.
-
-  * For humans, ISCN conventions MUST be used. Bands are denoted by
-    the arm ("p" or "q") and position (e.g., "22", "22.3", or the
-    symbolic values "cen", "tel", or "ter"). If `start` and `end` are
-    on different arms, they SHOULD correspond to the p-arm and q-arm
-    locations respectively. If `start` and `end` are on the same arm,
-    `start` SHOULD be the more centromeric position (i.e., with lower
-    band and sub-band numbers).
-
-* Prescribing the conversion of ChromosomeLocation instances to
-  SequenceLocation instances is out-of-scope for VRS.  When converting
-  `start` and `end` to SequenceLocations, the positions MUST be
-  interpreted as inclusive ranges that cover the maximal extent of the
-  region.  Data for this operation are available at `NCBI GDP
+* `interval` (of type :ref:`NamedInterval`) refers to a contiguous
+  region specified named markers, which are presumed to exist on the
+  specified chromosome.  Markers are intentionally specified vaguely
+  in order to accommodate older scientific literature and a variety of
+  legacy marker names.
+* When :ref:`NamedInterval` refers to cytogentic bands, the valid
+  values for, and the syntactic structure of, the `start` and `end`
+  depend on the species.  When using :ref:`NamedInterval` to refer to
+  human cytogentic bands, ISCN conventions MUST be used. Bands are
+  denoted by the arm ("p" or "q") and position (e.g., "22", "22.3", or
+  the symbolic values "cen", "tel", or "ter"). If `start` and `end`
+  are on different arms, they SHOULD correspond to the p-arm and q-arm
+  locations respectively. If `start` and `end` are on the same arm,
+  `start` SHOULD be the more centromeric position (i.e., with lower
+  band and sub-band numbers).
+* The conversion of ChromosomeLocation instances to SequenceLocation
+  instances is out-of-scope for VRS.  When converting `start` and
+  `end` to SequenceLocations, the positions MUST be interpreted as
+  inclusive ranges that cover the maximal extent of the region.
+* Data for converting cytogenetic bands to precise sequence
+  coordinates are available at `NCBI GDP
   <https://ftp.ncbi.nlm.nih.gov/pub/gdp/>`__, `UCSC GRCh37 (hg19)
   <http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/cytoBand.txt.gz>`__,
   `UCSC GRCh38 (hg38)
@@ -447,12 +449,14 @@ chromosomal band within a species.
 
    {
      'chr': '11',
-     'end': 'q22.3',
-     'species': 'taxonomy:9606',
-     'start': 'q22.2',
+     'interval': {
+       'end': 'q22.3',
+       'start': 'q22.2',
+       'type': 'NamedInterval'
+       },
+     'species_id': 'taxonomy:9606',
      'type': 'ChromosomeLocation'
    }
-
 
 .. _sequence-location:
 .. _sequencelocation:

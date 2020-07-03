@@ -52,17 +52,14 @@ definitions:
         $ref: "#/definitions/CURIE"
       chr:
         type: string
-      start:
-        $ref: "#/definitions/Cytoband"
-      end:
-        $ref: "#/definitions/Cytoband"
+      interval:
+        $ref: "#/definitions/NamedInterval"
     additionalProperties: false
     required:
       - type
       - species_id
       - chr
-      - start
-      - end
+      - interval
     
   SequenceLocation:
     additionalProperties: false
@@ -88,8 +85,14 @@ definitions:
 
   Interval:
     additionalProperties: false
+    oneOf:
+      - $ref: '#/definitions/SimpleInterval'
+    discriminator:
+      propertyName: type
+
+  SimpleInterval:
     description: >-
-      An Interval represents a span of sequence. Positions are
+      A SimpleInterval represents a span of sequence. Positions are
       always represented by contiguous spans using interbase
       coordinates.
 
@@ -99,12 +102,6 @@ definitions:
       with the exception that the GA4GH VR Interval may be
       zero-width. The SO definition is for an "extent greater than
       zero".
-    oneOf:
-      - $ref: '#/definitions/SimpleInterval'
-    discriminator:
-      propertyName: type
-
-  SimpleInterval:
     additionalProperties: false
     type: object
     properties:
@@ -126,6 +123,25 @@ definitions:
       start: 11
       end: 22
 
+  NamedInterval:
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [NamedInterval]
+        default: NamedInterval
+      start:
+        $ref: "#/definitions/Cytoband"
+      end:
+        $ref: "#/definitions/Cytoband"
+    required:
+      - start
+      - end
+    example:
+      type: NamedInterval
+      start: q22.2
+      end: q22.3
 
   ############################################################################
   # Variation
