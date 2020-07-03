@@ -316,6 +316,75 @@ An :ref:`Interval` with a single start and end coordinate.
       "type": "SimpleInterval"
     }
 
+
+.. _NamedInterval:
+
+NamedInterval
+$$$$$$$$$$$$$$
+
+**Computational definition**
+
+A contiguous region specified by named features.
+
+**Information model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - Interval type; MUST be set to '**NamedInterval**'
+   * - start
+     - string
+     - 1..1
+     - name of feature start
+   * - end
+     - string
+     - 1..1
+     - name of feature end
+
+**Implementation guidance**
+
+* `start` and `end` attributes of NamedInterval are intentionally
+  specified vaguely in order to accommodate a wide variety of
+  uses. Examples include named markers on chromosomes, cytogenetic
+  bands, and legacy marker names found in older scientific literature.
+* The interpretation of a NamedInterval will depend on the context of
+  containing classes.  For example, the `interval` within
+  :ref:`ChromosomeLocation` will refer to cytogenetic bands or
+  chromosomal marker names.
+* When :ref:`NamedInterval` refers to cytogentic bands, the valid
+  values for, and the syntactic structure of, the `start` and `end`
+  depend on the species.  When using :ref:`NamedInterval` to refer to
+  human cytogentic bands, ISCN conventions MUST be used. Bands are
+  denoted by the arm ("p" or "q") and position (e.g., "22", "22.3", or
+  the symbolic values "cen", "tel", or "ter"). If `start` and `end`
+  are on different arms, they SHOULD correspond to the p-arm and q-arm
+  locations respectively. If `start` and `end` are on the same arm,
+  `start` SHOULD be the more centromeric position (i.e., with lower
+  band and sub-band numbers).
+* NamedIntervals are currently unoriented. Future versions of VRS may
+  introduce conventions or attributes that permit explicit
+  orientation.
+
+**Example**
+
+.. parsed-literal::
+
+   {
+     'end': 'q22.3',
+     'start': 'q22.2',
+     'type': 'NamedInterval'
+   }
+
 .. _location:
 
 Location (Abstract Class)
@@ -412,21 +481,9 @@ chromosomal band within a species.
   `chromosome` MUST be an official sequence name from `NCBI Assembly
   <https://www.ncbi.nlm.nih.gov/assembly>`__.  For Humans, valid
   chromosome names are 1..22, X, Y (case-sensitive).
-* `interval` (of type :ref:`NamedInterval`) refers to a contiguous
-  region specified named markers, which are presumed to exist on the
-  specified chromosome.  Markers are intentionally specified vaguely
-  in order to accommodate older scientific literature and a variety of
-  legacy marker names.
-* When :ref:`NamedInterval` refers to cytogentic bands, the valid
-  values for, and the syntactic structure of, the `start` and `end`
-  depend on the species.  When using :ref:`NamedInterval` to refer to
-  human cytogentic bands, ISCN conventions MUST be used. Bands are
-  denoted by the arm ("p" or "q") and position (e.g., "22", "22.3", or
-  the symbolic values "cen", "tel", or "ter"). If `start` and `end`
-  are on different arms, they SHOULD correspond to the p-arm and q-arm
-  locations respectively. If `start` and `end` are on the same arm,
-  `start` SHOULD be the more centromeric position (i.e., with lower
-  band and sub-band numbers).
+* `interval` refers to a contiguous region specified named markers,
+  which are presumed to exist on the specified chromosome.  See
+  :ref:`NamedInterval` for additional information.
 * The conversion of ChromosomeLocation instances to SequenceLocation
   instances is out-of-scope for VRS.  When converting `start` and
   `end` to SequenceLocations, the positions MUST be interpreted as
