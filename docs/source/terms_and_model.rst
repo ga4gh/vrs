@@ -371,9 +371,6 @@ A contiguous region specified by named features.
   locations respectively. If `start` and `end` are on the same arm,
   `start` SHOULD be the more centromeric position (i.e., with lower
   band and sub-band numbers).
-* NamedIntervals are currently unoriented. Future versions of VRS may
-  introduce conventions or attributes that permit explicit
-  orientation.
 
 **Example**
 
