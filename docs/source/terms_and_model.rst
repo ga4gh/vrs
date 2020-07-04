@@ -419,7 +419,7 @@ $$$$$$$$$$$$$$$$$$
 
 **Biological definition**
 
-Imprecise chromosomal locations based on named landmarks.
+Chromosomal locations based on named landmarks.
 
 **Computational definition**
 
