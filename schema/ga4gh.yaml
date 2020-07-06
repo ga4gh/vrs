@@ -27,7 +27,7 @@ identifiers:
     Haplotype: VH
 
     SequenceLocation: VSL
-    # CytobandLocation: VCL
+    ChromosomeLocation: VCL
     # GeneLocation: VGL
 
 

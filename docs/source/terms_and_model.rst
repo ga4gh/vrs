@@ -130,7 +130,7 @@ string has the structure ``prefix``:``reference`` (W3C Terminology).
   <http://identifiers.org/>`__, support is implementation-dependent.
   That is, implementations MAY choose whether and how to support
   informal or local namespaces.
-* Implemantions MUST use CURIE identifiers verbatim and MUST NOT be
+* Implementations MUST use CURIE identifiers verbatim and MUST NOT be
   modified in any way (e.g., case-folding).  Implementations MUST NOT
   expose partial (parsed) identifiers to any client.
 
@@ -142,7 +142,7 @@ Identifiers for GRCh38 chromosome 19::
     refseq:NC_000019.10
     grch38:19
 
-See :ref:`identify` for examples of CURIE-based identifiers for VR
+See :ref:`identify` for examples of CURIE-based identifiers for VRS
 objects.
 
 
@@ -197,7 +197,7 @@ amino acid codes.
   to define an :ref:`Allele`. A Sequence that replaces another Sequence is
   called a “replacement sequence”.
 * In some contexts outside VRS, “reference sequence” may refer
-  to a member of set of sequences that comprise a genome assembly. In the VR
+  to a member of set of sequences that comprise a genome assembly. In the VRS
   specification, any sequence may be a “reference sequence”, including those in
   a genome assembly.
 * For the purposes of representing sequence variation, it is not
@@ -316,6 +316,75 @@ An :ref:`Interval` with a single start and end coordinate.
       "type": "SimpleInterval"
     }
 
+
+.. _NamedInterval:
+
+NamedInterval
+$$$$$$$$$$$$$$
+
+**Computational definition**
+
+A contiguous region specified by named features.
+
+**Information model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - Interval type; MUST be set to '**NamedInterval**'
+   * - start
+     - string
+     - 1..1
+     - name of feature start
+   * - end
+     - string
+     - 1..1
+     - name of feature end
+
+**Implementation guidance**
+
+* `start` and `end` attributes of NamedInterval are intentionally
+  specified vaguely in order to accommodate a wide variety of
+  uses. Examples include named markers on chromosomes, cytogenetic
+  bands, and legacy marker names found in older scientific literature.
+* The interpretation of a NamedInterval will depend on the context of
+  containing classes.  For example, the `interval` within
+  :ref:`ChromosomeLocation` will refer to cytogenetic bands or
+  chromosomal marker names.
+* When :ref:`NamedInterval` refers to cytogentic bands, the valid
+  values for, and the syntactic structure of, the `start` and `end`
+  depend on the species.  When using :ref:`NamedInterval` to refer to
+  human cytogentic bands, ISCN conventions MUST be used. Bands are
+  denoted by the arm ("p" or "q") and position (e.g., "22", "22.3", or
+  the symbolic values "cen", "tel", or "ter"). If `start` and `end`
+  are on different arms, they SHOULD correspond to the p-arm and q-arm
+  locations respectively. If `start` and `end` are on the same arm,
+  `start` SHOULD be the more centromeric position (i.e., with lower
+  band and sub-band numbers).
+* NamedIntervals are currently unoriented. Future versions of VRS may
+  introduce conventions or attributes that permit explicit
+  orientation.
+
+**Example**
+
+.. parsed-literal::
+
+   {
+     'end': 'q22.3',
+     'start': 'q22.2',
+     'type': 'NamedInterval'
+   }
+
 .. _location:
 
 Location (Abstract Class)
@@ -342,11 +411,112 @@ Location for Variation.
 **Implementation Guidance**
 
 * Location refers to a position.  Although it MAY imply a sequence,
-  the two concepts are not interchangable, especially when the
+  the two concepts are not interchangeable, especially when the
   location is non-specific (e.g., a range) or symbolic (a gene).
 
 
+.. _chromosome-location:
+
+ChromosomeLocation
+$$$$$$$$$$$$$$$$$$
+
+**Biological definition**
+
+Imprecise chromosomal locations based on named landmarks.
+
+**Computational definition**
+
+A ChromosomeLocation is a :ref:`Location` that is defined by a named
+chromosomal features.
+
+**Information model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Location id; MUST be unique within document
+   * - type
+     - string
+     - 1..1
+     - Location type; MUST be set to **'ChromosomeLocation'**
+   * - species
+     - :ref:`CURIE`
+     - 1..1
+     - An external reference to a species taxonomy.  See Implementation Guidance, below.
+   * - chr
+     - string
+     - 1..1
+     - The symbolic chromosome name
+   * - interval
+     - :ref:`NamedInterval`
+     - 1..1
+     - The chromosome region based on feature names
+
+
+**Implementation guidance**
+
+* ChromosomeLocation is intended to enable the representation of
+  cytogenetic results from karyotyping or low-resolution molecular
+  methods, particularly those found in older scientific literature.
+  Precise :ref:`SequenceLocation` should be preferred when
+  nucleotide-scale location is known.
+* `species` is specified using the NCBI taxonomy.  The CURIE prefix
+  MUST be "taxonomy", corresponding to the `NCBI taxonomy prefix at
+  identifiers.org
+  <https://registry.identifiers.org/registry/taxonomy>`__, and the
+  CURIE reference MUST be an NCBI taxonomy identifier (e.g., 9606 for
+  Homo sapiens).
+* `chromosome` is an archetypal chromosome name. Valid values for, and
+  the syntactic structure of, `chromosome` depends on the species.
+  `chromosome` MUST be an official sequence name from `NCBI Assembly
+  <https://www.ncbi.nlm.nih.gov/assembly>`__.  For Humans, valid
+  chromosome names are 1..22, X, Y (case-sensitive).
+* `interval` refers to a contiguous region specified named markers,
+  which are presumed to exist on the specified chromosome.  See
+  :ref:`NamedInterval` for additional information.
+* The conversion of ChromosomeLocation instances to SequenceLocation
+  instances is out-of-scope for VRS.  When converting `start` and
+  `end` to SequenceLocations, the positions MUST be interpreted as
+  inclusive ranges that cover the maximal extent of the region.
+* Data for converting cytogenetic bands to precise sequence
+  coordinates are available at `NCBI GDP
+  <https://ftp.ncbi.nlm.nih.gov/pub/gdp/>`__, `UCSC GRCh37 (hg19)
+  <http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/cytoBand.txt.gz>`__,
+  `UCSC GRCh38 (hg38)
+  <http://hgdownload.cse.ucsc.edu/goldenPath/hg38/database/cytoBand.txt.gz>`__,
+  and `bioutils (Python)
+  <https://bioutils.readthedocs.io/en/stable/reference/bioutils.cytobands.html>`__.
+* See also the rationale
+  for :ref:`dd-not-using-external-chromosome-declarations`.
+
+
+**Example**
+
+.. parsed-literal::
+
+   {
+     'chr': '11',
+     'interval': {
+       'end': 'q22.3',
+       'start': 'q22.2',
+       'type': 'NamedInterval'
+       },
+     'species_id': 'taxonomy:9606',
+     'type': 'ChromosomeLocation'
+   }
+
 .. _sequence-location:
+.. _sequencelocation:
 
 SequenceLocation
 $$$$$$$$$$$$$$$$
@@ -403,7 +573,7 @@ named :ref:`Sequence`.
 .. important:: HGVS permits variants that refer to non-existent
                sequence. Examples include coordinates extrapolated
                beyond the bounds of a transcript and intronic
-               sequence. Such variants are not representable using VR
+               sequence. Such variants are not representable using VRS
                and MUST be projected to a genomic reference in order
                to be represented.
 
@@ -421,6 +591,9 @@ named :ref:`Sequence`.
       "type": "SequenceLocation"
     }
 
+
+
+
 .. _state:
 
 State (Abstract Class)
@@ -432,7 +605,7 @@ None.
 
 **Computational definition**
 
-*State* objects are one of two primary components specifying a VR
+*State* objects are one of two primary components specifying a VRS
 :ref:`Allele` (in addition to :ref:`Location`), and the designated
 components for representing change (or non-change) of the features
 indicated by the Allele Location. As an abstract class, State currently
@@ -522,7 +695,7 @@ Allele
 One of a number of alternative forms of the same gene or same genetic
 locus. In the context of biological sequences, “allele” refers to one
 of a set of specific changes within a :ref:`Sequence`. In the context
-of VR, Allele refers to a Sequence or Sequence change with respect to
+of VRS, Allele refers to a Sequence or Sequence change with respect to
 a reference sequence, without regard to genes or other features.
 
 **Computational definition**

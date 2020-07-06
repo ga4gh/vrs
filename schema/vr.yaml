@@ -26,10 +26,33 @@ definitions:
     description: >-
       A Location represents a span on a specific sequence.
     oneOf:
+      - $ref: "#/definitions/ChromosomeLocation"
       - $ref: "#/definitions/SequenceLocation"
     discriminator:
       propertyName: type
 
+  ChromosomeLocation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [ChromosomeLocation]
+        default: ChromosomeLocation
+      _id:
+        $ref: "#/definitions/CURIE"
+      species_id:
+        $ref: "#/definitions/CURIE"
+      chr:
+        type: string
+      interval:
+        $ref: "#/definitions/NamedInterval"
+    additionalProperties: false
+    required:
+      - type
+      - species_id
+      - chr
+      - interval
+    
   SequenceLocation:
     additionalProperties: false
     description: >-
@@ -54,8 +77,14 @@ definitions:
 
   Interval:
     additionalProperties: false
+    oneOf:
+      - $ref: '#/definitions/SimpleInterval'
+    discriminator:
+      propertyName: type
+
+  SimpleInterval:
     description: >-
-      An Interval represents a span of sequence. Positions are
+      A SimpleInterval represents a span of sequence. Positions are
       always represented by contiguous spans using interbase
       coordinates.
 
@@ -65,12 +94,6 @@ definitions:
       with the exception that the GA4GH VR Interval may be
       zero-width. The SO definition is for an "extent greater than
       zero".
-    oneOf:
-      - $ref: '#/definitions/SimpleInterval'
-    discriminator:
-      propertyName: type
-
-  SimpleInterval:
     additionalProperties: false
     type: object
     properties:
@@ -92,6 +115,25 @@ definitions:
       start: 11
       end: 22
 
+  NamedInterval:
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [NamedInterval]
+        default: NamedInterval
+      start:
+        $ref: "#/definitions/Cytoband"
+      end:
+        $ref: "#/definitions/Cytoband"
+    required:
+      - start
+      - end
+    example:
+      type: NamedInterval
+      start: q22.2
+      end: q22.3
 
   ############################################################################
   # Variation
@@ -220,6 +262,10 @@ definitions:
   # Basic types
   # These types are used solely within other definitions.
 
+  Cytoband:
+    type: string
+    example: "q22.3"
+
   DateTime:
     additionalProperties: false
     type: string
@@ -255,29 +301,5 @@ definitions:
       Using internal ids in public messages is strongly discouraged.
 
     type: string
-    pattern: '^\w[^:]+:.+$'
-    example: "ga4gh:GA.01234abcde"
-
-
-############################################################################
-# Enumeration types
-
-enums:
-  Completeness:
-    type: string
-    description: >-
-      Declares the `completeness` of a Haplotype or Genotype
-      definition.  See descriptions in those schemas for additional
-      information.
-      * COMPLETE: The definition is complete. All data are included
-        for the covered assay.
-      * PARTIAL: The definition is intentionally incomplete, typically
-        to protect information.  Declaring partial variation allows
-        data submitters to convey that data are missing.
-      * UNKNOWN: The definition is not known to be either COMPLETE or
-        PARTIAL.
-    default: "UNKNOWN"
-    enum:
-    - UNKNOWN
-    - PARTIAL
-    - COMPLETE
+    pattern: '^\w[^:]*:.+$'
+    example: "ensembl:ENSG00000139618"

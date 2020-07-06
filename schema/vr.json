@@ -34,8 +34,43 @@
       "CURIE": {
          "additionalProperties": false,
          "description": "A string that refers to an object uniquely.  The lifetime and scope of an id is defined by the sender.\nVR does not impose any contraints on strings used as ids in messages. However, to maximize sharability of data, the VR Specification RECOMMENDS that implementations use [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.\nString CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially.\nThe VR specification also RECOMMENDS that `prefix` be defined in identifiers.org.\nThe `reference` component is an unconstrained string.\nA CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VR uses CURIEs primarily as a naming mechanism.\nImplementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable.\nUsing internal ids in public messages is strongly discouraged.",
-         "example": "ga4gh:GA.01234abcde",
-         "pattern": "^\\w[^:]+:.+$",
+         "example": "ensembl:ENSG00000139618",
+         "pattern": "^\\w[^:]*:.+$",
+         "type": "string"
+      },
+      "ChromosomeLocation": {
+         "additionalProperties": false,
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "chr": {
+               "type": "string"
+            },
+            "interval": {
+               "$ref": "#/definitions/NamedInterval"
+            },
+            "species_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "type": {
+               "default": "ChromosomeLocation",
+               "enum": [
+                  "ChromosomeLocation"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "species_id",
+            "chr",
+            "interval"
+         ],
+         "type": "object"
+      },
+      "Cytoband": {
+         "example": "q22.3",
          "type": "string"
       },
       "DateTime": {
@@ -87,7 +122,6 @@
       },
       "Interval": {
          "additionalProperties": false,
-         "description": "An Interval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of Interval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VR Interval may be zero-width. The SO definition is for an \"extent greater than zero\".",
          "discriminator": {
             "propertyName": "type"
          },
@@ -105,9 +139,40 @@
          },
          "oneOf": [
             {
+               "$ref": "#/definitions/ChromosomeLocation"
+            },
+            {
                "$ref": "#/definitions/SequenceLocation"
             }
          ]
+      },
+      "NamedInterval": {
+         "additionalProperties": false,
+         "example": {
+            "end": "q22.3",
+            "start": "q22.2",
+            "type": "NamedInterval"
+         },
+         "properties": {
+            "end": {
+               "$ref": "#/definitions/Cytoband"
+            },
+            "start": {
+               "$ref": "#/definitions/Cytoband"
+            },
+            "type": {
+               "default": "NamedInterval",
+               "enum": [
+                  "NamedInterval"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "start",
+            "end"
+         ],
+         "type": "object"
       },
       "SequenceLocation": {
          "additionalProperties": false,
@@ -159,6 +224,7 @@
       },
       "SimpleInterval": {
          "additionalProperties": false,
+         "description": "A SimpleInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of Interval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VR Interval may be zero-width. The SO definition is for an \"extent greater than zero\".",
          "example": {
             "end": 22,
             "start": 11,
