@@ -922,54 +922,15 @@ same reference sequence.
 
 **Implementation Guidance**
 
-* The Haplotype location (as specified by the location_id) may refer
-  to a subsequence of the reference sequence, such as a subsequence of
-  an entire chromosome.
+* Haplotypes are an assertion of Alleles known to occur “in cis” or
+  “in phase” with each other.
 * All Alleles in a Haplotype MUST be defined on the same reference
-  sequence as specified by location_id.
+  sequence.
 * Alleles within a Haplotype MUST not overlap ("overlap" is defined in
   Interval).
-* All Location Intervals are to be interpreted in the context of the
-  underlying reference sequence, irrespective of insertions or
-  deletions by other “upstream” Alleles within the Haplotype.
-* When reporting an Haplotype, completeness MUST be set according to
-  these criteria:
-
-  * "COMPLETE" only if the entire reference sequence was assayed and
-    all in-phase Alleles are reported in this Haplotype.
-  * "PARTIAL" only if the entire reference sequence was assayed, other
-    in-phase Alleles exist, and are NOT reported in this
-    Haplotype. This is an assertion of unreported variation.
-  * "UNKNOWN" otherwise. This value is the default and should be
-    used if neither "COMPLETE" nor "PARTIAL" applies. These cases
-    include, but are not limited to, assays that do not fully cover
-    the reference sequence and an unwillingness by the reporter to
-    declare the existence or absence of other in-phase Alleles.
-* A Haplotype with an empty list of Alleles and completeness set to
-  "COMPLETE" is an assertion of an unchanged reference sequence.  When
-  projecting a Haplotype from one sequence to a larger sequence, a
-  "complete" Haplotype becomes an "unknown" Haplotype on the target
-  sequence. Furthermore, this change is not reversible.
-
-**Notes**
-
-* Alleles within a Haplotype are, by definition, “cis” or
-  “in-phase”. (“In phase” and “cis” refer to features that exist on
+* The locations of Alleles are independent of upstream “upstream”
+  Alleles within the Haplotype.
   instances of covalently bonded sequences.)
-* Haplotypes are often given names, such as ApoE3 or A*33:01 for
-  convenience.
-* When used to report Haplotypes, the completeness property enables
-  data providers (e.g, diagnostic labs) to indicate that other Alleles
-  exist, may exist, or do not exist. Data providers may not assay the
-  full reference sequence or may withhold other in-phase Alleles in
-  order to protect patient privacy.
-* When used to define Haplotypes, the completeness property enables
-  implementations to permit (PARTIAL) or preclude (COMPLETE) the
-  existence of other variation when matching a Haplotype to a set of
-  observed Alleles.
-* Data consumers may wish to use the completeness property in order to
-  provide accurate context for Allele interpretation or to select data
-  used in association studies.
 
 **Sources**
 
@@ -986,11 +947,56 @@ same reference sequence.
 
 **Examples**
 
-- assertion of no change over region of chromosome
-- n positions by array
-- n positions by sequencing
+An APOE-ε1 Haplotype with inline Alleles::
 
-
+    {
+      "members": [
+        {
+          "location": {
+            "interval": {
+              "end": 44908684,
+              "start": 44908683,
+              "type": "SimpleInterval"
+            },
+            "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+            "type": "SequenceLocation"
+          },
+          "state": {
+            "sequence": "C",
+            "type": "SequenceState"
+          },
+          "type": "Allele"
+        },
+        {
+          "location": {
+            "interval": {
+              "end": 44908822,
+              "start": 44908821,
+              "type": "SimpleInterval"
+            },
+            "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+            "type": "SequenceLocation"
+          },
+          "state": {
+            "sequence": "T",
+            "type": "SequenceState"
+          },
+          "type": "Allele"
+        }
+      ],
+      "type": "Haplotype"
+    }
+    
+The same APOE-ε1 Haplotype with referenced Alleles::
+    
+    {
+      "members": [
+        "ga4gh:VA.iXjilHZiyCEoD3wVMPMXG3B8BtYfL88H",
+        "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_"
+      ],
+      "type": "Haplotype"
+    }
+    
 
 VariationSet
 ############
