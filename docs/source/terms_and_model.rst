@@ -915,8 +915,8 @@ same reference sequence.
    * - members
      - :ref:`Allele`\[] | :ref:`CURIE`\[]
      - 0..*
-     - List of Discrete Variation, or identifiers of Discrete
-       Variation, that comprise this Haplotype
+     - List of Alleles, or references to Alleles, that comprise this
+       Haplotype
 
 
 
@@ -930,7 +930,6 @@ same reference sequence.
   Interval).
 * The locations of Alleles are independent of upstream “upstream”
   Alleles within the Haplotype.
-  instances of covalently bonded sequences.)
 
 **Sources**
 
