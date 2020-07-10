@@ -665,7 +665,7 @@ Variation
 @@@@@@@@@
 
 The Variation class is the conceptual root of all types of variation,
-both current and future.  Variation subclasses are:
+both current and future.
 
 **Biological definition**
 
@@ -911,10 +911,10 @@ same reference sequence.
    * - type
      - string
      - 1..1
-     - Variation type; MUST be "Haplotype" (default)
+     - Variation type; MUST be "Haplotype"
    * - members
      - :ref:`Allele`\[] | :ref:`CURIE`\[]
-     - 0..*
+     - 1..*
      - List of Alleles, or references to Alleles, that comprise this
        Haplotype
 
@@ -928,21 +928,29 @@ same reference sequence.
   sequence.
 * Alleles within a Haplotype MUST not overlap ("overlap" is defined in
   Interval).
-* The locations of Alleles are independent of upstream “upstream”
-  Alleles within the Haplotype.
+* The locations of Alleles within the Haplotype MUST be interpreted
+  independently.  Alleles that create a net insertion or deletion of
+  sequence MUST NOT change the location of "downstream" Alleles.
+* The `members` attribute is required and SHOULD contain at least one
+  Allele.
+
 
 **Sources**
 
-* ISOGG: Haplotype — A haplotype is a combination of alleles (DNA
-  sequences) at different places (loci) on the chromosome that are
-  transmitted together. A haplotype may be one locus, several loci, or
-  an entire chromosome depending on the number of recombination events
-  that have occurred between a given set of loci.
-* SO: haplotype (SO:0001024) — A haplotype is one of a set of
-  coexisting sequence variants of a haplotype block.
-* GENO: Haplotype (GENO:0000871) - A set of two or more sequence
-  alterations on the same chromosomal strand that tend to be
-  transmitted together.
+* `ISOGG: Haplotype <https://isogg.org/wiki/Haplotype>`__ — A haplotype
+  is a combination of alleles (DNA sequences) at different places
+  (loci) on the chromosome that are transmitted together. A haplotype
+  may be one locus, several loci, or an entire chromosome depending on
+  the number of recombination events that have occurred between a
+  given set of loci.
+* `SO: haplotype (SO:0001024)
+  <http://www.sequenceontology.org/browser/current_release/term/SO:0001024>`__
+  — A haplotype is one of a set of coexisting sequence variants of a
+  haplotype block.
+* `GENO: Haplotype (GENO:0000871)
+  <http://www.ontobee.org/ontology/GENO?iri=http://purl.obolibrary.org/obo/GENO_0000871>`__ -
+  A set of two or more sequence alterations on the same chromosomal
+  strand that tend to be transmitted together.
 
 **Examples**
 
@@ -996,6 +1004,12 @@ The same APOE-ε1 Haplotype with referenced Alleles::
       "type": "Haplotype"
     }
     
+The GA4GH computed identifier for these Haplotypes is
+`ga4gh:VH.NAVnEuaP9gf41OxnPM56XxWQfdFNcUxJ`, regardless of the whether
+the Variation objects are inlined or referenced, and regardless of
+order. See :ref:`computed-identifiers` for more information.
+
+
 
 VariationSet
 ############
@@ -1028,7 +1042,7 @@ An unconstrained set of Variation objects or references.
    * - type
      - string
      - 1..1
-     - Variation type; MUST be "VariationSet" (default)
+     - Variation type; MUST be "VariationSet"
    * - members
      - :ref:`Variation`\[] or :ref:`CURIE`\[]
      - 0..*

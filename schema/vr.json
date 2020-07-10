@@ -329,18 +329,6 @@
          "type": "object"
       }
    },
-   "enums": {
-      "Completeness": {
-         "default": "UNKNOWN",
-         "description": "Declares the `completeness` of a Haplotype or Genotype definition.  See descriptions in those schemas for additional information. * COMPLETE: The definition is complete. All data are included\n  for the covered assay.\n* PARTIAL: The definition is intentionally incomplete, typically\n  to protect information.  Declaring partial variation allows\n  data submitters to convey that data are missing.\n* UNKNOWN: The definition is not known to be either COMPLETE or\n  PARTIAL.",
-         "enum": [
-            "UNKNOWN",
-            "PARTIAL",
-            "COMPLETE"
-         ],
-         "type": "string"
-      }
-   },
    "title": "GA4GH-VR-Definitions",
    "type": "object"
 }
