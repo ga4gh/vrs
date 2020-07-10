@@ -863,7 +863,8 @@ subclasses, but are still treated as variation.
   implementation SHOULD persist the original Text object and respond
   to queries matching the Text object with the new object.
 * Additional Variation subclasses are continually under
-  consideration. Please open a `github issue <github-issues>`_ if you would like to
+  consideration. Please `open a github issue
+  <https://github.com/ga4gh/vr-spec/issues>`__ if you would like to
   propose a Variation subclass to cover a needed variation
   representation.
 
