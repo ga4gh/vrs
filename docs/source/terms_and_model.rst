@@ -415,7 +415,7 @@ Location for Variation.
   location is non-specific (e.g., a range) or symbolic (a gene).
 
 
-.. _chromosome-location:
+.. _chromosomelocation:
 
 ChromosomeLocation
 $$$$$$$$$$$$$$$$$$
