@@ -78,6 +78,49 @@
          "format": "date-time",
          "type": "string"
       },
+      "Haplotype": {
+         "additionalProperties": false,
+         "description": "A set of zero or more Alleles",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "location": {
+               "default": null,
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/CURIE"
+                  },
+                  {
+                     "$ref": "#/definitions/Location"
+                  }
+               ]
+            },
+            "members": {
+               "items": {
+                  "oneOf": [
+                     {
+                        "$ref": "#/definitions/Allele"
+                     },
+                     {
+                        "$ref": "#/definitions/CURIE"
+                     }
+                  ]
+               },
+               "minItems": 1,
+               "type": "array",
+               "uniqueItems": true
+            },
+            "type": {
+               "default": "Haplotype",
+               "enum": [
+                  "Haplotype"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
       "Interval": {
          "additionalProperties": false,
          "discriminator": {

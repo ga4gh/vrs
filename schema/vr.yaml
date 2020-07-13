@@ -13,18 +13,10 @@ title: "GA4GH-VR-Definitions"
 type: object
 
 definitions:
-  # VR definitions are presented top-down.  The Conceptual structure is:
-  #
-  #    Interval
-  #    +- SimpleInterval
-  #
-  #    Location
-  #    +- SequenceLocation
-  #    
-  #    Variation
-  #    +- Allele
-  #    +- Text
-  #    +- VariationSet
+  # VR definitions are presented top-down.  Everything rolls up to
+  # Variation, which is a polymorphic abstraction of many kinds of
+  # variation.
+
 
   ############################################################################
   # Locations
@@ -211,6 +203,33 @@ definitions:
         items:
           oneOf:
             - $ref: "#/definitions/Variation"
+            - $ref: "#/definitions/CURIE"
+
+
+  Haplotype:
+    additionalProperties: false
+    description: >-
+      A set of zero or more Alleles
+    type: "object"
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: ["Haplotype"]
+        default: "Haplotype"
+      location:
+        oneOf:
+          - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Location"
+        default: null
+      members:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          oneOf:
+            - $ref: "#/definitions/Allele"
             - $ref: "#/definitions/CURIE"
 
 

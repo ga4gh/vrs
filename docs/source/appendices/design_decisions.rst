@@ -164,7 +164,7 @@ JSON`_ (not to be confused with `OLPC Canonical JSON`_).
 Not using External Chromosome Declarations
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-In :ref:`ChromosomeLocation <chromosome-location>`, the tuple <species,chromosome name>
+In :ref:`ChromosomeLocation <chromosomelocation>`, the tuple <species,chromosome name>
 refers an archetypal chromosome for the species.  `WikiData
 <https://www.wikidata.org/>`_ and `MeSH
 <https://www.ncbi.nlm.nih.gov/mesh/>`_ provide such definitions (e.g.,
