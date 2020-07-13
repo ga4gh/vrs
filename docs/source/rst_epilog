@@ -18,16 +18,17 @@
 .. _nucleic acid: https://en.wikipedia.org/wiki/Nucleic_acid
 .. _polymeric chain: https://en.wikipedia.org/wiki/Polymer
 .. _protein: https://en.wikipedia.org/wiki/Protein
+.. _vrs-issues: https://github.com/ga4gh/vr-spec/issues/
 
-.. |vrs| replace:: `VRS <https://github.com/ga4gh/vr-python/>`__
+.. |curie| replace:: `Compact URI (CURIE)`_
+.. |notebooks| replace:: `VR Python Notebooks <https://github.com/ga4gh/vr-python/tree/master/notebooks>`__
+.. |seqrepo_rs| replace:: `SeqRepo REST Service <https://github.com/biocommons/seqrepo-rest-service/>`__
+.. |seqrepo| replace:: `SeqRepo <https://github.com/biocommons/biocommons.seqrepo/>`__
 .. |vr-python| replace:: `GA4GH VR Python Implementation <https://github.com/ga4gh/vr-python/>`__
 .. |vr_json| replace:: :download:`vr.json <_static/vr.json>`
 .. |vr_yaml| replace:: :download:`vr.yaml <_static/vr.yaml>`
-.. |seqrepo| replace:: `SeqRepo <https://github.com/biocommons/biocommons.seqrepo/>`__
-.. |seqrepo_rs| replace:: `SeqRepo REST Service <https://github.com/biocommons/seqrepo-rest-service/>`__
-.. |notebooks| replace:: `VR Python Notebooks <https://github.com/ga4gh/vr-python/tree/master/notebooks>`__
+.. |vrs| replace:: `VRS <https://github.com/ga4gh/vr-spec/>`__
 
-.. |curie| replace:: `Compact URI (CURIE)`_
 
 .. |eg| replace:: *e.g.,*
 .. |ie| replace:: *i.e.,*

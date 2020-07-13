@@ -359,7 +359,7 @@ A contiguous region specified by named features.
   bands, and legacy marker names found in older scientific literature.
 * The interpretation of a NamedInterval will depend on the context of
   containing classes.  For example, the `interval` within
-  :ref:`ChromosomeLocation` will refer to cytogenetic bands or
+  :ref:`chromosomelocation` will refer to cytogenetic bands or
   chromosomal marker names.
 * When :ref:`NamedInterval` refers to cytogentic bands, the valid
   values for, and the syntactic structure of, the `start` and `end`
@@ -369,11 +369,8 @@ A contiguous region specified by named features.
   the symbolic values "cen", "tel", or "ter"). If `start` and `end`
   are on different arms, they SHOULD correspond to the p-arm and q-arm
   locations respectively. If `start` and `end` are on the same arm,
-  `start` SHOULD be the more centromeric position (i.e., with lower
+  `start` MUST be the more centromeric position (i.e., with lower
   band and sub-band numbers).
-* NamedIntervals are currently unoriented. Future versions of VRS may
-  introduce conventions or attributes that permit explicit
-  orientation.
 
 **Example**
 
@@ -422,7 +419,7 @@ $$$$$$$$$$$$$$$$$$
 
 **Biological definition**
 
-Imprecise chromosomal locations based on named landmarks.
+Chromosomal locations based on named landmarks.
 
 **Computational definition**
 
@@ -863,10 +860,9 @@ subclasses, but are still treated as variation.
   implementation SHOULD persist the original Text object and respond
   to queries matching the Text object with the new object.
 * Additional Variation subclasses are continually under
-  consideration. Please `open a github issue
-  <https://github.com/ga4gh/vr-spec/issues>`__ if you would like to
-  propose a Variation subclass to cover a needed variation
-  representation.
+  consideration. Please open a `GitHub issue`_ if you
+  would like to propose a Variation subclass to cover a needed
+  variation representation.
 
 **Example**
 
