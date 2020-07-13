@@ -225,6 +225,7 @@ definitions:
         default: null
       members:
         type: array
+        minItems: 1
         uniqueItems: true
         items:
           oneOf:

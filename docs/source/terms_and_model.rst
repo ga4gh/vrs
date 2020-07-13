@@ -928,7 +928,7 @@ same reference sequence.
 * The locations of Alleles within the Haplotype MUST be interpreted
   independently.  Alleles that create a net insertion or deletion of
   sequence MUST NOT change the location of "downstream" Alleles.
-* The `members` attribute is required and SHOULD contain at least one
+* The `members` attribute is required and MUST contain at least one
   Allele.
 
 
