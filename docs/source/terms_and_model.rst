@@ -369,7 +369,7 @@ A contiguous region specified by named features.
   the symbolic values "cen", "tel", or "ter"). If `start` and `end`
   are on different arms, they SHOULD correspond to the p-arm and q-arm
   locations respectively. If `start` and `end` are on the same arm,
-  `start` SHOULD be the more centromeric position (i.e., with lower
+  `start` MUST be the more centromeric position (i.e., with lower
   band and sub-band numbers).
 
 **Example**
