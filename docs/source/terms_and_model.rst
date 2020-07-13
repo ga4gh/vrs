@@ -369,11 +369,8 @@ A contiguous region specified by named features.
   the symbolic values "cen", "tel", or "ter"). If `start` and `end`
   are on different arms, they SHOULD correspond to the p-arm and q-arm
   locations respectively. If `start` and `end` are on the same arm,
-  `start` SHOULD be the more centromeric position (i.e., with lower
+  `start` MUST be the more centromeric position (i.e., with lower
   band and sub-band numbers).
-* NamedIntervals are currently unoriented. Future versions of VRS may
-  introduce conventions or attributes that permit explicit
-  orientation.
 
 **Example**
 
@@ -422,7 +419,7 @@ $$$$$$$$$$$$$$$$$$
 
 **Biological definition**
 
-Imprecise chromosomal locations based on named landmarks.
+Chromosomal locations based on named landmarks.
 
 **Computational definition**
 
