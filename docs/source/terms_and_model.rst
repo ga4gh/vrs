@@ -359,7 +359,7 @@ A contiguous region specified by named features.
   bands, and legacy marker names found in older scientific literature.
 * The interpretation of a NamedInterval will depend on the context of
   containing classes.  For example, the `interval` within
-  :ref:`ChromosomeLocation` will refer to cytogenetic bands or
+  :ref:`chromosomelocation` will refer to cytogenetic bands or
   chromosomal marker names.
 * When :ref:`NamedInterval` refers to cytogentic bands, the valid
   values for, and the syntactic structure of, the `start` and `end`
@@ -412,7 +412,7 @@ Location for Variation.
   location is non-specific (e.g., a range) or symbolic (a gene).
 
 
-.. _chromosome-location:
+.. _chromosomelocation:
 
 ChromosomeLocation
 $$$$$$$$$$$$$$$$$$
@@ -859,9 +859,9 @@ subclasses, but are still treated as variation.
   implementation SHOULD persist the original Text object and respond
   to queries matching the Text object with the new object.
 * Additional Variation subclasses are continually under
-  consideration. Please open a `GitHub issue`_ if you would like to
-  propose a Variation subclass to cover a needed variation
-  representation.
+  consideration. Please open a `GitHub issue`_ if you
+  would like to propose a Variation subclass to cover a needed
+  variation representation.
 
 **Example**
 
