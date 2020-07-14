@@ -103,6 +103,8 @@ definitions:
     additionalProperties: false
     oneOf:
       - $ref: '#/definitions/SimpleInterval'
+      - $ref: '#/definitions/NamedInterval'
+      - $ref: '#/definitions/CompleteInterval'
     discriminator:
       propertyName: type
 
