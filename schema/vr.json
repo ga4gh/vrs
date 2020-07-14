@@ -69,10 +69,6 @@
          ],
          "type": "object"
       },
-      "Cytoband": {
-         "example": "q22.3",
-         "type": "string"
-      },
       "DateTime": {
          "additionalProperties": false,
          "format": "date-time",
@@ -156,10 +152,10 @@
          },
          "properties": {
             "end": {
-               "$ref": "#/definitions/Cytoband"
+               "type": "string"
             },
             "start": {
-               "$ref": "#/definitions/Cytoband"
+               "type": "string"
             },
             "type": {
                "default": "NamedInterval",
