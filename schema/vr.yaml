@@ -62,7 +62,7 @@ definitions:
       chr:
         type: string
       interval:
-        $ref: "#/definitions/NamedInterval"
+        $ref: "#/definitions/Interval"
     additionalProperties: false
     required:
       - type
