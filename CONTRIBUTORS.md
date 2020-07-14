@@ -20,6 +20,7 @@
 |Eric Moyer         | NCBI/NLM/NIH |
 |Christa Lese Martin| Geisinger, ClinGen |
 |Jennifer Lee       | NCI |
+|Daniel Cameron     | WEHI |
 
 
 
