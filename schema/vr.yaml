@@ -103,6 +103,9 @@ definitions:
     additionalProperties: false
     oneOf:
       - $ref: '#/definitions/SimpleInterval'
+      - $ref: '#/definitions/NamedInterval'
+      - $ref: '#/definitions/CompleteInterval'
+      - $ref: '#/definitions/UndefinedInterval'
     discriminator:
       propertyName: type
 
@@ -171,6 +174,19 @@ definitions:
         type: string
         enum: [CompleteInterval]
         default: CompleteInterval
+    required:
+      - type
+
+  UndefinedInterval:
+    additionalProperties: false
+    type: object
+    description: >-
+      This interval type covers an undefined span of the object it is associated to in a Location. This is useful for describing a Sequence, Chromosome, Gene, or other entity Location in general terms when the interval is not specified.
+    properties:
+      type:
+        type: string
+        enum: [UndefinedInterval]
+        default: UndefinedInterval
     required:
       - type
 
