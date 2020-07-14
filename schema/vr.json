@@ -1,6 +1,18 @@
 {
    "$schema": "http://json-schema.org/draft-04/schema",
    "definitions": {
+      "Abundance": {
+         "additionalProperties": false,
+         "description": "Defines the abundance of a MolecularVariation in a systemic context. Some common uses of abundance include transcript / gene expression and CNVs.",
+         "discriminator": {
+            "propertyName": "type"
+         },
+         "oneOf": [
+            {
+               "$ref": "#/definitions/DiscreteCopyNumber"
+            }
+         ]
+      },
       "Allele": {
          "additionalProperties": false,
          "description": "An assertion of a sequence state at a Location.",
@@ -99,6 +111,35 @@
          "additionalProperties": false,
          "format": "date-time",
          "type": "string"
+      },
+      "DiscreteCopyNumber": {
+         "additionalProperties": false,
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "maxCopies": {
+               "type": "integer"
+            },
+            "minCopies": {
+               "type": "integer"
+            },
+            "molecularVariation": {
+               "$ref": "#/definitions/MolecularVariation"
+            },
+            "type": {
+               "default": "DiscreteCopyNumber",
+               "enum": [
+                  "DiscreteCopyNumber"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "molecularVariation"
+         ],
+         "type": "object"
       },
       "GeneLocation": {
          "additionalProperties": false,
@@ -241,6 +282,21 @@
             "type"
          ],
          "type": "object"
+      },
+      "MolecularVariation": {
+         "additionalProperties": false,
+         "description": "A subset of Variation describing a single resultant molecule.",
+         "discriminator": {
+            "propertyName": "type"
+         },
+         "oneOf": [
+            {
+               "$ref": "#/definitions/Allele"
+            },
+            {
+               "$ref": "#/definitions/LocationJunction"
+            }
+         ]
       },
       "NamedInterval": {
          "additionalProperties": false,

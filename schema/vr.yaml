@@ -227,6 +227,45 @@ definitions:
     discriminator:
       propertyName: type
 
+  MolecularVariation:
+    additionalProperties: false
+    description: >-
+      A subset of Variation describing a single resultant molecule.
+    oneOf:
+      - $ref: "#/definitions/Allele"
+      - $ref: "#/definitions/LocationJunction"
+    discriminator:
+      propertyName: type
+
+  Abundance:
+    additionalProperties: false
+    description: >-
+      Defines the abundance of a MolecularVariation in a systemic context. Some common
+      uses of abundance include transcript / gene expression and CNVs.
+    oneOf:
+      - $ref: "#/definitions/DiscreteCopyNumber"
+    discriminator:
+      propertyName: type
+
+  DiscreteCopyNumber:
+    additionalProperties: false
+    type: object
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [DiscreteCopyNumber]
+        default: DiscreteCopyNumber
+      molecularVariation:
+        $ref: "#/definitions/MolecularVariation"
+      minCopies:
+        type: integer
+      maxCopies:
+        type: integer
+    required:
+      - type
+      - molecularVariation
 
   Text:
     additionalProperties: false
@@ -310,7 +349,6 @@ definitions:
             - $ref: "#/definitions/Allele"
             - $ref: "#/definitions/CURIE"
 
-
   LocationJunction:
     additionalProperties: false
     description: >-
@@ -335,6 +373,7 @@ definitions:
           - $ref: "#/definitions/Location"
     required:
       - type
+
 
 
   ############################################################################
