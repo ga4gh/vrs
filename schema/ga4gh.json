@@ -9,6 +9,8 @@
          "ChromosomeLocation": "VCL",
          "GeneLocation": "VGL",
          "Haplotype": "VH",
+         "LocationJunction": "VLJ",
+         "OrientedLocation": "VOL",
          "Sequence": "SQ",
          "SequenceLocation": "VSL",
          "Text": "VT",

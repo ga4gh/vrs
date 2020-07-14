@@ -25,10 +25,12 @@ identifiers:
     Text: VT
     # Genotype: VG
     Haplotype: VH
+    LocationJunction: VLJ
 
     SequenceLocation: VSL
     ChromosomeLocation: VCL
     GeneLocation: VGL
+    OrientedLocation: VOL
 
 
   regexp: '^ga4gh:(?P<type>[^.]+)\.(?P<digest>.+)$'
