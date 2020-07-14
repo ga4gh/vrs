@@ -69,23 +69,6 @@
          ],
          "type": "object"
       },
-      "CompleteInterval": {
-         "additionalProperties": false,
-         "description": "This interval type covers the maximum possible span of the object it is associated to in a Location. This could be an entire Sequence, Chromosome, Gene, or other entity as defined by the Location type.",
-         "properties": {
-            "type": {
-               "default": "CompleteInterval",
-               "enum": [
-                  "CompleteInterval"
-               ],
-               "type": "string"
-            }
-         },
-         "required": [
-            "type"
-         ],
-         "type": "object"
-      },
       "DateTime": {
          "additionalProperties": false,
          "format": "date-time",
@@ -172,9 +155,6 @@
             },
             {
                "$ref": "#/definitions/NamedInterval"
-            },
-            {
-               "$ref": "#/definitions/CompleteInterval"
             },
             {
                "$ref": "#/definitions/UndefinedInterval"

@@ -104,7 +104,6 @@ definitions:
     oneOf:
       - $ref: '#/definitions/SimpleInterval'
       - $ref: '#/definitions/NamedInterval'
-      - $ref: '#/definitions/CompleteInterval'
       - $ref: '#/definitions/UndefinedInterval'
     discriminator:
       propertyName: type
@@ -164,18 +163,6 @@ definitions:
       start: q22.2
       end: q22.3
 
-  CompleteInterval:
-    additionalProperties: false
-    type: object
-    description: >-
-      This interval type covers the maximum possible span of the object it is associated to in a Location. This could be an entire Sequence, Chromosome, Gene, or other entity as defined by the Location type.
-    properties:
-      type:
-        type: string
-        enum: [CompleteInterval]
-        default: CompleteInterval
-    required:
-      - type
 
   UndefinedInterval:
     additionalProperties: false
