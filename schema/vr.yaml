@@ -29,6 +29,7 @@ definitions:
       - $ref: "#/definitions/ChromosomeLocation"
       - $ref: "#/definitions/SequenceLocation"
       - $ref: "#/definitions/GeneLocation"
+      - $ref: "#/definitions/OrientedLocation"
     discriminator:
       propertyName: type
 
@@ -94,6 +95,31 @@ definitions:
       - sequence_id
       - interval
 
+  OrientedLocation:
+    additionalProperties: false
+    description: >-
+      A specified orientation on another Location. Useful for composition of
+      structural variations.
+    type: object
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [OrientedLocation]
+        default: OrientedLocation
+      location:
+        oneOf:
+          - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Location"
+      orientation:
+        type: string
+        enum: ['+', '-']
+        default: '+'
+    required:
+      - type
+      - location
+      - orientation
 
   ############################################################################
   # Interval
@@ -294,18 +320,10 @@ definitions:
         oneOf:
           - $ref: "#/definitions/CURIE"
           - $ref: "#/definitions/Location"
-      left_orientation:
-        type: string
-        enum: ['+', '-']
-        default: '+'
       right:
         oneOf:
           - $ref: "#/definitions/CURIE"
           - $ref: "#/definitions/Location"
-      right_orientation:
-        type: string
-        enum: ['+', '-']
-        default: '+'
     required:
       - type
 
@@ -316,6 +334,7 @@ definitions:
   State:
     oneOf:
       - $ref: "#/definitions/SequenceState"
+      - $ref: "#/definitions/ChromosomeState"
 
   SequenceState:
     additionalProperties: false
@@ -335,6 +354,21 @@ definitions:
       type: SequenceState
       sequence: C
 
+  ChromosomeState:
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [ChromosomeState]
+        default: ChromosomeState
+      molecularRegion:
+        oneOf:
+          - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Location"
+    required:
+      - type
+      - molecularRegion
 
   ############################################################################
   # Basic types

@@ -69,6 +69,33 @@
          ],
          "type": "object"
       },
+      "ChromosomeState": {
+         "additionalProperties": false,
+         "properties": {
+            "molecularRegion": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/CURIE"
+                  },
+                  {
+                     "$ref": "#/definitions/Location"
+                  }
+               ]
+            },
+            "type": {
+               "default": "ChromosomeState",
+               "enum": [
+                  "ChromosomeState"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "molecularRegion"
+         ],
+         "type": "object"
+      },
       "DateTime": {
          "additionalProperties": false,
          "format": "date-time",
@@ -176,6 +203,9 @@
             },
             {
                "$ref": "#/definitions/GeneLocation"
+            },
+            {
+               "$ref": "#/definitions/OrientedLocation"
             }
          ]
       },
@@ -196,14 +226,6 @@
                   }
                ]
             },
-            "left_orientation": {
-               "default": "+",
-               "enum": [
-                  "+",
-                  "-"
-               ],
-               "type": "string"
-            },
             "right": {
                "oneOf": [
                   {
@@ -213,14 +235,6 @@
                      "$ref": "#/definitions/Location"
                   }
                ]
-            },
-            "right_orientation": {
-               "default": "+",
-               "enum": [
-                  "+",
-                  "-"
-               ],
-               "type": "string"
             },
             "type": {
                "default": "LocationJunction",
@@ -261,6 +275,46 @@
             "type",
             "start",
             "end"
+         ],
+         "type": "object"
+      },
+      "OrientedLocation": {
+         "additionalProperties": false,
+         "description": "A specified orientation on another Location. Useful for composition of structural variations.",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "location": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/CURIE"
+                  },
+                  {
+                     "$ref": "#/definitions/Location"
+                  }
+               ]
+            },
+            "orientation": {
+               "default": "+",
+               "enum": [
+                  "+",
+                  "-"
+               ],
+               "type": "string"
+            },
+            "type": {
+               "default": "OrientedLocation",
+               "enum": [
+                  "OrientedLocation"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "location",
+            "orientation"
          ],
          "type": "object"
       },
@@ -353,6 +407,9 @@
          "oneOf": [
             {
                "$ref": "#/definitions/SequenceState"
+            },
+            {
+               "$ref": "#/definitions/ChromosomeState"
             }
          ]
       },
