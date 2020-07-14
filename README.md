@@ -9,9 +9,8 @@ national information resource providers, major international public
 initiatives, and diagnostic testing laboratories.
 
 
-> **NOTE:** VRS is under very active development.  The priorities
-> and roadmap are available at the [VR 2019
-> Project](https://github.com/orgs/ga4gh/projects/5).
+> **NOTE:** VRS is under active development.  See [VR 
+> Project Roadmap](https://github.com/orgs/ga4gh/projects/5).
 
 
 # Specific goals:

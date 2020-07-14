@@ -152,9 +152,9 @@ definitions:
         enum: [NamedInterval]
         default: NamedInterval
       start:
-        $ref: "#/definitions/Cytoband"
+        type: string
       end:
-        $ref: "#/definitions/Cytoband"
+        type: string
     required:
       - type
       - start
@@ -317,10 +317,6 @@ definitions:
   ############################################################################
   # Basic types
   # These types are used solely within other definitions.
-
-  Cytoband:
-    type: string
-    example: "q22.3"
 
   DateTime:
     additionalProperties: false
