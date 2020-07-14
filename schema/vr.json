@@ -199,6 +199,66 @@
             }
          ]
       },
+      "LocationJunction": {
+         "additionalProperties": false,
+         "description": "A junction between two oriented Locations, where \"left\" corresponds to the 5' partner for nucleic acids, or N-terminus partner for amino acids, and \"right\" corresponds to the 3' and C-terminus partner, respectively.",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "left": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/CURIE"
+                  },
+                  {
+                     "$ref": "#/definitions/Location"
+                  }
+               ]
+            },
+            "left_orientation": {
+               "default": "+",
+               "enum": [
+                  "+",
+                  "-"
+               ],
+               "type": "string"
+            },
+            "right": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/CURIE"
+                  },
+                  {
+                     "$ref": "#/definitions/Location"
+                  }
+               ]
+            },
+            "right_orientation": {
+               "default": "+",
+               "enum": [
+                  "+",
+                  "-"
+               ],
+               "type": "string"
+            },
+            "type": {
+               "default": "LocationJunction",
+               "enum": [
+                  "LocationJunction"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "left",
+            "left_orientation",
+            "right",
+            "right_orientation"
+         ],
+         "type": "object"
+      },
       "NamedInterval": {
          "additionalProperties": false,
          "example": {
@@ -372,6 +432,9 @@
             },
             {
                "$ref": "#/definitions/VariationSet"
+            },
+            {
+               "$ref": "#/definitions/LocationJunction"
             }
          ]
       },

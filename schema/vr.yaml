@@ -201,6 +201,7 @@ definitions:
       - $ref: "#/definitions/Allele"
       - $ref: "#/definitions/Text"
       - $ref: "#/definitions/VariationSet"
+      - $ref: "#/definitions/LocationJunction"
     discriminator:
       propertyName: type
 
@@ -286,6 +287,44 @@ definitions:
           oneOf:
             - $ref: "#/definitions/Allele"
             - $ref: "#/definitions/CURIE"
+
+
+  LocationJunction:
+    additionalProperties: false
+    description: >-
+      A junction between two oriented Locations, where "left" corresponds to the 5'
+      partner for nucleic acids, or N-terminus partner for amino acids, and "right"
+      corresponds to the 3' and C-terminus partner, respectively.
+    type: "object"
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: ["LocationJunction"]
+        default: "LocationJunction"
+      left:
+        oneOf:
+          - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Location"
+      left_orientation:
+        type: string
+        enum: ['+', '-']
+        default: '+'
+      right:
+        oneOf:
+          - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Location"
+      right_orientation:
+        type: string
+        enum: ['+', '-']
+        default: '+'
+    required:
+      - type
+      - left
+      - left_orientation
+      - right
+      - right_orientation
 
 
   ############################################################################
