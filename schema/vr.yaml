@@ -24,11 +24,9 @@ definitions:
   Location:
     additionalProperties: false
     description: >-
-      A Location represents a span on a specific sequence.
+      A Location represents a span on a molecule in a coordinate system.
     oneOf:
-      - $ref: "#/definitions/ChromosomeLocation"
-      - $ref: "#/definitions/SequenceLocation"
-      - $ref: "#/definitions/GeneLocation"
+      - $ref: "#/definitions/UnorientedLocation"
       - $ref: "#/definitions/OrientedLocation"
     discriminator:
       propertyName: type
@@ -95,6 +93,17 @@ definitions:
       - sequence_id
       - interval
 
+  UnorientedLocation:
+    additionalProperties: false
+    description: >-
+      A Location represents a span on a molecule in a coordinate system.
+    oneOf:
+      - $ref: "#/definitions/ChromosomeLocation"
+      - $ref: "#/definitions/SequenceLocation"
+      - $ref: "#/definitions/GeneLocation"
+    discriminator:
+      propertyName: type
+
   OrientedLocation:
     additionalProperties: false
     description: >-
@@ -108,17 +117,17 @@ definitions:
         type: string
         enum: [OrientedLocation]
         default: OrientedLocation
-      location:
+      unorientedLocation:
         oneOf:
           - $ref: "#/definitions/CURIE"
-          - $ref: "#/definitions/Location"
+          - $ref: "#/definitions/UnorientedLocation"
       orientation:
         type: string
         enum: ['+', '-']
         default: '+'
     required:
       - type
-      - location
+      - unorientedLocation
       - orientation
 
   ############################################################################
@@ -368,7 +377,6 @@ definitions:
           - $ref: "#/definitions/Location"
     required:
       - type
-      - molecularRegion
 
   ############################################################################
   # Basic types

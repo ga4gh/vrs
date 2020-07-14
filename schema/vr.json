@@ -91,8 +91,7 @@
             }
          },
          "required": [
-            "type",
-            "molecularRegion"
+            "type"
          ],
          "type": "object"
       },
@@ -190,19 +189,13 @@
       },
       "Location": {
          "additionalProperties": false,
-         "description": "A Location represents a span on a specific sequence.",
+         "description": "A Location represents a span on a molecule in a coordinate system.",
          "discriminator": {
             "propertyName": "type"
          },
          "oneOf": [
             {
-               "$ref": "#/definitions/ChromosomeLocation"
-            },
-            {
-               "$ref": "#/definitions/SequenceLocation"
-            },
-            {
-               "$ref": "#/definitions/GeneLocation"
+               "$ref": "#/definitions/UnorientedLocation"
             },
             {
                "$ref": "#/definitions/OrientedLocation"
@@ -285,16 +278,6 @@
             "_id": {
                "$ref": "#/definitions/CURIE"
             },
-            "location": {
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/CURIE"
-                  },
-                  {
-                     "$ref": "#/definitions/Location"
-                  }
-               ]
-            },
             "orientation": {
                "default": "+",
                "enum": [
@@ -309,11 +292,21 @@
                   "OrientedLocation"
                ],
                "type": "string"
+            },
+            "unorientedLocation": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/CURIE"
+                  },
+                  {
+                     "$ref": "#/definitions/UnorientedLocation"
+                  }
+               ]
             }
          },
          "required": [
             "type",
-            "location",
+            "unorientedLocation",
             "orientation"
          ],
          "type": "object"
@@ -449,6 +442,24 @@
             "type"
          ],
          "type": "object"
+      },
+      "UnorientedLocation": {
+         "additionalProperties": false,
+         "description": "A Location represents a span on a molecule in a coordinate system.",
+         "discriminator": {
+            "propertyName": "type"
+         },
+         "oneOf": [
+            {
+               "$ref": "#/definitions/ChromosomeLocation"
+            },
+            {
+               "$ref": "#/definitions/SequenceLocation"
+            },
+            {
+               "$ref": "#/definitions/GeneLocation"
+            }
+         ]
       },
       "Variation": {
          "additionalProperties": false,
