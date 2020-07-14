@@ -69,6 +69,22 @@
          ],
          "type": "object"
       },
+      "CompleteInterval": {
+         "additionalProperties": false,
+         "properties": {
+            "type": {
+               "default": "CompleteInterval",
+               "enum": [
+                  "CompleteInterval"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type"
+         ],
+         "type": "object"
+      },
       "Cytoband": {
          "example": "q22.3",
          "type": "string"
@@ -77,6 +93,29 @@
          "additionalProperties": false,
          "format": "date-time",
          "type": "string"
+      },
+      "GeneLocation": {
+         "additionalProperties": false,
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "gene_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "type": {
+               "default": "ChromosomeLocation",
+               "enum": [
+                  "ChromosomeLocation"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "gene_id"
+         ],
+         "type": "object"
       },
       "Haplotype": {
          "additionalProperties": false,
@@ -144,6 +183,9 @@
             },
             {
                "$ref": "#/definitions/SequenceLocation"
+            },
+            {
+               "$ref": "#/definitions/GeneLocation"
             }
          ]
       },
@@ -170,6 +212,7 @@
             }
          },
          "required": [
+            "type",
             "start",
             "end"
          ],
@@ -196,6 +239,11 @@
                "type": "string"
             }
          },
+         "required": [
+            "type",
+            "sequence_id",
+            "interval"
+         ],
          "type": "object"
       },
       "SequenceState": {
@@ -249,6 +297,7 @@
             }
          },
          "required": [
+            "type",
             "start",
             "end"
          ],
