@@ -224,6 +224,7 @@ definitions:
       - $ref: "#/definitions/Text"
       - $ref: "#/definitions/VariationSet"
       - $ref: "#/definitions/LocationJunction"
+      - $ref: "#/definitions/Abundance"
     discriminator:
       propertyName: type
 

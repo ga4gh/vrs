@@ -570,6 +570,9 @@
             },
             {
                "$ref": "#/definitions/LocationJunction"
+            },
+            {
+               "$ref": "#/definitions/Abundance"
             }
          ]
       },
