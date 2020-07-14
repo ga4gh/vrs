@@ -244,6 +244,7 @@ definitions:
       uses of abundance include transcript / gene expression and CNVs.
     oneOf:
       - $ref: "#/definitions/DiscreteCopyNumber"
+      - $ref: "#/definitions/RelativeAbundance"
     discriminator:
       propertyName: type
 
@@ -266,6 +267,26 @@ definitions:
     required:
       - type
       - molecularVariation
+
+  RelativeAbundance:
+    additionalProperties: false
+    type: object
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [RelativeAbundance]
+        default: RelativeAbundance
+      molecularVariation:
+        $ref: "#/definitions/MolecularVariation"
+      relativeQuantity:
+        type: string
+        enum: [greater_than, less_than, equal_to]
+    required:
+      - type
+      - molecularVariation
+      - relativeQuantity
 
   Text:
     additionalProperties: false

@@ -10,6 +10,9 @@
          "oneOf": [
             {
                "$ref": "#/definitions/DiscreteCopyNumber"
+            },
+            {
+               "$ref": "#/definitions/RelativeAbundance"
             }
          ]
       },
@@ -364,6 +367,38 @@
             "type",
             "unorientedLocation",
             "orientation"
+         ],
+         "type": "object"
+      },
+      "RelativeAbundance": {
+         "additionalProperties": false,
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "molecularVariation": {
+               "$ref": "#/definitions/MolecularVariation"
+            },
+            "relativeQuantity": {
+               "enum": [
+                  "greater_than",
+                  "less_than",
+                  "equal_to"
+               ],
+               "type": "string"
+            },
+            "type": {
+               "default": "RelativeAbundance",
+               "enum": [
+                  "RelativeAbundance"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "molecularVariation",
+            "relativeQuantity"
          ],
          "type": "object"
       },
