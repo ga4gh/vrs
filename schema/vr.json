@@ -48,7 +48,7 @@
                "type": "string"
             },
             "interval": {
-               "$ref": "#/definitions/NamedInterval"
+               "$ref": "#/definitions/Interval"
             },
             "species_id": {
                "$ref": "#/definitions/CURIE"
@@ -71,6 +71,7 @@
       },
       "CompleteInterval": {
          "additionalProperties": false,
+         "description": "This interval type covers the maximum possible span of the object it is associated to in a Location. This could be an entire Sequence, Chromosome, Gene, or other entity as defined by the Location type.",
          "properties": {
             "type": {
                "default": "CompleteInterval",
@@ -103,6 +104,9 @@
             "gene_id": {
                "$ref": "#/definitions/CURIE"
             },
+            "interval": {
+               "$ref": "#/definitions/Interval"
+            },
             "type": {
                "default": "ChromosomeLocation",
                "enum": [
@@ -113,7 +117,8 @@
          },
          "required": [
             "type",
-            "gene_id"
+            "gene_id",
+            "interval"
          ],
          "type": "object"
       },

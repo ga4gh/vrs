@@ -43,10 +43,13 @@ definitions:
         $ref: "#/definitions/CURIE"
       gene_id:
         $ref: "#/definitions/CURIE"
+      interval:
+        $ref: "#/definitions/Interval"
     additionalProperties: false
     required:
       - type
       - gene_id
+      - interval
 
   ChromosomeLocation:
     type: object
@@ -161,6 +164,8 @@ definitions:
   CompleteInterval:
     additionalProperties: false
     type: object
+    description: >-
+      This interval type covers the maximum possible span of the object it is associated to in a Location. This could be an entire Sequence, Chromosome, Gene, or other entity as defined by the Location type.
     properties:
       type:
         type: string
