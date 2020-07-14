@@ -218,11 +218,6 @@ definitions:
         type: string
         enum: ["Haplotype"]
         default: "Haplotype"
-      location:
-        oneOf:
-          - $ref: "#/definitions/CURIE"
-          - $ref: "#/definitions/Location"
-        default: null
       members:
         type: array
         minItems: 1
