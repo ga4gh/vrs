@@ -251,11 +251,7 @@
             }
          },
          "required": [
-            "type",
-            "left",
-            "left_orientation",
-            "right",
-            "right_orientation"
+            "type"
          ],
          "type": "object"
       },

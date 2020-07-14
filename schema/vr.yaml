@@ -321,10 +321,6 @@ definitions:
         default: '+'
     required:
       - type
-      - left
-      - left_orientation
-      - right
-      - right_orientation
 
 
   ############################################################################
