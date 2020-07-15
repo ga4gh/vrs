@@ -439,6 +439,19 @@ definitions:
     required:
       - type
 
+  AmbiguousState:
+    additionalProperties: false
+    description: >-
+      Used for explicitly defining an ambiguous or unknown State at a molecule Location.
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [AmbiguousState]
+        default: AmbiguousState
+    required:
+      - type
+
   ############################################################################
   # Basic types
   # These types are used solely within other definitions.

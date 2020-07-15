@@ -46,6 +46,23 @@
          },
          "type": "object"
       },
+      "AmbiguousState": {
+         "additionalProperties": false,
+         "description": "Used for explicitly defining an ambiguous or unknown State at a molecule Location.",
+         "properties": {
+            "type": {
+               "default": "AmbiguousState",
+               "enum": [
+                  "AmbiguousState"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type"
+         ],
+         "type": "object"
+      },
       "CURIE": {
          "additionalProperties": false,
          "description": "A string that refers to an object uniquely.  The lifetime and scope of an id is defined by the sender.\nVR does not impose any contraints on strings used as ids in messages. However, to maximize sharability of data, the VR Specification RECOMMENDS that implementations use [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.\nString CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially.\nThe VR specification also RECOMMENDS that `prefix` be defined in identifiers.org.\nThe `reference` component is an unconstrained string.\nA CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VR uses CURIEs primarily as a naming mechanism.\nImplementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable.\nUsing internal ids in public messages is strongly discouraged.",
