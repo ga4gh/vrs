@@ -174,9 +174,9 @@
                "$ref": "#/definitions/Interval"
             },
             "type": {
-               "default": "ChromosomeLocation",
+               "default": "GeneLocation",
                "enum": [
-                  "ChromosomeLocation"
+                  "GeneLocation"
                ],
                "type": "string"
             }

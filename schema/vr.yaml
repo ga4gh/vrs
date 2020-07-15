@@ -36,8 +36,8 @@ definitions:
     properties:
       type:
         type: string
-        enum: [ChromosomeLocation]
-        default: ChromosomeLocation
+        enum: [GeneLocation]
+        default: GeneLocation
       _id:
         $ref: "#/definitions/CURIE"
       gene_id:
