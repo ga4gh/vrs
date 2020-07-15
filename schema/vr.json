@@ -511,6 +511,9 @@
             },
             {
                "$ref": "#/definitions/ChromosomeState"
+            },
+            {
+               "$ref": "#/definitions/AmbiguousState"
             }
          ]
       },

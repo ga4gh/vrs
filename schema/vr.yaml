@@ -405,6 +405,7 @@ definitions:
     oneOf:
       - $ref: "#/definitions/SequenceState"
       - $ref: "#/definitions/ChromosomeState"
+      - $ref: "#/definitions/AmbiguousState"
 
   SequenceState:
     additionalProperties: false
