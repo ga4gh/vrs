@@ -11,6 +11,7 @@
          "Haplotype": "VH",
          "LocationJunction": "VLJ",
          "OrientedLocation": "VOL",
+         "RelativeAbundance": "VRA",
          "Sequence": "SQ",
          "SequenceLocation": "VSL",
          "Text": "VT",

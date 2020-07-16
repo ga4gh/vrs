@@ -26,6 +26,7 @@ identifiers:
     # Genotype: VG
     Haplotype: VH
     LocationJunction: VLJ
+    RelativeAbundance: VRA
 
     SequenceLocation: VSL
     ChromosomeLocation: VCL
