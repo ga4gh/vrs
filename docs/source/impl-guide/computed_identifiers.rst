@@ -14,7 +14,8 @@ makes it easier for distributed groups to share data.
 
 A VRS Computed Identifier for a VRS concept is computed as follows:
 
-* If the object is an :ref:`allele`, :ref:`normalize <normalization>` it.
+* :ref:`Normalize <normalization>` the object.  Normalization formally
+  applies to all VRS classes.
 
 * Generate binary data to digest. If the object is a :ref:`sequence`
   string, encode it using UTF-8.  Otherwise, serialize the object
