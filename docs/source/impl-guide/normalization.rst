@@ -3,22 +3,52 @@
 Normalization
 !!!!!!!!!!!!!
 
-Certain insertion or deletion alleles may be represented ambiguously
-when using conventional sequence normalization, resulting in
-significant challenges when comparing such alleles.
+In VRS, "normalization" refers to the process of converting a given
+variation representation into a canonincal form.  Left- and
+right-shuffling are examples of normalization for sequence variants.
+VRS extends this concept to apply to all classes of VRS Variation.
+VRS normalization minimizes a class of ambiguity that impedes
+comparison of variation across systems.
 
-VRS describes a "fully-justified" normalization algorithm
-inspired by NCBI's Variant Overprecision Correction Algorithm [1]_.
+Implementations MUST provide a normalize function that accepts any
+Variation object and returns a normalized Variation.  Guidelines for
+these functions are below.
+
+
+General Normalization Rules
+@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+* VRS normalization functions are homomorphic: That is, the input and
+  output objects are always of the same `type`.
+* Object types that do not have VRS normalization rules are returned
+  as-is.  That is, all types of Variation MUST be supported, even if
+  such objects are unchanged.
+* VRS normalization functions are idempotent: Normalizing a normalized
+  Variation object returns an object with the same data.
+
+
+Allele Normalization
+@@@@@@@@@@@@@@@@@@@@
+
+Certain insertion or deletion alleles may have ambiguous
+representations when using conventional sequence normalization,
+resulting in significant challenges when comparing such alleles.
+
+VRS uses a "fully-justified" normalization algorithm inspired by
+NCBI's Variant Overprecision Correction Algorithm [1]_.
 Fully-justified normalization expands such ambiguous representation
 over the entire region of ambiguity, resulting in an *unambiguous*
 representation that may be readily compared with other alleles.
 
-VRS RECOMMENDS that Alleles at precise locations are
-normalized to a fully justified form unless there is a compelling
-reason to do otherwise.
+VRS RECOMMENDS that Alleles at precise locations are normalized to a
+fully justified form unless there is a compelling reason to do
+otherwise.  In addition, Alleles MUST be normalized in order to
+generate :ref:`computed-identifiers`.
 
 The process for fully justifying two alleles (reference sequence and
 alternate sequence) at an interval is outlined below.
+
+.. NOTE:: Align step numbers here and example table below
 
 1. Trim sequences:
 
