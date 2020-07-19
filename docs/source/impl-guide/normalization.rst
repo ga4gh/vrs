@@ -45,38 +45,63 @@ fully justified form unless there is a compelling reason to do
 otherwise.  In addition, Alleles MUST be normalized in order to
 generate :ref:`computed-identifiers`.
 
-The process for fully justifying two alleles (reference sequence and
-alternate sequence) at an interval is outlined below.
+The process for fully justifying an Allele is outlined below.
 
-.. NOTE:: Align step numbers here and example table below
+0. Given an Allele:
 
-1. Trim sequences:
+   a. Let `reference allele sequence` refer to the subsequence at the
+      Allele's SequenceLocation.
+   #. Let `alternate allele sequence` be the sequence in the Allele's
+      State object.
+   #. Let `start` and `end` initially be the `start` and `end` of the
+      Allele's SequenceLocation.
 
-   * Remove suffixes common to all alleles, if any. Decrement
-     the interval end position by the length of the trimmed suffix.
-   * Remove prefixes common to all alleles, if any. Increment
-     the interval start position by the length of the trimmed prefix.
-   * If neither allele is empty, the allele pairs represent a alleles
-     that do not have common prefixes or suffixes.  Normalization is not
-     applicable and the trimmed alleles are returned.
+#. Trim sequences:
 
-2. Determine bounds of ambiguity:
+   a. Remove suffixes common to the `reference allele sequence` and
+      `alternate allele sequence`, if any. Decrement `end` by the
+      length of the trimmed suffix.
+   #. Remove prefixes common to the `reference allele sequence` and
+      `alternate allele sequence`, if any. Increment `start` by the
+      length of the trimmed prefix.
 
-   * Left roll: While the terminal base of all non-empty alleles is
-     equal to the base *prior* to the current position, circularly
-     permute all alleles *rightward* and move the current position
-     *leftward*. When terminating, return `left_roll`, the number
-     of steps rolled leftward.
-   * Right roll: Symmetric case of left roll, returning `right_roll`,
-     the number of steps rolled rightward.
+#. If `reference allele sequence` and `alternate allele sequence`
+   are empty, the input Allele is a reference Allele.  Return the
+   input Allele unmodified.
 
-3. Update position and alleles:
+#. If `reference allele sequence` and `alternate allele sequence` are
+   non-empty, the input Allele has been reduced to a substitution
+   Allele.  Construct and return a new Allele with the current
+   `start`, `end`, and `alternate allele sequence`.
 
-   * To each trimmed allele, prepend the `left_roll` bases prior to the
-     trimmed allele position and append the `right_roll` bases after
-     the trimmed allele position.
-   * Expand the trimmed allele position by decrementing the start by
-     `left_roll` and incrementing the end by `right_roll`.
+   NOTE: The remainings case is that exactly one of `reference allele
+   sequence` or `alternate allele sequence` is empty.  If `reference
+   allele sequence` is empty, the Allele represents an insertion in
+   the reference.  If `alternate allele sequence` is empty, the Allele
+   represents a deletion in the reference.
+
+#. Determine bounds of ambiguity:
+
+   a. Left roll: While the terminal base of all non-empty alleles is
+      equal to the base *prior* to the current position, circularly
+      permute all alleles *rightward* and move the current position
+      *leftward*. When terminating, return `left_roll`, the number of
+      steps rolled leftward.
+   #. Right roll: Symmetric case of left roll, returning `right_roll`,
+      the number of steps rolled rightward.
+
+#. Fully justify the trimmed allele sequences:
+
+   a. To the `reference allele sequence` and `alternate allele
+      sequence`, prepend the `left_roll` bases prior to the trimmed
+      allele position and append the `right_roll` bases after the
+      trimmed allele position.
+   b. Decrement `start` by `left_roll` and increment `end` by
+      `right_roll`.
+
+#. Construct and return a new Allele with the current `start`, `end`,
+   and `alternate allele sequence`.
+
 
 
 .. _normalization-diagram:
@@ -88,12 +113,10 @@ alternate sequence) at an interval is outlined below.
    :widths: 40 15 20
    :align: left
 
-   *  -  Steps
-      -  | Interbase Position
-         | and Alleles
-      -  | Resulting Allele Set
-         | (All alleles in this column result
-	 | in the same empirical sequence change.)
+   *  -  | Steps
+      -  | `start` and `end` (interbase)
+	 | and allele sequences
+      -  | Equivalent representations
    *  -  0. Given allele ``S:g.5_6delinsCAGCA`` defined on reference sequence S=TCAGCAGCT
       -  | (4,6)
          | (“CA”, “CAGCA”)
@@ -101,25 +124,22 @@ alternate sequence) at an interval is outlined below.
 
    *  -  1. Trimming
 
-            Remove prefix common to all alleles, if any, and update start position. Remove suffix common to all alleles, if any, and update end position.
+            a. Remove suffix common to all alleles, if any, and update end position.
+            b. Remove prefix common to all alleles, if any, and update start position. 
 
             **Note:**  This example shows removing C prefix and A suffix.
             Equivalently in this case, CA prefix or CA suffix could be removed.
       -  | (5,5)
          | (“”, “AGC”)
-      -  .. math:: TCAGC \Bigl[ \frac{}{AGC} \Bigr] AGCT  ①
-   *  -  2. Condition: One allele must be empty.
+      -  .. math:: TCAGC \Bigl[ \frac{}{AGC} \Bigr] AGCT
 
-            If the reference allele is empty, the allele set represents an insertion in the reference.
-
-            If the alternate allele is empty, the allele set represents a deletion in the reference.
-
-            If neither is true, the allele set represents a substitution, which is not subject to further normalization.
+   *  -  2. & 3. These conditions are False.
       -
       -
-   *  -  3. Roll Left
 
-            Begin with trimmed alleles ①.
+   *  -  4a. Roll Left
+
+            Begin with trimmed alleles from (1).
 
             While the terminal base of all non-empty alleles equals the base
             prior to the current position, circularly permute all alleles right
@@ -129,28 +149,31 @@ alternate sequence) at an interval is outlined below.
       -  | (1,1)
          | (“”, “CAG”)
       -  .. math::
-            TCAGC \Bigl[ \frac{}{AGC} \Bigr] AGCT ①\\
-            TCAG \Bigl[ \frac{}{CAG} \Bigr] CAGCT   \\
-            TCA \Bigl[ \frac{}{GCA} \Bigr] GCAGCT   \\
-            TC \Bigl[ \frac{}{AGC} \Bigr] AGCAGCT   \\
-            T \Bigl[ \frac{}{CAG} \Bigr] CAGCAGCT   \\
+            TCAGC \Bigl[ \frac{}{AGC} \Bigr] AGCT \\
+            TCAG \Bigl[ \frac{}{CAG} \Bigr] CAGCT \\
+            TCA \Bigl[ \frac{}{GCA} \Bigr] GCAGCT \\
+            TC \Bigl[ \frac{}{AGC} \Bigr] AGCAGCT \\
+            T \Bigl[ \frac{}{CAG} \Bigr] CAGCAGCT \\
             \Rightarrow left\_roll = 4
-   *  -  4. Roll Right
 
-            Symmetric case of step 3.
+   *  -  4b. Roll Right
+
+            Symmetric case of step 4a.
       -  | (8,8)
          | (“”, “AGC”)
       -  .. math::
-            TCAGC \Bigl[ \frac{}{AGC} \Bigr] AGCT ①\\
-            TCAGCA \Bigl[ \frac{}{GCA} \Bigr] GCT   \\
-            TCAGCAG \Bigl[ \frac{}{CAG} \Bigr] CT   \\
-            TCAGCAGC \Bigl[ \frac{}{AGC} \Bigr] T   \\
+            TCAGC \Bigl[ \frac{}{AGC} \Bigr] AGCT \\
+            TCAGCA \Bigl[ \frac{}{GCA} \Bigr] GCT \\
+            TCAGCAG \Bigl[ \frac{}{CAG} \Bigr] CT \\
+            TCAGCAGC \Bigl[ \frac{}{AGC} \Bigr] T \\
             \Rightarrow right\_roll = 3
+
    *  -  5. Update position and alleles to fully justify within region of ambiguity.
 
-            To each trimmed allele (①), prepend the *left_roll* preceding reference
-            bases and append the *right_roll* following reference bases
-            (corresponding to the interbase reference spans (1,5) and (5,8) respectively).
+            To each trimmed allele from (1), prepend the *left_roll*
+            preceding reference bases and append the *right_roll*
+            following reference bases (corresponding to the interbase
+            reference spans (1,5) and (5,8) respectively).
 
             Decrement the start position by *left_roll*, and increment the end
             position by *right_roll*.
@@ -158,7 +181,6 @@ alternate sequence) at an interval is outlined below.
          | (“CAGCAGC”,
          | “CAGCAGCAGC”)
       -  .. math::
-            TCAGC \Bigl[ \frac{}{AGC} \Bigr] AGCT ①\\
             T \Bigl[ \frac{CAGCAGC}{CAGCAGCAGC} \Bigr] T
 
 **References**
