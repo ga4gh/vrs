@@ -74,7 +74,7 @@ decisions about external data sources, implementers should consider
 writing an abstract data proxy interface that to define a service, and
 then implement this interface for each data backend to be
 supported. The :ref:`impl-vr-python` `DataProxy class
-<https://github.com/ga4gh/vr-python/blob/master/src/ga4gh/vr/extras/dataproxy.py>`__
+<https://github.com/ga4gh/vr-python/blob/master/src/ga4gh.vr.dataproxy.py>`__
 provides an example of this design pattern and sample replies.
 
 The DataProxy interface defines three methods:
@@ -100,7 +100,7 @@ The following examples are taken from |notebooks|:
 
 .. code:: ipython3
 
-    from ga4gh.vr.extras.dataproxy import SeqRepoRESTDataProxy
+    from ga4gh.vr.dataproxy import SeqRepoRESTDataProxy
     seqrepo_rest_service_url = "http://localhost:5000/seqrepo"
     dp = SeqRepoRESTDataProxy(base_url=seqrepo_rest_service_url)
 

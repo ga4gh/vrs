@@ -16,7 +16,7 @@ data sources.
 
     import collections
     from ga4gh.vr import ga4gh_identify, models
-    from ga4gh.vr.extras.dataproxy import SeqRepoRESTDataProxy
+    from ga4gh.vr.dataproxy import SeqRepoRESTDataProxy
     from ga4gh.vr.extras.translator import Translator
     
     # Requires seqrepo REST interface is running on this URL (e.g., using docker image)
