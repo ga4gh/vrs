@@ -21,7 +21,7 @@ General Normalization Rules
 * VRS normalization functions are homomorphic: That is, the input and
   output objects are always of the same `type`.
 * Object types that do not have VRS normalization rules are returned
-  as-is.  That is, all types of Variation MUST be supported, even if
+  as-is.  That is, all types of VRS objects MUST be supported, even if
   such objects are unchanged.
 * VRS normalization functions are idempotent: Normalizing a normalized
   Variation object returns an object with the same data.
