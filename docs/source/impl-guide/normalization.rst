@@ -11,7 +11,7 @@ VRS normalization minimizes a class of ambiguity that impedes
 comparison of variation across systems.
 
 Implementations MUST provide a normalize function that accepts any
-Variation object and returns a normalized Variation.  Guidelines for
+Variation object and returns a normalized Variation object.  Guidelines for
 these functions are below.
 
 
