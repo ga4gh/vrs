@@ -74,7 +74,7 @@ The process for fully justifying an Allele is outlined below.
    Allele.  Construct and return a new Allele with the current
    `start`, `end`, and `alternate allele sequence`.
 
-   NOTE: The remainings case is that exactly one of `reference allele
+   NOTE: The remaining cases are that exactly one of `reference allele
    sequence` or `alternate allele sequence` is empty.  If `reference
    allele sequence` is empty, the Allele represents an insertion in
    the reference.  If `alternate allele sequence` is empty, the Allele
