@@ -3,28 +3,33 @@
 Normalization
 !!!!!!!!!!!!!
 
-In VRS, "normalization" refers to the process of converting a given
-variation representation into a canonincal form.  Left- and
-right-shuffling are examples of normalization for sequence variants.
-VRS extends this concept to apply to all classes of VRS Variation.
-VRS normalization minimizes a class of ambiguity that impedes
-comparison of variation across systems.
+In VRS, "normalization" refers to the process of rewriting an
+ambiguous variation representation of variation into a canonical form.
+Normalization eliminates a class of ambiguity that impedes comparison
+of variation across systems.
 
-Implementations MUST provide a normalize function that accepts any
-Variation object and returns a normalized Variation object.  Guidelines for
+In the sequencing community, "normalization" refers to the process of
+converting a given sequence variant into a canonincal form, typically
+by left- or right-shuffling insertion/deletion variants.  VRS
+normalization extends this concept to all classes of VRS Variation
+objects.
+
+Implementations MUST provide a normalize function that accepts *any*
+Variation object and returns a normalized Variation.  Guidelines for
 these functions are below.
 
 
 General Normalization Rules
 @@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-* VRS normalization functions are homomorphic: That is, the input and
-  output objects are always of the same `type`.
-* Object types that do not have VRS normalization rules are returned
-  as-is.  That is, all types of VRS objects MUST be supported, even if
-  such objects are unchanged.
+* Object types that do not have explicit VRS normalization rules below
+  are returned as-is.  That is, all types of Variation MUST be
+  supported, even if such objects are unchanged.
 * VRS normalization functions are idempotent: Normalizing a normalized
   Variation object returns an object with the same data.
+* VRS normalization functions are not necessarily homomorphic: That
+  is, the input and output objects may be of different types.
+
 
 
 Allele Normalization
