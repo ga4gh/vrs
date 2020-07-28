@@ -50,12 +50,11 @@ consequence is better associated with an allele than with a variant.
 Alleles are Fully Justified
 @@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-In order to standardize the presentation of sequence variation, computed ids from
-VRS require that Alleles be fully justified from the description
-of the NCBI `Variant Overprecision Correction Algorithm (VOCA)`_. Furthermore,
-normalization rules must be identical for all sequence types; although this
-need not be a strict requirement, there is no reason to normalize using
-different strategies based on sequence type.
+In order to standardize the representation of sequence variation,
+Alleles SHOULD be fully justified from the description of the NCBI
+`Variant Overprecision Correction Algorithm (VOCA)`_. Furthermore,
+normalization rules are identical for all sequence types (DNA, RNA,
+and protein). 
 
 The choice of algorithm was relatively straightforward: VOCA is
 published, easily understood, easily implemented, and

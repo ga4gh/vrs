@@ -9,7 +9,7 @@ Normalization eliminates a class of ambiguity that impedes comparison
 of variation across systems.
 
 In the sequencing community, "normalization" refers to the process of
-converting a given sequence variant into a canonincal form, typically
+converting a given sequence variant into a canonical form, typically
 by left- or right-shuffling insertion/deletion variants.  VRS
 normalization extends this concept to all classes of VRS Variation
 objects.
