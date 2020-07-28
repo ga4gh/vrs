@@ -45,6 +45,46 @@ when referring to an unchanged residue. In some cases, such "variants"
 are even associated with allele frequencies. Similarly, a predicted
 consequence is better associated with an allele than with a variant.
 
+.. _should-normalize:
+
+Implementations should normalize
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+VRS STRONGLY RECOMMENDS that Alleles be :ref:`normalized
+<normalization>` when generating :ref:`computed identifiers
+<computed-identifiers>`. The rationale for recommending, rather than
+requiring, normalization is grounded in dual views of Allele objects
+with distinct interpretations:
+
+* Allele as minimal representation of a change in sequence. In this
+  view, normalization is a process that makes the representation
+  minimal and unambiguous.
+
+* Allele as an assertion of state. In this view, it is reasonable to
+  want to assert state that may include (or be composed entirely of)
+  reference bases, for which the normalization process would alter the
+  intent.
+
+Although this rationale applies only to Alleles, it may have have
+parallels with other VRS types. In addition, it is desirable for all
+VRS types to be treated similarly.
+
+Furthermore, if normalization were required in order to generate
+:ref:`computed-identifiers`, but did not apply to certain instances of
+VRS Variation, implementations would likely require secondary
+identifier mechanisms, which would undermine the intent of a global
+computed identifier.
+
+The primary downside of not requiring normalization is that Variation
+objects might be written in non-canonical forms, thereby creating
+unintended degeneracy.
+
+Therefore, normalization of all VRS Variation classes is optional in
+order to support the view of Allele as an assertion of state on a
+sequence.
+
+
+
 .. _fully-justified:
 
 Alleles are Fully Justified

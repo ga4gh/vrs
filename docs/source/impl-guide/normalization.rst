@@ -47,8 +47,8 @@ representation that may be readily compared with other alleles.
 
 VRS RECOMMENDS that Alleles at precise locations are normalized to a
 fully justified form unless there is a compelling reason to do
-otherwise.  In addition, Alleles MUST be normalized in order to
-generate :ref:`computed-identifiers`.
+otherwise.  Alleles SHOULD be normalized in order to generate
+:ref:`computed-identifiers`.
 
 The process for fully justifying an Allele is outlined below.
 
