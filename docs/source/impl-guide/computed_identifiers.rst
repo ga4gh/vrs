@@ -3,18 +3,19 @@
 Computed Identifiers
 !!!!!!!!!!!!!!!!!!!!
 
-VRS provides an algorithmic solution to deterministically
-generate a globally unique identifier from a VRS object itself. All
-valid implementations of the VRS Computed Identifier will generate the
-same identifier when the objects are identical, and will generate
-different identifiers when they are not. The VRS Computed Digest
-algorithm obviates centralized registration services, allows
-computational pipelines to generate "private" ids efficiently, and
-makes it easier for distributed groups to share data.
+VRS provides an algorithmic solution to deterministically generate a
+globally unique identifier from a VRS object itself. All valid
+implementations of the VRS Computed Identifier will generate the same
+identifier when the objects are identical, and will generate different
+identifiers when they are not. The VRS Computed Digest algorithm
+obviates centralized registration services, allows computational
+pipelines to generate "private" ids efficiently, and makes it easier
+for distributed groups to share data.
 
 A VRS Computed Identifier for a VRS concept is computed as follows:
 
-* If the object is an :ref:`allele`, :ref:`normalize <normalization>` it.
+* The object SHOULD be :ref:`normalized <normalization>`.
+  Normalization formally applies to all VRS classes.
 
 * Generate binary data to digest. If the object is a :ref:`sequence`
   string, encode it using UTF-8.  Otherwise, serialize the object
@@ -24,9 +25,17 @@ A VRS Computed Identifier for a VRS concept is computed as follows:
 
 * :ref:`Construct an identifier <identify>` based on the digest and object type.
 
+.. important:: Normalizing objects is STRONGLY RECOMMENDED for
+               interoperability. While normalization is not strictly
+               required, automated validation mechanisms are
+               anticipated that will likely disqualify Variation that
+               is not normalized. See :ref:`should-normalize` for
+               a rationale.
+
 The following diagram depicts the operations necessary to generate a
 computed identifier.  These operations are described in detail in the
 subsequent sections.
+
 
 .. _ser-dig-id:
 .. figure:: ../images/id-dig-ser.png
