@@ -317,9 +317,9 @@ An :ref:`Interval` with a single start and end coordinate.
     }
 
 
-.. _NamedInterval:
+.. _CytobandInterval:
 
-NamedInterval
+CytobandInterval
 $$$$$$$$$$$$$$
 
 **Computational definition**
@@ -341,7 +341,7 @@ A contiguous region specified by named features.
    * - type
      - string
      - 1..1
-     - Interval type; MUST be set to '**NamedInterval**'
+     - Interval type; MUST be set to '**CytobandInterval**'
    * - start
      - string
      - 1..1
@@ -353,17 +353,13 @@ A contiguous region specified by named features.
 
 **Implementation guidance**
 
-* `start` and `end` attributes of NamedInterval are intentionally
+* `start` and `end` attributes of CytobandInterval are intentionally
   specified vaguely in order to accommodate a wide variety of
   uses. Examples include named markers on chromosomes, cytogenetic
   bands, and legacy marker names found in older scientific literature.
-* The interpretation of a NamedInterval will depend on the context of
-  containing classes.  For example, the `interval` within
-  :ref:`chromosomelocation` will refer to cytogenetic bands or
-  chromosomal marker names.
-* When :ref:`NamedInterval` refers to cytogentic bands, the valid
+* The valid
   values for, and the syntactic structure of, the `start` and `end`
-  depend on the species.  When using :ref:`NamedInterval` to refer to
+  depend on the species.  When using :ref:`CytobandInterval` to refer to
   human cytogentic bands, ISCN conventions MUST be used. Bands are
   denoted by the arm ("p" or "q") and position (e.g., "22", "22.3", or
   the symbolic values "cen", "tel", or "ter"). If `start` and `end`
@@ -379,7 +375,7 @@ A contiguous region specified by named features.
    {
      'end': 'q22.3',
      'start': 'q22.2',
-     'type': 'NamedInterval'
+     'type': 'CytobandInterval'
    }
 
 .. _location:
@@ -455,7 +451,7 @@ chromosomal features.
      - 1..1
      - The symbolic chromosome name
    * - interval
-     - :ref:`NamedInterval`
+     - :ref:`CytobandInterval`
      - 1..1
      - The chromosome region based on feature names
 
@@ -480,7 +476,7 @@ chromosomal features.
   chromosome names are 1..22, X, Y (case-sensitive).
 * `interval` refers to a contiguous region specified named markers,
   which are presumed to exist on the specified chromosome.  See
-  :ref:`NamedInterval` for additional information.
+  :ref:`CytobandInterval` for additional information.
 * The conversion of ChromosomeLocation instances to SequenceLocation
   instances is out-of-scope for VRS.  When converting `start` and
   `end` to SequenceLocations, the positions MUST be interpreted as
@@ -506,7 +502,7 @@ chromosomal features.
      'interval': {
        'end': 'q22.3',
        'start': 'q22.2',
-       'type': 'NamedInterval'
+       'type': 'CytobandInterval'
        },
      'species_id': 'taxonomy:9606',
      'type': 'ChromosomeLocation'

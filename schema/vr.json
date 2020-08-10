@@ -48,7 +48,7 @@
                "type": "string"
             },
             "interval": {
-               "$ref": "#/definitions/NamedInterval"
+               "$ref": "#/definitions/CytobandInterval"
             },
             "species_id": {
                "$ref": "#/definitions/CURIE"
@@ -66,6 +66,34 @@
             "species_id",
             "chr",
             "interval"
+         ],
+         "type": "object"
+      },
+      "CytobandInterval": {
+         "additionalProperties": false,
+         "example": {
+            "end": "q22.3",
+            "start": "q22.2",
+            "type": "CytobandInterval"
+         },
+         "properties": {
+            "end": {
+               "type": "string"
+            },
+            "start": {
+               "type": "string"
+            },
+            "type": {
+               "default": "CytobandInterval",
+               "enum": [
+                  "CytobandInterval"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "start",
+            "end"
          ],
          "type": "object"
       },
@@ -131,34 +159,6 @@
                "$ref": "#/definitions/SequenceLocation"
             }
          ]
-      },
-      "NamedInterval": {
-         "additionalProperties": false,
-         "example": {
-            "end": "q22.3",
-            "start": "q22.2",
-            "type": "NamedInterval"
-         },
-         "properties": {
-            "end": {
-               "type": "string"
-            },
-            "start": {
-               "type": "string"
-            },
-            "type": {
-               "default": "NamedInterval",
-               "enum": [
-                  "NamedInterval"
-               ],
-               "type": "string"
-            }
-         },
-         "required": [
-            "start",
-            "end"
-         ],
-         "type": "object"
       },
       "SequenceLocation": {
          "additionalProperties": false,

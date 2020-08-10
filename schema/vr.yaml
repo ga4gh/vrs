@@ -45,7 +45,7 @@ definitions:
       chr:
         type: string
       interval:
-        $ref: "#/definitions/NamedInterval"
+        $ref: "#/definitions/CytobandInterval"
     additionalProperties: false
     required:
       - type
@@ -115,14 +115,14 @@ definitions:
       start: 11
       end: 22
 
-  NamedInterval:
+  CytobandInterval:
     additionalProperties: false
     type: object
     properties:
       type:
         type: string
-        enum: [NamedInterval]
-        default: NamedInterval
+        enum: [CytobandInterval]
+        default: CytobandInterval
       start:
         type: string
       end:
@@ -131,7 +131,7 @@ definitions:
       - start
       - end
     example:
-      type: NamedInterval
+      type: CytobandInterval
       start: q22.2
       end: q22.3
 
