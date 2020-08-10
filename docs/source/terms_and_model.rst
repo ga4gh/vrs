@@ -674,7 +674,7 @@ state. The representation and types of molecular states are widely
 varied, and there are several :ref:`planned-variation` currently under
 consideration to capture this diversity. The primary Variation
 subclass defined by the VRS |version| specification is the
-:ref:`Allele`, with the :ref:`text` subclass for capturing other
+:ref:`Allele`, with the :ref:`textvariation` subclass for capturing other
 Variations that are not yet covered.
 
 
@@ -803,9 +803,9 @@ sequence at a :ref:`Location <Location>`.
     }
 
 
-.. _text:
+.. _textvariation:
 
-Text
+TextVariation
 ####
 
 **Biological definition**
@@ -814,7 +814,7 @@ None
 
 **Computational definition**
 
-The *Text* subclass of :ref:`Variation` is intended to capture textual
+The *TextVariation* subclass of :ref:`Variation` is intended to capture textual
 descriptions of variation that cannot be parsed by other Variation
 subclasses, but are still treated as variation.
 
@@ -837,7 +837,7 @@ subclasses, but are still treated as variation.
    * - type
      - string
      - 1..1
-     - Variation type; MUST be set to '**Text**'
+     - Variation type; MUST be set to '**TextVariation**'
    * - definition
      - string
      - 1..1
@@ -846,15 +846,15 @@ subclasses, but are still treated as variation.
 **Implementation guidance**
 
 * An implementation MUST represent Variation with subclasses other
-  than Text if possible.
+  than TextVariation if possible.
 * An implementation SHOULD define or adopt conventions for defining
-  the strings stored in Text.definition.
+  the strings stored in TextVariation.definition.
 * If a future version of VRS is adopted by an implementation and
-  the new version enables defining existing Text objects under a
+  the new version enables defining existing TextVariation objects under a
   different Variation subclass, the implementation MUST construct a
   new object under the other Variation subclass. In such a case, an
-  implementation SHOULD persist the original Text object and respond
-  to queries matching the Text object with the new object.
+  implementation SHOULD persist the original TextVariation object and respond
+  to queries matching the TextVariation object with the new object.
 * Additional Variation subclasses are continually under
   consideration. Please open a `GitHub issue`_ if you
   would like to propose a Variation subclass to cover a needed
@@ -866,7 +866,7 @@ subclasses, but are still treated as variation.
 
     {
       "definition": "APOE loss",
-      "type": "Text"
+      "type": "TextVariation"
     }
 
 

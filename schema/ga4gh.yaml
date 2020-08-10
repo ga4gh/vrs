@@ -22,7 +22,7 @@ identifiers:
     # Variation 
     Allele: VA
     VariationSet: VS
-    Text: VT
+    TextVariation: VT
     # Genotype: VG
     Haplotype: VH
 

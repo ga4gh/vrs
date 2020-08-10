@@ -144,13 +144,13 @@ definitions:
       The root class of all Variation types
     oneOf:
       - $ref: "#/definitions/Allele"
-      - $ref: "#/definitions/Text"
+      - $ref: "#/definitions/TextVariation"
       - $ref: "#/definitions/VariationSet"
     discriminator:
       propertyName: type
 
 
-  Text:
+  TextVariation:
     additionalProperties: false
     type: object
     properties:

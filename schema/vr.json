@@ -246,7 +246,7 @@
             }
          ]
       },
-      "Text": {
+      "TextVariation": {
          "additionalProperties": false,
          "properties": {
             "_id": {
@@ -277,7 +277,7 @@
                "$ref": "#/definitions/Allele"
             },
             {
-               "$ref": "#/definitions/Text"
+               "$ref": "#/definitions/TextVariation"
             },
             {
                "$ref": "#/definitions/VariationSet"
