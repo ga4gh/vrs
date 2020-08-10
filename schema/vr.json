@@ -246,6 +246,29 @@
             }
          ]
       },
+      "TextInterval": {
+         "additionalProperties": false,
+         "properties": {
+            "end": {
+               "type": "string"
+            },
+            "start": {
+               "type": "string"
+            },
+            "type": {
+               "default": "TextInterval",
+               "enum": [
+                  "TextInterval"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "start",
+            "end"
+         ],
+         "type": "object"
+      },
       "TextVariation": {
          "additionalProperties": false,
          "properties": {

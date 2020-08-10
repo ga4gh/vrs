@@ -324,7 +324,7 @@ $$$$$$$$$$$$$$
 
 **Computational definition**
 
-A contiguous region specified by named features.
+A contiguous region specified by named cytoband features.
 
 **Information model**
 
@@ -377,6 +377,46 @@ A contiguous region specified by named features.
      'start': 'q22.2',
      'type': 'CytobandInterval'
    }
+
+.. _TextInterval:
+
+TextInterval
+$$$$$$$$$$$$$$
+
+**Computational definition**
+
+A contiguous region specified by named features.
+
+**Information model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - Interval type; MUST be set to '**TextInterval**'
+   * - start
+     - string
+     - 1..1
+     - name of feature start
+   * - end
+     - string
+     - 1..1
+     - name of feature end
+
+**Implementation guidance**
+
+* `start` and `end` attributes of TextInterval are intentionally
+  specified vaguely in order to accommodate a wide variety of
+  uses.
 
 .. _location:
 
