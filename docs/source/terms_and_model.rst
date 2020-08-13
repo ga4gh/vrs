@@ -455,7 +455,7 @@ $$$$$$$$$$$$$$$$$$
 
 **Biological definition**
 
-Chromosomal locations based on named landmarks.
+Chromosomal locations based on named features.
 
 **Computational definition**
 
