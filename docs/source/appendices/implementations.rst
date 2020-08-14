@@ -85,14 +85,10 @@ of code written in C++.
 BRCA Exchange
 #############
 
-BRCA Exchange [2]_ proposes an API endpoint which will share the variant
-list in VRS JSON model.  Behind the scenes, all variants will be
-represented according to VRS, in a separate table of the
-BRCA Exchange database, and the contents of this table will be served
-by the BRCA Exchange API.  A stand-alone executable will leverage
-these data to integrate the BRCA Exchange variant set with the ClinGen
-allele registry.
+The goal of BRCA Exchange (https://brcaexchange.org/) is to expand approaches to integrate and disseminate information on BRCA variants in Hereditary Breast and Ovarian Cancer (HBOC), as an exemplar for additional genes and additional heritable disorders [2]_.  The BRCA Exchange web portal provides information on the annotation and clinical interpretation of 40,000 variants to date.  As a GA4GH Driver Project, BRCA Exchange is contributing to and adopting the Variant Annotation (VA), Pedigree (Ped) and Variant Representation (VRS) standards.  BRCA Exchange displays the VRS identifiers of all variants, and provides an API endpoint for querying variants by VRS identifier.  With this endpoint, if BRCA Exchange contains a variant that matches the VRS identifier, it returns data on that variant.  Otherwise, it returns a Server 500 error.
 
+Example query:
+   * https://brcaexchange.org/backend/data/vrid?vr_id=ga4gh:VA.jgT2lU4y55WshIgcW__MVzHBnnga_iZL
 
 .. _impl-vicc:
 
