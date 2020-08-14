@@ -353,20 +353,18 @@ A contiguous region specified by named cytoband features.
 
 **Implementation guidance**
 
-* `start` and `end` attributes of CytobandInterval are intentionally
-  specified vaguely in order to accommodate a wide variety of
-  uses. Examples include named markers on chromosomes, cytogenetic
-  bands, and legacy marker names found in older scientific literature.
-* The valid
-  values for, and the syntactic structure of, the `start` and `end`
-  depend on the species.  When using :ref:`CytobandInterval` to refer to
-  human cytogentic bands, ISCN conventions MUST be used. Bands are
-  denoted by the arm ("p" or "q") and position (e.g., "22", "22.3", or
-  the symbolic values "cen", "tel", or "ter"). If `start` and `end`
-  are on different arms, they SHOULD correspond to the p-arm and q-arm
-  locations respectively. If `start` and `end` are on the same arm,
-  `start` MUST be the more centromeric position (i.e., with lower
-  band and sub-band numbers).
+* `start` and `end` attributes of CytobandInterval are specified
+  vaguely in order to enable the use of CytobandInterval in multiple
+  species.  However, the primary use is for Human genetics.
+* The valid values for, and the syntactic structure of, the `start`
+  and `end` depend on the species.  When using :ref:`CytobandInterval`
+  to refer to human cytogentic bands, ISCN conventions MUST be
+  used. Bands are denoted by the arm ("p" or "q") and position (e.g.,
+  "22", "22.3", or the symbolic values "cen", "tel", or "ter"). If
+  `start` and `end` are on different arms, they SHOULD correspond to
+  the p-arm and q-arm locations respectively. If `start` and `end` are
+  on the same arm, `start` MUST be the more centromeric position
+  (i.e., with lower band and sub-band numbers).
 
 **Example**
 
