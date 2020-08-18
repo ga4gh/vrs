@@ -14,30 +14,49 @@ latest development code on the master branch for community review (see
 Release Cycle
 #############
 
+Components of this release cycle are tracked on our `VR project board`_.
+
 Planned Features
 $$$$$$$$$$$$$$$$
 Feature requests from the community are made through the generation of
 `GitHub issues on the VRS repository`_, which are open for
-public review and discussion. Feature requests identified to support
-an unmet need are scheduled for discussion
-in our weekly VR calls. These discussions are used to inform whether
-or not a feature will be planned for development. The :ref:`Project
-Leadership <project-leadership>` is responsible for making the final
-determination on whether a feature is to be added to VRS.
+public review and discussion.
+
+Project Leadership Review
+$$$$$$$$$$$$$$$$$$$$$$$$$
+Open issues are reviewed and triaged by the :ref:`Project Leadership
+<project-leadership>`. Feature requests identified to support an unmet
+need are added to the `Backburner`_ project column and scheduled for
+discussion in our weekly VR calls. These discussions are used to inform
+whether or not a feature will be planned for development. The :ref:`Project
+Maintainers <project-maintainers>` are responsible for making the
+final determination on whether or not a feature should be added to VRS.
 
 Requirements Gathering
 $$$$$$$$$$$$$$$$$$$$$$
-Once a feature is planned for production, an issue requesting
-community feedback on use cases and technical requirements will be
-constructed (see `example requirement issues`_).
+Once a planned feature is introduced in call, the issue moves to the
+`Planning`_ project column. During this phase, community feedback on use
+cases and technical requirements will be collected (see `example
+requirement issues`_). Deadlines for submitting cases will be set by the
+Project Maintainers.
+
+Project Leadership Review
+$$$$$$$$$$$$$$$$$$$$$$$$$
+Once the requirements gathering phase has been completed, the issue moves
+to the `Backlog/Ready for Dev`_ project column. #TODO: PICK UP FROM HERE
+
+an initial
+data model to meet the use cases will be developed by Project
+Leadership. This model will then be brought to a VR call for
+review and initial feedback.
 
 Feature Development
 $$$$$$$$$$$$$$$$$$$
 Features will be developed to meet gathered requirements. Features
 ready for public review MAY be merged into the master branch by pull
 request through review and approval by at least one (non-authoring)
-:ref:`Project Maintainer <project-maintainers>`. Merged commits MAY be
-tagged as alpha releases when needed.
+Project Maintainer. Merged commits MAY be tagged as alpha releases
+when needed.
 
 Version Review and Release
 $$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -88,6 +107,10 @@ Project maintainers are the leads of the GKS Variation Representation working gr
 * Reece Hart (`@reece <https://github.com/reece>`__)
 
 
+.. _VR project board: https://github.com/orgs/ga4gh/projects/5
+.. _Backburner: https://github.com/orgs/ga4gh/projects/5#column-9024746
+.. _Planning: https://github.com/orgs/ga4gh/projects/5#column-8939340
+.. _Backlog/Ready for Dev: https://github.com/orgs/ga4gh/projects/5#column-5274081
 .. _recommendation for semantic versioning: https://docs.google.com/document/d/1UUJSnsPw32W5r1jaJ0vI11X0LLLygpAC9TNosjSge_w/edit#heading=h.h5gpuoaxcrgy
 .. _GitHub issues on the VRS repository: https://github.com/ga4gh/vr-spec/issues
 .. _example requirement issues: https://github.com/ga4gh/vr-spec/labels/requirements
