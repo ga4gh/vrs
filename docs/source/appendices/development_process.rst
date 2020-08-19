@@ -47,8 +47,8 @@ moves to the `Backlog/Ready for Dev`_ project column. In this phase,
 the requirements undergo review and discussion by the community on
 VR calls.
 
-Feature Review
-$$$$$$$$$$$$$$
+Feature Development
+$$$$$$$$$$$$$$$$$$$
 After community review of requirements, the issue moves on to the
 `In Progress`_ project column. In this stage, the draft features
 will be developed as a draft `Pull Request`_.
