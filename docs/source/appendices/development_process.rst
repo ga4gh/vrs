@@ -40,27 +40,31 @@ cases and technical requirements will be collected (see `example
 requirement issues`_). Deadlines for submitting cases will be set by the
 Project Maintainers.
 
-Project Leadership Review
-$$$$$$$$$$$$$$$$$$$$$$$$$
-Once the requirements gathering phase has been completed, the issue moves
-to the `Backlog/Ready for Dev`_ project column. #TODO: PICK UP FROM HERE
-
-an initial
-data model to meet the use cases will be developed by Project
-Leadership. This model will then be brought to a VR call for
-review and initial feedback.
-
 Feature Development
 $$$$$$$$$$$$$$$$$$$
-Features will be developed to meet gathered requirements. Features
-ready for public review MAY be merged into the master branch by pull
-request through review and approval by at least one (non-authoring)
-Project Maintainer. Merged commits MAY be tagged as alpha releases
-when needed.
+Once the requirements gathering phase has been completed, the issue
+moves to the `Backlog/Ready for Dev`_ project column. In this phase,
+the requirements undergo review and discussion by the community on
+VR calls.
+
+Feature Review
+$$$$$$$$$$$$$$
+After community review of requirements, the issue moves on to the
+`In Progress`_ project column. In this stage, the draft features
+will be developed as a draft `Pull Request`_.
+
+Feature Review
+$$$$$$$$$$$$$$
+Once the PR is ready for review, the Pull Request leaves draft
+status and the issue advances to the `QA/Feedback`_ project column.
+Features ready for public review MAY be merged into the master
+branch by pull request through review and approval by at least one
+(non-authoring) Project Maintainer. Merged commits MAY be tagged as
+alpha releases when needed. After merging, issues are moved to the
+`Done`_ project column and are closed.
 
 Version Review and Release
 $$$$$$$$$$$$$$$$$$$$$$$$$$
-
 After completion of all planned features for a new minor or major
 version, a request for community review will be indicated by a beta
 release of the new version. Community stakeholders involved in the
@@ -111,6 +115,10 @@ Project maintainers are the leads of the GKS Variation Representation working gr
 .. _Backburner: https://github.com/orgs/ga4gh/projects/5#column-9024746
 .. _Planning: https://github.com/orgs/ga4gh/projects/5#column-8939340
 .. _Backlog/Ready for Dev: https://github.com/orgs/ga4gh/projects/5#column-5274081
+.. _Pull Request: https://github.com/ga4gh/vr-spec/pulls
+.. _In Progress: https://github.com/orgs/ga4gh/projects/5#column-5274078
+.. _QA/Feedback: https://github.com/orgs/ga4gh/projects/5#column-8087350
+.. _Done: https://github.com/orgs/ga4gh/projects/5#column-5274079
 .. _recommendation for semantic versioning: https://docs.google.com/document/d/1UUJSnsPw32W5r1jaJ0vI11X0LLLygpAC9TNosjSge_w/edit#heading=h.h5gpuoaxcrgy
 .. _GitHub issues on the VRS repository: https://github.com/ga4gh/vr-spec/issues
 .. _example requirement issues: https://github.com/ga4gh/vr-spec/labels/requirements
