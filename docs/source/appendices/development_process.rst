@@ -40,8 +40,8 @@ cases and technical requirements will be collected (see `example
 requirement issues`_). Deadlines for submitting cases will be set by the
 Project Maintainers.
 
-Feature Development
-$$$$$$$$$$$$$$$$$$$
+Requirements Discussion
+$$$$$$$$$$$$$$$$$$$$$$$
 Once the requirements gathering phase has been completed, the issue
 moves to the `Backlog/Ready for Dev`_ project column. In this phase,
 the requirements undergo review and discussion by the community on
