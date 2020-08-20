@@ -51,17 +51,19 @@ Feature Development
 $$$$$$$$$$$$$$$$$$$
 After community review of requirements, the issue moves on to the
 `In Progress`_ project column. In this stage, the draft features
-will be developed as a draft `Pull Request`_.
+will be developed as a draft `Pull Request`_ (PR). The draft author will
+indicate that a feature is ready for community review by marking the
+PR as "Ready for review" (at which point the PR loses "draft" status).
 
 Feature Review
 $$$$$$$$$$$$$$
-Once the PR is ready for review, the Pull Request leaves draft
-status and the issue advances to the `QA/Feedback`_ project column.
-Features ready for public review MAY be merged into the master
-branch by pull request through review and approval by at least one
+Once a PR is ready for review, the Project Maintainers will move the
+corresponding issue to the `QA/Feedback`_ project column.
+Pull requests ready for public review MAY be merged into the master
+branch by through review and approval by at least one
 (non-authoring) Project Maintainer. Merged commits MAY be tagged as
-alpha releases when needed. After merging, issues are moved to the
-`Done`_ project column and are closed.
+alpha releases when needed. After merging, corresponding issues are
+moved to the `Done`_ project column and are closed.
 
 Version Review and Release
 $$$$$$$$$$$$$$$$$$$$$$$$$$
