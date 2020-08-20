@@ -111,14 +111,14 @@ Project maintainers are the leads of the GKS Variation Representation working gr
 * Reece Hart (`@reece <https://github.com/reece>`__)
 
 
-.. _VR project board: https://github.com/orgs/ga4gh/projects/5
-.. _Backburner: https://github.com/orgs/ga4gh/projects/5#column-9024746
-.. _Planning: https://github.com/orgs/ga4gh/projects/5#column-8939340
-.. _Backlog/Ready for Dev: https://github.com/orgs/ga4gh/projects/5#column-5274081
+.. _VR project board: https://github.com/orgs/ga4gh/projects/5?card_filter_query=repo%3Aga4gh%2Fvr-spec
+.. _Backburner: https://github.com/orgs/ga4gh/projects/5?card_filter_query=repo%3Aga4gh%2Fvr-spec#column-9024746
+.. _Planning: https://github.com/orgs/ga4gh/projects/5?card_filter_query=repo%3Aga4gh%2Fvr-spec#column-8939340
+.. _Backlog/Ready for Dev: https://github.com/orgs/ga4gh/projects/5?card_filter_query=repo%3Aga4gh%2Fvr-spec#column-5274081
 .. _Pull Request: https://github.com/ga4gh/vr-spec/pulls
-.. _In Progress: https://github.com/orgs/ga4gh/projects/5#column-5274078
-.. _QA/Feedback: https://github.com/orgs/ga4gh/projects/5#column-8087350
-.. _Done: https://github.com/orgs/ga4gh/projects/5#column-5274079
+.. _In Progress: https://github.com/orgs/ga4gh/projects/5?card_filter_query=repo%3Aga4gh%2Fvr-spec#column-5274078
+.. _QA/Feedback: https://github.com/orgs/ga4gh/projects/5?card_filter_query=repo%3Aga4gh%2Fvr-spec#column-8087350
+.. _Done: https://github.com/orgs/ga4gh/projects/5?card_filter_query=repo%3Aga4gh%2Fvr-spec#column-5274079
 .. _recommendation for semantic versioning: https://docs.google.com/document/d/1UUJSnsPw32W5r1jaJ0vI11X0LLLygpAC9TNosjSge_w/edit#heading=h.h5gpuoaxcrgy
 .. _GitHub issues on the VRS repository: https://github.com/ga4gh/vr-spec/issues
 .. _example requirement issues: https://github.com/ga4gh/vr-spec/labels/requirements
