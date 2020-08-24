@@ -1,20 +1,18 @@
 Development Process
 @@@@@@@@@@@@@@@@@@@
 
-Versioning
-##########
-
-VRS will follow GA4GH `recommendation for semantic versioning`_
-with semver 2.0. The VRS GitHub repository will maintain the
-latest development code on the master branch for community review (see
-:ref:`Release Cycle <release-cycle>`).
-
 .. _release-cycle:
 
 Release Cycle
 #############
 
-Components of this release cycle are tracked on our `VR project board`_.
+.. figure:: ../images/dev-process.png
+
+   The VRS development process.
+
+The release cycle is implemented in the `VR project board`_, which is
+the authoritative source of information about development status.
+
 
 Planned Features
 $$$$$$$$$$$$$$$$
@@ -83,6 +81,13 @@ it is a major version change, instead a release candidate version will
 be released and submitted for GA4GH product approval. After approval,
 the new version is released to production.
 
+VRS follows `GA4GH project versioning recommendations
+<https://docs.google.com/document/d/1UUJSnsPw32W5r1jaJ0vI11X0LLLygpAC9TNosjSge_w/edit#heading=h.6672fcrbpqsk>`__,
+based on `Semantic Versioning 2.0 <http://semver.org/>`_.  The VRS
+GitHub repository master branch contains the latest development code
+for community review (see :ref:`Release Cycle <release-cycle>`).
+
+
 Leadership
 ##########
 
@@ -121,7 +126,6 @@ Project maintainers are the leads of the GKS Variation Representation working gr
 .. _In Progress: https://github.com/orgs/ga4gh/projects/5?card_filter_query=repo%3Aga4gh%2Fvr-spec#column-5274078
 .. _QA/Feedback: https://github.com/orgs/ga4gh/projects/5?card_filter_query=repo%3Aga4gh%2Fvr-spec#column-8087350
 .. _Done: https://github.com/orgs/ga4gh/projects/5?card_filter_query=repo%3Aga4gh%2Fvr-spec#column-5274079
-.. _recommendation for semantic versioning: https://docs.google.com/document/d/1UUJSnsPw32W5r1jaJ0vI11X0LLLygpAC9TNosjSge_w/edit#heading=h.h5gpuoaxcrgy
 .. _GitHub issues on the VRS repository: https://github.com/ga4gh/vr-spec/issues
 .. _example requirement issues: https://github.com/ga4gh/vr-spec/labels/requirements
 .. _Work Stream leadership: https://ga4gh-gks.github.io/
