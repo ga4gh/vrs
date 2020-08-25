@@ -106,17 +106,6 @@
          },
          "type": "object"
       },
-      "Interval": {
-         "additionalProperties": false,
-         "discriminator": {
-            "propertyName": "type"
-         },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/SimpleInterval"
-            }
-         ]
-      },
       "Location": {
          "additionalProperties": false,
          "description": "A Location represents a span on a specific sequence.",
@@ -160,6 +149,17 @@
          ],
          "type": "object"
       },
+      "SequenceInterval": {
+         "additionalProperties": false,
+         "discriminator": {
+            "propertyName": "type"
+         },
+         "oneOf": [
+            {
+               "$ref": "#/definitions/SimpleInterval"
+            }
+         ]
+      },
       "SequenceLocation": {
          "additionalProperties": false,
          "description": "A segment of a reference sequence",
@@ -168,7 +168,7 @@
                "$ref": "#/definitions/CURIE"
             },
             "interval": {
-               "$ref": "#/definitions/Interval"
+               "$ref": "#/definitions/SequenceInterval"
             },
             "sequence_id": {
                "$ref": "#/definitions/CURIE"
@@ -210,7 +210,7 @@
       },
       "SimpleInterval": {
          "additionalProperties": false,
-         "description": "A SimpleInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of Interval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VR Interval may be zero-width. The SO definition is for an \"extent greater than zero\".",
+         "description": "A SimpleInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of SequenceInterval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VR SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".",
          "example": {
             "end": 22,
             "start": 11,
