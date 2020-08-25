@@ -210,9 +210,10 @@ Non-variation classes
 @@@@@@@@@@@@@@@@@@@@@@
 
 .. _interval:
+.. _sequence-interval:
 
-Interval (Abstract Class)
-#########################
+SequenceInterval (Abstract Class)
+#################################
 
 **Biological definition**
 
@@ -220,13 +221,13 @@ None.
 
 **Computational definition**
 
-The *Interval* abstract class defines a range on a :ref:`sequence`,
-possibly with length zero, and specified using
+The *SequenceInterval* abstract class defines a range on a
+:ref:`sequence`, possibly with length zero, and specified using
 :ref:`interbase-coordinates-design`. An Interval MAY be a
 :ref:`SimpleInterval` with a single start and end coordinate.
-:ref:`Future Location and Interval types <planned-locations>` will
-enable other methods for describing where :ref:`variation` occurs. Any
-of these MAY be used as the Interval for Location.
+:ref:`Future Location and SequenceInterval types <planned-locations>`
+will enable other methods for describing where :ref:`variation`
+occurs. Any of these MAY be used as the SequenceInterval for Location.
 
 .. sidebar:: VRS Uses Interbase Coordinates
 
@@ -248,7 +249,7 @@ $$$$$$$$$$$$$$
 
 **Computational definition**
 
-An :ref:`Interval` with a single start and end coordinate.
+A :ref:`SequenceInterval` with a single start and end coordinate.
 
 **Information model**
 
@@ -265,7 +266,7 @@ An :ref:`Interval` with a single start and end coordinate.
    * - type
      - string
      - 1..1
-     - Interval type; MUST be set to '**SimpleInterval**'
+     - SequenceInterval type; MUST be set to '**SimpleInterval**'
    * - start
      - uint64
      - 1..1
@@ -300,7 +301,7 @@ An :ref:`Interval` with a single start and end coordinate.
    * a.start < b.end < a.end
 * Two intervals a and b *coincide* if they intersect or if they are
   equal (the equality condition is REQUIRED to handle the case of two
-  identical zero-width Intervals).
+  identical zero-width SimpleIntervals).
 * <start, end>=<*0,0*> refers to the point with width zero before the first residue.
 * <start, end>=<*i,i+1*> refers to the *i+1th* (1-based) residue.
 * <start, end>=<*N,N*> refers to the position after the last residue for Sequence of length *N*.
@@ -524,7 +525,7 @@ A specified subsequence within another sequence that is used as a reference sequ
 
 **Computational definition**
 
-A Location subclass for describing a defined :ref:`Interval` on a
+A Location subclass for describing a defined :ref:`SequenceInterval` on a
 named :ref:`Sequence`.
 
 **Information model**
@@ -552,7 +553,7 @@ named :ref:`Sequence`.
      - 1..1
      - An id mapping to the :ref:`computed-identifiers` of the external database Sequence containing the sequence to be located.
    * - interval
-     - :ref:`Interval`
+     - :ref:`SequenceInterval`
      - 1..1
      - Position of feature on reference sequence specified by sequence_id.
 
