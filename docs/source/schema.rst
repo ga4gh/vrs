@@ -16,11 +16,11 @@ Overview
    are shown with lines connecting classes.  Dashed borders denote
    abstract classes, which are not instantiated.  Four abstract
    classes -- :ref:`Variation`, :ref:`Location`, :ref:`State`, and
-   :ref:`Interval` -- enable specializations of concepts in this and
-   future versions of VRS.  Bold borders denote identifiable classes
-   -- that may be referenced with an identifier.  Identifiable objects
-   have an optional `_id` attribute.  Thin solid borders denote
-   classes that not identifiable; these classes exist only to
+   :ref:`SequenceInterval` -- enable specializations of concepts in
+   this and future versions of VRS.  Bold borders denote identifiable
+   classes -- that may be referenced with an identifier.  Identifiable
+   objects have an optional `_id` attribute.  Thin solid borders
+   denote classes that not identifiable; these classes exist only to
    structure data within identifiable classes.  All classes have a
    string `type`.  Dashed arrow lines denote inheritance; subclasses
    inherit all attributes from their parent.  Inherited attributes are

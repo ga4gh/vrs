@@ -29,15 +29,15 @@ require supporting more complex types of variation, including:
    colored red. The VRS Schema requires the use of multiple composite
    objects, which are grouped under four abstract classes:
    :ref:`Variation`, :ref:`Location`, :ref:`State`, and
-   :ref:`Interval`. These classes and their relationships to the
-   representation of Variation are illustrated here. All classes have
-   a string type. Dashed borders denote abstract classes. Abstract
-   classes are not instantiated. Thin solid borders denote classes
-   that may be instantiated but are not identifiable. Bold borders
-   denote identifiable objects (i.e., may be serialized and identified
-   by computed identifier). Solid arrow lines denoted
-   inheritance. Subclasses inherit all attributes from their
-   parent. Inherited attributes are not shown.
+   :ref:`SequenceInterval`. These classes and their relationships to
+   the representation of Variation are illustrated here. All classes
+   have a string type. Dashed borders denote abstract
+   classes. Abstract classes are not instantiated. Thin solid borders
+   denote classes that may be instantiated but are not
+   identifiable. Bold borders denote identifiable objects (i.e., may
+   be serialized and identified by computed identifier). Solid arrow
+   lines denoted inheritance. Subclasses inherit all attributes from
+   their parent. Inherited attributes are not shown.
 
 The following sections provide a preview of planned concepts under way
 to address a broader representation of variation.
@@ -48,10 +48,10 @@ to address a broader representation of variation.
 Intervals and Locations
 @@@@@@@@@@@@@@@@@@@@@@@
 
-VRS uses :ref:`Interval` and :ref:`Location` subclasses to define
-where variation occurs.  The schema is designed to be extensible to
-new kinds of Intervals and Locations in order to support, for example,
-fuzzy coordinates or feature-based locations.
+VRS uses :ref:`Location` subclasses to define where variation occurs.
+The schema is designed to be extensible to new kinds of Intervals and
+Locations in order to support, for example, fuzzy coordinates or
+feature-based locations.
 
 
 NestedInterval
