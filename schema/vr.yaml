@@ -300,7 +300,7 @@ definitions:
 
   Cytoband:
     description: >-
-      A Human band location on an unspecified chromosome
+      A feature referencing a giesma-stained band on an unspecified human chromosome.
     type: string
     pattern: '^[pq][1-9][0-9]*(\.[1-9][0-9]*)?$'
     example: "q22.3"
