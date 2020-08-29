@@ -318,14 +318,14 @@ A :ref:`SequenceInterval` with a single start and end coordinate.
     }
 
 
-.. _NamedInterval:
+.. _CytobandInterval:
 
-NamedInterval
-$$$$$$$$$$$$$$
+CytobandInterval
+$$$$$$$$$$$$$$$$
 
 **Computational definition**
 
-A contiguous region specified by named features.
+A contiguous region specified by chromosomal bands features.
 
 **Information model**
 
@@ -342,7 +342,7 @@ A contiguous region specified by named features.
    * - type
      - string
      - 1..1
-     - Interval type; MUST be set to '**NamedInterval**'
+     - Interval type; MUST be set to '**CytobandInterval**'
    * - start
      - string
      - 1..1
@@ -354,24 +354,20 @@ A contiguous region specified by named features.
 
 **Implementation guidance**
 
-* `start` and `end` attributes of NamedInterval are intentionally
+* `start` and `end` attributes of CytobandInterval are intentionally
   specified vaguely in order to accommodate a wide variety of
   uses. Examples include named markers on chromosomes, cytogenetic
   bands, and legacy marker names found in older scientific literature.
-* The interpretation of a NamedInterval will depend on the context of
-  containing classes.  For example, the `interval` within
-  :ref:`chromosomelocation` will refer to cytogenetic bands or
-  chromosomal marker names.
-* When :ref:`NamedInterval` refers to cytogentic bands, the valid
+* When :ref:`CytobandInterval` refers to cytogentic bands, the valid
   values for, and the syntactic structure of, the `start` and `end`
-  depend on the species.  When using :ref:`NamedInterval` to refer to
-  human cytogentic bands, ISCN conventions MUST be used. Bands are
+  depend on the species.  When using :ref:`CytobandInterval` to refer
+  to human cytogentic bands, ISCN conventions MUST be used. Bands are
   denoted by the arm ("p" or "q") and position (e.g., "22", "22.3", or
   the symbolic values "cen", "tel", or "ter"). If `start` and `end`
   are on different arms, they SHOULD correspond to the p-arm and q-arm
   locations respectively. If `start` and `end` are on the same arm,
-  `start` MUST be the more centromeric position (i.e., with lower
-  band and sub-band numbers).
+  `start` MUST be the more centromeric position (i.e., with lower band
+  and sub-band numbers).
 
 **Example**
 
@@ -380,7 +376,7 @@ A contiguous region specified by named features.
    {
      'end': 'q22.3',
      'start': 'q22.2',
-     'type': 'NamedInterval'
+     'type': 'CytobandInterval'
    }
 
 .. _location:
@@ -450,13 +446,14 @@ chromosomal features.
    * - species
      - :ref:`CURIE`
      - 1..1
-     - An external reference to a species taxonomy.  See Implementation Guidance, below.
+     - An external reference to a species taxonomy.  Default:
+       "taxonomy:9606" (Human).  See Implementation Guidance, below.
    * - chr
      - string
      - 1..1
      - The symbolic chromosome name
    * - interval
-     - :ref:`NamedInterval`
+     - :ref:`CytobandInterval`
      - 1..1
      - The chromosome region based on feature names
 
@@ -474,6 +471,9 @@ chromosomal features.
   <https://registry.identifiers.org/registry/taxonomy>`__, and the
   CURIE reference MUST be an NCBI taxonomy identifier (e.g., 9606 for
   Homo sapiens).
+* ChromosomeLocation is intended primarily for Humans.  Support for
+  other species is possible and will be considered based on community
+  feedback.
 * `chromosome` is an archetypal chromosome name. Valid values for, and
   the syntactic structure of, `chromosome` depends on the species.
   `chromosome` MUST be an official sequence name from `NCBI Assembly
@@ -481,7 +481,7 @@ chromosomal features.
   chromosome names are 1..22, X, Y (case-sensitive).
 * `interval` refers to a contiguous region specified named markers,
   which are presumed to exist on the specified chromosome.  See
-  :ref:`NamedInterval` for additional information.
+  :ref:`CytobandInterval` for additional information.
 * The conversion of ChromosomeLocation instances to SequenceLocation
   instances is out-of-scope for VRS.  When converting `start` and
   `end` to SequenceLocations, the positions MUST be interpreted as
@@ -507,7 +507,7 @@ chromosomal features.
      'interval': {
        'end': 'q22.3',
        'start': 'q22.2',
-       'type': 'NamedInterval'
+       'type': 'CytobandInterval'
        },
      'species_id': 'taxonomy:9606',
      'type': 'ChromosomeLocation'

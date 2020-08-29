@@ -42,17 +42,18 @@ definitions:
         $ref: "#/definitions/CURIE"
       species_id:
         $ref: "#/definitions/CURIE"
+        default: "taxonomy:9606"
       chr:
         type: string
       interval:
-        $ref: "#/definitions/NamedInterval"
+        $ref: "#/definitions/CytobandInterval"
     additionalProperties: false
     required:
       - type
       - species_id
       - chr
       - interval
-    
+
   SequenceLocation:
     additionalProperties: false
     description: >-
@@ -115,23 +116,23 @@ definitions:
       start: 11
       end: 22
 
-  NamedInterval:
+  CytobandInterval:
     additionalProperties: false
     type: object
     properties:
       type:
         type: string
-        enum: [NamedInterval]
-        default: NamedInterval
+        enum: [CytobandInterval]
+        default: CytobandInterval
       start:
-        type: string
+        $ref: "#/definitions/Cytoband"
       end:
-        type: string
+        $ref: "#/definitions/Cytoband"
     required:
       - start
       - end
     example:
-      type: NamedInterval
+      type: CytobandInterval
       start: q22.2
       end: q22.3
 
@@ -295,3 +296,11 @@ definitions:
     type: string
     pattern: '^\w[^:]*:.+$'
     example: "ensembl:ENSG00000139618"
+
+
+  Cytoband:
+    description: >-
+      A feature referencing a giesma-stained band on an unspecified human chromosome.
+    type: string
+    pattern: '^[pq][1-9][0-9]*(\.[1-9][0-9]*)?$'
+    example: "q22.3"

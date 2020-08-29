@@ -48,10 +48,11 @@
                "type": "string"
             },
             "interval": {
-               "$ref": "#/definitions/NamedInterval"
+               "$ref": "#/definitions/CytobandInterval"
             },
             "species_id": {
-               "$ref": "#/definitions/CURIE"
+               "$ref": "#/definitions/CURIE",
+               "default": "taxonomy:9606"
             },
             "type": {
                "default": "ChromosomeLocation",
@@ -66,6 +67,40 @@
             "species_id",
             "chr",
             "interval"
+         ],
+         "type": "object"
+      },
+      "Cytoband": {
+         "description": "A Human band location on an unspecified chromosome",
+         "example": "q22.3",
+         "pattern": "^[pq][1-9][0-9]*(\\.[1-9][0-9]*)?$",
+         "type": "string"
+      },
+      "CytobandInterval": {
+         "additionalProperties": false,
+         "example": {
+            "end": "q22.3",
+            "start": "q22.2",
+            "type": "CytobandInterval"
+         },
+         "properties": {
+            "end": {
+               "$ref": "#/definitions/Cytoband"
+            },
+            "start": {
+               "$ref": "#/definitions/Cytoband"
+            },
+            "type": {
+               "default": "CytobandInterval",
+               "enum": [
+                  "CytobandInterval"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "start",
+            "end"
          ],
          "type": "object"
       },
@@ -120,34 +155,6 @@
                "$ref": "#/definitions/SequenceLocation"
             }
          ]
-      },
-      "NamedInterval": {
-         "additionalProperties": false,
-         "example": {
-            "end": "q22.3",
-            "start": "q22.2",
-            "type": "NamedInterval"
-         },
-         "properties": {
-            "end": {
-               "type": "string"
-            },
-            "start": {
-               "type": "string"
-            },
-            "type": {
-               "default": "NamedInterval",
-               "enum": [
-                  "NamedInterval"
-               ],
-               "type": "string"
-            }
-         },
-         "required": [
-            "start",
-            "end"
-         ],
-         "type": "object"
       },
       "SequenceInterval": {
          "additionalProperties": false,
