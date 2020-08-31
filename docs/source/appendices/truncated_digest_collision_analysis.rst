@@ -8,8 +8,12 @@ unique identifier based on data that defines the object. This notebook
 discusses the choice of SHA-512 over other digest methods and the choice
 of truncation length.
 
-Source: Reece Hart,
-`CC-BY <https://creativecommons.org/licenses/by/4.0/>`__
+.. note:: Please see `this Jupyter notebook
+  <https://github.com/biocommons/biocommons.seqrepo/blob/master/docs/Truncated%20Digest%20Collision%20Analysis.ipynb>`__
+  in `Python SeqRepo library
+  <https://github.com/biocommons/biocommons.seqrepo>`__ for code and
+  updates.
+
 
 Conclusions
 -----------
