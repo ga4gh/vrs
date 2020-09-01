@@ -266,7 +266,7 @@ A :ref:`SequenceInterval` with a single start and end coordinate.
    * - type
      - string
      - 1..1
-     - SequenceInterval type; MUST be set to '**SimpleInterval**'
+     - MUST be "SimpleInterval"
    * - start
      - uint64
      - 1..1
@@ -342,7 +342,7 @@ A contiguous region specified by chromosomal bands features.
    * - type
      - string
      - 1..1
-     - Interval type; MUST be set to '**CytobandInterval**'
+     - MUST be "CytobandInterval"
    * - start
      - string
      - 1..1
@@ -442,7 +442,7 @@ chromosomal features.
    * - type
      - string
      - 1..1
-     - Location type; MUST be set to **'ChromosomeLocation'**
+     - MUST be "ChromosomeLocation"
    * - species
      - :ref:`CURIE`
      - 1..1
@@ -543,11 +543,11 @@ named :ref:`Sequence`.
    * - _id
      - :ref:`CURIE`
      - 0..1
-     - Location Id; MUST be unique within document
+     - Location id; MUST be unique within document
    * - type
      - string
      - 1..1
-     - Location type; MUST be set to '**SequenceLocation**'
+     - MUST be "SequenceLocation"
    * - sequence_id
      - :ref:`CURIE`
      - 1..1
@@ -641,7 +641,7 @@ The *SequenceState* class specifically captures a :ref:`sequence` as a
    * - type
      - string
      - 1..1
-     - State type; MUST be set to '**SequenceState**'
+     - MUST be "SequenceState"
    * - sequence
      - string
      - 1..1
@@ -720,7 +720,7 @@ sequence at a :ref:`Location <Location>`.
    * - type
      - string
      - 1..1
-     - Variation type; MUST be set to '**Allele**'
+     - MUST be "Allele"
    * - location
      - :ref:`Location`
      - 1..1
@@ -842,7 +842,7 @@ subclasses, but are still treated as variation.
    * - type
      - string
      - 1..1
-     - Variation type; MUST be set to '**Text**'
+     - MUST be "Text"
    * - definition
      - string
      - 1..1
@@ -909,7 +909,7 @@ same reference sequence.
    * - type
      - string
      - 1..1
-     - Variation type; MUST be "Haplotype"
+     - MUST be "Haplotype"
    * - members
      - :ref:`Allele`\[] | :ref:`CURIE`\[]
      - 1..*
@@ -1040,7 +1040,7 @@ An unconstrained set of Variation objects or references.
    * - type
      - string
      - 1..1
-     - Variation type; MUST be "VariationSet"
+     - MUST be "VariationSet"
    * - members
      - :ref:`Variation`\[] or :ref:`CURIE`\[]
      - 0..*
