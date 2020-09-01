@@ -130,9 +130,9 @@ string has the structure ``prefix``:``reference`` (W3C Terminology).
   <http://identifiers.org/>`__, support is implementation-dependent.
   That is, implementations MAY choose whether and how to support
   informal or local namespaces.
-* Implementations MUST use CURIE identifiers verbatim and MUST NOT be
-  modified in any way (e.g., case-folding).  Implementations MUST NOT
-  expose partial (parsed) identifiers to any client.
+* Implementations MUST use CURIE identifiers verbatim. Implementations
+  MAY NOT modify CURIEs in any way (e.g., case-folding).
+
 
 **Example**
 
@@ -722,7 +722,7 @@ sequence at a :ref:`Location <Location>`.
      - 1..1
      - MUST be "Allele"
    * - location
-     - :ref:`Location`
+     - :ref:`Location` | :ref:`CURIE`\[]
      - 1..1
      - Where Allele is located
    * - state
