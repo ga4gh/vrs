@@ -107,16 +107,16 @@ Primitive Concepts
 CURIE
 #####
 
-**Biological definition**
+**Biological Definition**
 
 None.
 
-**Computational definition**
+**Computational Definition**
 
 A `CURIE <https://www.w3.org/TR/curie/>`__ formatted string.  A CURIE
 string has the structure ``prefix``:``reference`` (W3C Terminology).
  
-**Implementation guidance**
+**Implementation Guidance**
 
 * All identifiers in VRS MUST be a valid |curie|, regardless of
   whether the identifier refers to GA4GH VRS objects or external data.
@@ -134,7 +134,7 @@ string has the structure ``prefix``:``reference`` (W3C Terminology).
   MAY NOT modify CURIEs in any way (e.g., case-folding).
 
 
-**Example**
+**Examples**
 
 Identifiers for GRCh38 chromosome 19::
 
@@ -151,13 +151,13 @@ objects.
 Residue
 #######
 
-**Biological definition**
+**Biological Definition**
 
 A residue refers to a specific `monomer`_ within the `polymeric
 chain`_ of a `protein`_ or `nucleic acid`_ (Source: `Wikipedia Residue
 page`_).
 
-**Computational definition**
+**Computational Definition**
 
 A character representing a specific residue (i.e., molecular species)
 or groupings of these ("ambiguity codes"), using `one-letter IUPAC
@@ -170,23 +170,23 @@ nucleic acids and amino acids.
 Sequence
 ########
 
-**Biological definition**
+**Biological Definition**
 
 A contiguous, linear polymer of nucleic acid or amino acid residues.
 
-**Computational definition**
+**Computational Definition**
 
 A character string of :ref:`Residues <Residue>` that represents a
 biological sequence using the conventional sequence order (5'-to-3'
 for nucleic acid sequences, and amino-to-carboxyl for amino acid
 sequences). IUPAC ambiguity codes are permitted in Sequences.
 
-**Information model**
+**Information Model**
 
 A Sequence is a string, constrained to contain only characters representing IUPAC nucleic acid or
 amino acid codes.
 
-**Implementation guidance**
+**Implementation Guidance**
 
 * Sequences MAY be empty (zero-length) strings. Empty sequences are used as the
   replacement Sequence for deletion Alleles.
@@ -215,11 +215,11 @@ Non-variation classes
 SequenceInterval (Abstract Class)
 #################################
 
-**Biological definition**
+**Biological Definition**
 
 None.
 
-**Computational definition**
+**Computational Definition**
 
 The *SequenceInterval* abstract class defines a range on a
 :ref:`sequence`, possibly with length zero, and specified using
@@ -247,11 +247,11 @@ occurs. Any of these MAY be used as the SequenceInterval for Location.
 SimpleInterval
 $$$$$$$$$$$$$$
 
-**Computational definition**
+**Computational Definition**
 
 A :ref:`SequenceInterval` with a single start and end coordinate.
 
-**Information model**
+**Information Model**
 
 .. list-table::
    :class: reece-wrap
@@ -276,7 +276,7 @@ A :ref:`SequenceInterval` with a single start and end coordinate.
      - 1..1
      - end position
 
-**Implementation guidance**
+**Implementation Guidance**
 
 * Implementations MUST enforce values 0 ≤ start ≤ end. In the case of
   double-stranded DNA, this constraint holds even when a feature is on
@@ -307,7 +307,7 @@ A :ref:`SequenceInterval` with a single start and end coordinate.
 * <start, end>=<*N,N*> refers to the position after the last residue for Sequence of length *N*.
 * See example notebooks in |vr-python|.
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -323,11 +323,11 @@ A :ref:`SequenceInterval` with a single start and end coordinate.
 CytobandInterval
 $$$$$$$$$$$$$$$$
 
-**Computational definition**
+**Computational Definition**
 
 A contiguous region specified by chromosomal bands features.
 
-**Information model**
+**Information Model**
 
 .. list-table::
    :class: reece-wrap
@@ -352,7 +352,7 @@ A contiguous region specified by chromosomal bands features.
      - 1..1
      - name of feature end
 
-**Implementation guidance**
+**Implementation Guidance**
 
 * `start` and `end` attributes of CytobandInterval are intentionally
   specified vaguely in order to accommodate a wide variety of
@@ -369,7 +369,7 @@ A contiguous region specified by chromosomal bands features.
   `start` MUST be the more centromeric position (i.e., with lower band
   and sub-band numbers).
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -384,7 +384,7 @@ A contiguous region specified by chromosomal bands features.
 Location (Abstract Class)
 #########################
 
-**Biological definition**
+**Biological Definition**
 
 As used by biologists, the precision of “location” (or “locus”) varies
 widely, ranging from precise start and end numerical coordinates
@@ -392,7 +392,7 @@ defining a Location, to bounded regions of a sequence, to conceptual
 references to named genomic features (e.g., chromosomal bands, genes,
 exons) as proxies for the Locations on an implied reference sequence.
 
-**Computational definition**
+**Computational Definition**
 
 The `Location` abstract class refers to position of a contiguous
 segment of a biological sequence.  The most common and concrete
@@ -414,16 +414,16 @@ Location for Variation.
 ChromosomeLocation
 $$$$$$$$$$$$$$$$$$
 
-**Biological definition**
+**Biological Definition**
 
 Chromosomal locations based on named features.
 
-**Computational definition**
+**Computational Definition**
 
 A ChromosomeLocation is a :ref:`Location` that is defined by a named
 chromosomal features.
 
-**Information model**
+**Information Model**
 
 .. list-table::
    :class: reece-wrap
@@ -458,7 +458,7 @@ chromosomal features.
      - The chromosome region based on feature names
 
 
-**Implementation guidance**
+**Implementation Guidance**
 
 * ChromosomeLocation is intended to enable the representation of
   cytogenetic results from karyotyping or low-resolution molecular
@@ -498,7 +498,7 @@ chromosomal features.
   for :ref:`dd-not-using-external-chromosome-declarations`.
 
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -519,16 +519,16 @@ chromosomal features.
 SequenceLocation
 $$$$$$$$$$$$$$$$
 
-**Biological definition**
+**Biological Definition**
 
 A specified subsequence within another sequence that is used as a reference sequence.
 
-**Computational definition**
+**Computational Definition**
 
 A Location subclass for describing a defined :ref:`SequenceInterval` on a
 named :ref:`Sequence`.
 
-**Information model**
+**Information Model**
 
 .. list-table::
    :class: reece-wrap
@@ -557,7 +557,7 @@ named :ref:`Sequence`.
      - 1..1
      - Position of feature on reference sequence specified by sequence_id.
 
-**Implementation guidance**
+**Implementation Guidance**
 
 * For a :ref:`Sequence` of length *n*:
    * 0 ≤ *interval.start* ≤ *interval.end* ≤ *n*
@@ -575,7 +575,7 @@ named :ref:`Sequence`.
                and MUST be projected to a genomic reference in order
                to be represented.
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -597,11 +597,11 @@ named :ref:`Sequence`.
 State (Abstract Class)
 ######################
 
-**Biological definition**
+**Biological Definition**
 
 None.
 
-**Computational definition**
+**Computational Definition**
 
 *State* objects are one of two primary components specifying a VRS
 :ref:`Allele` (in addition to :ref:`Location`), and the designated
@@ -616,17 +616,17 @@ encompasses single and contiguous :ref:`sequence` changes (see :ref:`SequenceSta
 SequenceState
 $$$$$$$$$$$$$
 
-**Biological definition**
+**Biological Definition**
 
 None.
 
-**Computational definition**
+**Computational Definition**
 
 The *SequenceState* class specifically captures a :ref:`sequence` as a
 :ref:`State`. This is the State class to use for representing
 "ref-alt" style variation, including SNVs, MNVs, del, ins, and delins.
 
-**Information model**
+**Information Model**
 
 .. list-table::
    :class: reece-wrap
@@ -647,7 +647,7 @@ The *SequenceState* class specifically captures a :ref:`sequence` as a
      - 1..1
      - The string of sequence residues that is to be used as the state for other types.
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -665,13 +665,13 @@ Variation
 The Variation class is the conceptual root of all types of variation,
 both current and future.
 
-**Biological definition**
+**Biological Definition**
 
 In biology, variation is often used to mean *sequence* variation,
 describing the differences observed in DNA or AA bases among
 individuals.
 
-**Computational definition**
+**Computational Definition**
 
 The *Variation* abstract class is the top-level object in the
 :ref:`vr-schema-diagram` and represents the concept of a molecular
@@ -688,7 +688,7 @@ Variations that are not yet covered.
 Allele
 ######
 
-**Biological definition**
+**Biological Definition**
 
 One of a number of alternative forms of the same gene or same genetic
 locus. In the context of biological sequences, “allele” refers to one
@@ -696,12 +696,12 @@ of a set of specific changes within a :ref:`Sequence`. In the context
 of VRS, Allele refers to a Sequence or Sequence change with respect to
 a reference sequence, without regard to genes or other features.
 
-**Computational definition**
+**Computational Definition**
 
 An Allele is an assertion of the :ref:`State <State>` of a biological
 sequence at a :ref:`Location <Location>`.
 
-**Information model**
+**Information Model**
 
 .. list-table::
    :class: reece-wrap
@@ -730,7 +730,7 @@ sequence at a :ref:`Location <Location>`.
      - 1..1
      - State at location
 
-**Implementation guidance**
+**Implementation Guidance**
 
 * The :ref:`State <State>` and :ref:`Location <Location>` subclasses
   respectively represent diverse kinds of sequence changes and
@@ -786,7 +786,7 @@ sequence at a :ref:`Location <Location>`.
 * This specification's definition of Allele applies to all Sequence
   types (DNA, RNA, AA).
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -813,17 +813,17 @@ sequence at a :ref:`Location <Location>`.
 Text
 ####
 
-**Biological definition**
+**Biological Definition**
 
 None
 
-**Computational definition**
+**Computational Definition**
 
 The *Text* subclass of :ref:`Variation` is intended to capture textual
 descriptions of variation that cannot be parsed by other Variation
 subclasses, but are still treated as variation.
 
-**Information model**
+**Information Model**
 
 .. list-table::
    :class: reece-wrap
@@ -848,7 +848,7 @@ subclasses, but are still treated as variation.
      - 1..1
      - The textual variation representation not parsable by other subclasses of Variation.
 
-**Implementation guidance**
+**Implementation Guidance**
 
 * An implementation MUST represent Variation with subclasses other
   than Text if possible.
@@ -865,7 +865,7 @@ subclasses, but are still treated as variation.
   would like to propose a Variation subclass to cover a needed
   variation representation.
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -880,17 +880,17 @@ subclasses, but are still treated as variation.
 Haplotype
 #########
 
-**Biological definition**
+**Biological Definition**
 
 A specific combination of Alleles that occur together on single
 sequence in one or more individuals.
 
-**Computational definition**
+**Computational Definition**
 
 A specific combination of non-overlapping Alleles that co-occur on the
 same reference sequence.
 
-**Information model**
+**Information Model**
 
 .. list-table::
    :class: reece-wrap
@@ -1012,16 +1012,16 @@ order. See :ref:`computed-identifiers` for more information.
 VariationSet
 ############
 
-**Biological definition**
+**Biological Definition**
 
 Sets of variation are used widely, such as sets of variants in dbSNP
 or ClinVar that might be related by function. 
 
-**Computational definition**
+**Computational Definition**
 
 An unconstrained set of Variation objects or references.
 
-**Information model**
+**Information Model**
 
 .. list-table::
    :class: reece-wrap
@@ -1068,7 +1068,7 @@ An unconstrained set of Variation objects or references.
 * Recursive sets are not meaningful and are not supported.
 * VariationSets may be empty.
 
-**Example**
+**Examples**
 
 Inlined Variation objects:
 
