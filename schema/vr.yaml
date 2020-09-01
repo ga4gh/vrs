@@ -145,6 +145,7 @@ definitions:
       The root class of all Variation types
     oneOf:
       - $ref: "#/definitions/Allele"
+      - $ref: "#/definitions/Haplotype"
       - $ref: "#/definitions/Text"
       - $ref: "#/definitions/VariationSet"
     discriminator:
