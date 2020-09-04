@@ -27,7 +27,7 @@ initiatives, and diagnostic testing laboratories.
   tests](https://github.com/ga4gh/vr-spec/tests/validation) to ensure
   consistency of implementations.
 
-The VR model is the product of the [GA4GH Variation Representation
+The VRS model is the product of the [GA4GH Variation Representation
 group](https://ga4gh-gks.github.io/variant_representation.html).
 
 
@@ -38,15 +38,15 @@ group](https://ga4gh-gks.github.io/variant_representation.html).
 # Using the schema
 
 The schema is available in the `schema/` directory, in both yaml and
-json versions.  It conforms to json schema draft-07.  For a list of
-libraries that support json schema, see [JSON
+json versions.  It conforms to JSON Schema draft-07.  For a list of
+libraries that support JSON schema, see [JSON
 Schema>Implementations](https://json-schema.org/implementations.html).
 
 
 
 # Contributing to the schema
 
-VR uses yaml as the source document for json schema
+VRS uses yaml as the source document for JSON Schema
 
 To convert vr.yaml to vr.json:
 
