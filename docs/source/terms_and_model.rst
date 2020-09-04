@@ -374,9 +374,9 @@ A contiguous region specified by chromosomal bands features.
 .. parsed-literal::
 
    {
-     'end': 'q22.3',
-     'start': 'q22.2',
-     'type': 'CytobandInterval'
+     "end": "q22.3",
+     "start": "q22.2",
+     "type": "CytobandInterval"
    }
 
 .. _location:
@@ -503,14 +503,14 @@ chromosomal features.
 .. parsed-literal::
 
    {
-     'chr': '11',
-     'interval': {
-       'end': 'q22.3',
-       'start': 'q22.2',
-       'type': 'CytobandInterval'
+     "chr": "11",
+     "interval": {
+       "end": "q22.3",
+       "start": "q22.2",
+       "type": "CytobandInterval"
        },
-     'species_id': 'taxonomy:9606',
-     'type': 'ChromosomeLocation'
+     "species_id": "taxonomy:9606",
+     "type": "ChromosomeLocation"
    }
 
 .. _sequence-location:
