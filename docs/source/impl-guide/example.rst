@@ -32,7 +32,7 @@ base substitution on the reference sequence `NC_000013.11
 chromosome 13, assembly GRCh38) at position 32936732 from the
 reference nucleotide ``G`` to ``C``.
 
-In VR, a contiguous change is represented using an :ref:`allele`
+In VRS, a contiguous change is represented using an :ref:`allele`
 object, which is composed of a :ref:`Location <location>` and of the
 :ref:`State <state>` at that location.  Location and State are
 abstract concepts: VRS is designed to accommodate many kinds of
@@ -44,7 +44,7 @@ event.
 In this example, we will use a :ref:`sequence-location`, which is
 composed of a sequence identifier and a :ref:`SimpleInterval`.
 
-In VR, all identifiers are a |CURIE|.  Therefore, NC_000013.11 MUST be
+In VRS, all identifiers are a |CURIE|.  Therefore, NC_000013.11 MUST be
 written as the string ``refseq:NC_000013.11`` to make explicit that
 this sequence is from `RefSeq
 <https://www.ncbi.nlm.nih.gov/refseq/>`__ .  VRS does not restrict

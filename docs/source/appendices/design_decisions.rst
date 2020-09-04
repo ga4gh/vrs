@@ -35,7 +35,7 @@ meanings and they are often used interchangeably. However, the VR
 contributors believe that it is essential to distinguish the state of
 the sequence from the change between states of a sequence. It is
 imperative that precise terms are used when modelling data. Therefore,
-within VR, Allele refers to a state and "variant" refers to the change
+within VRS, Allele refers to a state and "variant" refers to the change
 from one Allele to another.
 
 The word "variant", which implies change, makes it awkward to refer to
