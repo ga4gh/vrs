@@ -103,8 +103,8 @@ http://docs.cancervariants.org). Each interpretation is be linked to
 one or more variations or a variation class.
 
 As a Driver Project for GA4GH, VICC is contributing to and/or
-adopting three GA4GH standards: VRS, Variant Annotation (VA), and the
-Data Use Ontology (DUO). VICC supports queries on all VRS computed
+adopting several GA4GH standards, including VRS, Variant Annotation (VA), 
+and service_info. VICC supports queries on all VRS computed
 identifiers at the searchAssociations endpoint (`vicc-docs`_).
 Features associated with each interpretation are represented as VRS
 objects.
