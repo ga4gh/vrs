@@ -210,7 +210,7 @@ Non-variation classes
 @@@@@@@@@@@@@@@@@@@@@@
 
 .. _interval:
-.. _sequence-interval:
+.. _sequenceinterval:
 
 SequenceInterval (Abstract Class)
 #################################
@@ -374,9 +374,9 @@ A contiguous region specified by chromosomal bands features.
 .. parsed-literal::
 
    {
-     'end': 'q22.3',
-     'start': 'q22.2',
-     'type': 'CytobandInterval'
+     "end": "q22.3",
+     "start": "q22.2",
+     "type": "CytobandInterval"
    }
 
 .. _location:
@@ -503,14 +503,14 @@ chromosomal features.
 .. parsed-literal::
 
    {
-     'chr': '11',
-     'interval': {
-       'end': 'q22.3',
-       'start': 'q22.2',
-       'type': 'CytobandInterval'
+     "chr": "11",
+     "interval": {
+       "end": "q22.3",
+       "start": "q22.2",
+       "type": "CytobandInterval"
        },
-     'species_id': 'taxonomy:9606',
-     'type': 'ChromosomeLocation'
+     "species_id": "taxonomy:9606",
+     "type": "ChromosomeLocation"
    }
 
 .. _sequence-location:
@@ -861,9 +861,10 @@ subclasses, but are still treated as variation.
   implementation SHOULD persist the original Text object and respond
   to queries matching the Text object with the new object.
 * Additional Variation subclasses are continually under
-  consideration. Please open a `GitHub issue`_ if you
-  would like to propose a Variation subclass to cover a needed
-  variation representation.
+  consideration. Please open a `GitHub issue
+  <https://github.com/ga4gh/vr-spec/issues>`__ if you would like to
+  propose a Variation subclass to cover a needed variation
+  representation.
 
 **Examples**
 
