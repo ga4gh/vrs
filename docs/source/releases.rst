@@ -46,9 +46,4 @@ Documentation changes
 1.0
 @@@
 
-VRS 1.0 provides a machine-readable specification for:
-
-  * Sequence Location
-  * Alleles
-  * Text (Variation)
-
+VRS 1.0 was the first public release of the Variation Representation Specification.
