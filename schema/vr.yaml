@@ -32,6 +32,9 @@ definitions:
       propertyName: type
 
   ChromosomeLocation:
+    description: >-
+      A region of a chromosomed specified by species and name using
+      cytogenetic naming conventions
     type: object
     properties:
       type:
@@ -57,7 +60,7 @@ definitions:
   SequenceLocation:
     additionalProperties: false
     description: >-
-      A segment of a reference sequence
+      A specified subsequence within another sequence that is used as a reference sequence.
     type: object
     properties:
       _id:
@@ -117,6 +120,8 @@ definitions:
       end: 22
 
   CytobandInterval:
+    description: >-
+      A contiguous region specified by chromosomal bands features.
     additionalProperties: false
     type: object
     properties:
@@ -153,6 +158,9 @@ definitions:
 
 
   Text:
+    description: >-
+      A textual description of variation, typically not parseable but
+      understood by humans.
     additionalProperties: false
     type: object
     properties:
@@ -170,8 +178,9 @@ definitions:
           treated as variation.
 
   Allele:
+    description: >-
+      An assertion of a sequence state at a Location.
     additionalProperties: false
-    description: An assertion of a sequence state at a Location.
     type: object
     properties:
       _id:
@@ -190,7 +199,9 @@ definitions:
 
   VariationSet:
     description: >-
-      A set of Variation
+      A set of Variation objects.
+
+      Members may be specified inline or by reference (with CURIEs)
     type: "object"
     properties:
       _id:
@@ -209,9 +220,9 @@ definitions:
 
 
   Haplotype:
-    additionalProperties: false
     description: >-
       A set of zero or more Alleles
+    additionalProperties: false
     type: "object"
     properties:
       _id:
@@ -238,6 +249,9 @@ definitions:
       - $ref: "#/definitions/SequenceState"
 
   SequenceState:
+    description: >-
+      An assertion of the state of a sequence, typically at a Sequence
+      Location within an Allele
     additionalProperties: false
     type: object
     properties:
