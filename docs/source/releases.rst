@@ -21,25 +21,28 @@ Releases
 New classes
 ############
 
-  * ChromosomeLocation:
-  * CytobandInterval
-  * Haplotype
-  * VariationSet
+  * ChromosomeLocation: A region of a chromosomed specified by species
+    and name using cytogenetic naming conventions
+  * CytobandInterval: A contiguous region specified by chromosomal bands features.
+  * Haplotype: A set of zero or more Alleles.
+  * VariationSet: A set of Variation objects.
 
 Other data model changes
 ########################
 
-  * Interval was renamed to SequenceInterval. Interval is an abstract
-    that is never directly instantiated, so this internal
-    implementation change should not be visiable to users.
+  * Interval was renamed to SequenceInterval. Interval was an internal
+    class that was never instantiated, so this change should not be
+    visiable to users.
 
 Documentation changes
 #####################
 
-  * Added relationships.rst
-  * Normalization: generalization, ref alleles,  .  Design decisions, computed identifiers , 
-  * Updated figures
-  * Development process & release cycle
+  * Added :ref:`relationships` to describe how VRS relates to other
+    standards.
+  * Updated :ref:`normalization` to clarify handling of reference
+    alleles and generalize terminology to apply to all VRS objects.
+  * Updated current and future schema diagrams.
+  * Included a discussion of the :ref:`release-cycle`.
 
 
 
