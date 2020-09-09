@@ -40,6 +40,7 @@
       },
       "ChromosomeLocation": {
          "additionalProperties": false,
+         "description": "A region of a chromosomed specified by species and name using cytogenetic naming conventions",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
@@ -78,6 +79,7 @@
       },
       "CytobandInterval": {
          "additionalProperties": false,
+         "description": "A contiguous region specified by chromosomal bands features.",
          "example": {
             "end": "q22.3",
             "start": "q22.2",
@@ -169,7 +171,7 @@
       },
       "SequenceLocation": {
          "additionalProperties": false,
-         "description": "A segment of a reference sequence",
+         "description": "A specified subsequence within another sequence that is used as a reference sequence.",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
@@ -192,6 +194,7 @@
       },
       "SequenceState": {
          "additionalProperties": false,
+         "description": "An assertion of the state of a sequence, typically at a Sequence Location within an Allele",
          "example": {
             "sequence": "C",
             "type": "SequenceState"
@@ -255,6 +258,7 @@
       },
       "Text": {
          "additionalProperties": false,
+         "description": "A textual description of variation, typically not parseable but understood by humans.",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
@@ -295,7 +299,7 @@
          ]
       },
       "VariationSet": {
-         "description": "A set of Variation",
+         "description": "A set of Variation objects.\nMembers may be specified inline or by reference (with CURIEs)",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
