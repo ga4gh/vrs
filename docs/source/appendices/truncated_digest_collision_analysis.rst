@@ -33,7 +33,7 @@ Conclusions
     
     from IPython.display import display, Markdown
     
-    from ga4gh.vr.extras.utils import _format_time
+    from ga4gh.vrs.extras.utils import _format_time
     
     algorithms = {'sha512', 'sha1', 'sha256', 'md5', 'sha224', 'sha384'}
 

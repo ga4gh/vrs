@@ -15,9 +15,9 @@ data sources.
 .. code:: ipython3
 
     import collections
-    from ga4gh.vr import ga4gh_identify, models
-    from ga4gh.vr.dataproxy import SeqRepoRESTDataProxy
-    from ga4gh.vr.extras.translator import Translator
+    from ga4gh.vrs import ga4gh_identify, models
+    from ga4gh.vrs.dataproxy import SeqRepoRESTDataProxy
+    from ga4gh.vrs.extras.translator import Translator
     
     # Requires seqrepo REST interface is running on this URL (e.g., using docker image)
     seqrepo_rest_service_url = "http://localhost:5000/seqrepo"
