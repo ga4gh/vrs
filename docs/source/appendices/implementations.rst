@@ -71,10 +71,10 @@ standards are summarized in the following table.
    [GET] /sequence/service-info, \-, Refget v1.0.0, `/sequence/service-info <https://reg.clinicalgenome.org/sequence/service-info>`__
    [GET] /sequence/{id}, id => TRUNC512 digest for reference sequence, Refget v1.0.0, `/sequence/vYfm5TA_F-_BtIGjfzjGOj8b6IK5hCTx <https://reg.clinicalgenome.org/sequence/F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul?start=2232131&end=2232145>`__
    [GET] /sequence/{id}/metadata, id => TRUNC512 digest for reference sequence, Refget v1.0.0, `/sequence/vYfm5TA_F-_BtIGjfzjGOj8b6IK5hCTx/metadata <https://reg.clinicalgenome.org/sequence/F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul/metadata>`__
-   **VR**,,,
+   **VRS**,,,
    [GET] /vrAllele?hgvs={hgvs}, hgvs => HGVS expression, VRS v1.0, `/vrAllele?hgvs=NC_000007.14:g.55181320A>T <https://reg.clinicalgenome.org/vrAllele?hgvs=NC_000007.14:g.55181320A%3ET>`__  `/vrAllele?hgvs=NC_000007.14:g.55181220del <https://reg.clinicalgenome.org/vrAllele?hgvs=NC_000007.14:g.55181220del>`__
 
-Support for GA4GH refget and VR Specification provided in ClinGen Allele
+Support for GA4GH refget and VRS provided in ClinGen Allele
 Registry is independent from VRS-Python. Support for this community
 standards is implemented in ClinGen Allele Registry through extension
 of code written in C++.

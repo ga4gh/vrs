@@ -305,7 +305,7 @@ A :ref:`SequenceInterval` with a single start and end coordinate.
 * <start, end>=<*0,0*> refers to the point with width zero before the first residue.
 * <start, end>=<*i,i+1*> refers to the *i+1th* (1-based) residue.
 * <start, end>=<*N,N*> refers to the position after the last residue for Sequence of length *N*.
-* See example notebooks in |vr-python|.
+* See example notebooks in |vrs-python|.
 
 **Examples**
 
