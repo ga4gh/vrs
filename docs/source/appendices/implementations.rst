@@ -74,8 +74,8 @@ standards are summarized in the following table.
    **VR**,,,
    [GET] /vrAllele?hgvs={hgvs}, hgvs => HGVS expression, VRS v1.0, `/vrAllele?hgvs=NC_000007.14:g.55181320A>T <https://reg.clinicalgenome.org/vrAllele?hgvs=NC_000007.14:g.55181320A%3ET>`__  `/vrAllele?hgvs=NC_000007.14:g.55181220del <https://reg.clinicalgenome.org/vrAllele?hgvs=NC_000007.14:g.55181220del>`__
 
-Support for GA4GH refget and VRS specs provided in ClinGen Allele
-Registry is independent from VR-Python. Support for this community
+Support for GA4GH refget and VR Specification provided in ClinGen Allele
+Registry is independent from VRS-Python. Support for this community
 standards is implemented in ClinGen Allele Registry through extension
 of code written in C++.
 

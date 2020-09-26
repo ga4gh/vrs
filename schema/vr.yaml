@@ -9,7 +9,7 @@
 
 # https://json-schema.org/understanding-json-schema/reference/schema.html
 $schema: "http://json-schema.org/draft-04/schema"
-title: "GA4GH-VR-Definitions"
+title: "GA4GH-VRS-Definitions"
 type: object
 
 definitions:
@@ -286,16 +286,15 @@ definitions:
       scope of an id is defined by the sender.
 
       VRS does not impose any contraints on strings used as ids in
-      messages. However, to maximize sharability of data, the VR
-      Specification RECOMMENDS that implementations use [W3C Compact
-      URI (CURIE)](https://www.w3.org/TR/curie/) syntax.
+      messages. However, to maximize sharability of data, VRS
+      RECOMMENDS that implementations use [W3C Compact URI
+      (CURIE)](https://www.w3.org/TR/curie/) syntax.
 
       String CURIEs are represented as `prefix`:`reference` (W3C
       terminology), but often referred to as `namespace`:`accession`
       or `namespace`:`local id` colloquially.
 
-      The VR specification also RECOMMENDS that `prefix` be defined in
-      identifiers.org.
+      VRS also RECOMMENDS that `prefix` be defined in identifiers.org.
 
       The `reference` component is an unconstrained string.
 

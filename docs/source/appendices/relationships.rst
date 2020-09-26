@@ -62,9 +62,9 @@ ClinVar is an archive of clinically reported relationships between
 variation and phenotypes along with interpretations and supporting
 evidence. Data in ClinVar are submitted primarily by diagnostic
 labs. ClinVar includes expert reviews and data links to other
-clinically-relevant resources at NCBI. The VRS specification is
-expected to facilitate data submissions by providing unified
-guidelines for data structure and allele normalization.
+clinically-relevant resources at NCBI. VRS is expected to facilitate
+data submissions by providing unified guidelines for data structure
+and allele normalization.
 
 ClinGen provides a centralized database of genomic and phenotypic data
 provided by clinicians, researchers, and patients. It standardizes
