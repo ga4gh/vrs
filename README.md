@@ -49,9 +49,9 @@ Schema>Implementations](https://json-schema.org/implementations.html).
 
 VRS uses yaml as the source document for JSON Schema
 
-To convert vr.yaml to vr.json:
+To convert vrs.yaml to vrs.json:
 
-    make vr.json
+    make vrs.json
 
 You'll probably have to `pip install pyyaml` first.
 
