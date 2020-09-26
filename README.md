@@ -32,7 +32,7 @@ The VRS model is the product of the [GA4GH Variation Representation
 group](https://ga4gh-gks.github.io/variant_representation.html).
 
 
-> **SEE ALSO**: See [vr-python](https://github.com/ga4gh/vr-python)
+> **SEE ALSO**: See [vrs-python](https://github.com/ga4gh/vrs-python)
 > for an implementation and Jupyter notebooks.
 
 
