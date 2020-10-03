@@ -12,7 +12,7 @@ of truncation length.
   <https://github.com/biocommons/biocommons.seqrepo/blob/master/docs/Truncated%20Digest%20Collision%20Analysis.ipynb>`__
   in `Python SeqRepo library
   <https://github.com/biocommons/biocommons.seqrepo>`__ for code and
-  updates.
+  updates.  A fuller explanation is given in [Hart2020]_.
 
 
 Conclusions
@@ -419,3 +419,10 @@ digest length (bytes) required for expected collision probability :math:`P` over
 +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
 
 
+
+References
+@@@@@@@@@@
+
+.. [Hart2020] Hart, RK and Prlić, A; **SeqRepo: A system for managing
+       local collections biological sequences.** (2020).
+       https://doi.org/10.1101/2020.09.16.299495

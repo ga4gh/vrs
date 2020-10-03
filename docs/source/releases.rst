@@ -22,6 +22,14 @@ Releases
 1.1
 @@@
 
+1.1.1
+#####
+This patch version makes the following corrections:
+
+  * Remove erroneous bracket notation after CURIE from the `locations` attribute
+    in the :ref:`Allele` information model.
+  * Added citation for sha512t24u and truncated digest collision analysis.
+
 1.1.0
 #####
 
