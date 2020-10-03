@@ -722,7 +722,7 @@ sequence at a :ref:`Location <Location>`.
      - 1..1
      - MUST be "Allele"
    * - location
-     - :ref:`Location` | :ref:`CURIE`\[]
+     - :ref:`Location` | :ref:`CURIE`
      - 1..1
      - Where Allele is located
    * - state
