@@ -32,7 +32,7 @@ The VRS model is the product of the [GA4GH Variation Representation
 group](https://ga4gh-gks.github.io/variant_representation.html).
 
 
-> **SEE ALSO**: See [vr-python](https://github.com/ga4gh/vr-python)
+> **SEE ALSO**: See [vrs-python](https://github.com/ga4gh/vrs-python)
 > for an implementation and Jupyter notebooks.
 
 
@@ -49,9 +49,9 @@ Schema>Implementations](https://json-schema.org/implementations.html).
 
 VRS uses yaml as the source document for JSON Schema
 
-To convert vr.yaml to vr.json:
+To convert vrs.yaml to vrs.json:
 
-    make vr.json
+    make vrs.json
 
 You'll probably have to `pip install pyyaml` first.
 

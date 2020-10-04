@@ -21,12 +21,12 @@
 .. _vrs-issues: https://github.com/ga4gh/vr-spec/issues/
 
 .. |curie| replace:: `Compact URI (CURIE)`_
-.. |notebooks| replace:: `VR Python Notebooks <https://github.com/ga4gh/vr-python/tree/master/notebooks>`__
+.. |notebooks| replace:: `VRS Python Notebooks <https://github.com/ga4gh/vrs-python/tree/master/notebooks>`__
 .. |seqrepo_rs| replace:: `SeqRepo REST Service <https://github.com/biocommons/seqrepo-rest-service/>`__
 .. |seqrepo| replace:: `SeqRepo <https://github.com/biocommons/biocommons.seqrepo/>`__
-.. |vr-python| replace:: `GA4GH VR Python Implementation <https://github.com/ga4gh/vr-python/>`__
-.. |vr_json| replace:: :download:`vr.json <_static/vr.json>`
-.. |vr_yaml| replace:: :download:`vr.yaml <_static/vr.yaml>`
+.. |vrs-python| replace:: `GA4GH VRS Python Implementation <https://github.com/ga4gh/vrs-python/>`__
+.. |vrs_json| replace:: :download:`vrs.json <_static/vrs.json>`
+.. |vrs_yaml| replace:: :download:`vrs.yaml <_static/vrs.yaml>`
 .. |vrs| replace:: `VRS <https://github.com/ga4gh/vr-spec/>`__
 
 
