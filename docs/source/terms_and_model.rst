@@ -321,7 +321,7 @@ A :ref:`SequenceInterval` with a single start and end coordinate.
 .. _CytobandInterval:
 
 CytobandInterval
-$$$$$$$$$$$$$$$$
+################
 
 **Computational Definition**
 
