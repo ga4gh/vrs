@@ -123,16 +123,15 @@ coordinate conventions are used in this terminology because they
 provide conceptual consistency that is not possible with residue-based
 systems.
 
-.. important:: The choice of what to count–residues versus
-               inter-residue positions–has significant semantic
-               implications for coordinates. Because interbase
-               coordinates and the corresponding 0-based
-               residue-counted coordinates are numerically identical
-               in some circumstances, uninitiated readers often
-               conflate the choice of numerical base with the choice
-               of residue or inter-residue counting. Whereas the
-               choice of numerical base is inconsequential, the
-               semantic advantages of interbase are significant.
+.. important:: The choice of what to count--base or
+               interbase positions–-has significant semantic
+               implications for coordinates. In some circumstances,
+               interbase coordinates and the corresponding
+               base coordinates are numerically identical.
+               We intentionally avoid describing the interbase coordinate
+               system as "0-based" (a popular community term,
+               as is "space-based") to help reduce confusion on the
+               meaning of the coordinates used in VRS.
 
 When humans refer to a range of residues within a sequence, the most
 common convention is to use an interval of ordinal residue positions

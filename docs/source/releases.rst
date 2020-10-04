@@ -22,18 +22,23 @@ Releases
 1.1
 @@@
 
+
 1.1.1
 #####
-This patch version makes the following corrections:
 
+This patch version makes the following corrections and clarifications:
+
+  * Correct styling / indexing of CytobandLocation in restructuredText to match
+    the current Schema and ER Diagram.
   * Remove erroneous bracket notation after CURIE from the `locations` attribute
     in the :ref:`Allele` information model.
+  * Revised Note in interbase design decision to acknowledge community terms.
+
 
 1.1.0
 #####
 
 1.1.0 is the second release of VRS.
-
 
 New classes
 $$$$$$$$$$$
