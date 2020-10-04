@@ -9,6 +9,8 @@ collaboration among [contributors](CONTRIBUTORS.md) representing
 national information resource providers, major international public
 initiatives, and diagnostic testing laboratories.
 
+VRS is licensed under the [Apache License 2.0](LICENSE).
+
 
 > **NOTE:** VRS is under active development.  See [VR 
 > Project Roadmap](https://github.com/orgs/ga4gh/projects/5).
