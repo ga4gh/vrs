@@ -1,0 +1,5 @@
+# Docs
+see doc-updates branch
+* Standardize quoting: '**blah**' → ``blah``
+* Investigate 
+https://pypi.org/project/sphinx-jsonschema/

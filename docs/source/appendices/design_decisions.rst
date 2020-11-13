@@ -35,7 +35,7 @@ meanings and they are often used interchangeably. However, the VR
 contributors believe that it is essential to distinguish the state of
 the sequence from the change between states of a sequence. It is
 imperative that precise terms are used when modelling data. Therefore,
-within VR, Allele refers to a state and "variant" refers to the change
+within VRS, Allele refers to a state and "variant" refers to the change
 from one Allele to another.
 
 The word "variant", which implies change, makes it awkward to refer to
@@ -45,17 +45,56 @@ when referring to an unchanged residue. In some cases, such "variants"
 are even associated with allele frequencies. Similarly, a predicted
 consequence is better associated with an allele than with a variant.
 
+.. _should-normalize:
+
+Implementations should normalize
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+VRS STRONGLY RECOMMENDS that Alleles be :ref:`normalized
+<normalization>` when generating :ref:`computed identifiers
+<computed-identifiers>`. The rationale for recommending, rather than
+requiring, normalization is grounded in dual views of Allele objects
+with distinct interpretations:
+
+* Allele as minimal representation of a change in sequence. In this
+  view, normalization is a process that makes the representation
+  minimal and unambiguous.
+
+* Allele as an assertion of state. In this view, it is reasonable to
+  want to assert state that may include (or be composed entirely of)
+  reference bases, for which the normalization process would alter the
+  intent.
+
+Although this rationale applies only to Alleles, it may have have
+parallels with other VRS types. In addition, it is desirable for all
+VRS types to be treated similarly.
+
+Furthermore, if normalization were required in order to generate
+:ref:`computed-identifiers`, but did not apply to certain instances of
+VRS Variation, implementations would likely require secondary
+identifier mechanisms, which would undermine the intent of a global
+computed identifier.
+
+The primary downside of not requiring normalization is that Variation
+objects might be written in non-canonical forms, thereby creating
+unintended degeneracy.
+
+Therefore, normalization of all VRS Variation classes is optional in
+order to support the view of Allele as an assertion of state on a
+sequence.
+
+
+
 .. _fully-justified:
 
 Alleles are Fully Justified
 @@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-In order to standardize the presentation of sequence variation, computed ids from
-VRS require that Alleles be fully justified from the description
-of the NCBI `Variant Overprecision Correction Algorithm (VOCA)`_. Furthermore,
-normalization rules must be identical for all sequence types; although this
-need not be a strict requirement, there is no reason to normalize using
-different strategies based on sequence type.
+In order to standardize the representation of sequence variation,
+Alleles SHOULD be fully justified from the description of the NCBI
+`Variant Overprecision Correction Algorithm (VOCA)`_. Furthermore,
+normalization rules are identical for all sequence types (DNA, RNA,
+and protein). 
 
 The choice of algorithm was relatively straightforward: VOCA is
 published, easily understood, easily implemented, and
@@ -84,16 +123,15 @@ coordinate conventions are used in this terminology because they
 provide conceptual consistency that is not possible with residue-based
 systems.
 
-.. important:: The choice of what to count–residues versus
-               inter-residue positions–has significant semantic
-               implications for coordinates. Because interbase
-               coordinates and the corresponding 0-based
-               residue-counted coordinates are numerically identical
-               in some circumstances, uninitiated readers often
-               conflate the choice of numerical base with the choice
-               of residue or inter-residue counting. Whereas the
-               choice of numerical base is inconsequential, the
-               semantic advantages of interbase are significant.
+.. important:: The choice of what to count--base or
+               interbase positions–-has significant semantic
+               implications for coordinates. In some circumstances,
+               interbase coordinates and the corresponding
+               base coordinates are numerically identical.
+               We intentionally avoid describing the interbase coordinate
+               system as "0-based" (a popular community term,
+               as is "space-based") to help reduce confusion on the
+               meaning of the coordinates used in VRS.
 
 When humans refer to a range of residues within a sequence, the most
 common convention is to use an interval of ordinal residue positions
@@ -156,3 +194,22 @@ JSON`_ (not to be confused with `OLPC Canonical JSON`_).
 .. _left (5') normalized: https://genome.sph.umich.edu/wiki/Variant_Normalization#Definition
 .. _Gibson Canonical JSON: http://gibson042.github.io/canonicaljson-spec/
 .. _OLPC Canonical JSON: http://wiki.laptop.org/go/Canonical_JSON
+
+
+
+.. _dd-not-using-external-chromosome-declarations:
+
+Not using External Chromosome Declarations
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+In :ref:`ChromosomeLocation <chromosomelocation>`, the tuple <species,chromosome name>
+refers an archetypal chromosome for the species.  `WikiData
+<https://www.wikidata.org/>`_ and `MeSH
+<https://www.ncbi.nlm.nih.gov/mesh/>`_ provide such definitions (e.g.,
+Human Chr 1 at `WikiData <https://www.wikidata.org/wiki/Q430258>`__
+and `MeSH <https://meshb.nlm.nih.gov/record/ui?ui=D002878>`__) and
+were considered, and rejected, for use in VRS. Both ontologies were
+anticipated to increase complexity that was not justified by the
+benefit to VRS.  In addition, data in WikiData are crowd-sourced and
+therefore potentially unstable, and the species coverage in MeSH was
+insufficient for anticipated VRS uses.

@@ -16,4 +16,4 @@ all: ${JSONS}
 
 
 watch:
-	-while true; do ls -1 *.yaml | entr -dn make vr.json; done
+	-while true; do ls -1 *.yaml | entr -dn make vrs.json; done

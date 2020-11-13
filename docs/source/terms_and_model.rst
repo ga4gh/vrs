@@ -107,16 +107,16 @@ Primitive Concepts
 CURIE
 #####
 
-**Biological definition**
+**Biological Definition**
 
 None.
 
-**Computational definition**
+**Computational Definition**
 
 A `CURIE <https://www.w3.org/TR/curie/>`__ formatted string.  A CURIE
 string has the structure ``prefix``:``reference`` (W3C Terminology).
  
-**Implementation guidance**
+**Implementation Guidance**
 
 * All identifiers in VRS MUST be a valid |curie|, regardless of
   whether the identifier refers to GA4GH VRS objects or external data.
@@ -130,11 +130,11 @@ string has the structure ``prefix``:``reference`` (W3C Terminology).
   <http://identifiers.org/>`__, support is implementation-dependent.
   That is, implementations MAY choose whether and how to support
   informal or local namespaces.
-* Implemantions MUST use CURIE identifiers verbatim and MUST NOT be
-  modified in any way (e.g., case-folding).  Implementations MUST NOT
-  expose partial (parsed) identifiers to any client.
+* Implementations MUST use CURIE identifiers verbatim. Implementations
+  MAY NOT modify CURIEs in any way (e.g., case-folding).
 
-**Example**
+
+**Examples**
 
 Identifiers for GRCh38 chromosome 19::
 
@@ -142,7 +142,7 @@ Identifiers for GRCh38 chromosome 19::
     refseq:NC_000019.10
     grch38:19
 
-See :ref:`identify` for examples of CURIE-based identifiers for VR
+See :ref:`identify` for examples of CURIE-based identifiers for VRS
 objects.
 
 
@@ -151,13 +151,13 @@ objects.
 Residue
 #######
 
-**Biological definition**
+**Biological Definition**
 
 A residue refers to a specific `monomer`_ within the `polymeric
 chain`_ of a `protein`_ or `nucleic acid`_ (Source: `Wikipedia Residue
 page`_).
 
-**Computational definition**
+**Computational Definition**
 
 A character representing a specific residue (i.e., molecular species)
 or groupings of these ("ambiguity codes"), using `one-letter IUPAC
@@ -170,23 +170,23 @@ nucleic acids and amino acids.
 Sequence
 ########
 
-**Biological definition**
+**Biological Definition**
 
 A contiguous, linear polymer of nucleic acid or amino acid residues.
 
-**Computational definition**
+**Computational Definition**
 
 A character string of :ref:`Residues <Residue>` that represents a
 biological sequence using the conventional sequence order (5'-to-3'
 for nucleic acid sequences, and amino-to-carboxyl for amino acid
 sequences). IUPAC ambiguity codes are permitted in Sequences.
 
-**Information model**
+**Information Model**
 
 A Sequence is a string, constrained to contain only characters representing IUPAC nucleic acid or
 amino acid codes.
 
-**Implementation guidance**
+**Implementation Guidance**
 
 * Sequences MAY be empty (zero-length) strings. Empty sequences are used as the
   replacement Sequence for deletion Alleles.
@@ -197,7 +197,7 @@ amino acid codes.
   to define an :ref:`Allele`. A Sequence that replaces another Sequence is
   called a “replacement sequence”.
 * In some contexts outside VRS, “reference sequence” may refer
-  to a member of set of sequences that comprise a genome assembly. In the VR
+  to a member of set of sequences that comprise a genome assembly. In the VRS
   specification, any sequence may be a “reference sequence”, including those in
   a genome assembly.
 * For the purposes of representing sequence variation, it is not
@@ -210,23 +210,24 @@ Non-variation classes
 @@@@@@@@@@@@@@@@@@@@@@
 
 .. _interval:
+.. _sequenceinterval:
 
-Interval (Abstract Class)
-#########################
+SequenceInterval (Abstract Class)
+#################################
 
-**Biological definition**
+**Biological Definition**
 
 None.
 
-**Computational definition**
+**Computational Definition**
 
-The *Interval* abstract class defines a range on a :ref:`sequence`,
-possibly with length zero, and specified using
+The *SequenceInterval* abstract class defines a range on a
+:ref:`sequence`, possibly with length zero, and specified using
 :ref:`interbase-coordinates-design`. An Interval MAY be a
 :ref:`SimpleInterval` with a single start and end coordinate.
-:ref:`Future Location and Interval types <planned-locations>` will
-enable other methods for describing where :ref:`variation` occurs. Any
-of these MAY be used as the Interval for Location.
+:ref:`Future Location and SequenceInterval types <planned-locations>`
+will enable other methods for describing where :ref:`variation`
+occurs. Any of these MAY be used as the SequenceInterval for Location.
 
 .. sidebar:: VRS Uses Interbase Coordinates
 
@@ -246,11 +247,11 @@ of these MAY be used as the Interval for Location.
 SimpleInterval
 $$$$$$$$$$$$$$
 
-**Computational definition**
+**Computational Definition**
 
-An :ref:`Interval` with a single start and end coordinate.
+A :ref:`SequenceInterval` with a single start and end coordinate.
 
-**Information model**
+**Information Model**
 
 .. list-table::
    :class: reece-wrap
@@ -265,7 +266,7 @@ An :ref:`Interval` with a single start and end coordinate.
    * - type
      - string
      - 1..1
-     - Interval type; MUST be set to '**SimpleInterval**'
+     - MUST be "SimpleInterval"
    * - start
      - uint64
      - 1..1
@@ -275,7 +276,7 @@ An :ref:`Interval` with a single start and end coordinate.
      - 1..1
      - end position
 
-**Implementation guidance**
+**Implementation Guidance**
 
 * Implementations MUST enforce values 0 ≤ start ≤ end. In the case of
   double-stranded DNA, this constraint holds even when a feature is on
@@ -300,13 +301,13 @@ An :ref:`Interval` with a single start and end coordinate.
    * a.start < b.end < a.end
 * Two intervals a and b *coincide* if they intersect or if they are
   equal (the equality condition is REQUIRED to handle the case of two
-  identical zero-width Intervals).
+  identical zero-width SimpleIntervals).
 * <start, end>=<*0,0*> refers to the point with width zero before the first residue.
 * <start, end>=<*i,i+1*> refers to the *i+1th* (1-based) residue.
 * <start, end>=<*N,N*> refers to the position after the last residue for Sequence of length *N*.
-* See example notebooks in |vr-python|.
+* See example notebooks in |vrs-python|.
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -316,12 +317,74 @@ An :ref:`Interval` with a single start and end coordinate.
       "type": "SimpleInterval"
     }
 
+
+.. _CytobandInterval:
+
+CytobandInterval
+################
+
+**Computational Definition**
+
+A contiguous region specified by chromosomal bands features.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "CytobandInterval"
+   * - start
+     - string
+     - 1..1
+     - name of feature start
+   * - end
+     - string
+     - 1..1
+     - name of feature end
+
+**Implementation Guidance**
+
+* `start` and `end` attributes of CytobandInterval are intentionally
+  specified vaguely in order to accommodate a wide variety of
+  uses. Examples include named markers on chromosomes, cytogenetic
+  bands, and legacy marker names found in older scientific literature.
+* When :ref:`CytobandInterval` refers to cytogentic bands, the valid
+  values for, and the syntactic structure of, the `start` and `end`
+  depend on the species.  When using :ref:`CytobandInterval` to refer
+  to human cytogentic bands, ISCN conventions MUST be used. Bands are
+  denoted by the arm ("p" or "q") and position (e.g., "22", "22.3", or
+  the symbolic values "cen", "tel", or "ter"). If `start` and `end`
+  are on different arms, they SHOULD correspond to the p-arm and q-arm
+  locations respectively. If `start` and `end` are on the same arm,
+  `start` MUST be the more centromeric position (i.e., with lower band
+  and sub-band numbers).
+
+**Examples**
+
+.. parsed-literal::
+
+   {
+     "end": "q22.3",
+     "start": "q22.2",
+     "type": "CytobandInterval"
+   }
+
 .. _location:
 
 Location (Abstract Class)
 #########################
 
-**Biological definition**
+**Biological Definition**
 
 As used by biologists, the precision of “location” (or “locus”) varies
 widely, ranging from precise start and end numerical coordinates
@@ -329,7 +392,7 @@ defining a Location, to bounded regions of a sequence, to conceptual
 references to named genomic features (e.g., chromosomal bands, genes,
 exons) as proxies for the Locations on an implied reference sequence.
 
-**Computational definition**
+**Computational Definition**
 
 The `Location` abstract class refers to position of a contiguous
 segment of a biological sequence.  The most common and concrete
@@ -342,7 +405,7 @@ Location for Variation.
 **Implementation Guidance**
 
 * Location refers to a position.  Although it MAY imply a sequence,
-  the two concepts are not interchangable, especially when the
+  the two concepts are not interchangeable, especially when the
   location is non-specific (e.g., a range) or symbolic (a gene).
 
 
@@ -365,7 +428,6 @@ A :ref:`Location` subclass for describing a defined :ref:`Region` on a
 gene.
 
 **Information model**
-
 .. list-table::
    :class: reece-wrap
    :header-rows: 1
@@ -436,22 +498,127 @@ The following examples all refer to the Human BRCA1 gene:
      'type': 'GeneLocation'
    }
 
-   
+
+.. _chromosomelocation:
+
+ChromosomeLocation
+$$$$$$$$$$$$$$$$$$
+
+**Biological Definition**
+
+Chromosomal locations based on named features.
+
+**Computational Definition**
+
+A ChromosomeLocation is a :ref:`Location` that is defined by a named
+chromosomal features.
+
+**Information Model**
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Location id; MUST be unique within document
+   * - type
+     - string
+     - 1..1
+     - MUST be "ChromosomeLocation"
+   * - species
+     - :ref:`CURIE`
+     - 1..1
+     - An external reference to a species taxonomy.  Default:
+       "taxonomy:9606" (Human).  See Implementation Guidance, below.
+   * - chr
+     - string
+     - 1..1
+     - The symbolic chromosome name
+   * - interval
+     - :ref:`CytobandInterval`
+     - 1..1
+     - The chromosome region based on feature names
+
+
+**Implementation Guidance**
+
+* ChromosomeLocation is intended to enable the representation of
+  cytogenetic results from karyotyping or low-resolution molecular
+  methods, particularly those found in older scientific literature.
+  Precise :ref:`SequenceLocation` should be preferred when
+  nucleotide-scale location is known.
+* `species` is specified using the NCBI taxonomy.  The CURIE prefix
+  MUST be "taxonomy", corresponding to the `NCBI taxonomy prefix at
+  identifiers.org
+  <https://registry.identifiers.org/registry/taxonomy>`__, and the
+  CURIE reference MUST be an NCBI taxonomy identifier (e.g., 9606 for
+  Homo sapiens).
+* ChromosomeLocation is intended primarily for Humans.  Support for
+  other species is possible and will be considered based on community
+  feedback.
+* `chromosome` is an archetypal chromosome name. Valid values for, and
+  the syntactic structure of, `chromosome` depends on the species.
+  `chromosome` MUST be an official sequence name from `NCBI Assembly
+  <https://www.ncbi.nlm.nih.gov/assembly>`__.  For Humans, valid
+  chromosome names are 1..22, X, Y (case-sensitive).
+* `interval` refers to a contiguous region specified named markers,
+  which are presumed to exist on the specified chromosome.  See
+  :ref:`CytobandInterval` for additional information.
+* The conversion of ChromosomeLocation instances to SequenceLocation
+  instances is out-of-scope for VRS.  When converting `start` and
+  `end` to SequenceLocations, the positions MUST be interpreted as
+  inclusive ranges that cover the maximal extent of the region.
+* Data for converting cytogenetic bands to precise sequence
+  coordinates are available at `NCBI GDP
+  <https://ftp.ncbi.nlm.nih.gov/pub/gdp/>`__, `UCSC GRCh37 (hg19)
+  <http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/cytoBand.txt.gz>`__,
+  `UCSC GRCh38 (hg38)
+  <http://hgdownload.cse.ucsc.edu/goldenPath/hg38/database/cytoBand.txt.gz>`__,
+  and `bioutils (Python)
+  <https://bioutils.readthedocs.io/en/stable/reference/bioutils.cytobands.html>`__.
+* See also the rationale
+  for :ref:`dd-not-using-external-chromosome-declarations`.
+
+
+**Examples**
+
+.. parsed-literal::
+
+   {
+     "chr": "11",
+     "interval": {
+       "end": "q22.3",
+       "start": "q22.2",
+       "type": "CytobandInterval"
+       },
+     "species_id": "taxonomy:9606",
+     "type": "ChromosomeLocation"
+   }
+
+
 .. _sequence-location:
+.. _sequencelocation:
 
 SequenceLocation
 $$$$$$$$$$$$$$$$
 
-**Biological definition**
+**Biological Definition**
 
 A specified subsequence within another sequence that is used as a reference sequence.
 
-**Computational definition**
+**Computational Definition**
 
-A Location subclass for describing a defined :ref:`Interval` on a
+A Location subclass for describing a defined :ref:`SequenceInterval` on a
 named :ref:`Sequence`.
 
-**Information model**
+**Information Model**
 
 .. list-table::
    :class: reece-wrap
@@ -466,21 +633,21 @@ named :ref:`Sequence`.
    * - _id
      - :ref:`CURIE`
      - 0..1
-     - Location Id; MUST be unique within document
+     - Location id; MUST be unique within document
    * - type
      - string
      - 1..1
-     - Location type; MUST be set to '**SequenceLocation**'
+     - MUST be "SequenceLocation"
    * - sequence_id
      - :ref:`CURIE`
      - 1..1
      - An id mapping to the :ref:`computed-identifiers` of the external database Sequence containing the sequence to be located.
    * - interval
-     - :ref:`Interval`
+     - :ref:`SequenceInterval`
      - 1..1
      - Position of feature on reference sequence specified by sequence_id.
 
-**Implementation guidance**
+**Implementation Guidance**
 
 * For a :ref:`Sequence` of length *n*:
    * 0 ≤ *interval.start* ≤ *interval.end* ≤ *n*
@@ -494,11 +661,11 @@ named :ref:`Sequence`.
 .. important:: HGVS permits variants that refer to non-existent
                sequence. Examples include coordinates extrapolated
                beyond the bounds of a transcript and intronic
-               sequence. Such variants are not representable using VR
+               sequence. Such variants are not representable using VRS
                and MUST be projected to a genomic reference in order
                to be represented.
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -512,18 +679,21 @@ named :ref:`Sequence`.
       "type": "SequenceLocation"
     }
 
+
+
+
 .. _state:
 
 State (Abstract Class)
 ######################
 
-**Biological definition**
+**Biological Definition**
 
 None.
 
-**Computational definition**
+**Computational Definition**
 
-*State* objects are one of two primary components specifying a VR
+*State* objects are one of two primary components specifying a VRS
 :ref:`Allele` (in addition to :ref:`Location`), and the designated
 components for representing change (or non-change) of the features
 indicated by the Allele Location. As an abstract class, State currently
@@ -536,17 +706,17 @@ encompasses single and contiguous :ref:`sequence` changes (see :ref:`SequenceSta
 SequenceState
 $$$$$$$$$$$$$
 
-**Biological definition**
+**Biological Definition**
 
 None.
 
-**Computational definition**
+**Computational Definition**
 
 The *SequenceState* class specifically captures a :ref:`sequence` as a
 :ref:`State`. This is the State class to use for representing
 "ref-alt" style variation, including SNVs, MNVs, del, ins, and delins.
 
-**Information model**
+**Information Model**
 
 .. list-table::
    :class: reece-wrap
@@ -561,13 +731,13 @@ The *SequenceState* class specifically captures a :ref:`sequence` as a
    * - type
      - string
      - 1..1
-     - State type; MUST be set to '**SequenceState**'
+     - MUST be "SequenceState"
    * - sequence
      - string
      - 1..1
      - The string of sequence residues that is to be used as the state for other types.
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -583,14 +753,15 @@ Variation
 @@@@@@@@@
 
 The Variation class is the conceptual root of all types of variation,
-both current and future.  Variation subclasses are:
+both current and future.
 
-**Biological definition**
+**Biological Definition**
 
-In biology, variation is often used to mean `genetic variation`_,
-describing the differences observed in DNA among individuals.
+In biology, variation is often used to mean *sequence* variation,
+describing the differences observed in DNA or AA bases among
+individuals.
 
-**Computational definition**
+**Computational Definition**
 
 The *Variation* abstract class is the top-level object in the
 :ref:`vr-schema-diagram` and represents the concept of a molecular
@@ -607,20 +778,20 @@ Variations that are not yet covered.
 Allele
 ######
 
-**Biological definition**
+**Biological Definition**
 
 One of a number of alternative forms of the same gene or same genetic
 locus. In the context of biological sequences, “allele” refers to one
 of a set of specific changes within a :ref:`Sequence`. In the context
-of VR, Allele refers to a Sequence or Sequence change with respect to
+of VRS, Allele refers to a Sequence or Sequence change with respect to
 a reference sequence, without regard to genes or other features.
 
-**Computational definition**
+**Computational Definition**
 
 An Allele is an assertion of the :ref:`State <State>` of a biological
 sequence at a :ref:`Location <Location>`.
 
-**Information model**
+**Information Model**
 
 .. list-table::
    :class: reece-wrap
@@ -639,9 +810,9 @@ sequence at a :ref:`Location <Location>`.
    * - type
      - string
      - 1..1
-     - Variation type; MUST be set to '**Allele**'
+     - MUST be "Allele"
    * - location
-     - :ref:`Location`
+     - :ref:`Location` | :ref:`CURIE`
      - 1..1
      - Where Allele is located
    * - state
@@ -649,7 +820,7 @@ sequence at a :ref:`Location <Location>`.
      - 1..1
      - State at location
 
-**Implementation guidance**
+**Implementation Guidance**
 
 * The :ref:`State <State>` and :ref:`Location <Location>` subclasses
   respectively represent diverse kinds of sequence changes and
@@ -705,7 +876,7 @@ sequence at a :ref:`Location <Location>`.
 * This specification's definition of Allele applies to all Sequence
   types (DNA, RNA, AA).
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -732,17 +903,17 @@ sequence at a :ref:`Location <Location>`.
 Text
 ####
 
-**Biological definition**
+**Biological Definition**
 
 None
 
-**Computational definition**
+**Computational Definition**
 
 The *Text* subclass of :ref:`Variation` is intended to capture textual
 descriptions of variation that cannot be parsed by other Variation
 subclasses, but are still treated as variation.
 
-**Information model**
+**Information Model**
 
 .. list-table::
    :class: reece-wrap
@@ -761,13 +932,13 @@ subclasses, but are still treated as variation.
    * - type
      - string
      - 1..1
-     - Variation type; MUST be set to '**Text**'
+     - MUST be "Text"
    * - definition
      - string
      - 1..1
      - The textual variation representation not parsable by other subclasses of Variation.
 
-**Implementation guidance**
+**Implementation Guidance**
 
 * An implementation MUST represent Variation with subclasses other
   than Text if possible.
@@ -780,11 +951,12 @@ subclasses, but are still treated as variation.
   implementation SHOULD persist the original Text object and respond
   to queries matching the Text object with the new object.
 * Additional Variation subclasses are continually under
-  consideration. Please open a `GitHub issue`_ if you would like to
+  consideration. Please open a `GitHub issue
+  <https://github.com/ga4gh/vr-spec/issues>`__ if you would like to
   propose a Variation subclass to cover a needed variation
   representation.
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -794,23 +966,153 @@ subclasses, but are still treated as variation.
     }
 
 
-.. _GitHub issue: https://github.com/ga4gh/vr-spec/issues
-.. _genetic variation: https://en.wikipedia.org/wiki/Genetic_variation
+.. _haplotype:
+
+Haplotype
+#########
+
+**Biological Definition**
+
+A specific combination of Alleles that occur together on single
+sequence in one or more individuals.
+
+**Computational Definition**
+
+A specific combination of non-overlapping Alleles that co-occur on the
+same reference sequence.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Variation Id; MUST be unique within document
+   * - type
+     - string
+     - 1..1
+     - MUST be "Haplotype"
+   * - members
+     - :ref:`Allele`\[] | :ref:`CURIE`\[]
+     - 1..*
+     - List of Alleles, or references to Alleles, that comprise this
+       Haplotype
+
+
+
+**Implementation Guidance**
+
+* Haplotypes are an assertion of Alleles known to occur “in cis” or
+  “in phase” with each other.
+* All Alleles in a Haplotype MUST be defined on the same reference
+  sequence.
+* Alleles within a Haplotype MUST not overlap ("overlap" is defined in
+  Interval).
+* The locations of Alleles within the Haplotype MUST be interpreted
+  independently.  Alleles that create a net insertion or deletion of
+  sequence MUST NOT change the location of "downstream" Alleles.
+* The `members` attribute is required and MUST contain at least one
+  Allele.
+
+
+**Sources**
+
+* `ISOGG: Haplotype <https://isogg.org/wiki/Haplotype>`__ — A haplotype
+  is a combination of alleles (DNA sequences) at different places
+  (loci) on the chromosome that are transmitted together. A haplotype
+  may be one locus, several loci, or an entire chromosome depending on
+  the number of recombination events that have occurred between a
+  given set of loci.
+* `SO: haplotype (SO:0001024)
+  <http://www.sequenceontology.org/browser/current_release/term/SO:0001024>`__
+  — A haplotype is one of a set of coexisting sequence variants of a
+  haplotype block.
+* `GENO: Haplotype (GENO:0000871)
+  <http://www.ontobee.org/ontology/GENO?iri=http://purl.obolibrary.org/obo/GENO_0000871>`__ -
+  A set of two or more sequence alterations on the same chromosomal
+  strand that tend to be transmitted together.
+
+**Examples**
+
+An APOE-ε1 Haplotype with inline Alleles::
+
+    {
+      "members": [
+        {
+          "location": {
+            "interval": {
+              "end": 44908684,
+              "start": 44908683,
+              "type": "SimpleInterval"
+            },
+            "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+            "type": "SequenceLocation"
+          },
+          "state": {
+            "sequence": "C",
+            "type": "SequenceState"
+          },
+          "type": "Allele"
+        },
+        {
+          "location": {
+            "interval": {
+              "end": 44908822,
+              "start": 44908821,
+              "type": "SimpleInterval"
+            },
+            "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+            "type": "SequenceLocation"
+          },
+          "state": {
+            "sequence": "T",
+            "type": "SequenceState"
+          },
+          "type": "Allele"
+        }
+      ],
+      "type": "Haplotype"
+    }
+    
+The same APOE-ε1 Haplotype with referenced Alleles::
+    
+    {
+      "members": [
+        "ga4gh:VA.iXjilHZiyCEoD3wVMPMXG3B8BtYfL88H",
+        "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_"
+      ],
+      "type": "Haplotype"
+    }
+    
+The GA4GH computed identifier for these Haplotypes is
+`ga4gh:VH.NAVnEuaP9gf41OxnPM56XxWQfdFNcUxJ`, regardless of the whether
+the Variation objects are inlined or referenced, and regardless of
+order. See :ref:`computed-identifiers` for more information.
+
 
 
 VariationSet
 ############
 
-**Biological definition**
+**Biological Definition**
 
 Sets of variation are used widely, such as sets of variants in dbSNP
 or ClinVar that might be related by function. 
 
-**Computational definition**
+**Computational Definition**
 
 An unconstrained set of Variation objects or references.
 
-**Information model**
+**Information Model**
 
 .. list-table::
    :class: reece-wrap
@@ -829,7 +1131,7 @@ An unconstrained set of Variation objects or references.
    * - type
      - string
      - 1..1
-     - Variation type; MUST be "VariationSet" (default)
+     - MUST be "VariationSet"
    * - members
      - :ref:`Variation`\[] or :ref:`CURIE`\[]
      - 0..*
@@ -857,7 +1159,7 @@ An unconstrained set of Variation objects or references.
 * Recursive sets are not meaningful and are not supported.
 * VariationSets may be empty.
 
-**Example**
+**Examples**
 
 Inlined Variation objects:
 

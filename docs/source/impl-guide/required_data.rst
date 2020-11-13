@@ -73,8 +73,8 @@ In order to maximize portability and to insulate implementations from
 decisions about external data sources, implementers should consider
 writing an abstract data proxy interface that to define a service, and
 then implement this interface for each data backend to be
-supported. The :ref:`impl-vr-python` `DataProxy class
-<https://github.com/ga4gh/vr-python/blob/master/src/ga4gh/vr/extras/dataproxy.py>`__
+supported. The :ref:`impl-vrs-python` `DataProxy class
+<https://github.com/ga4gh/vrs-python/blob/master/src/ga4gh.vrs.dataproxy.py>`__
 provides an example of this design pattern and sample replies.
 
 The DataProxy interface defines three methods:
@@ -88,7 +88,7 @@ The DataProxy interface defines three methods:
   sequence identifier, return all aliases in the specified
   namespace. Zero or more aliases may be returned.
 
-|vr-python| implements the DataProxy interface using a local |seqrepo|
+|vrs-python| implements the DataProxy interface using a local |seqrepo|
 instance backend and using a |seqrepo_rs| backend.  A GA4GH refget
 implementation has been started, but is pending interface changes to
 support lookup using primary database accesssions.
@@ -100,7 +100,7 @@ The following examples are taken from |notebooks|:
 
 .. code:: ipython3
 
-    from ga4gh.vr.extras.dataproxy import SeqRepoRESTDataProxy
+    from ga4gh.vrs.dataproxy import SeqRepoRESTDataProxy
     seqrepo_rest_service_url = "http://localhost:5000/seqrepo"
     dp = SeqRepoRESTDataProxy(base_url=seqrepo_rest_service_url)
 
