@@ -158,6 +158,37 @@
             }
          ]
       },
+      "NestedInterval": {
+         "example": {
+            "inner": {
+               "end": 30,
+               "start": 20,
+               "type": "SimpleInterval"
+            },
+            "outer": {
+               "end": 40,
+               "start": 10,
+               "type": "SimpleInterval"
+            },
+            "type": "NestedInterval"
+         },
+         "properties": {
+            "inner": {
+               "$ref": "#/definitions/SimpleInterval"
+            },
+            "outer": {
+               "$ref": "#/definitions/SimpleInterval"
+            },
+            "type": {
+               "default": "NestedInterval",
+               "enum": [
+                  "NestedInterval"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
       "SequenceInterval": {
          "additionalProperties": false,
          "discriminator": {
@@ -166,6 +197,9 @@
          "oneOf": [
             {
                "$ref": "#/definitions/SimpleInterval"
+            },
+            {
+               "$ref": "#/definitions/NestedInterval"
             }
          ]
       },
@@ -228,12 +262,16 @@
          },
          "properties": {
             "end": {
-               "nullable": true,
-               "type": "integer"
+               "type": [
+                  "integer",
+                  "null"
+               ]
             },
             "start": {
-               "nullable": true,
-               "type": "integer"
+               "type": [
+                  "integer",
+                  "null"
+               ]
             },
             "type": {
                "default": "SimpleInterval",
@@ -243,10 +281,6 @@
                "type": "string"
             }
          },
-         "required": [
-            "start",
-            "end"
-         ],
          "type": "object"
       },
       "State": {

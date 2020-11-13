@@ -318,6 +318,69 @@ A :ref:`SequenceInterval` with a single start and end coordinate.
     }
 
 
+.. _NestedInterval:
+
+NestedInterval
+$$$$$$$$$$$$$$
+
+**Computational Definition**
+
+A :ref:`SequenceInterval` defined by nested inner and outer :ref:`SimpleInterval` instances
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "NestedInterval"
+   * - inner
+     - :ref:`SimpleInterval`
+     - 1..1
+     - inner interval
+   * - outer
+     - :ref:`SimpleInterval`
+     - 1..1
+     - outer interval
+
+**Implementation Guidance**
+
+* NestedInterval is intended to be used for variation where the start
+  and end positions each occur within ranges.
+* `inner` and `outer` must be defined, but the `start` and `end`
+  within each may be null.
+* If `start` and `end` attributes of `inner` and `outer` are defined,
+  they MUST satisfy `outer.start <= inner.start <= inner.end <=
+  outer.end`
+
+**Examples**
+
+.. parsed-literal::
+
+   {
+     "inner": {
+       "end": 30,
+       "start": 20,
+       "type": "SimpleInterval"
+     },
+     "outer": {
+       "end": 40,
+       "start": 10,
+       "type": "SimpleInterval"
+     },
+     "type": "NestedInterval"
+   }
+   
+
 .. _CytobandInterval:
 
 CytobandInterval

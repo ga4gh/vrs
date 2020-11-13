@@ -1,4 +1,8 @@
-This page shows style conventions used in these docs.
+This page shows style conventions used in these docs.  It will be
+built with other pages and you can view it (at
+docs/build/html/style.html). Unfortunately, because it's intentionally
+not included in the published docs, it generates the annoying warning
+"WARNING: document isn't included in any toctree".
 
 
 Headings

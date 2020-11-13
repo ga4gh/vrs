@@ -83,6 +83,7 @@ definitions:
     additionalProperties: false
     oneOf:
       - $ref: '#/definitions/SimpleInterval'
+      - $ref: '#/definitions/NestedInterval'
     discriminator:
       propertyName: type
 
@@ -106,18 +107,35 @@ definitions:
         enum: [SimpleInterval]
         default: SimpleInterval
       start:
-        type: integer
-        nullable: true
+        type: ["integer", "null"]
       end:
-        type: integer
-        nullable: true
-    required:
-      - start
-      - end
+        type: ["integer", "null"]
     example:
       type: SimpleInterval
       start: 11
       end: 22
+
+  NestedInterval:
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [NestedInterval]
+        default: NestedInterval
+      inner:
+        $ref: '#/definitions/SimpleInterval'
+      outer:
+        $ref: '#/definitions/SimpleInterval'
+    example:
+      type: NestedInterval
+      inner:
+        type: SimpleInterval
+        start: 20
+        end: 30
+      outer:
+        type: SimpleInterval
+        start: 10
+        end: 40
 
   CytobandInterval:
     description: >-
