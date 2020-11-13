@@ -514,6 +514,7 @@ A ChromosomeLocation is a :ref:`Location` that is defined by a named
 chromosomal features.
 
 **Information Model**
+
 .. list-table::
    :class: reece-wrap
    :header-rows: 1
@@ -601,7 +602,6 @@ chromosomal features.
      "species_id": "taxonomy:9606",
      "type": "ChromosomeLocation"
    }
-
 
 .. _sequence-location:
 .. _sequencelocation:

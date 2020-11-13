@@ -27,8 +27,8 @@ identifiers:
     Haplotype: VH
 
     SequenceLocation: VSL
-    GeneLocation: VGL
     ChromosomeLocation: VCL
+    GeneLocation: VGL
 
 
   regexp: '^ga4gh:(?P<type>[^.]+)\.(?P<digest>.+)$'
