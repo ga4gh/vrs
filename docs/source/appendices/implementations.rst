@@ -22,7 +22,7 @@ VRS is adopted.
 .. _impl-vrs-python:
 
 vrs-python: GA4GH VRS Python Implementation
-##########################################
+###########################################
 
 The |vrs-python| is an implementation for the GA4GH VRS.  It
 supports all types covered by the VRS, implements Allele

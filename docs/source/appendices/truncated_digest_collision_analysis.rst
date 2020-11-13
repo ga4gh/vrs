@@ -418,11 +418,3 @@ digest length (bytes) required for expected collision probability :math:`P` over
 | 30  |     |     |     |     |     |     |     |     |     |     |     |
 +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
 
-
-
-References
-@@@@@@@@@@
-
-.. [Hart2020] Hart, RK and Prlić, A; **SeqRepo: A system for managing
-       local collections biological sequences.** (2020).
-       https://doi.org/10.1101/2020.09.16.299495
