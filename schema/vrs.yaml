@@ -171,9 +171,34 @@ definitions:
       - $ref: "#/definitions/Haplotype"
       - $ref: "#/definitions/Text"
       - $ref: "#/definitions/VariationSet"
+      - $ref: "#/definitions/Abundance"
     discriminator:
       propertyName: type
 
+  Abundance:
+    additionalProperties: false
+    type: object
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [Abundance]
+        default: Abundance
+      location:
+        $ref: "#/definitions/Location"
+      amount:
+        # TODO: Structure each of the options below
+        description: >-
+          Systemic quantity. Intended options: 1) absolute copy min
+          (>=0) and max; 2) relative copy number quantity min (>=1)
+          and max. Relative must also note; 3) qualitative relative
+          copy number: gt, ge, lt, le, eq
+        type: object
+    required:
+      - type
+      - location
+      - amount
 
   Text:
     description: >-
