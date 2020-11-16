@@ -29,7 +29,7 @@ identifiers:
 
     SequenceLocation: VSL
     ChromosomeLocation: VCL
-    # GeneLocation: VGL
+    TranscriptLocation: VTL
 
 
   regexp: '^ga4gh:(?P<type>[^.]+)\.(?P<digest>.+)$'

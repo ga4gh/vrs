@@ -28,6 +28,7 @@ definitions:
     oneOf:
       - $ref: "#/definitions/ChromosomeLocation"
       - $ref: "#/definitions/SequenceLocation"
+      - $ref: "#/definitions/TranscriptLocation"
     discriminator:
       propertyName: type
 
@@ -424,10 +425,9 @@ definitions:
     type: object
     additionalProperties: false
     properties:
-      ftype:
+      feature_type:
         type: string
-        enum: ["5'utr", "3'utr", "exon", "intron", "cds"]
+        enum: ["5'utr", "3'utr", "exon", "intron"]
       index:
         type: integer
-
-    
+      

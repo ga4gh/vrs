@@ -12,6 +12,7 @@
          "SequenceLocation": "VSL",
          "Text": "VT",
          "Transcript": "VTX",
+         "TranscriptLocation": "VTL",
          "VariationSet": "VS"
       }
    }

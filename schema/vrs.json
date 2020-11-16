@@ -194,6 +194,9 @@
             },
             {
                "$ref": "#/definitions/SequenceLocation"
+            },
+            {
+               "$ref": "#/definitions/TranscriptLocation"
             }
          ]
       },
@@ -382,13 +385,12 @@
       "TranscriptFeature": {
          "additionalProperties": false,
          "properties": {
-            "ftype": {
+            "feature_type": {
                "enum": [
                   "5'utr",
                   "3'utr",
                   "exon",
-                  "intron",
-                  "cds"
+                  "intron"
                ],
                "type": "string"
             },
