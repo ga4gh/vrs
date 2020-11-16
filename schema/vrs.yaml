@@ -290,6 +290,7 @@ definitions:
   State:
     oneOf:
       - $ref: "#/definitions/SequenceState"
+      - $ref: "#/definitions/RepeatState"
 
   SequenceState:
     description: >-
@@ -311,6 +312,36 @@ definitions:
     example:
       type: SequenceState
       sequence: C
+
+  RepeatState:
+    description: >-
+      A tandem repeat of a SequenceLocation
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [RepeatState]
+        default: RepeatState
+      copies:
+        type: object
+        additionalProperties: false
+        properties:
+          min:
+            type: integer
+            minimum: 1
+          max:
+            type: ["integer", "null"]
+    required:
+      - type
+      - copies
+    example:
+      type: SequenceState
+      copies:
+        min: 40
+        max: 60
+        
+
 
 
   ############################################################################

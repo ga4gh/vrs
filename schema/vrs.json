@@ -217,6 +217,47 @@
          },
          "type": "object"
       },
+      "RepeatState": {
+         "additionalProperties": false,
+         "description": "A tandem repeat of a SequenceLocation",
+         "example": {
+            "copies": {
+               "max": 60,
+               "min": 40
+            },
+            "type": "SequenceState"
+         },
+         "properties": {
+            "copies": {
+               "additionalProperties": false,
+               "properties": {
+                  "max": {
+                     "type": [
+                        "integer",
+                        "null"
+                     ]
+                  },
+                  "min": {
+                     "minimum": 1,
+                     "type": "integer"
+                  }
+               },
+               "type": "object"
+            },
+            "type": {
+               "default": "RepeatState",
+               "enum": [
+                  "RepeatState"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "copies"
+         ],
+         "type": "object"
+      },
       "SequenceInterval": {
          "additionalProperties": false,
          "discriminator": {
@@ -315,6 +356,9 @@
          "oneOf": [
             {
                "$ref": "#/definitions/SequenceState"
+            },
+            {
+               "$ref": "#/definitions/RepeatState"
             }
          ]
       },
