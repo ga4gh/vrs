@@ -336,3 +336,98 @@ definitions:
     type: string
     pattern: '^[pq][1-9][0-9]*(\.[1-9][0-9]*)?$'
     example: "q22.3"
+
+
+  Transcript:
+    description: >-
+      A specified subsequence within another sequence that is used as a reference sequence.
+    type: object
+    additionalProperties: false
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [Transcript]
+        default: Transcript
+      sequence_id:
+        $ref: "#/definitions/CURIE"
+      exons:
+        type: array
+        items:
+          $ref: "#/definitions/SimpleInterval"
+      cds:
+        $ref: "#/definitions/SimpleInterval"
+
+  TranscriptLocation:
+    additionalProperties: false
+    description: >-
+      A specified subsequence within another sequence that is used as a reference sequence.
+    type: object
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [TranscriptLocation]
+        default: TranscriptLocation
+      transcript:
+        oneOf:
+          - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Transcript"
+      interval:
+        oneOf:
+          - $ref: '#/definitions/SimpleInterval'
+          - $ref: '#/definitions/BaseOffsetInterval'
+          - $ref: '#/definitions/TranscriptFeatureInterval'
+
+  BaseOffsetInterval:
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [BaseOffsetInterval]
+        default: BaseOffsetInterval
+      datum:
+        type: string
+        enum: ["seqstart", "cdsstart"]
+      start:
+        $ref: "#/definitions/BaseOffset"
+      end:
+        $ref: "#/definitions/BaseOffset"
+
+  BaseOffset:
+    type: object
+    additionalProperties: false
+    properties:
+      base:
+        type: integer
+      offset:
+        type: integer
+        default: 0
+
+  TranscriptFeatureInterval:
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [TranscriptFeatureInterval]
+        default: TranscriptFeatureInterval
+      start:
+        $ref: "#/definitions/TranscriptFeature"
+      end:
+        $ref: "#/definitions/TranscriptFeature"
+
+  TranscriptFeature:
+    type: object
+    additionalProperties: false
+    properties:
+      ftype:
+        type: string
+        enum: ["5'utr", "3'utr", "exon", "intron", "cds"]
+      index:
+        type: integer
+
+    

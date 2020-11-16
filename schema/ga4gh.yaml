@@ -18,6 +18,7 @@ identifiers:
   type_prefix_map:
     # global objects
     Sequence: SQ
+    Transcript: VTX
 
     # Variation 
     Allele: VA
