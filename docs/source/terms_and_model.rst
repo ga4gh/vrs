@@ -478,6 +478,10 @@ GeneLocation
 $$$$$$$$$$$$$$$$
 
 
+.. todo:: This section does not match implementation, but it's unclear 
+	which option is correct. 
+
+
 **Biological definition**
 
 A gene is a conceptual chromosomal region that is associated with 
