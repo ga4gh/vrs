@@ -5,6 +5,7 @@
       "ref_sep": ".",
       "regexp": "^ga4gh:(?P<type>[^.]+)\\.(?P<digest>.+)$",
       "type_prefix_map": {
+         "Abundance": "VAB",
          "Allele": "VA",
          "ChromosomeLocation": "VCL",
          "Haplotype": "VH",

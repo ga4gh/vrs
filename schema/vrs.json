@@ -1,6 +1,34 @@
 {
    "$schema": "http://json-schema.org/draft-04/schema",
    "definitions": {
+      "Abundance": {
+         "additionalProperties": false,
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "amount": {
+               "description": "Systemic quantity. Intended options: 1) absolute copy min (>=0) and max; 2) relative copy number quantity min (>=1) and max. Relative must also note; 3) qualitative relative copy number: gt, ge, lt, le, eq",
+               "type": "object"
+            },
+            "location": {
+               "$ref": "#/definitions/Location"
+            },
+            "type": {
+               "default": "Abundance",
+               "enum": [
+                  "Abundance"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "location",
+            "amount"
+         ],
+         "type": "object"
+      },
       "Allele": {
          "additionalProperties": false,
          "description": "An assertion of a sequence state at a Location.",
@@ -231,6 +259,47 @@
          },
          "type": "object"
       },
+      "RepeatState": {
+         "additionalProperties": false,
+         "description": "A tandem repeat of a SequenceLocation",
+         "example": {
+            "copies": {
+               "max": 60,
+               "min": 40
+            },
+            "type": "SequenceState"
+         },
+         "properties": {
+            "copies": {
+               "additionalProperties": false,
+               "properties": {
+                  "max": {
+                     "type": [
+                        "integer",
+                        "null"
+                     ]
+                  },
+                  "min": {
+                     "minimum": 1,
+                     "type": "integer"
+                  }
+               },
+               "type": "object"
+            },
+            "type": {
+               "default": "RepeatState",
+               "enum": [
+                  "RepeatState"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "copies"
+         ],
+         "type": "object"
+      },
       "SequenceInterval": {
          "additionalProperties": false,
          "discriminator": {
@@ -329,6 +398,9 @@
          "oneOf": [
             {
                "$ref": "#/definitions/SequenceState"
+            },
+            {
+               "$ref": "#/definitions/RepeatState"
             }
          ]
       },
@@ -477,6 +549,9 @@
             },
             {
                "$ref": "#/definitions/VariationSet"
+            },
+            {
+               "$ref": "#/definitions/Abundance"
             }
          ]
       },
