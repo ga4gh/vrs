@@ -32,22 +32,6 @@ definitions:
     discriminator:
       propertyName: type
 
-  GeneLocation:
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [GeneLocation]
-        default: GeneLocation
-      _id:
-        $ref: "#/definitions/CURIE"
-      gene_id:
-        $ref: "#/definitions/CURIE"
-        description: See https://www.ebi.ac.uk/miriam/main/datatypes/MIR:00000069
-      region:
-        type: string
-        default: null
-
   ChromosomeLocation:
     description: >-
       A region of a chromosomed specified by species and name using
@@ -335,3 +319,13 @@ definitions:
     type: string
     pattern: '^[pq][1-9][0-9]*(\.[1-9][0-9]*)?$'
     example: "q22.3"
+
+
+  GeneLocation:
+    description: >-
+      A reference to an external gene system, used as a location for
+      variation.  Currently, the `ncbigene` namespace is required. See
+      https://registry.identifiers.org/registry/ncbigene.
+    type: string
+    pattern: '^ncbigene:.+$'
+    

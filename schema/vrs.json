@@ -112,27 +112,9 @@
          "type": "string"
       },
       "GeneLocation": {
-         "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "gene_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "See https://www.ebi.ac.uk/miriam/main/datatypes/MIR:00000069"
-            },
-            "region": {
-               "default": null,
-               "type": "string"
-            },
-            "type": {
-               "default": "GeneLocation",
-               "enum": [
-                  "GeneLocation"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
+         "description": "A reference to an external gene system, used as a location for variation.  Currently, the `ncbigene` namespace is required. See https://registry.identifiers.org/registry/ncbigene.",
+         "pattern": "^ncbigene:.+$",
+         "type": "string"
       },
       "Haplotype": {
          "additionalProperties": false,
