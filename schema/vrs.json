@@ -178,6 +178,11 @@
          "format": "date-time",
          "type": "string"
       },
+      "GeneLocation": {
+         "description": "A reference to an external gene system, used as a location for variation.  Currently, the `ncbigene` namespace is required. See https://registry.identifiers.org/registry/ncbigene.",
+         "pattern": "^ncbigene:.+$",
+         "type": "string"
+      },
       "Haplotype": {
          "additionalProperties": false,
          "description": "A set of zero or more Alleles",
@@ -225,6 +230,9 @@
             },
             {
                "$ref": "#/definitions/TranscriptLocation"
+            },
+            {
+               "$ref": "#/definitions/GeneLocation"
             }
          ]
       },

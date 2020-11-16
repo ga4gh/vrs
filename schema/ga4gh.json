@@ -8,6 +8,7 @@
          "Abundance": "VAB",
          "Allele": "VA",
          "ChromosomeLocation": "VCL",
+         "GeneLocation": "VGL",
          "Haplotype": "VH",
          "Sequence": "SQ",
          "SequenceLocation": "VSL",

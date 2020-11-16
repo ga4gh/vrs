@@ -29,6 +29,7 @@ definitions:
       - $ref: "#/definitions/ChromosomeLocation"
       - $ref: "#/definitions/SequenceLocation"
       - $ref: "#/definitions/TranscriptLocation"
+      - $ref: "#/definitions/GeneLocation"
     discriminator:
       propertyName: type
 
@@ -487,3 +488,10 @@ definitions:
       index:
         type: integer
       
+  GeneLocation:
+    description: >-
+      A reference to an external gene system, used as a location for
+      variation.  Currently, the `ncbigene` namespace is required. See
+      https://registry.identifiers.org/registry/ncbigene.
+    type: string
+    pattern: '^ncbigene:.+$'
