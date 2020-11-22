@@ -110,8 +110,13 @@ definitions:
         default: SimpleInterval
       start:
         type: ["integer", "null"]
+        default: null
       end:
         type: ["integer", "null"]
+        default: null
+    required:
+      - start
+      - end
     example:
       type: SimpleInterval
       start: 11
@@ -119,6 +124,7 @@ definitions:
 
   NestedInterval:
     type: object
+    additionalProperties: false
     properties:
       type:
         type: string
@@ -142,8 +148,8 @@ definitions:
   CytobandInterval:
     description: >-
       A contiguous region specified by chromosomal bands features.
-    additionalProperties: false
     type: object
+    additionalProperties: false
     properties:
       type:
         type: string
@@ -315,35 +321,6 @@ definitions:
       type: SequenceState
       sequence: C
 
-  RepeatState:
-    description: >-
-      A tandem repeat of a SequenceLocation
-    additionalProperties: false
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [RepeatState]
-        default: RepeatState
-      copies:
-        type: object
-        additionalProperties: false
-        properties:
-          min:
-            type: integer
-            minimum: 1
-          max:
-            type: ["integer", "null"]
-    required:
-      - type
-      - copies
-    example:
-      type: SequenceState
-      copies:
-        min: 40
-        max: 60
-        
-
 
 
   ############################################################################
@@ -493,5 +470,75 @@ definitions:
       A reference to an external gene system, used as a location for
       variation.  Currently, the `ncbigene` namespace is required. See
       https://registry.identifiers.org/registry/ncbigene.
-    type: string
-    pattern: '^ncbigene:.+$'
+    type: object
+    additionalProperties: false
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [TranscriptLocation]
+        default: TranscriptLocation
+      gene:
+        $ref: "#/definitions/CURIE"
+        pattern: '^ncbigene:.+$'
+
+
+  # ============================================================================
+  # Repeats
+
+  RepeatState:
+    description: >-
+      A tandem repeat of a SequenceLocation
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [RepeatState]
+        default: RepeatState
+      sequence:
+        oneOf:
+          - type: string
+          - $ref: "#/definitions/SequenceLocation"
+          - $ref: "#/definitions/RegularExpression"
+          - $ref: "#/definitions/SizedSequence"
+      copies:
+        type: object
+        additionalProperties: false
+        properties:
+          min:
+            type: integer
+            minimum: 1
+          max:
+            type: ["integer", "null"]
+    required:
+      - type
+      - copies
+    example:
+      type: SequenceState
+      copies:
+        min: 40
+        max: 60
+        
+  RegularExpression:
+    type: object
+    additionalProperties: false
+    properties:
+      regexp:
+        type:
+          string
+    required: ["regexp"]
+
+  SizedSequence:
+    type: object
+    additionalProperties: false
+    properties:
+      min:
+        type: integer
+      max:
+        type: ["integer", "null"]
+        default: null
+      modulus:
+        type: integer
+        default: 1
