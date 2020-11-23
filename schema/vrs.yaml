@@ -202,7 +202,50 @@ definitions:
           (>=0) and max; 2) relative copy number quantity min (>=1)
           and max. Relative must also note; 3) qualitative relative
           copy number: gt, ge, lt, le, eq
-        type: object
+        oneOf:
+          - type: object
+            additionalProperties: false
+            properties:
+              measure:
+                type: string
+                enum: ["AbsoluteCounts"]
+                default: "AbsoluteCounts"
+              min:
+                type: integer
+              max:
+                type: integer
+            required:
+              - measure
+              - min
+              - max
+          - type: object
+            additionalProperties: false
+            properties:
+              measure:
+                type: string
+                enum: ["RelativeCounts"]
+                default: "RelativeCounts"
+              min:
+                type: integer
+              max:
+                type: integer
+            required:
+              - measure
+              - min
+              - max
+          - type: object
+            additionalProperties: false
+            properties:
+              measure:
+                type: string
+                enum: ["Qualitative"]
+                default: "Qualitative"
+              rel:
+                type: string
+                enum: ["gt", "ge", "eq", "le", "lt"]
+            required:
+              - measure
+              - rel
     required:
       - type
       - location
@@ -465,6 +508,10 @@ definitions:
       index:
         type: integer
       
+
+  # ============================================================================
+  # GeneLocation
+
   GeneLocation:
     description: >-
       A reference to an external gene system, used as a location for
@@ -477,11 +524,15 @@ definitions:
         $ref: "#/definitions/CURIE"
       type:
         type: string
-        enum: [TranscriptLocation]
-        default: TranscriptLocation
-      gene:
+        enum: [GeneLocation]
+        default: GeneLocation
+      gene_id:
         $ref: "#/definitions/CURIE"
         pattern: '^ncbigene:.+$'
+
+  GeneLocation2:
+    type: string
+    pattern: '^ncbigene:.+$'
 
 
   # ============================================================================

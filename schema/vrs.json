@@ -9,7 +9,83 @@
             },
             "amount": {
                "description": "Systemic quantity. Intended options: 1) absolute copy min (>=0) and max; 2) relative copy number quantity min (>=1) and max. Relative must also note; 3) qualitative relative copy number: gt, ge, lt, le, eq",
-               "type": "object"
+               "oneOf": [
+                  {
+                     "additionalProperties": false,
+                     "properties": {
+                        "max": {
+                           "type": "integer"
+                        },
+                        "measure": {
+                           "default": "AbsoluteCounts",
+                           "enum": [
+                              "AbsoluteCounts"
+                           ],
+                           "type": "string"
+                        },
+                        "min": {
+                           "type": "integer"
+                        }
+                     },
+                     "required": [
+                        "measure",
+                        "min",
+                        "max"
+                     ],
+                     "type": "object"
+                  },
+                  {
+                     "additionalProperties": false,
+                     "properties": {
+                        "max": {
+                           "type": "integer"
+                        },
+                        "measure": {
+                           "default": "RelativeCounts",
+                           "enum": [
+                              "RelativeCounts"
+                           ],
+                           "type": "string"
+                        },
+                        "min": {
+                           "type": "integer"
+                        }
+                     },
+                     "required": [
+                        "measure",
+                        "min",
+                        "max"
+                     ],
+                     "type": "object"
+                  },
+                  {
+                     "additionalProperties": false,
+                     "properties": {
+                        "measure": {
+                           "default": "Qualitative",
+                           "enum": [
+                              "Qualitative"
+                           ],
+                           "type": "string"
+                        },
+                        "rel": {
+                           "enum": [
+                              "gt",
+                              "ge",
+                              "eq",
+                              "le",
+                              "lt"
+                           ],
+                           "type": "string"
+                        }
+                     },
+                     "required": [
+                        "measure",
+                        "rel"
+                     ],
+                     "type": "object"
+                  }
+               ]
             },
             "location": {
                "$ref": "#/definitions/Location"
@@ -185,19 +261,23 @@
             "_id": {
                "$ref": "#/definitions/CURIE"
             },
-            "gene": {
+            "gene_id": {
                "$ref": "#/definitions/CURIE",
                "pattern": "^ncbigene:.+$"
             },
             "type": {
-               "default": "TranscriptLocation",
+               "default": "GeneLocation",
                "enum": [
-                  "TranscriptLocation"
+                  "GeneLocation"
                ],
                "type": "string"
             }
          },
          "type": "object"
+      },
+      "GeneLocation2": {
+         "pattern": "^ncbigene:.+$",
+         "type": "string"
       },
       "Haplotype": {
          "additionalProperties": false,
