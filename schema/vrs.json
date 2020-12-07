@@ -24,6 +24,7 @@
                            "type": "string"
                         },
                         "min": {
+                           "minimum": 0,
                            "type": "integer"
                         }
                      },
@@ -48,6 +49,7 @@
                            "type": "string"
                         },
                         "min": {
+                           "minimum": 0,
                            "type": "integer"
                         }
                      },
@@ -123,7 +125,7 @@
                ]
             },
             "state": {
-               "$ref": "#/definitions/State"
+               "$ref": "#/definitions/AlleleState"
             },
             "type": {
                "default": "Allele",
@@ -134,6 +136,16 @@
             }
          },
          "type": "object"
+      },
+      "AlleleState": {
+         "oneOf": [
+            {
+               "$ref": "#/definitions/SequenceState"
+            },
+            {
+               "$ref": "#/definitions/RepeatState"
+            }
+         ]
       },
       "BaseOffset": {
          "additionalProperties": false,
@@ -275,10 +287,6 @@
          },
          "type": "object"
       },
-      "GeneLocation2": {
-         "pattern": "^ncbigene:.+$",
-         "type": "string"
-      },
       "Haplotype": {
          "additionalProperties": false,
          "description": "A set of zero or more Alleles",
@@ -306,6 +314,14 @@
                "enum": [
                   "Haplotype"
                ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "LiteralSequence": {
+         "properties": {
+            "value": {
                "type": "string"
             }
          },
@@ -364,6 +380,38 @@
          },
          "type": "object"
       },
+      "RangedInterval": {
+         "additionalProperties": false,
+         "example": {
+            "end": {
+               "end": 40,
+               "start": 30,
+               "type": "SimpleInterval"
+            },
+            "start": {
+               "end": 20,
+               "start": 10,
+               "type": "SimpleInterval"
+            },
+            "type": "RangedInterval"
+         },
+         "properties": {
+            "end": {
+               "$ref": "#/definitions/SimpleInterval"
+            },
+            "start": {
+               "$ref": "#/definitions/SimpleInterval"
+            },
+            "type": {
+               "default": "RangedInterval",
+               "enum": [
+                  "RangedInterval"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
       "RegularExpression": {
          "additionalProperties": false,
          "properties": {
@@ -397,7 +445,7 @@
                      ]
                   },
                   "min": {
-                     "minimum": 1,
+                     "minimum": 0,
                      "type": "integer"
                   }
                },
@@ -464,6 +512,45 @@
                "default": "SequenceLocation",
                "enum": [
                   "SequenceLocation"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "SequenceMatchExpression": {
+         "additionalProperties": false,
+         "properties": {
+            "source": {
+               "oneOf": [
+                  {
+                     "additionalProperties": false,
+                     "properties": {
+                        "sequence": {
+                           "type": "string"
+                        },
+                        "type": {
+                           "default": "LiteralSequence",
+                           "enum": [
+                              "LiteralSequence"
+                           ],
+                           "type": "string"
+                        }
+                     },
+                     "type": "object"
+                  },
+                  {
+                     "$ref": "#/definitions/SequenceLocation"
+                  },
+                  {
+                     "$ref": "#/definitions/SizedSequence"
+                  }
+               ]
+            },
+            "type": {
+               "default": "SequenceMatchExpression",
+               "enum": [
+                  "SequenceMatchExpression"
                ],
                "type": "string"
             }
@@ -552,16 +639,6 @@
             }
          },
          "type": "object"
-      },
-      "State": {
-         "oneOf": [
-            {
-               "$ref": "#/definitions/SequenceState"
-            },
-            {
-               "$ref": "#/definitions/RepeatState"
-            }
-         ]
       },
       "Text": {
          "additionalProperties": false,

@@ -145,6 +145,29 @@ definitions:
         start: 10
         end: 40
 
+  RangedInterval:
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [RangedInterval]
+        default: RangedInterval
+      start:
+        $ref: '#/definitions/SimpleInterval'
+      end:
+        $ref: '#/definitions/SimpleInterval'
+    example:
+      type: RangedInterval
+      start:
+        type: SimpleInterval
+        start: 10
+        end: 20
+      end:
+        type: SimpleInterval
+        start: 30
+        end: 40
+
   CytobandInterval:
     description: >-
       A contiguous region specified by chromosomal bands features.
@@ -212,6 +235,7 @@ definitions:
                 default: "AbsoluteCounts"
               min:
                 type: integer
+                minimum: 0
               max:
                 type: integer
             required:
@@ -227,6 +251,7 @@ definitions:
                 default: "RelativeCounts"
               min:
                 type: integer
+                minimum: 0
               max:
                 type: integer
             required:
@@ -288,7 +313,7 @@ definitions:
           - $ref: "#/definitions/CURIE"
           - $ref: "#/definitions/Location"
       state:
-        $ref: "#/definitions/State"
+        $ref: "#/definitions/AlleleState"
 
 
   VariationSet:
@@ -338,7 +363,7 @@ definitions:
   ############################################################################
   # States
 
-  State:
+  AlleleState:
     oneOf:
       - $ref: "#/definitions/SequenceState"
       - $ref: "#/definitions/RepeatState"
@@ -530,10 +555,6 @@ definitions:
         $ref: "#/definitions/CURIE"
         pattern: '^ncbigene:.+$'
 
-  GeneLocation2:
-    type: string
-    pattern: '^ncbigene:.+$'
-
 
   # ============================================================================
   # Repeats
@@ -560,7 +581,7 @@ definitions:
         properties:
           min:
             type: integer
-            minimum: 1
+            minimum: 0
           max:
             type: ["integer", "null"]
     required:
@@ -572,15 +593,6 @@ definitions:
         min: 40
         max: 60
         
-  RegularExpression:
-    type: object
-    additionalProperties: false
-    properties:
-      regexp:
-        type:
-          string
-    required: ["regexp"]
-
   SizedSequence:
     type: object
     additionalProperties: false
@@ -593,3 +605,45 @@ definitions:
       modulus:
         type: integer
         default: 1
+
+  SequenceMatchExpression:
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [SequenceMatchExpression]
+        default: SequenceMatchExpression
+      source:
+        oneOf:
+        - type: object
+          additionalProperties: false
+          properties:
+            type:
+              type: string
+              enum: [LiteralSequence]
+              default: LiteralSequence
+            sequence:
+              type: string
+        - $ref: "#/definitions/SequenceLocation"
+        - $ref: "#/definitions/SizedSequence"
+
+
+  # ============================================================================
+  # unused
+  LiteralSequence:
+    type: object
+    properties:
+      value:
+        type: string
+    
+  RegularExpression:
+    type: object
+    additionalProperties: false
+    properties:
+      regexp:
+        type:
+          string
+    required: ["regexp"]
+
+          
