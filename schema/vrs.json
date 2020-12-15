@@ -319,8 +319,32 @@
          },
          "type": "object"
       },
-      "LiteralSequence": {
+      "Inversion": {
+         "additionalProperties": false,
          "properties": {
+            "source": {
+               "$ref": "#/definitions/SequenceExpression"
+            },
+            "type": {
+               "default": "Inversion",
+               "enum": [
+                  "Inversion"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "LiteralSequence": {
+         "additionalProperties": false,
+         "properties": {
+            "type": {
+               "default": "LiteralSequence",
+               "enum": [
+                  "LiteralSequence"
+               ],
+               "type": "string"
+            },
             "value": {
                "type": "string"
             }
@@ -417,6 +441,13 @@
          "properties": {
             "regexp": {
                "type": "string"
+            },
+            "type": {
+               "default": "RegularExpression",
+               "enum": [
+                  "RegularExpression"
+               ],
+               "type": "string"
             }
          },
          "required": [
@@ -457,13 +488,7 @@
                      "type": "string"
                   },
                   {
-                     "$ref": "#/definitions/SequenceLocation"
-                  },
-                  {
-                     "$ref": "#/definitions/RegularExpression"
-                  },
-                  {
-                     "$ref": "#/definitions/SizedSequence"
+                     "$ref": "#/definitions/SequenceExpression"
                   }
                ]
             },
@@ -480,6 +505,30 @@
             "copies"
          ],
          "type": "object"
+      },
+      "SequenceExpression": {
+         "additionalProperties": false,
+         "description": "A Location represents a span on a specific sequence.",
+         "discriminator": {
+            "propertyName": "type"
+         },
+         "oneOf": [
+            {
+               "$ref": "#/definitions/LiteralSequence"
+            },
+            {
+               "$ref": "#/definitions/RegularExpression"
+            },
+            {
+               "$ref": "#/definitions/SequenceLocation"
+            },
+            {
+               "$ref": "#/definitions/SizedSequence"
+            },
+            {
+               "$ref": "#/definitions/Inversion"
+            }
+         ]
       },
       "SequenceInterval": {
          "additionalProperties": false,
@@ -512,45 +561,6 @@
                "default": "SequenceLocation",
                "enum": [
                   "SequenceLocation"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "SequenceMatchExpression": {
-         "additionalProperties": false,
-         "properties": {
-            "source": {
-               "oneOf": [
-                  {
-                     "additionalProperties": false,
-                     "properties": {
-                        "sequence": {
-                           "type": "string"
-                        },
-                        "type": {
-                           "default": "LiteralSequence",
-                           "enum": [
-                              "LiteralSequence"
-                           ],
-                           "type": "string"
-                        }
-                     },
-                     "type": "object"
-                  },
-                  {
-                     "$ref": "#/definitions/SequenceLocation"
-                  },
-                  {
-                     "$ref": "#/definitions/SizedSequence"
-                  }
-               ]
-            },
-            "type": {
-               "default": "SequenceMatchExpression",
-               "enum": [
-                  "SequenceMatchExpression"
                ],
                "type": "string"
             }
@@ -636,6 +646,13 @@
             "modulus": {
                "default": 1,
                "type": "integer"
+            },
+            "type": {
+               "default": "SizedSequence",
+               "enum": [
+                  "SizedSequence"
+               ],
+               "type": "string"
             }
          },
          "type": "object"

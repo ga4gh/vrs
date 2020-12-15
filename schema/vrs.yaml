@@ -206,76 +206,6 @@ definitions:
     discriminator:
       propertyName: type
 
-  Abundance:
-    additionalProperties: false
-    type: object
-    properties:
-      _id:
-        $ref: "#/definitions/CURIE"
-      type:
-        type: string
-        enum: [Abundance]
-        default: Abundance
-      location:
-        $ref: "#/definitions/Location"
-      amount:
-        # TODO: Structure each of the options below
-        description: >-
-          Systemic quantity. Intended options: 1) absolute copy min
-          (>=0) and max; 2) relative copy number quantity min (>=1)
-          and max. Relative must also note; 3) qualitative relative
-          copy number: gt, ge, lt, le, eq
-        oneOf:
-          - type: object
-            additionalProperties: false
-            properties:
-              measure:
-                type: string
-                enum: ["AbsoluteCounts"]
-                default: "AbsoluteCounts"
-              min:
-                type: integer
-                minimum: 0
-              max:
-                type: integer
-            required:
-              - measure
-              - min
-              - max
-          - type: object
-            additionalProperties: false
-            properties:
-              measure:
-                type: string
-                enum: ["RelativeCounts"]
-                default: "RelativeCounts"
-              min:
-                type: integer
-                minimum: 0
-              max:
-                type: integer
-            required:
-              - measure
-              - min
-              - max
-          - type: object
-            additionalProperties: false
-            properties:
-              measure:
-                type: string
-                enum: ["Qualitative"]
-                default: "Qualitative"
-              rel:
-                type: string
-                enum: ["gt", "ge", "eq", "le", "lt"]
-            required:
-              - measure
-              - rel
-    required:
-      - type
-      - location
-      - amount
-
   Text:
     description: >-
       A textual description of variation, typically not parseable but
@@ -441,6 +371,14 @@ definitions:
     example: "q22.3"
 
 
+  # ============================================================================
+  #          NEW/EXPERIMENTAL FEATURES
+  # ============================================================================
+
+
+  # ============================================================================
+  # Transcripts
+
   Transcript:
     description: >-
       A specified subsequence within another sequence that is used as a reference sequence.
@@ -557,6 +495,75 @@ definitions:
 
 
   # ============================================================================
+  # SequenceExpression
+
+  SequenceExpression:
+    additionalProperties: false
+    description: >-
+      A Location represents a span on a specific sequence.
+    oneOf:
+      - $ref: "#/definitions/LiteralSequence"
+      - $ref: "#/definitions/RegularExpression"
+      - $ref: "#/definitions/SequenceLocation"
+      - $ref: "#/definitions/SizedSequence"
+      - $ref: "#/definitions/Inversion"
+    discriminator:
+      propertyName: type
+
+  LiteralSequence:
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [LiteralSequence]
+        default: LiteralSequence
+      value:
+        type: string
+
+  RegularExpression:
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [RegularExpression]
+        default: RegularExpression
+      regexp:
+        type:
+          string
+    required: ["regexp"]
+
+  SizedSequence:
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [SizedSequence]
+        default: SizedSequence
+      min:
+        type: integer
+      max:
+        type: ["integer", "null"]
+        default: null
+      modulus:
+        type: integer
+        default: 1
+
+  Inversion:
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [Inversion]
+        default: Inversion
+      source:
+        $ref: "#/definitions/SequenceExpression"
+
+
+  # ============================================================================
   # Repeats
 
   RepeatState:
@@ -572,9 +579,7 @@ definitions:
       sequence:
         oneOf:
           - type: string
-          - $ref: "#/definitions/SequenceLocation"
-          - $ref: "#/definitions/RegularExpression"
-          - $ref: "#/definitions/SizedSequence"
+          - $ref: "#/definitions/SequenceExpression"
       copies:
         type: object
         additionalProperties: false
@@ -593,57 +598,75 @@ definitions:
         min: 40
         max: 60
         
-  SizedSequence:
-    type: object
-    additionalProperties: false
-    properties:
-      min:
-        type: integer
-      max:
-        type: ["integer", "null"]
-        default: null
-      modulus:
-        type: integer
-        default: 1
+  # ============================================================================
+  # Abundance
 
-  SequenceMatchExpression:
-    type: object
+  Abundance:
     additionalProperties: false
+    type: object
     properties:
+      _id:
+        $ref: "#/definitions/CURIE"
       type:
         type: string
-        enum: [SequenceMatchExpression]
-        default: SequenceMatchExpression
-      source:
+        enum: [Abundance]
+        default: Abundance
+      location:
+        $ref: "#/definitions/Location"
+      amount:
+        # TODO: Structure each of the options below
+        description: >-
+          Systemic quantity. Intended options: 1) absolute copy min
+          (>=0) and max; 2) relative copy number quantity min (>=1)
+          and max. Relative must also note; 3) qualitative relative
+          copy number: gt, ge, lt, le, eq
         oneOf:
-        - type: object
-          additionalProperties: false
-          properties:
-            type:
-              type: string
-              enum: [LiteralSequence]
-              default: LiteralSequence
-            sequence:
-              type: string
-        - $ref: "#/definitions/SequenceLocation"
-        - $ref: "#/definitions/SizedSequence"
-
-
-  # ============================================================================
-  # unused
-  LiteralSequence:
-    type: object
-    properties:
-      value:
-        type: string
-    
-  RegularExpression:
-    type: object
-    additionalProperties: false
-    properties:
-      regexp:
-        type:
-          string
-    required: ["regexp"]
-
-          
+          - type: object
+            additionalProperties: false
+            properties:
+              measure:
+                type: string
+                enum: ["AbsoluteCounts"]
+                default: "AbsoluteCounts"
+              min:
+                type: integer
+                minimum: 0
+              max:
+                type: integer
+            required:
+              - measure
+              - min
+              - max
+          - type: object
+            additionalProperties: false
+            properties:
+              measure:
+                type: string
+                enum: ["RelativeCounts"]
+                default: "RelativeCounts"
+              min:
+                type: integer
+                minimum: 0
+              max:
+                type: integer
+            required:
+              - measure
+              - min
+              - max
+          - type: object
+            additionalProperties: false
+            properties:
+              measure:
+                type: string
+                enum: ["Qualitative"]
+                default: "Qualitative"
+              rel:
+                type: string
+                enum: ["gt", "ge", "eq", "le", "lt"]
+            required:
+              - measure
+              - rel
+    required:
+      - type
+      - location
+      - amount
