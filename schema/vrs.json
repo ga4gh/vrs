@@ -266,7 +266,23 @@
          "format": "date-time",
          "type": "string"
       },
-      "GeneLocation": {
+      "DerivedSequence": {
+         "additionalProperties": false,
+         "properties": {
+            "location": {
+               "$ref": "#/definitions/SequenceLocation"
+            },
+            "type": {
+               "default": "LiteralSequence",
+               "enum": [
+                  "LiteralSequence"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "Gene": {
          "additionalProperties": false,
          "description": "A reference to an external gene system, used as a location for variation.  Currently, the `ncbigene` namespace is required. See https://registry.identifiers.org/registry/ncbigene.",
          "properties": {
@@ -278,9 +294,9 @@
                "pattern": "^ncbigene:.+$"
             },
             "type": {
-               "default": "GeneLocation",
+               "default": "Gene",
                "enum": [
-                  "GeneLocation"
+                  "Gene"
                ],
                "type": "string"
             }
@@ -319,22 +335,6 @@
          },
          "type": "object"
       },
-      "Inversion": {
-         "additionalProperties": false,
-         "properties": {
-            "source": {
-               "$ref": "#/definitions/SequenceExpression"
-            },
-            "type": {
-               "default": "Inversion",
-               "enum": [
-                  "Inversion"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
       "LiteralSequence": {
          "additionalProperties": false,
          "properties": {
@@ -366,9 +366,6 @@
             },
             {
                "$ref": "#/definitions/TranscriptLocation"
-            },
-            {
-               "$ref": "#/definitions/GeneLocation"
             }
          ]
       },
@@ -402,57 +399,6 @@
                "type": "string"
             }
          },
-         "type": "object"
-      },
-      "RangedInterval": {
-         "additionalProperties": false,
-         "example": {
-            "end": {
-               "end": 40,
-               "start": 30,
-               "type": "SimpleInterval"
-            },
-            "start": {
-               "end": 20,
-               "start": 10,
-               "type": "SimpleInterval"
-            },
-            "type": "RangedInterval"
-         },
-         "properties": {
-            "end": {
-               "$ref": "#/definitions/SimpleInterval"
-            },
-            "start": {
-               "$ref": "#/definitions/SimpleInterval"
-            },
-            "type": {
-               "default": "RangedInterval",
-               "enum": [
-                  "RangedInterval"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "RegularExpression": {
-         "additionalProperties": false,
-         "properties": {
-            "regexp": {
-               "type": "string"
-            },
-            "type": {
-               "default": "RegularExpression",
-               "enum": [
-                  "RegularExpression"
-               ],
-               "type": "string"
-            }
-         },
-         "required": [
-            "regexp"
-         ],
          "type": "object"
       },
       "RepeatState": {
@@ -517,16 +463,7 @@
                "$ref": "#/definitions/LiteralSequence"
             },
             {
-               "$ref": "#/definitions/RegularExpression"
-            },
-            {
                "$ref": "#/definitions/SequenceLocation"
-            },
-            {
-               "$ref": "#/definitions/SizedSequence"
-            },
-            {
-               "$ref": "#/definitions/Inversion"
             }
          ]
       },
@@ -628,33 +565,6 @@
             "start",
             "end"
          ],
-         "type": "object"
-      },
-      "SizedSequence": {
-         "additionalProperties": false,
-         "properties": {
-            "max": {
-               "default": null,
-               "type": [
-                  "integer",
-                  "null"
-               ]
-            },
-            "min": {
-               "type": "integer"
-            },
-            "modulus": {
-               "default": 1,
-               "type": "integer"
-            },
-            "type": {
-               "default": "SizedSequence",
-               "enum": [
-                  "SizedSequence"
-               ],
-               "type": "string"
-            }
-         },
          "type": "object"
       },
       "Text": {

@@ -29,7 +29,6 @@ definitions:
       - $ref: "#/definitions/ChromosomeLocation"
       - $ref: "#/definitions/SequenceLocation"
       - $ref: "#/definitions/TranscriptLocation"
-      - $ref: "#/definitions/GeneLocation"
     discriminator:
       propertyName: type
 
@@ -143,29 +142,6 @@ definitions:
       outer:
         type: SimpleInterval
         start: 10
-        end: 40
-
-  RangedInterval:
-    type: object
-    additionalProperties: false
-    properties:
-      type:
-        type: string
-        enum: [RangedInterval]
-        default: RangedInterval
-      start:
-        $ref: '#/definitions/SimpleInterval'
-      end:
-        $ref: '#/definitions/SimpleInterval'
-    example:
-      type: RangedInterval
-      start:
-        type: SimpleInterval
-        start: 10
-        end: 20
-      end:
-        type: SimpleInterval
-        start: 30
         end: 40
 
   CytobandInterval:
@@ -473,9 +449,9 @@ definitions:
       
 
   # ============================================================================
-  # GeneLocation
+  # Gene
 
-  GeneLocation:
+  Gene:
     description: >-
       A reference to an external gene system, used as a location for
       variation.  Currently, the `ncbigene` namespace is required. See
@@ -487,8 +463,8 @@ definitions:
         $ref: "#/definitions/CURIE"
       type:
         type: string
-        enum: [GeneLocation]
-        default: GeneLocation
+        enum: [Gene]
+        default: Gene
       gene_id:
         $ref: "#/definitions/CURIE"
         pattern: '^ncbigene:.+$'
@@ -503,10 +479,7 @@ definitions:
       A Location represents a span on a specific sequence.
     oneOf:
       - $ref: "#/definitions/LiteralSequence"
-      - $ref: "#/definitions/RegularExpression"
       - $ref: "#/definitions/SequenceLocation"
-      - $ref: "#/definitions/SizedSequence"
-      - $ref: "#/definitions/Inversion"
     discriminator:
       propertyName: type
 
@@ -521,46 +494,16 @@ definitions:
       value:
         type: string
 
-  RegularExpression:
+  DerivedSequence:
     type: object
     additionalProperties: false
     properties:
       type:
         type: string
-        enum: [RegularExpression]
-        default: RegularExpression
-      regexp:
-        type:
-          string
-    required: ["regexp"]
-
-  SizedSequence:
-    type: object
-    additionalProperties: false
-    properties:
-      type:
-        type: string
-        enum: [SizedSequence]
-        default: SizedSequence
-      min:
-        type: integer
-      max:
-        type: ["integer", "null"]
-        default: null
-      modulus:
-        type: integer
-        default: 1
-
-  Inversion:
-    type: object
-    additionalProperties: false
-    properties:
-      type:
-        type: string
-        enum: [Inversion]
-        default: Inversion
-      source:
-        $ref: "#/definitions/SequenceExpression"
+        enum: [LiteralSequence]
+        default: LiteralSequence
+      location:
+        $ref: "#/definitions/SequenceLocation"
 
 
   # ============================================================================
