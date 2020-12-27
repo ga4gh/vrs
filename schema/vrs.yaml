@@ -17,8 +17,215 @@ definitions:
   # Variation, which is a polymorphic abstraction of many kinds of
   # variation.
 
+  # ============================================================================
+  # Variation
 
-  ############################################################################
+  Variation:
+    additionalProperties: false
+    description: >-
+      The root class of all Variation types
+    oneOf:
+      - $ref: "#/definitions/MolecularVariation"
+      - $ref: "#/definitions/SystemicVariation"
+      - $ref: "#/definitions/OtherVariation"
+    discriminator:
+      propertyName: type
+
+
+  MolecularVariation:
+    additionalProperties: false
+    description: >-
+      The root class of all Variation types
+    oneOf:
+      - $ref: "#/definitions/Allele"
+      - $ref: "#/definitions/Haplotype"
+    discriminator:
+      propertyName: type
+
+
+  OtherVariation:
+    additionalProperties: false
+    description: >-
+      The root class of all Variation types
+    oneOf:
+      - $ref: "#/definitions/Text"
+    discriminator:
+      propertyName: type
+
+
+  SystemicVariation:
+    additionalProperties: false
+    description: >-
+      The root class of all Variation types
+    oneOf:
+      - $ref: "#/definitions/Abundance"
+    discriminator:
+      propertyName: type
+
+
+  Abundance:
+    additionalProperties: false
+    type: object
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [Abundance]
+        default: Abundance
+      subject:
+        oneOf:
+          - $ref: "#/definitions/MolecularVariation"
+          - $ref: "#/definitions/Gene"
+      amount:
+        # TODO: Structure each of the options below
+        description: >-
+          Systemic quantity. Intended options: 1) absolute copy min
+          (>=0) and max; 2) relative copy number quantity min (>=1)
+          and max. Relative must also note; 3) qualitative relative
+          copy number: gt, ge, lt, le, eq
+        oneOf:
+          # Absolute Copy Count
+          - type: object
+            additionalProperties: false
+            properties:
+              measure:
+                type: string
+                enum: ["AbsoluteCounts"]
+                default: "AbsoluteCounts"
+              min:
+                type: integer
+                minimum: 0
+              max:
+                type: integer
+            required:
+              - measure
+              - min
+              - max
+          # Relative Copy Count
+          - type: object
+            additionalProperties: false
+            properties:
+              measure:
+                type: string
+                enum: ["RelativeCounts"]
+                default: "RelativeCounts"
+              min:
+                type: integer
+                minimum: 0
+              max:
+                type: integer
+            required:
+              - measure
+              - min
+              - max
+          # Qualitative Copy Count
+          - type: object
+            additionalProperties: false
+            properties:
+              measure:
+                type: string
+                enum: ["Qualitative"]
+                default: "Qualitative"
+              rel:
+                type: string
+                enum: ["gt", "ge", "eq", "le", "lt"]
+            required:
+              - measure
+              - rel
+    required:
+      - type
+      - subject
+      - amount
+
+
+  Allele:
+    description: >-
+      An assertion of a sequence state at a Location.
+    additionalProperties: false
+    type: object
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [Allele]
+        default: Allele
+      location:
+        oneOf:
+          - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Location"
+      state:
+        $ref: "#/definitions/_SequenceState"
+
+
+  Haplotype:
+    description: >-
+      A set of zero or more Alleles
+    additionalProperties: false
+    type: "object"
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: ["Haplotype"]
+        default: "Haplotype"
+      members:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          oneOf:
+            - $ref: "#/definitions/Allele"
+            - $ref: "#/definitions/CURIE"
+
+
+  Text:
+    description: >-
+      A textual description of variation, typically not parseable but
+      understood by humans.
+    additionalProperties: false
+    type: object
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [Text]
+        default: Text
+      definition:
+        type: string
+        description: >-
+          An textual representation of variation intended to capture
+          variation descriptions that cannot be parsed, but still
+          treated as variation.
+
+
+  VariationSet:
+    description: >-
+      A set of Variation objects.
+
+      Members may be specified inline or by reference (with CURIEs)
+    type: object
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: ["VariationSet"]
+        default: "VariationSet"
+      members:
+        type: array
+        uniqueItems: true
+        items:
+          oneOf:
+            - $ref: "#/definitions/CURIE"
+            - $ref: "#/definitions/Variation"
+
+
+
+  # ============================================================================
   # Locations
 
   Location:
@@ -68,15 +275,15 @@ definitions:
         $ref: "#/definitions/CURIE"
       type:
         type: string
-        enum: [SequenceLocation]
-        default: SequenceLocation
+        enum: ["SequenceLocation"]
+        default: "SequenceLocation"
       sequence_id:
         $ref: "#/definitions/CURIE"
       interval:
         $ref: "#/definitions/SequenceInterval"
 
 
-  ############################################################################
+  # ============================================================================
   # SequenceInterval
   # * SimpleInterval
 
@@ -166,113 +373,22 @@ definitions:
       start: q22.2
       end: q22.3
 
-  ############################################################################
-  # Variation
-
-  Variation:
-    additionalProperties: false
-    description: >-
-      The root class of all Variation types
-    oneOf:
-      - $ref: "#/definitions/Allele"
-      - $ref: "#/definitions/Haplotype"
-      - $ref: "#/definitions/Text"
-      - $ref: "#/definitions/VariationSet"
-      - $ref: "#/definitions/Abundance"
-    discriminator:
-      propertyName: type
-
-  Text:
-    description: >-
-      A textual description of variation, typically not parseable but
-      understood by humans.
-    additionalProperties: false
-    type: object
-    properties:
-      _id:
-        $ref: "#/definitions/CURIE"
-      type:
-        type: string
-        enum: [Text]
-        default: Text
-      definition:
-        type: string
-        description: >-
-          An textual representation of variation intended to capture
-          variation descriptions that cannot be parsed, but still
-          treated as variation.
-
-  Allele:
-    description: >-
-      An assertion of a sequence state at a Location.
-    additionalProperties: false
-    type: object
-    properties:
-      _id:
-        $ref: "#/definitions/CURIE"
-      type:
-        type: string
-        enum: [Allele]
-        default: Allele
-      location:
-        oneOf:
-          - $ref: "#/definitions/CURIE"
-          - $ref: "#/definitions/Location"
-      state:
-        $ref: "#/definitions/AlleleState"
 
 
-  VariationSet:
-    description: >-
-      A set of Variation objects.
-
-      Members may be specified inline or by reference (with CURIEs)
-    type: "object"
-    properties:
-      _id:
-        $ref: "#/definitions/CURIE"
-      type:
-        type: string
-        enum: ["VariationSet"]
-        default: "VariationSet"
-      members:
-        type: array
-        uniqueItems: true
-        items:
-          oneOf:
-            - $ref: "#/definitions/Variation"
-            - $ref: "#/definitions/CURIE"
-
-
-  Haplotype:
-    description: >-
-      A set of zero or more Alleles
-    additionalProperties: false
-    type: "object"
-    properties:
-      _id:
-        $ref: "#/definitions/CURIE"
-      type:
-        type: string
-        enum: ["Haplotype"]
-        default: "Haplotype"
-      members:
-        type: array
-        minItems: 1
-        uniqueItems: true
-        items:
-          oneOf:
-            - $ref: "#/definitions/Allele"
-            - $ref: "#/definitions/CURIE"
-
-
-  ############################################################################
+  # ============================================================================
   # States
 
-  AlleleState:
+  _SequenceState:
+    description: >-
+      TODO
+    additionalProperties: false
     oneOf:
       - $ref: "#/definitions/SequenceState"
-      - $ref: "#/definitions/RepeatState"
+      - $ref: "#/definitions/LiteralSequence"
+      - $ref: "#/definitions/DerivedSequence"
+      - $ref: "#/definitions/RepeatedSequence"
+    discriminator:
+      propertyName: type
 
   SequenceState:
     description: >-
@@ -295,9 +411,67 @@ definitions:
       type: SequenceState
       sequence: C
 
+  LiteralSequence:
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: ["LiteralSequence"]
+        default: "LiteralSequence"
+      sequence:
+        type: string
+
+  DerivedSequence:
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: ["DerivedSequence"]
+        default: "DerivedSequence"
+      location:
+        $ref: "#/definitions/SequenceLocation"
+      transformation:
+        type: string
+        enum: ["reverse", "complement", "reversecomplement"]
+        default: null
+
+  RepeatedSequence:
+    description: >-
+      A tandem repeat of a SequenceLocation
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        enum: ["RepeatedSequence"]
+        default: "RepeatedSequence"
+      sequence:
+        $ref: "#/definitions/_SequenceState"
+      copies:
+        type: object
+        additionalProperties: false
+        properties:
+          min:
+            type: integer
+            minimum: 0
+          max:
+            type: ["integer", "null"]
+    required:
+      - type
+      - copies
+    example:
+      type: SequenceState
+      copies:
+        min: 40
+        max: 60
 
 
-  ############################################################################
+
+
+
+  # ============================================================================
   # Basic types
   # These types are used solely within other definitions.
 
@@ -345,6 +519,7 @@ definitions:
     type: string
     pattern: '^[pq][1-9][0-9]*(\.[1-9][0-9]*)?$'
     example: "q22.3"
+
 
 
   # ============================================================================
@@ -469,147 +644,4 @@ definitions:
         $ref: "#/definitions/CURIE"
         pattern: '^ncbigene:.+$'
 
-
-  # ============================================================================
-  # SequenceExpression
-
-  SequenceExpression:
-    additionalProperties: false
-    description: >-
-      A Location represents a span on a specific sequence.
-    oneOf:
-      - $ref: "#/definitions/LiteralSequence"
-      - $ref: "#/definitions/SequenceLocation"
-    discriminator:
-      propertyName: type
-
-  LiteralSequence:
-    type: object
-    additionalProperties: false
-    properties:
-      type:
-        type: string
-        enum: [LiteralSequence]
-        default: LiteralSequence
-      value:
-        type: string
-
-  DerivedSequence:
-    type: object
-    additionalProperties: false
-    properties:
-      type:
-        type: string
-        enum: [LiteralSequence]
-        default: LiteralSequence
-      location:
-        $ref: "#/definitions/SequenceLocation"
-
-
-  # ============================================================================
-  # Repeats
-
-  RepeatState:
-    description: >-
-      A tandem repeat of a SequenceLocation
-    additionalProperties: false
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [RepeatState]
-        default: RepeatState
-      sequence:
-        oneOf:
-          - type: string
-          - $ref: "#/definitions/SequenceExpression"
-      copies:
-        type: object
-        additionalProperties: false
-        properties:
-          min:
-            type: integer
-            minimum: 0
-          max:
-            type: ["integer", "null"]
-    required:
-      - type
-      - copies
-    example:
-      type: SequenceState
-      copies:
-        min: 40
-        max: 60
         
-  # ============================================================================
-  # Abundance
-
-  Abundance:
-    additionalProperties: false
-    type: object
-    properties:
-      _id:
-        $ref: "#/definitions/CURIE"
-      type:
-        type: string
-        enum: [Abundance]
-        default: Abundance
-      location:
-        $ref: "#/definitions/Location"
-      amount:
-        # TODO: Structure each of the options below
-        description: >-
-          Systemic quantity. Intended options: 1) absolute copy min
-          (>=0) and max; 2) relative copy number quantity min (>=1)
-          and max. Relative must also note; 3) qualitative relative
-          copy number: gt, ge, lt, le, eq
-        oneOf:
-          - type: object
-            additionalProperties: false
-            properties:
-              measure:
-                type: string
-                enum: ["AbsoluteCounts"]
-                default: "AbsoluteCounts"
-              min:
-                type: integer
-                minimum: 0
-              max:
-                type: integer
-            required:
-              - measure
-              - min
-              - max
-          - type: object
-            additionalProperties: false
-            properties:
-              measure:
-                type: string
-                enum: ["RelativeCounts"]
-                default: "RelativeCounts"
-              min:
-                type: integer
-                minimum: 0
-              max:
-                type: integer
-            required:
-              - measure
-              - min
-              - max
-          - type: object
-            additionalProperties: false
-            properties:
-              measure:
-                type: string
-                enum: ["Qualitative"]
-                default: "Qualitative"
-              rel:
-                type: string
-                enum: ["gt", "ge", "eq", "le", "lt"]
-            required:
-              - measure
-              - rel
-    required:
-      - type
-      - location
-      - amount

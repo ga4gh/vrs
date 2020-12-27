@@ -89,8 +89,15 @@
                   }
                ]
             },
-            "location": {
-               "$ref": "#/definitions/Location"
+            "subject": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/MolecularVariation"
+                  },
+                  {
+                     "$ref": "#/definitions/Gene"
+                  }
+               ]
             },
             "type": {
                "default": "Abundance",
@@ -102,7 +109,7 @@
          },
          "required": [
             "type",
-            "location",
+            "subject",
             "amount"
          ],
          "type": "object"
@@ -125,7 +132,7 @@
                ]
             },
             "state": {
-               "$ref": "#/definitions/AlleleState"
+               "$ref": "#/definitions/_SequenceState"
             },
             "type": {
                "default": "Allele",
@@ -136,16 +143,6 @@
             }
          },
          "type": "object"
-      },
-      "AlleleState": {
-         "oneOf": [
-            {
-               "$ref": "#/definitions/SequenceState"
-            },
-            {
-               "$ref": "#/definitions/RepeatState"
-            }
-         ]
       },
       "BaseOffset": {
          "additionalProperties": false,
@@ -272,10 +269,19 @@
             "location": {
                "$ref": "#/definitions/SequenceLocation"
             },
-            "type": {
-               "default": "LiteralSequence",
+            "transformation": {
+               "default": null,
                "enum": [
-                  "LiteralSequence"
+                  "reverse",
+                  "complement",
+                  "reversecomplement"
+               ],
+               "type": "string"
+            },
+            "type": {
+               "default": "DerivedSequence",
+               "enum": [
+                  "DerivedSequence"
                ],
                "type": "string"
             }
@@ -338,14 +344,14 @@
       "LiteralSequence": {
          "additionalProperties": false,
          "properties": {
+            "sequence": {
+               "type": "string"
+            },
             "type": {
                "default": "LiteralSequence",
                "enum": [
                   "LiteralSequence"
                ],
-               "type": "string"
-            },
-            "value": {
                "type": "string"
             }
          },
@@ -366,6 +372,21 @@
             },
             {
                "$ref": "#/definitions/TranscriptLocation"
+            }
+         ]
+      },
+      "MolecularVariation": {
+         "additionalProperties": false,
+         "description": "The root class of all Variation types",
+         "discriminator": {
+            "propertyName": "type"
+         },
+         "oneOf": [
+            {
+               "$ref": "#/definitions/Allele"
+            },
+            {
+               "$ref": "#/definitions/Haplotype"
             }
          ]
       },
@@ -401,7 +422,19 @@
          },
          "type": "object"
       },
-      "RepeatState": {
+      "OtherVariation": {
+         "additionalProperties": false,
+         "description": "The root class of all Variation types",
+         "discriminator": {
+            "propertyName": "type"
+         },
+         "oneOf": [
+            {
+               "$ref": "#/definitions/Text"
+            }
+         ]
+      },
+      "RepeatedSequence": {
          "additionalProperties": false,
          "description": "A tandem repeat of a SequenceLocation",
          "example": {
@@ -429,19 +462,12 @@
                "type": "object"
             },
             "sequence": {
-               "oneOf": [
-                  {
-                     "type": "string"
-                  },
-                  {
-                     "$ref": "#/definitions/SequenceExpression"
-                  }
-               ]
+               "$ref": "#/definitions/_SequenceState"
             },
             "type": {
-               "default": "RepeatState",
+               "default": "RepeatedSequence",
                "enum": [
-                  "RepeatState"
+                  "RepeatedSequence"
                ],
                "type": "string"
             }
@@ -451,21 +477,6 @@
             "copies"
          ],
          "type": "object"
-      },
-      "SequenceExpression": {
-         "additionalProperties": false,
-         "description": "A Location represents a span on a specific sequence.",
-         "discriminator": {
-            "propertyName": "type"
-         },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/LiteralSequence"
-            },
-            {
-               "$ref": "#/definitions/SequenceLocation"
-            }
-         ]
       },
       "SequenceInterval": {
          "additionalProperties": false,
@@ -566,6 +577,18 @@
             "end"
          ],
          "type": "object"
+      },
+      "SystemicVariation": {
+         "additionalProperties": false,
+         "description": "The root class of all Variation types",
+         "discriminator": {
+            "propertyName": "type"
+         },
+         "oneOf": [
+            {
+               "$ref": "#/definitions/Abundance"
+            }
+         ]
       },
       "Text": {
          "additionalProperties": false,
@@ -702,19 +725,13 @@
          },
          "oneOf": [
             {
-               "$ref": "#/definitions/Allele"
+               "$ref": "#/definitions/MolecularVariation"
             },
             {
-               "$ref": "#/definitions/Haplotype"
+               "$ref": "#/definitions/SystemicVariation"
             },
             {
-               "$ref": "#/definitions/Text"
-            },
-            {
-               "$ref": "#/definitions/VariationSet"
-            },
-            {
-               "$ref": "#/definitions/Abundance"
+               "$ref": "#/definitions/OtherVariation"
             }
          ]
       },
@@ -728,10 +745,10 @@
                "items": {
                   "oneOf": [
                      {
-                        "$ref": "#/definitions/Variation"
+                        "$ref": "#/definitions/CURIE"
                      },
                      {
-                        "$ref": "#/definitions/CURIE"
+                        "$ref": "#/definitions/Variation"
                      }
                   ]
                },
@@ -747,6 +764,27 @@
             }
          },
          "type": "object"
+      },
+      "_SequenceState": {
+         "additionalProperties": false,
+         "description": "TODO",
+         "discriminator": {
+            "propertyName": "type"
+         },
+         "oneOf": [
+            {
+               "$ref": "#/definitions/SequenceState"
+            },
+            {
+               "$ref": "#/definitions/LiteralSequence"
+            },
+            {
+               "$ref": "#/definitions/DerivedSequence"
+            },
+            {
+               "$ref": "#/definitions/RepeatedSequence"
+            }
+         ]
       }
    },
    "title": "GA4GH-VRS-Definitions",
