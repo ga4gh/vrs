@@ -24,6 +24,7 @@
                            "type": "string"
                         },
                         "min": {
+                           "default": 0,
                            "minimum": 0,
                            "type": "integer"
                         }
@@ -49,8 +50,9 @@
                            "type": "string"
                         },
                         "min": {
+                           "default": 0,
                            "minimum": 0,
-                           "type": "integer"
+                           "type": "number"
                         }
                      },
                      "required": [
@@ -91,6 +93,9 @@
             },
             "subject": {
                "oneOf": [
+                  {
+                     "$ref": "#/definitions/SequenceLocation"
+                  },
                   {
                      "$ref": "#/definitions/MolecularVariation"
                   },
@@ -153,32 +158,6 @@
             "offset": {
                "default": 0,
                "type": "integer"
-            }
-         },
-         "type": "object"
-      },
-      "BaseOffsetInterval": {
-         "additionalProperties": false,
-         "properties": {
-            "datum": {
-               "enum": [
-                  "seqstart",
-                  "cdsstart"
-               ],
-               "type": "string"
-            },
-            "end": {
-               "$ref": "#/definitions/BaseOffset"
-            },
-            "start": {
-               "$ref": "#/definitions/BaseOffset"
-            },
-            "type": {
-               "default": "BaseOffsetInterval",
-               "enum": [
-                  "BaseOffsetInterval"
-               ],
-               "type": "string"
             }
          },
          "type": "object"
@@ -445,7 +424,7 @@
             "type": "SequenceState"
          },
          "properties": {
-            "copies": {
+            "count": {
                "additionalProperties": false,
                "properties": {
                   "max": {
@@ -474,7 +453,7 @@
          },
          "required": [
             "type",
-            "copies"
+            "count"
          ],
          "type": "object"
       },
@@ -630,6 +609,14 @@
             "sequence_id": {
                "$ref": "#/definitions/CURIE"
             },
+            "strand": {
+               "default": 1,
+               "enum": [
+                  1,
+                  -1
+               ],
+               "type": "integer"
+            },
             "type": {
                "default": "Transcript",
                "enum": [
@@ -677,6 +664,30 @@
          },
          "type": "object"
       },
+      "TranscriptInterval": {
+         "additionalProperties": false,
+         "properties": {
+            "end": {
+               "$ref": "#/definitions/BaseOffset"
+            },
+            "start": {
+               "$ref": "#/definitions/BaseOffset"
+            },
+            "type": {
+               "default": "TranscriptInterval",
+               "enum": [
+                  "TranscriptInterval"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "start",
+            "end"
+         ],
+         "type": "object"
+      },
       "TranscriptLocation": {
          "additionalProperties": false,
          "description": "A specified subsequence within another sequence that is used as a reference sequence.",
@@ -687,10 +698,7 @@
             "interval": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/SimpleInterval"
-                  },
-                  {
-                     "$ref": "#/definitions/BaseOffsetInterval"
+                     "$ref": "#/definitions/TranscriptInterval"
                   },
                   {
                      "$ref": "#/definitions/TranscriptFeatureInterval"
