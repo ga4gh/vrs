@@ -363,7 +363,7 @@ A contiguous region specified by chromosomal bands features.
   depend on the species.  When using :ref:`CytobandInterval` to refer
   to human cytogentic bands, ISCN conventions MUST be used. Bands are
   denoted by the arm ("p" or "q") and position (e.g., "22", "22.3", or
-  the symbolic values "cen", "tel", or "ter"). If `start` and `end`
+  the symbolic values "cen" or "ter"). If `start` and `end`
   are on different arms, they SHOULD correspond to the p-arm and q-arm
   locations respectively. If `start` and `end` are on the same arm,
   `start` MUST be the more centromeric position (i.e., with lower band
