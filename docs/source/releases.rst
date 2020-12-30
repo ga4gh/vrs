@@ -23,6 +23,14 @@ Releases
 @@@
 
 
+1.1.2
+#####
+
+This patch version makes the following corrections and clarifications:
+
+* Adds the intended ChromosomeLocation prefix to the Computed Identifiers table.
+
+
 1.1.1
 #####
 
