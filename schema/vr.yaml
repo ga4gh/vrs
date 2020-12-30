@@ -317,5 +317,5 @@ definitions:
     description: >-
       A feature referencing a giesma-stained band on an unspecified human chromosome.
     type: string
-    pattern: '^[pq][1-9][0-9]*(\.[1-9][0-9]*)?$'
+    pattern: '^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$'
     example: "q22.3"
