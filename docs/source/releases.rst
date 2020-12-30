@@ -28,7 +28,10 @@ Releases
 
 This patch version makes the following corrections and clarifications:
 
-* Adds the intended ChromosomeLocation prefix to the Computed Identifiers table.
+  * Adds the intended ChromosomeLocation prefix to the Computed Identifiers
+    table.
+  * Revises the Cytoband information model to align with ISCN conventions.
+  * Updates the Cytoband regex to match the specified model.
 
 
 1.1.1
