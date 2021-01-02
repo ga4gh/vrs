@@ -248,6 +248,7 @@ Type prefixes used by VRS are:
    VH, Haplotype
    VS, VariationSet
    VSL, SequenceLocation
+   VCL, ChromosomeLocation
    VT, Text
 
 For example, the identifer for the allele example under :ref:`digest-serialization` gives:
