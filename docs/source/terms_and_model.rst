@@ -472,100 +472,6 @@ Location for Variation.
   location is non-specific (e.g., a range) or symbolic (a gene).
 
 
-.. _gene_location:
-
-GeneLocation
-$$$$$$$$$$$$$$$$
-
-
-.. todo:: This section does not match implementation, but it's unclear 
-	which option is correct. 
-
-
-**Biological definition**
-
-A gene is a conceptual chromosomal region that is associated with 
-a biological function or trait. A GeneLocation is a Location within a gene,
-defined by regions such as a functional domain or exons, up to and
-including the entire gene.
-
-**Computational definition**
-
-A :ref:`Location` subclass for describing a defined :ref:`Region` on a
-gene.
-
-**Information model**
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Location Id; MUST be unique within document
-   * - type
-     - string
-     - 1..1
-     - Location type; MUST be set to **`GeneLocation`**
-   * - gene_id
-     - :ref:`CURIE`
-     - 1..1
-     - An id mapping to the :ref:`computed-identifiers` of the
-       external database Sequence containing the sequence to be
-       located.
-
-**Implementation guidance**
-
-* The intention of GeneLocation is to represent the conceptual
-  location of a named gene.  A GeneLocation may be thought of as
-  representing a family of precise :ref:`SequenceLocations` on
-  distinct sequences.
-* Implements MUST NOT use a gene symbol (e.g., "BRCA1") to define a
-  GeneLocation.
-* Implementations SHOULD use one of the following namespaces:
-  `ncbigene <https://registry.identifiers.org/registry/ncbigene>`__,
-  `hgnc <https://registry.identifiers.org/registry/hgnc>`__,
-  `vgnc <https://registry.identifiers.org/registry/vgnc>`__,
-  `mgi <https://registry.identifiers.org/registry/mgi>`__,  
-  `ensembl <https://registry.identifiers.org/registry/ensembl>`__.
-  Other namespaces may be used as necessary.
-* A gene is specific to a species.  Gene orthologs have distinct
-  records in the recommended databases.  For example, the BRCA1 gene
-  in humans and the Brca1 gene in mouse are orthologs and have
-  distinct records in the previously recommended gene databases.
-* GeneLocations MAY be converted to :ref:`sequence-location` using
-  external data. The source of such data and mechanism for
-  implementation is not defined by this specification.
-
-
-**Example**
-
-The following examples all refer to the Human BRCA1 gene:
-
-.. parsed-literal::
-
-   {
-     'gene': 'ncbigene:672',
-     'type': 'GeneLocation'
-   }
-
-   {
-     'gene': 'hgnc:1100',
-     'type': 'GeneLocation'
-   }
-
-   {
-     'gene': 'ensembl:ENSG00000012048',
-     'type': 'GeneLocation'
-   }
-
-
 .. _chromosomelocation:
 
 ChromosomeLocation
@@ -747,6 +653,99 @@ named :ref:`Sequence`.
     }
 
 
+
+
+.. _gene:
+
+Gene
+$$$$
+
+
+**Biological definition**
+
+Gene generally refers to a region of sequence that has some function.
+Gene is an elusive concept in biology with nuanced meaning that often
+depends on context, including whether the gene makes a transcripts,
+whether the transcript encodes a protein, non-functional ancestral
+elements ("pseudogenes").  In VRS, a gene is a reference to a
+third-party definition of a species-specific gene.
+
+**Computational definition**
+
+External gene definitions are referenced with a CURIE.
+
+**Information model**
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Location Id; MUST be unique within document
+   * - type
+     - string
+     - 1..1
+     - Location type; MUST be set to **`Gene`**
+
+**Implementation guidance**
+
+* Gene symbols (e.g., "BRCA1") are unreliable keys.  Implements MUST
+  NOT use a gene symbol to define a Gene.
+* The primary use case for Gene is as a subject of an abundance
+  statement statement.
+* Implementations SHOULD use one of the following namespaces:
+  `ncbigene <https://registry.identifiers.org/registry/ncbigene>`__,
+  `hgnc <https://registry.identifiers.org/registry/hgnc>`__,
+  `vgnc <https://registry.identifiers.org/registry/vgnc>`__,
+  `mgi <https://registry.identifiers.org/registry/mgi>`__,  
+  `ensembl <https://registry.identifiers.org/registry/ensembl>`__.
+  Other namespaces may be used as necessary.
+* A gene is specific to a species.  Gene orthologs have distinct
+  records in the recommended databases.  For example, the BRCA1 gene
+  in humans and the Brca1 gene in mouse are orthologs and have
+  distinct records in the previously recommended gene databases.
+* GeneLocations MAY be converted to :ref:`sequence-location` using
+  external data. The source of such data and mechanism for
+  implementation is not defined by this specification.
+
+
+**Example**
+
+The following examples all refer to the Human BRCA1 gene:
+
+.. parsed-literal::
+
+   {
+     'gene': 'ncbigene:672',
+     'type': 'Gene'
+   }
+
+   {
+     'gene': 'hgnc:1100',
+     'type': 'Gene'
+   }
+
+   {
+     'gene': 'ensembl:ENSG00000012048',
+     'type': 'Gene'
+   }
+
+
+**Sources**
+
+* `SequenceOntology: gene (SO:0000704)
+  <http://www.sequenceontology.org/browser/current_release/term/SO:0000704>`__
+  — A region (or regions) that includes all of the sequence elements
+  necessary to encode a functional transcript. A gene may include
+  regulatory regions, transcribed regions and/or other functional
+  sequence regions.
 
 
 .. _state:
