@@ -27,10 +27,7 @@ vrs-python: GA4GH VRS Python Implementation
 The |vrs-python| is an implementation for the GA4GH VRS.  It
 supports all types covered by the VRS, implements Allele
 normalization and computed identifier generation, and provides "extra"
-features such as translation from HGVS, SPDI, and VCF formats.  See
-`vrs-python notebooks
-<https://github.com/ga4gh/vrs-python/blob/master/notebooks>`__ for
-usage examples.
+features such as translation from HGVS, SPDI, and VCF formats.
 
 |VRS| MAY be used without using the Python implementation.
 
