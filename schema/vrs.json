@@ -36,7 +36,74 @@
          ],
          "type": "object"
       },
+      "AbsoluteAmount": {
+         "additionalProperties": false,
+         "description": "Relative abundance of a systemic subject such as a Gene or specific type of molecular variation.",
+         "properties": {
+            "max": {
+               "type": "integer"
+            },
+            "min": {
+               "type": "integer"
+            },
+            "type": {
+               "default": "AbsoluteAmount",
+               "enum": [
+                  "AbsoluteAmount"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "min",
+            "max"
+         ],
+         "type": "object"
+      },
       "Abundance": {
+         "additionalProperties": false,
+         "description": "Absolute abundance of a systemic subject such as a Gene or specific type of molecular variation.",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "amount": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/AbsoluteAmount"
+                  },
+                  {
+                     "$ref": "#/definitions/QualitativeAmount"
+                  }
+               ]
+            },
+            "subject": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/MolecularVariation"
+                  },
+                  {
+                     "$ref": "#/definitions/Gene"
+                  }
+               ]
+            },
+            "type": {
+               "default": "Abundance",
+               "enum": [
+                  "Abundance"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "subject",
+            "amount"
+         ],
+         "type": "object"
+      },
+      "Abundance2": {
          "additionalProperties": false,
          "description": "TODO",
          "discriminator": {
@@ -192,7 +259,7 @@
                "enum": [
                   "reverse",
                   "complement",
-                  "reversecomplement"
+                  "reverse-complement"
                ],
                "type": "string"
             },
@@ -351,6 +418,34 @@
             }
          ]
       },
+      "QualitativeAmount": {
+         "additionalProperties": false,
+         "description": "Relative abundance of a systemic subject such as a Gene or specific type of molecular variation.",
+         "properties": {
+            "amount": {
+               "enum": [
+                  "gt",
+                  "ge",
+                  "eq",
+                  "le",
+                  "lt"
+               ],
+               "type": "string"
+            },
+            "type": {
+               "default": "QualitativeAmount",
+               "enum": [
+                  "QualitativeAmount"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "amount"
+         ],
+         "type": "object"
+      },
       "Range": {
          "additionalProperties": false,
          "description": "A (min,max) range of integer values. At least one of min or max must be specified.",
@@ -373,13 +468,6 @@
                   "integer",
                   "null"
                ]
-            },
-            "type": {
-               "default": "Range",
-               "enum": [
-                  "Range"
-               ],
-               "type": "string"
             }
          },
          "type": "object"
@@ -419,11 +507,6 @@
                "type": "string"
             }
          },
-         "required": [
-            "type",
-            "subject",
-            "amount"
-         ],
          "type": "object"
       },
       "RepeatedSequence": {
@@ -478,9 +561,6 @@
          },
          "oneOf": [
             {
-               "$ref": "#/definitions/SequenceState"
-            },
-            {
                "$ref": "#/definitions/LiteralSequence"
             },
             {
@@ -530,7 +610,7 @@
       },
       "SequenceState": {
          "additionalProperties": false,
-         "description": "An assertion of the state of a sequence, typically at a Sequence Location within an Allele",
+         "description": "DEPRECATED: An assertion of the state of a sequence, typically at a Sequence Location within an Allele.\nThis class is deprecated. Use LiteralSequence instead.",
          "example": {
             "sequence": "C",
             "type": "SequenceState"

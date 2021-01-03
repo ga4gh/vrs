@@ -19,6 +19,7 @@ definitions:
 
   # =============================================================================
   # Kinds of Variation
+  # =============================================================================
 
   Variation:
     additionalProperties: false
@@ -60,7 +61,8 @@ definitions:
       propertyName: type
 
   # =============================================================================
-  #                           IDENTIFIABLE TYPES
+  # IDENTIFIABLE TYPES
+  # Have a `type` and `_id` attribute
   # =============================================================================
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -84,7 +86,7 @@ definitions:
           - $ref: "#/definitions/Location"
       state:
         oneOf:
-          - $ref: "#/definitions/SequenceState" # deprecated; remove in 2.0
+          - $ref: "#/definitions/SequenceState" # DEPRECATED; remove in 2.0
           - $ref: "#/definitions/SequenceExpression"
 
   Haplotype:
@@ -159,6 +161,71 @@ definitions:
 
   Abundance:
     additionalProperties: false
+    type: object
+    description: >-
+      Absolute abundance of a systemic subject such as a Gene or
+      specific type of molecular variation.
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [Abundance]
+        default: Abundance
+      subject:
+        oneOf:
+          - $ref: "#/definitions/MolecularVariation"
+          - $ref: "#/definitions/Gene"
+      amount:
+        oneOf:
+          - $ref: "#/definitions/AbsoluteAmount"
+          - $ref: "#/definitions/QualitativeAmount"
+    required:
+      - type
+      - subject
+      - amount
+
+  AbsoluteAmount:
+    additionalProperties: false
+    type: object
+    description: >-
+      Relative abundance of a systemic subject such as a Gene or
+      specific type of molecular variation.
+    properties:
+      type:
+        type: string
+        enum: [AbsoluteAmount]
+        default: AbsoluteAmount
+      min:
+        type: integer
+      max:
+        type: integer
+    required:
+      - type
+      - min
+      - max
+
+  QualitativeAmount:
+    additionalProperties: false
+    type: object
+    description: >-
+      Relative abundance of a systemic subject such as a Gene or
+      specific type of molecular variation.
+    properties:
+      type:
+        type: string
+        enum: [QualitativeAmount]
+        default: QualitativeAmount
+      amount:
+        type: string
+        enum: ["gt", "ge", "eq", "le", "lt"]
+    required:
+      - type
+      - amount
+
+
+  Abundance2:
+    additionalProperties: false
     description: >-
       TODO
     oneOf:
@@ -211,10 +278,8 @@ definitions:
       amount:
         type: string
         enum: ["gt", "ge", "eq", "le", "lt"]
-    required:
-      - type
-      - subject
-      - amount
+        
+
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations
@@ -275,12 +340,12 @@ definitions:
 
 
   # =============================================================================
-  #                       NON-IDENTIFIABLE TYPES
+  # NON-IDENTIFIABLE TYPES
+  # These types have a `type` attribute
   # =============================================================================
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # SequenceInterval
-  # * SimpleInterval
+  # SequenceIntervals
 
   SequenceInterval:
     additionalProperties: false
@@ -346,65 +411,19 @@ definitions:
         start: 10
         end: 40
 
-  CytobandInterval:
-    description: >-
-      A contiguous region specified by chromosomal bands features.
-    type: object
-    additionalProperties: false
-    properties:
-      type:
-        type: string
-        enum: [CytobandInterval]
-        default: CytobandInterval
-      start:
-        $ref: "#/definitions/Cytoband"
-      end:
-        $ref: "#/definitions/Cytoband"
-    required:
-      - start
-      - end
-    example:
-      type: CytobandInterval
-      start: q22.2
-      end: q22.3
-
-
-
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # States
+  # Sequence Expressions 
 
   SequenceExpression:
     description: >-
       TODO
     additionalProperties: false
     oneOf:
-      - $ref: "#/definitions/SequenceState"
       - $ref: "#/definitions/LiteralSequence"
       - $ref: "#/definitions/DerivedSequence"
       - $ref: "#/definitions/RepeatedSequence"
     discriminator:
       propertyName: type
-
-  SequenceState:
-    description: >-
-      An assertion of the state of a sequence, typically at a Sequence
-      Location within an Allele
-    additionalProperties: false
-    type: object
-    properties:
-      type:
-        type: string
-        enum: [SequenceState]
-        default: SequenceState
-      sequence:
-        type: string
-        nullable: false
-    required:
-      - type
-      - sequence
-    example:
-      type: SequenceState
-      sequence: C
 
   LiteralSequence:
     type: object
@@ -429,7 +448,7 @@ definitions:
         $ref: "#/definitions/SequenceLocation"
       transformation:
         type: string
-        enum: ["reverse", "complement", "reversecomplement"]
+        enum: ["reverse", "complement", "reverse-complement"]
         default: null
 
   RepeatedSequence:
@@ -462,9 +481,51 @@ definitions:
         min: 40
         max: 60
 
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # Basic types
+  Gene:
+    description: >-
+      A reference to an external gene system, used as a location for
+      variation.  Currently, the `ncbigene` namespace is required. See
+      https://registry.identifiers.org/registry/ncbigene.
+    type: object
+    additionalProperties: false
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [Gene]
+        default: Gene
+      gene_id:
+        $ref: "#/definitions/CURIE"
+
+  CytobandInterval:
+    description: >-
+      A contiguous region specified by chromosomal bands features.
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [CytobandInterval]
+        default: CytobandInterval
+      start:
+        $ref: "#/definitions/Cytoband"
+      end:
+        $ref: "#/definitions/Cytoband"
+    required:
+      - start
+      - end
+    example:
+      type: CytobandInterval
+      start: q22.2
+      end: q22.3
+
+
+  # =============================================================================
+  # BASIC TYPES (STRUCTURES)
+  # These types do NOT have a VRS `type` attribute
   # These types are used solely within other definitions.
+  # =============================================================================
 
   CURIE:
     additionalProperties: false
@@ -510,23 +571,6 @@ definitions:
     type: string
     format: "date-time"
 
-  Gene:
-    description: >-
-      A reference to an external gene system, used as a location for
-      variation.  Currently, the `ncbigene` namespace is required. See
-      https://registry.identifiers.org/registry/ncbigene.
-    type: object
-    additionalProperties: false
-    properties:
-      _id:
-        $ref: "#/definitions/CURIE"
-      type:
-        type: string
-        enum: [Gene]
-        default: Gene
-      gene_id:
-        $ref: "#/definitions/CURIE"
-
   Range:
     description: >-
       A (min,max) range of integer values. At least one of min or max
@@ -534,10 +578,6 @@ definitions:
     additionalProperties: false
     type: object
     properties:
-      type:
-        type: string
-        enum: ["Range"]
-        default: "Range"
       min:
         type: ["integer", "null"]
         default: null
@@ -549,6 +589,38 @@ definitions:
       start: 11
       end: 22
 
+
+  # =============================================================================
+  # DEPRECATED
+  # =============================================================================
+
+  SequenceState:
+    description: >-
+      DEPRECATED: An assertion of the state of a sequence, typically
+      at a Sequence Location within an Allele.
+
+      This class is deprecated. Use LiteralSequence instead.
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [SequenceState]
+        default: SequenceState
+      sequence:
+        type: string
+        nullable: false
+    required:
+      - type
+      - sequence
+    example:
+      type: SequenceState
+      sequence: C
+
+
+  # =============================================================================
+  # EXPERIMENTAL
+  # =============================================================================
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Transcripts (Experimental)
