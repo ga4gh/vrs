@@ -1,101 +1,18 @@
 {
    "$schema": "http://json-schema.org/draft-04/schema",
    "definitions": {
-      "Abundance": {
+      "AbsoluteAbundance": {
          "additionalProperties": false,
+         "description": "Absolute abundance of a systemic subject such as a Gene or specific type of molecular variation.",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
             },
             "amount": {
-               "description": "Systemic quantity. Intended options: 1) absolute copy min (>=0) and max; 2) relative copy number quantity min (>=1) and max. Relative must also note; 3) qualitative relative copy number: gt, ge, lt, le, eq",
-               "oneOf": [
-                  {
-                     "additionalProperties": false,
-                     "properties": {
-                        "max": {
-                           "type": "integer"
-                        },
-                        "measure": {
-                           "default": "AbsoluteCounts",
-                           "enum": [
-                              "AbsoluteCounts"
-                           ],
-                           "type": "string"
-                        },
-                        "min": {
-                           "default": 0,
-                           "minimum": 0,
-                           "type": "integer"
-                        }
-                     },
-                     "required": [
-                        "measure",
-                        "min",
-                        "max"
-                     ],
-                     "type": "object"
-                  },
-                  {
-                     "additionalProperties": false,
-                     "properties": {
-                        "max": {
-                           "type": "integer"
-                        },
-                        "measure": {
-                           "default": "RelativeCounts",
-                           "enum": [
-                              "RelativeCounts"
-                           ],
-                           "type": "string"
-                        },
-                        "min": {
-                           "default": 0,
-                           "minimum": 0,
-                           "type": "number"
-                        }
-                     },
-                     "required": [
-                        "measure",
-                        "min",
-                        "max"
-                     ],
-                     "type": "object"
-                  },
-                  {
-                     "additionalProperties": false,
-                     "properties": {
-                        "measure": {
-                           "default": "Qualitative",
-                           "enum": [
-                              "Qualitative"
-                           ],
-                           "type": "string"
-                        },
-                        "rel": {
-                           "enum": [
-                              "gt",
-                              "ge",
-                              "eq",
-                              "le",
-                              "lt"
-                           ],
-                           "type": "string"
-                        }
-                     },
-                     "required": [
-                        "measure",
-                        "rel"
-                     ],
-                     "type": "object"
-                  }
-               ]
+               "$ref": "#/definitions/Range"
             },
             "subject": {
                "oneOf": [
-                  {
-                     "$ref": "#/definitions/SequenceLocation"
-                  },
                   {
                      "$ref": "#/definitions/MolecularVariation"
                   },
@@ -105,9 +22,9 @@
                ]
             },
             "type": {
-               "default": "Abundance",
+               "default": "AbsoluteAbundance",
                "enum": [
-                  "Abundance"
+                  "AbsoluteAbundance"
                ],
                "type": "string"
             }
@@ -118,6 +35,21 @@
             "amount"
          ],
          "type": "object"
+      },
+      "Abundance": {
+         "additionalProperties": false,
+         "description": "TODO",
+         "discriminator": {
+            "propertyName": "type"
+         },
+         "oneOf": [
+            {
+               "$ref": "#/definitions/AbsoluteAbundance"
+            },
+            {
+               "$ref": "#/definitions/RelativeAbundance"
+            }
+         ]
       },
       "Allele": {
          "additionalProperties": false,
@@ -137,7 +69,14 @@
                ]
             },
             "state": {
-               "$ref": "#/definitions/_SequenceState"
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/SequenceState"
+                  },
+                  {
+                     "$ref": "#/definitions/SequenceExpression"
+                  }
+               ]
             },
             "type": {
                "default": "Allele",
@@ -275,8 +214,7 @@
                "$ref": "#/definitions/CURIE"
             },
             "gene_id": {
-               "$ref": "#/definitions/CURIE",
-               "pattern": "^ncbigene:.+$"
+               "$ref": "#/definitions/CURIE"
             },
             "type": {
                "default": "Gene",
@@ -356,7 +294,7 @@
       },
       "MolecularVariation": {
          "additionalProperties": false,
-         "description": "The root class of all Variation types",
+         "description": "Variation defined on a molecule (sequence)",
          "discriminator": {
             "propertyName": "type"
          },
@@ -413,6 +351,81 @@
             }
          ]
       },
+      "Range": {
+         "additionalProperties": false,
+         "description": "A (min,max) range of integer values. At least one of min or max must be specified.",
+         "example": {
+            "end": 22,
+            "start": 11,
+            "type": "Range"
+         },
+         "properties": {
+            "max": {
+               "default": null,
+               "type": [
+                  "integer",
+                  "null"
+               ]
+            },
+            "min": {
+               "default": null,
+               "type": [
+                  "integer",
+                  "null"
+               ]
+            },
+            "type": {
+               "default": "Range",
+               "enum": [
+                  "Range"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "RelativeAbundance": {
+         "additionalProperties": false,
+         "description": "Relative abundance of a systemic subject such as a Gene or specific type of molecular variation.",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "amount": {
+               "enum": [
+                  "gt",
+                  "ge",
+                  "eq",
+                  "le",
+                  "lt"
+               ],
+               "type": "string"
+            },
+            "subject": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/MolecularVariation"
+                  },
+                  {
+                     "$ref": "#/definitions/Gene"
+                  }
+               ]
+            },
+            "type": {
+               "default": "RelativeAbundance",
+               "enum": [
+                  "RelativeAbundance"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "subject",
+            "amount"
+         ],
+         "type": "object"
+      },
       "RepeatedSequence": {
          "additionalProperties": false,
          "description": "A tandem repeat of a SequenceLocation",
@@ -441,7 +454,7 @@
                "type": "object"
             },
             "sequence": {
-               "$ref": "#/definitions/_SequenceState"
+               "$ref": "#/definitions/SequenceExpression"
             },
             "type": {
                "default": "RepeatedSequence",
@@ -456,6 +469,27 @@
             "count"
          ],
          "type": "object"
+      },
+      "SequenceExpression": {
+         "additionalProperties": false,
+         "description": "TODO",
+         "discriminator": {
+            "propertyName": "type"
+         },
+         "oneOf": [
+            {
+               "$ref": "#/definitions/SequenceState"
+            },
+            {
+               "$ref": "#/definitions/LiteralSequence"
+            },
+            {
+               "$ref": "#/definitions/DerivedSequence"
+            },
+            {
+               "$ref": "#/definitions/RepeatedSequence"
+            }
+         ]
       },
       "SequenceInterval": {
          "additionalProperties": false,
@@ -559,7 +593,7 @@
       },
       "SystemicVariation": {
          "additionalProperties": false,
-         "description": "The root class of all Variation types",
+         "description": "Genome-wide statements about variation",
          "discriminator": {
             "propertyName": "type"
          },
@@ -772,27 +806,6 @@
             }
          },
          "type": "object"
-      },
-      "_SequenceState": {
-         "additionalProperties": false,
-         "description": "TODO",
-         "discriminator": {
-            "propertyName": "type"
-         },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/SequenceState"
-            },
-            {
-               "$ref": "#/definitions/LiteralSequence"
-            },
-            {
-               "$ref": "#/definitions/DerivedSequence"
-            },
-            {
-               "$ref": "#/definitions/RepeatedSequence"
-            }
-         ]
       }
    },
    "title": "GA4GH-VRS-Definitions",

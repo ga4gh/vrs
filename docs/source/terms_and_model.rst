@@ -98,6 +98,19 @@ Optional Attributes
   element must be a :ref:`GA4GH Computed Identifier <identify>`.
 
 
+Parking Lot
+@@@@@@@@@@@
+
+For abundance:
+##############
+Notes:
+* identify ambiguity in expressions like 
+NC_000001.10:g.15764951_15765010dup...
+NC_000001.10:g.(?_15764951)_(15765010_?)dup...
+... and identify causes of ambiguity
+
+
+
 Primitive Concepts
 @@@@@@@@@@@@@@@@@@
 
@@ -696,25 +709,26 @@ External gene definitions are referenced with a CURIE.
 
 **Implementation guidance**
 
-* Gene symbols (e.g., "BRCA1") are unreliable keys.  Implements MUST
-  NOT use a gene symbol to define a Gene.
-* The primary use case for Gene is as a subject of an abundance
-  statement statement.
-* Implementations SHOULD use one of the following namespaces:
-  `ncbigene <https://registry.identifiers.org/registry/ncbigene>`__,
-  `hgnc <https://registry.identifiers.org/registry/hgnc>`__,
-  `vgnc <https://registry.identifiers.org/registry/vgnc>`__,
-  `mgi <https://registry.identifiers.org/registry/mgi>`__,  
-  `ensembl <https://registry.identifiers.org/registry/ensembl>`__.
-  Other namespaces may be used as necessary.
+* Gene symbols (e.g., "BRCA1") are unreliable keys.  Implementations
+  MUST NOT use a gene symbol to define a Gene.
 * A gene is specific to a species.  Gene orthologs have distinct
   records in the recommended databases.  For example, the BRCA1 gene
   in humans and the Brca1 gene in mouse are orthologs and have
   distinct records in the previously recommended gene databases.
-* GeneLocations MAY be converted to :ref:`sequence-location` using
-  external data. The source of such data and mechanism for
-  implementation is not defined by this specification.
-
+* The primary use case for Gene is as a subject of an abundance
+  statement statement.
+* Implementations MUST use gene namespaces available from
+  identifiers.org whenever possible.  Examples include:
+    * `hgnc <https://registry.identifiers.org/registry/hgnc>`__
+    * `ncbigene <https://registry.identifiers.org/registry/ncbigene>`__
+    * `ensembl <https://registry.identifiers.org/registry/ensembl>`__
+    * `vgnc <https://registry.identifiers.org/registry/vgnc>`__
+    * `mgi <https://registry.identifiers.org/registry/mgi>`__
+* Implementations SHOULD prefer the `hgnc` namespace for Human
+  variation in order to improve interoperability.
+* Gene MAY be converted to :ref:`sequence-location` using external
+  data. The source of such data and mechanism for implementation is
+  not defined by this specification.
 
 **Example**
 

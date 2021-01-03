@@ -17,8 +17,8 @@ definitions:
   # Variation, which is a polymorphic abstraction of many kinds of
   # variation.
 
-  # ============================================================================
-  # Variation
+  # =============================================================================
+  # Kinds of Variation
 
   Variation:
     additionalProperties: false
@@ -31,17 +31,15 @@ definitions:
     discriminator:
       propertyName: type
 
-
   MolecularVariation:
     additionalProperties: false
     description: >-
-      The root class of all Variation types
+      Variation defined on a molecule (sequence)
     oneOf:
       - $ref: "#/definitions/Allele"
       - $ref: "#/definitions/Haplotype"
     discriminator:
       propertyName: type
-
 
   OtherVariation:
     additionalProperties: false
@@ -52,95 +50,21 @@ definitions:
     discriminator:
       propertyName: type
 
-
   SystemicVariation:
     additionalProperties: false
     description: >-
-      The root class of all Variation types
+      Genome-wide statements about variation
     oneOf:
       - $ref: "#/definitions/Abundance"
     discriminator:
       propertyName: type
 
+  # =============================================================================
+  #                           IDENTIFIABLE TYPES
+  # =============================================================================
 
-  Abundance:
-    additionalProperties: false
-    type: object
-    properties:
-      _id:
-        $ref: "#/definitions/CURIE"
-      type:
-        type: string
-        enum: [Abundance]
-        default: Abundance
-      subject:
-        oneOf:
-          - $ref: "#/definitions/SequenceLocation"
-          - $ref: "#/definitions/MolecularVariation"
-          - $ref: "#/definitions/Gene"
-      amount:
-        # TODO: Structure each of the options below
-        description: >-
-          Systemic quantity. Intended options: 1) absolute copy min
-          (>=0) and max; 2) relative copy number quantity min (>=1)
-          and max. Relative must also note; 3) qualitative relative
-          copy number: gt, ge, lt, le, eq
-        oneOf:
-          # Absolute Copy Count
-          - type: object
-            additionalProperties: false
-            properties:
-              measure:
-                type: string
-                enum: ["AbsoluteCounts"]
-                default: "AbsoluteCounts"
-              min:
-                type: integer
-                minimum: 0
-                default: 0
-              max:
-                type: integer
-            required:
-              - measure
-              - min
-              - max
-          # Relative Copy Count
-          - type: object
-            additionalProperties: false
-            properties:
-              measure:
-                type: string
-                enum: ["RelativeCounts"]
-                default: "RelativeCounts"
-              min:
-                type: number
-                minimum: 0
-                default: 0
-              max:
-                type: integer
-            required:
-              - measure
-              - min
-              - max
-          # Qualitative Copy Count
-          - type: object
-            additionalProperties: false
-            properties:
-              measure:
-                type: string
-                enum: ["Qualitative"]
-                default: "Qualitative"
-              rel:
-                type: string
-                enum: ["gt", "ge", "eq", "le", "lt"]
-            required:
-              - measure
-              - rel
-    required:
-      - type
-      - subject
-      - amount
-
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Molecular Variation
 
   Allele:
     description: >-
@@ -159,8 +83,9 @@ definitions:
           - $ref: "#/definitions/CURIE"
           - $ref: "#/definitions/Location"
       state:
-        $ref: "#/definitions/_SequenceState"
-
+        oneOf:
+          - $ref: "#/definitions/SequenceState" # deprecated; remove in 2.0
+          - $ref: "#/definitions/SequenceExpression"
 
   Haplotype:
     description: >-
@@ -184,6 +109,9 @@ definitions:
             - $ref: "#/definitions/CURIE"
 
 
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # OtherVariation
+
   Text:
     description: >-
       A textual description of variation, typically not parseable but
@@ -203,7 +131,6 @@ definitions:
           An textual representation of variation intended to capture
           variation descriptions that cannot be parsed, but still
           treated as variation.
-
 
   VariationSet:
     description: >-
@@ -227,8 +154,69 @@ definitions:
             - $ref: "#/definitions/Variation"
 
 
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # SystemicVariation
 
-  # ============================================================================
+  Abundance:
+    additionalProperties: false
+    description: >-
+      TODO
+    oneOf:
+      - $ref: "#/definitions/AbsoluteAbundance"
+      - $ref: "#/definitions/RelativeAbundance"
+    discriminator:
+      propertyName: type
+
+  AbsoluteAbundance:
+    additionalProperties: false
+    type: object
+    description: >-
+      Absolute abundance of a systemic subject such as a Gene or
+      specific type of molecular variation.
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [AbsoluteAbundance]
+        default: AbsoluteAbundance
+      subject:
+        oneOf:
+          - $ref: "#/definitions/MolecularVariation"
+          - $ref: "#/definitions/Gene"
+      amount:
+        $ref: "#/definitions/Range"
+    required:
+      - type
+      - subject
+      - amount
+
+  RelativeAbundance:
+    additionalProperties: false
+    type: object
+    description: >-
+      Relative abundance of a systemic subject such as a Gene or
+      specific type of molecular variation.
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [RelativeAbundance]
+        default: RelativeAbundance
+      subject:
+        oneOf:
+          - $ref: "#/definitions/MolecularVariation"
+          - $ref: "#/definitions/Gene"
+      amount:
+        type: string
+        enum: ["gt", "ge", "eq", "le", "lt"]
+    required:
+      - type
+      - subject
+      - amount
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations
 
   Location:
@@ -286,7 +274,11 @@ definitions:
         $ref: "#/definitions/SequenceInterval"
 
 
-  # ============================================================================
+  # =============================================================================
+  #                       NON-IDENTIFIABLE TYPES
+  # =============================================================================
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # SequenceInterval
   # * SimpleInterval
 
@@ -378,10 +370,10 @@ definitions:
 
 
 
-  # ============================================================================
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # States
 
-  _SequenceState:
+  SequenceExpression:
     description: >-
       TODO
     additionalProperties: false
@@ -451,7 +443,7 @@ definitions:
         enum: ["RepeatedSequence"]
         default: "RepeatedSequence"
       sequence:
-        $ref: "#/definitions/_SequenceState"
+        $ref: "#/definitions/SequenceExpression"
       count:
         type: object
         additionalProperties: false
@@ -470,18 +462,9 @@ definitions:
         min: 40
         max: 60
 
-
-
-
-
-  # ============================================================================
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Basic types
   # These types are used solely within other definitions.
-
-  DateTime:
-    additionalProperties: false
-    type: string
-    format: "date-time"
 
   CURIE:
     additionalProperties: false
@@ -515,7 +498,6 @@ definitions:
     pattern: '^\w[^:]*:.+$'
     example: "ensembl:ENSG00000139618"
 
-
   Cytoband:
     description: >-
       A feature referencing a giesma-stained band on an unspecified human chromosome.
@@ -523,15 +505,53 @@ definitions:
     pattern: '^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$'
     example: "q22.3"
 
+  DateTime:
+    additionalProperties: false
+    type: string
+    format: "date-time"
+
+  Gene:
+    description: >-
+      A reference to an external gene system, used as a location for
+      variation.  Currently, the `ncbigene` namespace is required. See
+      https://registry.identifiers.org/registry/ncbigene.
+    type: object
+    additionalProperties: false
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: [Gene]
+        default: Gene
+      gene_id:
+        $ref: "#/definitions/CURIE"
+
+  Range:
+    description: >-
+      A (min,max) range of integer values. At least one of min or max
+      must be specified.
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        enum: ["Range"]
+        default: "Range"
+      min:
+        type: ["integer", "null"]
+        default: null
+      max:
+        type: ["integer", "null"]
+        default: null
+    example:
+      type: Range
+      start: 11
+      end: 22
 
 
-  # ============================================================================
-  #          NEW/EXPERIMENTAL FEATURES
-  # ============================================================================
-
-
-  # ============================================================================
-  # Transcripts
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Transcripts (Experimental)
 
   Transcript:
     description: >-
@@ -628,27 +648,4 @@ definitions:
         enum: ["5'utr", "3'utr", "exon", "intron"]
       index:
         type: integer
-      
-
-  # ============================================================================
-  # Gene
-
-  Gene:
-    description: >-
-      A reference to an external gene system, used as a location for
-      variation.  Currently, the `ncbigene` namespace is required. See
-      https://registry.identifiers.org/registry/ncbigene.
-    type: object
-    additionalProperties: false
-    properties:
-      _id:
-        $ref: "#/definitions/CURIE"
-      type:
-        type: string
-        enum: [Gene]
-        default: Gene
-      gene_id:
-        $ref: "#/definitions/CURIE"
-        pattern: '^ncbigene:.+$'
-
         
