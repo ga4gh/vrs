@@ -14,7 +14,10 @@
             "subject": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/MolecularVariation"
+                     "$ref": "#/definitions/Allele"
+                  },
+                  {
+                     "$ref": "#/definitions/Haplotype"
                   },
                   {
                      "$ref": "#/definitions/Gene"
@@ -35,88 +38,6 @@
             "amount"
          ],
          "type": "object"
-      },
-      "AbsoluteAmount": {
-         "additionalProperties": false,
-         "description": "Relative abundance of a systemic subject such as a Gene or specific type of molecular variation.",
-         "properties": {
-            "max": {
-               "type": "integer"
-            },
-            "min": {
-               "type": "integer"
-            },
-            "type": {
-               "default": "AbsoluteAmount",
-               "enum": [
-                  "AbsoluteAmount"
-               ],
-               "type": "string"
-            }
-         },
-         "required": [
-            "type",
-            "min",
-            "max"
-         ],
-         "type": "object"
-      },
-      "Abundance": {
-         "additionalProperties": false,
-         "description": "Absolute abundance of a systemic subject such as a Gene or specific type of molecular variation.",
-         "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "amount": {
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/AbsoluteAmount"
-                  },
-                  {
-                     "$ref": "#/definitions/QualitativeAmount"
-                  }
-               ]
-            },
-            "subject": {
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/MolecularVariation"
-                  },
-                  {
-                     "$ref": "#/definitions/Gene"
-                  }
-               ]
-            },
-            "type": {
-               "default": "Abundance",
-               "enum": [
-                  "Abundance"
-               ],
-               "type": "string"
-            }
-         },
-         "required": [
-            "type",
-            "subject",
-            "amount"
-         ],
-         "type": "object"
-      },
-      "Abundance2": {
-         "additionalProperties": false,
-         "description": "TODO",
-         "discriminator": {
-            "propertyName": "type"
-         },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/AbsoluteAbundance"
-            },
-            {
-               "$ref": "#/definitions/RelativeAbundance"
-            }
-         ]
       },
       "Allele": {
          "additionalProperties": false,
@@ -418,34 +339,6 @@
             }
          ]
       },
-      "QualitativeAmount": {
-         "additionalProperties": false,
-         "description": "Relative abundance of a systemic subject such as a Gene or specific type of molecular variation.",
-         "properties": {
-            "amount": {
-               "enum": [
-                  "gt",
-                  "ge",
-                  "eq",
-                  "le",
-                  "lt"
-               ],
-               "type": "string"
-            },
-            "type": {
-               "default": "QualitativeAmount",
-               "enum": [
-                  "QualitativeAmount"
-               ],
-               "type": "string"
-            }
-         },
-         "required": [
-            "type",
-            "amount"
-         ],
-         "type": "object"
-      },
       "Range": {
          "additionalProperties": false,
          "description": "A (min,max) range of integer values. At least one of min or max must be specified.",
@@ -679,7 +572,10 @@
          },
          "oneOf": [
             {
-               "$ref": "#/definitions/Abundance"
+               "$ref": "#/definitions/AbsoluteAbundance"
+            },
+            {
+               "$ref": "#/definitions/RelativeAbundance"
             }
          ]
       },

@@ -26,7 +26,8 @@ identifiers:
     Text: VT
     # Genotype: VG
     Haplotype: VH
-    Abundance: VAB
+    AbsoluteAbundance: VAA
+    RelativeAbundance: VRA
 
     SequenceLocation: VSL
     ChromosomeLocation: VCL

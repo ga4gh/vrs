@@ -5,11 +5,12 @@
       "ref_sep": ".",
       "regexp": "^ga4gh:(?P<type>[^.]+)\\.(?P<digest>.+)$",
       "type_prefix_map": {
-         "Abundance": "VAB",
+         "AbsoluteAbundance": "VAA",
          "Allele": "VA",
          "ChromosomeLocation": "VCL",
          "GeneLocation": "VGL",
          "Haplotype": "VH",
+         "RelativeAbundance": "VRA",
          "Sequence": "SQ",
          "SequenceLocation": "VSL",
          "Text": "VT",

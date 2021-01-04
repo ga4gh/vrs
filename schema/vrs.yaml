@@ -56,7 +56,8 @@ definitions:
     description: >-
       Genome-wide statements about variation
     oneOf:
-      - $ref: "#/definitions/Abundance"
+      - $ref: "#/definitions/AbsoluteAbundance"
+      - $ref: "#/definitions/RelativeAbundance"
     discriminator:
       propertyName: type
 
@@ -159,81 +160,6 @@ definitions:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # SystemicVariation
 
-  Abundance:
-    additionalProperties: false
-    type: object
-    description: >-
-      Absolute abundance of a systemic subject such as a Gene or
-      specific type of molecular variation.
-    properties:
-      _id:
-        $ref: "#/definitions/CURIE"
-      type:
-        type: string
-        enum: [Abundance]
-        default: Abundance
-      subject:
-        oneOf:
-          - $ref: "#/definitions/MolecularVariation"
-          - $ref: "#/definitions/Gene"
-      amount:
-        oneOf:
-          - $ref: "#/definitions/AbsoluteAmount"
-          - $ref: "#/definitions/QualitativeAmount"
-    required:
-      - type
-      - subject
-      - amount
-
-  AbsoluteAmount:
-    additionalProperties: false
-    type: object
-    description: >-
-      Relative abundance of a systemic subject such as a Gene or
-      specific type of molecular variation.
-    properties:
-      type:
-        type: string
-        enum: [AbsoluteAmount]
-        default: AbsoluteAmount
-      min:
-        type: integer
-      max:
-        type: integer
-    required:
-      - type
-      - min
-      - max
-
-  QualitativeAmount:
-    additionalProperties: false
-    type: object
-    description: >-
-      Relative abundance of a systemic subject such as a Gene or
-      specific type of molecular variation.
-    properties:
-      type:
-        type: string
-        enum: [QualitativeAmount]
-        default: QualitativeAmount
-      amount:
-        type: string
-        enum: ["gt", "ge", "eq", "le", "lt"]
-    required:
-      - type
-      - amount
-
-
-  Abundance2:
-    additionalProperties: false
-    description: >-
-      TODO
-    oneOf:
-      - $ref: "#/definitions/AbsoluteAbundance"
-      - $ref: "#/definitions/RelativeAbundance"
-    discriminator:
-      propertyName: type
-
   AbsoluteAbundance:
     additionalProperties: false
     type: object
@@ -249,7 +175,8 @@ definitions:
         default: AbsoluteAbundance
       subject:
         oneOf:
-          - $ref: "#/definitions/MolecularVariation"
+          - $ref: "#/definitions/Allele"
+          - $ref: "#/definitions/Haplotype"
           - $ref: "#/definitions/Gene"
       amount:
         $ref: "#/definitions/Range"
@@ -278,7 +205,6 @@ definitions:
       amount:
         type: string
         enum: ["gt", "ge", "eq", "le", "lt"]
-        
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
