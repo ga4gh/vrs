@@ -5,10 +5,13 @@
 YAMLS:=$(wildcard *.yaml)
 JSONS:=${YAMLS:.yaml=.json}
 
-all: ${JSONS}
+all: ${JSONS} vrs.json
 
 %.json: %.yaml
 	./y2j <$< >$@
+
+vrs.json: vr.json
+	cp vr.json vrs.json
 
 ## # npm install -g json-dereference-cli
 ## %.json: %.yaml
