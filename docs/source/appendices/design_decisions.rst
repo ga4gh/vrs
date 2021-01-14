@@ -113,25 +113,25 @@ occurs in a low-complexity region, but rather describes the final and
 unambiguous state of the resultant sequence.
 
 
-.. _interbase-coordinates-design:
+.. _interresidue-coordinates-design:
 
-Interbase Coordinates
-@@@@@@@@@@@@@@@@@@@@@
+Interresidue Coordinates
+@@@@@@@@@@@@@@@@@@@@@@@@
 
-Sequence ranges use an interbase coordinate system. Interbase
+Sequence ranges use an interresidue coordinate system. Interresidue
 coordinate conventions are used in this terminology because they
 provide conceptual consistency that is not possible with residue-based
 systems.
 
-.. important:: The choice of what to count--base or
-               interbase positions–-has significant semantic
-               implications for coordinates. In some circumstances,
-               interbase coordinates and the corresponding
-               base coordinates are numerically identical.
-               We intentionally avoid describing the interbase coordinate
-               system as "0-based" (a popular community term,
-               as is "space-based") to help reduce confusion on the
-               meaning of the coordinates used in VRS.
+.. important:: The choice of what to count — base or interresidue
+               positions — has significant semantic implications for
+               coordinates. In some circumstances, interresidue
+               coordinates and the corresponding base coordinates are
+               numerically identical.  We intentionally avoid
+               describing the interresidue coordinate system as
+               "0-based" (a popular community term, as is
+               "space-based") to help reduce confusion on the meaning
+               of the coordinates used in VRS.
 
 When humans refer to a range of residues within a sequence, the most
 common convention is to use an interval of ordinal residue positions

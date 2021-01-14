@@ -105,7 +105,7 @@ The following examples are taken from |notebooks|:
 
     def get_sequence(identifier, start=None, end=None):
         """returns sequence for given identifier, optionally limited
-        to interbase <start, end> interval"""
+        to interresidue <start, end> interval"""
         return dp.get_sequence(identifier, start, end)
     def get_sequence_length(identifier):
         """return length of given sequence identifier"""

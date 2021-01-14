@@ -51,12 +51,12 @@ this sequence is from `RefSeq
 which data sources may be used, but does recommend using prefixes from
 `identifiers.org <http://identifiers.org>`_.
 
-VRS uses :ref:`interbase-coordinates-design`.  Interbase coordinates
-*always* use intervals to refer to sequence spans.  For the purposes
-of this example, interbase coordinates *look* like the more familiar
-0-based, right-open numbering system.  (Please read about
-:ref:`interbase-coordinates-design` if you are interested in the
-significant advantages of this design choice over other coordinate
+VRS uses :ref:`interresidue-coordinates-design`.  Interresidue
+coordinates *always* use intervals to refer to sequence spans.  For
+the purposes of this example, interresidue coordinates *look* like the
+more familiar 0-based, right-open numbering system.  (Please read
+about :ref:`interresidue-coordinates-design` if you are interested in
+the significant advantages of this design choice over other coordinate
 systems.)
 
 The :ref:`SimpleInterval` for the position ``32936732`` is

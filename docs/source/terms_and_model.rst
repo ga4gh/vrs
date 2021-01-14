@@ -103,11 +103,13 @@ Parking Lot
 
 For abundance:
 ##############
-Notes:
-* identify ambiguity in expressions like 
-NC_000001.10:g.15764951_15765010dup...
-NC_000001.10:g.(?_15764951)_(15765010_?)dup...
-... and identify causes of ambiguity
+
+Notes::
+
+    * identify ambiguity in expressions like 
+    NC_000001.10:g.15764951_15765010dup...
+    NC_000001.10:g.(?_15764951)_(15765010_?)dup...
+    ... and identify causes of ambiguity
 
 
 
@@ -236,23 +238,23 @@ None.
 
 The *SequenceInterval* abstract class defines a range on a
 :ref:`sequence`, possibly with length zero, and specified using
-:ref:`interbase-coordinates-design`. An Interval MAY be a
+:ref:`interresidue-coordinates-design`. An Interval MAY be a
 :ref:`SimpleInterval` with a single start and end coordinate.
 :ref:`Future Location and SequenceInterval types <planned-locations>`
 will enable other methods for describing where :ref:`variation`
 occurs. Any of these MAY be used as the SequenceInterval for Location.
 
-.. sidebar:: VRS Uses Interbase Coordinates
+.. sidebar:: VRS Uses Interresidue Coordinates
 
-   **GA4GH VRS uses interbase coordinates when referring to spans of
+   **GA4GH VRS uses interresidue coordinates when referring to spans of
    sequence.**
 
-   Interbase coordinates refer to the zero-width points before and
-   after :ref:`residues <Residue>`. An interval of interbase
+   Interresidue coordinates refer to the zero-width points before and
+   after :ref:`residues <Residue>`. An interval of interresidue
    coordinates permits referring to any span, including an empty span,
    before, within, or after a sequence. See
-   :ref:`interbase-coordinates-design` for more details on this design
-   choice.  Interbase coordinates are always zero-based.
+   :ref:`interresidue-coordinates-design` for more details on this design
+   choice.  Interresidue coordinates are always zero-based.
 
 
 .. _SimpleInterval:
@@ -294,12 +296,12 @@ A :ref:`SequenceInterval` with a single start and end coordinate.
 * Implementations MUST enforce values 0 ≤ start ≤ end. In the case of
   double-stranded DNA, this constraint holds even when a feature is on
   the complementary strand.
-* VRS uses Interbase coordinates because they provide conceptual
+* VRS uses Interresidue coordinates because they provide conceptual
   consistency that is not possible with residue-based systems (see
-  :ref:`rationale <interbase-coordinates-design>`). Implementations
-  will need to convert between interbase and 1-based inclusive
+  :ref:`rationale <interresidue-coordinates-design>`). Implementations
+  will need to convert between interresidue and 1-based inclusive
   residue coordinates familiar to most human users.
-* Interbase coordinates start at 0 (zero).
+* Interresidue coordinates start at 0 (zero).
 * The length of an interval is *end - start*.
 * An interval in which start == end is a zero width point between two residues.
 * An interval of length == 1 MAY be colloquially referred to as a position.
@@ -637,8 +639,8 @@ named :ref:`Sequence`.
 
 * For a :ref:`Sequence` of length *n*:
    * 0 ≤ *interval.start* ≤ *interval.end* ≤ *n*
-   * interbase coordinate 0 refers to the point before the start of the Sequence
-   * interbase coordinate n refers to the point after the end of the Sequence.
+   * interresidue coordinate 0 refers to the point before the start of the Sequence
+   * interresidue coordinate n refers to the point after the end of the Sequence.
 * Coordinates MUST refer to a valid Sequence. VRS does not support
   referring to intronic positions within a transcript sequence,
   extrapolations beyond the ends of sequences, or other implied
@@ -688,6 +690,7 @@ third-party definition of a species-specific gene.
 External gene definitions are referenced with a CURIE.
 
 **Information model**
+
 .. list-table::
    :class: reece-wrap
    :header-rows: 1
@@ -719,6 +722,7 @@ External gene definitions are referenced with a CURIE.
   statement statement.
 * Implementations MUST use gene namespaces available from
   identifiers.org whenever possible.  Examples include:
+
     * `hgnc <https://registry.identifiers.org/registry/hgnc>`__
     * `ncbigene <https://registry.identifiers.org/registry/ncbigene>`__
     * `ensembl <https://registry.identifiers.org/registry/ensembl>`__

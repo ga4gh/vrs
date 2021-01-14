@@ -87,11 +87,12 @@ Healthcare Interoperability Resources) framework.
 
 The SPDI format created to represent alleles in NCBI’s Variation
 Services has four components: the sequence identifier, which is
-specified with a sequence accession and version; the 0-based interbase
-coordinate where the deletion starts; the deleted sequence (or its
-length) and the inserted sequence. The Variation Services return the
-minimum deleted sequence required to avoid over precision. For
-example, a deletion of one G in a run of 4 is specified with deleted
-and inserted sequences of GGGG and GGG respectively, avoiding the need
-to left or right shift the minimal representation. This reduces
-ambiguity, but can lead to long allele descriptions.
+specified with a sequence accession and version; the 0-based
+interresidue coordinate where the deletion starts; the deleted
+sequence (or its length) and the inserted sequence. The Variation
+Services return the minimum deleted sequence required to avoid over
+precision. For example, a deletion of one G in a run of 4 is specified
+with deleted and inserted sequences of GGGG and GGG respectively,
+avoiding the need to left or right shift the minimal
+representation. This reduces ambiguity, but can lead to long allele
+descriptions.
