@@ -25,8 +25,6 @@
 .. |seqrepo_rs| replace:: `SeqRepo REST Service <https://github.com/biocommons/seqrepo-rest-service/>`__
 .. |seqrepo| replace:: `SeqRepo <https://github.com/biocommons/biocommons.seqrepo/>`__
 .. |vrs-python| replace:: `GA4GH VRS Python Implementation <https://github.com/ga4gh/vrs-python/>`__
-.. |vrs_json| replace:: :download:`vrs.json <_static/vrs.json>`
-.. |vrs_yaml| replace:: :download:`vrs.yaml <_static/vrs.yaml>`
 .. |vrs| replace:: `VRS <https://github.com/ga4gh/vr-spec/>`__
 
 
