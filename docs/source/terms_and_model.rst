@@ -238,23 +238,23 @@ None.
 
 The *SequenceInterval* abstract class defines a range on a
 :ref:`sequence`, possibly with length zero, and specified using
-:ref:`interresidue-coordinates-design`. An Interval MAY be a
+:ref:`inter-residue-coordinates-design`. An Interval MAY be a
 :ref:`SimpleInterval` with a single start and end coordinate.
 :ref:`Future Location and SequenceInterval types <planned-locations>`
 will enable other methods for describing where :ref:`variation`
 occurs. Any of these MAY be used as the SequenceInterval for Location.
 
-.. sidebar:: VRS Uses Interresidue Coordinates
+.. sidebar:: VRS Uses Inter-residue Coordinates
 
-   **GA4GH VRS uses interresidue coordinates when referring to spans of
+   **GA4GH VRS uses inter-residue coordinates when referring to spans of
    sequence.**
 
-   Interresidue coordinates refer to the zero-width points before and
-   after :ref:`residues <Residue>`. An interval of interresidue
+   Inter-residue coordinates refer to the zero-width points before and
+   after :ref:`residues <Residue>`. An interval of inter-residue
    coordinates permits referring to any span, including an empty span,
    before, within, or after a sequence. See
-   :ref:`interresidue-coordinates-design` for more details on this design
-   choice.  Interresidue coordinates are always zero-based.
+   :ref:`inter-residue-coordinates-design` for more details on this design
+   choice.  Inter-residue coordinates are always zero-based.
 
 
 .. _SimpleInterval:
@@ -296,12 +296,12 @@ A :ref:`SequenceInterval` with a single start and end coordinate.
 * Implementations MUST enforce values 0 ≤ start ≤ end. In the case of
   double-stranded DNA, this constraint holds even when a feature is on
   the complementary strand.
-* VRS uses Interresidue coordinates because they provide conceptual
+* VRS uses Inter-residue coordinates because they provide conceptual
   consistency that is not possible with residue-based systems (see
-  :ref:`rationale <interresidue-coordinates-design>`). Implementations
-  will need to convert between interresidue and 1-based inclusive
+  :ref:`rationale <inter-residue-coordinates-design>`). Implementations
+  will need to convert between inter-residue and 1-based inclusive
   residue coordinates familiar to most human users.
-* Interresidue coordinates start at 0 (zero).
+* Inter-residue coordinates start at 0 (zero).
 * The length of an interval is *end - start*.
 * An interval in which start == end is a zero width point between two residues.
 * An interval of length == 1 MAY be colloquially referred to as a position.
@@ -639,8 +639,8 @@ named :ref:`Sequence`.
 
 * For a :ref:`Sequence` of length *n*:
    * 0 ≤ *interval.start* ≤ *interval.end* ≤ *n*
-   * interresidue coordinate 0 refers to the point before the start of the Sequence
-   * interresidue coordinate n refers to the point after the end of the Sequence.
+   * inter-residue coordinate 0 refers to the point before the start of the Sequence
+   * inter-residue coordinate n refers to the point after the end of the Sequence.
 * Coordinates MUST refer to a valid Sequence. VRS does not support
   referring to intronic positions within a transcript sequence,
   extrapolations beyond the ends of sequences, or other implied

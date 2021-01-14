@@ -119,7 +119,7 @@ The process for fully justifying an Allele is outlined below.
    :align: left
 
    *  -  | Steps
-      -  | `start` and `end` (interresidue)
+      -  | `start` and `end` (inter-residue)
 	 | and allele sequences
       -  | Equivalent representations
    *  -  0. Given allele ``S:g.5_6delinsCAGCA`` defined on reference sequence S=TCAGCAGCT
@@ -177,7 +177,7 @@ The process for fully justifying an Allele is outlined below.
 
             To each trimmed allele from (1), prepend the *left_roll*
             preceding reference bases and append the *right_roll*
-            following reference bases (corresponding to the interresidue
+            following reference bases (corresponding to the inter-residue
             reference spans (1,5) and (5,8) respectively).
 
             Decrement the start position by *left_roll*, and increment the end

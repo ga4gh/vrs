@@ -113,22 +113,22 @@ occurs in a low-complexity region, but rather describes the final and
 unambiguous state of the resultant sequence.
 
 
-.. _interresidue-coordinates-design:
+.. _inter-residue-coordinates-design:
 
-Interresidue Coordinates
-@@@@@@@@@@@@@@@@@@@@@@@@
+Inter-residue Coordinates
+@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-Sequence ranges use an interresidue coordinate system. Interresidue
+Sequence ranges use an inter-residue coordinate system. Inter-residue
 coordinate conventions are used in this terminology because they
 provide conceptual consistency that is not possible with residue-based
 systems.
 
-.. important:: The choice of what to count — base or interresidue
+.. important:: The choice of what to count — base or inter-residue
                positions — has significant semantic implications for
-               coordinates. In some circumstances, interresidue
+               coordinates. In some circumstances, inter-residue
                coordinates and the corresponding base coordinates are
                numerically identical.  We intentionally avoid
-               describing the interresidue coordinate system as
+               describing the inter-residue coordinate system as
                "0-based" (a popular community term, as is
                "space-based") to help reduce confusion on the meaning
                of the coordinates used in VRS.
