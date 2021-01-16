@@ -1,8 +1,8 @@
 [![DOI](https://zenodo.org/badge/67005248.svg)](https://zenodo.org/badge/latestdoi/67005248)
-[![Read the Docs](https://img.shields.io/readthedocs/vr-spec/1.1)](https://vr-spec.readthedocs.io/en/1.1)
+[![Read the Docs](https://img.shields.io/readthedocs/vr-spec/1.1)](https://vrs.ga4gh.org/)
 
 The [GA4GH](https://www.ga4gh.org/) [Variation Representation
-Specification](https://vr-spec.readthedocs.io/) provides a
+Specification](https://vrs.ga4gh.org/) provides a
 comprehensive framework for the computational representation of
 biological sequence variation.  VRS is the result of a
 collaboration among [contributors](CONTRIBUTORS.md) representing
@@ -66,7 +66,7 @@ To watch for changes and update automatically:
 
 The VR specification documentation is written in reStructuredText and
 located in `docs/source/`.  Commits to this repo are built
-automatically at `vr-spec.readthedocs.io`. 
+automatically at `vrs.ga4gh.org`. 
 
 To build documentation locally, type:
 
