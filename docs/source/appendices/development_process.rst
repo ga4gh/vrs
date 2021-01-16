@@ -122,10 +122,10 @@ Project maintainers are the leads of the GKS Variation Representation working gr
 .. _Backburner: https://github.com/orgs/ga4gh/projects/5?card_filter_query=repo%3Aga4gh%2Fvr-spec#column-9024746
 .. _Planning: https://github.com/orgs/ga4gh/projects/5?card_filter_query=repo%3Aga4gh%2Fvr-spec#column-8939340
 .. _Backlog/Ready for Dev: https://github.com/orgs/ga4gh/projects/5?card_filter_query=repo%3Aga4gh%2Fvr-spec#column-5274081
-.. _Pull Request: https://github.com/ga4gh/vr-spec/pulls
+.. _Pull Request: https://github.com/ga4gh/vrs/pulls
 .. _In Progress: https://github.com/orgs/ga4gh/projects/5?card_filter_query=repo%3Aga4gh%2Fvr-spec#column-5274078
 .. _QA/Feedback: https://github.com/orgs/ga4gh/projects/5?card_filter_query=repo%3Aga4gh%2Fvr-spec#column-8087350
 .. _Done: https://github.com/orgs/ga4gh/projects/5?card_filter_query=repo%3Aga4gh%2Fvr-spec#column-5274079
-.. _GitHub issues on the VRS repository: https://github.com/ga4gh/vr-spec/issues
-.. _example requirement issues: https://github.com/ga4gh/vr-spec/labels/requirements
+.. _GitHub issues on the VRS repository: https://github.com/ga4gh/vrs/issues
+.. _example requirement issues: https://github.com/ga4gh/vrs/labels/requirements
 .. _Work Stream leadership: https://ga4gh-gks.github.io/

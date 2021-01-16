@@ -1036,7 +1036,7 @@ subclasses, but are still treated as variation.
   to queries matching the Text object with the new object.
 * Additional Variation subclasses are continually under
   consideration. Please open a `GitHub issue
-  <https://github.com/ga4gh/vr-spec/issues>`__ if you would like to
+  <https://github.com/ga4gh/vrs/issues>`__ if you would like to
   propose a Variation subclass to cover a needed variation
   representation.
 

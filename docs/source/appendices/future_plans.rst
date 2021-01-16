@@ -130,7 +130,7 @@ consideration in the specification.
 CNVState
 ########
 
-.. note:: This concept is being refined. Please comment at https://github.com/ga4gh/vr-spec/issues/46.
+.. note:: This concept is being refined. Please comment at https://github.com/ga4gh/vrs/issues/46.
 
 **Biological definition**
 
@@ -187,7 +187,7 @@ information.
 Translocations
 ##############
 
-.. note:: This concept is being refined. Please comment at https://github.com/ga4gh/vr-spec/issues/103
+.. note:: This concept is being refined. Please comment at https://github.com/ga4gh/vrs/issues/103
 
 **Biological definition**
 
@@ -204,7 +204,7 @@ terminology, if any).
 
 **Information model**
 
-Under consideration. See https://github.com/ga4gh/vr-spec/issues/28.
+Under consideration. See https://github.com/ga4gh/vrs/issues/28.
 
 **Examples**
 
@@ -336,7 +336,7 @@ SO: `Genotype (SO:0001027)
 
 
 
-.. _GitHub issue: https://github.com/ga4gh/vr-spec/issues
+.. _GitHub issue: https://github.com/ga4gh/vrs/issues
 .. _genetic variation: https://en.wikipedia.org/wiki/Genetic_variation
 
 
