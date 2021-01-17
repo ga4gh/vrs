@@ -20,14 +20,14 @@ need for a way to describe sequence changes outside regions associated
 with genes.
 
 **The computational representation of biological concepts requires
-translating precise biological definitions into data structures that
-can be used by implementers.** This translation should result in a
-representation of information that is consistent with conventional
-biological understanding and, ideally, be able to accommodate future
-data as well. The resulting *computational representation* of
-information should also be cognizant of computational performance, the
-minimization of opportunities for misunderstanding, and ease of
-manipulating and transforming data.
+translating precise biological definitions into information models and
+data structures that may be used in software.** This translation
+should result in a representation of information that is consistent
+with conventional biological understanding and, ideally, be able to
+accommodate future data as well. The resulting *computational
+representation* of information should also be cognizant of
+computational performance, the minimization of opportunities for
+misunderstanding, and ease of manipulating and transforming data.
 
 Accordingly, for each term we define below, we begin by describing the
 term as used by biologists (**biological definition**) as
@@ -37,7 +37,7 @@ specification. We then provide a computer modelling definition
 (**computational definition**) that reformulates the biological
 definition in terms of information content. We then translate each of
 these computational definitions into precise specifications for the
-(**logical model**). Terms are ordered "bottom-up" so that definitions
+(**information model**). Terms are ordered "bottom-up" so that definitions
 depend only on previously-defined terms.
 
 .. note:: The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
@@ -46,8 +46,8 @@ depend only on previously-defined terms.
           described in `RFC 2119`_.
 
 
-Data Model Notes and Principles
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Information Model Principles
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 * VRS uses `snake_case
   <https://simple.wikipedia.org/wiki/Snake_case>`__ to represent
@@ -344,7 +344,7 @@ A :ref:`SequenceInterval` defined by nested inner and outer :ref:`SimpleInterval
 
 **Information Model**
 
-.. list-table::
+.. list-table:: NestedInterval
    :class: reece-wrap
    :header-rows: 1
    :align: left
@@ -676,7 +676,7 @@ Gene
 $$$$
 
 
-**Biological definition**
+**Biological Definition**
 
 Gene generally refers to a region of sequence that has some function.
 Gene is an elusive concept in biology with nuanced meaning that often
@@ -689,7 +689,7 @@ third-party definition of a species-specific gene.
 
 External gene definitions are referenced with a CURIE.
 
-**Information model**
+**Information Model**
 
 .. list-table::
    :class: reece-wrap
