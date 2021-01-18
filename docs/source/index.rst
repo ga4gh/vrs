@@ -25,6 +25,6 @@ implementation that promotes adoption of the standard.
    terms_and_model
    schema
    impl-guide/index
-   releases
+   releases/index
    appendices/index
 
