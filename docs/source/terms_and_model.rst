@@ -438,22 +438,21 @@ A contiguous region specified by chromosomal bands features.
   bands, and legacy marker names found in older scientific literature.
 * When :ref:`CytobandInterval` refers to cytogentic bands, the valid
   values for, and the syntactic structure of, the `start` and `end`
-  depend on the species.  When using :ref:`CytobandInterval` to refer
-  to human cytogentic bands, ISCN conventions MUST be used. Bands are
-  denoted by the arm ("p" or "q") and position (e.g., "22", "22.3", or
-  the symbolic values "cen" or "ter"). If `start` and `end`
-  are on different arms, they SHOULD correspond to the p-arm and q-arm
-  locations respectively. If `start` and `end` are on the same arm,
-  `start` MUST be the more centromeric position (i.e., with lower band
-  and sub-band numbers).
+  depend on the species.
+* When using :ref:`CytobandInterval` to refer to human cytogentic
+  bands, ISCN conventions MUST be used. Bands are denoted by the arm
+  ("p" or "q") and position (e.g., "22", "22.3", or the symbolic
+  values "cen" or "ter"). ISCN conventions order bands p-ter → cen →
+  q-ter. In practice, this means that bands on the p-arm are
+  represented in descending numerical order.
 
 **Examples**
 
 .. parsed-literal::
 
    {
-     "end": "q22.3",
-     "start": "q22.2",
+     "end": "p22.1",
+     "start": "p22.3",
      "type": "CytobandInterval"
    }
 
