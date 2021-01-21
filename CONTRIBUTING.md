@@ -27,4 +27,5 @@ PRs must be approved by at least one project maintainer before they may
 be merged. PR titles must reflect the issue associated with the PR. For
 example, the associated PR title for 
 [issue 250](https://github.com/ga4gh/vrs/issues/250) would be
-`250: Add CONTRIBUTING.md`, as seen in PR #
+`#250: Add CONTRIBUTING.md`, as seen in 
+[PR #253](https://github.com/ga4gh/vrs/pull/253).
