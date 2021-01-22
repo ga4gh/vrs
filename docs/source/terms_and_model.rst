@@ -106,7 +106,7 @@ For abundance:
 
 Notes::
 
-    * identify ambiguity in expressions like 
+    * identify ambiguity in expressions like
     NC_000001.10:g.15764951_15765010dup...
     NC_000001.10:g.(?_15764951)_(15765010_?)dup...
     ... and identify causes of ambiguity
@@ -126,7 +126,7 @@ CURIE
 
 A `CURIE <https://www.w3.org/TR/curie/>`__ formatted string.  A CURIE
 string has the structure ``prefix``:``reference`` (W3C Terminology).
- 
+
 **Implementation Guidance**
 
 * All identifiers in VRS MUST be a valid |curie|, regardless of
@@ -397,7 +397,7 @@ A :ref:`SequenceInterval` defined by nested inner and outer :ref:`SimpleInterval
      },
      "type": "NestedInterval"
    }
-   
+
 
 .. _CytobandInterval:
 
@@ -1194,9 +1194,9 @@ An APOE-ε1 Haplotype with inline Alleles::
       ],
       "type": "Haplotype"
     }
-    
+
 The same APOE-ε1 Haplotype with referenced Alleles::
-    
+
     {
       "members": [
         "ga4gh:VA.iXjilHZiyCEoD3wVMPMXG3B8BtYfL88H",
@@ -1204,7 +1204,7 @@ The same APOE-ε1 Haplotype with referenced Alleles::
       ],
       "type": "Haplotype"
     }
-    
+
 The GA4GH computed identifier for these Haplotypes is
 `ga4gh:VH.NAVnEuaP9gf41OxnPM56XxWQfdFNcUxJ`, regardless of the whether
 the Variation objects are inlined or referenced, and regardless of
@@ -1218,7 +1218,7 @@ VariationSet
 **Biological Definition**
 
 Sets of variation are used widely, such as sets of variants in dbSNP
-or ClinVar that might be related by function. 
+or ClinVar that might be related by function.
 
 **Computational Definition**
 
