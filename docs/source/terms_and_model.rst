@@ -257,6 +257,13 @@ occurs. Any of these MAY be used as the SequenceInterval for Location.
    choice.  Inter-residue coordinates are always zero-based.
 
 
+**Sources**
+
+* `Interbase Coordinates (Chado documentation) <http://gmod.org/wiki/Introduction_to_Chado#Interbase_Coordinates>`__
+* `SequenceOntology: sequence_feature (SO:0000110) <http://www.sequenceontology.org/miso/current_svn/term/SO:0000110>`__ — Any extent of continuous biological sequence.
+* `SequenceOntoloty: region (SO:0000001) <http://www.sequenceontology.org/miso/current_svn/term/SO:0000001>`__ — A sequence_feature with an extent greater than zero. A nucleotide region is composed of bases and a polypeptide region is composed of amino acids.
+
+
 .. _SimpleInterval:
 
 SimpleInterval
@@ -981,6 +988,32 @@ sequence at a :ref:`Location <Location>`.
     }
 
 
+**Sources**
+
+* `ISOGG: Allele <http://isogg.org/wiki/Allele>`__ — An allele is one
+  of two or more forms of the DNA sequence of a particular gene.
+* `SequenceOntology: allele (SO:0001023)
+  <http://www.sequenceontology.org/browser/current_svn/term/SO:0001023>`__
+  — An allele is one of a set of coexisting sequence variants of a
+  gene.
+* `SequenceOntology: sequence_alteration (SO:0001059)
+  <http://www.sequenceontology.org/browser/current_svn/term/SO:0001059>`__
+  — A sequence_alteration is a sequence_feature whose extent is the
+  deviation from another sequence.
+* `SequenceOntology: sequence_variant (SO:0001060)
+  <http://www.sequenceontology.org/browser/current_svn/term/SO:0001060>`__
+  — A sequence_variant is a non exact copy of a sequence_feature or
+  genome exhibiting one or more sequence_alteration.
+* `Wikipedia: Allele <https://en.wikipedia.org/wiki/Allele>`__ — One
+  of a number of alternative forms of the same gene or same genetic
+  locus.
+* `GenotypeOntology: Allele (GENO:0000512)
+  <http://purl.obolibrary.org/obo/GENO_0000512>`__ - A sequence
+  feature representing one of a set of coexisting sequences at a
+  particular genomic locus. An allele can represent a 'reference' or
+  'variant' sequence at a locus.
+
+
 .. _text:
 
 Text
@@ -1091,7 +1124,6 @@ same reference sequence.
        Haplotype
 
 
-
 **Implementation Guidance**
 
 * Haplotypes are an assertion of Alleles known to occur “in cis” or
@@ -1115,7 +1147,7 @@ same reference sequence.
   may be one locus, several loci, or an entire chromosome depending on
   the number of recombination events that have occurred between a
   given set of loci.
-* `SO: haplotype (SO:0001024)
+* `SequenceOntology: haplotype (SO:0001024)
   <http://www.sequenceontology.org/browser/current_release/term/SO:0001024>`__
   — A haplotype is one of a set of coexisting sequence variants of a
   haplotype block.
