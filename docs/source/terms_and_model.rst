@@ -122,10 +122,6 @@ Primitive Concepts
 CURIE
 #####
 
-**Biological Definition**
-
-None.
-
 **Computational Definition**
 
 A `CURIE <https://www.w3.org/TR/curie/>`__ formatted string.  A CURIE
