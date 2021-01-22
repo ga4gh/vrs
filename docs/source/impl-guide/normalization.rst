@@ -40,7 +40,7 @@ representations when using conventional sequence normalization,
 resulting in significant challenges when comparing such alleles.
 
 VRS uses a "fully-justified" normalization algorithm adapted from
-NCBI's Variant Overprecision Correction Algorithm [2]_.
+NCBI's Variant Overprecision Correction Algorithm [1]_.
 Fully-justified normalization expands such ambiguous representation
 over the entire region of ambiguity, resulting in an *unambiguous*
 representation that may be readily compared with other alleles.
@@ -122,18 +122,18 @@ The VRS Normalization Algorithm is defined as follows:
 
     A demonstration of fully justifying an insertion allele.
 
-    Reproduced from [1]_
+    Reproduced from [2]_
 
 **References**
 
-.. [1] Wagner AH, Babb L, ..., Hart RK
+.. [1] Holmes JB, Moyer E, Phan L, Maglott D &
+       Kattman BL. *SPDI: Data Model for Variants and Applications
+       at NCBI.* Bioinformatics (2020 March 15). `doi:10.1093/bioinformatics/btz856`_
+.. [2] Wagner AH, Babb L, ..., Hart RK
        *The GA4GH Variation Representation Specification (VRS): a
        Computational Framework for the Precise Representation
        and Federated Identification of Molecular Variation.*
        bioRxiv (2021 January 17). `doi:10.1101/2021.01.15.426843`_
-.. [2] Holmes JB, Moyer E, Phan L, Maglott D &
-       Kattman BL. *SPDI: Data Model for Variants and Applications
-       at NCBI.* Bioinformatics (2020 March 15). `doi:10.1093/bioinformatics/btz856`_
 
 .. _doi:10.1101/2021.01.15.426843: https://doi.org/10.1101/2021.01.15.426843
 .. _doi:10.1093/bioinformatics/btz856: https://doi.org/10.1093/bioinformatics/btz856
