@@ -443,11 +443,14 @@ A contiguous region specified by chromosomal bands features.
   values for, and the syntactic structure of, the `start` and `end`
   depend on the species.
 * When using :ref:`CytobandInterval` to refer to human cytogentic
-  bands, ISCN conventions MUST be used. Bands are denoted by the arm
+  bands, ISCN [1]_ conventions MUST be used. Bands are denoted by the arm
   ("p" or "q") and position (e.g., "22", "22.3", or the symbolic
   values "cen" or "ter"). ISCN conventions order bands p-ter → cen →
   q-ter. In practice, this means that bands on the p-arm are
   represented in descending numerical order.
+
+.. [1] McGowan-Jordan J (Ed.). *ISCN 2016: An international system
+       for human cytogenomic nomenclature (2016).* Karger (2016).
 
 **Examples**
 
