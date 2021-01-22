@@ -500,11 +500,12 @@ $$$$$$$$$$$$$$$$$$
 
 **Biological Definition**
 
-Chromosomal locations based on named features.
+Chromosomal locations based on named features, including named landmarks,
+cytobands, and regions observed from chromosomal staining techniques.
 
 **Computational Definition**
 
-A ChromosomeLocation is a :ref:`Location` that is defined by a named
+A ChromosomeLocation is a :ref:`Location` that is defined by named
 chromosomal features.
 
 **Information Model**
