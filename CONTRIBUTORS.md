@@ -1,47 +1,46 @@
 # Contributors
 
-|Name             | Affiliation |
-|-----------------| --------|
-Reece K Hart | [1](#1)[2](#2) |
-Alex H Wagner | [3](#3)[4](#4) |
-Lawrence Babb | [2](#2) |
-Gil Alterovitz | [5](#5)[6](#6) |
-Michael Baudis | [7](#7) |
-Ewan Birney | [8](#8) |
-Christopher Bizon | [9](#9) |
-Matthew Brush | [10](#10) |
-Daniel L Cameron | [11](#11)[12](#12) |
-Melissa Cline | [13](#13) |
-Karen Eilbeck | [14](#14) |
-Robert R Freimuth | [15](#15) |
-Cristina Y. Gonzalez | [8](#8) |
-Peter Goodhand | [16](#16) |
-Malachi Griffith | [17](#17) |
-Obi Griffith | [17](#17) |
-Tim Hefferon | [18](#18) |
-Brad Holmes | [18](#18) |
-Sarah Hunt | [8](#8) |
-Melissa Konopko | [16](#16) |
-David Kreda | [19](#19) |
-Jennifer Lee | [20](#20) |
-Javier Lopez | [21](#21) |
-Anna Lu | [20](#20) |
-Donna R Maglott | [18](#18) |
-Christa Lese Martin | [22](#22) |
-Eric Moyer | [18](#18) |
-Tristan Nelson | [22](#22) |
-Angela Page | [16](#16) |
-Ronak Y Patel | [23](#23) |
-Lon Phan | [18](#18) |
-Heidi Rehm | [2](#2)[24](#24) |
-Kevin Riehle | [23](#23) |
-Peter N Robinson | [25](#25) |
-Shawn Rynearson | [26](#26) |
-Helen Schuilenburg | [8](#8) |
-Kirill Tsukanov | [8](#8) |
-Brian Walsh | [10](#10) |
-Andrew D Yates | [8](#8) |
-
+|Name             | Affiliations |
+|-----------------| ------------ |
+|Reece K Hart | [[1](#1)][[2](#2)] |
+|Alex H Wagner | [[3](#3)][[4](#4)] |
+|Lawrence Babb | [[2](#2)] |
+|Gil Alterovitz | [[5](#5)][[6](#6)] |
+|Michael Baudis | [[7](#7)] |
+|Ewan Birney | [[8](#8)] |
+|Christopher Bizon | [[9](#9)] |
+|Matthew Brush | [[10](#10)] |
+|Daniel L Cameron | [[11](#11)][[12](#12)] |
+|Melissa Cline | [[13](#13)] |
+|Karen Eilbeck | [[14](#14)] |
+|Robert R Freimuth | [[15](#15)] |
+|Cristina Y. Gonzalez | [[8](#8)] |
+|Peter Goodhand | [[16](#16)] |
+|Malachi Griffith | [[17](#17)] |
+|Obi Griffith | [[17](#17)] |
+|Tim Hefferon | [[18](#18)] |
+|Brad Holmes | [[18](#18)] |
+|Sarah Hunt | [[8](#8)] |
+|Melissa Konopko | [[16](#16)] |
+|David Kreda | [[19](#19)] |
+|Jennifer Lee | [[20](#20)] |
+|Javier Lopez | [[21](#21)] |
+|Anna Lu | [[20](#20)] |
+|Donna R Maglott | [[18](#18)] |
+|Christa Lese Martin | [[22](#22)] |
+|Eric Moyer | [[18](#18)] |
+|Tristan Nelson | [[22](#22)] |
+|Angela Page | [[16](#16)] |
+|Ronak Y Patel | [[23](#23)] |
+|Lon Phan | [[18](#18)] |
+|Heidi Rehm | [[2](#2)][[24](#24)] |
+|Kevin Riehle | [[23](#23)] |
+|Peter N Robinson | [[25](#25)] |
+|Shawn Rynearson | [[26](#26)] |
+|Helen Schuilenburg | [[8](#8)] |
+|Kirill Tsukanov | [[8](#8)] |
+|Brian Walsh | [[10](#10)] |
+|Andrew D Yates | [[8](#8)] |
 
 # VMC Collaborators
 
@@ -63,6 +62,8 @@ following VMC Collaborators for their contributions.
 * Peter Robinson, Jackson Laboratory, HPO
 * Sarah Hunt, Ensembl
 * Shawn Rynearson, University of Utah, UCGD
+
+# Affiliations
 
 ## 1
 MyOme, Inc., San Carlos, CA 94070, USA
