@@ -164,7 +164,7 @@ definitions:
     additionalProperties: false
     type: object
     description: >-
-      Absolute abundance of a systemic subject such as a Gene or
+      Absolute abundance of a systemic subject such as a gene or
       specific type of molecular variation.
     properties:
       _id:
@@ -177,9 +177,9 @@ definitions:
         oneOf:
           - $ref: "#/definitions/Allele"
           - $ref: "#/definitions/Haplotype"
-          - $ref: "#/definitions/Gene"
+          - $ref: "#/definitions/CURIE"
       amount:
-        $ref: "#/definitions/Range"
+        $ref: "#/definitions/IntegerRange"
     required:
       - type
       - subject
@@ -189,7 +189,7 @@ definitions:
     additionalProperties: false
     type: object
     description: >-
-      Relative abundance of a systemic subject such as a Gene or
+      Relative abundance of a systemic subject such as a gene or
       specific type of molecular variation.
     properties:
       _id:
@@ -201,7 +201,7 @@ definitions:
       subject:
         oneOf:
           - $ref: "#/definitions/MolecularVariation"
-          - $ref: "#/definitions/Gene"
+          - $ref: "#/definitions/CURIE"
       amount:
         type: string
         enum: ["gt", "ge", "eq", "le", "lt"]
@@ -217,7 +217,6 @@ definitions:
     oneOf:
       - $ref: "#/definitions/ChromosomeLocation"
       - $ref: "#/definitions/SequenceLocation"
-      - $ref: "#/definitions/TranscriptLocation"
     discriminator:
       propertyName: type
 
@@ -415,12 +414,10 @@ definitions:
     type: object
     additionalProperties: false
     properties:
-      _id:
-        $ref: "#/definitions/CURIE"
       type:
         type: string
-        enum: [Gene]
-        default: Gene
+        enum: ["Gene"]
+        default: "Gene"
       gene_id:
         $ref: "#/definitions/CURIE"
 
@@ -497,13 +494,17 @@ definitions:
     type: string
     format: "date-time"
 
-  Range:
+  IntegerRange:
     description: >-
       A (min,max) range of integer values. At least one of min or max
       must be specified.
     additionalProperties: false
     type: object
     properties:
+      type:
+        type: string
+        enum: ["IntegerRange"]
+        default: "IntegerRange"
       min:
         type: ["integer", "null"]
         default: null
@@ -511,9 +512,9 @@ definitions:
         type: ["integer", "null"]
         default: null
     example:
-      type: Range
-      start: 11
-      end: 22
+      type: "IntegerRange"
+      min: 5
+      max: 10
 
 
   # =============================================================================

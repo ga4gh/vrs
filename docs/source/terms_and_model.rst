@@ -98,21 +98,6 @@ Optional Attributes
   element must be a :ref:`GA4GH Computed Identifier <identify>`.
 
 
-Parking Lot
-@@@@@@@@@@@
-
-For abundance:
-##############
-
-Notes::
-
-    * identify ambiguity in expressions like
-    NC_000001.10:g.15764951_15765010dup...
-    NC_000001.10:g.(?_15764951)_(15765010_?)dup...
-    ... and identify causes of ambiguity
-
-
-
 Primitive Concepts
 @@@@@@@@@@@@@@@@@@
 
@@ -215,6 +200,53 @@ amino acid codes.
   necessary that Sequences be explicitly “typed” (i.e., DNA, RNA, or
   AA).
 
+
+.. _integerrange:
+
+IntegerRange
+############
+
+**Computational Definition**
+
+An pair of integer values used to specify an inclusive range.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "IntegerRange"
+   * - min
+     - int
+     - 0..1
+     - minimum value; inclusive
+   * - end
+     - int
+     - 0..1
+     - maximum value; inclusive
+
+**Implementation Guidance**
+
+* At least one of min or max must be specified.
+
+**Examples**
+
+.. parsed-literal::
+
+   {
+     "max": 10,
+     "min": 5
+   }
 
 
 Non-variation classes
@@ -863,6 +895,12 @@ subclass defined by the VRS |version| specification is the
 Variations that are not yet covered.
 
 
+.. _molecularvariation:
+
+MolecularVariation
+@@@@@@@@@@@@@@@@@@
+
+
 .. _allele:
 
 Allele
@@ -1014,74 +1052,6 @@ sequence at a :ref:`Location <Location>`.
   'variant' sequence at a locus.
 
 
-.. _text:
-
-Text
-####
-
-**Biological Definition**
-
-None
-
-**Computational Definition**
-
-The *Text* subclass of :ref:`Variation` is intended to capture textual
-descriptions of variation that cannot be parsed by other Variation
-subclasses, but are still treated as variation.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Variation Id; MUST be unique within document
-   * - type
-     - string
-     - 1..1
-     - MUST be "Text"
-   * - definition
-     - string
-     - 1..1
-     - The textual variation representation not parsable by other subclasses of Variation.
-
-**Implementation Guidance**
-
-* An implementation MUST represent Variation with subclasses other
-  than Text if possible.
-* An implementation SHOULD define or adopt conventions for defining
-  the strings stored in Text.definition.
-* If a future version of VRS is adopted by an implementation and
-  the new version enables defining existing Text objects under a
-  different Variation subclass, the implementation MUST construct a
-  new object under the other Variation subclass. In such a case, an
-  implementation SHOULD persist the original Text object and respond
-  to queries matching the Text object with the new object.
-* Additional Variation subclasses are continually under
-  consideration. Please open a `GitHub issue
-  <https://github.com/ga4gh/vrs/issues>`__ if you would like to
-  propose a Variation subclass to cover a needed variation
-  representation.
-
-**Examples**
-
-.. parsed-literal::
-
-    {
-      "definition": "APOE loss",
-      "type": "Text"
-    }
-
-
 .. _haplotype:
 
 Haplotype
@@ -1213,6 +1183,196 @@ The GA4GH computed identifier for these Haplotypes is
 the Variation objects are inlined or referenced, and regardless of
 order. See :ref:`computed-identifiers` for more information.
 
+
+
+.. _systemicvariation:
+
+SystemicVariation
+@@@@@@@@@@@@@@@@@
+
+
+AbsoluteAbundance
+#################
+
+**Biological Definition**
+
+AbsoluteAbundance is the absolute and quantified amount of an entity
+within a genome, cell, or sample.
+
+**Computational Definition**
+
+AbsoluteAbundance is represented as a `subject`, which may be an
+Allele or Haplotype, or any object identifiable with a CURIE.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Computed Identifier
+   * - type
+     - string
+     - 1..1
+     - MUST be "AbsoluteAbundance"
+   * - subject
+     - :ref:`Allele` | :ref:`Haplotype` | :ref:`CURIE`
+     - 1..1
+     - Subject of the relative abundance statement
+   * - amount
+     - :ref:`IntegerRange`
+     - 1..1
+     - At least one of `amount.min` or `amount.max` must be specified
+
+**Example**
+
+.. parsed-literal::
+
+    {
+      "amount": {
+        "max": 5,
+        "min": 0,
+        "type": "IntegerRange"
+      },
+      "subject": "ncbigene:1234",
+      "type": "AbsoluteAbundance"
+    }
+
+
+RelativeAbundance
+#################
+
+**Biological Definition**
+
+Relative abundance is the qualitative relative amount of a molecular
+species within a genome, cell, or sample.
+
+**Computational Definition**
+
+Relative abundance is represented as a combination of the `subject`
+and a qualitative relative amount.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Computed Identifier
+   * - type
+     - string
+     - 1..1
+     - MUST be "RelativeAbundance"
+   * - subject
+     - :ref:`MolecularVariation` | :ref:`Gene`
+     - 1..1
+     - Subject of the relative abundance statement
+   * - amount
+     - text; one of: "gt", "ge", "eq", "le", "lt"
+     - 1..1
+     - The amount of the subject with respect to an unspecified
+       reference; see Notes.
+
+**Example**
+
+.. parsed-literal::
+
+    {
+      "amount": "lt",
+      "subject": "ncbigene:1234",
+      "type": "RelativeAbundance"
+    }
+
+.. _othervariation:
+
+OtherVariation
+@@@@@@@@@@@@@@
+
+.. _text:
+
+Text
+####
+
+**Biological Definition**
+
+Some forms of variation are described with text that is interpretable
+only by humans.
+
+**Computational Definition**
+
+`Text` variation captures descriptions of variation as unparsed
+text.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Variation Id; MUST be unique within document
+   * - type
+     - string
+     - 1..1
+     - MUST be "Text"
+   * - definition
+     - string
+     - 1..1
+     - The textual variation representation not parsable by other subclasses of Variation.
+
+**Implementation Guidance**
+
+* An implementation MUST represent Variation with subclasses other
+  than Text if possible.
+* Because the Text type can be easily abused, implementations are NOT
+  REQUIRED to provide it.  If it is provided, implementations SHOULD
+  consider applying access controls.
+* If a future version of VRS is adopted by an implementation and
+  the new version enables defining existing Text objects under a
+  different Variation subclass, the implementation MUST construct a
+  new object under the other Variation subclass. In such a case, an
+  implementation SHOULD persist the original Text object and respond
+  to queries matching the Text object with the new object.
+* Additional Variation subclasses are continually under
+  consideration. Please open a `GitHub issue
+  <https://github.com/ga4gh/vrs/issues>`__ if you would like to
+  propose a Variation subclass to cover a needed variation
+  representation.
+
+**Examples**
+
+.. parsed-literal::
+
+    {
+      "definition": "APOE loss",
+      "type": "Text"
+    }
 
 
 VariationSet

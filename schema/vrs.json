@@ -3,13 +3,13 @@
    "definitions": {
       "AbsoluteAbundance": {
          "additionalProperties": false,
-         "description": "Absolute abundance of a systemic subject such as a Gene or specific type of molecular variation.",
+         "description": "Absolute abundance of a systemic subject such as a gene or specific type of molecular variation.",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
             },
             "amount": {
-               "$ref": "#/definitions/Range"
+               "$ref": "#/definitions/IntegerRange"
             },
             "subject": {
                "oneOf": [
@@ -20,7 +20,7 @@
                      "$ref": "#/definitions/Haplotype"
                   },
                   {
-                     "$ref": "#/definitions/Gene"
+                     "$ref": "#/definitions/CURIE"
                   }
                ]
             },
@@ -72,19 +72,6 @@
                   "Allele"
                ],
                "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "BaseOffset": {
-         "additionalProperties": false,
-         "properties": {
-            "base": {
-               "type": "integer"
-            },
-            "offset": {
-               "default": 0,
-               "type": "integer"
             }
          },
          "type": "object"
@@ -198,9 +185,6 @@
          "additionalProperties": false,
          "description": "A reference to an external gene system, used as a location for variation.  Currently, the `ncbigene` namespace is required. See https://registry.identifiers.org/registry/ncbigene.",
          "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
             "gene_id": {
                "$ref": "#/definitions/CURIE"
             },
@@ -246,6 +230,39 @@
          },
          "type": "object"
       },
+      "IntegerRange": {
+         "additionalProperties": false,
+         "description": "A (min,max) range of integer values. At least one of min or max must be specified.",
+         "example": {
+            "max": 10,
+            "min": 5,
+            "type": "IntegerRange"
+         },
+         "properties": {
+            "max": {
+               "default": null,
+               "type": [
+                  "integer",
+                  "null"
+               ]
+            },
+            "min": {
+               "default": null,
+               "type": [
+                  "integer",
+                  "null"
+               ]
+            },
+            "type": {
+               "default": "IntegerRange",
+               "enum": [
+                  "IntegerRange"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
       "LiteralSequence": {
          "additionalProperties": false,
          "properties": {
@@ -274,9 +291,6 @@
             },
             {
                "$ref": "#/definitions/SequenceLocation"
-            },
-            {
-               "$ref": "#/definitions/TranscriptLocation"
             }
          ]
       },
@@ -339,35 +353,9 @@
             }
          ]
       },
-      "Range": {
-         "additionalProperties": false,
-         "description": "A (min,max) range of integer values. At least one of min or max must be specified.",
-         "example": {
-            "end": 22,
-            "start": 11,
-            "type": "Range"
-         },
-         "properties": {
-            "max": {
-               "default": null,
-               "type": [
-                  "integer",
-                  "null"
-               ]
-            },
-            "min": {
-               "default": null,
-               "type": [
-                  "integer",
-                  "null"
-               ]
-            }
-         },
-         "type": "object"
-      },
       "RelativeAbundance": {
          "additionalProperties": false,
-         "description": "Relative abundance of a systemic subject such as a Gene or specific type of molecular variation.",
+         "description": "Relative abundance of a systemic subject such as a gene or specific type of molecular variation.",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
@@ -388,7 +376,7 @@
                      "$ref": "#/definitions/MolecularVariation"
                   },
                   {
-                     "$ref": "#/definitions/Gene"
+                     "$ref": "#/definitions/CURIE"
                   }
                ]
             },
@@ -594,141 +582,6 @@
                "default": "Text",
                "enum": [
                   "Text"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "Transcript": {
-         "additionalProperties": false,
-         "description": "A specified subsequence within another sequence that is used as a reference sequence.",
-         "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "cds": {
-               "$ref": "#/definitions/SimpleInterval"
-            },
-            "exons": {
-               "items": {
-                  "$ref": "#/definitions/SimpleInterval"
-               },
-               "type": "array"
-            },
-            "sequence_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "strand": {
-               "default": 1,
-               "enum": [
-                  1,
-                  -1
-               ],
-               "type": "integer"
-            },
-            "type": {
-               "default": "Transcript",
-               "enum": [
-                  "Transcript"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "TranscriptFeature": {
-         "additionalProperties": false,
-         "properties": {
-            "feature_type": {
-               "enum": [
-                  "5'utr",
-                  "3'utr",
-                  "exon",
-                  "intron"
-               ],
-               "type": "string"
-            },
-            "index": {
-               "type": "integer"
-            }
-         },
-         "type": "object"
-      },
-      "TranscriptFeatureInterval": {
-         "additionalProperties": false,
-         "properties": {
-            "end": {
-               "$ref": "#/definitions/TranscriptFeature"
-            },
-            "start": {
-               "$ref": "#/definitions/TranscriptFeature"
-            },
-            "type": {
-               "default": "TranscriptFeatureInterval",
-               "enum": [
-                  "TranscriptFeatureInterval"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "TranscriptInterval": {
-         "additionalProperties": false,
-         "properties": {
-            "end": {
-               "$ref": "#/definitions/BaseOffset"
-            },
-            "start": {
-               "$ref": "#/definitions/BaseOffset"
-            },
-            "type": {
-               "default": "TranscriptInterval",
-               "enum": [
-                  "TranscriptInterval"
-               ],
-               "type": "string"
-            }
-         },
-         "required": [
-            "type",
-            "start",
-            "end"
-         ],
-         "type": "object"
-      },
-      "TranscriptLocation": {
-         "additionalProperties": false,
-         "description": "A specified subsequence within another sequence that is used as a reference sequence.",
-         "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "interval": {
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/TranscriptInterval"
-                  },
-                  {
-                     "$ref": "#/definitions/TranscriptFeatureInterval"
-                  }
-               ]
-            },
-            "transcript": {
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/CURIE"
-                  },
-                  {
-                     "$ref": "#/definitions/Transcript"
-                  }
-               ]
-            },
-            "type": {
-               "default": "TranscriptLocation",
-               "enum": [
-                  "TranscriptLocation"
                ],
                "type": "string"
             }
