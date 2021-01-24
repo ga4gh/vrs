@@ -79,8 +79,8 @@ definitions:
         $ref: "#/definitions/CURIE"
       type:
         type: string
-        enum: [Allele]
-        default: Allele
+        enum: ["Allele"]
+        default: "Allele"
       location:
         oneOf:
           - $ref: "#/definitions/CURIE"
@@ -126,8 +126,8 @@ definitions:
         $ref: "#/definitions/CURIE"
       type:
         type: string
-        enum: [Text]
-        default: Text
+        enum: ["Text"]
+        default: "Text"
       definition:
         type: string
         description: >-
@@ -171,8 +171,8 @@ definitions:
         $ref: "#/definitions/CURIE"
       type:
         type: string
-        enum: [AbsoluteAbundance]
-        default: AbsoluteAbundance
+        enum: ["AbsoluteAbundance"]
+        default: "AbsoluteAbundance"
       subject:
         oneOf:
           - $ref: "#/definitions/Allele"
@@ -196,8 +196,8 @@ definitions:
         $ref: "#/definitions/CURIE"
       type:
         type: string
-        enum: [RelativeAbundance]
-        default: RelativeAbundance
+        enum: ["RelativeAbundance"]
+        default: "RelativeAbundance"
       subject:
         oneOf:
           - $ref: "#/definitions/MolecularVariation"
@@ -228,8 +228,8 @@ definitions:
     properties:
       type:
         type: string
-        enum: [ChromosomeLocation]
-        default: ChromosomeLocation
+        enum: ["ChromosomeLocation"]
+        default: "ChromosomeLocation"
       _id:
         $ref: "#/definitions/CURIE"
       species_id:
@@ -297,8 +297,8 @@ definitions:
     properties:
       type:
         type: string
-        enum: [SimpleInterval]
-        default: SimpleInterval
+        enum: ["SimpleInterval"]
+        default: "SimpleInterval"
       start:
         type: ["integer", "null"]
         default: null
@@ -319,8 +319,8 @@ definitions:
     properties:
       type:
         type: string
-        enum: [NestedInterval]
-        default: NestedInterval
+        enum: ["NestedInterval"]
+        default: "NestedInterval"
       inner:
         $ref: '#/definitions/SimpleInterval'
       outer:
@@ -422,8 +422,8 @@ definitions:
     properties:
       type:
         type: string
-        enum: [CytobandInterval]
-        default: CytobandInterval
+        enum: ["CytobandInterval"]
+        default: "CytobandInterval"
       start:
         $ref: "#/definitions/Cytoband"
       end:
@@ -525,8 +525,8 @@ definitions:
     properties:
       type:
         type: string
-        enum: [SequenceState]
-        default: SequenceState
+        enum: ["SequenceState"]
+        default: "SequenceState"
       sequence:
         type: string
         nullable: false

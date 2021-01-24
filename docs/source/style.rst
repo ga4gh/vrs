@@ -36,24 +36,47 @@ For example::
 
 To aid comprehension, the Text Styles section source looks like this::
 
-    .. _text-styles:
+    .. _text-styles-target:
     
     Text Styles
     !!!!!!!!!!!
 
 
-.. _text-styles:
+.. _text-styles-target:
 
 Text Styles
 !!!!!!!!!!!
 
-* Literal strings. Use double backticks. Example: ````a literal````
-  renders as ``a literal``. 
+A cheat sheet for making references, links, and literals in sphinx.
 
-* Use `.. _refname:` to create a target, and use ``:ref:`refname``` to
-  reference it.  Use this method for all headings, like in this
-  document for :ref:`text-styles` (and see source code excerpt above).
+* For external links, use ``target_``.
 
-* Classes: Use ref. Example: ``:ref:`Allele``` renders as :ref:`Allele`.
+  * See ``epilog.rst`` for pre-defined links.
+  * e.g, ``Base64_`` renders as Base64_ and ```Compact URI (CURIE)`_``
+    renders as `Compact URI (CURIE)`_.
 
-* Attributes and variables. Use \*. Example: ``*attribute*`` renders as *attribute*.
+* *Within* VRS documentation, use ``.. _refname:`` to create link
+  target, and use ``:ref:`refname``` to reference it.
+
+  * Create explicit link targets for all headings.
+  * Do not rely on the implicit targets created by sphinx because
+    changing the heading will break the link.
+  * e.g., ``:ref:`text-styles-target``` renders as
+    :ref:`text-styles-target` and uses the heading text as
+    the link name.
+  * e.g., ``:ref:`Alleles <Allele>``` renders as :ref:`Alleles
+    <Allele>`, with custom link text.
+  * Use class names verbatim when making link targets (e.g.,
+    ``.. _SequenceLocation:``). Use (lowercase) kebab-case for other
+    sections (e.g., ``.. computed-identifiers:``).
+
+* Use \* for attributes.
+
+  * ``*attribute*`` renders as *attribute*.
+  * e.g., The :ref:`Allele` *location* attribute must be set.
+
+* Use double backticks for literals.
+
+  * ````literal```` renders as ``literal``
+  * e.g., The :ref:`Allele` *type* attribute must be set to ``"Allele"``.
+

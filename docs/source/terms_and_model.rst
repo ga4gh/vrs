@@ -1,9 +1,3 @@
-.. todo:: Review enums for consistency of presentation in the
-          information model.
-.. todo:: standardize ````_ v. :ref:````
-
-
-
 Terminology & Information Model
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -81,10 +75,10 @@ Information Model Principles
 * **Optional attributes start with an underscore.** Optional
   attributes are not part of the value object.  Such attributes are
   not considered when evaluating equality or creating computed
-  identifiers.  The `_id` attribute is available to identifiable
+  identifiers.  The ``_id`` attribute is available to identifiable
   objects, and MAY be used by an implementation to store the
-  identifier for a VRS object.  If used, the stored `_id` element MUST
-  be a `CURIE`_. If used for creating a :ref:`truncated-digest`
+  identifier for a VRS object.  If used, the stored ``_id`` element
+  MUST be a `CURIE`_. If used for creating a :ref:`truncated-digest`
   for parent objects, the stored element must be a :ref:`GA4GH
   Computed Identifier <identify>`.  Implementations MUST ignore
   attributes beginning with an underscore and they SHOULD NOT transmit
@@ -92,72 +86,55 @@ Information Model Principles
 
 
 
-.. _SequenceExpression:
+.. _variation:
 
-SequenceExpression
-@@@@@@@@@@@@@@@@@@
+Variation
+@@@@@@@@@
 
-VRS provides several mechanisms to describe a sequence change,
-collectively referred to as SequenceExpressions. They are:
-
-* :ref:`LiteralSequence`: A class that wraps a :ref:`Sequence`
-  specified as a string.
-* :ref:`derived-sequence`: A sequence that is derived from a sequence
-  location, possibly with transformation.
-* :ref:`repeated-sequence`: A description of a repeating element,
-  possibly with ambiguity.
-
-
-.. _LiteralSequence:
-
-LiteralSequence
-###############
-
-**Computational Definition**
-
-A LiteralSequence "wraps" a string representation of a sequence for
-parallelism with other SequenceExpressions.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "LiteralSequence"
-   * - :ref:`Sequence`
-     - string
-     - 1..1
-     - The string representation of the sequence
-
-**Implementation Guidance**
-
-* Why wrap...
-
-
-.. _derived-sequence:
-
-DerivedSequence
-###############
+The Variation class is the conceptual root of all types of variation,
+both current and future.
 
 **Biological Definition**
 
-Certain mechanisms of variation result from relocating and
-transforming sequence from another location in the genome.
+In biology, variation is often used to mean *sequence* variation,
+describing the differences observed in DNA or AA bases among
+individuals.
 
 **Computational Definition**
 
-A relocated sequence is specified by the location of the source
-material and the orientation of that sequence.
+The *Variation* abstract class is the top-level object in the
+:ref:`vr-schema-diagram` and represents the concept of a molecular
+state. The representation and types of molecular states are widely
+varied, and there are several :ref:`planned-variation` currently under
+consideration to capture this diversity. The primary Variation
+subclass defined by the VRS |version| specification is the
+:ref:`Allele`, with the :ref:`text` subclass for capturing other
+Variations that are not yet covered.
+
+
+.. _MolecularVariation:
+
+Molecular Variation
+###################
+
+
+.. _allele:
+
+Allele
+$$$$$$
+
+**Biological Definition**
+
+One of a number of alternative forms of the same gene or same genetic
+locus. In the context of biological sequences, “allele” refers to one
+of a set of specific changes within a :ref:`Sequence`. In the context
+of VRS, Allele refers to a Sequence or Sequence change with respect to
+a reference sequence, without regard to genes or other features.
+
+**Computational Definition**
+
+An Allele is an assertion of the :ref:`State <State>` of a biological
+sequence at a :ref:`Location <Location>`.
 
 **Information Model**
 
@@ -171,38 +148,397 @@ material and the orientation of that sequence.
      - Type
      - Limits
      - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Variation Id; MUST be unique within document
    * - type
      - string
      - 1..1
-     - MUST be "DerivedSequence"
+     - MUST be "Allele"
    * - location
-     - :ref:`SequenceLocation`
+     - :ref:`Location` | :ref:`CURIE`
      - 1..1
-     - The location from which the source subsequence is obtained
-   * - transformation
-     - string; enum
+     - Where Allele is located
+   * - state
+     - :ref:`SequenceExpression` | :ref:`SequenceState`
      - 1..1
-     - One of: "none", "reverse", "complement", "reverse-complement"
+     - A description of the sequence change or expression
 
 **Implementation Guidance**
 
-* TODO
+* The :ref:`SequenceState <SequenceState>` and :ref:`Location
+  <Location>` subclasses respectively represent diverse kinds of
+  sequence changes and mechanisms for describing the locations of
+  those changes, including varying levels of precision of sequence
+  location and categories of sequence changes.
+* Implementations MUST enforce values interval.end ≤ sequence_length
+  when the Sequence length is known.
+* Alleles are equal only if the component fields are equal: at the
+  same location and with the same state.
+* Alleles MAY have multiple related representations on the same
+  Sequence type due to normalization differences.
+* Implementations SHOULD normalize Alleles using :ref:`fully-justified
+  normalization <normalization>` whenever possible to facilitate
+  comparisons of variation in regions of representational ambiguity.
+* Implementations MUST normalize Alleles using :ref:`fully-justified
+  normalization <normalization>` when generating a
+  :ref:`computed-identifiers`.
+* When the alternate Sequence is the same length as the interval, the
+  lengths of the reference Sequence and imputed Sequence are the
+  same. (Here, imputed sequence means the sequence derived by applying
+  the Allele to the reference sequence.) When the replacement Sequence
+  is shorter than the length of the interval, the imputed Sequence is
+  shorter than the reference Sequence, and conversely for replacements
+  that are larger than the interval.
+* When the replacement is ``""`` (the empty string), the Allele refers to
+  a deletion at this location.
+* The Allele entity is based on Sequence and is intended to be used
+  for intragenic and extragenic variation. Alleles are not explicitly
+  associated with genes or other features.
+* Biologically, referring to Alleles is typically meaningful only in
+  the context of empirical alternatives. For modelling purposes,
+  Alleles MAY exist as a result of biological observation or
+  computational simulation, i.e., virtual Alleles.
+* “Single, contiguous” refers the representation of the Allele, not
+  the biological mechanism by which it was created. For instance, two
+  non-adjacent single residue Alleles could be represented by a single
+  contiguous multi-residue Allele.
+* The terms "allele" and "variant" are often used interchangeably,
+  although this use may mask subtle distinctions made by some users.
+
+   * In the genetics community, "allele" may also refer to a
+     haplotype.
+   * "Allele" connotes a state whereas "variant" connotes a change
+     between states. This distinction makes it awkward to use variant
+     to refer to the concept of an unchanged position in a Sequence
+     and was one of the factors that influenced the preference of
+     “Allele” over “Variant” as the primary subject of annotations.
+   * See :ref:`Use “Allele” rather than “Variant” <use-allele>` for
+     further details.
+* When a trait has a known genetic basis, it is typically represented
+  computationally as an association with an Allele.
+* This specification's definition of Allele applies to all Sequence
+  types (DNA, RNA, AA).
+
+**Examples**
+
+.. parsed-literal::
+
+    {
+       "location": {
+          "interval": {
+             "end": 44908822,
+             "start": 44908821,
+             "type": "SimpleInterval"
+          },
+          "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+          "type": "SequenceLocation"
+       },
+       "state": {
+          "sequence": "T",
+          "type": "SequenceState"
+       },
+       "type": "Allele"
+    }
 
 
-.. _repeated-sequence:
+**Sources**
 
-RepeatedSequence
+* `ISOGG: Allele <http://isogg.org/wiki/Allele>`__ — An allele is one
+  of two or more forms of the DNA sequence of a particular gene.
+* `SequenceOntology: allele (SO:0001023)
+  <http://www.sequenceontology.org/browser/current_svn/term/SO:0001023>`__
+  — An allele is one of a set of coexisting sequence variants of a
+  gene.
+* `SequenceOntology: sequence_alteration (SO:0001059)
+  <http://www.sequenceontology.org/browser/current_svn/term/SO:0001059>`__
+  — A sequence_alteration is a sequence_feature whose extent is the
+  deviation from another sequence.
+* `SequenceOntology: sequence_variant (SO:0001060)
+  <http://www.sequenceontology.org/browser/current_svn/term/SO:0001060>`__
+  — A sequence_variant is a non exact copy of a sequence_feature or
+  genome exhibiting one or more sequence_alteration.
+* `Wikipedia: Allele <https://en.wikipedia.org/wiki/Allele>`__ — One
+  of a number of alternative forms of the same gene or same genetic
+  locus.
+* `GenotypeOntology: Allele (GENO:0000512)
+  <http://purl.obolibrary.org/obo/GENO_0000512>`__ - A sequence
+  feature representing one of a set of coexisting sequences at a
+  particular genomic locus. An allele can represent a 'reference' or
+  'variant' sequence at a locus.
+
+
+.. _haplotype:
+
+Haplotype
+$$$$$$$$$
+
+**Biological Definition**
+
+A specific combination of Alleles that occur together on single
+sequence in one or more individuals.
+
+**Computational Definition**
+
+A specific combination of non-overlapping Alleles that co-occur on the
+same reference sequence.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Variation Id; MUST be unique within document
+   * - type
+     - string
+     - 1..1
+     - MUST be "Haplotype"
+   * - members
+     - :ref:`Allele`\[] | :ref:`CURIE`\[]
+     - 1..*
+     - List of Alleles, or references to Alleles, that comprise this
+       Haplotype
+
+
+**Implementation Guidance**
+
+* Haplotypes are an assertion of Alleles known to occur “in cis” or
+  “in phase” with each other.
+* All Alleles in a Haplotype MUST be defined on the same reference
+  sequence.
+* Alleles within a Haplotype MUST not overlap ("overlap" is defined in
+  Interval).
+* The locations of Alleles within the Haplotype MUST be interpreted
+  independently.  Alleles that create a net insertion or deletion of
+  sequence MUST NOT change the location of "downstream" Alleles.
+* The `members` attribute is required and MUST contain at least one
+  Allele.
+
+
+**Sources**
+
+* `ISOGG: Haplotype <https://isogg.org/wiki/Haplotype>`__ — A haplotype
+  is a combination of alleles (DNA sequences) at different places
+  (loci) on the chromosome that are transmitted together. A haplotype
+  may be one locus, several loci, or an entire chromosome depending on
+  the number of recombination events that have occurred between a
+  given set of loci.
+* `SequenceOntology: haplotype (SO:0001024)
+  <http://www.sequenceontology.org/browser/current_release/term/SO:0001024>`__
+  — A haplotype is one of a set of coexisting sequence variants of a
+  haplotype block.
+* `GENO: Haplotype (GENO:0000871)
+  <http://www.ontobee.org/ontology/GENO?iri=http://purl.obolibrary.org/obo/GENO_0000871>`__ -
+  A set of two or more sequence alterations on the same chromosomal
+  strand that tend to be transmitted together.
+
+**Examples**
+
+An APOE-ε1 Haplotype with inline Alleles::
+
+    {
+      "members": [
+        {
+          "location": {
+            "interval": {
+              "end": 44908684,
+              "start": 44908683,
+              "type": "SimpleInterval"
+            },
+            "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+            "type": "SequenceLocation"
+          },
+          "state": {
+            "sequence": "C",
+            "type": "SequenceState"
+          },
+          "type": "Allele"
+        },
+        {
+          "location": {
+            "interval": {
+              "end": 44908822,
+              "start": 44908821,
+              "type": "SimpleInterval"
+            },
+            "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+            "type": "SequenceLocation"
+          },
+          "state": {
+            "sequence": "T",
+            "type": "SequenceState"
+          },
+          "type": "Allele"
+        }
+      ],
+      "type": "Haplotype"
+    }
+
+The same APOE-ε1 Haplotype with referenced Alleles::
+
+    {
+      "members": [
+        "ga4gh:VA.iXjilHZiyCEoD3wVMPMXG3B8BtYfL88H",
+        "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_"
+      ],
+      "type": "Haplotype"
+    }
+
+The GA4GH computed identifier for these Haplotypes is
+`ga4gh:VH.NAVnEuaP9gf41OxnPM56XxWQfdFNcUxJ`, regardless of the whether
+the Variation objects are inlined or referenced, and regardless of
+order. See :ref:`computed-identifiers` for more information.
+
+
+
+.. _systemic-variation:
+
+Systemic Variation
+##################
+
+
+AbsoluteAbundance
+$$$$$$$$$$$$$$$$$
+
+**Biological Definition**
+
+AbsoluteAbundance is the absolute and quantified amount of an entity
+within a genome, cell, or sample.
+
+**Computational Definition**
+
+AbsoluteAbundance is represented as a `subject`, which may be an
+Allele or Haplotype, or any object identifiable with a CURIE.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Computed Identifier
+   * - type
+     - string
+     - 1..1
+     - MUST be "AbsoluteAbundance"
+   * - subject
+     - :ref:`Allele` | :ref:`Haplotype` | :ref:`CURIE`
+     - 1..1
+     - Subject of the abundance statement
+   * - amount
+     - `IntegerRange`
+     - 1..1
+     - At least one of `amount.min` or `amount.max` must be specified
+
+**Example**
+
+.. parsed-literal::
+
+    {
+      "amount": {
+        "max": 5,
+        "min": 0,
+        "type": "IntegerRange"
+      },
+      "subject": "ncbigene:1234",
+      "type": "AbsoluteAbundance"
+    }
+
+
+RelativeAbundance
+$$$$$$$$$$$$$$$$$$
+
+**Biological Definition**
+
+Relative abundance is the qualitative relative amount of a molecular
+species within a genome, cell, or sample.
+
+**Computational Definition**
+
+Relative abundance is represented as a combination of the `subject`
+and a qualitative relative amount.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Computed Identifier
+   * - type
+     - string
+     - 1..1
+     - MUST be "RelativeAbundance"
+   * - subject
+     - :ref:`MolecularVariation` | :ref:`Gene`
+     - 1..1
+     - Subject of the abundance statement
+   * - amount
+     - string (enum)
+     - 1..1
+     - The amount of the subject with respect to an unspecified
+       reference. Must be one of: ``"gt"``, ``"ge"``, ``"eq"``,
+       ``"le"``, ``"lt"``.
+
+**Example**
+
+.. parsed-literal::
+
+    {
+      "amount": "lt",
+      "subject": "ncbigene:1234",
+      "type": "RelativeAbundance"
+    }
+
+
+.. _othervariation:
+
+Other Variation
 ################
 
+.. _text:
+
+Text
+$$$$
+
 **Biological Definition**
 
-A contiguous, tandem repeat of a sequence.
+Some forms of variation are described with text that is interpretable
+only by humans.
 
 **Computational Definition**
 
-A RepeatedSequence is comprised of a `sequence`, specified as a
-SequenceExpression, and a `count` object, which specifies the `min`
-and `max` number of repeats.
+`Text` variation captures descriptions of variation as unparsed
+text.
 
 **Information Model**
 
@@ -216,31 +552,194 @@ and `max` number of repeats.
      - Type
      - Limits
      - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Variation Id; MUST be unique within document
    * - type
      - string
      - 1..1
-     - MUST be "XXX"
-   * - sequence
-     - :ref:`SequenceExpression`
+     - MUST be "Text"
+   * - definition
+     - string
      - 1..1
-     - ...
-   * - count
-     - :ref:`IntegerRange`
-     - 1..1
-     - ...
+     - The textual variation representation not parsable by other subclasses of Variation.
 
 **Implementation Guidance**
 
-* At least one of ``count.min`` or ``count.max`` must be specified.
-* If both `count.min` and `count.max` are specified, then they must
-  satisfy ``0 <= count.min <= count.max``.
+* An implementation MUST represent Variation with subclasses other
+  than Text if possible.
+* Because the Text type can be easily abused, implementations are NOT
+  REQUIRED to provide it.  If it is provided, implementations SHOULD
+  consider applying access controls.
+* If a future version of VRS is adopted by an implementation and
+  the new version enables defining existing Text objects under a
+  different Variation subclass, the implementation MUST construct a
+  new object under the other Variation subclass. In such a case, an
+  implementation SHOULD persist the original Text object and respond
+  to queries matching the Text object with the new object.
+* Additional Variation subclasses are continually under
+  consideration. Please open a `GitHub issue
+  <https://github.com/ga4gh/vrs/issues>`__ if you would like to
+  propose a Variation subclass to cover a needed variation
+  representation.
+
+**Examples**
+
+.. parsed-literal::
+
+    {
+      "definition": "APOE loss",
+      "type": "Text"
+    }
+
+
+.. _variation-set:
+
+VariationSet
+$$$$$$$$$$$$
+
+**Biological Definition**
+
+Sets of variation are used widely, such as sets of variants in dbSNP
+or ClinVar that might be related by function.
+
+**Computational Definition**
+
+An unconstrained set of Variation objects or references.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Identifier of the VariationSet.
+   * - type
+     - string
+     - 1..1
+     - MUST be "VariationSet"
+   * - members
+     - :ref:`Variation`\[] or :ref:`CURIE`\[]
+     - 0..*
+     - List of Variation objects or identifiers. Attribute is
+       required, but MAY be empty.
+
+
+**Implementation Guidance**
+
+* The VariationSet identifier MAY be computed as described in
+  :ref:`computed-identifiers`, in which case the identifier
+  effectively refers to a static set because a different set of
+  members would generate a different identifier.
+* `members` may be specified as Variation objects or CURIE
+  identifiers.
+* CURIEs MAY refer to entities outside the `ga4gh` namespace.
+  However, objects that use non-`ga4gh` identifiers MAY NOT use the
+  :ref:`computed-identifiers` mechanism.
+* VariationSet identifiers computed using the GA4GH
+  :ref:`computed-identifiers` process do *not* depend on whether the
+  Variation objects are inlined or referenced, and do *not* depend on
+  the order of members.
+* Elements of `members` must be subclasses of Variation, which permits
+  sets to be nested.
+* Recursive sets are not meaningful and are not supported.
+* VariationSets may be empty.
+
+**Examples**
+
+Inlined Variation objects:
+
+.. parsed-literal::
+
+  {
+    "members": [
+      {
+        "location": {
+          "interval": {
+            "end": 11,
+            "start": 10,
+            "type": "SimpleInterval"
+          },
+          "sequence_id": "ga4gh:SQ.01234abcde",
+          "type": "SequenceLocation"
+        },
+        "state": {
+          "sequence": "C",
+          "type": "SequenceState"
+        },
+        "type": "Allele"
+      },
+      {
+        "location": {
+          "interval": {
+            "end": 21,
+            "start": 20,
+            "type": "SimpleInterval"
+          },
+          "sequence_id": "ga4gh:SQ.01234abcde",
+          "type": "SequenceLocation"
+        },
+        "state": {
+          "sequence": "C",
+          "type": "SequenceState"
+        },
+        "type": "Allele"
+      },
+      {
+        "location": {
+          "interval": {
+            "end": 31,
+            "start": 30,
+            "type": "SimpleInterval"
+          },
+          "sequence_id": "ga4gh:SQ.01234abcde",
+          "type": "SequenceLocation"
+        },
+        "state": {
+          "sequence": "C",
+          "type": "SequenceState"
+        },
+        "type": "Allele"
+      }
+    ],
+    "type": "VariationSet"
+  }
+
+
+Referenced Variation objects:
+
+.. parsed-literal::
+
+  {
+    "members": [
+      "ga4gh:VA.6xjH0Ikz88s7MhcyN5GJTa1p712-M10W",
+      "ga4gh:VA.7k2lyIsIsoBgRFPlfnIOeCeEgj_2BO7F",
+      "ga4gh:VA.ikcK330gH3bYO2sw9QcTsoptTFnk_Xjh"
+    ],
+    "type": "VariationSet"
+  }
+
+The GA4GH computed identifier for these sets is
+`ga4gh:VS.WVC_R7OJ688EQX3NrgpJfsf_ctQUsVP3`, regardless of the whether
+the Variation objects are inlined or referenced, and regardless of
+order. See :ref:`computed-identifiers` for more information.
 
 
 Locations and Intervals
 @@@@@@@@@@@@@@@@@@@@@@@
 
-.. _interval:
-.. _sequenceinterval:
+.. _Interval:
+.. _SequenceInterval:
 
 SequenceInterval
 #################################
@@ -305,11 +804,11 @@ A :ref:`SequenceInterval` with a single start and end coordinate.
      - 1..1
      - MUST be "SimpleInterval"
    * - start
-     - uint64
+     - integer
      - 1..1
      - start position
    * - end
-     - uint64
+     - integer
      - 1..1
      - end position
 
@@ -695,55 +1194,31 @@ named :ref:`Sequence`.
 
 
 
-.. _variation:
+.. _SequenceExpression:
 
-Variation
-@@@@@@@@@
+Sequence Expressions
+@@@@@@@@@@@@@@@@@@@@
 
-The Variation class is the conceptual root of all types of variation,
-both current and future.
+VRS provides several mechanisms to describe a sequence change,
+collectively referred to as SequenceExpressions. They are:
 
-**Biological Definition**
-
-In biology, variation is often used to mean *sequence* variation,
-describing the differences observed in DNA or AA bases among
-individuals.
-
-**Computational Definition**
-
-The *Variation* abstract class is the top-level object in the
-:ref:`vr-schema-diagram` and represents the concept of a molecular
-state. The representation and types of molecular states are widely
-varied, and there are several :ref:`planned-variation` currently under
-consideration to capture this diversity. The primary Variation
-subclass defined by the VRS |version| specification is the
-:ref:`Allele`, with the :ref:`text` subclass for capturing other
-Variations that are not yet covered.
+* :ref:`LiteralSequence`: A class that wraps a :ref:`Sequence`
+  specified as a string.
+* :ref:`derived-sequence`: A sequence that is derived from a sequence
+  location, possibly with transformation.
+* :ref:`repeated-sequence`: A description of a repeating element,
+  possibly with ambiguity.
 
 
-.. _MolecularVariation:
+.. _LiteralSequence:
 
-Molecular Variation
-###################
-
-
-.. _allele:
-
-Allele
-$$$$$$
-
-**Biological Definition**
-
-One of a number of alternative forms of the same gene or same genetic
-locus. In the context of biological sequences, “allele” refers to one
-of a set of specific changes within a :ref:`Sequence`. In the context
-of VRS, Allele refers to a Sequence or Sequence change with respect to
-a reference sequence, without regard to genes or other features.
+LiteralSequence
+###############
 
 **Computational Definition**
 
-An Allele is an assertion of the :ref:`State <State>` of a biological
-sequence at a :ref:`Location <Location>`.
+A LiteralSequence "wraps" a string representation of a sequence for
+parallelism with other SequenceExpressions.
 
 **Information Model**
 
@@ -757,395 +1232,73 @@ sequence at a :ref:`Location <Location>`.
      - Type
      - Limits
      - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Variation Id; MUST be unique within document
    * - type
      - string
      - 1..1
-     - MUST be "Allele"
+     - MUST be "LiteralSequence"
+   * - :ref:`Sequence`
+     - string
+     - 1..1
+     - The string representation of the sequence
+
+
+.. _derived-sequence:
+
+DerivedSequence
+###############
+
+**Biological Definition**
+
+Certain mechanisms of variation result from relocating and
+transforming sequence from another location in the genome.
+
+**Computational Definition**
+
+A relocated sequence is specified by the location of the source
+material and the orientation of that sequence.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "DerivedSequence"
    * - location
-     - :ref:`Location` | :ref:`CURIE`
+     - :ref:`SequenceLocation`
      - 1..1
-     - Where Allele is located
-   * - state
-     - :ref:`SequenceExpression` | :ref:`SequenceState`
+     - The location from which the source subsequence is obtained
+   * - transformation
+     - string (enum)
      - 1..1
-     - A description of the sequence change or expression
-
-**Implementation Guidance**
-
-* The :ref:`SequenceState <SequenceState>` and :ref:`Location
-  <Location>` subclasses respectively represent diverse kinds of
-  sequence changes and mechanisms for describing the locations of
-  those changes, including varying levels of precision of sequence
-  location and categories of sequence changes.
-* Implementations MUST enforce values interval.end ≤ sequence_length
-  when the Sequence length is known.
-* Alleles are equal only if the component fields are equal: at the
-  same location and with the same state.
-* Alleles MAY have multiple related representations on the same
-  Sequence type due to normalization differences.
-* Implementations SHOULD normalize Alleles using :ref:`fully-justified
-  normalization <normalization>` whenever possible to facilitate
-  comparisons of variation in regions of representational ambiguity.
-* Implementations MUST normalize Alleles using :ref:`fully-justified
-  normalization <normalization>` when generating a
-  :ref:`computed-identifiers`.
-* When the alternate Sequence is the same length as the interval, the
-  lengths of the reference Sequence and imputed Sequence are the
-  same. (Here, imputed sequence means the sequence derived by applying
-  the Allele to the reference sequence.) When the replacement Sequence
-  is shorter than the length of the interval, the imputed Sequence is
-  shorter than the reference Sequence, and conversely for replacements
-  that are larger than the interval.
-* When the replacement is “” (the empty string), the Allele refers to
-  a deletion at this location.
-* The Allele entity is based on Sequence and is intended to be used
-  for intragenic and extragenic variation. Alleles are not explicitly
-  associated with genes or other features.
-* Biologically, referring to Alleles is typically meaningful only in
-  the context of empirical alternatives. For modelling purposes,
-  Alleles MAY exist as a result of biological observation or
-  computational simulation, i.e., virtual Alleles.
-* “Single, contiguous” refers the representation of the Allele, not
-  the biological mechanism by which it was created. For instance, two
-  non-adjacent single residue Alleles could be represented by a single
-  contiguous multi-residue Allele.
-* The terms "allele" and "variant" are often used interchangeably,
-  although this use may mask subtle distinctions made by some users.
-
-   * In the genetics community, "allele" may also refer to a
-     haplotype.
-   * "Allele" connotes a state whereas "variant" connotes a change
-     between states. This distinction makes it awkward to use variant
-     to refer to the concept of an unchanged position in a Sequence
-     and was one of the factors that influenced the preference of
-     “Allele” over “Variant” as the primary subject of annotations.
-   * See :ref:`Use “Allele” rather than “Variant” <use-allele>` for
-     further details.
-* When a trait has a known genetic basis, it is typically represented
-  computationally as an association with an Allele.
-* This specification's definition of Allele applies to all Sequence
-  types (DNA, RNA, AA).
-
-**Examples**
-
-.. parsed-literal::
-
-    {
-       "location": {
-          "interval": {
-             "end": 44908822,
-             "start": 44908821,
-             "type": "SimpleInterval"
-          },
-          "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
-          "type": "SequenceLocation"
-       },
-       "state": {
-          "sequence": "T",
-          "type": "SequenceState"
-       },
-       "type": "Allele"
-    }
-
-
-**Sources**
-
-* `ISOGG: Allele <http://isogg.org/wiki/Allele>`__ — An allele is one
-  of two or more forms of the DNA sequence of a particular gene.
-* `SequenceOntology: allele (SO:0001023)
-  <http://www.sequenceontology.org/browser/current_svn/term/SO:0001023>`__
-  — An allele is one of a set of coexisting sequence variants of a
-  gene.
-* `SequenceOntology: sequence_alteration (SO:0001059)
-  <http://www.sequenceontology.org/browser/current_svn/term/SO:0001059>`__
-  — A sequence_alteration is a sequence_feature whose extent is the
-  deviation from another sequence.
-* `SequenceOntology: sequence_variant (SO:0001060)
-  <http://www.sequenceontology.org/browser/current_svn/term/SO:0001060>`__
-  — A sequence_variant is a non exact copy of a sequence_feature or
-  genome exhibiting one or more sequence_alteration.
-* `Wikipedia: Allele <https://en.wikipedia.org/wiki/Allele>`__ — One
-  of a number of alternative forms of the same gene or same genetic
-  locus.
-* `GenotypeOntology: Allele (GENO:0000512)
-  <http://purl.obolibrary.org/obo/GENO_0000512>`__ - A sequence
-  feature representing one of a set of coexisting sequences at a
-  particular genomic locus. An allele can represent a 'reference' or
-  'variant' sequence at a locus.
-
-
-.. _haplotype:
-
-Haplotype
-$$$$$$$$$
-
-**Biological Definition**
-
-A specific combination of Alleles that occur together on single
-sequence in one or more individuals.
-
-**Computational Definition**
-
-A specific combination of non-overlapping Alleles that co-occur on the
-same reference sequence.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Variation Id; MUST be unique within document
-   * - type
-     - string
-     - 1..1
-     - MUST be "Haplotype"
-   * - members
-     - :ref:`Allele`\[] | :ref:`CURIE`\[]
-     - 1..*
-     - List of Alleles, or references to Alleles, that comprise this
-       Haplotype
-
-
-**Implementation Guidance**
-
-* Haplotypes are an assertion of Alleles known to occur “in cis” or
-  “in phase” with each other.
-* All Alleles in a Haplotype MUST be defined on the same reference
-  sequence.
-* Alleles within a Haplotype MUST not overlap ("overlap" is defined in
-  Interval).
-* The locations of Alleles within the Haplotype MUST be interpreted
-  independently.  Alleles that create a net insertion or deletion of
-  sequence MUST NOT change the location of "downstream" Alleles.
-* The `members` attribute is required and MUST contain at least one
-  Allele.
-
-
-**Sources**
-
-* `ISOGG: Haplotype <https://isogg.org/wiki/Haplotype>`__ — A haplotype
-  is a combination of alleles (DNA sequences) at different places
-  (loci) on the chromosome that are transmitted together. A haplotype
-  may be one locus, several loci, or an entire chromosome depending on
-  the number of recombination events that have occurred between a
-  given set of loci.
-* `SequenceOntology: haplotype (SO:0001024)
-  <http://www.sequenceontology.org/browser/current_release/term/SO:0001024>`__
-  — A haplotype is one of a set of coexisting sequence variants of a
-  haplotype block.
-* `GENO: Haplotype (GENO:0000871)
-  <http://www.ontobee.org/ontology/GENO?iri=http://purl.obolibrary.org/obo/GENO_0000871>`__ -
-  A set of two or more sequence alterations on the same chromosomal
-  strand that tend to be transmitted together.
-
-**Examples**
-
-An APOE-ε1 Haplotype with inline Alleles::
-
-    {
-      "members": [
-        {
-          "location": {
-            "interval": {
-              "end": 44908684,
-              "start": 44908683,
-              "type": "SimpleInterval"
-            },
-            "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
-            "type": "SequenceLocation"
-          },
-          "state": {
-            "sequence": "C",
-            "type": "SequenceState"
-          },
-          "type": "Allele"
-        },
-        {
-          "location": {
-            "interval": {
-              "end": 44908822,
-              "start": 44908821,
-              "type": "SimpleInterval"
-            },
-            "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
-            "type": "SequenceLocation"
-          },
-          "state": {
-            "sequence": "T",
-            "type": "SequenceState"
-          },
-          "type": "Allele"
-        }
-      ],
-      "type": "Haplotype"
-    }
-
-The same APOE-ε1 Haplotype with referenced Alleles::
-
-    {
-      "members": [
-        "ga4gh:VA.iXjilHZiyCEoD3wVMPMXG3B8BtYfL88H",
-        "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_"
-      ],
-      "type": "Haplotype"
-    }
-
-The GA4GH computed identifier for these Haplotypes is
-`ga4gh:VH.NAVnEuaP9gf41OxnPM56XxWQfdFNcUxJ`, regardless of the whether
-the Variation objects are inlined or referenced, and regardless of
-order. See :ref:`computed-identifiers` for more information.
+     - Must be one of: ``"none"``, ``"reverse"``, ``"complement"``,
+       ``"reverse-complement"``
 
 
 
-.. _systemic-variation:
+.. _repeated-sequence:
 
-Systemic Variation
-##################
-
-
-AbsoluteAbundance
-$$$$$$$$$$$$$$$$$
-
-**Biological Definition**
-
-AbsoluteAbundance is the absolute and quantified amount of an entity
-within a genome, cell, or sample.
-
-**Computational Definition**
-
-AbsoluteAbundance is represented as a `subject`, which may be an
-Allele or Haplotype, or any object identifiable with a CURIE.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Computed Identifier
-   * - type
-     - string
-     - 1..1
-     - MUST be "AbsoluteAbundance"
-   * - subject
-     - :ref:`Allele` | :ref:`Haplotype` | :ref:`CURIE`
-     - 1..1
-     - Subject of the relative abundance statement
-   * - amount
-     - `IntegerRange`
-     - 1..1
-     - At least one of `amount.min` or `amount.max` must be specified
-
-**Example**
-
-.. parsed-literal::
-
-    {
-      "amount": {
-        "max": 5,
-        "min": 0,
-        "type": "IntegerRange"
-      },
-      "subject": "ncbigene:1234",
-      "type": "AbsoluteAbundance"
-    }
-
-
-RelativeAbundance
-$$$$$$$$$$$$$$$$$$
-
-**Biological Definition**
-
-Relative abundance is the qualitative relative amount of a molecular
-species within a genome, cell, or sample.
-
-**Computational Definition**
-
-Relative abundance is represented as a combination of the `subject`
-and a qualitative relative amount.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Computed Identifier
-   * - type
-     - string
-     - 1..1
-     - MUST be "RelativeAbundance"
-   * - subject
-     - :ref:`MolecularVariation` | :ref:`Gene`
-     - 1..1
-     - Subject of the relative abundance statement
-   * - amount
-     - text; one of: "gt", "ge", "eq", "le", "lt"
-     - 1..1
-     - The amount of the subject with respect to an unspecified
-       reference; see Notes.
-
-**Example**
-
-.. parsed-literal::
-
-    {
-      "amount": "lt",
-      "subject": "ncbigene:1234",
-      "type": "RelativeAbundance"
-    }
-
-.. _othervariation:
-
-Other Variation
+RepeatedSequence
 ################
 
-.. _text:
-
-Text
-$$$$
-
 **Biological Definition**
 
-Some forms of variation are described with text that is interpretable
-only by humans.
+A contiguous, tandem repeat of a sequence.
 
 **Computational Definition**
 
-`Text` variation captures descriptions of variation as unparsed
-text.
+A RepeatedSequence is comprised of a `sequence`, specified as a
+SequenceExpression, and a `count` object, which specifies the `min`
+and `max` number of repeats.
 
 **Information Model**
 
@@ -1159,187 +1312,26 @@ text.
      - Type
      - Limits
      - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Variation Id; MUST be unique within document
    * - type
      - string
      - 1..1
-     - MUST be "Text"
-   * - definition
-     - string
+     - MUST be "XXX"
+   * - sequence
+     - :ref:`SequenceExpression`
      - 1..1
-     - The textual variation representation not parsable by other subclasses of Variation.
+     - ...
+   * - count
+     - :ref:`IntegerRange`
+     - 1..1
+     - ...
 
 **Implementation Guidance**
 
-* An implementation MUST represent Variation with subclasses other
-  than Text if possible.
-* Because the Text type can be easily abused, implementations are NOT
-  REQUIRED to provide it.  If it is provided, implementations SHOULD
-  consider applying access controls.
-* If a future version of VRS is adopted by an implementation and
-  the new version enables defining existing Text objects under a
-  different Variation subclass, the implementation MUST construct a
-  new object under the other Variation subclass. In such a case, an
-  implementation SHOULD persist the original Text object and respond
-  to queries matching the Text object with the new object.
-* Additional Variation subclasses are continually under
-  consideration. Please open a `GitHub issue
-  <https://github.com/ga4gh/vrs/issues>`__ if you would like to
-  propose a Variation subclass to cover a needed variation
-  representation.
-
-**Examples**
-
-.. parsed-literal::
-
-    {
-      "definition": "APOE loss",
-      "type": "Text"
-    }
+* At least one of ``count.min`` or ``count.max`` must be specified.
+* If both `count.min` and `count.max` are specified, then they must
+  satisfy ``0 <= count.min <= count.max``.
 
 
-.. _variation-set:
-
-VariationSet
-$$$$$$$$$$$$
-
-**Biological Definition**
-
-Sets of variation are used widely, such as sets of variants in dbSNP
-or ClinVar that might be related by function.
-
-**Computational Definition**
-
-An unconstrained set of Variation objects or references.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Identifier of the VariationSet.
-   * - type
-     - string
-     - 1..1
-     - MUST be "VariationSet"
-   * - members
-     - :ref:`Variation`\[] or :ref:`CURIE`\[]
-     - 0..*
-     - List of Variation objects or identifiers. Attribute is
-       required, but MAY be empty.
-
-
-**Implementation Guidance**
-
-* The VariationSet identifier MAY be computed as described in
-  :ref:`computed-identifiers`, in which case the identifier
-  effectively refers to a static set because a different set of
-  members would generate a different identifier.
-* `members` may be specified as Variation objects or CURIE
-  identifiers.
-* CURIEs MAY refer to entities outside the `ga4gh` namespace.
-  However, objects that use non-`ga4gh` identifiers MAY NOT use the
-  :ref:`computed-identifiers` mechanism.
-* VariationSet identifiers computed using the GA4GH
-  :ref:`computed-identifiers` process do *not* depend on whether the
-  Variation objects are inlined or referenced, and do *not* depend on
-  the order of members.
-* Elements of `members` must be subclasses of Variation, which permits
-  sets to be nested.
-* Recursive sets are not meaningful and are not supported.
-* VariationSets may be empty.
-
-**Examples**
-
-Inlined Variation objects:
-
-.. parsed-literal::
-
-  {
-    "members": [
-      {
-        "location": {
-          "interval": {
-            "end": 11,
-            "start": 10,
-            "type": "SimpleInterval"
-          },
-          "sequence_id": "ga4gh:SQ.01234abcde",
-          "type": "SequenceLocation"
-        },
-        "state": {
-          "sequence": "C",
-          "type": "SequenceState"
-        },
-        "type": "Allele"
-      },
-      {
-        "location": {
-          "interval": {
-            "end": 21,
-            "start": 20,
-            "type": "SimpleInterval"
-          },
-          "sequence_id": "ga4gh:SQ.01234abcde",
-          "type": "SequenceLocation"
-        },
-        "state": {
-          "sequence": "C",
-          "type": "SequenceState"
-        },
-        "type": "Allele"
-      },
-      {
-        "location": {
-          "interval": {
-            "end": 31,
-            "start": 30,
-            "type": "SimpleInterval"
-          },
-          "sequence_id": "ga4gh:SQ.01234abcde",
-          "type": "SequenceLocation"
-        },
-        "state": {
-          "sequence": "C",
-          "type": "SequenceState"
-        },
-        "type": "Allele"
-      }
-    ],
-    "type": "VariationSet"
-  }
-
-
-Referenced Variation objects:
-
-.. parsed-literal::
-
-  {
-    "members": [
-      "ga4gh:VA.6xjH0Ikz88s7MhcyN5GJTa1p712-M10W",
-      "ga4gh:VA.7k2lyIsIsoBgRFPlfnIOeCeEgj_2BO7F",
-      "ga4gh:VA.ikcK330gH3bYO2sw9QcTsoptTFnk_Xjh"
-    ],
-    "type": "VariationSet"
-  }
-
-The GA4GH computed identifier for these sets is
-`ga4gh:VS.WVC_R7OJ688EQX3NrgpJfsf_ctQUsVP3`, regardless of the whether
-the Variation objects are inlined or referenced, and regardless of
-order. See :ref:`computed-identifiers` for more information.
 
 
 Primitive Concepts
@@ -1592,17 +1584,17 @@ amino acid codes.
   AA).
 
 
-Deprecated Classes
-@@@@@@@@@@@@@@@@@@
+Deprecated and Obsolete Classes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.. _sequence-state:
+.. _SequenceState:
 
 SequenceState
 #############
 
 .. warning::
 
-   SequenceState is deprecated. It will be removed in VRS 2.0. Use
+   DEPRECATED. SequenceState will be removed in VRS 2.0. Use
    :ref:`LiteralSequence` instead.
 
 **Biological Definition**
@@ -1646,9 +1638,6 @@ The *SequenceState* class specifically captures a :ref:`sequence` as a
     }
 
 
-Obsolete Classes
-@@@@@@@@@@@@@@@@
-
 .. _state:
 
 State
@@ -1656,12 +1645,11 @@ State
 
 .. Warning::
 
-   State is obsolete. It was previously an abstract class that was
-   intended for future growth. It was replaced by SequenceExpressions
-   with a superset of the the functionality envisioned for State.
-   Because State was abstract, and therefore never instantiated, it
-   was made obsolete at the same time that SequenceState was
-   deprecated.
+   OBSOLETE. State was an abstract class that was intended for future
+   growth. It was replaced by SequenceExpressions, which subsumes the
+   functionality envisioned for State.  Because State was abstract,
+   and therefore purely an internal concept, it was made obsolete at
+   the same time that SequenceState was deprecated.
 
 
 **Biological Definition**
@@ -1673,8 +1661,8 @@ None.
 *State* objects are one of two primary components specifying a VRS
 :ref:`Allele` (in addition to :ref:`Location`), and the designated
 components for representing change (or non-change) of the features
-indicated by the Allele Location. As an abstract class, State currently
-encompasses single and contiguous :ref:`sequence` changes (see :ref:`SequenceState
-<sequence-state>`), with additional types under consideration (see
-:ref:`planned-states`).
+indicated by the Allele Location. As an abstract class, State
+currently encompasses single and contiguous :ref:`sequence` changes
+(see :ref:`SequenceState`), with additional types under consideration
+(see :ref:`planned-states`).
 
