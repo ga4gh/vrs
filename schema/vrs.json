@@ -151,11 +151,6 @@
          ],
          "type": "object"
       },
-      "DateTime": {
-         "additionalProperties": false,
-         "format": "date-time",
-         "type": "string"
-      },
       "DerivedSequence": {
          "additionalProperties": false,
          "properties": {
