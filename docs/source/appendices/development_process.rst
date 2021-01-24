@@ -104,7 +104,6 @@ project leadership is comprised of the `Work Stream leadership`_:
 * Javier Lopez (`@javild <https://github.com/javild>`__)
 * Larry Babb (`@larrybabb <https://github.com/larrybabb>`__)
 * Matt Brush (`@mbrush <https://github.com/mbrush>`__)
-* Melissa Konopko (`@MKonopko <https://github.com/MKonopko>`__)
 * Reece Hart (`@reece <https://github.com/reece>`__)
 
 .. _project-maintainers:

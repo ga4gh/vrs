@@ -106,7 +106,7 @@ For abundance:
 
 Notes::
 
-    * identify ambiguity in expressions like 
+    * identify ambiguity in expressions like
     NC_000001.10:g.15764951_15765010dup...
     NC_000001.10:g.(?_15764951)_(15765010_?)dup...
     ... and identify causes of ambiguity
@@ -122,15 +122,11 @@ Primitive Concepts
 CURIE
 #####
 
-**Biological Definition**
-
-None.
-
 **Computational Definition**
 
 A `CURIE <https://www.w3.org/TR/curie/>`__ formatted string.  A CURIE
 string has the structure ``prefix``:``reference`` (W3C Terminology).
- 
+
 **Implementation Guidance**
 
 * All identifiers in VRS MUST be a valid |curie|, regardless of
@@ -255,6 +251,13 @@ occurs. Any of these MAY be used as the SequenceInterval for Location.
    before, within, or after a sequence. See
    :ref:`inter-residue-coordinates-design` for more details on this design
    choice.  Inter-residue coordinates are always zero-based.
+
+
+**Sources**
+
+* `Interbase Coordinates (Chado documentation) <http://gmod.org/wiki/Introduction_to_Chado#Interbase_Coordinates>`__
+* `SequenceOntology: sequence_feature (SO:0000110) <http://www.sequenceontology.org/miso/current_svn/term/SO:0000110>`__ — Any extent of continuous biological sequence.
+* `SequenceOntology: region (SO:0000001) <http://www.sequenceontology.org/miso/current_svn/term/SO:0000001>`__ — A sequence_feature with an extent greater than zero. A nucleotide region is composed of bases and a polypeptide region is composed of amino acids.
 
 
 .. _SimpleInterval:
@@ -394,7 +397,7 @@ A :ref:`SequenceInterval` defined by nested inner and outer :ref:`SimpleInterval
      },
      "type": "NestedInterval"
    }
-   
+
 
 .. _CytobandInterval:
 
@@ -438,22 +441,24 @@ A contiguous region specified by chromosomal bands features.
   bands, and legacy marker names found in older scientific literature.
 * When :ref:`CytobandInterval` refers to cytogentic bands, the valid
   values for, and the syntactic structure of, the `start` and `end`
-  depend on the species.  When using :ref:`CytobandInterval` to refer
-  to human cytogentic bands, ISCN conventions MUST be used. Bands are
-  denoted by the arm ("p" or "q") and position (e.g., "22", "22.3", or
-  the symbolic values "cen" or "ter"). If `start` and `end`
-  are on different arms, they SHOULD correspond to the p-arm and q-arm
-  locations respectively. If `start` and `end` are on the same arm,
-  `start` MUST be the more centromeric position (i.e., with lower band
-  and sub-band numbers).
+  depend on the species.
+* When using :ref:`CytobandInterval` to refer to human cytogentic
+  bands, ISCN [1]_ conventions MUST be used. Bands are denoted by the arm
+  ("p" or "q") and position (e.g., "22", "22.3", or the symbolic
+  values "cen" or "ter"). ISCN conventions order bands p-ter → cen →
+  q-ter. In practice, this means that bands on the p-arm are
+  represented in descending numerical order.
+
+.. [1] McGowan-Jordan J (Ed.). *ISCN 2016: An international system
+       for human cytogenomic nomenclature (2016).* Karger (2016).
 
 **Examples**
 
 .. parsed-literal::
 
    {
-     "end": "q22.3",
-     "start": "q22.2",
+     "end": "p22.1",
+     "start": "p22.3",
      "type": "CytobandInterval"
    }
 
@@ -494,11 +499,12 @@ $$$$$$$$$$$$$$$$$$
 
 **Biological Definition**
 
-Chromosomal locations based on named features.
+Chromosomal locations based on named features, including named landmarks,
+cytobands, and regions observed from chromosomal staining techniques.
 
 **Computational Definition**
 
-A ChromosomeLocation is a :ref:`Location` that is defined by a named
+A ChromosomeLocation is a :ref:`Location` that is defined by named
 chromosomal features.
 
 **Information Model**
@@ -982,6 +988,32 @@ sequence at a :ref:`Location <Location>`.
     }
 
 
+**Sources**
+
+* `ISOGG: Allele <http://isogg.org/wiki/Allele>`__ — An allele is one
+  of two or more forms of the DNA sequence of a particular gene.
+* `SequenceOntology: allele (SO:0001023)
+  <http://www.sequenceontology.org/browser/current_svn/term/SO:0001023>`__
+  — An allele is one of a set of coexisting sequence variants of a
+  gene.
+* `SequenceOntology: sequence_alteration (SO:0001059)
+  <http://www.sequenceontology.org/browser/current_svn/term/SO:0001059>`__
+  — A sequence_alteration is a sequence_feature whose extent is the
+  deviation from another sequence.
+* `SequenceOntology: sequence_variant (SO:0001060)
+  <http://www.sequenceontology.org/browser/current_svn/term/SO:0001060>`__
+  — A sequence_variant is a non exact copy of a sequence_feature or
+  genome exhibiting one or more sequence_alteration.
+* `Wikipedia: Allele <https://en.wikipedia.org/wiki/Allele>`__ — One
+  of a number of alternative forms of the same gene or same genetic
+  locus.
+* `GenotypeOntology: Allele (GENO:0000512)
+  <http://purl.obolibrary.org/obo/GENO_0000512>`__ - A sequence
+  feature representing one of a set of coexisting sequences at a
+  particular genomic locus. An allele can represent a 'reference' or
+  'variant' sequence at a locus.
+
+
 .. _text:
 
 Text
@@ -1092,7 +1124,6 @@ same reference sequence.
        Haplotype
 
 
-
 **Implementation Guidance**
 
 * Haplotypes are an assertion of Alleles known to occur “in cis” or
@@ -1116,7 +1147,7 @@ same reference sequence.
   may be one locus, several loci, or an entire chromosome depending on
   the number of recombination events that have occurred between a
   given set of loci.
-* `SO: haplotype (SO:0001024)
+* `SequenceOntology: haplotype (SO:0001024)
   <http://www.sequenceontology.org/browser/current_release/term/SO:0001024>`__
   — A haplotype is one of a set of coexisting sequence variants of a
   haplotype block.
@@ -1166,9 +1197,9 @@ An APOE-ε1 Haplotype with inline Alleles::
       ],
       "type": "Haplotype"
     }
-    
+
 The same APOE-ε1 Haplotype with referenced Alleles::
-    
+
     {
       "members": [
         "ga4gh:VA.iXjilHZiyCEoD3wVMPMXG3B8BtYfL88H",
@@ -1176,7 +1207,7 @@ The same APOE-ε1 Haplotype with referenced Alleles::
       ],
       "type": "Haplotype"
     }
-    
+
 The GA4GH computed identifier for these Haplotypes is
 `ga4gh:VH.NAVnEuaP9gf41OxnPM56XxWQfdFNcUxJ`, regardless of the whether
 the Variation objects are inlined or referenced, and regardless of
@@ -1190,7 +1221,7 @@ VariationSet
 **Biological Definition**
 
 Sets of variation are used widely, such as sets of variants in dbSNP
-or ClinVar that might be related by function. 
+or ClinVar that might be related by function.
 
 **Computational Definition**
 
