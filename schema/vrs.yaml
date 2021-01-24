@@ -217,7 +217,6 @@ definitions:
     oneOf:
       - $ref: "#/definitions/ChromosomeLocation"
       - $ref: "#/definitions/SequenceLocation"
-      - $ref: "#/definitions/TranscriptLocation"
     discriminator:
       propertyName: type
 

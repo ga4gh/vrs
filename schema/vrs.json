@@ -256,9 +256,6 @@
             },
             {
                "$ref": "#/definitions/SequenceLocation"
-            },
-            {
-               "$ref": "#/definitions/TranscriptLocation"
             }
          ]
       },
