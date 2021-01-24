@@ -217,7 +217,6 @@ definitions:
     oneOf:
       - $ref: "#/definitions/ChromosomeLocation"
       - $ref: "#/definitions/SequenceLocation"
-      - $ref: "#/definitions/TranscriptLocation"
     discriminator:
       propertyName: type
 
@@ -491,11 +490,6 @@ definitions:
     type: string
     pattern: '^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$'
     example: "q22.3"
-
-  DateTime:
-    additionalProperties: false
-    type: string
-    format: "date-time"
 
   Range:
     description: >-
