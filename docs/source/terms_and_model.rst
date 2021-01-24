@@ -399,14 +399,27 @@ A :ref:`SequenceInterval` defined by nested inner and outer :ref:`SimpleInterval
    }
 
 
+.. _Cytoband:
 .. _CytobandInterval:
 
-CytobandInterval
-################
+Cytoband and CytobandInterval
+#############################
+
+.. important:: VRS currently supports only human cytobands and
+   cytoband intervals.
+
+**Biological Definition**
+
+Cytobands refer to regions of chromosomes that are identified by
+visible patterns on stained metaphase chromosomes.  They provide a
+convenient, memorable, and low-resolution shorthand for chromosomal
+segments.
 
 **Computational Definition**
 
-A contiguous region specified by chromosomal bands features.
+In VRS, a Cytoband is a string with syntax constrained to human
+cytoband regions.  A CytobandInterval is comprised of a chromosome
+name and a contiguous region defined by two Cytobands.
 
 **Information Model**
 
@@ -425,23 +438,19 @@ A contiguous region specified by chromosomal bands features.
      - 1..1
      - MUST be "CytobandInterval"
    * - start
-     - string
+     - Cytoband (see below)
      - 1..1
      - name of feature start
    * - end
-     - string
+     - Cytoband (see below)
      - 1..1
      - name of feature end
 
+A Cytoband is a string constrained to match the regular expression
+``^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$``.
+
 **Implementation Guidance**
 
-* `start` and `end` attributes of CytobandInterval are intentionally
-  specified vaguely in order to accommodate a wide variety of
-  uses. Examples include named markers on chromosomes, cytogenetic
-  bands, and legacy marker names found in older scientific literature.
-* When :ref:`CytobandInterval` refers to cytogentic bands, the valid
-  values for, and the syntactic structure of, the `start` and `end`
-  depend on the species.
 * When using :ref:`CytobandInterval` to refer to human cytogentic
   bands, ISCN [1]_ conventions MUST be used. Bands are denoted by the arm
   ("p" or "q") and position (e.g., "22", "22.3", or the symbolic
@@ -531,7 +540,7 @@ chromosomal features.
      - :ref:`CURIE`
      - 1..1
      - An external reference to a species taxonomy.  Default:
-       "taxonomy:9606" (Human).  See Implementation Guidance, below.
+       "taxonomy:9606" (human).  See Implementation Guidance, below.
    * - chr
      - string
      - 1..1
@@ -555,13 +564,13 @@ chromosomal features.
   <https://registry.identifiers.org/registry/taxonomy>`__, and the
   CURIE reference MUST be an NCBI taxonomy identifier (e.g., 9606 for
   Homo sapiens).
-* ChromosomeLocation is intended primarily for Humans.  Support for
+* ChromosomeLocation is intended primarily for humans.  Support for
   other species is possible and will be considered based on community
   feedback.
 * `chromosome` is an archetypal chromosome name. Valid values for, and
   the syntactic structure of, `chromosome` depends on the species.
   `chromosome` MUST be an official sequence name from `NCBI Assembly
-  <https://www.ncbi.nlm.nih.gov/assembly>`__.  For Humans, valid
+  <https://www.ncbi.nlm.nih.gov/assembly>`__.  For humans, valid
   chromosome names are 1..22, X, Y (case-sensitive).
 * `interval` refers to a contiguous region specified named markers,
   which are presumed to exist on the specified chromosome.  See
@@ -734,7 +743,7 @@ External gene definitions are referenced with a CURIE.
     * `ensembl <https://registry.identifiers.org/registry/ensembl>`__
     * `vgnc <https://registry.identifiers.org/registry/vgnc>`__
     * `mgi <https://registry.identifiers.org/registry/mgi>`__
-* Implementations SHOULD prefer the `hgnc` namespace for Human
+* Implementations SHOULD prefer the `hgnc` namespace for human
   variation in order to improve interoperability.
 * Gene MAY be converted to :ref:`sequence-location` using external
   data. The source of such data and mechanism for implementation is
@@ -742,7 +751,7 @@ External gene definitions are referenced with a CURIE.
 
 **Example**
 
-The following examples all refer to the Human BRCA1 gene:
+The following examples all refer to the human BRCA1 gene:
 
 .. parsed-literal::
 
