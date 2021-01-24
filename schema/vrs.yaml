@@ -373,8 +373,8 @@ definitions:
         $ref: "#/definitions/SequenceLocation"
       transformation:
         type: string
-        enum: ["reverse", "complement", "reverse-complement"]
-        default: null
+        enum: ["none", "reverse", "complement", "reverse-complement"]
+        default: "none"
 
   RepeatedSequence:
     description: >-
@@ -389,14 +389,7 @@ definitions:
       sequence:
         $ref: "#/definitions/SequenceExpression"
       count:
-        type: object
-        additionalProperties: false
-        properties:
-          min:
-            type: integer
-            minimum: 0
-          max:
-            type: ["integer", "null"]
+        $ref: "#/definitions/IntegerRange"
     required:
       - type
       - count

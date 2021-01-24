@@ -34,11 +34,25 @@ For example::
   !!!!!!!!!!!!!!!
 
 
+To aid comprehension, the Text Styles section source looks like this::
+
+    .. _text-styles:
+    
+    Text Styles
+    !!!!!!!!!!!
+
+
+.. _text-styles:
+
 Text Styles
 !!!!!!!!!!!
 
 * Literal strings. Use double backticks. Example: ````a literal````
   renders as ``a literal``. 
+
+* Use `.. _refname:` to create a target, and use ``:ref:`refname``` to
+  reference it.  Use this method for all headings, like in this
+  document for :ref:`text-styles` (and see source code excerpt above).
 
 * Classes: Use ref. Example: ``:ref:`Allele``` renders as :ref:`Allele`.
 

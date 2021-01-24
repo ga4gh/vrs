@@ -1,3 +1,9 @@
+.. todo:: Review enums for consistency of presentation in the
+          information model.
+.. todo:: standardize ````_ v. :ref:````
+
+
+
 Terminology & Information Model
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -49,166 +55,68 @@ depend only on previously-defined terms.
 Information Model Principles
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-* VRS uses `snake_case
-  <https://simple.wikipedia.org/wiki/Snake_case>`__ to represent
-  compound words.  Although the schema is currently JSON-based (which
+* **VRS uses** `snake_case
+  <https://simple.wikipedia.org/wiki/Snake_case>`__ **to represent
+  compound words.** Although the schema is currently JSON-based (which
   would typically use camelCase), VRS itself is intended to be neutral
   with respect to languages and database.
 
-* VRS objects are `value objects
-  <https://en.wikipedia.org/wiki/Value_object>`__.  Two objects are
+* **VRS objects are minimal** `value objects
+  <https://en.wikipedia.org/wiki/Value_object>`__. Two objects are
   considered equal if and only if their respective attributes are
-  equal.  As value objects, VRS objects are used as primitive types and
-  SHOULD NOT be used as containers for related data.  Instead, related
-  data should be associated with VRS objects through identifiers.  See
-  :ref:`computed-identifiers`.
+  equal.  As value objects, VRS objects are used as primitive types
+  and MUST NOT be used as containers for related data, such as primary
+  database accessions, representations in particular formats, or links
+  to external data.  Instead, related data should be associated with
+  VRS objects through identifiers.  See :ref:`computed-identifiers`.
 
-* Error handling is intentionally unspecified and delegated to
-  implementation.  VRS provides foundational data types that
+* **Error handling is intentionally unspecified and delegated to
+  implementation.**  VRS provides foundational data types that
   enable significant flexibility.  Except where required by this
   specification, implementations may choose whether and how to
   validate data.  For example, implementations MAY choose to validate
   that particular combinations of objects are compatible, but such
   validation is not required.
 
-* We recognize that a common desire may be to have human-readable
-  identifiers associated with VRS objects. We recommend using the _id
-  field (see :ref:`optional-attributes` below) to create a lookup for
-  any such identifiers (see :ref:`example usage
-  <associating-annotations>`), and provide reference methods for
-  creating VRS identifiers from other common variant formats (see the
-  :ref:`HGVS translation example <example>`).
+* **Optional attributes start with an underscore.** Optional
+  attributes are not part of the value object.  Such attributes are
+  not considered when evaluating equality or creating computed
+  identifiers.  The `_id` attribute is available to identifiable
+  objects, and MAY be used by an implementation to store the
+  identifier for a VRS object.  If used, the stored `_id` element MUST
+  be a `CURIE`_. If used for creating a :ref:`truncated-digest`
+  for parent objects, the stored element must be a :ref:`GA4GH
+  Computed Identifier <identify>`.  Implementations MUST ignore
+  attributes beginning with an underscore and they SHOULD NOT transmit
+  objects containing them.
 
 
-.. _optional-attributes:
 
-Optional Attributes
-@@@@@@@@@@@@@@@@@@@
+.. _SequenceExpression:
 
-* VRS attributes use a leading underscore to represent optional
-  attributes that are not part of the value object.  Such attributes
-  are not considered when evaluating equality or creating computed
-  identifiers. Currently, the only such attribute in the specification
-  is the `_id` attribute.
-
-* The `_id` attribute is available to identifiable objects, and MAY be
-  used by an implementation to store the identifier for a VRS object.
-  If used, the stored `_id` element MUST be a :ref:`curie`. If used for
-  creating a :ref:`truncated-digest` for parent objects, the stored
-  element must be a :ref:`GA4GH Computed Identifier <identify>`.
-
-
-Primitive Concepts
+SequenceExpression
 @@@@@@@@@@@@@@@@@@
 
+VRS provides several mechanisms to describe a sequence change,
+collectively referred to as SequenceExpressions. They are:
 
-.. _curie:
-
-CURIE
-#####
-
-**Computational Definition**
-
-A `CURIE <https://www.w3.org/TR/curie/>`__ formatted string.  A CURIE
-string has the structure ``prefix``:``reference`` (W3C Terminology).
-
-**Implementation Guidance**
-
-* All identifiers in VRS MUST be a valid |curie|, regardless of
-  whether the identifier refers to GA4GH VRS objects or external data.
-* For GA4GH VRS objects, this specification RECOMMENDS using globally
-  unique :ref:`computed-identifiers` for use within *and* between
-  systems.
-* For external data, CURIE-formatted identifiers MUST be used.  When
-  an appropriate namespace exists at `identifiers.org
-  <http://identifiers.org/>`__, that namespace MUST be used.  When an
-  appropriate namespace does not exist at `identifiers.org
-  <http://identifiers.org/>`__, support is implementation-dependent.
-  That is, implementations MAY choose whether and how to support
-  informal or local namespaces.
-* Implementations MUST use CURIE identifiers verbatim. Implementations
-  MAY NOT modify CURIEs in any way (e.g., case-folding).
+* :ref:`LiteralSequence`: A class that wraps a :ref:`Sequence`
+  specified as a string.
+* :ref:`derived-sequence`: A sequence that is derived from a sequence
+  location, possibly with transformation.
+* :ref:`repeated-sequence`: A description of a repeating element,
+  possibly with ambiguity.
 
 
-**Examples**
+.. _LiteralSequence:
 
-Identifiers for GRCh38 chromosome 19::
-
-    ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
-    refseq:NC_000019.10
-    grch38:19
-
-See :ref:`identify` for examples of CURIE-based identifiers for VRS
-objects.
-
-
-.. _residue:
-
-Residue
-#######
-
-**Biological Definition**
-
-A residue refers to a specific `monomer`_ within the `polymeric
-chain`_ of a `protein`_ or `nucleic acid`_ (Source: `Wikipedia Residue
-page`_).
+LiteralSequence
+###############
 
 **Computational Definition**
 
-A character representing a specific residue (i.e., molecular species)
-or groupings of these ("ambiguity codes"), using `one-letter IUPAC
-abbreviations <https://www.genome.jp/kegg/catalog/codes1.html>`_ for
-nucleic acids and amino acids.
-
-
-.. _sequence:
-
-Sequence
-########
-
-**Biological Definition**
-
-A contiguous, linear polymer of nucleic acid or amino acid residues.
-
-**Computational Definition**
-
-A character string of :ref:`Residues <Residue>` that represents a
-biological sequence using the conventional sequence order (5'-to-3'
-for nucleic acid sequences, and amino-to-carboxyl for amino acid
-sequences). IUPAC ambiguity codes are permitted in Sequences.
-
-**Information Model**
-
-A Sequence is a string, constrained to contain only characters representing IUPAC nucleic acid or
-amino acid codes.
-
-**Implementation Guidance**
-
-* Sequences MAY be empty (zero-length) strings. Empty sequences are used as the
-  replacement Sequence for deletion Alleles.
-* Sequences MUST consist of only uppercase IUPAC abbreviations, including ambiguity codes.
-* A Sequence provides a stable coordinate system by which an :ref:`Allele` MAY be located and
-  interpreted.
-* A Sequence MAY have several roles. A “reference sequence” is any Sequence used
-  to define an :ref:`Allele`. A Sequence that replaces another Sequence is
-  called a “replacement sequence”.
-* In some contexts outside VRS, “reference sequence” may refer
-  to a member of set of sequences that comprise a genome assembly. In the VRS
-  specification, any sequence may be a “reference sequence”, including those in
-  a genome assembly.
-* For the purposes of representing sequence variation, it is not
-  necessary that Sequences be explicitly “typed” (i.e., DNA, RNA, or
-  AA).
-
-
-.. _integerrange:
-
-IntegerRange
-############
-
-**Computational Definition**
-
-An pair of integer values used to specify an inclusive range.
+A LiteralSequence "wraps" a string representation of a sequence for
+parallelism with other SequenceExpressions.
 
 **Information Model**
 
@@ -225,37 +133,116 @@ An pair of integer values used to specify an inclusive range.
    * - type
      - string
      - 1..1
-     - MUST be "IntegerRange"
-   * - min
-     - int
-     - 0..1
-     - minimum value; inclusive
-   * - end
-     - int
-     - 0..1
-     - maximum value; inclusive
+     - MUST be "LiteralSequence"
+   * - :ref:`Sequence`
+     - string
+     - 1..1
+     - The string representation of the sequence
 
 **Implementation Guidance**
 
-* At least one of min or max must be specified.
-
-**Examples**
-
-.. parsed-literal::
-
-   {
-     "max": 10,
-     "min": 5
-   }
+* Why wrap...
 
 
-Non-variation classes
-@@@@@@@@@@@@@@@@@@@@@@
+.. _derived-sequence:
+
+DerivedSequence
+###############
+
+**Biological Definition**
+
+Certain mechanisms of variation result from relocating and
+transforming sequence from another location in the genome.
+
+**Computational Definition**
+
+A relocated sequence is specified by the location of the source
+material and the orientation of that sequence.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "DerivedSequence"
+   * - location
+     - :ref:`SequenceLocation`
+     - 1..1
+     - The location from which the source subsequence is obtained
+   * - transformation
+     - string; enum
+     - 1..1
+     - One of: "none", "reverse", "complement", "reverse-complement"
+
+**Implementation Guidance**
+
+* TODO
+
+
+.. _repeated-sequence:
+
+RepeatedSequence
+################
+
+**Biological Definition**
+
+A contiguous, tandem repeat of a sequence.
+
+**Computational Definition**
+
+A RepeatedSequence is comprised of a `sequence`, specified as a
+SequenceExpression, and a `count` object, which specifies the `min`
+and `max` number of repeats.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "XXX"
+   * - sequence
+     - :ref:`SequenceExpression`
+     - 1..1
+     - ...
+   * - count
+     - :ref:`IntegerRange`
+     - 1..1
+     - ...
+
+**Implementation Guidance**
+
+* At least one of ``count.min`` or ``count.max`` must be specified.
+* If both `count.min` and `count.max` are specified, then they must
+  satisfy ``0 <= count.min <= count.max``.
+
+
+Locations and Intervals
+@@@@@@@@@@@@@@@@@@@@@@@
 
 .. _interval:
 .. _sequenceinterval:
 
-SequenceInterval (Abstract Class)
+SequenceInterval
 #################################
 
 **Biological Definition**
@@ -496,7 +483,7 @@ A contiguous region specified by chromosomal bands features.
 
 .. _location:
 
-Location (Abstract Class)
+Location
 #########################
 
 **Biological Definition**
@@ -708,167 +695,6 @@ named :ref:`Sequence`.
 
 
 
-.. _gene:
-
-Gene
-$$$$
-
-
-**Biological Definition**
-
-Gene generally refers to a region of sequence that has some function.
-Gene is an elusive concept in biology with nuanced meaning that often
-depends on context, including whether the gene makes a transcripts,
-whether the transcript encodes a protein, non-functional ancestral
-elements ("pseudogenes").  In VRS, a gene is a reference to a
-third-party definition of a species-specific gene.
-
-**Computational definition**
-
-External gene definitions are referenced with a CURIE.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Location Id; MUST be unique within document
-   * - type
-     - string
-     - 1..1
-     - Location type; MUST be set to **`Gene`**
-
-**Implementation guidance**
-
-* Gene symbols (e.g., "BRCA1") are unreliable keys.  Implementations
-  MUST NOT use a gene symbol to define a Gene.
-* A gene is specific to a species.  Gene orthologs have distinct
-  records in the recommended databases.  For example, the BRCA1 gene
-  in humans and the Brca1 gene in mouse are orthologs and have
-  distinct records in the previously recommended gene databases.
-* The primary use case for Gene is as a subject of an abundance
-  statement statement.
-* Implementations MUST use gene namespaces available from
-  identifiers.org whenever possible.  Examples include:
-
-    * `hgnc <https://registry.identifiers.org/registry/hgnc>`__
-    * `ncbigene <https://registry.identifiers.org/registry/ncbigene>`__
-    * `ensembl <https://registry.identifiers.org/registry/ensembl>`__
-    * `vgnc <https://registry.identifiers.org/registry/vgnc>`__
-    * `mgi <https://registry.identifiers.org/registry/mgi>`__
-* Implementations SHOULD prefer the `hgnc` namespace for Human
-  variation in order to improve interoperability.
-* Gene MAY be converted to :ref:`sequence-location` using external
-  data. The source of such data and mechanism for implementation is
-  not defined by this specification.
-
-**Example**
-
-The following examples all refer to the Human BRCA1 gene:
-
-.. parsed-literal::
-
-   {
-     'gene': 'ncbigene:672',
-     'type': 'Gene'
-   }
-
-   {
-     'gene': 'hgnc:1100',
-     'type': 'Gene'
-   }
-
-   {
-     'gene': 'ensembl:ENSG00000012048',
-     'type': 'Gene'
-   }
-
-
-**Sources**
-
-* `SequenceOntology: gene (SO:0000704)
-  <http://www.sequenceontology.org/browser/current_release/term/SO:0000704>`__
-  — A region (or regions) that includes all of the sequence elements
-  necessary to encode a functional transcript. A gene may include
-  regulatory regions, transcribed regions and/or other functional
-  sequence regions.
-
-
-.. _state:
-
-State (Abstract Class)
-######################
-
-**Biological Definition**
-
-None.
-
-**Computational Definition**
-
-*State* objects are one of two primary components specifying a VRS
-:ref:`Allele` (in addition to :ref:`Location`), and the designated
-components for representing change (or non-change) of the features
-indicated by the Allele Location. As an abstract class, State currently
-encompasses single and contiguous :ref:`sequence` changes (see :ref:`SequenceState
-<sequence-state>`), with additional types under consideration (see
-:ref:`planned-states`).
-
-.. _sequence-state:
-
-SequenceState
-$$$$$$$$$$$$$
-
-**Biological Definition**
-
-None.
-
-**Computational Definition**
-
-The *SequenceState* class specifically captures a :ref:`sequence` as a
-:ref:`State`. This is the State class to use for representing
-"ref-alt" style variation, including SNVs, MNVs, del, ins, and delins.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "SequenceState"
-   * - sequence
-     - string
-     - 1..1
-     - The string of sequence residues that is to be used as the state for other types.
-
-**Examples**
-
-.. parsed-literal::
-
-    {
-      "sequence": "T",
-      "type": "SequenceState"
-    }
-
-
 .. _variation:
 
 Variation
@@ -895,16 +721,16 @@ subclass defined by the VRS |version| specification is the
 Variations that are not yet covered.
 
 
-.. _molecularvariation:
+.. _MolecularVariation:
 
-MolecularVariation
-@@@@@@@@@@@@@@@@@@
+Molecular Variation
+###################
 
 
 .. _allele:
 
 Allele
-######
+$$$$$$
 
 **Biological Definition**
 
@@ -944,27 +770,27 @@ sequence at a :ref:`Location <Location>`.
      - 1..1
      - Where Allele is located
    * - state
-     - :ref:`State`
+     - :ref:`SequenceExpression` | :ref:`SequenceState`
      - 1..1
-     - State at location
+     - A description of the sequence change or expression
 
 **Implementation Guidance**
 
-* The :ref:`State <State>` and :ref:`Location <Location>` subclasses
-  respectively represent diverse kinds of sequence changes and
-  mechanisms for describing the locations of those changes, including
-  varying levels of precision of sequence location and categories of
-  sequence changes.
+* The :ref:`SequenceState <SequenceState>` and :ref:`Location
+  <Location>` subclasses respectively represent diverse kinds of
+  sequence changes and mechanisms for describing the locations of
+  those changes, including varying levels of precision of sequence
+  location and categories of sequence changes.
 * Implementations MUST enforce values interval.end ≤ sequence_length
   when the Sequence length is known.
 * Alleles are equal only if the component fields are equal: at the
   same location and with the same state.
 * Alleles MAY have multiple related representations on the same
   Sequence type due to normalization differences.
-* Implementations SHOULD normalize Alleles using :ref:`"justified"
+* Implementations SHOULD normalize Alleles using :ref:`fully-justified
   normalization <normalization>` whenever possible to facilitate
   comparisons of variation in regions of representational ambiguity.
-* Implementations MUST normalize Alleles using :ref:`"justified"
+* Implementations MUST normalize Alleles using :ref:`fully-justified
   normalization <normalization>` when generating a
   :ref:`computed-identifiers`.
 * When the alternate Sequence is the same length as the interval, the
@@ -1055,7 +881,7 @@ sequence at a :ref:`Location <Location>`.
 .. _haplotype:
 
 Haplotype
-#########
+$$$$$$$$$
 
 **Biological Definition**
 
@@ -1185,14 +1011,14 @@ order. See :ref:`computed-identifiers` for more information.
 
 
 
-.. _systemicvariation:
+.. _systemic-variation:
 
-SystemicVariation
-@@@@@@@@@@@@@@@@@
+Systemic Variation
+##################
 
 
 AbsoluteAbundance
-#################
+$$$$$$$$$$$$$$$$$
 
 **Biological Definition**
 
@@ -1229,7 +1055,7 @@ Allele or Haplotype, or any object identifiable with a CURIE.
      - 1..1
      - Subject of the relative abundance statement
    * - amount
-     - :ref:`IntegerRange`
+     - `IntegerRange`
      - 1..1
      - At least one of `amount.min` or `amount.max` must be specified
 
@@ -1249,7 +1075,7 @@ Allele or Haplotype, or any object identifiable with a CURIE.
 
 
 RelativeAbundance
-#################
+$$$$$$$$$$$$$$$$$$
 
 **Biological Definition**
 
@@ -1303,13 +1129,13 @@ and a qualitative relative amount.
 
 .. _othervariation:
 
-OtherVariation
-@@@@@@@@@@@@@@
+Other Variation
+################
 
 .. _text:
 
 Text
-####
+$$$$
 
 **Biological Definition**
 
@@ -1375,8 +1201,10 @@ text.
     }
 
 
+.. _variation-set:
+
 VariationSet
-############
+$$$$$$$$$$$$
 
 **Biological Definition**
 
@@ -1512,3 +1340,341 @@ The GA4GH computed identifier for these sets is
 `ga4gh:VS.WVC_R7OJ688EQX3NrgpJfsf_ctQUsVP3`, regardless of the whether
 the Variation objects are inlined or referenced, and regardless of
 order. See :ref:`computed-identifiers` for more information.
+
+
+Primitive Concepts
+@@@@@@@@@@@@@@@@@@
+
+
+.. _curie:
+
+CURIE
+#####
+
+**Computational Definition**
+
+A `CURIE <https://www.w3.org/TR/curie/>`__ formatted string.  A CURIE
+string has the structure ``prefix``:``reference`` (W3C Terminology).
+
+**Implementation Guidance**
+
+* All identifiers in VRS MUST be a valid |curie|, regardless of
+  whether the identifier refers to GA4GH VRS objects or external data.
+* For GA4GH VRS objects, this specification RECOMMENDS using globally
+  unique :ref:`computed-identifiers` for use within *and* between
+  systems.
+* For external data, CURIE-formatted identifiers MUST be used.  When
+  an appropriate namespace exists at `identifiers.org
+  <http://identifiers.org/>`__, that namespace MUST be used.  When an
+  appropriate namespace does not exist at `identifiers.org
+  <http://identifiers.org/>`__, support is implementation-dependent.
+  That is, implementations MAY choose whether and how to support
+  informal or local namespaces.
+* Implementations MUST use CURIE identifiers verbatim. Implementations
+  MAY NOT modify CURIEs in any way (e.g., case-folding).
+
+
+**Examples**
+
+Identifiers for GRCh38 chromosome 19::
+
+    ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+    refseq:NC_000019.10
+    grch38:19
+
+See :ref:`identify` for examples of CURIE-based identifiers for VRS
+objects.
+
+
+.. _gene:
+
+Gene
+####
+
+.. todo:: Verify that we really want to include Gene as a class. Reece
+          still thinks this is useless and perhaps detrimental.
+
+**Biological Definition**
+
+Gene generally refers to a region of sequence that has some function.
+Gene is an elusive concept in biology with nuanced meaning that often
+depends on context, including whether the gene makes a transcripts,
+whether the transcript encodes a protein, non-functional ancestral
+elements ("pseudogenes").  In VRS, a gene is a reference to a
+third-party definition of a species-specific gene.
+
+**Computational definition**
+
+External gene definitions are referenced with a CURIE.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Location Id; MUST be unique within document
+   * - type
+     - string
+     - 1..1
+     - Location type; MUST be set to **`Gene`**
+
+**Implementation guidance**
+
+* Gene symbols (e.g., "BRCA1") are unreliable keys.  Implementations
+  MUST NOT use a gene symbol to define a Gene.
+* A gene is specific to a species.  Gene orthologs have distinct
+  records in the recommended databases.  For example, the BRCA1 gene
+  in humans and the Brca1 gene in mouse are orthologs and have
+  distinct records in the previously recommended gene databases.
+* The primary use case for Gene is as a subject of an abundance
+  statement statement.
+* Implementations MUST use gene namespaces available from
+  identifiers.org whenever possible.  Examples include:
+
+    * `hgnc <https://registry.identifiers.org/registry/hgnc>`__
+    * `ncbigene <https://registry.identifiers.org/registry/ncbigene>`__
+    * `ensembl <https://registry.identifiers.org/registry/ensembl>`__
+    * `vgnc <https://registry.identifiers.org/registry/vgnc>`__
+    * `mgi <https://registry.identifiers.org/registry/mgi>`__
+* Implementations SHOULD prefer the `hgnc` namespace for Human
+  variation in order to improve interoperability.
+* Gene MAY be converted to :ref:`sequence-location` using external
+  data. The source of such data and mechanism for implementation is
+  not defined by this specification.
+
+**Example**
+
+The following examples all refer to the Human BRCA1 gene:
+
+.. parsed-literal::
+
+   {
+     'gene': 'ncbigene:672',
+     'type': 'Gene'
+   }
+
+   {
+     'gene': 'hgnc:1100',
+     'type': 'Gene'
+   }
+
+   {
+     'gene': 'ensembl:ENSG00000012048',
+     'type': 'Gene'
+   }
+
+
+**Sources**
+
+* `SequenceOntology: gene (SO:0000704)
+  <http://www.sequenceontology.org/browser/current_release/term/SO:0000704>`__
+  — A region (or regions) that includes all of the sequence elements
+  necessary to encode a functional transcript. A gene may include
+  regulatory regions, transcribed regions and/or other functional
+  sequence regions.
+
+
+
+.. _IntegerRange:
+
+IntegerRange
+############
+
+**Computational Definition**
+
+An pair of integer values used to specify an inclusive range.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "IntegerRange"
+   * - min
+     - int
+     - 0..1
+     - minimum value; inclusive
+   * - end
+     - int
+     - 0..1
+     - maximum value; inclusive
+
+**Implementation Guidance**
+
+* At least one of min or max must be specified.
+
+**Examples**
+
+.. parsed-literal::
+
+   {
+     "max": 10,
+     "min": 5
+   }
+
+
+.. _Residue:
+
+Residue
+#######
+
+**Biological Definition**
+
+A residue refers to a specific `monomer`_ within the `polymeric
+chain`_ of a `protein`_ or `nucleic acid`_ (Source: `Wikipedia Residue
+page`_).
+
+**Computational Definition**
+
+A character representing a specific residue (i.e., molecular species)
+or groupings of these ("ambiguity codes"), using `one-letter IUPAC
+abbreviations <https://www.genome.jp/kegg/catalog/codes1.html>`_ for
+nucleic acids and amino acids.
+
+
+.. _Sequence:
+
+Sequence
+########
+
+**Biological Definition**
+
+A contiguous, linear polymer of nucleic acid or amino acid residues.
+
+**Computational Definition**
+
+A character string of :ref:`Residues <Residue>` that represents a
+biological sequence using the conventional sequence order (5'-to-3'
+for nucleic acid sequences, and amino-to-carboxyl for amino acid
+sequences). IUPAC ambiguity codes are permitted in Sequences.
+
+**Information Model**
+
+A Sequence is a string, constrained to contain only characters representing IUPAC nucleic acid or
+amino acid codes.
+
+**Implementation Guidance**
+
+* Sequences MAY be empty (zero-length) strings. Empty sequences are used as the
+  replacement Sequence for deletion Alleles.
+* Sequences MUST consist of only uppercase IUPAC abbreviations, including ambiguity codes.
+* A Sequence provides a stable coordinate system by which an :ref:`Allele` MAY be located and
+  interpreted.
+* A Sequence MAY have several roles. A “reference sequence” is any Sequence used
+  to define an :ref:`Allele`. A Sequence that replaces another Sequence is
+  called a “replacement sequence”.
+* In some contexts outside VRS, “reference sequence” may refer
+  to a member of set of sequences that comprise a genome assembly. In the VRS
+  specification, any sequence may be a “reference sequence”, including those in
+  a genome assembly.
+* For the purposes of representing sequence variation, it is not
+  necessary that Sequences be explicitly “typed” (i.e., DNA, RNA, or
+  AA).
+
+
+Deprecated Classes
+@@@@@@@@@@@@@@@@@@
+
+.. _sequence-state:
+
+SequenceState
+#############
+
+.. warning::
+
+   SequenceState is deprecated. It will be removed in VRS 2.0. Use
+   :ref:`LiteralSequence` instead.
+
+**Biological Definition**
+
+None.
+
+**Computational Definition**
+
+The *SequenceState* class specifically captures a :ref:`sequence` as a
+:ref:`State`. This is the State class to use for representing
+"ref-alt" style variation, including SNVs, MNVs, del, ins, and delins.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "SequenceState"
+   * - sequence
+     - string
+     - 1..1
+     - The string of sequence residues that is to be used as the state for other types.
+
+**Examples**
+
+.. parsed-literal::
+
+    {
+      "sequence": "T",
+      "type": "SequenceState"
+    }
+
+
+Obsolete Classes
+@@@@@@@@@@@@@@@@
+
+.. _state:
+
+State
+#####
+
+.. Warning::
+
+   State is obsolete. It was previously an abstract class that was
+   intended for future growth. It was replaced by SequenceExpressions
+   with a superset of the the functionality envisioned for State.
+   Because State was abstract, and therefore never instantiated, it
+   was made obsolete at the same time that SequenceState was
+   deprecated.
+
+
+**Biological Definition**
+
+None.
+
+**Computational Definition**
+
+*State* objects are one of two primary components specifying a VRS
+:ref:`Allele` (in addition to :ref:`Location`), and the designated
+components for representing change (or non-change) of the features
+indicated by the Allele Location. As an abstract class, State currently
+encompasses single and contiguous :ref:`sequence` changes (see :ref:`SequenceState
+<sequence-state>`), with additional types under consideration (see
+:ref:`planned-states`).
+

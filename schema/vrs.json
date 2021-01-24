@@ -163,8 +163,9 @@
                "$ref": "#/definitions/SequenceLocation"
             },
             "transformation": {
-               "default": null,
+               "default": "none",
                "enum": [
+                  "none",
                   "reverse",
                   "complement",
                   "reverse-complement"
@@ -402,20 +403,7 @@
          },
          "properties": {
             "count": {
-               "additionalProperties": false,
-               "properties": {
-                  "max": {
-                     "type": [
-                        "integer",
-                        "null"
-                     ]
-                  },
-                  "min": {
-                     "minimum": 0,
-                     "type": "integer"
-                  }
-               },
-               "type": "object"
+               "$ref": "#/definitions/IntegerRange"
             },
             "sequence": {
                "$ref": "#/definitions/SequenceExpression"
