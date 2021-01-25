@@ -175,8 +175,7 @@ definitions:
         default: "AbsoluteAbundance"
       subject:
         oneOf:
-          - $ref: "#/definitions/Allele"
-          - $ref: "#/definitions/Haplotype"
+          - $ref: "#/definitions/MolecularVariation"
           - $ref: "#/definitions/CURIE"
       amount:
         $ref: "#/definitions/IntegerRange"
@@ -484,8 +483,10 @@ definitions:
 
   IntegerRange:
     description: >-
-      A (min,max) range of integer values. At least one of min or max
-      must be specified.
+      A [min,max] inclusive range of integer values. At least one of
+      min or max must be specified.  An unspecified value indicates an
+      unbounded min or max.  When both min and max are specified, they
+      must satisfy min <= max.
     additionalProperties: false
     type: object
     properties:

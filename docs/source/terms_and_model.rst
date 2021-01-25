@@ -442,13 +442,18 @@ Allele or Haplotype, or any object identifiable with a CURIE.
      - 1..1
      - MUST be "AbsoluteAbundance"
    * - subject
-     - :ref:`Allele` | :ref:`Haplotype` | :ref:`CURIE`
+     - :ref:`MolecularVariation` | :ref:`CURIE`
      - 1..1
      - Subject of the abundance statement
    * - amount
      - `IntegerRange`
      - 1..1
-     - At least one of `amount.min` or `amount.max` must be specified
+     - The inclusive range of integral copies of the subject.
+
+**Implementation Guidance**
+
+* See :ref:`IntegerRange` for an interpretation of the ``amount``
+  attribute.
 
 **Example**
 
@@ -499,7 +504,7 @@ and a qualitative relative amount.
      - 1..1
      - MUST be "RelativeAbundance"
    * - subject
-     - :ref:`MolecularVariation` | :ref:`Gene`
+     - :ref:`MolecularVariation` | :ref:`CURIE`
      - 1..1
      - Subject of the abundance statement
    * - amount
@@ -1327,11 +1332,8 @@ and `max` number of repeats.
 
 **Implementation Guidance**
 
-* At least one of ``count.min`` or ``count.max`` must be specified.
-* If both `count.min` and `count.max` are specified, then they must
-  satisfy ``0 <= count.min <= count.max``.
-
-
+* See :ref:`IntegerRange` for an interpretation of the ``count``
+  attribute.
 
 
 Primitive Concepts
@@ -1506,14 +1508,18 @@ An pair of integer values used to specify an inclusive range.
      - int
      - 0..1
      - minimum value; inclusive
-   * - end
+   * - max
      - int
      - 0..1
      - maximum value; inclusive
 
 **Implementation Guidance**
 
-* At least one of min or max must be specified.
+* At least one of ``min`` or ``max`` must be specified.
+* If both ``min`` and ``max`` are specified, they MUST satisfy ``min
+  <= max``.
+* If ``min == max``, then the range specifies a single integer amount.
+
 
 **Examples**
 
