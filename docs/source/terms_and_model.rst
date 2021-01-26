@@ -414,7 +414,7 @@ $$$$$$$$$$$$$$$$$
 **Biological Definition**
 
 AbsoluteAbundance is the absolute and quantified amount of an entity
-within a genome, cell, or sample.
+within a system, such as a genome, cell, or sample.
 
 **Computational Definition**
 
