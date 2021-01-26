@@ -158,8 +158,6 @@
                "default": "none",
                "enum": [
                   "none",
-                  "reverse",
-                  "complement",
                   "reverse-complement"
                ],
                "type": "string"
