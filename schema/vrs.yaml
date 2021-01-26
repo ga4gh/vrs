@@ -188,7 +188,7 @@ definitions:
     additionalProperties: false
     type: object
     description: >-
-      Relative abundance of a systemic subject such as a gene or
+      Relative abundance of a systemic subject such as a Gene or
       specific type of molecular variation.
     properties:
       _id:
@@ -532,4 +532,3 @@ definitions:
     example:
       type: SequenceState
       sequence: C
-
