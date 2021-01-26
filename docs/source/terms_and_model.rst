@@ -471,7 +471,7 @@ Allele or Haplotype, or any object identifiable with a CURIE.
 
 
 RelativeAbundance
-$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$
 
 **Biological Definition**
 
@@ -1671,4 +1671,3 @@ indicated by the Allele Location. As an abstract class, State
 currently encompasses single and contiguous :ref:`sequence` changes
 (see :ref:`SequenceState`), with additional types under consideration
 (see :ref:`planned-states`).
-
