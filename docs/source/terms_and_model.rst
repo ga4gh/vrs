@@ -418,7 +418,7 @@ within a genome, cell, or sample.
 
 **Computational Definition**
 
-AbsoluteAbundance is represented as a `subject`, which may be an
+AbsoluteAbundance references a `subject`, which may be an
 Allele or Haplotype, or any object identifiable with a CURIE.
 
 **Information Model**
