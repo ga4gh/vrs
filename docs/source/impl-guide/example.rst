@@ -84,13 +84,13 @@ The interval is then 'placed' on a sequence to create the
       "type": "SequenceLocation"
     }
 
-A :ref:`sequence-state` objects consists simply of the replacement sequence, as follows:
+A :ref:`LiteralSequence` object consists simply of the replacement sequence, as follows:
 
 .. code-block:: json
 
     {
       "sequence": "C",
-      "type": "SequenceState"
+      "type": "LiteralSequence"
     }
 
 We are now in a position to construct an :ref:`allele` object using
@@ -110,7 +110,7 @@ the objects defined above:
       },
       "state": {
         "sequence": "C",
-        "type": "SequenceState"
+        "type": "LiteralSequence"
       },
       "type": "Allele"
     }
