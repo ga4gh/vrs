@@ -943,7 +943,7 @@ A :ref:`SequenceInterval` defined by nested inner and outer
 .. _HumanCytoband:
 .. _CytobandInterval:
 
-HumanCytoband and CytobandInterval
+CytobandInterval and HumanCytoband
 ##################################
 
 .. important:: VRS currently supports only human cytobands and
