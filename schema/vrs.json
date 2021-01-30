@@ -3,24 +3,21 @@
    "definitions": {
       "AbsoluteAbundance": {
          "additionalProperties": false,
-         "description": "Absolute abundance of a systemic subject such as a Gene or specific type of molecular variation.",
+         "description": "Absolute abundance of a systemic subject such as a gene or specific type of molecular variation.",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
             },
             "amount": {
-               "$ref": "#/definitions/Range"
+               "$ref": "#/definitions/IntegerRange"
             },
             "subject": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Allele"
+                     "$ref": "#/definitions/MolecularVariation"
                   },
                   {
-                     "$ref": "#/definitions/Haplotype"
-                  },
-                  {
-                     "$ref": "#/definitions/Gene"
+                     "$ref": "#/definitions/CURIE"
                   }
                ]
             },
@@ -158,10 +155,9 @@
                "$ref": "#/definitions/SequenceLocation"
             },
             "transformation": {
-               "default": null,
+               "default": "none",
                "enum": [
-                  "reverse",
-                  "complement",
+                  "none",
                   "reverse-complement"
                ],
                "type": "string"
@@ -180,9 +176,6 @@
          "additionalProperties": false,
          "description": "A reference to an external gene system, used as a location for variation.  Currently, the `ncbigene` namespace is required. See https://registry.identifiers.org/registry/ncbigene.",
          "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
             "gene_id": {
                "$ref": "#/definitions/CURIE"
             },
@@ -222,6 +215,39 @@
                "default": "Haplotype",
                "enum": [
                   "Haplotype"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "IntegerRange": {
+         "additionalProperties": false,
+         "description": "A [min,max] inclusive range of integer values. At least one of min or max must be specified.  An unspecified value indicates an unbounded min or max.  When both min and max are specified, they must satisfy min <= max.",
+         "example": {
+            "max": 10,
+            "min": 5,
+            "type": "IntegerRange"
+         },
+         "properties": {
+            "max": {
+               "default": null,
+               "type": [
+                  "integer",
+                  "null"
+               ]
+            },
+            "min": {
+               "default": null,
+               "type": [
+                  "integer",
+                  "null"
+               ]
+            },
+            "type": {
+               "default": "IntegerRange",
+               "enum": [
+                  "IntegerRange"
                ],
                "type": "string"
             }
@@ -318,35 +344,9 @@
             }
          ]
       },
-      "Range": {
-         "additionalProperties": false,
-         "description": "A (min,max) range of integer values. At least one of min or max must be specified.",
-         "example": {
-            "end": 22,
-            "start": 11,
-            "type": "Range"
-         },
-         "properties": {
-            "max": {
-               "default": null,
-               "type": [
-                  "integer",
-                  "null"
-               ]
-            },
-            "min": {
-               "default": null,
-               "type": [
-                  "integer",
-                  "null"
-               ]
-            }
-         },
-         "type": "object"
-      },
       "RelativeAbundance": {
          "additionalProperties": false,
-         "description": "Relative abundance of a systemic subject such as a Gene or specific type of molecular variation.",
+         "description": "Relative abundance of a systemic subject such as a gene or specific type of molecular variation.",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
@@ -367,7 +367,7 @@
                      "$ref": "#/definitions/MolecularVariation"
                   },
                   {
-                     "$ref": "#/definitions/Gene"
+                     "$ref": "#/definitions/CURIE"
                   }
                ]
             },
@@ -393,20 +393,7 @@
          },
          "properties": {
             "count": {
-               "additionalProperties": false,
-               "properties": {
-                  "max": {
-                     "type": [
-                        "integer",
-                        "null"
-                     ]
-                  },
-                  "min": {
-                     "minimum": 0,
-                     "type": "integer"
-                  }
-               },
-               "type": "object"
+               "$ref": "#/definitions/IntegerRange"
             },
             "sequence": {
                "$ref": "#/definitions/SequenceExpression"

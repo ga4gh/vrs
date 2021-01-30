@@ -79,8 +79,8 @@ definitions:
         $ref: "#/definitions/CURIE"
       type:
         type: string
-        enum: [Allele]
-        default: Allele
+        enum: ["Allele"]
+        default: "Allele"
       location:
         oneOf:
           - $ref: "#/definitions/CURIE"
@@ -126,8 +126,8 @@ definitions:
         $ref: "#/definitions/CURIE"
       type:
         type: string
-        enum: [Text]
-        default: Text
+        enum: ["Text"]
+        default: "Text"
       definition:
         type: string
         description: >-
@@ -164,22 +164,21 @@ definitions:
     additionalProperties: false
     type: object
     description: >-
-      Absolute abundance of a systemic subject such as a Gene or
+      Absolute abundance of a systemic subject such as a gene or
       specific type of molecular variation.
     properties:
       _id:
         $ref: "#/definitions/CURIE"
       type:
         type: string
-        enum: [AbsoluteAbundance]
-        default: AbsoluteAbundance
+        enum: ["AbsoluteAbundance"]
+        default: "AbsoluteAbundance"
       subject:
         oneOf:
-          - $ref: "#/definitions/Allele"
-          - $ref: "#/definitions/Haplotype"
-          - $ref: "#/definitions/Gene"
+          - $ref: "#/definitions/MolecularVariation"
+          - $ref: "#/definitions/CURIE"
       amount:
-        $ref: "#/definitions/Range"
+        $ref: "#/definitions/IntegerRange"
     required:
       - type
       - subject
@@ -196,12 +195,12 @@ definitions:
         $ref: "#/definitions/CURIE"
       type:
         type: string
-        enum: [RelativeAbundance]
-        default: RelativeAbundance
+        enum: ["RelativeAbundance"]
+        default: "RelativeAbundance"
       subject:
         oneOf:
           - $ref: "#/definitions/MolecularVariation"
-          - $ref: "#/definitions/Gene"
+          - $ref: "#/definitions/CURIE"
       amount:
         type: string
         enum: ["gt", "ge", "eq", "le", "lt"]
@@ -228,8 +227,8 @@ definitions:
     properties:
       type:
         type: string
-        enum: [ChromosomeLocation]
-        default: ChromosomeLocation
+        enum: ["ChromosomeLocation"]
+        default: "ChromosomeLocation"
       _id:
         $ref: "#/definitions/CURIE"
       species_id:
@@ -297,8 +296,8 @@ definitions:
     properties:
       type:
         type: string
-        enum: [SimpleInterval]
-        default: SimpleInterval
+        enum: ["SimpleInterval"]
+        default: "SimpleInterval"
       start:
         type: ["integer", "null"]
         default: null
@@ -319,8 +318,8 @@ definitions:
     properties:
       type:
         type: string
-        enum: [NestedInterval]
-        default: NestedInterval
+        enum: ["NestedInterval"]
+        default: "NestedInterval"
       inner:
         $ref: '#/definitions/SimpleInterval'
       outer:
@@ -373,8 +372,8 @@ definitions:
         $ref: "#/definitions/SequenceLocation"
       transformation:
         type: string
-        enum: ["reverse", "complement", "reverse-complement"]
-        default: null
+        enum: ["none", "reverse", "complement", "reverse-complement"]
+        default: "none"
 
   RepeatedSequence:
     description: >-
@@ -389,14 +388,7 @@ definitions:
       sequence:
         $ref: "#/definitions/SequenceExpression"
       count:
-        type: object
-        additionalProperties: false
-        properties:
-          min:
-            type: integer
-            minimum: 0
-          max:
-            type: ["integer", "null"]
+        $ref: "#/definitions/IntegerRange"
     required:
       - type
       - count
@@ -414,12 +406,10 @@ definitions:
     type: object
     additionalProperties: false
     properties:
-      _id:
-        $ref: "#/definitions/CURIE"
       type:
         type: string
-        enum: [Gene]
-        default: Gene
+        enum: ["Gene"]
+        default: "Gene"
       gene_id:
         $ref: "#/definitions/CURIE"
 
@@ -431,8 +421,8 @@ definitions:
     properties:
       type:
         type: string
-        enum: [CytobandInterval]
-        default: CytobandInterval
+        enum: ["CytobandInterval"]
+        default: "CytobandInterval"
       start:
         $ref: "#/definitions/Cytoband"
       end:
@@ -491,13 +481,19 @@ definitions:
     pattern: '^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$'
     example: "q22.3"
 
-  Range:
+  IntegerRange:
     description: >-
-      A (min,max) range of integer values. At least one of min or max
-      must be specified.
+      A [min,max] inclusive range of integer values. At least one of
+      min or max must be specified.  An unspecified value indicates an
+      unbounded min or max.  When both min and max are specified, they
+      must satisfy min <= max.
     additionalProperties: false
     type: object
     properties:
+      type:
+        type: string
+        enum: ["IntegerRange"]
+        default: "IntegerRange"
       min:
         type: ["integer", "null"]
         default: null
@@ -505,9 +501,9 @@ definitions:
         type: ["integer", "null"]
         default: null
     example:
-      type: Range
-      start: 11
-      end: 22
+      type: "IntegerRange"
+      min: 5
+      max: 10
 
 
   # =============================================================================
@@ -525,8 +521,8 @@ definitions:
     properties:
       type:
         type: string
-        enum: [SequenceState]
-        default: SequenceState
+        enum: ["SequenceState"]
+        default: "SequenceState"
       sequence:
         type: string
         nullable: false
@@ -536,4 +532,3 @@ definitions:
     example:
       type: SequenceState
       sequence: C
-
