@@ -273,13 +273,13 @@ $$$$$$$$$
 
 **Biological Definition**
 
-A specific combination of Alleles that occur together on single
-sequence in one or more individuals.
+A specific combination of Alleles that are *in-cis*, occurring
+on the same physical molecule.
 
 **Computational Definition**
 
-A specific combination of non-overlapping Alleles that co-occur on the
-same reference sequence.
+A set of non-overlapping :ref:`Alleles <Allele>` that co-occur on the same
+reference sequence.
 
 **Information Model**
 
@@ -358,7 +358,7 @@ An APOE-ε1 Haplotype with inline Alleles::
           },
           "state": {
             "sequence": "C",
-            "type": "SequenceState"
+            "type": "LiteralSequence"
           },
           "type": "Allele"
         },
@@ -374,7 +374,7 @@ An APOE-ε1 Haplotype with inline Alleles::
           },
           "state": {
             "sequence": "T",
-            "type": "SequenceState"
+            "type": "LiteralSequence"
           },
           "type": "Allele"
         }
@@ -393,7 +393,7 @@ The same APOE-ε1 Haplotype with referenced Alleles::
     }
 
 The GA4GH computed identifier for these Haplotypes is
-`ga4gh:VH.NAVnEuaP9gf41OxnPM56XxWQfdFNcUxJ`, regardless of the whether
+`ga4gh:VH.NAVnEuaP9gf41OxnPM56XxWQfdFNcUxJ`, regardless of whether
 the Variation objects are inlined or referenced, and regardless of
 order. See :ref:`computed-identifiers` for more information.
 
