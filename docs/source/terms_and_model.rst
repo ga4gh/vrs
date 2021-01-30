@@ -940,11 +940,10 @@ A :ref:`SequenceInterval` defined by nested inner and outer
    }
 
 
-.. _HumanCytoband:
 .. _CytobandInterval:
 
-CytobandInterval and HumanCytoband
-##################################
+CytobandInterval
+################
 
 .. important:: VRS currently supports only human cytobands and
    cytoband intervals. Implementers wishing to use VRS for other
@@ -978,13 +977,13 @@ A giesma-stained band on a human chromosome.
      - 1..1
      - MUST be "CytobandInterval"
    * - start
-     - HumanCytoband (see below)
+     - HumanCytoband
      - 1..1
-     - name of feature start
+     - name of feature start (see below)
    * - end
-     - HumanCytoband (see below)
+     - HumanCytoband
      - 1..1
-     - name of feature end
+     - name of feature end  (see below)
 
 A HumanCytoband is a string constrained to match the regular expression
 ``^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$``.
