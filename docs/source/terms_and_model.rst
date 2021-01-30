@@ -760,6 +760,215 @@ order. See :ref:`computed-identifiers` for more information.
 Locations and Intervals
 @@@@@@@@@@@@@@@@@@@@@@@
 
+
+.. _Location:
+
+Location
+#########################
+
+**Biological Definition**
+
+As used by biologists, the precision of “location” (or “locus”) varies
+widely, ranging from precise start and end numerical coordinates
+defining a Location, to bounded regions of a sequence, to conceptual
+references to named genomic features (e.g., chromosomal bands, genes,
+exons) as proxies for the Locations on an implied reference sequence.
+
+**Computational Definition**
+
+The `Location` abstract class refers to position of a contiguous
+segment of a biological sequence.  The most common and concrete
+Location is a :ref:`SequenceLocation`, i.e., a Location based on a
+named sequence and an Interval on that sequence. Additional
+:ref:`planned-locations` may also be conceptual or symbolic locations,
+such as a cytoband region or a gene. Any of these may be used as the
+Location for Variation.
+
+**Implementation Guidance**
+
+* Location refers to a position.  Although it MAY imply a sequence,
+  the two concepts are not interchangeable, especially when the
+  location is non-specific (e.g., a range) or symbolic (a gene).
+
+
+.. _ChromosomeLocation:
+
+ChromosomeLocation
+$$$$$$$$$$$$$$$$$$
+
+**Biological Definition**
+
+Chromosomal locations based on named features, including named landmarks,
+cytobands, and regions observed from chromosomal staining techniques.
+
+**Computational Definition**
+
+A :ref:`Location` on a chromosome defined by a species and chromosome name.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Location id; MUST be unique within document
+   * - type
+     - string
+     - 1..1
+     - MUST be "ChromosomeLocation"
+   * - species
+     - :ref:`CURIE`
+     - 1..1
+     - An external reference to a species taxonomy.  Default:
+       "taxonomy:9606" (human).  See Implementation Guidance, below.
+   * - chr
+     - string
+     - 1..1
+     - The symbolic chromosome name
+   * - interval
+     - :ref:`CytobandInterval`
+     - 1..1
+     - The chromosome region based on feature names
+
+
+**Implementation Guidance**
+
+* ChromosomeLocation is intended to enable the representation of
+  cytogenetic results from karyotyping or low-resolution molecular
+  methods, particularly those found in older scientific literature.
+  Precise :ref:`SequenceLocation` should be preferred when
+  nucleotide-scale location is known.
+* `species` is specified using the NCBI taxonomy.  The CURIE prefix
+  MUST be "taxonomy", corresponding to the `NCBI taxonomy prefix at
+  identifiers.org
+  <https://registry.identifiers.org/registry/taxonomy>`__, and the
+  CURIE reference MUST be an NCBI taxonomy identifier (e.g., 9606 for
+  Homo sapiens).
+* ChromosomeLocation is intended primarily for human chromosomes.
+  Support for other species is possible and will be considered based
+  on community feedback.
+* `chromosome` is an archetypal chromosome name. Valid values for, and
+  the syntactic structure of, `chromosome` depends on the species.
+  `chromosome` MUST be an official sequence name from `NCBI Assembly
+  <https://www.ncbi.nlm.nih.gov/assembly>`__.  For humans, valid
+  chromosome names are 1..22, X, Y (case-sensitive).
+* `interval` refers to a contiguous region specified named markers,
+  which are presumed to exist on the specified chromosome.  See
+  :ref:`CytobandInterval` for additional information.
+* The conversion of ChromosomeLocation instances to SequenceLocation
+  instances is out-of-scope for VRS.  When converting `start` and
+  `end` to SequenceLocations, the positions MUST be interpreted as
+  inclusive ranges that cover the maximal extent of the region.
+* Data for converting cytogenetic bands to precise sequence
+  coordinates are available at `NCBI GDP
+  <https://ftp.ncbi.nlm.nih.gov/pub/gdp/>`__, `UCSC GRCh37 (hg19)
+  <http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/cytoBand.txt.gz>`__,
+  `UCSC GRCh38 (hg38)
+  <http://hgdownload.cse.ucsc.edu/goldenPath/hg38/database/cytoBand.txt.gz>`__,
+  and `bioutils (Python)
+  <https://bioutils.readthedocs.io/en/stable/reference/bioutils.cytobands.html>`__.
+* See also the rationale
+  for :ref:`dd-not-using-external-chromosome-declarations`.
+
+
+**Examples**
+
+.. parsed-literal::
+
+   {
+     "chr": "11",
+     "interval": {
+       "end": "q22.3",
+       "start": "q22.2",
+       "type": "CytobandInterval"
+       },
+     "species_id": "taxonomy:9606",
+     "type": "ChromosomeLocation"
+   }
+
+.. _SequenceLocation:
+
+SequenceLocation
+$$$$$$$$$$$$$$$$
+
+A *Sequence Location* is a specified subsequence of a reference :ref:`Sequence`.
+The reference is typically a chromosome, transcript, or protein sequence.
+
+**Computational Definition**
+
+A subsequence defined as an interval on a reference :ref:`Sequence`.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - _id
+     - :ref:`CURIE`
+     - 0..1
+     - Location id; MUST be unique within document
+   * - type
+     - string
+     - 1..1
+     - MUST be "SequenceLocation"
+   * - sequence_id
+     - :ref:`CURIE`
+     - 1..1
+     - A VRS :ref:`Computed Identifier <computed-identifiers>`
+       for the reference :ref:`Sequence`.
+   * - interval
+     - :ref:`SequenceInterval`
+     - 1..1
+     - Position of feature on reference sequence specified by sequence_id.
+
+**Implementation Guidance**
+
+* For a :ref:`Sequence` of length *n*:
+   * 0 ≤ *interval.start* ≤ *interval.end* ≤ *n*
+   * inter-residue coordinate 0 refers to the point before the start of the Sequence
+   * inter-residue coordinate n refers to the point after the end of the Sequence.
+* Coordinates MUST refer to a valid Sequence. VRS does not support
+  referring to intronic positions within a transcript sequence,
+  extrapolations beyond the ends of sequences, or other implied
+  sequence.
+
+.. important:: HGVS permits variants that refer to non-existent
+               sequence. Examples include coordinates extrapolated
+               beyond the bounds of a transcript and intronic
+               sequence. Such variants are not representable using VRS
+               and MUST be projected to a genomic reference in order
+               to be represented.
+
+**Examples**
+
+.. parsed-literal::
+
+    {
+      "interval": {
+        "end": 44908822,
+        "start": 44908821,
+        "type": "SimpleInterval"
+      },
+      "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+      "type": "SequenceLocation"
+    }
+
 .. _Interval:
 .. _SequenceInterval:
 
@@ -1013,218 +1222,6 @@ A HumanCytoband is a string constrained to match the regular expression
      "start": "p22.3",
      "type": "CytobandInterval"
    }
-
-.. _Location:
-
-Location
-#########################
-
-**Biological Definition**
-
-As used by biologists, the precision of “location” (or “locus”) varies
-widely, ranging from precise start and end numerical coordinates
-defining a Location, to bounded regions of a sequence, to conceptual
-references to named genomic features (e.g., chromosomal bands, genes,
-exons) as proxies for the Locations on an implied reference sequence.
-
-**Computational Definition**
-
-The `Location` abstract class refers to position of a contiguous
-segment of a biological sequence.  The most common and concrete
-Location is a :ref:`SequenceLocation`, i.e., a Location based on a
-named sequence and an Interval on that sequence. Additional
-:ref:`planned-locations` may also be conceptual or symbolic locations,
-such as a cytoband region or a gene. Any of these may be used as the
-Location for Variation.
-
-**Implementation Guidance**
-
-* Location refers to a position.  Although it MAY imply a sequence,
-  the two concepts are not interchangeable, especially when the
-  location is non-specific (e.g., a range) or symbolic (a gene).
-
-
-.. _ChromosomeLocation:
-
-ChromosomeLocation
-$$$$$$$$$$$$$$$$$$
-
-**Biological Definition**
-
-Chromosomal locations based on named features, including named landmarks,
-cytobands, and regions observed from chromosomal staining techniques.
-
-**Computational Definition**
-
-A :ref:`Location` on a chromosome defined by a species and chromosome name.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Location id; MUST be unique within document
-   * - type
-     - string
-     - 1..1
-     - MUST be "ChromosomeLocation"
-   * - species
-     - :ref:`CURIE`
-     - 1..1
-     - An external reference to a species taxonomy.  Default:
-       "taxonomy:9606" (human).  See Implementation Guidance, below.
-   * - chr
-     - string
-     - 1..1
-     - The symbolic chromosome name
-   * - interval
-     - :ref:`CytobandInterval`
-     - 1..1
-     - The chromosome region based on feature names
-
-
-**Implementation Guidance**
-
-* ChromosomeLocation is intended to enable the representation of
-  cytogenetic results from karyotyping or low-resolution molecular
-  methods, particularly those found in older scientific literature.
-  Precise :ref:`SequenceLocation` should be preferred when
-  nucleotide-scale location is known.
-* `species` is specified using the NCBI taxonomy.  The CURIE prefix
-  MUST be "taxonomy", corresponding to the `NCBI taxonomy prefix at
-  identifiers.org
-  <https://registry.identifiers.org/registry/taxonomy>`__, and the
-  CURIE reference MUST be an NCBI taxonomy identifier (e.g., 9606 for
-  Homo sapiens).
-* ChromosomeLocation is intended primarily for humans.  Support for
-  other species is possible and will be considered based on community
-  feedback.
-* `chromosome` is an archetypal chromosome name. Valid values for, and
-  the syntactic structure of, `chromosome` depends on the species.
-  `chromosome` MUST be an official sequence name from `NCBI Assembly
-  <https://www.ncbi.nlm.nih.gov/assembly>`__.  For humans, valid
-  chromosome names are 1..22, X, Y (case-sensitive).
-* `interval` refers to a contiguous region specified named markers,
-  which are presumed to exist on the specified chromosome.  See
-  :ref:`CytobandInterval` for additional information.
-* The conversion of ChromosomeLocation instances to SequenceLocation
-  instances is out-of-scope for VRS.  When converting `start` and
-  `end` to SequenceLocations, the positions MUST be interpreted as
-  inclusive ranges that cover the maximal extent of the region.
-* Data for converting cytogenetic bands to precise sequence
-  coordinates are available at `NCBI GDP
-  <https://ftp.ncbi.nlm.nih.gov/pub/gdp/>`__, `UCSC GRCh37 (hg19)
-  <http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/cytoBand.txt.gz>`__,
-  `UCSC GRCh38 (hg38)
-  <http://hgdownload.cse.ucsc.edu/goldenPath/hg38/database/cytoBand.txt.gz>`__,
-  and `bioutils (Python)
-  <https://bioutils.readthedocs.io/en/stable/reference/bioutils.cytobands.html>`__.
-* See also the rationale
-  for :ref:`dd-not-using-external-chromosome-declarations`.
-
-
-**Examples**
-
-.. parsed-literal::
-
-   {
-     "chr": "11",
-     "interval": {
-       "end": "q22.3",
-       "start": "q22.2",
-       "type": "CytobandInterval"
-       },
-     "species_id": "taxonomy:9606",
-     "type": "ChromosomeLocation"
-   }
-
-.. _SequenceLocation:
-
-SequenceLocation
-$$$$$$$$$$$$$$$$
-
-**Biological Definition**
-
-A specified subsequence within another sequence that is used as a reference sequence.
-
-**Computational Definition**
-
-A Location subclass for describing a defined :ref:`SequenceInterval` on a
-named :ref:`Sequence`.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Location id; MUST be unique within document
-   * - type
-     - string
-     - 1..1
-     - MUST be "SequenceLocation"
-   * - sequence_id
-     - :ref:`CURIE`
-     - 1..1
-     - An id mapping to the :ref:`computed-identifiers` of the external database Sequence containing the sequence to be located.
-   * - interval
-     - :ref:`SequenceInterval`
-     - 1..1
-     - Position of feature on reference sequence specified by sequence_id.
-
-**Implementation Guidance**
-
-* For a :ref:`Sequence` of length *n*:
-   * 0 ≤ *interval.start* ≤ *interval.end* ≤ *n*
-   * inter-residue coordinate 0 refers to the point before the start of the Sequence
-   * inter-residue coordinate n refers to the point after the end of the Sequence.
-* Coordinates MUST refer to a valid Sequence. VRS does not support
-  referring to intronic positions within a transcript sequence,
-  extrapolations beyond the ends of sequences, or other implied
-  sequence.
-
-.. important:: HGVS permits variants that refer to non-existent
-               sequence. Examples include coordinates extrapolated
-               beyond the bounds of a transcript and intronic
-               sequence. Such variants are not representable using VRS
-               and MUST be projected to a genomic reference in order
-               to be represented.
-
-**Examples**
-
-.. parsed-literal::
-
-    {
-      "interval": {
-        "end": 44908822,
-        "start": 44908821,
-        "type": "SimpleInterval"
-      },
-      "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
-      "type": "SequenceLocation"
-    }
-
-
-
 
 .. _SequenceExpression:
 
