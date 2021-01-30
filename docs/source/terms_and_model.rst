@@ -558,8 +558,7 @@ only by humans.
 
 **Computational Definition**
 
-`Text` variation captures descriptions of variation as unparsed
-text.
+A free-text description of variation.
 
 **Information Model**
 
@@ -584,7 +583,8 @@ text.
    * - definition
      - string
      - 1..1
-     - The textual variation representation not parsable by other subclasses of Variation.
+     - The textual variation representation not representable by
+       other subclasses of Variation.
 
 **Implementation Guidance**
 
@@ -610,7 +610,7 @@ text.
 .. parsed-literal::
 
     {
-      "definition": "APOE loss",
+      "definition": "Microsatellite Instability High",
       "type": "Text"
     }
 
