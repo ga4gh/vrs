@@ -92,7 +92,12 @@ Variation
 @@@@@@@@@
 
 The Variation class is the conceptual root of all types of variation,
-both current and future.
+both current and future, and the *Variation* abstract class is the
+top-level object in the :ref:`vr-schema-diagram`. Types of variation
+are widely varied, and there are several :ref:`planned-variation`
+currently under consideration to capture this diversity. In VRS,
+Variation types are broadly categorized as a :ref:`MolecularVariation`,
+a :ref:`SystemicVariation`, or a :ref:`utility subclass <othervariation>`.
 
 **Biological Definition**
 
@@ -102,14 +107,7 @@ individuals.
 
 **Computational Definition**
 
-The *Variation* abstract class is the top-level object in the
-:ref:`vr-schema-diagram` and represents the concept of a molecular
-state. The representation and types of molecular states are widely
-varied, and there are several :ref:`planned-variation` currently under
-consideration to capture this diversity. The primary Variation
-subclass defined by the VRS |version| specification is the
-:ref:`Allele`, with the :ref:`text` subclass for capturing other
-Variations that are not yet covered.
+Variation is a representation of the state of one or more molecules.
 
 
 .. _MolecularVariation:
@@ -117,24 +115,34 @@ Variations that are not yet covered.
 Molecular Variation
 ###################
 
+Molecular Variation is a :ref:`variation` of a contiguous molecule.
 
 .. _allele:
 
 Allele
 $$$$$$
 
+.. note:: The terms *allele* and *variant* are often used interchangeably,
+   although this use may mask subtle distinctions made by some users.
+
+   * In the genetics community, *allele* may also refer to a
+     haplotype.
+   * *Allele* connotes a state whereas *variant* connotes a change
+     between states. This distinction makes it awkward to use *variant*
+     to represent a refrence-agreement state at a Sequence Location,
+     and was one of the factors that influenced the preference of
+     *Allele* over *Variant* as the primary subject of annotations.
+   * Read more: Using :ref:`allele-not-variant`.
+
 **Biological Definition**
 
 One of a number of alternative forms of the same gene or same genetic
 locus. In the context of biological sequences, “allele” refers to one
-of a set of specific changes within a :ref:`Sequence`. In the context
-of VRS, Allele refers to a Sequence or Sequence change with respect to
-a reference sequence, without regard to genes or other features.
+of a set of specific changes within a :ref:`Sequence`.
 
 **Computational Definition**
 
-An Allele is an assertion of the :ref:`State <State>` of a biological
-sequence at a :ref:`Location <Location>`.
+An Allele is the state of a molecule at a specified :ref:`Location`.
 
 **Information Model**
 
@@ -167,8 +175,8 @@ sequence at a :ref:`Location <Location>`.
 
 **Implementation Guidance**
 
-* The :ref:`SequenceState <SequenceState>` and :ref:`Location
-  <Location>` subclasses respectively represent diverse kinds of
+* The :ref:`SequenceExpression` and :ref:`Location`
+  subclasses respectively represent diverse kinds of
   sequence changes and mechanisms for describing the locations of
   those changes, including varying levels of precision of sequence
   location and categories of sequence changes.
@@ -182,7 +190,7 @@ sequence at a :ref:`Location <Location>`.
   normalization <normalization>` whenever possible to facilitate
   comparisons of variation in regions of representational ambiguity.
 * Implementations MUST normalize Alleles using :ref:`fully-justified
-  normalization <normalization>` when generating a
+  normalization <normalization>` when generating
   :ref:`computed-identifiers`.
 * When the alternate Sequence is the same length as the interval, the
   lengths of the reference Sequence and imputed Sequence are the
@@ -191,8 +199,8 @@ sequence at a :ref:`Location <Location>`.
   is shorter than the length of the interval, the imputed Sequence is
   shorter than the reference Sequence, and conversely for replacements
   that are larger than the interval.
-* When the replacement is ``""`` (the empty string), the Allele refers to
-  a deletion at this location.
+* When the state is a :ref:`LiteralSequence` of ``""`` (the empty
+  string), the Allele refers to a deletion at this location.
 * The Allele entity is based on Sequence and is intended to be used
   for intragenic and extragenic variation. Alleles are not explicitly
   associated with genes or other features.
@@ -204,22 +212,11 @@ sequence at a :ref:`Location <Location>`.
   the biological mechanism by which it was created. For instance, two
   non-adjacent single residue Alleles could be represented by a single
   contiguous multi-residue Allele.
-* The terms "allele" and "variant" are often used interchangeably,
-  although this use may mask subtle distinctions made by some users.
-
-   * In the genetics community, "allele" may also refer to a
-     haplotype.
-   * "Allele" connotes a state whereas "variant" connotes a change
-     between states. This distinction makes it awkward to use variant
-     to refer to the concept of an unchanged position in a Sequence
-     and was one of the factors that influenced the preference of
-     “Allele” over “Variant” as the primary subject of annotations.
-   * See :ref:`Use “Allele” rather than “Variant” <use-allele>` for
-     further details.
 * When a trait has a known genetic basis, it is typically represented
   computationally as an association with an Allele.
-* This specification's definition of Allele applies to all Sequence
-  types (DNA, RNA, AA).
+* This specification's definition of Allele applies to any
+  :ref:`Location`, including locations on RNA or protein
+  :ref:`Sequence`.
 
 **Examples**
 
@@ -402,7 +399,7 @@ order. See :ref:`computed-identifiers` for more information.
 
 
 
-.. _systemic-variation:
+.. _SystemicVariation:
 
 Systemic Variation
 ##################
@@ -525,7 +522,7 @@ and a qualitative relative amount.
     }
 
 
-.. _othervariation:
+.. _OtherVariation:
 
 Other Variation
 ################
@@ -1399,7 +1396,7 @@ Gene
 
 **Biological Definition**
 
-Gene generally refers to a region of sequence that has some function.
+Gene generally refers to a region of DNA that has some function.
 Gene is an elusive concept in biology with nuanced meaning that often
 depends on context, including whether the gene makes a transcripts,
 whether the transcript encodes a protein, non-functional ancestral
