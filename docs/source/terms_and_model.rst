@@ -86,7 +86,7 @@ Information Model Principles
 
 
 
-.. _variation:
+.. _Variation:
 
 Variation
 @@@@@@@@@
@@ -117,7 +117,7 @@ Molecular Variation
 
 Molecular Variation is a :ref:`variation` of a contiguous molecule.
 
-.. _allele:
+.. _Allele:
 
 Allele
 $$$$$$
@@ -266,7 +266,7 @@ An Allele is the state of a molecule at a specified :ref:`Location`.
   'variant' sequence at a locus.
 
 
-.. _haplotype:
+.. _Haplotype:
 
 Haplotype
 $$$$$$$$$
@@ -407,6 +407,8 @@ Systemic Variation
 Systemic Variation is a :ref:`Variation` of multiple molecules in
 the context of a system, such as a genome, cell, or sample.
 
+.. _AbsoluteAbundance:
+
 AbsoluteAbundance
 $$$$$$$$$$$$$$$$$
 
@@ -529,7 +531,7 @@ and a qualitative relative amount.
 Other Variation
 ################
 
-.. _text:
+.. _Text:
 
 Text
 $$$$
@@ -598,7 +600,7 @@ text.
     }
 
 
-.. _variation-set:
+.. _VariationSet:
 
 VariationSet
 $$$$$$$$$$$$
@@ -993,7 +995,7 @@ A Cytoband is a string constrained to match the regular expression
      "type": "CytobandInterval"
    }
 
-.. _location:
+.. _Location:
 
 Location
 #########################
@@ -1010,7 +1012,7 @@ exons) as proxies for the Locations on an implied reference sequence.
 
 The `Location` abstract class refers to position of a contiguous
 segment of a biological sequence.  The most common and concrete
-Location is a :ref:`sequence-location`, i.e., a Location based on a
+Location is a :ref:`SequenceLocation`, i.e., a Location based on a
 named sequence and an Interval on that sequence. Additional
 :ref:`planned-locations` may also be conceptual or symbolic locations,
 such as a cytoband region or a gene. Any of these may be used as the
@@ -1023,7 +1025,7 @@ Location for Variation.
   location is non-specific (e.g., a range) or symbolic (a gene).
 
 
-.. _chromosomelocation:
+.. _ChromosomeLocation:
 
 ChromosomeLocation
 $$$$$$$$$$$$$$$$$$
@@ -1128,8 +1130,7 @@ chromosomal features.
      "type": "ChromosomeLocation"
    }
 
-.. _sequence-location:
-.. _sequencelocation:
+.. _SequenceLocation:
 
 SequenceLocation
 $$$$$$$$$$$$$$$$
@@ -1255,7 +1256,7 @@ parallelism with other SequenceExpressions.
      - The string representation of the sequence
 
 
-.. _derived-sequence:
+.. _DerivedSequence:
 
 DerivedSequence
 ###############
@@ -1298,7 +1299,7 @@ material and the orientation of that sequence.
 
 
 
-.. _repeated-sequence:
+.. _RepeatedSequence:
 
 RepeatedSequence
 ################
@@ -1354,7 +1355,7 @@ A *Molecular Feature* is a named entity that can be mapped to a
 some examples of common biological entities that may be Molecular
 Features.
 
-.. _gene:
+.. _Gene:
 
 Gene
 ####
@@ -1452,7 +1453,7 @@ Primitive Concepts
 @@@@@@@@@@@@@@@@@@
 
 
-.. _curie:
+.. _CURIE:
 
 CURIE
 #####
@@ -1656,7 +1657,7 @@ The *SequenceState* class specifically captures a :ref:`sequence` as a
     }
 
 
-.. _state:
+.. _State:
 
 State
 #####
