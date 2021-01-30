@@ -405,7 +405,8 @@ Systemic Variation
 ##################
 
 Systemic Variation is a :ref:`Variation` of multiple molecules in
-the context of a system, such as a genome, cell, or sample.
+the context of a system, such as a genome, cell, sample, or homologous
+chromosomal Locations.
 
 .. _AbsoluteAbundance:
 
@@ -418,8 +419,8 @@ amplification and copy loss.
 
 **Computational Definition**
 
-AbsoluteAbundance is the absolute quantity of a :ref:`MolecularFeature`
-or :ref:`MolecularVariation` within a system, such as a genome, cell,
+AbsoluteAbundance is the absolute count of a :ref:`MolecularFeature`
+or :ref:`MolecularVariation` within a system such as a genome, cell,
 or sample.
 
 **Information Model**
