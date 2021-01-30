@@ -420,8 +420,8 @@ amplification and copy loss.
 **Computational Definition**
 
 AbsoluteAbundance is the absolute count of a :ref:`MolecularFeature`
-or :ref:`MolecularVariation` within a system such as a genome, cell,
-or sample.
+or :ref:`MolecularVariation` within an implied system such as a genome,
+cell, or sample.
 
 **Information Model**
 
@@ -471,19 +471,21 @@ or sample.
       "type": "AbsoluteAbundance"
     }
 
+.. _RelativeAbundance:
 
 RelativeAbundance
 $$$$$$$$$$$$$$$$$
 
-**Biological Definition**
-
-Relative abundance is the qualitative relative amount of a molecular
-species within a genome, cell, or sample.
+*Relative Abundance* captures the relative quantity of a molecule
+within a system, and can be used to express concepts such as
+relative gene expression. The relative quantity is represented
+as a relation (e.g. *less than*, *greater than*) to an expected normal
+quantity for the implied system.
 
 **Computational Definition**
 
-Relative abundance is represented as a combination of the `subject`
-and a qualitative relative amount.
+The relation between a :ref:`MolecularFeature` or :ref:`MolecularVariation`
+to a normal state within an implied system such as a genome, cell, or sample.
 
 **Information Model**
 
@@ -513,16 +515,28 @@ and a qualitative relative amount.
      - string (enum)
      - 1..1
      - The amount of the subject with respect to an unspecified
-       reference. Must be one of: ``"gt"``, ``"ge"``, ``"eq"``,
-       ``"le"``, ``"lt"``.
+       reference. Must be one of: ``"gt"``, ``"geq"``, ``"eq"``,
+       ``"leq"``, ``"lt"``, ``"neq"``.
+
+**Implementation Guidance**
+
+* The strings specified in the `amount` enumerable correspond to
+  mathematical relations. See `W3C MathML2 Relation Notation`_ for more
+  details on these.
+
+.. _W3C MathML2 Relation Notation:
+    https://www.w3.org/TR/MathML2/chapter4.html#id.4.4.4
 
 **Example**
 
 .. parsed-literal::
 
     {
-      "amount": "lt",
-      "subject": "ncbigene:1234",
+      "amount": "gt",
+      "subject": {
+        "gene_id": "hgnc:12776",
+        "type": "Gene"
+      }
       "type": "RelativeAbundance"
     }
 
