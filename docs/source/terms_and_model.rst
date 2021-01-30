@@ -1685,11 +1685,6 @@ State
    and therefore purely an internal concept, it was made obsolete at
    the same time that SequenceState was deprecated.
 
-
-**Biological Definition**
-
-None.
-
 **Computational Definition**
 
 *State* objects are one of two primary components specifying a VRS
