@@ -1225,17 +1225,17 @@ named :ref:`Sequence`.
 
 .. _SequenceExpression:
 
-Sequence Expressions
-@@@@@@@@@@@@@@@@@@@@
+Sequence Expression
+@@@@@@@@@@@@@@@@@@@
 
 VRS provides several mechanisms to describe a sequence change,
-collectively referred to as SequenceExpressions. They are:
+collectively referred to as *Sequence Expressions*. They are:
 
 * :ref:`LiteralSequence`: A class that wraps a :ref:`Sequence`
   specified as a string.
-* :ref:`derived-sequence`: A sequence that is derived from a sequence
+* :ref:`DerivedSequence`: A sequence that is derived from a sequence
   location, possibly with transformation.
-* :ref:`repeated-sequence`: A description of a repeating element,
+* :ref:`RepeatedSequence`: A description of a repeating element,
   possibly with ambiguity.
 
 
