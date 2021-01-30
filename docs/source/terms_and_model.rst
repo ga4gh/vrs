@@ -600,10 +600,11 @@ A free-text description of variation.
   implementation SHOULD persist the original Text object and respond
   to queries matching the Text object with the new object.
 * Additional Variation subclasses are continually under
-  consideration. Please open a `GitHub issue
-  <https://github.com/ga4gh/vrs/issues>`__ if you would like to
+  consideration. Please open a `GitHub issue`_ if you would like to
   propose a Variation subclass to cover a needed variation
   representation.
+
+.. _GitHub issue: https://github.com/ga4gh/vrs/issues
 
 **Examples**
 
