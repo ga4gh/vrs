@@ -1247,8 +1247,8 @@ parallelism with other SequenceExpressions.
      - string
      - 1..1
      - MUST be "LiteralSequence"
-   * - :ref:`Sequence`
-     - string
+   * - sequence
+     - :ref:`Sequence`
      - 1..1
      - The string representation of the sequence
 
@@ -1574,7 +1574,7 @@ sequences). IUPAC ambiguity codes are permitted in Sequences.
 
 **Information Model**
 
-A Sequence is a string, constrained to contain only characters representing IUPAC nucleic acid or
+A Sequence is a string, constrained to characters representing IUPAC nucleic acid or
 amino acid codes.
 
 **Implementation Guidance**
