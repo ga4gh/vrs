@@ -939,14 +939,15 @@ A :ref:`SequenceInterval` defined by nested inner and outer :ref:`SimpleInterval
    }
 
 
-.. _Cytoband:
+.. _HumanCytoband:
 .. _CytobandInterval:
 
-Cytoband and CytobandInterval
-#############################
+HumanCytoband and CytobandInterval
+##################################
 
 .. important:: VRS currently supports only human cytobands and
-   cytoband intervals.
+   cytoband intervals. Implementers wishing to use VRS for other
+   cytogenetic systems are encouraged to open a `GitHub issue`_.
 
 **Biological Definition**
 
@@ -957,9 +958,7 @@ segments.
 
 **Computational Definition**
 
-In VRS, a Cytoband is a string with syntax constrained to human
-cytoband regions.  A CytobandInterval is comprised of a chromosome
-name and a contiguous region defined by two Cytobands.
+A giesma-stained band on a human chromosome.
 
 **Information Model**
 
@@ -978,15 +977,15 @@ name and a contiguous region defined by two Cytobands.
      - 1..1
      - MUST be "CytobandInterval"
    * - start
-     - Cytoband (see below)
+     - HumanCytoband (see below)
      - 1..1
      - name of feature start
    * - end
-     - Cytoband (see below)
+     - HumanCytoband (see below)
      - 1..1
      - name of feature end
 
-A Cytoband is a string constrained to match the regular expression
+A HumanCytoband is a string constrained to match the regular expression
 ``^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$``.
 
 **Implementation Guidance**
@@ -1053,8 +1052,7 @@ cytobands, and regions observed from chromosomal staining techniques.
 
 **Computational Definition**
 
-A ChromosomeLocation is a :ref:`Location` that is defined by named
-chromosomal features.
+A :ref:`Location` on a chromosome defined by a species and chromosome name.
 
 **Information Model**
 

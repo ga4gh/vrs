@@ -113,12 +113,6 @@
          ],
          "type": "object"
       },
-      "Cytoband": {
-         "description": "A feature referencing a giesma-stained band on an unspecified human chromosome.",
-         "example": "q22.3",
-         "pattern": "^cen|[pq](ter|([1-9][0-9]*(\\.[1-9][0-9]*)?))$",
-         "type": "string"
-      },
       "CytobandInterval": {
          "additionalProperties": false,
          "description": "A contiguous region specified by chromosomal bands features.",
@@ -158,6 +152,8 @@
                "default": "none",
                "enum": [
                   "none",
+                  "reverse",
+                  "complement",
                   "reverse-complement"
                ],
                "type": "string"
@@ -220,6 +216,12 @@
             }
          },
          "type": "object"
+      },
+      "HumanCytoband": {
+         "description": "A giesma-stained band on a human chromosome.",
+         "example": "q22.3",
+         "pattern": "^cen|[pq](ter|([1-9][0-9]*(\\.[1-9][0-9]*)?))$",
+         "type": "string"
       },
       "IntegerRange": {
          "additionalProperties": false,
@@ -346,7 +348,7 @@
       },
       "RelativeAbundance": {
          "additionalProperties": false,
-         "description": "Relative abundance of a systemic subject such as a gene or specific type of molecular variation.",
+         "description": "Relative abundance of a systemic subject such as a Gene or specific type of molecular variation.",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
