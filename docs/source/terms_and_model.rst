@@ -883,7 +883,8 @@ $$$$$$$$$$$$$$
 
 **Computational Definition**
 
-A :ref:`SequenceInterval` defined by nested inner and outer :ref:`SimpleInterval` instances
+A :ref:`SequenceInterval` defined by nested inner and outer
+:ref:`SimpleInterval` coordinates.
 
 **Information Model**
 
