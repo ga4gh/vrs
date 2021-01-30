@@ -234,7 +234,7 @@ An Allele is the state of a molecule at a specified :ref:`Location`.
        },
        "state": {
           "sequence": "T",
-          "type": "SequenceState"
+          "type": "LiteralSequence"
        },
        "type": "Allele"
     }
