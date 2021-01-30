@@ -958,7 +958,9 @@ segments.
 
 **Computational Definition**
 
-A giesma-stained band on a human chromosome.
+A interval on a stained metaphase chromosome specified by cytobands.
+CytobandIntervals include the regions described by the start and end
+cytobands.
 
 **Information Model**
 
@@ -993,9 +995,11 @@ A HumanCytoband is a string constrained to match the regular expression
 * When using :ref:`CytobandInterval` to refer to human cytogentic
   bands, ISCN [1]_ conventions MUST be used. Bands are denoted by the arm
   ("p" or "q") and position (e.g., "22", "22.3", or the symbolic
-  values "cen" or "ter"). ISCN conventions order bands p-ter → cen →
-  q-ter. In practice, this means that bands on the p-arm are
-  represented in descending numerical order.
+  values "cen" or "ter"). ISCN conventions designate cytobands from the
+  centromere towards the telomeres. In VRS, we order cytoband coordinates
+  in the p-ter → cen → q-ter orientation, analogous to sequence coordinates.
+  This has the consequence that bands on the p-arm are represented in
+  descending numerical order when selecting cytobands for `start` and `end`.
 
 .. [1] McGowan-Jordan J (Ed.). *ISCN 2016: An international system
        for human cytogenomic nomenclature (2016).* Karger (2016).

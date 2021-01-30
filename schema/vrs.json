@@ -218,7 +218,7 @@
          "type": "object"
       },
       "HumanCytoband": {
-         "description": "A giesma-stained band on a human chromosome.",
+         "description": "A interval on a stained metaphase chromosome specified by cytobands. CytobandIntervals include the regions described by the start and end cytobands.",
          "example": "q22.3",
          "pattern": "^cen|[pq](ter|([1-9][0-9]*(\\.[1-9][0-9]*)?))$",
          "type": "string"

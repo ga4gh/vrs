@@ -476,7 +476,9 @@ definitions:
 
   HumanCytoband:
     description: >-
-      A giesma-stained band on a human chromosome.
+      A interval on a stained metaphase chromosome specified by cytobands.
+      CytobandIntervals include the regions described by the start and end
+      cytobands.
     type: string
     pattern: '^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$'
     example: "q22.3"
