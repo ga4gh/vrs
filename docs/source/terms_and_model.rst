@@ -1344,6 +1344,110 @@ and `max` number of repeats.
   attribute.
 
 
+.. _MolecularFeature:
+
+Molecular Feature
+@@@@@@@@@@@@@@@@@
+
+A *Molecular Feature* is a named entity that can be mapped to a
+:ref:`Location`. Genes, protein domains, exons, and chromosomes are
+some examples of common biological entities that may be Molecular
+Features.
+
+.. _gene:
+
+Gene
+####
+
+A gene is a basic and fundamental unit of heritability. Genes are
+functional regions of heritable DNA or RNA that include transcript
+coding regions, regulatory elements, and other functional sequence
+domains. Because of the complex nature of these many components
+comprising a gene, the interpretation of a gene is context dependent.
+
+**Computational definition**
+
+A gene is an authoritative representation of one or more heritable
+:ref:`Locations <Location>` that includes all sequence elements
+necessary to perform a biological function. A gene may include
+regulatory, transcribed, and/or other functional Locations.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - gene_id
+     - :ref:`CURIE`
+     - 0..1
+     - Authoritative Gene ID (see guidance)
+   * - type
+     - string
+     - 1..1
+     - MUST be set to **`Gene`**
+
+**Implementation guidance**
+
+* Gene symbols (e.g., "BRCA1") are unreliable keys.  Implementations
+  MUST NOT use a gene symbol to define a Gene.
+* A gene is specific to a species.  Gene orthologs have distinct
+  records in the recommended databases.  For example, the BRCA1 gene
+  in humans and the Brca1 gene in mouse are orthologs and have
+  distinct records in the previously recommended gene databases.
+* Implementations MUST use authoritative gene namespaces available from
+  identifiers.org whenever possible.  Examples include:
+
+    * `hgnc <https://registry.identifiers.org/registry/hgnc>`__
+    * `ncbigene <https://registry.identifiers.org/registry/ncbigene>`__
+    * `ensembl <https://registry.identifiers.org/registry/ensembl>`__
+    * `vgnc <https://registry.identifiers.org/registry/vgnc>`__
+    * `mgi <https://registry.identifiers.org/registry/mgi>`__
+* Implementations RECOMMEND using the `hgnc` namespace for human
+  variation in order to improve interoperability.
+* Gene MAY be converted to one or more :ref:`Locations <Location>`
+  using external data. The source of such data and mechanism for
+  implementation is not defined by this specification.
+
+**Example**
+
+The following examples all refer to the human BRCA1 gene:
+
+.. parsed-literal::
+
+   {
+     'gene': 'ncbigene:672',
+     'type': 'Gene'
+   }
+
+   {
+     'gene': 'hgnc:1100',
+     'type': 'Gene'
+   }
+
+   {
+     'gene': 'ensembl:ENSG00000012048',
+     'type': 'Gene'
+   }
+
+
+**Sources**
+
+* `SequenceOntology: gene (SO:0000704)
+  <http://www.sequenceontology.org/browser/current_release/term/SO:0000704>`__
+  — A region (or regions) that includes all of the sequence elements
+  necessary to encode a functional transcript. A gene may include
+  regulatory regions, transcribed regions and/or other functional
+  sequence regions.
+
+
+
 Primitive Concepts
 @@@@@@@@@@@@@@@@@@
 
@@ -1386,106 +1490,6 @@ Identifiers for GRCh38 chromosome 19::
 
 See :ref:`identify` for examples of CURIE-based identifiers for VRS
 objects.
-
-
-.. _gene:
-
-Gene
-####
-
-.. todo:: Verify that we really want to include Gene as a class. Reece
-          still thinks this is useless and perhaps detrimental.
-
-**Biological Definition**
-
-Gene generally refers to a region of DNA that has some function.
-Gene is an elusive concept in biology with nuanced meaning that often
-depends on context, including whether the gene makes a transcripts,
-whether the transcript encodes a protein, non-functional ancestral
-elements ("pseudogenes").  In VRS, a gene is a reference to a
-third-party definition of a species-specific gene.
-
-**Computational definition**
-
-External gene definitions are referenced with a CURIE.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Location Id; MUST be unique within document
-   * - type
-     - string
-     - 1..1
-     - Location type; MUST be set to **`Gene`**
-
-**Implementation guidance**
-
-* Gene symbols (e.g., "BRCA1") are unreliable keys.  Implementations
-  MUST NOT use a gene symbol to define a Gene.
-* A gene is specific to a species.  Gene orthologs have distinct
-  records in the recommended databases.  For example, the BRCA1 gene
-  in humans and the Brca1 gene in mouse are orthologs and have
-  distinct records in the previously recommended gene databases.
-* The primary use case for Gene is as a subject of an abundance
-  statement statement.
-* Implementations MUST use gene namespaces available from
-  identifiers.org whenever possible.  Examples include:
-
-    * `hgnc <https://registry.identifiers.org/registry/hgnc>`__
-    * `ncbigene <https://registry.identifiers.org/registry/ncbigene>`__
-    * `ensembl <https://registry.identifiers.org/registry/ensembl>`__
-    * `vgnc <https://registry.identifiers.org/registry/vgnc>`__
-    * `mgi <https://registry.identifiers.org/registry/mgi>`__
-* Implementations SHOULD prefer the `hgnc` namespace for human
-  variation in order to improve interoperability.
-* Gene MAY be converted to :ref:`sequence-location` using external
-  data. The source of such data and mechanism for implementation is
-  not defined by this specification.
-
-**Example**
-
-The following examples all refer to the human BRCA1 gene:
-
-.. parsed-literal::
-
-   {
-     'gene': 'ncbigene:672',
-     'type': 'Gene'
-   }
-
-   {
-     'gene': 'hgnc:1100',
-     'type': 'Gene'
-   }
-
-   {
-     'gene': 'ensembl:ENSG00000012048',
-     'type': 'Gene'
-   }
-
-
-**Sources**
-
-* `SequenceOntology: gene (SO:0000704)
-  <http://www.sequenceontology.org/browser/current_release/term/SO:0000704>`__
-  — A region (or regions) that includes all of the sequence elements
-  necessary to encode a functional transcript. A gene may include
-  regulatory regions, transcribed regions and/or other functional
-  sequence regions.
-
-
 
 .. _IntegerRange:
 
