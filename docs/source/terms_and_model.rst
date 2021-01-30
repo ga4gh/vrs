@@ -412,15 +412,15 @@ the context of a system, such as a genome, cell, or sample.
 AbsoluteAbundance
 $$$$$$$$$$$$$$$$$
 
-**Biological Definition**
-
-AbsoluteAbundance is the absolute and quantified amount of an entity
-within a system, such as a genome, cell, or sample.
+*Absolute Abundance* captures the absolute quantity of a molecule
+within a system, and can be used to express concepts such as
+amplification and copy loss.
 
 **Computational Definition**
 
-AbsoluteAbundance references a `subject`, which may be an
-Allele or Haplotype, or any object identifiable with a CURIE.
+AbsoluteAbundance is the absolute quantity of a :ref:`MolecularFeature`
+or :ref:`MolecularVariation` within a system, such as a genome, cell,
+or sample.
 
 **Information Model**
 
@@ -443,7 +443,7 @@ Allele or Haplotype, or any object identifiable with a CURIE.
      - 1..1
      - MUST be "AbsoluteAbundance"
    * - subject
-     - :ref:`MolecularVariation` | :ref:`CURIE`
+     - :ref:`MolecularVariation` | :ref:`MolecularFeature`
      - 1..1
      - Subject of the abundance statement
    * - amount
