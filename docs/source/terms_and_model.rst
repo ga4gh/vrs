@@ -404,6 +404,8 @@ order. See :ref:`computed-identifiers` for more information.
 Systemic Variation
 ##################
 
+Systemic Variation is a :ref:`Variation` of multiple molecules in
+the context of a system, such as a genome, cell, or sample.
 
 AbsoluteAbundance
 $$$$$$$$$$$$$$$$$
