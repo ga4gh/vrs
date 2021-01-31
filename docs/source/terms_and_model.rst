@@ -1572,9 +1572,10 @@ page`_).
 
 A character representing a specific residue (i.e., molecular species)
 or groupings of these ("ambiguity codes"), using `one-letter IUPAC
-abbreviations <https://www.genome.jp/kegg/catalog/codes1.html>`_ for
-nucleic acids and amino acids.
+abbreviations`_ for nucleic acids and amino acids.
 
+.. _one-letter IUPAC abbreviations:
+     https://en.wikipedia.org/wiki/International_Union_of_Pure_and_Applied_Chemistry#Amino_acid_and_nucleotide_base_codes
 
 .. _Sequence:
 
