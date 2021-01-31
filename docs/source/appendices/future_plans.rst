@@ -108,66 +108,6 @@ Under development.
 Under development.
 
 
-
-
-.. _planned-states:
-
-State Classes
-@@@@@@@@@@@@@
-
-Additional :ref:`State` concepts that are being planned for future
-consideration in the specification.
-
-
-.. _planned-cnvstate:
-
-CNVState
-########
-
-.. note:: This concept is being refined. Please comment at https://github.com/ga4gh/vrs/issues/46.
-
-**Biological definition**
-
-Variations in the number of copies of a segment of DNA.  Copy number
-variations cover copy losses or gains and at known or unknown
-locations (including tandem repeats).  Variations MAY occur at precise
-SequenceLocations, within nested intervals, or at GeneLocations.
-There is no lower or upper bound on CNV sizes.
-
-**Computational definition**
-
-Under development.
-
-**Information model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - State type; MUST be set to '**CNVState**'
-   * - location
-     - :ref:`Location`
-     - 1..1
-     - the Location of the copy ('**null**' if unknown)
-   * - min_copies
-     - int
-     - 1..1
-     - The minimum number of copies
-   * - max_copies
-     - int
-     - 1..1
-     - The maximum number of copies
-
-
 .. _planned-variation:
 
 Variation Classes
