@@ -123,10 +123,10 @@
          },
          "properties": {
             "end": {
-               "$ref": "#/definitions/Cytoband"
+               "$ref": "#/definitions/HumanCytoband"
             },
             "start": {
-               "$ref": "#/definitions/Cytoband"
+               "$ref": "#/definitions/HumanCytoband"
             },
             "type": {
                "default": "CytobandInterval",
@@ -149,14 +149,7 @@
                "$ref": "#/definitions/SequenceLocation"
             },
             "transformation": {
-               "default": "none",
-               "enum": [
-                  "none",
-                  "reverse",
-                  "complement",
-                  "reverse-complement"
-               ],
-               "type": "string"
+               "type": "bool"
             },
             "type": {
                "default": "DerivedSequence",
@@ -260,7 +253,7 @@
          "additionalProperties": false,
          "properties": {
             "sequence": {
-               "type": "string"
+               "$ref": "#/definitions/Sequence"
             },
             "type": {
                "default": "LiteralSequence",
@@ -385,13 +378,12 @@
       },
       "RepeatedSequence": {
          "additionalProperties": false,
-         "description": "A tandem repeat of a SequenceLocation",
          "example": {
             "copies": {
                "max": 60,
                "min": 40
             },
-            "type": "SequenceState"
+            "type": "RepeatedSequence"
          },
          "properties": {
             "count": {
@@ -413,6 +405,12 @@
             "count"
          ],
          "type": "object"
+      },
+      "Sequence": {
+         "additionalProperties": false,
+         "description": "A character string of residues that represents a biological sequence using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequences.",
+         "pattern": "[A-Z*\\-]*",
+         "type": "string"
       },
       "SequenceExpression": {
          "additionalProperties": false,
@@ -471,6 +469,7 @@
       },
       "SequenceState": {
          "additionalProperties": false,
+         "deprecated": true,
          "description": "DEPRECATED: An assertion of the state of a sequence, typically at a Sequence Location within an Allele.\nThis class is deprecated. Use LiteralSequence instead.",
          "example": {
             "sequence": "C",
@@ -478,8 +477,7 @@
          },
          "properties": {
             "sequence": {
-               "nullable": false,
-               "type": "string"
+               "$ref": "#/definitions/Sequence"
             },
             "type": {
                "default": "SequenceState",

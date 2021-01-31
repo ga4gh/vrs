@@ -1630,10 +1630,6 @@ SequenceState
    DEPRECATED. SequenceState will be removed in VRS 2.0. Use
    :ref:`LiteralSequence` instead.
 
-**Biological Definition**
-
-None.
-
 **Computational Definition**
 
 The *SequenceState* class specifically captures a :ref:`sequence` as a
@@ -1657,7 +1653,7 @@ The *SequenceState* class specifically captures a :ref:`sequence` as a
      - 1..1
      - MUST be "SequenceState"
    * - sequence
-     - string
+     - :ref:`Sequence`
      - 1..1
      - The string of sequence residues that is to be used as the state for other types.
 
