@@ -1228,7 +1228,7 @@ A HumanCytoband is a string constrained to match the regular expression
 Sequence Expression
 @@@@@@@@@@@@@@@@@@@
 
-VRS provides several mechanisms to express a sequence state,
+VRS provides several mechanisms to express a sequence,
 collectively referred to as *Sequence Expressions*. They are:
 
 * :ref:`LiteralSequence`: An explicit :ref:`Sequence`.
