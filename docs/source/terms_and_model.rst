@@ -1228,15 +1228,13 @@ A HumanCytoband is a string constrained to match the regular expression
 Sequence Expression
 @@@@@@@@@@@@@@@@@@@
 
-VRS provides several mechanisms to describe a sequence change,
+VRS provides several mechanisms to express a sequence state,
 collectively referred to as *Sequence Expressions*. They are:
 
-* :ref:`LiteralSequence`: A class that wraps a :ref:`Sequence`
-  specified as a string.
-* :ref:`DerivedSequence`: A sequence that is derived from a sequence
-  location, possibly with transformation.
-* :ref:`RepeatedSequence`: A description of a repeating element,
-  possibly with ambiguity.
+* :ref:`LiteralSequence`: An explicit :ref:`Sequence`.
+* :ref:`DerivedSequence`: A sequence that is derived from a
+  :ref:`Sequencelocation`.
+* :ref:`RepeatedSequence`: A description of a repeating :ref:`Sequence`.
 
 
 .. _LiteralSequence:
@@ -1244,10 +1242,12 @@ collectively referred to as *Sequence Expressions*. They are:
 LiteralSequence
 ###############
 
-**Computational Definition**
-
 A LiteralSequence "wraps" a string representation of a sequence for
 parallelism with other SequenceExpressions.
+
+**Computational Definition**
+
+An explicit expression of a Sequence.
 
 **Information Model**
 
@@ -1268,7 +1268,7 @@ parallelism with other SequenceExpressions.
    * - sequence
      - :ref:`Sequence`
      - 1..1
-     - The string representation of the sequence
+     - The sequence to express
 
 
 .. _DerivedSequence:
@@ -1276,15 +1276,15 @@ parallelism with other SequenceExpressions.
 DerivedSequence
 ###############
 
-**Biological Definition**
-
 Certain mechanisms of variation result from relocating and
 transforming sequence from another location in the genome.
+A *derived sequence* is a mechanism for expressing (typically
+large) reference subsequences specified by a :ref:`SequenceLocation`.
 
 **Computational Definition**
 
-A relocated sequence is specified by the location of the source
-material and the orientation of that sequence.
+An expression of a sequence that is derived from a referenced
+sequence location.
 
 **Information Model**
 
@@ -1305,12 +1305,12 @@ material and the orientation of that sequence.
    * - location
      - :ref:`SequenceLocation`
      - 1..1
-     - The location from which the source subsequence is obtained
-   * - transformation
-     - string (enum)
+     - The location describing the sequence
+   * - reverse_complement
+     - bool
      - 1..1
-     - Must be one of: ``"none"``, ``"reverse"``, ``"complement"``,
-       ``"reverse-complement"``
+     - When True, indicates the derived sequence is a
+       reverse complement of the location sequence
 
 
 
@@ -1325,9 +1325,7 @@ A contiguous, tandem repeat of a sequence.
 
 **Computational Definition**
 
-A RepeatedSequence is comprised of a `sequence`, specified as a
-SequenceExpression, and a `count` object, which specifies the `min`
-and `max` number of repeats.
+An expression of a sequence comprised of a repeating subsequence.
 
 **Information Model**
 
@@ -1344,15 +1342,15 @@ and `max` number of repeats.
    * - type
      - string
      - 1..1
-     - MUST be "XXX"
+     - MUST be "RepeatedSequence"
    * - sequence
      - :ref:`SequenceExpression`
      - 1..1
-     - ...
+     - an expression of the repeating subsequence
    * - count
      - :ref:`IntegerRange`
      - 1..1
-     - ...
+     - the range of repeating units
 
 **Implementation Guidance**
 

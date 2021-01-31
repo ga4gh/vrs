@@ -371,13 +371,9 @@ definitions:
       location:
         $ref: "#/definitions/SequenceLocation"
       transformation:
-        type: string
-        enum: ["none", "reverse", "complement", "reverse-complement"]
-        default: "none"
+        type: bool
 
   RepeatedSequence:
-    description: >-
-      A tandem repeat of a SequenceLocation
     additionalProperties: false
     type: object
     properties:
@@ -393,7 +389,7 @@ definitions:
       - type
       - count
     example:
-      type: SequenceState
+      type: RepeatedSequence
       copies:
         min: 40
         max: 60
