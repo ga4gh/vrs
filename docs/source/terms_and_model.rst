@@ -1180,30 +1180,25 @@ cytobands.
      - 1..1
      - MUST be "CytobandInterval"
    * - start
-     - HumanCytoband
+     - :ref:`HumanCytoband`
      - 1..1
-     - name of feature start (see below)
+     - name of Cytoband at the interval start (see below)
    * - end
-     - HumanCytoband
+     - :ref:`HumanCytoband`
      - 1..1
-     - name of feature end  (see below)
-
-A HumanCytoband is a string constrained to match the regular expression
-``^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$``.
+     - name of Cytoband at the interval end (see below)
 
 **Implementation Guidance**
 
 * When using :ref:`CytobandInterval` to refer to human cytogentic
-  bands, ISCN [1]_ conventions MUST be used. Bands are denoted by the arm
-  ("p" or "q") and position (e.g., "22", "22.3", or the symbolic
-  values "cen" or "ter"). ISCN conventions designate cytobands from the
-  centromere towards the telomeres. In VRS, we order cytoband coordinates
-  in the p-ter → cen → q-ter orientation, analogous to sequence coordinates.
-  This has the consequence that bands on the p-arm are represented in
-  descending numerical order when selecting cytobands for `start` and `end`.
-
-.. [1] McGowan-Jordan J (Ed.). *ISCN 2016: An international system
-       for human cytogenomic nomenclature (2016).* Karger (2016).
+  bands, the following conventions MUST be used. Bands are denoted by
+  the arm ("p" or "q") and position (e.g., "22", "22.3", or the symbolic
+  values "cen" or "ter") per ISCN conventions [1]_. These conventions
+  identify cytobands in order from the centromere towards the telomeres.
+  In VRS, we order cytoband coordinates in the p-ter → cen → q-ter
+  orientation, analogous to sequence coordinates. This has the
+  consequence that bands on the p-arm are represented in descending
+  numerical order when selecting cytobands for `start` and `end`.
 
 **Examples**
 
@@ -1574,19 +1569,22 @@ abbreviations`_ for nucleic acids and amino acids.
 Sequence
 ########
 
-A contiguous, linear polymer of nucleic acid or amino acid residues.
+A *sequence* is a character string representation of a contiguous,
+linear polymer of nucleic acid or amino acid :ref:`Residues <Residue>`.
+Sequences are the prevalent representation of these polymers,
+particularly in the domain of variant representation.
 
 **Computational Definition**
 
 A character string representing :ref:`Residues <Residue>` using the
 conventional sequence order (5'-to-3' for nucleic acid sequences, and
-amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are
-permitted in Sequences.
+amino-to-carboxyl for amino acid sequences) and conforming to the
+`one-letter IUPAC abbreviations`_ for sequence representation.
 
 **Information Model**
 
-A Sequence is a string, constrained to characters representing IUPAC nucleic acid or
-amino acid codes.
+A string constrained to match the regular expression ``^[A-Z*\-]*$``,
+derived from the IUPAC one-letter nucleic acid and amino acid codes.
 
 **Implementation Guidance**
 
@@ -1606,6 +1604,29 @@ amino acid codes.
   necessary that Sequences be explicitly “typed” (i.e., DNA, RNA, or
   AA).
 
+.. _HumanCytoband:
+
+HumanCytoband
+#############
+
+Cytobands are any of a pattern of stained bands, formed on chromosomes of
+cells undergoing metaphase, that serve to identify particular chromosomes.
+Human cytobands are predominantly specified by the *International System
+for Human Cytogenomic Nomenclature* (ISCN) [1]_.
+
+**Computational Definition**
+
+A character string representing cytobands derived from the International
+System for Human Cytogenomic Nomenclature* (ISCN) guidelines.
+
+**Information Model**
+
+A string constrained to match the regular expression
+``^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$``, derived from the
+ISCN guidelines [1]_.
+
+.. [1] McGowan-Jordan J (Ed.). *ISCN 2016: An international system
+       for human cytogenomic nomenclature (2016).* Karger (2016).
 
 Deprecated and Obsolete Classes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

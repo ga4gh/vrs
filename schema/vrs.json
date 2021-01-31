@@ -409,7 +409,7 @@
       "Sequence": {
          "additionalProperties": false,
          "description": "A character string of residues that represents a biological sequence using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequences.",
-         "pattern": "[A-Z*\\-]*",
+         "pattern": "^[A-Z*\\-]*$",
          "type": "string"
       },
       "SequenceExpression": {

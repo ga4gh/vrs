@@ -446,7 +446,7 @@ definitions:
       nucleic acid sequences, and amino-to-carboxyl for amino acid
       sequences). IUPAC ambiguity codes are permitted in Sequences.
     type: string
-    pattern: '[A-Z*\-]*'
+    pattern: '^[A-Z*\-]*$'
 
   CURIE:
     additionalProperties: false
