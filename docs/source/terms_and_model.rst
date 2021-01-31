@@ -30,11 +30,11 @@ computational performance, the minimization of opportunities for
 misunderstanding, and ease of manipulating and transforming data.
 
 Accordingly, for each term we define below, we begin by describing the
-term as used by biologists (**biological definition**) as
-available. When a term has multiple biological definitions, we
-explicitly choose one of them for the purposes of this
-specification. We then provide a computer modelling definition
-(**computational definition**) that reformulates the biological
+term as used by the genetics and/or bioinformatics communities as
+available. When a term has multiple such definitions, we
+explicitly choose one of them for the purposes of computational
+modelling. We then explicitly define the modelling definition
+(**computational definition**) that reformulates the community
 definition in terms of information content. We then translate each of
 these computational definitions into precise specifications for the
 (**information model**). Terms are ordered "bottom-up" so that definitions
@@ -91,31 +91,28 @@ Information Model Principles
 Variation
 @@@@@@@@@
 
-The Variation class is the conceptual root of all types of variation,
-both current and future, and the *Variation* abstract class is the
-top-level object in the :ref:`vr-schema-diagram`. Types of variation
-are widely varied, and there are several :ref:`planned-variation`
-currently under consideration to capture this diversity. In VRS,
-Variation types are broadly categorized as a :ref:`MolecularVariation`,
-a :ref:`SystemicVariation`, or a :ref:`utility subclass <othervariation>`.
+In the genetics community, variation is often used to mean *sequence*
+variation, describing the differences observed in DNA or AA bases among
+individuals, and typically with respect to a common reference sequence.
 
-**Biological Definition**
-
-In biology, variation is often used to mean *sequence* variation,
-describing the differences observed in DNA or AA bases among
-individuals.
+In VRS, the Variation class is the conceptual root of all types of
+variation, and the *Variation* abstract class is the top-level object in
+the :ref:`vr-schema-diagram`. Variation types are broadly categorized as
+:ref:`MolecularVariation`, :ref:`SystemicVariation`, or a :ref:`utility
+subclass <othervariation>`. Types of variation are widely varied, and
+there are several :ref:`planned-variation` currently under consideration
+to capture this diversity.
 
 **Computational Definition**
 
-Variation is a representation of the state of one or more molecules.
-
+A representation of the state of one or more molecules.
 
 .. _MolecularVariation:
 
 Molecular Variation
 ###################
 
-Molecular Variation is a :ref:`variation` of a contiguous molecule.
+A :ref:`variation` of a contiguous molecule.
 
 .. _Allele:
 
@@ -124,25 +121,23 @@ $$$$$$
 
 .. note:: The terms *allele* and *variant* are often used interchangeably,
    although this use may mask subtle distinctions made by some users.
+   Specifically, while *allele* connotes a specific sequence state,
+   *variant* connotes a **change** between states.
 
-   * In the genetics community, *allele* may also refer to a
-     haplotype.
-   * *Allele* connotes a state whereas *variant* connotes a change
-     between states. This distinction makes it awkward to use *variant*
-     to represent a refrence-agreement state at a Sequence Location,
-     and was one of the factors that influenced the preference of
-     *Allele* over *Variant* as the primary subject of annotations.
-   * Read more: Using :ref:`allele-not-variant`.
+   This distinction makes it awkward to use *variant* to represent an
+   unchanged (refrence-agreement) state at a Sequence Location. This was
+   a primary factor for choosing to use *allele* over *variant*
+   when designing VRS. Read more about this design decision: Using
+   :ref:`allele-not-variant`.
 
-**Biological Definition**
-
-One of a number of alternative forms of the same gene or same genetic
-locus. In the context of biological sequences, “allele” refers to one
-of a set of specific changes within a :ref:`Sequence`.
+An allele may refer to a number of alternative forms of the same gene or same
+genetic locus. In the genetics community, *allele* may also refer to a
+specific haplotype. In the context of biological sequences, “allele” refers
+to a distinct state of a molecule at a location.
 
 **Computational Definition**
 
-An Allele is the state of a molecule at a specified :ref:`Location`.
+A state of a molecule at a :ref:`Location`.
 
 **Information Model**
 
@@ -171,7 +166,7 @@ An Allele is the state of a molecule at a specified :ref:`Location`.
    * - state
      - :ref:`SequenceExpression` | :ref:`SequenceState`
      - 1..1
-     - A description of the sequence change or expression
+     - An expression of the sequence state
 
 **Implementation Guidance**
 
@@ -270,8 +265,6 @@ An Allele is the state of a molecule at a specified :ref:`Location`.
 
 Haplotype
 $$$$$$$$$
-
-**Biological Definition**
 
 A specific combination of Alleles that are *in-cis*, occurring
 on the same physical molecule.
@@ -419,8 +412,8 @@ amplification and copy loss.
 
 **Computational Definition**
 
-AbsoluteAbundance is the absolute count of a :ref:`MolecularFeature`
-or :ref:`MolecularVariation` within an implied system such as a genome,
+An absolute count of a :ref:`MolecularFeature` or
+:ref:`MolecularVariation` within an implied system such as a genome,
 cell, or sample.
 
 **Information Model**
@@ -484,7 +477,7 @@ quantity for the implied system.
 
 **Computational Definition**
 
-The relation between a :ref:`MolecularFeature` or :ref:`MolecularVariation`
+A relation between a :ref:`MolecularFeature` or :ref:`MolecularVariation`
 to a normal state within an implied system such as a genome, cell, or sample.
 
 **Information Model**
@@ -550,8 +543,6 @@ Other Variation
 
 Text
 $$$$
-
-**Biological Definition**
 
 Some forms of variation are described with text that is interpretable
 only by humans.
@@ -621,14 +612,12 @@ A free-text description of variation.
 VariationSet
 $$$$$$$$$$$$
 
-**Biological Definition**
-
 Sets of variation are used widely, such as sets of variants in dbSNP
 or ClinVar that might be related by function.
 
 **Computational Definition**
 
-An unconstrained set of Variation objects or references.
+An unconstrained set of Variation members.
 
 **Information Model**
 
@@ -764,9 +753,7 @@ Locations and Intervals
 .. _Location:
 
 Location
-#########################
-
-**Biological Definition**
+########
 
 As used by biologists, the precision of “location” (or “locus”) varies
 widely, ranging from precise start and end numerical coordinates
@@ -774,15 +761,17 @@ defining a Location, to bounded regions of a sequence, to conceptual
 references to named genomic features (e.g., chromosomal bands, genes,
 exons) as proxies for the Locations on an implied reference sequence.
 
-**Computational Definition**
-
-The `Location` abstract class refers to position of a contiguous
-segment of a biological sequence.  The most common and concrete
-Location is a :ref:`SequenceLocation`, i.e., a Location based on a
-named sequence and an Interval on that sequence. Additional
-:ref:`planned-locations` may also be conceptual or symbolic locations,
+The most common and concrete Location is a :ref:`SequenceLocation`, i.e.,
+a Location based on a named sequence and an Interval on that sequence.
+Another common Location is a :ref:`ChromosomeLocation`, specifying a
+location from cytogenetic coordinates of stained metaphase chromosomes.
+Additional :ref:`planned-locations` may also be conceptual or symbolic locations,
 such as a cytoband region or a gene. Any of these may be used as the
 Location for Variation.
+
+**Computational Definition**
+
+A position of a contiguous segment of a biological sequence.
 
 **Implementation Guidance**
 
@@ -796,14 +785,12 @@ Location for Variation.
 ChromosomeLocation
 $$$$$$$$$$$$$$$$$$
 
-**Biological Definition**
-
 Chromosomal locations based on named features, including named landmarks,
 cytobands, and regions observed from chromosomal staining techniques.
 
 **Computational Definition**
 
-A :ref:`Location` on a chromosome defined by a species and chromosome name.
+A :ref:`Location`, on a chromosome defined by a species and chromosome name.
 
 **Information Model**
 
@@ -973,11 +960,7 @@ A subsequence defined as an interval on a reference :ref:`Sequence`.
 .. _SequenceInterval:
 
 SequenceInterval
-#################################
-
-**Biological Definition**
-
-None.
+################
 
 **Computational Definition**
 
@@ -1093,7 +1076,9 @@ $$$$$$$$$$$$$$
 **Computational Definition**
 
 A :ref:`SequenceInterval` defined by nested inner and outer
-:ref:`SimpleInterval` coordinates.
+:ref:`SimpleInterval` coordinates. Inner and outer coordinates
+represent inner and outer bounds of ambiguity for the start and
+end of the interval.
 
 **Information Model**
 
@@ -1157,8 +1142,6 @@ CytobandInterval
 .. important:: VRS currently supports only human cytobands and
    cytoband intervals. Implementers wishing to use VRS for other
    cytogenetic systems are encouraged to open a `GitHub issue`_.
-
-**Biological Definition**
 
 Cytobands refer to regions of chromosomes that are identified by
 visible patterns on stained metaphase chromosomes.  They provide a
@@ -1319,13 +1302,15 @@ sequence location.
 RepeatedSequence
 ################
 
-**Biological Definition**
-
-A contiguous, tandem repeat of a sequence.
+*Repeated Sequence* is a class of sequence expression where a specified
+subsequence is repeated multiple times in tandem. Microsatellites are an
+example of a common class of repeated sequence, but repeated sequence can
+also be used to describe larger subsequence repeats, up to and including
+large-scale tandem duplications.
 
 **Computational Definition**
 
-An expression of a sequence comprised of a repeating subsequence.
+An expression of a sequence comprised of a tandem repeating subsequence.
 
 **Information Model**
 
@@ -1512,7 +1497,7 @@ IntegerRange
 
 **Computational Definition**
 
-An pair of integer values used to specify an inclusive range.
+A pair of integer values used to specify an inclusive range.
 
 **Information Model**
 
@@ -1562,11 +1547,9 @@ An pair of integer values used to specify an inclusive range.
 Residue
 #######
 
-**Biological Definition**
-
 A residue refers to a specific `monomer`_ within the `polymeric
-chain`_ of a `protein`_ or `nucleic acid`_ (Source: `Wikipedia Residue
-page`_).
+chain`_ of a `protein`_ or `nucleic acid`_ (Source: `Wikipedia
+Residue page`_).
 
 **Computational Definition**
 
@@ -1582,16 +1565,14 @@ abbreviations`_ for nucleic acids and amino acids.
 Sequence
 ########
 
-**Biological Definition**
-
 A contiguous, linear polymer of nucleic acid or amino acid residues.
 
 **Computational Definition**
 
-A character string of :ref:`Residues <Residue>` that represents a
-biological sequence using the conventional sequence order (5'-to-3'
-for nucleic acid sequences, and amino-to-carboxyl for amino acid
-sequences). IUPAC ambiguity codes are permitted in Sequences.
+A character string representing :ref:`Residues <Residue>` using the
+conventional sequence order (5'-to-3' for nucleic acid sequences, and
+amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are
+permitted in Sequences.
 
 **Information Model**
 
@@ -1632,9 +1613,9 @@ SequenceState
 
 **Computational Definition**
 
-The *SequenceState* class specifically captures a :ref:`sequence` as a
-:ref:`State`. This is the State class to use for representing
-"ref-alt" style variation, including SNVs, MNVs, del, ins, and delins.
+A :ref:`sequence` as a :ref:`State`. This is the State class
+to use for representing "ref-alt" style variation, including
+SNVs, MNVs, del, ins, and delins.
 
 **Information Model**
 
@@ -1687,5 +1668,4 @@ State
 components for representing change (or non-change) of the features
 indicated by the Allele Location. As an abstract class, State
 currently encompasses single and contiguous :ref:`sequence` changes
-(see :ref:`SequenceState`), with additional types under consideration
-(see :ref:`planned-states`).
+(see :ref:`SequenceState`).

@@ -51,10 +51,6 @@ feature-based locations.
 NestedInterval
 ##############
 
-**Biological definition**
-
-None
-
 **Computational definition**
 
 An :ref:`Interval` comprised of an *inner* and *outer*
@@ -98,8 +94,6 @@ region (the *outer* SimpleInterval) and required included region (the
 
 ComplexInterval
 ###############
-
-**Biological definition**
 
 Representation of complex coordinates based on relative locations or
 offsets from a known location. Examples include "left of" a given
@@ -189,8 +183,6 @@ Translocations
 
 .. note:: This concept is being refined. Please comment at https://github.com/ga4gh/vrs/issues/103
 
-**Biological definition**
-
 The aberrant joining of two segments of DNA that are not typically
 contiguous.  In the context of joining two distinct coding sequences,
 translocations result in a gene fusion, which is also covered by this
@@ -215,8 +207,6 @@ t(9;22)(q34;q11) in BCR-ABL
 
 Genotype
 ########
-
-**Biological definition**
 
 The genetic state of an organism, whether complete (defined over the
 whole genome) or incomplete (defined over a subset of the genome).
