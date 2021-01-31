@@ -358,7 +358,7 @@ definitions:
         enum: ["LiteralSequence"]
         default: "LiteralSequence"
       sequence:
-        type: string
+        $ref: "#/definitions/Sequence"
 
   DerivedSequence:
     type: object
@@ -420,9 +420,9 @@ definitions:
         enum: ["CytobandInterval"]
         default: "CytobandInterval"
       start:
-        $ref: "#/definitions/Cytoband"
+        $ref: "#/definitions/HumanCytoband"
       end:
-        $ref: "#/definitions/Cytoband"
+        $ref: "#/definitions/HumanCytoband"
     required:
       - start
       - end
@@ -437,6 +437,16 @@ definitions:
   # These types do NOT have a VRS `type` attribute
   # These types are used solely within other definitions.
   # =============================================================================
+
+  Sequence:
+    additionalProperties: false
+    description: >-
+      A character string of residues that represents a biological
+      sequence using the conventional sequence order (5’-to-3’ for
+      nucleic acid sequences, and amino-to-carboxyl for amino acid
+      sequences). IUPAC ambiguity codes are permitted in Sequences.
+    type: string
+    pattern: '[A-Z*\-]*'
 
   CURIE:
     additionalProperties: false
@@ -509,6 +519,7 @@ definitions:
   # =============================================================================
 
   SequenceState:
+    deprecated: true
     description: >-
       DEPRECATED: An assertion of the state of a sequence, typically
       at a Sequence Location within an Allele.
@@ -522,8 +533,7 @@ definitions:
         enum: ["SequenceState"]
         default: "SequenceState"
       sequence:
-        type: string
-        nullable: false
+        $ref: "#/definitions/Sequence"
     required:
       - type
       - sequence
