@@ -201,7 +201,7 @@ definitions:
         oneOf:
           - $ref: "#/definitions/MolecularVariation"
           - $ref: "#/definitions/CURIE"
-      amount:
+      relation:
         type: string
         enum: ["gt", "ge", "eq", "le", "lt"]
 

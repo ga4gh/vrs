@@ -33,12 +33,11 @@ Accordingly, for each term we define below, we begin by describing the
 term as used by the genetics and/or bioinformatics communities as
 available. When a term has multiple such definitions, we
 explicitly choose one of them for the purposes of computational
-modelling. We then explicitly define the modelling definition
-(**computational definition**) that reformulates the community
-definition in terms of information content. We then translate each of
-these computational definitions into precise specifications for the
-(**information model**). Terms are ordered "bottom-up" so that definitions
-depend only on previously-defined terms.
+modelling. We then define the **computational definition** that
+reformulates the community definition in terms of information content.
+Finally, we translate each of these computational definitions into precise
+specifications for the (**information model**). Terms are ordered
+"bottom-up" so that definitions depend only on previously-defined terms.
 
 .. note:: The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
           NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
@@ -266,13 +265,15 @@ A state of a molecule at a :ref:`Location`.
 Haplotype
 $$$$$$$$$
 
-A specific combination of Alleles that are *in-cis*, occurring
-on the same physical molecule.
+Haplotypes are a specific combination of Alleles that are *in-cis*: occurring
+on the same physical molecule. Haplotypes are commonly described with respect
+to locations on a gene, a set of nearby genes, or other physically proximal
+genetic markers that tend to be transmitted together.
 
 **Computational Definition**
 
-A set of non-overlapping :ref:`Alleles <Allele>` that co-occur on the same
-reference sequence.
+A set of non-overlapping :ref:`Allele` members that co-occur on the same
+molecule.
 
 **Information Model**
 
@@ -306,7 +307,7 @@ reference sequence.
 * Haplotypes are an assertion of Alleles known to occur “in cis” or
   “in phase” with each other.
 * All Alleles in a Haplotype MUST be defined on the same reference
-  sequence.
+  sequence or chromosome.
 * Alleles within a Haplotype MUST not overlap ("overlap" is defined in
   Interval).
 * The locations of Alleles within the Haplotype MUST be interpreted
@@ -413,8 +414,8 @@ amplification and copy loss.
 **Computational Definition**
 
 An absolute count of a :ref:`MolecularFeature` or
-:ref:`MolecularVariation` within an implied system such as a genome,
-cell, or sample.
+:ref:`MolecularVariation` subject within an implied system such
+as a genome, cell, or sample.
 
 **Information Model**
 
@@ -478,7 +479,8 @@ quantity for the implied system.
 **Computational Definition**
 
 A relation between a :ref:`MolecularFeature` or :ref:`MolecularVariation`
-to a normal state within an implied system such as a genome, cell, or sample.
+subject and a normal state within an implied system (such as a genome, cell,
+or sample).
 
 **Information Model**
 
@@ -504,7 +506,7 @@ to a normal state within an implied system such as a genome, cell, or sample.
      - :ref:`MolecularVariation` | :ref:`CURIE`
      - 1..1
      - Subject of the abundance statement
-   * - amount
+   * - relation
      - string (enum)
      - 1..1
      - The amount of the subject with respect to an unspecified
@@ -549,7 +551,7 @@ only by humans.
 
 **Computational Definition**
 
-A free-text description of variation.
+A free-text definition of variation.
 
 **Information Model**
 
@@ -771,13 +773,14 @@ Location for Variation.
 
 **Computational Definition**
 
-A position of a contiguous segment of a biological sequence.
+The position of a contiguous segment of a biological sequence.
 
 **Implementation Guidance**
 
 * Location refers to a position.  Although it MAY imply a sequence,
   the two concepts are not interchangeable, especially when the
-  location is non-specific (e.g., a range) or symbolic (a gene).
+  location is non-specific (e.g., specified by a
+  :ref:`NestedInterval`).
 
 
 .. _ChromosomeLocation:
@@ -892,7 +895,7 @@ The reference is typically a chromosome, transcript, or protein sequence.
 
 **Computational Definition**
 
-A subsequence defined as an interval on a reference :ref:`Sequence`.
+A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
 
 **Information Model**
 
@@ -1073,6 +1076,12 @@ A :ref:`SequenceInterval` with a single start and end coordinate.
 NestedInterval
 $$$$$$$$$$$$$$
 
+For some assays, it is not possible to describe a
+:ref:`SequenceLocation` with exact precision, but it is possible
+to bound the region containing the Sequence Location. In those
+cases, two sets of coordinates are used as a nested interval to
+describe the inner and outer bounds.
+
 **Computational Definition**
 
 A :ref:`SequenceInterval` defined by nested inner and outer
@@ -1150,7 +1159,7 @@ segments.
 
 **Computational Definition**
 
-A interval on a stained metaphase chromosome specified by cytobands.
+An interval on a stained metaphase chromosome, specified by cytobands.
 CytobandIntervals include the regions described by the start and end
 cytobands.
 

@@ -299,4 +299,3 @@ RuleState
 RuleState is a subclass of :ref:`state` intended to capture states defined
 by categorical rules instead of sequence states. This includes *gain- /
 loss-of-function*, *oncogenic*, and *truncating* variation.
-
