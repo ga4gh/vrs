@@ -408,7 +408,7 @@ $$$$$$$$$
 
 *Abundance* is the measure of a quantity of a molecule
 in a system. :ref:`Copy Number <CopyNumber>` and
-:ref:`Expression` variants are two common types of
+gene expression variants are two common types of
 abundance statements, measuring the copies of a molecule
 present in a genome or expressed in a sample, respectively.
 
@@ -468,112 +468,6 @@ The count of copies of a :ref:`MolecularFeature` or
       "subject": "ncbigene:1234",
       "type": "CopyNumber"
     }
-
-.. _Expression:
-
-Expression
-%%%%%%%%%%
-
-*Expression* variation is the quantity of a gene
-product in a system (e.g. a biological tissue).
-Expression may be relative to an expected reference
-quantity for that system, represented as a relation
-(e.g. *less than*, *greater than*) or a fold-change
-difference.
-
-*Expression* may also be used to represent a complete
-loss of functional gene product. Additional representations
-for absolute expression measures are under consideration.
-
-**Computational Definition**
-
-The quantity of a gene product.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Computed Identifier
-   * - type
-     - string
-     - 1..1
-     - MUST be "Expression"
-   * - gene_product
-     - :ref:`MolecularVariation` | :ref:`MolecularFeature`
-     - 1..1
-     - Subject of the abundance statement
-   * - quantity
-     - :ref:`RelationalOperator` | :ref:`Range` | "loss"
-     - 1..1
-     - The quantity of the gene product (see below)
-   * - quantity_system
-     - string
-     - 1..1
-     - MUST be one of ["log2 change", "other"] (see
-       below)
-
-Interpretation of the ``quantity`` attribute is dependent upon
-the system characterizing it. The following table describes
-valid uses of the ``quantity`` and ``quantity_system`` attributes.
-Combinations of ``quantity`` type and ``quantity_system`` not
-indicated on the below table are invalid.
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - quantity_system
-     - quantity type
-     - interpretation
-   * - "log2 change"
-     - :ref:`Range`
-     - The base-2 logarithm of the relative quantity of gene product
-       to an expected contextual value
-   * - "other"
-     - "loss"
-     - Complete loss of the gene product
-   * - "other"
-     - :ref:`RelationalOperator`
-     - Relational operation describing the relative quantity of gene product
-       to an expected contextual value
-
-
-
-**Example**
-
-*WNT11 Overexpression*
-
-.. parsed-literal::
-
-    {
-      "quantity": "gt",
-      "quantity_type": "other",
-      "subject": {
-        "gene_id": "hgnc:12776",
-        "type": "Gene"
-      }
-      "type": "Expression"
-    }
-
-**Implementation Guidance**
-
-* Expression objects do not capture the reference system
-  context implied by relative expression quantities.
-  Implementations SHOULD therefore provide relevant context
-  in messages using relative forms of expression variation.
 
 .. _OtherVariation:
 
