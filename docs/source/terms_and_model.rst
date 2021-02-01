@@ -474,6 +474,10 @@ The count of copies of a :ref:`MolecularFeature` or
 Other Variation
 ################
 
+*Other variation* is a collection of utility :ref:`Variation`
+subclasses that cannot be constrained to a specific class of
+biological variation.
+
 .. _Text:
 
 Text

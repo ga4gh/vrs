@@ -35,7 +35,7 @@ definitions:
   MolecularVariation:
     additionalProperties: false
     description: >-
-      Variation defined on a molecule (sequence)
+      A variation on a contiguous molecule.
     oneOf:
       - $ref: "#/definitions/Allele"
       - $ref: "#/definitions/Haplotype"
@@ -45,7 +45,8 @@ definitions:
   OtherVariation:
     additionalProperties: false
     description: >-
-      The root class of all Variation types
+      Utility variation classes that cannot be constrained to a specific
+      biological class of variation.
     oneOf:
       - $ref: "#/definitions/Text"
       - $ref: "#/definitions/VariationSet"
@@ -55,7 +56,8 @@ definitions:
   SystemicVariation:
     additionalProperties: false
     description: >-
-      Genome-wide statements about variation
+      A Variation of multiple molecules in the context of a system, e.g.
+      a genome, sample, or homologous chromosomes.
     oneOf:
       - $ref: "#/definitions/Abundance"
     discriminator:

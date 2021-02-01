@@ -294,7 +294,7 @@
       },
       "MolecularVariation": {
          "additionalProperties": false,
-         "description": "Variation defined on a molecule (sequence)",
+         "description": "A variation on a contiguous molecule.",
          "discriminator": {
             "propertyName": "type"
          },
@@ -341,7 +341,7 @@
       },
       "OtherVariation": {
          "additionalProperties": false,
-         "description": "The root class of all Variation types",
+         "description": "Utility variation classes that cannot be constrained to a specific biological class of variation.",
          "discriminator": {
             "propertyName": "type"
          },
@@ -543,7 +543,7 @@
       },
       "SystemicVariation": {
          "additionalProperties": false,
-         "description": "Genome-wide statements about variation",
+         "description": "A Variation of multiple molecules in the context of a system, e.g. a genome, sample, or homologous chromosomes.",
          "discriminator": {
             "propertyName": "type"
          },
