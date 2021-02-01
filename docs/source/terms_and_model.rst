@@ -514,7 +514,7 @@ The quantity of a gene product.
      - 1..1
      - Subject of the abundance statement
    * - quantity
-     - :ref:`RelationOperator` | :ref:`Range` | "loss"
+     - :ref:`RelationalOperator` | :ref:`Range` | "loss"
      - 1..1
      - The quantity of the gene product (see below)
    * - quantity_system
@@ -541,26 +541,31 @@ indicated on the below table are invalid.
    * - "log2 change"
      - :ref:`Range`
      - The base-2 logarithm of the relative quantity of gene product
+       to an expected contextual value
    * - "other"
      - "loss"
      - Complete loss of the gene product
    * - "other"
-     - :ref:`RelationOperator`
-     - Expression relative to an implied
+     - :ref:`RelationalOperator`
+     - Relational operation describing the relative quantity of gene product
+       to an expected contextual value
 
 
 
 **Example**
 
+*WNT11 Overexpression*
+
 .. parsed-literal::
 
     {
-      "amount": "gt",
+      "quantity": "gt",
+      "quantity_type": "other",
       "subject": {
         "gene_id": "hgnc:12776",
         "type": "Gene"
       }
-      "type": "RelativeAbundance"
+      "type": "Expression"
     }
 
 **Implementation Guidance**
@@ -1708,9 +1713,9 @@ ISCN guidelines [1]_.
 .. [1] McGowan-Jordan J (Ed.). *ISCN 2016: An international system
        for human cytogenomic nomenclature (2016).* Karger (2016).
 
-.. _RelationOperator:
+.. _RelationalOperator:
 
-RelationOperator
+RelationalOperator
 ################
 
 Some types of variation are only specified in relative measure.

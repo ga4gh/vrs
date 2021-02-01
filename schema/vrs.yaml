@@ -229,7 +229,7 @@ definitions:
           properties:
             quantity:
               oneOf:
-                - $ref: "#/definitions/RelationOperator"
+                - $ref: "#/definitions/RelationalOperator"
                 - type: string
                   enum: ["loss"]
     required:

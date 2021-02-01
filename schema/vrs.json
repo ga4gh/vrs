@@ -208,7 +208,7 @@
                      "quantity": {
                         "oneOf": [
                            {
-                              "$ref": "#/definitions/RelationOperator"
+                              "$ref": "#/definitions/RelationalOperator"
                            },
                            {
                               "enum": [
