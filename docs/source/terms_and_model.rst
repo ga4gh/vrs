@@ -1611,28 +1611,6 @@ ISCN guidelines [1]_.
 .. [1] McGowan-Jordan J (Ed.). *ISCN 2016: An international system
        for human cytogenomic nomenclature (2016).* Karger (2016).
 
-.. _RelationalOperator:
-
-RelationalOperator
-##################
-
-Some types of variation are only specified in relative measure.
-Relation operators provide an expression of the relative amount
-between two subjects.
-
-**Computational Definition**
-
-A character string representing relational operators as specified
-by the W3C MathML2 Relation Notation.
-
-**Information Model**
-
-A string constrained to match one of [`gt`, `geq`, `eq`, `leq`, `lt`,
-`neq`], corresponding to mathematical relations as defined by the
-`W3C MathML2 Relation Notation`_.
-
-.. _W3C MathML2 Relation Notation:
-    https://www.w3.org/TR/MathML2/chapter4.html#id.4.4.4
 
 Deprecated and Obsolete Classes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
