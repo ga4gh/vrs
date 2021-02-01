@@ -188,7 +188,7 @@ definitions:
           - $ref: "#/definitions/MolecularVariation"
           - $ref: "#/definitions/MolecularFeature"
       copies:
-        $ref: "#/definitions/IntegerRange"
+        $ref: "#/definitions/CopyCount"
     required:
       - type
       - subject
@@ -323,8 +323,31 @@ definitions:
         start: 10
         end: 40
 
+  CytobandInterval:
+    description: >-
+      A contiguous region specified by chromosomal bands features.
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [ "CytobandInterval" ]
+        default: "CytobandInterval"
+      start:
+        $ref: "#/definitions/HumanCytoband"
+      end:
+        $ref: "#/definitions/HumanCytoband"
+    required:
+      - start
+      - end
+    example:
+      type: CytobandInterval
+      start: q22.2
+      end: q22.3
+
+
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # Sequence Expressions 
+  # SequenceExpressions
 
   SequenceExpression:
     description: >-
@@ -382,6 +405,9 @@ definitions:
         min: 40
         max: 60
 
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Feature
+
   Gene:
     description: >-
       A reference to an external gene system, used as a location for
@@ -397,28 +423,55 @@ definitions:
       gene_id:
         $ref: "#/definitions/CURIE"
 
-  CytobandInterval:
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Quantity
+
+  CopyCount:
     description: >-
-      A contiguous region specified by chromosomal bands features.
-    type: object
+      An integer count of copies. Counts are bounded ranges denoted by minimum
+      and maximum possible values. Absolute copy number counts may not be smaller
+      than zero.
     additionalProperties: false
+    type: object
     properties:
       type:
         type: string
-        enum: ["CytobandInterval"]
-        default: "CytobandInterval"
-      start:
-        $ref: "#/definitions/HumanCytoband"
-      end:
-        $ref: "#/definitions/HumanCytoband"
-    required:
-      - start
-      - end
+        enum: ["CopyCount"]
+        default: "CopyCount"
+      absolute_measure:
+        type: bool
+      min:
+        type: ["integer", "null"]
+        default: null
+      max:
+        type: ["integer", "null"]
+        default: null
+    allOf:
+      # At least one of min or max not null
+      - if:
+          properties:
+             min:
+               type: null
+             max:
+               type: null
+        then:
+          false
+      # min < max cannot be validated by JSON schema
+      # min >= 0 and max >= 0 if absolute_measure == true
+      - if:
+          properties:
+            absolute_measure:
+              const: true
+        then:
+          properties:
+            min:
+              minimum: 0
+            max:
+              minimum: 0
     example:
-      type: CytobandInterval
-      start: q22.2
-      end: q22.3
-
+      type: "IntegerRange"
+      min: 5
+      max: 10
 
   # =============================================================================
   # BASIC TYPES (STRUCTURES)
@@ -476,55 +529,6 @@ definitions:
     type: string
     pattern: '^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$'
     example: "q22.3"
-
-  Range:
-    description: >-
-      A [min,max] inclusive range of number values. At least one of
-      min or max must be specified.  An unspecified value indicates an
-      unbounded min or max.  When both min and max are specified, they
-      must satisfy min <= max.
-    additionalProperties: false
-    type: object
-    properties:
-      type:
-        type: string
-        enum: ["Range"]
-        default: "Range"
-      min:
-        type: ["number", "null"]
-        default: null
-      max:
-        type: ["number", "null"]
-        default: null
-    example:
-      type: "Range"
-      min: -1.2
-      max: 4.0
-
-  IntegerRange:
-    description: >-
-      A [min,max] inclusive range of integer values. At least one of
-      min or max must be specified.  An unspecified value indicates an
-      unbounded min or max.  When both min and max are specified, they
-      must satisfy min <= max.
-    additionalProperties: false
-    type: object
-    properties:
-      type:
-        type: string
-        enum: ["IntegerRange"]
-        default: "IntegerRange"
-      min:
-        type: ["integer", "null"]
-        default: null
-      max:
-        type: ["integer", "null"]
-        default: null
-    example:
-      type: "IntegerRange"
-      min: 5
-      max: 10
-
 
   # =============================================================================
   # DEPRECATED

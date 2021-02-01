@@ -451,7 +451,7 @@ The count of copies of a :ref:`MolecularFeature` or
      - 1..1
      - Subject of the abundance statement
    * - copies
-     - :ref:`IntegerRange`
+     - :ref:`CopyCount`
      - 1..1
      - The integral number of copies of the subject in the genome
 
@@ -1274,7 +1274,7 @@ An expression of a sequence comprised of a tandem repeating subsequence.
      - 1..1
      - an expression of the repeating subsequence
    * - count
-     - :ref:`IntegerRange`
+     - :ref:`CopyCount`
      - 1..1
      - the inclusive range count of repeated units
 
@@ -1381,6 +1381,68 @@ The following examples all refer to the human BRCA1 gene:
   regulatory regions, transcribed regions and/or other functional
   sequence regions.
 
+Quantity
+@@@@@@@@
+
+.. _CopyCount:
+
+CopyCount
+#########
+
+**Computational Definition**
+
+An integer count of copies. Counts are bounded ranges
+denoted by minimum and maximum possible values.
+Absolute copy number counts may not be smaller than zero.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "CopyCount"
+   * - absolute_measure
+     - bool
+     - 1..1
+     - specifies if the count is an absolute (TRUE)
+       or relative (FALSE) measure
+   * - min
+     - number
+     - 0..1
+     - minimum value; inclusive
+   * - max
+     - number
+     - 0..1
+     - maximum value; inclusive
+
+**Implementation Guidance**
+
+* At least one of ``min`` or ``max`` must be specified.
+* If both ``min`` and ``max`` are specified, they MUST satisfy ``min
+  <= max``.
+* If ``min == max``, then the range specifies a single numeric amount.
+
+
+**Examples**
+
+.. parsed-literal::
+
+   {
+     "absolute_measure": True,
+     "max": 4,
+     "min": 0,
+     "type": "CopyCount",
+   }
 
 
 Primitive Concepts
@@ -1425,109 +1487,6 @@ Identifiers for GRCh38 chromosome 19::
 
 See :ref:`identify` for examples of CURIE-based identifiers for VRS
 objects.
-
-.. _Range:
-
-Range
-#####
-
-**Computational Definition**
-
-A pair of numeric values used to specify an inclusive range.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "Range"
-   * - min
-     - number
-     - 0..1
-     - minimum value; inclusive
-   * - max
-     - number
-     - 0..1
-     - maximum value; inclusive
-
-**Implementation Guidance**
-
-* At least one of ``min`` or ``max`` must be specified.
-* If both ``min`` and ``max`` are specified, they MUST satisfy ``min
-  <= max``.
-* If ``min == max``, then the range specifies a single numeric amount.
-
-
-**Examples**
-
-.. parsed-literal::
-
-   {
-     "max": 4.0,
-     "min": -1.2
-   }
-
-.. _IntegerRange:
-
-IntegerRange
-############
-
-**Computational Definition**
-
-A pair of integer values used to specify an inclusive range.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "IntegerRange"
-   * - min
-     - integer
-     - 0..1
-     - minimum value; inclusive
-   * - max
-     - integer
-     - 0..1
-     - maximum value; inclusive
-
-**Implementation Guidance**
-
-* At least one of ``min`` or ``max`` must be specified.
-* If both ``min`` and ``max`` are specified, they MUST satisfy ``min
-  <= max``.
-* If ``min == max``, then the range specifies a single integer amount.
-
-
-**Examples**
-
-.. parsed-literal::
-
-   {
-     "max": 10,
-     "min": 5
-   }
-
 
 .. _Residue:
 

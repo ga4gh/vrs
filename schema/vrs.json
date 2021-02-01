@@ -90,6 +90,76 @@
          ],
          "type": "object"
       },
+      "CopyCount": {
+         "additionalProperties": false,
+         "allOf": [
+            {
+               "if": {
+                  "properties": {
+                     "max": {
+                        "type": null
+                     },
+                     "min": {
+                        "type": null
+                     }
+                  }
+               },
+               "then": false
+            },
+            {
+               "if": {
+                  "properties": {
+                     "absolute_measure": {
+                        "const": true
+                     }
+                  }
+               },
+               "then": {
+                  "properties": {
+                     "max": {
+                        "minimum": 0
+                     },
+                     "min": {
+                        "minimum": 0
+                     }
+                  }
+               }
+            }
+         ],
+         "description": "An integer count of copies. Counts are bounded ranges denoted by minimum and maximum possible values. Absolute copy number counts may not be smaller than zero.",
+         "example": {
+            "max": 10,
+            "min": 5,
+            "type": "IntegerRange"
+         },
+         "properties": {
+            "absolute_measure": {
+               "type": "bool"
+            },
+            "max": {
+               "default": null,
+               "type": [
+                  "integer",
+                  "null"
+               ]
+            },
+            "min": {
+               "default": null,
+               "type": [
+                  "integer",
+                  "null"
+               ]
+            },
+            "type": {
+               "default": "CopyCount",
+               "enum": [
+                  "CopyCount"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
       "CopyNumber": {
          "additionalProperties": false,
          "description": "The count of copies of a Molecular Feature or Molecular Variation subject within a genome.",
@@ -98,7 +168,7 @@
                "$ref": "#/definitions/CURIE"
             },
             "copies": {
-               "$ref": "#/definitions/IntegerRange"
+               "$ref": "#/definitions/CopyCount"
             },
             "subject": {
                "oneOf": [
@@ -228,39 +298,6 @@
          "pattern": "^cen|[pq](ter|([1-9][0-9]*(\\.[1-9][0-9]*)?))$",
          "type": "string"
       },
-      "IntegerRange": {
-         "additionalProperties": false,
-         "description": "A [min,max] inclusive range of integer values. At least one of min or max must be specified.  An unspecified value indicates an unbounded min or max.  When both min and max are specified, they must satisfy min <= max.",
-         "example": {
-            "max": 10,
-            "min": 5,
-            "type": "IntegerRange"
-         },
-         "properties": {
-            "max": {
-               "default": null,
-               "type": [
-                  "integer",
-                  "null"
-               ]
-            },
-            "min": {
-               "default": null,
-               "type": [
-                  "integer",
-                  "null"
-               ]
-            },
-            "type": {
-               "default": "IntegerRange",
-               "enum": [
-                  "IntegerRange"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
       "LiteralSequence": {
          "additionalProperties": false,
          "properties": {
@@ -353,39 +390,6 @@
                "$ref": "#/definitions/VariationSet"
             }
          ]
-      },
-      "Range": {
-         "additionalProperties": false,
-         "description": "A [min,max] inclusive range of number values. At least one of min or max must be specified.  An unspecified value indicates an unbounded min or max.  When both min and max are specified, they must satisfy min <= max.",
-         "example": {
-            "max": 4.0,
-            "min": -1.2,
-            "type": "Range"
-         },
-         "properties": {
-            "max": {
-               "default": null,
-               "type": [
-                  "number",
-                  "null"
-               ]
-            },
-            "min": {
-               "default": null,
-               "type": [
-                  "number",
-                  "null"
-               ]
-            },
-            "type": {
-               "default": "Range",
-               "enum": [
-                  "Range"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
       },
       "RepeatedSequence": {
          "additionalProperties": false,
