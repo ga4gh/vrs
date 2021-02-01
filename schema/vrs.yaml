@@ -48,6 +48,7 @@ definitions:
       The root class of all Variation types
     oneOf:
       - $ref: "#/definitions/Text"
+      - $ref: "#/definitions/VariationSet"
     discriminator:
       propertyName: type
 
@@ -56,8 +57,7 @@ definitions:
     description: >-
       Genome-wide statements about variation
     oneOf:
-      - $ref: "#/definitions/AbsoluteAbundance"
-      - $ref: "#/definitions/RelativeAbundance"
+      - $ref: "#/definitions/Abundance"
     discriminator:
       propertyName: type
 
@@ -160,12 +160,21 @@ definitions:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # SystemicVariation
 
-  AbsoluteAbundance:
+  Abundance:
+    additionalProperties: false
+    description: >-
+      The measure of a quantity of a molecule in a system.
+    oneOf:
+      - $ref: "#/definitions/CopyNumber"
+      - $ref: "#/definitions/Expression"
+    discriminator:
+      propertyName: type
+
+  CopyNumber:
     additionalProperties: false
     type: object
     description: >-
-      Absolute abundance of a systemic subject such as a gene or
-      specific type of molecular variation.
+      The count of copies of a Molecular Feature or Molecular Variation subject within a genome.
     properties:
       _id:
         $ref: "#/definitions/CURIE"
@@ -176,20 +185,19 @@ definitions:
       subject:
         oneOf:
           - $ref: "#/definitions/MolecularVariation"
-          - $ref: "#/definitions/CURIE"
-      amount:
+          - $ref: "#/definitions/MolecularFeature"
+      copies:
         $ref: "#/definitions/IntegerRange"
     required:
       - type
       - subject
-      - amount
+      - copies
 
-  RelativeAbundance:
+  Expression:
     additionalProperties: false
     type: object
     description: >-
-      Relative abundance of a systemic subject such as a Gene or
-      specific type of molecular variation.
+      A measure of the quantity of a gene product.
     properties:
       _id:
         $ref: "#/definitions/CURIE"
@@ -197,13 +205,16 @@ definitions:
         type: string
         enum: ["RelativeAbundance"]
         default: "RelativeAbundance"
-      subject:
+      gene_product:
         oneOf:
           - $ref: "#/definitions/MolecularVariation"
-          - $ref: "#/definitions/CURIE"
-      relation:
-        type: string
-        enum: ["gt", "ge", "eq", "le", "lt"]
+          - $ref: "#/definitions/MolecularFeature"
+      quantity:
+        - $ref: "#/definitions/RelationOperator"
+    required:
+      - type
+      - gene_product
+      - quantity
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -488,6 +499,30 @@ definitions:
     type: string
     pattern: '^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$'
     example: "q22.3"
+
+  Range:
+    description: >-
+      A [min,max] inclusive range of number values. At least one of
+      min or max must be specified.  An unspecified value indicates an
+      unbounded min or max.  When both min and max are specified, they
+      must satisfy min <= max.
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        enum: ["Range"]
+        default: "Range"
+      min:
+        type: ["number", "null"]
+        default: null
+      max:
+        type: ["number", "null"]
+        default: null
+    example:
+      type: "Range"
+      min: -1.2
+      max: 4.0
 
   IntegerRange:
     description: >-

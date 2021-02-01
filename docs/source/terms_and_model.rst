@@ -387,35 +387,44 @@ The same APOE-ε1 Haplotype with referenced Alleles::
     }
 
 The GA4GH computed identifier for these Haplotypes is
-`ga4gh:VH.NAVnEuaP9gf41OxnPM56XxWQfdFNcUxJ`, regardless of whether
-the Variation objects are inlined or referenced, and regardless of
-order. See :ref:`computed-identifiers` for more information.
-
-
+`ga4gh:VH.NAVnEuaP9gf41OxnPM56XxWQfdFNcUxJ`, regardless
+of whether the Variation objects are inlined or
+referenced, and regardless of order. See
+:ref:`computed-identifiers` for more information.
 
 .. _SystemicVariation:
 
 Systemic Variation
 ##################
 
-Systemic Variation is a :ref:`Variation` of multiple molecules in
-the context of a system, such as a genome, cell, sample, or homologous
-chromosomal Locations.
+Systemic Variation is a :ref:`Variation` of multiple
+molecules in the context of a system, e.g. a genome,
+sample, or homologous chromosomes.
 
-.. _AbsoluteAbundance:
+.. _Abundance:
 
-AbsoluteAbundance
-$$$$$$$$$$$$$$$$$
+Abundance
+$$$$$$$$$
 
-*Absolute Abundance* captures the absolute quantity of a molecule
-within a system, and can be used to express concepts such as
+*Abundance* is the measure of a quantity of a molecule
+in a system. :ref:`Copy Number <CopyNumber>` and
+:ref:`Expression` variants are two common types of
+abundance statements, measuring the copies of a molecule
+present in a genome or expressed in a sample, respectively.
+
+.. _CopyNumber:
+
+CopyNumber
+%%%%%%%%%%
+
+*Copy Number* captures the copies of a molecule within
+a genome, and can be used to express concepts such as
 amplification and copy loss.
 
 **Computational Definition**
 
-An absolute count of a :ref:`MolecularFeature` or
-:ref:`MolecularVariation` subject within an implied system such
-as a genome, cell, or sample.
+The count of copies of a :ref:`MolecularFeature` or
+:ref:`MolecularVariation` subject within a genome.
 
 **Information Model**
 
@@ -436,51 +445,50 @@ as a genome, cell, or sample.
    * - type
      - string
      - 1..1
-     - MUST be "AbsoluteAbundance"
+     - MUST be "CopyNumber"
    * - subject
      - :ref:`MolecularVariation` | :ref:`MolecularFeature`
      - 1..1
      - Subject of the abundance statement
-   * - amount
-     - `IntegerRange`
+   * - copies
+     - :ref:`IntegerRange`
      - 1..1
-     - The inclusive range of integral copies of the subject.
-
-**Implementation Guidance**
-
-* See :ref:`IntegerRange` for an interpretation of the ``amount``
-  attribute.
+     - The integral number of copies of the subject in the genome
 
 **Example**
 
 .. parsed-literal::
 
     {
-      "amount": {
+      "copies": {
         "max": 5,
         "min": 0,
         "type": "IntegerRange"
       },
       "subject": "ncbigene:1234",
-      "type": "AbsoluteAbundance"
+      "type": "CopyNumber"
     }
 
-.. _RelativeAbundance:
+.. _Expression:
 
-RelativeAbundance
-$$$$$$$$$$$$$$$$$
+Expression
+%%%%%%%%%%
 
-*Relative Abundance* captures the relative quantity of a molecule
-within a system, and can be used to express concepts such as
-relative gene expression. The relative quantity is represented
-as a relation (e.g. *less than*, *greater than*) to an expected normal
-quantity for the implied system.
+*Expression* variation is the quantity of a gene
+product in a system (e.g. a biological tissue).
+Expression may be relative to an expected reference
+quantity for that system, represented as a relation
+(e.g. *less than*, *greater than*) or a fold-change
+difference.
+
+*Expression* may also be used to represent a
+complete loss of functional gene product.
 
 **Computational Definition**
 
-A relation between a :ref:`MolecularFeature` or :ref:`MolecularVariation`
-subject and a normal state within an implied system (such as a genome, cell,
-or sample).
+The quantity of a gene product relative to an implied
+normal state. "Loss" indicates complete loss of a
+gene product.
 
 **Information Model**
 
@@ -501,26 +509,16 @@ or sample).
    * - type
      - string
      - 1..1
-     - MUST be "RelativeAbundance"
-   * - subject
-     - :ref:`MolecularVariation` | :ref:`CURIE`
+     - MUST be "Expression"
+   * - gene_product
+     - :ref:`MolecularVariation` | :ref:`MolecularFeature`
      - 1..1
      - Subject of the abundance statement
-   * - relation
-     - string (enum)
+   * - quantity
+     - :ref:`RelationOperator` | :ref:`Range` | "loss"
      - 1..1
-     - The amount of the subject with respect to an unspecified
-       reference. Must be one of: ``"gt"``, ``"geq"``, ``"eq"``,
-       ``"leq"``, ``"lt"``, ``"neq"``.
+     - The relative quantity of the subject.
 
-**Implementation Guidance**
-
-* The strings specified in the `amount` enumerable correspond to
-  mathematical relations. See `W3C MathML2 Relation Notation`_ for more
-  details on these.
-
-.. _W3C MathML2 Relation Notation:
-    https://www.w3.org/TR/MathML2/chapter4.html#id.4.4.4
 
 **Example**
 
@@ -535,6 +533,13 @@ or sample).
       "type": "RelativeAbundance"
     }
 
+**Implementation Guidance**
+
+* Expression variation is represented in relation to an
+  expected reference quantity, but the reference context
+  is not captured by the Expression object. Implementations
+  SHOULD provide relevant context in messages using this
+  type of variation.
 
 .. _OtherVariation:
 
@@ -642,7 +647,7 @@ An unconstrained set of Variation members.
      - 1..1
      - MUST be "VariationSet"
    * - members
-     - :ref:`Variation`\[] or :ref:`CURIE`\[]
+     - :ref:`Variation`\[] | :ref:`CURIE`\[]
      - 0..*
      - List of Variation objects or identifiers. Attribute is
        required, but MAY be empty.
@@ -1339,12 +1344,7 @@ An expression of a sequence comprised of a tandem repeating subsequence.
    * - count
      - :ref:`IntegerRange`
      - 1..1
-     - the range of repeating units
-
-**Implementation Guidance**
-
-* See :ref:`IntegerRange` for an interpretation of the ``count``
-  attribute.
+     - the inclusive range count of repeated units
 
 
 .. _MolecularFeature:
@@ -1494,6 +1494,57 @@ Identifiers for GRCh38 chromosome 19::
 See :ref:`identify` for examples of CURIE-based identifiers for VRS
 objects.
 
+.. _Range:
+
+Range
+#####
+
+**Computational Definition**
+
+A pair of numeric values used to specify an inclusive range.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "Range"
+   * - min
+     - number
+     - 0..1
+     - minimum value; inclusive
+   * - max
+     - number
+     - 0..1
+     - maximum value; inclusive
+
+**Implementation Guidance**
+
+* At least one of ``min`` or ``max`` must be specified.
+* If both ``min`` and ``max`` are specified, they MUST satisfy ``min
+  <= max``.
+* If ``min == max``, then the range specifies a single numeric amount.
+
+
+**Examples**
+
+.. parsed-literal::
+
+   {
+     "max": 4.0,
+     "min": -1.2
+   }
+
 .. _IntegerRange:
 
 IntegerRange
@@ -1520,11 +1571,11 @@ A pair of integer values used to specify an inclusive range.
      - 1..1
      - MUST be "IntegerRange"
    * - min
-     - int
+     - integer
      - 0..1
      - minimum value; inclusive
    * - max
-     - int
+     - integer
      - 0..1
      - maximum value; inclusive
 
@@ -1627,6 +1678,29 @@ ISCN guidelines [1]_.
 
 .. [1] McGowan-Jordan J (Ed.). *ISCN 2016: An international system
        for human cytogenomic nomenclature (2016).* Karger (2016).
+
+.. _RelationOperator:
+
+RelationOperator
+################
+
+Some types of variation are only specified in relative measure.
+Relation operators provide an expression of the relative amount
+between two subjects.
+
+**Computational Definition**
+
+A character string representing relational operators as specified
+by the W3C MathML2 Relation Notation.
+
+**Information Model**
+
+A string constrained to match one of [`gt`, `geq`, `eq`, `leq`, `lt`,
+`neq`], corresponding to mathematical relations as defined by the
+`W3C MathML2 Relation Notation`_.
+
+.. _W3C MathML2 Relation Notation:
+    https://www.w3.org/TR/MathML2/chapter4.html#id.4.4.4
 
 Deprecated and Obsolete Classes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

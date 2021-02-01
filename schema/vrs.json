@@ -1,40 +1,20 @@
 {
    "$schema": "http://json-schema.org/draft-04/schema",
    "definitions": {
-      "AbsoluteAbundance": {
+      "Abundance": {
          "additionalProperties": false,
-         "description": "Absolute abundance of a systemic subject such as a gene or specific type of molecular variation.",
-         "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "amount": {
-               "$ref": "#/definitions/IntegerRange"
-            },
-            "subject": {
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/MolecularVariation"
-                  },
-                  {
-                     "$ref": "#/definitions/CURIE"
-                  }
-               ]
-            },
-            "type": {
-               "default": "AbsoluteAbundance",
-               "enum": [
-                  "AbsoluteAbundance"
-               ],
-               "type": "string"
-            }
+         "description": "The measure of a quantity of a molecule in a system.",
+         "discriminator": {
+            "propertyName": "type"
          },
-         "required": [
-            "type",
-            "subject",
-            "amount"
-         ],
-         "type": "object"
+         "oneOf": [
+            {
+               "$ref": "#/definitions/CopyNumber"
+            },
+            {
+               "$ref": "#/definitions/Expression"
+            }
+         ]
       },
       "Allele": {
          "additionalProperties": false,
@@ -113,6 +93,41 @@
          ],
          "type": "object"
       },
+      "CopyNumber": {
+         "additionalProperties": false,
+         "description": "The count of copies of a Molecular Feature or Molecular Variation subject within a genome.",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "copies": {
+               "$ref": "#/definitions/IntegerRange"
+            },
+            "subject": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/MolecularVariation"
+                  },
+                  {
+                     "$ref": "#/definitions/MolecularFeature"
+                  }
+               ]
+            },
+            "type": {
+               "default": "AbsoluteAbundance",
+               "enum": [
+                  "AbsoluteAbundance"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "subject",
+            "copies"
+         ],
+         "type": "object"
+      },
       "CytobandInterval": {
          "additionalProperties": false,
          "description": "A contiguous region specified by chromosomal bands features.",
@@ -159,6 +174,43 @@
                "type": "string"
             }
          },
+         "type": "object"
+      },
+      "Expression": {
+         "additionalProperties": false,
+         "description": "A measure of the quantity of a gene product.",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "gene_product": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/MolecularVariation"
+                  },
+                  {
+                     "$ref": "#/definitions/MolecularFeature"
+                  }
+               ]
+            },
+            "quantity": [
+               {
+                  "$ref": "#/definitions/RelationOperator"
+               }
+            ],
+            "type": {
+               "default": "RelativeAbundance",
+               "enum": [
+                  "RelativeAbundance"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "gene_product",
+            "quantity"
+         ],
          "type": "object"
       },
       "Gene": {
@@ -336,40 +388,39 @@
          "oneOf": [
             {
                "$ref": "#/definitions/Text"
+            },
+            {
+               "$ref": "#/definitions/VariationSet"
             }
          ]
       },
-      "RelativeAbundance": {
+      "Range": {
          "additionalProperties": false,
-         "description": "Relative abundance of a systemic subject such as a Gene or specific type of molecular variation.",
+         "description": "A [min,max] inclusive range of number values. At least one of min or max must be specified.  An unspecified value indicates an unbounded min or max.  When both min and max are specified, they must satisfy min <= max.",
+         "example": {
+            "max": 4.0,
+            "min": -1.2,
+            "type": "Range"
+         },
          "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
+            "max": {
+               "default": null,
+               "type": [
+                  "number",
+                  "null"
+               ]
             },
-            "relation": {
-               "enum": [
-                  "gt",
-                  "ge",
-                  "eq",
-                  "le",
-                  "lt"
-               ],
-               "type": "string"
-            },
-            "subject": {
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/MolecularVariation"
-                  },
-                  {
-                     "$ref": "#/definitions/CURIE"
-                  }
+            "min": {
+               "default": null,
+               "type": [
+                  "number",
+                  "null"
                ]
             },
             "type": {
-               "default": "RelativeAbundance",
+               "default": "Range",
                "enum": [
-                  "RelativeAbundance"
+                  "Range"
                ],
                "type": "string"
             }
@@ -538,10 +589,7 @@
          },
          "oneOf": [
             {
-               "$ref": "#/definitions/AbsoluteAbundance"
-            },
-            {
-               "$ref": "#/definitions/RelativeAbundance"
+               "$ref": "#/definitions/Abundance"
             }
          ]
       },
