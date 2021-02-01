@@ -209,12 +209,34 @@ definitions:
         oneOf:
           - $ref: "#/definitions/MolecularVariation"
           - $ref: "#/definitions/MolecularFeature"
-      quantity:
-        - $ref: "#/definitions/RelationOperator"
+      quantity_type:
+        type: string
+        enum: ["log2 change", "other"]
+    allOf:
+      - if:
+          properties:
+            quantity_type:
+              const: "log2 change"
+        then:
+          properties:
+            quantity:
+              $ref: "#/definitions/Range"
+      - if:
+          properties:
+            quantity_type:
+              const: "other"
+        then:
+          properties:
+            quantity:
+              oneOf:
+                - $ref: "#/definitions/RelationOperator"
+                - type: string
+                  enum: ["loss"]
     required:
       - type
       - gene_product
       - quantity
+      - quantity_type
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

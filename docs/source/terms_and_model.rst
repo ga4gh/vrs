@@ -481,14 +481,13 @@ quantity for that system, represented as a relation
 (e.g. *less than*, *greater than*) or a fold-change
 difference.
 
-*Expression* may also be used to represent a
-complete loss of functional gene product.
+*Expression* may also be used to represent a complete
+loss of functional gene product. Additional representations
+for absolute expression measures are under consideration.
 
 **Computational Definition**
 
-The quantity of a gene product relative to an implied
-normal state. "Loss" indicates complete loss of a
-gene product.
+The quantity of a gene product.
 
 **Information Model**
 
@@ -517,7 +516,38 @@ gene product.
    * - quantity
      - :ref:`RelationOperator` | :ref:`Range` | "loss"
      - 1..1
-     - The relative quantity of the subject.
+     - The quantity of the gene product (see below)
+   * - quantity_system
+     - string
+     - 1..1
+     - MUST be one of ["log2 change", "other"] (see
+       below)
+
+Interpretation of the ``quantity`` attribute is dependent upon
+the system characterizing it. The following table describes
+valid uses of the ``quantity`` and ``quantity_system`` attributes.
+Combinations of ``quantity`` type and ``quantity_system`` not
+indicated on the below table are invalid.
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - quantity_system
+     - quantity type
+     - interpretation
+   * - "log2 change"
+     - :ref:`Range`
+     - The base-2 logarithm of the relative quantity of gene product
+   * - "other"
+     - "loss"
+     - Complete loss of the gene product
+   * - "other"
+     - :ref:`RelationOperator`
+     - Expression relative to an implied
+
 
 
 **Example**
@@ -535,11 +565,10 @@ gene product.
 
 **Implementation Guidance**
 
-* Expression variation is represented in relation to an
-  expected reference quantity, but the reference context
-  is not captured by the Expression object. Implementations
-  SHOULD provide relevant context in messages using this
-  type of variation.
+* Expression objects do not capture the reference system
+  context implied by relative expression quantities.
+  Implementations SHOULD therefore provide relevant context
+  in messages using relative forms of expression variation.
 
 .. _OtherVariation:
 

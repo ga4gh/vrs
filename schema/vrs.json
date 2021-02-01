@@ -178,6 +178,50 @@
       },
       "Expression": {
          "additionalProperties": false,
+         "allOf": [
+            {
+               "if": {
+                  "properties": {
+                     "quantity_type": {
+                        "const": "log2 change"
+                     }
+                  }
+               },
+               "then": {
+                  "properties": {
+                     "quantity": {
+                        "$ref": "#/definitions/Range"
+                     }
+                  }
+               }
+            },
+            {
+               "if": {
+                  "properties": {
+                     "quantity_type": {
+                        "const": "other"
+                     }
+                  }
+               },
+               "then": {
+                  "properties": {
+                     "quantity": {
+                        "oneOf": [
+                           {
+                              "$ref": "#/definitions/RelationOperator"
+                           },
+                           {
+                              "enum": [
+                                 "loss"
+                              ],
+                              "type": "string"
+                           }
+                        ]
+                     }
+                  }
+               }
+            }
+         ],
          "description": "A measure of the quantity of a gene product.",
          "properties": {
             "_id": {
@@ -193,11 +237,13 @@
                   }
                ]
             },
-            "quantity": [
-               {
-                  "$ref": "#/definitions/RelationOperator"
-               }
-            ],
+            "quantity_type": {
+               "enum": [
+                  "log2 change",
+                  "other"
+               ],
+               "type": "string"
+            },
             "type": {
                "default": "RelativeAbundance",
                "enum": [
@@ -209,7 +255,8 @@
          "required": [
             "type",
             "gene_product",
-            "quantity"
+            "quantity",
+            "quantity_type"
          ],
          "type": "object"
       },
