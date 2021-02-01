@@ -1446,7 +1446,7 @@ regulatory, transcribed, and/or other functional Locations.
     * `ensembl <https://registry.identifiers.org/registry/ensembl>`__
     * `vgnc <https://registry.identifiers.org/registry/vgnc>`__
     * `mgi <https://registry.identifiers.org/registry/mgi>`__
-* Implementations RECOMMEND using the `hgnc` namespace for human
+* The `hgnc` namespace is RECOMMENDED for human
   variation in order to improve interoperability.
 * Gene MAY be converted to one or more :ref:`Locations <Location>`
   using external data. The source of such data and mechanism for
