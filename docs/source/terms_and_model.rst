@@ -1716,7 +1716,7 @@ ISCN guidelines [1]_.
 .. _RelationalOperator:
 
 RelationalOperator
-################
+##################
 
 Some types of variation are only specified in relative measure.
 Relation operators provide an expression of the relative amount
