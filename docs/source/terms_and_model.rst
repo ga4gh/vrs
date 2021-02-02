@@ -423,7 +423,7 @@ amplification and copy loss.
 
 **Computational Definition**
 
-The count of copies of a :ref:`MolecularFeature` or
+The count of copies of a :ref:`Feature` or
 :ref:`MolecularVariation` subject within a genome.
 
 **Information Model**
@@ -447,7 +447,7 @@ The count of copies of a :ref:`MolecularFeature` or
      - 1..1
      - MUST be "CopyNumber"
    * - subject
-     - :ref:`MolecularVariation` | :ref:`MolecularFeature`
+     - :ref:`MolecularVariation` | :ref:`Feature`
      - 1..1
      - Subject of the abundance statement
    * - copies
