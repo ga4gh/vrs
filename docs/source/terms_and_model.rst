@@ -1279,15 +1279,14 @@ An expression of a sequence comprised of a tandem repeating subsequence.
      - the inclusive range count of repeated units
 
 
-.. _MolecularFeature:
+.. _Feature:
 
-Molecular Feature
-@@@@@@@@@@@@@@@@@
+Feature
+@@@@@@@
 
-A *Molecular Feature* is a named entity that can be mapped to a
+A *Feature* is a named entity that can be mapped to a
 :ref:`Location`. Genes, protein domains, exons, and chromosomes are
-some examples of common biological entities that may be Molecular
-Features.
+some examples of common biological entities that may be Features.
 
 .. _Gene:
 
