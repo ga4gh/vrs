@@ -1152,7 +1152,7 @@ cytobands.
 Sequence Expression
 @@@@@@@@@@@@@@@@@@@
 
-VRS provides several mechanisms to express a sequence,
+VRS provides several syntaxes for expressing a sequence,
 collectively referred to as *Sequence Expressions*. They are:
 
 * :ref:`LiteralSequence`: An explicit :ref:`Sequence`.

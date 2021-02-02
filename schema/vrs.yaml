@@ -347,11 +347,11 @@ definitions:
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # SequenceExpressions
+  # SequenceExpression
 
   SequenceExpression:
     description: >-
-      TODO
+      One of a set of sequence representation syntaxes.
     additionalProperties: false
     oneOf:
       - $ref: "#/definitions/LiteralSequence"
