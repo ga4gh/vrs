@@ -437,6 +437,15 @@ definitions:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Quantity
 
+  Quantity:
+    description: >-
+      A value representing a multitude or magnitude.
+    additionalProperties: false
+    oneOf:
+      - $ref: "#/definitions/CopyCount"
+    discriminator:
+      propertyName: type
+
   CopyCount:
     description: >-
       An integer count of copies. Counts are bounded ranges denoted by minimum
