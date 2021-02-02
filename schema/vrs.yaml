@@ -408,6 +408,17 @@ definitions:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Feature
 
+  Feature:
+    description: >-
+      A named entity that can be mapped to a Location. Genes, protein domains,
+      exons, and chromosomes are some examples of common biological entities
+      that may be Features.
+    additionalProperties: false
+    oneOf:
+      - $ref: "#/definitions/Gene"
+    discriminator:
+      propertyName: type
+
   Gene:
     description: >-
       A reference to an external gene system, used as a location for
