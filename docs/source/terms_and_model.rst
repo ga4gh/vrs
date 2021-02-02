@@ -1380,7 +1380,7 @@ The following examples all refer to the human BRCA1 gene:
   regulatory regions, transcribed regions and/or other functional
   sequence regions.
 
-.. _Quantity
+.. _Quantity:
 
 Quantity
 @@@@@@@@

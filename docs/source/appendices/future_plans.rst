@@ -18,6 +18,9 @@ require supporting more complex types of variation, including:
 * mosaicism and chimerism
 * rule-based variation
 
+.. todo::
+   The below figure will be updated prior to v1.2 release.
+
 .. figure:: ../images/schema-future.png
 
    Planned Variation Representation Specfication Schema
