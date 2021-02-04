@@ -409,7 +409,7 @@ $$$$$$$$$
 *Abundance* is the measure of a quantity of a molecule
 in a system. :ref:`Copy Number <CopyNumber>` and
 gene expression variants are two common types of
-abundance statements, measuring the copies of a molecule
+abundance variation, measuring the copies of a molecule
 present in a genome or expressed in a sample, respectively.
 
 .. _CopyNumber:
