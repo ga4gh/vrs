@@ -189,6 +189,7 @@ definitions:
           - $ref: "#/definitions/MolecularVariation"
           - $ref: "#/definitions/Feature"
           - $ref: "#/definitions/Location"
+          - $ref: "#/definitions/CURIE"
       copies:
         $ref: "#/definitions/CopyCount"
     required:
