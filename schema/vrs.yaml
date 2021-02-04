@@ -175,7 +175,8 @@ definitions:
     additionalProperties: false
     type: object
     description: >-
-      The count of copies of a Molecular Feature or Molecular Variation subject within a genome.
+      The count of copies of a Feature, Location, or Molecular Variation
+      subject within a genome.
     properties:
       _id:
         $ref: "#/definitions/CURIE"
@@ -186,7 +187,8 @@ definitions:
       subject:
         oneOf:
           - $ref: "#/definitions/MolecularVariation"
-          - $ref: "#/definitions/MolecularFeature"
+          - $ref: "#/definitions/Feature"
+          - $ref: "#/definitions/Location"
       copies:
         $ref: "#/definitions/CopyCount"
     required:
