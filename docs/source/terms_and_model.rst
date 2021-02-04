@@ -98,7 +98,7 @@ In VRS, the Variation class is the conceptual root of all types of
 variation, and the *Variation* abstract class is the top-level object in
 the :ref:`vr-schema-diagram`. Variation types are broadly categorized as
 :ref:`MolecularVariation`, :ref:`SystemicVariation`, or a :ref:`utility
-subclass <othervariation>`. Types of variation are widely varied, and
+subclass <utilityvariation>`. Types of variation are widely varied, and
 there are several :ref:`planned-variation` currently under consideration
 to capture this diversity.
 
@@ -469,14 +469,15 @@ The count of copies of a :ref:`Feature` or
       "type": "CopyNumber"
     }
 
-.. _OtherVariation:
+.. _UtilityVariation:
 
-Other Variation
+Utility Variation
 ################
 
-*Other variation* is a collection of utility :ref:`Variation`
+*Utility variation* is a collection of :ref:`Variation`
 subclasses that cannot be constrained to a specific class of
-biological variation.
+biological variation, but are necessary for some technical
+applications of VRS.
 
 .. _Text:
 

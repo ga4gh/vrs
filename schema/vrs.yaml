@@ -42,7 +42,7 @@ definitions:
     discriminator:
       propertyName: type
 
-  OtherVariation:
+  UtilityVariation:
     additionalProperties: false
     description: >-
       Utility variation classes that cannot be constrained to a specific
@@ -115,7 +115,7 @@ definitions:
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # OtherVariation
+  # UtilityVariation
 
   Text:
     description: >-
@@ -136,6 +136,7 @@ definitions:
           An textual representation of variation intended to capture
           variation descriptions that cannot be parsed, but still
           treated as variation.
+
 
   VariationSet:
     description: >-
