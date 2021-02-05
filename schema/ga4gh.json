@@ -5,16 +5,14 @@
       "ref_sep": ".",
       "regexp": "^ga4gh:(?P<type>[^.]+)\\.(?P<digest>.+)$",
       "type_prefix_map": {
-         "AbsoluteAbundance": "VAA",
          "Allele": "VA",
          "ChromosomeLocation": "VCL",
+         "CopyNumber": "VCN",
          "GeneLocation": "VGL",
          "Haplotype": "VH",
-         "RelativeAbundance": "VRA",
          "Sequence": "SQ",
          "SequenceLocation": "VSL",
          "Text": "VT",
-         "Transcript": "VTX",
          "TranscriptLocation": "VTL",
          "VariationSet": "VS"
       }

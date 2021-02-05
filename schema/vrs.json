@@ -162,7 +162,7 @@
       },
       "CopyNumber": {
          "additionalProperties": false,
-         "description": "The count of copies of a Molecular Feature or Molecular Variation subject within a genome.",
+         "description": "The count of copies of a Feature, Location, or Molecular Variation subject within a genome.",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
@@ -176,7 +176,13 @@
                      "$ref": "#/definitions/MolecularVariation"
                   },
                   {
-                     "$ref": "#/definitions/MolecularFeature"
+                     "$ref": "#/definitions/Feature"
+                  },
+                  {
+                     "$ref": "#/definitions/Location"
+                  },
+                  {
+                     "$ref": "#/definitions/CURIE"
                   }
                ]
             },
@@ -242,6 +248,18 @@
             }
          },
          "type": "object"
+      },
+      "Feature": {
+         "additionalProperties": false,
+         "description": "A named entity that can be mapped to a Location. Genes, protein domains, exons, and chromosomes are some examples of common biological entities that may be Features.",
+         "discriminator": {
+            "propertyName": "type"
+         },
+         "oneOf": [
+            {
+               "$ref": "#/definitions/Gene"
+            }
+         ]
       },
       "Gene": {
          "additionalProperties": false,
@@ -376,18 +394,15 @@
          },
          "type": "object"
       },
-      "OtherVariation": {
+      "Quantity": {
          "additionalProperties": false,
-         "description": "Utility variation classes that cannot be constrained to a specific biological class of variation.",
+         "description": "A value representing a multitude or magnitude.",
          "discriminator": {
             "propertyName": "type"
          },
          "oneOf": [
             {
-               "$ref": "#/definitions/Text"
-            },
-            {
-               "$ref": "#/definitions/VariationSet"
+               "$ref": "#/definitions/CopyCount"
             }
          ]
       },
@@ -429,7 +444,7 @@
       },
       "SequenceExpression": {
          "additionalProperties": false,
-         "description": "TODO",
+         "description": "One of a set of sequence representation syntaxes.",
          "discriminator": {
             "propertyName": "type"
          },
@@ -577,6 +592,21 @@
             }
          },
          "type": "object"
+      },
+      "UtilityVariation": {
+         "additionalProperties": false,
+         "description": "Utility variation classes that cannot be constrained to a specific biological class of variation.",
+         "discriminator": {
+            "propertyName": "type"
+         },
+         "oneOf": [
+            {
+               "$ref": "#/definitions/Text"
+            },
+            {
+               "$ref": "#/definitions/VariationSet"
+            }
+         ]
       },
       "Variation": {
          "additionalProperties": false,
