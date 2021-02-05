@@ -35,29 +35,31 @@ definitions:
   MolecularVariation:
     additionalProperties: false
     description: >-
-      Variation defined on a molecule (sequence)
+      A variation on a contiguous molecule.
     oneOf:
       - $ref: "#/definitions/Allele"
       - $ref: "#/definitions/Haplotype"
     discriminator:
       propertyName: type
 
-  OtherVariation:
+  UtilityVariation:
     additionalProperties: false
     description: >-
-      The root class of all Variation types
+      Utility variation classes that cannot be constrained to a specific
+      biological class of variation.
     oneOf:
       - $ref: "#/definitions/Text"
+      - $ref: "#/definitions/VariationSet"
     discriminator:
       propertyName: type
 
   SystemicVariation:
     additionalProperties: false
     description: >-
-      Genome-wide statements about variation
+      A Variation of multiple molecules in the context of a system, e.g.
+      a genome, sample, or homologous chromosomes.
     oneOf:
-      - $ref: "#/definitions/AbsoluteAbundance"
-      - $ref: "#/definitions/RelativeAbundance"
+      - $ref: "#/definitions/Abundance"
     discriminator:
       propertyName: type
 
@@ -113,7 +115,7 @@ definitions:
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # OtherVariation
+  # UtilityVariation
 
   Text:
     description: >-
@@ -134,6 +136,7 @@ definitions:
           An textual representation of variation intended to capture
           variation descriptions that cannot be parsed, but still
           treated as variation.
+
 
   VariationSet:
     description: >-
@@ -160,12 +163,21 @@ definitions:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # SystemicVariation
 
-  AbsoluteAbundance:
+  Abundance:
+    additionalProperties: false
+    description: >-
+      The measure of a quantity of a molecule in a system.
+    oneOf:
+      - $ref: "#/definitions/CopyNumber"
+    discriminator:
+      propertyName: type
+
+  CopyNumber:
     additionalProperties: false
     type: object
     description: >-
-      Absolute abundance of a systemic subject such as a gene or
-      specific type of molecular variation.
+      The count of copies of a Feature, Location, or Molecular Variation
+      subject within a genome.
     properties:
       _id:
         $ref: "#/definitions/CURIE"
@@ -176,35 +188,15 @@ definitions:
       subject:
         oneOf:
           - $ref: "#/definitions/MolecularVariation"
+          - $ref: "#/definitions/Feature"
+          - $ref: "#/definitions/Location"
           - $ref: "#/definitions/CURIE"
-      amount:
-        $ref: "#/definitions/IntegerRange"
+      copies:
+        $ref: "#/definitions/CopyCount"
     required:
       - type
       - subject
-      - amount
-
-  RelativeAbundance:
-    additionalProperties: false
-    type: object
-    description: >-
-      Relative abundance of a systemic subject such as a Gene or
-      specific type of molecular variation.
-    properties:
-      _id:
-        $ref: "#/definitions/CURIE"
-      type:
-        type: string
-        enum: ["RelativeAbundance"]
-        default: "RelativeAbundance"
-      subject:
-        oneOf:
-          - $ref: "#/definitions/MolecularVariation"
-          - $ref: "#/definitions/CURIE"
-      amount:
-        type: string
-        enum: ["gt", "ge", "eq", "le", "lt"]
-
+      - copies
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations
@@ -335,12 +327,35 @@ definitions:
         start: 10
         end: 40
 
+  CytobandInterval:
+    description: >-
+      A contiguous region specified by chromosomal bands features.
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [ "CytobandInterval" ]
+        default: "CytobandInterval"
+      start:
+        $ref: "#/definitions/HumanCytoband"
+      end:
+        $ref: "#/definitions/HumanCytoband"
+    required:
+      - start
+      - end
+    example:
+      type: CytobandInterval
+      start: q22.2
+      end: q22.3
+
+
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # Sequence Expressions 
+  # SequenceExpression
 
   SequenceExpression:
     description: >-
-      TODO
+      One of a set of sequence representation syntaxes.
     additionalProperties: false
     oneOf:
       - $ref: "#/definitions/LiteralSequence"
@@ -358,7 +373,7 @@ definitions:
         enum: ["LiteralSequence"]
         default: "LiteralSequence"
       sequence:
-        type: string
+        $ref: "#/definitions/Sequence"
 
   DerivedSequence:
     type: object
@@ -371,13 +386,9 @@ definitions:
       location:
         $ref: "#/definitions/SequenceLocation"
       transformation:
-        type: string
-        enum: ["none", "reverse", "complement", "reverse-complement"]
-        default: "none"
+        type: bool
 
   RepeatedSequence:
-    description: >-
-      A tandem repeat of a SequenceLocation
     additionalProperties: false
     type: object
     properties:
@@ -393,10 +404,24 @@ definitions:
       - type
       - count
     example:
-      type: SequenceState
+      type: RepeatedSequence
       copies:
         min: 40
         max: 60
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Feature
+
+  Feature:
+    description: >-
+      A named entity that can be mapped to a Location. Genes, protein domains,
+      exons, and chromosomes are some examples of common biological entities
+      that may be Features.
+    additionalProperties: false
+    oneOf:
+      - $ref: "#/definitions/Gene"
+    discriminator:
+      propertyName: type
 
   Gene:
     description: >-
@@ -413,34 +438,80 @@ definitions:
       gene_id:
         $ref: "#/definitions/CURIE"
 
-  CytobandInterval:
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Quantity
+
+  Quantity:
     description: >-
-      A contiguous region specified by chromosomal bands features.
-    type: object
+      A value representing a multitude or magnitude.
     additionalProperties: false
+    oneOf:
+      - $ref: "#/definitions/CopyCount"
+    discriminator:
+      propertyName: type
+
+  CopyCount:
+    description: >-
+      An integer count of copies. Counts are bounded ranges denoted by minimum
+      and maximum possible values. Absolute copy number counts may not be smaller
+      than zero.
+    additionalProperties: false
+    type: object
     properties:
       type:
         type: string
-        enum: ["CytobandInterval"]
-        default: "CytobandInterval"
-      start:
-        $ref: "#/definitions/Cytoband"
-      end:
-        $ref: "#/definitions/Cytoband"
-    required:
-      - start
-      - end
+        enum: ["CopyCount"]
+        default: "CopyCount"
+      absolute_measure:
+        type: bool
+      min:
+        type: ["integer", "null"]
+        default: null
+      max:
+        type: ["integer", "null"]
+        default: null
+    allOf:
+      # At least one of min or max not null
+      - if:
+          properties:
+             min:
+               type: null
+             max:
+               type: null
+        then:
+          false
+      # min < max cannot be validated by JSON schema
+      # min >= 0 and max >= 0 if absolute_measure == true
+      - if:
+          properties:
+            absolute_measure:
+              const: true
+        then:
+          properties:
+            min:
+              minimum: 0
+            max:
+              minimum: 0
     example:
-      type: CytobandInterval
-      start: q22.2
-      end: q22.3
-
+      type: "IntegerRange"
+      min: 5
+      max: 10
 
   # =============================================================================
   # BASIC TYPES (STRUCTURES)
   # These types do NOT have a VRS `type` attribute
   # These types are used solely within other definitions.
   # =============================================================================
+
+  Sequence:
+    additionalProperties: false
+    description: >-
+      A character string of residues that represents a biological
+      sequence using the conventional sequence order (5’-to-3’ for
+      nucleic acid sequences, and amino-to-carboxyl for amino acid
+      sequences). IUPAC ambiguity codes are permitted in Sequences.
+    type: string
+    pattern: '^[A-Z*\-]*$'
 
   CURIE:
     additionalProperties: false
@@ -474,43 +545,21 @@ definitions:
     pattern: '^\w[^:]*:.+$'
     example: "ensembl:ENSG00000139618"
 
-  Cytoband:
+  HumanCytoband:
     description: >-
-      A feature referencing a giesma-stained band on an unspecified human chromosome.
+      A interval on a stained metaphase chromosome specified by cytobands.
+      CytobandIntervals include the regions described by the start and end
+      cytobands.
     type: string
     pattern: '^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$'
     example: "q22.3"
-
-  IntegerRange:
-    description: >-
-      A [min,max] inclusive range of integer values. At least one of
-      min or max must be specified.  An unspecified value indicates an
-      unbounded min or max.  When both min and max are specified, they
-      must satisfy min <= max.
-    additionalProperties: false
-    type: object
-    properties:
-      type:
-        type: string
-        enum: ["IntegerRange"]
-        default: "IntegerRange"
-      min:
-        type: ["integer", "null"]
-        default: null
-      max:
-        type: ["integer", "null"]
-        default: null
-    example:
-      type: "IntegerRange"
-      min: 5
-      max: 10
-
 
   # =============================================================================
   # DEPRECATED
   # =============================================================================
 
   SequenceState:
+    deprecated: true
     description: >-
       DEPRECATED: An assertion of the state of a sequence, typically
       at a Sequence Location within an Allele.
@@ -524,8 +573,7 @@ definitions:
         enum: ["SequenceState"]
         default: "SequenceState"
       sequence:
-        type: string
-        nullable: false
+        $ref: "#/definitions/Sequence"
     required:
       - type
       - sequence

@@ -41,7 +41,7 @@ other ways of describing locations. Similarly, State may refer to a
 specific sequence change, copy number change, or complex sequence
 event.
 
-In this example, we will use a :ref:`sequence-location`, which is
+In this example, we will use a :ref:`SequenceLocation`, which is
 composed of a sequence identifier and a :ref:`SimpleInterval`.
 
 In VRS, all identifiers are a |CURIE|.  Therefore, NC_000013.11 MUST be
@@ -70,7 +70,7 @@ The :ref:`SimpleInterval` for the position ``32936732`` is
     }
 
 The interval is then 'placed' on a sequence to create the
-:ref:`sequence-location`:
+:ref:`SequenceLocation`:
 
 .. code-block:: json
 

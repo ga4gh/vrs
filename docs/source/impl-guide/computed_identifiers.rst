@@ -246,6 +246,7 @@ Type prefixes used by VRS are:
    SQ, Sequence
    VA, Allele
    VH, Haplotype
+   VAB, Abundance
    VS, VariationSet
    VSL, SequenceLocation
    VCL, ChromosomeLocation
