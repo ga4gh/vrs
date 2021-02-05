@@ -463,7 +463,7 @@ The count of copies of a :ref:`Feature` or
       "copies": {
         "max": 5,
         "min": 0,
-        "type": "IntegerRange"
+        "type": "CopyCount"
       },
       "subject": "ncbigene:1234",
       "type": "CopyNumber"
@@ -1421,11 +1421,11 @@ Absolute copy number counts may not be smaller than zero.
      - specifies if the count is an absolute (TRUE)
        or relative (FALSE) measure
    * - min
-     - number
+     - integer
      - 0..1
      - minimum value; inclusive
    * - max
-     - number
+     - integer
      - 0..1
      - maximum value; inclusive
 
