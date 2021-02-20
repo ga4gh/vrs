@@ -8,12 +8,10 @@
          "Allele": "VA",
          "ChromosomeLocation": "VCL",
          "CopyNumber": "VCN",
-         "GeneLocation": "VGL",
          "Haplotype": "VH",
          "Sequence": "SQ",
          "SequenceLocation": "VSL",
          "Text": "VT",
-         "TranscriptLocation": "VTL",
          "VariationSet": "VS"
       }
    }
