@@ -28,7 +28,7 @@ definitions:
     oneOf:
       - $ref: "#/definitions/MolecularVariation"
       - $ref: "#/definitions/SystemicVariation"
-      - $ref: "#/definitions/OtherVariation"
+      - $ref: "#/definitions/UtilityVariation"
     discriminator:
       propertyName: type
 
@@ -49,7 +49,9 @@ definitions:
       biological class of variation.
     oneOf:
       - $ref: "#/definitions/Text"
-      - $ref: "#/definitions/VariationSet"
+      # TODO: Recent changes break this for an unknown reason
+      # Remove for now so that it's not broken.
+      # - $ref: "#/definitions/VariationSet"
     discriminator:
       propertyName: type
 
@@ -136,7 +138,6 @@ definitions:
           An textual representation of variation intended to capture
           variation descriptions that cannot be parsed, but still
           treated as variation.
-
 
   VariationSet:
     description: >-
@@ -386,7 +387,7 @@ definitions:
       location:
         $ref: "#/definitions/SequenceLocation"
       transformation:
-        type: bool
+        type: boolean
 
   RepeatedSequence:
     additionalProperties: false
@@ -399,7 +400,7 @@ definitions:
       sequence:
         $ref: "#/definitions/SequenceExpression"
       count:
-        $ref: "#/definitions/IntegerRange"
+        $ref: "#/definitions/CopyCount"
     required:
       - type
       - count
@@ -463,37 +464,39 @@ definitions:
         enum: ["CopyCount"]
         default: "CopyCount"
       absolute_measure:
-        type: bool
+        type: boolean
       min:
         type: ["integer", "null"]
         default: null
       max:
         type: ["integer", "null"]
         default: null
-    allOf:
-      # At least one of min or max not null
-      - if:
-          properties:
-             min:
-               type: null
-             max:
-               type: null
-        then:
-          false
-      # min < max cannot be validated by JSON schema
-      # min >= 0 and max >= 0 if absolute_measure == true
-      - if:
-          properties:
-            absolute_measure:
-              const: true
-        then:
-          properties:
-            min:
-              minimum: 0
-            max:
-              minimum: 0
+    # TODO: Remove or fix
+    # This is broken for Reece with vrs-python. Tested? 
+    # allOf:
+    #   # At least one of min or max not null
+    #   - if:
+    #       properties:
+    #          min:
+    #            type: null
+    #          max:
+    #            type: null
+    #     then:
+    #       false
+    #   # min < max cannot be validated by JSON schema
+    #   # min >= 0 and max >= 0 if absolute_measure == true
+    #   - if:
+    #       properties:
+    #         absolute_measure:
+    #           const: true
+    #     then:
+    #       properties:
+    #         min:
+    #           minimum: 0
+    #         max:
+    #           minimum: 0
     example:
-      type: "IntegerRange"
+      type: "CopyCount"
       min: 5
       max: 10
 

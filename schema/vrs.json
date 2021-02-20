@@ -92,49 +92,15 @@
       },
       "CopyCount": {
          "additionalProperties": false,
-         "allOf": [
-            {
-               "if": {
-                  "properties": {
-                     "max": {
-                        "type": null
-                     },
-                     "min": {
-                        "type": null
-                     }
-                  }
-               },
-               "then": false
-            },
-            {
-               "if": {
-                  "properties": {
-                     "absolute_measure": {
-                        "const": true
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "max": {
-                        "minimum": 0
-                     },
-                     "min": {
-                        "minimum": 0
-                     }
-                  }
-               }
-            }
-         ],
          "description": "An integer count of copies. Counts are bounded ranges denoted by minimum and maximum possible values. Absolute copy number counts may not be smaller than zero.",
          "example": {
             "max": 10,
             "min": 5,
-            "type": "IntegerRange"
+            "type": "CopyCount"
          },
          "properties": {
             "absolute_measure": {
-               "type": "bool"
+               "type": "boolean"
             },
             "max": {
                "default": null,
@@ -237,7 +203,7 @@
                "$ref": "#/definitions/SequenceLocation"
             },
             "transformation": {
-               "type": "bool"
+               "type": "boolean"
             },
             "type": {
                "default": "DerivedSequence",
@@ -417,7 +383,7 @@
          },
          "properties": {
             "count": {
-               "$ref": "#/definitions/IntegerRange"
+               "$ref": "#/definitions/CopyCount"
             },
             "sequence": {
                "$ref": "#/definitions/SequenceExpression"
@@ -602,9 +568,6 @@
          "oneOf": [
             {
                "$ref": "#/definitions/Text"
-            },
-            {
-               "$ref": "#/definitions/VariationSet"
             }
          ]
       },
@@ -622,7 +585,7 @@
                "$ref": "#/definitions/SystemicVariation"
             },
             {
-               "$ref": "#/definitions/OtherVariation"
+               "$ref": "#/definitions/UtilityVariation"
             }
          ]
       },
