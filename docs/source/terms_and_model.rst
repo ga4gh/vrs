@@ -163,7 +163,7 @@ A state of a molecule at a :ref:`Location`.
      - 1..1
      - Where Allele is located
    * - state
-     - :ref:`SequenceExpression` | :ref:`SequenceState`
+     - :ref:`SequenceExpression` | :ref:`SequenceState` (deprecated)
      - 1..1
      - An expression of the sequence state
 
@@ -193,7 +193,7 @@ A state of a molecule at a :ref:`Location`.
   is shorter than the length of the interval, the imputed Sequence is
   shorter than the reference Sequence, and conversely for replacements
   that are larger than the interval.
-* When the state is a :ref:`LiteralSequence` of ``""`` (the empty
+* When the state is a :ref:`LiteralSequenceExpression` of ``""`` (the empty
   string), the Allele refers to a deletion at this location.
 * The Allele entity is based on Sequence and is intended to be used
   for intragenic and extragenic variation. Alleles are not explicitly
@@ -228,7 +228,7 @@ A state of a molecule at a :ref:`Location`.
        },
        "state": {
           "sequence": "T",
-          "type": "LiteralSequence"
+          "type": "LiteralSequenceExpression"
        },
        "type": "Allele"
     }
@@ -352,7 +352,7 @@ An APOE-ε1 Haplotype with inline Alleles::
           },
           "state": {
             "sequence": "C",
-            "type": "LiteralSequence"
+            "type": "LiteralSequenceExpression"
           },
           "type": "Allele"
         },
@@ -368,7 +368,7 @@ An APOE-ε1 Haplotype with inline Alleles::
           },
           "state": {
             "sequence": "T",
-            "type": "LiteralSequence"
+            "type": "LiteralSequenceExpression"
           },
           "type": "Allele"
         }
@@ -415,7 +415,7 @@ present in a genome or expressed in a sample, respectively.
 .. _CopyNumber:
 
 CopyNumber
-%%%%%%%%%%
+##########
 
 *Copy Number* captures the copies of a molecule within
 a genome, and can be used to express concepts such as
@@ -472,7 +472,7 @@ The count of copies of a :ref:`Feature` or
 .. _UtilityVariation:
 
 Utility Variation
-################
+#################
 
 *Utility variation* is a collection of :ref:`Variation`
 subclasses that cannot be constrained to a specific class of
@@ -609,6 +609,8 @@ An unconstrained set of Variation members.
 **Examples**
 
 Inlined Variation objects:
+
+.. todo:: Update Alelle example to remove SequenceState
 
 .. parsed-literal::
 
@@ -1156,18 +1158,18 @@ Sequence Expression
 VRS provides several syntaxes for expressing a sequence,
 collectively referred to as *Sequence Expressions*. They are:
 
-* :ref:`LiteralSequence`: An explicit :ref:`Sequence`.
-* :ref:`DerivedSequence`: A sequence that is derived from a
+* :ref:`LiteralSequenceExpression`: An explicit :ref:`Sequence`.
+* :ref:`DerivedSequenceExpression`: A sequence that is derived from a
   :ref:`Sequencelocation`.
-* :ref:`RepeatedSequence`: A description of a repeating :ref:`Sequence`.
+* :ref:`RepeatedSequenceExpression`: A description of a repeating :ref:`Sequence`.
 
 
-.. _LiteralSequence:
+.. _LiteralSequenceExpression:
 
-LiteralSequence
-###############
+LiteralSequenceExpression
+#########################
 
-A LiteralSequence "wraps" a string representation of a sequence for
+A LiteralSequenceExpression "wraps" a string representation of a sequence for
 parallelism with other SequenceExpressions.
 
 **Computational Definition**
@@ -1189,17 +1191,17 @@ An explicit expression of a Sequence.
    * - type
      - string
      - 1..1
-     - MUST be "LiteralSequence"
+     - MUST be "LiteralSequenceExpression"
    * - sequence
      - :ref:`Sequence`
      - 1..1
      - The sequence to express
 
 
-.. _DerivedSequence:
+.. _DerivedSequenceExpression:
 
-DerivedSequence
-###############
+DerivedSequenceExpression
+#########################
 
 Certain mechanisms of variation result from relocating and
 transforming sequence from another location in the genome.
@@ -1226,23 +1228,23 @@ sequence location.
    * - type
      - string
      - 1..1
-     - MUST be "DerivedSequence"
+     - MUST be "DerivedSequenceExpression"
    * - location
      - :ref:`SequenceLocation`
      - 1..1
      - The location describing the sequence
    * - reverse_complement
-     - bool
+     - boolean
      - 1..1
      - When True, indicates the derived sequence is a
        reverse complement of the location sequence
 
 
 
-.. _RepeatedSequence:
+.. _RepeatedSequenceExpression:
 
-RepeatedSequence
-################
+RepeatedSequenceExpression
+##########################
 
 *Repeated Sequence* is a class of sequence expression where a specified
 subsequence is repeated multiple times in tandem. Microsatellites are an
@@ -1269,8 +1271,8 @@ An expression of a sequence comprised of a tandem repeating subsequence.
    * - type
      - string
      - 1..1
-     - MUST be "RepeatedSequence"
-   * - sequence
+     - MUST be "RepeatedSequenceExpression"
+   * - seq_expr
      - :ref:`SequenceExpression`
      - 1..1
      - an expression of the repeating subsequence
@@ -1278,6 +1280,8 @@ An expression of a sequence comprised of a tandem repeating subsequence.
      - :ref:`CopyCount`
      - 1..1
      - the inclusive range count of repeated units
+
+.. todo:: Add RepeatedSequenceExpression example.
 
 
 .. _Feature:
@@ -1326,7 +1330,7 @@ regulatory, transcribed, and/or other functional Locations.
    * - type
      - string
      - 1..1
-     - MUST be set to **`Gene`**
+     - MUST be "Gene"
 
 **Implementation guidance**
 
@@ -1335,7 +1339,7 @@ regulatory, transcribed, and/or other functional Locations.
 * A gene is specific to a species.  Gene orthologs have distinct
   records in the recommended databases.  For example, the BRCA1 gene
   in humans and the Brca1 gene in mouse are orthologs and have
-  distinct records in the previously recommended gene databases.
+  distinct records in the recommended gene databases.
 * Implementations MUST use authoritative gene namespaces available from
   identifiers.org whenever possible.  Examples include:
 
@@ -1357,17 +1361,17 @@ The following examples all refer to the human BRCA1 gene:
 .. parsed-literal::
 
    {
-     'gene': 'ncbigene:672',
+     'gene_id': 'ncbigene:672',
      'type': 'Gene'
    }
 
    {
-     'gene': 'hgnc:1100',
+     'gene_id': 'hgnc:1100',
      'type': 'Gene'
    }
 
    {
-     'gene': 'ensembl:ENSG00000012048',
+     'gene_id': 'ensembl:ENSG00000012048',
      'type': 'Gene'
    }
 
@@ -1416,10 +1420,10 @@ Absolute copy number counts may not be smaller than zero.
      - 1..1
      - MUST be "CopyCount"
    * - absolute_measure
-     - bool
+     - boolean
      - 1..1
-     - specifies if the count is an absolute (TRUE)
-       or relative (FALSE) measure
+     - specifies if the count is an absolute (True)
+       or relative (False) measure
    * - min
      - integer
      - 0..1
@@ -1562,8 +1566,9 @@ for Human Cytogenomic Nomenclature* (ISCN) [1]_.
 
 **Computational Definition**
 
-A character string representing cytobands derived from the International
-System for Human Cytogenomic Nomenclature* (ISCN) guidelines.
+A character string representing cytobands derived from the
+*International System for Human Cytogenomic Nomenclature* (ISCN)
+guidelines.
 
 **Information Model**
 
@@ -1586,7 +1591,7 @@ SequenceState
 .. warning::
 
    DEPRECATED. SequenceState will be removed in VRS 2.0. Use
-   :ref:`LiteralSequence` instead.
+   :ref:`LiteralSequenceExpression` instead.
 
 **Computational Definition**
 
