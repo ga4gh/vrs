@@ -196,7 +196,7 @@
          ],
          "type": "object"
       },
-      "DerivedSequence": {
+      "DerivedSequenceExpression": {
          "additionalProperties": false,
          "properties": {
             "location": {
@@ -206,9 +206,9 @@
                "type": "boolean"
             },
             "type": {
-               "default": "DerivedSequence",
+               "default": "DerivedSequenceExpression",
                "enum": [
-                  "DerivedSequence"
+                  "DerivedSequenceExpression"
                ],
                "type": "string"
             }
@@ -282,16 +282,16 @@
          "pattern": "^cen|[pq](ter|([1-9][0-9]*(\\.[1-9][0-9]*)?))$",
          "type": "string"
       },
-      "LiteralSequence": {
+      "LiteralSequenceExpression": {
          "additionalProperties": false,
          "properties": {
             "sequence": {
                "$ref": "#/definitions/Sequence"
             },
             "type": {
-               "default": "LiteralSequence",
+               "default": "LiteralSequenceExpression",
                "enum": [
-                  "LiteralSequence"
+                  "LiteralSequenceExpression"
                ],
                "type": "string"
             }
@@ -372,26 +372,26 @@
             }
          ]
       },
-      "RepeatedSequence": {
+      "RepeatedSequenceExpression": {
          "additionalProperties": false,
          "example": {
             "copies": {
                "max": 60,
                "min": 40
             },
-            "type": "RepeatedSequence"
+            "type": "RepeatedSequenceExpression"
          },
          "properties": {
             "count": {
                "$ref": "#/definitions/CopyCount"
             },
-            "sequence": {
+            "seq_expr": {
                "$ref": "#/definitions/SequenceExpression"
             },
             "type": {
-               "default": "RepeatedSequence",
+               "default": "RepeatedSequenceExpression",
                "enum": [
-                  "RepeatedSequence"
+                  "RepeatedSequenceExpression"
                ],
                "type": "string"
             }
@@ -416,13 +416,13 @@
          },
          "oneOf": [
             {
-               "$ref": "#/definitions/LiteralSequence"
+               "$ref": "#/definitions/LiteralSequenceExpression"
             },
             {
-               "$ref": "#/definitions/DerivedSequence"
+               "$ref": "#/definitions/DerivedSequenceExpression"
             },
             {
-               "$ref": "#/definitions/RepeatedSequence"
+               "$ref": "#/definitions/RepeatedSequenceExpression"
             }
          ]
       },
@@ -466,7 +466,7 @@
       "SequenceState": {
          "additionalProperties": false,
          "deprecated": true,
-         "description": "DEPRECATED: An assertion of the state of a sequence, typically at a Sequence Location within an Allele.\nThis class is deprecated. Use LiteralSequence instead.",
+         "description": "DEPRECATED: An assertion of the state of a sequence, typically at a Sequence Location within an Allele.\nThis class is deprecated. Use LiteralSequenceExpression instead.",
          "example": {
             "sequence": "C",
             "type": "SequenceState"

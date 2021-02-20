@@ -359,45 +359,45 @@ definitions:
       One of a set of sequence representation syntaxes.
     additionalProperties: false
     oneOf:
-      - $ref: "#/definitions/LiteralSequence"
-      - $ref: "#/definitions/DerivedSequence"
-      - $ref: "#/definitions/RepeatedSequence"
+      - $ref: "#/definitions/LiteralSequenceExpression"
+      - $ref: "#/definitions/DerivedSequenceExpression"
+      - $ref: "#/definitions/RepeatedSequenceExpression"
     discriminator:
       propertyName: type
 
-  LiteralSequence:
+  LiteralSequenceExpression:
     type: object
     additionalProperties: false
     properties:
       type:
         type: string
-        enum: ["LiteralSequence"]
-        default: "LiteralSequence"
+        enum: ["LiteralSequenceExpression"]
+        default: "LiteralSequenceExpression"
       sequence:
         $ref: "#/definitions/Sequence"
 
-  DerivedSequence:
+  DerivedSequenceExpression:
     type: object
     additionalProperties: false
     properties:
       type:
         type: string
-        enum: ["DerivedSequence"]
-        default: "DerivedSequence"
+        enum: ["DerivedSequenceExpression"]
+        default: "DerivedSequenceExpression"
       location:
         $ref: "#/definitions/SequenceLocation"
       transformation:
         type: boolean
 
-  RepeatedSequence:
+  RepeatedSequenceExpression:
     additionalProperties: false
     type: object
     properties:
       type:
         type: string
-        enum: ["RepeatedSequence"]
-        default: "RepeatedSequence"
-      sequence:
+        enum: ["RepeatedSequenceExpression"]
+        default: "RepeatedSequenceExpression"
+      seq_expr:
         $ref: "#/definitions/SequenceExpression"
       count:
         $ref: "#/definitions/CopyCount"
@@ -405,7 +405,7 @@ definitions:
       - type
       - count
     example:
-      type: RepeatedSequence
+      type: RepeatedSequenceExpression
       copies:
         min: 40
         max: 60
@@ -567,7 +567,7 @@ definitions:
       DEPRECATED: An assertion of the state of a sequence, typically
       at a Sequence Location within an Allele.
 
-      This class is deprecated. Use LiteralSequence instead.
+      This class is deprecated. Use LiteralSequenceExpression instead.
     additionalProperties: false
     type: object
     properties:
