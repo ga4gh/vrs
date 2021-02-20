@@ -457,16 +457,22 @@ The count of copies of a :ref:`Feature` or
 
 **Example**
 
+Two, three, or four total copies of BRCA1:
+
 .. parsed-literal::
 
     {
       "copies": {
-        "max": 5,
-        "min": 0,
+        "absolute_measure": true,
+        "max": 4,
+        "min": 2,
         "type": "CopyCount"
       },
-      "subject": "ncbigene:1234",
-      "type": "CopyNumber"
+      "subject": {
+        "gene_id": "ncbigene:672",
+        "type": "Gene"
+      },
+      "type": "AbsoluteAbundance"
     }
 
 .. _UtilityVariation:
