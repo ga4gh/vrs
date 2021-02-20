@@ -1197,6 +1197,15 @@ An explicit expression of a Sequence.
      - 1..1
      - The sequence to express
 
+**Example**
+
+.. parsed-literal::
+
+    {
+      "sequence": "ACGT",
+      "type": "LiteralSequenceExpression"
+    }
+
 
 .. _DerivedSequenceExpression:
 
@@ -1233,12 +1242,23 @@ sequence location.
      - :ref:`SequenceLocation`
      - 1..1
      - The location describing the sequence
-   * - reverse_complement
-     - boolean
-     - 1..1
-     - When True, indicates the derived sequence is a
-       reverse complement of the location sequence
 
+**Example**
+
+.. parsed-literal::
+
+     {
+       "location": {
+         "interval": {
+           "end": 33,
+           "start": 22,
+           "type": "SimpleInterval"
+         },
+         "sequence_id": "ga4gh:SQ.0123abcd",
+         "type": "SequenceLocation"
+       },
+       "type": "DerivedSequenceExpression"
+     }
 
 
 .. _RepeatedSequenceExpression:
@@ -1281,7 +1301,24 @@ An expression of a sequence comprised of a tandem repeating subsequence.
      - 1..1
      - the inclusive range count of repeated units
 
-.. todo:: Add RepeatedSequenceExpression example.
+
+**Example**
+
+.. parsed-literal::
+
+    {
+      "count": {
+        "max": 10,
+        "min": 5,
+        "type": "CopyCount"
+      },
+      "seq_expr": {
+        "sequence": "CAG",
+        "type": "LiteralSequenceExpression"
+      },
+      "type": "RepeatedSequenceExpression"
+    }
+
 
 
 .. _Feature:
