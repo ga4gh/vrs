@@ -615,69 +615,6 @@ An unconstrained set of Variation members.
 
 **Examples**
 
-Inlined Variation objects:
-
-.. todo:: Update Alelle example to remove SequenceState
-
-.. parsed-literal::
-
-  {
-    "members": [
-      {
-        "location": {
-          "interval": {
-            "end": 11,
-            "start": 10,
-            "type": "SimpleInterval"
-          },
-          "sequence_id": "ga4gh:SQ.01234abcde",
-          "type": "SequenceLocation"
-        },
-        "state": {
-          "sequence": "C",
-          "type": "SequenceState"
-        },
-        "type": "Allele"
-      },
-      {
-        "location": {
-          "interval": {
-            "end": 21,
-            "start": 20,
-            "type": "SimpleInterval"
-          },
-          "sequence_id": "ga4gh:SQ.01234abcde",
-          "type": "SequenceLocation"
-        },
-        "state": {
-          "sequence": "C",
-          "type": "SequenceState"
-        },
-        "type": "Allele"
-      },
-      {
-        "location": {
-          "interval": {
-            "end": 31,
-            "start": 30,
-            "type": "SimpleInterval"
-          },
-          "sequence_id": "ga4gh:SQ.01234abcde",
-          "type": "SequenceLocation"
-        },
-        "state": {
-          "sequence": "C",
-          "type": "SequenceState"
-        },
-        "type": "Allele"
-      }
-    ],
-    "type": "VariationSet"
-  }
-
-
-Referenced Variation objects:
-
 .. parsed-literal::
 
   {
