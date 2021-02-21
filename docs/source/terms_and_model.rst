@@ -475,6 +475,7 @@ Two, three, or four total copies of BRCA1:
       "type": "AbsoluteAbundance"
     }
 
+
 .. _UtilityVariation:
 
 Utility Variation
@@ -1408,15 +1409,24 @@ The following examples all refer to the human BRCA1 gene:
      'type': 'Gene'
    }
 
-   {
-     'gene_id': 'hgnc:1100',
-     'type': 'Gene'
-   }
+Gene is intended to be used as a subject of gene-level annotations,
+such as this statement of increased copy number of BRCA1:
 
-   {
-     'gene_id': 'ensembl:ENSG00000012048',
-     'type': 'Gene'
-   }
+.. parsed-literal::
+
+    {
+      "copies": {
+        "absolute_measure": true,
+        "min": 3,
+        "type": "CopyCount"
+      },
+      "subject": {
+        "gene_id": "ncbigene:672",
+        "type": "Gene"
+      },
+      "type": "AbsoluteAbundance"
+    }
+
 
 
 **Sources**
