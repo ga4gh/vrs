@@ -131,7 +131,7 @@ $$$$$$
 
 An allele may refer to a number of alternative forms of the same gene or same
 genetic locus. In the genetics community, *allele* may also refer to a
-specific haplotype. In the context of biological sequences, “allele” refers
+specific haplotype. In the context of biological sequences, "allele" refers
 to a distinct state of a molecule at a location.
 
 **Computational Definition**
@@ -202,7 +202,7 @@ A state of a molecule at a :ref:`Location`.
   the context of empirical alternatives. For modelling purposes,
   Alleles MAY exist as a result of biological observation or
   computational simulation, i.e., virtual Alleles.
-* “Single, contiguous” refers the representation of the Allele, not
+* "Single, contiguous" refers the representation of the Allele, not
   the biological mechanism by which it was created. For instance, two
   non-adjacent single residue Alleles could be represented by a single
   contiguous multi-residue Allele.
@@ -304,8 +304,8 @@ molecule.
 
 **Implementation Guidance**
 
-* Haplotypes are an assertion of Alleles known to occur “in cis” or
-  “in phase” with each other.
+* Haplotypes are an assertion of Alleles known to occur "in cis" or
+  "in phase" with each other.
 * All Alleles in a Haplotype MUST be defined on the same reference
   sequence or chromosome.
 * Alleles within a Haplotype MUST not overlap ("overlap" is defined in
@@ -641,7 +641,7 @@ Locations and Intervals
 Location
 ########
 
-As used by biologists, the precision of “location” (or “locus”) varies
+As used by biologists, the precision of "location" (or "locus") varies
 widely, ranging from precise start and end numerical coordinates
 defining a Location, to bounded regions of a sequence, to conceptual
 references to named genomic features (e.g., chromosomal bands, genes,
@@ -1533,15 +1533,15 @@ derived from the IUPAC one-letter nucleic acid and amino acid codes.
 * Sequences MUST consist of only uppercase IUPAC abbreviations, including ambiguity codes.
 * A Sequence provides a stable coordinate system by which an :ref:`Allele` MAY be located and
   interpreted.
-* A Sequence MAY have several roles. A “reference sequence” is any Sequence used
+* A Sequence MAY have several roles. A "reference sequence" is any Sequence used
   to define an :ref:`Allele`. A Sequence that replaces another Sequence is
-  called a “replacement sequence”.
-* In some contexts outside VRS, “reference sequence” may refer
+  called a "replacement sequence".
+* In some contexts outside VRS, "reference sequence" may refer
   to a member of set of sequences that comprise a genome assembly. In the VRS
-  specification, any sequence may be a “reference sequence”, including those in
+  specification, any sequence may be a "reference sequence", including those in
   a genome assembly.
 * For the purposes of representing sequence variation, it is not
-  necessary that Sequences be explicitly “typed” (i.e., DNA, RNA, or
+  necessary that Sequences be explicitly "typed" (i.e., DNA, RNA, or
   AA).
 
 .. _HumanCytoband:
