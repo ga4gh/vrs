@@ -445,8 +445,6 @@ definitions:
         type: string
         enum: ["CopyCount"]
         default: "CopyCount"
-      absolute_measure:
-        type: boolean
       min:
         type: ["integer", "null"]
         default: null
