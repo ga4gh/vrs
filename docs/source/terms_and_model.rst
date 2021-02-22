@@ -111,7 +111,8 @@ A representation of the state of one or more molecules.
 Molecular Variation
 ###################
 
-A :ref:`variation` of a contiguous molecule.
+A :ref:`variation` of a sequence that represents a portion of or an
+entire contiguous molecule.
 
 .. _Allele:
 
@@ -472,7 +473,7 @@ Two, three, or four total copies of BRCA1:
         "gene_id": "ncbigene:672",
         "type": "Gene"
       },
-      "type": "AbsoluteAbundance"
+      "type": "CopyCount"
     }
 
 
@@ -1361,7 +1362,7 @@ such as this statement of increased copy number of BRCA1:
         "gene_id": "ncbigene:672",
         "type": "Gene"
       },
-      "type": "AbsoluteAbundance"
+      "type": "CopyCount"
     }
 
 
