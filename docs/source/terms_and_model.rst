@@ -1307,7 +1307,7 @@ regulatory, transcribed, and/or other functional Locations.
      - Description
    * - gene_id
      - :ref:`CURIE`
-     - 0..1
+     - 1..1
      - Authoritative Gene ID (see guidance)
    * - type
      - string
