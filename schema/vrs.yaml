@@ -167,7 +167,7 @@ definitions:
   Abundance:
     additionalProperties: false
     description: >-
-      The measure of a quantity of a molecule in a system.
+      The quantity of a feature, variation, molecule or part thereof in a system.
     oneOf:
       - $ref: "#/definitions/CopyNumber"
     discriminator:
@@ -184,8 +184,8 @@ definitions:
         $ref: "#/definitions/CURIE"
       type:
         type: string
-        enum: ["AbsoluteAbundance"]
-        default: "AbsoluteAbundance"
+        enum: ["CopyNumber"]
+        default: "CopyNumber"
       subject:
         oneOf:
           - $ref: "#/definitions/MolecularVariation"
@@ -194,10 +194,6 @@ definitions:
           - $ref: "#/definitions/CURIE"
       copies:
         $ref: "#/definitions/CopyCount"
-    required:
-      - type
-      - subject
-      - copies
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations
@@ -232,11 +228,6 @@ definitions:
       interval:
         $ref: "#/definitions/CytobandInterval"
     additionalProperties: false
-    required:
-      - type
-      - species_id
-      - chr
-      - interval
 
   SequenceLocation:
     additionalProperties: false
@@ -297,9 +288,6 @@ definitions:
       end:
         type: ["integer", "null"]
         default: null
-    required:
-      - start
-      - end
     example:
       type: SimpleInterval
       start: 11
@@ -342,9 +330,6 @@ definitions:
         $ref: "#/definitions/HumanCytoband"
       end:
         $ref: "#/definitions/HumanCytoband"
-    required:
-      - start
-      - end
     example:
       type: CytobandInterval
       start: q22.2
@@ -401,9 +386,6 @@ definitions:
         $ref: "#/definitions/SequenceExpression"
       count:
         $ref: "#/definitions/CopyCount"
-    required:
-      - type
-      - count
     example:
       type: RepeatedSequenceExpression
       copies:
@@ -577,9 +559,6 @@ definitions:
         default: "SequenceState"
       sequence:
         $ref: "#/definitions/Sequence"
-    required:
-      - type
-      - sequence
     example:
       type: SequenceState
       sequence: C
