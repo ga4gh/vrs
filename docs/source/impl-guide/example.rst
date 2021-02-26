@@ -41,7 +41,7 @@ other ways of describing locations. Similarly, State may refer to a
 specific sequence change, copy number change, or complex sequence
 event.
 
-In this example, we will use a :ref:`sequence-location`, which is
+In this example, we will use a :ref:`SequenceLocation`, which is
 composed of a sequence identifier and a :ref:`SimpleInterval`.
 
 In VRS, all identifiers are a |CURIE|.  Therefore, NC_000013.11 MUST be
@@ -70,7 +70,7 @@ The :ref:`SimpleInterval` for the position ``32936732`` is
     }
 
 The interval is then 'placed' on a sequence to create the
-:ref:`sequence-location`:
+:ref:`SequenceLocation`:
 
 .. code-block:: json
 
@@ -84,13 +84,13 @@ The interval is then 'placed' on a sequence to create the
       "type": "SequenceLocation"
     }
 
-A :ref:`sequence-state` objects consists simply of the replacement sequence, as follows:
+A :ref:`LiteralSequenceExpression` object consists simply of the replacement sequence, as follows:
 
 .. code-block:: json
 
     {
       "sequence": "C",
-      "type": "SequenceState"
+      "type": "LiteralSequenceExprssion"
     }
 
 We are now in a position to construct an :ref:`allele` object using
@@ -110,7 +110,7 @@ the objects defined above:
       },
       "state": {
         "sequence": "C",
-        "type": "SequenceState"
+        "type": "LiteralSequenceExpression"
       },
       "type": "Allele"
     }

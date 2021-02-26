@@ -246,6 +246,7 @@ Type prefixes used by VRS are:
    SQ, Sequence
    VA, Allele
    VH, Haplotype
+   VAB, Abundance
    VS, VariationSet
    VSL, SequenceLocation
    VCL, ChromosomeLocation
@@ -263,9 +264,11 @@ For example, the identifer for the allele example under :ref:`digest-serializati
 References
 @@@@@@@@@@
 
-.. [Hart2020] Hart, RK and Prlić, A; **SeqRepo: A system for managing
-       local collections biological sequences.** (2020).
-       https://doi.org/10.1101/2020.09.16.299495
+.. [Hart2020] Hart RK, Prlić A. **SeqRepo: A system for managing local
+			  collections of biological sequences.** PLoS
+			  One. 2020;15:
+			  e0239883. `doi:10.1371/journal.pone.0239883
+			  <https://journals.plos.org/plosone/article/comments?id=10.1371/journal.pone.0239883>`__
 .. [Gibson] `Gibson Canonical JSON <http://gibson042.github.io/canonicaljson-spec/>`__
 .. [OLPC] `OLPC Canonical JSON <http://wiki.laptop.org/go/Canonical_JSON>`__
 .. [JCS] `JSON Canonicalization Scheme <https://tools.ietf.org/html/draft-rundgren-json-canonicalization-scheme-05>`__

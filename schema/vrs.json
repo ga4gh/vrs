@@ -1,43 +1,17 @@
 {
-   "$schema": "http://json-schema.org/draft-04/schema",
+   "$schema": "http://json-schema.org/draft-07/schema",
    "definitions": {
-      "AbsoluteAbundance": {
+      "Abundance": {
          "additionalProperties": false,
-         "description": "Absolute abundance of a systemic subject such as a Gene or specific type of molecular variation.",
-         "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "amount": {
-               "$ref": "#/definitions/Range"
-            },
-            "subject": {
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/Allele"
-                  },
-                  {
-                     "$ref": "#/definitions/Haplotype"
-                  },
-                  {
-                     "$ref": "#/definitions/Gene"
-                  }
-               ]
-            },
-            "type": {
-               "default": "AbsoluteAbundance",
-               "enum": [
-                  "AbsoluteAbundance"
-               ],
-               "type": "string"
-            }
+         "description": "The measure of a quantity of a molecule in a system.",
+         "discriminator": {
+            "propertyName": "type"
          },
-         "required": [
-            "type",
-            "subject",
-            "amount"
-         ],
-         "type": "object"
+         "oneOf": [
+            {
+               "$ref": "#/definitions/CopyNumber"
+            }
+         ]
       },
       "Allele": {
          "additionalProperties": false,
@@ -116,11 +90,82 @@
          ],
          "type": "object"
       },
-      "Cytoband": {
-         "description": "A feature referencing a giesma-stained band on an unspecified human chromosome.",
-         "example": "q22.3",
-         "pattern": "^cen|[pq](ter|([1-9][0-9]*(\\.[1-9][0-9]*)?))$",
-         "type": "string"
+      "CopyCount": {
+         "additionalProperties": false,
+         "description": "An integer count of copies. Counts are bounded ranges denoted by minimum and maximum possible values. Absolute copy number counts may not be smaller than zero.",
+         "example": {
+            "max": 10,
+            "min": 5,
+            "type": "CopyCount"
+         },
+         "properties": {
+            "absolute_measure": {
+               "type": "boolean"
+            },
+            "max": {
+               "default": null,
+               "type": [
+                  "integer",
+                  "null"
+               ]
+            },
+            "min": {
+               "default": null,
+               "type": [
+                  "integer",
+                  "null"
+               ]
+            },
+            "type": {
+               "default": "CopyCount",
+               "enum": [
+                  "CopyCount"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
+      "CopyNumber": {
+         "additionalProperties": false,
+         "description": "The count of copies of a Feature, Location, or Molecular Variation subject within a genome.",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "copies": {
+               "$ref": "#/definitions/CopyCount"
+            },
+            "subject": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/MolecularVariation"
+                  },
+                  {
+                     "$ref": "#/definitions/Feature"
+                  },
+                  {
+                     "$ref": "#/definitions/Location"
+                  },
+                  {
+                     "$ref": "#/definitions/CURIE"
+                  }
+               ]
+            },
+            "type": {
+               "default": "AbsoluteAbundance",
+               "enum": [
+                  "AbsoluteAbundance"
+               ],
+               "type": "string"
+            }
+         },
+         "required": [
+            "type",
+            "subject",
+            "copies"
+         ],
+         "type": "object"
       },
       "CytobandInterval": {
          "additionalProperties": false,
@@ -132,10 +177,10 @@
          },
          "properties": {
             "end": {
-               "$ref": "#/definitions/Cytoband"
+               "$ref": "#/definitions/HumanCytoband"
             },
             "start": {
-               "$ref": "#/definitions/Cytoband"
+               "$ref": "#/definitions/HumanCytoband"
             },
             "type": {
                "default": "CytobandInterval",
@@ -151,38 +196,41 @@
          ],
          "type": "object"
       },
-      "DerivedSequence": {
+      "DerivedSequenceExpression": {
          "additionalProperties": false,
          "properties": {
             "location": {
                "$ref": "#/definitions/SequenceLocation"
             },
             "transformation": {
-               "default": null,
-               "enum": [
-                  "reverse",
-                  "complement",
-                  "reverse-complement"
-               ],
-               "type": "string"
+               "type": "boolean"
             },
             "type": {
-               "default": "DerivedSequence",
+               "default": "DerivedSequenceExpression",
                "enum": [
-                  "DerivedSequence"
+                  "DerivedSequenceExpression"
                ],
                "type": "string"
             }
          },
          "type": "object"
       },
+      "Feature": {
+         "additionalProperties": false,
+         "description": "A named entity that can be mapped to a Location. Genes, protein domains, exons, and chromosomes are some examples of common biological entities that may be Features.",
+         "discriminator": {
+            "propertyName": "type"
+         },
+         "oneOf": [
+            {
+               "$ref": "#/definitions/Gene"
+            }
+         ]
+      },
       "Gene": {
          "additionalProperties": false,
          "description": "A reference to an external gene system, used as a location for variation.  Currently, the `ncbigene` namespace is required. See https://registry.identifiers.org/registry/ncbigene.",
          "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
             "gene_id": {
                "$ref": "#/definitions/CURIE"
             },
@@ -228,16 +276,22 @@
          },
          "type": "object"
       },
-      "LiteralSequence": {
+      "HumanCytoband": {
+         "description": "A interval on a stained metaphase chromosome specified by cytobands. CytobandIntervals include the regions described by the start and end cytobands.",
+         "example": "q22.3",
+         "pattern": "^cen|[pq](ter|([1-9][0-9]*(\\.[1-9][0-9]*)?))$",
+         "type": "string"
+      },
+      "LiteralSequenceExpression": {
          "additionalProperties": false,
          "properties": {
             "sequence": {
-               "type": "string"
+               "$ref": "#/definitions/Sequence"
             },
             "type": {
-               "default": "LiteralSequence",
+               "default": "LiteralSequenceExpression",
                "enum": [
-                  "LiteralSequence"
+                  "LiteralSequenceExpression"
                ],
                "type": "string"
             }
@@ -261,7 +315,7 @@
       },
       "MolecularVariation": {
          "additionalProperties": false,
-         "description": "Variation defined on a molecule (sequence)",
+         "description": "A variation on a contiguous molecule.",
          "discriminator": {
             "propertyName": "type"
          },
@@ -306,115 +360,38 @@
          },
          "type": "object"
       },
-      "OtherVariation": {
+      "Quantity": {
          "additionalProperties": false,
-         "description": "The root class of all Variation types",
+         "description": "A value representing a multitude or magnitude.",
          "discriminator": {
             "propertyName": "type"
          },
          "oneOf": [
             {
-               "$ref": "#/definitions/Text"
+               "$ref": "#/definitions/CopyCount"
             }
          ]
       },
-      "Range": {
+      "RepeatedSequenceExpression": {
          "additionalProperties": false,
-         "description": "A (min,max) range of integer values. At least one of min or max must be specified.",
-         "example": {
-            "end": 22,
-            "start": 11,
-            "type": "Range"
-         },
-         "properties": {
-            "max": {
-               "default": null,
-               "type": [
-                  "integer",
-                  "null"
-               ]
-            },
-            "min": {
-               "default": null,
-               "type": [
-                  "integer",
-                  "null"
-               ]
-            }
-         },
-         "type": "object"
-      },
-      "RelativeAbundance": {
-         "additionalProperties": false,
-         "description": "Relative abundance of a systemic subject such as a Gene or specific type of molecular variation.",
-         "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "amount": {
-               "enum": [
-                  "gt",
-                  "ge",
-                  "eq",
-                  "le",
-                  "lt"
-               ],
-               "type": "string"
-            },
-            "subject": {
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/MolecularVariation"
-                  },
-                  {
-                     "$ref": "#/definitions/Gene"
-                  }
-               ]
-            },
-            "type": {
-               "default": "RelativeAbundance",
-               "enum": [
-                  "RelativeAbundance"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "RepeatedSequence": {
-         "additionalProperties": false,
-         "description": "A tandem repeat of a SequenceLocation",
          "example": {
             "copies": {
                "max": 60,
                "min": 40
             },
-            "type": "SequenceState"
+            "type": "RepeatedSequenceExpression"
          },
          "properties": {
             "count": {
-               "additionalProperties": false,
-               "properties": {
-                  "max": {
-                     "type": [
-                        "integer",
-                        "null"
-                     ]
-                  },
-                  "min": {
-                     "minimum": 0,
-                     "type": "integer"
-                  }
-               },
-               "type": "object"
+               "$ref": "#/definitions/CopyCount"
             },
-            "sequence": {
+            "seq_expr": {
                "$ref": "#/definitions/SequenceExpression"
             },
             "type": {
-               "default": "RepeatedSequence",
+               "default": "RepeatedSequenceExpression",
                "enum": [
-                  "RepeatedSequence"
+                  "RepeatedSequenceExpression"
                ],
                "type": "string"
             }
@@ -425,21 +402,27 @@
          ],
          "type": "object"
       },
+      "Sequence": {
+         "additionalProperties": false,
+         "description": "A character string of residues that represents a biological sequence using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequences.",
+         "pattern": "^[A-Z*\\-]*$",
+         "type": "string"
+      },
       "SequenceExpression": {
          "additionalProperties": false,
-         "description": "TODO",
+         "description": "One of a set of sequence representation syntaxes.",
          "discriminator": {
             "propertyName": "type"
          },
          "oneOf": [
             {
-               "$ref": "#/definitions/LiteralSequence"
+               "$ref": "#/definitions/LiteralSequenceExpression"
             },
             {
-               "$ref": "#/definitions/DerivedSequence"
+               "$ref": "#/definitions/DerivedSequenceExpression"
             },
             {
-               "$ref": "#/definitions/RepeatedSequence"
+               "$ref": "#/definitions/RepeatedSequenceExpression"
             }
          ]
       },
@@ -482,15 +465,15 @@
       },
       "SequenceState": {
          "additionalProperties": false,
-         "description": "DEPRECATED: An assertion of the state of a sequence, typically at a Sequence Location within an Allele.\nThis class is deprecated. Use LiteralSequence instead.",
+         "deprecated": true,
+         "description": "DEPRECATED: An assertion of the state of a sequence, typically at a Sequence Location within an Allele.\nThis class is deprecated. Use LiteralSequenceExpression instead.",
          "example": {
             "sequence": "C",
             "type": "SequenceState"
          },
          "properties": {
             "sequence": {
-               "nullable": false,
-               "type": "string"
+               "$ref": "#/definitions/Sequence"
             },
             "type": {
                "default": "SequenceState",
@@ -545,16 +528,13 @@
       },
       "SystemicVariation": {
          "additionalProperties": false,
-         "description": "Genome-wide statements about variation",
+         "description": "A Variation of multiple molecules in the context of a system, e.g. a genome, sample, or homologous chromosomes.",
          "discriminator": {
             "propertyName": "type"
          },
          "oneOf": [
             {
-               "$ref": "#/definitions/AbsoluteAbundance"
-            },
-            {
-               "$ref": "#/definitions/RelativeAbundance"
+               "$ref": "#/definitions/Abundance"
             }
          ]
       },
@@ -579,6 +559,18 @@
          },
          "type": "object"
       },
+      "UtilityVariation": {
+         "additionalProperties": false,
+         "description": "Utility variation classes that cannot be constrained to a specific biological class of variation.",
+         "discriminator": {
+            "propertyName": "type"
+         },
+         "oneOf": [
+            {
+               "$ref": "#/definitions/Text"
+            }
+         ]
+      },
       "Variation": {
          "additionalProperties": false,
          "description": "The root class of all Variation types",
@@ -593,7 +585,7 @@
                "$ref": "#/definitions/SystemicVariation"
             },
             {
-               "$ref": "#/definitions/OtherVariation"
+               "$ref": "#/definitions/UtilityVariation"
             }
          ]
       },

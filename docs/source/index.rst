@@ -10,11 +10,11 @@ implementation that promotes adoption of the standard.
 
 .. admonition:: Citation
 
-   | **The GA4GH Variation Representation Specification (VRS): a
-     Computational Framework for the Precise Representation
-     and Federated Identification of Molecular Variation.**
-   | Wagner AH, Babb L, ..., Hart RK
-   | bioRxiv (2021 January 17). `doi:10.1101/2021.01.15.426843 <https://www.biorxiv.org/content/10.1101/2021.01.15.426843v1>`__
+   **The GA4GH Variation Representation Specification (VRS):
+   a Computational Framework for the Precise Representation and
+   Federated Identification of Molecular Variation.**
+   Wagner AH, Babb L, Alterovitz G, Baudis M, Brush M, Cameron DL, ..., Hart RK. 
+   bioRxiv. 2021. `doi:10.1101/2021.01.15.426843 <https://www.biorxiv.org/content/10.1101/2021.01.15.426843v1>`__
 
 
 .. toctree::

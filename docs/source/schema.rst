@@ -1,6 +1,9 @@
 Schema
 !!!!!!
 
+.. todo::
+   The below figure will be updated prior to v1.2 release.
+
 Overview
 @@@@@@@@
 
