@@ -8,7 +8,7 @@ specification. As these trade-offs may not be apparent to outside
 readers, this section highlights the most significant ones and the
 rationale for our design decisions, including:
 
-.. _use-variation:
+.. _variation-not-variant:
 
 Variation Rather than Variant
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -24,7 +24,7 @@ and transcript abundance. Capturing these other classes of variation
 is a :doc:`future goal <future_plans>` of VRS, as there are many
 annotations that will require these variation classes as the subject.
 
-.. _use-allele:
+.. _allele-not-variant:
 
 Allele Rather than Variant
 @@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -123,15 +123,13 @@ coordinate conventions are used in this terminology because they
 provide conceptual consistency that is not possible with residue-based
 systems.
 
-.. important:: The choice of what to count — base or inter-residue
+.. important:: The choice of what to count — residue or inter-residue
                positions — has significant semantic implications for
-               coordinates. In some circumstances, inter-residue
-               coordinates and the corresponding base coordinates are
-               numerically identical.  We intentionally avoid
-               describing the inter-residue coordinate system as
-               "0-based" (a popular community term, as is
-               "space-based") to help reduce confusion on the meaning
-               of the coordinates used in VRS.
+               the interpretation of coordinates.  Although
+               inter-residue coordinates and the "0-based" residue
+               coordinates are often numerically identical, we favor
+               "inter-residue" to emphasize the meaning of these
+               coordinates.
 
 When humans refer to a range of residues within a sequence, the most
 common convention is to use an interval of ordinal residue positions

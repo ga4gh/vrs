@@ -64,7 +64,7 @@ templates_path = ['_templates']
 exclude_patterns = []
 
 # TODO directive output
-todo_include_todos = False
+todo_include_todos = True
 todo_emit_warnings = True
 
 # -- Options for HTML output -------------------------------------------------

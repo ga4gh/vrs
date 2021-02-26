@@ -126,14 +126,15 @@ The VRS Normalization Algorithm is defined as follows:
 
 **References**
 
-.. [1] Holmes JB, Moyer E, Phan L, Maglott D &
-       Kattman BL. *SPDI: Data Model for Variants and Applications
-       at NCBI.* Bioinformatics (2020 March 15). `doi:10.1093/bioinformatics/btz856`_
-.. [2] Wagner AH, Babb L, ..., Hart RK
-       *The GA4GH Variation Representation Specification (VRS): a
-       Computational Framework for the Precise Representation
-       and Federated Identification of Molecular Variation.*
-       bioRxiv (2021 January 17). `doi:10.1101/2021.01.15.426843`_
+.. [1] Holmes JB, Moyer E, Phan L, Maglott D, Kattman B.
+	   **SPDI: Data Model for Variants and Applications at NCBI.
+	   Bioinformatics.** 2019. `doi:10.1093/bioinformatics/btz856`_
+	   
+.. [2] Wagner AH, Babb L, Alterovitz G, Baudis M, Brush M, Cameron DL,
+	   ..., Hart RK. **The GA4GH Variation Representation Specification (VRS):
+	   a Computational Framework for the Precise Representation and
+	   Federated Identification of Molecular Variation.**
+	   bioRxiv. 2021. `doi:10.1101/2021.01.15.426843`_
 
 .. _doi:10.1101/2021.01.15.426843: https://doi.org/10.1101/2021.01.15.426843
 .. _doi:10.1093/bioinformatics/btz856: https://doi.org/10.1093/bioinformatics/btz856

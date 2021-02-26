@@ -18,7 +18,6 @@ identifiers:
   type_prefix_map:
     # global objects
     Sequence: SQ
-    Transcript: VTX
 
     # Variation 
     Allele: VA
@@ -26,13 +25,10 @@ identifiers:
     Text: VT
     # Genotype: VG
     Haplotype: VH
-    AbsoluteAbundance: VAA
-    RelativeAbundance: VRA
+    CopyNumber: VCN
 
     SequenceLocation: VSL
     ChromosomeLocation: VCL
-    TranscriptLocation: VTL
-    GeneLocation: VGL
 
 
   regexp: '^ga4gh:(?P<type>[^.]+)\.(?P<digest>.+)$'
