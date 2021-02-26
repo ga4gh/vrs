@@ -1,5 +1,5 @@
 # This file provides parameters for GA4GH specifications.
-# See https://github.com/ga4gh/vr-spec
+# See https://github.com/ga4gh/vrs
 
 
 identifiers:
@@ -25,10 +25,10 @@ identifiers:
     Text: VT
     # Genotype: VG
     Haplotype: VH
+    CopyNumber: VCN
 
     SequenceLocation: VSL
     ChromosomeLocation: VCL
-    # GeneLocation: VGL
 
 
   regexp: '^ga4gh:(?P<type>[^.]+)\.(?P<digest>.+)$'

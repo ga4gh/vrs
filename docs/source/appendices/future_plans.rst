@@ -18,6 +18,9 @@ require supporting more complex types of variation, including:
 * mosaicism and chimerism
 * rule-based variation
 
+.. todo::
+   The below figure will be updated prior to v1.2 release.
+
 .. figure:: ../images/schema-future.png
 
    Planned Variation Representation Specfication Schema
@@ -50,10 +53,6 @@ feature-based locations.
 
 NestedInterval
 ##############
-
-**Biological definition**
-
-None
 
 **Computational definition**
 
@@ -99,8 +98,6 @@ region (the *outer* SimpleInterval) and required included region (the
 ComplexInterval
 ###############
 
-**Biological definition**
-
 Representation of complex coordinates based on relative locations or
 offsets from a known location. Examples include "left of" a given
 position and intronic positions measured from intron-exon junctions.
@@ -112,114 +109,6 @@ Under development.
 **Information model**
 
 Under development.
-
-
-GeneLocation
-############
-
-**Biological definition**
-
-The symbolic location of a gene.
-
-**Computational definition**
-
-A gene location is made by reference to a gene identifier from NCBI,
-Ensembl, HGNC, or other public trusted authority.
-
-**Information model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Location Id; MUST be unique within document
-   * - type
-     - string
-     - 1..1
-     - Location type; MUST be set to '**GeneLocation**'
-   * - gene_id
-     - :ref:`CURIE`
-     - 1..1
-     - CURIE-formatted gene identifier using NCBI numeric gene id.
-
-**Notes**
-
-* `gene_id` MUST be specified as a CURIE, using a CURIE prefix of
-  `"NCBI"` and CURIE reference with the numeric gene id. Other trusted
-  authorities MAY be permitted in future releases.
-
-**Implementation guidance**
-
-* GeneLocations MAY be converted to :ref:`sequence-location` using
-  external data. The source of such data and mechanism for
-  implementation is not defined by this specification.
-
-
-.. _planned-states:
-
-State Classes
-@@@@@@@@@@@@@
-
-Additional :ref:`State` concepts that are being planned for future
-consideration in the specification.
-
-
-.. _planned-cnvstate:
-
-CNVState
-########
-
-.. note:: This concept is being refined. Please comment at https://github.com/ga4gh/vr-spec/issues/46.
-
-**Biological definition**
-
-Variations in the number of copies of a segment of DNA.  Copy number
-variations cover copy losses or gains and at known or unknown
-locations (including tandem repeats).  Variations MAY occur at precise
-SequenceLocations, within nested intervals, or at GeneLocations.
-There is no lower or upper bound on CNV sizes.
-
-**Computational definition**
-
-Under development.
-
-**Information model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - State type; MUST be set to '**CNVState**'
-   * - location
-     - :ref:`Location`
-     - 1..1
-     - the Location of the copy ('**null**' if unknown)
-   * - min_copies
-     - int
-     - 1..1
-     - The minimum number of copies
-   * - max_copies
-     - int
-     - 1..1
-     - The maximum number of copies
 
 
 .. _planned-variation:
@@ -235,9 +124,7 @@ information.
 Translocations
 ##############
 
-.. note:: This concept is being refined. Please comment at https://github.com/ga4gh/vr-spec/issues/103
-
-**Biological definition**
+.. note:: This concept is being refined. Please comment at https://github.com/ga4gh/vrs/issues/103
 
 The aberrant joining of two segments of DNA that are not typically
 contiguous.  In the context of joining two distinct coding sequences,
@@ -252,7 +139,7 @@ terminology, if any).
 
 **Information model**
 
-Under consideration. See https://github.com/ga4gh/vr-spec/issues/28.
+Under consideration. See https://github.com/ga4gh/vrs/issues/28.
 
 **Examples**
 
@@ -263,8 +150,6 @@ t(9;22)(q34;q11) in BCR-ABL
 
 Genotype
 ########
-
-**Biological definition**
 
 The genetic state of an organism, whether complete (defined over the
 whole genome) or incomplete (defined over a subset of the genome).
@@ -384,7 +269,7 @@ SO: `Genotype (SO:0001027)
 
 
 
-.. _GitHub issue: https://github.com/ga4gh/vr-spec/issues
+.. _GitHub issue: https://github.com/ga4gh/vrs/issues
 .. _genetic variation: https://en.wikipedia.org/wiki/Genetic_variation
 
 
@@ -417,4 +302,3 @@ RuleState
 RuleState is a subclass of :ref:`state` intended to capture states defined
 by categorical rules instead of sequence states. This includes *gain- /
 loss-of-function*, *oncogenic*, and *truncating* variation.
-

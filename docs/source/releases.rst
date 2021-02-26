@@ -43,8 +43,8 @@ This patch version makes the following corrections and clarifications:
     the current Schema and ER Diagram.
   * Remove erroneous bracket notation after CURIE from the `locations` attribute
     in the :ref:`Allele` information model.
-  * Revised Note in interbase design decision to acknowledge community terms.
-
+  * Added citation for sha512t24u and truncated digest collision analysis.
+  * Revised Note in inter-residue design decision to acknowledge community terms.
 
 1.1.0
 #####

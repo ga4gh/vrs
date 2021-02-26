@@ -45,11 +45,11 @@ subsequent sections.
    Entities are shown in gray boxes. Functions are denoted by bold
    italics.  The yellow, green, and blue boxes, corresponding to the
    ``sha512t24u``, ``ga4gh_digest``, and ``ga4gh_identify`` functions
-   respectively, depict the dependencies among functions.
-   ``SHA512/192`` is `SHA-512`_ truncated at 192 bits using the
-   systematic name recommended by SHA-512 (§5.3.6).  base64url_ is the
-   official name of the variant of `Base64`_ encoding that uses a
-   URL-safe character set. [`figure source
+   respectively, depict the dependencies among functions.  ``SHA512``
+   is `SHA-512`_ truncated to 24 bytes (192 bits), using the SHA-512
+   initialization vector.  base64url_ is the official name of the
+   variant of `Base64`_ encoding that uses a URL-safe character
+   set. [`figure source
    <https://www.draw.io/?page-id=M8V1EMsVyfZQDDbK8gNL&title=VR%20diagrams.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fharts.net%2Fuc%3Fid%3D1Qimkvi-Fnd1hhuixbd6aU4Se6zr5Nc1h%26export%3Ddownload>`__]
 
 .. note:: Most implementation users will need only the
@@ -188,7 +188,7 @@ For comparison, here is one of many possible JSON serializations of the same obj
 Truncated Digest (sha512t24u)
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-The sha512t24u truncated digest algorithm computes an ASCII digest
+The sha512t24u truncated digest algorithm [Hart2020]_ computes an ASCII digest
 from binary data.  The method uses two well-established standard
 algorithms, the `SHA-512`_ hash function, which generates a binary
 digest from binary data, and `Base64`_ URL encoding, which encodes
@@ -246,6 +246,7 @@ Type prefixes used by VRS are:
    SQ, Sequence
    VA, Allele
    VH, Haplotype
+   VAB, Abundance
    VS, VariationSet
    VSL, SequenceLocation
    VCL, ChromosomeLocation
@@ -263,6 +264,11 @@ For example, the identifer for the allele example under :ref:`digest-serializati
 References
 @@@@@@@@@@
 
+.. [Hart2020] Hart RK, Prlić A. **SeqRepo: A system for managing local
+			  collections of biological sequences.** PLoS
+			  One. 2020;15:
+			  e0239883. `doi:10.1371/journal.pone.0239883
+			  <https://journals.plos.org/plosone/article/comments?id=10.1371/journal.pone.0239883>`__
 .. [Gibson] `Gibson Canonical JSON <http://gibson042.github.io/canonicaljson-spec/>`__
 .. [OLPC] `OLPC Canonical JSON <http://wiki.laptop.org/go/Canonical_JSON>`__
 .. [JCS] `JSON Canonicalization Scheme <https://tools.ietf.org/html/draft-rundgren-json-canonicalization-scheme-05>`__

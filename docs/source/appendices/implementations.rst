@@ -19,18 +19,15 @@ currently, it is expected that others will eventually appear as
 VRS is adopted.
 
 
-.. _impl-vr-python:
+.. _impl-vrs-python:
 
-vr-python: GA4GH VRS Python Implementation
-##########################################
+vrs-python: GA4GH VRS Python Implementation
+###########################################
 
-The |vr-python| is an implementation for the GA4GH VRS.  It
+The |vrs-python| is an implementation for the GA4GH VRS.  It
 supports all types covered by the VRS, implements Allele
 normalization and computed identifier generation, and provides "extra"
-features such as translation from HGVS, SPDI, and VCF formats.  See
-`vr-python notebooks
-<https://github.com/ga4gh/vr-python/blob/master/notebooks>`__ for
-usage examples.
+features such as translation from HGVS, SPDI, and VCF formats.
 
 |VRS| MAY be used without using the Python implementation.
 
@@ -71,11 +68,11 @@ standards are summarized in the following table.
    [GET] /sequence/service-info, \-, Refget v1.0.0, `/sequence/service-info <https://reg.clinicalgenome.org/sequence/service-info>`__
    [GET] /sequence/{id}, id => TRUNC512 digest for reference sequence, Refget v1.0.0, `/sequence/vYfm5TA_F-_BtIGjfzjGOj8b6IK5hCTx <https://reg.clinicalgenome.org/sequence/F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul?start=2232131&end=2232145>`__
    [GET] /sequence/{id}/metadata, id => TRUNC512 digest for reference sequence, Refget v1.0.0, `/sequence/vYfm5TA_F-_BtIGjfzjGOj8b6IK5hCTx/metadata <https://reg.clinicalgenome.org/sequence/F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul/metadata>`__
-   **VR**,,,
+   **VRS**,,,
    [GET] /vrAllele?hgvs={hgvs}, hgvs => HGVS expression, VRS v1.0, `/vrAllele?hgvs=NC_000007.14:g.55181320A>T <https://reg.clinicalgenome.org/vrAllele?hgvs=NC_000007.14:g.55181320A%3ET>`__  `/vrAllele?hgvs=NC_000007.14:g.55181220del <https://reg.clinicalgenome.org/vrAllele?hgvs=NC_000007.14:g.55181220del>`__
 
-Support for GA4GH refget and VRS specs provided in ClinGen Allele
-Registry is independent from VR-Python. Support for this community
+Support for GA4GH refget and VRS provided in ClinGen Allele
+Registry is independent from VRS-Python. Support for this community
 standards is implemented in ClinGen Allele Registry through extension
 of code written in C++.
 

@@ -1,13 +1,15 @@
 [![DOI](https://zenodo.org/badge/67005248.svg)](https://zenodo.org/badge/latestdoi/67005248)
-[![Read the Docs](https://img.shields.io/readthedocs/vr-spec/1.1)](https://vr-spec.readthedocs.io/en/1.1)
+[![Read the Docs](https://img.shields.io/readthedocs/vr-spec/1.1)](https://vrs.ga4gh.org/)
 
 The [GA4GH](https://www.ga4gh.org/) [Variation Representation
-Specification](https://vr-spec.readthedocs.io/) provides a
+Specification](https://vrs.ga4gh.org/) provides a
 comprehensive framework for the computational representation of
 biological sequence variation.  VRS is the result of a
 collaboration among [contributors](CONTRIBUTORS.md) representing
 national information resource providers, major international public
 initiatives, and diagnostic testing laboratories.
+
+VRS is licensed under the [Apache License 2.0](LICENSE).
 
 
 > **NOTE:** VRS is under active development.  See [VR 
@@ -25,14 +27,14 @@ initiatives, and diagnostic testing laboratories.
 * Define a globally unique *computed identifier* for covered data
   classes.
 * Develop [validation
-  tests](https://github.com/ga4gh/vr-spec/tests/validation) to ensure
+  tests](https://github.com/ga4gh/vrs/tests/validation) to ensure
   consistency of implementations.
 
 The VRS model is the product of the [GA4GH Variation Representation
 group](https://ga4gh-gks.github.io/variant_representation.html).
 
 
-> **SEE ALSO**: See [vr-python](https://github.com/ga4gh/vr-python)
+> **SEE ALSO**: See [vrs-python](https://github.com/ga4gh/vrs-python)
 > for an implementation and Jupyter notebooks.
 
 
@@ -49,9 +51,9 @@ Schema>Implementations](https://json-schema.org/implementations.html).
 
 VRS uses yaml as the source document for JSON Schema
 
-To convert vr.yaml to vr.json:
+To convert vrs.yaml to vrs.json:
 
-    make vr.json
+    make vrs.json
 
 You'll probably have to `pip install pyyaml` first.
 
@@ -64,7 +66,7 @@ To watch for changes and update automatically:
 
 The VR specification documentation is written in reStructuredText and
 located in `docs/source/`.  Commits to this repo are built
-automatically at `vr-spec.readthedocs.io`. 
+automatically at `vrs.ga4gh.org`. 
 
 To build documentation locally, type:
 

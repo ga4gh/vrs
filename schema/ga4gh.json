@@ -7,6 +7,7 @@
       "type_prefix_map": {
          "Allele": "VA",
          "ChromosomeLocation": "VCL",
+         "CopyNumber": "VCN",
          "Haplotype": "VH",
          "Sequence": "SQ",
          "SequenceLocation": "VSL",

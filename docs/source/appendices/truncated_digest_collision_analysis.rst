@@ -12,7 +12,7 @@ of truncation length.
   <https://github.com/biocommons/biocommons.seqrepo/blob/master/docs/Truncated%20Digest%20Collision%20Analysis.ipynb>`__
   in `Python SeqRepo library
   <https://github.com/biocommons/biocommons.seqrepo>`__ for code and
-  updates.
+  updates.  A fuller explanation is given in [Hart2020]_.
 
 
 Conclusions
@@ -33,7 +33,7 @@ Conclusions
     
     from IPython.display import display, Markdown
     
-    from ga4gh.vr.extras.utils import _format_time
+    from ga4gh.vrs.extras.utils import _format_time
     
     algorithms = {'sha512', 'sha1', 'sha256', 'md5', 'sha224', 'sha384'}
 
@@ -417,5 +417,4 @@ digest length (bytes) required for expected collision probability :math:`P` over
 | 1e+ | 39  | 39  | 36  | 36  | 33  | 33  | 30  | 30  | 30  | 27  | 27  |
 | 30  |     |     |     |     |     |     |     |     |     |     |     |
 +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-
 
