@@ -416,7 +416,7 @@ present in a genome or expressed in a sample, respectively.
 .. _CopyNumber:
 
 CopyNumber
-##########
+%%%%%%%%%%
 
 *Copy Number* captures the copies of a molecule within
 a genome, and can be used to express concepts such as
