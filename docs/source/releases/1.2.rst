@@ -36,8 +36,6 @@ New classes
 Other data model changes
 ########################
 
-  * Cytobands within :ref:`CytobandIntervals` must be ordered per ISCN
-    conventions.
   * Sequence strings are now formally defined by a :ref:`Sequence`
     type, which is fundamentally also a string.  This change aids
     documentation but has no technical impact.
