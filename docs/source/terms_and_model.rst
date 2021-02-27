@@ -1571,6 +1571,8 @@ ISCN guidelines [1]_.
        for human cytogenomic nomenclature (2016).* Karger (2016).
 
 
+.. _deprecations:
+
 Deprecated and Obsolete Classes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
