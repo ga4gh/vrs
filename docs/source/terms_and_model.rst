@@ -1417,19 +1417,19 @@ Absolute copy number counts may not be smaller than zero.
      - MUST be "AbsoluteCopyCount"
    * - min
      - integer
-     - 0..1
+     - 1..1
      - minimum value; inclusive
    * - max
      - integer
-     - 0..1
+     - 1..1
      - maximum value; inclusive
 
 **Implementation Guidance**
 
-* At least one of ``min`` or ``max`` must be specified.
-* If both ``min`` and ``max`` are specified, they MUST satisfy ``min
+* If both ``min`` and ``max`` MUST satisfy ``min
   <= max``.
 * If ``min == max``, then the range specifies a single numeric amount.
+* Both ``min`` and ``max`` MUST be non-negative
 
 
 **Examples**
