@@ -193,7 +193,7 @@ definitions:
           - $ref: "#/definitions/Location"
           - $ref: "#/definitions/CURIE"
       copies:
-        $ref: "#/definitions/CopyCount"
+        $ref: "#/definitions/AbsoluteCopyCount"
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations
@@ -283,11 +283,9 @@ definitions:
         enum: ["SimpleInterval"]
         default: "SimpleInterval"
       start:
-        type: ["integer", "null"]
-        default: null
+        type: ["integer"]
       end:
-        type: ["integer", "null"]
-        default: null
+        type: ["integer"]
     example:
       type: SimpleInterval
       start: 11
@@ -385,7 +383,7 @@ definitions:
       seq_expr:
         $ref: "#/definitions/SequenceExpression"
       count:
-        $ref: "#/definitions/CopyCount"
+        $ref: "#/definitions/AbsoluteCopyCount"
     example:
       type: RepeatedSequenceExpression
       copies:
@@ -429,11 +427,11 @@ definitions:
       A value representing a multitude or magnitude.
     additionalProperties: false
     oneOf:
-      - $ref: "#/definitions/CopyCount"
+      - $ref: "#/definitions/AbsoluteCopyCount"
     discriminator:
       propertyName: type
 
-  CopyCount:
+  AbsoluteCopyCount:
     description: >-
       An integer count of copies. Counts are bounded ranges denoted by minimum
       and maximum possible values. Absolute copy number counts may not be smaller
@@ -443,14 +441,14 @@ definitions:
     properties:
       type:
         type: string
-        enum: ["CopyCount"]
-        default: "CopyCount"
+        enum: ["AbsoluteCopyCount"]
+        default: "AbsoluteCopyCount"
       min:
-        type: ["integer", "null"]
-        default: null
+        type: ["integer"]
+        minimum: 0
       max:
-        type: ["integer", "null"]
-        default: null
+        type: ["integer"]
+        minimum: 0
     # TODO: Remove or fix
     # This is broken for Reece with vrs-python. Tested? 
     # allOf:
@@ -464,19 +462,9 @@ definitions:
     #     then:
     #       false
     #   # min < max cannot be validated by JSON schema
-    #   # min >= 0 and max >= 0 if absolute_measure == true
-    #   - if:
-    #       properties:
-    #         absolute_measure:
-    #           const: true
-    #     then:
-    #       properties:
-    #         min:
-    #           minimum: 0
-    #         max:
-    #           minimum: 0
+
     example:
-      type: "CopyCount"
+      type: "AbsoluteCopyCount"
       min: 5
       max: 10
 

@@ -1,9 +1,40 @@
 {
    "$schema": "http://json-schema.org/draft-07/schema",
    "definitions": {
+      "AbsoluteCopyCount": {
+         "additionalProperties": false,
+         "description": "An integer count of copies. Counts are bounded ranges denoted by minimum and maximum possible values. Absolute copy number counts may not be smaller than zero.",
+         "example": {
+            "max": 10,
+            "min": 5,
+            "type": "AbsoluteCopyCount"
+         },
+         "properties": {
+            "max": {
+               "minimum": 0,
+               "type": [
+                  "integer"
+               ]
+            },
+            "min": {
+               "minimum": 0,
+               "type": [
+                  "integer"
+               ]
+            },
+            "type": {
+               "default": "AbsoluteCopyCount",
+               "enum": [
+                  "AbsoluteCopyCount"
+               ],
+               "type": "string"
+            }
+         },
+         "type": "object"
+      },
       "Abundance": {
          "additionalProperties": false,
-         "description": "The measure of a quantity of a molecule in a system.",
+         "description": "The quantity of a feature, variation, molecule or part thereof in a system.",
          "discriminator": {
             "propertyName": "type"
          },
@@ -82,48 +113,6 @@
                "type": "string"
             }
          },
-         "required": [
-            "type",
-            "species_id",
-            "chr",
-            "interval"
-         ],
-         "type": "object"
-      },
-      "CopyCount": {
-         "additionalProperties": false,
-         "description": "An integer count of copies. Counts are bounded ranges denoted by minimum and maximum possible values. Absolute copy number counts may not be smaller than zero.",
-         "example": {
-            "max": 10,
-            "min": 5,
-            "type": "CopyCount"
-         },
-         "properties": {
-            "absolute_measure": {
-               "type": "boolean"
-            },
-            "max": {
-               "default": null,
-               "type": [
-                  "integer",
-                  "null"
-               ]
-            },
-            "min": {
-               "default": null,
-               "type": [
-                  "integer",
-                  "null"
-               ]
-            },
-            "type": {
-               "default": "CopyCount",
-               "enum": [
-                  "CopyCount"
-               ],
-               "type": "string"
-            }
-         },
          "type": "object"
       },
       "CopyNumber": {
@@ -134,7 +123,7 @@
                "$ref": "#/definitions/CURIE"
             },
             "copies": {
-               "$ref": "#/definitions/CopyCount"
+               "$ref": "#/definitions/AbsoluteCopyCount"
             },
             "subject": {
                "oneOf": [
@@ -153,18 +142,13 @@
                ]
             },
             "type": {
-               "default": "AbsoluteAbundance",
+               "default": "CopyNumber",
                "enum": [
-                  "AbsoluteAbundance"
+                  "CopyNumber"
                ],
                "type": "string"
             }
          },
-         "required": [
-            "type",
-            "subject",
-            "copies"
-         ],
          "type": "object"
       },
       "CytobandInterval": {
@@ -190,10 +174,6 @@
                "type": "string"
             }
          },
-         "required": [
-            "start",
-            "end"
-         ],
          "type": "object"
       },
       "DerivedSequenceExpression": {
@@ -368,7 +348,7 @@
          },
          "oneOf": [
             {
-               "$ref": "#/definitions/CopyCount"
+               "$ref": "#/definitions/AbsoluteCopyCount"
             }
          ]
       },
@@ -383,7 +363,7 @@
          },
          "properties": {
             "count": {
-               "$ref": "#/definitions/CopyCount"
+               "$ref": "#/definitions/AbsoluteCopyCount"
             },
             "seq_expr": {
                "$ref": "#/definitions/SequenceExpression"
@@ -396,10 +376,6 @@
                "type": "string"
             }
          },
-         "required": [
-            "type",
-            "count"
-         ],
          "type": "object"
       },
       "Sequence": {
@@ -483,10 +459,6 @@
                "type": "string"
             }
          },
-         "required": [
-            "type",
-            "sequence"
-         ],
          "type": "object"
       },
       "SimpleInterval": {
@@ -499,17 +471,13 @@
          },
          "properties": {
             "end": {
-               "default": null,
                "type": [
-                  "integer",
-                  "null"
+                  "integer"
                ]
             },
             "start": {
-               "default": null,
                "type": [
-                  "integer",
-                  "null"
+                  "integer"
                ]
             },
             "type": {
@@ -520,10 +488,6 @@
                "type": "string"
             }
          },
-         "required": [
-            "start",
-            "end"
-         ],
          "type": "object"
       },
       "SystemicVariation": {

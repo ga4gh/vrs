@@ -454,7 +454,7 @@ The count of copies of a :ref:`Feature` or
      - 1..1
      - Subject of the abundance statement
    * - copies
-     - :ref:`CopyCount`
+     - :ref:`AbsoluteCopyCount`
      - 1..1
      - The integral number of copies of the subject in the genome
 
@@ -466,16 +466,15 @@ Two, three, or four total copies of BRCA1:
 
     {
       "copies": {
-        "absolute_measure": true,
         "max": 4,
         "min": 2,
-        "type": "CopyCount"
+        "type": "AbsoluteCopyCount"
       },
       "subject": {
         "gene_id": "ncbigene:672",
         "type": "Gene"
       },
-      "type": "CopyCount"
+      "type": "CopyNumber"
     }
 
 
@@ -1248,7 +1247,7 @@ An expression of a sequence comprised of a tandem repeating subsequence.
      - 1..1
      - an expression of the repeating subsequence
    * - count
-     - :ref:`CopyCount`
+     - :ref:`AbsoluteCopyCount`
      - 1..1
      - the inclusive range count of repeated units
 
@@ -1261,7 +1260,7 @@ An expression of a sequence comprised of a tandem repeating subsequence.
       "count": {
         "max": 10,
         "min": 5,
-        "type": "CopyCount"
+        "type": "AbsoluteCopyCount"
       },
       "seq_expr": {
         "sequence": "CAG",
@@ -1361,15 +1360,14 @@ such as this statement of increased copy number of BRCA1:
 
     {
       "copies": {
-        "absolute_measure": true,
         "min": 3,
-        "type": "CopyCount"
+        "type": "AbsoluteCopyCount"
       },
       "subject": {
         "gene_id": "ncbigene:672",
         "type": "Gene"
       },
-      "type": "CopyCount"
+      "type": "AbsoluteCopyCount"
     }
 
 
@@ -1390,10 +1388,10 @@ Quantity
 
 A value indicating a multitude or magnitude measure.
 
-.. _CopyCount:
+.. _AbsoluteCopyCount:
 
-CopyCount
-#########
+AbsoluteCopyCount
+#################
 
 **Computational Definition**
 
@@ -1416,12 +1414,7 @@ Absolute copy number counts may not be smaller than zero.
    * - type
      - string
      - 1..1
-     - MUST be "CopyCount"
-   * - absolute_measure
-     - boolean
-     - 1..1
-     - specifies if the count is an absolute (True)
-       or relative (False) measure
+     - MUST be "AbsoluteCopyCount"
    * - min
      - integer
      - 0..1
@@ -1444,10 +1437,9 @@ Absolute copy number counts may not be smaller than zero.
 .. parsed-literal::
 
    {
-     "absolute_measure": True,
      "max": 4,
      "min": 0,
-     "type": "CopyCount",
+     "type": "AbsoluteCopyCount",
    }
 
 
