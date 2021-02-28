@@ -316,6 +316,8 @@ molecule.
   sequence MUST NOT change the location of "downstream" Alleles.
 * The `members` attribute is required and MUST contain at least one
   Allele.
+* Haplotypes with one Allele are intended to be distinct entities from
+  the Allele by itself. See discussion on :ref:`equivalence`.
 
 
 **Sources**
@@ -1108,6 +1110,10 @@ collectively referred to as *Sequence Expressions*. They are:
   :ref:`Sequencelocation`.
 * :ref:`RepeatedSequenceExpression`: A description of a repeating :ref:`Sequence`.
 
+Some SequenceExpression instances may appear to resolve to the same
+sequence, but are intended to be semantically distinct. There MAY be
+reasons to select or enforce one form over another that SHOULD be
+managed by implementations. See discussion on :ref:`equivalence`.
 
 .. _LiteralSequenceExpression:
 
@@ -1335,6 +1341,7 @@ regulatory, transcribed, and/or other functional Locations.
 * Gene MAY be converted to one or more :ref:`Locations <Location>`
   using external data. The source of such data and mechanism for
   implementation is not defined by this specification.
+* See discussion on :ref:`equivalence`.
 
 **Example**
 
