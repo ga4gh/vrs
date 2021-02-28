@@ -1,4 +1,4 @@
-.. _associating-annotations:
+.. _associating_annotations:
 
 Associating Annotations with VRS Objects
 ========================================

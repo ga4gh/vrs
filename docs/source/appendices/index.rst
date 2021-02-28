@@ -5,7 +5,7 @@ Appendices
    :maxdepth: 2
 
    relationships
-   associating-annotations
+   associating_annotations
    design_decisions
    development_process
    future_plans
