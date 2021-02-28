@@ -1582,8 +1582,10 @@ SequenceState
 
 .. warning::
 
-   DEPRECATED. SequenceState will be removed in VRS 2.0. Use
-   :ref:`LiteralSequenceExpression` instead.
+   DEPRECATED. Use :ref:`LiteralSequenceExpression` instead.
+   SequenceState will be removed in VRS 2.0.
+
+.. deprecated:: 1.2
 
 **Computational Definition**
 
@@ -1627,13 +1629,15 @@ SNVs, MNVs, del, ins, and delins.
 State
 #####
 
-.. Warning::
+.. warning::
 
    OBSOLETE. State was an abstract class that was intended for future
    growth. It was replaced by SequenceExpressions, which subsumes the
    functionality envisioned for State.  Because State was abstract,
    and therefore purely an internal concept, it was made obsolete at
    the same time that SequenceState was deprecated.
+
+.. deprecated:: 1.2
 
 **Computational Definition**
 
