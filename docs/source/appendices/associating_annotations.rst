@@ -3,14 +3,20 @@
 Associating Annotations with VRS Objects
 ========================================
 
-This example demonstrates how to associate information with VRS
-objects.  Although the examples use the |vrs-python| library, the
-principles apply regardless of implementation.
-
 Information is never embedded within VRS objects. Instead, it is
 associated with those objects by means of their ids. This approach to
 annotations scales better in size and distributes better across multiple
 data sources.
+
+The Genomic Knowledge Standards Work Stream is currently developing
+a Value Object Descriptors policy to provide a standardized way to
+associate common annotations with VRS objects as part of the `VRSATILE`_
+framework. This approach enables standard and verbose exchange while
+maintaining the advantages of the VRS value object design philosophy.
+
+This example demonstrates how to associate information with VRS
+objects.  Although the examples use the |vrs-python| library, the
+principles apply regardless of implementation.
 
 .. code:: ipython3
 
