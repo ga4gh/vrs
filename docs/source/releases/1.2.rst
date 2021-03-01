@@ -8,7 +8,7 @@ Important
 #########
 
   * :ref:`SequenceState is deprecated <deprecations>`. It will be
-    obsolete in VRS 1.3.
+    removed in VRS 2.0.
   * The first manuscript for VRS has been submitted. Please cite
     https://www.biorxiv.org/content/10.1101/2021.01.15.426843v1.
 
