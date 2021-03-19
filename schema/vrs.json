@@ -1,54 +1,78 @@
 {
    "$schema": "http://json-schema.org/draft-07/schema",
+   "title": "GA4GH-VRS-Definitions",
+   "type": "object",
    "definitions": {
-      "AbsoluteCopyCount": {
-         "additionalProperties": false,
-         "description": "An integer count of copies. Counts are bounded ranges denoted by minimum and maximum possible values. Absolute copy number counts may not be smaller than zero.",
-         "example": {
-            "max": 10,
-            "min": 5,
-            "type": "AbsoluteCopyCount"
-         },
-         "properties": {
-            "max": {
-               "minimum": 0,
-               "type": [
-                  "integer"
-               ]
-            },
-            "min": {
-               "minimum": 0,
-               "type": [
-                  "integer"
-               ]
-            },
-            "type": {
-               "default": "AbsoluteCopyCount",
-               "enum": [
-                  "AbsoluteCopyCount"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "Abundance": {
-         "description": "The quantity of a feature, variation, molecule or part thereof in a system.",
-         "discriminator": {
-            "propertyName": "type"
-         },
+      "Variation": {
+         "description": "The root class of all Variation types",
          "oneOf": [
             {
-               "$ref": "#/definitions/CopyNumber"
+               "$ref": "#/definitions/MolecularVariation"
+            },
+            {
+               "$ref": "#/definitions/SystemicVariation"
+            },
+            {
+               "$ref": "#/definitions/UtilityVariation"
             }
-         ]
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
+      },
+      "MolecularVariation": {
+         "description": "A variation on a contiguous molecule.",
+         "oneOf": [
+            {
+               "$ref": "#/definitions/Allele"
+            },
+            {
+               "$ref": "#/definitions/Haplotype"
+            }
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
+      },
+      "UtilityVariation": {
+         "description": "Utility variation classes that cannot be constrained to a specific biological class of variation.",
+         "oneOf": [
+            {
+               "$ref": "#/definitions/Text"
+            },
+            {
+               "$ref": "#/definitions/VariationSet"
+            }
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
+      },
+      "SystemicVariation": {
+         "description": "A Variation of multiple molecules in the context of a system, e.g. a genome, sample, or homologous chromosomes.",
+         "oneOf": [
+            {
+               "$ref": "#/definitions/Abundance"
+            }
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
       },
       "Allele": {
-         "additionalProperties": false,
          "description": "An assertion of a sequence state at a Location.",
+         "additionalProperties": false,
+         "type": "object",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
+            },
+            "type": {
+               "type": "string",
+               "enum": [
+                  "Allele"
+               ],
+               "default": "Allele"
             },
             "location": {
                "oneOf": [
@@ -69,60 +93,118 @@
                      "$ref": "#/definitions/SequenceExpression"
                   }
                ]
-            },
-            "type": {
-               "default": "Allele",
-               "enum": [
-                  "Allele"
-               ],
-               "type": "string"
             }
-         },
-         "type": "object"
+         }
       },
-      "CURIE": {
+      "Haplotype": {
+         "description": "A set of zero or more Alleles",
          "additionalProperties": false,
-         "description": "A string that refers to an object uniquely.  The lifetime and scope of an id is defined by the sender.\nVRS does not impose any contraints on strings used as ids in messages. However, to maximize sharability of data, VRS RECOMMENDS that implementations use [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.\nString CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially.\nVRS also RECOMMENDS that `prefix` be defined in identifiers.org.\nThe `reference` component is an unconstrained string.\nA CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VRS uses CURIEs primarily as a naming mechanism.\nImplementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable.\nUsing internal ids in public messages is strongly discouraged.",
-         "example": "ensembl:ENSG00000139618",
-         "pattern": "^\\w[^:]*:.+$",
-         "type": "string"
-      },
-      "ChromosomeLocation": {
-         "additionalProperties": false,
-         "description": "A region of a chromosomed specified by species and name using cytogenetic naming conventions",
+         "type": "object",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
             },
-            "chr": {
-               "type": "string"
+            "type": {
+               "type": "string",
+               "enum": [
+                  "Haplotype"
+               ],
+               "default": "Haplotype"
             },
-            "interval": {
-               "$ref": "#/definitions/CytobandInterval"
-            },
-            "species_id": {
-               "$ref": "#/definitions/CURIE",
-               "default": "taxonomy:9606"
+            "members": {
+               "type": "array",
+               "minItems": 1,
+               "uniqueItems": true,
+               "items": {
+                  "oneOf": [
+                     {
+                        "$ref": "#/definitions/Allele"
+                     },
+                     {
+                        "$ref": "#/definitions/CURIE"
+                     }
+                  ]
+               }
+            }
+         }
+      },
+      "Text": {
+         "description": "A textual description of variation, typically not parseable but understood by humans.",
+         "additionalProperties": false,
+         "type": "object",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
             },
             "type": {
-               "default": "ChromosomeLocation",
+               "type": "string",
                "enum": [
-                  "ChromosomeLocation"
+                  "Text"
                ],
-               "type": "string"
+               "default": "Text"
+            },
+            "definition": {
+               "type": "string",
+               "description": "An textual representation of variation intended to capture variation descriptions that cannot be parsed, but still treated as variation."
             }
-         },
-         "type": "object"
+         }
+      },
+      "VariationSet": {
+         "description": "A set of Variation objects.\nMembers may be specified inline or by reference (with CURIEs)",
+         "type": "object",
+         "additionalProperties": false,
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "type": {
+               "type": "string",
+               "enum": [
+                  "VariationSet"
+               ],
+               "default": "VariationSet"
+            },
+            "members": {
+               "type": "array",
+               "uniqueItems": true,
+               "items": {
+                  "oneOf": [
+                     {
+                        "$ref": "#/definitions/CURIE"
+                     },
+                     {
+                        "$ref": "#/definitions/Variation"
+                     }
+                  ]
+               }
+            }
+         }
+      },
+      "Abundance": {
+         "description": "The quantity of a feature, variation, molecule or part thereof in a system.",
+         "oneOf": [
+            {
+               "$ref": "#/definitions/CopyNumber"
+            }
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
       },
       "CopyNumber": {
          "additionalProperties": false,
+         "type": "object",
          "description": "The count of copies of a Feature, Location, or Molecular Variation subject within a genome.",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
             },
-            "copies": {
-               "$ref": "#/definitions/AbsoluteCopyCount"
+            "type": {
+               "type": "string",
+               "enum": [
+                  "CopyNumber"
+               ],
+               "default": "CopyNumber"
             },
             "subject": {
                "oneOf": [
@@ -140,148 +222,13 @@
                   }
                ]
             },
-            "type": {
-               "default": "CopyNumber",
-               "enum": [
-                  "CopyNumber"
-               ],
-               "type": "string"
+            "copies": {
+               "$ref": "#/definitions/AbsoluteCopyCount"
             }
-         },
-         "type": "object"
-      },
-      "CytobandInterval": {
-         "additionalProperties": false,
-         "description": "A contiguous region specified by chromosomal bands features.",
-         "example": {
-            "end": "q22.3",
-            "start": "q22.2",
-            "type": "CytobandInterval"
-         },
-         "properties": {
-            "end": {
-               "$ref": "#/definitions/HumanCytoband"
-            },
-            "start": {
-               "$ref": "#/definitions/HumanCytoband"
-            },
-            "type": {
-               "default": "CytobandInterval",
-               "enum": [
-                  "CytobandInterval"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "DerivedSequenceExpression": {
-         "additionalProperties": false,
-         "properties": {
-            "location": {
-               "$ref": "#/definitions/SequenceLocation"
-            },
-            "transformation": {
-               "type": "boolean"
-            },
-            "type": {
-               "default": "DerivedSequenceExpression",
-               "enum": [
-                  "DerivedSequenceExpression"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "Feature": {
-         "description": "A named entity that can be mapped to a Location. Genes, protein domains, exons, and chromosomes are some examples of common biological entities that may be Features.",
-         "discriminator": {
-            "propertyName": "type"
-         },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/Gene"
-            }
-         ]
-      },
-      "Gene": {
-         "additionalProperties": false,
-         "description": "A reference to an external gene system, used as a location for variation.  Currently, the `ncbigene` namespace is required. See https://registry.identifiers.org/registry/ncbigene.",
-         "properties": {
-            "gene_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "type": {
-               "default": "Gene",
-               "enum": [
-                  "Gene"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "Haplotype": {
-         "additionalProperties": false,
-         "description": "A set of zero or more Alleles",
-         "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "members": {
-               "items": {
-                  "oneOf": [
-                     {
-                        "$ref": "#/definitions/Allele"
-                     },
-                     {
-                        "$ref": "#/definitions/CURIE"
-                     }
-                  ]
-               },
-               "minItems": 1,
-               "type": "array",
-               "uniqueItems": true
-            },
-            "type": {
-               "default": "Haplotype",
-               "enum": [
-                  "Haplotype"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "HumanCytoband": {
-         "additionalProperties": false,
-         "description": "A interval on a stained metaphase chromosome specified by cytobands. CytobandIntervals include the regions described by the start and end cytobands.",
-         "example": "q22.3",
-         "pattern": "^cen|[pq](ter|([1-9][0-9]*(\\.[1-9][0-9]*)?))$",
-         "type": "string"
-      },
-      "LiteralSequenceExpression": {
-         "additionalProperties": false,
-         "properties": {
-            "sequence": {
-               "$ref": "#/definitions/Sequence"
-            },
-            "type": {
-               "default": "LiteralSequenceExpression",
-               "enum": [
-                  "LiteralSequenceExpression"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
+         }
       },
       "Location": {
          "description": "A Location represents a span on a specific sequence.",
-         "discriminator": {
-            "propertyName": "type"
-         },
          "oneOf": [
             {
                "$ref": "#/definitions/ChromosomeLocation"
@@ -289,102 +236,162 @@
             {
                "$ref": "#/definitions/SequenceLocation"
             }
-         ]
-      },
-      "MolecularVariation": {
-         "description": "A variation on a contiguous molecule.",
+         ],
          "discriminator": {
             "propertyName": "type"
-         },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/Allele"
-            },
-            {
-               "$ref": "#/definitions/Haplotype"
-            }
-         ]
+         }
       },
-      "NestedInterval": {
+      "ChromosomeLocation": {
          "additionalProperties": false,
-         "example": {
-            "inner": {
-               "end": 30,
-               "start": 20,
-               "type": "SimpleInterval"
-            },
-            "outer": {
-               "end": 40,
-               "start": 10,
-               "type": "SimpleInterval"
-            },
-            "type": "NestedInterval"
-         },
+         "description": "A region of a chromosomed specified by species and name using cytogenetic naming conventions",
+         "type": "object",
          "properties": {
-            "inner": {
-               "$ref": "#/definitions/SimpleInterval"
+            "type": {
+               "type": "string",
+               "enum": [
+                  "ChromosomeLocation"
+               ],
+               "default": "ChromosomeLocation"
             },
-            "outer": {
-               "$ref": "#/definitions/SimpleInterval"
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "species_id": {
+               "$ref": "#/definitions/CURIE",
+               "default": "taxonomy:9606"
+            },
+            "chr": {
+               "type": "string"
+            },
+            "interval": {
+               "$ref": "#/definitions/CytobandInterval"
+            }
+         }
+      },
+      "SequenceLocation": {
+         "additionalProperties": false,
+         "description": "A specified subsequence within another sequence that is used as a reference sequence.",
+         "type": "object",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
             },
             "type": {
-               "default": "NestedInterval",
+               "type": "string",
+               "enum": [
+                  "SequenceLocation"
+               ],
+               "default": "SequenceLocation"
+            },
+            "sequence_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "interval": {
+               "$ref": "#/definitions/SequenceInterval"
+            }
+         }
+      },
+      "SequenceInterval": {
+         "oneOf": [
+            {
+               "$ref": "#/definitions/SimpleInterval"
+            },
+            {
+               "$ref": "#/definitions/NestedInterval"
+            }
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
+      },
+      "SimpleInterval": {
+         "description": "A SimpleInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of SequenceInterval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".",
+         "additionalProperties": false,
+         "type": "object",
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "SimpleInterval"
+               ],
+               "default": "SimpleInterval"
+            },
+            "start": {
+               "type": [
+                  "integer"
+               ]
+            },
+            "end": {
+               "type": [
+                  "integer"
+               ]
+            }
+         },
+         "example": {
+            "type": "SimpleInterval",
+            "start": 11,
+            "end": 22
+         }
+      },
+      "NestedInterval": {
+         "type": "object",
+         "additionalProperties": false,
+         "properties": {
+            "type": {
+               "type": "string",
                "enum": [
                   "NestedInterval"
                ],
-               "type": "string"
+               "default": "NestedInterval"
+            },
+            "inner": {
+               "$ref": "#/definitions/SimpleInterval"
+            },
+            "outer": {
+               "$ref": "#/definitions/SimpleInterval"
             }
          },
-         "type": "object"
-      },
-      "Quantity": {
-         "description": "A value representing a multitude or magnitude.",
-         "discriminator": {
-            "propertyName": "type"
-         },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/AbsoluteCopyCount"
-            }
-         ]
-      },
-      "RepeatedSequenceExpression": {
-         "additionalProperties": false,
          "example": {
-            "copies": {
-               "max": 60,
-               "min": 40
+            "type": "NestedInterval",
+            "inner": {
+               "type": "SimpleInterval",
+               "start": 20,
+               "end": 30
             },
-            "type": "RepeatedSequenceExpression"
-         },
+            "outer": {
+               "type": "SimpleInterval",
+               "start": 10,
+               "end": 40
+            }
+         }
+      },
+      "CytobandInterval": {
+         "description": "A contiguous region specified by chromosomal bands features.",
+         "type": "object",
+         "additionalProperties": false,
          "properties": {
-            "count": {
-               "$ref": "#/definitions/AbsoluteCopyCount"
-            },
-            "seq_expr": {
-               "$ref": "#/definitions/SequenceExpression"
-            },
             "type": {
-               "default": "RepeatedSequenceExpression",
+               "type": "string",
                "enum": [
-                  "RepeatedSequenceExpression"
+                  "CytobandInterval"
                ],
-               "type": "string"
+               "default": "CytobandInterval"
+            },
+            "start": {
+               "$ref": "#/definitions/HumanCytoband"
+            },
+            "end": {
+               "$ref": "#/definitions/HumanCytoband"
             }
          },
-         "type": "object"
-      },
-      "Sequence": {
-         "additionalProperties": false,
-         "description": "A character string of residues that represents a biological sequence using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequences.",
-         "pattern": "^[A-Z*\\-]*$",
-         "type": "string"
+         "example": {
+            "type": "CytobandInterval",
+            "start": "q22.2",
+            "end": "q22.3"
+         }
       },
       "SequenceExpression": {
          "description": "One of a set of sequence representation syntaxes.",
-         "discriminator": {
-            "propertyName": "type"
-         },
          "oneOf": [
             {
                "$ref": "#/definitions/LiteralSequenceExpression"
@@ -395,187 +402,183 @@
             {
                "$ref": "#/definitions/RepeatedSequenceExpression"
             }
-         ]
-      },
-      "SequenceInterval": {
+         ],
          "discriminator": {
             "propertyName": "type"
-         },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/SimpleInterval"
-            },
-            {
-               "$ref": "#/definitions/NestedInterval"
-            }
-         ]
+         }
       },
-      "SequenceLocation": {
+      "LiteralSequenceExpression": {
+         "type": "object",
          "additionalProperties": false,
-         "description": "A specified subsequence within another sequence that is used as a reference sequence.",
          "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "interval": {
-               "$ref": "#/definitions/SequenceInterval"
-            },
-            "sequence_id": {
-               "$ref": "#/definitions/CURIE"
-            },
             "type": {
-               "default": "SequenceLocation",
+               "type": "string",
                "enum": [
-                  "SequenceLocation"
+                  "LiteralSequenceExpression"
                ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "SequenceState": {
-         "additionalProperties": false,
-         "deprecated": true,
-         "description": "DEPRECATED: An assertion of the state of a sequence, typically at a Sequence Location within an Allele.\nThis class is deprecated. Use LiteralSequenceExpression instead.",
-         "example": {
-            "sequence": "C",
-            "type": "SequenceState"
-         },
-         "properties": {
+               "default": "LiteralSequenceExpression"
+            },
             "sequence": {
                "$ref": "#/definitions/Sequence"
-            },
+            }
+         }
+      },
+      "DerivedSequenceExpression": {
+         "type": "object",
+         "additionalProperties": false,
+         "properties": {
             "type": {
-               "default": "SequenceState",
+               "type": "string",
+               "enum": [
+                  "DerivedSequenceExpression"
+               ],
+               "default": "DerivedSequenceExpression"
+            },
+            "location": {
+               "$ref": "#/definitions/SequenceLocation"
+            },
+            "transformation": {
+               "type": "boolean"
+            }
+         }
+      },
+      "RepeatedSequenceExpression": {
+         "additionalProperties": false,
+         "type": "object",
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "RepeatedSequenceExpression"
+               ],
+               "default": "RepeatedSequenceExpression"
+            },
+            "seq_expr": {
+               "$ref": "#/definitions/SequenceExpression"
+            },
+            "count": {
+               "$ref": "#/definitions/AbsoluteCopyCount"
+            }
+         },
+         "example": {
+            "type": "RepeatedSequenceExpression",
+            "copies": {
+               "min": 40,
+               "max": 60
+            }
+         }
+      },
+      "Feature": {
+         "description": "A named entity that can be mapped to a Location. Genes, protein domains, exons, and chromosomes are some examples of common biological entities that may be Features.",
+         "oneOf": [
+            {
+               "$ref": "#/definitions/Gene"
+            }
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
+      },
+      "Gene": {
+         "description": "A reference to an external gene system, used as a location for variation.  Currently, the `ncbigene` namespace is required. See https://registry.identifiers.org/registry/ncbigene.",
+         "type": "object",
+         "additionalProperties": false,
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "Gene"
+               ],
+               "default": "Gene"
+            },
+            "gene_id": {
+               "$ref": "#/definitions/CURIE"
+            }
+         }
+      },
+      "Quantity": {
+         "description": "A value representing a multitude or magnitude.",
+         "oneOf": [
+            {
+               "$ref": "#/definitions/AbsoluteCopyCount"
+            }
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
+      },
+      "AbsoluteCopyCount": {
+         "description": "An integer count of copies. Counts are bounded ranges denoted by minimum and maximum possible values. Absolute copy number counts may not be smaller than zero.",
+         "additionalProperties": false,
+         "type": "object",
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "AbsoluteCopyCount"
+               ],
+               "default": "AbsoluteCopyCount"
+            },
+            "min": {
+               "type": [
+                  "integer"
+               ],
+               "minimum": 0
+            },
+            "max": {
+               "type": [
+                  "integer"
+               ],
+               "minimum": 0
+            }
+         },
+         "example": {
+            "type": "AbsoluteCopyCount",
+            "min": 5,
+            "max": 10
+         }
+      },
+      "Sequence": {
+         "additionalProperties": false,
+         "description": "A character string of residues that represents a biological sequence using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequences.",
+         "type": "string",
+         "pattern": "^[A-Z*\\-]*$"
+      },
+      "CURIE": {
+         "additionalProperties": false,
+         "description": "A string that refers to an object uniquely.  The lifetime and scope of an id is defined by the sender.\nVRS does not impose any contraints on strings used as ids in messages. However, to maximize sharability of data, VRS RECOMMENDS that implementations use [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.\nString CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially.\nVRS also RECOMMENDS that `prefix` be defined in identifiers.org.\nThe `reference` component is an unconstrained string.\nA CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VRS uses CURIEs primarily as a naming mechanism.\nImplementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable.\nUsing internal ids in public messages is strongly discouraged.",
+         "type": "string",
+         "pattern": "^\\w[^:]*:.+$",
+         "example": "ensembl:ENSG00000139618"
+      },
+      "HumanCytoband": {
+         "additionalProperties": false,
+         "description": "A interval on a stained metaphase chromosome specified by cytobands. CytobandIntervals include the regions described by the start and end cytobands.",
+         "type": "string",
+         "pattern": "^cen|[pq](ter|([1-9][0-9]*(\\.[1-9][0-9]*)?))$",
+         "example": "q22.3"
+      },
+      "SequenceState": {
+         "deprecated": true,
+         "description": "DEPRECATED: An assertion of the state of a sequence, typically at a Sequence Location within an Allele.\nThis class is deprecated. Use LiteralSequenceExpression instead.",
+         "additionalProperties": false,
+         "type": "object",
+         "properties": {
+            "type": {
+               "type": "string",
                "enum": [
                   "SequenceState"
                ],
-               "type": "string"
+               "default": "SequenceState"
+            },
+            "sequence": {
+               "$ref": "#/definitions/Sequence"
             }
          },
-         "type": "object"
-      },
-      "SimpleInterval": {
-         "additionalProperties": false,
-         "description": "A SimpleInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of SequenceInterval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".",
          "example": {
-            "end": 22,
-            "start": 11,
-            "type": "SimpleInterval"
-         },
-         "properties": {
-            "end": {
-               "type": [
-                  "integer"
-               ]
-            },
-            "start": {
-               "type": [
-                  "integer"
-               ]
-            },
-            "type": {
-               "default": "SimpleInterval",
-               "enum": [
-                  "SimpleInterval"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "SystemicVariation": {
-         "description": "A Variation of multiple molecules in the context of a system, e.g. a genome, sample, or homologous chromosomes.",
-         "discriminator": {
-            "propertyName": "type"
-         },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/Abundance"
-            }
-         ]
-      },
-      "Text": {
-         "additionalProperties": false,
-         "description": "A textual description of variation, typically not parseable but understood by humans.",
-         "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "definition": {
-               "description": "An textual representation of variation intended to capture variation descriptions that cannot be parsed, but still treated as variation.",
-               "type": "string"
-            },
-            "type": {
-               "default": "Text",
-               "enum": [
-                  "Text"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "UtilityVariation": {
-         "description": "Utility variation classes that cannot be constrained to a specific biological class of variation.",
-         "discriminator": {
-            "propertyName": "type"
-         },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/Text"
-            }
-         ]
-      },
-      "Variation": {
-         "description": "The root class of all Variation types",
-         "discriminator": {
-            "propertyName": "type"
-         },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/MolecularVariation"
-            },
-            {
-               "$ref": "#/definitions/SystemicVariation"
-            },
-            {
-               "$ref": "#/definitions/UtilityVariation"
-            }
-         ]
-      },
-      "VariationSet": {
-         "additionalProperties": false,
-         "description": "A set of Variation objects.\nMembers may be specified inline or by reference (with CURIEs)",
-         "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "members": {
-               "items": {
-                  "oneOf": [
-                     {
-                        "$ref": "#/definitions/CURIE"
-                     },
-                     {
-                        "$ref": "#/definitions/Variation"
-                     }
-                  ]
-               },
-               "type": "array",
-               "uniqueItems": true
-            },
-            "type": {
-               "default": "VariationSet",
-               "enum": [
-                  "VariationSet"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
+            "type": "SequenceState",
+            "sequence": "C"
+         }
       }
-   },
-   "title": "GA4GH-VRS-Definitions",
-   "type": "object"
+   }
 }

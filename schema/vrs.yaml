@@ -46,9 +46,7 @@ definitions:
       biological class of variation.
     oneOf:
       - $ref: "#/definitions/Text"
-      # TODO: Recent changes break this for an unknown reason
-      # Remove for now so that it's not broken.
-      # - $ref: "#/definitions/VariationSet"
+      - $ref: "#/definitions/VariationSet"
     discriminator:
       propertyName: type
 
