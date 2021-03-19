@@ -33,7 +33,6 @@
          "type": "object"
       },
       "Abundance": {
-         "additionalProperties": false,
          "description": "The quantity of a feature, variation, molecule or part thereof in a system.",
          "discriminator": {
             "propertyName": "type"
@@ -196,7 +195,6 @@
          "type": "object"
       },
       "Feature": {
-         "additionalProperties": false,
          "description": "A named entity that can be mapped to a Location. Genes, protein domains, exons, and chromosomes are some examples of common biological entities that may be Features.",
          "discriminator": {
             "propertyName": "type"
@@ -257,6 +255,7 @@
          "type": "object"
       },
       "HumanCytoband": {
+         "additionalProperties": false,
          "description": "A interval on a stained metaphase chromosome specified by cytobands. CytobandIntervals include the regions described by the start and end cytobands.",
          "example": "q22.3",
          "pattern": "^cen|[pq](ter|([1-9][0-9]*(\\.[1-9][0-9]*)?))$",
@@ -279,7 +278,6 @@
          "type": "object"
       },
       "Location": {
-         "additionalProperties": false,
          "description": "A Location represents a span on a specific sequence.",
          "discriminator": {
             "propertyName": "type"
@@ -294,7 +292,6 @@
          ]
       },
       "MolecularVariation": {
-         "additionalProperties": false,
          "description": "A variation on a contiguous molecule.",
          "discriminator": {
             "propertyName": "type"
@@ -341,7 +338,6 @@
          "type": "object"
       },
       "Quantity": {
-         "additionalProperties": false,
          "description": "A value representing a multitude or magnitude.",
          "discriminator": {
             "propertyName": "type"
@@ -385,7 +381,6 @@
          "type": "string"
       },
       "SequenceExpression": {
-         "additionalProperties": false,
          "description": "One of a set of sequence representation syntaxes.",
          "discriminator": {
             "propertyName": "type"
@@ -403,7 +398,6 @@
          ]
       },
       "SequenceInterval": {
-         "additionalProperties": false,
          "discriminator": {
             "propertyName": "type"
          },
@@ -491,7 +485,6 @@
          "type": "object"
       },
       "SystemicVariation": {
-         "additionalProperties": false,
          "description": "A Variation of multiple molecules in the context of a system, e.g. a genome, sample, or homologous chromosomes.",
          "discriminator": {
             "propertyName": "type"
@@ -524,7 +517,6 @@
          "type": "object"
       },
       "UtilityVariation": {
-         "additionalProperties": false,
          "description": "Utility variation classes that cannot be constrained to a specific biological class of variation.",
          "discriminator": {
             "propertyName": "type"
@@ -536,7 +528,6 @@
          ]
       },
       "Variation": {
-         "additionalProperties": false,
          "description": "The root class of all Variation types",
          "discriminator": {
             "propertyName": "type"
@@ -554,6 +545,7 @@
          ]
       },
       "VariationSet": {
+         "additionalProperties": false,
          "description": "A set of Variation objects.\nMembers may be specified inline or by reference (with CURIEs)",
          "properties": {
             "_id": {
