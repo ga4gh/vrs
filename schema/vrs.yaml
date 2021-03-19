@@ -22,7 +22,6 @@ definitions:
   # =============================================================================
 
   Variation:
-    additionalProperties: false
     description: >-
       The root class of all Variation types
     oneOf:
@@ -33,7 +32,6 @@ definitions:
       propertyName: type
 
   MolecularVariation:
-    additionalProperties: false
     description: >-
       A variation on a contiguous molecule.
     oneOf:
@@ -43,7 +41,6 @@ definitions:
       propertyName: type
 
   UtilityVariation:
-    additionalProperties: false
     description: >-
       Utility variation classes that cannot be constrained to a specific
       biological class of variation.
@@ -56,7 +53,6 @@ definitions:
       propertyName: type
 
   SystemicVariation:
-    additionalProperties: false
     description: >-
       A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
@@ -145,6 +141,7 @@ definitions:
 
       Members may be specified inline or by reference (with CURIEs)
     type: object
+    additionalProperties: false
     properties:
       _id:
         $ref: "#/definitions/CURIE"
@@ -165,7 +162,6 @@ definitions:
   # SystemicVariation
 
   Abundance:
-    additionalProperties: false
     description: >-
       The quantity of a feature, variation, molecule or part thereof in a system.
     oneOf:
@@ -199,7 +195,6 @@ definitions:
   # Locations
 
   Location:
-    additionalProperties: false
     description: >-
       A Location represents a span on a specific sequence.
     oneOf:
@@ -209,6 +204,7 @@ definitions:
       propertyName: type
 
   ChromosomeLocation:
+    additionalProperties: false
     description: >-
       A region of a chromosomed specified by species and name using
       cytogenetic naming conventions
@@ -227,7 +223,6 @@ definitions:
         type: string
       interval:
         $ref: "#/definitions/CytobandInterval"
-    additionalProperties: false
 
   SequenceLocation:
     additionalProperties: false
@@ -256,7 +251,6 @@ definitions:
   # SequenceIntervals
 
   SequenceInterval:
-    additionalProperties: false
     oneOf:
       - $ref: '#/definitions/SimpleInterval'
       - $ref: '#/definitions/NestedInterval'
@@ -340,7 +334,6 @@ definitions:
   SequenceExpression:
     description: >-
       One of a set of sequence representation syntaxes.
-    additionalProperties: false
     oneOf:
       - $ref: "#/definitions/LiteralSequenceExpression"
       - $ref: "#/definitions/DerivedSequenceExpression"
@@ -398,7 +391,6 @@ definitions:
       A named entity that can be mapped to a Location. Genes, protein domains,
       exons, and chromosomes are some examples of common biological entities
       that may be Features.
-    additionalProperties: false
     oneOf:
       - $ref: "#/definitions/Gene"
     discriminator:
@@ -425,7 +417,6 @@ definitions:
   Quantity:
     description: >-
       A value representing a multitude or magnitude.
-    additionalProperties: false
     oneOf:
       - $ref: "#/definitions/AbsoluteCopyCount"
     discriminator:
@@ -517,6 +508,7 @@ definitions:
     example: "ensembl:ENSG00000139618"
 
   HumanCytoband:
+    additionalProperties: false
     description: >-
       A interval on a stained metaphase chromosome specified by cytobands.
       CytobandIntervals include the regions described by the start and end
