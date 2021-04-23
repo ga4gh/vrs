@@ -187,7 +187,9 @@ definitions:
           - $ref: "#/definitions/Location"
           - $ref: "#/definitions/CURIE"
       copies:
-        $ref: "#/definitions/AbsoluteCopyCount"
+        oneOf:
+          - $ref: "#/definitions/Range"
+          - $ref: "#/definitions/Numeric"
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations
@@ -249,62 +251,39 @@ definitions:
   # SequenceIntervals
 
   SequenceInterval:
+    description: >-
+      A SequenceInterval is intended to be compatible with that in Sequence Ontology
+      ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)),
+      with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO
+      definition is for an "extent greater than zero".
     oneOf:
+      - $ref: '#/definitions/NumericInterval'
       - $ref: '#/definitions/SimpleInterval'
-      - $ref: '#/definitions/NestedInterval'
     discriminator:
       propertyName: type
 
-  SimpleInterval:
+  NumericInterval:
     description: >-
-      A SimpleInterval represents a span of sequence. Positions are
+      A NumericInterval represents a span of sequence. Positions are
       always represented by contiguous spans using interbase
       coordinates.
-
-      This definition of SequenceInterval is intended to be compatible with that
-      in Sequence Ontology
-      ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)),
-      with the exception that the GA4GH VRS SequenceInterval may be
-      zero-width. The SO definition is for an "extent greater than
-      zero".
-    additionalProperties: false
     type: object
+    additionalProperties: false
     properties:
       type:
         type: string
-        enum: ["SimpleInterval"]
-        default: "SimpleInterval"
+        enum: [ "NumericInterval" ]
+        default: "NumericInterval"
       start:
-        type: ["integer"]
+        oneOf:
+          - $ref: "#/definitions/Numeric"
+          - $ref: "#/definitions/Range"
       end:
-        type: ["integer"]
-    example:
-      type: SimpleInterval
-      start: 11
-      end: 22
+        oneOf:
+          - $ref: "#/definitions/Numeric"
+          - $ref: "#/definitions/Range"
 
-  NestedInterval:
-    type: object
-    additionalProperties: false
-    properties:
-      type:
-        type: string
-        enum: ["NestedInterval"]
-        default: "NestedInterval"
-      inner:
-        $ref: '#/definitions/SimpleInterval'
-      outer:
-        $ref: '#/definitions/SimpleInterval'
-    example:
-      type: NestedInterval
-      inner:
-        type: SimpleInterval
-        start: 20
-        end: 30
-      outer:
-        type: SimpleInterval
-        start: 10
-        end: 40
+  # SimpleInterval has been moved to DEPRECATED section at bottom.
 
   CytobandInterval:
     description: >-
@@ -374,12 +353,22 @@ definitions:
       seq_expr:
         $ref: "#/definitions/SequenceExpression"
       count:
-        $ref: "#/definitions/AbsoluteCopyCount"
+        one_of:
+          - $ref: "#/definitions/Numeric"
+          - $ref: "#/definitions/Range"
     example:
       type: RepeatedSequenceExpression
-      copies:
-        min: 40
-        max: 60
+      seq_expr:
+        type: LiteralSequenceExpression
+        sequence: CAG
+      count:
+        type: Range
+        min:
+          type: SimpleNumeric
+          value: 15
+        max:
+          type: SimpleNumeric
+          value: 20
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Feature
@@ -410,52 +399,56 @@ definitions:
         $ref: "#/definitions/CURIE"
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # Quantity
+  # Numerics, Comparators, and Ranges
 
-  Quantity:
+  Numeric:
     description: >-
-      A value representing a multitude or magnitude.
+      Lorem ipsum
     oneOf:
-      - $ref: "#/definitions/AbsoluteCopyCount"
+      - $ref: "#/definitions/SimpleNumeric"
+      - $ref: "#/definitions/ComparatorNumeric"
     discriminator:
       propertyName: type
 
-  AbsoluteCopyCount:
-    description: >-
-      An integer count of copies. Counts are bounded ranges denoted by minimum
-      and maximum possible values. Absolute copy number counts may not be smaller
-      than zero.
-    additionalProperties: false
+  SimpleNumeric:
     type: object
+    additionalProperties: false
     properties:
       type:
         type: string
-        enum: ["AbsoluteCopyCount"]
-        default: "AbsoluteCopyCount"
-      min:
-        type: ["integer"]
-        minimum: 0
-      max:
-        type: ["integer"]
-        minimum: 0
-    # TODO: Remove or fix
-    # This is broken for Reece with vrs-python. Tested? 
-    # allOf:
-    #   # At least one of min or max not null
-    #   - if:
-    #       properties:
-    #          min:
-    #            type: null
-    #          max:
-    #            type: null
-    #     then:
-    #       false
-    #   # min < max cannot be validated by JSON schema
+        enum: [ "SimpleNumeric" ]
+        default: "SimpleNumeric"
+      value:
+        type: [ number, integer ]
 
-    example:
-      type: "AbsoluteCopyCount"
-      min: 5
-      max: 10
+  ComparatorNumeric:
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [ "ComparatorNumeric" ]
+        default: "ComparatorNumeric"
+      value:
+        type: [ number, integer ]
+      comparator:
+        type: string
+        enum: [ "<", ">" ]
+
+  Range:
+    description: >-
+      An inclusive range of Numeric values.
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [ "Range" ]
+        default: "Range"
+      min:
+        $ref: "#/definitions/SimpleNumeric"
+      max:
+        $ref: "#/definitions/SimpleNumeric"
 
   # =============================================================================
   # BASIC TYPES (STRUCTURES)
@@ -500,7 +493,6 @@ definitions:
       prefixes to make these objects locatable.
 
       Using internal ids in public messages is strongly discouraged.
-
     type: string
     pattern: '^\w[^:]*:.+$'
     example: "ensembl:ENSG00000139618"
@@ -538,3 +530,34 @@ definitions:
     example:
       type: SequenceState
       sequence: C
+
+  SimpleInterval:
+    deprecated: true
+    description: >-
+      DEPRECATED: A SimpleInterval represents a span of sequence. Positions are
+      always represented by contiguous spans using interbase
+      coordinates.
+
+      This definition of SequenceInterval is intended to be compatible with that
+      in Sequence Ontology
+      ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)),
+      with the exception that the GA4GH VRS SequenceInterval may be
+      zero-width. The SO definition is for an "extent greater than
+      zero".
+
+      This class is deprecated. Use NumericInterval instead.
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        enum: ["SimpleInterval"]
+        default: "SimpleInterval"
+      start:
+        type: ["integer"]
+      end:
+        type: ["integer"]
+    example:
+      type: SimpleInterval
+      start: 11
+      end: 22
