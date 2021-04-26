@@ -232,6 +232,52 @@
                   }
                ]
             }
+         },
+         "if": {
+            "properties": {
+               "copies": {
+                  "$ref": "#/definitions/Numeric"
+               }
+            }
+         },
+         "then": {
+            "properties": {
+               "copies": {
+                  "properties": {
+                     "value": {
+                        "type": "integer"
+                     },
+                     "comparator": {
+                        "enum": [
+                           "<=",
+                           ">="
+                        ]
+                     }
+                  }
+               }
+            }
+         },
+         "else": {
+            "properties": {
+               "copies": {
+                  "properties": {
+                     "min": {
+                        "properties": {
+                           "value": {
+                              "type": "integer"
+                           }
+                        }
+                     },
+                     "max": {
+                        "properties": {
+                           "value": {
+                              "type": "integer"
+                           }
+                        }
+                     }
+                  }
+               }
+            }
          }
       },
       "Location": {
@@ -344,7 +390,99 @@
                   }
                ]
             }
-         }
+         },
+         "allOf": [
+            {
+               "if": {
+                  "properties": {
+                     "start": {
+                        "$ref": "#/definitions/Numeric"
+                     }
+                  }
+               },
+               "then": {
+                  "properties": {
+                     "start": {
+                        "properties": {
+                           "value": {
+                              "type": "integer"
+                           },
+                           "comparator": {
+                              "enum": [
+                                 "<",
+                                 ">"
+                              ]
+                           }
+                        }
+                     }
+                  }
+               },
+               "else": {
+                  "properties": {
+                     "start": {
+                        "properties": {
+                           "min": {
+                              "properties": {
+                                 "value": {
+                                    "type": "integer"
+                                 }
+                              }
+                           },
+                           "max": {
+                              "properties": {
+                                 "value": {
+                                    "type": "integer"
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            {
+               "if": {
+                  "properties": {
+                     "end": {
+                        "$ref": "#/definitions/Numeric"
+                     }
+                  }
+               },
+               "then": {
+                  "properties": {
+                     "end": {
+                        "properties": {
+                           "value": {
+                              "type": "integer"
+                           }
+                        }
+                     }
+                  }
+               },
+               "else": {
+                  "properties": {
+                     "end": {
+                        "properties": {
+                           "min": {
+                              "properties": {
+                                 "value": {
+                                    "type": "integer"
+                                 }
+                              }
+                           },
+                           "max": {
+                              "properties": {
+                                 "value": {
+                                    "type": "integer"
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         ]
       },
       "CytobandInterval": {
          "description": "A contiguous region specified by chromosomal bands features.",
@@ -521,10 +659,7 @@
                "default": "SimpleNumeric"
             },
             "value": {
-               "type": [
-                  "number",
-                  "integer"
-               ]
+               "type": "number"
             }
          }
       },
@@ -540,16 +675,15 @@
                "default": "ComparatorNumeric"
             },
             "value": {
-               "type": [
-                  "number",
-                  "integer"
-               ]
+               "type": "number"
             },
             "comparator": {
                "type": "string",
                "enum": [
                   "<",
-                  ">"
+                  ">",
+                  "<=",
+                  ">="
                ]
             }
          }

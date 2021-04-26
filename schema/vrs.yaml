@@ -190,6 +190,31 @@ definitions:
         oneOf:
           - $ref: "#/definitions/Range"
           - $ref: "#/definitions/Numeric"
+    # Require that Numerics (alone or in Ranges) are integers in CopyNumber
+    if:
+      properties:
+        copies:
+          $ref: '#/definitions/Numeric'
+    then:
+      properties:
+        copies:
+          properties:
+            value:
+              type: integer
+            comparator:
+              enum: [ "<=", ">=" ]
+    else:
+      properties:
+        copies:
+          properties:
+            min:
+              properties:
+                value:
+                  type: integer
+            max:
+              properties:
+                value:
+                  type: integer
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations
@@ -282,6 +307,54 @@ definitions:
         oneOf:
           - $ref: "#/definitions/Numeric"
           - $ref: "#/definitions/Range"
+    # Require that Numerics (alone or in Ranges) are integers in NumericInterval
+    allOf:
+      - if:
+          properties:
+            start:
+              $ref: '#/definitions/Numeric'
+        then:
+          properties:
+            start:
+              properties:
+                value:
+                  type: integer
+                comparator:
+                  enum: [ "<", ">" ]
+        else:
+          properties:
+            start:
+              properties:
+                min:
+                  properties:
+                    value:
+                      type: integer
+                max:
+                  properties:
+                    value:
+                      type: integer
+      - if:
+          properties:
+            end:
+              $ref: '#/definitions/Numeric'
+        then:
+          properties:
+            end:
+              properties:
+                value:
+                  type: integer
+        else:
+          properties:
+            end:
+              properties:
+                min:
+                  properties:
+                    value:
+                      type: integer
+                max:
+                  properties:
+                    value:
+                      type: integer
 
   # SimpleInterval has been moved to DEPRECATED section at bottom.
 
@@ -419,7 +492,7 @@ definitions:
         enum: [ "SimpleNumeric" ]
         default: "SimpleNumeric"
       value:
-        type: [ number, integer ]
+        type: number
 
   ComparatorNumeric:
     type: object
@@ -430,10 +503,10 @@ definitions:
         enum: [ "ComparatorNumeric" ]
         default: "ComparatorNumeric"
       value:
-        type: [ number, integer ]
+        type: number
       comparator:
         type: string
-        enum: [ "<", ">" ]
+        enum: [ "<", ">", "<=", ">=" ]
 
   Range:
     description: >-
