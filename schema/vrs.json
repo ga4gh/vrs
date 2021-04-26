@@ -215,7 +215,7 @@
                      "$ref": "#/definitions/Feature"
                   },
                   {
-                     "$ref": "#/definitions/Location"
+                     "$ref": "#/definitions/SequenceExpression"
                   },
                   {
                      "$ref": "#/definitions/CURIE"
