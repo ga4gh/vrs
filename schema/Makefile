@@ -4,11 +4,15 @@
 
 YAMLS:=ga4gh.yaml vrs.yaml
 JSONS:=${YAMLS:.yaml=.json}
+PROTOS:=vrs.proto
 
-all: ${JSONS}
+all: ${JSONS} ${PROTOS}
 
 %.json: %.yaml
 	./y2j <$< >$@
+
+%.proto: %.yaml
+	./y2p <$< >$@
 
 ## # npm install -g json-dereference-cli
 ## %.json: %.yaml
