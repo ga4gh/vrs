@@ -1,0 +1,175 @@
+#!/usr/bin/env python
+
+import yaml
+import re
+import subprocess
+
+
+def _get_git_tag():
+    res = subprocess.run("git describe --tags --exact-match".split(), capture_output=True)
+    if res.stderr.decode().startswith("fatal"):
+        # if no exact tag, then get branch
+        res = subprocess.run("git rev-parse --abbrev-ref HEAD".split(), capture_output=True)
+    tag = res.stdout.decode().strip()
+    return tag
+
+
+def _parse_release_as_version(rls):
+    m = re.match("^(\d+\.\d+)", rls)
+    if m:
+        return m.group(1)
+    return rls
+
+
+def snake_case(camel_case):
+    return re.sub(r'(?<![A-Z])(?<!^)(?=[A-Z])', '_', camel_case).lower()
+
+
+def indent(text, level):
+    return '   ' * level + text
+
+
+def simplify_reference(reference_string):
+    try:
+        return reference_string['$ref'].split('/')[-1]
+    except TypeError:
+        return reference_string
+
+
+def list_one_of(one_of_list):
+    return [simplify_reference(ref) for ref in one_of_list]
+
+
+class ProtoMessage:
+    basic_types = {
+        'string': 'string',
+        'number': 'double',
+        'integer': 'uint64',
+        'bool': 'bool'
+    }
+
+    def __init__(self, obj, abstract_map, deprecated_types, level=1):
+        self.obj = obj
+        self.props = obj['properties']
+        self.abstract_map = abstract_map
+        self.deprecated_types = deprecated_types
+        self.message_type = self.props["type"]["default"]
+        self.attributes = [f'message {self.message_type} {{']
+        self.attribute_index = 1
+        for name, value in obj['properties'].items():
+            self._create_proto_attribute(name, value, level)
+        self.attributes.append('}')
+
+    def emit(self):
+        for attribute in self.attributes:
+            print(attribute)
+
+    def _register_attribute(self, name, t, level):
+        if t in self.basic_types:
+            out = f'{self.basic_types[t]} {name} = {self.attribute_index};'
+        else:
+            out = f'{t} {name} = {self.attribute_index};'
+        self.attributes.append(indent(out, level))
+        self.attribute_index += 1
+
+    def _register_attribute_set(self, name, collected_properties, level):
+        self.attributes.append(indent(f'oneOf {name} {{', level))
+        for cp_name, cp_type in sorted(collected_properties):
+            self._register_attribute(cp_name, cp_type, level + 1)
+        self.attributes.append(indent('}', level))
+
+    def _create_proto_attribute(self, name, value, level):
+        if name == 'type':
+            return
+        if 'oneOf' in value:
+            # TODO: oneOf string
+            collected_properties = set()
+            for type_ref in list_one_of(value['oneOf']):
+                if type_ref in self.abstract_map:
+                    collected_properties.update(self._collect_properties(type_ref))
+                elif type_ref not in self.deprecated_types:
+                    collected_properties.add((snake_case(type_ref), type_ref))
+            self._register_attribute_set(name, collected_properties, level)
+            return
+        if '$ref' in value:
+            t = simplify_reference(value)
+        else:
+            t = value['type']
+
+        if t in self.basic_types:
+            self._register_attribute(name, t, level)
+        elif t in self.abstract_map:
+            collected_properties = self._collect_properties(t)
+            if len(collected_properties) == 1:
+                self._register_attribute(name, collected_properties.pop()[1], level)
+            else:
+                self._register_attribute_set(name, collected_properties, level)
+        elif t == 'array':
+            # Currently arrays allow for an object or a CURIE, handled here.
+            # A generalized strategy may need to be defined in the future for other array structures.
+            self._register_attribute('allele', 'Allele', level)
+        else:
+            raise ValueError
+
+    def _collect_properties(self, abstract_type):
+        mapped_types = self.abstract_map[abstract_type]
+        out = set()
+        for mapped_type in mapped_types:
+            if mapped_type in self.deprecated_types:
+                continue
+            if mapped_type in self.abstract_map:
+                out.union(self._collect_properties(mapped_type))
+            elif mapped_type in self.basic_types:
+                out.add((snake_case(abstract_type), self.basic_types[mapped_type]))
+            else:
+                out.add((snake_case(mapped_type), mapped_type))
+        return out
+
+
+def main(version=None):
+    with open('vrs.yaml', 'r') as vrs_yaml:
+        obj_store = yaml.load(vrs_yaml, Loader=yaml.SafeLoader)
+
+    abstract_map = dict()
+    deprecated_types = list()
+    for x, y in obj_store['definitions'].items():
+        if 'properties' in y:
+            if y.get('deprecated', False) is True:
+                deprecated_types.append(x)
+            continue
+        try:
+            map_terms = list_one_of(y['oneOf'])
+            abstract_map[x] = map_terms
+        except KeyError:
+            abstract_map[x] = [y['type']]
+
+    for x, y in obj_store['definitions'].items():
+        if 'properties' not in y:
+            continue
+        if x in deprecated_types:
+            continue
+
+        if version is None:
+            release = _get_git_tag()
+            version = _parse_release_as_version(release)
+
+        proto_header = f"""
+        syntax = "proto3";
+
+        package org.ga4gh.vrs.v{version};
+        
+        import "google/protobuf/timestamp.proto";
+        
+        option java_multiple_files = true;
+        option java_package = "org.ga4gh.vrs.v{version}";
+        
+        """
+
+        print(proto_header)
+        m = ProtoMessage(y, abstract_map, deprecated_types)
+        m.emit()
+        print()
+
+
+if __name__ == '__main__':
+    main(version=1.2)
