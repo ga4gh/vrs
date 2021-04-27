@@ -627,9 +627,9 @@ definitions:
         enum: ["SimpleInterval"]
         default: "SimpleInterval"
       start:
-        type: ["integer"]
+        type: integer
       end:
-        type: ["integer"]
+        type: integer
     example:
       type: SimpleInterval
       start: 11
