@@ -23,6 +23,7 @@ identifiers:
     Allele: VA
     VariationSet: VS
     Text: VT
+
     # Genotype: VG
     Haplotype: VH
     CopyNumber: VCN
