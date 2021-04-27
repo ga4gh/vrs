@@ -1,1 +1,2 @@
 ipython >= 7.5.0
+inflector >= 3.0.1

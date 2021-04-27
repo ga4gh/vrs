@@ -3,6 +3,9 @@
 import yaml
 import re
 import subprocess
+from inflector.languages.english import English
+
+INFLECTOR = English()
 
 
 def _get_git_tag():
@@ -48,17 +51,17 @@ class ProtoMessage:
         'bool': 'bool'
     }
 
-    def __init__(self, obj, abstract_map, deprecated_types, level=1):
+    def __init__(self, obj, abstract_map, deprecated_types, level=0):
         self.obj = obj
         self.props = obj['properties']
         self.abstract_map = abstract_map
         self.deprecated_types = deprecated_types
         self.message_type = self.props["type"]["default"]
-        self.attributes = [f'message {self.message_type} {{']
+        self.attributes = [indent(f'message {self.message_type} {{', level)]
         self.attribute_index = 1
         for name, value in obj['properties'].items():
-            self._create_proto_attribute(name, value, level)
-        self.attributes.append('}')
+            self._create_proto_attribute(name, value, level + 1)
+        self.attributes.append(indent('}', level))
 
     def emit(self):
         for attribute in self.attributes:
@@ -105,11 +108,29 @@ class ProtoMessage:
             else:
                 self._register_attribute_set(name, collected_properties, level)
         elif t == 'array':
-            # Currently arrays allow for an object or a CURIE, handled here.
-            # A generalized strategy may need to be defined in the future for other array structures.
-            self._register_attribute('allele', 'Allele', level)
+            # Currently arrays all rely on repeated oneOf structures, not
+            # supported by protobuf. This section handles that challenge, but
+            # A generalized strategy may need to be defined in the future for
+            # other array structures.
+            assert len(value['items']['oneOf']) > 1
+            nested_message_properties = {
+                'type': {'default': INFLECTOR.titleize(INFLECTOR.singularize(name))},
+                'value': value['items']
+            }
+            nested_message_obj = {
+                'description': 'An auto-generated nested message.',
+                'properties': nested_message_properties
+            }
+            nested_message = ProtoMessage(
+                nested_message_obj, self.abstract_map,
+                self.deprecated_types, level
+            )
+            self.attributes.extend(nested_message.attributes)
+            idx = len(self.attributes)
+            self._register_attribute(name, f'repeated {nested_message.message_type}', level)
+            return
         else:
-            raise ValueError
+            self._register_attribute(name, t, level)
 
     def _collect_properties(self, abstract_type):
         mapped_types = self.abstract_map[abstract_type]
@@ -118,7 +139,7 @@ class ProtoMessage:
             if mapped_type in self.deprecated_types:
                 continue
             if mapped_type in self.abstract_map:
-                out.union(self._collect_properties(mapped_type))
+                out.update(self._collect_properties(mapped_type))
             elif mapped_type in self.basic_types:
                 out.add((snake_case(abstract_type), self.basic_types[mapped_type]))
             else:
@@ -143,6 +164,20 @@ def main(version=None):
         except KeyError:
             abstract_map[x] = [y['type']]
 
+    proto_header = \
+f"""syntax = "proto3";
+
+package org.ga4gh.vrs.v{version};
+
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option java_package = "org.ga4gh.vrs.v{version}";
+
+"""
+
+    print(proto_header)
+
     for x, y in obj_store['definitions'].items():
         if 'properties' not in y:
             continue
@@ -153,19 +188,6 @@ def main(version=None):
             release = _get_git_tag()
             version = _parse_release_as_version(release)
 
-        proto_header = f"""
-        syntax = "proto3";
-
-        package org.ga4gh.vrs.v{version};
-        
-        import "google/protobuf/timestamp.proto";
-        
-        option java_multiple_files = true;
-        option java_package = "org.ga4gh.vrs.v{version}";
-        
-        """
-
-        print(proto_header)
         m = ProtoMessage(y, abstract_map, deprecated_types)
         m.emit()
         print()
