@@ -576,7 +576,7 @@
                "$ref": "#/definitions/SequenceExpression"
             },
             "count": {
-               "one_of": [
+               "oneOf": [
                   {
                      "$ref": "#/definitions/Numeric"
                   },

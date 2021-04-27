@@ -426,7 +426,7 @@ definitions:
       seq_expr:
         $ref: "#/definitions/SequenceExpression"
       count:
-        one_of:
+        oneOf:
           - $ref: "#/definitions/Numeric"
           - $ref: "#/definitions/Range"
     example:
