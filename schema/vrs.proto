@@ -1,0 +1,144 @@
+syntax = "proto3";
+
+package org.ga4gh.vrs.v1_2;
+
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option java_package = "org.ga4gh.vrs.v1_2";
+
+
+message Allele {
+   string _id = 1;
+   oneof location {
+      ChromosomeLocation chromosome_location = 2;
+      string curie = 3;
+      SequenceLocation sequence_location = 4;
+   }
+   oneof state {
+      DerivedSequenceExpression derived_sequence_expression = 5;
+      LiteralSequenceExpression literal_sequence_expression = 6;
+      RepeatedSequenceExpression repeated_sequence_expression = 7;
+   }
+}
+
+message Haplotype {
+   string _id = 1;
+   message Member {
+      oneof value {
+         Allele allele = 1;
+         string curie = 2;
+      }
+   }
+   repeated Member members = 2;
+}
+
+message Text {
+   string _id = 1;
+   string definition = 2;
+}
+
+message VariationSet {
+   string _id = 1;
+   message Member {
+      oneof value {
+         Allele allele = 1;
+         CopyNumber copy_number = 2;
+         string curie = 3;
+         Haplotype haplotype = 4;
+         Text text = 5;
+         VariationSet variation_set = 6;
+      }
+   }
+   repeated Member members = 2;
+}
+
+message CopyNumber {
+   string _id = 1;
+   oneof subject {
+      Allele allele = 2;
+      string curie = 3;
+      DerivedSequenceExpression derived_sequence_expression = 4;
+      Gene gene = 5;
+      Haplotype haplotype = 6;
+      LiteralSequenceExpression literal_sequence_expression = 7;
+      RepeatedSequenceExpression repeated_sequence_expression = 8;
+   }
+   oneof copies {
+      ComparatorNumeric comparator_numeric = 9;
+      Range range = 10;
+      SimpleNumeric simple_numeric = 11;
+   }
+}
+
+message ChromosomeLocation {
+   string _id = 1;
+   string species_id = 2;
+   string chr = 3;
+   CytobandInterval interval = 4;
+}
+
+message SequenceLocation {
+   string _id = 1;
+   string sequence_id = 2;
+   NumericInterval interval = 3;
+}
+
+message NumericInterval {
+   oneof start {
+      ComparatorNumeric start_comparator_numeric = 1;
+      Range start_range = 2;
+      SimpleNumeric start_simple_numeric = 3;
+   }
+   oneof end {
+      ComparatorNumeric end_comparator_numeric = 4;
+      Range end_range = 5;
+      SimpleNumeric end_simple_numeric = 6;
+   }
+}
+
+message CytobandInterval {
+   string start = 1;
+   string end = 2;
+}
+
+message LiteralSequenceExpression {
+   string sequence = 1;
+}
+
+message DerivedSequenceExpression {
+   SequenceLocation location = 1;
+   bool transformation = 2;
+}
+
+message RepeatedSequenceExpression {
+   oneof seq_expr {
+      DerivedSequenceExpression derived_sequence_expression = 1;
+      LiteralSequenceExpression literal_sequence_expression = 2;
+      RepeatedSequenceExpression repeated_sequence_expression = 3;
+   }
+   oneof count {
+      ComparatorNumeric comparator_numeric = 4;
+      Range range = 5;
+      SimpleNumeric simple_numeric = 6;
+   }
+}
+
+message Gene {
+   string gene_id = 1;
+}
+
+message SimpleNumeric {
+   double value = 1;
+}
+
+message ComparatorNumeric {
+   double value = 1;
+   string comparator = 2;
+}
+
+message Range {
+   SimpleNumeric min = 1;
+   SimpleNumeric max = 2;
+}
+
