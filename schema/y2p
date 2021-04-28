@@ -88,9 +88,6 @@ class ProtoMessage:
                     new = f'{spaces}{att_type} {parent}_{att_name}{assignment}'
                     self.attributes[i] = new
 
-
-
-
     def emit(self):
         for attribute in self.attributes:
             print(attribute)
