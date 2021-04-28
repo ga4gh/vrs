@@ -21,7 +21,7 @@ def _get_git_tag():
 def _parse_release_as_version(rls):
     m = re.match("^(\d+\.\d+)", rls)
     if m:
-        return m.group(1)
+        return m.group(1).replace('.', '_')
     return rls
 
 
@@ -86,7 +86,6 @@ class ProtoMessage:
         if name == 'type':
             return
         if 'oneOf' in value:
-            # TODO: oneOf string
             collected_properties = set()
             for type_ref in list_one_of(value['oneOf']):
                 if type_ref in self.abstract_map:
@@ -127,9 +126,7 @@ class ProtoMessage:
                 self.deprecated_types, level
             )
             self.attributes.extend(nested_message.attributes)
-            idx = len(self.attributes)
             self._register_attribute(name, f'repeated {nested_message.message_type}', level)
-            return
         else:
             self._register_attribute(name, t, level)
 
@@ -194,4 +191,4 @@ option java_package = "org.ga4gh.vrs.v{version}";
 
 
 if __name__ == '__main__':
-    main(version=1.2)
+    main(version='1_2')
