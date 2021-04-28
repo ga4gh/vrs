@@ -476,7 +476,7 @@ definitions:
 
   Numeric:
     description: >-
-      Lorem ipsum
+An abstract low-level datatype for representing a bounded or unbounded number.
     oneOf:
       - $ref: "#/definitions/SimpleNumeric"
       - $ref: "#/definitions/ComparatorNumeric"
@@ -484,6 +484,8 @@ definitions:
       propertyName: type
 
   SimpleNumeric:
+    description: >-
+        A simple number.
     type: object
     additionalProperties: false
     properties:
@@ -495,6 +497,8 @@ definitions:
         type: number
 
   ComparatorNumeric:
+    description: >-
+        "A number with an open bound indicated by comparator. The bound operator is interpreted as follows: '>' are all numbers greater than and excluding the value, '>=' are all numbers greater than and including the value, '<=' are all numbers less than and including the value, and '<' are all numbers less than and excluding the value."
     type: object
     additionalProperties: false
     properties:
@@ -510,7 +514,7 @@ definitions:
 
   Range:
     description: >-
-      An inclusive range of Numeric values.
+      An inclusive range of numbers.
     type: object
     additionalProperties: false
     properties:
