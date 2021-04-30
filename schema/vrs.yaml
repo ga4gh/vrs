@@ -400,10 +400,8 @@ definitions:
       max:
         type: integer
     anyOf:
-      - required:
-        [ "min" ]
-      - required:
-        [ "max" ]
+      - required: [ "min" ]
+      - required: [ "max" ]
 
 
   # =============================================================================
