@@ -87,6 +87,7 @@ definitions:
         oneOf:
           - $ref: "#/definitions/SequenceState" # DEPRECATED; remove in 2.0
           - $ref: "#/definitions/SequenceExpression"
+    required: [ "type", "location", "state" ]
 
   Haplotype:
     description: >-
@@ -108,6 +109,7 @@ definitions:
           oneOf:
             - $ref: "#/definitions/Allele"
             - $ref: "#/definitions/CURIE"
+    required: [ "type", "members" ]
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -132,6 +134,7 @@ definitions:
           An textual representation of variation intended to capture
           variation descriptions that cannot be parsed, but still
           treated as variation.
+    required: [ "type", "definition" ]
 
   VariationSet:
     description: >-
@@ -154,6 +157,7 @@ definitions:
           oneOf:
             - $ref: "#/definitions/CURIE"
             - $ref: "#/definitions/Variation"
+    required: [ "type", "members" ]
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -188,6 +192,7 @@ definitions:
           - $ref: "#/definitions/CURIE"
       copies:
         $ref: "#/definitions/Range"
+    required: [ "type", "subject", "copies" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations
@@ -221,6 +226,7 @@ definitions:
         type: string
       interval:
         $ref: "#/definitions/CytobandInterval"
+    required: [ "type", "species_id", "chr", "interval" ]
 
   SequenceLocation:
     additionalProperties: false
@@ -240,6 +246,7 @@ definitions:
         oneOf:
           - $ref: "#/definitions/SequenceInterval"
           - $ref: "#/definitions/SimpleInterval"
+    required: [ "type", "sequence_id", "interval" ]
 
 
   # =============================================================================
@@ -270,6 +277,7 @@ definitions:
         $ref: "#/definitions/Range"
       end:
         $ref: "#/definitions/Range"
+    required: [ "type", "start", "end" ]
 
   # SimpleInterval has been moved to DEPRECATED section at bottom.
 
@@ -291,6 +299,7 @@ definitions:
       type: CytobandInterval
       start: q22.2
       end: q22.3
+    required: [ "type", "start", "end" ]
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -316,6 +325,7 @@ definitions:
         default: "LiteralSequenceExpression"
       sequence:
         $ref: "#/definitions/Sequence"
+    required: [ "type", "sequence" ]
 
   DerivedSequenceExpression:
     type: object
@@ -329,6 +339,7 @@ definitions:
         $ref: "#/definitions/SequenceLocation"
       reverse_complement:
         type: boolean
+    required: [ "type", "location", "reverse_complement" ]
 
   RepeatedSequenceExpression:
     additionalProperties: false
@@ -351,6 +362,7 @@ definitions:
         type: Range
         min: 15
         max: 20
+    required: [ "type", "seq_expr", "count" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Feature
@@ -379,6 +391,7 @@ definitions:
         default: "Gene"
       gene_id:
         $ref: "#/definitions/CURIE"
+    required: [ "type", "gene_id" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Range
@@ -401,9 +414,9 @@ definitions:
         type: integer
     anyOf:
       - required:
-        [ "min" ]
+        [ "type", "min" ]
       - required:
-        [ "max" ]
+        [ "type", "max" ]
 
 
   # =============================================================================
@@ -486,6 +499,7 @@ definitions:
     example:
       type: SequenceState
       sequence: C
+    required: [ "type", "sequence" ]
 
   SimpleInterval:
     deprecated: true
@@ -510,3 +524,4 @@ definitions:
       type: SimpleInterval
       start: 11
       end: 22
+    required: [ "type", "start", "end" ]
