@@ -413,10 +413,8 @@ definitions:
       max:
         type: integer
     anyOf:
-      - required:
-        [ "type", "min" ]
-      - required:
-        [ "type", "max" ]
+      - required: [ "type", "min" ]
+      - required: [ "type", "max" ]
 
 
   # =============================================================================
