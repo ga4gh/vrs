@@ -223,60 +223,7 @@
                ]
             },
             "copies": {
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/Range"
-                  },
-                  {
-                     "$ref": "#/definitions/Numeric"
-                  }
-               ]
-            }
-         },
-         "if": {
-            "properties": {
-               "copies": {
-                  "$ref": "#/definitions/Numeric"
-               }
-            }
-         },
-         "then": {
-            "properties": {
-               "copies": {
-                  "properties": {
-                     "value": {
-                        "type": "integer"
-                     },
-                     "comparator": {
-                        "enum": [
-                           "<=",
-                           ">="
-                        ]
-                     }
-                  }
-               }
-            }
-         },
-         "else": {
-            "properties": {
-               "copies": {
-                  "properties": {
-                     "min": {
-                        "properties": {
-                           "value": {
-                              "type": "integer"
-                           }
-                        }
-                     },
-                     "max": {
-                        "properties": {
-                           "value": {
-                              "type": "integer"
-                           }
-                        }
-                     }
-                  }
-               }
+               "$ref": "#/definitions/Range"
             }
          }
       },
@@ -340,149 +287,36 @@
                "$ref": "#/definitions/CURIE"
             },
             "interval": {
-               "$ref": "#/definitions/SequenceInterval"
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/SequenceInterval"
+                  },
+                  {
+                     "$ref": "#/definitions/SimpleInterval"
+                  }
+               ]
             }
          }
       },
       "SequenceInterval": {
-         "description": "A SequenceInterval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".",
-         "oneOf": [
-            {
-               "$ref": "#/definitions/NumericInterval"
-            },
-            {
-               "$ref": "#/definitions/SimpleInterval"
-            }
-         ],
-         "discriminator": {
-            "propertyName": "type"
-         }
-      },
-      "NumericInterval": {
-         "description": "A NumericInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.",
+         "description": "A SequenceInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nSequenceInterval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".",
          "type": "object",
          "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
                "enum": [
-                  "NumericInterval"
+                  "SequenceInterval"
                ],
-               "default": "NumericInterval"
+               "default": "SequenceInterval"
             },
             "start": {
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/Numeric"
-                  },
-                  {
-                     "$ref": "#/definitions/Range"
-                  }
-               ]
+               "$ref": "#/definitions/Range"
             },
             "end": {
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/Numeric"
-                  },
-                  {
-                     "$ref": "#/definitions/Range"
-                  }
-               ]
+               "$ref": "#/definitions/Range"
             }
-         },
-         "allOf": [
-            {
-               "if": {
-                  "properties": {
-                     "start": {
-                        "$ref": "#/definitions/Numeric"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "start": {
-                        "properties": {
-                           "value": {
-                              "type": "integer"
-                           },
-                           "comparator": {
-                              "enum": [
-                                 "<",
-                                 ">"
-                              ]
-                           }
-                        }
-                     }
-                  }
-               },
-               "else": {
-                  "properties": {
-                     "start": {
-                        "properties": {
-                           "min": {
-                              "properties": {
-                                 "value": {
-                                    "type": "integer"
-                                 }
-                              }
-                           },
-                           "max": {
-                              "properties": {
-                                 "value": {
-                                    "type": "integer"
-                                 }
-                              }
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "end": {
-                        "$ref": "#/definitions/Numeric"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "end": {
-                        "properties": {
-                           "value": {
-                              "type": "integer"
-                           }
-                        }
-                     }
-                  }
-               },
-               "else": {
-                  "properties": {
-                     "end": {
-                        "properties": {
-                           "min": {
-                              "properties": {
-                                 "value": {
-                                    "type": "integer"
-                                 }
-                              }
-                           },
-                           "max": {
-                              "properties": {
-                                 "value": {
-                                    "type": "integer"
-                                 }
-                              }
-                           }
-                        }
-                     }
-                  }
-               }
-            }
-         ]
+         }
       },
       "CytobandInterval": {
          "description": "A contiguous region specified by chromosomal bands features.",
@@ -576,14 +410,7 @@
                "$ref": "#/definitions/SequenceExpression"
             },
             "count": {
-               "one_of": [
-                  {
-                     "$ref": "#/definitions/Numeric"
-                  },
-                  {
-                     "$ref": "#/definitions/Range"
-                  }
-               ]
+               "$ref": "#/definitions/Range"
             }
          },
          "example": {
@@ -594,14 +421,8 @@
             },
             "count": {
                "type": "Range",
-               "min": {
-                  "type": "SimpleNumeric",
-                  "value": 15
-               },
-               "max": {
-                  "type": "SimpleNumeric",
-                  "value": 20
-               }
+               "min": 15,
+               "max": 20
             }
          }
       },
@@ -633,63 +454,8 @@
             }
          }
       },
-      "Numeric": {
-         "description": "Lorem ipsum",
-         "oneOf": [
-            {
-               "$ref": "#/definitions/SimpleNumeric"
-            },
-            {
-               "$ref": "#/definitions/ComparatorNumeric"
-            }
-         ],
-         "discriminator": {
-            "propertyName": "type"
-         }
-      },
-      "SimpleNumeric": {
-         "type": "object",
-         "additionalProperties": false,
-         "properties": {
-            "type": {
-               "type": "string",
-               "enum": [
-                  "SimpleNumeric"
-               ],
-               "default": "SimpleNumeric"
-            },
-            "value": {
-               "type": "number"
-            }
-         }
-      },
-      "ComparatorNumeric": {
-         "type": "object",
-         "additionalProperties": false,
-         "properties": {
-            "type": {
-               "type": "string",
-               "enum": [
-                  "ComparatorNumeric"
-               ],
-               "default": "ComparatorNumeric"
-            },
-            "value": {
-               "type": "number"
-            },
-            "comparator": {
-               "type": "string",
-               "enum": [
-                  "<",
-                  ">",
-                  "<=",
-                  ">="
-               ]
-            }
-         }
-      },
       "Range": {
-         "description": "An inclusive range of Numeric values.",
+         "description": "An inclusive range of integers. A range may be unbounded by omitting either min or max values. Fully unbounded ranges are not permitted (one of min or max MUST be specified).",
          "type": "object",
          "additionalProperties": false,
          "properties": {
@@ -701,12 +467,24 @@
                "default": "Range"
             },
             "min": {
-               "$ref": "#/definitions/SimpleNumeric"
+               "type": "integer"
             },
             "max": {
-               "$ref": "#/definitions/SimpleNumeric"
+               "type": "integer"
             }
-         }
+         },
+         "anyOf": [
+            {
+               "required": [
+                  "min"
+               ]
+            },
+            {
+               "required": [
+                  "max"
+               ]
+            }
+         ]
       },
       "Sequence": {
          "additionalProperties": false,
@@ -752,7 +530,7 @@
       },
       "SimpleInterval": {
          "deprecated": true,
-         "description": "DEPRECATED: A SimpleInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of SequenceInterval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".\nThis class is deprecated. Use NumericInterval instead.",
+         "description": "DEPRECATED: A SimpleInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nThis class is deprecated. Use SequenceInterval instead.",
          "additionalProperties": false,
          "type": "object",
          "properties": {
@@ -764,14 +542,10 @@
                "default": "SimpleInterval"
             },
             "start": {
-               "type": [
-                  "integer"
-               ]
+               "type": "integer"
             },
             "end": {
-               "type": [
-                  "integer"
-               ]
+               "type": "integer"
             }
          },
          "example": {
