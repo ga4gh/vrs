@@ -327,7 +327,7 @@ definitions:
         default: "DerivedSequenceExpression"
       location:
         $ref: "#/definitions/SequenceLocation"
-      transformation:
+      reverse_complement:
         type: boolean
 
   RepeatedSequenceExpression:
