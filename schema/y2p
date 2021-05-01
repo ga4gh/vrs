@@ -36,7 +36,7 @@ def indent(text, level):
 
 def simplify_reference(reference_string):
     try:
-        return reference_string['$ref'].split('/')[-1]
+        return reference_string.split('/')[-1]
     except TypeError:
         return reference_string
 
@@ -45,23 +45,128 @@ def list_one_of(one_of_list):
     return [simplify_reference(ref) for ref in one_of_list]
 
 
+class ProtoDoc:
+
+    def __init__(self, definitions, version):
+        self.header = f"""syntax = "proto3";
+
+        package org.ga4gh.vrs.v{version};
+
+        import "google/protobuf/timestamp.proto";
+
+        option java_multiple_files = true;
+        option java_package = "org.ga4gh.vrs.v{version}";
+
+        """
+        self.definitions = definitions
+        self.messages = dict()
+        self.dependencies = dict()
+        self._map_dependencies()
+        self._build_messages()
+
+    def _register_dependency(self, arg, message):
+        if '$ref' in arg:
+            x = simplify_reference(arg['$ref'])
+            self.dependencies[message].add(x)
+        for conditional in ['oneOf', 'anyOf', 'allOf']:
+            if conditional in arg:
+                for sub_arg in arg[conditional]:
+                    if '$ref' in sub_arg:
+                        x = simplify_reference(sub_arg['$ref'])
+                        self.dependencies[message].add(x)
+        if arg.get('type') == 'array' and arg.get('items'):
+            self._register_dependency(arg['items'], message)
+
+    def _map_dependencies(self):
+        for message, message_attributes in self.definitions.items():
+            self.dependencies[message] = set()
+            self._register_dependency(message_attributes, message)
+            if 'properties' in message_attributes:
+                for _, property_attributes in message_attributes['properties'].items():
+                    self._register_dependency(property_attributes, message)
+
+    def _build_message(self, message):
+        for dependency in self.dependencies[message]:
+            if dependency in self.messages:
+                continue
+            else:
+                self._build_message(dependency)
+        self.messages[message] = ProtoMessage(message, self)
+
+    def _build_messages(self):
+        for message in self.definitions:
+            self._build_message(message)
+
+
 class ProtoMessage:
-    basic_types = {
+
+    property_basic_types = {
         'string': 'string',
         'number': 'double',
         'integer': 'uint64',
         'boolean': 'bool'
     }
 
-    def __init__(self, obj, abstract_map, deprecated_types, level=0):
-        self.obj = obj
-        self.props = obj['properties']
+    def __init__(self, message_name, document):
+        self.message_name = message_name
+        self.document = document
+        self.js_definition = document.definitions[message_name]
+        self.deprecated = False
+        self.properties = self.js_definition.get('properties', dict())
+        t = self.js_definition.get('type', None)
+        self.simple = (t == 'string')
+        self.abstract = not (bool(t) or self.simple)
+        self.nested = list()
+        self.fields = list()
+        self._build_fields()
+
+    def _dereference(self, field_name, reference, n):
+        k = simplify_reference(reference)
+        m = self.document.messages[k]
+        if m.simple:
+            field = ProtoField(field_name, m.js_definition['type'], n, deprecated=m.deprecated)
+        elif not m.abstract:
+            field = ProtoField(field_name, m.message_name, n, deprecated=m.deprecated)
+        else:
+            raise NotImplementedError
+        return field
+
+    def _build_fields(self):
+        for prop, prop_attributes in self.properties.items():
+            if prop == 'type':
+                continue
+            n = prop_attributes.get('protobuf_number')
+            if '$ref' in prop_attributes:
+                field = self._dereference(prop, prop_attributes['$ref'], n)
+            elif prop_attributes.get('type') in self.property_basic_types:
+                proto_type = self.property_basic_types[prop_attributes['type']]
+                field = ProtoField(prop, proto_type, n)
+            else:
+                raise NotImplementedError
+            self.fields.append(field)
+
+
+class ProtoField:
+
+    def __init__(self, name, field_type, number, nested=None, deprecated=False):
+        self.name = name
+        self.field_type = field_type
+        self.number = number
+        self.nested = nested
+        self.deprecated = deprecated
+
+
+class ProtoMessageOld:
+
+    def __init__(self, message_obj, abstract_map, deprecated_types, document, level=0):
+        self.obj = message_obj
+        self.props = message_obj['properties']
         self.abstract_map = abstract_map
         self.deprecated_types = deprecated_types
         self.message_type = self.props["type"]["default"]
         self.attributes = [indent(f'message {self.message_type} {{', level)]
         self.attribute_index = 1
-        for name, value in obj['properties'].items():
+        for name, value in message_obj['properties'].items():
             self._create_proto_attribute(name, value, level + 1)
         self._uniquify_attributes()
         self.attributes.append(indent('}', level))
@@ -93,8 +198,8 @@ class ProtoMessage:
             print(attribute)
 
     def _register_attribute(self, name, t, level):
-        if t in self.basic_types:
-            out = f'{self.basic_types[t]} {name} = {self.attribute_index};'
+        if t in self.property_basic_types:
+            out = f'{self.property_basic_types[t]} {name} = {self.attribute_index};'
         else:
             out = f'{t} {name} = {self.attribute_index};'
         self.attributes.append(indent(out, level))
@@ -123,7 +228,7 @@ class ProtoMessage:
         else:
             t = value['type']
 
-        if t in self.basic_types:
+        if t in self.property_basic_types:
             self._register_attribute(name, t, level)
         elif t in self.abstract_map:
             collected_properties = self._collect_properties(t)
@@ -145,7 +250,7 @@ class ProtoMessage:
                 'description': 'An auto-generated nested message.',
                 'properties': nested_message_properties
             }
-            nested_message = ProtoMessage(
+            nested_message = ProtoMessageOld(
                 nested_message_obj, self.abstract_map,
                 self.deprecated_types, level
             )
@@ -162,57 +267,17 @@ class ProtoMessage:
                 continue
             if mapped_type in self.abstract_map:
                 out.update(self._collect_properties(mapped_type))
-            elif mapped_type in self.basic_types:
-                out.add((snake_case(abstract_type), self.basic_types[mapped_type]))
+            elif mapped_type in self.property_basic_types:
+                out.add((snake_case(abstract_type), self.property_basic_types[mapped_type]))
             else:
                 out.add((snake_case(mapped_type), mapped_type))
         return out
 
 
-def main(version=None):
-    obj_store = yaml.load(sys.stdin, Loader=yaml.SafeLoader)
-
-    abstract_map = dict()
-    deprecated_types = list()
-    for x, y in obj_store['definitions'].items():
-        if 'properties' in y:
-            if y.get('deprecated', False) is True:
-                deprecated_types.append(x)
-            continue
-        try:
-            map_terms = list_one_of(y['oneOf'])
-            abstract_map[x] = map_terms
-        except KeyError:
-            abstract_map[x] = [y['type']]
-
-    proto_header = \
-f"""syntax = "proto3";
-
-package org.ga4gh.vrs.v{version};
-
-import "google/protobuf/timestamp.proto";
-
-option java_multiple_files = true;
-option java_package = "org.ga4gh.vrs.v{version}";
-
-"""
-
-    print(proto_header)
-
-    for x, y in obj_store['definitions'].items():
-        if 'properties' not in y:
-            continue
-        if x in deprecated_types:
-            continue
-
-        if version is None:
-            release = _get_git_tag()
-            version = _parse_release_as_version(release)
-
-        m = ProtoMessage(y, abstract_map, deprecated_types)
-        m.emit()
-        print()
+def main(version):
+    yaml_dict = yaml.load(sys.stdin, Loader=yaml.SafeLoader)
+    ProtoDoc(yaml_dict['definitions'], version)
 
 
 if __name__ == '__main__':
-    main(version='1_2')
+    main(version='1')
