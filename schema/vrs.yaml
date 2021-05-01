@@ -87,6 +87,7 @@ definitions:
         oneOf:
           - $ref: "#/definitions/SequenceState" # DEPRECATED; remove in 2.0
           - $ref: "#/definitions/SequenceExpression"
+    required: [ "type", "location", "state" ]
 
   Haplotype:
     description: >-
@@ -108,6 +109,7 @@ definitions:
           oneOf:
             - $ref: "#/definitions/Allele"
             - $ref: "#/definitions/CURIE"
+    required: [ "type", "members" ]
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -132,6 +134,7 @@ definitions:
           An textual representation of variation intended to capture
           variation descriptions that cannot be parsed, but still
           treated as variation.
+    required: [ "type", "definition" ]
 
   VariationSet:
     description: >-
@@ -154,6 +157,7 @@ definitions:
           oneOf:
             - $ref: "#/definitions/CURIE"
             - $ref: "#/definitions/Variation"
+    required: [ "type", "members" ]
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -187,34 +191,8 @@ definitions:
           - $ref: "#/definitions/SequenceExpression"
           - $ref: "#/definitions/CURIE"
       copies:
-        oneOf:
-          - $ref: "#/definitions/Range"
-          - $ref: "#/definitions/Numeric"
-    # Require that Numerics (alone or in Ranges) are integers in CopyNumber
-    if:
-      properties:
-        copies:
-          $ref: '#/definitions/Numeric'
-    then:
-      properties:
-        copies:
-          properties:
-            value:
-              type: integer
-            comparator:
-              enum: [ "<=", ">=" ]
-    else:
-      properties:
-        copies:
-          properties:
-            min:
-              properties:
-                value:
-                  type: integer
-            max:
-              properties:
-                value:
-                  type: integer
+        $ref: "#/definitions/Range"
+    required: [ "type", "subject", "copies" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations
@@ -248,6 +226,7 @@ definitions:
         type: string
       interval:
         $ref: "#/definitions/CytobandInterval"
+    required: [ "type", "species_id", "chr", "interval" ]
 
   SequenceLocation:
     additionalProperties: false
@@ -264,7 +243,10 @@ definitions:
       sequence_id:
         $ref: "#/definitions/CURIE"
       interval:
-        $ref: "#/definitions/SequenceInterval"
+        oneOf:
+          - $ref: "#/definitions/SequenceInterval"
+          - $ref: "#/definitions/SimpleInterval"
+    required: [ "type", "sequence_id", "interval" ]
 
 
   # =============================================================================
@@ -277,84 +259,25 @@ definitions:
 
   SequenceInterval:
     description: >-
-      A SequenceInterval is intended to be compatible with that in Sequence Ontology
+      A SequenceInterval represents a span of sequence. Positions are
+      always represented by contiguous spans using interbase coordinates.
+
+      SequenceInterval is intended to be compatible with that in Sequence Ontology
       ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)),
       with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO
       definition is for an "extent greater than zero".
-    oneOf:
-      - $ref: '#/definitions/NumericInterval'
-      - $ref: '#/definitions/SimpleInterval'
-    discriminator:
-      propertyName: type
-
-  NumericInterval:
-    description: >-
-      A NumericInterval represents a span of sequence. Positions are
-      always represented by contiguous spans using interbase
-      coordinates.
     type: object
     additionalProperties: false
     properties:
       type:
         type: string
-        enum: [ "NumericInterval" ]
-        default: "NumericInterval"
+        enum: [ "SequenceInterval" ]
+        default: "SequenceInterval"
       start:
-        oneOf:
-          - $ref: "#/definitions/Numeric"
-          - $ref: "#/definitions/Range"
+        $ref: "#/definitions/Range"
       end:
-        oneOf:
-          - $ref: "#/definitions/Numeric"
-          - $ref: "#/definitions/Range"
-    # Require that Numerics (alone or in Ranges) are integers in NumericInterval
-    allOf:
-      - if:
-          properties:
-            start:
-              $ref: '#/definitions/Numeric'
-        then:
-          properties:
-            start:
-              properties:
-                value:
-                  type: integer
-                comparator:
-                  enum: [ "<", ">" ]
-        else:
-          properties:
-            start:
-              properties:
-                min:
-                  properties:
-                    value:
-                      type: integer
-                max:
-                  properties:
-                    value:
-                      type: integer
-      - if:
-          properties:
-            end:
-              $ref: '#/definitions/Numeric'
-        then:
-          properties:
-            end:
-              properties:
-                value:
-                  type: integer
-        else:
-          properties:
-            end:
-              properties:
-                min:
-                  properties:
-                    value:
-                      type: integer
-                max:
-                  properties:
-                    value:
-                      type: integer
+        $ref: "#/definitions/Range"
+    required: [ "type", "start", "end" ]
 
   # SimpleInterval has been moved to DEPRECATED section at bottom.
 
@@ -376,6 +299,7 @@ definitions:
       type: CytobandInterval
       start: q22.2
       end: q22.3
+    required: [ "type", "start", "end" ]
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -401,6 +325,7 @@ definitions:
         default: "LiteralSequenceExpression"
       sequence:
         $ref: "#/definitions/Sequence"
+    required: [ "type", "sequence" ]
 
   DerivedSequenceExpression:
     type: object
@@ -412,8 +337,9 @@ definitions:
         default: "DerivedSequenceExpression"
       location:
         $ref: "#/definitions/SequenceLocation"
-      transformation:
+      reverse_complement:
         type: boolean
+    required: [ "type", "location", "reverse_complement" ]
 
   RepeatedSequenceExpression:
     additionalProperties: false
@@ -424,11 +350,12 @@ definitions:
         enum: ["RepeatedSequenceExpression"]
         default: "RepeatedSequenceExpression"
       seq_expr:
-        $ref: "#/definitions/SequenceExpression"
+        allOf:
+          - $ref: "#/definitions/SequenceExpression"
+          - not:
+              $ref: "#/definitions/RepeatedSequenceExpression"
       count:
-        oneOf:
-          - $ref: "#/definitions/Numeric"
-          - $ref: "#/definitions/Range"
+        $ref: "#/definitions/Range"
     example:
       type: RepeatedSequenceExpression
       seq_expr:
@@ -436,12 +363,9 @@ definitions:
         sequence: CAG
       count:
         type: Range
-        min:
-          type: SimpleNumeric
-          value: 15
-        max:
-          type: SimpleNumeric
-          value: 20
+        min: 15
+        max: 20
+    required: [ "type", "seq_expr", "count" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Feature
@@ -470,47 +394,16 @@ definitions:
         default: "Gene"
       gene_id:
         $ref: "#/definitions/CURIE"
+    required: [ "type", "gene_id" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # Numerics, Comparators, and Ranges
-
-  Numeric:
-    description: >-
-      Lorem ipsum
-    oneOf:
-      - $ref: "#/definitions/SimpleNumeric"
-      - $ref: "#/definitions/ComparatorNumeric"
-    discriminator:
-      propertyName: type
-
-  SimpleNumeric:
-    type: object
-    additionalProperties: false
-    properties:
-      type:
-        type: string
-        enum: [ "SimpleNumeric" ]
-        default: "SimpleNumeric"
-      value:
-        type: number
-
-  ComparatorNumeric:
-    type: object
-    additionalProperties: false
-    properties:
-      type:
-        type: string
-        enum: [ "ComparatorNumeric" ]
-        default: "ComparatorNumeric"
-      value:
-        type: number
-      comparator:
-        type: string
-        enum: [ "<", ">", "<=", ">=" ]
+  # Range
 
   Range:
     description: >-
-      An inclusive range of Numeric values.
+      An inclusive range of integers. A range may be unbounded by omitting either
+      min or max values. Fully unbounded ranges are not permitted (one of min or
+      max MUST be specified).
     type: object
     additionalProperties: false
     properties:
@@ -519,9 +412,13 @@ definitions:
         enum: [ "Range" ]
         default: "Range"
       min:
-        $ref: "#/definitions/SimpleNumeric"
+        type: integer
       max:
-        $ref: "#/definitions/SimpleNumeric"
+        type: integer
+    anyOf:
+      - required: [ "type", "min" ]
+      - required: [ "type", "max" ]
+
 
   # =============================================================================
   # BASIC TYPES (STRUCTURES)
@@ -603,6 +500,7 @@ definitions:
     example:
       type: SequenceState
       sequence: C
+    required: [ "type", "sequence" ]
 
   SimpleInterval:
     deprecated: true
@@ -611,14 +509,7 @@ definitions:
       always represented by contiguous spans using interbase
       coordinates.
 
-      This definition of SequenceInterval is intended to be compatible with that
-      in Sequence Ontology
-      ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)),
-      with the exception that the GA4GH VRS SequenceInterval may be
-      zero-width. The SO definition is for an "extent greater than
-      zero".
-
-      This class is deprecated. Use NumericInterval instead.
+      This class is deprecated. Use SequenceInterval instead.
     additionalProperties: false
     type: object
     properties:
@@ -634,3 +525,4 @@ definitions:
       type: SimpleInterval
       start: 11
       end: 22
+    required: [ "type", "start", "end" ]

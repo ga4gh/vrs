@@ -94,7 +94,12 @@
                   }
                ]
             }
-         }
+         },
+         "required": [
+            "type",
+            "location",
+            "state"
+         ]
       },
       "Haplotype": {
          "description": "A set of zero or more Alleles",
@@ -126,7 +131,11 @@
                   ]
                }
             }
-         }
+         },
+         "required": [
+            "type",
+            "members"
+         ]
       },
       "Text": {
          "description": "A textual description of variation, typically not parseable but understood by humans.",
@@ -147,7 +156,11 @@
                "type": "string",
                "description": "An textual representation of variation intended to capture variation descriptions that cannot be parsed, but still treated as variation."
             }
-         }
+         },
+         "required": [
+            "type",
+            "definition"
+         ]
       },
       "VariationSet": {
          "description": "A set of Variation objects.\nMembers may be specified inline or by reference (with CURIEs)",
@@ -178,7 +191,11 @@
                   ]
                }
             }
-         }
+         },
+         "required": [
+            "type",
+            "members"
+         ]
       },
       "Abundance": {
          "description": "The quantity of a feature, variation, molecule or part thereof in a system.",
@@ -223,62 +240,14 @@
                ]
             },
             "copies": {
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/Range"
-                  },
-                  {
-                     "$ref": "#/definitions/Numeric"
-                  }
-               ]
+               "$ref": "#/definitions/Range"
             }
          },
-         "if": {
-            "properties": {
-               "copies": {
-                  "$ref": "#/definitions/Numeric"
-               }
-            }
-         },
-         "then": {
-            "properties": {
-               "copies": {
-                  "properties": {
-                     "value": {
-                        "type": "integer"
-                     },
-                     "comparator": {
-                        "enum": [
-                           "<=",
-                           ">="
-                        ]
-                     }
-                  }
-               }
-            }
-         },
-         "else": {
-            "properties": {
-               "copies": {
-                  "properties": {
-                     "min": {
-                        "properties": {
-                           "value": {
-                              "type": "integer"
-                           }
-                        }
-                     },
-                     "max": {
-                        "properties": {
-                           "value": {
-                              "type": "integer"
-                           }
-                        }
-                     }
-                  }
-               }
-            }
-         }
+         "required": [
+            "type",
+            "subject",
+            "copies"
+         ]
       },
       "Location": {
          "description": "A Location represents a span on a specific sequence.",
@@ -319,7 +288,13 @@
             "interval": {
                "$ref": "#/definitions/CytobandInterval"
             }
-         }
+         },
+         "required": [
+            "type",
+            "species_id",
+            "chr",
+            "interval"
+         ]
       },
       "SequenceLocation": {
          "additionalProperties": false,
@@ -340,148 +315,45 @@
                "$ref": "#/definitions/CURIE"
             },
             "interval": {
-               "$ref": "#/definitions/SequenceInterval"
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/SequenceInterval"
+                  },
+                  {
+                     "$ref": "#/definitions/SimpleInterval"
+                  }
+               ]
             }
-         }
+         },
+         "required": [
+            "type",
+            "sequence_id",
+            "interval"
+         ]
       },
       "SequenceInterval": {
-         "description": "A SequenceInterval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".",
-         "oneOf": [
-            {
-               "$ref": "#/definitions/NumericInterval"
-            },
-            {
-               "$ref": "#/definitions/SimpleInterval"
-            }
-         ],
-         "discriminator": {
-            "propertyName": "type"
-         }
-      },
-      "NumericInterval": {
-         "description": "A NumericInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.",
+         "description": "A SequenceInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nSequenceInterval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".",
          "type": "object",
          "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
                "enum": [
-                  "NumericInterval"
+                  "SequenceInterval"
                ],
-               "default": "NumericInterval"
+               "default": "SequenceInterval"
             },
             "start": {
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/Numeric"
-                  },
-                  {
-                     "$ref": "#/definitions/Range"
-                  }
-               ]
+               "$ref": "#/definitions/Range"
             },
             "end": {
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/Numeric"
-                  },
-                  {
-                     "$ref": "#/definitions/Range"
-                  }
-               ]
+               "$ref": "#/definitions/Range"
             }
          },
-         "allOf": [
-            {
-               "if": {
-                  "properties": {
-                     "start": {
-                        "$ref": "#/definitions/Numeric"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "start": {
-                        "properties": {
-                           "value": {
-                              "type": "integer"
-                           },
-                           "comparator": {
-                              "enum": [
-                                 "<",
-                                 ">"
-                              ]
-                           }
-                        }
-                     }
-                  }
-               },
-               "else": {
-                  "properties": {
-                     "start": {
-                        "properties": {
-                           "min": {
-                              "properties": {
-                                 "value": {
-                                    "type": "integer"
-                                 }
-                              }
-                           },
-                           "max": {
-                              "properties": {
-                                 "value": {
-                                    "type": "integer"
-                                 }
-                              }
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "end": {
-                        "$ref": "#/definitions/Numeric"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "end": {
-                        "properties": {
-                           "value": {
-                              "type": "integer"
-                           }
-                        }
-                     }
-                  }
-               },
-               "else": {
-                  "properties": {
-                     "end": {
-                        "properties": {
-                           "min": {
-                              "properties": {
-                                 "value": {
-                                    "type": "integer"
-                                 }
-                              }
-                           },
-                           "max": {
-                              "properties": {
-                                 "value": {
-                                    "type": "integer"
-                                 }
-                              }
-                           }
-                        }
-                     }
-                  }
-               }
-            }
+         "required": [
+            "type",
+            "start",
+            "end"
          ]
       },
       "CytobandInterval": {
@@ -507,7 +379,12 @@
             "type": "CytobandInterval",
             "start": "q22.2",
             "end": "q22.3"
-         }
+         },
+         "required": [
+            "type",
+            "start",
+            "end"
+         ]
       },
       "SequenceExpression": {
          "description": "One of a set of sequence representation syntaxes.",
@@ -540,7 +417,11 @@
             "sequence": {
                "$ref": "#/definitions/Sequence"
             }
-         }
+         },
+         "required": [
+            "type",
+            "sequence"
+         ]
       },
       "DerivedSequenceExpression": {
          "type": "object",
@@ -556,10 +437,15 @@
             "location": {
                "$ref": "#/definitions/SequenceLocation"
             },
-            "transformation": {
+            "reverse_complement": {
                "type": "boolean"
             }
-         }
+         },
+         "required": [
+            "type",
+            "location",
+            "reverse_complement"
+         ]
       },
       "RepeatedSequenceExpression": {
          "additionalProperties": false,
@@ -573,17 +459,19 @@
                "default": "RepeatedSequenceExpression"
             },
             "seq_expr": {
-               "$ref": "#/definitions/SequenceExpression"
-            },
-            "count": {
-               "oneOf": [
+               "allOf": [
                   {
-                     "$ref": "#/definitions/Numeric"
+                     "$ref": "#/definitions/SequenceExpression"
                   },
                   {
-                     "$ref": "#/definitions/Range"
+                     "not": {
+                        "$ref": "#/definitions/RepeatedSequenceExpression"
+                     }
                   }
                ]
+            },
+            "count": {
+               "$ref": "#/definitions/Range"
             }
          },
          "example": {
@@ -594,16 +482,15 @@
             },
             "count": {
                "type": "Range",
-               "min": {
-                  "type": "SimpleNumeric",
-                  "value": 15
-               },
-               "max": {
-                  "type": "SimpleNumeric",
-                  "value": 20
-               }
+               "min": 15,
+               "max": 20
             }
-         }
+         },
+         "required": [
+            "type",
+            "seq_expr",
+            "count"
+         ]
       },
       "Feature": {
          "description": "A named entity that can be mapped to a Location. Genes, protein domains, exons, and chromosomes are some examples of common biological entities that may be Features.",
@@ -631,65 +518,14 @@
             "gene_id": {
                "$ref": "#/definitions/CURIE"
             }
-         }
-      },
-      "Numeric": {
-         "description": "Lorem ipsum",
-         "oneOf": [
-            {
-               "$ref": "#/definitions/SimpleNumeric"
-            },
-            {
-               "$ref": "#/definitions/ComparatorNumeric"
-            }
-         ],
-         "discriminator": {
-            "propertyName": "type"
-         }
-      },
-      "SimpleNumeric": {
-         "type": "object",
-         "additionalProperties": false,
-         "properties": {
-            "type": {
-               "type": "string",
-               "enum": [
-                  "SimpleNumeric"
-               ],
-               "default": "SimpleNumeric"
-            },
-            "value": {
-               "type": "number"
-            }
-         }
-      },
-      "ComparatorNumeric": {
-         "type": "object",
-         "additionalProperties": false,
-         "properties": {
-            "type": {
-               "type": "string",
-               "enum": [
-                  "ComparatorNumeric"
-               ],
-               "default": "ComparatorNumeric"
-            },
-            "value": {
-               "type": "number"
-            },
-            "comparator": {
-               "type": "string",
-               "enum": [
-                  "<",
-                  ">",
-                  "<=",
-                  ">="
-               ]
-            }
-         }
+         },
+         "required": [
+            "type",
+            "gene_id"
+         ]
       },
       "Range": {
-         "description": "An inclusive range of Numeric values.",
+         "description": "An inclusive range of integers. A range may be unbounded by omitting either min or max values. Fully unbounded ranges are not permitted (one of min or max MUST be specified).",
          "type": "object",
          "additionalProperties": false,
          "properties": {
@@ -701,12 +537,26 @@
                "default": "Range"
             },
             "min": {
-               "$ref": "#/definitions/SimpleNumeric"
+               "type": "integer"
             },
             "max": {
-               "$ref": "#/definitions/SimpleNumeric"
+               "type": "integer"
             }
-         }
+         },
+         "anyOf": [
+            {
+               "required": [
+                  "type",
+                  "min"
+               ]
+            },
+            {
+               "required": [
+                  "type",
+                  "max"
+               ]
+            }
+         ]
       },
       "Sequence": {
          "additionalProperties": false,
@@ -748,11 +598,15 @@
          "example": {
             "type": "SequenceState",
             "sequence": "C"
-         }
+         },
+         "required": [
+            "type",
+            "sequence"
+         ]
       },
       "SimpleInterval": {
          "deprecated": true,
-         "description": "DEPRECATED: A SimpleInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of SequenceInterval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".\nThis class is deprecated. Use NumericInterval instead.",
+         "description": "DEPRECATED: A SimpleInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nThis class is deprecated. Use SequenceInterval instead.",
          "additionalProperties": false,
          "type": "object",
          "properties": {
@@ -774,7 +628,12 @@
             "type": "SimpleInterval",
             "start": 11,
             "end": 22
-         }
+         },
+         "required": [
+            "type",
+            "start",
+            "end"
+         ]
       }
    }
 }
