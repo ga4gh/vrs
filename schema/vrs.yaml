@@ -350,7 +350,10 @@ definitions:
         enum: ["RepeatedSequenceExpression"]
         default: "RepeatedSequenceExpression"
       seq_expr:
-        $ref: "#/definitions/SequenceExpression"
+        allOf:
+          - $ref: "#/definitions/SequenceExpression"
+          - not:
+              $ref: "#/definitions/RepeatedSequenceExpression"
       count:
         $ref: "#/definitions/Range"
     example:
