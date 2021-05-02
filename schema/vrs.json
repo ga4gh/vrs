@@ -215,7 +215,7 @@
                      "$ref": "#/definitions/Feature"
                   },
                   {
-                     "$ref": "#/definitions/Location"
+                     "$ref": "#/definitions/SequenceExpression"
                   },
                   {
                      "$ref": "#/definitions/CURIE"
@@ -223,7 +223,7 @@
                ]
             },
             "copies": {
-               "$ref": "#/definitions/AbsoluteCopyCount"
+               "$ref": "#/definitions/Range"
             }
          }
       },
@@ -287,81 +287,34 @@
                "$ref": "#/definitions/CURIE"
             },
             "interval": {
-               "$ref": "#/definitions/SequenceInterval"
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/SequenceInterval"
+                  },
+                  {
+                     "$ref": "#/definitions/SimpleInterval"
+                  }
+               ]
             }
          }
       },
       "SequenceInterval": {
-         "oneOf": [
-            {
-               "$ref": "#/definitions/SimpleInterval"
-            },
-            {
-               "$ref": "#/definitions/NestedInterval"
-            }
-         ],
-         "discriminator": {
-            "propertyName": "type"
-         }
-      },
-      "SimpleInterval": {
-         "description": "A SimpleInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of SequenceInterval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".",
-         "additionalProperties": false,
+         "description": "A SequenceInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nSequenceInterval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".",
          "type": "object",
+         "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
                "enum": [
-                  "SimpleInterval"
+                  "SequenceInterval"
                ],
-               "default": "SimpleInterval"
+               "default": "SequenceInterval"
             },
             "start": {
-               "type": [
-                  "integer"
-               ]
+               "$ref": "#/definitions/Range"
             },
             "end": {
-               "type": [
-                  "integer"
-               ]
-            }
-         },
-         "example": {
-            "type": "SimpleInterval",
-            "start": 11,
-            "end": 22
-         }
-      },
-      "NestedInterval": {
-         "type": "object",
-         "additionalProperties": false,
-         "properties": {
-            "type": {
-               "type": "string",
-               "enum": [
-                  "NestedInterval"
-               ],
-               "default": "NestedInterval"
-            },
-            "inner": {
-               "$ref": "#/definitions/SimpleInterval"
-            },
-            "outer": {
-               "$ref": "#/definitions/SimpleInterval"
-            }
-         },
-         "example": {
-            "type": "NestedInterval",
-            "inner": {
-               "type": "SimpleInterval",
-               "start": 20,
-               "end": 30
-            },
-            "outer": {
-               "type": "SimpleInterval",
-               "start": 10,
-               "end": 40
+               "$ref": "#/definitions/Range"
             }
          }
       },
@@ -457,14 +410,19 @@
                "$ref": "#/definitions/SequenceExpression"
             },
             "count": {
-               "$ref": "#/definitions/AbsoluteCopyCount"
+               "$ref": "#/definitions/Range"
             }
          },
          "example": {
             "type": "RepeatedSequenceExpression",
-            "copies": {
-               "min": 40,
-               "max": 60
+            "seq_expr": {
+               "type": "LiteralSequenceExpression",
+               "sequence": "CAG"
+            },
+            "count": {
+               "type": "Range",
+               "min": 15,
+               "max": 20
             }
          }
       },
@@ -496,47 +454,37 @@
             }
          }
       },
-      "Quantity": {
-         "description": "A value representing a multitude or magnitude.",
-         "oneOf": [
-            {
-               "$ref": "#/definitions/AbsoluteCopyCount"
-            }
-         ],
-         "discriminator": {
-            "propertyName": "type"
-         }
-      },
-      "AbsoluteCopyCount": {
-         "description": "An integer count of copies. Counts are bounded ranges denoted by minimum and maximum possible values. Absolute copy number counts may not be smaller than zero.",
-         "additionalProperties": false,
+      "Range": {
+         "description": "An inclusive range of integers. A range may be unbounded by omitting either min or max values. Fully unbounded ranges are not permitted (one of min or max MUST be specified).",
          "type": "object",
+         "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
                "enum": [
-                  "AbsoluteCopyCount"
+                  "Range"
                ],
-               "default": "AbsoluteCopyCount"
+               "default": "Range"
             },
             "min": {
-               "type": [
-                  "integer"
-               ],
-               "minimum": 0
+               "type": "integer"
             },
             "max": {
-               "type": [
-                  "integer"
-               ],
-               "minimum": 0
+               "type": "integer"
             }
          },
-         "example": {
-            "type": "AbsoluteCopyCount",
-            "min": 5,
-            "max": 10
-         }
+         "anyOf": [
+            {
+               "required": [
+                  "min"
+               ]
+            },
+            {
+               "required": [
+                  "max"
+               ]
+            }
+         ]
       },
       "Sequence": {
          "additionalProperties": false,
@@ -578,6 +526,32 @@
          "example": {
             "type": "SequenceState",
             "sequence": "C"
+         }
+      },
+      "SimpleInterval": {
+         "deprecated": true,
+         "description": "DEPRECATED: A SimpleInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nThis class is deprecated. Use SequenceInterval instead.",
+         "additionalProperties": false,
+         "type": "object",
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "SimpleInterval"
+               ],
+               "default": "SimpleInterval"
+            },
+            "start": {
+               "type": "integer"
+            },
+            "end": {
+               "type": "integer"
+            }
+         },
+         "example": {
+            "type": "SimpleInterval",
+            "start": 11,
+            "end": 22
          }
       }
    }
