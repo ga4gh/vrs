@@ -94,7 +94,12 @@
                   }
                ]
             }
-         }
+         },
+         "required": [
+            "type",
+            "location",
+            "state"
+         ]
       },
       "Haplotype": {
          "description": "A set of zero or more Alleles",
@@ -126,7 +131,11 @@
                   ]
                }
             }
-         }
+         },
+         "required": [
+            "type",
+            "members"
+         ]
       },
       "Text": {
          "description": "A textual description of variation, typically not parseable but understood by humans.",
@@ -147,7 +156,11 @@
                "type": "string",
                "description": "An textual representation of variation intended to capture variation descriptions that cannot be parsed, but still treated as variation."
             }
-         }
+         },
+         "required": [
+            "type",
+            "definition"
+         ]
       },
       "VariationSet": {
          "description": "A set of Variation objects.\nMembers may be specified inline or by reference (with CURIEs)",
@@ -178,7 +191,11 @@
                   ]
                }
             }
-         }
+         },
+         "required": [
+            "type",
+            "members"
+         ]
       },
       "Abundance": {
          "description": "The quantity of a feature, variation, molecule or part thereof in a system.",
@@ -225,7 +242,12 @@
             "copies": {
                "$ref": "#/definitions/Range"
             }
-         }
+         },
+         "required": [
+            "type",
+            "subject",
+            "copies"
+         ]
       },
       "Location": {
          "description": "A Location represents a span on a specific sequence.",
@@ -266,7 +288,13 @@
             "interval": {
                "$ref": "#/definitions/CytobandInterval"
             }
-         }
+         },
+         "required": [
+            "type",
+            "species_id",
+            "chr",
+            "interval"
+         ]
       },
       "SequenceLocation": {
          "additionalProperties": false,
@@ -296,7 +324,12 @@
                   }
                ]
             }
-         }
+         },
+         "required": [
+            "type",
+            "sequence_id",
+            "interval"
+         ]
       },
       "SequenceInterval": {
          "description": "A SequenceInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nSequenceInterval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".",
@@ -316,7 +349,12 @@
             "end": {
                "$ref": "#/definitions/Range"
             }
-         }
+         },
+         "required": [
+            "type",
+            "start",
+            "end"
+         ]
       },
       "CytobandInterval": {
          "description": "A contiguous region specified by chromosomal bands features.",
@@ -341,7 +379,12 @@
             "type": "CytobandInterval",
             "start": "q22.2",
             "end": "q22.3"
-         }
+         },
+         "required": [
+            "type",
+            "start",
+            "end"
+         ]
       },
       "SequenceExpression": {
          "description": "One of a set of sequence representation syntaxes.",
@@ -374,7 +417,11 @@
             "sequence": {
                "$ref": "#/definitions/Sequence"
             }
-         }
+         },
+         "required": [
+            "type",
+            "sequence"
+         ]
       },
       "DerivedSequenceExpression": {
          "type": "object",
@@ -393,7 +440,12 @@
             "reverse_complement": {
                "type": "boolean"
             }
-         }
+         },
+         "required": [
+            "type",
+            "location",
+            "reverse_complement"
+         ]
       },
       "RepeatedSequenceExpression": {
          "additionalProperties": false,
@@ -407,7 +459,16 @@
                "default": "RepeatedSequenceExpression"
             },
             "seq_expr": {
-               "$ref": "#/definitions/SequenceExpression"
+               "allOf": [
+                  {
+                     "$ref": "#/definitions/SequenceExpression"
+                  },
+                  {
+                     "not": {
+                        "$ref": "#/definitions/RepeatedSequenceExpression"
+                     }
+                  }
+               ]
             },
             "count": {
                "$ref": "#/definitions/Range"
@@ -424,7 +485,12 @@
                "min": 15,
                "max": 20
             }
-         }
+         },
+         "required": [
+            "type",
+            "seq_expr",
+            "count"
+         ]
       },
       "Feature": {
          "description": "A named entity that can be mapped to a Location. Genes, protein domains, exons, and chromosomes are some examples of common biological entities that may be Features.",
@@ -452,7 +518,11 @@
             "gene_id": {
                "$ref": "#/definitions/CURIE"
             }
-         }
+         },
+         "required": [
+            "type",
+            "gene_id"
+         ]
       },
       "Range": {
          "description": "An inclusive range of integers. A range may be unbounded by omitting either min or max values. Fully unbounded ranges are not permitted (one of min or max MUST be specified).",
@@ -476,11 +546,13 @@
          "anyOf": [
             {
                "required": [
+                  "type",
                   "min"
                ]
             },
             {
                "required": [
+                  "type",
                   "max"
                ]
             }
@@ -526,7 +598,11 @@
          "example": {
             "type": "SequenceState",
             "sequence": "C"
-         }
+         },
+         "required": [
+            "type",
+            "sequence"
+         ]
       },
       "SimpleInterval": {
          "deprecated": true,
@@ -552,7 +628,12 @@
             "type": "SimpleInterval",
             "start": 11,
             "end": 22
-         }
+         },
+         "required": [
+            "type",
+            "start",
+            "end"
+         ]
       }
    }
 }
