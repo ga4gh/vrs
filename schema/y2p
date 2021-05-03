@@ -128,7 +128,7 @@ class ProtoMessage:
         self.message_name = message_name
         self.document = document
         self.js_definition = document.definitions[message_name]
-        self.deprecated = False
+        self.deprecated = self.js_definition.get('deprecated', False)
         self.properties = self.js_definition.get('properties', dict())
         t = self.js_definition.get('type', None)
         self.simple = (t == 'string')
@@ -136,17 +136,19 @@ class ProtoMessage:
         self.nested = list()
         self.fields = list()
         self._build_fields()
+        self._uniquify_fields()
+        self._assign_proto_field_values()
 
     def __repr__(self):
         return f'{self.message_name} <ProtoMessage>'
 
-    def _dereference(self, field_name, reference, n=None):
+    def _dereference(self, field_name, reference):
         k = simplify_reference(reference)
         m = self.document.messages.get(k)
         if k in self.document.simple_types:
-            field = ProtoField(field_name, m.js_definition['type'], n, deprecated=m.deprecated)
+            field = ProtoField(field_name, m.js_definition['type'], deprecated=m.deprecated)
         elif k not in self.document.abstract_types:
-            field = ProtoField(field_name, m.message_name, n, deprecated=m.deprecated)
+            field = ProtoField(field_name, m.message_name, deprecated=m.deprecated)
         else:
             raise ValueError
         return field
@@ -171,18 +173,17 @@ class ProtoMessage:
             else:
                 field = self._dereference_and_rename(s)
                 one_of_fields.append(field)
-        return ProtoField(name, 'oneof', None, nested=one_of_fields)
+        return ProtoField(name, 'oneof', nested=one_of_fields)
 
     def _build_fields(self):
         for prop, prop_attributes in self.properties.items():
             if prop == 'type':
                 continue
-            n = prop_attributes.get('protobuf_number')
             if '$ref' in prop_attributes:
-                field = self._dereference(prop, prop_attributes['$ref'], n)
+                field = self._dereference(prop, prop_attributes['$ref'])
             elif prop_attributes.get('type') in self.property_basic_types:
                 proto_type = self.property_basic_types[prop_attributes['type']]
-                field = ProtoField(prop, proto_type, n)
+                field = ProtoField(prop, proto_type)
             elif 'oneOf' in prop_attributes:
                 field = self._create_oneof_field(prop, prop_attributes['oneOf'])
             elif 'allOf' in prop_attributes:
@@ -198,17 +199,50 @@ class ProtoMessage:
                 else:
                     ordered_field_refs = [{'$ref': x} for x in self.document.dependencies[k] if x in field_refs]
                     field = self._create_oneof_field(prop, ordered_field_refs)
-                    field
             else:
-                x = 0
+                continue
             self.fields.append(field)
-        # TODO: Uniquify field names
-        # TODO: Assign proto field values
+
+    def _uniquify_fields(self):
+        observed = Counter()
+        for field in self.fields:
+            observed[(field.name, field.field_type)] += 1
+            if observed[(field.name, field.field_type)] > 1:
+                field.name = f'{field.name}{observed[(field.name, field.field_type)]}'
+            if field.field_type == 'oneof':
+                for subfield in field.nested:
+                    observed[(subfield.name, subfield.field_type)] += 1
+        for field in self.fields:
+            if field.field_type == 'oneof':
+                for subfield in field.nested:
+                    if observed[(subfield.name, subfield.field_type)] > 1:
+                        subfield.name = f'{field.name}_{subfield.name}'
+
+    def _assign_proto_field_values(self):
+        # TODO: Modify this method to retrieve and account for previous field assignments
+        low_fields_counter = 1
+        high_fields_counter = 100
+        for field in self.fields:
+            if field.field_type == 'oneof':
+                for subfield in field.nested:
+                    if subfield.deprecated:
+                        subfield.number = high_fields_counter
+                        high_fields_counter += 1
+                    else:
+                        subfield.number = low_fields_counter
+                        low_fields_counter += 1
+            else:
+                if field.deprecated:
+                    field.number = high_fields_counter
+                    high_fields_counter += 1
+                else:
+                    field.number = low_fields_counter
+                    low_fields_counter += 1
 
 
 class ProtoField:
 
-    def __init__(self, name, field_type, number, nested=None, deprecated=False):
+    def __init__(self, name, field_type, number=None, nested=None, deprecated=False):
         self.name = name
         self.field_type = field_type
         self.number = number
@@ -242,6 +276,7 @@ class ProtoField:
                 if (x.name, x.field_type) in r:
                     new.append(x)
             return ProtoField(self.name, self.field_type, self.number, new, self.deprecated)
+
 
 class ProtoMessageOld:
 
@@ -364,7 +399,7 @@ class ProtoMessageOld:
 def main(version):
     yaml_dict = yaml.load(sys.stdin, Loader=yaml.SafeLoader)
     doc = ProtoDoc(yaml_dict['definitions'], version)
-    x = 0
+    doc.emit()
 
 
 if __name__ == '__main__':
