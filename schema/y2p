@@ -66,6 +66,15 @@ class ProtoDoc:
         self._map_dependencies()
         self._build_messages()
 
+    def emit(self):
+        print(self.header)
+        for message_name in list(self.definitions):
+            m = self.messages[message_name]
+            if m.abstract or m.simple:
+                continue
+            m.emit()
+            print()
+
     def _resolve_reference_and_store(self, reference, message):
         r = simplify_reference(reference)
         if r == message:
@@ -124,20 +133,34 @@ class ProtoMessage:
         'boolean': 'bool'
     }
 
-    def __init__(self, message_name, document):
+    def __init__(self, message_name, document, fields=None):
         self.message_name = message_name
         self.document = document
-        self.js_definition = document.definitions[message_name]
+        if fields is None:
+            self.js_definition = document.definitions[message_name]
+        else:
+            self.js_definition = dict()
         self.deprecated = self.js_definition.get('deprecated', False)
         self.properties = self.js_definition.get('properties', dict())
         t = self.js_definition.get('type', None)
         self.simple = (t == 'string')
         self.abstract = not (bool(t) or self.simple)
         self.nested = list()
-        self.fields = list()
-        self._build_fields()
+        if fields is None:
+            self.fields = list()
+            self._build_fields()
+        else:
+            self.fields = fields
         self._uniquify_fields()
         self._assign_proto_field_values()
+
+    def emit(self, level=0):
+        print(indent(f'message {self.message_name} {{', level))
+        for message in self.nested:
+            message.emit(level + 1)
+        for field in self.fields:
+            field.emit(level + 1)
+        print(indent('}', level))
 
     def __repr__(self):
         return f'{self.message_name} <ProtoMessage>'
@@ -145,7 +168,9 @@ class ProtoMessage:
     def _dereference(self, field_name, reference):
         k = simplify_reference(reference)
         m = self.document.messages.get(k)
-        if k in self.document.simple_types:
+        if k == self.message_name:
+            field = ProtoField(field_name, self.message_name, deprecated=self.deprecated)
+        elif k in self.document.simple_types:
             field = ProtoField(field_name, m.js_definition['type'], deprecated=m.deprecated)
         elif k not in self.document.abstract_types:
             field = ProtoField(field_name, m.message_name, deprecated=m.deprecated)
@@ -195,10 +220,21 @@ class ProtoMessage:
                 if len(field_refs) == 0:
                     raise SyntaxError(prop)
                 elif len(field_refs) == 1:
-                    field = self._dereference(prop, field_refs.pop(), n)
+                    field = self._dereference(prop, field_refs.pop())
                 else:
                     ordered_field_refs = [{'$ref': x} for x in self.document.dependencies[k] if x in field_refs]
                     field = self._create_oneof_field(prop, ordered_field_refs)
+            elif prop_attributes['type'] == 'array':
+                field_refs = prop_attributes['items']['oneOf']
+                field = self._create_oneof_field('value', field_refs)
+                submessage_type = INFLECTOR.titleize(INFLECTOR.singularize(prop))
+                message = ProtoMessage(
+                    submessage_type,
+                    self.document,
+                    fields=[field]
+                )
+                self.nested.append(message)
+                field = ProtoField(prop, submessage_type, repeated=True)
             else:
                 continue
             self.fields.append(field)
@@ -242,12 +278,29 @@ class ProtoMessage:
 
 class ProtoField:
 
-    def __init__(self, name, field_type, number=None, nested=None, deprecated=False):
+    def __init__(self, name, field_type, number=None, nested=None, deprecated=False, repeated=False):
         self.name = name
         self.field_type = field_type
         self.number = number
         self.nested = nested
         self.deprecated = deprecated
+        self.repeated = repeated
+
+    def emit(self, level):
+        if self.nested:
+            print(indent(f'{self.field_type} {self.name} {{', level))
+            for field in self.nested:
+                field.emit(level + 1)
+            print(indent('}', level))
+            return
+        if self.deprecated:
+            emit_string = f'{self.field_type} {self.name} = {self.number} [deprecated=true];'
+        else:
+            emit_string = f'{self.field_type} {self.name} = {self.number};'
+        if self.repeated:
+            print(indent(f'repeated {emit_string}', level))
+        else:
+            print(indent(emit_string, level))
 
     def __repr__(self):
         return f'{self.name} <ProtoField>'
