@@ -459,16 +459,7 @@
                "default": "RepeatedSequenceExpression"
             },
             "seq_expr": {
-               "allOf": [
-                  {
-                     "$ref": "#/definitions/SequenceExpression"
-                  },
-                  {
-                     "not": {
-                        "$ref": "#/definitions/RepeatedSequenceExpression"
-                     }
-                  }
-               ]
+               "$ref": "#/definitions/SequenceExpression"
             },
             "count": {
                "$ref": "#/definitions/Range"
@@ -542,21 +533,7 @@
             "max": {
                "type": "integer"
             }
-         },
-         "anyOf": [
-            {
-               "required": [
-                  "type",
-                  "min"
-               ]
-            },
-            {
-               "required": [
-                  "type",
-                  "max"
-               ]
-            }
-         ]
+         }
       },
       "Sequence": {
          "additionalProperties": false,
