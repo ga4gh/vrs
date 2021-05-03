@@ -52,8 +52,6 @@ class ProtoDoc:
 
         package org.ga4gh.vrs.v{version};
 
-        import "google/protobuf/timestamp.proto";
-
         option java_multiple_files = true;
         option java_package = "org.ga4gh.vrs.v{version}";
 
