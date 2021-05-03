@@ -50,12 +50,11 @@ class ProtoDoc:
     def __init__(self, definitions, version):
         self.header = f"""syntax = "proto3";
 
-        package org.ga4gh.vrs.v{version};
+package org.ga4gh.vrs.v{version};
 
-        option java_multiple_files = true;
-        option java_package = "org.ga4gh.vrs.v{version}";
-
-        """
+option java_multiple_files = true;
+option java_package = "org.ga4gh.vrs.v{version}";
+"""
         self.definitions = definitions
         self.messages = dict()
         self.dependencies = dict()
