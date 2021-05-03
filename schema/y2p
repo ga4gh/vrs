@@ -67,7 +67,7 @@ option java_package = "org.ga4gh.vrs.v{version}";
         print(self.header)
         for message_name in list(self.definitions):
             m = self.messages[message_name]
-            if m.abstract or m.simple:
+            if m.simple:
                 continue
             m.emit()
             print()
@@ -198,6 +198,10 @@ class ProtoMessage:
         return ProtoField(name, 'oneof', nested=one_of_fields)
 
     def _build_fields(self):
+        if self.abstract:
+            field = self._create_oneof_field(snake_case(self.message_name), self.js_definition['oneOf'])
+            self.fields.append(field)
+            return
         for prop, prop_attributes in self.properties.items():
             if prop == 'type':
                 continue

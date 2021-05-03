@@ -5,6 +5,36 @@ package org.ga4gh.vrs.v1;
 option java_multiple_files = true;
 option java_package = "org.ga4gh.vrs.v1";
 
+message Variation {
+   oneof variation {
+      Allele allele = 1;
+      Haplotype haplotype = 2;
+      CopyNumber copy_number = 3;
+      Text text = 4;
+      VariationSet variation_set = 5;
+   }
+}
+
+message MolecularVariation {
+   oneof molecular_variation {
+      Allele allele = 1;
+      Haplotype haplotype = 2;
+   }
+}
+
+message UtilityVariation {
+   oneof utility_variation {
+      Text text = 1;
+      VariationSet variation_set = 2;
+   }
+}
+
+message SystemicVariation {
+   oneof systemic_variation {
+      CopyNumber copy_number = 1;
+   }
+}
+
 message Allele {
    string _id = 1;
    oneof location {
@@ -51,6 +81,12 @@ message VariationSet {
    repeated Member members = 2;
 }
 
+message Abundance {
+   oneof abundance {
+      CopyNumber copy_number = 1;
+   }
+}
+
 message CopyNumber {
    string _id = 1;
    oneof subject {
@@ -63,6 +99,13 @@ message CopyNumber {
       string curie = 8;
    }
    Range copies = 9;
+}
+
+message Location {
+   oneof location {
+      ChromosomeLocation chromosome_location = 1;
+      SequenceLocation sequence_location = 2;
+   }
 }
 
 message ChromosomeLocation {
@@ -91,6 +134,14 @@ message CytobandInterval {
    string end = 2;
 }
 
+message SequenceExpression {
+   oneof sequence_expression {
+      LiteralSequenceExpression literal_sequence_expression = 1;
+      DerivedSequenceExpression derived_sequence_expression = 2;
+      RepeatedSequenceExpression repeated_sequence_expression = 3;
+   }
+}
+
 message LiteralSequenceExpression {
    string sequence = 1;
 }
@@ -106,6 +157,12 @@ message RepeatedSequenceExpression {
       DerivedSequenceExpression derived_sequence_expression = 2;
    }
    Range count = 3;
+}
+
+message Feature {
+   oneof feature {
+      Gene gene = 1;
+   }
 }
 
 message Gene {
