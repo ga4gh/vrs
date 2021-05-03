@@ -13,5 +13,6 @@ assert y == j, "parsed yaml and json do not match"
 
 
 # Can pjs handle this schema?
-ob = pjs.ObjectBuilder("schema/vrs.json")
-ob.build_classes()              # no exception => okay
+def test_pjs_smoke():
+    ob = pjs.ObjectBuilder("schema/vrs.json")
+    assert ob.build_classes()              # no exception => okay
