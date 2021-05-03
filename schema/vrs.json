@@ -459,7 +459,14 @@
                "default": "RepeatedSequenceExpression"
             },
             "seq_expr": {
-               "$ref": "#/definitions/SequenceExpression"
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/LiteralSequenceExpression"
+                  },
+                  {
+                     "$ref": "#/definitions/DerivedSequenceExpression"
+                  }
+               ]
             },
             "count": {
                "$ref": "#/definitions/Range"
@@ -533,7 +540,21 @@
             "max": {
                "type": "integer"
             }
-         }
+         },
+         "oneOf": [
+            {
+               "required": [
+                  "type",
+                  "min"
+               ]
+            },
+            {
+               "required": [
+                  "type",
+                  "max"
+               ]
+            }
+         ]
       },
       "Sequence": {
          "additionalProperties": false,

@@ -350,7 +350,9 @@ definitions:
         enum: ["RepeatedSequenceExpression"]
         default: "RepeatedSequenceExpression"
       seq_expr:
-        $ref: "#/definitions/SequenceExpression"
+        oneOf:
+          - $ref: "#/definitions/LiteralSequenceExpression"
+          - $ref: "#/definitions/DerivedSequenceExpression"
       count:
         $ref: "#/definitions/Range"
     example:
@@ -412,6 +414,10 @@ definitions:
         type: integer
       max:
         type: integer
+    oneOf:
+      - required: [ "type", "min" ]
+      - required: [ "type", "max" ]
+
 
   # =============================================================================
   # BASIC TYPES (STRUCTURES)
