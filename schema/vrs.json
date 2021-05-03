@@ -541,7 +541,7 @@
                "type": "integer"
             }
          },
-         "oneOf": [
+         "anyOf": [
             {
                "required": [
                   "type",

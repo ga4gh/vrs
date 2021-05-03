@@ -414,7 +414,7 @@ definitions:
         type: integer
       max:
         type: integer
-    oneOf:
+    anyOf:
       - required: [ "type", "min" ]
       - required: [ "type", "max" ]
 
