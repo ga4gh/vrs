@@ -459,14 +459,12 @@
                "default": "RepeatedSequenceExpression"
             },
             "seq_expr": {
-               "allOf": [
+               "oneOf": [
                   {
-                     "$ref": "#/definitions/SequenceExpression"
+                     "$ref": "#/definitions/LiteralSequenceExpression"
                   },
                   {
-                     "not": {
-                        "$ref": "#/definitions/RepeatedSequenceExpression"
-                     }
+                     "$ref": "#/definitions/DerivedSequenceExpression"
                   }
                ]
             },
@@ -543,7 +541,7 @@
                "type": "integer"
             }
          },
-         "anyOf": [
+         "oneOf": [
             {
                "required": [
                   "type",
