@@ -75,3 +75,26 @@ To build documentation locally, type:
 Then, open `docs/build/html/index.html`.  The above make command
 should build docs when source changes. (Some types of changes require
 recleaning and building.)
+
+
+# Testing
+
+The VRS repo contains two kinds of tests. Basic smoketests in `tests/`
+ensure that the schema is parseable and works with certain tools.
+These tests provide a basic sanity check during development.
+
+Validation tests (in `validation/`) provide language-neutral tests for
+those implementing tools with VRS.
+
+## Using smoketests
+
+The smoketests require python 3.8+. This is the recommended setup:
+
+```
+$ python3 -m venv venv
+$ source venv/bin/activate
+$ pip install -U setuptools pip
+$ pip install -r requirements.txt
+$ pytest
+
+```
