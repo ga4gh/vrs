@@ -392,25 +392,25 @@ definitions:
   Range:
     description: >-
       A set of classes that provide the possible representations of integer number
-      ranges, from a single integer (Bound) to bounded ranges (ClosedRange) or
-      half-bounded ranges (OpenRange).
+      ranges, from a single integer (BoundedInteger) to bounded ranges (ClosedRange)
+      or half-bounded ranges (OpenRange).
     oneOf:
-      - $ref: "#/definitions/BoundInteger"
+      - $ref: "#/definitions/BoundedInteger"
       - $ref: "#/definitions/BoundedRange"
       - $ref: "#/definitions/HalfBoundedRange"
     discriminator:
       propertyName: type
 
-  BoundInteger:
+  BoundedInteger:
     description: >-
-        A single integer range.
+        A range bounding a single integer.
     type: object
     additionalProperties: false
     properties:
       type:
         type: string
-        enum: [ "BoundInteger" ]
-        default: "BoundInteger"
+        enum: [ "BoundedInteger" ]
+        default: "BoundedInteger"
       value:
         type: integer
     required: ["type", "value"]

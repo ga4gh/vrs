@@ -511,10 +511,10 @@
          ]
       },
       "Range": {
-         "description": "A set of classes that provide the possible representations of integer number ranges, from a single integer (Bound) to bounded ranges (ClosedRange) or half-bounded ranges (OpenRange).",
+         "description": "A set of classes that provide the possible representations of integer number ranges, from a single integer (BoundedInteger) to bounded ranges (ClosedRange) or half-bounded ranges (OpenRange).",
          "oneOf": [
             {
-               "$ref": "#/definitions/BoundInteger"
+               "$ref": "#/definitions/BoundedInteger"
             },
             {
                "$ref": "#/definitions/BoundedRange"
@@ -527,17 +527,17 @@
             "propertyName": "type"
          }
       },
-      "BoundInteger": {
-         "description": "A single integer range.",
+      "BoundedInteger": {
+         "description": "A range bounding a single integer.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
                "enum": [
-                  "BoundInteger"
+                  "BoundedInteger"
                ],
-               "default": "BoundInteger"
+               "default": "BoundedInteger"
             },
             "value": {
                "type": "integer"
