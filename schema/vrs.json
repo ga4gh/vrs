@@ -472,18 +472,6 @@
                "$ref": "#/definitions/Range"
             }
          },
-         "example": {
-            "type": "RepeatedSequenceExpression",
-            "seq_expr": {
-               "type": "LiteralSequenceExpression",
-               "sequence": "CAG"
-            },
-            "count": {
-               "type": "Range",
-               "min": 15,
-               "max": 20
-            }
-         },
          "required": [
             "type",
             "seq_expr",
@@ -523,37 +511,95 @@
          ]
       },
       "Range": {
-         "description": "An inclusive range of integers. A range may be unbounded by omitting either min or max values. Fully unbounded ranges are not permitted (one of min or max MUST be specified).",
+         "description": "A set of classes that provide the possible representations of integer number ranges, from a single integer (Bound) to bounded ranges (ClosedRange) or half-bounded ranges (OpenRange).",
+         "oneOf": [
+            {
+               "$ref": "#/definitions/BoundInteger"
+            },
+            {
+               "$ref": "#/definitions/BoundedRange"
+            },
+            {
+               "$ref": "#/definitions/HalfBoundedRange"
+            }
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
+      },
+      "BoundInteger": {
+         "description": "A single integer range.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
                "enum": [
-                  "Range"
+                  "BoundInteger"
                ],
-               "default": "Range"
+               "default": "BoundInteger"
             },
-            "min": {
-               "type": "integer"
-            },
-            "max": {
+            "value": {
                "type": "integer"
             }
          },
-         "anyOf": [
-            {
-               "required": [
-                  "type",
-                  "min"
-               ]
+         "required": [
+            "type",
+            "value"
+         ]
+      },
+      "HalfBoundedRange": {
+         "description": "\"A half-open range with an open bound indicated by comparator. The bound operator is interpreted as follows: '>=' are all integers greater than and including the value, '<=' are all integers less than and including the value.\"",
+         "type": "object",
+         "additionalProperties": false,
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "HalfBoundedRange"
+               ],
+               "default": "HalfBoundedRange"
             },
-            {
-               "required": [
-                  "type",
-                  "max"
+            "bound": {
+               "type": "integer"
+            },
+            "comparator": {
+               "type": "string",
+               "enum": [
+                  "<=",
+                  ">="
                ]
             }
+         },
+         "required": [
+            "type",
+            "bound",
+            "comparator"
+         ]
+      },
+      "BoundedRange": {
+         "description": "A bounded, inclusive range of integers.",
+         "type": "object",
+         "additionalProperties": false,
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "BoundedRange"
+               ],
+               "default": "BoundedRange"
+            },
+            "min_bound": {
+               "type": "integer"
+            },
+            "max_bound": {
+               "type": "integer"
+            }
+         },
+         "required": [
+            "type",
+            "min_bound",
+            "max_bound"
          ]
       },
       "Sequence": {
