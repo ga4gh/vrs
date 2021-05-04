@@ -1,7 +1,5 @@
 from pathlib import Path
 
-import pytest
-
 root_dir = Path(__file__).parent.parent
 schema_dir = root_dir / "schema"
 vrs_yaml_path = schema_dir / "vrs.yaml"
