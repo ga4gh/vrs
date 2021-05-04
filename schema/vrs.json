@@ -549,7 +549,7 @@
          ]
       },
       "HalfBoundedRange": {
-         "description": "\"A half-open range with an open bound indicated by comparator. The bound operator is interpreted as follows: '>=' are all integers greater than and including the value, '<=' are all integers less than and including the value.\"",
+         "description": "A half-open range with an open bound indicated by comparator. The bound operator is interpreted as follows: '>=' are all integers greater than and including the value, '<=' are all integers less than and including the value.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
