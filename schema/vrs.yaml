@@ -389,52 +389,61 @@ definitions:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Numerics, Comparators, and Ranges
 
-  Range:
+  IntegerOrRange:
     description: >-
-      A set of classes that provide the possible representations of integer number
-      ranges, from a single integer (BoundedInteger) to bounded ranges (ClosedRange)
-      or half-bounded ranges (OpenRange).
+      A set of classes that are used to represent either single integer values
+      (such as SimpleInteger) or integer ranges (such as Range).
     oneOf:
-      - $ref: "#/definitions/BoundedInteger"
-      - $ref: "#/definitions/BoundedRange"
-      - $ref: "#/definitions/HalfBoundedRange"
+      - $ref: "#/definitions/IntegerValue"
+      - $ref: "#/definitions/Range"
     discriminator:
       propertyName: type
 
-  BoundedInteger:
+  IntegerValue:
     description: >-
-        A range bounding a single integer.
+      An abstract class for related integer-based value classes.
     type: object
+    oneOf:
+      - $ref: "#/definitions/SimpleInteger"
+      - $ref: "#/definitions/OpenInteger"
+    discriminator:
+      propertyName: type
+
+  SimpleInteger:
+    description: >-
+      A simple integer value. This is the minimal implementation of an IntegerValue
+      subclass.
     additionalProperties: false
     properties:
       type:
         type: string
-        enum: [ "BoundedInteger" ]
-        default: "BoundedInteger"
+        enum: [ "OpenInteger" ]
+        default: "OpenInteger"
       value:
         type: integer
-    required: ["type", "value"]
+    required: [ "type", "value" ]
 
-  HalfBoundedRange:
+  OpenInteger:
     description: >-
-      A half-open range with an open bound indicated by comparator. The bound operator
-      is interpreted as follows: '>=' are all integers greater than and including
-      the value, '<=' are all integers less than and including the value.
+      A half-bounded integer range represented as a IntegerValue and associated
+      comparator. The bound operator is interpreted as follows: '>=' are all integers
+      greater than and including the value, '<=' are all integers less than and
+      including the value.
     type: object
     additionalProperties: false
     properties:
       type:
         type: string
-        enum: [ "HalfBoundedRange" ]
-        default: "HalfBoundedRange"
-      bound:
+        enum: [ "OpenInteger" ]
+        default: "OpenInteger"
+      value:
         type: integer
       comparator:
         type: string
         enum: [ "<=", ">=" ]
-    required: ["type", "bound", "comparator"]
+    required: [ "type", "value", "comparator" ]
 
-  BoundedRange:
+  Range:
     description: >-
       A bounded, inclusive range of integers.
     type: object
@@ -442,13 +451,13 @@ definitions:
     properties:
       type:
         type: string
-        enum: [ "BoundedRange" ]
-        default: "BoundedRange"
-      min_bound:
+        enum: [ "Range" ]
+        default: "Range"
+      min:
         type: integer
-      max_bound:
+      max:
         type: integer
-    required: ["type", "min_bound", "max_bound"]
+    required: ["type", "min", "max"]
 
 
   # =============================================================================

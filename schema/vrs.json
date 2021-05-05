@@ -510,34 +510,45 @@
             "gene_id"
          ]
       },
-      "Range": {
-         "description": "A set of classes that provide the possible representations of integer number ranges, from a single integer (BoundedInteger) to bounded ranges (ClosedRange) or half-bounded ranges (OpenRange).",
+      "IntegerOrRange": {
+         "description": "A set of classes that are used to represent either single integer values (such as SimpleInteger) or integer ranges (such as Range).",
          "oneOf": [
             {
-               "$ref": "#/definitions/BoundedInteger"
+               "$ref": "#/definitions/IntegerValue"
             },
             {
-               "$ref": "#/definitions/BoundedRange"
-            },
-            {
-               "$ref": "#/definitions/HalfBoundedRange"
+               "$ref": "#/definitions/Range"
             }
          ],
          "discriminator": {
             "propertyName": "type"
          }
       },
-      "BoundedInteger": {
-         "description": "A range bounding a single integer.",
+      "IntegerValue": {
+         "description": "An abstract class for related integer-based value classes.",
          "type": "object",
+         "oneOf": [
+            {
+               "$ref": "#/definitions/SimpleInteger"
+            },
+            {
+               "$ref": "#/definitions/OpenInteger"
+            }
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
+      },
+      "SimpleInteger": {
+         "description": "A simple integer value. This is the minimal implementation of an IntegerValue subclass.",
          "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
                "enum": [
-                  "BoundedInteger"
+                  "OpenInteger"
                ],
-               "default": "BoundedInteger"
+               "default": "OpenInteger"
             },
             "value": {
                "type": "integer"
@@ -548,19 +559,19 @@
             "value"
          ]
       },
-      "HalfBoundedRange": {
-         "description": "A half-open range with an open bound indicated by comparator. The bound operator is interpreted as follows: '>=' are all integers greater than and including the value, '<=' are all integers less than and including the value.",
+      "OpenInteger": {
+         "description": "A half-bounded integer range represented as a IntegerValue and associated comparator. The bound operator is interpreted as follows: '>=' are all integers greater than and including the value, '<=' are all integers less than and including the value.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
                "enum": [
-                  "HalfBoundedRange"
+                  "OpenInteger"
                ],
-               "default": "HalfBoundedRange"
+               "default": "OpenInteger"
             },
-            "bound": {
+            "value": {
                "type": "integer"
             },
             "comparator": {
@@ -573,11 +584,11 @@
          },
          "required": [
             "type",
-            "bound",
+            "value",
             "comparator"
          ]
       },
-      "BoundedRange": {
+      "Range": {
          "description": "A bounded, inclusive range of integers.",
          "type": "object",
          "additionalProperties": false,
@@ -585,21 +596,21 @@
             "type": {
                "type": "string",
                "enum": [
-                  "BoundedRange"
+                  "Range"
                ],
-               "default": "BoundedRange"
+               "default": "Range"
             },
-            "min_bound": {
+            "min": {
                "type": "integer"
             },
-            "max_bound": {
+            "max": {
                "type": "integer"
             }
          },
          "required": [
             "type",
-            "min_bound",
-            "max_bound"
+            "min",
+            "max"
          ]
       },
       "Sequence": {
