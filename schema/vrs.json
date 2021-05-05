@@ -511,7 +511,7 @@
          ]
       },
       "IntegerOrRange": {
-         "description": "A set of classes that are used to represent either single integer values (such as SimpleInteger) or integer ranges (such as Range).",
+         "description": "A set of classes that are used to represent either single integer values (such as SimpleInteger) or integer ranges (such as IntegerRange).",
          "oneOf": [
             {
                "$ref": "#/definitions/IntegerValue"
