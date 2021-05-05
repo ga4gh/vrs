@@ -240,7 +240,7 @@
                ]
             },
             "copies": {
-               "$ref": "#/definitions/Range"
+               "$ref": "#/definitions/IntegerOrRange"
             }
          },
          "required": [
@@ -344,10 +344,10 @@
                "default": "SequenceInterval"
             },
             "start": {
-               "$ref": "#/definitions/Range"
+               "$ref": "#/definitions/IntegerOrRange"
             },
             "end": {
-               "$ref": "#/definitions/Range"
+               "$ref": "#/definitions/IntegerOrRange"
             }
          },
          "required": [
@@ -469,7 +469,7 @@
                ]
             },
             "count": {
-               "$ref": "#/definitions/Range"
+               "$ref": "#/definitions/IntegerOrRange"
             }
          },
          "required": [
@@ -517,7 +517,7 @@
                "$ref": "#/definitions/IntegerValue"
             },
             {
-               "$ref": "#/definitions/Range"
+               "$ref": "#/definitions/IntegerRange"
             }
          ],
          "discriminator": {
@@ -588,7 +588,7 @@
             "comparator"
          ]
       },
-      "Range": {
+      "IntegerRange": {
          "description": "A bounded, inclusive range of integers.",
          "type": "object",
          "additionalProperties": false,
@@ -596,9 +596,9 @@
             "type": {
                "type": "string",
                "enum": [
-                  "Range"
+                  "IntegerRange"
                ],
-               "default": "Range"
+               "default": "IntegerRange"
             },
             "min": {
                "type": "integer"

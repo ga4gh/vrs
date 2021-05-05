@@ -191,7 +191,7 @@ definitions:
           - $ref: "#/definitions/SequenceExpression"
           - $ref: "#/definitions/CURIE"
       copies:
-        $ref: "#/definitions/Range"
+        $ref: "#/definitions/IntegerOrRange"
     required: [ "type", "subject", "copies" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -274,9 +274,9 @@ definitions:
         enum: [ "SequenceInterval" ]
         default: "SequenceInterval"
       start:
-        $ref: "#/definitions/Range"
+        $ref: "#/definitions/IntegerOrRange"
       end:
-        $ref: "#/definitions/Range"
+        $ref: "#/definitions/IntegerOrRange"
     required: [ "type", "start", "end" ]
 
   # SimpleInterval has been moved to DEPRECATED section at bottom.
@@ -354,7 +354,7 @@ definitions:
           - $ref: "#/definitions/LiteralSequenceExpression"
           - $ref: "#/definitions/DerivedSequenceExpression"
       count:
-        $ref: "#/definitions/Range"
+        $ref: "#/definitions/IntegerOrRange"
     required: [ "type", "seq_expr", "count" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -395,7 +395,7 @@ definitions:
       (such as SimpleInteger) or integer ranges (such as Range).
     oneOf:
       - $ref: "#/definitions/IntegerValue"
-      - $ref: "#/definitions/Range"
+      - $ref: "#/definitions/IntegerRange"
     discriminator:
       propertyName: type
 
@@ -443,7 +443,7 @@ definitions:
         enum: [ "<=", ">=" ]
     required: [ "type", "value", "comparator" ]
 
-  Range:
+  IntegerRange:
     description: >-
       A bounded, inclusive range of integers.
     type: object
@@ -451,8 +451,8 @@ definitions:
     properties:
       type:
         type: string
-        enum: [ "Range" ]
-        default: "Range"
+        enum: [ "IntegerRange" ]
+        default: "IntegerRange"
       min:
         type: integer
       max:
