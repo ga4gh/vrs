@@ -118,13 +118,13 @@ option java_package = "org.ga4gh.vrs.v{version}";
                 self.abstract_types.add(message)
 
     def _build_message(self, message):
-        logger.info(f'Building {message}...')
+        logger.debug(f'Checking {message} dependencies...')
         for dependency in self.dependencies[message]:
             if dependency in self.messages:
-                logger.debug(f'{dependency} dependency met')
+                logger.debug(f'{message}.{dependency} dependency met.')
                 continue
             else:
-                logger.debug(f'{dependency} dependency not met, building.')
+                logger.debug(f'{message}.{dependency} dependency not met, building.')
                 self._build_message(dependency)
         self.messages[message] = ProtoMessage(message, self)
 
@@ -143,6 +143,7 @@ class ProtoMessage:
     }
 
     def __init__(self, message_name, document, fields=None):
+        logger.info(f'Building {message_name}...')
         self.message_name = message_name
         self.document = document
         if fields is None:
@@ -162,6 +163,7 @@ class ProtoMessage:
             self.fields = fields
         self._uniquify_fields()
         self._assign_proto_field_values()
+        logger.info(f'{message_name} built.')
 
     def emit(self, level=0):
         print(indent(f'message {self.message_name} {{', level))
