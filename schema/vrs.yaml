@@ -404,6 +404,7 @@ definitions:
   Integer:
     description: >-
       A simple integer value as a VRS class.
+    type: object
     additionalProperties: false
     properties:
       type:
