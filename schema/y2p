@@ -6,6 +6,15 @@ import re
 import subprocess
 from collections import Counter
 from inflector.languages.english import English
+import logging
+
+logger = logging.getLogger(__name__)
+debug_handler = logging.FileHandler('debug.log', mode='w')
+debug_handler.setLevel(logging.DEBUG)
+formatter = logging.Formatter("%(asctime)s %(name)s %(levelname)-8s %(message)s")
+debug_handler.setFormatter(formatter)
+logger.addHandler(debug_handler)
+logger.setLevel(logging.DEBUG)
 
 INFLECTOR = English()
 
@@ -109,10 +118,13 @@ option java_package = "org.ga4gh.vrs.v{version}";
                 self.abstract_types.add(message)
 
     def _build_message(self, message):
+        logger.info(f'Building {message}...')
         for dependency in self.dependencies[message]:
             if dependency in self.messages:
+                logger.debug(f'{dependency} dependency met')
                 continue
             else:
+                logger.debug(f'{dependency} dependency not met, building.')
                 self._build_message(dependency)
         self.messages[message] = ProtoMessage(message, self)
 
@@ -185,6 +197,7 @@ class ProtoMessage:
         return field
 
     def _create_oneof_field(self, name, field_references):
+        logger.debug(f'Creating {self.message_name}.one_of {name}')
         one_of_fields = list()
         for one_of_obj in field_references:
             s = simplify_reference(one_of_obj['$ref'])
@@ -199,6 +212,7 @@ class ProtoMessage:
 
     def _build_fields(self):
         if self.abstract:
+            logger.debug(f'{self.message_name} is abstract, resolving to concrete.')
             field = self._create_oneof_field(snake_case(self.message_name), self.js_definition['oneOf'])
             self.fields.append(field)
             return
