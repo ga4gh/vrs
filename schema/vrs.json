@@ -240,7 +240,17 @@
                ]
             },
             "copies": {
-               "$ref": "#/definitions/Range"
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/Integer"
+                  },
+                  {
+                     "$ref": "#/definitions/BoundedIntegerRange"
+                  },
+                  {
+                     "$ref": "#/definitions/HalfBoundedIntegerRange"
+                  }
+               ]
             }
          },
          "required": [
@@ -344,10 +354,30 @@
                "default": "SequenceInterval"
             },
             "start": {
-               "$ref": "#/definitions/Range"
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/Integer"
+                  },
+                  {
+                     "$ref": "#/definitions/BoundedIntegerRange"
+                  },
+                  {
+                     "$ref": "#/definitions/HalfBoundedIntegerRange"
+                  }
+               ]
             },
             "end": {
-               "$ref": "#/definitions/Range"
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/Integer"
+                  },
+                  {
+                     "$ref": "#/definitions/BoundedIntegerRange"
+                  },
+                  {
+                     "$ref": "#/definitions/HalfBoundedIntegerRange"
+                  }
+               ]
             }
          },
          "required": [
@@ -459,31 +489,27 @@
                "default": "RepeatedSequenceExpression"
             },
             "seq_expr": {
-               "allOf": [
+               "oneOf": [
                   {
-                     "$ref": "#/definitions/SequenceExpression"
+                     "$ref": "#/definitions/LiteralSequenceExpression"
                   },
                   {
-                     "not": {
-                        "$ref": "#/definitions/RepeatedSequenceExpression"
-                     }
+                     "$ref": "#/definitions/DerivedSequenceExpression"
                   }
                ]
             },
             "count": {
-               "$ref": "#/definitions/Range"
-            }
-         },
-         "example": {
-            "type": "RepeatedSequenceExpression",
-            "seq_expr": {
-               "type": "LiteralSequenceExpression",
-               "sequence": "CAG"
-            },
-            "count": {
-               "type": "Range",
-               "min": 15,
-               "max": 20
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/Integer"
+                  },
+                  {
+                     "$ref": "#/definitions/BoundedIntegerRange"
+                  },
+                  {
+                     "$ref": "#/definitions/HalfBoundedIntegerRange"
+                  }
+               ]
             }
          },
          "required": [
@@ -524,17 +550,66 @@
             "gene_id"
          ]
       },
-      "Range": {
-         "description": "An inclusive range of integers. A range may be unbounded by omitting either min or max values. Fully unbounded ranges are not permitted (one of min or max MUST be specified).",
+      "Integer": {
+         "description": "A simple integer value as a VRS class.",
+         "additionalProperties": false,
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "Integer"
+               ],
+               "default": "Integer"
+            },
+            "value": {
+               "type": "integer"
+            }
+         },
+         "required": [
+            "type",
+            "value"
+         ]
+      },
+      "HalfBoundedIntegerRange": {
+         "description": "A half-bounded integer range represented as an integer and associated comparator. The bound operator is interpreted as follows: '>=' are all integers greater than and including the value, '<=' are all integers less than and including the value.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
                "enum": [
-                  "Range"
+                  "HalfBoundedIntegerRange"
                ],
-               "default": "Range"
+               "default": "HalfBoundedIntegerRange"
+            },
+            "value": {
+               "type": "integer"
+            },
+            "comparator": {
+               "type": "string",
+               "enum": [
+                  "<=",
+                  ">="
+               ]
+            }
+         },
+         "required": [
+            "type",
+            "value",
+            "comparator"
+         ]
+      },
+      "BoundedIntegerRange": {
+         "description": "A bounded, inclusive range of integers.",
+         "type": "object",
+         "additionalProperties": false,
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "BoundedIntegerRange"
+               ],
+               "default": "BoundedIntegerRange"
             },
             "min": {
                "type": "integer"
@@ -543,19 +618,10 @@
                "type": "integer"
             }
          },
-         "anyOf": [
-            {
-               "required": [
-                  "type",
-                  "min"
-               ]
-            },
-            {
-               "required": [
-                  "type",
-                  "max"
-               ]
-            }
+         "required": [
+            "type",
+            "min",
+            "max"
          ]
       },
       "Sequence": {

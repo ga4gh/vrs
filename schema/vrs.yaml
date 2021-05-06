@@ -191,7 +191,10 @@ definitions:
           - $ref: "#/definitions/SequenceExpression"
           - $ref: "#/definitions/CURIE"
       copies:
-        $ref: "#/definitions/Range"
+        oneOf:
+          - $ref: "#/definitions/Integer"
+          - $ref: "#/definitions/BoundedIntegerRange"
+          - $ref: "#/definitions/HalfBoundedIntegerRange"
     required: [ "type", "subject", "copies" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -274,9 +277,15 @@ definitions:
         enum: [ "SequenceInterval" ]
         default: "SequenceInterval"
       start:
-        $ref: "#/definitions/Range"
+        oneOf:
+          - $ref: "#/definitions/Integer"
+          - $ref: "#/definitions/BoundedIntegerRange"
+          - $ref: "#/definitions/HalfBoundedIntegerRange"
       end:
-        $ref: "#/definitions/Range"
+        oneOf:
+          - $ref: "#/definitions/Integer"
+          - $ref: "#/definitions/BoundedIntegerRange"
+          - $ref: "#/definitions/HalfBoundedIntegerRange"
     required: [ "type", "start", "end" ]
 
   # SimpleInterval has been moved to DEPRECATED section at bottom.
@@ -350,21 +359,14 @@ definitions:
         enum: ["RepeatedSequenceExpression"]
         default: "RepeatedSequenceExpression"
       seq_expr:
-        allOf:
-          - $ref: "#/definitions/SequenceExpression"
-          - not:
-              $ref: "#/definitions/RepeatedSequenceExpression"
+        oneOf:
+          - $ref: "#/definitions/LiteralSequenceExpression"
+          - $ref: "#/definitions/DerivedSequenceExpression"
       count:
-        $ref: "#/definitions/Range"
-    example:
-      type: RepeatedSequenceExpression
-      seq_expr:
-        type: LiteralSequenceExpression
-        sequence: CAG
-      count:
-        type: Range
-        min: 15
-        max: 20
+        oneOf:
+          - $ref: "#/definitions/Integer"
+          - $ref: "#/definitions/BoundedIntegerRange"
+          - $ref: "#/definitions/HalfBoundedIntegerRange"
     required: [ "type", "seq_expr", "count" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -397,27 +399,56 @@ definitions:
     required: [ "type", "gene_id" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # Range
+  # Numerics, Comparators, and Ranges
 
-  Range:
+  Integer:
     description: >-
-      An inclusive range of integers. A range may be unbounded by omitting either
-      min or max values. Fully unbounded ranges are not permitted (one of min or
-      max MUST be specified).
+      A simple integer value as a VRS class.
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [ "Integer" ]
+        default: "Integer"
+      value:
+        type: integer
+    required: [ "type", "value" ]
+
+  HalfBoundedIntegerRange:
+    description: >-
+      A half-bounded integer range represented as an integer and associated
+      comparator. The bound operator is interpreted as follows: '>=' are all integers
+      greater than and including the value, '<=' are all integers less than and
+      including the value.
     type: object
     additionalProperties: false
     properties:
       type:
         type: string
-        enum: [ "Range" ]
-        default: "Range"
+        enum: [ "HalfBoundedIntegerRange" ]
+        default: "HalfBoundedIntegerRange"
+      value:
+        type: integer
+      comparator:
+        type: string
+        enum: [ "<=", ">=" ]
+    required: [ "type", "value", "comparator" ]
+
+  BoundedIntegerRange:
+    description: >-
+      A bounded, inclusive range of integers.
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [ "BoundedIntegerRange" ]
+        default: "BoundedIntegerRange"
       min:
         type: integer
       max:
         type: integer
-    anyOf:
-      - required: [ "type", "min" ]
-      - required: [ "type", "max" ]
+    required: ["type", "min", "max"]
 
 
   # =============================================================================
@@ -506,8 +537,7 @@ definitions:
     deprecated: true
     description: >-
       DEPRECATED: A SimpleInterval represents a span of sequence. Positions are
-      always represented by contiguous spans using interbase
-      coordinates.
+      always represented by contiguous spans using interbase coordinates.
 
       This class is deprecated. Use SequenceInterval instead.
     additionalProperties: false

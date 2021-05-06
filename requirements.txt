@@ -1,2 +1,5 @@
+pytest
+python-jsonschema-objects>=0.3,<=0.3.10
+pyyaml
 ipython >= 7.5.0
 inflector >= 3.0.1
