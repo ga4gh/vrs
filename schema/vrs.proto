@@ -98,7 +98,11 @@ message CopyNumber {
       RepeatedSequenceExpression repeated_sequence_expression = 7;
       string curie = 8;
    }
-   Range copies = 9;
+   oneof copies {
+      Integer integer = 9;
+      BoundedIntegerRange bounded_integer_range = 10;
+      HalfBoundedIntegerRange half_bounded_integer_range = 11;
+   }
 }
 
 message Location {
@@ -125,8 +129,16 @@ message SequenceLocation {
 }
 
 message SequenceInterval {
-   Range start = 1;
-   Range end = 2;
+   oneof start {
+      Integer start_integer = 1;
+      BoundedIntegerRange start_bounded_integer_range = 2;
+      HalfBoundedIntegerRange start_half_bounded_integer_range = 3;
+   }
+   oneof end {
+      Integer end_integer = 4;
+      BoundedIntegerRange end_bounded_integer_range = 5;
+      HalfBoundedIntegerRange end_half_bounded_integer_range = 6;
+   }
 }
 
 message CytobandInterval {
@@ -156,7 +168,11 @@ message RepeatedSequenceExpression {
       LiteralSequenceExpression literal_sequence_expression = 1;
       DerivedSequenceExpression derived_sequence_expression = 2;
    }
-   Range count = 3;
+   oneof count {
+      Integer integer = 3;
+      BoundedIntegerRange bounded_integer_range = 4;
+      HalfBoundedIntegerRange half_bounded_integer_range = 5;
+   }
 }
 
 message Feature {
@@ -169,7 +185,16 @@ message Gene {
    string gene_id = 1;
 }
 
-message Range {
+message Integer {
+   uint64 value = 1;
+}
+
+message HalfBoundedIntegerRange {
+   uint64 value = 1;
+   string comparator = 2;
+}
+
+message BoundedIntegerRange {
    uint64 min = 1;
    uint64 max = 2;
 }
