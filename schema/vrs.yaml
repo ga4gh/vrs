@@ -191,7 +191,10 @@ definitions:
           - $ref: "#/definitions/SequenceExpression"
           - $ref: "#/definitions/CURIE"
       copies:
-        $ref: "#/definitions/IntegerOrRange"
+        oneOf:
+          - $ref: "#/definitions/Integer"
+          - $ref: "#/definitions/BoundedIntegerRange"
+          - $ref: "#/definitions/HalfBoundedIntegerRange"
     required: [ "type", "subject", "copies" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -274,9 +277,15 @@ definitions:
         enum: [ "SequenceInterval" ]
         default: "SequenceInterval"
       start:
-        $ref: "#/definitions/IntegerOrRange"
+        oneOf:
+          - $ref: "#/definitions/Integer"
+          - $ref: "#/definitions/BoundedIntegerRange"
+          - $ref: "#/definitions/HalfBoundedIntegerRange"
       end:
-        $ref: "#/definitions/IntegerOrRange"
+        oneOf:
+          - $ref: "#/definitions/Integer"
+          - $ref: "#/definitions/BoundedIntegerRange"
+          - $ref: "#/definitions/HalfBoundedIntegerRange"
     required: [ "type", "start", "end" ]
 
   # SimpleInterval has been moved to DEPRECATED section at bottom.
@@ -354,7 +363,10 @@ definitions:
           - $ref: "#/definitions/LiteralSequenceExpression"
           - $ref: "#/definitions/DerivedSequenceExpression"
       count:
-        $ref: "#/definitions/IntegerOrRange"
+        oneOf:
+          - $ref: "#/definitions/Integer"
+          - $ref: "#/definitions/BoundedIntegerRange"
+          - $ref: "#/definitions/HalfBoundedIntegerRange"
     required: [ "type", "seq_expr", "count" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -389,43 +401,22 @@ definitions:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Numerics, Comparators, and Ranges
 
-  IntegerOrRange:
+  Integer:
     description: >-
-      A set of classes that are used to represent either single integer values
-      (such as SimpleInteger) or integer ranges (such as IntegerRange).
-    oneOf:
-      - $ref: "#/definitions/IntegerValue"
-      - $ref: "#/definitions/IntegerRange"
-    discriminator:
-      propertyName: type
-
-  IntegerValue:
-    description: >-
-      An abstract class for related integer-based value classes.
-    type: object
-    oneOf:
-      - $ref: "#/definitions/SimpleInteger"
-      - $ref: "#/definitions/OpenInteger"
-    discriminator:
-      propertyName: type
-
-  SimpleInteger:
-    description: >-
-      A simple integer value. This is the minimal implementation of an IntegerValue
-      subclass.
+      A simple integer value as a VRS class.
     additionalProperties: false
     properties:
       type:
         type: string
-        enum: [ "OpenInteger" ]
-        default: "OpenInteger"
+        enum: [ "Integer" ]
+        default: "Integer"
       value:
         type: integer
     required: [ "type", "value" ]
 
-  OpenInteger:
+  HalfBoundedIntegerRange:
     description: >-
-      A half-bounded integer range represented as a IntegerValue and associated
+      A half-bounded integer range represented as an integer and associated
       comparator. The bound operator is interpreted as follows: '>=' are all integers
       greater than and including the value, '<=' are all integers less than and
       including the value.
@@ -434,8 +425,8 @@ definitions:
     properties:
       type:
         type: string
-        enum: [ "OpenInteger" ]
-        default: "OpenInteger"
+        enum: [ "HalfBoundedIntegerRange" ]
+        default: "HalfBoundedIntegerRange"
       value:
         type: integer
       comparator:
@@ -443,7 +434,7 @@ definitions:
         enum: [ "<=", ">=" ]
     required: [ "type", "value", "comparator" ]
 
-  IntegerRange:
+  BoundedIntegerRange:
     description: >-
       A bounded, inclusive range of integers.
     type: object
@@ -451,8 +442,8 @@ definitions:
     properties:
       type:
         type: string
-        enum: [ "IntegerRange" ]
-        default: "IntegerRange"
+        enum: [ "BoundedIntegerRange" ]
+        default: "BoundedIntegerRange"
       min:
         type: integer
       max:
