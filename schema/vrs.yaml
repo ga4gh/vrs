@@ -192,9 +192,9 @@ definitions:
           - $ref: "#/definitions/CURIE"
       copies:
         oneOf:
-          - $ref: "#/definitions/Integer"
-          - $ref: "#/definitions/BoundedIntegerRange"
-          - $ref: "#/definitions/HalfBoundedIntegerRange"
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
     required: [ "type", "subject", "copies" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -278,14 +278,14 @@ definitions:
         default: "SequenceInterval"
       start:
         oneOf:
-          - $ref: "#/definitions/Integer"
-          - $ref: "#/definitions/BoundedIntegerRange"
-          - $ref: "#/definitions/HalfBoundedIntegerRange"
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
       end:
         oneOf:
-          - $ref: "#/definitions/Integer"
-          - $ref: "#/definitions/BoundedIntegerRange"
-          - $ref: "#/definitions/HalfBoundedIntegerRange"
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
     required: [ "type", "start", "end" ]
 
   # SimpleInterval has been moved to DEPRECATED section at bottom.
@@ -364,9 +364,9 @@ definitions:
           - $ref: "#/definitions/DerivedSequenceExpression"
       count:
         oneOf:
-          - $ref: "#/definitions/Integer"
-          - $ref: "#/definitions/BoundedIntegerRange"
-          - $ref: "#/definitions/HalfBoundedIntegerRange"
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
     required: [ "type", "seq_expr", "count" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -401,54 +401,54 @@ definitions:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Numerics, Comparators, and Ranges
 
-  Integer:
+  Number:
     description: >-
-      A simple integer value as a VRS class.
+      A simple number value as a VRS class.
     type: object
     additionalProperties: false
     properties:
       type:
         type: string
-        enum: [ "Integer" ]
-        default: "Integer"
+        enum: [ "Number" ]
+        default: "Number"
       value:
-        type: integer
+        type: number
     required: [ "type", "value" ]
 
-  HalfBoundedIntegerRange:
+  IndefiniteRange:
     description: >-
-      A half-bounded integer range represented as an integer and associated
-      comparator. The bound operator is interpreted as follows: '>=' are all integers
-      greater than and including the value, '<=' are all integers less than and
+      An indefinite range represented as a number and associated comparator.
+      The bound operator is interpreted as follows: '>=' are all values
+      greater than and including the value, '<=' are all numbers less than and
       including the value.
     type: object
     additionalProperties: false
     properties:
       type:
         type: string
-        enum: [ "HalfBoundedIntegerRange" ]
-        default: "HalfBoundedIntegerRange"
+        enum: [ "IndefiniteRange" ]
+        default: "IndefiniteRange"
       value:
-        type: integer
+        type: number
       comparator:
         type: string
         enum: [ "<=", ">=" ]
     required: [ "type", "value", "comparator" ]
 
-  BoundedIntegerRange:
+  DefiniteRange:
     description: >-
-      A bounded, inclusive range of integers.
+      A bounded, inclusive range of numbers.
     type: object
     additionalProperties: false
     properties:
       type:
         type: string
-        enum: [ "BoundedIntegerRange" ]
-        default: "BoundedIntegerRange"
+        enum: [ "DefiniteRange" ]
+        default: "DefiniteRange"
       min:
-        type: integer
+        type: number
       max:
-        type: integer
+        type: number
     required: ["type", "min", "max"]
 
 
