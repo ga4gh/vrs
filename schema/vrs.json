@@ -242,13 +242,13 @@
             "copies": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Integer"
+                     "$ref": "#/definitions/Number"
                   },
                   {
-                     "$ref": "#/definitions/BoundedIntegerRange"
+                     "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/HalfBoundedIntegerRange"
+                     "$ref": "#/definitions/DefiniteRange"
                   }
                ]
             }
@@ -356,26 +356,26 @@
             "start": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Integer"
+                     "$ref": "#/definitions/Number"
                   },
                   {
-                     "$ref": "#/definitions/BoundedIntegerRange"
+                     "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/HalfBoundedIntegerRange"
+                     "$ref": "#/definitions/DefiniteRange"
                   }
                ]
             },
             "end": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Integer"
+                     "$ref": "#/definitions/Number"
                   },
                   {
-                     "$ref": "#/definitions/BoundedIntegerRange"
+                     "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/HalfBoundedIntegerRange"
+                     "$ref": "#/definitions/DefiniteRange"
                   }
                ]
             }
@@ -501,13 +501,13 @@
             "count": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Integer"
+                     "$ref": "#/definitions/Number"
                   },
                   {
-                     "$ref": "#/definitions/BoundedIntegerRange"
+                     "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/HalfBoundedIntegerRange"
+                     "$ref": "#/definitions/DefiniteRange"
                   }
                ]
             }
@@ -550,20 +550,20 @@
             "gene_id"
          ]
       },
-      "Integer": {
-         "description": "A simple integer value as a VRS class.",
+      "Number": {
+         "description": "A simple number value as a VRS class.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
                "enum": [
-                  "Integer"
+                  "Number"
                ],
-               "default": "Integer"
+               "default": "Number"
             },
             "value": {
-               "type": "integer"
+               "type": "number"
             }
          },
          "required": [
@@ -571,20 +571,20 @@
             "value"
          ]
       },
-      "HalfBoundedIntegerRange": {
-         "description": "A half-bounded integer range represented as an integer and associated comparator. The bound operator is interpreted as follows: '>=' are all integers greater than and including the value, '<=' are all integers less than and including the value.",
+      "IndefiniteRange": {
+         "description": "An indefinite range represented as a number and associated comparator. The bound operator is interpreted as follows: '>=' are all values greater than and including the value, '<=' are all numbers less than and including the value.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
                "enum": [
-                  "HalfBoundedIntegerRange"
+                  "IndefiniteRange"
                ],
-               "default": "HalfBoundedIntegerRange"
+               "default": "IndefiniteRange"
             },
             "value": {
-               "type": "integer"
+               "type": "number"
             },
             "comparator": {
                "type": "string",
@@ -600,23 +600,23 @@
             "comparator"
          ]
       },
-      "BoundedIntegerRange": {
-         "description": "A bounded, inclusive range of integers.",
+      "DefiniteRange": {
+         "description": "A bounded, inclusive range of numbers.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
                "enum": [
-                  "BoundedIntegerRange"
+                  "DefiniteRange"
                ],
-               "default": "BoundedIntegerRange"
+               "default": "DefiniteRange"
             },
             "min": {
-               "type": "integer"
+               "type": "number"
             },
             "max": {
-               "type": "integer"
+               "type": "number"
             }
          },
          "required": [
