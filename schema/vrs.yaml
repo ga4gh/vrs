@@ -191,7 +191,10 @@ definitions:
           - $ref: "#/definitions/SequenceExpression"
           - $ref: "#/definitions/CURIE"
       copies:
-        $ref: "#/definitions/Range"
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
     required: [ "type", "subject", "copies" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -274,9 +277,15 @@ definitions:
         enum: [ "SequenceInterval" ]
         default: "SequenceInterval"
       start:
-        $ref: "#/definitions/Range"
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
       end:
-        $ref: "#/definitions/Range"
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
     required: [ "type", "start", "end" ]
 
   # SimpleInterval has been moved to DEPRECATED section at bottom.
@@ -354,16 +363,10 @@ definitions:
           - $ref: "#/definitions/LiteralSequenceExpression"
           - $ref: "#/definitions/DerivedSequenceExpression"
       count:
-        $ref: "#/definitions/Range"
-    example:
-      type: RepeatedSequenceExpression
-      seq_expr:
-        type: LiteralSequenceExpression
-        sequence: CAG
-      count:
-        type: Range
-        min: 15
-        max: 20
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
     required: [ "type", "seq_expr", "count" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -396,27 +399,57 @@ definitions:
     required: [ "type", "gene_id" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # Range
+  # Numerics, Comparators, and Ranges
 
-  Range:
+  Number:
     description: >-
-      An inclusive range of integers. A range may be unbounded by omitting either
-      min or max values. Fully unbounded ranges are not permitted (one of min or
-      max MUST be specified).
+      A simple number value as a VRS class.
     type: object
     additionalProperties: false
     properties:
       type:
         type: string
-        enum: [ "Range" ]
-        default: "Range"
+        enum: [ "Number" ]
+        default: "Number"
+      value:
+        type: number
+    required: [ "type", "value" ]
+
+  IndefiniteRange:
+    description: >-
+      An indefinite range represented as a number and associated comparator.
+      The bound operator is interpreted as follows: '>=' are all values
+      greater than and including the value, '<=' are all numbers less than and
+      including the value.
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [ "IndefiniteRange" ]
+        default: "IndefiniteRange"
+      value:
+        type: number
+      comparator:
+        type: string
+        enum: [ "<=", ">=" ]
+    required: [ "type", "value", "comparator" ]
+
+  DefiniteRange:
+    description: >-
+      A bounded, inclusive range of numbers.
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [ "DefiniteRange" ]
+        default: "DefiniteRange"
       min:
-        type: integer
+        type: number
       max:
-        type: integer
-    anyOf:
-      - required: [ "type", "min" ]
-      - required: [ "type", "max" ]
+        type: number
+    required: ["type", "min", "max"]
 
 
   # =============================================================================
@@ -505,8 +538,7 @@ definitions:
     deprecated: true
     description: >-
       DEPRECATED: A SimpleInterval represents a span of sequence. Positions are
-      always represented by contiguous spans using interbase
-      coordinates.
+      always represented by contiguous spans using interbase coordinates.
 
       This class is deprecated. Use SequenceInterval instead.
     additionalProperties: false

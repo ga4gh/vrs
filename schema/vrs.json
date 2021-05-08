@@ -240,7 +240,17 @@
                ]
             },
             "copies": {
-               "$ref": "#/definitions/Range"
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/Number"
+                  },
+                  {
+                     "$ref": "#/definitions/IndefiniteRange"
+                  },
+                  {
+                     "$ref": "#/definitions/DefiniteRange"
+                  }
+               ]
             }
          },
          "required": [
@@ -344,10 +354,30 @@
                "default": "SequenceInterval"
             },
             "start": {
-               "$ref": "#/definitions/Range"
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/Number"
+                  },
+                  {
+                     "$ref": "#/definitions/IndefiniteRange"
+                  },
+                  {
+                     "$ref": "#/definitions/DefiniteRange"
+                  }
+               ]
             },
             "end": {
-               "$ref": "#/definitions/Range"
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/Number"
+                  },
+                  {
+                     "$ref": "#/definitions/IndefiniteRange"
+                  },
+                  {
+                     "$ref": "#/definitions/DefiniteRange"
+                  }
+               ]
             }
          },
          "required": [
@@ -469,19 +499,17 @@
                ]
             },
             "count": {
-               "$ref": "#/definitions/Range"
-            }
-         },
-         "example": {
-            "type": "RepeatedSequenceExpression",
-            "seq_expr": {
-               "type": "LiteralSequenceExpression",
-               "sequence": "CAG"
-            },
-            "count": {
-               "type": "Range",
-               "min": 15,
-               "max": 20
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/Number"
+                  },
+                  {
+                     "$ref": "#/definitions/IndefiniteRange"
+                  },
+                  {
+                     "$ref": "#/definitions/DefiniteRange"
+                  }
+               ]
             }
          },
          "required": [
@@ -522,38 +550,79 @@
             "gene_id"
          ]
       },
-      "Range": {
-         "description": "An inclusive range of integers. A range may be unbounded by omitting either min or max values. Fully unbounded ranges are not permitted (one of min or max MUST be specified).",
+      "Number": {
+         "description": "A simple number value as a VRS class.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
                "enum": [
-                  "Range"
+                  "Number"
                ],
-               "default": "Range"
+               "default": "Number"
             },
-            "min": {
-               "type": "integer"
-            },
-            "max": {
-               "type": "integer"
+            "value": {
+               "type": "number"
             }
          },
-         "anyOf": [
-            {
-               "required": [
-                  "type",
-                  "min"
-               ]
+         "required": [
+            "type",
+            "value"
+         ]
+      },
+      "IndefiniteRange": {
+         "description": "An indefinite range represented as a number and associated comparator. The bound operator is interpreted as follows: '>=' are all values greater than and including the value, '<=' are all numbers less than and including the value.",
+         "type": "object",
+         "additionalProperties": false,
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "IndefiniteRange"
+               ],
+               "default": "IndefiniteRange"
             },
-            {
-               "required": [
-                  "type",
-                  "max"
+            "value": {
+               "type": "number"
+            },
+            "comparator": {
+               "type": "string",
+               "enum": [
+                  "<=",
+                  ">="
                ]
             }
+         },
+         "required": [
+            "type",
+            "value",
+            "comparator"
+         ]
+      },
+      "DefiniteRange": {
+         "description": "A bounded, inclusive range of numbers.",
+         "type": "object",
+         "additionalProperties": false,
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "DefiniteRange"
+               ],
+               "default": "DefiniteRange"
+            },
+            "min": {
+               "type": "number"
+            },
+            "max": {
+               "type": "number"
+            }
+         },
+         "required": [
+            "type",
+            "min",
+            "max"
          ]
       },
       "Sequence": {
