@@ -1,18 +1,18 @@
 {
    "identifiers": {
-      "curie_sep": ":",
       "namespace": "ga4gh",
+      "curie_sep": ":",
       "ref_sep": ".",
-      "regexp": "^ga4gh:(?P<type>[^.]+)\\.(?P<digest>.+)$",
       "type_prefix_map": {
-         "Allele": "VA",
-         "ChromosomeLocation": "VCL",
-         "CopyNumber": "VCN",
-         "Haplotype": "VH",
          "Sequence": "SQ",
-         "SequenceLocation": "VSL",
+         "Allele": "VA",
+         "VariationSet": "VS",
          "Text": "VT",
-         "VariationSet": "VS"
-      }
+         "Haplotype": "VH",
+         "CopyNumber": "VCN",
+         "SequenceLocation": "VSL",
+         "ChromosomeLocation": "VCL"
+      },
+      "regexp": "^ga4gh:(?P<type>[^.]+)\\.(?P<digest>.+)$"
    }
 }
