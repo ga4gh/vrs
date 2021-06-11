@@ -69,7 +69,7 @@ definitions:
 
   Allele:
     description: >-
-      An assertion of a sequence state at a Location.
+      The sequence state at a Location.
     additionalProperties: false
     type: object
     properties:
