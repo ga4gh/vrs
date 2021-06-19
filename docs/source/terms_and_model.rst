@@ -94,7 +94,7 @@ In the genetics community, variation is often used to mean *sequence*
 variation, describing the differences observed in DNA or AA bases among
 individuals, and typically with respect to a common reference sequence.
 
-In VRS, the Variation class is the conceptual root of all types of
+In VRS, the Variation class is the conceptual root of all types of biomolecular
 variation, and the *Variation* abstract class is the top-level object in
 the :ref:`vr-schema-diagram`. Variation types are broadly categorized as
 :ref:`MolecularVariation`, :ref:`SystemicVariation`, or a :ref:`utility
@@ -104,15 +104,14 @@ to capture this diversity.
 
 **Computational Definition**
 
-A representation of the state of one or more molecules.
+A representation of the state of one or more biomolecules.
 
 .. _MolecularVariation:
 
 Molecular Variation
 ###################
 
-A :ref:`variation` of a sequence that represents a portion of or an
-entire contiguous molecule.
+A :ref:`variation` on a contiguous molecule.
 
 .. _Allele:
 
@@ -400,34 +399,30 @@ referenced, and regardless of order. See
 Systemic Variation
 ##################
 
-Systemic Variation is a :ref:`Variation` of multiple
-molecules in the context of a system, e.g. a genome,
-sample, or homologous chromosomes.
+A :ref:`Variation` of multiple molecules in the context of a system,
+e.g. a genome, sample, or homologous chromosomes.
 
 .. _Abundance:
 
 Abundance
 $$$$$$$$$
 
-*Abundance* is the measure of a quantity of a molecule
-in a system. :ref:`Copy Number <CopyNumber>` and
-gene expression variants are two common types of
-abundance variation, measuring the copies of a molecule
-present in a genome or expressed in a sample, respectively.
+*Abundance* is the quantity of a :ref:`Feature`, :ref:`Variation`,
+or other molecule (represented by a :ref:`SequenceExpression`) in
+a system.
 
 .. _CopyNumber:
 
 CopyNumber
 %%%%%%%%%%
 
-*Copy Number* captures the copies of a molecule within
-a genome, and can be used to express concepts such as
-amplification and copy loss.
+*Copy Number* captures the copies of a molecule within a genome, and
+can be used to express concepts such as amplification and copy loss.
 
 **Computational Definition**
 
-The count of copies of a :ref:`Feature` or
-:ref:`MolecularVariation` subject within a genome.
+The count of copies of a :ref:`Feature`, :ref:`MolecularVariation`,
+or other molecule within a genome.
 
 **Information Model**
 
@@ -659,7 +654,7 @@ Location for Variation.
 
 **Computational Definition**
 
-The position of a contiguous segment of a biological sequence.
+A contiguous segment of a biological sequence.
 
 **Implementation Guidance**
 
@@ -679,7 +674,7 @@ cytobands, and regions observed from chromosomal staining techniques.
 
 **Computational Definition**
 
-A :ref:`Location`, on a chromosome defined by a species and chromosome name.
+A :ref:`Location` on a chromosome defined by a species and chromosome name.
 
 **Information Model**
 
@@ -853,13 +848,13 @@ SequenceInterval
 
 **Computational Definition**
 
-The *SequenceInterval* abstract class defines a range on a
-:ref:`sequence`, possibly with length zero, and specified using
-:ref:`inter-residue-coordinates-design`. An Interval MAY be a
-:ref:`SimpleInterval` with a single start and end coordinate.
-:ref:`Future Location and SequenceInterval types <planned-locations>`
-will enable other methods for describing where :ref:`variation`
-occurs. Any of these MAY be used as the SequenceInterval for Location.
+A SequenceInterval represents a span of :ref:`Sequence`. Positions are
+always represented by contiguous spans using interbase coordinates.
+
+SequenceInterval is intended to be compatible with a "region" in Sequence Ontology
+([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)),
+with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO
+definition of region has an "extent greater than zero".
 
 .. sidebar:: VRS Uses Inter-residue Coordinates
 
@@ -879,154 +874,6 @@ occurs. Any of these MAY be used as the SequenceInterval for Location.
 * `Interbase Coordinates (Chado documentation) <http://gmod.org/wiki/Introduction_to_Chado#Interbase_Coordinates>`__
 * `SequenceOntology: sequence_feature (SO:0000110) <http://www.sequenceontology.org/miso/current_svn/term/SO:0000110>`__ — Any extent of continuous biological sequence.
 * `SequenceOntology: region (SO:0000001) <http://www.sequenceontology.org/miso/current_svn/term/SO:0000001>`__ — A sequence_feature with an extent greater than zero. A nucleotide region is composed of bases and a polypeptide region is composed of amino acids.
-
-
-.. _SimpleInterval:
-
-SimpleInterval
-$$$$$$$$$$$$$$
-
-**Computational Definition**
-
-A :ref:`SequenceInterval` with a single start and end coordinate.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "SimpleInterval"
-   * - start
-     - integer
-     - 1..1
-     - start position
-   * - end
-     - integer
-     - 1..1
-     - end position
-
-**Implementation Guidance**
-
-* Implementations MUST enforce values 0 ≤ start ≤ end. In the case of
-  double-stranded DNA, this constraint holds even when a feature is on
-  the complementary strand.
-* VRS uses Inter-residue coordinates because they provide conceptual
-  consistency that is not possible with residue-based systems (see
-  :ref:`rationale <inter-residue-coordinates-design>`). Implementations
-  will need to convert between inter-residue and 1-based inclusive
-  residue coordinates familiar to most human users.
-* Inter-residue coordinates start at 0 (zero).
-* The length of an interval is *end - start*.
-* An interval in which start == end is a zero width point between two residues.
-* An interval of length == 1 MAY be colloquially referred to as a position.
-* Two intervals are *equal* if the their start and end coordinates are equal.
-* Two intervals *intersect* if the start or end coordinate of one is
-  strictly between the start and end coordinates of the other. That
-  is, if:
-
-   * b.start < a.start < b.end OR
-   * b.start < a.end < b.end OR
-   * a.start < b.start < a.end OR
-   * a.start < b.end < a.end
-* Two intervals a and b *coincide* if they intersect or if they are
-  equal (the equality condition is REQUIRED to handle the case of two
-  identical zero-width SimpleIntervals).
-* <start, end>=<*0,0*> refers to the point with width zero before the first residue.
-* <start, end>=<*i,i+1*> refers to the *i+1th* (1-based) residue.
-* <start, end>=<*N,N*> refers to the position after the last residue for Sequence of length *N*.
-* See example notebooks in |vrs-python|.
-
-**Examples**
-
-.. parsed-literal::
-
-    {
-      "end": 44908822,
-      "start": 44908821,
-      "type": "SimpleInterval"
-    }
-
-
-.. _NestedInterval:
-
-NestedInterval
-$$$$$$$$$$$$$$
-
-For some assays, it is not possible to describe a
-:ref:`SequenceLocation` with exact precision, but it is possible
-to bound the region containing the Sequence Location. In those
-cases, two sets of coordinates are used as a nested interval to
-describe the inner and outer bounds.
-
-**Computational Definition**
-
-A :ref:`SequenceInterval` defined by nested inner and outer
-:ref:`SimpleInterval` coordinates. Inner and outer coordinates
-represent inner and outer bounds of ambiguity for the start and
-end of the interval.
-
-**Information Model**
-
-.. list-table:: NestedInterval
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "NestedInterval"
-   * - inner
-     - :ref:`SimpleInterval`
-     - 1..1
-     - inner interval
-   * - outer
-     - :ref:`SimpleInterval`
-     - 1..1
-     - outer interval
-
-**Implementation Guidance**
-
-* NestedInterval is intended to be used for variation where the start
-  and end positions each occur within ranges.
-* `inner` and `outer` must be defined, but the `start` and `end`
-  within each may be null.
-* If `start` and `end` attributes of `inner` and `outer` are defined,
-  they MUST satisfy `outer.start <= inner.start <= inner.end <=
-  outer.end`
-
-**Examples**
-
-.. parsed-literal::
-
-   {
-     "inner": {
-       "end": 30,
-       "start": 20,
-       "type": "SimpleInterval"
-     },
-     "outer": {
-       "end": 40,
-       "start": 10,
-       "type": "SimpleInterval"
-     },
-     "type": "NestedInterval"
-   }
 
 
 .. _CytobandInterval:
@@ -1574,6 +1421,84 @@ ISCN guidelines [1]_.
 
 Deprecated and Obsolete Classes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+.. _SimpleInterval:
+
+SimpleInterval
+$$$$$$$$$$$$$$
+
+**Computational Definition**
+
+DEPRECATED: A SimpleInterval represents a span of sequence. Positions are
+always represented by contiguous spans using interbase coordinates.
+
+This class is deprecated. Use :ref:`SequenceInterval` instead.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "SimpleInterval"
+   * - start
+     - integer
+     - 1..1
+     - start position
+   * - end
+     - integer
+     - 1..1
+     - end position
+
+**Implementation Guidance**
+
+* Implementations MUST enforce values 0 ≤ start ≤ end. In the case of
+  double-stranded DNA, this constraint holds even when a feature is on
+  the complementary strand.
+* VRS uses Inter-residue coordinates because they provide conceptual
+  consistency that is not possible with residue-based systems (see
+  :ref:`rationale <inter-residue-coordinates-design>`). Implementations
+  will need to convert between inter-residue and 1-based inclusive
+  residue coordinates familiar to most human users.
+* Inter-residue coordinates start at 0 (zero).
+* The length of an interval is *end - start*.
+* An interval in which start == end is a zero width point between two residues.
+* An interval of length == 1 MAY be colloquially referred to as a position.
+* Two intervals are *equal* if the their start and end coordinates are equal.
+* Two intervals *intersect* if the start or end coordinate of one is
+  strictly between the start and end coordinates of the other. That
+  is, if:
+
+   * b.start < a.start < b.end OR
+   * b.start < a.end < b.end OR
+   * a.start < b.start < a.end OR
+   * a.start < b.end < a.end
+* Two intervals a and b *coincide* if they intersect or if they are
+  equal (the equality condition is REQUIRED to handle the case of two
+  identical zero-width SimpleIntervals).
+* <start, end>=<*0,0*> refers to the point with width zero before the first residue.
+* <start, end>=<*i,i+1*> refers to the *i+1th* (1-based) residue.
+* <start, end>=<*N,N*> refers to the position after the last residue for Sequence of length *N*.
+* See example notebooks in |vrs-python|.
+
+**Examples**
+
+.. parsed-literal::
+
+    {
+      "end": 44908822,
+      "start": 44908821,
+      "type": "SimpleInterval"
+    }
 
 .. _SequenceState:
 

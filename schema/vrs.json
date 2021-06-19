@@ -4,7 +4,7 @@
    "type": "object",
    "definitions": {
       "Variation": {
-         "description": "The root class of all Variation types",
+         "description": "A representation of the state of one or more biomolecules.",
          "oneOf": [
             {
                "$ref": "#/definitions/MolecularVariation"
@@ -35,7 +35,7 @@
          }
       },
       "UtilityVariation": {
-         "description": "Utility variation classes that cannot be constrained to a specific biological class of variation.",
+         "description": "A collection of :ref:`Variation` subclasses that cannot be constrained to a specific class of biological variation, but are necessary for some applications of VRS.",
          "oneOf": [
             {
                "$ref": "#/definitions/Text"
@@ -102,7 +102,7 @@
          ]
       },
       "Haplotype": {
-         "description": "A set of zero or more Alleles",
+         "description": "A set of non-overlapping Alleles that co-occur on the same molecule.",
          "additionalProperties": false,
          "type": "object",
          "properties": {
@@ -138,7 +138,7 @@
          ]
       },
       "Text": {
-         "description": "A textual description of variation, typically not parseable but understood by humans.",
+         "description": "A free-text definition of variation.",
          "additionalProperties": false,
          "type": "object",
          "properties": {
@@ -163,7 +163,7 @@
          ]
       },
       "VariationSet": {
-         "description": "A set of Variation objects.\nMembers may be specified inline or by reference (with CURIEs)",
+         "description": "An unconstrained set of Variation members.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
@@ -211,7 +211,7 @@
       "CopyNumber": {
          "additionalProperties": false,
          "type": "object",
-         "description": "The count of copies of a Feature, Location, or Molecular Variation subject within a genome.",
+         "description": "The count of copies of a Feature, Molecular Variation, or other molecule within a genome.",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
@@ -329,7 +329,7 @@
          ]
       },
       "Location": {
-         "description": "A Location represents a span on a specific sequence.",
+         "description": "A contiguous segment of a biological sequence.",
          "oneOf": [
             {
                "$ref": "#/definitions/ChromosomeLocation"
@@ -344,7 +344,7 @@
       },
       "ChromosomeLocation": {
          "additionalProperties": false,
-         "description": "A region of a chromosomed specified by species and name using cytogenetic naming conventions",
+         "description": "A Location on a chromosome defined by a species and chromosome name.",
          "type": "object",
          "properties": {
             "type": {
@@ -377,7 +377,7 @@
       },
       "SequenceLocation": {
          "additionalProperties": false,
-         "description": "A specified subsequence within another sequence that is used as a reference sequence.",
+         "description": "A Location defined by an interval on a referenced Sequence.",
          "type": "object",
          "properties": {
             "_id": {
