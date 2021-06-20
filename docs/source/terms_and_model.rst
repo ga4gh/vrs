@@ -183,9 +183,10 @@ A state of a molecule at a :ref:`Location`.
 * Implementations SHOULD normalize Alleles using :ref:`fully-justified
   normalization <normalization>` whenever possible to facilitate
   comparisons of variation in regions of representational ambiguity.
-* Implementations MUST normalize Alleles using :ref:`fully-justified
-  normalization <normalization>` when generating
-  :ref:`computed-identifiers`.
+* Implementations SHOULD preferentially represent Alleles using
+  :ref:`LiteralSequenceExpression`, however there are cases where use
+  of other :ref:`SequenceExpression` classes is most appropriate; see
+  :ref:`using-sequence-expressions` for guidance.
 * When the alternate Sequence is the same length as the interval, the
   lengths of the reference Sequence and imputed Sequence are the
   same. (Here, imputed sequence means the sequence derived by applying
