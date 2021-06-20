@@ -379,6 +379,8 @@ An APOE-ε1 Haplotype with inline Alleles::
       "type": "Haplotype"
     }
 
+.. todo:: update the digests in the below example (outdated)
+
 The same APOE-ε1 Haplotype with referenced Alleles::
 
     {
