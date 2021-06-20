@@ -870,6 +870,31 @@ definition of region has an "extent greater than zero".
    :ref:`inter-residue-coordinates-design` for more details on this design
    choice.  Inter-residue coordinates are always zero-based.
 
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "SequenceInterval"
+   * - start
+     - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`
+     - 1..1
+     - Coordinate or coordinate range for the interval start
+   * - end
+     - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`
+     - 1..1
+     - Coordinate or coordinate range for the interval end
+
 
 **Sources**
 
