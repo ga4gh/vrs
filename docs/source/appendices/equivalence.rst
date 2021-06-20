@@ -37,7 +37,11 @@ when describing large sequences that are approximately reference for use in
 some large-scale :ref:`MolecularVariation` or :ref:`SystemicVariation` concepts.
 :ref:`RepeatedSequenceExpression` is typically used for the semantic importance
 of describing a specific, repeated subsequence *by count*, such as description
-of CAG repeats in the *ATXN7* gene, where the repeat count is a `diagnostic
-biomarker for severe neurodegenerative disorder spinocerebellar ataxia type 7
-<https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4914895/>`_.
+of CAG repeats in the *ATXN7* gene, where the repeat count is a diagnostic
+biomarker for severe neurodegenerative disorder spinocerebellar ataxia type 7 [1]_.
 
+.. [1] Bettencourt C, Hensman-Moss D, Flower M, et al. DNA repair pathways underlie
+       a common genetic mechanism modulating onset in polyglutamine diseases. *Ann
+       Neurol*. 2016;79(6):983-990. `doi:10.1002/ana.24656`_
+
+.. _`doi:10.1002/ana.24656`: https://doi.org/10.1002/ana.24656
