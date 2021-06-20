@@ -220,9 +220,9 @@ A state of a molecule at a :ref:`Location`.
     {
        "location": {
           "interval": {
-             "end": 44908822,
-             "start": 44908821,
-             "type": "SimpleInterval"
+             "end": { "value": 44908822, "type": "Number" }
+             "start": { "value": 44908821, "type": "Number" },
+             "type": "SequenceInterval"
           },
           "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
           "type": "SequenceLocation"
