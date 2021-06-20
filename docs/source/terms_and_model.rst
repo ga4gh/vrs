@@ -316,6 +316,8 @@ molecule.
   sequence MUST NOT change the location of "downstream" Alleles.
 * The `members` attribute is required and MUST contain at least one
   Allele.
+* Haplotypes with one Allele are intended to be distinct entities from
+  the Allele by itself. See discussion on :ref:`equivalence`.
 
 
 **Sources**
@@ -416,7 +418,7 @@ present in a genome or expressed in a sample, respectively.
 .. _CopyNumber:
 
 CopyNumber
-##########
+%%%%%%%%%%
 
 *Copy Number* captures the copies of a molecule within
 a genome, and can be used to express concepts such as
@@ -452,7 +454,7 @@ The count of copies of a :ref:`Feature` or
      - 1..1
      - Subject of the abundance statement
    * - copies
-     - :ref:`CopyCount`
+     - :ref:`AbsoluteCopyCount`
      - 1..1
      - The integral number of copies of the subject in the genome
 
@@ -464,16 +466,15 @@ Two, three, or four total copies of BRCA1:
 
     {
       "copies": {
-        "absolute_measure": true,
         "max": 4,
         "min": 2,
-        "type": "CopyCount"
+        "type": "AbsoluteCopyCount"
       },
       "subject": {
         "gene_id": "ncbigene:672",
         "type": "Gene"
       },
-      "type": "CopyCount"
+      "type": "CopyNumber"
     }
 
 
@@ -1108,6 +1109,10 @@ collectively referred to as *Sequence Expressions*. They are:
   :ref:`Sequencelocation`.
 * :ref:`RepeatedSequenceExpression`: A description of a repeating :ref:`Sequence`.
 
+Some SequenceExpression instances may appear to resolve to the same
+sequence, but are intended to be semantically distinct. There MAY be
+reasons to select or enforce one form over another that SHOULD be
+managed by implementations. See discussion on :ref:`equivalence`.
 
 .. _LiteralSequenceExpression:
 
@@ -1242,7 +1247,7 @@ An expression of a sequence comprised of a tandem repeating subsequence.
      - 1..1
      - an expression of the repeating subsequence
    * - count
-     - :ref:`CopyCount`
+     - :ref:`AbsoluteCopyCount`
      - 1..1
      - the inclusive range count of repeated units
 
@@ -1255,7 +1260,7 @@ An expression of a sequence comprised of a tandem repeating subsequence.
       "count": {
         "max": 10,
         "min": 5,
-        "type": "CopyCount"
+        "type": "AbsoluteCopyCount"
       },
       "seq_expr": {
         "sequence": "CAG",
@@ -1335,6 +1340,7 @@ regulatory, transcribed, and/or other functional Locations.
 * Gene MAY be converted to one or more :ref:`Locations <Location>`
   using external data. The source of such data and mechanism for
   implementation is not defined by this specification.
+* See discussion on :ref:`equivalence`.
 
 **Example**
 
@@ -1354,15 +1360,14 @@ such as this statement of increased copy number of BRCA1:
 
     {
       "copies": {
-        "absolute_measure": true,
         "min": 3,
-        "type": "CopyCount"
+        "type": "AbsoluteCopyCount"
       },
       "subject": {
         "gene_id": "ncbigene:672",
         "type": "Gene"
       },
-      "type": "CopyCount"
+      "type": "AbsoluteCopyCount"
     }
 
 
@@ -1383,10 +1388,10 @@ Quantity
 
 A value indicating a multitude or magnitude measure.
 
-.. _CopyCount:
+.. _AbsoluteCopyCount:
 
-CopyCount
-#########
+AbsoluteCopyCount
+#################
 
 **Computational Definition**
 
@@ -1409,27 +1414,22 @@ Absolute copy number counts may not be smaller than zero.
    * - type
      - string
      - 1..1
-     - MUST be "CopyCount"
-   * - absolute_measure
-     - boolean
-     - 1..1
-     - specifies if the count is an absolute (True)
-       or relative (False) measure
+     - MUST be "AbsoluteCopyCount"
    * - min
      - integer
-     - 0..1
+     - 1..1
      - minimum value; inclusive
    * - max
      - integer
-     - 0..1
+     - 1..1
      - maximum value; inclusive
 
 **Implementation Guidance**
 
-* At least one of ``min`` or ``max`` must be specified.
-* If both ``min`` and ``max`` are specified, they MUST satisfy ``min
+* If both ``min`` and ``max`` MUST satisfy ``min
   <= max``.
 * If ``min == max``, then the range specifies a single numeric amount.
+* Both ``min`` and ``max`` MUST be non-negative
 
 
 **Examples**
@@ -1437,10 +1437,9 @@ Absolute copy number counts may not be smaller than zero.
 .. parsed-literal::
 
    {
-     "absolute_measure": True,
      "max": 4,
      "min": 0,
-     "type": "CopyCount",
+     "type": "AbsoluteCopyCount",
    }
 
 
@@ -1455,12 +1454,12 @@ CURIE
 
 **Computational Definition**
 
-A `CURIE <https://www.w3.org/TR/curie/>`__ formatted string.  A CURIE
-string has the structure ``prefix``:``reference`` (W3C Terminology).
+A |curie| formatted string. A CURIE string has the structure
+``prefix``:``reference`` (W3C Terminology).
 
 **Implementation Guidance**
 
-* All identifiers in VRS MUST be a valid |curie|, regardless of
+* All identifiers in VRS MUST be a valid CURIE, regardless of
   whether the identifier refers to GA4GH VRS objects or external data.
 * For GA4GH VRS objects, this specification RECOMMENDS using globally
   unique :ref:`computed-identifiers` for use within *and* between
@@ -1583,8 +1582,10 @@ SequenceState
 
 .. warning::
 
-   DEPRECATED. SequenceState will be removed in VRS 2.0. Use
-   :ref:`LiteralSequenceExpression` instead.
+   DEPRECATED. Use :ref:`LiteralSequenceExpression` instead.
+   SequenceState will be removed in VRS 2.0.
+
+.. deprecated:: 1.2
 
 **Computational Definition**
 
@@ -1628,13 +1629,15 @@ SNVs, MNVs, del, ins, and delins.
 State
 #####
 
-.. Warning::
+.. warning::
 
    OBSOLETE. State was an abstract class that was intended for future
    growth. It was replaced by SequenceExpressions, which subsumes the
    functionality envisioned for State.  Because State was abstract,
    and therefore purely an internal concept, it was made obsolete at
    the same time that SequenceState was deprecated.
+
+.. deprecated:: 1.2
 
 **Computational Definition**
 

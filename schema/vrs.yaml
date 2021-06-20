@@ -22,7 +22,6 @@ definitions:
   # =============================================================================
 
   Variation:
-    additionalProperties: false
     description: >-
       The root class of all Variation types
     oneOf:
@@ -33,7 +32,6 @@ definitions:
       propertyName: type
 
   MolecularVariation:
-    additionalProperties: false
     description: >-
       A variation on a contiguous molecule.
     oneOf:
@@ -43,20 +41,16 @@ definitions:
       propertyName: type
 
   UtilityVariation:
-    additionalProperties: false
     description: >-
       Utility variation classes that cannot be constrained to a specific
       biological class of variation.
     oneOf:
       - $ref: "#/definitions/Text"
-      # TODO: Recent changes break this for an unknown reason
-      # Remove for now so that it's not broken.
-      # - $ref: "#/definitions/VariationSet"
+      - $ref: "#/definitions/VariationSet"
     discriminator:
       propertyName: type
 
   SystemicVariation:
-    additionalProperties: false
     description: >-
       A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
@@ -75,7 +69,7 @@ definitions:
 
   Allele:
     description: >-
-      An assertion of a sequence state at a Location.
+      The sequence state at a Location.
     additionalProperties: false
     type: object
     properties:
@@ -93,6 +87,7 @@ definitions:
         oneOf:
           - $ref: "#/definitions/SequenceState" # DEPRECATED; remove in 2.0
           - $ref: "#/definitions/SequenceExpression"
+    required: [ "type", "location", "state" ]
 
   Haplotype:
     description: >-
@@ -114,6 +109,7 @@ definitions:
           oneOf:
             - $ref: "#/definitions/Allele"
             - $ref: "#/definitions/CURIE"
+    required: [ "type", "members" ]
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -138,6 +134,7 @@ definitions:
           An textual representation of variation intended to capture
           variation descriptions that cannot be parsed, but still
           treated as variation.
+    required: [ "type", "definition" ]
 
   VariationSet:
     description: >-
@@ -145,6 +142,7 @@ definitions:
 
       Members may be specified inline or by reference (with CURIEs)
     type: object
+    additionalProperties: false
     properties:
       _id:
         $ref: "#/definitions/CURIE"
@@ -159,13 +157,13 @@ definitions:
           oneOf:
             - $ref: "#/definitions/CURIE"
             - $ref: "#/definitions/Variation"
+    required: [ "type", "members" ]
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # SystemicVariation
 
   Abundance:
-    additionalProperties: false
     description: >-
       The quantity of a feature, variation, molecule or part thereof in a system.
     oneOf:
@@ -190,16 +188,57 @@ definitions:
         oneOf:
           - $ref: "#/definitions/MolecularVariation"
           - $ref: "#/definitions/Feature"
-          - $ref: "#/definitions/Location"
+          - $ref: "#/definitions/SequenceExpression"
           - $ref: "#/definitions/CURIE"
       copies:
-        $ref: "#/definitions/CopyCount"
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
+    allOf:
+      - if:
+          properties:
+            copies:
+              $ref: "#/definitions/Number"
+        then:
+          properties:
+            copies:
+              properties:
+                value:
+                  minimum: 0
+                  type: integer
+      - if:
+          properties:
+            copies:
+              $ref: "#/definitions/IndefiniteRange"
+        then:
+          properties:
+            copies:
+              properties:
+                value:
+                  minimum: 0
+                  type: integer
+      - if:
+          properties:
+            copies:
+              $ref: "#/definitions/DefiniteRange"
+        then:
+          properties:
+            copies:
+              properties:
+                min:
+                  minimum: 0
+                  type: integer
+                max:
+                  minimum: 0
+                  type: integer
+
+    required: [ "type", "subject", "copies" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations
 
   Location:
-    additionalProperties: false
     description: >-
       A Location represents a span on a specific sequence.
     oneOf:
@@ -209,6 +248,7 @@ definitions:
       propertyName: type
 
   ChromosomeLocation:
+    additionalProperties: false
     description: >-
       A region of a chromosomed specified by species and name using
       cytogenetic naming conventions
@@ -227,7 +267,7 @@ definitions:
         type: string
       interval:
         $ref: "#/definitions/CytobandInterval"
-    additionalProperties: false
+    required: [ "type", "species_id", "chr", "interval" ]
 
   SequenceLocation:
     additionalProperties: false
@@ -244,7 +284,10 @@ definitions:
       sequence_id:
         $ref: "#/definitions/CURIE"
       interval:
-        $ref: "#/definitions/SequenceInterval"
+        oneOf:
+          - $ref: "#/definitions/SequenceInterval"
+          - $ref: "#/definitions/SimpleInterval"
+    required: [ "type", "sequence_id", "interval" ]
 
 
   # =============================================================================
@@ -256,65 +299,107 @@ definitions:
   # SequenceIntervals
 
   SequenceInterval:
-    additionalProperties: false
-    oneOf:
-      - $ref: '#/definitions/SimpleInterval'
-      - $ref: '#/definitions/NestedInterval'
-    discriminator:
-      propertyName: type
-
-  SimpleInterval:
     description: >-
-      A SimpleInterval represents a span of sequence. Positions are
-      always represented by contiguous spans using interbase
-      coordinates.
+      A SequenceInterval represents a span of sequence. Positions are
+      always represented by contiguous spans using interbase coordinates.
 
-      This definition of SequenceInterval is intended to be compatible with that
-      in Sequence Ontology
+      SequenceInterval is intended to be compatible with that in Sequence Ontology
       ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)),
-      with the exception that the GA4GH VRS SequenceInterval may be
-      zero-width. The SO definition is for an "extent greater than
-      zero".
-    additionalProperties: false
+      with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO
+      definition is for an "extent greater than zero".
     type: object
+    additionalProperties: false
     properties:
       type:
         type: string
-        enum: ["SimpleInterval"]
-        default: "SimpleInterval"
+        enum: [ "SequenceInterval" ]
+        default: "SequenceInterval"
       start:
-        type: ["integer", "null"]
-        default: null
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
       end:
-        type: ["integer", "null"]
-        default: null
-    example:
-      type: SimpleInterval
-      start: 11
-      end: 22
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
+    allOf:
+      - if:
+          properties:
+            start:
+              $ref: "#/definitions/Number"
+        then:
+          properties:
+            start:
+              properties:
+                value:
+                  minimum: 0
+                  type: integer
+      - if:
+          properties:
+            start:
+              $ref: "#/definitions/IndefiniteRange"
+        then:
+          properties:
+            start:
+              properties:
+                value:
+                  minimum: 0
+                  type: integer
+      - if:
+          properties:
+            start:
+              $ref: "#/definitions/DefiniteRange"
+        then:
+          properties:
+            start:
+              properties:
+                min:
+                  minimum: 0
+                  type: integer
+                max:
+                  minimum: 0
+                  type: integer
+      - if:
+          properties:
+            end:
+              $ref: "#/definitions/Number"
+        then:
+          properties:
+            end:
+              properties:
+                value:
+                  minimum: 0
+                  type: integer
+      - if:
+          properties:
+            end:
+              $ref: "#/definitions/IndefiniteRange"
+        then:
+          properties:
+            end:
+              properties:
+                value:
+                  minimum: 0
+                  type: integer
+      - if:
+          properties:
+            end:
+              $ref: "#/definitions/DefiniteRange"
+        then:
+          properties:
+            end:
+              properties:
+                min:
+                  minimum: 0
+                  type: integer
+                max:
+                  minimum: 0
+                  type: integer
+    required: [ "type", "start", "end" ]
 
-  NestedInterval:
-    type: object
-    additionalProperties: false
-    properties:
-      type:
-        type: string
-        enum: ["NestedInterval"]
-        default: "NestedInterval"
-      inner:
-        $ref: '#/definitions/SimpleInterval'
-      outer:
-        $ref: '#/definitions/SimpleInterval'
-    example:
-      type: NestedInterval
-      inner:
-        type: SimpleInterval
-        start: 20
-        end: 30
-      outer:
-        type: SimpleInterval
-        start: 10
-        end: 40
+  # SimpleInterval has been moved to DEPRECATED section at bottom.
 
   CytobandInterval:
     description: >-
@@ -334,6 +419,7 @@ definitions:
       type: CytobandInterval
       start: q22.2
       end: q22.3
+    required: [ "type", "start", "end" ]
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -342,7 +428,6 @@ definitions:
   SequenceExpression:
     description: >-
       One of a set of sequence representation syntaxes.
-    additionalProperties: false
     oneOf:
       - $ref: "#/definitions/LiteralSequenceExpression"
       - $ref: "#/definitions/DerivedSequenceExpression"
@@ -360,6 +445,7 @@ definitions:
         default: "LiteralSequenceExpression"
       sequence:
         $ref: "#/definitions/Sequence"
+    required: [ "type", "sequence" ]
 
   DerivedSequenceExpression:
     type: object
@@ -371,8 +457,9 @@ definitions:
         default: "DerivedSequenceExpression"
       location:
         $ref: "#/definitions/SequenceLocation"
-      transformation:
+      reverse_complement:
         type: boolean
+    required: [ "type", "location", "reverse_complement" ]
 
   RepeatedSequenceExpression:
     additionalProperties: false
@@ -383,14 +470,52 @@ definitions:
         enum: ["RepeatedSequenceExpression"]
         default: "RepeatedSequenceExpression"
       seq_expr:
-        $ref: "#/definitions/SequenceExpression"
+        oneOf:
+          - $ref: "#/definitions/LiteralSequenceExpression"
+          - $ref: "#/definitions/DerivedSequenceExpression"
       count:
-        $ref: "#/definitions/CopyCount"
-    example:
-      type: RepeatedSequenceExpression
-      copies:
-        min: 40
-        max: 60
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
+    allOf:
+      - if:
+          properties:
+            count:
+              $ref: "#/definitions/Number"
+        then:
+          properties:
+            count:
+              properties:
+                value:
+                  minimum: 0
+                  type: integer
+      - if:
+          properties:
+            count:
+              $ref: "#/definitions/IndefiniteRange"
+        then:
+          properties:
+            count:
+              properties:
+                value:
+                  minimum: 0
+                  type: integer
+      - if:
+          properties:
+            count:
+              $ref: "#/definitions/DefiniteRange"
+        then:
+          properties:
+            count:
+              properties:
+                min:
+                  minimum: 0
+                  type: integer
+                max:
+                  minimum: 0
+                  type: integer
+    required: [ "type", "seq_expr", "count" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Feature
@@ -400,7 +525,6 @@ definitions:
       A named entity that can be mapped to a Location. Genes, protein domains,
       exons, and chromosomes are some examples of common biological entities
       that may be Features.
-    additionalProperties: false
     oneOf:
       - $ref: "#/definitions/Gene"
     discriminator:
@@ -420,65 +544,61 @@ definitions:
         default: "Gene"
       gene_id:
         $ref: "#/definitions/CURIE"
+    required: [ "type", "gene_id" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # Quantity
+  # Numerics, Comparators, and Ranges
 
-  Quantity:
+  Number:
     description: >-
-      A value representing a multitude or magnitude.
-    additionalProperties: false
-    oneOf:
-      - $ref: "#/definitions/CopyCount"
-    discriminator:
-      propertyName: type
-
-  CopyCount:
-    description: >-
-      An integer count of copies. Counts are bounded ranges denoted by minimum
-      and maximum possible values. Absolute copy number counts may not be smaller
-      than zero.
-    additionalProperties: false
+      A simple number value as a VRS class.
     type: object
+    additionalProperties: false
     properties:
       type:
         type: string
-        enum: ["CopyCount"]
-        default: "CopyCount"
+        enum: [ "Number" ]
+        default: "Number"
+      value:
+        type: number
+    required: [ "type", "value" ]
+
+  IndefiniteRange:
+    description: >-
+      An indefinite range represented as a number and associated comparator.
+      The bound operator is interpreted as follows: '>=' are all values
+      greater than and including the value, '<=' are all numbers less than and
+      including the value.
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [ "IndefiniteRange" ]
+        default: "IndefiniteRange"
+      value:
+        type: number
+      comparator:
+        type: string
+        enum: [ "<=", ">=" ]
+    required: [ "type", "value", "comparator" ]
+
+  DefiniteRange:
+    description: >-
+      A bounded, inclusive range of numbers.
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [ "DefiniteRange" ]
+        default: "DefiniteRange"
       min:
-        type: ["integer", "null"]
-        default: null
+        type: number
       max:
-        type: ["integer", "null"]
-        default: null
-    # TODO: Remove or fix
-    # This is broken for Reece with vrs-python. Tested? 
-    # allOf:
-    #   # At least one of min or max not null
-    #   - if:
-    #       properties:
-    #          min:
-    #            type: null
-    #          max:
-    #            type: null
-    #     then:
-    #       false
-    #   # min < max cannot be validated by JSON schema
-    #   # min >= 0 and max >= 0 if absolute_measure == true
-    #   - if:
-    #       properties:
-    #         absolute_measure:
-    #           const: true
-    #     then:
-    #       properties:
-    #         min:
-    #           minimum: 0
-    #         max:
-    #           minimum: 0
-    example:
-      type: "CopyCount"
-      min: 5
-      max: 10
+        type: number
+    required: ["type", "min", "max"]
+
 
   # =============================================================================
   # BASIC TYPES (STRUCTURES)
@@ -523,12 +643,12 @@ definitions:
       prefixes to make these objects locatable.
 
       Using internal ids in public messages is strongly discouraged.
-
     type: string
     pattern: '^\w[^:]*:.+$'
     example: "ensembl:ENSG00000139618"
 
   HumanCytoband:
+    additionalProperties: false
     description: >-
       A interval on a stained metaphase chromosome specified by cytobands.
       CytobandIntervals include the regions described by the start and end
@@ -560,3 +680,28 @@ definitions:
     example:
       type: SequenceState
       sequence: C
+    required: [ "type", "sequence" ]
+
+  SimpleInterval:
+    deprecated: true
+    description: >-
+      DEPRECATED: A SimpleInterval represents a span of sequence. Positions are
+      always represented by contiguous spans using interbase coordinates.
+
+      This class is deprecated. Use SequenceInterval instead.
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        enum: ["SimpleInterval"]
+        default: "SimpleInterval"
+      start:
+        type: integer
+      end:
+        type: integer
+    example:
+      type: SimpleInterval
+      start: 11
+      end: 22
+    required: [ "type", "start", "end" ]

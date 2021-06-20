@@ -5,12 +5,13 @@ Appendices
    :maxdepth: 2
 
    relationships
-   associating-annotations
+   associating_annotations
    design_decisions
-   faq
+   equivalence
    development_process
    future_plans
    ga4gh_identifiers
    implementations
    truncated_digest_collision_analysis
+   faq
    glossary

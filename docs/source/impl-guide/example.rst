@@ -269,4 +269,4 @@ VRS objects are `value objects
 consequence of this design choice is that data should be associated
 *with* VRS objects via their identifiers rather than embedded *within*
 those objects.  The appendix contains an example of :ref:`associating
-annotations with variation <associating-annotations>`.
+annotations with variation <associating_annotations>`.

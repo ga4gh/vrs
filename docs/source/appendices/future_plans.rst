@@ -11,15 +11,10 @@ variation, thus far predominantly related to the replacement of a
 subsequence in a reference sequence. Increasing its applicability will
 require supporting more complex types of variation, including:
 
-* alternative coordinate types such as nested ranges
-* feature-based coordinates such as genes, cytogenetic bands, and exons
-* copy number variation
+* genotypes
 * structural variation
 * mosaicism and chimerism
-* rule-based variation
-
-.. todo::
-   The below figure will be updated prior to v1.2 release.
+* categorical variation
 
 .. figure:: ../images/schema-future.png
 
@@ -50,51 +45,6 @@ The schema is designed to be extensible to new kinds of Intervals and
 Locations in order to support, for example, fuzzy coordinates or
 feature-based locations.
 
-
-NestedInterval
-##############
-
-**Computational definition**
-
-An :ref:`Interval` comprised of an *inner* and *outer*
-:ref:`SimpleInterval`. The *NestedInterval* allows for the definition
-of "fuzzy" range endpoints by designating a potentially included
-region (the *outer* SimpleInterval) and required included region (the
-*inner* SimpleInterval).
-
-**Information model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - Interval type; MUST be set to '**NestedInterval**'
-   * - inner
-     - :ref:`SimpleInterval`
-     - 1..1
-     - known interval
-   * - outer
-     - :ref:`SimpleInterval`
-     - 1..1
-     - potential interval
-
-**Implementation guidance**
-
-* Implementations MUST enforce values `0 ≤ outer.start ≤ inner.start ≤
-  inner.end ≤ outer.end`. In the case of double-stranded DNA, this
-  constraint holds even when a feature is on the complementary strand.
-
-
-
 ComplexInterval
 ###############
 
@@ -121,8 +71,8 @@ consideration in the specification. See :ref:`Variation` for more
 information.
 
 
-Translocations
-##############
+Structural Variation
+####################
 
 .. note:: This concept is being refined. Please comment at https://github.com/ga4gh/vrs/issues/103
 
@@ -275,8 +225,8 @@ SO: `Genotype (SO:0001027)
 
 .. _planned-variation-sets:
 
-Rule-based Variation
-@@@@@@@@@@@@@@@@@@@@
+Categorical Variation
+@@@@@@@@@@@@@@@@@@@@@
 
 Some variations are defined by categorical concepts, rather than specific
 locations and states. These variations go by many terms, including
@@ -286,19 +236,5 @@ broadly-recognized variation format, but modeling them is a key requirement
 for the representation of aggregate variation descriptions as commonly
 found in biomedical literature. Our future work will focus on the formal
 specification for representing these variations with sets of rules, which
-we currently call *Rule-based Variation*.
+we currently call *Categorical Variation*.
 
-RuleLocation
-############
-
-RuleLocation is a subclass of :ref:`location` intended to capture locations
-defined by rules instead of specific contiguous sequences. This includes
-locations defined by sequence characteristics, e.g. *microsatellite
-regions*.
-
-RuleState
-#########
-
-RuleState is a subclass of :ref:`state` intended to capture states defined
-by categorical rules instead of sequence states. This includes *gain- /
-loss-of-function*, *oncogenic*, and *truncating* variation.

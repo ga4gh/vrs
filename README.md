@@ -1,5 +1,6 @@
 [![DOI](https://zenodo.org/badge/67005248.svg)](https://zenodo.org/badge/latestdoi/67005248)
 [![Read the Docs](https://img.shields.io/readthedocs/vr-spec/1.1)](https://vrs.ga4gh.org/)
+[![tests](https://github.com/ga4gh/vrs/actions/workflows/tests.yml/badge.svg)](https://github.com/ga4gh/vrs/actions/workflows/tests.yml)
 
 The [GA4GH](https://www.ga4gh.org/) [Variation Representation
 Specification](https://vrs.ga4gh.org/) provides a
@@ -75,3 +76,26 @@ To build documentation locally, type:
 Then, open `docs/build/html/index.html`.  The above make command
 should build docs when source changes. (Some types of changes require
 recleaning and building.)
+
+
+# Testing
+
+The VRS repo contains two kinds of tests. Basic smoketests in `tests/`
+ensure that the schema is parseable and works with certain tools.
+These tests provide a basic sanity check during development.
+
+Validation tests (in `validation/`) provide language-neutral tests for
+those implementing tools with VRS.
+
+## Using smoketests
+
+The smoketests require python 3.8+. This is the recommended setup:
+
+```
+$ python3 -m venv venv
+$ source venv/bin/activate
+$ pip install -U setuptools pip
+$ pip install -r requirements.txt
+$ pytest
+
+```

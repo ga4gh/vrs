@@ -27,4 +27,3 @@ implementation that promotes adoption of the standard.
    impl-guide/index
    releases/index
    appendices/index
-
