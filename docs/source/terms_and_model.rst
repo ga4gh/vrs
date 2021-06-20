@@ -405,27 +405,25 @@ Systemic Variation
 A :ref:`Variation` of multiple molecules in the context of a system,
 e.g. a genome, sample, or homologous chromosomes.
 
-.. _Abundance:
-
-Abundance
-$$$$$$$$$
-
-*Abundance* is the quantity of a :ref:`Feature`, :ref:`Variation`,
-or other molecule (represented by a :ref:`SequenceExpression`) in
-a system.
-
 .. _CopyNumber:
 
 CopyNumber
-%%%%%%%%%%
+$$$$$$$$$$
 
-*Copy Number* captures the copies of a molecule within a genome, and
-can be used to express concepts such as amplification and copy loss.
+*Copy Number Variation* captures the copies of a molecule within a
+genome, and can be used to express concepts such as amplification
+and copy loss. Copy Number Variation has conflated meanings in the
+genomics community, and can mean either (or both) the notion of copy
+number *in a genome* or copy number *on a molecule*. VRS separates
+the concerns of these two types of statements; this concept is a type
+of :ref:`SystemicVariation` and so describes the number of copies in a
+genome. The related :ref:`MolecularVariation` concept can be expressed
+as an :ref:`Allele` with a :ref:`RepeatedSequenceExpression`.
 
 **Computational Definition**
 
-The count of copies of a :ref:`Feature`, :ref:`MolecularVariation`,
-or other molecule within a genome.
+The count of discrete copies of a :ref:`Feature`,
+:ref:`MolecularVariation`, or other molecule within a genome.
 
 **Information Model**
 
