@@ -346,9 +346,9 @@ An APOE-ε1 Haplotype with inline Alleles::
         {
           "location": {
             "interval": {
-              "end": 44908684,
-              "start": 44908683,
-              "type": "SimpleInterval"
+              "end": { "value": 44908684, "type": "Number" },
+              "start": { "value": 44908683, "type": "Number" },
+              "type": "SequenceInterval"
             },
             "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
             "type": "SequenceLocation"
@@ -362,9 +362,9 @@ An APOE-ε1 Haplotype with inline Alleles::
         {
           "location": {
             "interval": {
-              "end": 44908822,
-              "start": 44908821,
-              "type": "SimpleInterval"
+              "end": { "value": 44908822, "type": "Number" },
+              "start": { "value": 44908821, "type": "Number" },
+              "type": "SequenceInterval"
             },
             "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
             "type": "SequenceLocation"
@@ -390,7 +390,7 @@ The same APOE-ε1 Haplotype with referenced Alleles::
     }
 
 The GA4GH computed identifier for these Haplotypes is
-`ga4gh:VH.NAVnEuaP9gf41OxnPM56XxWQfdFNcUxJ`, regardless
+the same regardless
 of whether the Variation objects are inlined or
 referenced, and regardless of order. See
 :ref:`computed-identifiers` for more information.
