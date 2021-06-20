@@ -661,8 +661,9 @@ A contiguous segment of a biological sequence.
 
 * Location refers to a position.  Although it MAY imply a sequence,
   the two concepts are not interchangeable, especially when the
-  location is non-specific (e.g., specified by an
-  :ref:`IndefiniteRange`).
+  location is non-specific (e.g., specified by an :ref:`IndefiniteRange`).
+  To represent a sequence derived from a Location, see
+  :ref:`DerivedSequenceExpression`.
 
 
 .. _ChromosomeLocation:
