@@ -52,7 +52,7 @@
          "description": "A Variation of multiple molecules in the context of a system, e.g. a genome, sample, or homologous chromosomes.",
          "oneOf": [
             {
-               "$ref": "#/definitions/Abundance"
+               "$ref": "#/definitions/CopyNumber"
             }
          ],
          "discriminator": {
@@ -197,21 +197,10 @@
             "members"
          ]
       },
-      "Abundance": {
-         "description": "The quantity of a feature, variation, molecule or part thereof in a system.",
-         "oneOf": [
-            {
-               "$ref": "#/definitions/CopyNumber"
-            }
-         ],
-         "discriminator": {
-            "propertyName": "type"
-         }
-      },
       "CopyNumber": {
          "additionalProperties": false,
          "type": "object",
-         "description": "The count of copies of a Feature, Molecular Variation, or other molecule within a genome.",
+         "description": "The count of discrete copies of a Feature, Molecular Variation, or other molecule within a genome.",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
