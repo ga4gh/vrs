@@ -445,11 +445,11 @@ or other molecule within a genome.
      - 1..1
      - MUST be "CopyNumber"
    * - subject
-     - :ref:`MolecularVariation` | :ref:`Feature`
+     - :ref:`MolecularVariation` | :ref:`Feature` | :ref:`SequenceExpression` | :ref:`CURIE`
      - 1..1
      - Subject of the abundance statement
    * - copies
-     - :ref:`AbsoluteCopyCount`
+     - :ref:`Number` | :ref:`DefiniteRange` | :ref:`IndefiniteRange`
      - 1..1
      - The integral number of copies of the subject in the genome
 
@@ -463,10 +463,10 @@ Two, three, or four total copies of BRCA1:
       "copies": {
         "max": 4,
         "min": 2,
-        "type": "AbsoluteCopyCount"
+        "type": "DefiniteRange"
       },
       "subject": {
-        "gene_id": "ncbigene:672",
+        "gene_id": "hgnc:1100",
         "type": "Gene"
       },
       "type": "CopyNumber"
@@ -660,8 +660,8 @@ A contiguous segment of a biological sequence.
 
 * Location refers to a position.  Although it MAY imply a sequence,
   the two concepts are not interchangeable, especially when the
-  location is non-specific (e.g., specified by a
-  :ref:`NestedInterval`).
+  location is non-specific (e.g., specified by an
+  :ref:`IndefiniteRange`).
 
 
 .. _ChromosomeLocation:
@@ -849,7 +849,8 @@ SequenceInterval
 **Computational Definition**
 
 A SequenceInterval represents a span of :ref:`Sequence`. Positions are
-always represented by contiguous spans using interbase coordinates.
+always represented by contiguous spans using interbase coordinates or
+coordinate ranges.
 
 SequenceInterval is intended to be compatible with a "region" in Sequence Ontology
 ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)),
@@ -966,8 +967,8 @@ managed by implementations. See discussion on :ref:`equivalence`.
 LiteralSequenceExpression
 #########################
 
-A LiteralSequenceExpression "wraps" a string representation of a sequence for
-parallelism with other SequenceExpressions.
+A LiteralSequenceExpression "wraps" a string representation of a
+sequence for parallelism with other SequenceExpressions.
 
 **Computational Definition**
 
@@ -1016,8 +1017,12 @@ large) reference subsequences specified by a :ref:`SequenceLocation`.
 
 **Computational Definition**
 
-An expression of a sequence that is derived from a referenced
-sequence location.
+An approximate expression of a sequence that is derived from
+a referenced sequence location. Use of DerivedSequenceExpression
+indicates that the derived sequence is approximately equivalent
+to the reference indicated, and is typically used for describing
+large regions for variation concepts where the precision of an
+exact sequence is unnecesssary.
 
 **Information Model**
 
@@ -1090,11 +1095,11 @@ An expression of a sequence comprised of a tandem repeating subsequence.
      - 1..1
      - MUST be "RepeatedSequenceExpression"
    * - seq_expr
-     - :ref:`SequenceExpression`
+     - :ref:`SequenceExpression` and NOT :ref:`RepeatedSequenceExpression`
      - 1..1
      - an expression of the repeating subsequence
    * - count
-     - :ref:`AbsoluteCopyCount`
+     - :ref:`Number` | :ref:`DefiniteRange` | :ref:`IndefiniteRange`
      - 1..1
      - the inclusive range count of repeated units
 
@@ -1107,7 +1112,7 @@ An expression of a sequence comprised of a tandem repeating subsequence.
       "count": {
         "max": 10,
         "min": 5,
-        "type": "AbsoluteCopyCount"
+        "type": "DefiniteRagne"
       },
       "seq_expr": {
         "sequence": "CAG",
@@ -1196,7 +1201,7 @@ The following examples all refer to the human BRCA1 gene:
 .. parsed-literal::
 
    {
-     'gene_id': 'ncbigene:672',
+     'gene_id': 'hgnc:1100',
      'type': 'Gene'
    }
 
@@ -1207,17 +1212,16 @@ such as this statement of increased copy number of BRCA1:
 
     {
       "copies": {
-        "min": 3,
-        "type": "AbsoluteCopyCount"
+        "value": 3,
+        "comparator": ">="
+        "type": "IndefiniteRange"
       },
       "subject": {
-        "gene_id": "ncbigene:672",
+        "gene_id": "hgnc:1100",
         "type": "Gene"
       },
-      "type": "AbsoluteCopyCount"
+      "type": "CopyNumber"
     }
-
-
 
 **Sources**
 
@@ -1228,23 +1232,20 @@ such as this statement of increased copy number of BRCA1:
   regulatory regions, transcribed regions and/or other functional
   sequence regions.
 
-.. _Quantity:
+Numerics, Comparators, and Ranges
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-Quantity
-@@@@@@@@
+.. _Number:
 
-A value indicating a multitude or magnitude measure.
+Number
+######
 
-.. _AbsoluteCopyCount:
-
-AbsoluteCopyCount
-#################
+The *Number* class "wraps" a number as a value in a VRS class, which
+is often used as one of several optional VRS classes for an attribute
+in another class.
 
 **Computational Definition**
-
-An integer count of copies. Counts are bounded ranges
-denoted by minimum and maximum possible values.
-Absolute copy number counts may not be smaller than zero.
+A simple number value as a VRS class.
 
 **Information Model**
 
@@ -1258,37 +1259,84 @@ Absolute copy number counts may not be smaller than zero.
      - Type
      - Limits
      - Description
+   * - value
+     - number
+     - 1..1
+     - A simple number value
    * - type
      - string
      - 1..1
-     - MUST be "AbsoluteCopyCount"
+     - MUST be "Number"
+
+.. _DefiniteRange:
+
+DefiniteRange
+#############
+
+**Computational Definition**
+A bounded, inclusive range of numbers.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
    * - min
-     - integer
+     - number
      - 1..1
-     - minimum value; inclusive
+     - A simple number value representing the range minimum
    * - max
-     - integer
+     - number
      - 1..1
-     - maximum value; inclusive
+     - A simple number value representing the range maximum
+   * - type
+     - string
+     - 1..1
+     - MUST be "DefiniteRange"
 
-**Implementation Guidance**
+.. _IndefiniteRange:
 
-* If both ``min`` and ``max`` MUST satisfy ``min
-  <= max``.
-* If ``min == max``, then the range specifies a single numeric amount.
-* Both ``min`` and ``max`` MUST be non-negative
+IndefiniteRange
+###############
 
+**Computational Definition**
+An indefinite range represented as a number and associated comparator.
+The bound operator is interpreted as follows: '>=' are all values
+greater than and including the value, '<=' are all numbers less than and
+including the value.
 
-**Examples**
+**Information Model**
 
-.. parsed-literal::
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
 
-   {
-     "max": 4,
-     "min": 0,
-     "type": "AbsoluteCopyCount",
-   }
-
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - value
+     - number
+     - 1..1
+     - A simple number value representing a range boundary
+   * - comparator
+     - number
+     - 1..1
+     - MUST be one of "<=" or ">=", indicates in which direction
+       the range is indefinite
+   * - type
+     - string
+     - 1..1
+     - MUST be "IndefiniteRange"
 
 Primitive Concepts
 @@@@@@@@@@@@@@@@@@
@@ -1425,7 +1473,7 @@ Deprecated and Obsolete Classes
 .. _SimpleInterval:
 
 SimpleInterval
-$$$$$$$$$$$$$$
+##############
 
 **Computational Definition**
 
