@@ -1454,12 +1454,12 @@ CURIE
 
 **Computational Definition**
 
-A `CURIE <https://www.w3.org/TR/curie/>`__ formatted string.  A CURIE
-string has the structure ``prefix``:``reference`` (W3C Terminology).
+A |curie| formatted string. A CURIE string has the structure
+``prefix``:``reference`` (W3C Terminology).
 
 **Implementation Guidance**
 
-* All identifiers in VRS MUST be a valid |curie|, regardless of
+* All identifiers in VRS MUST be a valid CURIE, regardless of
   whether the identifier refers to GA4GH VRS objects or external data.
 * For GA4GH VRS objects, this specification RECOMMENDS using globally
   unique :ref:`computed-identifiers` for use within *and* between

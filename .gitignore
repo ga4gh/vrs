@@ -1,3 +1,5 @@
+.ipynb_checkpoints
+__pycache__
 archive
 docs/build
-.ipynb_checkpoints
+venv

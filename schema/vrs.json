@@ -1,55 +1,78 @@
 {
    "$schema": "http://json-schema.org/draft-07/schema",
+   "title": "GA4GH-VRS-Definitions",
+   "type": "object",
    "definitions": {
-      "AbsoluteCopyCount": {
-         "additionalProperties": false,
-         "description": "An integer count of copies. Counts are bounded ranges denoted by minimum and maximum possible values. Absolute copy number counts may not be smaller than zero.",
-         "example": {
-            "max": 10,
-            "min": 5,
-            "type": "AbsoluteCopyCount"
-         },
-         "properties": {
-            "max": {
-               "minimum": 0,
-               "type": [
-                  "integer"
-               ]
-            },
-            "min": {
-               "minimum": 0,
-               "type": [
-                  "integer"
-               ]
-            },
-            "type": {
-               "default": "AbsoluteCopyCount",
-               "enum": [
-                  "AbsoluteCopyCount"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "Abundance": {
-         "additionalProperties": false,
-         "description": "The quantity of a feature, variation, molecule or part thereof in a system.",
-         "discriminator": {
-            "propertyName": "type"
-         },
+      "Variation": {
+         "description": "The root class of all Variation types",
          "oneOf": [
             {
-               "$ref": "#/definitions/CopyNumber"
+               "$ref": "#/definitions/MolecularVariation"
+            },
+            {
+               "$ref": "#/definitions/SystemicVariation"
+            },
+            {
+               "$ref": "#/definitions/UtilityVariation"
             }
-         ]
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
+      },
+      "MolecularVariation": {
+         "description": "A variation on a contiguous molecule.",
+         "oneOf": [
+            {
+               "$ref": "#/definitions/Allele"
+            },
+            {
+               "$ref": "#/definitions/Haplotype"
+            }
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
+      },
+      "UtilityVariation": {
+         "description": "Utility variation classes that cannot be constrained to a specific biological class of variation.",
+         "oneOf": [
+            {
+               "$ref": "#/definitions/Text"
+            },
+            {
+               "$ref": "#/definitions/VariationSet"
+            }
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
+      },
+      "SystemicVariation": {
+         "description": "A Variation of multiple molecules in the context of a system, e.g. a genome, sample, or homologous chromosomes.",
+         "oneOf": [
+            {
+               "$ref": "#/definitions/Abundance"
+            }
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
       },
       "Allele": {
+         "description": "The sequence state at a Location.",
          "additionalProperties": false,
-         "description": "An assertion of a sequence state at a Location.",
+         "type": "object",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
+            },
+            "type": {
+               "type": "string",
+               "enum": [
+                  "Allele"
+               ],
+               "default": "Allele"
             },
             "location": {
                "oneOf": [
@@ -70,60 +93,135 @@
                      "$ref": "#/definitions/SequenceExpression"
                   }
                ]
-            },
-            "type": {
-               "default": "Allele",
-               "enum": [
-                  "Allele"
-               ],
-               "type": "string"
             }
          },
-         "type": "object"
+         "required": [
+            "type",
+            "location",
+            "state"
+         ]
       },
-      "CURIE": {
+      "Haplotype": {
+         "description": "A set of zero or more Alleles",
          "additionalProperties": false,
-         "description": "A string that refers to an object uniquely.  The lifetime and scope of an id is defined by the sender.\nVRS does not impose any contraints on strings used as ids in messages. However, to maximize sharability of data, VRS RECOMMENDS that implementations use [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.\nString CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially.\nVRS also RECOMMENDS that `prefix` be defined in identifiers.org.\nThe `reference` component is an unconstrained string.\nA CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VRS uses CURIEs primarily as a naming mechanism.\nImplementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable.\nUsing internal ids in public messages is strongly discouraged.",
-         "example": "ensembl:ENSG00000139618",
-         "pattern": "^\\w[^:]*:.+$",
-         "type": "string"
-      },
-      "ChromosomeLocation": {
-         "additionalProperties": false,
-         "description": "A region of a chromosomed specified by species and name using cytogenetic naming conventions",
+         "type": "object",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
             },
-            "chr": {
-               "type": "string"
-            },
-            "interval": {
-               "$ref": "#/definitions/CytobandInterval"
-            },
-            "species_id": {
-               "$ref": "#/definitions/CURIE",
-               "default": "taxonomy:9606"
-            },
             "type": {
-               "default": "ChromosomeLocation",
+               "type": "string",
                "enum": [
-                  "ChromosomeLocation"
+                  "Haplotype"
                ],
-               "type": "string"
+               "default": "Haplotype"
+            },
+            "members": {
+               "type": "array",
+               "minItems": 1,
+               "uniqueItems": true,
+               "items": {
+                  "oneOf": [
+                     {
+                        "$ref": "#/definitions/Allele"
+                     },
+                     {
+                        "$ref": "#/definitions/CURIE"
+                     }
+                  ]
+               }
             }
          },
-         "type": "object"
+         "required": [
+            "type",
+            "members"
+         ]
+      },
+      "Text": {
+         "description": "A textual description of variation, typically not parseable but understood by humans.",
+         "additionalProperties": false,
+         "type": "object",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "type": {
+               "type": "string",
+               "enum": [
+                  "Text"
+               ],
+               "default": "Text"
+            },
+            "definition": {
+               "type": "string",
+               "description": "An textual representation of variation intended to capture variation descriptions that cannot be parsed, but still treated as variation."
+            }
+         },
+         "required": [
+            "type",
+            "definition"
+         ]
+      },
+      "VariationSet": {
+         "description": "A set of Variation objects.\nMembers may be specified inline or by reference (with CURIEs)",
+         "type": "object",
+         "additionalProperties": false,
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "type": {
+               "type": "string",
+               "enum": [
+                  "VariationSet"
+               ],
+               "default": "VariationSet"
+            },
+            "members": {
+               "type": "array",
+               "uniqueItems": true,
+               "items": {
+                  "oneOf": [
+                     {
+                        "$ref": "#/definitions/CURIE"
+                     },
+                     {
+                        "$ref": "#/definitions/Variation"
+                     }
+                  ]
+               }
+            }
+         },
+         "required": [
+            "type",
+            "members"
+         ]
+      },
+      "Abundance": {
+         "description": "The quantity of a feature, variation, molecule or part thereof in a system.",
+         "oneOf": [
+            {
+               "$ref": "#/definitions/CopyNumber"
+            }
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
       },
       "CopyNumber": {
          "additionalProperties": false,
+         "type": "object",
          "description": "The count of copies of a Feature, Location, or Molecular Variation subject within a genome.",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE"
             },
-            "copies": {
-               "$ref": "#/definitions/AbsoluteCopyCount"
+            "type": {
+               "type": "string",
+               "enum": [
+                  "CopyNumber"
+               ],
+               "default": "CopyNumber"
             },
             "subject": {
                "oneOf": [
@@ -134,156 +232,104 @@
                      "$ref": "#/definitions/Feature"
                   },
                   {
-                     "$ref": "#/definitions/Location"
+                     "$ref": "#/definitions/SequenceExpression"
                   },
                   {
                      "$ref": "#/definitions/CURIE"
                   }
                ]
             },
-            "type": {
-               "default": "CopyNumber",
-               "enum": [
-                  "CopyNumber"
-               ],
-               "type": "string"
+            "copies": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/Number"
+                  },
+                  {
+                     "$ref": "#/definitions/IndefiniteRange"
+                  },
+                  {
+                     "$ref": "#/definitions/DefiniteRange"
+                  }
+               ]
             }
          },
-         "type": "object"
-      },
-      "CytobandInterval": {
-         "additionalProperties": false,
-         "description": "A contiguous region specified by chromosomal bands features.",
-         "example": {
-            "end": "q22.3",
-            "start": "q22.2",
-            "type": "CytobandInterval"
-         },
-         "properties": {
-            "end": {
-               "$ref": "#/definitions/HumanCytoband"
-            },
-            "start": {
-               "$ref": "#/definitions/HumanCytoband"
-            },
-            "type": {
-               "default": "CytobandInterval",
-               "enum": [
-                  "CytobandInterval"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "DerivedSequenceExpression": {
-         "additionalProperties": false,
-         "properties": {
-            "location": {
-               "$ref": "#/definitions/SequenceLocation"
-            },
-            "transformation": {
-               "type": "boolean"
-            },
-            "type": {
-               "default": "DerivedSequenceExpression",
-               "enum": [
-                  "DerivedSequenceExpression"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "Feature": {
-         "additionalProperties": false,
-         "description": "A named entity that can be mapped to a Location. Genes, protein domains, exons, and chromosomes are some examples of common biological entities that may be Features.",
-         "discriminator": {
-            "propertyName": "type"
-         },
-         "oneOf": [
+         "allOf": [
             {
-               "$ref": "#/definitions/Gene"
+               "if": {
+                  "properties": {
+                     "copies": {
+                        "$ref": "#/definitions/Number"
+                     }
+                  }
+               },
+               "then": {
+                  "properties": {
+                     "copies": {
+                        "properties": {
+                           "value": {
+                              "minimum": 0,
+                              "type": "integer"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            {
+               "if": {
+                  "properties": {
+                     "copies": {
+                        "$ref": "#/definitions/IndefiniteRange"
+                     }
+                  }
+               },
+               "then": {
+                  "properties": {
+                     "copies": {
+                        "properties": {
+                           "value": {
+                              "minimum": 0,
+                              "type": "integer"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            {
+               "if": {
+                  "properties": {
+                     "copies": {
+                        "$ref": "#/definitions/DefiniteRange"
+                     }
+                  }
+               },
+               "then": {
+                  "properties": {
+                     "copies": {
+                        "properties": {
+                           "min": {
+                              "minimum": 0,
+                              "type": "integer"
+                           },
+                           "max": {
+                              "minimum": 0,
+                              "type": "integer"
+                           }
+                        }
+                     }
+                  }
+               }
             }
+         ],
+         "required": [
+            "type",
+            "subject",
+            "copies"
          ]
       },
-      "Gene": {
-         "additionalProperties": false,
-         "description": "A reference to an external gene system, used as a location for variation.  Currently, the `ncbigene` namespace is required. See https://registry.identifiers.org/registry/ncbigene.",
-         "properties": {
-            "gene_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "type": {
-               "default": "Gene",
-               "enum": [
-                  "Gene"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "Haplotype": {
-         "additionalProperties": false,
-         "description": "A set of zero or more Alleles",
-         "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "members": {
-               "items": {
-                  "oneOf": [
-                     {
-                        "$ref": "#/definitions/Allele"
-                     },
-                     {
-                        "$ref": "#/definitions/CURIE"
-                     }
-                  ]
-               },
-               "minItems": 1,
-               "type": "array",
-               "uniqueItems": true
-            },
-            "type": {
-               "default": "Haplotype",
-               "enum": [
-                  "Haplotype"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "HumanCytoband": {
-         "description": "A interval on a stained metaphase chromosome specified by cytobands. CytobandIntervals include the regions described by the start and end cytobands.",
-         "example": "q22.3",
-         "pattern": "^cen|[pq](ter|([1-9][0-9]*(\\.[1-9][0-9]*)?))$",
-         "type": "string"
-      },
-      "LiteralSequenceExpression": {
-         "additionalProperties": false,
-         "properties": {
-            "sequence": {
-               "$ref": "#/definitions/Sequence"
-            },
-            "type": {
-               "default": "LiteralSequenceExpression",
-               "enum": [
-                  "LiteralSequenceExpression"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
       "Location": {
-         "additionalProperties": false,
          "description": "A Location represents a span on a specific sequence.",
-         "discriminator": {
-            "propertyName": "type"
-         },
          "oneOf": [
             {
                "$ref": "#/definitions/ChromosomeLocation"
@@ -291,105 +337,292 @@
             {
                "$ref": "#/definitions/SequenceLocation"
             }
-         ]
-      },
-      "MolecularVariation": {
-         "additionalProperties": false,
-         "description": "A variation on a contiguous molecule.",
+         ],
          "discriminator": {
             "propertyName": "type"
-         },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/Allele"
+         }
+      },
+      "ChromosomeLocation": {
+         "additionalProperties": false,
+         "description": "A region of a chromosomed specified by species and name using cytogenetic naming conventions",
+         "type": "object",
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "ChromosomeLocation"
+               ],
+               "default": "ChromosomeLocation"
             },
-            {
-               "$ref": "#/definitions/Haplotype"
+            "_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "species_id": {
+               "$ref": "#/definitions/CURIE",
+               "default": "taxonomy:9606"
+            },
+            "chr": {
+               "type": "string"
+            },
+            "interval": {
+               "$ref": "#/definitions/CytobandInterval"
             }
+         },
+         "required": [
+            "type",
+            "species_id",
+            "chr",
+            "interval"
          ]
       },
-      "NestedInterval": {
+      "SequenceLocation": {
          "additionalProperties": false,
-         "example": {
-            "inner": {
-               "end": 30,
-               "start": 20,
-               "type": "SimpleInterval"
-            },
-            "outer": {
-               "end": 40,
-               "start": 10,
-               "type": "SimpleInterval"
-            },
-            "type": "NestedInterval"
-         },
+         "description": "A specified subsequence within another sequence that is used as a reference sequence.",
+         "type": "object",
          "properties": {
-            "inner": {
-               "$ref": "#/definitions/SimpleInterval"
-            },
-            "outer": {
-               "$ref": "#/definitions/SimpleInterval"
+            "_id": {
+               "$ref": "#/definitions/CURIE"
             },
             "type": {
-               "default": "NestedInterval",
+               "type": "string",
                "enum": [
-                  "NestedInterval"
+                  "SequenceLocation"
                ],
-               "type": "string"
+               "default": "SequenceLocation"
+            },
+            "sequence_id": {
+               "$ref": "#/definitions/CURIE"
+            },
+            "interval": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/SequenceInterval"
+                  },
+                  {
+                     "$ref": "#/definitions/SimpleInterval"
+                  }
+               ]
             }
          },
-         "type": "object"
-      },
-      "Quantity": {
-         "additionalProperties": false,
-         "description": "A value representing a multitude or magnitude.",
-         "discriminator": {
-            "propertyName": "type"
-         },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/AbsoluteCopyCount"
-            }
+         "required": [
+            "type",
+            "sequence_id",
+            "interval"
          ]
       },
-      "RepeatedSequenceExpression": {
+      "SequenceInterval": {
+         "description": "A SequenceInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nSequenceInterval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".",
+         "type": "object",
          "additionalProperties": false,
-         "example": {
-            "copies": {
-               "max": 60,
-               "min": 40
-            },
-            "type": "RepeatedSequenceExpression"
-         },
          "properties": {
-            "count": {
-               "$ref": "#/definitions/AbsoluteCopyCount"
-            },
-            "seq_expr": {
-               "$ref": "#/definitions/SequenceExpression"
-            },
             "type": {
-               "default": "RepeatedSequenceExpression",
+               "type": "string",
                "enum": [
-                  "RepeatedSequenceExpression"
+                  "SequenceInterval"
                ],
-               "type": "string"
+               "default": "SequenceInterval"
+            },
+            "start": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/Number"
+                  },
+                  {
+                     "$ref": "#/definitions/IndefiniteRange"
+                  },
+                  {
+                     "$ref": "#/definitions/DefiniteRange"
+                  }
+               ]
+            },
+            "end": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/Number"
+                  },
+                  {
+                     "$ref": "#/definitions/IndefiniteRange"
+                  },
+                  {
+                     "$ref": "#/definitions/DefiniteRange"
+                  }
+               ]
             }
          },
-         "type": "object"
+         "allOf": [
+            {
+               "if": {
+                  "properties": {
+                     "start": {
+                        "$ref": "#/definitions/Number"
+                     }
+                  }
+               },
+               "then": {
+                  "properties": {
+                     "start": {
+                        "properties": {
+                           "value": {
+                              "minimum": 0,
+                              "type": "integer"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            {
+               "if": {
+                  "properties": {
+                     "start": {
+                        "$ref": "#/definitions/IndefiniteRange"
+                     }
+                  }
+               },
+               "then": {
+                  "properties": {
+                     "start": {
+                        "properties": {
+                           "value": {
+                              "minimum": 0,
+                              "type": "integer"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            {
+               "if": {
+                  "properties": {
+                     "start": {
+                        "$ref": "#/definitions/DefiniteRange"
+                     }
+                  }
+               },
+               "then": {
+                  "properties": {
+                     "start": {
+                        "properties": {
+                           "min": {
+                              "minimum": 0,
+                              "type": "integer"
+                           },
+                           "max": {
+                              "minimum": 0,
+                              "type": "integer"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            {
+               "if": {
+                  "properties": {
+                     "end": {
+                        "$ref": "#/definitions/Number"
+                     }
+                  }
+               },
+               "then": {
+                  "properties": {
+                     "end": {
+                        "properties": {
+                           "value": {
+                              "minimum": 0,
+                              "type": "integer"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            {
+               "if": {
+                  "properties": {
+                     "end": {
+                        "$ref": "#/definitions/IndefiniteRange"
+                     }
+                  }
+               },
+               "then": {
+                  "properties": {
+                     "end": {
+                        "properties": {
+                           "value": {
+                              "minimum": 0,
+                              "type": "integer"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            {
+               "if": {
+                  "properties": {
+                     "end": {
+                        "$ref": "#/definitions/DefiniteRange"
+                     }
+                  }
+               },
+               "then": {
+                  "properties": {
+                     "end": {
+                        "properties": {
+                           "min": {
+                              "minimum": 0,
+                              "type": "integer"
+                           },
+                           "max": {
+                              "minimum": 0,
+                              "type": "integer"
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         ],
+         "required": [
+            "type",
+            "start",
+            "end"
+         ]
       },
-      "Sequence": {
+      "CytobandInterval": {
+         "description": "A contiguous region specified by chromosomal bands features.",
+         "type": "object",
          "additionalProperties": false,
-         "description": "A character string of residues that represents a biological sequence using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequences.",
-         "pattern": "^[A-Z*\\-]*$",
-         "type": "string"
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "CytobandInterval"
+               ],
+               "default": "CytobandInterval"
+            },
+            "start": {
+               "$ref": "#/definitions/HumanCytoband"
+            },
+            "end": {
+               "$ref": "#/definitions/HumanCytoband"
+            }
+         },
+         "example": {
+            "type": "CytobandInterval",
+            "start": "q22.2",
+            "end": "q22.3"
+         },
+         "required": [
+            "type",
+            "start",
+            "end"
+         ]
       },
       "SequenceExpression": {
-         "additionalProperties": false,
          "description": "One of a set of sequence representation syntaxes.",
-         "discriminator": {
-            "propertyName": "type"
-         },
          "oneOf": [
             {
                "$ref": "#/definitions/LiteralSequenceExpression"
@@ -400,190 +633,348 @@
             {
                "$ref": "#/definitions/RepeatedSequenceExpression"
             }
-         ]
-      },
-      "SequenceInterval": {
-         "additionalProperties": false,
+         ],
          "discriminator": {
             "propertyName": "type"
-         },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/SimpleInterval"
-            },
-            {
-               "$ref": "#/definitions/NestedInterval"
-            }
-         ]
+         }
       },
-      "SequenceLocation": {
+      "LiteralSequenceExpression": {
+         "type": "object",
          "additionalProperties": false,
-         "description": "A specified subsequence within another sequence that is used as a reference sequence.",
          "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "interval": {
-               "$ref": "#/definitions/SequenceInterval"
-            },
-            "sequence_id": {
-               "$ref": "#/definitions/CURIE"
-            },
             "type": {
-               "default": "SequenceLocation",
+               "type": "string",
                "enum": [
-                  "SequenceLocation"
+                  "LiteralSequenceExpression"
                ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "SequenceState": {
-         "additionalProperties": false,
-         "deprecated": true,
-         "description": "DEPRECATED: An assertion of the state of a sequence, typically at a Sequence Location within an Allele.\nThis class is deprecated. Use LiteralSequenceExpression instead.",
-         "example": {
-            "sequence": "C",
-            "type": "SequenceState"
-         },
-         "properties": {
+               "default": "LiteralSequenceExpression"
+            },
             "sequence": {
                "$ref": "#/definitions/Sequence"
-            },
+            }
+         },
+         "required": [
+            "type",
+            "sequence"
+         ]
+      },
+      "DerivedSequenceExpression": {
+         "type": "object",
+         "additionalProperties": false,
+         "properties": {
             "type": {
-               "default": "SequenceState",
+               "type": "string",
+               "enum": [
+                  "DerivedSequenceExpression"
+               ],
+               "default": "DerivedSequenceExpression"
+            },
+            "location": {
+               "$ref": "#/definitions/SequenceLocation"
+            },
+            "reverse_complement": {
+               "type": "boolean"
+            }
+         },
+         "required": [
+            "type",
+            "location",
+            "reverse_complement"
+         ]
+      },
+      "RepeatedSequenceExpression": {
+         "additionalProperties": false,
+         "type": "object",
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "RepeatedSequenceExpression"
+               ],
+               "default": "RepeatedSequenceExpression"
+            },
+            "seq_expr": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/LiteralSequenceExpression"
+                  },
+                  {
+                     "$ref": "#/definitions/DerivedSequenceExpression"
+                  }
+               ]
+            },
+            "count": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/Number"
+                  },
+                  {
+                     "$ref": "#/definitions/IndefiniteRange"
+                  },
+                  {
+                     "$ref": "#/definitions/DefiniteRange"
+                  }
+               ]
+            }
+         },
+         "allOf": [
+            {
+               "if": {
+                  "properties": {
+                     "count": {
+                        "$ref": "#/definitions/Number"
+                     }
+                  }
+               },
+               "then": {
+                  "properties": {
+                     "count": {
+                        "properties": {
+                           "value": {
+                              "minimum": 0,
+                              "type": "integer"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            {
+               "if": {
+                  "properties": {
+                     "count": {
+                        "$ref": "#/definitions/IndefiniteRange"
+                     }
+                  }
+               },
+               "then": {
+                  "properties": {
+                     "count": {
+                        "properties": {
+                           "value": {
+                              "minimum": 0,
+                              "type": "integer"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            {
+               "if": {
+                  "properties": {
+                     "count": {
+                        "$ref": "#/definitions/DefiniteRange"
+                     }
+                  }
+               },
+               "then": {
+                  "properties": {
+                     "count": {
+                        "properties": {
+                           "min": {
+                              "minimum": 0,
+                              "type": "integer"
+                           },
+                           "max": {
+                              "minimum": 0,
+                              "type": "integer"
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         ],
+         "required": [
+            "type",
+            "seq_expr",
+            "count"
+         ]
+      },
+      "Feature": {
+         "description": "A named entity that can be mapped to a Location. Genes, protein domains, exons, and chromosomes are some examples of common biological entities that may be Features.",
+         "oneOf": [
+            {
+               "$ref": "#/definitions/Gene"
+            }
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
+      },
+      "Gene": {
+         "description": "A reference to an external gene system, used as a location for variation.  Currently, the `ncbigene` namespace is required. See https://registry.identifiers.org/registry/ncbigene.",
+         "type": "object",
+         "additionalProperties": false,
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "Gene"
+               ],
+               "default": "Gene"
+            },
+            "gene_id": {
+               "$ref": "#/definitions/CURIE"
+            }
+         },
+         "required": [
+            "type",
+            "gene_id"
+         ]
+      },
+      "Number": {
+         "description": "A simple number value as a VRS class.",
+         "type": "object",
+         "additionalProperties": false,
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "Number"
+               ],
+               "default": "Number"
+            },
+            "value": {
+               "type": "number"
+            }
+         },
+         "required": [
+            "type",
+            "value"
+         ]
+      },
+      "IndefiniteRange": {
+         "description": "An indefinite range represented as a number and associated comparator. The bound operator is interpreted as follows: '>=' are all values greater than and including the value, '<=' are all numbers less than and including the value.",
+         "type": "object",
+         "additionalProperties": false,
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "IndefiniteRange"
+               ],
+               "default": "IndefiniteRange"
+            },
+            "value": {
+               "type": "number"
+            },
+            "comparator": {
+               "type": "string",
+               "enum": [
+                  "<=",
+                  ">="
+               ]
+            }
+         },
+         "required": [
+            "type",
+            "value",
+            "comparator"
+         ]
+      },
+      "DefiniteRange": {
+         "description": "A bounded, inclusive range of numbers.",
+         "type": "object",
+         "additionalProperties": false,
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "DefiniteRange"
+               ],
+               "default": "DefiniteRange"
+            },
+            "min": {
+               "type": "number"
+            },
+            "max": {
+               "type": "number"
+            }
+         },
+         "required": [
+            "type",
+            "min",
+            "max"
+         ]
+      },
+      "Sequence": {
+         "additionalProperties": false,
+         "description": "A character string of residues that represents a biological sequence using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequences.",
+         "type": "string",
+         "pattern": "^[A-Z*\\-]*$"
+      },
+      "CURIE": {
+         "additionalProperties": false,
+         "description": "A string that refers to an object uniquely.  The lifetime and scope of an id is defined by the sender.\nVRS does not impose any contraints on strings used as ids in messages. However, to maximize sharability of data, VRS RECOMMENDS that implementations use [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.\nString CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially.\nVRS also RECOMMENDS that `prefix` be defined in identifiers.org.\nThe `reference` component is an unconstrained string.\nA CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VRS uses CURIEs primarily as a naming mechanism.\nImplementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable.\nUsing internal ids in public messages is strongly discouraged.",
+         "type": "string",
+         "pattern": "^\\w[^:]*:.+$",
+         "example": "ensembl:ENSG00000139618"
+      },
+      "HumanCytoband": {
+         "additionalProperties": false,
+         "description": "A interval on a stained metaphase chromosome specified by cytobands. CytobandIntervals include the regions described by the start and end cytobands.",
+         "type": "string",
+         "pattern": "^cen|[pq](ter|([1-9][0-9]*(\\.[1-9][0-9]*)?))$",
+         "example": "q22.3"
+      },
+      "SequenceState": {
+         "deprecated": true,
+         "description": "DEPRECATED: An assertion of the state of a sequence, typically at a Sequence Location within an Allele.\nThis class is deprecated. Use LiteralSequenceExpression instead.",
+         "additionalProperties": false,
+         "type": "object",
+         "properties": {
+            "type": {
+               "type": "string",
                "enum": [
                   "SequenceState"
                ],
-               "type": "string"
+               "default": "SequenceState"
+            },
+            "sequence": {
+               "$ref": "#/definitions/Sequence"
             }
          },
-         "type": "object"
+         "example": {
+            "type": "SequenceState",
+            "sequence": "C"
+         },
+         "required": [
+            "type",
+            "sequence"
+         ]
       },
       "SimpleInterval": {
+         "deprecated": true,
+         "description": "DEPRECATED: A SimpleInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nThis class is deprecated. Use SequenceInterval instead.",
          "additionalProperties": false,
-         "description": "A SimpleInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nThis definition of SequenceInterval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".",
-         "example": {
-            "end": 22,
-            "start": 11,
-            "type": "SimpleInterval"
-         },
+         "type": "object",
          "properties": {
-            "end": {
-               "type": [
-                  "integer"
-               ]
-            },
-            "start": {
-               "type": [
-                  "integer"
-               ]
-            },
             "type": {
-               "default": "SimpleInterval",
+               "type": "string",
                "enum": [
                   "SimpleInterval"
                ],
-               "type": "string"
+               "default": "SimpleInterval"
+            },
+            "start": {
+               "type": "integer"
+            },
+            "end": {
+               "type": "integer"
             }
          },
-         "type": "object"
-      },
-      "SystemicVariation": {
-         "additionalProperties": false,
-         "description": "A Variation of multiple molecules in the context of a system, e.g. a genome, sample, or homologous chromosomes.",
-         "discriminator": {
-            "propertyName": "type"
+         "example": {
+            "type": "SimpleInterval",
+            "start": 11,
+            "end": 22
          },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/Abundance"
-            }
+         "required": [
+            "type",
+            "start",
+            "end"
          ]
-      },
-      "Text": {
-         "additionalProperties": false,
-         "description": "A textual description of variation, typically not parseable but understood by humans.",
-         "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "definition": {
-               "description": "An textual representation of variation intended to capture variation descriptions that cannot be parsed, but still treated as variation.",
-               "type": "string"
-            },
-            "type": {
-               "default": "Text",
-               "enum": [
-                  "Text"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
-      },
-      "UtilityVariation": {
-         "additionalProperties": false,
-         "description": "Utility variation classes that cannot be constrained to a specific biological class of variation.",
-         "discriminator": {
-            "propertyName": "type"
-         },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/Text"
-            }
-         ]
-      },
-      "Variation": {
-         "additionalProperties": false,
-         "description": "The root class of all Variation types",
-         "discriminator": {
-            "propertyName": "type"
-         },
-         "oneOf": [
-            {
-               "$ref": "#/definitions/MolecularVariation"
-            },
-            {
-               "$ref": "#/definitions/SystemicVariation"
-            },
-            {
-               "$ref": "#/definitions/UtilityVariation"
-            }
-         ]
-      },
-      "VariationSet": {
-         "description": "A set of Variation objects.\nMembers may be specified inline or by reference (with CURIEs)",
-         "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE"
-            },
-            "members": {
-               "items": {
-                  "oneOf": [
-                     {
-                        "$ref": "#/definitions/CURIE"
-                     },
-                     {
-                        "$ref": "#/definitions/Variation"
-                     }
-                  ]
-               },
-               "type": "array",
-               "uniqueItems": true
-            },
-            "type": {
-               "default": "VariationSet",
-               "enum": [
-                  "VariationSet"
-               ],
-               "type": "string"
-            }
-         },
-         "type": "object"
       }
-   },
-   "title": "GA4GH-VRS-Definitions",
-   "type": "object"
+   }
 }
