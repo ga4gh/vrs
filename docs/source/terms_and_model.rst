@@ -218,20 +218,26 @@ A state of a molecule at a :ref:`Location`.
 .. parsed-literal::
 
     {
-       "location": {
-          "interval": {
-             "end": 44908822,
-             "start": 44908821,
-             "type": "SimpleInterval"
+      "location": {
+        "interval": {
+          "end": {
+            "type": "Number",
+            "value": 44908822
           },
-          "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
-          "type": "SequenceLocation"
-       },
-       "state": {
-          "sequence": "T",
-          "type": "LiteralSequenceExpression"
-       },
-       "type": "Allele"
+          "start": {
+            "type": "Number",
+            "value": 44908821
+          },
+          "type": "SequenceInterval"
+        },
+        "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+        "type": "SequenceLocation"
+      },
+      "state": {
+        "sequence": "T",
+        "type": "SequenceState"
+      },
+      "type": "Allele"
     }
 
 
@@ -339,16 +345,22 @@ molecule.
 
 **Examples**
 
-An APOE-ε1 Haplotype with inline Alleles::
+An APOE1 Haplotype with inline Alleles::
 
     {
       "members": [
         {
           "location": {
             "interval": {
-              "end": 44908684,
-              "start": 44908683,
-              "type": "SimpleInterval"
+              "end": {
+                "type": "Number",
+                "value": 44908822
+              },
+              "start": {
+                "type": "Number",
+                "value": 44908821
+              },
+              "type": "SequenceInterval"
             },
             "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
             "type": "SequenceLocation"
@@ -362,15 +374,21 @@ An APOE-ε1 Haplotype with inline Alleles::
         {
           "location": {
             "interval": {
-              "end": 44908822,
-              "start": 44908821,
-              "type": "SimpleInterval"
+              "end": {
+                "type": "Number",
+                "value": 44908684
+              },
+              "start": {
+                "type": "Number",
+                "value": 44908683
+              },
+              "type": "SequenceInterval"
             },
             "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
             "type": "SequenceLocation"
           },
           "state": {
-            "sequence": "T",
+            "sequence": "C",
             "type": "LiteralSequenceExpression"
           },
           "type": "Allele"
@@ -466,12 +484,12 @@ Two, three, or four total copies of BRCA1:
 
     {
       "copies": {
-        "max": 4,
-        "min": 2,
-        "type": "AbsoluteCopyCount"
+        "comparator": ">=",
+        "type": "IndefiniteRange",
+        "value": 3
       },
       "subject": {
-        "gene_id": "ncbigene:672",
+        "gene_id": "ncbigene:384",
         "type": "Gene"
       },
       "type": "CopyNumber"
@@ -551,10 +569,9 @@ A free-text definition of variation.
 .. parsed-literal::
 
     {
-      "definition": "Microsatellite Instability High",
+      "definition": "APOE loss",
       "type": "Text"
     }
-
 
 .. _VariationSet:
 
