@@ -1,19 +1,19 @@
 Number:
-  -
+  - 
     in:
       type: Number
       value: 55
     out:
       ga4gh_serialize: '{"type":"Number","value":55}'
 Gene:
-  -
+  - 
     in:
       gene_id: ncbigene:384
       type: Gene
     out:
       ga4gh_serialize: '{"gene_id":"ncbigene:384","type":"Gene"}'
 SimpleInterval:
-  -
+  - 
     in:
       end: 44908822
       start: 44908821
@@ -63,7 +63,7 @@ SequenceInterval:
     out:
       ga4gh_serialize: '{"end":{"comparator":">=","type":"IndefiniteRange","value":44908822},"start":{"max":44908821,"min":44908721,"type":"DefiniteRange"},"type":"SequenceInterval"}'
 SequenceLocation:
-  -
+  - name: "SequenceLocation w/simple interval"
     in:
       interval:
         end:
@@ -80,7 +80,7 @@ SequenceLocation:
       ga4gh_identify: ga4gh:VSL.QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg
       ga4gh_serialize: '{"interval":{"end":{"type":"Number","value":44908822},"start":{"type":"Number","value":44908821},"type":"SequenceInterval"},"sequence_id":"IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl","type":"SequenceLocation"}'
 SequenceLocation:
-  -
+  - name: "SequenceLocation w/Definite and Indefinite Ranges"
     in:
       interval:
         end:
@@ -107,7 +107,7 @@ CytobandInterval:
     out:
       ga4gh_serialize: '{"end":"q13.32","start":"q13.32","type":"CytobandInterval"}'
 ChromosomeLocation:
-  -
+  - name: "19q13.32 Example"
     in:
       chr: '19'
       interval:
@@ -170,7 +170,7 @@ RepeatedSequenceExpression:
     out:
       ga4gh_serialize: '{"count":{"comparator":">=","type":"IndefiniteRange","value":6},"seq_expr":{"location":"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg","reverse_complement":false,"type":"DerivedSequenceExpression"},"type":"RepeatedSequenceExpression"}'
 Allele:
-  -
+  - name: "rs7412@GRCh38>T w/SequenceState"
     in:
       location:
         interval:
@@ -192,7 +192,7 @@ Allele:
       ga4gh_identify: ga4gh:VA.KnG6BLTexv7o-j9LnYsgPxZkRUu1IRnp
       ga4gh_serialize: '{"location":"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg","state":{"sequence":"T","type":"SequenceState"},"type":"Allele"}'
 Allele:
-  -
+  - name: "rs7412@GRCh38>T w/LiteralSequenceExpression"
     in:
       location:
         interval:
@@ -214,7 +214,7 @@ Allele:
       ga4gh_identify: ga4gh:VA.CxiA_hvYbkD8Vqwjhx5AYuyul4mtlkpD
       ga4gh_serialize: '{"location":"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}'
 Haplotype:
-  -
+  - name: "APOE1 on GRCh38, inline"
     in:
       members:
       - location:
@@ -252,8 +252,18 @@ Haplotype:
       ga4gh_digest: i8owCOBHIlRCPtcw_WzRFNTunwJRy99-
       ga4gh_identify: ga4gh:VH.i8owCOBHIlRCPtcw_WzRFNTunwJRy99-
       ga4gh_serialize: '{"members":["-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x","Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"],"type":"Haplotype"}'
+  - name: "APOE1 on GRCh38, referenced"
+    in:
+      members:
+      - ga4gh:VA.-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x
+      - ga4gh:VA.Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1
+      type: Haplotype
+    out:
+      ga4gh_digest: i8owCOBHIlRCPtcw_WzRFNTunwJRy99-
+      ga4gh_identify: ga4gh:VH.i8owCOBHIlRCPtcw_WzRFNTunwJRy99-
+      ga4gh_serialize: '{"members":["-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x","Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"],"type":"Haplotype"}'
 CopyNumber:
-  -
+  - name: ">=3 copies APOE"
     in:
       copies:
         comparator: '>='
@@ -277,7 +287,7 @@ Text:
       ga4gh_identify: ga4gh:VT.7hhlAaPeqj-sd67nSWXl7WC1yJ-g15tp
       ga4gh_serialize: '{"definition":"APOE loss","type":"Text"}'
 VariationSet:
-  - name: VariationSet with referenced Alleles
+  - name: "VariationSet with referenced Alleles"
     in:
       members:
       - location:
@@ -315,7 +325,7 @@ VariationSet:
       ga4gh_digest: QLQXSNSIFlqNYWmQbw-YkfmexPi4NeDE
       ga4gh_identify: ga4gh:VS.QLQXSNSIFlqNYWmQbw-YkfmexPi4NeDE
       ga4gh_serialize: '{"members":["-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x","Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"],"type":"VariationSet"}'
-  - name: VariationSet with inlined Alleles
+  - name: "VariationSet with inlined Alleles"
     in:
       members:
       - ga4gh:VA.-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x
