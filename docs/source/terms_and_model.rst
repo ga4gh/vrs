@@ -482,7 +482,7 @@ The count of copies of a :ref:`Feature` or
      - 1..1
      - The integral number of copies of the subject in the genome
 
-**Example**
+**Examples**
 
 Two, three, or four total copies of BRCA1:
 
@@ -963,7 +963,7 @@ occurs. Any of these MAY be used as the SequenceInterval for Location.
 * `SequenceOntology: sequence_feature (SO:0000110) <http://www.sequenceontology.org/miso/current_svn/term/SO:0000110>`__ — Any extent of continuous biological sequence.
 * `SequenceOntology: region (SO:0000001) <http://www.sequenceontology.org/miso/current_svn/term/SO:0000001>`__ — A sequence_feature with an extent greater than zero. A nucleotide region is composed of bases and a polypeptide region is composed of amino acids.
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -1247,7 +1247,7 @@ An explicit expression of a Sequence.
      - 1..1
      - The sequence to express
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -1293,7 +1293,7 @@ sequence location.
      - 1..1
      - The location describing the sequence
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -1359,7 +1359,7 @@ An expression of a sequence comprised of a tandem repeating subsequence.
      - the inclusive range count of repeated units
 
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -1463,7 +1463,7 @@ regulatory, transcribed, and/or other functional Locations.
   implementation is not defined by this specification.
 * See discussion on :ref:`equivalence`.
 
-**Example**
+**Examples**
 
 The following examples all refer to the human BRCA1 gene:
 
@@ -1589,7 +1589,7 @@ DefiniteRange represents an inclusive range of values.
      - maximum value; inclusive
 
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -1637,7 +1637,7 @@ side by negative infinity or positive infinity.
      - The range direction
 
 
-**Example**
+**Examples**
 
 This value is equivalent to the concept of "equal to or greater than
 22":
@@ -1685,7 +1685,7 @@ A simple number.  This class exists primarily for parity with
      - The integer values
 
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -1769,7 +1769,7 @@ ISCN guidelines [1]_.
 .. [1] McGowan-Jordan J (Ed.). *ISCN 2016: An international system
        for human cytogenomic nomenclature (2016).* Karger (2016).
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
@@ -1834,7 +1834,7 @@ derived from the IUPAC one-letter nucleic acid and amino acid codes.
   necessary that Sequences be explicitly "typed" (i.e., DNA, RNA, or
   AA).
 
-**Example**
+**Examples**
 
 .. parsed-literal::
 
