@@ -1,10 +1,17 @@
-# Validation tests for objects
-# See notebooks/appendices/Validation%20Tests.ipynb
-
-# top-level keys are class names
-# in subkey contains key-value pairs of constructor arguments
-# out subkey contains key-value pairs of function and output
-
+Number:
+  -
+    in:
+      type: Number
+      value: 55
+    out:
+      ga4gh_serialize: '{"type":"Number","value":55}'
+Gene:
+  -
+    in:
+      gene_id: ncbigene:384
+      type: Gene
+    out:
+      ga4gh_serialize: '{"gene_id":"ncbigene:384","type":"Gene"}'
 SimpleInterval:
   -
     in:
@@ -13,56 +20,167 @@ SimpleInterval:
       type: SimpleInterval
     out:
       ga4gh_serialize: '{"end":44908822,"start":44908821,"type":"SimpleInterval"}'
-
-# NestedInterval:
-#   -
-#     in:
-#       inner:
-#         end: 44908821
-#         start: 44908796
-#         type: SimpleInterval
-#       outer:
-#         end: 44908847
-#         start: 44908822
-#         type: SimpleInterval
-#       type: NestedInterval
-#     out:
-#       ga4gh_serialize: '{"inner":{"end":44908821,"start":44908796,"type":"SimpleInterval"},"outer":{"end":44908847,"start":44908822,"type":"SimpleInterval"},"type":"NestedInterval"}'
-
+DefiniteRange:
+  -
+    in:
+      max: 33
+      min: 22
+      type: DefiniteRange
+    out:
+      ga4gh_serialize: '{"max":33,"min":22,"type":"DefiniteRange"}'
+IndefiniteRange:
+  -
+    in:
+      comparator: '>='
+      type: IndefiniteRange
+      value: 22
+    out:
+      ga4gh_serialize: '{"comparator":">=","type":"IndefiniteRange","value":22}'
+SequenceInterval:
+  -
+    in:
+      end:
+        type: Number
+        value: 44908822
+      start:
+        type: Number
+        value: 44908821
+      type: SequenceInterval
+    out:
+      ga4gh_serialize: '{"end":{"type":"Number","value":44908822},"start":{"type":"Number","value":44908821},"type":"SequenceInterval"}'
+SequenceInterval:
+  -
+    in:
+      end:
+        comparator: '>='
+        type: IndefiniteRange
+        value: 44908822
+      start:
+        max: 44908821
+        min: 44908721
+        type: DefiniteRange
+      type: SequenceInterval
+    out:
+      ga4gh_serialize: '{"end":{"comparator":">=","type":"IndefiniteRange","value":44908822},"start":{"max":44908821,"min":44908721,"type":"DefiniteRange"},"type":"SequenceInterval"}'
 SequenceLocation:
   -
     in:
       interval:
-        end: 44908822
-        start: 44908821
-        type: SimpleInterval
+        end:
+          type: Number
+          value: 44908822
+        start:
+          type: Number
+          value: 44908821
+        type: SequenceInterval
       sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
       type: SequenceLocation
     out:
-      ga4gh_serialize: '{"interval":{"end":44908822,"start":44908821,"type":"SimpleInterval"},"sequence_id":"IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl","type":"SequenceLocation"}'
-
+      ga4gh_digest: QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg
+      ga4gh_identify: ga4gh:VSL.QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg
+      ga4gh_serialize: '{"interval":{"end":{"type":"Number","value":44908822},"start":{"type":"Number","value":44908821},"type":"SequenceInterval"},"sequence_id":"IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl","type":"SequenceLocation"}'
 SequenceLocation:
   -
     in:
       interval:
-        end: 44908822
-        start: 44908821
-        type: SimpleInterval
+        end:
+          comparator: '>='
+          type: IndefiniteRange
+          value: 44908822
+        start:
+          max: 44908821
+          min: 44908721
+          type: DefiniteRange
+        type: SequenceInterval
       sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
       type: SequenceLocation
     out:
-      ga4gh_digest: u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx
-      ga4gh_identify: ga4gh:VSL.u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx
-      ga4gh_serialize: '{"interval":{"end":44908822,"start":44908821,"type":"SimpleInterval"},"sequence_id":"IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl","type":"SequenceLocation"}'
-
+      ga4gh_digest: 2ZIY16gPTLbVISuREaRmb0jXGj-_IdRv
+      ga4gh_identify: ga4gh:VSL.2ZIY16gPTLbVISuREaRmb0jXGj-_IdRv
+      ga4gh_serialize: '{"interval":{"end":{"comparator":">=","type":"IndefiniteRange","value":44908822},"start":{"max":44908821,"min":44908721,"type":"DefiniteRange"},"type":"SequenceInterval"},"sequence_id":"IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl","type":"SequenceLocation"}'
+CytobandInterval:
+  -
+    in:
+      end: q13.32
+      start: q13.32
+      type: CytobandInterval
+    out:
+      ga4gh_serialize: '{"end":"q13.32","start":"q13.32","type":"CytobandInterval"}'
+ChromosomeLocation:
+  -
+    in:
+      chr: '19'
+      interval:
+        end: q13.32
+        start: q13.32
+        type: CytobandInterval
+      species_id: taxonomy:9606
+      type: ChromosomeLocation
+    out:
+      ga4gh_digest: HLH0tBIjV4Vxr_814b41hBsICouJkSN1
+      ga4gh_identify: ga4gh:VCL.HLH0tBIjV4Vxr_814b41hBsICouJkSN1
+      ga4gh_serialize: '{"chr":"19","interval":{"end":"q13.32","start":"q13.32","type":"CytobandInterval"},"species_id":"taxonomy:9606","type":"ChromosomeLocation"}'
+DerivedSequenceExpression:
+  -
+    in:
+      location:
+        interval:
+          end:
+            type: Number
+            value: 44908822
+          start:
+            type: Number
+            value: 44908821
+          type: SequenceInterval
+        sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+        type: SequenceLocation
+      reverse_complement: false
+      type: DerivedSequenceExpression
+    out:
+      ga4gh_serialize: '{"location":"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg","reverse_complement":false,"type":"DerivedSequenceExpression"}'
+LiteralSequenceExpression:
+  -
+    in:
+      sequence: ACGT
+      type: LiteralSequenceExpression
+    out:
+      ga4gh_serialize: '{"sequence":"ACGT","type":"LiteralSequenceExpression"}'
+RepeatedSequenceExpression:
+  -
+    in:
+      count:
+        comparator: '>='
+        type: IndefiniteRange
+        value: 6
+      seq_expr:
+        location:
+          interval:
+            end:
+              type: Number
+              value: 44908822
+            start:
+              type: Number
+              value: 44908821
+            type: SequenceInterval
+          sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+          type: SequenceLocation
+        reverse_complement: false
+        type: DerivedSequenceExpression
+      type: RepeatedSequenceExpression
+    out:
+      ga4gh_serialize: '{"count":{"comparator":">=","type":"IndefiniteRange","value":6},"seq_expr":{"location":"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg","reverse_complement":false,"type":"DerivedSequenceExpression"},"type":"RepeatedSequenceExpression"}'
 Allele:
   -
     in:
       location:
         interval:
-          end: 44908822
-          start: 44908821
-          type: SimpleInterval
+          end:
+            type: Number
+            value: 44908822
+          start:
+            type: Number
+            value: 44908821
+          type: SequenceInterval
         sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
         type: SequenceLocation
       state:
@@ -70,18 +188,130 @@ Allele:
         type: SequenceState
       type: Allele
     out:
-      ga4gh_digest: EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_
-      ga4gh_identify: ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_
-      ga4gh_serialize: '{"location":"u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx","state":{"sequence":"T","type":"SequenceState"},"type":"Allele"}'
-
+      ga4gh_digest: KnG6BLTexv7o-j9LnYsgPxZkRUu1IRnp
+      ga4gh_identify: ga4gh:VA.KnG6BLTexv7o-j9LnYsgPxZkRUu1IRnp
+      ga4gh_serialize: '{"location":"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg","state":{"sequence":"T","type":"SequenceState"},"type":"Allele"}'
+Allele:
   -
     in:
-      location: ga4gh:VSL.u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx
+      location:
+        interval:
+          end:
+            type: Number
+            value: 44908822
+          start:
+            type: Number
+            value: 44908821
+          type: SequenceInterval
+        sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+        type: SequenceLocation
       state:
         sequence: T
-        type: SequenceState
+        type: LiteralSequenceExpression
       type: Allele
     out:
-      ga4gh_digest: EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_
-      ga4gh_identify: ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_
-      ga4gh_serialize: '{"location":"u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx","state":{"sequence":"T","type":"SequenceState"},"type":"Allele"}'
+      ga4gh_digest: CxiA_hvYbkD8Vqwjhx5AYuyul4mtlkpD
+      ga4gh_identify: ga4gh:VA.CxiA_hvYbkD8Vqwjhx5AYuyul4mtlkpD
+      ga4gh_serialize: '{"location":"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}'
+Haplotype:
+  -
+    in:
+      members:
+      - location:
+          interval:
+            end:
+              type: Number
+              value: 44908822
+            start:
+              type: Number
+              value: 44908821
+            type: SequenceInterval
+          sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+          type: SequenceLocation
+        state:
+          sequence: C
+          type: LiteralSequenceExpression
+        type: Allele
+      - location:
+          interval:
+            end:
+              type: Number
+              value: 44908684
+            start:
+              type: Number
+              value: 44908683
+            type: SequenceInterval
+          sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+          type: SequenceLocation
+        state:
+          sequence: C
+          type: LiteralSequenceExpression
+        type: Allele
+      type: Haplotype
+    out:
+      ga4gh_digest: i8owCOBHIlRCPtcw_WzRFNTunwJRy99-
+      ga4gh_identify: ga4gh:VH.i8owCOBHIlRCPtcw_WzRFNTunwJRy99-
+      ga4gh_serialize: '{"members":["-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x","Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"],"type":"Haplotype"}'
+CopyNumber:
+  -
+    in:
+      copies:
+        comparator: '>='
+        type: IndefiniteRange
+        value: 3
+      subject:
+        gene_id: ncbigene:384
+        type: Gene
+      type: CopyNumber
+    out:
+      ga4gh_digest: xksSWn--_z28Qaj-Udlhot4OKqYGkywy
+      ga4gh_identify: ga4gh:VCN.xksSWn--_z28Qaj-Udlhot4OKqYGkywy
+      ga4gh_serialize: '{"copies":{"comparator":">=","type":"IndefiniteRange","value":3},"subject":{"gene_id":"ncbigene:384","type":"Gene"},"type":"CopyNumber"}'
+Text:
+  -
+    in:
+      definition: APOE loss
+      type: Text
+    out:
+      ga4gh_digest: 7hhlAaPeqj-sd67nSWXl7WC1yJ-g15tp
+      ga4gh_identify: ga4gh:VT.7hhlAaPeqj-sd67nSWXl7WC1yJ-g15tp
+      ga4gh_serialize: '{"definition":"APOE loss","type":"Text"}'
+VariationSet:
+  -
+    in:
+      members:
+      - location:
+          interval:
+            end:
+              type: Number
+              value: 44908822
+            start:
+              type: Number
+              value: 44908821
+            type: SequenceInterval
+          sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+          type: SequenceLocation
+        state:
+          sequence: C
+          type: LiteralSequenceExpression
+        type: Allele
+      - location:
+          interval:
+            end:
+              type: Number
+              value: 44908684
+            start:
+              type: Number
+              value: 44908683
+            type: SequenceInterval
+          sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+          type: SequenceLocation
+        state:
+          sequence: C
+          type: LiteralSequenceExpression
+        type: Allele
+      type: VariationSet
+    out:
+      ga4gh_digest: QLQXSNSIFlqNYWmQbw-YkfmexPi4NeDE
+      ga4gh_identify: ga4gh:VS.QLQXSNSIFlqNYWmQbw-YkfmexPi4NeDE
+      ga4gh_serialize: '{"members":["-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x","Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"],"type":"VariationSet"}'
