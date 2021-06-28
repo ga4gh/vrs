@@ -347,7 +347,9 @@ molecule.
 
 **Examples**
 
-An APOE ε2 Haplotype with inline Alleles::
+An APOE ε2 Haplotype with inline Alleles:
+
+.. parsed-literal::
 
     {
       "members": [
@@ -1544,8 +1546,161 @@ Absolute copy number counts may not be smaller than zero.
    }
 
 
-Primitive Concepts
-@@@@@@@@@@@@@@@@@@
+Base Classes
+@@@@@@@@@@@@
+
+Base classes are data structures that represent general concepts and
+that may be applicable in multiple parts of VRS.
+
+
+.. _DefiniteRange:
+
+DefiniteRange
+###############
+
+
+**Computational Definition**
+
+DefiniteRange represents an inclusive range of values.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "DefiniteRange"
+   * - min
+     - integer
+     - 1..1
+     - minimum value; inclusive
+   * - max
+     - integer
+     - 1..1
+     - maximum value; inclusive
+
+
+**Example**
+
+.. parsed-literal::
+
+    {
+      "max": 33,
+      "min": 22,
+      "type": "DefiniteRange"
+    }
+
+
+.. _IndefiniteRange:
+
+IndefiniteRange
+################
+
+
+**Computational Definition**
+
+IndefiniteRange represents an range of integer values, bounded on one
+side by negative infinity or positive infinity.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "IndefiniteRange"
+   * - value
+     - integer
+     - 1..1
+     - minimum value; inclusive
+   * - comparator
+     - string; enum ["<=", ">="]
+     - 1..1
+     - The range direction
+
+
+**Example**
+
+This value is equivalent to the concept of "equal to or greater than
+22":
+
+.. parsed-literal::
+
+    {
+      "comparator": ">=",
+      "type": "IndefiniteRange",
+      "value": 22
+    }
+
+
+.. _Number:
+
+Number
+#############
+
+
+**Computational Definition**
+
+A simple number.  This class exists primarily for parity with
+:ref:`DefiniteRange` and :ref:`IndefiniteRange`.
+
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "Number"
+   * - value
+     - integer
+     - 1..1
+     - The integer values
+
+
+**Example**
+
+.. parsed-literal::
+
+    {
+      "type": "Number",
+      "value": 55
+    }
+
+
+
+Primitives
+@@@@@@@@@@
+
+Primitives represent simple values with syntactic or other
+constraints. They enable correctness for values stored in VRS.
 
 
 .. _CURIE:
@@ -1578,7 +1733,9 @@ A |curie| formatted string. A CURIE string has the structure
 
 **Examples**
 
-Identifiers for GRCh38 chromosome 19::
+Identifiers for GRCh38 chromosome 19:
+
+.. parsed-literal::
 
     ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
     refseq:NC_000019.10
@@ -1586,29 +1743,6 @@ Identifiers for GRCh38 chromosome 19::
 
 See :ref:`identify` for examples of CURIE-based identifiers for VRS
 objects.
-
-.. _DefiniteRange:
-
-DefiniteRange
-###############
-
-
-**Computational Definition**
-
-
-**Information Model**
-
-
-**Example**
-
-.. parsed-literal::
-
-    {
-      "max": 33,
-      "min": 22,
-      "type": "DefiniteRange"
-    }
-
 
 .. _HumanCytoband:
 
@@ -1637,53 +1771,9 @@ ISCN guidelines [1]_.
 
 **Example**
 
-"q13.32" (string)
-
-
-.. _IndefiniteRange:
-
-IndefiniteRange
-################
-
-
-**Computational Definition**
-
-
-**Information Model**
-
-
-**Example**
-
 .. parsed-literal::
 
-    {
-      "comparator": ">=",
-      "type": "IndefiniteRange",
-      "value": 22
-    }
-
-
-.. _Number:
-
-Number
-#############
-
-
-**Computational Definition**
-
-
-**Information Model**
-
-
-**Example**
-
-.. parsed-literal::
-
-    {
-      "type": "Number",
-      "value": 55
-    }
-
+   "q13.32" (string)
 
 
 .. _Residue:
@@ -1749,8 +1839,6 @@ derived from the IUPAC one-letter nucleic acid and amino acid codes.
 .. parsed-literal::
 
     "ACGT" (string)
-
-
 
 
 
