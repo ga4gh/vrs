@@ -215,6 +215,8 @@ A state of a molecule at a :ref:`Location`.
 
 **Examples**
 
+An Allele correponding to rs7412 C>T on GRCh38:
+
 .. parsed-literal::
 
     {
@@ -345,7 +347,7 @@ molecule.
 
 **Examples**
 
-An APOE1 Haplotype with inline Alleles::
+An APOE ε2 Haplotype with inline Alleles::
 
     {
       "members": [
@@ -397,21 +399,23 @@ An APOE1 Haplotype with inline Alleles::
       "type": "Haplotype"
     }
 
-The same APOE-ε1 Haplotype with referenced Alleles::
+The same APOE ε2 Haplotype with referenced Alleles:
+  
+.. parsed-literal::
 
     {
       "members": [
-        "ga4gh:VA.iXjilHZiyCEoD3wVMPMXG3B8BtYfL88H",
-        "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_"
+        "ga4gh:VA.-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x",
+        "ga4gh:VA.Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"
       ],
       "type": "Haplotype"
     }
 
 The GA4GH computed identifier for these Haplotypes is
-`ga4gh:VH.NAVnEuaP9gf41OxnPM56XxWQfdFNcUxJ`, regardless
-of whether the Variation objects are inlined or
-referenced, and regardless of order. See
-:ref:`computed-identifiers` for more information.
+``ga4gh:VH.i8owCOBHIlRCPtcw_WzRFNTunwJRy99-``, regardless of whether the
+Variation objects are inlined or referenced, and regardless of
+order. See :ref:`computed-identifiers` for more information.
+
 
 .. _SystemicVariation:
 
@@ -634,19 +638,77 @@ An unconstrained set of Variation members.
 
 **Examples**
 
+
+Example VariationSet with inline Alleles:
+
 .. parsed-literal::
 
-  {
-    "members": [
-      "ga4gh:VA.6xjH0Ikz88s7MhcyN5GJTa1p712-M10W",
-      "ga4gh:VA.7k2lyIsIsoBgRFPlfnIOeCeEgj_2BO7F",
-      "ga4gh:VA.ikcK330gH3bYO2sw9QcTsoptTFnk_Xjh"
-    ],
-    "type": "VariationSet"
-  }
+    {
+      "members": [
+        {
+          "location": {
+            "interval": {
+              "end": {
+                "type": "Number",
+                "value": 44908822
+              },
+              "start": {
+                "type": "Number",
+                "value": 44908821
+              },
+              "type": "SequenceInterval"
+            },
+            "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+            "type": "SequenceLocation"
+          },
+          "state": {
+            "sequence": "C",
+            "type": "LiteralSequenceExpression"
+          },
+          "type": "Allele"
+        },
+        {
+          "location": {
+            "interval": {
+              "end": {
+                "type": "Number",
+                "value": 44908684
+              },
+              "start": {
+                "type": "Number",
+                "value": 44908683
+              },
+              "type": "SequenceInterval"
+            },
+            "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+            "type": "SequenceLocation"
+          },
+          "state": {
+            "sequence": "C",
+            "type": "LiteralSequenceExpression"
+          },
+          "type": "Allele"
+        }
+      ],
+      "type": "VariationSet"
+    }
+
+
+The same VariationSet with referenced Alleles:
+
+.. parsed-literal::
+
+    {
+      "members": [
+        "ga4gh:VA.-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x",
+        "ga4gh:VA.Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"
+      ],
+      "type": "VariationSet"
+    }
+
 
 The GA4GH computed identifier for these sets is
-`ga4gh:VS.WVC_R7OJ688EQX3NrgpJfsf_ctQUsVP3`, regardless of the whether
+``ga4gh:VS.QLQXSNSIFlqNYWmQbw-YkfmexPi4NeDE``, regardless of the whether
 the Variation objects are inlined or referenced, and regardless of
 order. See :ref:`computed-identifiers` for more information.
 
@@ -753,7 +815,8 @@ A :ref:`Location`, on a chromosome defined by a species and chromosome name.
   the syntactic structure of, `chromosome` depends on the species.
   `chromosome` MUST be an official sequence name from `NCBI Assembly
   <https://www.ncbi.nlm.nih.gov/assembly>`__.  For humans, valid
-  chromosome names are 1..22, X, Y (case-sensitive).
+  chromosome names are 1..22, X, Y (case-sensitive).  **NOTE: A `chr`
+  prefix is NOT part of the chromosome and MUST NOT be included.**
 * `interval` refers to a contiguous region specified named markers,
   which are presumed to exist on the specified chromosome.  See
   :ref:`CytobandInterval` for additional information.
@@ -777,16 +840,17 @@ A :ref:`Location`, on a chromosome defined by a species and chromosome name.
 
 .. parsed-literal::
 
-   {
-     "chr": "11",
-     "interval": {
-       "end": "q22.3",
-       "start": "q22.2",
-       "type": "CytobandInterval"
-       },
-     "species_id": "taxonomy:9606",
-     "type": "ChromosomeLocation"
-   }
+    {
+      "chr": "19",
+      "interval": {
+        "end": "q13.32",
+        "start": "q13.32",
+        "type": "CytobandInterval"
+      },
+      "species_id": "taxonomy:9606",
+      "type": "ChromosomeLocation"
+    }
+
 
 .. _SequenceLocation:
 
@@ -896,6 +960,22 @@ occurs. Any of these MAY be used as the SequenceInterval for Location.
 * `Interbase Coordinates (Chado documentation) <http://gmod.org/wiki/Introduction_to_Chado#Interbase_Coordinates>`__
 * `SequenceOntology: sequence_feature (SO:0000110) <http://www.sequenceontology.org/miso/current_svn/term/SO:0000110>`__ — Any extent of continuous biological sequence.
 * `SequenceOntology: region (SO:0000001) <http://www.sequenceontology.org/miso/current_svn/term/SO:0000001>`__ — A sequence_feature with an extent greater than zero. A nucleotide region is composed of bases and a polypeptide region is composed of amino acids.
+
+**Example**
+
+.. parsed-literal::
+
+    {
+      "end": {
+        "type": "Number",
+        "value": 44908822
+      },
+      "start": {
+        "type": "Number",
+        "value": 44908821
+      },
+      "type": "SequenceInterval"
+    }
 
 
 .. _SimpleInterval:
@@ -1107,11 +1187,12 @@ cytobands.
 
 .. parsed-literal::
 
-   {
-     "end": "p22.1",
-     "start": "p22.3",
-     "type": "CytobandInterval"
-   }
+    {
+      "end": "q13.32",
+      "start": "q13.32",
+      "type": "CytobandInterval"
+    }
+
 
 .. _SequenceExpression:
 
@@ -1214,20 +1295,27 @@ sequence location.
 
 .. parsed-literal::
 
-     {
-       "location": {
-         "interval": {
-           "end": 33,
-           "start": 22,
-           "type": "SimpleInterval"
-         },
-         "sequence_id": "ga4gh:SQ.0123abcd",
-         "type": "SequenceLocation"
-       },
-       "type": "DerivedSequenceExpression"
-     }
+    {
+      "location": {
+        "interval": {
+          "end": {
+            "type": "Number",
+            "value": 44908822
+          },
+          "start": {
+            "type": "Number",
+            "value": 44908821
+          },
+          "type": "SequenceInterval"
+        },
+        "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+        "type": "SequenceLocation"
+      },
+      "reverse_complement": false,
+      "type": "DerivedSequenceExpression"
+    }
 
-
+    
 .. _RepeatedSequenceExpression:
 
 RepeatedSequenceExpression
@@ -1275,17 +1363,31 @@ An expression of a sequence comprised of a tandem repeating subsequence.
 
     {
       "count": {
-        "max": 10,
-        "min": 5,
-        "type": "AbsoluteCopyCount"
+        "comparator": ">=",
+        "type": "IndefiniteRange",
+        "value": 6
       },
       "seq_expr": {
-        "sequence": "CAG",
-        "type": "LiteralSequenceExpression"
+        "location": {
+          "interval": {
+            "end": {
+              "type": "Number",
+              "value": 44908822
+            },
+            "start": {
+              "type": "Number",
+              "value": 44908821
+            },
+            "type": "SequenceInterval"
+          },
+          "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+          "type": "SequenceLocation"
+        },
+        "reverse_complement": false,
+        "type": "DerivedSequenceExpression"
       },
       "type": "RepeatedSequenceExpression"
     }
-
 
 
 .. _Feature:
@@ -1366,27 +1468,9 @@ The following examples all refer to the human BRCA1 gene:
 .. parsed-literal::
 
    {
-     'gene_id': 'ncbigene:672',
+     'gene_id': 'ncbigene:384',
      'type': 'Gene'
    }
-
-Gene is intended to be used as a subject of gene-level annotations,
-such as this statement of increased copy number of BRCA1:
-
-.. parsed-literal::
-
-    {
-      "copies": {
-        "min": 3,
-        "type": "AbsoluteCopyCount"
-      },
-      "subject": {
-        "gene_id": "ncbigene:672",
-        "type": "Gene"
-      },
-      "type": "AbsoluteCopyCount"
-    }
-
 
 
 **Sources**
@@ -1503,6 +1587,105 @@ Identifiers for GRCh38 chromosome 19::
 See :ref:`identify` for examples of CURIE-based identifiers for VRS
 objects.
 
+.. _DefiniteRange:
+
+DefiniteRange
+###############
+
+
+**Computational Definition**
+
+
+**Information Model**
+
+
+**Example**
+
+.. parsed-literal::
+
+    {
+      "max": 33,
+      "min": 22,
+      "type": "DefiniteRange"
+    }
+
+
+.. _HumanCytoband:
+
+HumanCytoband
+#############
+
+Cytobands are any of a pattern of stained bands, formed on chromosomes of
+cells undergoing metaphase, that serve to identify particular chromosomes.
+Human cytobands are predominantly specified by the *International System
+for Human Cytogenomic Nomenclature* (ISCN) [1]_.
+
+**Computational Definition**
+
+A character string representing cytobands derived from the
+*International System for Human Cytogenomic Nomenclature* (ISCN)
+guidelines.
+
+**Information Model**
+
+A string constrained to match the regular expression
+``^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$``, derived from the
+ISCN guidelines [1]_.
+
+.. [1] McGowan-Jordan J (Ed.). *ISCN 2016: An international system
+       for human cytogenomic nomenclature (2016).* Karger (2016).
+
+**Example**
+
+"q13.32" (string)
+
+
+.. _IndefiniteRange:
+
+IndefiniteRange
+################
+
+
+**Computational Definition**
+
+
+**Information Model**
+
+
+**Example**
+
+.. parsed-literal::
+
+    {
+      "comparator": ">=",
+      "type": "IndefiniteRange",
+      "value": 22
+    }
+
+
+.. _Number:
+
+Number
+#############
+
+
+**Computational Definition**
+
+
+**Information Model**
+
+
+**Example**
+
+.. parsed-literal::
+
+    {
+      "type": "Number",
+      "value": 55
+    }
+
+
+
 .. _Residue:
 
 Residue
@@ -1561,30 +1744,14 @@ derived from the IUPAC one-letter nucleic acid and amino acid codes.
   necessary that Sequences be explicitly "typed" (i.e., DNA, RNA, or
   AA).
 
-.. _HumanCytoband:
+**Example**
 
-HumanCytoband
-#############
+.. parsed-literal::
 
-Cytobands are any of a pattern of stained bands, formed on chromosomes of
-cells undergoing metaphase, that serve to identify particular chromosomes.
-Human cytobands are predominantly specified by the *International System
-for Human Cytogenomic Nomenclature* (ISCN) [1]_.
+    "ACGT" (string)
 
-**Computational Definition**
 
-A character string representing cytobands derived from the
-*International System for Human Cytogenomic Nomenclature* (ISCN)
-guidelines.
 
-**Information Model**
-
-A string constrained to match the regular expression
-``^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$``, derived from the
-ISCN guidelines [1]_.
-
-.. [1] McGowan-Jordan J (Ed.). *ISCN 2016: An international system
-       for human cytogenomic nomenclature (2016).* Karger (2016).
 
 
 .. _deprecations:

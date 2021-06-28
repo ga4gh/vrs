@@ -277,7 +277,7 @@ Text:
       ga4gh_identify: ga4gh:VT.7hhlAaPeqj-sd67nSWXl7WC1yJ-g15tp
       ga4gh_serialize: '{"definition":"APOE loss","type":"Text"}'
 VariationSet:
-  -
+  - name: VariationSet with referenced Alleles
     in:
       members:
       - location:
@@ -310,6 +310,16 @@ VariationSet:
           sequence: C
           type: LiteralSequenceExpression
         type: Allele
+      type: VariationSet
+    out:
+      ga4gh_digest: QLQXSNSIFlqNYWmQbw-YkfmexPi4NeDE
+      ga4gh_identify: ga4gh:VS.QLQXSNSIFlqNYWmQbw-YkfmexPi4NeDE
+      ga4gh_serialize: '{"members":["-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x","Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"],"type":"VariationSet"}'
+  - name: VariationSet with inlined Alleles
+    in:
+      members:
+      - ga4gh:VA.-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x
+      - ga4gh:VA.Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1
       type: VariationSet
     out:
       ga4gh_digest: QLQXSNSIFlqNYWmQbw-YkfmexPi4NeDE
