@@ -444,8 +444,9 @@ as an :ref:`Allele` with a :ref:`RepeatedSequenceExpression`.
 
 **Computational Definition**
 
-The count of discrete copies of a :ref:`Feature`,
-:ref:`MolecularVariation`, or other molecule within a genome.
+The count of discrete copies of a :ref:`MolecularVariation`,
+:ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference
+to any of these.
 
 **Information Model**
 
