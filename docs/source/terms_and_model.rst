@@ -1120,12 +1120,12 @@ large) reference subsequences specified by a :ref:`SequenceLocation`.
 
 **Computational Definition**
 
-An approximate expression of a sequence that is derived from
-a referenced sequence location. Use of DerivedSequenceExpression
-indicates that the derived sequence is approximately equivalent
-to the reference indicated, and is typically used for describing
-large regions for variation concepts where the precision of an
-exact sequence is unnecesssary.
+An approximate expression of a sequence that is derived from a
+referenced sequence location. Use of DerivedSequenceExpression
+indicates that the derived sequence is approximately equivalent to the
+reference indicated, and is typically used for describing large
+regions for variation concepts where the exact sequence is
+inconsequential.
 
 **Information Model**
 
@@ -1265,14 +1265,11 @@ A gene is a basic and fundamental unit of heritability. Genes are
 functional regions of heritable DNA or RNA that include transcript
 coding regions, regulatory elements, and other functional sequence
 domains. Because of the complex nature of these many components
-comprising a gene, the interpretation of a gene is context dependent.
+comprising a gene, the interpretation of a gene depends on context.
 
 **Computational definition**
 
-A gene is an authoritative representation of one or more heritable
-:ref:`Locations <Location>` that includes all sequence elements
-necessary to perform a biological function. A gene may include
-regulatory, transcribed, and/or other functional Locations.
+In VRS, a Gene is a reference to an external gene nomenclature.
 
 **Information Model**
 
@@ -1289,7 +1286,7 @@ regulatory, transcribed, and/or other functional Locations.
    * - gene_id
      - :ref:`CURIE`
      - 1..1
-     - Authoritative Gene ID (see guidance)
+     - External gene identifier (see guidance)
    * - type
      - string
      - 1..1
@@ -1311,8 +1308,9 @@ regulatory, transcribed, and/or other functional Locations.
     * `ensembl <https://registry.identifiers.org/registry/ensembl>`__
     * `vgnc <https://registry.identifiers.org/registry/vgnc>`__
     * `mgi <https://registry.identifiers.org/registry/mgi>`__
-* The `hgnc` namespace is RECOMMENDED for human
-  variation in order to improve interoperability.
+* The `hgnc` namespace is RECOMMENDED for human variation in order to
+  improve interoperability.  When using the ``hgnc`` namespace, the
+  optional "HGNC:" prefix MUST NOT be used.
 * Gene MAY be converted to one or more :ref:`Locations <Location>`
   using external data. The source of such data and mechanism for
   implementation is not defined by this specification.
@@ -1325,7 +1323,7 @@ The following examples all refer to the human APOE gene:
 .. parsed-literal::
 
    {
-     'gene_id': 'ncbigene:348',
+     'gene_id': 'ncbigene:613',
      'type': 'Gene'
    }
 
