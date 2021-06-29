@@ -977,46 +977,6 @@ definition of region has an "extent greater than zero".
     }
 
 
-.. _SimpleInterval:
-
-SimpleInterval
-$$$$$$$$$$$$$$
-
-**Computational Definition**
-
-A :ref:`SequenceInterval` with a single start and end coordinate.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "SequenceInterval"
-   * - start
-     - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`
-     - 1..1
-     - Coordinate or coordinate range for the interval start
-   * - end
-     - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`
-     - 1..1
-     - Coordinate or coordinate range for the interval end
-
-
-**Sources**
-
-* `Interbase Coordinates (Chado documentation) <http://gmod.org/wiki/Introduction_to_Chado#Interbase_Coordinates>`__
-* `SequenceOntology: sequence_feature (SO:0000110) <http://www.sequenceontology.org/miso/current_svn/term/SO:0000110>`__ — Any extent of continuous biological sequence.
-* `SequenceOntology: region (SO:0000001) <http://www.sequenceontology.org/miso/current_svn/term/SO:0000001>`__ — A sequence_feature with an extent greater than zero. A nucleotide region is composed of bases and a polypeptide region is composed of amino acids.
 
 
 .. _CytobandInterval:
@@ -1379,112 +1339,6 @@ The following examples all refer to the human APOE gene:
   regulatory regions, transcribed regions and/or other functional
   sequence regions.
 
-Numerics, Comparators, and Ranges
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-.. _Number:
-
-Number
-######
-
-The *Number* class "wraps" a number as a value in a VRS class, which
-is often used as one of several optional VRS classes for an attribute
-in another class.
-
-**Computational Definition**
-A simple number value as a VRS class.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - value
-     - number
-     - 1..1
-     - A simple number value
-   * - type
-     - string
-     - 1..1
-     - MUST be "Number"
-
-.. _DefiniteRange:
-
-DefiniteRange
-#############
-
-**Computational Definition**
-A bounded, inclusive range of numbers.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - min
-     - number
-     - 1..1
-     - A simple number value representing the range minimum
-   * - max
-     - number
-     - 1..1
-     - A simple number value representing the range maximum
-   * - type
-     - string
-     - 1..1
-     - MUST be "DefiniteRange"
-
-.. _IndefiniteRange:
-
-IndefiniteRange
-###############
-
-**Computational Definition**
-An indefinite range represented as a number and associated comparator.
-The bound operator is interpreted as follows: '>=' are all values
-greater than and including the value, '<=' are all numbers less than and
-including the value.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - value
-     - number
-     - 1..1
-     - A simple number value representing a range boundary
-   * - comparator
-     - number
-     - 1..1
-     - MUST be one of "<=" or ">=", indicates in which direction
-       the range is indefinite
-   * - type
-     - string
-     - 1..1
-     - MUST be "IndefiniteRange"
-
 Base Classes
 @@@@@@@@@@@@
 
@@ -1500,7 +1354,7 @@ DefiniteRange
 
 **Computational Definition**
 
-DefiniteRange represents an inclusive range of values.
+A bounded, inclusive range of numbers.
 
 **Information Model**
 
@@ -1547,8 +1401,9 @@ IndefiniteRange
 
 **Computational Definition**
 
-IndefiniteRange represents an range of integer values, bounded on one
-side by negative infinity or positive infinity.
+An half-bounded range of integer values, bounded on one side by an
+integer and on the other by negative infinity or positive infinity.
+
 
 **Information Model**
 
@@ -1569,11 +1424,12 @@ side by negative infinity or positive infinity.
    * - value
      - integer
      - 1..1
-     - minimum value; inclusive
+     - The bounded value; inclusive
    * - comparator
      - string; enum ["<=", ">="]
      - 1..1
-     - The range direction
+     - MUST be one of "<=" or ">=", indicates in which direction
+       the range is indefinite
 
 
 **Examples**
@@ -1593,14 +1449,14 @@ This value is equivalent to the concept of "equal to or greater than
 .. _Number:
 
 Number
-#############
+######
 
 
 **Computational Definition**
 
-A simple number.  This class exists primarily for parity with
-:ref:`DefiniteRange` and :ref:`IndefiniteRange`.
-
+The *Number* class is a container for a simple number. This class is
+required when an attribute may be a number or more complex type, such
+as :ref:`DefiniteRange` and :ref:`IndefiniteRange`.
 
 **Information Model**
 
@@ -1621,7 +1477,7 @@ A simple number.  This class exists primarily for parity with
    * - value
      - integer
      - 1..1
-     - The integer values
+     - The integer value
 
 
 **Examples**
