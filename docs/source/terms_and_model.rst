@@ -1339,10 +1339,11 @@ The following examples all refer to the human APOE gene:
   regulatory regions, transcribed regions and/or other functional
   sequence regions.
 
-Base Classes
-@@@@@@@@@@@@
 
-Base classes are data structures that represent general concepts and
+Basic Types
+@@@@@@@@@@@
+
+Basic types are data structures that represent general concepts and
 that may be applicable in multiple parts of VRS.
 
 
