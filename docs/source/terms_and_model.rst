@@ -495,7 +495,7 @@ Two, three, or four total copies of BRCA1:
         "value": 3
       },
       "subject": {
-        "gene_id": "ncbigene:384",
+        "gene_id": "ncbigene:348",
         "type": "Gene"
       },
       "type": "CopyNumber"
@@ -1465,12 +1465,12 @@ regulatory, transcribed, and/or other functional Locations.
 
 **Examples**
 
-The following examples all refer to the human BRCA1 gene:
+The following examples all refer to the human APOE gene:
 
 .. parsed-literal::
 
    {
-     'gene_id': 'ncbigene:384',
+     'gene_id': 'ncbigene:348',
      'type': 'Gene'
    }
 
