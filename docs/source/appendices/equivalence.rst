@@ -22,3 +22,26 @@ VRS to represent different forms of variation. To assist in that effort,
 the GA4GH Genomic Knowledge Standards Work Stream is developing a
 specification for resource-defined Variation Concept Origination Policies
 (VCOPs). You can learn more about VCOPs in the `VRSATILE`_ framework.
+
+.. _using-sequence-expressions:
+
+Using Sequence Expressions
+@@@@@@@@@@@@@@@@@@@@@@@@@@
+When using Sequence Expressions, our general recommendation is to use
+:ref:`LiteralSequenceExpression` for when the precise sequence state is of
+importance to the Variation concept; this is the most common use case.
+When the precise state is not important but instead it is desired to refer
+to the general sequence derived from a location on a reference sequence, we
+recommend using a :ref:`DerivedSequenceExpression`; this is typically used
+when describing large sequences that are approximately reference for use in
+some large-scale :ref:`MolecularVariation` or :ref:`SystemicVariation` concepts.
+:ref:`RepeatedSequenceExpression` is typically used for the semantic importance
+of describing a specific, repeated subsequence *by count*, such as description
+of CAG repeats in the *ATXN7* gene, where the repeat count is a diagnostic
+biomarker for severe neurodegenerative disorder spinocerebellar ataxia type 7 [1]_.
+
+.. [1] Bettencourt C, Hensman-Moss D, Flower M, et al. DNA repair pathways underlie
+       a common genetic mechanism modulating onset in polyglutamine diseases. *Ann
+       Neurol*. 2016;79(6):983-990. `doi:10.1002/ana.24656`_
+
+.. _`doi:10.1002/ana.24656`: https://doi.org/10.1002/ana.24656
