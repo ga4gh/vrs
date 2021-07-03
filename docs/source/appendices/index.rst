@@ -4,14 +4,17 @@ Appendices
 .. toctree::
    :maxdepth: 2
 
-   relationships
-   associating_annotations
+   getting_involved    
    design_decisions
-   equivalence
    development_process
    future_plans
-   ga4gh_identifiers
+
    implementations
+   relationships
+   associating_annotations
+   equivalence
+   ga4gh_identifiers
    truncated_digest_collision_analysis
+
    faq
    glossary

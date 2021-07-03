@@ -6,27 +6,26 @@ Frequently (Asked and) Answered Questions
 .. glossary::
 
    How can I learn more about VRS? How can I get involved?
-     (TODO) meeting, mailing list, vrs and vrs-python
-     https://github.com/ga4gh/vrs/issues/311
+     See :ref:`getting-involved`.
 
-   Why does VRS ...?
+   Why does VRS ...?  Why did you use interresidue coordinates?  Are they they same as 0-based coordinates?  Why aren't sequences typed?
+
       The first stop for these questions is :ref:`design-decisions`. 
 
-   Why did you use interresidue coordinates?  Are they they same as 0-based coordinates?
-     To be written
-
-   Why aren't sequences typed?
-     To be written
-
    How does VRS handle strandedness?
+
      It doesn't. VRS presumes that all locations are with respect to
      the positive/forward/Watson strand.
+   
+   How do you deal with variation that need to hold large amounts of data?
 
-   
-   How do you deal with Variants that need to hold large amounts of data?
-     `#318 <https://github.com/ga4gh/vrs/issues/318>`__
-     
-   
+     VRS models are minimal, meaning that they contain only the
+     minimum information required to represent the instance.  They do
+     not contain related information or annotations of any sort.  If
+     an instance entails the insertion of a large arbitrary sequence,
+     then the object will be large. Computed identifiers are fixed
+     length and independent of the size of an object.
+
    How do you handle variant representations and annotation across multiple transcripts and reference builds?
 
      VRS does not currently structure any of the many notions of
