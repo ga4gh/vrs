@@ -48,12 +48,6 @@ specifications for the (**information model**). Terms are ordered
 Information Model Principles
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-* **VRS uses** `snake_case
-  <https://simple.wikipedia.org/wiki/Snake_case>`__ **to represent
-  compound words.** Although the schema is currently JSON-based (which
-  would typically use camelCase), VRS itself is intended to be neutral
-  with respect to languages and database.
-
 * **VRS objects are minimal** `value objects
   <https://en.wikipedia.org/wiki/Value_object>`__. Two objects are
   considered equal if and only if their respective attributes are
@@ -63,6 +57,15 @@ Information Model Principles
   to external data.  Instead, related data should be associated with
   VRS objects through identifiers.  See :ref:`computed-identifiers`.
 
+* **VRS uses polymorphism.** VRS uses polymorphism extensively in
+   order to provide a coherent top-down structure for variation while
+   enabling precise models for variation data.  For example, Allele is
+   a kind of Variation, SequenceLocation is a kind of Location, and
+   SequenceState is a kind of State.  See :ref:`future-plans` for the
+   roadmap of VRS data classes and relationships.  All VRS objects
+   contain a ``type`` attribute, which is used to discriminate
+   polymorphic objects.
+
 * **Error handling is intentionally unspecified and delegated to
   implementation.**  VRS provides foundational data types that
   enable significant flexibility.  Except where required by this
@@ -70,6 +73,12 @@ Information Model Principles
   validate data.  For example, implementations MAY choose to validate
   that particular combinations of objects are compatible, but such
   validation is not required.
+
+* **VRS uses** `snake_case
+  <https://simple.wikipedia.org/wiki/Snake_case>`__ **to represent
+  compound words.** Although the schema is currently JSON-based (which
+  would typically use camelCase), VRS itself is intended to be neutral
+  with respect to languages and database.
 
 * **Optional attributes start with an underscore.** Optional
   attributes are not part of the value object.  Such attributes are
@@ -82,7 +91,6 @@ Information Model Principles
   Computed Identifier <identify>`.  Implementations MUST ignore
   attributes beginning with an underscore and they SHOULD NOT transmit
   objects containing them.
-
 
 
 .. _Variation:
