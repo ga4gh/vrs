@@ -114,12 +114,14 @@ common operation, implementations are strongly encouraged to
 precompute GA4GH sequence identifiers as described in
 :ref:`required-data`.
 
-If the object is a composite VRS object, implementations MUST:
+If the object is an instance of a VRS class, implementations MUST:
 
     * ensure that objects are referenced with identifiers in the
       ``ga4gh`` namespace
-    * replace nested identifiable objects (i.e., objects that have id
-      properties) with their corresponding *digests*
+    * replace each nested :term:`identifiable object` with their
+      corresponding *digests*. (Note: Attributes of some objects, such
+      as :ref:`CopyNumber`, permit a mix of identifiable and
+      non-identifiable values.)
     * order arrays of digests and ids by Unicode Character Set values
     * filter out fields that start with underscore (e.g., `_id`)
     * filter out fields with null values

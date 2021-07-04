@@ -10,33 +10,38 @@ News
 
   * The first manuscript for VRS has been submitted. Please cite
     https://www.biorxiv.org/content/10.1101/2021.01.15.426843v1.
-  * Want to get involved? See the :ref:`VRS Appendix
-    <https://vrs.ga4gh.org/en/stable/appendices/index.html>` for the
+  * Want to get involved? See the `VRS Appendix
+    <https://vrs.ga4gh.org/en/stable/appendices/index.html>`_ for the
     many ways that you can inform and contribute to VRS.
 
 Important
 #########
 
   * :ref:`SimpleInterval and SequenceState are deprecated
-    <deprecations>`. Theywill be removed in VRS 2.0.
+    <deprecations>`. They will be removed in VRS 2.0.
 
 Major Changes
 #############
 
-  * VRS 1.2 introduces a new classification of variation
-    types. :ref:`MolecularVariation` refers to variation within or of
-    a contiguous molecular. :ref:`SystemicVariation` refers to
-    variation in the context of a system, such as a genome, sample, or
-    homologous chromosomes.  :ref:`UtilityVariation` classes provide
-    useful representations for certain technical operations.
-  * :ref:`SequenceExpressions <SequenceExpression>` replaces
-    SequenceState with more sophisticated expressions.  Subtypes are:
-    :ref:`DerivedSequenceExpression`, which representations sequence
-    notionally derived from a SequenceLocation;
-    :ref:`RepreatedSequenceExpression`, which represents contiguous
-    repeats of a sequence; and :ref:`LiteralSequenceExpression`, which
-    wraps a :ref:`Sequence` and provides data structure parity with
-    other SequenceExpressions.
+  * New classification of variation types.
+
+    * :ref:`MolecularVariation` refers to variation within or of a
+      contiguous molecular
+    * :ref:`SystemicVariation` refers to variation in the context of a
+      system, such as a genome, sample, or homologous chromosomes
+    * :ref:`UtilityVariation` classes provide useful representations
+      for certain technical operations
+
+  * New :ref:`SequenceExpressions <SequenceExpression>` subclasses
+    replace SequenceState.  Subtypes are:
+    
+    * :ref:`DerivedSequenceExpression`, which representations sequence
+      notionally derived from a SequenceLocation
+    * :ref:`RepeatedSequenceExpression`, which represents contiguous
+      repeats of a sequence
+    * :ref:`LiteralSequenceExpression`, which
+      wraps a :ref:`Sequence` and provides data structure parity with
+      other SequenceExpressions
   * :ref:`CopyNumber`, a form of SystemicVariation, represents the
     copies of a molecule within a genome, and can be used to express
     concepts such as amplification and copy loss.
