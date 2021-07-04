@@ -17,6 +17,12 @@ Glossary
       input data.  It is statistically extremely unlikely for two
       fingerprints to match when the underlying data are distinct. 
 
+   identifiable object
+      An identifiable object in VRS is any data structure for
+      which VRS defines a serialization method, which is the
+      precursor to generating a computational digest. All
+      Sequence, Location, and Variation types are identifiable.
+
    serialization
      The process of converting an object in memory into a stream of
      bytes that may be sent via the network, saved in a database, or
