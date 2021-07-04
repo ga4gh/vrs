@@ -96,3 +96,20 @@ with deleted and inserted sequences of GGGG and GGG respectively,
 avoiding the need to left or right shift the minimal
 representation. This reduces ambiguity, but can lead to long allele
 descriptions.
+
+
+From https://github.com/ga4gh/vrs/issues/305:
+
+VRS is being designed as an informational model that is designed as atomic building blocks that can be composed into higher order variant representations. It is designed for the primary function of precise computational data exchange.
+
+VRS is also extensible. It is not limited to simple SNVs, DelIns and any subset of variation and such can be used as a standard that will grow with the types of variation that are often limited by other methods, nomenclatures and authorizing registries (SPDI, VCF and HGVS)
+
+VRS is not limited to genomic sequence, but any type of sequence (genomic, transcript, protein).
+
+VRS is not limited to sequence based variation (cytobands, systemic expression, genetic features)
+
+SPDI is only about alleles and precise genomic variation, SPDI's nomenclature is built on VOCA (variant overprecision correction algorithm) as specified by NCBI. VRS is built on VOCA as well for the types of variation that fall within its domain.
+
+VCF is genomic only. VCF is a file format. VCF is primarily designed for high-volume, compact variant calls. VCF is not designed to be extensible in the same way as VRS to support much broader representations of variation independent of samples or cohorts. VCF does not normalize the small precise SNVs and DelInss using the same VOCA based normalization.
+
+HGVS is a nomenclature. HGVS is designed primarily for human-readability not computational identification. HGVS is not applied consistently in reporting, literature, and databases even though there has been great strides to provide tooling to validate HGVS syntax. HGVS does not normalize variation using VOCA. Several HGVS expressions can represent the same variant. VRS is not designed to be human-readable (we have started designing implementation guidance for wrapping VRS representations in Value Object Descriptors to allow exchange systems to add human-readable and useful attributes that improve the productivity of data exchange contracts involving variation - see VRSATILE).
