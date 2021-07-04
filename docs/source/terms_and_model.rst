@@ -512,12 +512,20 @@ applications of VRS.
 Text
 $$$$
 
-Some forms of variation are described with text that is interpretable
-only by humans.
+A free-text description of variation that is intended for
+interpretation by humans.
+
+.. important:: **Text variation should be used sparingly.** The Text
+               type is provided as an option of last resort for
+               systems that need to represent human-readable
+               descriptions of complex genetic phenomena or variation
+               for which VRS does not yet have a data type.
+               Structured data types should be preferred over Text.
+
 
 **Computational Definition**
 
-A free-text definition of variation.
+A string of unconstrained text.
 
 **Information Model**
 
@@ -552,12 +560,9 @@ A free-text definition of variation.
 * Because the Text type can be easily abused, implementations are NOT
   REQUIRED to provide it.  If it is provided, implementations SHOULD
   consider applying access controls.
-* If a future version of VRS is adopted by an implementation and
-  the new version enables defining existing Text objects under a
-  different Variation subclass, the implementation MUST construct a
-  new object under the other Variation subclass. In such a case, an
-  implementation SHOULD persist the original Text object and respond
-  to queries matching the Text object with the new object.
+* Implementations SHOULD upgrade Text variation to structured data
+  types when available. A future version of VRS will provide
+  additional guidance regarding upgrade mechanisms.
 * Additional Variation subclasses are continually under
   consideration. Please open a `GitHub issue`_ if you would like to
   propose a Variation subclass to cover a needed variation
