@@ -7,7 +7,7 @@ VRS is driven by community involvement.  Here are a few ways that you
 can get involved:
 
 * `GA4GH Variation Representation mailing list
-  <https://groups.google.com/a/ga4gh.org/g/variant-rep>`_.
+  <https://groups.google.com/a/ga4gh.org/g/ga4gh-vr>`_.
 
 * Biweekly meetings. Currently (July 2021) meets on the second and
   fourth Mondays of each month at 9am US Pacific time.  
