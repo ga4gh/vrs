@@ -28,7 +28,7 @@ VRS is licensed under the [Apache License 2.0](LICENSE).
 * Define a globally unique *computed identifier* for covered data
   classes.
 * Develop [validation
-  tests](https://github.com/ga4gh/vrs/tests/validation) to ensure
+  tests](https://github.com/ga4gh/vrs/tree/main/validation) to ensure
   consistency of implementations.
 
 The VRS model is the product of the [GA4GH Variation Representation
