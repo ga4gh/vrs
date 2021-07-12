@@ -4,37 +4,57 @@
 1.2.0
 @@@@@
 
+
+News
+####
+
+  * The first manuscript for VRS has been submitted. Please cite
+    https://www.biorxiv.org/content/10.1101/2021.01.15.426843v1.
+  * Want to get involved? See the `VRS Appendix
+    <https://vrs.ga4gh.org/en/stable/appendices/index.html>`_ for the
+    many ways that you can inform and contribute to VRS.
+
 Important
 #########
 
-  * :ref:`SequenceState is deprecated <deprecations>`. It will be
-    removed in VRS 2.0.
-  * The first manuscript for VRS has been submitted. Please cite
-    https://www.biorxiv.org/content/10.1101/2021.01.15.426843v1.
+  * :ref:`SimpleInterval and SequenceState are deprecated
+    <deprecations>`. They will be removed in VRS 2.0.
 
+Major Changes
+#############
 
-New classes
-###########
+  * New classification of variation types.
 
-  * :ref:`SequenceExpressions <SequenceExpression>` replaces
-    SequenceState with more sophisticated expressions such as sequence
-    repeats and sequence derived from a location.
+    * :ref:`MolecularVariation` refers to variation within or of a
+      contiguous molecular
+    * :ref:`SystemicVariation` refers to variation in the context of a
+      system, such as a genome, sample, or homologous chromosomes
+    * :ref:`UtilityVariation` classes provide useful representations
+      for certain technical operations
+
+  * New :ref:`SequenceExpressions <SequenceExpression>` subclasses
+    replace SequenceState.  Subtypes are:
+    
+    * :ref:`DerivedSequenceExpression`, which representations sequence
+      notionally derived from a SequenceLocation
+    * :ref:`RepeatedSequenceExpression`, which represents contiguous
+      repeats of a sequence
+    * :ref:`LiteralSequenceExpression`, which
+      wraps a :ref:`Sequence` and provides data structure parity with
+      other SequenceExpressions
+  * :ref:`CopyNumber`, a form of SystemicVariation, represents the
+    copies of a molecule within a genome, and can be used to express
+    concepts such as amplification and copy loss.
   * :ref:`Gene` enables reference to an external definition of a gene,
     particularly for useas a subject of copy number expressions.
-  * :ref:`CopyNumber` captures the copies of a molecule within a
-    genome, and can be used to express concepts such as amplification
-    and copy loss.
-  * VRS 1.2 introduces a new classification of variation
-    types. :ref:`MolecularVariation` refers to variation within or of
-    a contiguous molecular. :ref:`SystemicVariation` refers to
-    variation in the context of a system, such as a genome, sample, or
-    homologous chromosomes.  :ref:`UtilityVariation` classes provide
-    useful representations for certain technical operations.
-  * :ref:`NestedInterval` represents imprecise or uncertain locations.
+  * :ref:`DefiniteRange` and :ref:`IndefiniteRange` represent bounded
+    and half-bounded ranges respectively. A new :ref:`Number` type
+    wraps integers so that some attributes may assume values of any of
+    these three types.
 
 
-Other data model changes
-########################
+Minor Changes
+#############
 
   * Sequence strings are now formally defined by a :ref:`Sequence`
     type, which is fundamentally also a string.  This change aids

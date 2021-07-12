@@ -8,7 +8,7 @@ Overview
 
 .. figure:: images/schema-current.png
 
-   Current Variation Representation Specfication Schema
+   Current Variation Representation Specification Schema
 
    **Legend** Classes (data types) are shown as boxes.  Abstract
    classes are denoted by dotted outline; "identifiable" classes,

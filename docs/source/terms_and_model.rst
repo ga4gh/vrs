@@ -48,12 +48,6 @@ specifications for the (**information model**). Terms are ordered
 Information Model Principles
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-* **VRS uses** `snake_case
-  <https://simple.wikipedia.org/wiki/Snake_case>`__ **to represent
-  compound words.** Although the schema is currently JSON-based (which
-  would typically use camelCase), VRS itself is intended to be neutral
-  with respect to languages and database.
-
 * **VRS objects are minimal** `value objects
   <https://en.wikipedia.org/wiki/Value_object>`__. Two objects are
   considered equal if and only if their respective attributes are
@@ -63,6 +57,15 @@ Information Model Principles
   to external data.  Instead, related data should be associated with
   VRS objects through identifiers.  See :ref:`computed-identifiers`.
 
+* **VRS uses polymorphism.** VRS uses polymorphism extensively in
+   order to provide a coherent top-down structure for variation while
+   enabling precise models for variation data.  For example, Allele is
+   a kind of Variation, SequenceLocation is a kind of Location, and
+   SequenceState is a kind of State.  See :ref:`future-plans` for the
+   roadmap of VRS data classes and relationships.  All VRS objects
+   contain a ``type`` attribute, which is used to discriminate
+   polymorphic objects.
+
 * **Error handling is intentionally unspecified and delegated to
   implementation.**  VRS provides foundational data types that
   enable significant flexibility.  Except where required by this
@@ -70,6 +73,12 @@ Information Model Principles
   validate data.  For example, implementations MAY choose to validate
   that particular combinations of objects are compatible, but such
   validation is not required.
+
+* **VRS uses** `snake_case
+  <https://simple.wikipedia.org/wiki/Snake_case>`__ **to represent
+  compound words.** Although the schema is currently JSON-based (which
+  would typically use camelCase), VRS itself is intended to be neutral
+  with respect to languages and database.
 
 * **Optional attributes start with an underscore.** Optional
   attributes are not part of the value object.  Such attributes are
@@ -84,7 +93,6 @@ Information Model Principles
   objects containing them.
 
 
-
 .. _Variation:
 
 Variation
@@ -94,7 +102,7 @@ In the genetics community, variation is often used to mean *sequence*
 variation, describing the differences observed in DNA or AA bases among
 individuals, and typically with respect to a common reference sequence.
 
-In VRS, the Variation class is the conceptual root of all types of
+In VRS, the Variation class is the conceptual root of all types of biomolecular
 variation, and the *Variation* abstract class is the top-level object in
 the :ref:`vr-schema-diagram`. Variation types are broadly categorized as
 :ref:`MolecularVariation`, :ref:`SystemicVariation`, or a :ref:`utility
@@ -104,15 +112,14 @@ to capture this diversity.
 
 **Computational Definition**
 
-A representation of the state of one or more molecules.
+A representation of the state of one or more biomolecules.
 
 .. _MolecularVariation:
 
 Molecular Variation
 ###################
 
-A :ref:`variation` of a sequence that represents a portion of or an
-entire contiguous molecule.
+A :ref:`variation` on a contiguous molecule.
 
 .. _Allele:
 
@@ -184,9 +191,10 @@ A state of a molecule at a :ref:`Location`.
 * Implementations SHOULD normalize Alleles using :ref:`fully-justified
   normalization <normalization>` whenever possible to facilitate
   comparisons of variation in regions of representational ambiguity.
-* Implementations MUST normalize Alleles using :ref:`fully-justified
-  normalization <normalization>` when generating
-  :ref:`computed-identifiers`.
+* Implementations SHOULD preferentially represent Alleles using
+  :ref:`LiteralSequenceExpression`, however there are cases where use
+  of other :ref:`SequenceExpression` classes is most appropriate; see
+  :ref:`using-sequence-expressions` for guidance.
 * When the alternate Sequence is the same length as the interval, the
   lengths of the reference Sequence and imputed Sequence are the
   same. (Here, imputed sequence means the sequence derived by applying
@@ -215,23 +223,31 @@ A state of a molecule at a :ref:`Location`.
 
 **Examples**
 
+An Allele correponding to rs7412 C>T on GRCh38:
+
 .. parsed-literal::
 
     {
-       "location": {
-          "interval": {
-             "end": 44908822,
-             "start": 44908821,
-             "type": "SimpleInterval"
+      "location": {
+        "interval": {
+          "end": {
+            "type": "Number",
+            "value": 44908822
           },
-          "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
-          "type": "SequenceLocation"
-       },
-       "state": {
-          "sequence": "T",
-          "type": "LiteralSequenceExpression"
-       },
-       "type": "Allele"
+          "start": {
+            "type": "Number",
+            "value": 44908821
+          },
+          "type": "SequenceInterval"
+        },
+        "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+        "type": "SequenceLocation"
+      },
+      "state": {
+        "sequence": "T",
+        "type": "SequenceState"
+      },
+      "type": "Allele"
     }
 
 
@@ -339,16 +355,24 @@ molecule.
 
 **Examples**
 
-An APOE-ε1 Haplotype with inline Alleles::
+An APOE ε2 Haplotype with inline Alleles:
+
+.. parsed-literal::
 
     {
       "members": [
         {
           "location": {
             "interval": {
-              "end": 44908684,
-              "start": 44908683,
-              "type": "SimpleInterval"
+              "end": {
+                "type": "Number",
+                "value": 44908822
+              },
+              "start": {
+                "type": "Number",
+                "value": 44908821
+              },
+              "type": "SequenceInterval"
             },
             "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
             "type": "SequenceLocation"
@@ -362,15 +386,21 @@ An APOE-ε1 Haplotype with inline Alleles::
         {
           "location": {
             "interval": {
-              "end": 44908822,
-              "start": 44908821,
-              "type": "SimpleInterval"
+              "end": {
+                "type": "Number",
+                "value": 44908684
+              },
+              "start": {
+                "type": "Number",
+                "value": 44908683
+              },
+              "type": "SequenceInterval"
             },
             "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
             "type": "SequenceLocation"
           },
           "state": {
-            "sequence": "T",
+            "sequence": "C",
             "type": "LiteralSequenceExpression"
           },
           "type": "Allele"
@@ -379,55 +409,52 @@ An APOE-ε1 Haplotype with inline Alleles::
       "type": "Haplotype"
     }
 
-The same APOE-ε1 Haplotype with referenced Alleles::
+The same APOE ε2 Haplotype with referenced Alleles:
+  
+.. parsed-literal::
 
     {
       "members": [
-        "ga4gh:VA.iXjilHZiyCEoD3wVMPMXG3B8BtYfL88H",
-        "ga4gh:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH_"
+        "ga4gh:VA.-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x",
+        "ga4gh:VA.Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"
       ],
       "type": "Haplotype"
     }
 
 The GA4GH computed identifier for these Haplotypes is
-`ga4gh:VH.NAVnEuaP9gf41OxnPM56XxWQfdFNcUxJ`, regardless
-of whether the Variation objects are inlined or
-referenced, and regardless of order. See
-:ref:`computed-identifiers` for more information.
+``ga4gh:VH.i8owCOBHIlRCPtcw_WzRFNTunwJRy99-``, regardless of whether the
+Variation objects are inlined or referenced, and regardless of
+order. See :ref:`computed-identifiers` for more information.
+
 
 .. _SystemicVariation:
 
 Systemic Variation
 ##################
 
-Systemic Variation is a :ref:`Variation` of multiple
-molecules in the context of a system, e.g. a genome,
-sample, or homologous chromosomes.
-
-.. _Abundance:
-
-Abundance
-$$$$$$$$$
-
-*Abundance* is the measure of a quantity of a molecule
-in a system. :ref:`Copy Number <CopyNumber>` and
-gene expression variants are two common types of
-abundance variation, measuring the copies of a molecule
-present in a genome or expressed in a sample, respectively.
+A :ref:`Variation` of multiple molecules in the context of a system,
+e.g. a genome, sample, or homologous chromosomes.
 
 .. _CopyNumber:
 
 CopyNumber
-%%%%%%%%%%
+$$$$$$$$$$
 
-*Copy Number* captures the copies of a molecule within
-a genome, and can be used to express concepts such as
-amplification and copy loss.
+*Copy Number Variation* captures the copies of a molecule within a
+genome, and can be used to express concepts such as amplification
+and copy loss. Copy Number Variation has conflated meanings in the
+genomics community, and can mean either (or both) the notion of copy
+number *in a genome* or copy number *on a molecule*. VRS separates
+the concerns of these two types of statements; this concept is a type
+of :ref:`SystemicVariation` and so describes the number of copies in a
+genome. The related :ref:`MolecularVariation` concept can be expressed
+as an :ref:`Allele` with a :ref:`RepeatedSequenceExpression`.
 
 **Computational Definition**
 
-The count of copies of a :ref:`Feature` or
-:ref:`MolecularVariation` subject within a genome.
+The count of discrete copies of a :ref:`MolecularVariation`,
+:ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference
+to any of these.
 
 **Information Model**
 
@@ -450,15 +477,15 @@ The count of copies of a :ref:`Feature` or
      - 1..1
      - MUST be "CopyNumber"
    * - subject
-     - :ref:`MolecularVariation` | :ref:`Feature`
+     - :ref:`MolecularVariation` | :ref:`Feature` | :ref:`SequenceExpression` | :ref:`CURIE`
      - 1..1
      - Subject of the abundance statement
    * - copies
-     - :ref:`AbsoluteCopyCount`
+     - :ref:`Number` | :ref:`DefiniteRange` | :ref:`IndefiniteRange`
      - 1..1
      - The integral number of copies of the subject in the genome
 
-**Example**
+**Examples**
 
 Two, three, or four total copies of BRCA1:
 
@@ -466,12 +493,12 @@ Two, three, or four total copies of BRCA1:
 
     {
       "copies": {
-        "max": 4,
-        "min": 2,
-        "type": "AbsoluteCopyCount"
+        "comparator": ">=",
+        "type": "IndefiniteRange",
+        "value": 3
       },
       "subject": {
-        "gene_id": "ncbigene:672",
+        "gene_id": "ncbigene:348",
         "type": "Gene"
       },
       "type": "CopyNumber"
@@ -493,12 +520,20 @@ applications of VRS.
 Text
 $$$$
 
-Some forms of variation are described with text that is interpretable
-only by humans.
+A free-text description of variation that is intended for
+interpretation by humans.
+
+.. important:: **Text variation should be used sparingly.** The Text
+               type is provided as an option of last resort for
+               systems that need to represent human-readable
+               descriptions of complex genetic phenomena or variation
+               for which VRS does not yet have a data type.
+               Structured data types should be preferred over Text.
+
 
 **Computational Definition**
 
-A free-text definition of variation.
+A string of unconstrained text.
 
 **Information Model**
 
@@ -533,12 +568,9 @@ A free-text definition of variation.
 * Because the Text type can be easily abused, implementations are NOT
   REQUIRED to provide it.  If it is provided, implementations SHOULD
   consider applying access controls.
-* If a future version of VRS is adopted by an implementation and
-  the new version enables defining existing Text objects under a
-  different Variation subclass, the implementation MUST construct a
-  new object under the other Variation subclass. In such a case, an
-  implementation SHOULD persist the original Text object and respond
-  to queries matching the Text object with the new object.
+* Implementations SHOULD upgrade Text variation to structured data
+  types when available. A future version of VRS will provide
+  additional guidance regarding upgrade mechanisms.
 * Additional Variation subclasses are continually under
   consideration. Please open a `GitHub issue`_ if you would like to
   propose a Variation subclass to cover a needed variation
@@ -551,10 +583,9 @@ A free-text definition of variation.
 .. parsed-literal::
 
     {
-      "definition": "Microsatellite Instability High",
+      "definition": "APOE loss",
       "type": "Text"
     }
-
 
 .. _VariationSet:
 
@@ -617,19 +648,77 @@ An unconstrained set of Variation members.
 
 **Examples**
 
+
+Example VariationSet with inline Alleles:
+
 .. parsed-literal::
 
-  {
-    "members": [
-      "ga4gh:VA.6xjH0Ikz88s7MhcyN5GJTa1p712-M10W",
-      "ga4gh:VA.7k2lyIsIsoBgRFPlfnIOeCeEgj_2BO7F",
-      "ga4gh:VA.ikcK330gH3bYO2sw9QcTsoptTFnk_Xjh"
-    ],
-    "type": "VariationSet"
-  }
+    {
+      "members": [
+        {
+          "location": {
+            "interval": {
+              "end": {
+                "type": "Number",
+                "value": 44908822
+              },
+              "start": {
+                "type": "Number",
+                "value": 44908821
+              },
+              "type": "SequenceInterval"
+            },
+            "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+            "type": "SequenceLocation"
+          },
+          "state": {
+            "sequence": "C",
+            "type": "LiteralSequenceExpression"
+          },
+          "type": "Allele"
+        },
+        {
+          "location": {
+            "interval": {
+              "end": {
+                "type": "Number",
+                "value": 44908684
+              },
+              "start": {
+                "type": "Number",
+                "value": 44908683
+              },
+              "type": "SequenceInterval"
+            },
+            "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+            "type": "SequenceLocation"
+          },
+          "state": {
+            "sequence": "C",
+            "type": "LiteralSequenceExpression"
+          },
+          "type": "Allele"
+        }
+      ],
+      "type": "VariationSet"
+    }
+
+
+The same VariationSet with referenced Alleles:
+
+.. parsed-literal::
+
+    {
+      "members": [
+        "ga4gh:VA.-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x",
+        "ga4gh:VA.Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"
+      ],
+      "type": "VariationSet"
+    }
+
 
 The GA4GH computed identifier for these sets is
-`ga4gh:VS.WVC_R7OJ688EQX3NrgpJfsf_ctQUsVP3`, regardless of the whether
+``ga4gh:VS.QLQXSNSIFlqNYWmQbw-YkfmexPi4NeDE``, regardless of the whether
 the Variation objects are inlined or referenced, and regardless of
 order. See :ref:`computed-identifiers` for more information.
 
@@ -659,14 +748,15 @@ Location for Variation.
 
 **Computational Definition**
 
-The position of a contiguous segment of a biological sequence.
+A contiguous segment of a biological sequence.
 
 **Implementation Guidance**
 
 * Location refers to a position.  Although it MAY imply a sequence,
   the two concepts are not interchangeable, especially when the
-  location is non-specific (e.g., specified by a
-  :ref:`NestedInterval`).
+  location is non-specific (e.g., specified by an :ref:`IndefiniteRange`).
+  To represent a sequence derived from a Location, see
+  :ref:`DerivedSequenceExpression`.
 
 
 .. _ChromosomeLocation:
@@ -679,7 +769,7 @@ cytobands, and regions observed from chromosomal staining techniques.
 
 **Computational Definition**
 
-A :ref:`Location`, on a chromosome defined by a species and chromosome name.
+A :ref:`Location` on a chromosome defined by a species and chromosome name.
 
 **Information Model**
 
@@ -736,7 +826,8 @@ A :ref:`Location`, on a chromosome defined by a species and chromosome name.
   the syntactic structure of, `chromosome` depends on the species.
   `chromosome` MUST be an official sequence name from `NCBI Assembly
   <https://www.ncbi.nlm.nih.gov/assembly>`__.  For humans, valid
-  chromosome names are 1..22, X, Y (case-sensitive).
+  chromosome names are 1..22, X, Y (case-sensitive).  **NOTE: A `chr`
+  prefix is NOT part of the chromosome and MUST NOT be included.**
 * `interval` refers to a contiguous region specified named markers,
   which are presumed to exist on the specified chromosome.  See
   :ref:`CytobandInterval` for additional information.
@@ -760,16 +851,17 @@ A :ref:`Location`, on a chromosome defined by a species and chromosome name.
 
 .. parsed-literal::
 
-   {
-     "chr": "11",
-     "interval": {
-       "end": "q22.3",
-       "start": "q22.2",
-       "type": "CytobandInterval"
-       },
-     "species_id": "taxonomy:9606",
-     "type": "ChromosomeLocation"
-   }
+    {
+      "chr": "19",
+      "interval": {
+        "end": "q13.32",
+        "start": "q13.32",
+        "type": "CytobandInterval"
+      },
+      "species_id": "taxonomy:9606",
+      "type": "ChromosomeLocation"
+    }
+
 
 .. _SequenceLocation:
 
@@ -853,13 +945,14 @@ SequenceInterval
 
 **Computational Definition**
 
-The *SequenceInterval* abstract class defines a range on a
-:ref:`sequence`, possibly with length zero, and specified using
-:ref:`inter-residue-coordinates-design`. An Interval MAY be a
-:ref:`SimpleInterval` with a single start and end coordinate.
-:ref:`Future Location and SequenceInterval types <planned-locations>`
-will enable other methods for describing where :ref:`variation`
-occurs. Any of these MAY be used as the SequenceInterval for Location.
+A SequenceInterval represents a span of :ref:`Sequence`. Positions are
+always represented by contiguous spans using interbase coordinates or
+coordinate ranges.
+
+SequenceInterval is intended to be compatible with a "region" in Sequence Ontology
+([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)),
+with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO
+definition of region has an "extent greater than zero".
 
 .. sidebar:: VRS Uses Inter-residue Coordinates
 
@@ -880,15 +973,698 @@ occurs. Any of these MAY be used as the SequenceInterval for Location.
 * `SequenceOntology: sequence_feature (SO:0000110) <http://www.sequenceontology.org/miso/current_svn/term/SO:0000110>`__ — Any extent of continuous biological sequence.
 * `SequenceOntology: region (SO:0000001) <http://www.sequenceontology.org/miso/current_svn/term/SO:0000001>`__ — A sequence_feature with an extent greater than zero. A nucleotide region is composed of bases and a polypeptide region is composed of amino acids.
 
+**Examples**
+
+.. parsed-literal::
+
+    {
+      "end": {
+        "type": "Number",
+        "value": 44908822
+      },
+      "start": {
+        "type": "Number",
+        "value": 44908821
+      },
+      "type": "SequenceInterval"
+    }
+
+
+
+
+.. _CytobandInterval:
+
+CytobandInterval
+################
+
+.. important:: VRS currently supports only human cytobands and
+   cytoband intervals. Implementers wishing to use VRS for other
+   cytogenetic systems are encouraged to open a `GitHub issue`_.
+
+Cytobands refer to regions of chromosomes that are identified by
+visible patterns on stained metaphase chromosomes.  They provide a
+convenient, memorable, and low-resolution shorthand for chromosomal
+segments.
+
+**Computational Definition**
+
+An interval on a stained metaphase chromosome, specified by cytobands.
+CytobandIntervals include the regions described by the start and end
+cytobands.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "CytobandInterval"
+   * - start
+     - :ref:`HumanCytoband`
+     - 1..1
+     - name of Cytoband at the interval start (see below)
+   * - end
+     - :ref:`HumanCytoband`
+     - 1..1
+     - name of Cytoband at the interval end (see below)
+
+**Implementation Guidance**
+
+* When using :ref:`CytobandInterval` to refer to human cytogentic
+  bands, the following conventions MUST be used. Bands are denoted by
+  the arm ("p" or "q") and position (e.g., "22", "22.3", or the symbolic
+  values "cen" or "ter") per ISCN conventions [1]_. These conventions
+  identify cytobands in order from the centromere towards the telomeres.
+  In VRS, we order cytoband coordinates in the p-ter → cen → q-ter
+  orientation, analogous to sequence coordinates. This has the
+  consequence that bands on the p-arm are represented in descending
+  numerical order when selecting cytobands for `start` and `end`.
+
+**Examples**
+
+.. parsed-literal::
+
+    {
+      "end": "q13.32",
+      "start": "q13.32",
+      "type": "CytobandInterval"
+    }
+
+
+.. _SequenceExpression:
+
+Sequence Expression
+@@@@@@@@@@@@@@@@@@@
+
+VRS provides several syntaxes for expressing a sequence,
+collectively referred to as *Sequence Expressions*. They are:
+
+* :ref:`LiteralSequenceExpression`: An explicit :ref:`Sequence`.
+* :ref:`DerivedSequenceExpression`: A sequence that is derived from a
+  :ref:`Sequencelocation`.
+* :ref:`RepeatedSequenceExpression`: A description of a repeating :ref:`Sequence`.
+
+Some SequenceExpression instances may appear to resolve to the same
+sequence, but are intended to be semantically distinct. There MAY be
+reasons to select or enforce one form over another that SHOULD be
+managed by implementations. See discussion on :ref:`equivalence`.
+
+.. _LiteralSequenceExpression:
+
+LiteralSequenceExpression
+#########################
+
+A LiteralSequenceExpression "wraps" a string representation of a
+sequence for parallelism with other SequenceExpressions.
+
+**Computational Definition**
+
+An explicit expression of a Sequence.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "LiteralSequenceExpression"
+   * - sequence
+     - :ref:`Sequence`
+     - 1..1
+     - The sequence to express
+
+**Examples**
+
+.. parsed-literal::
+
+    {
+      "sequence": "ACGT",
+      "type": "LiteralSequenceExpression"
+    }
+
+
+.. _DerivedSequenceExpression:
+
+DerivedSequenceExpression
+#########################
+
+Certain mechanisms of variation result from relocating and
+transforming sequence from another location in the genome.
+A *derived sequence* is a mechanism for expressing (typically
+large) reference subsequences specified by a :ref:`SequenceLocation`.
+
+**Computational Definition**
+
+An approximate expression of a sequence that is derived from a
+referenced sequence location. Use of DerivedSequenceExpression
+indicates that the derived sequence is approximately equivalent to the
+reference indicated, and is typically used for describing large
+regions for variation concepts where the exact sequence is
+inconsequential.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "DerivedSequenceExpression"
+   * - location
+     - :ref:`SequenceLocation`
+     - 1..1
+     - The location describing the sequence
+
+**Examples**
+
+.. parsed-literal::
+
+    {
+      "location": {
+        "interval": {
+          "end": {
+            "type": "Number",
+            "value": 44908822
+          },
+          "start": {
+            "type": "Number",
+            "value": 44908821
+          },
+          "type": "SequenceInterval"
+        },
+        "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+        "type": "SequenceLocation"
+      },
+      "reverse_complement": false,
+      "type": "DerivedSequenceExpression"
+    }
+
+    
+.. _RepeatedSequenceExpression:
+
+RepeatedSequenceExpression
+##########################
+
+*Repeated Sequence* is a class of sequence expression where a specified
+subsequence is repeated multiple times in tandem. Microsatellites are an
+example of a common class of repeated sequence, but repeated sequence can
+also be used to describe larger subsequence repeats, up to and including
+large-scale tandem duplications.
+
+**Computational Definition**
+
+An expression of a sequence comprised of a tandem repeating subsequence.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "RepeatedSequenceExpression"
+   * - seq_expr
+     - :ref:`SequenceExpression` and NOT :ref:`RepeatedSequenceExpression`
+     - 1..1
+     - an expression of the repeating subsequence
+   * - count
+     - :ref:`Number` | :ref:`DefiniteRange` | :ref:`IndefiniteRange`
+     - 1..1
+     - the inclusive range count of repeated units
+
+
+**Examples**
+
+.. parsed-literal::
+
+    {
+      "count": {
+        "comparator": ">=",
+        "type": "IndefiniteRange",
+        "value": 6
+      },
+      "seq_expr": {
+        "location": {
+          "interval": {
+            "end": {
+              "type": "Number",
+              "value": 44908822
+            },
+            "start": {
+              "type": "Number",
+              "value": 44908821
+            },
+            "type": "SequenceInterval"
+          },
+          "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
+          "type": "SequenceLocation"
+        },
+        "reverse_complement": false,
+        "type": "DerivedSequenceExpression"
+      },
+      "type": "RepeatedSequenceExpression"
+    }
+
+
+.. _Feature:
+
+Feature
+@@@@@@@
+
+A *Feature* is a named entity that can be mapped to a
+:ref:`Location`. Genes, protein domains, exons, and chromosomes are
+some examples of common biological entities that may be Features.
+
+.. _Gene:
+
+Gene
+####
+
+A gene is a basic and fundamental unit of heritability. Genes are
+functional regions of heritable DNA or RNA that include transcript
+coding regions, regulatory elements, and other functional sequence
+domains. Because of the complex nature of these many components
+comprising a gene, the interpretation of a gene depends on context.
+
+**Computational definition**
+
+In VRS, a Gene is a reference to an external gene nomenclature.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - gene_id
+     - :ref:`CURIE`
+     - 1..1
+     - External gene identifier (see guidance)
+   * - type
+     - string
+     - 1..1
+     - MUST be "Gene"
+
+**Implementation guidance**
+
+* Gene symbols (e.g., "BRCA1") are unreliable keys.  Implementations
+  MUST NOT use a gene symbol to define a Gene.
+* A gene is specific to a species.  Gene orthologs have distinct
+  records in the recommended databases.  For example, the BRCA1 gene
+  in humans and the Brca1 gene in mouse are orthologs and have
+  distinct records in the recommended gene databases.
+* Implementations MUST use authoritative gene namespaces available from
+  identifiers.org whenever possible.  Examples include:
+
+    * `hgnc <https://registry.identifiers.org/registry/hgnc>`__
+    * `ncbigene <https://registry.identifiers.org/registry/ncbigene>`__
+    * `ensembl <https://registry.identifiers.org/registry/ensembl>`__
+    * `vgnc <https://registry.identifiers.org/registry/vgnc>`__
+    * `mgi <https://registry.identifiers.org/registry/mgi>`__
+* The `hgnc` namespace is RECOMMENDED for human variation in order to
+  improve interoperability.  When using the ``hgnc`` namespace, the
+  optional "HGNC:" prefix MUST NOT be used.
+* Gene MAY be converted to one or more :ref:`Locations <Location>`
+  using external data. The source of such data and mechanism for
+  implementation is not defined by this specification.
+* See discussion on :ref:`equivalence`.
+
+**Examples**
+
+The following examples all refer to the human APOE gene:
+
+.. parsed-literal::
+
+   {
+     'gene_id': 'ncbigene:613',
+     'type': 'Gene'
+   }
+
+
+**Sources**
+
+* `SequenceOntology: gene (SO:0000704)
+  <http://www.sequenceontology.org/browser/current_release/term/SO:0000704>`__
+  — A region (or regions) that includes all of the sequence elements
+  necessary to encode a functional transcript. A gene may include
+  regulatory regions, transcribed regions and/or other functional
+  sequence regions.
+
+
+Basic Types
+@@@@@@@@@@@
+
+Basic types are data structures that represent general concepts and
+that may be applicable in multiple parts of VRS.
+
+
+.. _DefiniteRange:
+
+DefiniteRange
+###############
+
+
+**Computational Definition**
+
+A bounded, inclusive range of numbers.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "DefiniteRange"
+   * - min
+     - integer
+     - 1..1
+     - minimum value; inclusive
+   * - max
+     - integer
+     - 1..1
+     - maximum value; inclusive
+
+
+**Examples**
+
+.. parsed-literal::
+
+    {
+      "max": 33,
+      "min": 22,
+      "type": "DefiniteRange"
+    }
+
+
+.. _IndefiniteRange:
+
+IndefiniteRange
+################
+
+
+**Computational Definition**
+
+An half-bounded range of integer values, bounded on one side by an
+integer and on the other by negative infinity or positive infinity.
+
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "IndefiniteRange"
+   * - value
+     - integer
+     - 1..1
+     - The bounded value; inclusive
+   * - comparator
+     - string; enum ["<=", ">="]
+     - 1..1
+     - MUST be one of "<=" or ">=", indicates in which direction
+       the range is indefinite
+
+
+**Examples**
+
+This value is equivalent to the concept of "equal to or greater than
+22":
+
+.. parsed-literal::
+
+    {
+      "comparator": ">=",
+      "type": "IndefiniteRange",
+      "value": 22
+    }
+
+
+.. _Number:
+
+Number
+######
+
+
+**Computational Definition**
+
+The *Number* class is a container for a simple number. This class is
+required when an attribute may be a number or more complex type, such
+as :ref:`DefiniteRange` and :ref:`IndefiniteRange`.
+
+**Information Model**
+
+.. list-table::
+   :class: reece-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+
+   * - Field
+     - Type
+     - Limits
+     - Description
+   * - type
+     - string
+     - 1..1
+     - MUST be "Number"
+   * - value
+     - integer
+     - 1..1
+     - The integer value
+
+
+**Examples**
+
+.. parsed-literal::
+
+    {
+      "type": "Number",
+      "value": 55
+    }
+
+
+
+Primitives
+@@@@@@@@@@
+
+Primitives represent simple values with syntactic or other
+constraints. They enable correctness for values stored in VRS.
+
+
+.. _CURIE:
+
+CURIE
+#####
+
+**Computational Definition**
+
+A |curie| formatted string. A CURIE string has the structure
+``prefix``:``reference`` (W3C Terminology).
+
+**Implementation Guidance**
+
+* All identifiers in VRS MUST be a valid CURIE, regardless of
+  whether the identifier refers to GA4GH VRS objects or external data.
+* For GA4GH VRS objects, this specification RECOMMENDS using globally
+  unique :ref:`computed-identifiers` for use within *and* between
+  systems.
+* For external data, CURIE-formatted identifiers MUST be used.  When
+  an appropriate namespace exists at `identifiers.org
+  <http://identifiers.org/>`__, that namespace MUST be used.  When an
+  appropriate namespace does not exist at `identifiers.org
+  <http://identifiers.org/>`__, support is implementation-dependent.
+  That is, implementations MAY choose whether and how to support
+  informal or local namespaces.
+* Implementations MUST use CURIE identifiers verbatim. Implementations
+  MAY NOT modify CURIEs in any way (e.g., case-folding).
+
+
+**Examples**
+
+Identifiers for GRCh38 chromosome 19:
+
+.. parsed-literal::
+
+    ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+    refseq:NC_000019.10
+    grch38:19
+
+See :ref:`identify` for examples of CURIE-based identifiers for VRS
+objects.
+
+.. _HumanCytoband:
+
+HumanCytoband
+#############
+
+Cytobands are any of a pattern of stained bands, formed on chromosomes of
+cells undergoing metaphase, that serve to identify particular chromosomes.
+Human cytobands are predominantly specified by the *International System
+for Human Cytogenomic Nomenclature* (ISCN) [1]_.
+
+**Computational Definition**
+
+A character string representing cytobands derived from the
+*International System for Human Cytogenomic Nomenclature* (ISCN)
+guidelines.
+
+**Information Model**
+
+A string constrained to match the regular expression
+``^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$``, derived from the
+ISCN guidelines [1]_.
+
+.. [1] McGowan-Jordan J (Ed.). *ISCN 2016: An international system
+       for human cytogenomic nomenclature (2016).* Karger (2016).
+
+**Examples**
+
+.. parsed-literal::
+
+   "q13.32" (string)
+
+
+.. _Residue:
+
+Residue
+#######
+
+A residue refers to a specific `monomer`_ within the `polymeric
+chain`_ of a `protein`_ or `nucleic acid`_ (Source: `Wikipedia
+Residue page`_).
+
+**Computational Definition**
+
+A character representing a specific residue (i.e., molecular species)
+or groupings of these ("ambiguity codes"), using `one-letter IUPAC
+abbreviations`_ for nucleic acids and amino acids.
+
+.. _one-letter IUPAC abbreviations:
+     https://en.wikipedia.org/wiki/International_Union_of_Pure_and_Applied_Chemistry#Amino_acid_and_nucleotide_base_codes
+
+.. _Sequence:
+
+Sequence
+########
+
+A *sequence* is a character string representation of a contiguous,
+linear polymer of nucleic acid or amino acid :ref:`Residues <Residue>`.
+Sequences are the prevalent representation of these polymers,
+particularly in the domain of variant representation.
+
+**Computational Definition**
+
+A character string representing :ref:`Residues <Residue>` using the
+conventional sequence order (5'-to-3' for nucleic acid sequences, and
+amino-to-carboxyl for amino acid sequences) and conforming to the
+`one-letter IUPAC abbreviations`_ for sequence representation.
+
+**Information Model**
+
+A string constrained to match the regular expression ``^[A-Z*\-]*$``,
+derived from the IUPAC one-letter nucleic acid and amino acid codes.
+
+**Implementation Guidance**
+
+* Sequences MAY be empty (zero-length) strings. Empty sequences are used as the
+  replacement Sequence for deletion Alleles.
+* Sequences MUST consist of only uppercase IUPAC abbreviations, including ambiguity codes.
+* A Sequence provides a stable coordinate system by which an :ref:`Allele` MAY be located and
+  interpreted.
+* A Sequence MAY have several roles. A "reference sequence" is any Sequence used
+  to define an :ref:`Allele`. A Sequence that replaces another Sequence is
+  called a "replacement sequence".
+* In some contexts outside VRS, "reference sequence" may refer
+  to a member of set of sequences that comprise a genome assembly. In the VRS
+  specification, any sequence may be a "reference sequence", including those in
+  a genome assembly.
+* For the purposes of representing sequence variation, it is not
+  necessary that Sequences be explicitly "typed" (i.e., DNA, RNA, or
+  AA).
+
+**Examples**
+
+.. parsed-literal::
+
+    "ACGT" (string)
+
+
+
+.. _deprecations:
+
+Deprecated and Obsolete Classes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .. _SimpleInterval:
 
 SimpleInterval
-$$$$$$$$$$$$$$
+##############
 
 **Computational Definition**
 
-A :ref:`SequenceInterval` with a single start and end coordinate.
+DEPRECATED: A SimpleInterval represents a span of sequence. Positions are
+always represented by contiguous spans using interbase coordinates.
+
+This class is deprecated. Use :ref:`SequenceInterval` instead.
 
 **Information Model**
 
@@ -955,625 +1731,6 @@ A :ref:`SequenceInterval` with a single start and end coordinate.
       "start": 44908821,
       "type": "SimpleInterval"
     }
-
-
-.. _NestedInterval:
-
-NestedInterval
-$$$$$$$$$$$$$$
-
-For some assays, it is not possible to describe a
-:ref:`SequenceLocation` with exact precision, but it is possible
-to bound the region containing the Sequence Location. In those
-cases, two sets of coordinates are used as a nested interval to
-describe the inner and outer bounds.
-
-**Computational Definition**
-
-A :ref:`SequenceInterval` defined by nested inner and outer
-:ref:`SimpleInterval` coordinates. Inner and outer coordinates
-represent inner and outer bounds of ambiguity for the start and
-end of the interval.
-
-**Information Model**
-
-.. list-table:: NestedInterval
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "NestedInterval"
-   * - inner
-     - :ref:`SimpleInterval`
-     - 1..1
-     - inner interval
-   * - outer
-     - :ref:`SimpleInterval`
-     - 1..1
-     - outer interval
-
-**Implementation Guidance**
-
-* NestedInterval is intended to be used for variation where the start
-  and end positions each occur within ranges.
-* `inner` and `outer` must be defined, but the `start` and `end`
-  within each may be null.
-* If `start` and `end` attributes of `inner` and `outer` are defined,
-  they MUST satisfy `outer.start <= inner.start <= inner.end <=
-  outer.end`
-
-**Examples**
-
-.. parsed-literal::
-
-   {
-     "inner": {
-       "end": 30,
-       "start": 20,
-       "type": "SimpleInterval"
-     },
-     "outer": {
-       "end": 40,
-       "start": 10,
-       "type": "SimpleInterval"
-     },
-     "type": "NestedInterval"
-   }
-
-
-.. _CytobandInterval:
-
-CytobandInterval
-################
-
-.. important:: VRS currently supports only human cytobands and
-   cytoband intervals. Implementers wishing to use VRS for other
-   cytogenetic systems are encouraged to open a `GitHub issue`_.
-
-Cytobands refer to regions of chromosomes that are identified by
-visible patterns on stained metaphase chromosomes.  They provide a
-convenient, memorable, and low-resolution shorthand for chromosomal
-segments.
-
-**Computational Definition**
-
-An interval on a stained metaphase chromosome, specified by cytobands.
-CytobandIntervals include the regions described by the start and end
-cytobands.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "CytobandInterval"
-   * - start
-     - :ref:`HumanCytoband`
-     - 1..1
-     - name of Cytoband at the interval start (see below)
-   * - end
-     - :ref:`HumanCytoband`
-     - 1..1
-     - name of Cytoband at the interval end (see below)
-
-**Implementation Guidance**
-
-* When using :ref:`CytobandInterval` to refer to human cytogentic
-  bands, the following conventions MUST be used. Bands are denoted by
-  the arm ("p" or "q") and position (e.g., "22", "22.3", or the symbolic
-  values "cen" or "ter") per ISCN conventions [1]_. These conventions
-  identify cytobands in order from the centromere towards the telomeres.
-  In VRS, we order cytoband coordinates in the p-ter → cen → q-ter
-  orientation, analogous to sequence coordinates. This has the
-  consequence that bands on the p-arm are represented in descending
-  numerical order when selecting cytobands for `start` and `end`.
-
-**Examples**
-
-.. parsed-literal::
-
-   {
-     "end": "p22.1",
-     "start": "p22.3",
-     "type": "CytobandInterval"
-   }
-
-.. _SequenceExpression:
-
-Sequence Expression
-@@@@@@@@@@@@@@@@@@@
-
-VRS provides several syntaxes for expressing a sequence,
-collectively referred to as *Sequence Expressions*. They are:
-
-* :ref:`LiteralSequenceExpression`: An explicit :ref:`Sequence`.
-* :ref:`DerivedSequenceExpression`: A sequence that is derived from a
-  :ref:`Sequencelocation`.
-* :ref:`RepeatedSequenceExpression`: A description of a repeating :ref:`Sequence`.
-
-Some SequenceExpression instances may appear to resolve to the same
-sequence, but are intended to be semantically distinct. There MAY be
-reasons to select or enforce one form over another that SHOULD be
-managed by implementations. See discussion on :ref:`equivalence`.
-
-.. _LiteralSequenceExpression:
-
-LiteralSequenceExpression
-#########################
-
-A LiteralSequenceExpression "wraps" a string representation of a sequence for
-parallelism with other SequenceExpressions.
-
-**Computational Definition**
-
-An explicit expression of a Sequence.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "LiteralSequenceExpression"
-   * - sequence
-     - :ref:`Sequence`
-     - 1..1
-     - The sequence to express
-
-**Example**
-
-.. parsed-literal::
-
-    {
-      "sequence": "ACGT",
-      "type": "LiteralSequenceExpression"
-    }
-
-
-.. _DerivedSequenceExpression:
-
-DerivedSequenceExpression
-#########################
-
-Certain mechanisms of variation result from relocating and
-transforming sequence from another location in the genome.
-A *derived sequence* is a mechanism for expressing (typically
-large) reference subsequences specified by a :ref:`SequenceLocation`.
-
-**Computational Definition**
-
-An expression of a sequence that is derived from a referenced
-sequence location.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "DerivedSequenceExpression"
-   * - location
-     - :ref:`SequenceLocation`
-     - 1..1
-     - The location describing the sequence
-
-**Example**
-
-.. parsed-literal::
-
-     {
-       "location": {
-         "interval": {
-           "end": 33,
-           "start": 22,
-           "type": "SimpleInterval"
-         },
-         "sequence_id": "ga4gh:SQ.0123abcd",
-         "type": "SequenceLocation"
-       },
-       "type": "DerivedSequenceExpression"
-     }
-
-
-.. _RepeatedSequenceExpression:
-
-RepeatedSequenceExpression
-##########################
-
-*Repeated Sequence* is a class of sequence expression where a specified
-subsequence is repeated multiple times in tandem. Microsatellites are an
-example of a common class of repeated sequence, but repeated sequence can
-also be used to describe larger subsequence repeats, up to and including
-large-scale tandem duplications.
-
-**Computational Definition**
-
-An expression of a sequence comprised of a tandem repeating subsequence.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "RepeatedSequenceExpression"
-   * - seq_expr
-     - :ref:`SequenceExpression`
-     - 1..1
-     - an expression of the repeating subsequence
-   * - count
-     - :ref:`AbsoluteCopyCount`
-     - 1..1
-     - the inclusive range count of repeated units
-
-
-**Example**
-
-.. parsed-literal::
-
-    {
-      "count": {
-        "max": 10,
-        "min": 5,
-        "type": "AbsoluteCopyCount"
-      },
-      "seq_expr": {
-        "sequence": "CAG",
-        "type": "LiteralSequenceExpression"
-      },
-      "type": "RepeatedSequenceExpression"
-    }
-
-
-
-.. _Feature:
-
-Feature
-@@@@@@@
-
-A *Feature* is a named entity that can be mapped to a
-:ref:`Location`. Genes, protein domains, exons, and chromosomes are
-some examples of common biological entities that may be Features.
-
-.. _Gene:
-
-Gene
-####
-
-A gene is a basic and fundamental unit of heritability. Genes are
-functional regions of heritable DNA or RNA that include transcript
-coding regions, regulatory elements, and other functional sequence
-domains. Because of the complex nature of these many components
-comprising a gene, the interpretation of a gene is context dependent.
-
-**Computational definition**
-
-A gene is an authoritative representation of one or more heritable
-:ref:`Locations <Location>` that includes all sequence elements
-necessary to perform a biological function. A gene may include
-regulatory, transcribed, and/or other functional Locations.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - gene_id
-     - :ref:`CURIE`
-     - 1..1
-     - Authoritative Gene ID (see guidance)
-   * - type
-     - string
-     - 1..1
-     - MUST be "Gene"
-
-**Implementation guidance**
-
-* Gene symbols (e.g., "BRCA1") are unreliable keys.  Implementations
-  MUST NOT use a gene symbol to define a Gene.
-* A gene is specific to a species.  Gene orthologs have distinct
-  records in the recommended databases.  For example, the BRCA1 gene
-  in humans and the Brca1 gene in mouse are orthologs and have
-  distinct records in the recommended gene databases.
-* Implementations MUST use authoritative gene namespaces available from
-  identifiers.org whenever possible.  Examples include:
-
-    * `hgnc <https://registry.identifiers.org/registry/hgnc>`__
-    * `ncbigene <https://registry.identifiers.org/registry/ncbigene>`__
-    * `ensembl <https://registry.identifiers.org/registry/ensembl>`__
-    * `vgnc <https://registry.identifiers.org/registry/vgnc>`__
-    * `mgi <https://registry.identifiers.org/registry/mgi>`__
-* The `hgnc` namespace is RECOMMENDED for human
-  variation in order to improve interoperability.
-* Gene MAY be converted to one or more :ref:`Locations <Location>`
-  using external data. The source of such data and mechanism for
-  implementation is not defined by this specification.
-* See discussion on :ref:`equivalence`.
-
-**Example**
-
-The following examples all refer to the human BRCA1 gene:
-
-.. parsed-literal::
-
-   {
-     'gene_id': 'ncbigene:672',
-     'type': 'Gene'
-   }
-
-Gene is intended to be used as a subject of gene-level annotations,
-such as this statement of increased copy number of BRCA1:
-
-.. parsed-literal::
-
-    {
-      "copies": {
-        "min": 3,
-        "type": "AbsoluteCopyCount"
-      },
-      "subject": {
-        "gene_id": "ncbigene:672",
-        "type": "Gene"
-      },
-      "type": "AbsoluteCopyCount"
-    }
-
-
-
-**Sources**
-
-* `SequenceOntology: gene (SO:0000704)
-  <http://www.sequenceontology.org/browser/current_release/term/SO:0000704>`__
-  — A region (or regions) that includes all of the sequence elements
-  necessary to encode a functional transcript. A gene may include
-  regulatory regions, transcribed regions and/or other functional
-  sequence regions.
-
-.. _Quantity:
-
-Quantity
-@@@@@@@@
-
-A value indicating a multitude or magnitude measure.
-
-.. _AbsoluteCopyCount:
-
-AbsoluteCopyCount
-#################
-
-**Computational Definition**
-
-An integer count of copies. Counts are bounded ranges
-denoted by minimum and maximum possible values.
-Absolute copy number counts may not be smaller than zero.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "AbsoluteCopyCount"
-   * - min
-     - integer
-     - 1..1
-     - minimum value; inclusive
-   * - max
-     - integer
-     - 1..1
-     - maximum value; inclusive
-
-**Implementation Guidance**
-
-* If both ``min`` and ``max`` MUST satisfy ``min
-  <= max``.
-* If ``min == max``, then the range specifies a single numeric amount.
-* Both ``min`` and ``max`` MUST be non-negative
-
-
-**Examples**
-
-.. parsed-literal::
-
-   {
-     "max": 4,
-     "min": 0,
-     "type": "AbsoluteCopyCount",
-   }
-
-
-Primitive Concepts
-@@@@@@@@@@@@@@@@@@
-
-
-.. _CURIE:
-
-CURIE
-#####
-
-**Computational Definition**
-
-A |curie| formatted string. A CURIE string has the structure
-``prefix``:``reference`` (W3C Terminology).
-
-**Implementation Guidance**
-
-* All identifiers in VRS MUST be a valid CURIE, regardless of
-  whether the identifier refers to GA4GH VRS objects or external data.
-* For GA4GH VRS objects, this specification RECOMMENDS using globally
-  unique :ref:`computed-identifiers` for use within *and* between
-  systems.
-* For external data, CURIE-formatted identifiers MUST be used.  When
-  an appropriate namespace exists at `identifiers.org
-  <http://identifiers.org/>`__, that namespace MUST be used.  When an
-  appropriate namespace does not exist at `identifiers.org
-  <http://identifiers.org/>`__, support is implementation-dependent.
-  That is, implementations MAY choose whether and how to support
-  informal or local namespaces.
-* Implementations MUST use CURIE identifiers verbatim. Implementations
-  MAY NOT modify CURIEs in any way (e.g., case-folding).
-
-
-**Examples**
-
-Identifiers for GRCh38 chromosome 19::
-
-    ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
-    refseq:NC_000019.10
-    grch38:19
-
-See :ref:`identify` for examples of CURIE-based identifiers for VRS
-objects.
-
-.. _Residue:
-
-Residue
-#######
-
-A residue refers to a specific `monomer`_ within the `polymeric
-chain`_ of a `protein`_ or `nucleic acid`_ (Source: `Wikipedia
-Residue page`_).
-
-**Computational Definition**
-
-A character representing a specific residue (i.e., molecular species)
-or groupings of these ("ambiguity codes"), using `one-letter IUPAC
-abbreviations`_ for nucleic acids and amino acids.
-
-.. _one-letter IUPAC abbreviations:
-     https://en.wikipedia.org/wiki/International_Union_of_Pure_and_Applied_Chemistry#Amino_acid_and_nucleotide_base_codes
-
-.. _Sequence:
-
-Sequence
-########
-
-A *sequence* is a character string representation of a contiguous,
-linear polymer of nucleic acid or amino acid :ref:`Residues <Residue>`.
-Sequences are the prevalent representation of these polymers,
-particularly in the domain of variant representation.
-
-**Computational Definition**
-
-A character string representing :ref:`Residues <Residue>` using the
-conventional sequence order (5'-to-3' for nucleic acid sequences, and
-amino-to-carboxyl for amino acid sequences) and conforming to the
-`one-letter IUPAC abbreviations`_ for sequence representation.
-
-**Information Model**
-
-A string constrained to match the regular expression ``^[A-Z*\-]*$``,
-derived from the IUPAC one-letter nucleic acid and amino acid codes.
-
-**Implementation Guidance**
-
-* Sequences MAY be empty (zero-length) strings. Empty sequences are used as the
-  replacement Sequence for deletion Alleles.
-* Sequences MUST consist of only uppercase IUPAC abbreviations, including ambiguity codes.
-* A Sequence provides a stable coordinate system by which an :ref:`Allele` MAY be located and
-  interpreted.
-* A Sequence MAY have several roles. A "reference sequence" is any Sequence used
-  to define an :ref:`Allele`. A Sequence that replaces another Sequence is
-  called a "replacement sequence".
-* In some contexts outside VRS, "reference sequence" may refer
-  to a member of set of sequences that comprise a genome assembly. In the VRS
-  specification, any sequence may be a "reference sequence", including those in
-  a genome assembly.
-* For the purposes of representing sequence variation, it is not
-  necessary that Sequences be explicitly "typed" (i.e., DNA, RNA, or
-  AA).
-
-.. _HumanCytoband:
-
-HumanCytoband
-#############
-
-Cytobands are any of a pattern of stained bands, formed on chromosomes of
-cells undergoing metaphase, that serve to identify particular chromosomes.
-Human cytobands are predominantly specified by the *International System
-for Human Cytogenomic Nomenclature* (ISCN) [1]_.
-
-**Computational Definition**
-
-A character string representing cytobands derived from the
-*International System for Human Cytogenomic Nomenclature* (ISCN)
-guidelines.
-
-**Information Model**
-
-A string constrained to match the regular expression
-``^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$``, derived from the
-ISCN guidelines [1]_.
-
-.. [1] McGowan-Jordan J (Ed.). *ISCN 2016: An international system
-       for human cytogenomic nomenclature (2016).* Karger (2016).
-
-
-.. _deprecations:
-
-Deprecated and Obsolete Classes
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .. _SequenceState:
 

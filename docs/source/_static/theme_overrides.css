@@ -67,3 +67,7 @@ div.figure div.legend p:last-child {
 .rst-content .section ul p {
     margin-bottom: 0px;
 }
+
+span.std-term::after {
+    content: " 🛈"
+}
