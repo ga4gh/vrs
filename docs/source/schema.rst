@@ -10,20 +10,17 @@ Overview
 
    Current Variation Representation Specification Schema
 
-   **Legend** Classes (data types) are shown as boxes.  Abstract
-   classes are denoted by dotted outline; "identifiable" classes,
-   which may be referenced with an identifier, are denoted by bold
-   borders; non-identifiable classes are denoted by thin solid
-   borders.  Inheritance and composition are shown with dotted gray
-   and solid black lines connecting classes, respectively.  All
-   classes have a string `type`.  Abstract classes enable
-   specializations of concepts in this and future versions of VRS.
-   Identifiable classes have an optional `_id`
-   attribute. Non-identifiable classes exist only to structure data
-   always occur "inline" within objects.  Inherited attributes are not
-   shown in this diagram.  An asterisk (*) denotes a nullable
-   attribute. A dagger (†) denotes attributes that may be specified
-   with inline objects or references to the same type.
+   **Legend** The VRS information model consists of several interdependent
+   data classes, including both concrete classes and abstract superclasses
+   (indicated by <<abst>> stereotype in header). These classes may be broadly
+   categorized as conceptual representations of Variation (green boxes),
+   Feature (blue boxes), Location (light blue boxes), SequenceExpression
+   (purple boxes), and General Purpose Types (gray boxes). The general purpose
+   types support the primary classes, including intervals, ranges, Number and
+   GA4GH Sequence strings (not shown). While all VRS objects are Value
+   Objects, only some objects are intended to be identifiable (Variation,
+   Location, and Sequence). Conceptual inheritance relationships between
+   classes is indicated by connecting lines.
 
    [`source
    <https://app.diagrams.net/#G1Qimkvi-Fnd1hhuixbd6aU4Se6zr5Nc1h>`__]
