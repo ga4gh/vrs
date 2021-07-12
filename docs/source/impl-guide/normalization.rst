@@ -49,12 +49,16 @@ This algorithm was designed for :ref:`Allele` instances in which the
 Reference Allele Sequence and Alternate Allele Sequence are
 precisely known and intended to be normalized. In some instances,
 this may not be desired, e.g. faithfully maintaining a sequence
-represented as a repeating subsequence through a RepeatSequence
+represented as a repeating subsequence through a RepeatSequenceExpression
 object. We also anticipate that these edge cases will not be common,
 and encourage adopters to use the VRS Allele Normalization Algorithm
 whenever possible.
 
-The VRS Normalization Algorithm is defined as follows:
+LiteralSequenceExpression Alleles
+#################################
+
+When normalizing an Allele with a `LiteralSequenceExpression` state,
+the following normalization rules apply:
 
 0. Start with an unnormalized Allele, with corresponding `reference`
    and `alternate` Allele Sequences.
@@ -63,7 +67,7 @@ The VRS Normalization Algorithm is defined as follows:
       Allele SequenceLocation.
 
    #. The `Alternate Allele Sequence` refers to the Sequence described
-      by the Allele state attribute.
+      by the Allele `state` attribute.
 
    #. Let `start` and `end` initially be the start and end of the Allele
       SequenceLocation.
@@ -123,6 +127,23 @@ The VRS Normalization Algorithm is defined as follows:
     A demonstration of fully justifying an insertion allele.
 
     Reproduced from [2]_
+
+RepeatedSequenceExpression Alleles
+##################################
+
+When normalizing an Allele with a :ref:`RepeatedSequenceExpression` state,
+normalization is similar to that of :ref:`LiteralSequenceExpression`, expanding
+the `Reference Allele Sequence` to capture the entire region of ambiguity.
+Unlike :ref:`LiteralSequenceExpression` normalization, however, the region of
+ambiguity is defined by full-length repeat subunits. The `Alternate Allele Sequence`
+is also expanded in this way, but is represented by altering the
+`RepeatedSequenceExpression.count` attribute, rather than the `seq_expr` attribute.
+
+The above only applies if `RepeatedSequenceExpression.seq_expr` is set to a
+:ref:`LiteralSequenceExpression` object. If the `RepeatedSequenceExpression.seq_expr`
+is instead a `DerivedSequenceExpression`, the `Allele` SHOULD be returned as-is.
+
+.. todo: Illustrate this process.
 
 **References**
 
