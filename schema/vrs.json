@@ -96,9 +96,9 @@
             }
          },
          "required": [
-            "type",
             "location",
-            "state"
+            "state",
+            "type"
          ]
       },
       "Haplotype": {
@@ -133,8 +133,8 @@
             }
          },
          "required": [
-            "type",
-            "members"
+            "members",
+            "type"
          ]
       },
       "Text": {
@@ -158,8 +158,8 @@
             }
          },
          "required": [
-            "type",
-            "definition"
+            "definition",
+            "type"
          ]
       },
       "VariationSet": {
@@ -193,8 +193,8 @@
             }
          },
          "required": [
-            "type",
-            "members"
+            "members",
+            "type"
          ]
       },
       "CopyNumber": {
@@ -312,9 +312,9 @@
             }
          ],
          "required": [
-            "type",
+            "copies",
             "subject",
-            "copies"
+            "type"
          ]
       },
       "Location": {
@@ -358,10 +358,10 @@
             }
          },
          "required": [
-            "type",
-            "species_id",
             "chr",
-            "interval"
+            "interval",
+            "species_id",
+            "type"
          ]
       },
       "SequenceLocation": {
@@ -394,9 +394,9 @@
             }
          },
          "required": [
-            "type",
+            "interval",
             "sequence_id",
-            "interval"
+            "type"
          ]
       },
       "SequenceInterval": {
@@ -575,9 +575,9 @@
             }
          ],
          "required": [
-            "type",
+            "end",
             "start",
-            "end"
+            "type"
          ]
       },
       "CytobandInterval": {
@@ -605,9 +605,9 @@
             "end": "q22.3"
          },
          "required": [
-            "type",
+            "end",
             "start",
-            "end"
+            "type"
          ]
       },
       "SequenceExpression": {
@@ -644,8 +644,8 @@
             }
          },
          "required": [
-            "type",
-            "sequence"
+            "sequence",
+            "type"
          ]
       },
       "DerivedSequenceExpression": {
@@ -668,9 +668,9 @@
             }
          },
          "required": [
-            "type",
             "location",
-            "reverse_complement"
+            "reverse_complement",
+            "type"
          ]
       },
       "RepeatedSequenceExpression": {
@@ -779,9 +779,9 @@
             }
          ],
          "required": [
-            "type",
+            "count",
             "seq_expr",
-            "count"
+            "type"
          ]
       },
       "Feature": {
@@ -812,8 +812,8 @@
             }
          },
          "required": [
-            "type",
-            "gene_id"
+            "gene_id",
+            "type"
          ]
       },
       "Number": {
@@ -861,9 +861,9 @@
             }
          },
          "required": [
+            "comparator",
             "type",
-            "value",
-            "comparator"
+            "value"
          ]
       },
       "DefiniteRange": {
@@ -886,9 +886,9 @@
             }
          },
          "required": [
-            "type",
+            "max",
             "min",
-            "max"
+            "type"
          ]
       },
       "Sequence": {
@@ -933,8 +933,8 @@
             "sequence": "C"
          },
          "required": [
-            "type",
-            "sequence"
+            "sequence",
+            "type"
          ]
       },
       "SimpleInterval": {
@@ -963,9 +963,9 @@
             "end": 22
          },
          "required": [
-            "type",
+            "end",
             "start",
-            "end"
+            "type"
          ]
       }
    }

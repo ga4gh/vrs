@@ -9,9 +9,7 @@ _logger = logging.getLogger(__name__)
 
 def pjs_filter(yaml_dict):
     """filter out schema elements that are not supported by python
-    jsonschema objects (yet)
-
-    """
+    jsonschema objects (yet)"""
 
     for message_name, message_definition in yaml_dict['definitions'].items():
         if 'anyOf' in message_definition:
@@ -21,3 +19,4 @@ def pjs_filter(yaml_dict):
             _logger.warning(f'Removing allOf attribute from {message_name} to avoid pjs error.')
             del message_definition['allOf']
     return yaml_dict
+

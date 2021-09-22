@@ -2,13 +2,13 @@
 .SUFFIXES:
 .DELETE_ON_ERROR:
 
-YAMLS:=ga4gh.yaml vrs.yaml
+YAMLS:=vrs.yaml
 JSONS:=${YAMLS:.yaml=.json}
 
-all: ${JSONS}
+all: ${JSONS} defs
 
 %.json: %.yaml
-	./y2j <$< >$@
+	./y2j.py <$< >$@
 
 ## # npm install -g json-dereference-cli
 ## %.json: %.yaml
