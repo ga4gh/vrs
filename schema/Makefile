@@ -8,7 +8,7 @@ JSONS:=${YAMLS:.yaml=.json}
 all: ${JSONS}
 
 %.json: %.yaml
-	./y2j <$< >$@
+	./y2j.py <$< >$@
 
 ## # npm install -g json-dereference-cli
 ## %.json: %.yaml
