@@ -85,7 +85,7 @@ supported. The data proxy interface defines three methods:
   namespace. Zero or more aliases may be returned.
 
 The :ref:`impl-vrs-python` `DataProxy class
-<https://github.com/ga4gh/vrs-python/blob/develop/src/ga4gh.vrs.dataproxy.py>`__
+<https://github.com/ga4gh/vrs-python/blob/main/src/ga4gh/vrs/dataproxy.py>`__
 provides an example of this design pattern and sample replies.
 |vrs-python| implements the DataProxy interface using a local
 |seqrepo| instance backend and using a |seqrepo_rs| backend.  A GA4GH
