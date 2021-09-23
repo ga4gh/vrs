@@ -58,7 +58,7 @@ $$$$$$$$$$$$$$
 Once a PR is ready for review, the Project Maintainers will move the
 corresponding issue to the `QA/Feedback`_ project column.  Pull
 requests ready for public review MAY be merged into the `main` (stable
-release) branch by through review and approval by at least one
+release) branch through review and approval by at least one
 (non-authoring) Project Maintainer. Merged commits MAY be tagged as
 alpha releases when needed. After merging, corresponding issues are
 moved to the `Done`_ project column and are closed.
