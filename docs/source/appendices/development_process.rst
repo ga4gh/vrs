@@ -83,9 +83,7 @@ the new version is released to production.
 
 VRS follows `GA4GH project versioning recommendations
 <https://docs.google.com/document/d/1UUJSnsPw32W5r1jaJ0vI11X0LLLygpAC9TNosjSge_w/edit#heading=h.6672fcrbpqsk>`__,
-based on `Semantic Versioning 2.0 <http://semver.org/>`_.  The VRS
-GitHub repository `develop` branch contains the latest development
-code for community review (see :ref:`Release Cycle <release-cycle>`).
+based on `Semantic Versioning 2.0 <http://semver.org/>`_. 
 
 
 Leadership
