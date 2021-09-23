@@ -90,7 +90,7 @@ provides an example of this design pattern and sample replies.
 |vrs-python| implements the DataProxy interface using a local
 |seqrepo| instance backend and using a |seqrepo_rs| backend.  A GA4GH
 refget implementation has been started, but is pending interface
-changes to support lookup using primary database accesssions.
+changes to support lookup using primary database accessions.
 
 Examples
 ########
