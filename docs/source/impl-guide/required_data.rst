@@ -71,7 +71,7 @@ Suggested Implementation
 
 In order to maximize portability and to insulate implementations from
 decisions about external data sources, implementers should consider
-writing an abstract data proxy interface that to define a service, and
+writing an abstract data proxy interface to define a service, and
 then implement this interface for each data backend to be
 supported. The data proxy interface defines three methods:
 
