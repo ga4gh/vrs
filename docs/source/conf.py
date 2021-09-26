@@ -2,7 +2,7 @@
 #
 # This file only contains a selection of the most common options. For a full
 # list see the documentation:
-# http://www.sphinx-doc.org/en/master/config
+# https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 # -- Path setup --------------------------------------------------------------
 
@@ -34,7 +34,7 @@ def _parse_release_as_version(rls):
 # -- Project information -----------------------------------------------------
 
 project = 'GA4GH Variation Representation Specification'
-copyright = '2019, GA4GH VRS Contributors'
+copyright = '2021, GA4GH VRS Contributors'
 author = 'Committers'
 master_doc = 'index'
 # N.B. RTD ignores these values. :-/
