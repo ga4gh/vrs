@@ -60,7 +60,7 @@
          }
       },
       "Allele": {
-         "description": "The sequence state at a Location.",
+         "description": "The state of a molecule at a :ref:`Location`.",
          "additionalProperties": false,
          "type": "object",
          "properties": {
@@ -96,7 +96,12 @@
                      "$ref": "#/definitions/SequenceExpression"
                   }
                ],
-               "description": "An expression of the sequence state"
+               "description": "An expression of the sequence state",
+               "deprecated": [
+                  {
+                     "$ref": "#/definitions/SequenceState"
+                  }
+               ]
             }
          },
          "required": [
