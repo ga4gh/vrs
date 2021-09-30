@@ -21,7 +21,7 @@
          }
       },
       "MolecularVariation": {
-         "description": "A variation on a contiguous molecule.",
+         "description": "A :ref:`variation` on a contiguous molecule.",
          "oneOf": [
             {
                "$ref": "#/definitions/Allele"
@@ -65,14 +65,16 @@
          "type": "object",
          "properties": {
             "_id": {
-               "$ref": "#/definitions/CURIE"
+               "$ref": "#/definitions/CURIE",
+               "description": "Variation Id. MUST be unique within document."
             },
             "type": {
                "type": "string",
                "enum": [
                   "Allele"
                ],
-               "default": "Allele"
+               "default": "Allele",
+               "description": "MUST be \"Allele\""
             },
             "location": {
                "oneOf": [
@@ -82,7 +84,8 @@
                   {
                      "$ref": "#/definitions/Location"
                   }
-               ]
+               ],
+               "description": "Where Allele is located"
             },
             "state": {
                "oneOf": [
@@ -92,10 +95,12 @@
                   {
                      "$ref": "#/definitions/SequenceExpression"
                   }
-               ]
+               ],
+               "description": "An expression of the sequence state"
             }
          },
          "required": [
+            "id",
             "location",
             "state",
             "type"
@@ -133,6 +138,7 @@
             }
          },
          "required": [
+            "id",
             "members",
             "type"
          ]
@@ -159,6 +165,7 @@
          },
          "required": [
             "definition",
+            "id",
             "type"
          ]
       },
@@ -193,6 +200,7 @@
             }
          },
          "required": [
+            "id",
             "members",
             "type"
          ]
@@ -313,6 +321,7 @@
          ],
          "required": [
             "copies",
+            "id",
             "subject",
             "type"
          ]

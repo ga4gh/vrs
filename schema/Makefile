@@ -1,4 +1,4 @@
-.PHONY: FORCE
+.PHONY: defs FORCE
 .SUFFIXES:
 .DELETE_ON_ERROR:
 
@@ -9,6 +9,10 @@ all: ${JSONS} defs
 
 %.json: %.yaml
 	./y2j.py <$< >$@
+
+defs:
+	rm -rf defs
+	./y2t.py
 
 ## # npm install -g json-dereference-cli
 ## %.json: %.yaml

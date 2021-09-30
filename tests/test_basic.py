@@ -14,7 +14,7 @@ j = json.load(open(vrs_json_path))
 
 
 def test_json_yaml_match():
-    assert p.processed_schema == j, "parsed yaml and json do not match"
+    assert p.for_json == j, "parsed yaml and json do not match"
 
 
 # Can pjs handle this schema?

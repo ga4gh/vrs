@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """convert vrsatile.yaml to .rst artifacts"""
+import copy
 
 import yaml
 import os
 import pathlib
 from inflector import Inflector
-from y2j import SCHEMA_DEF_KEYWORD_BY_VERSION
+from y2j import SCHEMA_DEF_KEYWORD_BY_VERSION, YamlSchemaProcessor
 
 defs_path = pathlib.Path.cwd() / 'defs'
 os.mkdir(defs_path)  # error expected if directory already exists – clear with Make
@@ -14,6 +15,7 @@ with open('vrs.yaml', 'r') as f:
     schema = yaml.load(f, Loader=yaml.SafeLoader)
 
 i = Inflector()
+proc_schema = YamlSchemaProcessor(schema)
 schema_def_keyword = SCHEMA_DEF_KEYWORD_BY_VERSION[schema['$schema']]
 
 
@@ -60,17 +62,28 @@ def resolve_cardinality(class_property_name, class_property_attributes, class_de
     return f'{min_count}..{max_count}'
 
 
-for class_name, class_definition in schema[schema_def_keyword].items():
-    with open(defs_path / (class_name + '_definition.rst'), "w") as f:
+for class_name, class_definition in proc_schema.defs.items():
+    with open(defs_path / (class_name + '.rst'), "w") as f:
+        print("**Computational Definition**\n", file=f)
         print(class_definition['description'], file=f)
-    if 'heritable_properties' in class_definition:
-        p = 'heritable_properties'
-    elif 'properties' in class_definition:
-        p = 'properties'
-    else:
-        continue
-    with open(defs_path / (class_name + '_info_model.rst'), "w") as f:
-        print("""\
+        if 'heritable_properties' in class_definition:
+            p = 'heritable_properties'
+        elif 'properties' in class_definition:
+            p = 'properties'
+        elif proc_schema.class_is_primitive(class_name):
+            continue
+        else:
+            raise ValueError(class_name, class_definition)
+        deps = list(proc_schema.dependency_map[class_name])
+        if len(deps) == 1:
+            inheritance = f"\nSome {class_name} attributes are inherited from :ref:`{deps[0]}`.\n"
+        elif len(deps) == 0:
+            inheritance = ""
+        else:
+            raise ValueError
+        print(f"""
+**Information Model**
+{inheritance}
 .. list-table::
    :class: clean-wrap
    :header-rows: 1

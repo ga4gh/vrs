@@ -28,12 +28,21 @@ definitions:
       - $ref: "#/definitions/MolecularVariation"
       - $ref: "#/definitions/SystemicVariation"
       - $ref: "#/definitions/UtilityVariation"
+    heritable_properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+        description: >-
+          Variation Id. MUST be unique within document.
+      type:
+        type: string
+    heritable_required: ["id", "type"]
+
     discriminator:
       propertyName: type
 
   MolecularVariation:
     description: >-
-      A variation on a contiguous molecule.
+      A :ref:`variation` on a contiguous molecule.
     oneOf:
       - $ref: "#/definitions/Allele"
       - $ref: "#/definitions/Haplotype"
@@ -74,20 +83,24 @@ definitions:
     additionalProperties: false
     type: object
     properties:
-      _id:
-        $ref: "#/definitions/CURIE"
       type:
         type: string
         enum: ["Allele"]
         default: "Allele"
+        description: >-
+          MUST be "Allele"
       location:
         oneOf:
           - $ref: "#/definitions/CURIE"
           - $ref: "#/definitions/Location"
+        description: >-
+          Where Allele is located
       state:
         oneOf:
           - $ref: "#/definitions/SequenceState" # DEPRECATED; remove in 2.0
           - $ref: "#/definitions/SequenceExpression"
+        description: >-
+          An expression of the sequence state
     required: [ "type", "location", "state" ]
 
   Haplotype:

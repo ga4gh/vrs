@@ -1,0 +1,34 @@
+**Computational Definition**
+
+The sequence state at a Location.
+
+**Information Model**
+
+Some Allele attributes are inherited from :ref:`MolecularVariation`.
+
+.. list-table::
+   :class: clean-wrap
+   :header-rows: 1
+   :align: left
+   :widths: auto
+   
+   *  - Field
+      - Type
+      - Limits
+      - Description
+   *  - _id
+      - :ref:`CURIE`
+      - 0..1
+      - Variation Id. MUST be unique within document.
+   *  - type
+      - string
+      - 1..1
+      - MUST be "Allele"
+   *  - location
+      - :ref:`CURIE` | :ref:`Location`
+      - 1..1
+      - Where Allele is located
+   *  - state
+      - :ref:`SequenceState` | :ref:`SequenceExpression`
+      - 1..1
+      - An expression of the sequence state
