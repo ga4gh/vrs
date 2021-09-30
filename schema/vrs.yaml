@@ -79,7 +79,7 @@ definitions:
 
   Allele:
     description: >-
-      The sequence state at a Location.
+      The state of a molecule at a :ref:`Location`.
     additionalProperties: false
     type: object
     properties:
@@ -101,6 +101,8 @@ definitions:
           - $ref: "#/definitions/SequenceExpression"
         description: >-
           An expression of the sequence state
+        deprecated:
+          - $ref: "#/definitions/SequenceState"
     required: [ "type", "location", "state" ]
 
   Haplotype:

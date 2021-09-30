@@ -1,13 +1,13 @@
 **Computational Definition**
 
-The sequence state at a Location.
+The state of a molecule at a :ref:`Location`.
 
 **Information Model**
 
 Some Allele attributes are inherited from :ref:`MolecularVariation`.
 
 .. list-table::
-   :class: clean-wrap
+   :class: reece-wrap
    :header-rows: 1
    :align: left
    :widths: auto
@@ -29,6 +29,6 @@ Some Allele attributes are inherited from :ref:`MolecularVariation`.
       - 1..1
       - Where Allele is located
    *  - state
-      - :ref:`SequenceState` | :ref:`SequenceExpression`
+      - :ref:`SequenceExpression` | :ref:`SequenceState` (deprecated)
       - 1..1
       - An expression of the sequence state

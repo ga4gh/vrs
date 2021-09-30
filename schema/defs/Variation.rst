@@ -5,7 +5,7 @@ A representation of the state of one or more biomolecules.
 **Information Model**
 
 .. list-table::
-   :class: clean-wrap
+   :class: reece-wrap
    :header-rows: 1
    :align: left
    :widths: auto

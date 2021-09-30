@@ -42,7 +42,16 @@ def resolve_type(class_property_definition):
         else:
             return f'`{identifier} <{ref}>`_'
     elif 'oneOf' in class_property_definition:
-        return ' | '.join([resolve_type(x) for x in class_property_definition['oneOf']])
+        deprecated_types = class_property_definition.get('deprecated', list())
+        resolved_deprecated = list()
+        resolved_active = list()
+        for property_type in class_property_definition['oneOf']:
+            resolved_type = resolve_type(property_type)
+            if property_type in deprecated_types:
+                resolved_deprecated.append(resolved_type + f' (deprecated)')
+            else:
+                resolved_active.append(resolved_type)
+        return ' | '.join(resolved_active + resolved_deprecated)
     else:
         raise ValueError(class_property_definition)
 
@@ -85,7 +94,7 @@ for class_name, class_definition in proc_schema.defs.items():
 **Information Model**
 {inheritance}
 .. list-table::
-   :class: clean-wrap
+   :class: reece-wrap
    :header-rows: 1
    :align: left
    :widths: auto
