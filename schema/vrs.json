@@ -613,11 +613,13 @@
                "$ref": "#/definitions/HumanCytoband"
             }
          },
-         "example": {
-            "type": "CytobandInterval",
-            "start": "q22.2",
-            "end": "q22.3"
-         },
+         "examples": [
+            {
+               "type": "CytobandInterval",
+               "start": "q22.2",
+               "end": "q22.3"
+            }
+         ],
          "required": [
             "end",
             "start",
@@ -916,14 +918,18 @@
          "description": "A string that refers to an object uniquely.  The lifetime and scope of an id is defined by the sender. VRS does not impose any contraints on strings used as ids in messages. However, to maximize sharability of data, VRS RECOMMENDS that implementations use W3C Compact URI syntax. String CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially. VRS also RECOMMENDS that `prefix` be defined in identifiers.org. The `reference` component is an unconstrained string. A CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VRS uses CURIEs primarily as a naming mechanism. Implementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable. Using internal ids in public messages is strongly discouraged.",
          "type": "string",
          "pattern": "^\\w[^:]*:.+$",
-         "example": "ensembl:ENSG00000139618"
+         "examples": [
+            "ensembl:ENSG00000139618"
+         ]
       },
       "HumanCytoband": {
          "additionalProperties": false,
          "description": "A interval on a stained metaphase chromosome specified by cytobands. CytobandIntervals include the regions described by the start and end cytobands.",
          "type": "string",
          "pattern": "^cen|[pq](ter|([1-9][0-9]*(\\.[1-9][0-9]*)?))$",
-         "example": "q22.3"
+         "examples": [
+            "q22.3"
+         ]
       },
       "SequenceState": {
          "deprecated": true,
@@ -942,10 +948,12 @@
                "$ref": "#/definitions/Sequence"
             }
          },
-         "example": {
-            "type": "SequenceState",
-            "sequence": "C"
-         },
+         "examples": [
+            {
+               "type": "SequenceState",
+               "sequence": "C"
+            }
+         ],
          "required": [
             "sequence",
             "type"
@@ -971,11 +979,13 @@
                "type": "integer"
             }
          },
-         "example": {
-            "type": "SimpleInterval",
-            "start": 11,
-            "end": 22
-         },
+         "examples": [
+            {
+               "type": "SimpleInterval",
+               "start": 11,
+               "end": 22
+            }
+         ],
          "required": [
             "end",
             "start",

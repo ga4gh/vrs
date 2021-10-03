@@ -419,10 +419,11 @@ definitions:
         $ref: "#/definitions/HumanCytoband"
       end:
         $ref: "#/definitions/HumanCytoband"
-    example:
-      type: CytobandInterval
-      start: q22.2
-      end: q22.3
+    examples:
+      - type: CytobandInterval
+        start: q22.2
+        end: q22.3
+
     required: [ "type", "start", "end" ]
 
 
@@ -661,7 +662,8 @@ definitions:
       Using internal ids in public messages is strongly discouraged.
     type: string
     pattern: '^\w[^:]*:.+$'
-    example: "ensembl:ENSG00000139618"
+    examples:
+      - "ensembl:ENSG00000139618"
 
   HumanCytoband:
     additionalProperties: false
@@ -671,7 +673,8 @@ definitions:
       cytobands.
     type: string
     pattern: '^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$'
-    example: "q22.3"
+    examples:
+      - "q22.3"
 
   # =============================================================================
   # DEPRECATED
@@ -693,9 +696,9 @@ definitions:
         default: "SequenceState"
       sequence:
         $ref: "#/definitions/Sequence"
-    example:
-      type: SequenceState
-      sequence: C
+    examples:
+      - type: SequenceState
+        sequence: C
     required: [ "type", "sequence" ]
 
   SimpleInterval:
@@ -716,8 +719,8 @@ definitions:
         type: integer
       end:
         type: integer
-    example:
-      type: SimpleInterval
-      start: 11
-      end: 22
+    examples:
+      - type: SimpleInterval
+        start: 11
+        end: 22
     required: [ "type", "start", "end" ]
