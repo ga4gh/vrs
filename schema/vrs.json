@@ -21,7 +21,7 @@
          }
       },
       "MolecularVariation": {
-         "description": "A :ref:`variation` on a contiguous molecule.",
+         "description": "A variation on a contiguous molecule.",
          "oneOf": [
             {
                "$ref": "#/definitions/Allele"
@@ -35,7 +35,7 @@
          }
       },
       "UtilityVariation": {
-         "description": "A collection of :ref:`Variation` subclasses that cannot be constrained to a specific class of biological variation, but are necessary for some applications of VRS.",
+         "description": "A collection of Variation subclasses that cannot be constrained to a specific class of biological variation, but are necessary for some applications of VRS.",
          "oneOf": [
             {
                "$ref": "#/definitions/Text"
@@ -60,7 +60,7 @@
          }
       },
       "Allele": {
-         "description": "The state of a molecule at a :ref:`Location`.",
+         "description": "The state of a molecule at a Location.",
          "additionalProperties": false,
          "type": "object",
          "properties": {
@@ -414,7 +414,7 @@
          ]
       },
       "SequenceInterval": {
-         "description": "A SequenceInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nSequenceInterval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".",
+         "description": "A SequenceInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates.\nSequenceInterval is intended to be compatible with that in Sequence Ontology (SO:0000001), with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".",
          "type": "object",
          "additionalProperties": false,
          "properties": {
@@ -810,7 +810,7 @@
          }
       },
       "Gene": {
-         "description": "A gene is an authoritative representation of one or more heritable :ref:`Locations <Location>` that includes all sequence elements necessary to perform a biological function. A gene may include regulatory, transcribed, and/or other functional Locations.",
+         "description": "A gene is an authoritative representation of one or more heritable Locations  that includes all sequence elements necessary to perform a biological function. A gene may include regulatory, transcribed, and/or other functional Locations.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
@@ -913,7 +913,7 @@
       },
       "CURIE": {
          "additionalProperties": false,
-         "description": "A string that refers to an object uniquely.  The lifetime and scope of an id is defined by the sender.\nVRS does not impose any contraints on strings used as ids in messages. However, to maximize sharability of data, VRS RECOMMENDS that implementations use [W3C Compact URI (CURIE)](https://www.w3.org/TR/curie/) syntax.\nString CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially.\nVRS also RECOMMENDS that `prefix` be defined in identifiers.org.\nThe `reference` component is an unconstrained string.\nA CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VRS uses CURIEs primarily as a naming mechanism.\nImplementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable.\nUsing internal ids in public messages is strongly discouraged.",
+         "description": "A string that refers to an object uniquely.  The lifetime and scope of an id is defined by the sender.\nVRS does not impose any contraints on strings used as ids in messages. However, to maximize sharability of data, VRS RECOMMENDS that implementations use W3C Compact URI syntax.\nString CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially.\nVRS also RECOMMENDS that `prefix` be defined in identifiers.org.\nThe `reference` component is an unconstrained string.\nA CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VRS uses CURIEs primarily as a naming mechanism.\nImplementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable.\nUsing internal ids in public messages is strongly discouraged.",
          "type": "string",
          "pattern": "^\\w[^:]*:.+$",
          "example": "ensembl:ENSG00000139618"

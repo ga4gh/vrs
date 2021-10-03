@@ -4,12 +4,17 @@ import copy
 import json
 import sys
 import yaml
+import re
 from collections import defaultdict
 
 SCHEMA_DEF_KEYWORD_BY_VERSION = {
     "http://json-schema.org/draft-07/schema": "definitions",
     "http://json-schema.org/draft/2020-12/schema": "$defs"
 }
+
+
+ref_re = re.compile(r':ref:`(.*?)(<.*>)?`')
+link_re = re.compile(r'`(.*)\<.*\>`_')
 
 
 def resolve_curie(curie):
@@ -115,6 +120,12 @@ class YamlSchemaProcessor:
         processed_class_def[req_k] = sorted(list(inherited_required | processed_class_required))
         self.processed_classes.add(schema_class)
 
+    @staticmethod
+    def _scrub_rst_markup(string):
+        string = ref_re.sub('\g<1>', string)
+        string = link_re.sub('\g<1>', string)
+        return string
+
     def clean_for_json(self):
         self.for_json.pop('namespaces', None)
         for schema_class, schema_definition in self.for_json[self.schema_def_keyword].items():
@@ -122,6 +133,8 @@ class YamlSchemaProcessor:
                 schema_definition.pop('heritable_properties', None)
                 schema_definition.pop('heritable_required', None)
                 schema_definition.pop('header_level', None)
+            if 'description' in schema_definition:
+                schema_definition['description'] = self._scrub_rst_markup(schema_definition['description'])
 
 
 if __name__ == '__main__':

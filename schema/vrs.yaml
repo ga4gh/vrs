@@ -308,7 +308,7 @@ definitions:
       always represented by contiguous spans using interbase coordinates.
 
       SequenceInterval is intended to be compatible with that in Sequence Ontology
-      ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)),
+      (`SO:0000001<http://www.sequenceontology.org/browser/current_svn/term/SO:0000001>`_),
       with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO
       definition is for an "extent greater than zero".
     type: object
@@ -640,8 +640,8 @@ definitions:
 
       VRS does not impose any contraints on strings used as ids in
       messages. However, to maximize sharability of data, VRS
-      RECOMMENDS that implementations use [W3C Compact URI
-      (CURIE)](https://www.w3.org/TR/curie/) syntax.
+      RECOMMENDS that implementations use
+      `W3C Compact URI<https://www.w3.org/TR/curie/>`_ syntax.
 
       String CURIEs are represented as `prefix`:`reference` (W3C
       terminology), but often referred to as `namespace`:`accession`
