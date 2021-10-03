@@ -58,7 +58,7 @@ $$$$$$$$$$$$$$
 Once a PR is ready for review, the Project Maintainers will move the
 corresponding issue to the `QA/Feedback`_ project column.  Pull
 requests ready for public review MAY be merged into the `main` (stable
-release) branch by through review and approval by at least one
+release) branch through review and approval by at least one
 (non-authoring) Project Maintainer. Merged commits MAY be tagged as
 alpha releases when needed. After merging, corresponding issues are
 moved to the `Done`_ project column and are closed.
@@ -83,9 +83,7 @@ the new version is released to production.
 
 VRS follows `GA4GH project versioning recommendations
 <https://docs.google.com/document/d/1UUJSnsPw32W5r1jaJ0vI11X0LLLygpAC9TNosjSge_w/edit#heading=h.6672fcrbpqsk>`__,
-based on `Semantic Versioning 2.0 <http://semver.org/>`_.  The VRS
-GitHub repository `develop` branch contains the latest development
-code for community review (see :ref:`Release Cycle <release-cycle>`).
+based on `Semantic Versioning 2.0 <http://semver.org/>`_. 
 
 
 Leadership
