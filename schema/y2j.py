@@ -4,12 +4,17 @@ import copy
 import json
 import sys
 import yaml
+import re
 from collections import defaultdict
 
 SCHEMA_DEF_KEYWORD_BY_VERSION = {
     "http://json-schema.org/draft-07/schema": "definitions",
     "http://json-schema.org/draft/2020-12/schema": "$defs"
 }
+
+
+ref_re = re.compile(r':ref:`(.*?)(<.*>)?`')
+link_re = re.compile(r'`(.*)\<.*\>`_')
 
 
 def resolve_curie(curie):
@@ -28,23 +33,28 @@ class YamlSchemaProcessor:
         self.defs = self.processed_schema[self.schema_def_keyword]
         self.processed_classes = set()
         self.process_schema()
+        self.for_json = copy.deepcopy(self.processed_schema)
+        self.clean_for_json()
+
+    def _get_refs(self, schema_class):
+        return [item['$ref'].split('/')[-1] for item in self.defs[schema_class]['oneOf'] if '$ref' in item]
+
+    def _map_dependencies(self, schema_class, refs):
+        for ref in refs:
+            self.dependency_map[ref].add(schema_class)
+            if self.class_is_abstract(ref):
+                child_refs = self._get_refs(ref)
+                self._map_dependencies(ref, child_refs)
 
     def process_schema(self):
-        self.processed_schema.pop('namespaces', None)
         for schema_class in self.defs:
             if 'heritable_properties' in self.defs[schema_class]:
                 assert 'oneOf' in self.defs[schema_class]  # Expected schema pattern
-                refs = [item['$ref'].split('/')[-1] for item in self.defs[schema_class]['oneOf'] if '$ref' in item]
-                for ref in refs:
-                    self.dependency_map[ref].add(schema_class)
+                refs = self._get_refs(schema_class)
+                self._map_dependencies(schema_class, refs)
 
         for schema_class in self.defs:
             self.process_schema_class(schema_class)
-        for schema_class in self.defs:
-            if self.class_is_abstract(schema_class):
-                self.defs[schema_class].pop('heritable_properties', None)
-                self.defs[schema_class].pop('heritable_required', None)
-                self.defs[schema_class].pop('header_level', None)
 
     def class_is_abstract(self, schema_class):
         one_of_items = self.raw_schema[self.schema_def_keyword][schema_class].get('oneOf', [])
@@ -59,7 +69,7 @@ class YamlSchemaProcessor:
         return False
 
     def json_dump(self, stream):
-        json.dump(self.processed_schema, stream, indent=3, sort_keys=False)
+        json.dump(self.for_json, stream, indent=3, sort_keys=False)
 
     def process_property_tree(self, raw_node, processed_node):
         if isinstance(raw_node, dict):
@@ -109,6 +119,23 @@ class YamlSchemaProcessor:
         processed_class_def[prop_k] = inherited_properties | processed_class_properties
         processed_class_def[req_k] = sorted(list(inherited_required | processed_class_required))
         self.processed_classes.add(schema_class)
+
+    @staticmethod
+    def _scrub_rst_markup(string):
+        string = ref_re.sub('\g<1>', string)
+        string = link_re.sub('\g<1>', string)
+        string = string.replace('\n', ' ')
+        return string
+
+    def clean_for_json(self):
+        self.for_json.pop('namespaces', None)
+        for schema_class, schema_definition in self.for_json[self.schema_def_keyword].items():
+            if self.class_is_abstract(schema_class):
+                schema_definition.pop('heritable_properties', None)
+                schema_definition.pop('heritable_required', None)
+                schema_definition.pop('header_level', None)
+            if 'description' in schema_definition:
+                schema_definition['description'] = self._scrub_rst_markup(schema_definition['description'])
 
 
 if __name__ == '__main__':

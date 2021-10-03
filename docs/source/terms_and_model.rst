@@ -110,9 +110,7 @@ subclass <utilityvariation>`. Types of variation are widely varied, and
 there are several :ref:`planned-variation` currently under consideration
 to capture this diversity.
 
-**Computational Definition**
-
-A representation of the state of one or more biomolecules.
+.. include:: defs/variation.rst
 
 .. _MolecularVariation:
 
@@ -142,38 +140,7 @@ genetic locus. In the genetics community, *allele* may also refer to a
 specific haplotype. In the context of biological sequences, "allele" refers
 to a distinct state of a molecule at a location.
 
-**Computational Definition**
-
-A state of a molecule at a :ref:`Location`.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Variation Id; MUST be unique within document
-   * - type
-     - string
-     - 1..1
-     - MUST be "Allele"
-   * - location
-     - :ref:`Location` | :ref:`CURIE`
-     - 1..1
-     - Where Allele is located
-   * - state
-     - :ref:`SequenceExpression` | :ref:`SequenceState` (deprecated)
-     - 1..1
-     - An expression of the sequence state
+.. include:: defs/Allele.rst
 
 **Implementation Guidance**
 
