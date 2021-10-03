@@ -124,6 +124,7 @@ class YamlSchemaProcessor:
     def _scrub_rst_markup(string):
         string = ref_re.sub('\g<1>', string)
         string = link_re.sub('\g<1>', string)
+        string = string.replace('\n', ' ')
         return string
 
     def clean_for_json(self):
