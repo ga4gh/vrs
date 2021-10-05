@@ -110,7 +110,7 @@ subclass <utilityvariation>`. Types of variation are widely varied, and
 there are several :ref:`planned-variation` currently under consideration
 to capture this diversity.
 
-.. include:: defs/variation.rst
+.. include:: defs/Variation.rst
 
 .. _MolecularVariation:
 
