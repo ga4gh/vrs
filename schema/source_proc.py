@@ -13,7 +13,7 @@ SCHEMA_DEF_KEYWORD_BY_VERSION = {
 
 
 ref_re = re.compile(r':ref:`(.*?)(<.*>)?`')
-link_re = re.compile(r'`(.*)\<.*\>`_')
+link_re = re.compile(r'`(.*) \<(.*)\>`_')
 
 
 class YamlSchemaProcessor:

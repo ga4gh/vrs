@@ -14,3 +14,11 @@ A representation of the state of one or more biomolecules.
       - Type
       - Limits
       - Description
+   *  - _id
+      - :ref:`CURIE`
+      - 1..1
+      - Variation Id. MUST be unique within document.
+   *  - type
+      - string
+      - 1..1
+      - The Variation class type. MUST match child class type.

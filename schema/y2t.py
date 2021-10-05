@@ -10,7 +10,7 @@ from source_proc import SCHEMA_DEF_KEYWORD_BY_VERSION, YamlSchemaProcessor
 defs_path = pathlib.Path.cwd() / 'defs'
 os.mkdir(defs_path)  # error expected if directory already exists – clear with Make
 
-with open('vrs.yaml', 'r') as f:
+with open('vrs-source.yaml', 'r') as f:
     schema = yaml.load(f, Loader=yaml.SafeLoader)
 
 i = Inflector()

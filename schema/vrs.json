@@ -414,7 +414,7 @@
          ]
       },
       "SequenceInterval": {
-         "description": "A SequenceInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates. SequenceInterval is intended to be compatible with that in Sequence Ontology (SO:0000001), with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".",
+         "description": "A SequenceInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates. SequenceInterval is intended to be compatible with that in Sequence Ontology (`SO:0000001<http://www.sequenceontology.org/browser/current_svn/term/SO:0000001>`_), with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".",
          "type": "object",
          "additionalProperties": false,
          "properties": {
@@ -913,7 +913,7 @@
       },
       "CURIE": {
          "additionalProperties": false,
-         "description": "A string that refers to an object uniquely.  The lifetime and scope of an id is defined by the sender. VRS does not impose any contraints on strings used as ids in messages. However, to maximize sharability of data, VRS RECOMMENDS that implementations use W3C Compact URI syntax. String CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially. VRS also RECOMMENDS that `prefix` be defined in identifiers.org. The `reference` component is an unconstrained string. A CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VRS uses CURIEs primarily as a naming mechanism. Implementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable. Using internal ids in public messages is strongly discouraged.",
+         "description": "A string that refers to an object uniquely.  The lifetime and scope of an id is defined by the sender. VRS does not impose any contraints on strings used as ids in messages. However, to maximize sharability of data, VRS RECOMMENDS that implementations use `W3C Compact URI<https://www.w3.org/TR/curie/>`_ syntax. String CURIEs are represented as `prefix`:`reference` (W3C terminology), but often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially. VRS also RECOMMENDS that `prefix` be defined in identifiers.org. The `reference` component is an unconstrained string. A CURIE is a URI.  URIs may *locate* objects (i.e., specify where to retrieve them) or *name* objects conceptually.  VRS uses CURIEs primarily as a naming mechanism. Implementations MAY provide CURIE resolution mechanisms for prefixes to make these objects locatable. Using internal ids in public messages is strongly discouraged.",
          "type": "string",
          "pattern": "^\\w[^:]*:.+$",
          "example": "ensembl:ENSG00000139618"

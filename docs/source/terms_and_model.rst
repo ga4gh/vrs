@@ -917,7 +917,7 @@ always represented by contiguous spans using interbase coordinates or
 coordinate ranges.
 
 SequenceInterval is intended to be compatible with a "region" in Sequence Ontology
-([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)),
+(`SO:0000001 <http://www.sequenceontology.org/browser/current_svn/term/SO:0000001>`_),
 with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO
 definition of region has an "extent greater than zero".
 

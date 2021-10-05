@@ -1,8 +1,10 @@
 **Computational Definition**
 
-The state of a molecule at a Location.
+The state of a molecule at a :ref:`Location`.
 
 **Information Model**
+
+Some Allele attributes are inherited from :ref:`MolecularVariation`.
 
 .. list-table::
    :class: reece-wrap
