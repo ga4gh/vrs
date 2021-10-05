@@ -1,0 +1,725 @@
+# VRS uses yaml as the source document for json schema
+#
+# To convert vrs.yaml to vrs.json:
+#   make vrs.json
+# You'll probably have to `pip install pyyaml` first.
+#
+# To watch for changes and update automatically:
+#   make watch &
+
+# https://json-schema.org/understanding-json-schema/reference/schema.html
+$schema: "http://json-schema.org/draft-07/schema"
+title: "GA4GH-VRS-Definitions"
+type: object
+
+definitions:
+  # VRS definitions are presented top-down.  Everything rolls up to
+  # Variation, which is a polymorphic abstraction of many kinds of
+  # variation.
+
+  # =============================================================================
+  # Kinds of Variation
+  # =============================================================================
+
+  Variation:
+    description: >-
+      A representation of the state of one or more biomolecules.
+    oneOf:
+      - $ref: "#/definitions/MolecularVariation"
+      - $ref: "#/definitions/SystemicVariation"
+      - $ref: "#/definitions/UtilityVariation"
+    heritable_properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+        description: >-
+          Variation Id. MUST be unique within document.
+      type:
+        type: string
+        description: >-
+          The Variation class type. MUST match child class type.
+    heritable_required: ["_id", "type"]
+
+    discriminator:
+      propertyName: type
+
+  MolecularVariation:
+    description: >-
+      A :ref:`variation` on a contiguous molecule.
+    oneOf:
+      - $ref: "#/definitions/Allele"
+      - $ref: "#/definitions/Haplotype"
+    discriminator:
+      propertyName: type
+
+  UtilityVariation:
+    description: >-
+      A collection of :ref:`Variation` subclasses that cannot be
+      constrained to a specific class of biological variation, but
+      are necessary for some applications of VRS.
+    oneOf:
+      - $ref: "#/definitions/Text"
+      - $ref: "#/definitions/VariationSet"
+    discriminator:
+      propertyName: type
+
+  SystemicVariation:
+    description: >-
+      A Variation of multiple molecules in the context of a system, e.g.
+      a genome, sample, or homologous chromosomes.
+    oneOf:
+      - $ref: "#/definitions/CopyNumber"
+    discriminator:
+      propertyName: type
+
+  # =============================================================================
+  # IDENTIFIABLE TYPES
+  # Have a `type` and `_id` attribute
+  # =============================================================================
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Molecular Variation
+
+  Allele:
+    description: >-
+      The state of a molecule at a :ref:`Location`.
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        enum: ["Allele"]
+        default: "Allele"
+        description: >-
+          MUST be "Allele"
+      location:
+        oneOf:
+          - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Location"
+        description: >-
+          Where Allele is located
+      state:
+        oneOf:
+          - $ref: "#/definitions/SequenceState" # DEPRECATED; remove in 2.0
+          - $ref: "#/definitions/SequenceExpression"
+        description: >-
+          An expression of the sequence state
+        deprecated:
+          - $ref: "#/definitions/SequenceState"
+    required: [ "type", "location", "state" ]
+
+  Haplotype:
+    description: >-
+      A set of non-overlapping Alleles that co-occur on the same molecule.
+    additionalProperties: false
+    type: "object"
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: ["Haplotype"]
+        default: "Haplotype"
+      members:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          oneOf:
+            - $ref: "#/definitions/Allele"
+            - $ref: "#/definitions/CURIE"
+    required: [ "type", "members" ]
+
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # UtilityVariation
+
+  Text:
+    description: >-
+      A free-text definition of variation.
+    additionalProperties: false
+    type: object
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: ["Text"]
+        default: "Text"
+      definition:
+        type: string
+        description: >-
+          An textual representation of variation intended to capture
+          variation descriptions that cannot be parsed, but still
+          treated as variation.
+    required: [ "type", "definition" ]
+
+  VariationSet:
+    description: >-
+      An unconstrained set of Variation members.
+    type: object
+    additionalProperties: false
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: ["VariationSet"]
+        default: "VariationSet"
+      members:
+        type: array
+        uniqueItems: true
+        items:
+          oneOf:
+            - $ref: "#/definitions/CURIE"
+            - $ref: "#/definitions/Variation"
+    required: [ "type", "members" ]
+
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # SystemicVariation
+
+  CopyNumber:
+    additionalProperties: false
+    type: object
+    description: >-
+      The count of discrete copies of a Feature, Molecular Variation, or
+      other molecule within a genome.
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: ["CopyNumber"]
+        default: "CopyNumber"
+      subject:
+        oneOf:
+          - $ref: "#/definitions/MolecularVariation"
+          - $ref: "#/definitions/Feature"
+          - $ref: "#/definitions/SequenceExpression"
+          - $ref: "#/definitions/CURIE"
+      copies:
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
+    allOf:
+      - if:
+          properties:
+            copies:
+              $ref: "#/definitions/Number"
+        then:
+          properties:
+            copies:
+              properties:
+                value:
+                  minimum: 0
+                  type: integer
+      - if:
+          properties:
+            copies:
+              $ref: "#/definitions/IndefiniteRange"
+        then:
+          properties:
+            copies:
+              properties:
+                value:
+                  minimum: 0
+                  type: integer
+      - if:
+          properties:
+            copies:
+              $ref: "#/definitions/DefiniteRange"
+        then:
+          properties:
+            copies:
+              properties:
+                min:
+                  minimum: 0
+                  type: integer
+                max:
+                  minimum: 0
+                  type: integer
+
+    required: [ "type", "subject", "copies" ]
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Locations
+
+  Location:
+    description: >-
+      A contiguous segment of a biological sequence.
+    oneOf:
+      - $ref: "#/definitions/ChromosomeLocation"
+      - $ref: "#/definitions/SequenceLocation"
+    discriminator:
+      propertyName: type
+
+  ChromosomeLocation:
+    additionalProperties: false
+    description: >-
+      A Location on a chromosome defined by a species and chromosome name.
+    type: object
+    properties:
+      type:
+        type: string
+        enum: ["ChromosomeLocation"]
+        default: "ChromosomeLocation"
+      _id:
+        $ref: "#/definitions/CURIE"
+      species_id:
+        $ref: "#/definitions/CURIE"
+        default: "taxonomy:9606"
+      chr:
+        type: string
+      interval:
+        $ref: "#/definitions/CytobandInterval"
+    required: [ "type", "species_id", "chr", "interval" ]
+
+  SequenceLocation:
+    additionalProperties: false
+    description: >-
+      A Location defined by an interval on a referenced Sequence.
+    type: object
+    properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+      type:
+        type: string
+        enum: ["SequenceLocation"]
+        default: "SequenceLocation"
+      sequence_id:
+        $ref: "#/definitions/CURIE"
+      interval:
+        oneOf:
+          - $ref: "#/definitions/SequenceInterval"
+          - $ref: "#/definitions/SimpleInterval"
+    required: [ "type", "sequence_id", "interval" ]
+
+
+  # =============================================================================
+  # NON-IDENTIFIABLE TYPES
+  # These types have a `type` attribute
+  # =============================================================================
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # SequenceIntervals
+
+  SequenceInterval:
+    description: >-
+      A SequenceInterval represents a span of sequence. Positions are
+      always represented by contiguous spans using interbase coordinates.
+
+      SequenceInterval is intended to be compatible with that in Sequence Ontology
+      (`SO:0000001<http://www.sequenceontology.org/browser/current_svn/term/SO:0000001>`_),
+      with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO
+      definition is for an "extent greater than zero".
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [ "SequenceInterval" ]
+        default: "SequenceInterval"
+      start:
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
+      end:
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
+    allOf:
+      - if:
+          properties:
+            start:
+              $ref: "#/definitions/Number"
+        then:
+          properties:
+            start:
+              properties:
+                value:
+                  minimum: 0
+                  type: integer
+      - if:
+          properties:
+            start:
+              $ref: "#/definitions/IndefiniteRange"
+        then:
+          properties:
+            start:
+              properties:
+                value:
+                  minimum: 0
+                  type: integer
+      - if:
+          properties:
+            start:
+              $ref: "#/definitions/DefiniteRange"
+        then:
+          properties:
+            start:
+              properties:
+                min:
+                  minimum: 0
+                  type: integer
+                max:
+                  minimum: 0
+                  type: integer
+      - if:
+          properties:
+            end:
+              $ref: "#/definitions/Number"
+        then:
+          properties:
+            end:
+              properties:
+                value:
+                  minimum: 0
+                  type: integer
+      - if:
+          properties:
+            end:
+              $ref: "#/definitions/IndefiniteRange"
+        then:
+          properties:
+            end:
+              properties:
+                value:
+                  minimum: 0
+                  type: integer
+      - if:
+          properties:
+            end:
+              $ref: "#/definitions/DefiniteRange"
+        then:
+          properties:
+            end:
+              properties:
+                min:
+                  minimum: 0
+                  type: integer
+                max:
+                  minimum: 0
+                  type: integer
+    required: [ "type", "start", "end" ]
+
+  # SimpleInterval has been moved to DEPRECATED section at bottom.
+
+  CytobandInterval:
+    description: >-
+      A contiguous region specified by chromosomal bands features.
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [ "CytobandInterval" ]
+        default: "CytobandInterval"
+      start:
+        $ref: "#/definitions/HumanCytoband"
+      end:
+        $ref: "#/definitions/HumanCytoband"
+    example:
+      type: CytobandInterval
+      start: q22.2
+      end: q22.3
+    required: [ "type", "start", "end" ]
+
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # SequenceExpression
+
+  SequenceExpression:
+    description: >-
+      One of a set of sequence representation syntaxes.
+    oneOf:
+      - $ref: "#/definitions/LiteralSequenceExpression"
+      - $ref: "#/definitions/DerivedSequenceExpression"
+      - $ref: "#/definitions/RepeatedSequenceExpression"
+    discriminator:
+      propertyName: type
+
+  LiteralSequenceExpression:
+    description: >-
+      An explicit expression of a Sequence.
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: ["LiteralSequenceExpression"]
+        default: "LiteralSequenceExpression"
+      sequence:
+        $ref: "#/definitions/Sequence"
+    required: [ "type", "sequence" ]
+
+  DerivedSequenceExpression:
+    description: >-
+      An approximate expression of a sequence that is derived from
+      a referenced sequence location. Use of DerivedSequenceExpression
+      indicates that the derived sequence is approximately equivalent
+      to the reference indicated, and is typically used for describing
+      large regions in contexts where the precision of a literal sequence
+      is unnecessary.
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: ["DerivedSequenceExpression"]
+        default: "DerivedSequenceExpression"
+      location:
+        $ref: "#/definitions/SequenceLocation"
+      reverse_complement:
+        type: boolean
+    required: [ "type", "location", "reverse_complement" ]
+
+  RepeatedSequenceExpression:
+    description: >-
+      An expression of a sequence comprised of a tandem repeating subsequence.
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        enum: ["RepeatedSequenceExpression"]
+        default: "RepeatedSequenceExpression"
+      seq_expr:
+        oneOf:
+          - $ref: "#/definitions/LiteralSequenceExpression"
+          - $ref: "#/definitions/DerivedSequenceExpression"
+      count:
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
+    allOf:
+      - if:
+          properties:
+            count:
+              $ref: "#/definitions/Number"
+        then:
+          properties:
+            count:
+              properties:
+                value:
+                  minimum: 0
+                  type: integer
+      - if:
+          properties:
+            count:
+              $ref: "#/definitions/IndefiniteRange"
+        then:
+          properties:
+            count:
+              properties:
+                value:
+                  minimum: 0
+                  type: integer
+      - if:
+          properties:
+            count:
+              $ref: "#/definitions/DefiniteRange"
+        then:
+          properties:
+            count:
+              properties:
+                min:
+                  minimum: 0
+                  type: integer
+                max:
+                  minimum: 0
+                  type: integer
+    required: [ "type", "seq_expr", "count" ]
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Feature
+
+  Feature:
+    description: >-
+      A named entity that can be mapped to a Location. Genes, protein domains,
+      exons, and chromosomes are some examples of common biological entities
+      that may be Features.
+    oneOf:
+      - $ref: "#/definitions/Gene"
+    discriminator:
+      propertyName: type
+
+  Gene:
+    description: >-
+      A gene is an authoritative representation of one or more heritable
+      :ref:`Locations <Location>` that includes all sequence elements
+      necessary to perform a biological function. A gene may include
+      regulatory, transcribed, and/or other functional Locations.
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: ["Gene"]
+        default: "Gene"
+      gene_id:
+        $ref: "#/definitions/CURIE"
+    required: [ "type", "gene_id" ]
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Numerics, Comparators, and Ranges
+
+  Number:
+    description: >-
+      A simple number value as a VRS class.
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [ "Number" ]
+        default: "Number"
+      value:
+        type: number
+    required: [ "type", "value" ]
+
+  IndefiniteRange:
+    description: >-
+      An indefinite range represented as a number and associated comparator.
+      The bound operator is interpreted as follows: '>=' are all values
+      greater than and including the value, '<=' are all numbers less than and
+      including the value.
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [ "IndefiniteRange" ]
+        default: "IndefiniteRange"
+      value:
+        type: number
+      comparator:
+        type: string
+        enum: [ "<=", ">=" ]
+    required: [ "type", "value", "comparator" ]
+
+  DefiniteRange:
+    description: >-
+      A bounded, inclusive range of numbers.
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [ "DefiniteRange" ]
+        default: "DefiniteRange"
+      min:
+        type: number
+      max:
+        type: number
+    required: ["type", "min", "max"]
+
+
+  # =============================================================================
+  # BASIC TYPES (STRUCTURES)
+  # These types do NOT have a VRS `type` attribute
+  # These types are used solely within other definitions.
+  # =============================================================================
+
+  Sequence:
+    additionalProperties: false
+    description: >-
+      A character string of residues that represents a biological
+      sequence using the conventional sequence order (5’-to-3’ for
+      nucleic acid sequences, and amino-to-carboxyl for amino acid
+      sequences). IUPAC ambiguity codes are permitted in Sequences.
+    type: string
+    pattern: '^[A-Z*\-]*$'
+
+  CURIE:
+    additionalProperties: false
+    description: >-
+      A string that refers to an object uniquely.  The lifetime and
+      scope of an id is defined by the sender.
+
+      VRS does not impose any contraints on strings used as ids in
+      messages. However, to maximize sharability of data, VRS
+      RECOMMENDS that implementations use
+      `W3C Compact URI<https://www.w3.org/TR/curie/>`_ syntax.
+
+      String CURIEs are represented as `prefix`:`reference` (W3C
+      terminology), but often referred to as `namespace`:`accession`
+      or `namespace`:`local id` colloquially.
+
+      VRS also RECOMMENDS that `prefix` be defined in identifiers.org.
+
+      The `reference` component is an unconstrained string.
+
+      A CURIE is a URI.  URIs may *locate* objects (i.e., specify
+      where to retrieve them) or *name* objects conceptually.  VRS uses
+      CURIEs primarily as a naming mechanism.
+
+      Implementations MAY provide CURIE resolution mechanisms for
+      prefixes to make these objects locatable.
+
+      Using internal ids in public messages is strongly discouraged.
+    type: string
+    pattern: '^\w[^:]*:.+$'
+    example: "ensembl:ENSG00000139618"
+
+  HumanCytoband:
+    additionalProperties: false
+    description: >-
+      A interval on a stained metaphase chromosome specified by cytobands.
+      CytobandIntervals include the regions described by the start and end
+      cytobands.
+    type: string
+    pattern: '^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$'
+    example: "q22.3"
+
+  # =============================================================================
+  # DEPRECATED
+  # =============================================================================
+
+  SequenceState:
+    deprecated: true
+    description: >-
+      DEPRECATED: An assertion of the state of a sequence, typically
+      at a Sequence Location within an Allele.
+
+      This class is deprecated. Use LiteralSequenceExpression instead.
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        enum: ["SequenceState"]
+        default: "SequenceState"
+      sequence:
+        $ref: "#/definitions/Sequence"
+    example:
+      type: SequenceState
+      sequence: C
+    required: [ "type", "sequence" ]
+
+  SimpleInterval:
+    deprecated: true
+    description: >-
+      DEPRECATED: A SimpleInterval represents a span of sequence. Positions are
+      always represented by contiguous spans using interbase coordinates.
+
+      This class is deprecated. Use SequenceInterval instead.
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        enum: ["SimpleInterval"]
+        default: "SimpleInterval"
+      start:
+        type: integer
+      end:
+        type: integer
+    example:
+      type: SimpleInterval
+      start: 11
+      end: 22
+    required: [ "type", "start", "end" ]

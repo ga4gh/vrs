@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 """convert vrsatile.yaml to .rst artifacts"""
-import copy
 
 import yaml
 import os
 import pathlib
 from inflector import Inflector
-from y2j import SCHEMA_DEF_KEYWORD_BY_VERSION, YamlSchemaProcessor
+from source_proc import SCHEMA_DEF_KEYWORD_BY_VERSION, YamlSchemaProcessor
 
 defs_path = pathlib.Path.cwd() / 'defs'
 os.mkdir(defs_path)  # error expected if directory already exists – clear with Make

@@ -3,7 +3,7 @@ import json
 import python_jsonschema_objects as pjs
 import yaml
 from schema.helpers import pjs_filter
-from schema.y2j import YamlSchemaProcessor
+from schema.source_proc import YamlSchemaProcessor
 
 from config import vrs_json_path, vrs_yaml_path
 
@@ -14,7 +14,7 @@ j = json.load(open(vrs_json_path))
 
 
 def test_json_yaml_match():
-    assert p.for_json == j, "parsed yaml and json do not match"
+    assert p.for_js == j, "parsed yaml and json do not match"
 
 
 # Can pjs handle this schema?

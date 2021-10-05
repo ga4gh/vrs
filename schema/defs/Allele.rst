@@ -1,10 +1,8 @@
 **Computational Definition**
 
-The state of a molecule at a :ref:`Location`.
+The state of a molecule at a Location.
 
 **Information Model**
-
-Some Allele attributes are inherited from :ref:`MolecularVariation`.
 
 .. list-table::
    :class: reece-wrap
@@ -18,7 +16,7 @@ Some Allele attributes are inherited from :ref:`MolecularVariation`.
       - Description
    *  - _id
       - :ref:`CURIE`
-      - 0..1
+      - 1..1
       - Variation Id. MUST be unique within document.
    *  - type
       - string

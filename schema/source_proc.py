@@ -2,7 +2,6 @@
 """convert yaml on stdin to json on stdout"""
 import copy
 import json
-import sys
 import yaml
 import re
 from collections import defaultdict
@@ -17,12 +16,6 @@ ref_re = re.compile(r':ref:`(.*?)(<.*>)?`')
 link_re = re.compile(r'`(.*)\<.*\>`_')
 
 
-def resolve_curie(curie):
-    namespace, identifier = curie.split(':')
-    base_url = raw_schema['namespaces'][namespace]
-    return base_url + identifier
-
-
 class YamlSchemaProcessor:
 
     def __init__(self, raw_schema):
@@ -33,8 +26,8 @@ class YamlSchemaProcessor:
         self.defs = self.processed_schema[self.schema_def_keyword]
         self.processed_classes = set()
         self.process_schema()
-        self.for_json = copy.deepcopy(self.processed_schema)
-        self.clean_for_json()
+        self.for_js = copy.deepcopy(self.processed_schema)
+        self.clean_for_js()
 
     def _get_refs(self, schema_class):
         return [item['$ref'].split('/')[-1] for item in self.defs[schema_class]['oneOf'] if '$ref' in item]
@@ -68,15 +61,23 @@ class YamlSchemaProcessor:
             return True
         return False
 
-    def json_dump(self, stream):
-        json.dump(self.for_json, stream, indent=3, sort_keys=False)
+    def js_json_dump(self, stream):
+        json.dump(self.for_js, stream, indent=3, sort_keys=False)
+
+    def js_yaml_dump(self, stream):
+        yaml.dump(self.for_js, stream, sort_keys=False)
+
+    def resolve_curie(self, curie):
+        namespace, identifier = curie.split(':')
+        base_url = self.processed_schema['namespaces'][namespace]
+        return base_url + identifier
 
     def process_property_tree(self, raw_node, processed_node):
         if isinstance(raw_node, dict):
             for k, v in raw_node.items():
                 if k.endswith('_curie'):
                     new_k = k[:-6]
-                    processed_node[new_k] = resolve_curie(v)
+                    processed_node[new_k] = self.resolve_curie(v)
                     del (processed_node[k])
                 else:
                     self.process_property_tree(raw_node[k], processed_node[k])
@@ -127,18 +128,12 @@ class YamlSchemaProcessor:
         string = string.replace('\n', ' ')
         return string
 
-    def clean_for_json(self):
-        self.for_json.pop('namespaces', None)
-        for schema_class, schema_definition in self.for_json[self.schema_def_keyword].items():
+    def clean_for_js(self):
+        self.for_js.pop('namespaces', None)
+        for schema_class, schema_definition in self.for_js[self.schema_def_keyword].items():
             if self.class_is_abstract(schema_class):
                 schema_definition.pop('heritable_properties', None)
                 schema_definition.pop('heritable_required', None)
                 schema_definition.pop('header_level', None)
             if 'description' in schema_definition:
                 schema_definition['description'] = self._scrub_rst_markup(schema_definition['description'])
-
-
-if __name__ == '__main__':
-    raw_schema = yaml.load(sys.stdin, Loader=yaml.SafeLoader)
-    p = YamlSchemaProcessor(raw_schema)
-    p.json_dump(sys.stdout)

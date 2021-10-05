@@ -5,10 +5,13 @@
 YAMLS:=vrs.yaml
 JSONS:=${YAMLS:.yaml=.json}
 
-all: ${JSONS} defs
+all: vrs.json defs
 
-%.json: %.yaml
-	./y2j.py <$< >$@
+vrs.json: vrs.yaml
+	./jsy2js.py <$< >$@
+
+vrs.yaml: vrs-source.yaml
+	./source2jsy.py <$< >$@
 
 defs:
 	rm -rf defs
