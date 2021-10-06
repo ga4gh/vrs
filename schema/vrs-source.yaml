@@ -640,8 +640,8 @@ definitions:
       A string that refers to an object uniquely.  The lifetime and
       scope of an id is defined by the sender.
 
-      VRS does not impose any contraints on strings used as ids in
-      messages. However, to maximize sharability of data, VRS
+      VRS does not impose any constraints on strings used as ids in
+      messages. However, to maximize shareability of data, VRS
       RECOMMENDS that implementations use
       `W3C Compact URI<https://www.w3.org/TR/curie/>`_ syntax.
 
