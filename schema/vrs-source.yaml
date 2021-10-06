@@ -37,7 +37,7 @@ definitions:
         type: string
         description: >-
           The Variation class type. MUST match child class type.
-    heritable_required: ["_id", "type"]
+    heritable_required: ["type"]
 
     discriminator:
       propertyName: type

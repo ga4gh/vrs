@@ -16,7 +16,7 @@ A representation of the state of one or more biomolecules.
       - Description
    *  - _id
       - :ref:`CURIE`
-      - 1..1
+      - 0..1
       - Variation Id. MUST be unique within document.
    *  - type
       - string

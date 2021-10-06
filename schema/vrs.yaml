@@ -60,7 +60,6 @@ definitions:
         deprecated:
         - $ref: '#/definitions/SequenceState'
     required:
-    - _id
     - location
     - state
     - type
@@ -85,7 +84,6 @@ definitions:
           - $ref: '#/definitions/Allele'
           - $ref: '#/definitions/CURIE'
     required:
-    - _id
     - members
     - type
   Text:
@@ -105,7 +103,6 @@ definitions:
         description: An textual representation of variation intended to capture variation
           descriptions that cannot be parsed, but still treated as variation.
     required:
-    - _id
     - definition
     - type
   VariationSet:
@@ -128,7 +125,6 @@ definitions:
           - $ref: '#/definitions/CURIE'
           - $ref: '#/definitions/Variation'
     required:
-    - _id
     - members
     - type
   CopyNumber:
@@ -193,7 +189,6 @@ definitions:
                 minimum: 0
                 type: integer
     required:
-    - _id
     - copies
     - subject
     - type
