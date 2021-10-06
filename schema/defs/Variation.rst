@@ -21,4 +21,4 @@ A representation of the state of one or more biomolecules.
    *  - type
       - string
       - 1..1
-      - 
+      - The Variation class type. MUST match child class type.
