@@ -7,7 +7,7 @@ The state of a molecule at a :ref:`Location`.
 Some Allele attributes are inherited from :ref:`MolecularVariation`.
 
 .. list-table::
-   :class: reece-wrap
+   :class: clean-wrap
    :header-rows: 1
    :align: left
    :widths: auto
