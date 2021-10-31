@@ -111,19 +111,21 @@
          ]
       },
       "Haplotype": {
-         "description": "A set of non-overlapping Alleles that co-occur on the same molecule.",
+         "description": "A set of non-overlapping Allele members that co-occur on the same molecule.",
          "additionalProperties": false,
          "type": "object",
          "properties": {
             "_id": {
-               "$ref": "#/definitions/CURIE"
+               "$ref": "#/definitions/CURIE",
+               "description": "Variation Id. MUST be unique within document."
             },
             "type": {
                "type": "string",
                "enum": [
                   "Haplotype"
                ],
-               "default": "Haplotype"
+               "default": "Haplotype",
+               "description": "MUST be \"Haplotype\""
             },
             "members": {
                "type": "array",
@@ -138,7 +140,8 @@
                         "$ref": "#/definitions/CURIE"
                      }
                   ]
-               }
+               },
+               "description": "List of Alleles, or references to Alleles, that comprise this Haplotype."
             }
          },
          "required": [

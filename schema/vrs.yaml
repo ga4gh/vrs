@@ -38,7 +38,7 @@ definitions:
     additionalProperties: false
     type: object
     properties:
-      _id:
+      _id: &id001
         $ref: '#/definitions/CURIE'
         description: Variation Id. MUST be unique within document.
       type:
@@ -64,17 +64,18 @@ definitions:
     - state
     - type
   Haplotype:
-    description: A set of non-overlapping Alleles that co-occur on the same molecule.
+    description: A set of non-overlapping Allele members that co-occur on the same
+      molecule.
     additionalProperties: false
     type: object
     properties:
-      _id:
-        $ref: '#/definitions/CURIE'
+      _id: *id001
       type:
         type: string
         enum:
         - Haplotype
         default: Haplotype
+        description: MUST be "Haplotype"
       members:
         type: array
         minItems: 1
@@ -83,6 +84,8 @@ definitions:
           oneOf:
           - $ref: '#/definitions/Allele'
           - $ref: '#/definitions/CURIE'
+        description: List of Alleles, or references to Alleles, that comprise this
+          Haplotype.
     required:
     - members
     - type
