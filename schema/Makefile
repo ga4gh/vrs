@@ -9,14 +9,14 @@ JSONS:=${JSYAMLS:.yaml=.json}
 all: vrs.json defs
 
 vrs.json: vrs.yaml
-	../vrsatile/tools/jsy2js.py <$< >$@
+	jsy2js.py <$< >$@
 
 vrs.yaml: vrs-source.yaml
-	../vrsatile/tools/source2jsy.py <$< >$@
+	source2jsy.py <$< >$@
 
 defs:
 	rm -rf defs
-	../vrsatile/tools/y2t.py vrs-source.yaml
+	y2t.py vrs-source.yaml
 
 ## # npm install -g json-dereference-cli
 ## %.json: %.yaml
