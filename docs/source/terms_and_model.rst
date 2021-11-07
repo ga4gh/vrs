@@ -117,7 +117,7 @@ to capture this diversity.
 Molecular Variation
 ###################
 
-A :ref:`variation` on a contiguous molecule.
+.. include:: defs/MolecularVariation.rst
 
 .. _Allele:
 
