@@ -4,7 +4,7 @@ The state of a molecule at a :ref:`Location`.
 
 **Information Model**
 
-Some Allele attributes are inherited from :ref:`MolecularVariation`.
+Some Allele attributes are inherited from :ref:`Variation`.
 
 .. list-table::
    :class: clean-wrap

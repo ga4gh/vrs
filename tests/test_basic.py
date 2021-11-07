@@ -3,7 +3,7 @@ import json
 import python_jsonschema_objects as pjs
 import yaml
 from schema.helpers import pjs_filter
-from ga4gh.vrsatile.tools.source_proc import YamlSchemaProcessor
+from ga4gh.gks.metaschema.tools.source_proc import YamlSchemaProcessor
 
 from config import vrs_json_path, vrs_yaml_path
 

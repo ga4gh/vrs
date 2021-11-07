@@ -4,7 +4,7 @@ A set of non-overlapping :ref:`Allele` members that co-occur on the same molecul
 
 **Information Model**
 
-Some Haplotype attributes are inherited from :ref:`MolecularVariation`.
+Some Haplotype attributes are inherited from :ref:`Variation`.
 
 .. list-table::
    :class: clean-wrap
