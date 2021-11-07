@@ -49,7 +49,7 @@ Information Model Principles
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 * **VRS objects are minimal** `value objects
-  <https://en.wikipedia.org/wiki/Value_object>`__. Two objects are
+  <https://en.wikipedia.org/wiki/Value_object>`_. Two objects are
   considered equal if and only if their respective attributes are
   equal.  As value objects, VRS objects are used as primitive types
   and MUST NOT be used as containers for related data, such as primary
@@ -58,13 +58,13 @@ Information Model Principles
   VRS objects through identifiers.  See :ref:`computed-identifiers`.
 
 * **VRS uses polymorphism.** VRS uses polymorphism extensively in
-   order to provide a coherent top-down structure for variation while
-   enabling precise models for variation data.  For example, Allele is
-   a kind of Variation, SequenceLocation is a kind of Location, and
-   SequenceState is a kind of State.  See :ref:`future-plans` for the
-   roadmap of VRS data classes and relationships.  All VRS objects
-   contain a ``type`` attribute, which is used to discriminate
-   polymorphic objects.
+  order to provide a coherent top-down structure for variation while
+  enabling precise models for variation data.  For example, Allele is
+  a kind of Variation, SequenceLocation is a kind of Location, and
+  SequenceState is a kind of State.  See :ref:`future-plans` for the
+  roadmap of VRS data classes and relationships.  All VRS objects
+  contain a ``type`` attribute, which is used to discriminate
+  polymorphic objects.
 
 * **Error handling is intentionally unspecified and delegated to
   implementation.**  VRS provides foundational data types that
@@ -254,37 +254,7 @@ on the same physical molecule. Haplotypes are commonly described with respect
 to locations on a gene, a set of nearby genes, or other physically proximal
 genetic markers that tend to be transmitted together.
 
-**Computational Definition**
-
-A set of non-overlapping :ref:`Allele` members that co-occur on the same
-molecule.
-
-**Information Model**
-
-.. list-table::
-   :class: reece-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Variation Id; MUST be unique within document
-   * - type
-     - string
-     - 1..1
-     - MUST be "Haplotype"
-   * - members
-     - :ref:`Allele`\[] | :ref:`CURIE`\[]
-     - 1..*
-     - List of Alleles, or references to Alleles, that comprise this
-       Haplotype
-
+.. include:: defs/Haplotype.rst
 
 **Implementation Guidance**
 
@@ -426,7 +396,7 @@ to any of these.
 **Information Model**
 
 .. list-table::
-   :class: reece-wrap
+   :class: clean-wrap
    :header-rows: 1
    :align: left
    :widths: auto
@@ -505,7 +475,7 @@ A string of unconstrained text.
 **Information Model**
 
 .. list-table::
-   :class: reece-wrap
+   :class: clean-wrap
    :header-rows: 1
    :align: left
    :widths: auto
@@ -569,7 +539,7 @@ An unconstrained set of Variation members.
 **Information Model**
 
 .. list-table::
-   :class: reece-wrap
+   :class: clean-wrap
    :header-rows: 1
    :align: left
    :widths: auto
@@ -741,7 +711,7 @@ A :ref:`Location` on a chromosome defined by a species and chromosome name.
 **Information Model**
 
 .. list-table::
-   :class: reece-wrap
+   :class: clean-wrap
    :header-rows: 1
    :align: left
    :widths: auto
@@ -845,7 +815,7 @@ A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
 **Information Model**
 
 .. list-table::
-   :class: reece-wrap
+   :class: clean-wrap
    :header-rows: 1
    :align: left
    :widths: auto
@@ -982,7 +952,7 @@ cytobands.
 **Information Model**
 
 .. list-table::
-   :class: reece-wrap
+   :class: clean-wrap
    :header-rows: 1
    :align: left
    :widths: auto
@@ -1060,7 +1030,7 @@ An explicit expression of a Sequence.
 **Information Model**
 
 .. list-table::
-   :class: reece-wrap
+   :class: clean-wrap
    :header-rows: 1
    :align: left
    :widths: auto
@@ -1110,7 +1080,7 @@ inconsequential.
 **Information Model**
 
 .. list-table::
-   :class: reece-wrap
+   :class: clean-wrap
    :header-rows: 1
    :align: left
    :widths: auto
@@ -1171,7 +1141,7 @@ An expression of a sequence comprised of a tandem repeating subsequence.
 **Information Model**
 
 .. list-table::
-   :class: reece-wrap
+   :class: clean-wrap
    :header-rows: 1
    :align: left
    :widths: auto
@@ -1254,7 +1224,7 @@ In VRS, a Gene is a reference to an external gene nomenclature.
 **Information Model**
 
 .. list-table::
-   :class: reece-wrap
+   :class: clean-wrap
    :header-rows: 1
    :align: left
    :widths: auto
@@ -1338,7 +1308,7 @@ A bounded, inclusive range of numbers.
 **Information Model**
 
 .. list-table::
-   :class: reece-wrap
+   :class: clean-wrap
    :header-rows: 1
    :align: left
    :widths: auto
@@ -1387,7 +1357,7 @@ integer and on the other by negative infinity or positive infinity.
 **Information Model**
 
 .. list-table::
-   :class: reece-wrap
+   :class: clean-wrap
    :header-rows: 1
    :align: left
    :widths: auto
@@ -1440,7 +1410,7 @@ as :ref:`DefiniteRange` and :ref:`IndefiniteRange`.
 **Information Model**
 
 .. list-table::
-   :class: reece-wrap
+   :class: clean-wrap
    :header-rows: 1
    :align: left
    :widths: auto
@@ -1636,7 +1606,7 @@ This class is deprecated. Use :ref:`SequenceInterval` instead.
 **Information Model**
 
 .. list-table::
-   :class: reece-wrap
+   :class: clean-wrap
    :header-rows: 1
    :align: left
    :widths: auto
@@ -1720,7 +1690,7 @@ SNVs, MNVs, del, ins, and delins.
 **Information Model**
 
 .. list-table::
-   :class: reece-wrap
+   :class: clean-wrap
    :header-rows: 1
    :align: left
    :widths: auto
