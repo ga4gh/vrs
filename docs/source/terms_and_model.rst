@@ -369,8 +369,7 @@ order. See :ref:`computed-identifiers` for more information.
 Systemic Variation
 ##################
 
-A :ref:`Variation` of multiple molecules in the context of a system,
-e.g. a genome, sample, or homologous chromosomes.
+.. include:: defs/SystemicVariation.rst
 
 .. _CopyNumber:
 
@@ -447,10 +446,7 @@ Two, three, or four total copies of BRCA1:
 Utility Variation
 #################
 
-*Utility variation* is a collection of :ref:`Variation`
-subclasses that cannot be constrained to a specific class of
-biological variation, but are necessary for some technical
-applications of VRS.
+.. include:: defs/UtilityVariation.rst
 
 .. _Text:
 
