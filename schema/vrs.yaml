@@ -133,27 +133,29 @@ definitions:
   CopyNumber:
     additionalProperties: false
     type: object
-    description: The count of discrete copies of a Feature, Molecular Variation, or
-      other molecule within a genome.
+    description: The count of discrete copies of a subject MolecularVariation, Feature,
+      SequenceExpression, or a CURIE reference to any of these.
     properties:
-      _id:
-        $ref: '#/definitions/CURIE'
+      _id: *id001
       type:
         type: string
         enum:
         - CopyNumber
         default: CopyNumber
+        description: MUST be "CopyNumber"
       subject:
         oneOf:
         - $ref: '#/definitions/MolecularVariation'
         - $ref: '#/definitions/Feature'
         - $ref: '#/definitions/SequenceExpression'
         - $ref: '#/definitions/CURIE'
+        description: Subject of the Copy Number object
       copies:
         oneOf:
         - $ref: '#/definitions/Number'
         - $ref: '#/definitions/IndefiniteRange'
         - $ref: '#/definitions/DefiniteRange'
+        description: The integral number of copies of the subject in a genome
     allOf:
     - if:
         properties:
