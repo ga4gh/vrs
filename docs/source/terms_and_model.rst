@@ -430,36 +430,7 @@ interpretation by humans.
                for which VRS does not yet have a data type.
                Structured data types should be preferred over Text.
 
-
-**Computational Definition**
-
-A string of unconstrained text.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Variation Id; MUST be unique within document
-   * - type
-     - string
-     - 1..1
-     - MUST be "Text"
-   * - definition
-     - string
-     - 1..1
-     - The textual variation representation not representable by
-       other subclasses of Variation.
+.. include:: defs/Text.rst
 
 **Implementation Guidance**
 
@@ -483,7 +454,7 @@ A string of unconstrained text.
 .. parsed-literal::
 
     {
-      "definition": "APOE loss",
+      "definition": "MSI High",
       "type": "Text"
     }
 
@@ -495,36 +466,7 @@ $$$$$$$$$$$$
 Sets of variation are used widely, such as sets of variants in dbSNP
 or ClinVar that might be related by function.
 
-**Computational Definition**
-
-An unconstrained set of Variation members.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Identifier of the VariationSet.
-   * - type
-     - string
-     - 1..1
-     - MUST be "VariationSet"
-   * - members
-     - :ref:`Variation`\[] | :ref:`CURIE`\[]
-     - 0..*
-     - List of Variation objects or identifiers. Attribute is
-       required, but MAY be empty.
-
+.. include:: defs/VariationSet.rst
 
 **Implementation Guidance**
 

@@ -94,17 +94,17 @@ definitions:
     additionalProperties: false
     type: object
     properties:
-      _id:
-        $ref: '#/definitions/CURIE'
+      _id: *id001
       type:
         type: string
         enum:
         - Text
         default: Text
+        description: MUST be "Text"
       definition:
         type: string
-        description: An textual representation of variation intended to capture variation
-          descriptions that cannot be parsed, but still treated as variation.
+        description: A textual representation of variation not representable by other
+          subclasses of Variation.
     required:
     - definition
     - type
@@ -113,13 +113,13 @@ definitions:
     type: object
     additionalProperties: false
     properties:
-      _id:
-        $ref: '#/definitions/CURIE'
+      _id: *id001
       type:
         type: string
         enum:
         - VariationSet
         default: VariationSet
+        description: MUST be "VariationSet"
       members:
         type: array
         uniqueItems: true
@@ -127,6 +127,8 @@ definitions:
           oneOf:
           - $ref: '#/definitions/CURIE'
           - $ref: '#/definitions/Variation'
+        description: List of Variation objects or identifiers. Attribute is required,
+          but MAY be empty.
     required:
     - members
     - type

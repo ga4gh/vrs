@@ -155,18 +155,20 @@
          "type": "object",
          "properties": {
             "_id": {
-               "$ref": "#/definitions/CURIE"
+               "$ref": "#/definitions/CURIE",
+               "description": "Variation Id. MUST be unique within document."
             },
             "type": {
                "type": "string",
                "enum": [
                   "Text"
                ],
-               "default": "Text"
+               "default": "Text",
+               "description": "MUST be \"Text\""
             },
             "definition": {
                "type": "string",
-               "description": "An textual representation of variation intended to capture variation descriptions that cannot be parsed, but still treated as variation."
+               "description": "A textual representation of variation not representable by other subclasses of Variation."
             }
          },
          "required": [
@@ -180,14 +182,16 @@
          "additionalProperties": false,
          "properties": {
             "_id": {
-               "$ref": "#/definitions/CURIE"
+               "$ref": "#/definitions/CURIE",
+               "description": "Variation Id. MUST be unique within document."
             },
             "type": {
                "type": "string",
                "enum": [
                   "VariationSet"
                ],
-               "default": "VariationSet"
+               "default": "VariationSet",
+               "description": "MUST be \"VariationSet\""
             },
             "members": {
                "type": "array",
@@ -201,7 +205,8 @@
                         "$ref": "#/definitions/Variation"
                      }
                   ]
-               }
+               },
+               "description": "List of Variation objects or identifiers. Attribute is required, but MAY be empty."
             }
          },
          "required": [
