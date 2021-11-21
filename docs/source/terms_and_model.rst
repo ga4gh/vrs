@@ -719,7 +719,7 @@ SequenceInterval is intended to be compatible with a "region" in Sequence Ontolo
 with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO
 definition of region has an "extent greater than zero".
 
-.. include:: defs/SequenceInterval
+.. include:: defs/SequenceInterval.rst
 
 .. sidebar:: VRS Uses Inter-residue Coordinates
 
@@ -756,15 +756,14 @@ definition of region has an "extent greater than zero".
       "type": "SequenceInterval"
     }
 
-
-
-
 .. _CytobandInterval:
 
 CytobandInterval
 ################
 
-.. important:: VRS currently supports only human cytobands and
+.. important::
+
+   VRS currently supports only human cytobands and
    cytoband intervals. Implementers wishing to use VRS for other
    cytogenetic systems are encouraged to open a `GitHub issue`_.
 
@@ -773,7 +772,7 @@ visible patterns on stained metaphase chromosomes.  They provide a
 convenient, memorable, and low-resolution shorthand for chromosomal
 segments.
 
-.. include:: defs/CytobandInterval
+.. include:: defs/CytobandInterval.rst
 
 **Implementation Guidance**
 
