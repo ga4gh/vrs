@@ -714,16 +714,12 @@ The reference is typically a chromosome, transcript, or protein sequence.
 SequenceInterval
 ################
 
-**Computational Definition**
-
-A SequenceInterval represents a span of :ref:`Sequence`. Positions are
-always represented by contiguous spans using interbase coordinates or
-coordinate ranges.
-
 SequenceInterval is intended to be compatible with a "region" in Sequence Ontology
 (`SO:0000001 <http://www.sequenceontology.org/browser/current_svn/term/SO:0000001>`_),
 with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO
 definition of region has an "extent greater than zero".
+
+.. include:: defs/SequenceInterval
 
 .. sidebar:: VRS Uses Inter-residue Coordinates
 
@@ -777,36 +773,7 @@ visible patterns on stained metaphase chromosomes.  They provide a
 convenient, memorable, and low-resolution shorthand for chromosomal
 segments.
 
-**Computational Definition**
-
-An interval on a stained metaphase chromosome, specified by cytobands.
-CytobandIntervals include the regions described by the start and end
-cytobands.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "CytobandInterval"
-   * - start
-     - :ref:`HumanCytoband`
-     - 1..1
-     - name of Cytoband at the interval start (see below)
-   * - end
-     - :ref:`HumanCytoband`
-     - 1..1
-     - name of Cytoband at the interval end (see below)
+.. include:: defs/CytobandInterval
 
 **Implementation Guidance**
 

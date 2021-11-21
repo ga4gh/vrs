@@ -430,7 +430,7 @@
          ]
       },
       "SequenceInterval": {
-         "description": "A SequenceInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates. SequenceInterval is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)), with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO definition is for an \"extent greater than zero\".",
+         "description": "A SequenceInterval represents a span of Sequence. Positions are always represented by contiguous spans using interbase coordinates or coordinate ranges.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
@@ -439,7 +439,8 @@
                "enum": [
                   "SequenceInterval"
                ],
-               "default": "SequenceInterval"
+               "default": "SequenceInterval",
+               "description": "MUST be \"SequenceInterval\""
             },
             "start": {
                "oneOf": [
@@ -452,7 +453,8 @@
                   {
                      "$ref": "#/definitions/DefiniteRange"
                   }
-               ]
+               ],
+               "description": "The start coordinate or range of the interval. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range less than the value of `end`."
             },
             "end": {
                "oneOf": [
@@ -465,7 +467,8 @@
                   {
                      "$ref": "#/definitions/DefiniteRange"
                   }
-               ]
+               ],
+               "description": "The end coordinate or range of the interval. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range greater than the value of `start`."
             }
          },
          "allOf": [
@@ -611,7 +614,7 @@
          ]
       },
       "CytobandInterval": {
-         "description": "A contiguous region specified by chromosomal bands features.",
+         "description": "A contiguous region specified by cytobands. The region includes the constituent regions described by the start and end cytobands, as well as any intervening regions.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
@@ -620,13 +623,16 @@
                "enum": [
                   "CytobandInterval"
                ],
-               "default": "CytobandInterval"
+               "default": "CytobandInterval",
+               "description": "MUST be \"CytobandInterval\""
             },
             "start": {
-               "$ref": "#/definitions/HumanCytoband"
+               "$ref": "#/definitions/HumanCytoband",
+               "description": "The start cytoband region. MUST specify a region nearer the terminal end (telomere) of the chromosome p-arm than `end`."
             },
             "end": {
-               "$ref": "#/definitions/HumanCytoband"
+               "$ref": "#/definitions/HumanCytoband",
+               "description": "The start cytoband region. MUST specify a region nearer the terminal end (telomere) of the chromosome q-arm than `start`."
             }
          },
          "example": {
@@ -936,7 +942,7 @@
       },
       "HumanCytoband": {
          "additionalProperties": false,
-         "description": "A interval on a stained metaphase chromosome specified by cytobands. CytobandIntervals include the regions described by the start and end cytobands.",
+         "description": "A interval on a stained metaphase chromosome specified by cytobands.",
          "type": "string",
          "pattern": "^cen|[pq](ter|([1-9][0-9]*(\\.[1-9][0-9]*)?))$",
          "example": "q22.3"
