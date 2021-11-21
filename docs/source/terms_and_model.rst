@@ -588,9 +588,7 @@ Additional :ref:`planned-locations` may also be conceptual or symbolic locations
 such as a cytoband region or a gene. Any of these may be used as the
 Location for Variation.
 
-**Computational Definition**
-
-A contiguous segment of a biological sequence.
+.. include:: defs/Location.rst
 
 **Implementation Guidance**
 
@@ -609,44 +607,7 @@ $$$$$$$$$$$$$$$$$$
 Chromosomal locations based on named features, including named landmarks,
 cytobands, and regions observed from chromosomal staining techniques.
 
-**Computational Definition**
-
-A :ref:`Location` on a chromosome defined by a species and chromosome name.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Location id; MUST be unique within document
-   * - type
-     - string
-     - 1..1
-     - MUST be "ChromosomeLocation"
-   * - species
-     - :ref:`CURIE`
-     - 1..1
-     - An external reference to a species taxonomy.  Default:
-       "taxonomy:9606" (human).  See Implementation Guidance, below.
-   * - chr
-     - string
-     - 1..1
-     - The symbolic chromosome name
-   * - interval
-     - :ref:`CytobandInterval`
-     - 1..1
-     - The chromosome region based on feature names
-
+.. include:: defs/ChromosomeLocation.rst
 
 **Implementation Guidance**
 
@@ -713,39 +674,7 @@ $$$$$$$$$$$$$$$$
 A *Sequence Location* is a specified subsequence of a reference :ref:`Sequence`.
 The reference is typically a chromosome, transcript, or protein sequence.
 
-**Computational Definition**
-
-A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Location id; MUST be unique within document
-   * - type
-     - string
-     - 1..1
-     - MUST be "SequenceLocation"
-   * - sequence_id
-     - :ref:`CURIE`
-     - 1..1
-     - A VRS :ref:`Computed Identifier <computed-identifiers>`
-       for the reference :ref:`Sequence`.
-   * - interval
-     - :ref:`SequenceInterval`
-     - 1..1
-     - Position of feature on reference sequence specified by sequence_id.
+.. include:: defs/SequenceLocation.rst
 
 **Implementation Guidance**
 

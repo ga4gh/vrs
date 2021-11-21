@@ -211,20 +211,28 @@ definitions:
     description: A Location on a chromosome defined by a species and chromosome name.
     type: object
     properties:
+      _id: &id002
+        $ref: '#/definitions/CURIE'
+        description: Location Id. MUST be unique within document.
       type:
         type: string
         enum:
         - ChromosomeLocation
         default: ChromosomeLocation
-      _id:
-        $ref: '#/definitions/CURIE'
+        description: MUST be "ChromosomeLocation"
       species_id:
         $ref: '#/definitions/CURIE'
         default: taxonomy:9606
+        description: ':ref:`CURIE` representing a species from the `NCBI species taxonomy
+          <https://registry.identifiers.org/registry/taxonomy>`_. Default: "taxonomy:9606"
+          (human)'
       chr:
         type: string
+        description: The symbolic chromosome name. For humans, For humans, chromosome
+          names MUST be one of 1..22, X, Y (case-sensitive)
       interval:
         $ref: '#/definitions/CytobandInterval'
+        description: The chromosome region defined by a :ref:`CytobandInterval`
     required:
     - chr
     - interval
@@ -235,19 +243,22 @@ definitions:
     description: A Location defined by an interval on a referenced Sequence.
     type: object
     properties:
-      _id:
-        $ref: '#/definitions/CURIE'
+      _id: *id002
       type:
         type: string
         enum:
         - SequenceLocation
         default: SequenceLocation
+        description: MUST be "SequenceLocation"
       sequence_id:
         $ref: '#/definitions/CURIE'
+        description: A VRS :ref:`Computed Identifier <computed-identifiers>` for the
+          reference :ref:`Sequence`.
       interval:
         oneOf:
         - $ref: '#/definitions/SequenceInterval'
         - $ref: '#/definitions/SimpleInterval'
+        description: Reference sequence region defined by a :ref:`SequenceInterval`.
     required:
     - interval
     - sequence_id
