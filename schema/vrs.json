@@ -647,7 +647,7 @@
          ]
       },
       "SequenceExpression": {
-         "description": "One of a set of sequence representation syntaxes.",
+         "description": "An expression describing a Sequence.",
          "oneOf": [
             {
                "$ref": "#/definitions/LiteralSequenceExpression"
@@ -673,10 +673,12 @@
                "enum": [
                   "LiteralSequenceExpression"
                ],
-               "default": "LiteralSequenceExpression"
+               "default": "LiteralSequenceExpression",
+               "description": "MUST be \"LiteralSequenceExpression\""
             },
             "sequence": {
-               "$ref": "#/definitions/Sequence"
+               "$ref": "#/definitions/Sequence",
+               "description": "the literal :ref:`Sequence` expressed"
             }
          },
          "required": [
@@ -685,7 +687,7 @@
          ]
       },
       "DerivedSequenceExpression": {
-         "description": "An approximate expression of a sequence that is derived from a referenced sequence location. Use of DerivedSequenceExpression indicates that the derived sequence is approximately equivalent to the reference indicated, and is typically used for describing large regions in contexts where the precision of a literal sequence is unnecessary.",
+         "description": "An approximate expression of a sequence that is derived from a referenced sequence location. Use of this class indicates that the derived sequence is *approximately equivalent* to the reference indicated, and is typically used for describing large regions in contexts where the use of an approximate sequence is inconsequential.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
@@ -694,13 +696,16 @@
                "enum": [
                   "DerivedSequenceExpression"
                ],
-               "default": "DerivedSequenceExpression"
+               "default": "DerivedSequenceExpression",
+               "description": "MUST be \"DerivedSequenceExpression\""
             },
             "location": {
-               "$ref": "#/definitions/SequenceLocation"
+               "$ref": "#/definitions/SequenceLocation",
+               "description": "The location from which the approximate sequence is derived"
             },
             "reverse_complement": {
-               "type": "boolean"
+               "type": "boolean",
+               "description": "A flag indicating if the expressed sequence is the reverse complement of the sequence referred to by `location`"
             }
          },
          "required": [
@@ -719,7 +724,8 @@
                "enum": [
                   "RepeatedSequenceExpression"
                ],
-               "default": "RepeatedSequenceExpression"
+               "default": "RepeatedSequenceExpression",
+               "description": "MUST be \"RepeatedSequenceExpression\""
             },
             "seq_expr": {
                "oneOf": [
@@ -729,7 +735,8 @@
                   {
                      "$ref": "#/definitions/DerivedSequenceExpression"
                   }
-               ]
+               ],
+               "description": "An expression of the repeating subsequence"
             },
             "count": {
                "oneOf": [
@@ -742,7 +749,8 @@
                   {
                      "$ref": "#/definitions/DefiniteRange"
                   }
-               ]
+               ],
+               "description": "The count of repeated units, as an integer or inclusive range"
             }
          },
          "allOf": [

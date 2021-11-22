@@ -815,6 +815,8 @@ sequence, but are intended to be semantically distinct. There MAY be
 reasons to select or enforce one form over another that SHOULD be
 managed by implementations. See discussion on :ref:`equivalence`.
 
+.. include:: defs/SequenceExpression.rst
+
 .. _LiteralSequenceExpression:
 
 LiteralSequenceExpression
@@ -823,30 +825,7 @@ LiteralSequenceExpression
 A LiteralSequenceExpression "wraps" a string representation of a
 sequence for parallelism with other SequenceExpressions.
 
-**Computational Definition**
-
-An explicit expression of a Sequence.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "LiteralSequenceExpression"
-   * - sequence
-     - :ref:`Sequence`
-     - 1..1
-     - The sequence to express
+.. include:: defs/LiteralSequenceExpression.rst
 
 **Examples**
 
@@ -868,35 +847,7 @@ transforming sequence from another location in the genome.
 A *derived sequence* is a mechanism for expressing (typically
 large) reference subsequences specified by a :ref:`SequenceLocation`.
 
-**Computational Definition**
-
-An approximate expression of a sequence that is derived from a
-referenced sequence location. Use of DerivedSequenceExpression
-indicates that the derived sequence is approximately equivalent to the
-reference indicated, and is typically used for describing large
-regions for variation concepts where the exact sequence is
-inconsequential.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "DerivedSequenceExpression"
-   * - location
-     - :ref:`SequenceLocation`
-     - 1..1
-     - The location describing the sequence
+.. include:: defs/DerivedSequenceExpression.rst
 
 **Examples**
 
@@ -934,35 +885,7 @@ example of a common class of repeated sequence, but repeated sequence can
 also be used to describe larger subsequence repeats, up to and including
 large-scale tandem duplications.
 
-**Computational Definition**
-
-An expression of a sequence comprised of a tandem repeating subsequence.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "RepeatedSequenceExpression"
-   * - seq_expr
-     - :ref:`SequenceExpression` and NOT :ref:`RepeatedSequenceExpression`
-     - 1..1
-     - an expression of the repeating subsequence
-   * - count
-     - :ref:`Number` | :ref:`DefiniteRange` | :ref:`IndefiniteRange`
-     - 1..1
-     - the inclusive range count of repeated units
-
+.. include:: defs/RepeatedSequenceExpression.rst
 
 **Examples**
 
