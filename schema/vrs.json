@@ -372,7 +372,7 @@
             "species_id": {
                "$ref": "#/definitions/CURIE",
                "default": "taxonomy:9606",
-               "description": ":ref:`CURIE` representing a species from the `NCBI species taxonomy <https://registry.identifiers.org/registry/taxonomy>`_. Default: \"taxonomy:9606\" (human)"
+               "description": "CURIE representing a species from the [NCBI species taxonomy](https://registry.identifiers.org/registry/taxonomy). Default: \"taxonomy:9606\" (human)"
             },
             "chr": {
                "type": "string",
@@ -380,7 +380,7 @@
             },
             "interval": {
                "$ref": "#/definitions/CytobandInterval",
-               "description": "The chromosome region defined by a :ref:`CytobandInterval`"
+               "description": "The chromosome region defined by a CytobandInterval"
             }
          },
          "required": [
@@ -409,7 +409,7 @@
             },
             "sequence_id": {
                "$ref": "#/definitions/CURIE",
-               "description": "A VRS :ref:`Computed Identifier <computed-identifiers>` for the reference :ref:`Sequence`."
+               "description": "A VRS Computed Identifier for the reference Sequence."
             },
             "interval": {
                "oneOf": [
@@ -420,7 +420,7 @@
                      "$ref": "#/definitions/SimpleInterval"
                   }
                ],
-               "description": "Reference sequence region defined by a :ref:`SequenceInterval`."
+               "description": "Reference sequence region defined by a SequenceInterval."
             }
          },
          "required": [
@@ -678,7 +678,7 @@
             },
             "sequence": {
                "$ref": "#/definitions/Sequence",
-               "description": "the literal :ref:`Sequence` expressed"
+               "description": "the literal Sequence expressed"
             }
          },
          "required": [
@@ -840,7 +840,7 @@
          }
       },
       "Gene": {
-         "description": "A reference to a Gene as defined by an authority. For human genes, the use of [hgnc ](https://registry.identifiers.org/registry/hgnc) as the gene authority is RECOMMENDED.",
+         "description": "A reference to a Gene as defined by an authority. For human genes, the use of [hgnc](https://registry.identifiers.org/registry/hgnc) as the gene authority is RECOMMENDED.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
@@ -947,27 +947,27 @@
       },
       "CURIE": {
          "additionalProperties": false,
-         "description": "A [W3C Compact URI ](https://www.w3.org/TR/curie/) formatted string. A CURIE string has the structure ``prefix``:``reference``, as defined by the W3C syntax.",
+         "description": "A [W3C Compact URI](https://www.w3.org/TR/curie/) formatted string. A CURIE string has the structure ``prefix``:``reference``, as defined by the W3C syntax.",
          "type": "string",
          "pattern": "^\\w[^:]*:.+$",
          "example": "ensembl:ENSG00000139618"
       },
       "HumanCytoband": {
          "additionalProperties": false,
-         "description": "A character string representing cytobands derived from the *International System for Human Cytogenomic Nomenclature* (ISCN) [guidelines ](http://doi.org/10.1159/isbn.978-3-318-06861-0).",
+         "description": "A character string representing cytobands derived from the *International System for Human Cytogenomic Nomenclature* (ISCN) [guidelines](http://doi.org/10.1159/isbn.978-3-318-06861-0).",
          "type": "string",
          "pattern": "^cen|[pq](ter|([1-9][0-9]*(\\.[1-9][0-9]*)?))$",
          "example": "q22.3"
       },
       "Residue": {
          "additionalProperties": false,
-         "description": "A character representing a specific residue (i.e., molecular species) or groupings of these (\"ambiguity codes\"), using [one-letter IUPAC abbreviations ](https://en.wikipedia.org/wiki/International_Union_of_Pure_and_Applied_Chemistry#Amino_acid_and_nucleotide_base_codes) for nucleic acids and amino acids.",
+         "description": "A character representing a specific residue (i.e., molecular species) or groupings of these (\"ambiguity codes\"), using [one-letter IUPAC abbreviations](https://en.wikipedia.org/wiki/International_Union_of_Pure_and_Applied_Chemistry#Amino_acid_and_nucleotide_base_codes) for nucleic acids and amino acids.",
          "type": "string",
          "pattern": "[A-Z*\\-]"
       },
       "Sequence": {
          "additionalProperties": false,
-         "description": "A character string of Residues  that represents a biological sequence using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequences.",
+         "description": "A character string of Residues that represents a biological sequence using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequences.",
          "type": "string",
          "pattern": "^[A-Z*\\-]*$"
       },
@@ -987,7 +987,7 @@
             },
             "sequence": {
                "$ref": "#/definitions/Sequence",
-               "description": "A string of :ref:`Residues <Residue>`"
+               "description": "A string of Residues"
             }
          },
          "example": {
