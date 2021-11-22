@@ -1052,16 +1052,12 @@ Primitives
 Primitives represent simple values with syntactic or other
 constraints. They enable correctness for values stored in VRS.
 
-
 .. _CURIE:
 
 CURIE
 #####
 
-**Computational Definition**
-
-A |curie| formatted string. A CURIE string has the structure
-``prefix``:``reference`` (W3C Terminology).
+.. include:: defs/CURIE.rst
 
 **Implementation Guidance**
 
@@ -1079,7 +1075,6 @@ A |curie| formatted string. A CURIE string has the structure
   informal or local namespaces.
 * Implementations MUST use CURIE identifiers verbatim. Implementations
   MAY NOT modify CURIEs in any way (e.g., case-folding).
-
 
 **Examples**
 
@@ -1104,11 +1099,7 @@ cells undergoing metaphase, that serve to identify particular chromosomes.
 Human cytobands are predominantly specified by the *International System
 for Human Cytogenomic Nomenclature* (ISCN) [1]_.
 
-**Computational Definition**
-
-A character string representing cytobands derived from the
-*International System for Human Cytogenomic Nomenclature* (ISCN)
-guidelines.
+.. include:: defs/HumanCytoband.rst
 
 **Information Model**
 
@@ -1125,7 +1116,6 @@ ISCN guidelines [1]_.
 
    "q13.32" (string)
 
-
 .. _Residue:
 
 Residue
@@ -1135,14 +1125,7 @@ A residue refers to a specific `monomer`_ within the `polymeric
 chain`_ of a `protein`_ or `nucleic acid`_ (Source: `Wikipedia
 Residue page`_).
 
-**Computational Definition**
-
-A character representing a specific residue (i.e., molecular species)
-or groupings of these ("ambiguity codes"), using `one-letter IUPAC
-abbreviations`_ for nucleic acids and amino acids.
-
-.. _one-letter IUPAC abbreviations:
-     https://en.wikipedia.org/wiki/International_Union_of_Pure_and_Applied_Chemistry#Amino_acid_and_nucleotide_base_codes
+.. include:: defs/Residue.rst
 
 .. _Sequence:
 
@@ -1154,12 +1137,7 @@ linear polymer of nucleic acid or amino acid :ref:`Residues <Residue>`.
 Sequences are the prevalent representation of these polymers,
 particularly in the domain of variant representation.
 
-**Computational Definition**
-
-A character string representing :ref:`Residues <Residue>` using the
-conventional sequence order (5'-to-3' for nucleic acid sequences, and
-amino-to-carboxyl for amino acid sequences) and conforming to the
-`one-letter IUPAC abbreviations`_ for sequence representation.
+.. include:: defs/Sequence.rst
 
 **Information Model**
 
@@ -1202,37 +1180,12 @@ Deprecated and Obsolete Classes
 SimpleInterval
 ##############
 
-**Computational Definition**
+.. warning::
 
-DEPRECATED: A SimpleInterval represents a span of sequence. Positions are
-always represented by contiguous spans using interbase coordinates.
+   DEPRECATED. Use :ref:`SequenceInterval` instead.
+   SimpleInterval will be removed in VRS 2.0.
 
-This class is deprecated. Use :ref:`SequenceInterval` instead.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "SimpleInterval"
-   * - start
-     - integer
-     - 1..1
-     - start position
-   * - end
-     - integer
-     - 1..1
-     - end position
+.. include:: defs/SimpleInterval.rst
 
 **Implementation Guidance**
 
@@ -1287,32 +1240,7 @@ SequenceState
 
 .. deprecated:: 1.2
 
-**Computational Definition**
-
-A :ref:`sequence` as a :ref:`State`. This is the State class
-to use for representing "ref-alt" style variation, including
-SNVs, MNVs, del, ins, and delins.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "SequenceState"
-   * - sequence
-     - :ref:`Sequence`
-     - 1..1
-     - The string of sequence residues that is to be used as the state for other types.
+.. include:: defs/SequenceState.rst
 
 **Examples**
 

@@ -604,42 +604,42 @@ definitions:
     - comparator
     - type
     - value
-  Sequence:
-    additionalProperties: false
-    description: "A character string of residues that represents a biological sequence\
-      \ using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid\
-      \ sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity\
-      \ codes are permitted in Sequences."
-    type: string
-    pattern: ^[A-Z*\-]*$
   CURIE:
     additionalProperties: false
-    description: A string that refers to an object uniquely.  The lifetime and scope
-      of an id is defined by the sender. VRS does not impose any constraints on strings
-      used as ids in messages. However, to maximize shareability of data, VRS RECOMMENDS
-      that implementations use [W3C Compact URI](https://www.w3.org/TR/curie/) syntax.
-      String CURIEs are represented as `prefix`:`reference` (W3C terminology), but
-      often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially.
-      VRS also RECOMMENDS that `prefix` be defined in identifiers.org. The `reference`
-      component is an unconstrained string. A CURIE is a URI.  URIs may *locate* objects
-      (i.e., specify where to retrieve them) or *name* objects conceptually.  VRS
-      uses CURIEs primarily as a naming mechanism. Implementations MAY provide CURIE
-      resolution mechanisms for prefixes to make these objects locatable. Using internal
-      ids in public messages is strongly discouraged.
+    description: A [W3C Compact URI ](https://www.w3.org/TR/curie/) formatted string.
+      A CURIE string has the structure ``prefix``:``reference``, as defined by the
+      W3C syntax.
     type: string
     pattern: ^\w[^:]*:.+$
     example: ensembl:ENSG00000139618
   HumanCytoband:
     additionalProperties: false
-    description: A interval on a stained metaphase chromosome specified by cytobands.
+    description: A character string representing cytobands derived from the *International
+      System for Human Cytogenomic Nomenclature* (ISCN) [guidelines ](http://doi.org/10.1159/isbn.978-3-318-06861-0).
     type: string
     pattern: ^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$
     example: q22.3
+  Residue:
+    additionalProperties: false
+    description: A character representing a specific residue (i.e., molecular species)
+      or groupings of these ("ambiguity codes"), using [one-letter IUPAC abbreviations
+      ](https://en.wikipedia.org/wiki/International_Union_of_Pure_and_Applied_Chemistry#Amino_acid_and_nucleotide_base_codes)
+      for nucleic acids and amino acids.
+    type: string
+    pattern: '[A-Z*\-]'
+  Sequence:
+    additionalProperties: false
+    description: "A character string of Residues  that represents a biological sequence\
+      \ using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid\
+      \ sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity\
+      \ codes are permitted in Sequences."
+    type: string
+    pattern: ^[A-Z*\-]*$
   SequenceState:
     deprecated: true
-    description: 'DEPRECATED: An assertion of the state of a sequence, typically at
-      a Sequence Location within an Allele. This class is deprecated. Use LiteralSequenceExpression
-      instead.'
+    description: DEPRECATED. A Sequence as a State. This is the State class to use
+      for representing "ref-alt" style variation, including SNVs, MNVs, del, ins,
+      and delins. This class is deprecated. Use LiteralSequenceExpression instead.
     additionalProperties: false
     type: object
     properties:
@@ -648,8 +648,10 @@ definitions:
         enum:
         - SequenceState
         default: SequenceState
+        description: MUST be "SequenceState"
       sequence:
         $ref: '#/definitions/Sequence'
+        description: A string of :ref:`Residues <Residue>`
     example:
       type: SequenceState
       sequence: C
@@ -669,10 +671,13 @@ definitions:
         enum:
         - SimpleInterval
         default: SimpleInterval
+        description: MUST be "SimpleInterval"
       start:
         type: integer
+        description: The start coordinate
       end:
         type: integer
+        description: The end coordinate
     example:
       type: SimpleInterval
       start: 11
