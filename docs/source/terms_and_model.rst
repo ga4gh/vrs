@@ -925,9 +925,7 @@ large-scale tandem duplications.
 Feature
 @@@@@@@
 
-A *Feature* is a named entity that can be mapped to a
-:ref:`Location`. Genes, protein domains, exons, and chromosomes are
-some examples of common biological entities that may be Features.
+.. include:: defs/Feature.rst
 
 .. _Gene:
 
@@ -940,30 +938,7 @@ coding regions, regulatory elements, and other functional sequence
 domains. Because of the complex nature of these many components
 comprising a gene, the interpretation of a gene depends on context.
 
-**Computational definition**
-
-In VRS, a Gene is a reference to an external gene nomenclature.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - gene_id
-     - :ref:`CURIE`
-     - 1..1
-     - External gene identifier (see guidance)
-   * - type
-     - string
-     - 1..1
-     - MUST be "Gene"
+.. include:: defs/Gene.rst
 
 **Implementation guidance**
 
@@ -1017,42 +992,28 @@ Basic Types
 Basic types are data structures that represent general concepts and
 that may be applicable in multiple parts of VRS.
 
+.. _Number:
+
+Number
+######
+
+.. include:: defs/Number.rst
+
+**Examples**
+
+.. parsed-literal::
+
+    {
+      "type": "Number",
+      "value": 55
+    }
 
 .. _DefiniteRange:
 
 DefiniteRange
 ###############
 
-
-**Computational Definition**
-
-A bounded, inclusive range of numbers.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "DefiniteRange"
-   * - min
-     - integer
-     - 1..1
-     - minimum value; inclusive
-   * - max
-     - integer
-     - 1..1
-     - maximum value; inclusive
-
+.. include:: defs/DefiniteRange.rst
 
 **Examples**
 
@@ -1070,39 +1031,7 @@ A bounded, inclusive range of numbers.
 IndefiniteRange
 ################
 
-
-**Computational Definition**
-
-An half-bounded range of integer values, bounded on one side by an
-integer and on the other by negative infinity or positive infinity.
-
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "IndefiniteRange"
-   * - value
-     - integer
-     - 1..1
-     - The bounded value; inclusive
-   * - comparator
-     - string; enum ["<=", ">="]
-     - 1..1
-     - MUST be one of "<=" or ">=", indicates in which direction
-       the range is indefinite
-
+.. include:: defs/IndefiniteRange.rst
 
 **Examples**
 
@@ -1116,52 +1045,6 @@ This value is equivalent to the concept of "equal to or greater than
       "type": "IndefiniteRange",
       "value": 22
     }
-
-
-.. _Number:
-
-Number
-######
-
-
-**Computational Definition**
-
-The *Number* class is a container for a simple number. This class is
-required when an attribute may be a number or more complex type, such
-as :ref:`DefiniteRange` and :ref:`IndefiniteRange`.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "Number"
-   * - value
-     - integer
-     - 1..1
-     - The integer value
-
-
-**Examples**
-
-.. parsed-literal::
-
-    {
-      "type": "Number",
-      "value": 55
-    }
-
-
 
 Primitives
 @@@@@@@@@@

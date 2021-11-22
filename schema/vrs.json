@@ -840,7 +840,7 @@
          }
       },
       "Gene": {
-         "description": "A gene is an authoritative representation of one or more heritable Locations  that includes all sequence elements necessary to perform a biological function. A gene may include regulatory, transcribed, and/or other functional Locations.",
+         "description": "A reference to a Gene as defined by an authority. For human genes, the use of [hgnc ](https://registry.identifiers.org/registry/hgnc) as the gene authority is RECOMMENDED.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
@@ -849,10 +849,12 @@
                "enum": [
                   "Gene"
                ],
-               "default": "Gene"
+               "default": "Gene",
+               "description": "MUST be \"Gene\""
             },
             "gene_id": {
-               "$ref": "#/definitions/CURIE"
+               "$ref": "#/definitions/CURIE",
+               "description": "A CURIE reference to a Gene concept"
             }
          },
          "required": [
@@ -870,42 +872,15 @@
                "enum": [
                   "Number"
                ],
-               "default": "Number"
+               "default": "Number",
+               "description": "MUST be \"Number\""
             },
             "value": {
-               "type": "number"
+               "type": "number",
+               "description": "The value represented by Number"
             }
          },
          "required": [
-            "type",
-            "value"
-         ]
-      },
-      "IndefiniteRange": {
-         "description": "An indefinite range represented as a number and associated comparator. The bound operator is interpreted as follows: '>=' are all values greater than and including the value, '<=' are all numbers less than and including the value.",
-         "type": "object",
-         "additionalProperties": false,
-         "properties": {
-            "type": {
-               "type": "string",
-               "enum": [
-                  "IndefiniteRange"
-               ],
-               "default": "IndefiniteRange"
-            },
-            "value": {
-               "type": "number"
-            },
-            "comparator": {
-               "type": "string",
-               "enum": [
-                  "<=",
-                  ">="
-               ]
-            }
-         },
-         "required": [
-            "comparator",
             "type",
             "value"
          ]
@@ -920,19 +895,54 @@
                "enum": [
                   "DefiniteRange"
                ],
-               "default": "DefiniteRange"
+               "default": "DefiniteRange",
+               "description": "MUST be \"DefiniteRange\""
             },
             "min": {
-               "type": "number"
+               "type": "number",
+               "description": "The minimum value; inclusive"
             },
             "max": {
-               "type": "number"
+               "type": "number",
+               "description": "The maximum value; inclusive"
             }
          },
          "required": [
             "max",
             "min",
             "type"
+         ]
+      },
+      "IndefiniteRange": {
+         "description": "A half-bounded range of numbers represented as a number bound and associated comparator. The bound operator is interpreted as follows: '>=' are all numbers greater than and including `value`, '<=' are all numbers less than and including `value`.",
+         "type": "object",
+         "additionalProperties": false,
+         "properties": {
+            "type": {
+               "type": "string",
+               "enum": [
+                  "IndefiniteRange"
+               ],
+               "default": "IndefiniteRange",
+               "description": "MUST be \"IndefiniteRange\""
+            },
+            "value": {
+               "type": "number",
+               "description": "The bounded value; inclusive"
+            },
+            "comparator": {
+               "type": "string",
+               "enum": [
+                  "<=",
+                  ">="
+               ],
+               "description": "MUST be one of \"<=\" or \">=\", indicating which direction the range is indefinite"
+            }
+         },
+         "required": [
+            "comparator",
+            "type",
+            "value"
          ]
       },
       "Sequence": {

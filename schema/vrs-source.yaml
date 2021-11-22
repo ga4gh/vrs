@@ -594,7 +594,7 @@ definitions:
                 max:
                   minimum: 0
                   type: integer
-    required: [ "type", "seq_expr", "count" ]
+    required: [ "seq_expr", "count" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Feature
@@ -608,13 +608,18 @@ definitions:
       - $ref: "#/definitions/Gene"
     discriminator:
       propertyName: type
+    heritable_properties:
+      type:
+        type: string
+        description: >-
+          The Feature class type. MUST match child class type.
+    heritable_required: [ "type" ]
 
   Gene:
     description: >-
-      A gene is an authoritative representation of one or more heritable
-      :ref:`Locations <Location>` that includes all sequence elements
-      necessary to perform a biological function. A gene may include
-      regulatory, transcribed, and/or other functional Locations.
+      A reference to a Gene as defined by an authority. For human genes,
+      the use of `hgnc <https://registry.identifiers.org/registry/hgnc>`_
+      as the gene authority is RECOMMENDED.
     type: object
     additionalProperties: false
     properties:
@@ -622,9 +627,12 @@ definitions:
         type: string
         enum: ["Gene"]
         default: "Gene"
+        description: MUST be "Gene"
       gene_id:
         $ref: "#/definitions/CURIE"
-    required: [ "type", "gene_id" ]
+        description: >-
+          A CURIE reference to a Gene concept
+    required: [ "gene_id" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Numerics, Comparators, and Ranges
@@ -639,29 +647,11 @@ definitions:
         type: string
         enum: [ "Number" ]
         default: "Number"
+        description: MUST be "Number"
       value:
         type: number
+        description: The value represented by Number
     required: [ "type", "value" ]
-
-  IndefiniteRange:
-    description: >-
-      An indefinite range represented as a number and associated comparator.
-      The bound operator is interpreted as follows: '>=' are all values
-      greater than and including the value, '<=' are all numbers less than and
-      including the value.
-    type: object
-    additionalProperties: false
-    properties:
-      type:
-        type: string
-        enum: [ "IndefiniteRange" ]
-        default: "IndefiniteRange"
-      value:
-        type: number
-      comparator:
-        type: string
-        enum: [ "<=", ">=" ]
-    required: [ "type", "value", "comparator" ]
 
   DefiniteRange:
     description: >-
@@ -673,12 +663,39 @@ definitions:
         type: string
         enum: [ "DefiniteRange" ]
         default: "DefiniteRange"
+        description: MUST be "DefiniteRange"
       min:
         type: number
+        description: The minimum value; inclusive
       max:
         type: number
+        description: The maximum value; inclusive
     required: ["type", "min", "max"]
 
+  IndefiniteRange:
+    description: >-
+      A half-bounded range of numbers represented as a number bound and
+      associated comparator. The bound operator is interpreted as follows:
+      '>=' are all numbers greater than and including `value`, '<=' are all
+      numbers less than and including `value`.
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum: [ "IndefiniteRange" ]
+        default: "IndefiniteRange"
+        description: MUST be "IndefiniteRange"
+      value:
+        type: number
+        description: The bounded value; inclusive
+      comparator:
+        type: string
+        enum: [ "<=", ">=" ]
+        description: >-
+          MUST be one of "<=" or ">=", indicating which direction the range
+          is indefinite
+    required: [ "type", "value", "comparator" ]
 
   # =============================================================================
   # BASIC TYPES (STRUCTURES)
