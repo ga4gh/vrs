@@ -94,17 +94,17 @@ definitions:
     additionalProperties: false
     type: object
     properties:
-      _id:
-        $ref: '#/definitions/CURIE'
+      _id: *id001
       type:
         type: string
         enum:
         - Text
         default: Text
+        description: MUST be "Text"
       definition:
         type: string
-        description: An textual representation of variation intended to capture variation
-          descriptions that cannot be parsed, but still treated as variation.
+        description: A textual representation of variation not representable by other
+          subclasses of Variation.
     required:
     - definition
     - type
@@ -113,13 +113,13 @@ definitions:
     type: object
     additionalProperties: false
     properties:
-      _id:
-        $ref: '#/definitions/CURIE'
+      _id: *id001
       type:
         type: string
         enum:
         - VariationSet
         default: VariationSet
+        description: MUST be "VariationSet"
       members:
         type: array
         uniqueItems: true
@@ -127,33 +127,37 @@ definitions:
           oneOf:
           - $ref: '#/definitions/CURIE'
           - $ref: '#/definitions/Variation'
+        description: List of Variation objects or identifiers. Attribute is required,
+          but MAY be empty.
     required:
     - members
     - type
   CopyNumber:
     additionalProperties: false
     type: object
-    description: The count of discrete copies of a Feature, Molecular Variation, or
-      other molecule within a genome.
+    description: The count of discrete copies of a subject MolecularVariation, Feature,
+      SequenceExpression, or a CURIE reference to any of these.
     properties:
-      _id:
-        $ref: '#/definitions/CURIE'
+      _id: *id001
       type:
         type: string
         enum:
         - CopyNumber
         default: CopyNumber
+        description: MUST be "CopyNumber"
       subject:
         oneOf:
         - $ref: '#/definitions/MolecularVariation'
         - $ref: '#/definitions/Feature'
         - $ref: '#/definitions/SequenceExpression'
         - $ref: '#/definitions/CURIE'
+        description: Subject of the Copy Number object
       copies:
         oneOf:
         - $ref: '#/definitions/Number'
         - $ref: '#/definitions/IndefiniteRange'
         - $ref: '#/definitions/DefiniteRange'
+        description: The integral number of copies of the subject in a genome
     allOf:
     - if:
         properties:
@@ -207,20 +211,27 @@ definitions:
     description: A Location on a chromosome defined by a species and chromosome name.
     type: object
     properties:
+      _id: &id002
+        $ref: '#/definitions/CURIE'
+        description: Location Id. MUST be unique within document.
       type:
         type: string
         enum:
         - ChromosomeLocation
         default: ChromosomeLocation
-      _id:
-        $ref: '#/definitions/CURIE'
+        description: MUST be "ChromosomeLocation"
       species_id:
         $ref: '#/definitions/CURIE'
         default: taxonomy:9606
+        description: 'CURIE representing a species from the [NCBI species taxonomy](https://registry.identifiers.org/registry/taxonomy).
+          Default: "taxonomy:9606" (human)'
       chr:
         type: string
+        description: The symbolic chromosome name. For humans, For humans, chromosome
+          names MUST be one of 1..22, X, Y (case-sensitive)
       interval:
         $ref: '#/definitions/CytobandInterval'
+        description: The chromosome region defined by a CytobandInterval
     required:
     - chr
     - interval
@@ -231,29 +242,29 @@ definitions:
     description: A Location defined by an interval on a referenced Sequence.
     type: object
     properties:
-      _id:
-        $ref: '#/definitions/CURIE'
+      _id: *id002
       type:
         type: string
         enum:
         - SequenceLocation
         default: SequenceLocation
+        description: MUST be "SequenceLocation"
       sequence_id:
         $ref: '#/definitions/CURIE'
+        description: A VRS Computed Identifier for the reference Sequence.
       interval:
         oneOf:
         - $ref: '#/definitions/SequenceInterval'
         - $ref: '#/definitions/SimpleInterval'
+        description: Reference sequence region defined by a SequenceInterval.
     required:
     - interval
     - sequence_id
     - type
   SequenceInterval:
-    description: A SequenceInterval represents a span of sequence. Positions are always
-      represented by contiguous spans using interbase coordinates. SequenceInterval
-      is intended to be compatible with that in Sequence Ontology ([SO:0000001](http://www.sequenceontology.org/browser/current_svn/term/SO:0000001)),
-      with the exception that the GA4GH VRS SequenceInterval may be zero-width. The
-      SO definition is for an "extent greater than zero".
+    description: A SequenceInterval represents a span on a Sequence. Positions are
+      always represented by contiguous spans using interbase coordinates or coordinate
+      ranges.
     type: object
     additionalProperties: false
     properties:
@@ -262,16 +273,23 @@ definitions:
         enum:
         - SequenceInterval
         default: SequenceInterval
+        description: MUST be "SequenceInterval"
       start:
         oneOf:
         - $ref: '#/definitions/Number'
         - $ref: '#/definitions/IndefiniteRange'
         - $ref: '#/definitions/DefiniteRange'
+        description: The start coordinate or range of the interval. The minimum value
+          of this coordinate or range is 0. MUST represent a coordinate or range less
+          than the value of `end`.
       end:
         oneOf:
         - $ref: '#/definitions/Number'
         - $ref: '#/definitions/IndefiniteRange'
         - $ref: '#/definitions/DefiniteRange'
+        description: The end coordinate or range of the interval. The minimum value
+          of this coordinate or range is 0. MUST represent a coordinate or range greater
+          than the value of `start`.
     allOf:
     - if:
         properties:
@@ -350,7 +368,9 @@ definitions:
     - start
     - type
   CytobandInterval:
-    description: A contiguous region specified by chromosomal bands features.
+    description: A contiguous region specified by cytobands. The region includes the
+      constituent regions described by the start and end cytobands, as well as any
+      intervening regions.
     type: object
     additionalProperties: false
     properties:
@@ -359,10 +379,15 @@ definitions:
         enum:
         - CytobandInterval
         default: CytobandInterval
+        description: MUST be "CytobandInterval"
       start:
         $ref: '#/definitions/HumanCytoband'
+        description: The start cytoband region. MUST specify a region nearer the terminal
+          end (telomere) of the chromosome p-arm than `end`.
       end:
         $ref: '#/definitions/HumanCytoband'
+        description: The start cytoband region. MUST specify a region nearer the terminal
+          end (telomere) of the chromosome q-arm than `start`.
     example:
       type: CytobandInterval
       start: q22.2
@@ -372,7 +397,7 @@ definitions:
     - start
     - type
   SequenceExpression:
-    description: One of a set of sequence representation syntaxes.
+    description: An expression describing a Sequence.
     oneOf:
     - $ref: '#/definitions/LiteralSequenceExpression'
     - $ref: '#/definitions/DerivedSequenceExpression'
@@ -389,17 +414,19 @@ definitions:
         enum:
         - LiteralSequenceExpression
         default: LiteralSequenceExpression
+        description: MUST be "LiteralSequenceExpression"
       sequence:
         $ref: '#/definitions/Sequence'
+        description: the literal Sequence expressed
     required:
     - sequence
     - type
   DerivedSequenceExpression:
     description: An approximate expression of a sequence that is derived from a referenced
-      sequence location. Use of DerivedSequenceExpression indicates that the derived
-      sequence is approximately equivalent to the reference indicated, and is typically
-      used for describing large regions in contexts where the precision of a literal
-      sequence is unnecessary.
+      sequence location. Use of this class indicates that the derived sequence is
+      *approximately equivalent* to the reference indicated, and is typically used
+      for describing large regions in contexts where the use of an approximate sequence
+      is inconsequential.
     type: object
     additionalProperties: false
     properties:
@@ -408,10 +435,14 @@ definitions:
         enum:
         - DerivedSequenceExpression
         default: DerivedSequenceExpression
+        description: MUST be "DerivedSequenceExpression"
       location:
         $ref: '#/definitions/SequenceLocation'
+        description: The location from which the approximate sequence is derived
       reverse_complement:
         type: boolean
+        description: A flag indicating if the expressed sequence is the reverse complement
+          of the sequence referred to by `location`
     required:
     - location
     - reverse_complement
@@ -426,15 +457,18 @@ definitions:
         enum:
         - RepeatedSequenceExpression
         default: RepeatedSequenceExpression
+        description: MUST be "RepeatedSequenceExpression"
       seq_expr:
         oneOf:
         - $ref: '#/definitions/LiteralSequenceExpression'
         - $ref: '#/definitions/DerivedSequenceExpression'
+        description: An expression of the repeating subsequence
       count:
         oneOf:
         - $ref: '#/definitions/Number'
         - $ref: '#/definitions/IndefiniteRange'
         - $ref: '#/definitions/DefiniteRange'
+        description: The count of repeated units, as an integer or inclusive range
     allOf:
     - if:
         properties:
@@ -485,10 +519,9 @@ definitions:
     discriminator:
       propertyName: type
   Gene:
-    description: A gene is an authoritative representation of one or more heritable
-      Locations  that includes all sequence elements necessary to perform a biological
-      function. A gene may include regulatory, transcribed, and/or other functional
-      Locations.
+    description: A reference to a Gene as defined by an authority. For human genes,
+      the use of [hgnc](https://registry.identifiers.org/registry/hgnc) as the gene
+      authority is RECOMMENDED.
     type: object
     additionalProperties: false
     properties:
@@ -497,8 +530,10 @@ definitions:
         enum:
         - Gene
         default: Gene
+        description: MUST be "Gene"
       gene_id:
         $ref: '#/definitions/CURIE'
+        description: A CURIE reference to a Gene concept
     required:
     - gene_id
     - type
@@ -512,33 +547,11 @@ definitions:
         enum:
         - Number
         default: Number
+        description: MUST be "Number"
       value:
         type: number
+        description: The value represented by Number
     required:
-    - type
-    - value
-  IndefiniteRange:
-    description: 'An indefinite range represented as a number and associated comparator.
-      The bound operator is interpreted as follows: ''>='' are all values greater
-      than and including the value, ''<='' are all numbers less than and including
-      the value.'
-    type: object
-    additionalProperties: false
-    properties:
-      type:
-        type: string
-        enum:
-        - IndefiniteRange
-        default: IndefiniteRange
-      value:
-        type: number
-      comparator:
-        type: string
-        enum:
-        - <=
-        - '>='
-    required:
-    - comparator
     - type
     - value
   DefiniteRange:
@@ -551,51 +564,80 @@ definitions:
         enum:
         - DefiniteRange
         default: DefiniteRange
+        description: MUST be "DefiniteRange"
       min:
         type: number
+        description: The minimum value; inclusive
       max:
         type: number
+        description: The maximum value; inclusive
     required:
     - max
     - min
     - type
-  Sequence:
+  IndefiniteRange:
+    description: 'A half-bounded range of numbers represented as a number bound and
+      associated comparator. The bound operator is interpreted as follows: ''>=''
+      are all numbers greater than and including `value`, ''<='' are all numbers less
+      than and including `value`.'
+    type: object
     additionalProperties: false
-    description: "A character string of residues that represents a biological sequence\
-      \ using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid\
-      \ sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity\
-      \ codes are permitted in Sequences."
-    type: string
-    pattern: ^[A-Z*\-]*$
+    properties:
+      type:
+        type: string
+        enum:
+        - IndefiniteRange
+        default: IndefiniteRange
+        description: MUST be "IndefiniteRange"
+      value:
+        type: number
+        description: The bounded value; inclusive
+      comparator:
+        type: string
+        enum:
+        - <=
+        - '>='
+        description: MUST be one of "<=" or ">=", indicating which direction the range
+          is indefinite
+    required:
+    - comparator
+    - type
+    - value
   CURIE:
     additionalProperties: false
-    description: A string that refers to an object uniquely.  The lifetime and scope
-      of an id is defined by the sender. VRS does not impose any constraints on strings
-      used as ids in messages. However, to maximize shareability of data, VRS RECOMMENDS
-      that implementations use [W3C Compact URI](https://www.w3.org/TR/curie/) syntax.
-      String CURIEs are represented as `prefix`:`reference` (W3C terminology), but
-      often referred to as `namespace`:`accession` or `namespace`:`local id` colloquially.
-      VRS also RECOMMENDS that `prefix` be defined in identifiers.org. The `reference`
-      component is an unconstrained string. A CURIE is a URI.  URIs may *locate* objects
-      (i.e., specify where to retrieve them) or *name* objects conceptually.  VRS
-      uses CURIEs primarily as a naming mechanism. Implementations MAY provide CURIE
-      resolution mechanisms for prefixes to make these objects locatable. Using internal
-      ids in public messages is strongly discouraged.
+    description: A [W3C Compact URI](https://www.w3.org/TR/curie/) formatted string.
+      A CURIE string has the structure ``prefix``:``reference``, as defined by the
+      W3C syntax.
     type: string
     pattern: ^\w[^:]*:.+$
     example: ensembl:ENSG00000139618
   HumanCytoband:
     additionalProperties: false
-    description: A interval on a stained metaphase chromosome specified by cytobands.
-      CytobandIntervals include the regions described by the start and end cytobands.
+    description: A character string representing cytobands derived from the *International
+      System for Human Cytogenomic Nomenclature* (ISCN) [guidelines](http://doi.org/10.1159/isbn.978-3-318-06861-0).
     type: string
     pattern: ^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$
     example: q22.3
+  Residue:
+    additionalProperties: false
+    description: A character representing a specific residue (i.e., molecular species)
+      or groupings of these ("ambiguity codes"), using [one-letter IUPAC abbreviations](https://en.wikipedia.org/wiki/International_Union_of_Pure_and_Applied_Chemistry#Amino_acid_and_nucleotide_base_codes)
+      for nucleic acids and amino acids.
+    type: string
+    pattern: '[A-Z*\-]'
+  Sequence:
+    additionalProperties: false
+    description: "A character string of Residues that represents a biological sequence\
+      \ using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid\
+      \ sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity\
+      \ codes are permitted in Sequences."
+    type: string
+    pattern: ^[A-Z*\-]*$
   SequenceState:
     deprecated: true
-    description: 'DEPRECATED: An assertion of the state of a sequence, typically at
-      a Sequence Location within an Allele. This class is deprecated. Use LiteralSequenceExpression
-      instead.'
+    description: DEPRECATED. A Sequence as a State. This is the State class to use
+      for representing "ref-alt" style variation, including SNVs, MNVs, del, ins,
+      and delins. This class is deprecated. Use LiteralSequenceExpression instead.
     additionalProperties: false
     type: object
     properties:
@@ -604,8 +646,10 @@ definitions:
         enum:
         - SequenceState
         default: SequenceState
+        description: MUST be "SequenceState"
       sequence:
         $ref: '#/definitions/Sequence'
+        description: A string of Residues
     example:
       type: SequenceState
       sequence: C
@@ -625,10 +669,13 @@ definitions:
         enum:
         - SimpleInterval
         default: SimpleInterval
+        description: MUST be "SimpleInterval"
       start:
         type: integer
+        description: The start coordinate
       end:
         type: integer
+        description: The end coordinate
     example:
       type: SimpleInterval
       start: 11

@@ -117,7 +117,7 @@ to capture this diversity.
 Molecular Variation
 ###################
 
-A :ref:`variation` on a contiguous molecule.
+.. include:: defs/MolecularVariation.rst
 
 .. _Allele:
 
@@ -369,8 +369,7 @@ order. See :ref:`computed-identifiers` for more information.
 Systemic Variation
 ##################
 
-A :ref:`Variation` of multiple molecules in the context of a system,
-e.g. a genome, sample, or homologous chromosomes.
+.. include:: defs/SystemicVariation.rst
 
 .. _CopyNumber:
 
@@ -387,40 +386,7 @@ of :ref:`SystemicVariation` and so describes the number of copies in a
 genome. The related :ref:`MolecularVariation` concept can be expressed
 as an :ref:`Allele` with a :ref:`RepeatedSequenceExpression`.
 
-**Computational Definition**
-
-The count of discrete copies of a :ref:`MolecularVariation`,
-:ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference
-to any of these.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Computed Identifier
-   * - type
-     - string
-     - 1..1
-     - MUST be "CopyNumber"
-   * - subject
-     - :ref:`MolecularVariation` | :ref:`Feature` | :ref:`SequenceExpression` | :ref:`CURIE`
-     - 1..1
-     - Subject of the abundance statement
-   * - copies
-     - :ref:`Number` | :ref:`DefiniteRange` | :ref:`IndefiniteRange`
-     - 1..1
-     - The integral number of copies of the subject in the genome
+.. include:: defs/CopyNumber.rst
 
 **Examples**
 
@@ -447,10 +413,7 @@ Two, three, or four total copies of BRCA1:
 Utility Variation
 #################
 
-*Utility variation* is a collection of :ref:`Variation`
-subclasses that cannot be constrained to a specific class of
-biological variation, but are necessary for some technical
-applications of VRS.
+.. include:: defs/UtilityVariation.rst
 
 .. _Text:
 
@@ -467,36 +430,7 @@ interpretation by humans.
                for which VRS does not yet have a data type.
                Structured data types should be preferred over Text.
 
-
-**Computational Definition**
-
-A string of unconstrained text.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Variation Id; MUST be unique within document
-   * - type
-     - string
-     - 1..1
-     - MUST be "Text"
-   * - definition
-     - string
-     - 1..1
-     - The textual variation representation not representable by
-       other subclasses of Variation.
+.. include:: defs/Text.rst
 
 **Implementation Guidance**
 
@@ -520,7 +454,7 @@ A string of unconstrained text.
 .. parsed-literal::
 
     {
-      "definition": "APOE loss",
+      "definition": "MSI High",
       "type": "Text"
     }
 
@@ -532,36 +466,7 @@ $$$$$$$$$$$$
 Sets of variation are used widely, such as sets of variants in dbSNP
 or ClinVar that might be related by function.
 
-**Computational Definition**
-
-An unconstrained set of Variation members.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Identifier of the VariationSet.
-   * - type
-     - string
-     - 1..1
-     - MUST be "VariationSet"
-   * - members
-     - :ref:`Variation`\[] | :ref:`CURIE`\[]
-     - 0..*
-     - List of Variation objects or identifiers. Attribute is
-       required, but MAY be empty.
-
+.. include:: defs/VariationSet.rst
 
 **Implementation Guidance**
 
@@ -683,9 +588,7 @@ Additional :ref:`planned-locations` may also be conceptual or symbolic locations
 such as a cytoband region or a gene. Any of these may be used as the
 Location for Variation.
 
-**Computational Definition**
-
-A contiguous segment of a biological sequence.
+.. include:: defs/Location.rst
 
 **Implementation Guidance**
 
@@ -704,44 +607,7 @@ $$$$$$$$$$$$$$$$$$
 Chromosomal locations based on named features, including named landmarks,
 cytobands, and regions observed from chromosomal staining techniques.
 
-**Computational Definition**
-
-A :ref:`Location` on a chromosome defined by a species and chromosome name.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Location id; MUST be unique within document
-   * - type
-     - string
-     - 1..1
-     - MUST be "ChromosomeLocation"
-   * - species
-     - :ref:`CURIE`
-     - 1..1
-     - An external reference to a species taxonomy.  Default:
-       "taxonomy:9606" (human).  See Implementation Guidance, below.
-   * - chr
-     - string
-     - 1..1
-     - The symbolic chromosome name
-   * - interval
-     - :ref:`CytobandInterval`
-     - 1..1
-     - The chromosome region based on feature names
-
+.. include:: defs/ChromosomeLocation.rst
 
 **Implementation Guidance**
 
@@ -808,39 +674,7 @@ $$$$$$$$$$$$$$$$
 A *Sequence Location* is a specified subsequence of a reference :ref:`Sequence`.
 The reference is typically a chromosome, transcript, or protein sequence.
 
-**Computational Definition**
-
-A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - _id
-     - :ref:`CURIE`
-     - 0..1
-     - Location id; MUST be unique within document
-   * - type
-     - string
-     - 1..1
-     - MUST be "SequenceLocation"
-   * - sequence_id
-     - :ref:`CURIE`
-     - 1..1
-     - A VRS :ref:`Computed Identifier <computed-identifiers>`
-       for the reference :ref:`Sequence`.
-   * - interval
-     - :ref:`SequenceInterval`
-     - 1..1
-     - Position of feature on reference sequence specified by sequence_id.
+.. include:: defs/SequenceLocation.rst
 
 **Implementation Guidance**
 
@@ -880,16 +714,12 @@ A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
 SequenceInterval
 ################
 
-**Computational Definition**
-
-A SequenceInterval represents a span of :ref:`Sequence`. Positions are
-always represented by contiguous spans using interbase coordinates or
-coordinate ranges.
-
 SequenceInterval is intended to be compatible with a "region" in Sequence Ontology
 (`SO:0000001 <http://www.sequenceontology.org/browser/current_svn/term/SO:0000001>`_),
 with the exception that the GA4GH VRS SequenceInterval may be zero-width. The SO
 definition of region has an "extent greater than zero".
+
+.. include:: defs/SequenceInterval.rst
 
 .. sidebar:: VRS Uses Inter-residue Coordinates
 
@@ -926,15 +756,14 @@ definition of region has an "extent greater than zero".
       "type": "SequenceInterval"
     }
 
-
-
-
 .. _CytobandInterval:
 
 CytobandInterval
 ################
 
-.. important:: VRS currently supports only human cytobands and
+.. important::
+
+   VRS currently supports only human cytobands and
    cytoband intervals. Implementers wishing to use VRS for other
    cytogenetic systems are encouraged to open a `GitHub issue`_.
 
@@ -943,36 +772,7 @@ visible patterns on stained metaphase chromosomes.  They provide a
 convenient, memorable, and low-resolution shorthand for chromosomal
 segments.
 
-**Computational Definition**
-
-An interval on a stained metaphase chromosome, specified by cytobands.
-CytobandIntervals include the regions described by the start and end
-cytobands.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "CytobandInterval"
-   * - start
-     - :ref:`HumanCytoband`
-     - 1..1
-     - name of Cytoband at the interval start (see below)
-   * - end
-     - :ref:`HumanCytoband`
-     - 1..1
-     - name of Cytoband at the interval end (see below)
+.. include:: defs/CytobandInterval.rst
 
 **Implementation Guidance**
 
@@ -1015,6 +815,8 @@ sequence, but are intended to be semantically distinct. There MAY be
 reasons to select or enforce one form over another that SHOULD be
 managed by implementations. See discussion on :ref:`equivalence`.
 
+.. include:: defs/SequenceExpression.rst
+
 .. _LiteralSequenceExpression:
 
 LiteralSequenceExpression
@@ -1023,30 +825,7 @@ LiteralSequenceExpression
 A LiteralSequenceExpression "wraps" a string representation of a
 sequence for parallelism with other SequenceExpressions.
 
-**Computational Definition**
-
-An explicit expression of a Sequence.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "LiteralSequenceExpression"
-   * - sequence
-     - :ref:`Sequence`
-     - 1..1
-     - The sequence to express
+.. include:: defs/LiteralSequenceExpression.rst
 
 **Examples**
 
@@ -1068,35 +847,7 @@ transforming sequence from another location in the genome.
 A *derived sequence* is a mechanism for expressing (typically
 large) reference subsequences specified by a :ref:`SequenceLocation`.
 
-**Computational Definition**
-
-An approximate expression of a sequence that is derived from a
-referenced sequence location. Use of DerivedSequenceExpression
-indicates that the derived sequence is approximately equivalent to the
-reference indicated, and is typically used for describing large
-regions for variation concepts where the exact sequence is
-inconsequential.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "DerivedSequenceExpression"
-   * - location
-     - :ref:`SequenceLocation`
-     - 1..1
-     - The location describing the sequence
+.. include:: defs/DerivedSequenceExpression.rst
 
 **Examples**
 
@@ -1134,35 +885,7 @@ example of a common class of repeated sequence, but repeated sequence can
 also be used to describe larger subsequence repeats, up to and including
 large-scale tandem duplications.
 
-**Computational Definition**
-
-An expression of a sequence comprised of a tandem repeating subsequence.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "RepeatedSequenceExpression"
-   * - seq_expr
-     - :ref:`SequenceExpression` and NOT :ref:`RepeatedSequenceExpression`
-     - 1..1
-     - an expression of the repeating subsequence
-   * - count
-     - :ref:`Number` | :ref:`DefiniteRange` | :ref:`IndefiniteRange`
-     - 1..1
-     - the inclusive range count of repeated units
-
+.. include:: defs/RepeatedSequenceExpression.rst
 
 **Examples**
 
@@ -1202,9 +925,7 @@ An expression of a sequence comprised of a tandem repeating subsequence.
 Feature
 @@@@@@@
 
-A *Feature* is a named entity that can be mapped to a
-:ref:`Location`. Genes, protein domains, exons, and chromosomes are
-some examples of common biological entities that may be Features.
+.. include:: defs/Feature.rst
 
 .. _Gene:
 
@@ -1217,30 +938,7 @@ coding regions, regulatory elements, and other functional sequence
 domains. Because of the complex nature of these many components
 comprising a gene, the interpretation of a gene depends on context.
 
-**Computational definition**
-
-In VRS, a Gene is a reference to an external gene nomenclature.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - gene_id
-     - :ref:`CURIE`
-     - 1..1
-     - External gene identifier (see guidance)
-   * - type
-     - string
-     - 1..1
-     - MUST be "Gene"
+.. include:: defs/Gene.rst
 
 **Implementation guidance**
 
@@ -1294,42 +992,28 @@ Basic Types
 Basic types are data structures that represent general concepts and
 that may be applicable in multiple parts of VRS.
 
+.. _Number:
+
+Number
+######
+
+.. include:: defs/Number.rst
+
+**Examples**
+
+.. parsed-literal::
+
+    {
+      "type": "Number",
+      "value": 55
+    }
 
 .. _DefiniteRange:
 
 DefiniteRange
 ###############
 
-
-**Computational Definition**
-
-A bounded, inclusive range of numbers.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "DefiniteRange"
-   * - min
-     - integer
-     - 1..1
-     - minimum value; inclusive
-   * - max
-     - integer
-     - 1..1
-     - maximum value; inclusive
-
+.. include:: defs/DefiniteRange.rst
 
 **Examples**
 
@@ -1347,39 +1031,7 @@ A bounded, inclusive range of numbers.
 IndefiniteRange
 ################
 
-
-**Computational Definition**
-
-An half-bounded range of integer values, bounded on one side by an
-integer and on the other by negative infinity or positive infinity.
-
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "IndefiniteRange"
-   * - value
-     - integer
-     - 1..1
-     - The bounded value; inclusive
-   * - comparator
-     - string; enum ["<=", ">="]
-     - 1..1
-     - MUST be one of "<=" or ">=", indicates in which direction
-       the range is indefinite
-
+.. include:: defs/IndefiniteRange.rst
 
 **Examples**
 
@@ -1394,68 +1046,18 @@ This value is equivalent to the concept of "equal to or greater than
       "value": 22
     }
 
-
-.. _Number:
-
-Number
-######
-
-
-**Computational Definition**
-
-The *Number* class is a container for a simple number. This class is
-required when an attribute may be a number or more complex type, such
-as :ref:`DefiniteRange` and :ref:`IndefiniteRange`.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "Number"
-   * - value
-     - integer
-     - 1..1
-     - The integer value
-
-
-**Examples**
-
-.. parsed-literal::
-
-    {
-      "type": "Number",
-      "value": 55
-    }
-
-
-
 Primitives
 @@@@@@@@@@
 
 Primitives represent simple values with syntactic or other
 constraints. They enable correctness for values stored in VRS.
 
-
 .. _CURIE:
 
 CURIE
 #####
 
-**Computational Definition**
-
-A |curie| formatted string. A CURIE string has the structure
-``prefix``:``reference`` (W3C Terminology).
+.. include:: defs/CURIE.rst
 
 **Implementation Guidance**
 
@@ -1473,7 +1075,6 @@ A |curie| formatted string. A CURIE string has the structure
   informal or local namespaces.
 * Implementations MUST use CURIE identifiers verbatim. Implementations
   MAY NOT modify CURIEs in any way (e.g., case-folding).
-
 
 **Examples**
 
@@ -1498,11 +1099,7 @@ cells undergoing metaphase, that serve to identify particular chromosomes.
 Human cytobands are predominantly specified by the *International System
 for Human Cytogenomic Nomenclature* (ISCN) [1]_.
 
-**Computational Definition**
-
-A character string representing cytobands derived from the
-*International System for Human Cytogenomic Nomenclature* (ISCN)
-guidelines.
+.. include:: defs/HumanCytoband.rst
 
 **Information Model**
 
@@ -1519,7 +1116,6 @@ ISCN guidelines [1]_.
 
    "q13.32" (string)
 
-
 .. _Residue:
 
 Residue
@@ -1529,14 +1125,7 @@ A residue refers to a specific `monomer`_ within the `polymeric
 chain`_ of a `protein`_ or `nucleic acid`_ (Source: `Wikipedia
 Residue page`_).
 
-**Computational Definition**
-
-A character representing a specific residue (i.e., molecular species)
-or groupings of these ("ambiguity codes"), using `one-letter IUPAC
-abbreviations`_ for nucleic acids and amino acids.
-
-.. _one-letter IUPAC abbreviations:
-     https://en.wikipedia.org/wiki/International_Union_of_Pure_and_Applied_Chemistry#Amino_acid_and_nucleotide_base_codes
+.. include:: defs/Residue.rst
 
 .. _Sequence:
 
@@ -1548,12 +1137,7 @@ linear polymer of nucleic acid or amino acid :ref:`Residues <Residue>`.
 Sequences are the prevalent representation of these polymers,
 particularly in the domain of variant representation.
 
-**Computational Definition**
-
-A character string representing :ref:`Residues <Residue>` using the
-conventional sequence order (5'-to-3' for nucleic acid sequences, and
-amino-to-carboxyl for amino acid sequences) and conforming to the
-`one-letter IUPAC abbreviations`_ for sequence representation.
+.. include:: defs/Sequence.rst
 
 **Information Model**
 
@@ -1596,37 +1180,12 @@ Deprecated and Obsolete Classes
 SimpleInterval
 ##############
 
-**Computational Definition**
+.. warning::
 
-DEPRECATED: A SimpleInterval represents a span of sequence. Positions are
-always represented by contiguous spans using interbase coordinates.
+   DEPRECATED. Use :ref:`SequenceInterval` instead.
+   SimpleInterval will be removed in VRS 2.0.
 
-This class is deprecated. Use :ref:`SequenceInterval` instead.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "SimpleInterval"
-   * - start
-     - integer
-     - 1..1
-     - start position
-   * - end
-     - integer
-     - 1..1
-     - end position
+.. include:: defs/SimpleInterval.rst
 
 **Implementation Guidance**
 
@@ -1681,32 +1240,7 @@ SequenceState
 
 .. deprecated:: 1.2
 
-**Computational Definition**
-
-A :ref:`sequence` as a :ref:`State`. This is the State class
-to use for representing "ref-alt" style variation, including
-SNVs, MNVs, del, ins, and delins.
-
-**Information Model**
-
-.. list-table::
-   :class: clean-wrap
-   :header-rows: 1
-   :align: left
-   :widths: auto
-
-   * - Field
-     - Type
-     - Limits
-     - Description
-   * - type
-     - string
-     - 1..1
-     - MUST be "SequenceState"
-   * - sequence
-     - :ref:`Sequence`
-     - 1..1
-     - The string of sequence residues that is to be used as the state for other types.
+.. include:: defs/SequenceState.rst
 
 **Examples**
 
