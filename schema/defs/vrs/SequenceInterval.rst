@@ -1,6 +1,6 @@
 **Computational Definition**
 
-A SequenceInterval represents a span of :ref:`Sequence`. Positions are always represented by contiguous spans using interbase coordinates or coordinate ranges.
+A SequenceInterval represents a span on a :ref:`Sequence`. Positions are always represented by contiguous spans using interbase coordinates or coordinate ranges.
 
 **Information Model**
 

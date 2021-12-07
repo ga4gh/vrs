@@ -335,7 +335,7 @@ definitions:
 
   SequenceInterval:
     description: >-
-      A SequenceInterval represents a span of :ref:`Sequence`. Positions are
+      A SequenceInterval represents a span on a :ref:`Sequence`. Positions are
       always represented by contiguous spans using interbase coordinates or
       coordinate ranges.
     type: object
