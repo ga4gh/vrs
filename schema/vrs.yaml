@@ -43,9 +43,7 @@ definitions:
         description: Variation Id. MUST be unique within document.
       type:
         type: string
-        enum:
-        - Allele
-        default: Allele
+        const: Allele
         description: MUST be "Allele"
       location:
         oneOf:
@@ -72,9 +70,7 @@ definitions:
       _id: *id001
       type:
         type: string
-        enum:
-        - Haplotype
-        default: Haplotype
+        const: Haplotype
         description: MUST be "Haplotype"
       members:
         type: array
@@ -97,9 +93,7 @@ definitions:
       _id: *id001
       type:
         type: string
-        enum:
-        - Text
-        default: Text
+        const: Text
         description: MUST be "Text"
       definition:
         type: string
@@ -116,9 +110,7 @@ definitions:
       _id: *id001
       type:
         type: string
-        enum:
-        - VariationSet
-        default: VariationSet
+        const: VariationSet
         description: MUST be "VariationSet"
       members:
         type: array
@@ -141,9 +133,7 @@ definitions:
       _id: *id001
       type:
         type: string
-        enum:
-        - CopyNumber
-        default: CopyNumber
+        const: CopyNumber
         description: MUST be "CopyNumber"
       subject:
         oneOf:
@@ -216,9 +206,7 @@ definitions:
         description: Location Id. MUST be unique within document.
       type:
         type: string
-        enum:
-        - ChromosomeLocation
-        default: ChromosomeLocation
+        const: ChromosomeLocation
         description: MUST be "ChromosomeLocation"
       species_id:
         $ref: '#/definitions/CURIE'
@@ -245,9 +233,7 @@ definitions:
       _id: *id002
       type:
         type: string
-        enum:
-        - SequenceLocation
-        default: SequenceLocation
+        const: SequenceLocation
         description: MUST be "SequenceLocation"
       sequence_id:
         $ref: '#/definitions/CURIE'
@@ -270,9 +256,7 @@ definitions:
     properties:
       type:
         type: string
-        enum:
-        - SequenceInterval
-        default: SequenceInterval
+        const: SequenceInterval
         description: MUST be "SequenceInterval"
       start:
         oneOf:
@@ -376,9 +360,7 @@ definitions:
     properties:
       type:
         type: string
-        enum:
-        - CytobandInterval
-        default: CytobandInterval
+        const: CytobandInterval
         description: MUST be "CytobandInterval"
       start:
         $ref: '#/definitions/HumanCytoband'
@@ -411,9 +393,7 @@ definitions:
     properties:
       type:
         type: string
-        enum:
-        - LiteralSequenceExpression
-        default: LiteralSequenceExpression
+        const: LiteralSequenceExpression
         description: MUST be "LiteralSequenceExpression"
       sequence:
         $ref: '#/definitions/Sequence'
@@ -432,9 +412,7 @@ definitions:
     properties:
       type:
         type: string
-        enum:
-        - DerivedSequenceExpression
-        default: DerivedSequenceExpression
+        const: DerivedSequenceExpression
         description: MUST be "DerivedSequenceExpression"
       location:
         $ref: '#/definitions/SequenceLocation'
@@ -454,9 +432,7 @@ definitions:
     properties:
       type:
         type: string
-        enum:
-        - RepeatedSequenceExpression
-        default: RepeatedSequenceExpression
+        const: RepeatedSequenceExpression
         description: MUST be "RepeatedSequenceExpression"
       seq_expr:
         oneOf:
@@ -527,9 +503,7 @@ definitions:
     properties:
       type:
         type: string
-        enum:
-        - Gene
-        default: Gene
+        const: Gene
         description: MUST be "Gene"
       gene_id:
         $ref: '#/definitions/CURIE'
@@ -544,9 +518,7 @@ definitions:
     properties:
       type:
         type: string
-        enum:
-        - Number
-        default: Number
+        const: Number
         description: MUST be "Number"
       value:
         type: number
@@ -561,9 +533,7 @@ definitions:
     properties:
       type:
         type: string
-        enum:
-        - DefiniteRange
-        default: DefiniteRange
+        const: DefiniteRange
         description: MUST be "DefiniteRange"
       min:
         type: number
@@ -585,9 +555,7 @@ definitions:
     properties:
       type:
         type: string
-        enum:
-        - IndefiniteRange
-        default: IndefiniteRange
+        const: IndefiniteRange
         description: MUST be "IndefiniteRange"
       value:
         type: number
@@ -643,9 +611,7 @@ definitions:
     properties:
       type:
         type: string
-        enum:
-        - SequenceState
-        default: SequenceState
+        const: SequenceState
         description: MUST be "SequenceState"
       sequence:
         $ref: '#/definitions/Sequence'
@@ -666,9 +632,7 @@ definitions:
     properties:
       type:
         type: string
-        enum:
-        - SimpleInterval
-        default: SimpleInterval
+        const: SimpleInterval
         description: MUST be "SimpleInterval"
       start:
         type: integer
