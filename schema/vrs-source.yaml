@@ -215,7 +215,6 @@ definitions:
               properties:
                 value:
                   minimum: 0
-                  type: integer
       - if:
           properties:
             copies:
@@ -226,7 +225,6 @@ definitions:
               properties:
                 value:
                   minimum: 0
-                  type: integer
       - if:
           properties:
             copies:
@@ -237,10 +235,8 @@ definitions:
               properties:
                 min:
                   minimum: 0
-                  type: integer
                 max:
                   minimum: 0
-                  type: integer
 
     required: [ "subject", "copies" ]
 
@@ -367,7 +363,6 @@ definitions:
               properties:
                 value:
                   minimum: 0
-                  type: integer
       - if:
           properties:
             start:
@@ -378,7 +373,6 @@ definitions:
               properties:
                 value:
                   minimum: 0
-                  type: integer
       - if:
           properties:
             start:
@@ -389,10 +383,8 @@ definitions:
               properties:
                 min:
                   minimum: 0
-                  type: integer
                 max:
                   minimum: 0
-                  type: integer
       - if:
           properties:
             end:
@@ -403,7 +395,6 @@ definitions:
               properties:
                 value:
                   minimum: 0
-                  type: integer
       - if:
           properties:
             end:
@@ -414,7 +405,6 @@ definitions:
               properties:
                 value:
                   minimum: 0
-                  type: integer
       - if:
           properties:
             end:
@@ -425,10 +415,8 @@ definitions:
               properties:
                 min:
                   minimum: 0
-                  type: integer
                 max:
                   minimum: 0
-                  type: integer
     required: [ "type", "start", "end" ]
 
   # SimpleInterval has been moved to DEPRECATED section at bottom.
@@ -556,7 +544,6 @@ definitions:
               properties:
                 value:
                   minimum: 0
-                  type: integer
       - if:
           properties:
             count:
@@ -567,7 +554,6 @@ definitions:
               properties:
                 value:
                   minimum: 0
-                  type: integer
       - if:
           properties:
             count:
@@ -578,10 +564,8 @@ definitions:
               properties:
                 min:
                   minimum: 0
-                  type: integer
                 max:
                   minimum: 0
-                  type: integer
     required: [ "seq_expr", "count" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -626,7 +610,7 @@ definitions:
 
   Number:
     description: >-
-      A simple number value as a VRS class.
+      A simple integer value as a VRS class.
     type: object
     additionalProperties: false
     properties:
@@ -635,7 +619,7 @@ definitions:
         const: "Number"
         description: MUST be "Number"
       value:
-        type: number
+        type: integer
         description: The value represented by Number
     required: [ "type", "value" ]
 

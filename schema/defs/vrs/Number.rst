@@ -1,6 +1,6 @@
 **Computational Definition**
 
-A simple number value as a VRS class.
+A simple integer value as a VRS class.
 
 **Information Model**
 
@@ -19,6 +19,6 @@ A simple number value as a VRS class.
       - 1..1
       - MUST be "Number"
    *  - value
-      - number
+      - integer
       - 1..1
       - The value represented by Number
