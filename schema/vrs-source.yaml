@@ -180,9 +180,9 @@ definitions:
     additionalProperties: false
     type: object
     description: >-
-      The count of discrete copies of a subject :ref:`MolecularVariation`,
+      The absolute count of discrete copies of a :ref:`MolecularVariation`,
       :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference
-      to any of these.
+      within a system (e.g. genome, cell, etc.).
     properties:
       type:
         type: string
