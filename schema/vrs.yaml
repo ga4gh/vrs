@@ -352,9 +352,9 @@ definitions:
     - start
     - type
   CytobandInterval:
-    description: A contiguous region specified by cytobands. The region includes the
-      constituent regions described by the start and end cytobands, as well as any
-      intervening regions.
+    description: A contiguous span on a chromosome defined by cytoband features. The
+      span includes the constituent regions described by the start and end cytobands,
+      as well as any intervening regions.
     type: object
     additionalProperties: false
     properties:

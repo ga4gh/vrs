@@ -1,6 +1,6 @@
 **Computational Definition**
 
-A contiguous region specified by cytobands. The region includes the constituent regions described by the start and end cytobands, as well as any intervening regions.
+A contiguous span on a chromosome defined by cytoband features. The span includes the constituent regions described by the start and end cytobands, as well as any intervening regions.
 
 **Information Model**
 
