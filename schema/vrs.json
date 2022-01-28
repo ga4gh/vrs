@@ -792,6 +792,7 @@
             "components": {
                "type": "array",
                "uniqueItems": true,
+               "minItems": 2,
                "items": {
                   "oneOf": [
                      {

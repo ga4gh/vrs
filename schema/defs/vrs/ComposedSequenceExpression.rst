@@ -22,5 +22,5 @@ Some ComposedSequenceExpression attributes are inherited from :ref:`SequenceExpr
       - MUST be "ComposedSequenceExpression"
    *  - components
       - :ref:`LiteralSequenceExpression` | :ref:`RepeatedSequenceExpression` | :ref:`DerivedSequenceExpression`
-      - 0..m
+      - 2..m
       - An ordered list of :ref:`SequenceExpression` components   comprising the expression.
