@@ -205,7 +205,7 @@
       "CopyNumber": {
          "additionalProperties": false,
          "type": "object",
-         "description": "The count of discrete copies of a subject MolecularVariation, Feature, SequenceExpression, or a CURIE reference to any of these.",
+         "description": "The absolute count of discrete copies of a MolecularVariation, Feature, SequenceExpression, or a CURIE reference within a system (e.g. genome, cell, etc.).",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE",
