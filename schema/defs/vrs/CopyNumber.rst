@@ -31,4 +31,4 @@ Some CopyNumber attributes are inherited from :ref:`Variation`.
    *  - copies
       - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`
       - 1..1
-      - The integral number of copies of the subject in a genome
+      - The integral number of copies of the subject in a system

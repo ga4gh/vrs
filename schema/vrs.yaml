@@ -148,7 +148,7 @@ definitions:
         - $ref: '#/definitions/Number'
         - $ref: '#/definitions/IndefiniteRange'
         - $ref: '#/definitions/DefiniteRange'
-        description: The integral number of copies of the subject in a genome
+        description: The integral number of copies of the subject in a system
     allOf:
     - if:
         properties:
