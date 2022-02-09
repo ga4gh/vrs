@@ -262,8 +262,7 @@
                      "copies": {
                         "properties": {
                            "value": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -283,8 +282,7 @@
                      "copies": {
                         "properties": {
                            "value": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -304,12 +302,10 @@
                      "copies": {
                         "properties": {
                            "min": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            },
                            "max": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -461,8 +457,7 @@
                      "start": {
                         "properties": {
                            "value": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -482,8 +477,7 @@
                      "start": {
                         "properties": {
                            "value": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -503,12 +497,10 @@
                      "start": {
                         "properties": {
                            "min": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            },
                            "max": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -528,8 +520,7 @@
                      "end": {
                         "properties": {
                            "value": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -549,8 +540,7 @@
                      "end": {
                         "properties": {
                            "value": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -570,12 +560,10 @@
                      "end": {
                         "properties": {
                            "min": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            },
                            "max": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -731,8 +719,7 @@
                      "count": {
                         "properties": {
                            "value": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -752,8 +739,7 @@
                      "count": {
                         "properties": {
                            "value": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -773,12 +759,10 @@
                      "count": {
                         "properties": {
                            "min": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            },
                            "max": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -824,7 +808,7 @@
          ]
       },
       "Number": {
-         "description": "A simple number value as a VRS class.",
+         "description": "A simple integer value as a VRS class.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
@@ -834,7 +818,7 @@
                "description": "MUST be \"Number\""
             },
             "value": {
-               "type": "number",
+               "type": "integer",
                "description": "The value represented by Number"
             }
          },

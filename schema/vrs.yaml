@@ -159,7 +159,6 @@ definitions:
             properties:
               value:
                 minimum: 0
-                type: integer
     - if:
         properties:
           copies:
@@ -170,7 +169,6 @@ definitions:
             properties:
               value:
                 minimum: 0
-                type: integer
     - if:
         properties:
           copies:
@@ -181,10 +179,8 @@ definitions:
             properties:
               min:
                 minimum: 0
-                type: integer
               max:
                 minimum: 0
-                type: integer
     required:
     - copies
     - subject
@@ -285,7 +281,6 @@ definitions:
             properties:
               value:
                 minimum: 0
-                type: integer
     - if:
         properties:
           start:
@@ -296,7 +291,6 @@ definitions:
             properties:
               value:
                 minimum: 0
-                type: integer
     - if:
         properties:
           start:
@@ -307,10 +301,8 @@ definitions:
             properties:
               min:
                 minimum: 0
-                type: integer
               max:
                 minimum: 0
-                type: integer
     - if:
         properties:
           end:
@@ -321,7 +313,6 @@ definitions:
             properties:
               value:
                 minimum: 0
-                type: integer
     - if:
         properties:
           end:
@@ -332,7 +323,6 @@ definitions:
             properties:
               value:
                 minimum: 0
-                type: integer
     - if:
         properties:
           end:
@@ -343,10 +333,8 @@ definitions:
             properties:
               min:
                 minimum: 0
-                type: integer
               max:
                 minimum: 0
-                type: integer
     required:
     - end
     - start
@@ -456,7 +444,6 @@ definitions:
             properties:
               value:
                 minimum: 0
-                type: integer
     - if:
         properties:
           count:
@@ -467,7 +454,6 @@ definitions:
             properties:
               value:
                 minimum: 0
-                type: integer
     - if:
         properties:
           count:
@@ -478,10 +464,8 @@ definitions:
             properties:
               min:
                 minimum: 0
-                type: integer
               max:
                 minimum: 0
-                type: integer
     required:
     - count
     - seq_expr
@@ -512,7 +496,7 @@ definitions:
     - gene_id
     - type
   Number:
-    description: A simple number value as a VRS class.
+    description: A simple integer value as a VRS class.
     type: object
     additionalProperties: false
     properties:
@@ -521,7 +505,7 @@ definitions:
         const: Number
         description: MUST be "Number"
       value:
-        type: number
+        type: integer
         description: The value represented by Number
     required:
     - type
