@@ -205,7 +205,7 @@
       "CopyNumber": {
          "additionalProperties": false,
          "type": "object",
-         "description": "The count of discrete copies of a subject MolecularVariation, Feature, SequenceExpression, or a CURIE reference to any of these.",
+         "description": "The absolute count of discrete copies of a MolecularVariation, Feature, SequenceExpression, or a CURIE reference within a system (e.g. genome, cell, etc.).",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE",
@@ -245,7 +245,7 @@
                      "$ref": "#/definitions/DefiniteRange"
                   }
                ],
-               "description": "The integral number of copies of the subject in a genome"
+               "description": "The integral number of copies of the subject in a system"
             }
          },
          "allOf": [
@@ -262,8 +262,7 @@
                      "copies": {
                         "properties": {
                            "value": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -283,8 +282,7 @@
                      "copies": {
                         "properties": {
                            "value": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -304,12 +302,10 @@
                      "copies": {
                         "properties": {
                            "min": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            },
                            "max": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -461,8 +457,7 @@
                      "start": {
                         "properties": {
                            "value": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -482,8 +477,7 @@
                      "start": {
                         "properties": {
                            "value": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -503,12 +497,10 @@
                      "start": {
                         "properties": {
                            "min": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            },
                            "max": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -528,8 +520,7 @@
                      "end": {
                         "properties": {
                            "value": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -549,8 +540,7 @@
                      "end": {
                         "properties": {
                            "value": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -570,12 +560,10 @@
                      "end": {
                         "properties": {
                            "min": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            },
                            "max": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -590,7 +578,7 @@
          ]
       },
       "CytobandInterval": {
-         "description": "A contiguous region specified by cytobands. The region includes the constituent regions described by the start and end cytobands, as well as any intervening regions.",
+         "description": "A contiguous span on a chromosome defined by cytoband features. The span includes the constituent regions described by the start and end cytobands, as well as any intervening regions.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
@@ -630,6 +618,9 @@
             },
             {
                "$ref": "#/definitions/RepeatedSequenceExpression"
+            },
+            {
+               "$ref": "#/definitions/ComposedSequenceExpression"
             }
          ],
          "discriminator": {
@@ -731,8 +722,7 @@
                      "count": {
                         "properties": {
                            "value": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -752,8 +742,7 @@
                      "count": {
                         "properties": {
                            "value": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -773,12 +762,10 @@
                      "count": {
                         "properties": {
                            "min": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            },
                            "max": {
-                              "minimum": 0,
-                              "type": "integer"
+                              "minimum": 0
                            }
                         }
                      }
@@ -789,6 +776,51 @@
          "required": [
             "count",
             "seq_expr",
+            "type"
+         ]
+      },
+      "ComposedSequenceExpression": {
+         "description": "An expression of a sequence composed from multiple other  Sequence Expressions  objects. MUST have at least one component that is not a  ref:`LiteralSequenceExpression`. CANNOT be composed from  nested composed sequence expressions.",
+         "additionalProperties": false,
+         "type": "object",
+         "properties": {
+            "type": {
+               "type": "string",
+               "const": "ComposedSequenceExpression",
+               "description": "MUST be \"ComposedSequenceExpression\""
+            },
+            "components": {
+               "type": "array",
+               "uniqueItems": true,
+               "minItems": 2,
+               "items": {
+                  "oneOf": [
+                     {
+                        "$ref": "#/definitions/LiteralSequenceExpression"
+                     },
+                     {
+                        "$ref": "#/definitions/RepeatedSequenceExpression"
+                     },
+                     {
+                        "$ref": "#/definitions/DerivedSequenceExpression"
+                     }
+                  ]
+               },
+               "contains": {
+                  "oneOf": [
+                     {
+                        "$ref": "#/definitions/RepeatedSequenceExpression"
+                     },
+                     {
+                        "$ref": "#/definitions/DerivedSequenceExpression"
+                     }
+                  ]
+               },
+               "description": "An ordered list of SequenceExpression components   comprising the expression."
+            }
+         },
+         "required": [
+            "components",
             "type"
          ]
       },
@@ -824,7 +856,7 @@
          ]
       },
       "Number": {
-         "description": "A simple number value as a VRS class.",
+         "description": "A simple integer value as a VRS class.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
@@ -834,7 +866,7 @@
                "description": "MUST be \"Number\""
             },
             "value": {
-               "type": "number",
+               "type": "integer",
                "description": "The value represented by Number"
             }
          },

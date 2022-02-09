@@ -180,9 +180,9 @@ definitions:
     additionalProperties: false
     type: object
     description: >-
-      The count of discrete copies of a subject :ref:`MolecularVariation`,
+      The absolute count of discrete copies of a :ref:`MolecularVariation`,
       :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference
-      to any of these.
+      within a system (e.g. genome, cell, etc.).
     properties:
       type:
         type: string
@@ -203,7 +203,7 @@ definitions:
           - $ref: "#/definitions/IndefiniteRange"
           - $ref: "#/definitions/DefiniteRange"
         description: >-
-          The integral number of copies of the subject in a genome
+          The integral number of copies of the subject in a system
     allOf:
       - if:
           properties:
@@ -215,7 +215,6 @@ definitions:
               properties:
                 value:
                   minimum: 0
-                  type: integer
       - if:
           properties:
             copies:
@@ -226,7 +225,6 @@ definitions:
               properties:
                 value:
                   minimum: 0
-                  type: integer
       - if:
           properties:
             copies:
@@ -237,10 +235,8 @@ definitions:
               properties:
                 min:
                   minimum: 0
-                  type: integer
                 max:
                   minimum: 0
-                  type: integer
 
     required: [ "subject", "copies" ]
 
@@ -367,7 +363,6 @@ definitions:
               properties:
                 value:
                   minimum: 0
-                  type: integer
       - if:
           properties:
             start:
@@ -378,7 +373,6 @@ definitions:
               properties:
                 value:
                   minimum: 0
-                  type: integer
       - if:
           properties:
             start:
@@ -389,10 +383,8 @@ definitions:
               properties:
                 min:
                   minimum: 0
-                  type: integer
                 max:
                   minimum: 0
-                  type: integer
       - if:
           properties:
             end:
@@ -403,7 +395,6 @@ definitions:
               properties:
                 value:
                   minimum: 0
-                  type: integer
       - if:
           properties:
             end:
@@ -414,7 +405,6 @@ definitions:
               properties:
                 value:
                   minimum: 0
-                  type: integer
       - if:
           properties:
             end:
@@ -425,19 +415,17 @@ definitions:
               properties:
                 min:
                   minimum: 0
-                  type: integer
                 max:
                   minimum: 0
-                  type: integer
     required: [ "type", "start", "end" ]
 
   # SimpleInterval has been moved to DEPRECATED section at bottom.
 
   CytobandInterval:
     description: >-
-      A contiguous region specified by cytobands. The region includes
-      the constituent regions described by the start and end cytobands,
-      as well as any intervening regions.
+      A contiguous span on a chromosome defined by cytoband features.
+      The span includes the constituent regions described by the start and
+      end cytobands, as well as any intervening regions.
     type: object
     additionalProperties: false
     properties:
@@ -472,6 +460,7 @@ definitions:
       - $ref: "#/definitions/LiteralSequenceExpression"
       - $ref: "#/definitions/DerivedSequenceExpression"
       - $ref: "#/definitions/RepeatedSequenceExpression"
+      - $ref: "#/definitions/ComposedSequenceExpression"
     discriminator:
       propertyName: type
     heritable_properties:
@@ -556,7 +545,6 @@ definitions:
               properties:
                 value:
                   minimum: 0
-                  type: integer
       - if:
           properties:
             count:
@@ -567,7 +555,6 @@ definitions:
               properties:
                 value:
                   minimum: 0
-                  type: integer
       - if:
           properties:
             count:
@@ -578,11 +565,41 @@ definitions:
               properties:
                 min:
                   minimum: 0
-                  type: integer
                 max:
                   minimum: 0
-                  type: integer
     required: [ "seq_expr", "count" ]
+
+  ComposedSequenceExpression:
+    description: >-
+      An expression of a sequence composed from multiple other 
+      :ref:`Sequence Expressions<SequenceExpression>` 
+      objects. MUST have at least one component that is not a 
+      ref:`LiteralSequenceExpression`. CANNOT be composed from 
+      nested composed sequence expressions.
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        const: "ComposedSequenceExpression"
+        description: MUST be "ComposedSequenceExpression"
+      components:
+        type: array
+        uniqueItems: true
+        minItems: 2
+        items:
+          oneOf:
+            - $ref: "#/definitions/LiteralSequenceExpression"
+            - $ref: "#/definitions/RepeatedSequenceExpression"
+            - $ref: "#/definitions/DerivedSequenceExpression"
+        contains:
+          oneOf:
+            - $ref: "#/definitions/RepeatedSequenceExpression"
+            - $ref: "#/definitions/DerivedSequenceExpression"
+        description: >-
+          An ordered list of :ref:`SequenceExpression` components  
+          comprising the expression.
+    required: [ "components" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Feature
@@ -626,7 +643,7 @@ definitions:
 
   Number:
     description: >-
-      A simple number value as a VRS class.
+      A simple integer value as a VRS class.
     type: object
     additionalProperties: false
     properties:
@@ -635,7 +652,7 @@ definitions:
         const: "Number"
         description: MUST be "Number"
       value:
-        type: number
+        type: integer
         description: The value represented by Number
     required: [ "type", "value" ]
 
