@@ -618,6 +618,9 @@
             },
             {
                "$ref": "#/definitions/RepeatedSequenceExpression"
+            },
+            {
+               "$ref": "#/definitions/ComposedSequenceExpression"
             }
          ],
          "discriminator": {
@@ -773,6 +776,51 @@
          "required": [
             "count",
             "seq_expr",
+            "type"
+         ]
+      },
+      "ComposedSequenceExpression": {
+         "description": "An expression of a sequence composed from multiple other  Sequence Expressions  objects. MUST have at least one component that is not a  ref:`LiteralSequenceExpression`. CANNOT be composed from  nested composed sequence expressions.",
+         "additionalProperties": false,
+         "type": "object",
+         "properties": {
+            "type": {
+               "type": "string",
+               "const": "ComposedSequenceExpression",
+               "description": "MUST be \"ComposedSequenceExpression\""
+            },
+            "components": {
+               "type": "array",
+               "uniqueItems": true,
+               "minItems": 2,
+               "items": {
+                  "oneOf": [
+                     {
+                        "$ref": "#/definitions/LiteralSequenceExpression"
+                     },
+                     {
+                        "$ref": "#/definitions/RepeatedSequenceExpression"
+                     },
+                     {
+                        "$ref": "#/definitions/DerivedSequenceExpression"
+                     }
+                  ]
+               },
+               "contains": {
+                  "oneOf": [
+                     {
+                        "$ref": "#/definitions/RepeatedSequenceExpression"
+                     },
+                     {
+                        "$ref": "#/definitions/DerivedSequenceExpression"
+                     }
+                  ]
+               },
+               "description": "An ordered list of SequenceExpression components   comprising the expression."
+            }
+         },
+         "required": [
+            "components",
             "type"
          ]
       },
