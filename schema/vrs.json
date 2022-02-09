@@ -70,10 +70,7 @@
             },
             "type": {
                "type": "string",
-               "enum": [
-                  "Allele"
-               ],
-               "default": "Allele",
+               "const": "Allele",
                "description": "MUST be \"Allele\""
             },
             "location": {
@@ -121,10 +118,7 @@
             },
             "type": {
                "type": "string",
-               "enum": [
-                  "Haplotype"
-               ],
-               "default": "Haplotype",
+               "const": "Haplotype",
                "description": "MUST be \"Haplotype\""
             },
             "members": {
@@ -160,10 +154,7 @@
             },
             "type": {
                "type": "string",
-               "enum": [
-                  "Text"
-               ],
-               "default": "Text",
+               "const": "Text",
                "description": "MUST be \"Text\""
             },
             "definition": {
@@ -187,10 +178,7 @@
             },
             "type": {
                "type": "string",
-               "enum": [
-                  "VariationSet"
-               ],
-               "default": "VariationSet",
+               "const": "VariationSet",
                "description": "MUST be \"VariationSet\""
             },
             "members": {
@@ -225,10 +213,7 @@
             },
             "type": {
                "type": "string",
-               "enum": [
-                  "CopyNumber"
-               ],
-               "default": "CopyNumber",
+               "const": "CopyNumber",
                "description": "MUST be \"CopyNumber\""
             },
             "subject": {
@@ -363,10 +348,7 @@
             },
             "type": {
                "type": "string",
-               "enum": [
-                  "ChromosomeLocation"
-               ],
-               "default": "ChromosomeLocation",
+               "const": "ChromosomeLocation",
                "description": "MUST be \"ChromosomeLocation\""
             },
             "species_id": {
@@ -401,10 +383,7 @@
             },
             "type": {
                "type": "string",
-               "enum": [
-                  "SequenceLocation"
-               ],
-               "default": "SequenceLocation",
+               "const": "SequenceLocation",
                "description": "MUST be \"SequenceLocation\""
             },
             "sequence_id": {
@@ -436,10 +415,7 @@
          "properties": {
             "type": {
                "type": "string",
-               "enum": [
-                  "SequenceInterval"
-               ],
-               "default": "SequenceInterval",
+               "const": "SequenceInterval",
                "description": "MUST be \"SequenceInterval\""
             },
             "start": {
@@ -620,10 +596,7 @@
          "properties": {
             "type": {
                "type": "string",
-               "enum": [
-                  "CytobandInterval"
-               ],
-               "default": "CytobandInterval",
+               "const": "CytobandInterval",
                "description": "MUST be \"CytobandInterval\""
             },
             "start": {
@@ -670,10 +643,7 @@
          "properties": {
             "type": {
                "type": "string",
-               "enum": [
-                  "LiteralSequenceExpression"
-               ],
-               "default": "LiteralSequenceExpression",
+               "const": "LiteralSequenceExpression",
                "description": "MUST be \"LiteralSequenceExpression\""
             },
             "sequence": {
@@ -693,10 +663,7 @@
          "properties": {
             "type": {
                "type": "string",
-               "enum": [
-                  "DerivedSequenceExpression"
-               ],
-               "default": "DerivedSequenceExpression",
+               "const": "DerivedSequenceExpression",
                "description": "MUST be \"DerivedSequenceExpression\""
             },
             "location": {
@@ -721,10 +688,7 @@
          "properties": {
             "type": {
                "type": "string",
-               "enum": [
-                  "RepeatedSequenceExpression"
-               ],
-               "default": "RepeatedSequenceExpression",
+               "const": "RepeatedSequenceExpression",
                "description": "MUST be \"RepeatedSequenceExpression\""
             },
             "seq_expr": {
@@ -846,10 +810,7 @@
          "properties": {
             "type": {
                "type": "string",
-               "enum": [
-                  "Gene"
-               ],
-               "default": "Gene",
+               "const": "Gene",
                "description": "MUST be \"Gene\""
             },
             "gene_id": {
@@ -869,10 +830,7 @@
          "properties": {
             "type": {
                "type": "string",
-               "enum": [
-                  "Number"
-               ],
-               "default": "Number",
+               "const": "Number",
                "description": "MUST be \"Number\""
             },
             "value": {
@@ -892,10 +850,7 @@
          "properties": {
             "type": {
                "type": "string",
-               "enum": [
-                  "DefiniteRange"
-               ],
-               "default": "DefiniteRange",
+               "const": "DefiniteRange",
                "description": "MUST be \"DefiniteRange\""
             },
             "min": {
@@ -920,10 +875,7 @@
          "properties": {
             "type": {
                "type": "string",
-               "enum": [
-                  "IndefiniteRange"
-               ],
-               "default": "IndefiniteRange",
+               "const": "IndefiniteRange",
                "description": "MUST be \"IndefiniteRange\""
             },
             "value": {
@@ -979,10 +931,7 @@
          "properties": {
             "type": {
                "type": "string",
-               "enum": [
-                  "SequenceState"
-               ],
-               "default": "SequenceState",
+               "const": "SequenceState",
                "description": "MUST be \"SequenceState\""
             },
             "sequence": {
@@ -1007,10 +956,7 @@
          "properties": {
             "type": {
                "type": "string",
-               "enum": [
-                  "SimpleInterval"
-               ],
-               "default": "SimpleInterval",
+               "const": "SimpleInterval",
                "description": "MUST be \"SimpleInterval\""
             },
             "start": {
