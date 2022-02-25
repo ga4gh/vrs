@@ -919,47 +919,6 @@ large-scale tandem duplications.
       "type": "RepeatedSequenceExpression"
     }
 
-.. _ComposedSequenceExpression:
-
-ComposedSequenceExpression
-##########################
-
-*Composed Sequence* is a class of sequence expression where two or more
-constitutive sequence expressions are expressed as an ordered list,
-representing a concatenated sequence. This class is useful for expressing
-concepts such as the OPMD polyalanine alleles [2]_.
-
-.. [2] Brais b, et al. *Short CCG expansions in the PABP2 gene cause
-       oculopharyngeal muscular dystrophy* Nat Genet. (1998).
-
-.. include:: defs/ComposedSequenceExpression.rst
-
-**Examples**
-
-.. parsed-literal::
-
-   {
-     "type": "ComposedSequenceExpression",
-     "components": [
-       {
-         "type": "RepeatedSequenceExpression",
-         "seq_expr": { "type": "LiteralSequenceExpression", "sequence": "GCG" },
-         "count": { "type": "Number", "value": 11 }
-       },
-       {
-         "type": "RepeatedSequenceExpression",
-         "seq_expr": { "type": "LiteralSequenceExpression", "sequence": "GCA" },
-         "count": { "type": "Number", "value": 3 }
-       },
-       {
-         "type": "RepeatedSequenceExpression",
-         "seq_expr": { "type": "LiteralSequenceExpression", "sequence": "GCG" },
-         "count": { "type": "Number", "value": 1 }
-       }
-     ]
-   }
-
-
 .. _Feature:
 
 Feature
