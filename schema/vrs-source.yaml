@@ -67,7 +67,8 @@ definitions:
       A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
     oneOf:
-      - $ref: "#/definitions/CopyNumber"
+      - $ref: "#/definitions/AbsoluteCopyNumber"
+      - $ref: "#/definitions/RelativeCopyNumber"
     discriminator:
       propertyName: type
 
@@ -176,9 +177,10 @@ definitions:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # SystemicVariation
 
-  CopyNumber:
+  AbsoluteCopyNumber:
     additionalProperties: false
     type: object
+    status: draft
     description: >-
       The absolute count of discrete copies of a :ref:`MolecularVariation`,
       :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference
@@ -186,9 +188,9 @@ definitions:
     properties:
       type:
         type: string
-        const: "CopyNumber"
+        const: "AbsoluteCopyNumber"
         description: >-
-          MUST be "CopyNumber"
+          MUST be "AbsoluteCopyNumber"
       subject:
         oneOf:
           - $ref: "#/definitions/MolecularVariation"
@@ -239,6 +241,35 @@ definitions:
                   minimum: 0
 
     required: [ "subject", "copies" ]
+
+  RelativeCopyNumber:
+    additionalProperties: false
+    type: object
+    status: draft
+    description: >-
+      The relative copies of a :ref:`MolecularVariation`,
+      :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference
+      within an unspecified baseline in a system (e.g. genome, cell, etc.).
+    properties:
+      type:
+        type: string
+        const: "RelativeCopyNumber"
+        description: >-
+          MUST be "RelativeCopyNumber"
+      subject:
+        oneOf:
+          - $ref: "#/definitions/MolecularVariation"
+          - $ref: "#/definitions/Feature"
+          - $ref: "#/definitions/SequenceExpression"
+          - $ref: "#/definitions/CURIE"
+        description: >-
+          Subject of the Copy Number object
+      relative_copy_class:
+        type: string
+        enum: [ "complete loss", "partial loss", "copy neutral", "low-level gain", "high-level gain" ]
+        description: >-
+          MUST be one of "complete loss", "partial loss", "copy neutral", "low-level gain" or "high-level gain".
+    required: [ "subject", "relative_copy_class" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations

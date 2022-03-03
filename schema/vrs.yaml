@@ -30,7 +30,8 @@ definitions:
     description: A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
     oneOf:
-    - $ref: '#/definitions/CopyNumber'
+    - $ref: '#/definitions/AbsoluteCopyNumber'
+    - $ref: '#/definitions/RelativeCopyNumber'
     discriminator:
       propertyName: type
   Allele:
@@ -124,9 +125,10 @@ definitions:
     required:
     - members
     - type
-  CopyNumber:
+  AbsoluteCopyNumber:
     additionalProperties: false
     type: object
+    status: draft
     description: The absolute count of discrete copies of a MolecularVariation, Feature,
       SequenceExpression, or a CURIE reference within a system (e.g. genome, cell,
       etc.).
@@ -134,8 +136,8 @@ definitions:
       _id: *id001
       type:
         type: string
-        const: CopyNumber
-        description: MUST be "CopyNumber"
+        const: AbsoluteCopyNumber
+        description: MUST be "AbsoluteCopyNumber"
       subject:
         oneOf:
         - $ref: '#/definitions/MolecularVariation'
@@ -184,6 +186,40 @@ definitions:
                 minimum: 0
     required:
     - copies
+    - subject
+    - type
+  RelativeCopyNumber:
+    additionalProperties: false
+    type: object
+    status: draft
+    description: The relative copies of a MolecularVariation, Feature, SequenceExpression,
+      or a CURIE reference within an unspecified baseline in a system (e.g. genome,
+      cell, etc.).
+    properties:
+      _id: *id001
+      type:
+        type: string
+        const: RelativeCopyNumber
+        description: MUST be "RelativeCopyNumber"
+      subject:
+        oneOf:
+        - $ref: '#/definitions/MolecularVariation'
+        - $ref: '#/definitions/Feature'
+        - $ref: '#/definitions/SequenceExpression'
+        - $ref: '#/definitions/CURIE'
+        description: Subject of the Copy Number object
+      relative_copy_class:
+        type: string
+        enum:
+        - complete loss
+        - partial loss
+        - copy neutral
+        - low-level gain
+        - high-level gain
+        description: MUST be one of "complete loss", "partial loss", "copy neutral",
+          "low-level gain" or "high-level gain".
+    required:
+    - relative_copy_class
     - subject
     - type
   Location:

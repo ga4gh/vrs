@@ -4,7 +4,7 @@ The absolute count of discrete copies of a :ref:`MolecularVariation`, :ref:`Feat
 
 **Information Model**
 
-Some CopyNumber attributes are inherited from :ref:`Variation`.
+Some AbsoluteCopyNumber attributes are inherited from :ref:`Variation`.
 
 .. list-table::
    :class: clean-wrap
@@ -23,7 +23,7 @@ Some CopyNumber attributes are inherited from :ref:`Variation`.
    *  - type
       - string
       - 1..1
-      - MUST be "CopyNumber"
+      - MUST be "AbsoluteCopyNumber"
    *  - subject
       - :ref:`MolecularVariation` | :ref:`Feature` | :ref:`SequenceExpression` | :ref:`CURIE`
       - 1..1
