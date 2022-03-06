@@ -52,23 +52,46 @@ Implementations should normalize Alleles
 
 VRS STRONGLY RECOMMENDS that Alleles be :ref:`normalized
 <normalization>` when generating :ref:`computed identifiers
-<computed-identifiers>` unless there is compelling reason to do otherwise.
-Those reasons are the subject of this section.
+<computed-identifiers>` unless there is compelling reason to do
+otherwise.  Those reasons are the subject of this section.
 
-:ref:`Fully-justified Normalization <normalization>` is the process of comparing a span of reference sequence to a sequence state (often the alternative sequence).  Normalization consists of two steps: trimming and shuffling.  In the trimming step, common flanking prefix and suffix sequences are removed.  For example, a CAG-to-CTG Allele would be trimmed to merely A-to-T, with the position adjusted accordingly.  There are four cases of the resulting sequences:
+:ref:`Fully-justified Normalization <normalization>` is the process of
+comparing a span of reference sequence to a sequence state (often the
+alternative sequence).  Normalization consists of two steps: trimming
+and shuffling.  In the trimming step, common flanking prefix and
+suffix sequences are removed.  For example, a CAG-to-CTG Allele would
+be trimmed to merely A-to-T, with the position adjusted accordingly.
+There are four cases of the resulting sequences:
 
-  1. The trimmed sequences are empty: The Allele refers to reference state.
-  2. The trimmed sequences are non-empty: The Allele is a substitution (perhaps multi-residue).
+  1. The trimmed sequences are empty: The Allele refers to reference
+     state.
+  2. The trimmed sequences are non-empty: The Allele is a substitution
+     (perhaps multi-residue).
   3. The reference sequence is empty: The Allele is a net insertion.
   4. The state sequence is empty: The Allele is a net deletion.
 
-When the Allele refers to a reference state (case 1), trimming would reduce the variant to a null change.  However, reduction to a null state would make it impossible to refer to a specific span of reference sequence. In order to permit users to refer to spans of reference sequence, VRS does not require normalizing reference agreement Alleles.
+When the Allele refers to a reference state (case 1), trimming would
+reduce the variant to a null change.  However, reduction to a null
+state would make it impossible to refer to a specific span of
+reference sequence. In order to permit users to refer to spans of
+reference sequence, VRS does not require normalizing reference
+agreement Alleles.
 
-The trimming step applies only when the reference or the state sequences are empty (cases 3 and 4).  When these occur in the context of repeating reference sequence that matches the inserted or deleted sequence, the Allele may be shuffled left and right to identify the fully-justified location of the variation. (See :ref:`normalization` for details.)
+The trimming step applies only when the reference or the state
+sequences are empty (cases 3 and 4).  When these occur in the context
+of repeating reference sequence that matches the inserted or deleted
+sequence, the Allele may be shuffled left and right to identify the
+fully-justified location of the variation. (See :ref:`normalization`
+for details.)
 
-In rare cases, data originators might have reason to associate an annotation with a specific repeating unit in the context of repeated sequence.  In order to support this case, normalization is not strictly required.
+In rare cases, data originators might have reason to associate an
+annotation with a specific repeating unit in the context of repeated
+sequence.  In order to support this case, normalization is not
+strictly required.
 
-Most users will normalize most Alleles.  Normalization should be skipped only when doing so would decrease the intended precision of an Allele.
+Most users will normalize most Alleles.  Normalization should be
+skipped only when doing so would decrease the intended precision of an
+Allele.
 
 
 .. _fully-justified:
