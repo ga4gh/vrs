@@ -32,10 +32,10 @@ Allele Rather than Variant
 The most primitive sequence assertion in VRS is the :ref:`Allele`
 entity. Colloquially, the words "allele" and "variant" have similar
 meanings and they are often used interchangeably. However, the VR
-contributors believe that it is essential to distinguish the state of
-the sequence from the change between states of a sequence. It is
+contributors believe that it is essential to distinguish the *state* of
+the sequence from the *change between states* of a sequence. It is
 imperative that precise terms are used when modelling data. Therefore,
-within VRS, Allele refers to a state and "variant" refers to the change
+within VRS, "Allele" refers to a state and "variant" refers to the change
 from one Allele to another.
 
 The word "variant", which implies change, makes it awkward to refer to
@@ -47,42 +47,28 @@ consequence is better associated with an allele than with a variant.
 
 .. _should-normalize:
 
-Implementations should normalize
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Implementations should normalize Alleles
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 VRS STRONGLY RECOMMENDS that Alleles be :ref:`normalized
 <normalization>` when generating :ref:`computed identifiers
-<computed-identifiers>`. The rationale for recommending, rather than
-requiring, normalization is grounded in dual views of Allele objects
-with distinct interpretations:
+<computed-identifiers>` unless there is compelling reason to do otherwise.
+Those reasons are the subject of this section.
 
-* Allele as minimal representation of a change in sequence. In this
-  view, normalization is a process that makes the representation
-  minimal and unambiguous.
+:ref:`Fully-justified Normalization <normalization>` is the process of comparing a span of reference sequence to a sequence state (often the alternative sequence).  Normalization consists of two steps: trimming and shuffling.  In the trimming step, common flanking prefix and suffix sequences are removed.  For example, a CAG-to-CTG Allele would be trimmed to merely A-to-T, with the position adjusted accordingly.  There are four cases of the resulting sequences:
 
-* Allele as an assertion of state. In this view, it is reasonable to
-  want to assert state that may include (or be composed entirely of)
-  reference bases, for which the normalization process would alter the
-  intent.
+  1. The trimmed sequences are empty: The Allele refers to reference state.
+  2. The trimmed sequences are non-empty: The Allele is a substitution (perhaps multi-residue).
+  3. The reference sequence is empty: The Allele is a net insertion.
+  4. The state sequence is empty: The Allele is a net deletion.
 
-Although this rationale applies only to Alleles, it may have have
-parallels with other VRS types. In addition, it is desirable for all
-VRS types to be treated similarly.
+When the Allele refers to a reference state (case 1), trimming would reduce the variant to a null change.  However, reduction to a null state would make it impossible to refer to a specific span of reference sequence. In order to permit users to refer to spans of reference sequence, VRS does not require normalizing reference agreement Alleles.
 
-Furthermore, if normalization were required in order to generate
-:ref:`computed-identifiers`, but did not apply to certain instances of
-VRS Variation, implementations would likely require secondary
-identifier mechanisms, which would undermine the intent of a global
-computed identifier.
+The trimming step applies only when the reference or the state sequences are empty (cases 3 and 4).  When these occur in the context of repeating reference sequence that matches the inserted or deleted sequence, the Allele may be shuffled left and right to identify the fully-justified location of the variation. (See :ref:`normalization` for details.)
 
-The primary downside of not requiring normalization is that Variation
-objects might be written in non-canonical forms, thereby creating
-unintended degeneracy.
+In rare cases, data originators might have reason to associate an annotation with a specific repeating unit in the context of repeated sequence.  In order to support this case, normalization is not strictly required.
 
-Therefore, normalization of all VRS Variation classes is optional in
-order to support the view of Allele as an assertion of state on a
-sequence.
-
+Most users will normalize most Alleles.  Normalization should be skipped only when doing so would decrease the intended precision of an Allele.
 
 
 .. _fully-justified:
