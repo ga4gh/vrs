@@ -45,6 +45,35 @@ when referring to an unchanged residue. In some cases, such "variants"
 are even associated with allele frequencies. Similarly, a predicted
 consequence is better associated with an allele than with a variant.
 
+
+.. _fully-justified:
+
+Alleles are Fully Justified
+@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+In order to standardize the representation of sequence variation,
+Alleles SHOULD be fully justified from the description of the NCBI
+`Variant Overprecision Correction Algorithm (VOCA)`_. Furthermore,
+normalization rules are identical for all sequence types (DNA, RNA,
+and protein). 
+
+The choice of algorithm was relatively straightforward: VOCA is
+published, easily understood, easily implemented, and
+covers a wide range of cases.
+
+The choice to fully justify is a departure from other common variation
+formats. The HGVS nomenclature recommendations, originally published in
+1998, require that alleles be right normalized `(3' rule)`_ on all sequence
+types. The Variant Call Format (VCF), released as a PDF specification
+in 2009, made the conflicting choice to write variants `left (5')
+normalized`_ and anchored to the previous nucleotide.
+
+Fully-justified alleles represent an alternate approach. A fully-justified
+representation does not make an arbitrary choice of where a variant truly
+occurs in a low-complexity region, but rather describes the final and
+unambiguous state of the resultant sequence.
+
+
 .. _should-normalize:
 
 Implementations should normalize Alleles
@@ -92,34 +121,6 @@ strictly required.
 Most users will normalize most Alleles.  Normalization should be
 skipped only when doing so would decrease the intended precision of an
 Allele.
-
-
-.. _fully-justified:
-
-Alleles are Fully Justified
-@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-In order to standardize the representation of sequence variation,
-Alleles SHOULD be fully justified from the description of the NCBI
-`Variant Overprecision Correction Algorithm (VOCA)`_. Furthermore,
-normalization rules are identical for all sequence types (DNA, RNA,
-and protein). 
-
-The choice of algorithm was relatively straightforward: VOCA is
-published, easily understood, easily implemented, and
-covers a wide range of cases.
-
-The choice to fully justify is a departure from other common variation
-formats. The HGVS nomenclature recommendations, originally published in
-1998, require that alleles be right normalized `(3' rule)`_ on all sequence
-types. The Variant Call Format (VCF), released as a PDF specification
-in 2009, made the conflicting choice to write variants `left (5')
-normalized`_ and anchored to the previous nucleotide.
-
-Fully-justified alleles represent an alternate approach. A fully-justified
-representation does not make an arbitrary choice of where a variant truly
-occurs in a low-complexity region, but rather describes the final and
-unambiguous state of the resultant sequence.
 
 
 .. _inter-residue-coordinates-design:
