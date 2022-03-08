@@ -1,6 +1,6 @@
 **Computational Definition**
 
-The relative copies of a :ref:`MolecularVariation`, :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference within an unspecified baseline in a system (e.g. genome, cell, etc.).
+The relative copies of a :ref:`MolecularVariation`, :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference against an unspecified baseline in a system (e.g. genome, cell, etc.).
 
 **Information Model**
 
