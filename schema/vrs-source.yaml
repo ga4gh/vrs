@@ -180,7 +180,7 @@ definitions:
   AbsoluteCopyNumber:
     additionalProperties: false
     type: object
-    status: draft
+    maturity: draft
     description: >-
       The absolute count of discrete copies of a :ref:`MolecularVariation`,
       :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference
@@ -245,11 +245,11 @@ definitions:
   RelativeCopyNumber:
     additionalProperties: false
     type: object
-    status: draft
+    maturity: draft
     description: >-
       The relative copies of a :ref:`MolecularVariation`,
       :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference
-      within an unspecified baseline in a system (e.g. genome, cell, etc.).
+      against an unspecified baseline in a system (e.g. genome, cell, etc.).
     properties:
       type:
         type: string
