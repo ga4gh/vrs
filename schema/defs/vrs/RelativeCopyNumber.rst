@@ -1,10 +1,10 @@
 **Computational Definition**
 
-The absolute count of discrete copies of a :ref:`MolecularVariation`, :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference within a system (e.g. genome, cell, etc.).
+The relative copies of a :ref:`MolecularVariation`, :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference against an unspecified baseline in a system (e.g. genome, cell, etc.).
 
 **Information Model**
 
-Some CopyNumber attributes are inherited from :ref:`Variation`.
+Some RelativeCopyNumber attributes are inherited from :ref:`Variation`.
 
 .. list-table::
    :class: clean-wrap
@@ -23,12 +23,12 @@ Some CopyNumber attributes are inherited from :ref:`Variation`.
    *  - type
       - string
       - 1..1
-      - MUST be "CopyNumber"
+      - MUST be "RelativeCopyNumber"
    *  - subject
       - :ref:`MolecularVariation` | :ref:`Feature` | :ref:`SequenceExpression` | :ref:`CURIE`
       - 1..1
       - Subject of the Copy Number object
-   *  - copies
-      - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`
+   *  - relative_copy_class
+      - string
       - 1..1
-      - The integral number of copies of the subject in a system
+      - MUST be one of "complete loss", "partial loss", "copy neutral", "low-level gain" or "high-level gain".
