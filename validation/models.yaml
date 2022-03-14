@@ -1,19 +1,19 @@
 Number:
-  - 
+  -
     in:
       type: Number
       value: 55
     out:
       ga4gh_serialize: '{"type":"Number","value":55}'
 Gene:
-  - 
+  -
     in:
       gene_id: ncbigene:384
       type: Gene
     out:
       ga4gh_serialize: '{"gene_id":"ncbigene:384","type":"Gene"}'
 SimpleInterval:
-  - 
+  -
     in:
       end: 44908822
       start: 44908821
@@ -262,7 +262,7 @@ Haplotype:
       ga4gh_digest: i8owCOBHIlRCPtcw_WzRFNTunwJRy99-
       ga4gh_identify: ga4gh:VH.i8owCOBHIlRCPtcw_WzRFNTunwJRy99-
       ga4gh_serialize: '{"members":["-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x","Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"],"type":"Haplotype"}'
-CopyNumber:
+AbsoluteCopyNumber:
   - name: ">=3 copies APOE"
     in:
       copies:
@@ -270,13 +270,25 @@ CopyNumber:
         type: IndefiniteRange
         value: 3
       subject:
-        gene_id: ncbigene:384
+        gene_id: ncbigene:348
         type: Gene
-      type: CopyNumber
+      type: AbsoluteCopyNumber
     out:
-      ga4gh_digest: xksSWn--_z28Qaj-Udlhot4OKqYGkywy
-      ga4gh_identify: ga4gh:VCN.xksSWn--_z28Qaj-Udlhot4OKqYGkywy
-      ga4gh_serialize: '{"copies":{"comparator":">=","type":"IndefiniteRange","value":3},"subject":{"gene_id":"ncbigene:384","type":"Gene"},"type":"CopyNumber"}'
+      ga4gh_digest: 5DNZrhIFslE6Eeo0CsDyQQERR6x7v9OE
+      ga4gh_identify: ga4gh:VAC.5DNZrhIFslE6Eeo0CsDyQQERR6x7v9OE
+      ga4gh_serialize: '{"copies":{"comparator":">=","type":"IndefiniteRange","value":3},"subject":{"gene_id":"ncbigene:348","type":"Gene"},"type":"AbsoluteCopyNumber"}'
+RelativeCopyNumber:
+  - name: "Low-level copy gain of BRCA1"
+    in:
+      relative_copy_class: low-level gain
+      subject:
+        gene_id: ncbigene:348
+        type: Gene
+      type: RelativeCopyNumber
+    out:
+      ga4gh_digest: CUf7xZJd36mapcm0h3cOZR8kjM_Aj4UV
+      ga4gh_identify: ga4gh:VRC.CUf7xZJd36mapcm0h3cOZR8kjM_Aj4UV
+      ga4gh_serialize: '{"relative_copy_class":"low-level gain","subject":{"gene_id":"ncbigene:348","type":"Gene"},"type":"RelativeCopyNumber"}'
 Text:
   -
     in:
