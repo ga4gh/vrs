@@ -53,8 +53,8 @@ definitions:
         description: Where Allele is located
       state:
         oneOf:
-        - $ref: '#/definitions/SequenceState'
         - $ref: '#/definitions/SequenceExpression'
+        - $ref: '#/definitions/SequenceState'
         description: An expression of the sequence state
         deprecated:
         - $ref: '#/definitions/SequenceState'
@@ -509,9 +509,9 @@ definitions:
     - seq_expr
     - type
   ComposedSequenceExpression:
-    description: An expression of a sequence composed from multiple other  Sequence
-      Expressions  objects. MUST have at least one component that is not a  ref:`LiteralSequenceExpression`.
-      CANNOT be composed from  nested composed sequence expressions.
+    description: An expression of a sequence composed from multiple other Sequence
+      Expressions objects. MUST have at least one component that is not a ref:`LiteralSequenceExpression`.
+      CANNOT be composed from nested composed sequence expressions.
     additionalProperties: false
     type: object
     properties:
@@ -532,8 +532,8 @@ definitions:
           oneOf:
           - $ref: '#/definitions/RepeatedSequenceExpression'
           - $ref: '#/definitions/DerivedSequenceExpression'
-        description: An ordered list of SequenceExpression components   comprising
-          the expression.
+        description: An ordered list of SequenceExpression components comprising the
+          expression.
     required:
     - components
     - type
