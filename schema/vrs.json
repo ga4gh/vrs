@@ -62,15 +62,13 @@
             "propertyName": "type"
          }
       },
-      "Allele": {
+      "Allele.v2": {
          "description": "The state of a molecule at a Location.",
          "additionalProperties": false,
          "type": "object",
+         "maturity": "draft",
+         "prefix": "VA.v2",
          "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "Variation Id. MUST be unique within document."
-            },
             "type": {
                "type": "string",
                "const": "Allele",
@@ -82,32 +80,19 @@
                      "$ref": "#/definitions/CURIE"
                   },
                   {
-                     "$ref": "#/definitions/Location"
+                     "$ref": "#/definitions/SequenceLocation.v2"
                   }
                ],
                "description": "Where Allele is located"
             },
             "state": {
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/SequenceExpression"
-                  },
-                  {
-                     "$ref": "#/definitions/SequenceState"
-                  }
-               ],
-               "description": "An expression of the sequence state",
-               "deprecated": [
-                  {
-                     "$ref": "#/definitions/SequenceState"
-                  }
-               ]
+               "$ref": "#/definitions/SequenceExpression",
+               "description": "An expression of the sequence state"
             }
          },
          "required": [
             "location",
-            "state",
-            "type"
+            "state"
          ]
       },
       "Haplotype": {
@@ -209,6 +194,7 @@
          "additionalProperties": false,
          "type": "object",
          "maturity": "draft",
+         "prefix": "VACN.v1",
          "description": "The absolute count of discrete copies of a MolecularVariation, Feature, SequenceExpression, or a CURIE reference within a system (e.g. genome, cell, etc.).",
          "properties": {
             "_id": {
@@ -223,16 +209,10 @@
             "subject": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/MolecularVariation"
+                     "$ref": "#/definitions/SequenceLocation"
                   },
                   {
                      "$ref": "#/definitions/Feature"
-                  },
-                  {
-                     "$ref": "#/definitions/SequenceExpression"
-                  },
-                  {
-                     "$ref": "#/definitions/CURIE"
                   }
                ],
                "description": "Subject of the Copy Number object"
@@ -327,6 +307,7 @@
          "additionalProperties": false,
          "type": "object",
          "maturity": "draft",
+         "prefix": "VRCN.v1",
          "description": "The relative copies of a MolecularVariation, Feature, SequenceExpression, or a CURIE reference against an unspecified baseline in a system (e.g. genome, cell, etc.).",
          "properties": {
             "_id": {
@@ -341,16 +322,10 @@
             "subject": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/MolecularVariation"
+                     "$ref": "#/definitions/SequenceLocation"
                   },
                   {
                      "$ref": "#/definitions/Feature"
-                  },
-                  {
-                     "$ref": "#/definitions/SequenceExpression"
-                  },
-                  {
-                     "$ref": "#/definitions/CURIE"
                   }
                ],
                "description": "Subject of the Copy Number object"
@@ -373,59 +348,26 @@
             "type"
          ]
       },
-      "Location": {
+      "Location.v2": {
          "description": "A contiguous segment of a biological sequence.",
          "oneOf": [
             {
-               "$ref": "#/definitions/ChromosomeLocation"
+               "$ref": "#/definitions/CytogenomicLocation.v2"
             },
             {
-               "$ref": "#/definitions/SequenceLocation"
+               "$ref": "#/definitions/SequenceLocation.v2"
             }
          ],
          "discriminator": {
             "propertyName": "type"
          }
       },
-      "ChromosomeLocation": {
-         "additionalProperties": false,
-         "description": "A Location on a chromosome defined by a species and chromosome name.",
-         "type": "object",
-         "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "Location Id. MUST be unique within document."
-            },
-            "type": {
-               "type": "string",
-               "const": "ChromosomeLocation",
-               "description": "MUST be \"ChromosomeLocation\""
-            },
-            "species_id": {
-               "$ref": "#/definitions/CURIE",
-               "default": "taxonomy:9606",
-               "description": "CURIE representing a species from the [NCBI species taxonomy](https://registry.identifiers.org/registry/taxonomy). Default: \"taxonomy:9606\" (human)"
-            },
-            "chr": {
-               "type": "string",
-               "description": "The symbolic chromosome name. For humans, For humans, chromosome names MUST be one of 1..22, X, Y (case-sensitive)"
-            },
-            "interval": {
-               "$ref": "#/definitions/CytobandInterval",
-               "description": "The chromosome region defined by a CytobandInterval"
-            }
-         },
-         "required": [
-            "chr",
-            "interval",
-            "species_id",
-            "type"
-         ]
-      },
-      "SequenceLocation": {
+      "SequenceLocation.v2": {
          "additionalProperties": false,
          "description": "A Location defined by an interval on a referenced Sequence.",
          "type": "object",
+         "maturity": "draft",
+         "prefix": "VSL.v2",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE",
@@ -438,23 +380,78 @@
             },
             "sequence_id": {
                "$ref": "#/definitions/CURIE",
-               "description": "A VRS Computed Identifier for the reference Sequence."
+               "description": "A VRS :ref:`Computed Identifier <computed-identifiers>` for the reference :ref:`Sequence`."
             },
-            "interval": {
+            "start": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/SequenceInterval"
+                     "$ref": "#/definitions/Number"
                   },
                   {
-                     "$ref": "#/definitions/SimpleInterval"
+                     "$ref": "#/definitions/IndefiniteRange"
+                  },
+                  {
+                     "$ref": "#/definitions/DefiniteRange"
                   }
                ],
-               "description": "Reference sequence region defined by a SequenceInterval."
+               "description": "The start coordinate or range of the interval. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range less than the value of `end`."
+            },
+            "end": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/Number"
+                  },
+                  {
+                     "$ref": "#/definitions/IndefiniteRange"
+                  },
+                  {
+                     "$ref": "#/definitions/DefiniteRange"
+                  }
+               ],
+               "description": "The end coordinate or range of the interval. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range greater than the value of `start`."
             }
          },
          "required": [
-            "interval",
+            "end",
             "sequence_id",
+            "start",
+            "type"
+         ]
+      },
+      "CytogenomicLocation.v2": {
+         "additionalProperties": false,
+         "description": "A Location on a human chromosome defined by cytogenetic markers.",
+         "type": "object",
+         "maturity": "draft",
+         "prefix": "VCL.v2",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE",
+               "description": "Location Id. MUST be unique within document."
+            },
+            "type": {
+               "type": "string",
+               "const": "CytogenomicLocation",
+               "description": "MUST be \"CytogenomicLocation\""
+            },
+            "species_id": {
+               "$ref": "#/definitions/CURIE",
+               "default": "taxonomy:9606",
+               "description": ":ref:`CURIE` representing a species from the `NCBI species taxonomy <https://registry.identifiers.org/registry/taxonomy>`_. Default: \"taxonomy:9606\" (human)"
+            },
+            "chr": {
+               "type": "string",
+               "description": "The symbolic chromosome name. For humans, For humans, chromosome names MUST be one of 1..22, X, Y (case-sensitive)"
+            },
+            "interval": {
+               "$ref": "#/definitions/CytobandInterval",
+               "description": "The chromosome region defined by a :ref:`CytobandInterval`"
+            }
+         },
+         "required": [
+            "chr",
+            "interval",
+            "species_id",
             "type"
          ]
       },
@@ -693,7 +690,7 @@
             },
             "sequence": {
                "$ref": "#/definitions/Sequence",
-               "description": "the literal Sequence expressed"
+               "description": "the literal :ref:`Sequence` expressed"
             }
          },
          "required": [
@@ -870,7 +867,7 @@
                      }
                   ]
                },
-               "description": "An ordered list of SequenceExpression components comprising the expression."
+               "description": "An ordered list of :ref:`SequenceExpression` components comprising the expression."
             }
          },
          "required": [
@@ -890,7 +887,7 @@
          }
       },
       "Gene": {
-         "description": "A reference to a Gene as defined by an authority. For human genes, the use of [hgnc](https://registry.identifiers.org/registry/hgnc) as the gene authority is RECOMMENDED.",
+         "description": "A reference to a Gene as defined by an authority. For human genes, the use of [hgnc ](https://registry.identifiers.org/registry/hgnc) as the gene authority is RECOMMENDED.",
          "type": "object",
          "additionalProperties": false,
          "properties": {
@@ -985,29 +982,77 @@
       },
       "CURIE": {
          "additionalProperties": false,
-         "description": "A [W3C Compact URI](https://www.w3.org/TR/curie/) formatted string. A CURIE string has the structure ``prefix``:``reference``, as defined by the W3C syntax.",
+         "description": "A [W3C Compact URI ](https://www.w3.org/TR/curie/) formatted string. A CURIE string has the structure ``prefix``:``reference``, as defined by the W3C syntax.",
          "type": "string",
          "pattern": "^\\w[^:]*:.+$",
          "example": "ensembl:ENSG00000139618"
       },
       "HumanCytoband": {
          "additionalProperties": false,
-         "description": "A character string representing cytobands derived from the *International System for Human Cytogenomic Nomenclature* (ISCN) [guidelines](http://doi.org/10.1159/isbn.978-3-318-06861-0).",
+         "description": "A character string representing cytobands derived from the *International System for Human Cytogenomic Nomenclature* (ISCN) [guidelines ](http://doi.org/10.1159/isbn.978-3-318-06861-0).",
          "type": "string",
          "pattern": "^cen|[pq](ter|([1-9][0-9]*(\\.[1-9][0-9]*)?))$",
          "example": "q22.3"
       },
       "Residue": {
          "additionalProperties": false,
-         "description": "A character representing a specific residue (i.e., molecular species) or groupings of these (\"ambiguity codes\"), using [one-letter IUPAC abbreviations](https://en.wikipedia.org/wiki/International_Union_of_Pure_and_Applied_Chemistry#Amino_acid_and_nucleotide_base_codes) for nucleic acids and amino acids.",
+         "description": "A character representing a specific residue (i.e., molecular species) or groupings of these (\"ambiguity codes\"), using [one-letter IUPAC abbreviations ](https://en.wikipedia.org/wiki/International_Union_of_Pure_and_Applied_Chemistry#Amino_acid_and_nucleotide_base_codes) for nucleic acids and amino acids.",
          "type": "string",
          "pattern": "[A-Z*\\-]"
       },
       "Sequence": {
          "additionalProperties": false,
-         "description": "A character string of Residues that represents a biological sequence using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequences.",
+         "description": "A character string of Residues  that represents a biological sequence using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequences.",
          "type": "string",
          "pattern": "^[A-Z*\\-]*$"
+      },
+      "Allele": {
+         "description": "The state of a molecule at a Location.",
+         "additionalProperties": false,
+         "type": "object",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE",
+               "description": "Variation Id. MUST be unique within document."
+            },
+            "type": {
+               "type": "string",
+               "const": "Allele",
+               "description": "MUST be \"Allele\""
+            },
+            "location": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/CURIE"
+                  },
+                  {
+                     "$ref": "#/definitions/Location"
+                  }
+               ],
+               "description": "Where Allele is located"
+            },
+            "state": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/SequenceExpression"
+                  },
+                  {
+                     "$ref": "#/definitions/SequenceState"
+                  }
+               ],
+               "description": "An expression of the sequence state",
+               "deprecated": [
+                  {
+                     "$ref": "#/definitions/SequenceState"
+                  }
+               ]
+            }
+         },
+         "required": [
+            "location",
+            "state",
+            "type"
+         ]
       },
       "SequenceState": {
          "deprecated": true,
@@ -1022,7 +1067,7 @@
             },
             "sequence": {
                "$ref": "#/definitions/Sequence",
-               "description": "A string of Residues"
+               "description": "A string of :ref:`Residues <Residue>`"
             }
          },
          "example": {
@@ -1062,6 +1107,95 @@
          "required": [
             "end",
             "start",
+            "type"
+         ]
+      },
+      "Location": {
+         "description": "A contiguous segment of a biological sequence.",
+         "oneOf": [
+            {
+               "$ref": "#/definitions/ChromosomeLocation"
+            },
+            {
+               "$ref": "#/definitions/SequenceLocation"
+            }
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
+      },
+      "ChromosomeLocation": {
+         "additionalProperties": false,
+         "description": "A Location on a chromosome defined by a species and chromosome name.",
+         "type": "object",
+         "maturity": "deprecated",
+         "prefix": "VCL",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE",
+               "description": "Location Id. MUST be unique within document."
+            },
+            "type": {
+               "type": "string",
+               "const": "ChromosomeLocation",
+               "description": "MUST be \"ChromosomeLocation\""
+            },
+            "species_id": {
+               "$ref": "#/definitions/CURIE",
+               "default": "taxonomy:9606",
+               "description": ":ref:`CURIE` representing a species from the `NCBI species taxonomy <https://registry.identifiers.org/registry/taxonomy>`_. Default: \"taxonomy:9606\" (human)"
+            },
+            "chr": {
+               "type": "string",
+               "description": "The symbolic chromosome name. For humans, For humans, chromosome names MUST be one of 1..22, X, Y (case-sensitive)"
+            },
+            "interval": {
+               "$ref": "#/definitions/CytobandInterval",
+               "description": "The chromosome region defined by a :ref:`CytobandInterval`"
+            }
+         },
+         "required": [
+            "chr",
+            "interval",
+            "species_id",
+            "type"
+         ]
+      },
+      "SequenceLocation": {
+         "additionalProperties": false,
+         "description": "A Location defined by an interval on a referenced Sequence.",
+         "type": "object",
+         "maturity": "deprecated",
+         "prefix": "VSL",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE",
+               "description": "Location Id. MUST be unique within document."
+            },
+            "type": {
+               "type": "string",
+               "const": "SequenceLocation",
+               "description": "MUST be \"SequenceLocation\""
+            },
+            "sequence_id": {
+               "$ref": "#/definitions/CURIE",
+               "description": "A VRS :ref:`Computed Identifier <computed-identifiers>` for the reference :ref:`Sequence`."
+            },
+            "interval": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/SequenceInterval"
+                  },
+                  {
+                     "$ref": "#/definitions/SimpleInterval"
+                  }
+               ],
+               "description": "Reference sequence region defined by a :ref:`SequenceInterval`."
+            }
+         },
+         "required": [
+            "interval",
+            "sequence_id",
             "type"
          ]
       }

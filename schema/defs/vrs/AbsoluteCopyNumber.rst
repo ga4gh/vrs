@@ -25,7 +25,7 @@ Some AbsoluteCopyNumber attributes are inherited from :ref:`Variation`.
       - 1..1
       - MUST be "AbsoluteCopyNumber"
    *  - subject
-      - :ref:`MolecularVariation` | :ref:`Feature` | :ref:`SequenceExpression` | :ref:`CURIE`
+      - :ref:`SequenceLocation` | :ref:`Feature`
       - 1..1
       - Subject of the Copy Number object
    *  - copies

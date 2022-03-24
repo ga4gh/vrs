@@ -25,7 +25,7 @@ Some RelativeCopyNumber attributes are inherited from :ref:`Variation`.
       - 1..1
       - MUST be "RelativeCopyNumber"
    *  - subject
-      - :ref:`MolecularVariation` | :ref:`Feature` | :ref:`SequenceExpression` | :ref:`CURIE`
+      - :ref:`SequenceLocation` | :ref:`Feature`
       - 1..1
       - Subject of the Copy Number object
    *  - relative_copy_class

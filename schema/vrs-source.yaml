@@ -21,12 +21,12 @@ definitions:
   # Kinds of Variation
   # =============================================================================
 
-  Variation:
+  Variation.v2:
     description: >-
       A representation of the state of one or more biomolecules.
     oneOf:
-      - $ref: "#/definitions/MolecularVariation"
-      - $ref: "#/definitions/SystemicVariation"
+      - $ref: "#/definitions/MolecularVariation.v2"
+      - $ref: "#/definitions/SystemicVariation.v2"
       - $ref: "#/definitions/UtilityVariation"
     heritable_properties:
       _id:
@@ -42,16 +42,18 @@ definitions:
     discriminator:
       propertyName: type
 
-  MolecularVariation:
+  MolecularVariation.v2:
+    status: draft
     description: >-
       A :ref:`variation` on a contiguous molecule.
     oneOf:
-      - $ref: "#/definitions/Allele"
+      - $ref: "#/definitions/Allele.v2"
       - $ref: "#/definitions/Haplotype"
     discriminator:
       propertyName: type
 
   UtilityVariation:
+    status: stable
     description: >-
       A collection of :ref:`Variation` subclasses that cannot be
       constrained to a specific class of biological variation, but
@@ -62,7 +64,8 @@ definitions:
     discriminator:
       propertyName: type
 
-  SystemicVariation:
+  SystemicVariation.v2:
+    status: draft
     description: >-
       A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
@@ -80,11 +83,13 @@ definitions:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Molecular Variation
 
-  Allele:
+  Allele.v2:
     description: >-
       The state of a molecule at a :ref:`Location`.
     additionalProperties: false
     type: object
+    maturity: draft
+    prefix: VA.v2
     properties:
       type:
         type: string
@@ -94,17 +99,13 @@ definitions:
       location:
         oneOf:
           - $ref: "#/definitions/CURIE"
-          - $ref: "#/definitions/Location"
+          - $ref: "#/definitions/SequenceLocation.v2"
         description: >-
           Where Allele is located
       state:
-        oneOf:
-          - $ref: "#/definitions/SequenceExpression"
-          - $ref: "#/definitions/SequenceState" # DEPRECATED; remove in 2.0
+        $ref: "#/definitions/SequenceExpression"
         description: >-
           An expression of the sequence state
-        deprecated:
-          - $ref: "#/definitions/SequenceState"
     required: [ "location", "state" ]
 
   Haplotype:
@@ -181,6 +182,7 @@ definitions:
     additionalProperties: false
     type: object
     maturity: draft
+    prefix: VACN.v1
     description: >-
       The absolute count of discrete copies of a :ref:`MolecularVariation`,
       :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference
@@ -193,10 +195,8 @@ definitions:
           MUST be "AbsoluteCopyNumber"
       subject:
         oneOf:
-          - $ref: "#/definitions/MolecularVariation"
+          - $ref: "#/definitions/SequenceLocation"
           - $ref: "#/definitions/Feature"
-          - $ref: "#/definitions/SequenceExpression"
-          - $ref: "#/definitions/CURIE"
         description: >-
           Subject of the Copy Number object
       copies:
@@ -246,6 +246,7 @@ definitions:
     additionalProperties: false
     type: object
     maturity: draft
+    prefix: VRCN.v1
     description: >-
       The relative copies of a :ref:`MolecularVariation`,
       :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference
@@ -258,10 +259,8 @@ definitions:
           MUST be "RelativeCopyNumber"
       subject:
         oneOf:
-          - $ref: "#/definitions/MolecularVariation"
+          - $ref: "#/definitions/SequenceLocation"
           - $ref: "#/definitions/Feature"
-          - $ref: "#/definitions/SequenceExpression"
-          - $ref: "#/definitions/CURIE"
         description: >-
           Subject of the Copy Number object
       relative_copy_class:
@@ -274,12 +273,12 @@ definitions:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations
 
-  Location:
+  Location.v2:
     description: >-
       A contiguous segment of a biological sequence.
     oneOf:
-      - $ref: "#/definitions/ChromosomeLocation"
-      - $ref: "#/definitions/SequenceLocation"
+      - $ref: "#/definitions/CytogenomicLocation.v2"
+      - $ref: "#/definitions/SequenceLocation.v2"
     heritable_properties:
       _id:
         $ref: "#/definitions/CURIE"
@@ -293,16 +292,55 @@ definitions:
     discriminator:
       propertyName: type
 
-  ChromosomeLocation:
+  SequenceLocation.v2:
     additionalProperties: false
     description: >-
-      A Location on a chromosome defined by a species and chromosome name.
+      A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
     type: object
+    maturity: draft
+    prefix: VSL.v2
     properties:
       type:
         type: string
-        const: "ChromosomeLocation"
-        description: MUST be "ChromosomeLocation"
+        const: "SequenceLocation"
+        description: MUST be "SequenceLocation"
+      sequence_id:
+        $ref: "#/definitions/CURIE"
+        description: >-
+          A VRS :ref:`Computed Identifier <computed-identifiers>`
+          for the reference :ref:`Sequence`.
+      start:
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
+        description: >-
+          The start coordinate or range of the interval.
+          The minimum value of this coordinate or range is 0.
+          MUST represent a coordinate or range less than the value of `end`.
+      end:
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
+        description: >-
+          The end coordinate or range of the interval.
+          The minimum value of this coordinate or range is 0.
+          MUST represent a coordinate or range greater than the value of `start`.
+    required: [ "sequence_id", "start", "end" ]
+
+  CytogenomicLocation.v2:
+    additionalProperties: false
+    description: >-
+      A Location on a human chromosome defined by cytogenetic markers.
+    type: object
+    maturity: draft
+    prefix: VCL.v2
+    properties:
+      type:
+        type: string
+        const: "CytogenomicLocation"
+        description: MUST be "CytogenomicLocation"
       species_id:
         $ref: "#/definitions/CURIE"
         default: "taxonomy:9606"
@@ -320,30 +358,6 @@ definitions:
         description: >-
           The chromosome region defined by a :ref:`CytobandInterval`
     required: [ "species_id", "chr", "interval" ]
-
-  SequenceLocation:
-    additionalProperties: false
-    description: >-
-      A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
-    type: object
-    properties:
-      type:
-        type: string
-        const: "SequenceLocation"
-        description: MUST be "SequenceLocation"
-      sequence_id:
-        $ref: "#/definitions/CURIE"
-        description: >-
-          A VRS :ref:`Computed Identifier <computed-identifiers>`
-          for the reference :ref:`Sequence`.
-      interval:
-        oneOf:
-          - $ref: "#/definitions/SequenceInterval"
-          - $ref: "#/definitions/SimpleInterval"
-        description: >-
-          Reference sequence region defined by a :ref:`SequenceInterval`.
-    required: [ "sequence_id", "interval" ]
-
 
   # =============================================================================
   # NON-IDENTIFIABLE TYPES
@@ -780,8 +794,142 @@ definitions:
   # DEPRECATED
   # =============================================================================
 
+  Variation:
+    maturity: deprecated
+    description: >-
+      A representation of the state of one or more biomolecules.
+    oneOf:
+      - $ref: "#/definitions/MolecularVariation"
+      - $ref: "#/definitions/SystemicVariation"
+      - $ref: "#/definitions/UtilityVariation"
+    heritable_properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+        description: >-
+          Variation Id. MUST be unique within document.
+      type:
+        type: string
+        description: >-
+          The Variation class type. MUST match child class type.
+    heritable_required: [ "type" ]
+
+  MolecularVariation:
+    maturity: deprecated
+    description: >-
+      A :ref:`variation` on a contiguous molecule.
+    oneOf:
+      - $ref: "#/definitions/Allele"
+      - $ref: "#/definitions/Haplotype"
+    discriminator:
+      propertyName: type
+
+  SystemicVariation:
+    maturity: deprecated
+    description: >-
+      A Variation of multiple molecules in the context of a system, e.g.
+      a genome, sample, or homologous chromosomes.
+    oneOf:
+      - $ref: "#/definitions/CopyNumber"
+    discriminator:
+      propertyName: type
+
+  Allele:
+    description: >-
+      The state of a molecule at a :ref:`Location`.
+    additionalProperties: false
+    type: object
+    maturity: deprecated
+    prefix: VA.v1
+    properties:
+      type:
+        type: string
+        const: "Allele"
+        description: >-
+          MUST be "Allele"
+      location:
+        oneOf:
+          - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Location"
+        description: >-
+          Where Allele is located
+      state:
+        oneOf:
+          - $ref: "#/definitions/SequenceExpression"
+          - $ref: "#/definitions/SequenceState" # DEPRECATED; remove in 2.0
+        description: >-
+          An expression of the sequence state
+        deprecated:
+          - $ref: "#/definitions/SequenceState"
+    required: [ "location", "state" ]
+
+  CopyNumber:
+    additionalProperties: false
+    type: object
+    maturity: deprecated
+    prefix: VCN.v1
+    description: >-
+      The absolute count of discrete copies of a :ref:`MolecularVariation`,
+      :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference
+      within a system (e.g. genome, cell, etc.).
+    properties:
+      type:
+        type: string
+        const: "CopyNumber"
+        description: >-
+          MUST be "CopyNumber"
+      subject:
+        oneOf:
+          - $ref: "#/definitions/MolecularVariation"
+          - $ref: "#/definitions/Feature"
+          - $ref: "#/definitions/SequenceExpression"
+          - $ref: "#/definitions/CURIE"
+        description: >-
+          Subject of the Copy Number object
+      copies:
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
+        description: >-
+          The integral number of copies of the subject in a system
+    allOf:
+      - if:
+          properties:
+            copies:
+              $ref: "#/definitions/Number"
+        then:
+          properties:
+            copies:
+              properties:
+                value:
+                  minimum: 0
+      - if:
+          properties:
+            copies:
+              $ref: "#/definitions/IndefiniteRange"
+        then:
+          properties:
+            copies:
+              properties:
+                value:
+                  minimum: 0
+      - if:
+          properties:
+            copies:
+              $ref: "#/definitions/DefiniteRange"
+        then:
+          properties:
+            copies:
+              properties:
+                min:
+                  minimum: 0
+                max:
+                  minimum: 0
+
+    required: [ "subject", "copies" ]
+
   SequenceState:
-    deprecated: true
+    maturity: deprecated
     description: >-
       DEPRECATED. A :ref:`Sequence` as a :ref:`State`. This is the State class
       to use for representing "ref-alt" style variation, including SNVs, MNVs,
@@ -803,7 +951,7 @@ definitions:
     required: [ "type", "sequence" ]
 
   SimpleInterval:
-    deprecated: true
+    maturity: deprecated
     description: >-
       DEPRECATED: A SimpleInterval represents a span of sequence. Positions are
       always represented by contiguous spans using interbase coordinates.
@@ -827,3 +975,78 @@ definitions:
       start: 11
       end: 22
     required: [ "type", "start", "end" ]
+
+  Location:
+    maturity: deprecated
+    description: >-
+      A contiguous segment of a biological sequence.
+    oneOf:
+      - $ref: "#/definitions/ChromosomeLocation"
+      - $ref: "#/definitions/SequenceLocation"
+    heritable_properties:
+      _id:
+        $ref: "#/definitions/CURIE"
+        description: >-
+          Location Id. MUST be unique within document.
+      type:
+        type: string
+        description: >-
+          The Location class type. MUST match child class type.
+    heritable_required: [ "type" ]
+    discriminator:
+      propertyName: type
+
+  ChromosomeLocation:
+    additionalProperties: false
+    description: >-
+      A Location on a chromosome defined by a species and chromosome name.
+    type: object
+    maturity: deprecated
+    prefix: VCL.v1
+    properties:
+      type:
+        type: string
+        const: "ChromosomeLocation"
+        description: MUST be "ChromosomeLocation"
+      species_id:
+        $ref: "#/definitions/CURIE"
+        default: "taxonomy:9606"
+        description: >-
+          :ref:`CURIE` representing a species from the
+          `NCBI species taxonomy <https://registry.identifiers.org/registry/taxonomy>`_.
+          Default: "taxonomy:9606" (human)
+      chr:
+        type: string
+        description: >-
+          The symbolic chromosome name. For humans, For humans,
+          chromosome names MUST be one of 1..22, X, Y (case-sensitive)
+      interval:
+        $ref: "#/definitions/CytobandInterval"
+        description: >-
+          The chromosome region defined by a :ref:`CytobandInterval`
+    required: [ "species_id", "chr", "interval" ]
+
+  SequenceLocation:
+    additionalProperties: false
+    description: >-
+      A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
+    type: object
+    maturity: deprecated
+    prefix: VSL.v1
+    properties:
+      type:
+        type: string
+        const: "SequenceLocation"
+        description: MUST be "SequenceLocation"
+      sequence_id:
+        $ref: "#/definitions/CURIE"
+        description: >-
+          A VRS :ref:`Computed Identifier <computed-identifiers>`
+          for the reference :ref:`Sequence`.
+      interval:
+        oneOf:
+          - $ref: "#/definitions/SequenceInterval"
+          - $ref: "#/definitions/SimpleInterval"
+        description: >-
+          Reference sequence region defined by a :ref:`SequenceInterval`.
+    required: [ "sequence_id", "interval" ]
