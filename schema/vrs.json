@@ -52,7 +52,10 @@
          "description": "A Variation of multiple molecules in the context of a system, e.g. a genome, sample, or homologous chromosomes.",
          "oneOf": [
             {
-               "$ref": "#/definitions/CopyNumber"
+               "$ref": "#/definitions/AbsoluteCopyNumber"
+            },
+            {
+               "$ref": "#/definitions/RelativeCopyNumber"
             }
          ],
          "discriminator": {
@@ -87,10 +90,10 @@
             "state": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/SequenceState"
+                     "$ref": "#/definitions/SequenceExpression"
                   },
                   {
-                     "$ref": "#/definitions/SequenceExpression"
+                     "$ref": "#/definitions/SequenceState"
                   }
                ],
                "description": "An expression of the sequence state",
@@ -202,9 +205,10 @@
             "type"
          ]
       },
-      "CopyNumber": {
+      "AbsoluteCopyNumber": {
          "additionalProperties": false,
          "type": "object",
+         "maturity": "draft",
          "description": "The absolute count of discrete copies of a MolecularVariation, Feature, SequenceExpression, or a CURIE reference within a system (e.g. genome, cell, etc.).",
          "properties": {
             "_id": {
@@ -213,8 +217,8 @@
             },
             "type": {
                "type": "string",
-               "const": "CopyNumber",
-               "description": "MUST be \"CopyNumber\""
+               "const": "AbsoluteCopyNumber",
+               "description": "MUST be \"AbsoluteCopyNumber\""
             },
             "subject": {
                "oneOf": [
@@ -315,6 +319,56 @@
          ],
          "required": [
             "copies",
+            "subject",
+            "type"
+         ]
+      },
+      "RelativeCopyNumber": {
+         "additionalProperties": false,
+         "type": "object",
+         "maturity": "draft",
+         "description": "The relative copies of a MolecularVariation, Feature, SequenceExpression, or a CURIE reference against an unspecified baseline in a system (e.g. genome, cell, etc.).",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE",
+               "description": "Variation Id. MUST be unique within document."
+            },
+            "type": {
+               "type": "string",
+               "const": "RelativeCopyNumber",
+               "description": "MUST be \"RelativeCopyNumber\""
+            },
+            "subject": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/MolecularVariation"
+                  },
+                  {
+                     "$ref": "#/definitions/Feature"
+                  },
+                  {
+                     "$ref": "#/definitions/SequenceExpression"
+                  },
+                  {
+                     "$ref": "#/definitions/CURIE"
+                  }
+               ],
+               "description": "Subject of the Copy Number object"
+            },
+            "relative_copy_class": {
+               "type": "string",
+               "enum": [
+                  "complete loss",
+                  "partial loss",
+                  "copy neutral",
+                  "low-level gain",
+                  "high-level gain"
+               ],
+               "description": "MUST be one of \"complete loss\", \"partial loss\", \"copy neutral\", \"low-level gain\" or \"high-level gain\"."
+            }
+         },
+         "required": [
+            "relative_copy_class",
             "subject",
             "type"
          ]
@@ -780,7 +834,7 @@
          ]
       },
       "ComposedSequenceExpression": {
-         "description": "An expression of a sequence composed from multiple other  Sequence Expressions  objects. MUST have at least one component that is not a  ref:`LiteralSequenceExpression`. CANNOT be composed from  nested composed sequence expressions.",
+         "description": "An expression of a sequence composed from multiple other Sequence Expressions objects. MUST have at least one component that is not a ref:`LiteralSequenceExpression`. CANNOT be composed from nested composed sequence expressions.",
          "additionalProperties": false,
          "type": "object",
          "properties": {
@@ -816,7 +870,7 @@
                      }
                   ]
                },
-               "description": "An ordered list of SequenceExpression components   comprising the expression."
+               "description": "An ordered list of SequenceExpression components comprising the expression."
             }
          },
          "required": [

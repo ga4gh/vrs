@@ -25,10 +25,9 @@ identifiers:
     Text: VT
     # Genotype: VG
     Haplotype: VH
-    CopyNumber: VCN
-
+    AbsoluteCopyNumber: VAC
+    RelativeCopyNumber: VRC
     SequenceLocation: VSL
     ChromosomeLocation: VCL
-
 
   regexp: '^ga4gh:(?P<type>[^.]+)\.(?P<digest>.+)$'
