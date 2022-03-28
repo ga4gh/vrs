@@ -195,6 +195,7 @@ definitions:
           - $ref: "#/definitions/Feature"
           - $ref: "#/definitions/SequenceExpression"
           - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Location"
         description: >-
           Subject of the Copy Number object
       copies:
