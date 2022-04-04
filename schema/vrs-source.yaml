@@ -22,6 +22,7 @@ definitions:
   # =============================================================================
 
   Variation.v2:
+    maturity: draft
     description: >-
       A representation of the state of one or more biomolecules.
     oneOf:
@@ -29,7 +30,7 @@ definitions:
       - $ref: "#/definitions/SystemicVariation.v2"
       - $ref: "#/definitions/UtilityVariation"
     heritable_properties:
-      _id:
+      id:
         $ref: "#/definitions/CURIE"
         description: >-
           Variation Id. MUST be unique within document.
@@ -43,7 +44,7 @@ definitions:
       propertyName: type
 
   MolecularVariation.v2:
-    status: draft
+    maturity: draft
     description: >-
       A :ref:`variation` on a contiguous molecule.
     oneOf:
@@ -53,7 +54,7 @@ definitions:
       propertyName: type
 
   UtilityVariation:
-    status: stable
+    maturity: stable
     description: >-
       A collection of :ref:`Variation` subclasses that cannot be
       constrained to a specific class of biological variation, but
@@ -65,7 +66,7 @@ definitions:
       propertyName: type
 
   SystemicVariation.v2:
-    status: draft
+    maturity: draft
     description: >-
       A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
@@ -77,7 +78,7 @@ definitions:
 
   # =============================================================================
   # IDENTIFIABLE TYPES
-  # Have a `type` and `_id` attribute
+  # Have a `type` and `id` attribute
   # =============================================================================
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -280,7 +281,7 @@ definitions:
       - $ref: "#/definitions/CytogenomicLocation.v2"
       - $ref: "#/definitions/SequenceLocation.v2"
     heritable_properties:
-      _id:
+      id:
         $ref: "#/definitions/CURIE"
         description: >-
           Location Id. MUST be unique within document.
