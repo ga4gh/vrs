@@ -32,8 +32,8 @@ Allele Rather than Variant
 The most primitive sequence assertion in VRS is the :ref:`Allele`
 entity. Colloquially, the words "allele" and "variant" have similar
 meanings and they are often used interchangeably. However, the VR
-contributors believe that it is essential to distinguish the *state* of
-the sequence from the *change between states* of a sequence. It is
+contributors assert that it is essential to distinguish between the *state of*
+a reference sequence from the *change from* a reference sequence. It is
 imperative that precise terms are used when modelling data. Therefore,
 within VRS, "Allele" refers to a state and "variant" refers to the change
 from one Allele to another.
