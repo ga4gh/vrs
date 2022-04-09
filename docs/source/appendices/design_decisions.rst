@@ -36,7 +36,7 @@ contributors assert that it is essential to distinguish between the *state of*
 a reference sequence from the *change from* a reference sequence. It is
 imperative that precise terms are used when modelling data. Therefore,
 within VRS, "allele" refers to a state of a reference sequence and "variant" refers to a change
-from one Allele to another.
+from a reference sequence.
 
 The word "variant", which implies change, makes it awkward to refer to
 the (unchanged) reference allele. Some systems will use an HGVS-like
