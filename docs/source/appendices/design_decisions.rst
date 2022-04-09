@@ -84,7 +84,7 @@ VRS STRONGLY RECOMMENDS that Alleles be :ref:`normalized
 <computed-identifiers>` unless there is compelling reason to do
 otherwise.  Those reasons are the subject of this section.
 
-:ref:`Fully-justified Normalization <normalization>` is the process of
+:ref:`Allele Normalization <normalization>` is the process of
 comparing a span of reference sequence to a sequence state (often the
 alternative sequence).  Normalization consists of two steps: trimming
 and shuffling.  In the trimming step, common flanking prefix and
