@@ -99,8 +99,8 @@ definitions:
           Where Allele is located
       state:
         oneOf:
-          - $ref: "#/definitions/SequenceState" # DEPRECATED; remove in 2.0
           - $ref: "#/definitions/SequenceExpression"
+          - $ref: "#/definitions/SequenceState" # DEPRECATED; remove in 2.0
         description: >-
           An expression of the sequence state
         deprecated:

@@ -53,8 +53,8 @@ definitions:
         description: Where Allele is located
       state:
         oneOf:
-        - $ref: '#/definitions/SequenceState'
         - $ref: '#/definitions/SequenceExpression'
+        - $ref: '#/definitions/SequenceState'
         description: An expression of the sequence state
         deprecated:
         - $ref: '#/definitions/SequenceState'

@@ -88,10 +88,10 @@
             "state": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/SequenceState"
+                     "$ref": "#/definitions/SequenceExpression"
                   },
                   {
-                     "$ref": "#/definitions/SequenceExpression"
+                     "$ref": "#/definitions/SequenceState"
                   }
                ],
                "description": "An expression of the sequence state",
