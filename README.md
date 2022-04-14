@@ -13,7 +13,7 @@ initiatives, and diagnostic testing laboratories.
 VRS is licensed under the [Apache License 2.0](LICENSE).
 
 
-> **NOTE:** VRS is under active development.  See [VR 
+> **NOTE:** VRS is under active development.  See [VR
 > Project Roadmap](https://github.com/orgs/ga4gh/projects/5).
 
 
@@ -67,12 +67,12 @@ To watch for changes and update automatically:
 
 The VR specification documentation is written in reStructuredText and
 located in `docs/source/`.  Commits to this repo are built
-automatically at `vrs.ga4gh.org`. 
+automatically at `vrs.ga4gh.org`.
 
 To build documentation locally, type:
 
     make -C docs clean watch &
-	
+
 Then, open `docs/build/html/index.html`.  The above make command
 should build docs when source changes. (Some types of changes require
 recleaning and building.)
@@ -95,7 +95,6 @@ The smoketests require python 3.8+. This is the recommended setup:
 $ python3 -m venv venv
 $ source venv/bin/activate
 $ pip install -U setuptools pip
-$ pip install -r requirements.txt
-$ pytest
-
+$ pip install -r .requirements.txt
+$ python3 -m pytest
 ```
