@@ -407,6 +407,12 @@ Two, three, or four total copies of BRCA1:
       "type": "CopyNumber"
     }
 
+.. _Genotype:
+
+Genotype
+$$$$$$$$
+
+.. include:: defs/Genotype.rst
 
 .. _UtilityVariation:
 
@@ -1044,6 +1050,11 @@ This value is equivalent to the concept of "equal to or greater than
       "type": "IndefiniteRange",
       "value": 22
     }
+
+GenotypeMember
+##############
+
+.. include:: defs/GenotypeMember.rst
 
 Primitives
 @@@@@@@@@@

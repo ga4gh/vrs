@@ -53,6 +53,9 @@
          "oneOf": [
             {
                "$ref": "#/definitions/CopyNumber"
+            },
+            {
+               "$ref": "#/definitions/Genotype"
             }
          ],
          "discriminator": {
@@ -123,7 +126,7 @@
             },
             "members": {
                "type": "array",
-               "minItems": 1,
+               "minItems": 2,
                "uniqueItems": true,
                "items": {
                   "oneOf": [
@@ -316,6 +319,50 @@
          "required": [
             "copies",
             "subject",
+            "type"
+         ]
+      },
+      "Genotype": {
+         "description": "A set of trans-phased MolecularVariation members, with associated copy counts, across a specified number of genomic locus `copies`.",
+         "additionalProperties": false,
+         "type": "object",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE",
+               "description": "Variation Id. MUST be unique within document."
+            },
+            "type": {
+               "type": "string",
+               "const": "Genotype",
+               "description": "MUST be \"Genotype\""
+            },
+            "members": {
+               "type": "array",
+               "uniqueItems": true,
+               "minItems": 1,
+               "items": {
+                  "$ref": "#/definitions/GenotypeMember"
+               },
+               "description": "Each GenotypeMember in `members` describes a MolecularVariation and the count of that variation at the locus."
+            },
+            "copies": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/Number"
+                  },
+                  {
+                     "$ref": "#/definitions/IndefiniteRange"
+                  },
+                  {
+                     "$ref": "#/definitions/DefiniteRange"
+                  }
+               ],
+               "description": "The total number of copies of all MolecularVariation at this locus, MUST be greater than or equal to the sum of GenotypeMember copy counts. If greater than the total counts, this implies additional  MolecularVariation that are expected to exist but are not explicitly indicated."
+            }
+         },
+         "required": [
+            "copies",
+            "members",
             "type"
          ]
       },
@@ -774,6 +821,40 @@
             "count",
             "seq_expr",
             "type"
+         ]
+      },
+      "GenotypeMember": {
+         "description": "A class describing a Genotype `member`.",
+         "type": "object",
+         "additionalProperties": false,
+         "properties": {
+            "type": {
+               "type": "string",
+               "const": "GenotypeMember",
+               "description": "MUST be \"GenotypeMember\"."
+            },
+            "copies": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/Number"
+                  },
+                  {
+                     "$ref": "#/definitions/IndefiniteRange"
+                  },
+                  {
+                     "$ref": "#/definitions/DefiniteRange"
+                  }
+               ],
+               "description": "The number of copies of the `variation` at a Genotype locus."
+            },
+            "variation": {
+               "$ref": "#/definitions/MolecularVariation",
+               "description": "A MolecularVariation at a Genotype locus."
+            }
+         },
+         "required": [
+            "copies",
+            "variation"
          ]
       },
       "Feature": {

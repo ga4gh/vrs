@@ -68,6 +68,7 @@ definitions:
       a genome, sample, or homologous chromosomes.
     oneOf:
       - $ref: "#/definitions/CopyNumber"
+      - $ref: "#/definitions/Genotype"
     discriminator:
       propertyName: type
 
@@ -239,6 +240,42 @@ definitions:
                   minimum: 0
 
     required: [ "subject", "copies" ]
+
+  Genotype:
+    description: >-
+      A set of trans-phased :ref:`MolecularVariation` members, with associated
+      copy counts, across a specified number of genomic locus `copies`.
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        const: "Genotype"
+        description: >-
+          MUST be "Genotype"
+      members:
+        type: array
+        uniqueItems: true
+        minItems: 1
+        items:
+          $ref: "#/definitions/GenotypeMember"
+        description: >-
+          Each GenotypeMember in `members` describes a :ref:`MolecularVariation`
+          and the count of that variation at the locus.
+      copies:
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
+        description: >-
+          The total number of copies of all :ref:`MolecularVariation` at this locus,
+          MUST be greater than or equal to the sum of :ref:`GenotypeMember` copy counts.
+          If greater than the total counts, this implies additional 
+          :ref:`MolecularVariation` that are expected to exist but are not explicitly
+          indicated.
+    required: [ "members", "copies" ]
+
+
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations
@@ -567,6 +604,32 @@ definitions:
                 max:
                   minimum: 0
     required: [ "seq_expr", "count" ]
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Nested Classes
+
+  GenotypeMember:
+    description: >-
+      A class describing a :ref:`Genotype` `member`.
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        const: "GenotypeMember"
+        description: MUST be "GenotypeMember".
+      copies:
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
+        description: >-
+          The number of copies of the `variation` at a :ref:`Genotype` locus.
+      variation:
+        $ref: "#/definitions/MolecularVariation"
+        description: >-
+          A :ref:`MolecularVariation` at a :ref:`Genotype` locus.
+    required: [ "copies", "variation" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Feature
