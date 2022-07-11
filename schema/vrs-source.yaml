@@ -122,7 +122,7 @@ definitions:
           MUST be "Haplotype"
       members:
         type: array
-        minItems: 1
+        minItems: 2
         uniqueItems: true
         items:
           oneOf:
