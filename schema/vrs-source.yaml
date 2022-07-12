@@ -89,6 +89,7 @@ definitions:
       type:
         type: string
         const: "Allele"
+        default: "Allele"
         description: >-
           MUST be "Allele"
       location:
@@ -116,6 +117,7 @@ definitions:
       type:
         type: string
         const: "Haplotype"
+        default: "Haplotype"
         description: >-
           MUST be "Haplotype"
       members:
@@ -143,6 +145,7 @@ definitions:
       type:
         type: string
         const: "Text"
+        default: "Text"
         description: MUST be "Text"
       definition:
         type: string
@@ -160,6 +163,7 @@ definitions:
       type:
         type: string
         const: "VariationSet"
+        default: "VariationSet"
         description: MUST be "VariationSet"
       members:
         type: array
@@ -188,6 +192,7 @@ definitions:
       type:
         type: string
         const: "CopyNumber"
+        default: "CopyNumber"
         description: >-
           MUST be "CopyNumber"
       subject:
@@ -251,6 +256,7 @@ definitions:
       type:
         type: string
         const: "Genotype"
+        default: "Genotype"
         description: >-
           MUST be "Genotype"
       members:
@@ -308,6 +314,7 @@ definitions:
       type:
         type: string
         const: "ChromosomeLocation"
+        default: "ChromosomeLocation"
         description: MUST be "ChromosomeLocation"
       species_id:
         $ref: "#/definitions/CURIE"
@@ -336,6 +343,7 @@ definitions:
       type:
         type: string
         const: "SequenceLocation"
+        default: "SequenceLocation"
         description: MUST be "SequenceLocation"
       sequence_id:
         $ref: "#/definitions/CURIE"
@@ -370,6 +378,7 @@ definitions:
       type:
         type: string
         const: "SequenceInterval"
+        default: "SequenceInterval"
         description: MUST be "SequenceInterval"
       start:
         oneOf:
@@ -469,6 +478,7 @@ definitions:
       type:
         type: string
         const: "CytobandInterval"
+        default: "CytobandInterval"
         description: MUST be "CytobandInterval"
       start:
         $ref: "#/definitions/HumanCytoband"
@@ -515,6 +525,7 @@ definitions:
       type:
         type: string
         const: "LiteralSequenceExpression"
+        default: "LiteralSequenceExpression"
         description: MUST be "LiteralSequenceExpression"
       sequence:
         $ref: "#/definitions/Sequence"
@@ -535,6 +546,7 @@ definitions:
       type:
         type: string
         const: "DerivedSequenceExpression"
+        default: "DerivedSequenceExpression"
         description: MUST be "DerivedSequenceExpression"
       location:
         $ref: "#/definitions/SequenceLocation"
@@ -556,6 +568,7 @@ definitions:
       type:
         type: string
         const: "RepeatedSequenceExpression"
+        default: "RepeatedSequenceExpression"
         description: MUST be "RepeatedSequenceExpression"
       seq_expr:
         oneOf:
@@ -617,6 +630,7 @@ definitions:
       type:
         type: string
         const: "GenotypeMember"
+        default: "GenotypeMember"
         description: MUST be "GenotypeMember".
       copies:
         oneOf:
@@ -661,6 +675,7 @@ definitions:
       type:
         type: string
         const: "Gene"
+        default: "Gene"
         description: MUST be "Gene"
       gene_id:
         $ref: "#/definitions/CURIE"
@@ -680,6 +695,7 @@ definitions:
       type:
         type: string
         const: "Number"
+        default: "Number"
         description: MUST be "Number"
       value:
         type: integer
@@ -695,6 +711,7 @@ definitions:
       type:
         type: string
         const: "DefiniteRange"
+        default: "DefiniteRange"
         description: MUST be "DefiniteRange"
       min:
         type: number
@@ -716,6 +733,7 @@ definitions:
       type:
         type: string
         const: "IndefiniteRange"
+        default: "IndefiniteRange"
         description: MUST be "IndefiniteRange"
       value:
         type: number
