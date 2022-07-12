@@ -127,46 +127,6 @@
 			<item type="str">members</item>
 			<item type="str">type</item>
 		</Haplotype>
-		<Genotype type="dict">
-			<description type="str">A set of trans-phased MolecularVariation members, with associated copy counts, across a specified number of genomic locus `copies`.</description>
-			<additionalProperties type="bool">false</additionalProperties>
-			<type type="str">object</type>
-			<properties type="dict">
-				<_id type="dict">
-					<key name="$ref" type="str">#/definitions/CURIE</key>
-					<description type="str">Variation Id. MUST be unique within document.</description>
-				</_id>
-				<type type="dict">
-					<type type="str">string</type>
-					<const type="str">Genotype</const>
-					<description type="str">MUST be &quot;Genotype&quot;</description>
-				</type>
-				<members type="dict">
-					<type type="str">array</type>
-					<uniqueItems type="bool">true</uniqueItems>
-					<minItems type="int">1</minItems>
-					<items type="dict">
-						<key name="$ref" type="str">#/definitions/GenotypeMember</key>
-					</items>
-					<description type="str">Each GenotypeMember in `members` describes a MolecularVariation and the count of that variation at the locus.</description>
-				</members>
-				<copies type="dict">
-					<oneOf>
-						<key name="$ref" type="str">#/definitions/Number</key>
-					</oneOf>
-					<oneOf>
-						<key name="$ref" type="str">#/definitions/IndefiniteRange</key>
-					</oneOf>
-					<oneOf>
-						<key name="$ref" type="str">#/definitions/DefiniteRange</key>
-					</oneOf>
-					<description type="str">The total number of copies of all MolecularVariation at this locus, MUST be greater than or equal to the sum of GenotypeMember copy counts. If greater than the total counts, this implies additional  MolecularVariation that are expected to exist but are not explicitly indicated.</description>
-				</copies>
-			</properties>
-			<item type="str">copies</item>
-			<item type="str">members</item>
-			<item type="str">type</item>
-		</Genotype>
 		<Text type="dict">
 			<description type="str">A free-text definition of variation.</description>
 			<additionalProperties type="bool">false</additionalProperties>
@@ -329,6 +289,46 @@
 			<item type="str">subject</item>
 			<item type="str">type</item>
 		</CopyNumber>
+		<Genotype type="dict">
+			<description type="str">A set of trans-phased MolecularVariation members, with associated copy counts, across a specified number of genomic locus `copies`.</description>
+			<additionalProperties type="bool">false</additionalProperties>
+			<type type="str">object</type>
+			<properties type="dict">
+				<_id type="dict">
+					<key name="$ref" type="str">#/definitions/CURIE</key>
+					<description type="str">Variation Id. MUST be unique within document.</description>
+				</_id>
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">Genotype</const>
+					<description type="str">MUST be &quot;Genotype&quot;</description>
+				</type>
+				<members type="dict">
+					<type type="str">array</type>
+					<uniqueItems type="bool">true</uniqueItems>
+					<minItems type="int">1</minItems>
+					<items type="dict">
+						<key name="$ref" type="str">#/definitions/GenotypeMember</key>
+					</items>
+					<description type="str">Each GenotypeMember in `members` describes a MolecularVariation and the count of that variation at the locus.</description>
+				</members>
+				<copies type="dict">
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/Number</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/IndefiniteRange</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/DefiniteRange</key>
+					</oneOf>
+					<description type="str">The total number of copies of all MolecularVariation at this locus, MUST be greater than or equal to the sum of GenotypeMember copy counts. If greater than the total counts, this implies additional  MolecularVariation that are expected to exist but are not explicitly indicated.</description>
+				</copies>
+			</properties>
+			<item type="str">copies</item>
+			<item type="str">members</item>
+			<item type="str">type</item>
+		</Genotype>
 		<Location type="dict">
 			<description type="str">A contiguous segment of a biological sequence.</description>
 			<oneOf>
