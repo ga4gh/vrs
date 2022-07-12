@@ -1,0 +1,959 @@
+<?xml version="1.0" ?>
+<all>
+	<key name="$schema" type="str">http://json-schema.org/draft-07/schema</key>
+	<title type="str">GA4GH-VRS-Definitions</title>
+	<type type="str">object</type>
+	<definitions type="dict">
+		<Variation type="dict">
+			<description type="str">A representation of the state of one or more biomolecules.</description>
+			<oneOf>
+				<key name="$ref" type="str">#/definitions/MolecularVariation</key>
+			</oneOf>
+			<oneOf>
+				<key name="$ref" type="str">#/definitions/SystemicVariation</key>
+			</oneOf>
+			<oneOf>
+				<key name="$ref" type="str">#/definitions/UtilityVariation</key>
+			</oneOf>
+			<discriminator type="dict">
+				<propertyName type="str">type</propertyName>
+			</discriminator>
+		</Variation>
+		<MolecularVariation type="dict">
+			<description type="str">A variation on a contiguous molecule.</description>
+			<oneOf>
+				<key name="$ref" type="str">#/definitions/Allele</key>
+			</oneOf>
+			<oneOf>
+				<key name="$ref" type="str">#/definitions/Haplotype</key>
+			</oneOf>
+			<discriminator type="dict">
+				<propertyName type="str">type</propertyName>
+			</discriminator>
+		</MolecularVariation>
+		<UtilityVariation type="dict">
+			<description type="str">A collection of Variation subclasses that cannot be constrained to a specific class of biological variation, but are necessary for some applications of VRS.</description>
+			<oneOf>
+				<key name="$ref" type="str">#/definitions/Text</key>
+			</oneOf>
+			<oneOf>
+				<key name="$ref" type="str">#/definitions/VariationSet</key>
+			</oneOf>
+			<discriminator type="dict">
+				<propertyName type="str">type</propertyName>
+			</discriminator>
+		</UtilityVariation>
+		<SystemicVariation type="dict">
+			<description type="str">A Variation of multiple molecules in the context of a system, e.g. a genome, sample, or homologous chromosomes.</description>
+			<oneOf>
+				<key name="$ref" type="str">#/definitions/CopyNumber</key>
+			</oneOf>
+			<oneOf>
+				<key name="$ref" type="str">#/definitions/Genotype</key>
+			</oneOf>
+			<discriminator type="dict">
+				<propertyName type="str">type</propertyName>
+			</discriminator>
+		</SystemicVariation>
+		<Allele type="dict">
+			<description type="str">The state of a molecule at a Location.</description>
+			<additionalProperties type="bool">false</additionalProperties>
+			<type type="str">object</type>
+			<properties type="dict">
+				<_id type="dict">
+					<key name="$ref" type="str">#/definitions/CURIE</key>
+					<description type="str">Variation Id. MUST be unique within document.</description>
+				</_id>
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">Allele</const>
+					<description type="str">MUST be &quot;Allele&quot;</description>
+				</type>
+				<location type="dict">
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/CURIE</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/Location</key>
+					</oneOf>
+					<description type="str">Where Allele is located</description>
+				</location>
+				<state type="dict">
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/SequenceState</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/SequenceExpression</key>
+					</oneOf>
+					<description type="str">An expression of the sequence state</description>
+					<deprecated>
+						<key name="$ref" type="str">#/definitions/SequenceState</key>
+					</deprecated>
+				</state>
+			</properties>
+			<item type="str">location</item>
+			<item type="str">state</item>
+			<item type="str">type</item>
+		</Allele>
+		<Haplotype type="dict">
+			<description type="str">A set of non-overlapping Allele members that co-occur on the same molecule.</description>
+			<additionalProperties type="bool">false</additionalProperties>
+			<type type="str">object</type>
+			<properties type="dict">
+				<_id type="dict">
+					<key name="$ref" type="str">#/definitions/CURIE</key>
+					<description type="str">Variation Id. MUST be unique within document.</description>
+				</_id>
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">Haplotype</const>
+					<description type="str">MUST be &quot;Haplotype&quot;</description>
+				</type>
+				<members type="dict">
+					<type type="str">array</type>
+					<minItems type="int">2</minItems>
+					<uniqueItems type="bool">true</uniqueItems>
+					<items type="dict">
+						<oneOf>
+							<key name="$ref" type="str">#/definitions/Allele</key>
+						</oneOf>
+						<oneOf>
+							<key name="$ref" type="str">#/definitions/CURIE</key>
+						</oneOf>
+					</items>
+					<description type="str">List of Alleles, or references to Alleles, that comprise this Haplotype.</description>
+				</members>
+			</properties>
+			<item type="str">members</item>
+			<item type="str">type</item>
+		</Haplotype>
+		<Genotype type="dict">
+			<description type="str">A set of trans-phased MolecularVariation members, with associated copy counts, across a specified number of genomic locus `copies`.</description>
+			<additionalProperties type="bool">false</additionalProperties>
+			<type type="str">object</type>
+			<properties type="dict">
+				<_id type="dict">
+					<key name="$ref" type="str">#/definitions/CURIE</key>
+					<description type="str">Variation Id. MUST be unique within document.</description>
+				</_id>
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">Genotype</const>
+					<description type="str">MUST be &quot;Genotype&quot;</description>
+				</type>
+				<members type="dict">
+					<type type="str">array</type>
+					<uniqueItems type="bool">true</uniqueItems>
+					<minItems type="int">1</minItems>
+					<items type="dict">
+						<key name="$ref" type="str">#/definitions/GenotypeMember</key>
+					</items>
+					<description type="str">Each GenotypeMember in `members` describes a MolecularVariation and the count of that variation at the locus.</description>
+				</members>
+				<copies type="dict">
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/Number</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/IndefiniteRange</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/DefiniteRange</key>
+					</oneOf>
+					<description type="str">The total number of copies of all MolecularVariation at this locus, MUST be greater than or equal to the sum of GenotypeMember copy counts. If greater than the total counts, this implies additional  MolecularVariation that are expected to exist but are not explicitly indicated.</description>
+				</copies>
+			</properties>
+			<item type="str">copies</item>
+			<item type="str">members</item>
+			<item type="str">type</item>
+		</Genotype>
+		<Text type="dict">
+			<description type="str">A free-text definition of variation.</description>
+			<additionalProperties type="bool">false</additionalProperties>
+			<type type="str">object</type>
+			<properties type="dict">
+				<_id type="dict">
+					<key name="$ref" type="str">#/definitions/CURIE</key>
+					<description type="str">Variation Id. MUST be unique within document.</description>
+				</_id>
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">Text</const>
+					<description type="str">MUST be &quot;Text&quot;</description>
+				</type>
+				<definition type="dict">
+					<type type="str">string</type>
+					<description type="str">A textual representation of variation not representable by other subclasses of Variation.</description>
+				</definition>
+			</properties>
+			<item type="str">definition</item>
+			<item type="str">type</item>
+		</Text>
+		<VariationSet type="dict">
+			<description type="str">An unconstrained set of Variation members.</description>
+			<type type="str">object</type>
+			<additionalProperties type="bool">false</additionalProperties>
+			<properties type="dict">
+				<_id type="dict">
+					<key name="$ref" type="str">#/definitions/CURIE</key>
+					<description type="str">Variation Id. MUST be unique within document.</description>
+				</_id>
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">VariationSet</const>
+					<description type="str">MUST be &quot;VariationSet&quot;</description>
+				</type>
+				<members type="dict">
+					<type type="str">array</type>
+					<uniqueItems type="bool">true</uniqueItems>
+					<items type="dict">
+						<oneOf>
+							<key name="$ref" type="str">#/definitions/CURIE</key>
+						</oneOf>
+						<oneOf>
+							<key name="$ref" type="str">#/definitions/Variation</key>
+						</oneOf>
+					</items>
+					<description type="str">List of Variation objects or identifiers. Attribute is required, but MAY be empty.</description>
+				</members>
+			</properties>
+			<item type="str">members</item>
+			<item type="str">type</item>
+		</VariationSet>
+		<CopyNumber type="dict">
+			<additionalProperties type="bool">false</additionalProperties>
+			<type type="str">object</type>
+			<description type="str">The absolute count of discrete copies of a MolecularVariation, Feature, SequenceExpression, or a CURIE reference within a system (e.g. genome, cell, etc.).</description>
+			<properties type="dict">
+				<_id type="dict">
+					<key name="$ref" type="str">#/definitions/CURIE</key>
+					<description type="str">Variation Id. MUST be unique within document.</description>
+				</_id>
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">CopyNumber</const>
+					<description type="str">MUST be &quot;CopyNumber&quot;</description>
+				</type>
+				<subject type="dict">
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/MolecularVariation</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/Feature</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/SequenceExpression</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/CURIE</key>
+					</oneOf>
+					<description type="str">Subject of the Copy Number object</description>
+				</subject>
+				<copies type="dict">
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/Number</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/IndefiniteRange</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/DefiniteRange</key>
+					</oneOf>
+					<description type="str">The integral number of copies of the subject in a system</description>
+				</copies>
+			</properties>
+			<allOf>
+				<if type="dict">
+					<properties type="dict">
+						<copies type="dict">
+							<key name="$ref" type="str">#/definitions/Number</key>
+						</copies>
+					</properties>
+				</if>
+				<then type="dict">
+					<properties type="dict">
+						<copies type="dict">
+							<properties type="dict">
+								<value type="dict">
+									<minimum type="int">0</minimum>
+								</value>
+							</properties>
+						</copies>
+					</properties>
+				</then>
+			</allOf>
+			<allOf>
+				<if type="dict">
+					<properties type="dict">
+						<copies type="dict">
+							<key name="$ref" type="str">#/definitions/IndefiniteRange</key>
+						</copies>
+					</properties>
+				</if>
+				<then type="dict">
+					<properties type="dict">
+						<copies type="dict">
+							<properties type="dict">
+								<value type="dict">
+									<minimum type="int">0</minimum>
+								</value>
+							</properties>
+						</copies>
+					</properties>
+				</then>
+			</allOf>
+			<allOf>
+				<if type="dict">
+					<properties type="dict">
+						<copies type="dict">
+							<key name="$ref" type="str">#/definitions/DefiniteRange</key>
+						</copies>
+					</properties>
+				</if>
+				<then type="dict">
+					<properties type="dict">
+						<copies type="dict">
+							<properties type="dict">
+								<min type="dict">
+									<minimum type="int">0</minimum>
+								</min>
+								<max type="dict">
+									<minimum type="int">0</minimum>
+								</max>
+							</properties>
+						</copies>
+					</properties>
+				</then>
+			</allOf>
+			<item type="str">copies</item>
+			<item type="str">subject</item>
+			<item type="str">type</item>
+		</CopyNumber>
+		<Location type="dict">
+			<description type="str">A contiguous segment of a biological sequence.</description>
+			<oneOf>
+				<key name="$ref" type="str">#/definitions/ChromosomeLocation</key>
+			</oneOf>
+			<oneOf>
+				<key name="$ref" type="str">#/definitions/SequenceLocation</key>
+			</oneOf>
+			<discriminator type="dict">
+				<propertyName type="str">type</propertyName>
+			</discriminator>
+		</Location>
+		<ChromosomeLocation type="dict">
+			<additionalProperties type="bool">false</additionalProperties>
+			<description type="str">A Location on a chromosome defined by a species and chromosome name.</description>
+			<type type="str">object</type>
+			<properties type="dict">
+				<_id type="dict">
+					<key name="$ref" type="str">#/definitions/CURIE</key>
+					<description type="str">Location Id. MUST be unique within document.</description>
+				</_id>
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">ChromosomeLocation</const>
+					<description type="str">MUST be &quot;ChromosomeLocation&quot;</description>
+				</type>
+				<species_id type="dict">
+					<key name="$ref" type="str">#/definitions/CURIE</key>
+					<default type="str">taxonomy:9606</default>
+					<description type="str">CURIE representing a species from the [NCBI species taxonomy](https://registry.identifiers.org/registry/taxonomy). Default: &quot;taxonomy:9606&quot; (human)</description>
+				</species_id>
+				<chr type="dict">
+					<type type="str">string</type>
+					<description type="str">The symbolic chromosome name. For humans, For humans, chromosome names MUST be one of 1..22, X, Y (case-sensitive)</description>
+				</chr>
+				<interval type="dict">
+					<key name="$ref" type="str">#/definitions/CytobandInterval</key>
+					<description type="str">The chromosome region defined by a CytobandInterval</description>
+				</interval>
+			</properties>
+			<item type="str">chr</item>
+			<item type="str">interval</item>
+			<item type="str">species_id</item>
+			<item type="str">type</item>
+		</ChromosomeLocation>
+		<SequenceLocation type="dict">
+			<additionalProperties type="bool">false</additionalProperties>
+			<description type="str">A Location defined by an interval on a referenced Sequence.</description>
+			<type type="str">object</type>
+			<properties type="dict">
+				<_id type="dict">
+					<key name="$ref" type="str">#/definitions/CURIE</key>
+					<description type="str">Location Id. MUST be unique within document.</description>
+				</_id>
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">SequenceLocation</const>
+					<description type="str">MUST be &quot;SequenceLocation&quot;</description>
+				</type>
+				<sequence_id type="dict">
+					<key name="$ref" type="str">#/definitions/CURIE</key>
+					<description type="str">A VRS Computed Identifier for the reference Sequence.</description>
+				</sequence_id>
+				<interval type="dict">
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/SequenceInterval</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/SimpleInterval</key>
+					</oneOf>
+					<description type="str">Reference sequence region defined by a SequenceInterval.</description>
+				</interval>
+			</properties>
+			<item type="str">interval</item>
+			<item type="str">sequence_id</item>
+			<item type="str">type</item>
+		</SequenceLocation>
+		<SequenceInterval type="dict">
+			<description type="str">A SequenceInterval represents a span on a Sequence. Positions are always represented by contiguous spans using interbase coordinates or coordinate ranges.</description>
+			<type type="str">object</type>
+			<additionalProperties type="bool">false</additionalProperties>
+			<properties type="dict">
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">SequenceInterval</const>
+					<description type="str">MUST be &quot;SequenceInterval&quot;</description>
+				</type>
+				<start type="dict">
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/Number</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/IndefiniteRange</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/DefiniteRange</key>
+					</oneOf>
+					<description type="str">The start coordinate or range of the interval. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range less than the value of `end`.</description>
+				</start>
+				<end type="dict">
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/Number</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/IndefiniteRange</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/DefiniteRange</key>
+					</oneOf>
+					<description type="str">The end coordinate or range of the interval. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range greater than the value of `start`.</description>
+				</end>
+			</properties>
+			<allOf>
+				<if type="dict">
+					<properties type="dict">
+						<start type="dict">
+							<key name="$ref" type="str">#/definitions/Number</key>
+						</start>
+					</properties>
+				</if>
+				<then type="dict">
+					<properties type="dict">
+						<start type="dict">
+							<properties type="dict">
+								<value type="dict">
+									<minimum type="int">0</minimum>
+								</value>
+							</properties>
+						</start>
+					</properties>
+				</then>
+			</allOf>
+			<allOf>
+				<if type="dict">
+					<properties type="dict">
+						<start type="dict">
+							<key name="$ref" type="str">#/definitions/IndefiniteRange</key>
+						</start>
+					</properties>
+				</if>
+				<then type="dict">
+					<properties type="dict">
+						<start type="dict">
+							<properties type="dict">
+								<value type="dict">
+									<minimum type="int">0</minimum>
+								</value>
+							</properties>
+						</start>
+					</properties>
+				</then>
+			</allOf>
+			<allOf>
+				<if type="dict">
+					<properties type="dict">
+						<start type="dict">
+							<key name="$ref" type="str">#/definitions/DefiniteRange</key>
+						</start>
+					</properties>
+				</if>
+				<then type="dict">
+					<properties type="dict">
+						<start type="dict">
+							<properties type="dict">
+								<min type="dict">
+									<minimum type="int">0</minimum>
+								</min>
+								<max type="dict">
+									<minimum type="int">0</minimum>
+								</max>
+							</properties>
+						</start>
+					</properties>
+				</then>
+			</allOf>
+			<allOf>
+				<if type="dict">
+					<properties type="dict">
+						<end type="dict">
+							<key name="$ref" type="str">#/definitions/Number</key>
+						</end>
+					</properties>
+				</if>
+				<then type="dict">
+					<properties type="dict">
+						<end type="dict">
+							<properties type="dict">
+								<value type="dict">
+									<minimum type="int">0</minimum>
+								</value>
+							</properties>
+						</end>
+					</properties>
+				</then>
+			</allOf>
+			<allOf>
+				<if type="dict">
+					<properties type="dict">
+						<end type="dict">
+							<key name="$ref" type="str">#/definitions/IndefiniteRange</key>
+						</end>
+					</properties>
+				</if>
+				<then type="dict">
+					<properties type="dict">
+						<end type="dict">
+							<properties type="dict">
+								<value type="dict">
+									<minimum type="int">0</minimum>
+								</value>
+							</properties>
+						</end>
+					</properties>
+				</then>
+			</allOf>
+			<allOf>
+				<if type="dict">
+					<properties type="dict">
+						<end type="dict">
+							<key name="$ref" type="str">#/definitions/DefiniteRange</key>
+						</end>
+					</properties>
+				</if>
+				<then type="dict">
+					<properties type="dict">
+						<end type="dict">
+							<properties type="dict">
+								<min type="dict">
+									<minimum type="int">0</minimum>
+								</min>
+								<max type="dict">
+									<minimum type="int">0</minimum>
+								</max>
+							</properties>
+						</end>
+					</properties>
+				</then>
+			</allOf>
+			<item type="str">end</item>
+			<item type="str">start</item>
+			<item type="str">type</item>
+		</SequenceInterval>
+		<CytobandInterval type="dict">
+			<description type="str">A contiguous span on a chromosome defined by cytoband features. The span includes the constituent regions described by the start and end cytobands, as well as any intervening regions.</description>
+			<type type="str">object</type>
+			<additionalProperties type="bool">false</additionalProperties>
+			<properties type="dict">
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">CytobandInterval</const>
+					<description type="str">MUST be &quot;CytobandInterval&quot;</description>
+				</type>
+				<start type="dict">
+					<key name="$ref" type="str">#/definitions/HumanCytoband</key>
+					<description type="str">The start cytoband region. MUST specify a region nearer the terminal end (telomere) of the chromosome p-arm than `end`.</description>
+				</start>
+				<end type="dict">
+					<key name="$ref" type="str">#/definitions/HumanCytoband</key>
+					<description type="str">The start cytoband region. MUST specify a region nearer the terminal end (telomere) of the chromosome q-arm than `start`.</description>
+				</end>
+			</properties>
+			<example type="dict">
+				<type type="str">CytobandInterval</type>
+				<start type="str">q22.2</start>
+				<end type="str">q22.3</end>
+			</example>
+			<item type="str">end</item>
+			<item type="str">start</item>
+			<item type="str">type</item>
+		</CytobandInterval>
+		<SequenceExpression type="dict">
+			<description type="str">An expression describing a Sequence.</description>
+			<oneOf>
+				<key name="$ref" type="str">#/definitions/LiteralSequenceExpression</key>
+			</oneOf>
+			<oneOf>
+				<key name="$ref" type="str">#/definitions/DerivedSequenceExpression</key>
+			</oneOf>
+			<oneOf>
+				<key name="$ref" type="str">#/definitions/RepeatedSequenceExpression</key>
+			</oneOf>
+			<discriminator type="dict">
+				<propertyName type="str">type</propertyName>
+			</discriminator>
+		</SequenceExpression>
+		<LiteralSequenceExpression type="dict">
+			<description type="str">An explicit expression of a Sequence.</description>
+			<type type="str">object</type>
+			<additionalProperties type="bool">false</additionalProperties>
+			<properties type="dict">
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">LiteralSequenceExpression</const>
+					<description type="str">MUST be &quot;LiteralSequenceExpression&quot;</description>
+				</type>
+				<sequence type="dict">
+					<key name="$ref" type="str">#/definitions/Sequence</key>
+					<description type="str">the literal Sequence expressed</description>
+				</sequence>
+			</properties>
+			<item type="str">sequence</item>
+			<item type="str">type</item>
+		</LiteralSequenceExpression>
+		<DerivedSequenceExpression type="dict">
+			<description type="str">An approximate expression of a sequence that is derived from a referenced sequence location. Use of this class indicates that the derived sequence is *approximately equivalent* to the reference indicated, and is typically used for describing large regions in contexts where the use of an approximate sequence is inconsequential.</description>
+			<type type="str">object</type>
+			<additionalProperties type="bool">false</additionalProperties>
+			<properties type="dict">
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">DerivedSequenceExpression</const>
+					<description type="str">MUST be &quot;DerivedSequenceExpression&quot;</description>
+				</type>
+				<location type="dict">
+					<key name="$ref" type="str">#/definitions/SequenceLocation</key>
+					<description type="str">The location from which the approximate sequence is derived</description>
+				</location>
+				<reverse_complement type="dict">
+					<type type="str">boolean</type>
+					<description type="str">A flag indicating if the expressed sequence is the reverse complement of the sequence referred to by `location`</description>
+				</reverse_complement>
+			</properties>
+			<item type="str">location</item>
+			<item type="str">reverse_complement</item>
+			<item type="str">type</item>
+		</DerivedSequenceExpression>
+		<RepeatedSequenceExpression type="dict">
+			<description type="str">An expression of a sequence comprised of a tandem repeating subsequence.</description>
+			<additionalProperties type="bool">false</additionalProperties>
+			<type type="str">object</type>
+			<properties type="dict">
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">RepeatedSequenceExpression</const>
+					<description type="str">MUST be &quot;RepeatedSequenceExpression&quot;</description>
+				</type>
+				<seq_expr type="dict">
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/LiteralSequenceExpression</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/DerivedSequenceExpression</key>
+					</oneOf>
+					<description type="str">An expression of the repeating subsequence</description>
+				</seq_expr>
+				<count type="dict">
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/Number</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/IndefiniteRange</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/DefiniteRange</key>
+					</oneOf>
+					<description type="str">The count of repeated units, as an integer or inclusive range</description>
+				</count>
+			</properties>
+			<allOf>
+				<if type="dict">
+					<properties type="dict">
+						<count type="dict">
+							<key name="$ref" type="str">#/definitions/Number</key>
+						</count>
+					</properties>
+				</if>
+				<then type="dict">
+					<properties type="dict">
+						<count type="dict">
+							<properties type="dict">
+								<value type="dict">
+									<minimum type="int">0</minimum>
+								</value>
+							</properties>
+						</count>
+					</properties>
+				</then>
+			</allOf>
+			<allOf>
+				<if type="dict">
+					<properties type="dict">
+						<count type="dict">
+							<key name="$ref" type="str">#/definitions/IndefiniteRange</key>
+						</count>
+					</properties>
+				</if>
+				<then type="dict">
+					<properties type="dict">
+						<count type="dict">
+							<properties type="dict">
+								<value type="dict">
+									<minimum type="int">0</minimum>
+								</value>
+							</properties>
+						</count>
+					</properties>
+				</then>
+			</allOf>
+			<allOf>
+				<if type="dict">
+					<properties type="dict">
+						<count type="dict">
+							<key name="$ref" type="str">#/definitions/DefiniteRange</key>
+						</count>
+					</properties>
+				</if>
+				<then type="dict">
+					<properties type="dict">
+						<count type="dict">
+							<properties type="dict">
+								<min type="dict">
+									<minimum type="int">0</minimum>
+								</min>
+								<max type="dict">
+									<minimum type="int">0</minimum>
+								</max>
+							</properties>
+						</count>
+					</properties>
+				</then>
+			</allOf>
+			<item type="str">count</item>
+			<item type="str">seq_expr</item>
+			<item type="str">type</item>
+		</RepeatedSequenceExpression>
+		<GenotypeMember type="dict">
+			<description type="str">A class describing a Genotype `member`.</description>
+			<type type="str">object</type>
+			<additionalProperties type="bool">false</additionalProperties>
+			<properties type="dict">
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">GenotypeMember</const>
+					<description type="str">MUST be &quot;GenotypeMember&quot;.</description>
+				</type>
+				<copies type="dict">
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/Number</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/IndefiniteRange</key>
+					</oneOf>
+					<oneOf>
+						<key name="$ref" type="str">#/definitions/DefiniteRange</key>
+					</oneOf>
+					<description type="str">The number of copies of the `variation` at a Genotype locus.</description>
+				</copies>
+				<variation type="dict">
+					<key name="$ref" type="str">#/definitions/MolecularVariation</key>
+					<description type="str">A MolecularVariation at a Genotype locus.</description>
+				</variation>
+			</properties>
+			<item type="str">copies</item>
+			<item type="str">variation</item>
+		</GenotypeMember>
+		<Feature type="dict">
+			<description type="str">A named entity that can be mapped to a Location. Genes, protein domains, exons, and chromosomes are some examples of common biological entities that may be Features.</description>
+			<oneOf>
+				<key name="$ref" type="str">#/definitions/Gene</key>
+			</oneOf>
+			<discriminator type="dict">
+				<propertyName type="str">type</propertyName>
+			</discriminator>
+		</Feature>
+		<Gene type="dict">
+			<description type="str">A reference to a Gene as defined by an authority. For human genes, the use of [hgnc](https://registry.identifiers.org/registry/hgnc) as the gene authority is RECOMMENDED.</description>
+			<type type="str">object</type>
+			<additionalProperties type="bool">false</additionalProperties>
+			<properties type="dict">
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">Gene</const>
+					<description type="str">MUST be &quot;Gene&quot;</description>
+				</type>
+				<gene_id type="dict">
+					<key name="$ref" type="str">#/definitions/CURIE</key>
+					<description type="str">A CURIE reference to a Gene concept</description>
+				</gene_id>
+			</properties>
+			<item type="str">gene_id</item>
+			<item type="str">type</item>
+		</Gene>
+		<Number type="dict">
+			<description type="str">A simple integer value as a VRS class.</description>
+			<type type="str">object</type>
+			<additionalProperties type="bool">false</additionalProperties>
+			<properties type="dict">
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">Number</const>
+					<description type="str">MUST be &quot;Number&quot;</description>
+				</type>
+				<value type="dict">
+					<type type="str">integer</type>
+					<description type="str">The value represented by Number</description>
+				</value>
+			</properties>
+			<item type="str">type</item>
+			<item type="str">value</item>
+		</Number>
+		<DefiniteRange type="dict">
+			<description type="str">A bounded, inclusive range of numbers.</description>
+			<type type="str">object</type>
+			<additionalProperties type="bool">false</additionalProperties>
+			<properties type="dict">
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">DefiniteRange</const>
+					<description type="str">MUST be &quot;DefiniteRange&quot;</description>
+				</type>
+				<min type="dict">
+					<type type="str">number</type>
+					<description type="str">The minimum value; inclusive</description>
+				</min>
+				<max type="dict">
+					<type type="str">number</type>
+					<description type="str">The maximum value; inclusive</description>
+				</max>
+			</properties>
+			<item type="str">max</item>
+			<item type="str">min</item>
+			<item type="str">type</item>
+		</DefiniteRange>
+		<IndefiniteRange type="dict">
+			<description type="str">A half-bounded range of numbers represented as a number bound and associated comparator. The bound operator is interpreted as follows: '&gt;=' are all numbers greater than and including `value`, '&lt;=' are all numbers less than and including `value`.</description>
+			<type type="str">object</type>
+			<additionalProperties type="bool">false</additionalProperties>
+			<properties type="dict">
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">IndefiniteRange</const>
+					<description type="str">MUST be &quot;IndefiniteRange&quot;</description>
+				</type>
+				<value type="dict">
+					<type type="str">number</type>
+					<description type="str">The bounded value; inclusive</description>
+				</value>
+				<comparator type="dict">
+					<type type="str">string</type>
+					<item type="str">&lt;=</item>
+					<item type="str">&gt;=</item>
+					<description type="str">MUST be one of &quot;&lt;=&quot; or &quot;&gt;=&quot;, indicating which direction the range is indefinite</description>
+				</comparator>
+			</properties>
+			<item type="str">comparator</item>
+			<item type="str">type</item>
+			<item type="str">value</item>
+		</IndefiniteRange>
+		<CURIE type="dict">
+			<additionalProperties type="bool">false</additionalProperties>
+			<description type="str">A [W3C Compact URI](https://www.w3.org/TR/curie/) formatted string. A CURIE string has the structure ``prefix``:``reference``, as defined by the W3C syntax.</description>
+			<type type="str">string</type>
+			<pattern type="str">^\w[^:]*:.+$</pattern>
+			<example type="str">ensembl:ENSG00000139618</example>
+		</CURIE>
+		<HumanCytoband type="dict">
+			<additionalProperties type="bool">false</additionalProperties>
+			<description type="str">A character string representing cytobands derived from the *International System for Human Cytogenomic Nomenclature* (ISCN) [guidelines](http://doi.org/10.1159/isbn.978-3-318-06861-0).</description>
+			<type type="str">string</type>
+			<pattern type="str">^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$</pattern>
+			<example type="str">q22.3</example>
+		</HumanCytoband>
+		<Residue type="dict">
+			<additionalProperties type="bool">false</additionalProperties>
+			<description type="str">A character representing a specific residue (i.e., molecular species) or groupings of these (&quot;ambiguity codes&quot;), using [one-letter IUPAC abbreviations](https://en.wikipedia.org/wiki/International_Union_of_Pure_and_Applied_Chemistry#Amino_acid_and_nucleotide_base_codes) for nucleic acids and amino acids.</description>
+			<type type="str">string</type>
+			<pattern type="str">[A-Z*\-]</pattern>
+		</Residue>
+		<Sequence type="dict">
+			<additionalProperties type="bool">false</additionalProperties>
+			<description type="str">A character string of Residues that represents a biological sequence using the conventional sequence order (5’-to-3’ for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequences.</description>
+			<type type="str">string</type>
+			<pattern type="str">^[A-Z*\-]*$</pattern>
+		</Sequence>
+		<SequenceState type="dict">
+			<deprecated type="bool">true</deprecated>
+			<description type="str">DEPRECATED. A Sequence as a State. This is the State class to use for representing &quot;ref-alt&quot; style variation, including SNVs, MNVs, del, ins, and delins. This class is deprecated. Use LiteralSequenceExpression instead.</description>
+			<additionalProperties type="bool">false</additionalProperties>
+			<type type="str">object</type>
+			<properties type="dict">
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">SequenceState</const>
+					<description type="str">MUST be &quot;SequenceState&quot;</description>
+				</type>
+				<sequence type="dict">
+					<key name="$ref" type="str">#/definitions/Sequence</key>
+					<description type="str">A string of Residues</description>
+				</sequence>
+			</properties>
+			<example type="dict">
+				<type type="str">SequenceState</type>
+				<sequence type="str">C</sequence>
+			</example>
+			<item type="str">sequence</item>
+			<item type="str">type</item>
+		</SequenceState>
+		<SimpleInterval type="dict">
+			<deprecated type="bool">true</deprecated>
+			<description type="str">DEPRECATED: A SimpleInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates. This class is deprecated. Use SequenceInterval instead.</description>
+			<additionalProperties type="bool">false</additionalProperties>
+			<type type="str">object</type>
+			<properties type="dict">
+				<type type="dict">
+					<type type="str">string</type>
+					<const type="str">SimpleInterval</const>
+					<description type="str">MUST be &quot;SimpleInterval&quot;</description>
+				</type>
+				<start type="dict">
+					<type type="str">integer</type>
+					<description type="str">The start coordinate</description>
+				</start>
+				<end type="dict">
+					<type type="str">integer</type>
+					<description type="str">The end coordinate</description>
+				</end>
+			</properties>
+			<example type="dict">
+				<type type="str">SimpleInterval</type>
+				<start type="int">11</start>
+				<end type="int">22</end>
+			</example>
+			<item type="str">end</item>
+			<item type="str">start</item>
+			<item type="str">type</item>
+		</SimpleInterval>
+	</definitions>
+</all>
