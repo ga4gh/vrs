@@ -5,3 +5,4 @@ ipython
 pyyaml
 ga4gh.gks.metaschema>=0.1.1
 sphinx ~= 3.5
+json2xml==3.19.3
