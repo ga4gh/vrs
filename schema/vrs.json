@@ -862,7 +862,14 @@
                "description": "The number of copies of the `variation` at a Genotype locus."
             },
             "variation": {
-               "$ref": "#/definitions/MolecularVariation",
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/Allele"
+                  },
+                  {
+                     "$ref": "#/definitions/Haplotype"
+                  }
+               ],
                "description": "A MolecularVariation at a Genotype locus."
             }
          },

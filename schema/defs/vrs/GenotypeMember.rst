@@ -23,6 +23,6 @@ A class describing a :ref:`Genotype` `member`.
       - 1..1
       - The number of copies of the `variation` at a :ref:`Genotype` locus.
    *  - variation
-      - :ref:`MolecularVariation`
+      - :ref:`Allele` | :ref:`Haplotype`
       - 1..1
       - A :ref:`MolecularVariation` at a :ref:`Genotype` locus.
