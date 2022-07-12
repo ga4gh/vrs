@@ -640,7 +640,9 @@ definitions:
         description: >-
           The number of copies of the `variation` at a :ref:`Genotype` locus.
       variation:
-        $ref: "#/definitions/MolecularVariation"
+        oneOf:
+          - $ref: "#/definitions/Allele"
+          - $ref: "#/definitions/Haplotype"
         description: >-
           A :ref:`MolecularVariation` at a :ref:`Genotype` locus.
     required: [ "copies", "variation" ]
