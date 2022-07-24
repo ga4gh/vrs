@@ -11,6 +11,7 @@
 $schema: "http://json-schema.org/draft-07/schema"
 title: "GA4GH-VRS-Definitions"
 type: object
+strict: true
 
 definitions:
   # VRS definitions are presented top-down.  Everything rolls up to
@@ -83,7 +84,6 @@ definitions:
   Allele:
     description: >-
       The state of a molecule at a :ref:`Location`.
-    additionalProperties: false
     type: object
     properties:
       type:
@@ -111,7 +111,6 @@ definitions:
   Haplotype:
     description: >-
       A set of non-overlapping :ref:`Allele` members that co-occur on the same molecule.
-    additionalProperties: false
     type: "object"
     properties:
       type:
@@ -139,7 +138,6 @@ definitions:
   Text:
     description: >-
       A free-text definition of variation.
-    additionalProperties: false
     type: object
     properties:
       type:
@@ -158,7 +156,6 @@ definitions:
     description: >-
       An unconstrained set of Variation members.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -182,7 +179,6 @@ definitions:
   # SystemicVariation
 
   CopyNumber:
-    additionalProperties: false
     type: object
     description: >-
       The absolute count of discrete copies of a :ref:`MolecularVariation`,
@@ -250,7 +246,6 @@ definitions:
     description: >-
       A set of trans-phased :ref:`MolecularVariation` members, with associated
       copy counts, across a specified number of genomic locus `copies`.
-    additionalProperties: false
     type: object
     properties:
       type:
@@ -306,7 +301,6 @@ definitions:
       propertyName: type
 
   ChromosomeLocation:
-    additionalProperties: false
     description: >-
       A Location on a chromosome defined by a species and chromosome name.
     type: object
@@ -335,7 +329,6 @@ definitions:
     required: [ "species_id", "chr", "interval" ]
 
   SequenceLocation:
-    additionalProperties: false
     description: >-
       A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
     type: object
@@ -373,7 +366,6 @@ definitions:
       always represented by contiguous spans using interbase coordinates or
       coordinate ranges.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -473,7 +465,6 @@ definitions:
       The span includes the constituent regions described by the start and
       end cytobands, as well as any intervening regions.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -520,7 +511,6 @@ definitions:
     description: >-
       An explicit expression of a Sequence.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -541,7 +531,6 @@ definitions:
       large regions in contexts where the use of an approximate sequence
       is inconsequential.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -562,7 +551,6 @@ definitions:
   RepeatedSequenceExpression:
     description: >-
       An expression of a sequence comprised of a tandem repeating subsequence.
-    additionalProperties: false
     type: object
     properties:
       type:
@@ -625,7 +613,6 @@ definitions:
     description: >-
       A class describing a :ref:`Genotype` `member`.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -672,7 +659,6 @@ definitions:
       the use of `hgnc <https://registry.identifiers.org/registry/hgnc>`_
       as the gene authority is RECOMMENDED.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -692,7 +678,6 @@ definitions:
     description: >-
       A simple integer value as a VRS class.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -708,7 +693,6 @@ definitions:
     description: >-
       A bounded, inclusive range of numbers.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -730,7 +714,6 @@ definitions:
       '>=' are all numbers greater than and including `value`, '<=' are all
       numbers less than and including `value`.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -755,7 +738,6 @@ definitions:
   # =============================================================================
 
   CURIE:
-    additionalProperties: false
     description: >-
       A `W3C Compact URI <https://www.w3.org/TR/curie/>`_ formatted string.
       A CURIE string has the structure ``prefix``:``reference``, as defined by
@@ -765,7 +747,6 @@ definitions:
     example: "ensembl:ENSG00000139618"
 
   HumanCytoband:
-    additionalProperties: false
     description: >-
       A character string representing cytobands derived from the
       *International System for Human Cytogenomic Nomenclature* (ISCN)
@@ -775,7 +756,6 @@ definitions:
     example: "q22.3"
 
   Residue:
-    additionalProperties: false
     description: >-
       A character representing a specific residue (i.e., molecular species)
       or groupings of these ("ambiguity codes"), using `one-letter IUPAC
@@ -785,7 +765,6 @@ definitions:
     pattern: '[A-Z*\-]'
 
   Sequence:
-    additionalProperties: false
     description: >-
       A character string of :ref:`Residues <Residue>` that represents a biological
       sequence using the conventional sequence order (5’-to-3’ for
@@ -806,7 +785,6 @@ definitions:
       to use for representing "ref-alt" style variation, including SNVs, MNVs,
       del, ins, and delins.
       This class is deprecated. Use :ref:`LiteralSequenceExpression` instead.
-    additionalProperties: false
     type: object
     properties:
       type:
@@ -828,7 +806,6 @@ definitions:
       always represented by contiguous spans using interbase coordinates.
 
       This class is deprecated. Use SequenceInterval instead.
-    additionalProperties: false
     type: object
     properties:
       type:

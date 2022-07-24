@@ -36,7 +36,6 @@ definitions:
       propertyName: type
   Allele:
     description: The state of a molecule at a Location.
-    additionalProperties: false
     type: object
     properties:
       _id: &id001
@@ -63,10 +62,10 @@ definitions:
     - location
     - state
     - type
+    additionalProperties: false
   Haplotype:
     description: A set of non-overlapping Allele members that co-occur on the same
       molecule.
-    additionalProperties: false
     type: object
     properties:
       _id: *id001
@@ -88,9 +87,9 @@ definitions:
     required:
     - members
     - type
+    additionalProperties: false
   Text:
     description: A free-text definition of variation.
-    additionalProperties: false
     type: object
     properties:
       _id: *id001
@@ -106,10 +105,10 @@ definitions:
     required:
     - definition
     - type
+    additionalProperties: false
   VariationSet:
     description: An unconstrained set of Variation members.
     type: object
-    additionalProperties: false
     properties:
       _id: *id001
       type:
@@ -129,8 +128,8 @@ definitions:
     required:
     - members
     - type
-  CopyNumber:
     additionalProperties: false
+  CopyNumber:
     type: object
     description: The absolute count of discrete copies of a MolecularVariation, Feature,
       SequenceExpression, or a CURIE reference within a system (e.g. genome, cell,
@@ -192,10 +191,10 @@ definitions:
     - copies
     - subject
     - type
+    additionalProperties: false
   Genotype:
     description: A set of trans-phased MolecularVariation members, with associated
       copy counts, across a specified number of genomic locus `copies`.
-    additionalProperties: false
     type: object
     properties:
       _id: *id001
@@ -225,6 +224,7 @@ definitions:
     - copies
     - members
     - type
+    additionalProperties: false
   Location:
     description: A contiguous segment of a biological sequence.
     oneOf:
@@ -233,7 +233,6 @@ definitions:
     discriminator:
       propertyName: type
   ChromosomeLocation:
-    additionalProperties: false
     description: A Location on a chromosome defined by a species and chromosome name.
     type: object
     properties:
@@ -262,8 +261,8 @@ definitions:
     - interval
     - species_id
     - type
-  SequenceLocation:
     additionalProperties: false
+  SequenceLocation:
     description: A Location defined by an interval on a referenced Sequence.
     type: object
     properties:
@@ -285,12 +284,12 @@ definitions:
     - interval
     - sequence_id
     - type
+    additionalProperties: false
   SequenceInterval:
     description: A SequenceInterval represents a span on a Sequence. Positions are
       always represented by contiguous spans using interbase coordinates or coordinate
       ranges.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -382,12 +381,12 @@ definitions:
     - end
     - start
     - type
+    additionalProperties: false
   CytobandInterval:
     description: A contiguous span on a chromosome defined by cytoband features. The
       span includes the constituent regions described by the start and end cytobands,
       as well as any intervening regions.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -410,6 +409,7 @@ definitions:
     - end
     - start
     - type
+    additionalProperties: false
   SequenceExpression:
     description: An expression describing a Sequence.
     oneOf:
@@ -421,7 +421,6 @@ definitions:
   LiteralSequenceExpression:
     description: An explicit expression of a Sequence.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -434,6 +433,7 @@ definitions:
     required:
     - sequence
     - type
+    additionalProperties: false
   DerivedSequenceExpression:
     description: An approximate expression of a sequence that is derived from a referenced
       sequence location. Use of this class indicates that the derived sequence is
@@ -441,7 +441,6 @@ definitions:
       for describing large regions in contexts where the use of an approximate sequence
       is inconsequential.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -459,9 +458,9 @@ definitions:
     - location
     - reverse_complement
     - type
+    additionalProperties: false
   RepeatedSequenceExpression:
     description: An expression of a sequence comprised of a tandem repeating subsequence.
-    additionalProperties: false
     type: object
     properties:
       type:
@@ -517,10 +516,10 @@ definitions:
     - count
     - seq_expr
     - type
+    additionalProperties: false
   GenotypeMember:
     description: A class describing a Genotype `member`.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -541,6 +540,7 @@ definitions:
     required:
     - copies
     - variation
+    additionalProperties: false
   Feature:
     description: A named entity that can be mapped to a Location. Genes, protein domains,
       exons, and chromosomes are some examples of common biological entities that
@@ -554,7 +554,6 @@ definitions:
       the use of [hgnc](https://registry.identifiers.org/registry/hgnc) as the gene
       authority is RECOMMENDED.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -567,10 +566,10 @@ definitions:
     required:
     - gene_id
     - type
+    additionalProperties: false
   Number:
     description: A simple integer value as a VRS class.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -583,10 +582,10 @@ definitions:
     required:
     - type
     - value
+    additionalProperties: false
   DefiniteRange:
     description: A bounded, inclusive range of numbers.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -603,13 +602,13 @@ definitions:
     - max
     - min
     - type
+    additionalProperties: false
   IndefiniteRange:
     description: 'A half-bounded range of numbers represented as a number bound and
       associated comparator. The bound operator is interpreted as follows: ''>=''
       are all numbers greater than and including `value`, ''<='' are all numbers less
       than and including `value`.'
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -630,8 +629,8 @@ definitions:
     - comparator
     - type
     - value
-  CURIE:
     additionalProperties: false
+  CURIE:
     description: A [W3C Compact URI](https://www.w3.org/TR/curie/) formatted string.
       A CURIE string has the structure ``prefix``:``reference``, as defined by the
       W3C syntax.
@@ -639,21 +638,18 @@ definitions:
     pattern: ^\w[^:]*:.+$
     example: ensembl:ENSG00000139618
   HumanCytoband:
-    additionalProperties: false
     description: A character string representing cytobands derived from the *International
       System for Human Cytogenomic Nomenclature* (ISCN) [guidelines](http://doi.org/10.1159/isbn.978-3-318-06861-0).
     type: string
     pattern: ^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$
     example: q22.3
   Residue:
-    additionalProperties: false
     description: A character representing a specific residue (i.e., molecular species)
       or groupings of these ("ambiguity codes"), using [one-letter IUPAC abbreviations](https://en.wikipedia.org/wiki/International_Union_of_Pure_and_Applied_Chemistry#Amino_acid_and_nucleotide_base_codes)
       for nucleic acids and amino acids.
     type: string
     pattern: '[A-Z*\-]'
   Sequence:
-    additionalProperties: false
     description: "A character string of Residues that represents a biological sequence\
       \ using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid\
       \ sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity\
@@ -665,7 +661,6 @@ definitions:
     description: DEPRECATED. A Sequence as a State. This is the State class to use
       for representing "ref-alt" style variation, including SNVs, MNVs, del, ins,
       and delins. This class is deprecated. Use LiteralSequenceExpression instead.
-    additionalProperties: false
     type: object
     properties:
       type:
@@ -681,12 +676,12 @@ definitions:
     required:
     - sequence
     - type
+    additionalProperties: false
   SimpleInterval:
     deprecated: true
     description: 'DEPRECATED: A SimpleInterval represents a span of sequence. Positions
       are always represented by contiguous spans using interbase coordinates. This
       class is deprecated. Use SequenceInterval instead.'
-    additionalProperties: false
     type: object
     properties:
       type:
@@ -707,3 +702,4 @@ definitions:
     - end
     - start
     - type
+    additionalProperties: false
