@@ -1,0 +1,46 @@
+{
+   "$schema": "http://json-schema.org/draft/2020-12/schema",
+   "title": "GA4GH-GKS-Core-Definitions",
+   "type": "object",
+   "$defs": {
+      "Entity": {
+         "description": "Entity is the root class of \u2018core\u2019 classes model - those that have identifiers and other general  metadata like labels, xrefs, urls, descriptions, etc. All core classes descend from and inherit  its attributes.",
+         "oneOf": [
+            {
+               "$ref": "#/$defs/ExtensibleEntity"
+            },
+            {
+               "$ref": "#/$defs/ValueEntity"
+            }
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
+      },
+      "ValueEntity": {
+         "description": "ValueEntity is the root class for classes that instantiate Value Objects. ValueEntity classes are not extensible and MUST NOT have optional properties.",
+         "oneOf": [
+            {
+               "$ref": "#/$defs/Proposition"
+            }
+         ],
+         "discriminator": {
+            "propertyName": "type"
+         }
+      },
+      "ExtensibleEntity": {
+         "description": "ExtensibleEntity is the root class for classes that instantiate Extensible Objects. Extensible Objects are extensible using the extensions property and MAY have optional properties.",
+         "oneOf": [
+            {
+               "$ref": "#/$defs/"
+            }
+         ]
+      },
+      "CURIE": {
+         "description": "A [W3C Compact URI](https://www.w3.org/TR/curie/) formatted string. A CURIE string has the structure ``prefix``:``reference``, as defined by the W3C syntax.",
+         "type": "string",
+         "pattern": "^\\w[^:]*:.+$",
+         "example": "ensembl:ENSG00000139618"
+      }
+   }
+}

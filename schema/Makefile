@@ -3,20 +3,21 @@
 .SUFFIXES:
 .DELETE_ON_ERROR:
 
-JSYAMLS:=vrs.yaml
+JSYAMLS:=vrs.yaml core.yaml
 JSONS:=${JSYAMLS:.yaml=.json}
 
-all: vrs.json defs
+all: ${JSONS} defs
 
-vrs.json: vrs.yaml
+%.json: %.yaml
 	jsy2js.py <$< >$@
 
-vrs.yaml: vrs-source.yaml
-	source2jsy.py <$< >$@
+%.yaml: %-source.yaml
+	source2jsy.py $< >$@
 
 defs:
 	rm -rf defs
 	y2t.py vrs-source.yaml
+	y2t.py core-source.yaml
 
 ## # npm install -g json-dereference-cli
 ## %.json: %.yaml

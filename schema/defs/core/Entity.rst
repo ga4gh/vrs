@@ -1,10 +1,8 @@
 **Computational Definition**
 
-An unconstrained set of Variation members.
+Entity is the root class of ‘core’ classes model - those that have identifiers and other general  metadata like labels, xrefs, urls, descriptions, etc. All core classes descend from and inherit  its attributes.
 
 **Information Model**
-
-Some VariationSet attributes are inherited from :ref:`Entity`.
 
 .. list-table::
    :class: clean-wrap
@@ -17,14 +15,10 @@ Some VariationSet attributes are inherited from :ref:`Entity`.
       - Limits
       - Description
    *  - _id
-      - `CURIE <core.json#/$defs/CURIE>`_
+      - :ref:`CURIE`
       - 0..1
       - The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system.
    *  - type
       - string
       - 1..1
-      - MUST be "VariationSet"
-   *  - members
-      - `CURIE <core.json#/$defs/CURIE>`_ | :ref:`Variation`
-      - 0..m
-      - List of Variation objects or identifiers. Attribute is required, but MAY be empty.
+      - The schema class that is instantiated by the data object. Must be the name of a class from  the VA schema.

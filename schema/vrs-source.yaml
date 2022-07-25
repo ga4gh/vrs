@@ -13,6 +13,12 @@ title: "GA4GH-VRS-Definitions"
 type: object
 strict: true
 
+imports:
+  gks.core: "core-source.yaml"
+
+namespaces:
+  gks.core: core.json#/$defs/
+
 definitions:
   # VRS definitions are presented top-down.  Everything rolls up to
   # Variation, which is a polymorphic abstraction of many kinds of
@@ -23,27 +29,19 @@ definitions:
   # =============================================================================
 
   Variation:
+    inherits: gks.core:ValueEntity
     description: >-
       A representation of the state of one or more biomolecules.
     oneOf:
       - $ref: "#/definitions/MolecularVariation"
       - $ref: "#/definitions/SystemicVariation"
       - $ref: "#/definitions/UtilityVariation"
-    heritable_properties:
-      _id:
-        $ref: "#/definitions/CURIE"
-        description: >-
-          Variation Id. MUST be unique within document.
-      type:
-        type: string
-        description: >-
-          The Variation class type. MUST match child class type.
-    heritable_required: ["type"]
 
     discriminator:
       propertyName: type
 
   MolecularVariation:
+    inherits: Variation
     description: >-
       A :ref:`variation` on a contiguous molecule.
     oneOf:
@@ -53,6 +51,7 @@ definitions:
       propertyName: type
 
   UtilityVariation:
+    inherits: Variation
     description: >-
       A collection of :ref:`Variation` subclasses that cannot be
       constrained to a specific class of biological variation, but
@@ -64,6 +63,7 @@ definitions:
       propertyName: type
 
   SystemicVariation:
+    inherits: Variation
     description: >-
       A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
@@ -82,6 +82,7 @@ definitions:
   # Molecular Variation
 
   Allele:
+    inherits: MolecularVariation
     description: >-
       The state of a molecule at a :ref:`Location`.
     type: object
@@ -94,7 +95,7 @@ definitions:
           MUST be "Allele"
       location:
         oneOf:
-          - $ref: "#/definitions/CURIE"
+          - $ref_curie: gks.core:CURIE
           - $ref: "#/definitions/Location"
         description: >-
           Where Allele is located
@@ -109,6 +110,7 @@ definitions:
     required: [ "location", "state" ]
 
   Haplotype:
+    inherits: MolecularVariation
     description: >-
       A set of non-overlapping :ref:`Allele` members that co-occur on the same molecule.
     type: "object"
@@ -126,7 +128,7 @@ definitions:
         items:
           oneOf:
             - $ref: "#/definitions/Allele"
-            - $ref: "#/definitions/CURIE"
+            - $ref_curie: gks.core:CURIE
         description: >-
           List of Alleles, or references to Alleles, that comprise this Haplotype.
     required: [ "members" ]
@@ -136,6 +138,7 @@ definitions:
   # UtilityVariation
 
   Text:
+    inherits: UtilityVariation
     description: >-
       A free-text definition of variation.
     type: object
@@ -153,6 +156,7 @@ definitions:
     required: [ "definition" ]
 
   VariationSet:
+    inherits: UtilityVariation
     description: >-
       An unconstrained set of Variation members.
     type: object
@@ -167,7 +171,7 @@ definitions:
         uniqueItems: true
         items:
           oneOf:
-            - $ref: "#/definitions/CURIE"
+            - $ref_curie: gks.core:CURIE
             - $ref: "#/definitions/Variation"
         description: >-
           List of Variation objects or identifiers. Attribute is
@@ -179,6 +183,7 @@ definitions:
   # SystemicVariation
 
   CopyNumber:
+    inherits: SystemicVariation
     type: object
     description: >-
       The absolute count of discrete copies of a :ref:`MolecularVariation`,
@@ -196,7 +201,7 @@ definitions:
           - $ref: "#/definitions/MolecularVariation"
           - $ref: "#/definitions/Feature"
           - $ref: "#/definitions/SequenceExpression"
-          - $ref: "#/definitions/CURIE"
+          - $ref_curie: gks.core:CURIE
         description: >-
           Subject of the Copy Number object
       copies:
@@ -243,6 +248,7 @@ definitions:
     required: [ "subject", "copies" ]
 
   Genotype:
+    inherits: SystemicVariation
     description: >-
       A set of trans-phased :ref:`MolecularVariation` members, with associated
       copy counts, across a specified number of genomic locus `copies`.
@@ -282,25 +288,17 @@ definitions:
   # Locations
 
   Location:
+    inherits: gks.core:ValueEntity
     description: >-
       A contiguous segment of a biological sequence.
     oneOf:
       - $ref: "#/definitions/ChromosomeLocation"
       - $ref: "#/definitions/SequenceLocation"
-    heritable_properties:
-      _id:
-        $ref: "#/definitions/CURIE"
-        description: >-
-          Location Id. MUST be unique within document.
-      type:
-        type: string
-        description: >-
-          The Location class type. MUST match child class type.
-    heritable_required: ["type"]
     discriminator:
       propertyName: type
 
   ChromosomeLocation:
+    inherits: Location
     description: >-
       A Location on a chromosome defined by a species and chromosome name.
     type: object
@@ -311,7 +309,7 @@ definitions:
         default: "ChromosomeLocation"
         description: MUST be "ChromosomeLocation"
       species_id:
-        $ref: "#/definitions/CURIE"
+        $ref_curie: gks.core:CURIE
         default: "taxonomy:9606"
         description: >-
           :ref:`CURIE` representing a species from the
@@ -329,6 +327,7 @@ definitions:
     required: [ "species_id", "chr", "interval" ]
 
   SequenceLocation:
+    inherits: Location
     description: >-
       A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
     type: object
@@ -339,7 +338,7 @@ definitions:
         default: "SequenceLocation"
         description: MUST be "SequenceLocation"
       sequence_id:
-        $ref: "#/definitions/CURIE"
+        $ref_curie: gks.core:CURIE
         description: >-
           A VRS :ref:`Computed Identifier <computed-identifiers>`
           for the reference :ref:`Sequence`.
@@ -505,9 +504,10 @@ definitions:
         type: string
         description: >-
           The SequenceExpression class type. MUST match child class type.
-    heritable_required: ["type"]
+    heritable_required: [ "type" ]
 
   LiteralSequenceExpression:
+    inherits: SequenceExpression
     description: >-
       An explicit expression of a Sequence.
     type: object
@@ -523,6 +523,7 @@ definitions:
     required: [ "sequence" ]
 
   DerivedSequenceExpression:
+    inherits: SequenceExpression
     description: >-
       An approximate expression of a sequence that is derived from
       a referenced sequence location. Use of this class
@@ -549,6 +550,7 @@ definitions:
     required: [ "location", "reverse_complement" ]
 
   RepeatedSequenceExpression:
+    inherits: SequenceExpression
     description: >-
       An expression of a sequence comprised of a tandem repeating subsequence.
     type: object
@@ -632,7 +634,7 @@ definitions:
           - $ref: "#/definitions/Haplotype"
         description: >-
           A :ref:`MolecularVariation` at a :ref:`Genotype` locus.
-    required: [ "copies", "variation" ]
+    required: [ "copies", "variation", "type" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Feature
@@ -666,10 +668,10 @@ definitions:
         default: "Gene"
         description: MUST be "Gene"
       gene_id:
-        $ref: "#/definitions/CURIE"
+        $ref_curie: gks.core:CURIE
         description: >-
           A CURIE reference to a Gene concept
-    required: [ "gene_id" ]
+    required: [ "gene_id", "type" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Numerics, Comparators, and Ranges
@@ -736,15 +738,6 @@ definitions:
   # These types do NOT have a VRS `type` attribute
   # These types are used solely within other definitions.
   # =============================================================================
-
-  CURIE:
-    description: >-
-      A `W3C Compact URI <https://www.w3.org/TR/curie/>`_ formatted string.
-      A CURIE string has the structure ``prefix``:``reference``, as defined by
-      the W3C syntax.
-    type: string
-    pattern: '^\w[^:]*:.+$'
-    example: "ensembl:ENSG00000139618"
 
   HumanCytoband:
     description: >-

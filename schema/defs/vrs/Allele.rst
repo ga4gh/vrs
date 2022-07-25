@@ -4,7 +4,7 @@ The state of a molecule at a :ref:`Location`.
 
 **Information Model**
 
-Some Allele attributes are inherited from :ref:`Variation`.
+Some Allele attributes are inherited from :ref:`Entity`.
 
 .. list-table::
    :class: clean-wrap
@@ -17,15 +17,15 @@ Some Allele attributes are inherited from :ref:`Variation`.
       - Limits
       - Description
    *  - _id
-      - :ref:`CURIE`
+      - `CURIE <core.json#/$defs/CURIE>`_
       - 0..1
-      - Variation Id. MUST be unique within document.
+      - The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system.
    *  - type
       - string
       - 1..1
       - MUST be "Allele"
    *  - location
-      - :ref:`CURIE` | :ref:`Location`
+      - `CURIE <core.json#/$defs/CURIE>`_ | :ref:`Location`
       - 1..1
       - Where Allele is located
    *  - state

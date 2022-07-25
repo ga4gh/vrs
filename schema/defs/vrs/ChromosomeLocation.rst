@@ -4,7 +4,7 @@ A Location on a chromosome defined by a species and chromosome name.
 
 **Information Model**
 
-Some ChromosomeLocation attributes are inherited from :ref:`Location`.
+Some ChromosomeLocation attributes are inherited from :ref:`Entity`.
 
 .. list-table::
    :class: clean-wrap
@@ -17,15 +17,15 @@ Some ChromosomeLocation attributes are inherited from :ref:`Location`.
       - Limits
       - Description
    *  - _id
-      - :ref:`CURIE`
+      - `CURIE <core.json#/$defs/CURIE>`_
       - 0..1
-      - Location Id. MUST be unique within document.
+      - The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system.
    *  - type
       - string
       - 1..1
       - MUST be "ChromosomeLocation"
    *  - species_id
-      - :ref:`CURIE`
+      - `CURIE <core.json#/$defs/CURIE>`_
       - 1..1
       - :ref:`CURIE` representing a species from the `NCBI species taxonomy <https://registry.identifiers.org/registry/taxonomy>`_. Default: "taxonomy:9606" (human)
    *  - chr

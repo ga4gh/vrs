@@ -67,8 +67,8 @@
          "type": "object",
          "properties": {
             "_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "Variation Id. MUST be unique within document."
+               "$ref": "core.json#/$defs/CURIE",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system."
             },
             "type": {
                "type": "string",
@@ -79,7 +79,7 @@
             "location": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/CURIE"
+                     "$ref": "core.json#/$defs/CURIE"
                   },
                   {
                      "$ref": "#/definitions/Location"
@@ -116,8 +116,8 @@
          "type": "object",
          "properties": {
             "_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "Variation Id. MUST be unique within document."
+               "$ref": "core.json#/$defs/CURIE",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system."
             },
             "type": {
                "type": "string",
@@ -135,7 +135,7 @@
                         "$ref": "#/definitions/Allele"
                      },
                      {
-                        "$ref": "#/definitions/CURIE"
+                        "$ref": "core.json#/$defs/CURIE"
                      }
                   ]
                },
@@ -153,8 +153,8 @@
          "type": "object",
          "properties": {
             "_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "Variation Id. MUST be unique within document."
+               "$ref": "core.json#/$defs/CURIE",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system."
             },
             "type": {
                "type": "string",
@@ -178,8 +178,8 @@
          "type": "object",
          "properties": {
             "_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "Variation Id. MUST be unique within document."
+               "$ref": "core.json#/$defs/CURIE",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system."
             },
             "type": {
                "type": "string",
@@ -193,7 +193,7 @@
                "items": {
                   "oneOf": [
                      {
-                        "$ref": "#/definitions/CURIE"
+                        "$ref": "core.json#/$defs/CURIE"
                      },
                      {
                         "$ref": "#/definitions/Variation"
@@ -214,8 +214,8 @@
          "description": "The absolute count of discrete copies of a MolecularVariation, Feature, SequenceExpression, or a CURIE reference within a system (e.g. genome, cell, etc.).",
          "properties": {
             "_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "Variation Id. MUST be unique within document."
+               "$ref": "core.json#/$defs/CURIE",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system."
             },
             "type": {
                "type": "string",
@@ -235,7 +235,7 @@
                      "$ref": "#/definitions/SequenceExpression"
                   },
                   {
-                     "$ref": "#/definitions/CURIE"
+                     "$ref": "core.json#/$defs/CURIE"
                   }
                ],
                "description": "Subject of the Copy Number object"
@@ -332,8 +332,8 @@
          "type": "object",
          "properties": {
             "_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "Variation Id. MUST be unique within document."
+               "$ref": "core.json#/$defs/CURIE",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system."
             },
             "type": {
                "type": "string",
@@ -391,8 +391,8 @@
          "type": "object",
          "properties": {
             "_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "Location Id. MUST be unique within document."
+               "$ref": "core.json#/$defs/CURIE",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system."
             },
             "type": {
                "type": "string",
@@ -401,9 +401,9 @@
                "description": "MUST be \"ChromosomeLocation\""
             },
             "species_id": {
-               "$ref": "#/definitions/CURIE",
                "default": "taxonomy:9606",
-               "description": "CURIE representing a species from the [NCBI species taxonomy](https://registry.identifiers.org/registry/taxonomy). Default: \"taxonomy:9606\" (human)"
+               "description": "CURIE representing a species from the [NCBI species taxonomy](https://registry.identifiers.org/registry/taxonomy). Default: \"taxonomy:9606\" (human)",
+               "$ref": "core.json#/$defs/CURIE"
             },
             "chr": {
                "type": "string",
@@ -427,8 +427,8 @@
          "type": "object",
          "properties": {
             "_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "Location Id. MUST be unique within document."
+               "$ref": "core.json#/$defs/CURIE",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system."
             },
             "type": {
                "type": "string",
@@ -437,8 +437,8 @@
                "description": "MUST be \"SequenceLocation\""
             },
             "sequence_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "A VRS Computed Identifier for the reference Sequence."
+               "description": "A VRS Computed Identifier for the reference Sequence.",
+               "$ref": "core.json#/$defs/CURIE"
             },
             "interval": {
                "oneOf": [
@@ -874,6 +874,7 @@
          },
          "required": [
             "copies",
+            "type",
             "variation"
          ],
          "additionalProperties": false
@@ -900,8 +901,8 @@
                "description": "MUST be \"Gene\""
             },
             "gene_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "A CURIE reference to a Gene concept"
+               "description": "A CURIE reference to a Gene concept",
+               "$ref": "core.json#/$defs/CURIE"
             }
          },
          "required": [
@@ -986,12 +987,6 @@
             "value"
          ],
          "additionalProperties": false
-      },
-      "CURIE": {
-         "description": "A [W3C Compact URI](https://www.w3.org/TR/curie/) formatted string. A CURIE string has the structure ``prefix``:``reference``, as defined by the W3C syntax.",
-         "type": "string",
-         "pattern": "^\\w[^:]*:.+$",
-         "example": "ensembl:ENSG00000139618"
       },
       "HumanCytoband": {
          "description": "A character string representing cytobands derived from the *International System for Human Cytogenomic Nomenclature* (ISCN) [guidelines](http://doi.org/10.1159/isbn.978-3-318-06861-0).",

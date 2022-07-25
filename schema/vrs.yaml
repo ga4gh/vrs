@@ -39,8 +39,10 @@ definitions:
     type: object
     properties:
       _id: &id001
-        $ref: '#/definitions/CURIE'
-        description: Variation Id. MUST be unique within document.
+        $ref: core.json#/$defs/CURIE
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system.
       type:
         type: string
         const: Allele
@@ -48,7 +50,7 @@ definitions:
         description: MUST be "Allele"
       location:
         oneOf:
-        - $ref: '#/definitions/CURIE'
+        - $ref: core.json#/$defs/CURIE
         - $ref: '#/definitions/Location'
         description: Where Allele is located
       state:
@@ -81,7 +83,7 @@ definitions:
         items:
           oneOf:
           - $ref: '#/definitions/Allele'
-          - $ref: '#/definitions/CURIE'
+          - $ref: core.json#/$defs/CURIE
         description: List of Alleles, or references to Alleles, that comprise this
           Haplotype.
     required:
@@ -121,7 +123,7 @@ definitions:
         uniqueItems: true
         items:
           oneOf:
-          - $ref: '#/definitions/CURIE'
+          - $ref: core.json#/$defs/CURIE
           - $ref: '#/definitions/Variation'
         description: List of Variation objects or identifiers. Attribute is required,
           but MAY be empty.
@@ -146,7 +148,7 @@ definitions:
         - $ref: '#/definitions/MolecularVariation'
         - $ref: '#/definitions/Feature'
         - $ref: '#/definitions/SequenceExpression'
-        - $ref: '#/definitions/CURIE'
+        - $ref: core.json#/$defs/CURIE
         description: Subject of the Copy Number object
       copies:
         oneOf:
@@ -236,19 +238,17 @@ definitions:
     description: A Location on a chromosome defined by a species and chromosome name.
     type: object
     properties:
-      _id: &id002
-        $ref: '#/definitions/CURIE'
-        description: Location Id. MUST be unique within document.
+      _id: *id001
       type:
         type: string
         const: ChromosomeLocation
         default: ChromosomeLocation
         description: MUST be "ChromosomeLocation"
       species_id:
-        $ref: '#/definitions/CURIE'
         default: taxonomy:9606
         description: 'CURIE representing a species from the [NCBI species taxonomy](https://registry.identifiers.org/registry/taxonomy).
           Default: "taxonomy:9606" (human)'
+        $ref: core.json#/$defs/CURIE
       chr:
         type: string
         description: The symbolic chromosome name. For humans, For humans, chromosome
@@ -266,15 +266,15 @@ definitions:
     description: A Location defined by an interval on a referenced Sequence.
     type: object
     properties:
-      _id: *id002
+      _id: *id001
       type:
         type: string
         const: SequenceLocation
         default: SequenceLocation
         description: MUST be "SequenceLocation"
       sequence_id:
-        $ref: '#/definitions/CURIE'
         description: A VRS Computed Identifier for the reference Sequence.
+        $ref: core.json#/$defs/CURIE
       interval:
         oneOf:
         - $ref: '#/definitions/SequenceInterval'
@@ -539,6 +539,7 @@ definitions:
         description: A MolecularVariation at a Genotype locus.
     required:
     - copies
+    - type
     - variation
     additionalProperties: false
   Feature:
@@ -561,8 +562,8 @@ definitions:
         default: Gene
         description: MUST be "Gene"
       gene_id:
-        $ref: '#/definitions/CURIE'
         description: A CURIE reference to a Gene concept
+        $ref: core.json#/$defs/CURIE
     required:
     - gene_id
     - type
@@ -630,13 +631,6 @@ definitions:
     - type
     - value
     additionalProperties: false
-  CURIE:
-    description: A [W3C Compact URI](https://www.w3.org/TR/curie/) formatted string.
-      A CURIE string has the structure ``prefix``:``reference``, as defined by the
-      W3C syntax.
-    type: string
-    pattern: ^\w[^:]*:.+$
-    example: ensembl:ENSG00000139618
   HumanCytoband:
     description: A character string representing cytobands derived from the *International
       System for Human Cytogenomic Nomenclature* (ISCN) [guidelines](http://doi.org/10.1159/isbn.978-3-318-06861-0).

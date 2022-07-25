@@ -16,7 +16,7 @@ A class describing a :ref:`Genotype` `member`.
       - Description
    *  - type
       - string
-      - 0..1
+      - 1..1
       - MUST be "GenotypeMember".
    *  - copies
       - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`
