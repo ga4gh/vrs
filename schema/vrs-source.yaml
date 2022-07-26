@@ -14,7 +14,7 @@ type: object
 strict: true
 
 imports:
-  gks.core: "core-source.yaml"
+  gks.core: core-source.yaml
 
 namespaces:
   gks.core: core.json#/$defs/

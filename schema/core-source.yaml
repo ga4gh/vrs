@@ -43,13 +43,42 @@ $defs:
     description: >-
       ExtensibleEntity is the root class for classes that instantiate Extensible Objects. Extensible
       Objects are extensible using the extensions property and MAY have optional properties.
-    oneOf:
-      - $ref: "#/$defs/"
     heritable_properties:
+      label:
+        type: string
       extensions:
         type: array
         items:
           $ref: "#/$defs/Extension"
+      record_metadata:
+        $ref: "#/$defs/RecordMetadata"
+
+  RecordMetadata:
+    inherits: ExtensibleEntity
+    description: >-
+      A re-usable structure that encapsulates provenance metadata that applies to a specific
+      concrete record of information as encoded in a particular system, as opposed to 
+      provenance of the abstract information content/knowledge the record represents.
+    properties:
+      type:
+        type: string
+        const: RecordMetadata
+        default: RecordMetadata
+        description: MUST be "RecordMetadata".
+      is_version_of:
+        $ref: "#/$defs/CURIE"
+      version:
+        type: string
+
+  LabeledEntity:
+    inherits: ExtensibleEntity
+    description: Write this later.
+    properties:
+      type:
+        type: string
+        const: LabeledEntity
+        default: LabeledEntity
+        description: MUST be "LabeledEntity".
 
   Extension:
     description: >-
@@ -78,3 +107,22 @@ $defs:
     type: string
     pattern: '^\w[^:]*:.+$'
     example: "ensembl:ENSG00000139618"
+
+  Disease:
+    description: A typed, externally-referenced concept representing a disease.
+
+  Phenotype:
+    description: A typed, externally-referenced concept representing a phenotype.
+
+  Condition:
+    description: A set of phenotype and/or disease concepts that constitute a condition.
+    inherits: ValueEntity
+    properties:
+      members:
+        type: array
+        items:
+          oneOf:
+            - $ref: "#/$defs/Disease"
+            - $ref: "#/$defs/Phenotype"
+        minItems: 1
+    required: [ "members" ]
