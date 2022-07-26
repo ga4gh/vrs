@@ -38,7 +38,7 @@ definitions:
     description: The state of a molecule at a Location.
     type: object
     properties:
-      _id: &id001
+      id: &id001
         $ref: core.json#/$defs/CURIE
         description: The 'logical' identifier of the entity in the system of record,
           e.g. a UUID. This 'id' is  unique within a given system. The identified
@@ -70,7 +70,7 @@ definitions:
       molecule.
     type: object
     properties:
-      _id: *id001
+      id: *id001
       type:
         type: string
         const: Haplotype
@@ -94,7 +94,7 @@ definitions:
     description: A free-text definition of variation.
     type: object
     properties:
-      _id: *id001
+      id: *id001
       type:
         type: string
         const: Text
@@ -112,7 +112,7 @@ definitions:
     description: An unconstrained set of Variation members.
     type: object
     properties:
-      _id: *id001
+      id: *id001
       type:
         type: string
         const: VariationSet
@@ -137,7 +137,7 @@ definitions:
       SequenceExpression, or a CURIE reference within a system (e.g. genome, cell,
       etc.).
     properties:
-      _id: *id001
+      id: *id001
       type:
         type: string
         const: CopyNumber
@@ -199,7 +199,7 @@ definitions:
       copy counts, across a specified number of genomic locus `copies`.
     type: object
     properties:
-      _id: *id001
+      id: *id001
       type:
         type: string
         const: Genotype
@@ -238,7 +238,7 @@ definitions:
     description: A Location on a chromosome defined by a species and chromosome name.
     type: object
     properties:
-      _id: *id001
+      id: *id001
       type:
         type: string
         const: ChromosomeLocation
@@ -266,7 +266,7 @@ definitions:
     description: A Location defined by an interval on a referenced Sequence.
     type: object
     properties:
-      _id: *id001
+      id: *id001
       type:
         type: string
         const: SequenceLocation

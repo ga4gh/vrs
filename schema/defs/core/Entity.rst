@@ -14,7 +14,7 @@ Entity is the root class of ‘core’ classes model - those that have identifie
       - Type
       - Limits
       - Description
-   *  - _id
+   *  - id
       - :ref:`CURIE`
       - 0..1
       - The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system.

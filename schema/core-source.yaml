@@ -13,7 +13,7 @@ $defs:
       - $ref: "#/$defs/ExtensibleEntity"
       - $ref: "#/$defs/ValueEntity"
     heritable_properties:
-      _id:
+      id:
         $ref: "#/$defs/CURIE"
         description: >-
           The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is 
