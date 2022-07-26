@@ -36,6 +36,36 @@
             }
          ]
       },
+      "Extension": {
+         "description": "The Extension class provides VODs with a means to extend descriptions with other attributes unique to a content provider. These extensions are not expected to be natively understood under VRSATILE, but may be used for pre-negotiated exchange of message attributes when needed.",
+         "properties": {
+            "type": {
+               "type": "string",
+               "const": "Extension",
+               "description": "MUST be \"Extension\"."
+            },
+            "name": {
+               "type": "string",
+               "description": "A name for the Extension"
+            },
+            "value": {
+               "type": [
+                  "number",
+                  "string",
+                  "boolean",
+                  "object",
+                  "array",
+                  "null"
+               ],
+               "description": "Any primitive or structured object"
+            }
+         },
+         "required": [
+            "name",
+            "type"
+         ],
+         "additionalProperties": false
+      },
       "CURIE": {
          "description": "A [W3C Compact URI](https://www.w3.org/TR/curie/) formatted string. A CURIE string has the structure ``prefix``:``reference``, as defined by the W3C syntax.",
          "type": "string",
