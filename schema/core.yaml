@@ -177,8 +177,9 @@ $defs:
       members:
         type: array
         items:
-          oneOf:
+          anyOf:
           - $ref: '#/$defs/Disease'
+          - $ref: '#/$defs/Phenotype'
         minItems: 1
     required:
     - members
