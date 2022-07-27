@@ -24,6 +24,18 @@ Some RecordMetadata attributes are inherited from :ref:`Entity`.
       - string
       - 1..1
       - MUST be "RecordMetadata".
+   *  - label
+      - string
+      - 0..1
+      - 
+   *  - extensions
+      - :ref:`Extension`
+      - 0..m
+      - 
+   *  - record_metadata
+      - :ref:`RecordMetadata`
+      - 0..1
+      - 
    *  - is_version_of
       - :ref:`CURIE`
       - 0..1

@@ -655,24 +655,6 @@ definitions:
           The Feature class type. MUST match child class type.
     heritable_required: [ "type" ]
 
-  Gene:
-    description: >-
-      A reference to a Gene as defined by an authority. For human genes,
-      the use of `hgnc <https://registry.identifiers.org/registry/hgnc>`_
-      as the gene authority is RECOMMENDED.
-    type: object
-    properties:
-      type:
-        type: string
-        const: "Gene"
-        default: "Gene"
-        description: MUST be "Gene"
-      gene_id:
-        $ref_curie: gks.core:CURIE
-        description: >-
-          A CURIE reference to a Gene concept
-    required: [ "gene_id", "type" ]
-
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Numerics, Comparators, and Ranges
 

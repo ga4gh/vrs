@@ -16,7 +16,7 @@ The Extension class provides VODs with a means to extend descriptions with other
       - Description
    *  - type
       - string
-      - 1..1
+      - 0..1
       - MUST be "Extension".
    *  - name
       - string

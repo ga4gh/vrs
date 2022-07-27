@@ -23,10 +23,10 @@
             {
                "$ref": "#/$defs/Proposition"
             }
-         ],
-         "discriminator": {
-            "propertyName": "type"
-         }
+         ]
+      },
+      "DomainEntity": {
+         "description": "An abstract ValueEntity class extended to capture specific domain entities by reference to an external identifier."
       },
       "ExtensibleEntity": {
          "description": "ExtensibleEntity is the root class for classes that instantiate Extensible Objects. Extensible Objects are extensible using the extensions property and MAY have optional properties."
@@ -43,6 +43,18 @@
                "const": "RecordMetadata",
                "default": "RecordMetadata",
                "description": "MUST be \"RecordMetadata\"."
+            },
+            "label": {
+               "type": "string"
+            },
+            "extensions": {
+               "type": "array",
+               "items": {
+                  "$ref": "#/$defs/Extension"
+               }
+            },
+            "record_metadata": {
+               "$ref": "#/$defs/RecordMetadata"
             },
             "is_version_of": {
                "$ref": "#/$defs/CURIE"
@@ -112,8 +124,7 @@
             }
          },
          "required": [
-            "name",
-            "type"
+            "name"
          ],
          "additionalProperties": false
       },
@@ -124,10 +135,65 @@
          "example": "ensembl:ENSG00000139618"
       },
       "Disease": {
-         "description": "A typed, externally-referenced concept representing a disease."
+         "description": "A reference to a Disease as defined by an authority. For human diseases, the use of [MONDO](https://registry.identifiers.org/registry/mondo) as the disease authority is RECOMMENDED.",
+         "properties": {
+            "type": {
+               "type": "string",
+               "const": "Disease",
+               "default": "Disease",
+               "description": "MUST be \"Disease\"."
+            },
+            "disease_id": {
+               "$ref": "#/$defs/CURIE",
+               "description": "A CURIE reference to a disease concept."
+            }
+         },
+         "required": [
+            "disease_id",
+            "type"
+         ],
+         "additionalProperties": false
       },
       "Phenotype": {
-         "description": "A typed, externally-referenced concept representing a phenotype."
+         "description": "A reference to a Phenotype as defined by an authority. For human phenotypes, the use of [HPO](https://registry.identifiers.org/registry/hpo) as the disease authority is RECOMMENDED.",
+         "properties": {
+            "type": {
+               "type": "string",
+               "const": "Phenotype",
+               "default": "Phenotype",
+               "description": "MUST be \"Phenotype\"."
+            },
+            "phenotype_id": {
+               "$ref": "#/$defs/CURIE",
+               "description": "A CURIE reference to a phenotype concept."
+            }
+         },
+         "required": [
+            "phenotype_id",
+            "type"
+         ],
+         "additionalProperties": false
+      },
+      "Gene": {
+         "description": "A reference to a Gene as defined by an authority. For human genes, the use of [hgnc](https://registry.identifiers.org/registry/hgnc) as the gene authority is RECOMMENDED.",
+         "type": "object",
+         "properties": {
+            "type": {
+               "type": "string",
+               "const": "Gene",
+               "default": "Gene",
+               "description": "MUST be \"Gene\""
+            },
+            "gene_id": {
+               "$ref": "#/$defs/CURIE",
+               "description": "A CURIE reference to a Gene concept"
+            }
+         },
+         "required": [
+            "gene_id",
+            "type"
+         ],
+         "additionalProperties": false
       },
       "Condition": {
          "description": "A set of phenotype and/or disease concepts that constitute a condition.",
@@ -146,9 +212,6 @@
                   "oneOf": [
                      {
                         "$ref": "#/$defs/Disease"
-                     },
-                     {
-                        "$ref": "#/$defs/Phenotype"
                      }
                   ]
                },

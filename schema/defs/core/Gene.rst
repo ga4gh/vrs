@@ -4,6 +4,8 @@ A reference to a Gene as defined by an authority. For human genes, the use of `h
 
 **Information Model**
 
+Some Gene attributes are inherited from :ref:`Entity`.
+
 .. list-table::
    :class: clean-wrap
    :header-rows: 1
@@ -19,6 +21,6 @@ A reference to a Gene as defined by an authority. For human genes, the use of `h
       - 1..1
       - MUST be "Gene"
    *  - gene_id
-      - `CURIE <core.json#/$defs/CURIE>`_
+      - :ref:`CURIE`
       - 1..1
       - A CURIE reference to a Gene concept

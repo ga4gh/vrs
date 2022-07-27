@@ -38,7 +38,7 @@ definitions:
     description: The state of a molecule at a Location.
     type: object
     properties:
-      id: &id001
+      id:
         $ref: core.json#/$defs/CURIE
         description: The 'logical' identifier of the entity in the system of record,
           e.g. a UUID. This 'id' is  unique within a given system. The identified
@@ -70,7 +70,11 @@ definitions:
       molecule.
     type: object
     properties:
-      id: *id001
+      id:
+        $ref: core.json#/$defs/CURIE
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system.
       type:
         type: string
         const: Haplotype
@@ -94,7 +98,11 @@ definitions:
     description: A free-text definition of variation.
     type: object
     properties:
-      id: *id001
+      id:
+        $ref: core.json#/$defs/CURIE
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system.
       type:
         type: string
         const: Text
@@ -112,7 +120,11 @@ definitions:
     description: An unconstrained set of Variation members.
     type: object
     properties:
-      id: *id001
+      id:
+        $ref: core.json#/$defs/CURIE
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system.
       type:
         type: string
         const: VariationSet
@@ -137,7 +149,11 @@ definitions:
       SequenceExpression, or a CURIE reference within a system (e.g. genome, cell,
       etc.).
     properties:
-      id: *id001
+      id:
+        $ref: core.json#/$defs/CURIE
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system.
       type:
         type: string
         const: CopyNumber
@@ -199,7 +215,11 @@ definitions:
       copy counts, across a specified number of genomic locus `copies`.
     type: object
     properties:
-      id: *id001
+      id:
+        $ref: core.json#/$defs/CURIE
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system.
       type:
         type: string
         const: Genotype
@@ -238,7 +258,11 @@ definitions:
     description: A Location on a chromosome defined by a species and chromosome name.
     type: object
     properties:
-      id: *id001
+      id:
+        $ref: core.json#/$defs/CURIE
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system.
       type:
         type: string
         const: ChromosomeLocation
@@ -266,7 +290,11 @@ definitions:
     description: A Location defined by an interval on a referenced Sequence.
     type: object
     properties:
-      id: *id001
+      id:
+        $ref: core.json#/$defs/CURIE
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system.
       type:
         type: string
         const: SequenceLocation
@@ -550,24 +578,6 @@ definitions:
     - $ref: '#/definitions/Gene'
     discriminator:
       propertyName: type
-  Gene:
-    description: A reference to a Gene as defined by an authority. For human genes,
-      the use of [hgnc](https://registry.identifiers.org/registry/hgnc) as the gene
-      authority is RECOMMENDED.
-    type: object
-    properties:
-      type:
-        type: string
-        const: Gene
-        default: Gene
-        description: MUST be "Gene"
-      gene_id:
-        description: A CURIE reference to a Gene concept
-        $ref: core.json#/$defs/CURIE
-    required:
-    - gene_id
-    - type
-    additionalProperties: false
   Number:
     description: A simple integer value as a VRS class.
     type: object
