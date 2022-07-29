@@ -1,6 +1,6 @@
 **Computational Definition**
 
-A class describing a :ref:`Genotype` `member`.
+A class for expressing the count of a specific :ref:`MolecularVariation` present _in-trans_ at a genomic locus represented by a :ref:`Genotype`.
 
 **Information Model**
 
@@ -18,7 +18,7 @@ A class describing a :ref:`Genotype` `member`.
       - string
       - 0..1
       - MUST be "GenotypeMember".
-   *  - copies
+   *  - count
       - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`
       - 1..1
       - The number of copies of the `variation` at a :ref:`Genotype` locus.

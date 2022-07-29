@@ -193,7 +193,7 @@ definitions:
     - type
     additionalProperties: false
   Genotype:
-    description: A quantified set of _in-trans_ Molecular Variation at a genomic locus.
+    description: A quantified set of _in-trans_ MolecularVariation at a genomic locus.
     type: object
     properties:
       _id: *id001
@@ -210,7 +210,7 @@ definitions:
           $ref: '#/definitions/GenotypeMember'
         description: Each GenotypeMember in `members` describes a MolecularVariation
           and the count of that variation at the locus.
-      copies:
+      count:
         oneOf:
         - $ref: '#/definitions/Number'
         - $ref: '#/definitions/IndefiniteRange'
@@ -220,7 +220,7 @@ definitions:
           If greater than the total counts, this implies additional  MolecularVariation
           that are expected to exist but are not explicitly indicated.
     required:
-    - copies
+    - count
     - members
     - type
     additionalProperties: false
@@ -517,7 +517,8 @@ definitions:
     - type
     additionalProperties: false
   GenotypeMember:
-    description: A class describing a Genotype `member`.
+    description: A class for expressing the count of a specific MolecularVariation
+      present _in-trans_ at a genomic locus represented by a Genotype.
     type: object
     properties:
       type:
@@ -525,7 +526,7 @@ definitions:
         const: GenotypeMember
         default: GenotypeMember
         description: MUST be "GenotypeMember".
-      copies:
+      count:
         oneOf:
         - $ref: '#/definitions/Number'
         - $ref: '#/definitions/IndefiniteRange'
@@ -537,7 +538,7 @@ definitions:
         - $ref: '#/definitions/Haplotype'
         description: A MolecularVariation at a Genotype locus.
     required:
-    - copies
+    - count
     - variation
     additionalProperties: false
   Feature:

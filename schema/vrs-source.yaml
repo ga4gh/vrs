@@ -244,7 +244,7 @@ definitions:
 
   Genotype:
     description: >-
-      A quantified set of _in-trans_ :ref:`Molecular Variation` at a genomic locus.
+      A quantified set of _in-trans_ :ref:`MolecularVariation` at a genomic locus.
     type: object
     properties:
       type:
@@ -262,7 +262,7 @@ definitions:
         description: >-
           Each GenotypeMember in `members` describes a :ref:`MolecularVariation`
           and the count of that variation at the locus.
-      copies:
+      count:
         oneOf:
           - $ref: "#/definitions/Number"
           - $ref: "#/definitions/IndefiniteRange"
@@ -273,7 +273,7 @@ definitions:
           If greater than the total counts, this implies additional 
           :ref:`MolecularVariation` that are expected to exist but are not explicitly
           indicated.
-    required: [ "members", "copies" ]
+    required: [ "members", "count" ]
 
 
 
@@ -610,7 +610,8 @@ definitions:
 
   GenotypeMember:
     description: >-
-      A class describing a :ref:`Genotype` `member`.
+      A class for expressing the count of a specific :ref:`MolecularVariation` present
+      _in-trans_ at a genomic locus represented by a :ref:`Genotype`.
     type: object
     properties:
       type:
@@ -618,7 +619,7 @@ definitions:
         const: "GenotypeMember"
         default: "GenotypeMember"
         description: MUST be "GenotypeMember".
-      copies:
+      count:
         oneOf:
           - $ref: "#/definitions/Number"
           - $ref: "#/definitions/IndefiniteRange"
@@ -631,7 +632,7 @@ definitions:
           - $ref: "#/definitions/Haplotype"
         description: >-
           A :ref:`MolecularVariation` at a :ref:`Genotype` locus.
-    required: [ "copies", "variation" ]
+    required: [ "count", "variation" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Feature
