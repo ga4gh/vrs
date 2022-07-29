@@ -328,7 +328,7 @@
          "additionalProperties": false
       },
       "Genotype": {
-         "description": "A set of trans-phased MolecularVariation members, with associated copy counts, across a specified number of genomic locus `copies`.",
+         "description": "A quantified set of _in-trans_ Molecular Variation at a genomic locus.",
          "type": "object",
          "properties": {
             "_id": {

@@ -244,8 +244,7 @@ definitions:
 
   Genotype:
     description: >-
-      A set of trans-phased :ref:`MolecularVariation` members, with associated
-      copy counts, across a specified number of genomic locus `copies`.
+      A quantified set of _in-trans_ :ref:`Molecular Variation` at a genomic locus.
     type: object
     properties:
       type:

@@ -1,6 +1,6 @@
 **Computational Definition**
 
-A set of trans-phased :ref:`MolecularVariation` members, with associated copy counts, across a specified number of genomic locus `copies`.
+A quantified set of _in-trans_ :ref:`Molecular Variation` at a genomic locus.
 
 **Information Model**
 
