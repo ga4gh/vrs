@@ -19,7 +19,7 @@ Some Haplotype attributes are inherited from :ref:`Entity`.
    *  - id
       - `CURIE <core.json#/$defs/CURIE>`_
       - 0..1
-      - The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system.
+      - The 'logical' identifier of the entity in the system of record, and MUST be represented as a CURIE. This 'id' is unique within a given system, but may also refer to an 'id' for the shared concept in  another system (represented by namespace, accordingly).
    *  - type
       - string
       - 1..1

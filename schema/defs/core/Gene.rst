@@ -16,11 +16,11 @@ Some Gene attributes are inherited from :ref:`Entity`.
       - Type
       - Limits
       - Description
+   *  - id
+      - :ref:`CURIE`
+      - 1..1
+      - The 'logical' identifier of the entity in the system of record, and MUST be represented as a CURIE. This 'id' is unique within a given system, but may also refer to an 'id' for the shared concept in  another system (represented by namespace, accordingly).
    *  - type
       - string
       - 1..1
       - MUST be "Gene"
-   *  - gene_id
-      - :ref:`CURIE`
-      - 1..1
-      - A CURIE reference to a Gene concept

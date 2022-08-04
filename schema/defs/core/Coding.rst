@@ -1,10 +1,10 @@
 **Computational Definition**
 
-Write this later.
+A `coding` is an extensible entity for labeling or otherwise annotating globally  namespaced identifiers known as "codes".
 
 **Information Model**
 
-Some LabeledEntity attributes are inherited from :ref:`Entity`.
+Some Coding attributes are inherited from :ref:`Entity`.
 
 .. list-table::
    :class: clean-wrap
@@ -19,11 +19,11 @@ Some LabeledEntity attributes are inherited from :ref:`Entity`.
    *  - id
       - :ref:`CURIE`
       - 0..1
-      - The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system.
+      - The `coding.id` field is used to capture the code as a CURIE.
    *  - type
       - string
       - 1..1
-      - MUST be "LabeledEntity".
+      - MUST be "Coding".
    *  - label
       - string
       - 0..1

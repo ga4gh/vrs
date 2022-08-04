@@ -18,12 +18,7 @@
          }
       },
       "ValueEntity": {
-         "description": "ValueEntity is the root class for classes that instantiate Value Objects. ValueEntity classes are not extensible and MUST NOT have optional properties.",
-         "oneOf": [
-            {
-               "$ref": "#/$defs/Proposition"
-            }
-         ]
+         "description": "ValueEntity is the root class for classes that instantiate Value Objects. ValueEntity classes are not extensible and MUST NOT have optional properties."
       },
       "DomainEntity": {
          "description": "An abstract ValueEntity class extended to capture specific domain entities by reference to an external identifier."
@@ -35,8 +30,8 @@
          "description": "A re-usable structure that encapsulates provenance metadata that applies to a specific concrete record of information as encoded in a particular system, as opposed to  provenance of the abstract information content/knowledge the record represents.",
          "properties": {
             "id": {
-               "$ref": "#/$defs/CURIE",
-               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system."
+               "type": "string",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "type": {
                "type": "string",
@@ -68,18 +63,18 @@
          ],
          "additionalProperties": false
       },
-      "LabeledEntity": {
-         "description": "Write this later.",
+      "Coding": {
+         "description": "A `coding` is an extensible entity for labeling or otherwise annotating globally  namespaced identifiers known as \"codes\".",
          "properties": {
             "id": {
                "$ref": "#/$defs/CURIE",
-               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system."
+               "description": "The `coding.id` field is used to capture the code as a CURIE."
             },
             "type": {
                "type": "string",
-               "const": "LabeledEntity",
-               "default": "LabeledEntity",
-               "description": "MUST be \"LabeledEntity\"."
+               "const": "Coding",
+               "default": "Coding",
+               "description": "MUST be \"Coding\"."
             },
             "label": {
                "type": "string"
@@ -137,19 +132,19 @@
       "Disease": {
          "description": "A reference to a Disease as defined by an authority. For human diseases, the use of [MONDO](https://registry.identifiers.org/registry/mondo) as the disease authority is RECOMMENDED.",
          "properties": {
+            "id": {
+               "$ref": "#/$defs/CURIE",
+               "description": "The 'logical' identifier of the entity in the system of record, and MUST be represented as a CURIE. This 'id' is unique within a given system, but may also refer to an 'id' for the shared concept in  another system (represented by namespace, accordingly)."
+            },
             "type": {
                "type": "string",
                "const": "Disease",
                "default": "Disease",
                "description": "MUST be \"Disease\"."
-            },
-            "disease_id": {
-               "$ref": "#/$defs/CURIE",
-               "description": "A CURIE reference to a disease concept."
             }
          },
          "required": [
-            "disease_id",
+            "id",
             "type"
          ],
          "additionalProperties": false
@@ -157,19 +152,19 @@
       "Phenotype": {
          "description": "A reference to a Phenotype as defined by an authority. For human phenotypes, the use of [HPO](https://registry.identifiers.org/registry/hpo) as the disease authority is RECOMMENDED.",
          "properties": {
+            "id": {
+               "$ref": "#/$defs/CURIE",
+               "description": "The 'logical' identifier of the entity in the system of record, and MUST be represented as a CURIE. This 'id' is unique within a given system, but may also refer to an 'id' for the shared concept in  another system (represented by namespace, accordingly)."
+            },
             "type": {
                "type": "string",
                "const": "Phenotype",
                "default": "Phenotype",
                "description": "MUST be \"Phenotype\"."
-            },
-            "phenotype_id": {
-               "$ref": "#/$defs/CURIE",
-               "description": "A CURIE reference to a phenotype concept."
             }
          },
          "required": [
-            "phenotype_id",
+            "id",
             "type"
          ],
          "additionalProperties": false
@@ -178,19 +173,19 @@
          "description": "A reference to a Gene as defined by an authority. For human genes, the use of [hgnc](https://registry.identifiers.org/registry/hgnc) as the gene authority is RECOMMENDED.",
          "type": "object",
          "properties": {
+            "id": {
+               "$ref": "#/$defs/CURIE",
+               "description": "The 'logical' identifier of the entity in the system of record, and MUST be represented as a CURIE. This 'id' is unique within a given system, but may also refer to an 'id' for the shared concept in  another system (represented by namespace, accordingly)."
+            },
             "type": {
                "type": "string",
                "const": "Gene",
                "default": "Gene",
                "description": "MUST be \"Gene\""
-            },
-            "gene_id": {
-               "$ref": "#/$defs/CURIE",
-               "description": "A CURIE reference to a Gene concept"
             }
          },
          "required": [
-            "gene_id",
+            "id",
             "type"
          ],
          "additionalProperties": false
@@ -200,7 +195,7 @@
          "properties": {
             "id": {
                "$ref": "#/$defs/CURIE",
-               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system."
+               "description": "The 'logical' identifier of the entity in the system of record, and MUST be represented as a CURIE. This 'id' is unique within a given system, but may also refer to an 'id' for the shared concept in  another system (represented by namespace, accordingly)."
             },
             "type": {
                "type": "string",
