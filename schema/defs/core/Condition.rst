@@ -26,5 +26,5 @@ Some Condition attributes are inherited from :ref:`Entity`.
       - The schema class that is instantiated by the data object. Must be the name of a class from  the VA schema.
    *  - members
       - :ref:`Disease` | :ref:`Phenotype`
-      - 1..m
+      - 2..m
       - 

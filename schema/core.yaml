@@ -188,7 +188,7 @@ $defs:
           anyOf:
           - $ref: '#/$defs/Disease'
           - $ref: '#/$defs/Phenotype'
-        minItems: 1
+        minItems: 2
     required:
     - members
     - type
