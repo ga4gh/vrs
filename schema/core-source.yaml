@@ -61,8 +61,6 @@ $defs:
         type: array
         items:
           $ref: "#/$defs/Extension"
-      record_metadata:
-        $ref: "#/$defs/RecordMetadata"
 
   RecordMetadata:
     inherits: ExtensibleEntity
@@ -96,6 +94,8 @@ $defs:
         $ref: "#/$defs/CURIE"
         description: >-
           The `coding.id` field is used to capture the code as a CURIE.
+      record_metadata:
+        $ref: "#/$defs/RecordMetadata"
 
   Extension:
     description: >-

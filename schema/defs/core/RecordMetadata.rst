@@ -32,10 +32,6 @@ Some RecordMetadata attributes are inherited from :ref:`Entity`.
       - :ref:`Extension`
       - 0..m
       - 
-   *  - record_metadata
-      - :ref:`RecordMetadata`
-      - 0..1
-      - 
    *  - is_version_of
       - :ref:`CURIE`
       - 0..1

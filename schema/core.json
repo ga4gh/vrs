@@ -48,9 +48,6 @@
                   "$ref": "#/$defs/Extension"
                }
             },
-            "record_metadata": {
-               "$ref": "#/$defs/RecordMetadata"
-            },
             "is_version_of": {
                "$ref": "#/$defs/CURIE"
             },
