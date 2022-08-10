@@ -507,8 +507,9 @@
             }
          },
          "required": [
-            "interval",
+            "end",
             "sequence_id",
+            "start",
             "type"
          ],
          "additionalProperties": false
