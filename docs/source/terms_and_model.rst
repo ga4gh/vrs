@@ -371,12 +371,12 @@ Systemic Variation
 
 .. include:: defs/SystemicVariation.rst
 
-.. _CopyNumber:
+.. _AbsoluteCopyNumber:
 
-CopyNumber
-$$$$$$$$$$
+AbsoluteCopyNumber
+$$$$$$$$$$$$$$$$$$
 
-*Copy Number Variation* captures the copies of a molecule within a
+*Absolute Copy Number Variation* captures the copies of a molecule within a
 genome, and can be used to express concepts such as amplification
 and copy loss. Copy Number Variation has conflated meanings in the
 genomics community, and can mean either (or both) the notion of copy
@@ -386,7 +386,7 @@ of :ref:`SystemicVariation` and so describes the number of copies in a
 genome. The related :ref:`MolecularVariation` concept can be expressed
 as an :ref:`Allele` with a :ref:`RepeatedSequenceExpression`.
 
-.. include:: defs/CopyNumber.rst
+.. include:: defs/AbsoluteCopyNumber.rst
 
 **Examples**
 
@@ -404,7 +404,35 @@ Two, three, or four total copies of BRCA1:
         "gene_id": "ncbigene:348",
         "type": "Gene"
       },
-      "type": "CopyNumber"
+      "type": "AbsoluteCopyNumber"
+    }
+
+.. _RelativeCopyNumber:
+
+RelativeCopyNumber
+$$$$$$$$$$$$$$$$$$
+
+*Relative Copy Number Variation* captures a classification of copies
+of a molecule within a system, relative to a baseline. These types
+of Variation are common outputs from CNV callers, particularly in the
+somatic domain where Absolute Copy Counts are difficult to estimate
+and less useful in practice than relative statements.
+
+.. include:: defs/RelativeCopyNumber.rst
+
+**Examples**
+
+Low-level copy gain of BRCA1:
+
+.. parsed-literal::
+
+    {
+      "relative_copy_class": "low-level gain",
+      "subject": {
+        "gene_id": "ncbigene:348",
+        "type": "Gene"
+      },
+      "type": "RelativeCopyNumber"
     }
 
 .. _Genotype:
@@ -924,6 +952,47 @@ large-scale tandem duplications.
       },
       "type": "RepeatedSequenceExpression"
     }
+
+.. _ComposedSequenceExpression:
+
+ComposedSequenceExpression
+##########################
+
+*Composed Sequence* is a class of sequence expression where two or more
+constitutive sequence expressions are expressed as an ordered list,
+representing a concatenated sequence. This class is useful for expressing
+concepts such as the OPMD polyalanine alleles [2]_.
+
+.. [2] Brais b, et al. *Short CCG expansions in the PABP2 gene cause
+       oculopharyngeal muscular dystrophy* Nat Genet. (1998).
+
+.. include:: defs/ComposedSequenceExpression.rst
+
+**Examples**
+
+.. parsed-literal::
+
+   {
+     "type": "ComposedSequenceExpression",
+     "components": [
+       {
+         "type": "RepeatedSequenceExpression",
+         "seq_expr": { "type": "LiteralSequenceExpression", "sequence": "GCG" },
+         "count": { "type": "Number", "value": 11 }
+       },
+       {
+         "type": "RepeatedSequenceExpression",
+         "seq_expr": { "type": "LiteralSequenceExpression", "sequence": "GCA" },
+         "count": { "type": "Number", "value": 3 }
+       },
+       {
+         "type": "RepeatedSequenceExpression",
+         "seq_expr": { "type": "LiteralSequenceExpression", "sequence": "GCG" },
+         "count": { "type": "Number", "value": 1 }
+       }
+     ]
+   }
+
 
 .. _Feature:
 

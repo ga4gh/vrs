@@ -4,8 +4,6 @@ The absolute count of discrete copies of a :ref:`MolecularVariation`, :ref:`Feat
 
 **Information Model**
 
-Some CopyNumber attributes are inherited from :ref:`Entity`.
-
 .. list-table::
    :class: clean-wrap
    :header-rows: 1
@@ -16,14 +14,10 @@ Some CopyNumber attributes are inherited from :ref:`Entity`.
       - Type
       - Limits
       - Description
-   *  - id
-      - `CURIE <core.json#/$defs/CURIE>`_
-      - 0..1
-      - The 'logical' identifier of the entity in the system of record, and MUST be represented as a CURIE. This 'id' is unique within a given system, but may also refer to an 'id' for the shared concept in  another system (represented by namespace, accordingly).
    *  - type
       - string
-      - 1..1
-      - MUST be "CopyNumber"
+      - 0..1
+      - MUST be "AbsoluteCopyNumber"
    *  - subject
       - :ref:`MolecularVariation` | :ref:`Feature` | :ref:`SequenceExpression` | `CURIE <core.json#/$defs/CURIE>`_
       - 1..1

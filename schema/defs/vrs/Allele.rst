@@ -29,6 +29,6 @@ Some Allele attributes are inherited from :ref:`Entity`.
       - 1..1
       - Where Allele is located
    *  - state
-      - :ref:`SequenceExpression` | :ref:`SequenceState` (deprecated)
+      - :ref:`SequenceExpression`
       - 1..1
       - An expression of the sequence state

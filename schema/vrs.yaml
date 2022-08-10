@@ -30,8 +30,9 @@ definitions:
     description: A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
     oneOf:
-    - $ref: '#/definitions/CopyNumber'
     - $ref: '#/definitions/Genotype'
+    - $ref: '#/definitions/AbsoluteCopyNumber'
+    - $ref: '#/definitions/RelativeCopyNumber'
     discriminator:
       propertyName: type
   Allele:
@@ -55,9 +56,7 @@ definitions:
         - $ref: '#/definitions/Location'
         description: Where Allele is located
       state:
-        oneOf:
-        - $ref: '#/definitions/SequenceState'
-        - $ref: '#/definitions/SequenceExpression'
+        $ref: '#/definitions/SequenceExpression'
         description: An expression of the sequence state
         deprecated:
         - $ref: '#/definitions/SequenceState'
@@ -147,23 +146,17 @@ definitions:
     - members
     - type
     additionalProperties: false
-  CopyNumber:
+  AbsoluteCopyNumber:
     type: object
     description: The absolute count of discrete copies of a MolecularVariation, Feature,
       SequenceExpression, or a CURIE reference within a system (e.g. genome, cell,
       etc.).
     properties:
-      id:
-        $ref: core.json#/$defs/CURIE
-        description: The 'logical' identifier of the entity in the system of record,
-          and MUST be represented as a CURIE. This 'id' is unique within a given system,
-          but may also refer to an 'id' for the shared concept in  another system
-          (represented by namespace, accordingly).
       type:
         type: string
-        const: CopyNumber
-        default: CopyNumber
-        description: MUST be "CopyNumber"
+        const: AbsoluteCopyNumber
+        default: AbsoluteCopyNumber
+        description: MUST be "AbsoluteCopyNumber"
       subject:
         oneOf:
         - $ref: '#/definitions/MolecularVariation'
@@ -213,8 +206,40 @@ definitions:
     required:
     - copies
     - subject
-    - type
     additionalProperties: false
+  RelativeCopyNumber:
+    additionalProperties: false
+    type: object
+    maturity: draft
+    description: The relative copies of a MolecularVariation, Feature, SequenceExpression,
+      or a CURIE reference against an unspecified baseline in a system (e.g. genome,
+      cell, etc.).
+    properties:
+      type:
+        type: string
+        const: RelativeCopyNumber
+        default: RelativeCopyNumber
+        description: MUST be "RelativeCopyNumber"
+      subject:
+        oneOf:
+        - $ref: '#/definitions/MolecularVariation'
+        - $ref: '#/definitions/Feature'
+        - $ref: '#/definitions/SequenceExpression'
+        - $ref: '#/definitions/CURIE'
+        description: Subject of the Copy Number object
+      relative_copy_class:
+        type: string
+        enum:
+        - complete loss
+        - partial loss
+        - copy neutral
+        - low-level gain
+        - high-level gain
+        description: MUST be one of "complete loss", "partial loss", "copy neutral",
+          "low-level gain" or "high-level gain".
+    required:
+    - relative_copy_class
+    - subject
   Genotype:
     description: A set of trans-phased MolecularVariation members, with associated
       copy counts, across a specified number of genomic locus `copies`.
@@ -452,6 +477,7 @@ definitions:
     - $ref: '#/definitions/LiteralSequenceExpression'
     - $ref: '#/definitions/DerivedSequenceExpression'
     - $ref: '#/definitions/RepeatedSequenceExpression'
+    - $ref: '#/definitions/ComposedSequenceExpression'
     discriminator:
       propertyName: type
   LiteralSequenceExpression:
@@ -553,6 +579,35 @@ definitions:
     - seq_expr
     - type
     additionalProperties: false
+  ComposedSequenceExpression:
+    description: An expression of a sequence composed from multiple other Sequence
+      Expressions objects. MUST have at least one component that is not a ref:`LiteralSequenceExpression`.
+      CANNOT be composed from nested composed sequence expressions.
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        const: ComposedSequenceExpression
+        default: ComposedSequenceExpression
+        description: MUST be "ComposedSequenceExpression"
+      components:
+        type: array
+        uniqueItems: true
+        minItems: 2
+        items:
+          oneOf:
+          - $ref: '#/definitions/LiteralSequenceExpression'
+          - $ref: '#/definitions/RepeatedSequenceExpression'
+          - $ref: '#/definitions/DerivedSequenceExpression'
+        contains:
+          oneOf:
+          - $ref: '#/definitions/RepeatedSequenceExpression'
+          - $ref: '#/definitions/DerivedSequenceExpression'
+        description: An ordered list of SequenceExpression components comprising the
+          expression.
+    required:
+    - components
   GenotypeMember:
     description: A class describing a Genotype `member`.
     type: object
@@ -668,50 +723,3 @@ definitions:
       \ codes are permitted in Sequences."
     type: string
     pattern: ^[A-Z*\-]*$
-  SequenceState:
-    deprecated: true
-    description: DEPRECATED. A Sequence as a State. This is the State class to use
-      for representing "ref-alt" style variation, including SNVs, MNVs, del, ins,
-      and delins. This class is deprecated. Use LiteralSequenceExpression instead.
-    type: object
-    properties:
-      type:
-        type: string
-        const: SequenceState
-        description: MUST be "SequenceState"
-      sequence:
-        $ref: '#/definitions/Sequence'
-        description: A string of Residues
-    example:
-      type: SequenceState
-      sequence: C
-    required:
-    - sequence
-    - type
-    additionalProperties: false
-  SimpleInterval:
-    deprecated: true
-    description: 'DEPRECATED: A SimpleInterval represents a span of sequence. Positions
-      are always represented by contiguous spans using interbase coordinates. This
-      class is deprecated. Use SequenceInterval instead.'
-    type: object
-    properties:
-      type:
-        type: string
-        const: SimpleInterval
-        description: MUST be "SimpleInterval"
-      start:
-        type: integer
-        description: The start coordinate
-      end:
-        type: integer
-        description: The end coordinate
-    example:
-      type: SimpleInterval
-      start: 11
-      end: 22
-    required:
-    - end
-    - start
-    - type
-    additionalProperties: false
