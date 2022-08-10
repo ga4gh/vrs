@@ -370,12 +370,24 @@ definitions:
         description: >-
           A VRS :ref:`Computed Identifier <computed-identifiers>`
           for the reference :ref:`Sequence`.
-      interval:
+      start:
         oneOf:
-          - $ref: "#/definitions/SequenceInterval"
-          - $ref: "#/definitions/SimpleInterval"
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
         description: >-
-          Reference sequence region defined by a :ref:`SequenceInterval`.
+          The start coordinate or range of the SequenceLocation.
+          The minimum value of this coordinate or range is 0.
+          MUST represent a coordinate or range less than the value of `end`.
+      end:
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
+        description: >-
+          The end coordinate or range of the SequenceLocation.
+          The minimum value of this coordinate or range is 0.
+          MUST represent a coordinate or range greater than the value of `start`.
     required: [ "sequence_id", "interval" ]
 
 
@@ -386,105 +398,6 @@ definitions:
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Intervals
-
-  SequenceInterval:
-    description: >-
-      A SequenceInterval represents a span on a :ref:`Sequence`. Positions are
-      always represented by contiguous spans using interbase coordinates or
-      coordinate ranges.
-    type: object
-    properties:
-      type:
-        type: string
-        const: "SequenceInterval"
-        default: "SequenceInterval"
-        description: MUST be "SequenceInterval"
-      start:
-        oneOf:
-          - $ref: "#/definitions/Number"
-          - $ref: "#/definitions/IndefiniteRange"
-          - $ref: "#/definitions/DefiniteRange"
-        description: >-
-          The start coordinate or range of the interval.
-          The minimum value of this coordinate or range is 0.
-          MUST represent a coordinate or range less than the value of `end`.
-      end:
-        oneOf:
-          - $ref: "#/definitions/Number"
-          - $ref: "#/definitions/IndefiniteRange"
-          - $ref: "#/definitions/DefiniteRange"
-        description: >-
-          The end coordinate or range of the interval.
-          The minimum value of this coordinate or range is 0.
-          MUST represent a coordinate or range greater than the value of `start`.
-    allOf:
-      - if:
-          properties:
-            start:
-              $ref: "#/definitions/Number"
-        then:
-          properties:
-            start:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            start:
-              $ref: "#/definitions/IndefiniteRange"
-        then:
-          properties:
-            start:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            start:
-              $ref: "#/definitions/DefiniteRange"
-        then:
-          properties:
-            start:
-              properties:
-                min:
-                  minimum: 0
-                max:
-                  minimum: 0
-      - if:
-          properties:
-            end:
-              $ref: "#/definitions/Number"
-        then:
-          properties:
-            end:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            end:
-              $ref: "#/definitions/IndefiniteRange"
-        then:
-          properties:
-            end:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            end:
-              $ref: "#/definitions/DefiniteRange"
-        then:
-          properties:
-            end:
-              properties:
-                min:
-                  minimum: 0
-                max:
-                  minimum: 0
-    required: [ "type", "start", "end" ]
-
-  # SimpleInterval has been moved to DEPRECATED section at bottom.
 
   CytobandInterval:
     description: >-
