@@ -1,6 +1,6 @@
 **Computational Definition**
 
-A set of trans-phased :ref:`MolecularVariation` members, with associated copy counts, across a specified number of genomic locus `copies`.
+A quantified set of _in-trans_ :ref:`MolecularVariation` at a genomic locus.
 
 **Information Model**
 
@@ -28,7 +28,7 @@ Some Genotype attributes are inherited from :ref:`Entity`.
       - :ref:`GenotypeMember`
       - 1..m
       - Each GenotypeMember in `members` describes a :ref:`MolecularVariation` and the count of that variation at the locus.
-   *  - copies
+   *  - count
       - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`
       - 1..1
       - The total number of copies of all :ref:`MolecularVariation` at this locus, MUST be greater than or equal to the sum of :ref:`GenotypeMember` copy counts. If greater than the total counts, this implies additional  :ref:`MolecularVariation` that are expected to exist but are not explicitly indicated.

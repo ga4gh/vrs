@@ -268,7 +268,7 @@
          ]
       },
       "Genotype": {
-         "description": "A set of trans-phased MolecularVariation members, with associated copy counts, across a specified number of genomic locus `copies`.",
+         "description": "A quantified set of _in-trans_ MolecularVariation at a genomic locus.",
          "type": "object",
          "properties": {
             "id": {
@@ -290,7 +290,7 @@
                },
                "description": "Each GenotypeMember in `members` describes a MolecularVariation and the count of that variation at the locus."
             },
-            "copies": {
+            "count": {
                "oneOf": [
                   {
                      "$ref": "#/definitions/Number"
@@ -306,7 +306,7 @@
             }
          },
          "required": [
-            "copies",
+            "count",
             "members",
             "type"
          ],
@@ -669,7 +669,7 @@
          ]
       },
       "GenotypeMember": {
-         "description": "A class describing a Genotype `member`.",
+         "description": "A class for expressing the count of a specific MolecularVariation present _in-trans_ at a genomic locus represented by a Genotype.",
          "type": "object",
          "properties": {
             "type": {
@@ -678,7 +678,7 @@
                "default": "GenotypeMember",
                "description": "MUST be \"GenotypeMember\"."
             },
-            "copies": {
+            "count": {
                "oneOf": [
                   {
                      "$ref": "#/definitions/Number"
@@ -705,8 +705,7 @@
             }
          },
          "required": [
-            "copies",
-            "type",
+            "count",
             "variation"
          ],
          "additionalProperties": false

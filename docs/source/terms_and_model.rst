@@ -1120,6 +1120,8 @@ This value is equivalent to the concept of "equal to or greater than
       "value": 22
     }
 
+.. _GenotypeMember:
+
 GenotypeMember
 ##############
 
