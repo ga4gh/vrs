@@ -205,6 +205,10 @@
          ],
          "additionalProperties": false
       },
+      "CopyNumber": {
+         "type": "object",
+         "description": "A measure of the copies of a Location within a system (e.g. a genome)"
+      },
       "AbsoluteCopyNumber": {
          "type": "object",
          "description": "The absolute count of discrete copies of a MolecularVariation, Feature, SequenceExpression, or a CURIE reference within a system (e.g. genome, cell, etc.).",
@@ -213,24 +217,7 @@
                "type": "string",
                "const": "AbsoluteCopyNumber",
                "default": "AbsoluteCopyNumber",
-               "description": "MUST be \"AbsoluteCopyNumber\""
-            },
-            "subject": {
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/MolecularVariation"
-                  },
-                  {
-                     "$ref": "#/definitions/Feature"
-                  },
-                  {
-                     "$ref": "#/definitions/SequenceExpression"
-                  },
-                  {
-                     "$ref": "core.json#/$defs/CURIE"
-                  }
-               ],
-               "description": "Subject of the Copy Number object"
+               "description": "MUST be \"AbsoluteCopyNumber\"."
             },
             "copies": {
                "oneOf": [
@@ -244,77 +231,11 @@
                      "$ref": "#/definitions/DefiniteRange"
                   }
                ],
-               "description": "The integral number of copies of the subject in a system"
+               "description": "The integral number of copies of the subject in a system."
             }
          },
-         "allOf": [
-            {
-               "if": {
-                  "properties": {
-                     "copies": {
-                        "$ref": "#/definitions/Number"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "copies": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "copies": {
-                        "$ref": "#/definitions/IndefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "copies": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "copies": {
-                        "$ref": "#/definitions/DefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "copies": {
-                        "properties": {
-                           "min": {
-                              "minimum": 0
-                           },
-                           "max": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            }
-         ],
          "required": [
-            "copies",
-            "subject"
+            "copies"
          ],
          "additionalProperties": false
       },
@@ -330,23 +251,6 @@
                "default": "RelativeCopyNumber",
                "description": "MUST be \"RelativeCopyNumber\""
             },
-            "subject": {
-               "oneOf": [
-                  {
-                     "$ref": "#/definitions/MolecularVariation"
-                  },
-                  {
-                     "$ref": "#/definitions/Feature"
-                  },
-                  {
-                     "$ref": "#/definitions/SequenceExpression"
-                  },
-                  {
-                     "$ref": "#/definitions/CURIE"
-                  }
-               ],
-               "description": "Subject of the Copy Number object"
-            },
             "relative_copy_class": {
                "type": "string",
                "enum": [
@@ -360,8 +264,7 @@
             }
          },
          "required": [
-            "relative_copy_class",
-            "subject"
+            "relative_copy_class"
          ]
       },
       "Genotype": {

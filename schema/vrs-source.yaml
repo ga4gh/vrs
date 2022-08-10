@@ -181,6 +181,20 @@ definitions:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # SystemicVariation
 
+  CopyNumber:
+    inherits: SystemicVariation
+    type: object
+    description: >-
+      A measure of the copies of a :ref:`Location` within a system (e.g. a genome)
+    heritable_properties:
+      location:
+        oneOf:
+          - $ref_curie: gks.core:CURIE
+          - $ref: "#/definitions/CURIE"
+        description: >-
+          The location within the system.
+    heritable_required: [ "subject" ]
+
   AbsoluteCopyNumber:
     type: object
     description: >-
@@ -193,57 +207,15 @@ definitions:
         const: "AbsoluteCopyNumber"
         default: "AbsoluteCopyNumber"
         description: >-
-          MUST be "AbsoluteCopyNumber"
-      subject:
-        oneOf:
-          - $ref: "#/definitions/MolecularVariation"
-          - $ref: "#/definitions/Feature"
-          - $ref: "#/definitions/SequenceExpression"
-          - $ref_curie: gks.core:CURIE
-        description: >-
-          Subject of the Copy Number object
+          MUST be "AbsoluteCopyNumber".
       copies:
         oneOf:
           - $ref: "#/definitions/Number"
           - $ref: "#/definitions/IndefiniteRange"
           - $ref: "#/definitions/DefiniteRange"
         description: >-
-          The integral number of copies of the subject in a system
-    allOf:
-      - if:
-          properties:
-            copies:
-              $ref: "#/definitions/Number"
-        then:
-          properties:
-            copies:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            copies:
-              $ref: "#/definitions/IndefiniteRange"
-        then:
-          properties:
-            copies:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            copies:
-              $ref: "#/definitions/DefiniteRange"
-        then:
-          properties:
-            copies:
-              properties:
-                min:
-                  minimum: 0
-                max:
-                  minimum: 0
-
-    required: [ "subject", "copies" ]
+          The integral number of copies of the subject in a system.
+    required: [ "copies" ]
 
   RelativeCopyNumber:
     additionalProperties: false
@@ -260,20 +232,12 @@ definitions:
         default: "RelativeCopyNumber"
         description: >-
           MUST be "RelativeCopyNumber"
-      subject:
-        oneOf:
-          - $ref: "#/definitions/MolecularVariation"
-          - $ref: "#/definitions/Feature"
-          - $ref: "#/definitions/SequenceExpression"
-          - $ref: "#/definitions/CURIE"
-        description: >-
-          Subject of the Copy Number object
       relative_copy_class:
         type: string
         enum: [ "complete loss", "partial loss", "copy neutral", "low-level gain", "high-level gain" ]
         description: >-
           MUST be one of "complete loss", "partial loss", "copy neutral", "low-level gain" or "high-level gain".
-    required: [ "subject", "relative_copy_class" ]
+    required: [ "relative_copy_class" ]
 
   Genotype:
     inherits: SystemicVariation
@@ -309,8 +273,6 @@ definitions:
           :ref:`MolecularVariation` that are expected to exist but are not explicitly
           indicated.
     required: [ "members", "copies" ]
-
-
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations

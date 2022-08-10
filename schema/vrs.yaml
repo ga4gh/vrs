@@ -146,6 +146,9 @@ definitions:
     - members
     - type
     additionalProperties: false
+  CopyNumber:
+    type: object
+    description: A measure of the copies of a Location within a system (e.g. a genome)
   AbsoluteCopyNumber:
     type: object
     description: The absolute count of discrete copies of a MolecularVariation, Feature,
@@ -156,56 +159,15 @@ definitions:
         type: string
         const: AbsoluteCopyNumber
         default: AbsoluteCopyNumber
-        description: MUST be "AbsoluteCopyNumber"
-      subject:
-        oneOf:
-        - $ref: '#/definitions/MolecularVariation'
-        - $ref: '#/definitions/Feature'
-        - $ref: '#/definitions/SequenceExpression'
-        - $ref: core.json#/$defs/CURIE
-        description: Subject of the Copy Number object
+        description: MUST be "AbsoluteCopyNumber".
       copies:
         oneOf:
         - $ref: '#/definitions/Number'
         - $ref: '#/definitions/IndefiniteRange'
         - $ref: '#/definitions/DefiniteRange'
-        description: The integral number of copies of the subject in a system
-    allOf:
-    - if:
-        properties:
-          copies:
-            $ref: '#/definitions/Number'
-      then:
-        properties:
-          copies:
-            properties:
-              value:
-                minimum: 0
-    - if:
-        properties:
-          copies:
-            $ref: '#/definitions/IndefiniteRange'
-      then:
-        properties:
-          copies:
-            properties:
-              value:
-                minimum: 0
-    - if:
-        properties:
-          copies:
-            $ref: '#/definitions/DefiniteRange'
-      then:
-        properties:
-          copies:
-            properties:
-              min:
-                minimum: 0
-              max:
-                minimum: 0
+        description: The integral number of copies of the subject in a system.
     required:
     - copies
-    - subject
     additionalProperties: false
   RelativeCopyNumber:
     additionalProperties: false
@@ -220,13 +182,6 @@ definitions:
         const: RelativeCopyNumber
         default: RelativeCopyNumber
         description: MUST be "RelativeCopyNumber"
-      subject:
-        oneOf:
-        - $ref: '#/definitions/MolecularVariation'
-        - $ref: '#/definitions/Feature'
-        - $ref: '#/definitions/SequenceExpression'
-        - $ref: '#/definitions/CURIE'
-        description: Subject of the Copy Number object
       relative_copy_class:
         type: string
         enum:
@@ -239,7 +194,6 @@ definitions:
           "low-level gain" or "high-level gain".
     required:
     - relative_copy_class
-    - subject
   Genotype:
     description: A set of trans-phased MolecularVariation members, with associated
       copy counts, across a specified number of genomic locus `copies`.

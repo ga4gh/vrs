@@ -18,10 +18,6 @@ The relative copies of a :ref:`MolecularVariation`, :ref:`Feature`, :ref:`Sequen
       - string
       - 0..1
       - MUST be "RelativeCopyNumber"
-   *  - subject
-      - :ref:`MolecularVariation` | :ref:`Feature` | :ref:`SequenceExpression` | :ref:`CURIE`
-      - 1..1
-      - Subject of the Copy Number object
    *  - relative_copy_class
       - string
       - 1..1

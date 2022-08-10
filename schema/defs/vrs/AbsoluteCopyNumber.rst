@@ -17,12 +17,8 @@ The absolute count of discrete copies of a :ref:`MolecularVariation`, :ref:`Feat
    *  - type
       - string
       - 0..1
-      - MUST be "AbsoluteCopyNumber"
-   *  - subject
-      - :ref:`MolecularVariation` | :ref:`Feature` | :ref:`SequenceExpression` | `CURIE <core.json#/$defs/CURIE>`_
-      - 1..1
-      - Subject of the Copy Number object
+      - MUST be "AbsoluteCopyNumber".
    *  - copies
       - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`
       - 1..1
-      - The integral number of copies of the subject in a system
+      - The integral number of copies of the subject in a system.
