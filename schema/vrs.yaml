@@ -490,7 +490,7 @@ definitions:
         uniqueItems: true
         minItems: 2
         items:
-          oneOf:
+          anyOf:
           - $ref: '#/definitions/LiteralSequenceExpression'
           - $ref: '#/definitions/RepeatedSequenceExpression'
           - $ref: '#/definitions/DerivedSequenceExpression'
