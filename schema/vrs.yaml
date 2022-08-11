@@ -494,12 +494,8 @@ definitions:
           - $ref: '#/definitions/LiteralSequenceExpression'
           - $ref: '#/definitions/RepeatedSequenceExpression'
           - $ref: '#/definitions/DerivedSequenceExpression'
-        contains:
-          oneOf:
-          - $ref: '#/definitions/RepeatedSequenceExpression'
-          - $ref: '#/definitions/DerivedSequenceExpression'
         description: An ordered list of SequenceExpression components comprising the
-          expression.
+          expression. MUST NOT have two adjacent LiteralSequenceExpression objects.
     required:
     - components
   GenotypeMember:

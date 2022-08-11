@@ -685,17 +685,7 @@
                      }
                   ]
                },
-               "contains": {
-                  "oneOf": [
-                     {
-                        "$ref": "#/definitions/RepeatedSequenceExpression"
-                     },
-                     {
-                        "$ref": "#/definitions/DerivedSequenceExpression"
-                     }
-                  ]
-               },
-               "description": "An ordered list of SequenceExpression components comprising the expression."
+               "description": "An ordered list of SequenceExpression components comprising the expression. MUST NOT have two adjacent LiteralSequenceExpression objects."
             }
          },
          "required": [

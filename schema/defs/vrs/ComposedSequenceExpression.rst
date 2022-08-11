@@ -21,4 +21,4 @@ An expression of a sequence composed from multiple other :ref:`Sequence Expressi
    *  - components
       - :ref:`LiteralSequenceExpression` | :ref:`RepeatedSequenceExpression` | :ref:`DerivedSequenceExpression`
       - 2..m
-      - An ordered list of :ref:`SequenceExpression` components comprising the expression.
+      - An ordered list of :ref:`SequenceExpression` components comprising the expression. MUST NOT have two adjacent :ref:`LiteralSequenceExpression` objects.

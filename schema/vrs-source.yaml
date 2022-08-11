@@ -536,13 +536,10 @@ definitions:
             - $ref: "#/definitions/LiteralSequenceExpression"
             - $ref: "#/definitions/RepeatedSequenceExpression"
             - $ref: "#/definitions/DerivedSequenceExpression"
-        contains:
-          oneOf:
-            - $ref: "#/definitions/RepeatedSequenceExpression"
-            - $ref: "#/definitions/DerivedSequenceExpression"
         description: >-
           An ordered list of :ref:`SequenceExpression` components
-          comprising the expression.
+          comprising the expression. MUST NOT have two adjacent
+          :ref:`LiteralSequenceExpression` objects.
     required: [ "components" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
