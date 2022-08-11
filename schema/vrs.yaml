@@ -155,11 +155,22 @@ definitions:
       SequenceExpression, or a CURIE reference within a system (e.g. genome, cell,
       etc.).
     properties:
+      id:
+        $ref: core.json#/$defs/CURIE
+        description: The 'logical' identifier of the entity in the system of record,
+          and MUST be represented as a CURIE. This 'id' is unique within a given system,
+          but may also refer to an 'id' for the shared concept in  another system
+          (represented by namespace, accordingly).
       type:
         type: string
         const: AbsoluteCopyNumber
         default: AbsoluteCopyNumber
         description: MUST be "AbsoluteCopyNumber".
+      location:
+        oneOf:
+        - $ref: core.json#/$defs/CURIE
+        - $ref: '#/definitions/Location'
+        description: The location within the system.
       copies:
         oneOf:
         - $ref: '#/definitions/Number'
@@ -168,20 +179,32 @@ definitions:
         description: The integral number of copies of the subject in a system.
     required:
     - copies
+    - location
+    - type
     additionalProperties: false
   RelativeCopyNumber:
-    additionalProperties: false
     type: object
     maturity: draft
     description: The relative copies of a MolecularVariation, Feature, SequenceExpression,
       or a CURIE reference against an unspecified baseline in a system (e.g. genome,
       cell, etc.).
     properties:
+      id:
+        $ref: core.json#/$defs/CURIE
+        description: The 'logical' identifier of the entity in the system of record,
+          and MUST be represented as a CURIE. This 'id' is unique within a given system,
+          but may also refer to an 'id' for the shared concept in  another system
+          (represented by namespace, accordingly).
       type:
         type: string
         const: RelativeCopyNumber
         default: RelativeCopyNumber
         description: MUST be "RelativeCopyNumber"
+      location:
+        oneOf:
+        - $ref: core.json#/$defs/CURIE
+        - $ref: '#/definitions/Location'
+        description: The location within the system.
       relative_copy_class:
         type: string
         enum:
@@ -193,7 +216,10 @@ definitions:
         description: MUST be one of "complete loss", "partial loss", "copy neutral",
           "low-level gain" or "high-level gain".
     required:
+    - location
     - relative_copy_class
+    - type
+    additionalProperties: false
   Genotype:
     description: A quantified set of _in-trans_ MolecularVariation at a genomic locus.
     type: object

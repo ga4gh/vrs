@@ -190,12 +190,13 @@ definitions:
       location:
         oneOf:
           - $ref_curie: gks.core:CURIE
-          - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Location"
         description: >-
           The location within the system.
-    heritable_required: [ "subject" ]
+    heritable_required: [ "location" ]
 
   AbsoluteCopyNumber:
+    inherits: CopyNumber
     type: object
     description: >-
       The absolute count of discrete copies of a :ref:`MolecularVariation`,
@@ -218,7 +219,7 @@ definitions:
     required: [ "copies" ]
 
   RelativeCopyNumber:
-    additionalProperties: false
+    inherits: CopyNumber
     type: object
     maturity: draft
     description: >-
