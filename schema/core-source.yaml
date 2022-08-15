@@ -24,7 +24,7 @@ $defs:
         description: >-
           The schema class that is instantiated by the data object. Must be the name of a class from 
           the VA schema.
-    heritable_required: ["type"]
+    heritable_required: [ "type" ]
     discriminator:
       propertyName: type
 
