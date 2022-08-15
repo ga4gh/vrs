@@ -36,6 +36,7 @@ definitions:
     discriminator:
       propertyName: type
   Allele:
+    ga4gh_prefix: VA
     description: The state of a molecule at a Location.
     type: object
     properties:
@@ -66,6 +67,7 @@ definitions:
     - type
     additionalProperties: false
   Haplotype:
+    ga4gh_prefix: HT
     description: A set of non-overlapping Allele members that co-occur on the same
       molecule.
     type: object
@@ -96,6 +98,7 @@ definitions:
     - type
     additionalProperties: false
   Text:
+    ga4gh_prefix: VT
     description: A free-text definition of variation.
     type: object
     properties:
@@ -119,6 +122,7 @@ definitions:
     - type
     additionalProperties: false
   VariationSet:
+    ga4gh_prefix: VS
     description: An unconstrained set of Variation members.
     type: object
     properties:
@@ -150,6 +154,7 @@ definitions:
     type: object
     description: A measure of the copies of a Location within a system (e.g. a genome)
   AbsoluteCopyNumber:
+    ga4gh_prefix: ACN
     type: object
     description: The absolute count of discrete copies of a MolecularVariation, Feature,
       SequenceExpression, or a CURIE reference within a system (e.g. genome, cell,
@@ -183,6 +188,7 @@ definitions:
     - type
     additionalProperties: false
   RelativeCopyNumber:
+    ga4gh_prefix: RCN
     type: object
     maturity: draft
     description: The relative copies of a MolecularVariation, Feature, SequenceExpression,
@@ -221,6 +227,7 @@ definitions:
     - type
     additionalProperties: false
   Genotype:
+    ga4gh_prefix: GT
     description: A quantified set of _in-trans_ MolecularVariation at a genomic locus.
     type: object
     properties:
@@ -265,6 +272,7 @@ definitions:
     discriminator:
       propertyName: type
   ChromosomeLocation:
+    ga4gh_prefix: CL
     description: A Location on a chromosome defined by a species and chromosome name.
     type: object
     properties:
@@ -288,9 +296,14 @@ definitions:
         type: string
         description: The symbolic chromosome name. For humans, For humans, chromosome
           names MUST be one of 1..22, X, Y (case-sensitive)
-      interval:
-        $ref: '#/definitions/CytobandInterval'
-        description: The chromosome region defined by a CytobandInterval
+      start:
+        $ref: '#/definitions/HumanCytoband'
+        description: The start cytoband region. MUST specify a region nearer the terminal
+          end (telomere) of the chromosome p-arm than `end`.
+      end:
+        $ref: '#/definitions/HumanCytoband'
+        description: The start cytoband region. MUST specify a region nearer the terminal
+          end (telomere) of the chromosome q-arm than `start`.
     required:
     - chr
     - interval
@@ -298,6 +311,7 @@ definitions:
     - type
     additionalProperties: false
   SequenceLocation:
+    ga4gh_prefix: SL
     description: A Location defined by an interval on a referenced Sequence.
     type: object
     properties:
@@ -334,34 +348,6 @@ definitions:
     required:
     - end
     - sequence_id
-    - start
-    - type
-    additionalProperties: false
-  CytobandInterval:
-    description: A contiguous span on a chromosome defined by cytoband features. The
-      span includes the constituent regions described by the start and end cytobands,
-      as well as any intervening regions.
-    type: object
-    properties:
-      type:
-        type: string
-        const: CytobandInterval
-        default: CytobandInterval
-        description: MUST be "CytobandInterval"
-      start:
-        $ref: '#/definitions/HumanCytoband'
-        description: The start cytoband region. MUST specify a region nearer the terminal
-          end (telomere) of the chromosome p-arm than `end`.
-      end:
-        $ref: '#/definitions/HumanCytoband'
-        description: The start cytoband region. MUST specify a region nearer the terminal
-          end (telomere) of the chromosome q-arm than `start`.
-    example:
-      type: CytobandInterval
-      start: q22.2
-      end: q22.3
-    required:
-    - end
     - start
     - type
     additionalProperties: false
@@ -523,14 +509,6 @@ definitions:
     - count
     - variation
     additionalProperties: false
-  Feature:
-    description: A named entity that can be mapped to a Location. Genes, protein domains,
-      exons, and chromosomes are some examples of common biological entities that
-      may be Features.
-    oneOf:
-    - $ref: '#/definitions/Gene'
-    discriminator:
-      propertyName: type
   Number:
     description: A simple integer value as a VRS class.
     type: object

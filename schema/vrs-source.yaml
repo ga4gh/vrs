@@ -83,6 +83,7 @@ definitions:
   # Molecular Variation
 
   Allele:
+    ga4gh_prefix: VA
     inherits: MolecularVariation
     description: >-
       The state of a molecule at a :ref:`Location`.
@@ -109,6 +110,7 @@ definitions:
     required: [ "location", "state" ]
 
   Haplotype:
+    ga4gh_prefix: HT
     inherits: MolecularVariation
     description: >-
       A set of non-overlapping :ref:`Allele` members that co-occur on the same molecule.
@@ -132,11 +134,11 @@ definitions:
           List of Alleles, or references to Alleles, that comprise this Haplotype.
     required: [ "members" ]
 
-
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # UtilityVariation
 
   Text:
+    ga4gh_prefix: VT
     inherits: UtilityVariation
     description: >-
       A free-text definition of variation.
@@ -155,6 +157,7 @@ definitions:
     required: [ "definition" ]
 
   VariationSet:
+    ga4gh_prefix: VS
     inherits: UtilityVariation
     description: >-
       An unconstrained set of Variation members.
@@ -196,6 +199,7 @@ definitions:
     heritable_required: [ "location" ]
 
   AbsoluteCopyNumber:
+    ga4gh_prefix: ACN
     inherits: CopyNumber
     type: object
     description: >-
@@ -219,6 +223,7 @@ definitions:
     required: [ "copies" ]
 
   RelativeCopyNumber:
+    ga4gh_prefix: RCN
     inherits: CopyNumber
     type: object
     maturity: draft
@@ -241,6 +246,7 @@ definitions:
     required: [ "relative_copy_class" ]
 
   Genotype:
+    ga4gh_prefix: GT
     inherits: SystemicVariation
     description: >-
       A quantified set of _in-trans_ :ref:`MolecularVariation` at a genomic locus.
@@ -288,6 +294,7 @@ definitions:
       propertyName: type
 
   ChromosomeLocation:
+    ga4gh_prefix: CL
     inherits: Location
     description: >-
       A Location on a chromosome defined by a species and chromosome name.
@@ -310,13 +317,20 @@ definitions:
         description: >-
           The symbolic chromosome name. For humans, For humans,
           chromosome names MUST be one of 1..22, X, Y (case-sensitive)
-      interval:
-        $ref: "#/definitions/CytobandInterval"
+      start:
+        $ref: "#/definitions/HumanCytoband"
         description: >-
-          The chromosome region defined by a :ref:`CytobandInterval`
+          The start cytoband region. MUST specify a region nearer the
+          terminal end (telomere) of the chromosome p-arm than `end`.
+      end:
+        $ref: "#/definitions/HumanCytoband"
+        description: >-
+          The start cytoband region. MUST specify a region nearer the
+          terminal end (telomere) of the chromosome q-arm than `start`.
     required: [ "species_id", "chr", "interval" ]
 
   SequenceLocation:
+    ga4gh_prefix: SL
     inherits: Location
     description: >-
       A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
@@ -357,38 +371,6 @@ definitions:
   # NON-IDENTIFIABLE TYPES
   # These types have a `type` attribute
   # =============================================================================
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # Intervals
-
-  CytobandInterval:
-    description: >-
-      A contiguous span on a chromosome defined by cytoband features.
-      The span includes the constituent regions described by the start and
-      end cytobands, as well as any intervening regions.
-    type: object
-    properties:
-      type:
-        type: string
-        const: "CytobandInterval"
-        default: "CytobandInterval"
-        description: MUST be "CytobandInterval"
-      start:
-        $ref: "#/definitions/HumanCytoband"
-        description: >-
-          The start cytoband region. MUST specify a region nearer the
-          terminal end (telomere) of the chromosome p-arm than `end`.
-      end:
-        $ref: "#/definitions/HumanCytoband"
-        description: >-
-          The start cytoband region. MUST specify a region nearer the
-          terminal end (telomere) of the chromosome q-arm than `start`.
-    example:
-      type: CytobandInterval
-      start: q22.2
-      end: q22.3
-    required: [ "type", "start", "end" ]
-
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # SequenceExpression
@@ -570,25 +552,6 @@ definitions:
         description: >-
           A :ref:`MolecularVariation` at a :ref:`Genotype` locus.
     required: [ "count", "variation" ]
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # Feature
-
-  Feature:
-    description: >-
-      A named entity that can be mapped to a Location. Genes, protein domains,
-      exons, and chromosomes are some examples of common biological entities
-      that may be Features.
-    oneOf:
-      - $ref: "#/definitions/Gene"
-    discriminator:
-      propertyName: type
-    heritable_properties:
-      type:
-        type: string
-        description: >-
-          The Feature class type. MUST match child class type.
-    heritable_required: [ "type" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Numerics, Comparators, and Ranges
