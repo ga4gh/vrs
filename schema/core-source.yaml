@@ -177,3 +177,46 @@ $defs:
             - $ref: "#/$defs/Phenotype"
         minItems: 2
     required: [ "members" ]
+
+  Therapeutic:
+    inherits: DomainEntity
+    description: A treatment, therapy, or drug.
+    properties:
+      type:
+        type: string
+        const: Therapeutic
+        default: Therapeutic
+        description: MUST be "Therapeutic".
+
+  TherapeuticsCollection:
+    inherits: ValueEntity
+    description: A collection of therapeutics.
+    heritable_properties:
+      members:
+        type: array
+        items:
+          $ref: "#/$defs/Therapeutic"
+        description: >-
+          The therapeutics that constitute the described collection.
+
+  CombinationTherapeutics:
+    inherits: TherapeuticsCollection
+    description: >-
+      A collection of therapeutics that are taken during a course of treatment.
+    properties:
+      type:
+        type: string
+        const: CombinationTherapeutics
+        default: CombinationTherapeutics
+        description: MUST be "CombinationTherapeutics"
+
+  SubstitutionTherapeutics:
+    inherits: TherapeuticsCollection
+    description: >-
+      A collection of therapeutics that are considered as valid alternative entities.
+    properties:
+      type:
+        type: string
+        const: SubstitutionTherapeutics
+        default: SubstitutionTherapeutics
+        description: MUST be "SubstitutionTherapeutics"

@@ -218,6 +218,81 @@
             "type"
          ],
          "additionalProperties": false
+      },
+      "Therapeutic": {
+         "description": "A treatment, therapy, or drug.",
+         "properties": {
+            "id": {
+               "$ref": "#/$defs/CURIE",
+               "description": "The 'logical' identifier of the entity in the system of record, and MUST be represented as a CURIE. This 'id' is unique within a given system, but may also refer to an 'id' for the shared concept in  another system (represented by namespace, accordingly)."
+            },
+            "type": {
+               "type": "string",
+               "const": "Therapeutic",
+               "default": "Therapeutic",
+               "description": "MUST be \"Therapeutic\"."
+            }
+         },
+         "required": [
+            "id",
+            "type"
+         ],
+         "additionalProperties": false
+      },
+      "TherapeuticsCollection": {
+         "description": "A collection of therapeutics."
+      },
+      "CombinationTherapeutics": {
+         "description": "A collection of therapeutics that are taken during a course of treatment.",
+         "properties": {
+            "id": {
+               "$ref": "#/$defs/CURIE",
+               "description": "The 'logical' identifier of the entity in the system of record, and MUST be represented as a CURIE. This 'id' is unique within a given system, but may also refer to an 'id' for the shared concept in  another system (represented by namespace, accordingly)."
+            },
+            "type": {
+               "type": "string",
+               "const": "CombinationTherapeutics",
+               "default": "CombinationTherapeutics",
+               "description": "MUST be \"CombinationTherapeutics\""
+            },
+            "members": {
+               "type": "array",
+               "items": {
+                  "$ref": "#/$defs/Therapeutic"
+               },
+               "description": "The therapeutics that constitute the described collection."
+            }
+         },
+         "required": [
+            "type"
+         ],
+         "additionalProperties": false
+      },
+      "SubstitutionTherapeutics": {
+         "description": "A collection of therapeutics that are considered as valid alternative entities.",
+         "properties": {
+            "id": {
+               "$ref": "#/$defs/CURIE",
+               "description": "The 'logical' identifier of the entity in the system of record, and MUST be represented as a CURIE. This 'id' is unique within a given system, but may also refer to an 'id' for the shared concept in  another system (represented by namespace, accordingly)."
+            },
+            "type": {
+               "type": "string",
+               "const": "SubstitutionTherapeutics",
+               "default": "SubstitutionTherapeutics",
+               "description": "MUST be \"SubstitutionTherapeutics\""
+            },
+            "members": {
+               "type": "array",
+               "items": {
+                  "$ref": "#/$defs/Therapeutic"
+               },
+               "description": "The therapeutics that constitute the described collection."
+            }
+         },
+         "required": [
+            "type"
+         ],
+         "additionalProperties": false
       }
    }
 }
