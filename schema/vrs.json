@@ -83,17 +83,33 @@
             "location": {
                "oneOf": [
                   {
-                     "$ref": "core.json#/$defs/CURIE"
+                     "$ref": "#/definitions/ChromosomeLocation"
                   },
                   {
-                     "$ref": "#/definitions/Location"
+                     "$ref": "#/definitions/SequenceLocation"
+                  },
+                  {
+                     "$ref": "core.json#/$defs/CURIE"
                   }
                ],
                "description": "Where Allele is located"
             },
             "state": {
-               "$ref": "#/definitions/SequenceExpression",
-               "description": "An expression of the sequence state"
+               "description": "An expression of the sequence state",
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/ComposedSequenceExpression"
+                  },
+                  {
+                     "$ref": "#/definitions/DerivedSequenceExpression"
+                  },
+                  {
+                     "$ref": "#/definitions/LiteralSequenceExpression"
+                  },
+                  {
+                     "$ref": "#/definitions/RepeatedSequenceExpression"
+                  }
+               ]
             }
          },
          "required": [
@@ -222,10 +238,13 @@
             "location": {
                "oneOf": [
                   {
-                     "$ref": "core.json#/$defs/CURIE"
+                     "$ref": "#/definitions/ChromosomeLocation"
                   },
                   {
-                     "$ref": "#/definitions/Location"
+                     "$ref": "#/definitions/SequenceLocation"
+                  },
+                  {
+                     "$ref": "core.json#/$defs/CURIE"
                   }
                ],
                "description": "The location within the system."
@@ -233,13 +252,13 @@
             "copies": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Number"
+                     "$ref": "#/definitions/DefiniteRange"
                   },
                   {
                      "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/DefiniteRange"
+                     "$ref": "#/definitions/Number"
                   }
                ],
                "description": "The integral number of copies of the subject in a system."
@@ -271,10 +290,13 @@
             "location": {
                "oneOf": [
                   {
-                     "$ref": "core.json#/$defs/CURIE"
+                     "$ref": "#/definitions/ChromosomeLocation"
                   },
                   {
-                     "$ref": "#/definitions/Location"
+                     "$ref": "#/definitions/SequenceLocation"
+                  },
+                  {
+                     "$ref": "core.json#/$defs/CURIE"
                   }
                ],
                "description": "The location within the system."
@@ -325,13 +347,13 @@
             "count": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Number"
+                     "$ref": "#/definitions/DefiniteRange"
                   },
                   {
                      "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/DefiniteRange"
+                     "$ref": "#/definitions/Number"
                   }
                ],
                "description": "The total number of copies of all MolecularVariation at this locus, MUST be greater than or equal to the sum of GenotypeMember copy counts. If greater than the total counts, this implies additional  MolecularVariation that are expected to exist but are not explicitly indicated."
@@ -422,13 +444,13 @@
             "start": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Number"
+                     "$ref": "#/definitions/DefiniteRange"
                   },
                   {
                      "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/DefiniteRange"
+                     "$ref": "#/definitions/Number"
                   }
                ],
                "description": "The start coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range less than the value of `end`."
@@ -436,13 +458,13 @@
             "end": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Number"
+                     "$ref": "#/definitions/DefiniteRange"
                   },
                   {
                      "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/DefiniteRange"
+                     "$ref": "#/definitions/Number"
                   }
                ],
                "description": "The end coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range greater than the value of `start`."
@@ -536,10 +558,10 @@
             "seq_expr": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/LiteralSequenceExpression"
+                     "$ref": "#/definitions/DerivedSequenceExpression"
                   },
                   {
-                     "$ref": "#/definitions/DerivedSequenceExpression"
+                     "$ref": "#/definitions/LiteralSequenceExpression"
                   }
                ],
                "description": "An expression of the repeating subsequence"
@@ -547,13 +569,13 @@
             "count": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Number"
+                     "$ref": "#/definitions/DefiniteRange"
                   },
                   {
                      "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/DefiniteRange"
+                     "$ref": "#/definitions/Number"
                   }
                ],
                "description": "The count of repeated units, as an integer or inclusive range"
@@ -679,13 +701,13 @@
             "count": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Number"
+                     "$ref": "#/definitions/DefiniteRange"
                   },
                   {
                      "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/DefiniteRange"
+                     "$ref": "#/definitions/Number"
                   }
                ],
                "description": "The number of copies of the `variation` at a Genotype locus."
