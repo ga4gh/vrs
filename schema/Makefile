@@ -6,13 +6,16 @@
 JSYAMLS:=vrs.yaml core.yaml
 JSONS:=${JSYAMLS:.yaml=.json}
 
-all: ${JSONS} defs
+all: ${JSONS} merged.json defs
 
 %.json: %.yaml
 	jsy2js.py <$< >$@
 
 %.yaml: %-source.yaml
 	source2jsy.py $< >$@
+
+merged.yaml: vrs-source.yaml
+	source2mergedjsy.py $< >$@
 
 defs:
 	rm -rf defs

@@ -1,5 +1,5 @@
 $schema: http://json-schema.org/draft-07/schema
-title: GA4GH-VRS-Definitions
+title: GA4GH-VRS-Definitions-Merged-Imports
 type: object
 definitions:
   Variation:
@@ -41,7 +41,7 @@ definitions:
     type: object
     properties:
       id:
-        $ref: core.json#/$defs/CURIE
+        $ref: '#/definitions/CURIE'
         description: The 'logical' identifier of the entity in the system of record,
           and MUST be represented as a CURIE. This 'id' is unique within a given system,
           but may also refer to an 'id' for the shared concept in  another system
@@ -53,7 +53,7 @@ definitions:
         description: MUST be "Allele"
       location:
         oneOf:
-        - $ref: core.json#/$defs/CURIE
+        - $ref: '#/definitions/CURIE'
         - $ref: '#/definitions/Location'
         description: Where Allele is located
       state:
@@ -73,7 +73,7 @@ definitions:
     type: object
     properties:
       id:
-        $ref: core.json#/$defs/CURIE
+        $ref: '#/definitions/CURIE'
         description: The 'logical' identifier of the entity in the system of record,
           and MUST be represented as a CURIE. This 'id' is unique within a given system,
           but may also refer to an 'id' for the shared concept in  another system
@@ -90,7 +90,7 @@ definitions:
         items:
           oneOf:
           - $ref: '#/definitions/Allele'
-          - $ref: core.json#/$defs/CURIE
+          - $ref: '#/definitions/CURIE'
         description: List of Alleles, or references to Alleles, that comprise this
           Haplotype.
     required:
@@ -103,7 +103,7 @@ definitions:
     type: object
     properties:
       id:
-        $ref: core.json#/$defs/CURIE
+        $ref: '#/definitions/CURIE'
         description: The 'logical' identifier of the entity in the system of record,
           and MUST be represented as a CURIE. This 'id' is unique within a given system,
           but may also refer to an 'id' for the shared concept in  another system
@@ -127,7 +127,7 @@ definitions:
     type: object
     properties:
       id:
-        $ref: core.json#/$defs/CURIE
+        $ref: '#/definitions/CURIE'
         description: The 'logical' identifier of the entity in the system of record,
           and MUST be represented as a CURIE. This 'id' is unique within a given system,
           but may also refer to an 'id' for the shared concept in  another system
@@ -142,7 +142,7 @@ definitions:
         uniqueItems: true
         items:
           oneOf:
-          - $ref: core.json#/$defs/CURIE
+          - $ref: '#/definitions/CURIE'
           - $ref: '#/definitions/Variation'
         description: List of Variation objects or identifiers. Attribute is required,
           but MAY be empty.
@@ -158,7 +158,7 @@ definitions:
       etc.).
     properties:
       id:
-        $ref: core.json#/$defs/CURIE
+        $ref: '#/definitions/CURIE'
         description: The 'logical' identifier of the entity in the system of record,
           and MUST be represented as a CURIE. This 'id' is unique within a given system,
           but may also refer to an 'id' for the shared concept in  another system
@@ -170,7 +170,7 @@ definitions:
         description: MUST be "AbsoluteCopyNumber".
       location:
         oneOf:
-        - $ref: core.json#/$defs/CURIE
+        - $ref: '#/definitions/CURIE'
         - $ref: '#/definitions/Location'
         description: The location within the system.
       copies:
@@ -193,7 +193,7 @@ definitions:
       cell, etc.).
     properties:
       id:
-        $ref: core.json#/$defs/CURIE
+        $ref: '#/definitions/CURIE'
         description: The 'logical' identifier of the entity in the system of record,
           and MUST be represented as a CURIE. This 'id' is unique within a given system,
           but may also refer to an 'id' for the shared concept in  another system
@@ -205,7 +205,7 @@ definitions:
         description: MUST be "RelativeCopyNumber"
       location:
         oneOf:
-        - $ref: core.json#/$defs/CURIE
+        - $ref: '#/definitions/CURIE'
         - $ref: '#/definitions/Location'
         description: The location within the system.
       relative_copy_class:
@@ -229,7 +229,7 @@ definitions:
     type: object
     properties:
       id:
-        $ref: core.json#/$defs/CURIE
+        $ref: '#/definitions/CURIE'
         description: The 'logical' identifier of the entity in the system of record,
           and MUST be represented as a CURIE. This 'id' is unique within a given system,
           but may also refer to an 'id' for the shared concept in  another system
@@ -274,7 +274,7 @@ definitions:
     type: object
     properties:
       id:
-        $ref: core.json#/$defs/CURIE
+        $ref: '#/definitions/CURIE'
         description: The 'logical' identifier of the entity in the system of record,
           and MUST be represented as a CURIE. This 'id' is unique within a given system,
           but may also refer to an 'id' for the shared concept in  another system
@@ -288,7 +288,7 @@ definitions:
         default: taxonomy:9606
         description: 'CURIE representing a species from the [NCBI species taxonomy](https://registry.identifiers.org/registry/taxonomy).
           Default: "taxonomy:9606" (human)'
-        $ref: core.json#/$defs/CURIE
+        $ref: '#/definitions/CURIE'
       chr:
         type: string
         description: The symbolic chromosome name. For humans, For humans, chromosome
@@ -314,7 +314,7 @@ definitions:
     type: object
     properties:
       id:
-        $ref: core.json#/$defs/CURIE
+        $ref: '#/definitions/CURIE'
         description: The 'logical' identifier of the entity in the system of record,
           and MUST be represented as a CURIE. This 'id' is unique within a given system,
           but may also refer to an 'id' for the shared concept in  another system
@@ -326,7 +326,7 @@ definitions:
         description: MUST be "SequenceLocation"
       sequence_id:
         description: A VRS Computed Identifier for the reference Sequence.
-        $ref: core.json#/$defs/CURIE
+        $ref: '#/definitions/CURIE'
       start:
         oneOf:
         - $ref: '#/definitions/Number'
@@ -589,3 +589,236 @@ definitions:
       \ codes are permitted in Sequences."
     type: string
     pattern: ^[A-Z*\-]*$
+  RecordMetadata:
+    description: A re-usable structure that encapsulates provenance metadata that
+      applies to a specific concrete record of information as encoded in a particular
+      system, as opposed to  provenance of the abstract information content/knowledge
+      the record represents.
+    properties:
+      id:
+        type: string
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      type:
+        type: string
+        const: RecordMetadata
+        default: RecordMetadata
+        description: MUST be "RecordMetadata".
+      label:
+        type: string
+      extensions:
+        type: array
+        items:
+          $ref: '#/definitions/Extension'
+      is_version_of:
+        $ref: '#/definitions/CURIE'
+      version:
+        type: string
+    required:
+    - type
+    additionalProperties: false
+  Coding:
+    description: A `coding` is an extensible entity for labeling or otherwise annotating
+      globally  namespaced identifiers known as "codes".
+    properties:
+      id:
+        $ref: '#/definitions/CURIE'
+        description: The `coding.id` field is used to capture the code as a CURIE.
+      type:
+        type: string
+        const: Coding
+        default: Coding
+        description: MUST be "Coding".
+      label:
+        type: string
+      extensions:
+        type: array
+        items:
+          $ref: '#/definitions/Extension'
+      record_metadata:
+        $ref: '#/definitions/RecordMetadata'
+    required:
+    - type
+    additionalProperties: false
+  Extension:
+    description: The Extension class provides VODs with a means to extend descriptions
+      with other attributes unique to a content provider. These extensions are not
+      expected to be natively understood under VRSATILE, but may be used for pre-negotiated
+      exchange of message attributes when needed.
+    properties:
+      type:
+        type: string
+        const: Extension
+        description: MUST be "Extension".
+      name:
+        type: string
+        description: A name for the Extension
+      value:
+        type:
+        - number
+        - string
+        - boolean
+        - object
+        - array
+        - 'null'
+        description: Any primitive or structured object
+    required:
+    - name
+    additionalProperties: false
+  CURIE:
+    description: A [W3C Compact URI](https://www.w3.org/TR/curie/) formatted string.
+      A CURIE string has the structure ``prefix``:``reference``, as defined by the
+      W3C syntax.
+    type: string
+    pattern: ^\w[^:]*:.+$
+    example: ensembl:ENSG00000139618
+  Disease:
+    description: A reference to a Disease as defined by an authority. For human diseases,
+      the use of [MONDO](https://registry.identifiers.org/registry/mondo) as the disease
+      authority is RECOMMENDED.
+    properties:
+      id:
+        $ref: '#/definitions/CURIE'
+        description: The 'logical' identifier of the entity in the system of record,
+          and MUST be represented as a CURIE. This 'id' is unique within a given system,
+          but may also refer to an 'id' for the shared concept in  another system
+          (represented by namespace, accordingly).
+      type:
+        type: string
+        const: Disease
+        default: Disease
+        description: MUST be "Disease".
+    required:
+    - id
+    - type
+    additionalProperties: false
+  Phenotype:
+    description: A reference to a Phenotype as defined by an authority. For human
+      phenotypes, the use of [HPO](https://registry.identifiers.org/registry/hpo)
+      as the disease authority is RECOMMENDED.
+    properties:
+      id:
+        $ref: '#/definitions/CURIE'
+        description: The 'logical' identifier of the entity in the system of record,
+          and MUST be represented as a CURIE. This 'id' is unique within a given system,
+          but may also refer to an 'id' for the shared concept in  another system
+          (represented by namespace, accordingly).
+      type:
+        type: string
+        const: Phenotype
+        default: Phenotype
+        description: MUST be "Phenotype".
+    required:
+    - id
+    - type
+    additionalProperties: false
+  Gene:
+    description: A reference to a Gene as defined by an authority. For human genes,
+      the use of [hgnc](https://registry.identifiers.org/registry/hgnc) as the gene
+      authority is RECOMMENDED.
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/CURIE'
+        description: The 'logical' identifier of the entity in the system of record,
+          and MUST be represented as a CURIE. This 'id' is unique within a given system,
+          but may also refer to an 'id' for the shared concept in  another system
+          (represented by namespace, accordingly).
+      type:
+        type: string
+        const: Gene
+        default: Gene
+        description: MUST be "Gene"
+    required:
+    - id
+    - type
+    additionalProperties: false
+  Condition:
+    description: A set of phenotype and/or disease concepts that constitute a condition.
+    properties:
+      id:
+        $ref: '#/definitions/CURIE'
+        description: The 'logical' identifier of the entity in the system of record,
+          and MUST be represented as a CURIE. This 'id' is unique within a given system,
+          but may also refer to an 'id' for the shared concept in  another system
+          (represented by namespace, accordingly).
+      type:
+        type: string
+        description: The schema class that is instantiated by the data object. Must
+          be the name of a class from  the VA schema.
+      members:
+        type: array
+        items:
+          anyOf:
+          - $ref: '#/definitions/Disease'
+          - $ref: '#/definitions/Phenotype'
+        minItems: 2
+    required:
+    - members
+    - type
+    additionalProperties: false
+  Therapeutic:
+    description: A treatment, therapy, or drug.
+    properties:
+      id:
+        $ref: '#/definitions/CURIE'
+        description: The 'logical' identifier of the entity in the system of record,
+          and MUST be represented as a CURIE. This 'id' is unique within a given system,
+          but may also refer to an 'id' for the shared concept in  another system
+          (represented by namespace, accordingly).
+      type:
+        type: string
+        const: Therapeutic
+        default: Therapeutic
+        description: MUST be "Therapeutic".
+    required:
+    - id
+    - type
+    additionalProperties: false
+  CombinationTherapeutics:
+    description: A collection of therapeutics that are taken during a course of treatment.
+    properties:
+      id:
+        $ref: '#/definitions/CURIE'
+        description: The 'logical' identifier of the entity in the system of record,
+          and MUST be represented as a CURIE. This 'id' is unique within a given system,
+          but may also refer to an 'id' for the shared concept in  another system
+          (represented by namespace, accordingly).
+      type:
+        type: string
+        const: CombinationTherapeutics
+        default: CombinationTherapeutics
+        description: MUST be "CombinationTherapeutics"
+      members:
+        type: array
+        items:
+          $ref: '#/definitions/Therapeutic'
+        description: The therapeutics that constitute the described collection.
+    required:
+    - type
+    additionalProperties: false
+  SubstitutionTherapeutics:
+    description: A collection of therapeutics that are considered as valid alternative
+      entities.
+    properties:
+      id:
+        $ref: '#/definitions/CURIE'
+        description: The 'logical' identifier of the entity in the system of record,
+          and MUST be represented as a CURIE. This 'id' is unique within a given system,
+          but may also refer to an 'id' for the shared concept in  another system
+          (represented by namespace, accordingly).
+      type:
+        type: string
+        const: SubstitutionTherapeutics
+        default: SubstitutionTherapeutics
+        description: MUST be "SubstitutionTherapeutics"
+      members:
+        type: array
+        items:
+          $ref: '#/definitions/Therapeutic'
+        description: The therapeutics that constitute the described collection.
+    required:
+    - type
+    additionalProperties: false

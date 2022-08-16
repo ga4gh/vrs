@@ -34,9 +34,9 @@ Some ChromosomeLocation attributes are inherited from :ref:`Entity`.
       - The symbolic chromosome name. For humans, For humans, chromosome names MUST be one of 1..22, X, Y (case-sensitive)
    *  - start
       - :ref:`HumanCytoband`
-      - 0..1
+      - 1..1
       - The start cytoband region. MUST specify a region nearer the terminal end (telomere) of the chromosome p-arm than `end`.
    *  - end
       - :ref:`HumanCytoband`
-      - 0..1
+      - 1..1
       - The start cytoband region. MUST specify a region nearer the terminal end (telomere) of the chromosome q-arm than `start`.

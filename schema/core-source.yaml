@@ -9,9 +9,6 @@ $defs:
       Entity is the root class of ‘core’ classes model - those that have identifiers and other general 
       metadata like labels, xrefs, urls, descriptions, etc. All core classes descend from and inherit 
       its attributes.
-    oneOf:
-      - $ref: "#/$defs/ExtensibleEntity"
-      - $ref: "#/$defs/ValueEntity"
     heritable_properties:
       id:
         type: string

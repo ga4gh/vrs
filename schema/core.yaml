@@ -2,25 +2,6 @@ $schema: http://json-schema.org/draft/2020-12/schema
 title: GA4GH-GKS-Core-Definitions
 type: object
 $defs:
-  Entity:
-    description: "Entity is the root class of \u2018core\u2019 classes model - those\
-      \ that have identifiers and other general  metadata like labels, xrefs, urls,\
-      \ descriptions, etc. All core classes descend from and inherit  its attributes."
-    oneOf:
-    - $ref: '#/$defs/ExtensibleEntity'
-    - $ref: '#/$defs/ValueEntity'
-    discriminator:
-      propertyName: type
-  ValueEntity:
-    description: ValueEntity is the root class for classes that instantiate Value
-      Objects. ValueEntity classes are not extensible and MUST NOT have optional properties.
-  DomainEntity:
-    description: An abstract ValueEntity class extended to capture specific domain
-      entities by reference to an external identifier.
-  ExtensibleEntity:
-    description: ExtensibleEntity is the root class for classes that instantiate Extensible
-      Objects. Extensible Objects are extensible using the extensions property and
-      MAY have optional properties.
   RecordMetadata:
     description: A re-usable structure that encapsulates provenance metadata that
       applies to a specific concrete record of information as encoded in a particular
@@ -209,8 +190,6 @@ $defs:
     - id
     - type
     additionalProperties: false
-  TherapeuticsCollection:
-    description: A collection of therapeutics.
   CombinationTherapeutics:
     description: A collection of therapeutics that are taken during a course of treatment.
     properties:

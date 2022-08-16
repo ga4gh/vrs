@@ -327,7 +327,7 @@ definitions:
         description: >-
           The start cytoband region. MUST specify a region nearer the
           terminal end (telomere) of the chromosome q-arm than `start`.
-    required: [ "species_id", "chr", "interval" ]
+    required: [ "species_id", "chr", "start", "end" ]
 
   SequenceLocation:
     ga4gh_prefix: SL
