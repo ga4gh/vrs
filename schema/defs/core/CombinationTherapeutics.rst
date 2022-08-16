@@ -26,5 +26,5 @@ Some CombinationTherapeutics attributes are inherited from :ref:`Entity`.
       - MUST be "CombinationTherapeutics"
    *  - members
       - :ref:`Therapeutic`
-      - 0..m
+      - 2..m
       - The therapeutics that constitute the described collection.

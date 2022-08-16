@@ -206,13 +206,15 @@ $defs:
         description: MUST be "CombinationTherapeutics"
       members:
         type: array
+        description: The therapeutics that constitute the described collection.
         items:
           $ref: '#/$defs/Therapeutic'
-        description: The therapeutics that constitute the described collection.
+        minItems: 2
     required:
+    - members
     - type
     additionalProperties: false
-  SubstitutionTherapeutics:
+  SubstituteTherapeutics:
     description: A collection of therapeutics that are considered as valid alternative
       entities.
     properties:
@@ -224,14 +226,16 @@ $defs:
           (represented by namespace, accordingly).
       type:
         type: string
-        const: SubstitutionTherapeutics
-        default: SubstitutionTherapeutics
-        description: MUST be "SubstitutionTherapeutics"
+        const: SubstituteTherapeutics
+        default: SubstituteTherapeutics
+        description: MUST be "SubstituteTherapeutics"
       members:
         type: array
+        description: The therapeutics that constitute the described collection.
         items:
           $ref: '#/$defs/Therapeutic'
-        description: The therapeutics that constitute the described collection.
+        minItems: 2
     required:
+    - members
     - type
     additionalProperties: false

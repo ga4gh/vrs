@@ -191,10 +191,12 @@ $defs:
     heritable_properties:
       members:
         type: array
-        items:
-          $ref: "#/$defs/Therapeutic"
         description: >-
           The therapeutics that constitute the described collection.
+        items:
+          $ref: "#/$defs/Therapeutic"
+        minItems: 2
+    heritable_required: [ "members" ]
 
   CombinationTherapeutics:
     inherits: TherapeuticsCollection
@@ -207,13 +209,13 @@ $defs:
         default: CombinationTherapeutics
         description: MUST be "CombinationTherapeutics"
 
-  SubstitutionTherapeutics:
+  SubstituteTherapeutics:
     inherits: TherapeuticsCollection
     description: >-
       A collection of therapeutics that are considered as valid alternative entities.
     properties:
       type:
         type: string
-        const: SubstitutionTherapeutics
-        default: SubstitutionTherapeutics
-        description: MUST be "SubstitutionTherapeutics"
+        const: SubstituteTherapeutics
+        default: SubstituteTherapeutics
+        description: MUST be "SubstituteTherapeutics"
