@@ -93,12 +93,7 @@
             },
             "state": {
                "$ref": "#/definitions/SequenceExpression",
-               "description": "An expression of the sequence state",
-               "deprecated": [
-                  {
-                     "$ref": "#/definitions/SequenceState"
-                  }
-               ]
+               "description": "An expression of the sequence state"
             }
          },
          "required": [

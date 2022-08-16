@@ -59,8 +59,6 @@ definitions:
       state:
         $ref: '#/definitions/SequenceExpression'
         description: An expression of the sequence state
-        deprecated:
-        - $ref: '#/definitions/SequenceState'
     required:
     - location
     - state
