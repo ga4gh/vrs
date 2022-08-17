@@ -23,6 +23,7 @@ $defs:
         type: string
       extensions:
         type: array
+        ordered: true
         items:
           $ref: '#/$defs/Extension'
       is_version_of:
@@ -48,6 +49,7 @@ $defs:
         type: string
       extensions:
         type: array
+        ordered: true
         items:
           $ref: '#/$defs/Extension'
       record_metadata:
@@ -163,6 +165,7 @@ $defs:
           be the name of a class from  the VA schema.
       members:
         type: array
+        ordered: false
         items:
           anyOf:
           - $ref: '#/$defs/Disease'
@@ -206,6 +209,7 @@ $defs:
         description: MUST be "CombinationTherapeutics"
       members:
         type: array
+        ordered: false
         description: The therapeutics that constitute the described collection.
         items:
           $ref: '#/$defs/Therapeutic'
@@ -231,6 +235,7 @@ $defs:
         description: MUST be "SubstituteTherapeutics"
       members:
         type: array
+        ordered: false
         description: The therapeutics that constitute the described collection.
         items:
           $ref: '#/$defs/Therapeutic'

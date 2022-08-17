@@ -2,6 +2,7 @@
    "$schema": "http://json-schema.org/draft-07/schema",
    "title": "GA4GH-VRS-Definitions-Merged-Imports",
    "type": "object",
+   "enforce_sorted": true,
    "definitions": {
       "Variation": {
          "description": "A representation of the state of one or more biomolecules.",
@@ -136,6 +137,7 @@
             },
             "members": {
                "type": "array",
+               "ordered": false,
                "minItems": 2,
                "uniqueItems": true,
                "items": {
@@ -200,6 +202,7 @@
             },
             "members": {
                "type": "array",
+               "ordered": false,
                "uniqueItems": true,
                "items": {
                   "oneOf": [
@@ -337,6 +340,7 @@
             },
             "members": {
                "type": "array",
+               "ordered": false,
                "uniqueItems": true,
                "minItems": 1,
                "items": {
@@ -666,6 +670,7 @@
             },
             "components": {
                "type": "array",
+               "ordered": true,
                "uniqueItems": true,
                "minItems": 2,
                "items": {
@@ -841,6 +846,7 @@
             },
             "extensions": {
                "type": "array",
+               "ordered": true,
                "items": {
                   "$ref": "#/definitions/Extension"
                }
@@ -875,6 +881,7 @@
             },
             "extensions": {
                "type": "array",
+               "ordered": true,
                "items": {
                   "$ref": "#/definitions/Extension"
                }
@@ -997,6 +1004,7 @@
             },
             "members": {
                "type": "array",
+               "ordered": false,
                "items": {
                   "anyOf": [
                      {
@@ -1051,6 +1059,7 @@
             },
             "members": {
                "type": "array",
+               "ordered": false,
                "description": "The therapeutics that constitute the described collection.",
                "items": {
                   "$ref": "#/definitions/Therapeutic"
@@ -1079,6 +1088,7 @@
             },
             "members": {
                "type": "array",
+               "ordered": false,
                "description": "The therapeutics that constitute the described collection.",
                "items": {
                   "$ref": "#/definitions/Therapeutic"

@@ -1,6 +1,7 @@
 $schema: http://json-schema.org/draft-07/schema
 title: GA4GH-VRS-Definitions
 type: object
+enforce_sorted: true
 definitions:
   Variation:
     description: A representation of the state of one or more biomolecules.
@@ -88,6 +89,7 @@ definitions:
         description: MUST be "Haplotype"
       members:
         type: array
+        ordered: false
         minItems: 2
         uniqueItems: true
         items:
@@ -142,6 +144,7 @@ definitions:
         description: MUST be "VariationSet"
       members:
         type: array
+        ordered: false
         uniqueItems: true
         items:
           oneOf:
@@ -246,6 +249,7 @@ definitions:
         description: MUST be "Genotype"
       members:
         type: array
+        ordered: false
         uniqueItems: true
         minItems: 1
         items:
@@ -476,6 +480,7 @@ definitions:
         description: MUST be "ComposedSequenceExpression"
       components:
         type: array
+        ordered: true
         uniqueItems: true
         minItems: 2
         items:
