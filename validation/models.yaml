@@ -8,18 +8,10 @@ Number:
 Gene:
   -
     in:
-      gene_id: ncbigene:384
+      id: ncbigene:384
       type: Gene
     out:
-      ga4gh_serialize: '{"gene_id":"ncbigene:384","type":"Gene"}'
-SimpleInterval:
-  -
-    in:
-      end: 44908822
-      start: 44908821
-      type: SimpleInterval
-    out:
-      ga4gh_serialize: '{"end":44908822,"start":44908821,"type":"SimpleInterval"}'
+      ga4gh_serialize: '{"id":"ncbigene:384","type":"Gene"}'
 DefiniteRange:
   -
     in:
@@ -36,8 +28,8 @@ IndefiniteRange:
       value: 22
     out:
       ga4gh_serialize: '{"comparator":">=","type":"IndefiniteRange","value":22}'
-SequenceInterval:
-  -
+SequenceLocation:
+  - name: "SequenceLocation w/ Number"
     in:
       end:
         type: Number
@@ -45,11 +37,14 @@ SequenceInterval:
       start:
         type: Number
         value: 44908821
-      type: SequenceInterval
+      sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+      type: SequenceLocation
     out:
-      ga4gh_serialize: '{"end":{"type":"Number","value":44908822},"start":{"type":"Number","value":44908821},"type":"SequenceInterval"}'
-SequenceInterval:
-  -
+      ga4gh_digest: D2B1VpJuYRCJq99Wpd7nG4VCanjs_kVn
+      ga4gh_identify: ga4gh:SL.D2B1VpJuYRCJq99Wpd7nG4VCanjs_kVn
+      ga4gh_serialize: '{"end":{"type":"Number","value":44908822},"start":{"type":"Number","value":44908821},"sequence_id":"IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl","type":"SequenceLocation"}'
+SequenceLocation:
+  - name: "SequenceLocation w/Definite and Indefinite Ranges"
     in:
       end:
         comparator: '>='
@@ -59,85 +54,40 @@ SequenceInterval:
         max: 44908821
         min: 44908721
         type: DefiniteRange
-      type: SequenceInterval
+      sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+      type: SequenceLocation
     out:
-      ga4gh_serialize: '{"end":{"comparator":">=","type":"IndefiniteRange","value":44908822},"start":{"max":44908821,"min":44908721,"type":"DefiniteRange"},"type":"SequenceInterval"}'
-SequenceLocation:
-  - name: "SequenceLocation w/simple interval"
+      ga4gh_digest: 8HRf5w3blL_930Y7i1Kl-rFpi8KZLg6I
+      ga4gh_identify: ga4gh:SL.8HRf5w3blL_930Y7i1Kl-rFpi8KZLg6I
+      ga4gh_serialize: '{"end":{"comparator":">=","type":"IndefiniteRange","value":44908822},"sequence_id":"IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl","start":{"max":44908821,"min":44908721,"type":"DefiniteRange"},"type":"SequenceLocation"}'
+ChromosomeLocation:
+  - name: "19q13.32 Example"
     in:
-      interval:
+      chr: '19'
+      end: q13.32
+      start: q13.32
+      species_id: taxonomy:9606
+      type: ChromosomeLocation
+    out:
+      ga4gh_digest: UYh-HXuUg1qSD6dMXGzvfGUwirqQz9bW
+      ga4gh_identify: ga4gh:CL.UYh-HXuUg1qSD6dMXGzvfGUwirqQz9bW
+      ga4gh_serialize: '{"chr":"19","end":"q13.32","species_id":"taxonomy:9606","start":"q13.32","type":"ChromosomeLocation"}'
+DerivedSequenceExpression:
+  -
+    in:
+      location:
         end:
           type: Number
           value: 44908822
         start:
           type: Number
           value: 44908821
-        type: SequenceInterval
-      sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
-      type: SequenceLocation
-    out:
-      ga4gh_digest: QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg
-      ga4gh_identify: ga4gh:VSL.QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg
-      ga4gh_serialize: '{"interval":{"end":{"type":"Number","value":44908822},"start":{"type":"Number","value":44908821},"type":"SequenceInterval"},"sequence_id":"IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl","type":"SequenceLocation"}'
-SequenceLocation:
-  - name: "SequenceLocation w/Definite and Indefinite Ranges"
-    in:
-      interval:
-        end:
-          comparator: '>='
-          type: IndefiniteRange
-          value: 44908822
-        start:
-          max: 44908821
-          min: 44908721
-          type: DefiniteRange
-        type: SequenceInterval
-      sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
-      type: SequenceLocation
-    out:
-      ga4gh_digest: 2ZIY16gPTLbVISuREaRmb0jXGj-_IdRv
-      ga4gh_identify: ga4gh:VSL.2ZIY16gPTLbVISuREaRmb0jXGj-_IdRv
-      ga4gh_serialize: '{"interval":{"end":{"comparator":">=","type":"IndefiniteRange","value":44908822},"start":{"max":44908821,"min":44908721,"type":"DefiniteRange"},"type":"SequenceInterval"},"sequence_id":"IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl","type":"SequenceLocation"}'
-CytobandInterval:
-  -
-    in:
-      end: q13.32
-      start: q13.32
-      type: CytobandInterval
-    out:
-      ga4gh_serialize: '{"end":"q13.32","start":"q13.32","type":"CytobandInterval"}'
-ChromosomeLocation:
-  - name: "19q13.32 Example"
-    in:
-      chr: '19'
-      interval:
-        end: q13.32
-        start: q13.32
-        type: CytobandInterval
-      species_id: taxonomy:9606
-      type: ChromosomeLocation
-    out:
-      ga4gh_digest: HLH0tBIjV4Vxr_814b41hBsICouJkSN1
-      ga4gh_identify: ga4gh:VCL.HLH0tBIjV4Vxr_814b41hBsICouJkSN1
-      ga4gh_serialize: '{"chr":"19","interval":{"end":"q13.32","start":"q13.32","type":"CytobandInterval"},"species_id":"taxonomy:9606","type":"ChromosomeLocation"}'
-DerivedSequenceExpression:
-  -
-    in:
-      location:
-        interval:
-          end:
-            type: Number
-            value: 44908822
-          start:
-            type: Number
-            value: 44908821
-          type: SequenceInterval
         sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
         type: SequenceLocation
       reverse_complement: false
       type: DerivedSequenceExpression
     out:
-      ga4gh_serialize: '{"location":"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg","reverse_complement":false,"type":"DerivedSequenceExpression"}'
+      ga4gh_serialize: '{"location":"D2B1VpJuYRCJq99Wpd7nG4VCanjs_kVn","reverse_complement":false,"type":"DerivedSequenceExpression"}'
 LiteralSequenceExpression:
   -
     in:
@@ -154,33 +104,29 @@ RepeatedSequenceExpression:
         value: 6
       seq_expr:
         location:
-          interval:
-            end:
-              type: Number
-              value: 44908822
-            start:
-              type: Number
-              value: 44908821
-            type: SequenceInterval
-          sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
-          type: SequenceLocation
-        reverse_complement: false
-        type: DerivedSequenceExpression
-      type: RepeatedSequenceExpression
-    out:
-      ga4gh_serialize: '{"count":{"comparator":">=","type":"IndefiniteRange","value":6},"seq_expr":{"location":"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg","reverse_complement":false,"type":"DerivedSequenceExpression"},"type":"RepeatedSequenceExpression"}'
-Allele:
-  - name: "rs7412@GRCh38>T w/SequenceState"
-    in:
-      location:
-        interval:
           end:
             type: Number
             value: 44908822
           start:
             type: Number
             value: 44908821
-          type: SequenceInterval
+          sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+          type: SequenceLocation
+        reverse_complement: false
+        type: DerivedSequenceExpression
+      type: RepeatedSequenceExpression
+    out:
+      ga4gh_serialize: '{"count":{"comparator":">=","type":"IndefiniteRange","value":6},"seq_expr":{"location":"D2B1VpJuYRCJq99Wpd7nG4VCanjs_kVn","reverse_complement":false,"type":"DerivedSequenceExpression"},"type":"RepeatedSequenceExpression"}'
+Allele:
+  - name: "rs7412@GRCh38>T w/SequenceState"
+    in:
+      location:
+        end:
+          type: Number
+          value: 44908822
+        start:
+          type: Number
+          value: 44908821
         sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
         type: SequenceLocation
       state:
@@ -190,19 +136,17 @@ Allele:
     out:
       ga4gh_digest: KnG6BLTexv7o-j9LnYsgPxZkRUu1IRnp
       ga4gh_identify: ga4gh:VA.KnG6BLTexv7o-j9LnYsgPxZkRUu1IRnp
-      ga4gh_serialize: '{"location":"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg","state":{"sequence":"T","type":"SequenceState"},"type":"Allele"}'
+      ga4gh_serialize: '{"location":"D2B1VpJuYRCJq99Wpd7nG4VCanjs_kVn","state":{"sequence":"T","type":"SequenceState"},"type":"Allele"}'
 Allele:
   - name: "rs7412@GRCh38>T w/LiteralSequenceExpression"
     in:
       location:
-        interval:
-          end:
-            type: Number
-            value: 44908822
-          start:
-            type: Number
-            value: 44908821
-          type: SequenceInterval
+        end:
+          type: Number
+          value: 44908822
+        start:
+          type: Number
+          value: 44908821
         sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
         type: SequenceLocation
       state:
@@ -210,22 +154,20 @@ Allele:
         type: LiteralSequenceExpression
       type: Allele
     out:
-      ga4gh_digest: CxiA_hvYbkD8Vqwjhx5AYuyul4mtlkpD
-      ga4gh_identify: ga4gh:VA.CxiA_hvYbkD8Vqwjhx5AYuyul4mtlkpD
-      ga4gh_serialize: '{"location":"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}'
+      ga4gh_digest: sxz6QISV8xItgkKmlzKRamxSEuAJM7ME
+      ga4gh_identify: ga4gh:VA.sxz6QISV8xItgkKmlzKRamxSEuAJM7ME
+      ga4gh_serialize: '{"location":"D2B1VpJuYRCJq99Wpd7nG4VCanjs_kVn","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}'
 Haplotype:
   - name: "APOE1 on GRCh38, inline"
     in:
       members:
       - location:
-          interval:
-            end:
-              type: Number
-              value: 44908822
-            start:
-              type: Number
-              value: 44908821
-            type: SequenceInterval
+          end:
+            type: Number
+            value: 44908822
+          start:
+            type: Number
+            value: 44908821
           sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
           type: SequenceLocation
         state:
@@ -233,14 +175,12 @@ Haplotype:
           type: LiteralSequenceExpression
         type: Allele
       - location:
-          interval:
-            end:
-              type: Number
-              value: 44908684
-            start:
-              type: Number
-              value: 44908683
-            type: SequenceInterval
+          end:
+            type: Number
+            value: 44908684
+          start:
+            type: Number
+            value: 44908683
           sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
           type: SequenceLocation
         state:
@@ -249,19 +189,19 @@ Haplotype:
         type: Allele
       type: Haplotype
     out:
-      ga4gh_digest: i8owCOBHIlRCPtcw_WzRFNTunwJRy99-
-      ga4gh_identify: ga4gh:VH.i8owCOBHIlRCPtcw_WzRFNTunwJRy99-
-      ga4gh_serialize: '{"members":["-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x","Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"],"type":"Haplotype"}'
+      ga4gh_digest: yzu0AkAaqDYbO0vtuatRi49FmYhkVIqr
+      ga4gh_identify: ga4gh:HT.yzu0AkAaqDYbO0vtuatRi49FmYhkVIqr
+      ga4gh_serialize: '{"members":["khD7xy2qdhEmCtv2mFnNfc6BGibim97K","zxokbi7DQc5Eq5iLxlEFVzK3hOBEJMxr"],"type":"Haplotype"}'
   - name: "APOE1 on GRCh38, referenced"
     in:
       members:
-      - ga4gh:VA.-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x
-      - ga4gh:VA.Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1
+      - ga4gh:VA.zxokbi7DQc5Eq5iLxlEFVzK3hOBEJMxr
+      - ga4gh:VA.khD7xy2qdhEmCtv2mFnNfc6BGibim97K
       type: Haplotype
     out:
-      ga4gh_digest: i8owCOBHIlRCPtcw_WzRFNTunwJRy99-
-      ga4gh_identify: ga4gh:VH.i8owCOBHIlRCPtcw_WzRFNTunwJRy99-
-      ga4gh_serialize: '{"members":["-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x","Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"],"type":"Haplotype"}'
+      ga4gh_digest: yzu0AkAaqDYbO0vtuatRi49FmYhkVIqr
+      ga4gh_identify: ga4gh:HT.yzu0AkAaqDYbO0vtuatRi49FmYhkVIqr
+      ga4gh_serialize: '{"members":["khD7xy2qdhEmCtv2mFnNfc6BGibim97K","zxokbi7DQc5Eq5iLxlEFVzK3hOBEJMxr"],"type":"Haplotype"}'
 AbsoluteCopyNumber:
   - name: ">=3 copies APOE"
     in:
@@ -269,26 +209,22 @@ AbsoluteCopyNumber:
         comparator: '>='
         type: IndefiniteRange
         value: 3
-      subject:
-        gene_id: ncbigene:348
-        type: Gene
+      location: ncbigene:348
       type: AbsoluteCopyNumber
     out:
-      ga4gh_digest: 5DNZrhIFslE6Eeo0CsDyQQERR6x7v9OE
-      ga4gh_identify: ga4gh:VAC.5DNZrhIFslE6Eeo0CsDyQQERR6x7v9OE
-      ga4gh_serialize: '{"copies":{"comparator":">=","type":"IndefiniteRange","value":3},"subject":{"gene_id":"ncbigene:348","type":"Gene"},"type":"AbsoluteCopyNumber"}'
+      ga4gh_digest: dWDGePNUT_GEsLmt9RJvvJWEQcN_rdtq
+      ga4gh_identify: ga4gh:ACN.dWDGePNUT_GEsLmt9RJvvJWEQcN_rdtq
+      ga4gh_serialize: '{"copies":{"comparator":">=","type":"IndefiniteRange","value":3},"location":"ncbigene:348","type":"AbsoluteCopyNumber"}'
 RelativeCopyNumber:
   - name: "Low-level copy gain of BRCA1"
     in:
       relative_copy_class: low-level gain
-      subject:
-        gene_id: ncbigene:348
-        type: Gene
+      location: ncbigene:348
       type: RelativeCopyNumber
     out:
-      ga4gh_digest: CUf7xZJd36mapcm0h3cOZR8kjM_Aj4UV
-      ga4gh_identify: ga4gh:VRC.CUf7xZJd36mapcm0h3cOZR8kjM_Aj4UV
-      ga4gh_serialize: '{"relative_copy_class":"low-level gain","subject":{"gene_id":"ncbigene:348","type":"Gene"},"type":"RelativeCopyNumber"}'
+      ga4gh_digest: 5mCOeI_TBdhs7zQmtikMTW7QS9bLJ7mj
+      ga4gh_identify: ga4gh:RCN.5mCOeI_TBdhs7zQmtikMTW7QS9bLJ7mj
+      ga4gh_serialize: '{"location":"ncbigene:348","relative_copy_class":"low-level gain","type":"RelativeCopyNumber"}'
 Text:
   -
     in:
@@ -303,14 +239,12 @@ VariationSet:
     in:
       members:
       - location:
-          interval:
-            end:
-              type: Number
-              value: 44908822
-            start:
-              type: Number
-              value: 44908821
-            type: SequenceInterval
+          end:
+            type: Number
+            value: 44908822
+          start:
+            type: Number
+            value: 44908821
           sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
           type: SequenceLocation
         state:
@@ -318,14 +252,12 @@ VariationSet:
           type: LiteralSequenceExpression
         type: Allele
       - location:
-          interval:
-            end:
-              type: Number
-              value: 44908684
-            start:
-              type: Number
-              value: 44908683
-            type: SequenceInterval
+          end:
+            type: Number
+            value: 44908684
+          start:
+            type: Number
+            value: 44908683
           sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
           type: SequenceLocation
         state:
@@ -334,16 +266,16 @@ VariationSet:
         type: Allele
       type: VariationSet
     out:
-      ga4gh_digest: QLQXSNSIFlqNYWmQbw-YkfmexPi4NeDE
-      ga4gh_identify: ga4gh:VS.QLQXSNSIFlqNYWmQbw-YkfmexPi4NeDE
-      ga4gh_serialize: '{"members":["-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x","Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"],"type":"VariationSet"}'
+      ga4gh_digest: xdsUhADhgCz9DFMW3qjHt_7NJ0Md8632
+      ga4gh_identify: ga4gh:VS.xdsUhADhgCz9DFMW3qjHt_7NJ0Md8632
+      ga4gh_serialize: '{"members":["khD7xy2qdhEmCtv2mFnNfc6BGibim97K","zxokbi7DQc5Eq5iLxlEFVzK3hOBEJMxr"],"type":"VariationSet"}'
   - name: "VariationSet with inlined Alleles"
     in:
       members:
-      - ga4gh:VA.-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x
-      - ga4gh:VA.Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1
+      - ga4gh:VA.zxokbi7DQc5Eq5iLxlEFVzK3hOBEJMxr
+      - ga4gh:VA.khD7xy2qdhEmCtv2mFnNfc6BGibim97K
       type: VariationSet
     out:
-      ga4gh_digest: QLQXSNSIFlqNYWmQbw-YkfmexPi4NeDE
-      ga4gh_identify: ga4gh:VS.QLQXSNSIFlqNYWmQbw-YkfmexPi4NeDE
-      ga4gh_serialize: '{"members":["-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x","Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"],"type":"VariationSet"}'
+      ga4gh_digest: xdsUhADhgCz9DFMW3qjHt_7NJ0Md8632
+      ga4gh_identify: ga4gh:VS.xdsUhADhgCz9DFMW3qjHt_7NJ0Md8632
+      ga4gh_serialize: '{"members":["khD7xy2qdhEmCtv2mFnNfc6BGibim97K","zxokbi7DQc5Eq5iLxlEFVzK3hOBEJMxr"],"type":"VariationSet"}'
