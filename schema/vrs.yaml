@@ -147,8 +147,14 @@ definitions:
         uniqueItems: true
         items:
           oneOf:
+          - $ref: '#/definitions/AbsoluteCopyNumber'
+          - $ref: '#/definitions/Allele'
+          - $ref: '#/definitions/Genotype'
+          - $ref: '#/definitions/Haplotype'
+          - $ref: '#/definitions/RelativeCopyNumber'
+          - $ref: '#/definitions/Text'
+          - $ref: '#/definitions/VariationSet'
           - $ref: core.json#/$defs/CURIE
-          - $ref: '#/definitions/Variation'
         description: List of Variation objects or identifiers. Attribute is required,
           but MAY be empty.
     required:

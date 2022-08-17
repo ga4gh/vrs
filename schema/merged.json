@@ -206,10 +206,28 @@
                "items": {
                   "oneOf": [
                      {
+                        "$ref": "#/definitions/AbsoluteCopyNumber"
+                     },
+                     {
+                        "$ref": "#/definitions/Allele"
+                     },
+                     {
                         "$ref": "#/definitions/CURIE"
                      },
                      {
-                        "$ref": "#/definitions/Variation"
+                        "$ref": "#/definitions/Genotype"
+                     },
+                     {
+                        "$ref": "#/definitions/Haplotype"
+                     },
+                     {
+                        "$ref": "#/definitions/RelativeCopyNumber"
+                     },
+                     {
+                        "$ref": "#/definitions/Text"
+                     },
+                     {
+                        "$ref": "#/definitions/VariationSet"
                      }
                   ]
                },

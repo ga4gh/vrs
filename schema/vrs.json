@@ -206,10 +206,28 @@
                "items": {
                   "oneOf": [
                      {
-                        "$ref": "core.json#/$defs/CURIE"
+                        "$ref": "#/definitions/AbsoluteCopyNumber"
                      },
                      {
-                        "$ref": "#/definitions/Variation"
+                        "$ref": "#/definitions/Allele"
+                     },
+                     {
+                        "$ref": "#/definitions/Genotype"
+                     },
+                     {
+                        "$ref": "#/definitions/Haplotype"
+                     },
+                     {
+                        "$ref": "#/definitions/RelativeCopyNumber"
+                     },
+                     {
+                        "$ref": "#/definitions/Text"
+                     },
+                     {
+                        "$ref": "#/definitions/VariationSet"
+                     },
+                     {
+                        "$ref": "core.json#/$defs/CURIE"
                      }
                   ]
                },
