@@ -136,6 +136,7 @@
             },
             "members": {
                "type": "array",
+               "ordered": false,
                "minItems": 2,
                "uniqueItems": true,
                "items": {
@@ -200,14 +201,33 @@
             },
             "members": {
                "type": "array",
+               "ordered": false,
                "uniqueItems": true,
                "items": {
                   "oneOf": [
                      {
+                        "$ref": "#/definitions/AbsoluteCopyNumber"
+                     },
+                     {
+                        "$ref": "#/definitions/Allele"
+                     },
+                     {
                         "$ref": "#/definitions/CURIE"
                      },
                      {
-                        "$ref": "#/definitions/Variation"
+                        "$ref": "#/definitions/Genotype"
+                     },
+                     {
+                        "$ref": "#/definitions/Haplotype"
+                     },
+                     {
+                        "$ref": "#/definitions/RelativeCopyNumber"
+                     },
+                     {
+                        "$ref": "#/definitions/Text"
+                     },
+                     {
+                        "$ref": "#/definitions/VariationSet"
                      }
                   ]
                },
@@ -337,6 +357,7 @@
             },
             "members": {
                "type": "array",
+               "ordered": false,
                "uniqueItems": true,
                "minItems": 1,
                "items": {
@@ -666,6 +687,7 @@
             },
             "components": {
                "type": "array",
+               "ordered": true,
                "uniqueItems": true,
                "minItems": 2,
                "items": {
@@ -841,6 +863,7 @@
             },
             "extensions": {
                "type": "array",
+               "ordered": true,
                "items": {
                   "$ref": "#/definitions/Extension"
                }
@@ -875,6 +898,7 @@
             },
             "extensions": {
                "type": "array",
+               "ordered": true,
                "items": {
                   "$ref": "#/definitions/Extension"
                }
@@ -997,6 +1021,7 @@
             },
             "members": {
                "type": "array",
+               "ordered": false,
                "items": {
                   "anyOf": [
                      {
@@ -1051,6 +1076,7 @@
             },
             "members": {
                "type": "array",
+               "ordered": false,
                "description": "The therapeutics that constitute the described collection.",
                "items": {
                   "$ref": "#/definitions/Therapeutic"
@@ -1079,6 +1105,7 @@
             },
             "members": {
                "type": "array",
+               "ordered": false,
                "description": "The therapeutics that constitute the described collection.",
                "items": {
                   "$ref": "#/definitions/Therapeutic"

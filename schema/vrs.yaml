@@ -88,6 +88,7 @@ definitions:
         description: MUST be "Haplotype"
       members:
         type: array
+        ordered: false
         minItems: 2
         uniqueItems: true
         items:
@@ -142,11 +143,18 @@ definitions:
         description: MUST be "VariationSet"
       members:
         type: array
+        ordered: false
         uniqueItems: true
         items:
           oneOf:
+          - $ref: '#/definitions/AbsoluteCopyNumber'
+          - $ref: '#/definitions/Allele'
+          - $ref: '#/definitions/Genotype'
+          - $ref: '#/definitions/Haplotype'
+          - $ref: '#/definitions/RelativeCopyNumber'
+          - $ref: '#/definitions/Text'
+          - $ref: '#/definitions/VariationSet'
           - $ref: core.json#/$defs/CURIE
-          - $ref: '#/definitions/Variation'
         description: List of Variation objects or identifiers. Attribute is required,
           but MAY be empty.
     required:
@@ -246,6 +254,7 @@ definitions:
         description: MUST be "Genotype"
       members:
         type: array
+        ordered: false
         uniqueItems: true
         minItems: 1
         items:
@@ -476,6 +485,7 @@ definitions:
         description: MUST be "ComposedSequenceExpression"
       components:
         type: array
+        ordered: true
         uniqueItems: true
         minItems: 2
         items:

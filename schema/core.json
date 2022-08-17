@@ -21,6 +21,7 @@
             },
             "extensions": {
                "type": "array",
+               "ordered": true,
                "items": {
                   "$ref": "#/$defs/Extension"
                }
@@ -55,6 +56,7 @@
             },
             "extensions": {
                "type": "array",
+               "ordered": true,
                "items": {
                   "$ref": "#/$defs/Extension"
                }
@@ -177,6 +179,7 @@
             },
             "members": {
                "type": "array",
+               "ordered": false,
                "items": {
                   "anyOf": [
                      {
@@ -231,6 +234,7 @@
             },
             "members": {
                "type": "array",
+               "ordered": false,
                "description": "The therapeutics that constitute the described collection.",
                "items": {
                   "$ref": "#/$defs/Therapeutic"
@@ -259,6 +263,7 @@
             },
             "members": {
                "type": "array",
+               "ordered": false,
                "description": "The therapeutics that constitute the described collection.",
                "items": {
                   "$ref": "#/$defs/Therapeutic"

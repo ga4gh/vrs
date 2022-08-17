@@ -56,6 +56,7 @@ $defs:
         type: string
       extensions:
         type: array
+        ordered: true
         items:
           $ref: "#/$defs/Extension"
 
@@ -168,6 +169,7 @@ $defs:
     properties:
       members:
         type: array
+        ordered: false
         items:
           anyOf:
             - $ref: "#/$defs/Disease"
@@ -191,6 +193,7 @@ $defs:
     heritable_properties:
       members:
         type: array
+        ordered: false
         description: >-
           The therapeutics that constitute the described collection.
         items:

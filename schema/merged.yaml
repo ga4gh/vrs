@@ -88,6 +88,7 @@ definitions:
         description: MUST be "Haplotype"
       members:
         type: array
+        ordered: false
         minItems: 2
         uniqueItems: true
         items:
@@ -142,11 +143,18 @@ definitions:
         description: MUST be "VariationSet"
       members:
         type: array
+        ordered: false
         uniqueItems: true
         items:
           oneOf:
+          - $ref: '#/definitions/AbsoluteCopyNumber'
+          - $ref: '#/definitions/Allele'
           - $ref: '#/definitions/CURIE'
-          - $ref: '#/definitions/Variation'
+          - $ref: '#/definitions/Genotype'
+          - $ref: '#/definitions/Haplotype'
+          - $ref: '#/definitions/RelativeCopyNumber'
+          - $ref: '#/definitions/Text'
+          - $ref: '#/definitions/VariationSet'
         description: List of Variation objects or identifiers. Attribute is required,
           but MAY be empty.
     required:
@@ -246,6 +254,7 @@ definitions:
         description: MUST be "Genotype"
       members:
         type: array
+        ordered: false
         uniqueItems: true
         minItems: 1
         items:
@@ -476,6 +485,7 @@ definitions:
         description: MUST be "ComposedSequenceExpression"
       components:
         type: array
+        ordered: true
         uniqueItems: true
         minItems: 2
         items:
@@ -615,6 +625,7 @@ definitions:
         type: string
       extensions:
         type: array
+        ordered: true
         items:
           $ref: '#/definitions/Extension'
       is_version_of:
@@ -640,6 +651,7 @@ definitions:
         type: string
       extensions:
         type: array
+        ordered: true
         items:
           $ref: '#/definitions/Extension'
       record_metadata:
@@ -755,6 +767,7 @@ definitions:
           be the name of a class from  the VA schema.
       members:
         type: array
+        ordered: false
         items:
           anyOf:
           - $ref: '#/definitions/Disease'
@@ -798,6 +811,7 @@ definitions:
         description: MUST be "CombinationTherapeutics"
       members:
         type: array
+        ordered: false
         description: The therapeutics that constitute the described collection.
         items:
           $ref: '#/definitions/Therapeutic'
@@ -823,6 +837,7 @@ definitions:
         description: MUST be "SubstituteTherapeutics"
       members:
         type: array
+        ordered: false
         description: The therapeutics that constitute the described collection.
         items:
           $ref: '#/definitions/Therapeutic'
