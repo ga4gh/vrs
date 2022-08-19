@@ -4,7 +4,7 @@ A collection of therapeutics that are considered as valid alternative entities.
 
 **Information Model**
 
-Some SubstituteTherapeutics attributes are inherited from :ref:`Entity`.
+Some SubstituteTherapeuticCollection attributes are inherited from :ref:`Entity`.
 
 .. list-table::
    :class: clean-wrap

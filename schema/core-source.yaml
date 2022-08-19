@@ -187,7 +187,7 @@ $defs:
         default: Therapeutic
         description: MUST be "Therapeutic".
 
-  TherapeuticsCollection:
+  TherapeuticCollection:
     inherits: ValueEntity
     description: A collection of therapeutics.
     heritable_properties:
@@ -201,8 +201,8 @@ $defs:
         minItems: 2
     heritable_required: [ "members" ]
 
-  CombinationTherapeutics:
-    inherits: TherapeuticsCollection
+  CombinationTherapeuticCollection:
+    inherits: TherapeuticCollection
     description: >-
       A collection of therapeutics that are taken during a course of treatment.
     properties:
@@ -212,8 +212,8 @@ $defs:
         default: CombinationTherapeutics
         description: MUST be "CombinationTherapeutics"
 
-  SubstituteTherapeutics:
-    inherits: TherapeuticsCollection
+  SubstituteTherapeuticCollection:
+    inherits: TherapeuticCollection
     description: >-
       A collection of therapeutics that are considered as valid alternative entities.
     properties:

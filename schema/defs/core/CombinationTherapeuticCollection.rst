@@ -4,7 +4,7 @@ A collection of therapeutics that are taken during a course of treatment.
 
 **Information Model**
 
-Some CombinationTherapeutics attributes are inherited from :ref:`Entity`.
+Some CombinationTherapeuticCollection attributes are inherited from :ref:`Entity`.
 
 .. list-table::
    :class: clean-wrap

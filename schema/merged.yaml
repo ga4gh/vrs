@@ -795,7 +795,7 @@ definitions:
     - id
     - type
     additionalProperties: false
-  CombinationTherapeutics:
+  CombinationTherapeuticCollection:
     description: A collection of therapeutics that are taken during a course of treatment.
     properties:
       id:
@@ -820,7 +820,7 @@ definitions:
     - members
     - type
     additionalProperties: false
-  SubstituteTherapeutics:
+  SubstituteTherapeuticCollection:
     description: A collection of therapeutics that are considered as valid alternative
       entities.
     properties:
