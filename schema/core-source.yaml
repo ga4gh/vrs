@@ -61,6 +61,7 @@ $defs:
           $ref: "#/$defs/Extension"
 
   RecordMetadata:
+    type: object
     inherits: ExtensibleEntity
     description: >-
       A re-usable structure that encapsulates provenance metadata that applies to a specific
@@ -78,6 +79,7 @@ $defs:
         type: string
 
   Coding:
+    type: object
     inherits: ExtensibleEntity
     description: >-
       A `coding` is an extensible entity for labeling or otherwise annotating globally 
@@ -96,6 +98,7 @@ $defs:
         $ref: "#/$defs/RecordMetadata"
 
   Extension:
+    type: object
     description: >-
       The Extension class provides VODs with a means to extend descriptions
       with other attributes unique to a content provider. These extensions
@@ -124,6 +127,7 @@ $defs:
     example: "ensembl:ENSG00000139618"
 
   Disease:
+    type: object
     inherits: DomainEntity
     description: >-
       A reference to a Disease as defined by an authority. For human diseases,
@@ -137,6 +141,7 @@ $defs:
         description: MUST be "Disease".
 
   Phenotype:
+    type: object
     inherits: DomainEntity
     description: >-
       A reference to a Phenotype as defined by an authority. For human phenotypes,
@@ -164,6 +169,7 @@ $defs:
         description: MUST be "Gene"
 
   Condition:
+    type: object
     description: A set of phenotype and/or disease concepts that constitute a condition.
     inherits: ValueEntity
     properties:
@@ -178,6 +184,7 @@ $defs:
     required: [ "members" ]
 
   Therapeutic:
+    type: object
     inherits: DomainEntity
     description: A treatment, therapy, or drug.
     properties:
@@ -202,6 +209,7 @@ $defs:
     heritable_required: [ "members" ]
 
   CombinationTherapeuticCollection:
+    type: object
     inherits: TherapeuticCollection
     description: >-
       A collection of therapeutics that are taken during a course of treatment.
@@ -213,6 +221,7 @@ $defs:
         description: MUST be "CombinationTherapeutics"
 
   SubstituteTherapeuticCollection:
+    type: object
     inherits: TherapeuticCollection
     description: >-
       A collection of therapeutics that are considered as valid alternative entities.

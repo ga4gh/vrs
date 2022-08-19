@@ -846,6 +846,7 @@
          "pattern": "^[A-Z*\\-]*$"
       },
       "RecordMetadata": {
+         "type": "object",
          "description": "A re-usable structure that encapsulates provenance metadata that applies to a specific concrete record of information as encoded in a particular system, as opposed to  provenance of the abstract information content/knowledge the record represents.",
          "properties": {
             "id": {
@@ -881,6 +882,7 @@
          "additionalProperties": false
       },
       "Coding": {
+         "type": "object",
          "description": "A `coding` is an extensible entity for labeling or otherwise annotating globally  namespaced identifiers known as \"codes\".",
          "properties": {
             "id": {
@@ -913,6 +915,7 @@
          "additionalProperties": false
       },
       "Extension": {
+         "type": "object",
          "description": "The Extension class provides VODs with a means to extend descriptions with other attributes unique to a content provider. These extensions are not expected to be natively understood under VRSATILE, but may be used for pre-negotiated exchange of message attributes when needed.",
          "properties": {
             "type": {
@@ -948,6 +951,7 @@
          "example": "ensembl:ENSG00000139618"
       },
       "Disease": {
+         "type": "object",
          "description": "A reference to a Disease as defined by an authority. For human diseases, the use of [MONDO](https://registry.identifiers.org/registry/mondo) as the disease authority is RECOMMENDED.",
          "properties": {
             "id": {
@@ -968,6 +972,7 @@
          "additionalProperties": false
       },
       "Phenotype": {
+         "type": "object",
          "description": "A reference to a Phenotype as defined by an authority. For human phenotypes, the use of [HPO](https://registry.identifiers.org/registry/hpo) as the disease authority is RECOMMENDED.",
          "properties": {
             "id": {
@@ -1009,6 +1014,7 @@
          "additionalProperties": false
       },
       "Condition": {
+         "type": "object",
          "description": "A set of phenotype and/or disease concepts that constitute a condition.",
          "properties": {
             "id": {
@@ -1042,6 +1048,7 @@
          "additionalProperties": false
       },
       "Therapeutic": {
+         "type": "object",
          "description": "A treatment, therapy, or drug.",
          "properties": {
             "id": {
@@ -1062,6 +1069,7 @@
          "additionalProperties": false
       },
       "CombinationTherapeuticCollection": {
+         "type": "object",
          "description": "A collection of therapeutics that are taken during a course of treatment.",
          "properties": {
             "id": {
@@ -1091,6 +1099,7 @@
          "additionalProperties": false
       },
       "SubstituteTherapeuticCollection": {
+         "type": "object",
          "description": "A collection of therapeutics that are considered as valid alternative entities.",
          "properties": {
             "id": {

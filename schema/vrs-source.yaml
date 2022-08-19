@@ -186,7 +186,6 @@ definitions:
 
   CopyNumber:
     inherits: SystemicVariation
-    type: object
     description: >-
       A measure of the copies of a :ref:`Location` within a system (e.g. a genome)
     heritable_properties:
