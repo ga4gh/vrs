@@ -463,6 +463,7 @@ SO: `Genotype (SO:0001027)
 .. _genotypes-represent-haplotypes-with-arbitrary-ploidy:
 
 .. note:: Genotypes represent Haplotypes with arbitrary ploidy
+
      The VRS defines Haplotypes as a list of Alleles, and Genotypes as
      a list of Haplotypes. In essence, Haplotypes and Genotypes represent
      two distinct dimensions of containment: Haplotypes represent the "in
@@ -473,19 +474,16 @@ SO: `Genotype (SO:0001027)
      single-location Genotype. Users of SNP data will be familiar with
      representations like rs7412 C/C, which indicates the diploid state at
      a position. In the VRS, this is merely a special case of a
-     Genotype with two Haplotypes, each of which is defined with only one
-     Allele (the same Allele in this case).  The VRS does not define a
-     diplotype type. A diplotype is a special case of a VRS Genotype
-     with exactly two Haplotypes. In practice, software data types that
-     assume a ploidy of 2 make it very difficult to represent haploid
+     Genotype with one GenotypeMember, defined by a single Allele with
+     two copies.  The VRS does not define a diplotype class. A diplotype
+     is a special case of a VRS Genotype with count = 2. In practice, software
+     data types that assume a ploidy of 2 make it very difficult to represent haploid
      states, copy number loss, and copy number gain, all of which occur
-     when representing human data. In addition, assuming ploidy=2 makes
+     when representing human data. In addition, inferred ploidy = 2 makes
      software incompatible with organisms with other ploidy. The VRS
-     makes no assumptions about "normal" ploidy.
-
-     In other words, the VRS does not represent single-position
-     Genotypes or diplotypes because both concepts are subsumed by the
-     Allele, Haplotype, and Genotypes entities.
+     requires explicit definition of the in-trans molecules at a genomic locus
+     with the `count` attribute, though this count may be inexact (e.g. a
+     :ref:`DefiniteRange` or :ref:`IndefiniteRange`.
 
 .. _UtilityVariation:
 
