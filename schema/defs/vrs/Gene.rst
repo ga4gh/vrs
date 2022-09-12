@@ -4,8 +4,6 @@ A reference to a Gene as defined by an authority. For human genes, the use of `h
 
 **Information Model**
 
-Some Gene attributes are inherited from :ref:`Feature`.
-
 .. list-table::
    :class: clean-wrap
    :header-rows: 1
@@ -18,7 +16,7 @@ Some Gene attributes are inherited from :ref:`Feature`.
       - Description
    *  - type
       - string
-      - 1..1
+      - 0..1
       - MUST be "Gene"
    *  - gene_id
       - :ref:`CURIE`

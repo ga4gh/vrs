@@ -1,10 +1,8 @@
 **Computational Definition**
 
-A quantified set of _in-trans_ :ref:`MolecularVariation` at a genomic locus.
+A quantified set of *in-trans* :ref:`MolecularVariation` at a genomic locus.
 
 **Information Model**
-
-Some Genotype attributes are inherited from :ref:`Variation`.
 
 .. list-table::
    :class: clean-wrap
@@ -16,13 +14,9 @@ Some Genotype attributes are inherited from :ref:`Variation`.
       - Type
       - Limits
       - Description
-   *  - _id
-      - :ref:`CURIE`
-      - 0..1
-      - Variation Id. MUST be unique within document.
    *  - type
       - string
-      - 1..1
+      - 0..1
       - MUST be "Genotype"
    *  - members
       - :ref:`GenotypeMember`

@@ -4,8 +4,6 @@ An expression of a sequence comprised of a tandem repeating subsequence.
 
 **Information Model**
 
-Some RepeatedSequenceExpression attributes are inherited from :ref:`SequenceExpression`.
-
 .. list-table::
    :class: clean-wrap
    :header-rows: 1
@@ -18,7 +16,7 @@ Some RepeatedSequenceExpression attributes are inherited from :ref:`SequenceExpr
       - Description
    *  - type
       - string
-      - 1..1
+      - 0..1
       - MUST be "RepeatedSequenceExpression"
    *  - seq_expr
       - :ref:`LiteralSequenceExpression` | :ref:`DerivedSequenceExpression`

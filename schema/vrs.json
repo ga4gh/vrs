@@ -66,10 +66,6 @@
          "description": "The state of a molecule at a Location.",
          "type": "object",
          "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "Variation Id. MUST be unique within document."
-            },
             "type": {
                "type": "string",
                "const": "Allele",
@@ -82,7 +78,10 @@
                      "$ref": "#/definitions/CURIE"
                   },
                   {
-                     "$ref": "#/definitions/Location"
+                     "$ref": "#/definitions/ChromosomeLocation"
+                  },
+                  {
+                     "$ref": "#/definitions/SequenceLocation"
                   }
                ],
                "description": "Where Allele is located"
@@ -90,10 +89,16 @@
             "state": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/SequenceState"
+                     "$ref": "#/definitions/DerivedSequenceExpression"
                   },
                   {
-                     "$ref": "#/definitions/SequenceExpression"
+                     "$ref": "#/definitions/LiteralSequenceExpression"
+                  },
+                  {
+                     "$ref": "#/definitions/RepeatedSequenceExpression"
+                  },
+                  {
+                     "$ref": "#/definitions/SequenceState"
                   }
                ],
                "description": "An expression of the sequence state",
@@ -106,8 +111,7 @@
          },
          "required": [
             "location",
-            "state",
-            "type"
+            "state"
          ],
          "additionalProperties": false
       },
@@ -115,10 +119,6 @@
          "description": "A set of non-overlapping Allele members that co-occur on the same molecule.",
          "type": "object",
          "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "Variation Id. MUST be unique within document."
-            },
             "type": {
                "type": "string",
                "const": "Haplotype",
@@ -129,6 +129,7 @@
                "type": "array",
                "minItems": 2,
                "uniqueItems": true,
+               "ordered": false,
                "items": {
                   "oneOf": [
                      {
@@ -143,8 +144,7 @@
             }
          },
          "required": [
-            "members",
-            "type"
+            "members"
          ],
          "additionalProperties": false
       },
@@ -152,10 +152,6 @@
          "description": "A free-text definition of variation.",
          "type": "object",
          "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "Variation Id. MUST be unique within document."
-            },
             "type": {
                "type": "string",
                "const": "Text",
@@ -168,8 +164,7 @@
             }
          },
          "required": [
-            "definition",
-            "type"
+            "definition"
          ],
          "additionalProperties": false
       },
@@ -177,10 +172,6 @@
          "description": "An unconstrained set of Variation members.",
          "type": "object",
          "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "Variation Id. MUST be unique within document."
-            },
             "type": {
                "type": "string",
                "const": "VariationSet",
@@ -190,13 +181,29 @@
             "members": {
                "type": "array",
                "uniqueItems": true,
+               "ordered": false,
                "items": {
                   "oneOf": [
+                     {
+                        "$ref": "#/definitions/Allele"
+                     },
                      {
                         "$ref": "#/definitions/CURIE"
                      },
                      {
-                        "$ref": "#/definitions/Variation"
+                        "$ref": "#/definitions/CopyNumber"
+                     },
+                     {
+                        "$ref": "#/definitions/Genotype"
+                     },
+                     {
+                        "$ref": "#/definitions/Haplotype"
+                     },
+                     {
+                        "$ref": "#/definitions/Text"
+                     },
+                     {
+                        "$ref": "#/definitions/VariationSet"
                      }
                   ]
                },
@@ -204,8 +211,7 @@
             }
          },
          "required": [
-            "members",
-            "type"
+            "members"
          ],
          "additionalProperties": false
       },
@@ -213,10 +219,6 @@
          "type": "object",
          "description": "The absolute count of discrete copies of a MolecularVariation, Feature, SequenceExpression, or a CURIE reference within a system (e.g. genome, cell, etc.).",
          "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "Variation Id. MUST be unique within document."
-            },
             "type": {
                "type": "string",
                "const": "CopyNumber",
@@ -226,16 +228,25 @@
             "subject": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/MolecularVariation"
-                  },
-                  {
-                     "$ref": "#/definitions/Feature"
-                  },
-                  {
-                     "$ref": "#/definitions/SequenceExpression"
+                     "$ref": "#/definitions/Allele"
                   },
                   {
                      "$ref": "#/definitions/CURIE"
+                  },
+                  {
+                     "$ref": "#/definitions/DerivedSequenceExpression"
+                  },
+                  {
+                     "$ref": "#/definitions/Gene"
+                  },
+                  {
+                     "$ref": "#/definitions/Haplotype"
+                  },
+                  {
+                     "$ref": "#/definitions/LiteralSequenceExpression"
+                  },
+                  {
+                     "$ref": "#/definitions/RepeatedSequenceExpression"
                   }
                ],
                "description": "Subject of the Copy Number object"
@@ -243,13 +254,13 @@
             "copies": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Number"
+                     "$ref": "#/definitions/DefiniteRange"
                   },
                   {
                      "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/DefiniteRange"
+                     "$ref": "#/definitions/Number"
                   }
                ],
                "description": "The integral number of copies of the subject in a system"
@@ -322,19 +333,14 @@
          ],
          "required": [
             "copies",
-            "subject",
-            "type"
+            "subject"
          ],
          "additionalProperties": false
       },
       "Genotype": {
-         "description": "A quantified set of _in-trans_ MolecularVariation at a genomic locus.",
+         "description": "A quantified set of *in-trans* MolecularVariation at a genomic locus.",
          "type": "object",
          "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "Variation Id. MUST be unique within document."
-            },
             "type": {
                "type": "string",
                "const": "Genotype",
@@ -345,6 +351,7 @@
                "type": "array",
                "uniqueItems": true,
                "minItems": 1,
+               "ordered": false,
                "items": {
                   "$ref": "#/definitions/GenotypeMember"
                },
@@ -353,13 +360,13 @@
             "count": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Number"
+                     "$ref": "#/definitions/DefiniteRange"
                   },
                   {
                      "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/DefiniteRange"
+                     "$ref": "#/definitions/Number"
                   }
                ],
                "description": "The total number of copies of all MolecularVariation at this locus, MUST be greater than or equal to the sum of GenotypeMember copy counts. If greater than the total counts, this implies additional  MolecularVariation that are expected to exist but are not explicitly indicated."
@@ -367,8 +374,7 @@
          },
          "required": [
             "count",
-            "members",
-            "type"
+            "members"
          ],
          "additionalProperties": false
       },
@@ -390,10 +396,6 @@
          "description": "A Location on a chromosome defined by a species and chromosome name.",
          "type": "object",
          "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "Location Id. MUST be unique within document."
-            },
             "type": {
                "type": "string",
                "const": "ChromosomeLocation",
@@ -417,8 +419,7 @@
          "required": [
             "chr",
             "interval",
-            "species_id",
-            "type"
+            "species_id"
          ],
          "additionalProperties": false
       },
@@ -426,10 +427,6 @@
          "description": "A Location defined by an interval on a referenced Sequence.",
          "type": "object",
          "properties": {
-            "_id": {
-               "$ref": "#/definitions/CURIE",
-               "description": "Location Id. MUST be unique within document."
-            },
             "type": {
                "type": "string",
                "const": "SequenceLocation",
@@ -454,8 +451,7 @@
          },
          "required": [
             "interval",
-            "sequence_id",
-            "type"
+            "sequence_id"
          ],
          "additionalProperties": false
       },
@@ -472,13 +468,13 @@
             "start": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Number"
+                     "$ref": "#/definitions/DefiniteRange"
                   },
                   {
                      "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/DefiniteRange"
+                     "$ref": "#/definitions/Number"
                   }
                ],
                "description": "The start coordinate or range of the interval. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range less than the value of `end`."
@@ -486,13 +482,13 @@
             "end": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Number"
+                     "$ref": "#/definitions/DefiniteRange"
                   },
                   {
                      "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/DefiniteRange"
+                     "$ref": "#/definitions/Number"
                   }
                ],
                "description": "The end coordinate or range of the interval. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range greater than the value of `start`."
@@ -697,8 +693,7 @@
             }
          },
          "required": [
-            "sequence",
-            "type"
+            "sequence"
          ],
          "additionalProperties": false
       },
@@ -723,8 +718,7 @@
          },
          "required": [
             "location",
-            "reverse_complement",
-            "type"
+            "reverse_complement"
          ],
          "additionalProperties": false
       },
@@ -741,10 +735,10 @@
             "seq_expr": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/LiteralSequenceExpression"
+                     "$ref": "#/definitions/DerivedSequenceExpression"
                   },
                   {
-                     "$ref": "#/definitions/DerivedSequenceExpression"
+                     "$ref": "#/definitions/LiteralSequenceExpression"
                   }
                ],
                "description": "An expression of the repeating subsequence"
@@ -752,13 +746,13 @@
             "count": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Number"
+                     "$ref": "#/definitions/DefiniteRange"
                   },
                   {
                      "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/DefiniteRange"
+                     "$ref": "#/definitions/Number"
                   }
                ],
                "description": "The count of repeated units, as an integer or inclusive range"
@@ -831,13 +825,12 @@
          ],
          "required": [
             "count",
-            "seq_expr",
-            "type"
+            "seq_expr"
          ],
          "additionalProperties": false
       },
       "GenotypeMember": {
-         "description": "A class for expressing the count of a specific MolecularVariation present _in-trans_ at a genomic locus represented by a Genotype.",
+         "description": "A class for expressing the count of a specific MolecularVariation present *in-trans* at a genomic locus represented by a Genotype.",
          "type": "object",
          "properties": {
             "type": {
@@ -849,13 +842,13 @@
             "count": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Number"
+                     "$ref": "#/definitions/DefiniteRange"
                   },
                   {
                      "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/DefiniteRange"
+                     "$ref": "#/definitions/Number"
                   }
                ],
                "description": "The number of copies of the `variation` at a Genotype locus."
@@ -905,8 +898,7 @@
             }
          },
          "required": [
-            "gene_id",
-            "type"
+            "gene_id"
          ],
          "additionalProperties": false
       },

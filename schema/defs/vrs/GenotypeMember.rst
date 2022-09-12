@@ -1,6 +1,6 @@
 **Computational Definition**
 
-A class for expressing the count of a specific :ref:`MolecularVariation` present _in-trans_ at a genomic locus represented by a :ref:`Genotype`.
+A class for expressing the count of a specific :ref:`MolecularVariation` present *in-trans* at a genomic locus represented by a :ref:`Genotype`.
 
 **Information Model**
 

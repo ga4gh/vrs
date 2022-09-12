@@ -123,6 +123,7 @@ definitions:
         type: array
         minItems: 2
         uniqueItems: true
+        ordered: false
         items:
           oneOf:
             - $ref: "#/definitions/Allele"
@@ -165,6 +166,7 @@ definitions:
       members:
         type: array
         uniqueItems: true
+        ordered: false
         items:
           oneOf:
             - $ref: "#/definitions/CURIE"
@@ -244,7 +246,7 @@ definitions:
 
   Genotype:
     description: >-
-      A quantified set of _in-trans_ :ref:`MolecularVariation` at a genomic locus.
+      A quantified set of *in-trans* :ref:`MolecularVariation` at a genomic locus.
     type: object
     properties:
       type:
@@ -257,6 +259,7 @@ definitions:
         type: array
         uniqueItems: true
         minItems: 1
+        ordered: false
         items:
           $ref: "#/definitions/GenotypeMember"
         description: >-
@@ -611,7 +614,7 @@ definitions:
   GenotypeMember:
     description: >-
       A class for expressing the count of a specific :ref:`MolecularVariation` present
-      _in-trans_ at a genomic locus represented by a :ref:`Genotype`.
+      *in-trans* at a genomic locus represented by a :ref:`Genotype`.
     type: object
     properties:
       type:

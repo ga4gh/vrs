@@ -4,8 +4,6 @@ A Location on a chromosome defined by a species and chromosome name.
 
 **Information Model**
 
-Some ChromosomeLocation attributes are inherited from :ref:`Location`.
-
 .. list-table::
    :class: clean-wrap
    :header-rows: 1
@@ -16,13 +14,9 @@ Some ChromosomeLocation attributes are inherited from :ref:`Location`.
       - Type
       - Limits
       - Description
-   *  - _id
-      - :ref:`CURIE`
-      - 0..1
-      - Location Id. MUST be unique within document.
    *  - type
       - string
-      - 1..1
+      - 0..1
       - MUST be "ChromosomeLocation"
    *  - species_id
       - :ref:`CURIE`

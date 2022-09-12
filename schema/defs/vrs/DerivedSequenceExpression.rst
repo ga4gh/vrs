@@ -4,8 +4,6 @@ An approximate expression of a sequence that is derived from a referenced sequen
 
 **Information Model**
 
-Some DerivedSequenceExpression attributes are inherited from :ref:`SequenceExpression`.
-
 .. list-table::
    :class: clean-wrap
    :header-rows: 1
@@ -18,7 +16,7 @@ Some DerivedSequenceExpression attributes are inherited from :ref:`SequenceExpre
       - Description
    *  - type
       - string
-      - 1..1
+      - 0..1
       - MUST be "DerivedSequenceExpression"
    *  - location
       - :ref:`SequenceLocation`
