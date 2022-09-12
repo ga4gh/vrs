@@ -433,12 +433,12 @@ objects (which would otherwise be represented using symbolic shorthand).
   location and often with a ploidy of two, such as a pair of single residue
   variants on an autosome. The broader, generalized definition is a
   set of alleles at multiple locations and/or with ploidy other than
-  two. The VRS Genotype entity is based on this broader definition.
+  two. VRS Genotype entity is based on this broader definition.
 * The term "diplotype" is often used to refer to two in-trans haplotypes at a locus.
-  The VRS Genotype entity subsumes the conventional definition of diplotype. Therefore,
-  the VRS model does not include an explicit entity for diplotypes. See :ref:`this note
+  VRS Genotype entity subsumes the conventional definition of diplotype. Therefore,
+  VRS does not include an explicit entity for diplotypes. See :ref:`this note
   <genotypes-represent-haplotypes-with-arbitrary-ploidy>` for a discussion.
-* The VRS model makes no assumptions about ploidy of an organism or individual nor any
+* VRS makes no assumptions about ploidy of an organism or individual nor any
   polysomy affecting a locus. The `genotype.count` attribute explicitly captures the total
   count of in-trans molecules at a genomic locus represented by the Genotype.
 * In diploid organisms, there are typically two instances of each autosomal chromosome,
@@ -463,7 +463,7 @@ SO: `Genotype (SO:0001027)
 .. _genotypes-represent-haplotypes-with-arbitrary-ploidy:
 
 .. note::
-     The VRS defines Haplotypes as a list of Alleles, and Genotypes as
+     VRS defines Haplotypes as a list of Alleles, and Genotypes as
      a list of Haplotypes. In essence, Haplotypes and Genotypes represent
      two distinct dimensions of containment: Haplotypes represent the "in
      phase" relationship of Alleles while Genotypes represents sets of
@@ -472,14 +472,14 @@ SO: `Genotype (SO:0001027)
      There are two important consequences of these definitions: There is no
      single-location Genotype. Users of SNP data will be familiar with
      representations like rs7412 C/C, which indicates the diploid state at
-     a position. In the VRS, this is merely a special case of a
+     a position. In VRS, this is merely a special case of a
      Genotype with one GenotypeMember, defined by a single Allele with
-     two copies.  The VRS does not define a diplotype class. A diplotype
+     two copies.  VRS does not define a diplotype class. A diplotype
      is a special case of a VRS Genotype with count = 2. In practice, software
      data types that assume a ploidy of 2 make it very difficult to represent haploid
      states, copy number loss, and copy number gain, all of which occur
      when representing human data. In addition, inferred ploidy = 2 makes
-     software incompatible with organisms with other ploidy. The VRS
+     software incompatible with organisms with other ploidy. VRS
      requires explicit definition of the in-trans molecules at a genomic locus
      with the `count` attribute, though this count may be inexact (e.g. a
      :ref:`DefiniteRange` or :ref:`IndefiniteRange`.
@@ -1237,7 +1237,7 @@ derived from the IUPAC one-letter nucleic acid and amino acid codes.
   to define an :ref:`Allele`. A Sequence that replaces another Sequence is
   called a "replacement sequence".
 * In some contexts outside VRS, "reference sequence" may refer
-  to a member of set of sequences that comprise a genome assembly. In the VRS
+  to a member of set of sequences that comprise a genome assembly. In VRS
   specification, any sequence may be a "reference sequence", including those in
   a genome assembly.
 * For the purposes of representing sequence variation, it is not
