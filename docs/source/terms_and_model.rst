@@ -412,6 +412,12 @@ Two, three, or four total copies of BRCA1:
 Genotype
 $$$$$$$$
 
+A *genotype* is a representation of the variants present at a given genomic locus, and may be referred
+to either by individual nucleotide representations (e.g. GT representation in VCF files) or symbolically
+(e.g. A/B/O blood type reporting). To support these use cases, VRS genotypes enable representation of
+genotypes using either :ref:`Allele` objects (as commonly done in VCF records) or larger :ref:`Haplotype`
+objects (which would otherwise be represented using symbolic shorthand).
+
 .. include:: defs/Genotype.rst
 
 **Implementation guidance**
