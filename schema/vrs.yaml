@@ -38,6 +38,9 @@ definitions:
     description: The state of a molecule at a Location.
     type: object
     properties:
+      _id:
+        $ref: '#/definitions/CURIE'
+        description: Variation Id. MUST be unique within document.
       type:
         type: string
         const: Allele
@@ -61,12 +64,16 @@ definitions:
     required:
     - location
     - state
+    - type
     additionalProperties: false
   Haplotype:
     description: A set of non-overlapping Allele members that co-occur on the same
       molecule.
     type: object
     properties:
+      _id:
+        $ref: '#/definitions/CURIE'
+        description: Variation Id. MUST be unique within document.
       type:
         type: string
         const: Haplotype
@@ -85,11 +92,15 @@ definitions:
           Haplotype.
     required:
     - members
+    - type
     additionalProperties: false
   Text:
     description: A free-text definition of variation.
     type: object
     properties:
+      _id:
+        $ref: '#/definitions/CURIE'
+        description: Variation Id. MUST be unique within document.
       type:
         type: string
         const: Text
@@ -101,11 +112,15 @@ definitions:
           subclasses of Variation.
     required:
     - definition
+    - type
     additionalProperties: false
   VariationSet:
     description: An unconstrained set of Variation members.
     type: object
     properties:
+      _id:
+        $ref: '#/definitions/CURIE'
+        description: Variation Id. MUST be unique within document.
       type:
         type: string
         const: VariationSet
@@ -128,6 +143,7 @@ definitions:
           but MAY be empty.
     required:
     - members
+    - type
     additionalProperties: false
   CopyNumber:
     type: object
@@ -135,6 +151,9 @@ definitions:
       SequenceExpression, or a CURIE reference within a system (e.g. genome, cell,
       etc.).
     properties:
+      _id:
+        $ref: '#/definitions/CURIE'
+        description: Variation Id. MUST be unique within document.
       type:
         type: string
         const: CopyNumber
@@ -192,11 +211,15 @@ definitions:
     required:
     - copies
     - subject
+    - type
     additionalProperties: false
   Genotype:
     description: A quantified set of *in-trans* MolecularVariation at a genomic locus.
     type: object
     properties:
+      _id:
+        $ref: '#/definitions/CURIE'
+        description: Variation Id. MUST be unique within document.
       type:
         type: string
         const: Genotype
@@ -223,6 +246,7 @@ definitions:
     required:
     - count
     - members
+    - type
     additionalProperties: false
   Location:
     description: A contiguous segment of a biological sequence.
@@ -235,6 +259,9 @@ definitions:
     description: A Location on a chromosome defined by a species and chromosome name.
     type: object
     properties:
+      _id:
+        $ref: '#/definitions/CURIE'
+        description: Location Id. MUST be unique within document.
       type:
         type: string
         const: ChromosomeLocation
@@ -256,11 +283,15 @@ definitions:
     - chr
     - interval
     - species_id
+    - type
     additionalProperties: false
   SequenceLocation:
     description: A Location defined by an interval on a referenced Sequence.
     type: object
     properties:
+      _id:
+        $ref: '#/definitions/CURIE'
+        description: Location Id. MUST be unique within document.
       type:
         type: string
         const: SequenceLocation
@@ -277,6 +308,7 @@ definitions:
     required:
     - interval
     - sequence_id
+    - type
     additionalProperties: false
   SequenceInterval:
     description: A SequenceInterval represents a span on a Sequence. Positions are
@@ -425,6 +457,7 @@ definitions:
         description: the literal Sequence expressed
     required:
     - sequence
+    - type
     additionalProperties: false
   DerivedSequenceExpression:
     description: An approximate expression of a sequence that is derived from a referenced
@@ -449,6 +482,7 @@ definitions:
     required:
     - location
     - reverse_complement
+    - type
     additionalProperties: false
   RepeatedSequenceExpression:
     description: An expression of a sequence comprised of a tandem repeating subsequence.
@@ -506,6 +540,7 @@ definitions:
     required:
     - count
     - seq_expr
+    - type
     additionalProperties: false
   GenotypeMember:
     description: A class for expressing the count of a specific MolecularVariation
@@ -530,6 +565,7 @@ definitions:
         description: A MolecularVariation at a Genotype locus.
     required:
     - count
+    - type
     - variation
     additionalProperties: false
   Feature:
@@ -556,6 +592,7 @@ definitions:
         description: A CURIE reference to a Gene concept
     required:
     - gene_id
+    - type
     additionalProperties: false
   Number:
     description: A simple integer value as a VRS class.

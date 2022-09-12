@@ -44,6 +44,7 @@ definitions:
       propertyName: type
 
   MolecularVariation:
+    inherits: Variation
     description: >-
       A :ref:`variation` on a contiguous molecule.
     oneOf:
@@ -53,6 +54,7 @@ definitions:
       propertyName: type
 
   UtilityVariation:
+    inherits: Variation
     description: >-
       A collection of :ref:`Variation` subclasses that cannot be
       constrained to a specific class of biological variation, but
@@ -64,6 +66,7 @@ definitions:
       propertyName: type
 
   SystemicVariation:
+    inherits: Variation
     description: >-
       A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
@@ -82,6 +85,7 @@ definitions:
   # Molecular Variation
 
   Allele:
+    inherits: MolecularVariation
     description: >-
       The state of a molecule at a :ref:`Location`.
     type: object
@@ -109,6 +113,7 @@ definitions:
     required: [ "location", "state" ]
 
   Haplotype:
+    inherits: MolecularVariation
     description: >-
       A set of non-overlapping :ref:`Allele` members that co-occur on the same molecule.
     type: "object"
@@ -137,6 +142,7 @@ definitions:
   # UtilityVariation
 
   Text:
+    inherits: UtilityVariation
     description: >-
       A free-text definition of variation.
     type: object
@@ -154,6 +160,7 @@ definitions:
     required: [ "definition" ]
 
   VariationSet:
+    inherits: UtilityVariation
     description: >-
       An unconstrained set of Variation members.
     type: object
@@ -181,6 +188,7 @@ definitions:
   # SystemicVariation
 
   CopyNumber:
+    inherits: SystemicVariation
     type: object
     description: >-
       The absolute count of discrete copies of a :ref:`MolecularVariation`,
@@ -245,6 +253,7 @@ definitions:
     required: [ "subject", "copies" ]
 
   Genotype:
+    inherits: SystemicVariation
     description: >-
       A quantified set of *in-trans* :ref:`MolecularVariation` at a genomic locus.
     type: object
@@ -303,6 +312,7 @@ definitions:
       propertyName: type
 
   ChromosomeLocation:
+    inherits: Location
     description: >-
       A Location on a chromosome defined by a species and chromosome name.
     type: object
@@ -331,6 +341,7 @@ definitions:
     required: [ "species_id", "chr", "interval" ]
 
   SequenceLocation:
+    inherits: Location
     description: >-
       A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
     type: object
@@ -510,6 +521,7 @@ definitions:
     heritable_required: ["type"]
 
   LiteralSequenceExpression:
+    inherits: SequenceExpression
     description: >-
       An explicit expression of a Sequence.
     type: object
@@ -525,6 +537,7 @@ definitions:
     required: [ "sequence" ]
 
   DerivedSequenceExpression:
+    inherits: SequenceExpression
     description: >-
       An approximate expression of a sequence that is derived from
       a referenced sequence location. Use of this class
@@ -551,6 +564,7 @@ definitions:
     required: [ "location", "reverse_complement" ]
 
   RepeatedSequenceExpression:
+    inherits: SequenceExpression
     description: >-
       An expression of a sequence comprised of a tandem repeating subsequence.
     type: object
@@ -635,7 +649,7 @@ definitions:
           - $ref: "#/definitions/Haplotype"
         description: >-
           A :ref:`MolecularVariation` at a :ref:`Genotype` locus.
-    required: [ "count", "variation" ]
+    required: [ "type", "count", "variation" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Feature
@@ -657,6 +671,7 @@ definitions:
     heritable_required: [ "type" ]
 
   Gene:
+    inherits: Feature
     description: >-
       A reference to a Gene as defined by an authority. For human genes,
       the use of `hgnc <https://registry.identifiers.org/registry/hgnc>`_

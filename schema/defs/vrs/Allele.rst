@@ -4,6 +4,8 @@ The state of a molecule at a :ref:`Location`.
 
 **Information Model**
 
+Some Allele attributes are inherited from :ref:`Variation`.
+
 .. list-table::
    :class: clean-wrap
    :header-rows: 1
@@ -14,9 +16,13 @@ The state of a molecule at a :ref:`Location`.
       - Type
       - Limits
       - Description
+   *  - _id
+      - :ref:`CURIE`
+      - 0..1
+      - Variation Id. MUST be unique within document.
    *  - type
       - string
-      - 0..1
+      - 1..1
       - MUST be "Allele"
    *  - location
       - :ref:`CURIE` | :ref:`Location`

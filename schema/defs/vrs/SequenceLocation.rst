@@ -4,6 +4,8 @@ A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
 
 **Information Model**
 
+Some SequenceLocation attributes are inherited from :ref:`Location`.
+
 .. list-table::
    :class: clean-wrap
    :header-rows: 1
@@ -14,9 +16,13 @@ A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
       - Type
       - Limits
       - Description
+   *  - _id
+      - :ref:`CURIE`
+      - 0..1
+      - Location Id. MUST be unique within document.
    *  - type
       - string
-      - 0..1
+      - 1..1
       - MUST be "SequenceLocation"
    *  - sequence_id
       - :ref:`CURIE`

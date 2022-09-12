@@ -16,7 +16,7 @@ A class for expressing the count of a specific :ref:`MolecularVariation` present
       - Description
    *  - type
       - string
-      - 0..1
+      - 1..1
       - MUST be "GenotypeMember".
    *  - count
       - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`

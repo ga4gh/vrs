@@ -66,6 +66,10 @@
          "description": "The state of a molecule at a Location.",
          "type": "object",
          "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE",
+               "description": "Variation Id. MUST be unique within document."
+            },
             "type": {
                "type": "string",
                "const": "Allele",
@@ -111,7 +115,8 @@
          },
          "required": [
             "location",
-            "state"
+            "state",
+            "type"
          ],
          "additionalProperties": false
       },
@@ -119,6 +124,10 @@
          "description": "A set of non-overlapping Allele members that co-occur on the same molecule.",
          "type": "object",
          "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE",
+               "description": "Variation Id. MUST be unique within document."
+            },
             "type": {
                "type": "string",
                "const": "Haplotype",
@@ -144,7 +153,8 @@
             }
          },
          "required": [
-            "members"
+            "members",
+            "type"
          ],
          "additionalProperties": false
       },
@@ -152,6 +162,10 @@
          "description": "A free-text definition of variation.",
          "type": "object",
          "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE",
+               "description": "Variation Id. MUST be unique within document."
+            },
             "type": {
                "type": "string",
                "const": "Text",
@@ -164,7 +178,8 @@
             }
          },
          "required": [
-            "definition"
+            "definition",
+            "type"
          ],
          "additionalProperties": false
       },
@@ -172,6 +187,10 @@
          "description": "An unconstrained set of Variation members.",
          "type": "object",
          "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE",
+               "description": "Variation Id. MUST be unique within document."
+            },
             "type": {
                "type": "string",
                "const": "VariationSet",
@@ -211,7 +230,8 @@
             }
          },
          "required": [
-            "members"
+            "members",
+            "type"
          ],
          "additionalProperties": false
       },
@@ -219,6 +239,10 @@
          "type": "object",
          "description": "The absolute count of discrete copies of a MolecularVariation, Feature, SequenceExpression, or a CURIE reference within a system (e.g. genome, cell, etc.).",
          "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE",
+               "description": "Variation Id. MUST be unique within document."
+            },
             "type": {
                "type": "string",
                "const": "CopyNumber",
@@ -333,7 +357,8 @@
          ],
          "required": [
             "copies",
-            "subject"
+            "subject",
+            "type"
          ],
          "additionalProperties": false
       },
@@ -341,6 +366,10 @@
          "description": "A quantified set of *in-trans* MolecularVariation at a genomic locus.",
          "type": "object",
          "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE",
+               "description": "Variation Id. MUST be unique within document."
+            },
             "type": {
                "type": "string",
                "const": "Genotype",
@@ -374,7 +403,8 @@
          },
          "required": [
             "count",
-            "members"
+            "members",
+            "type"
          ],
          "additionalProperties": false
       },
@@ -396,6 +426,10 @@
          "description": "A Location on a chromosome defined by a species and chromosome name.",
          "type": "object",
          "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE",
+               "description": "Location Id. MUST be unique within document."
+            },
             "type": {
                "type": "string",
                "const": "ChromosomeLocation",
@@ -419,7 +453,8 @@
          "required": [
             "chr",
             "interval",
-            "species_id"
+            "species_id",
+            "type"
          ],
          "additionalProperties": false
       },
@@ -427,6 +462,10 @@
          "description": "A Location defined by an interval on a referenced Sequence.",
          "type": "object",
          "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE",
+               "description": "Location Id. MUST be unique within document."
+            },
             "type": {
                "type": "string",
                "const": "SequenceLocation",
@@ -451,7 +490,8 @@
          },
          "required": [
             "interval",
-            "sequence_id"
+            "sequence_id",
+            "type"
          ],
          "additionalProperties": false
       },
@@ -693,7 +733,8 @@
             }
          },
          "required": [
-            "sequence"
+            "sequence",
+            "type"
          ],
          "additionalProperties": false
       },
@@ -718,7 +759,8 @@
          },
          "required": [
             "location",
-            "reverse_complement"
+            "reverse_complement",
+            "type"
          ],
          "additionalProperties": false
       },
@@ -825,7 +867,8 @@
          ],
          "required": [
             "count",
-            "seq_expr"
+            "seq_expr",
+            "type"
          ],
          "additionalProperties": false
       },
@@ -867,6 +910,7 @@
          },
          "required": [
             "count",
+            "type",
             "variation"
          ],
          "additionalProperties": false
@@ -898,7 +942,8 @@
             }
          },
          "required": [
-            "gene_id"
+            "gene_id",
+            "type"
          ],
          "additionalProperties": false
       },

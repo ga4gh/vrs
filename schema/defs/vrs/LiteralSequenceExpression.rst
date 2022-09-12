@@ -4,6 +4,8 @@ An explicit expression of a Sequence.
 
 **Information Model**
 
+Some LiteralSequenceExpression attributes are inherited from :ref:`SequenceExpression`.
+
 .. list-table::
    :class: clean-wrap
    :header-rows: 1
@@ -16,7 +18,7 @@ An explicit expression of a Sequence.
       - Description
    *  - type
       - string
-      - 0..1
+      - 1..1
       - MUST be "LiteralSequenceExpression"
    *  - sequence
       - :ref:`Sequence`
