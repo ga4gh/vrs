@@ -462,8 +462,7 @@ SO: `Genotype (SO:0001027)
 
 .. _genotypes-represent-haplotypes-with-arbitrary-ploidy:
 
-.. note:: Genotypes represent Haplotypes with arbitrary ploidy
-
+.. note::
      The VRS defines Haplotypes as a list of Alleles, and Genotypes as
      a list of Haplotypes. In essence, Haplotypes and Genotypes represent
      two distinct dimensions of containment: Haplotypes represent the "in
