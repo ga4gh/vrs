@@ -445,10 +445,12 @@ objects (which would otherwise be represented using symbolic shorthand).
   and therefore two instances of sequence at a particular location. Thus, Genotypes will
   often list two GenotypeMembers each based on a distinct Haplotype or Allele. In the case
   of haploid chromosomes or haploinsufficiency, the Genotype consists of a single GenotypeMember.
-* A consequence of the computational definition is that Haplotypes at
-  overlapping or adjacent intervals MUST NOT be included in the same
-  Genotype. However, two or more Alleles MAY always be rewritten as an
-  equivalent Allele with a common sequence and interval context.
+* A consequence of the computational definition is that in-cis Haplotypes at overlapping or
+  adjacent intervals MUST be merged into a single Haplotype for the same Genotype.
+* A `GenotypeMember.variation` value MUST be unique among Genotype Members within a Genotype.
+  When more than one Genotype Member would have the same `variation` value (e.g. in the case
+  of a homozygous variant), this would be represented as a Genotype Value with a corresponding
+  `count` (i.e. for a diploid homozygous variant, `GenotypeMember.count = 2`).
 * The rationale for permitting Genotypes with Haplotypes defined on
   different reference sequences is to enable the accurate
   representation of segments of DNA with the most appropriate
@@ -463,8 +465,8 @@ SO: `Genotype (SO:0001027)
 .. _genotypes-represent-haplotypes-with-arbitrary-ploidy:
 
 .. note::
-     VRS defines Haplotypes as a list of Alleles, and Genotypes as
-     a list of Haplotypes. In essence, Haplotypes and Genotypes represent
+     VRS defines Genotypes as a list of GenotypeMembers defined by Haplotypes
+     or Alleles. In essence, Haplotypes and Genotypes represent
      two distinct dimensions of containment: Haplotypes represent the "in
      phase" relationship of Alleles while Genotypes represents sets of
      Haplotypes of arbitrary ploidy.
