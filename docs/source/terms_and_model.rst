@@ -267,11 +267,8 @@ genetic markers that tend to be transmitted together.
 * The locations of Alleles within the Haplotype MUST be interpreted
   independently.  Alleles that create a net insertion or deletion of
   sequence MUST NOT change the location of "downstream" Alleles.
-* The `members` attribute is required and MUST contain at least one
-  Allele.
-* Haplotypes with one Allele are intended to be distinct entities from
-  the Allele by itself. See discussion on :ref:`equivalence`.
-
+* The `members` attribute is required and MUST contain at least two
+  Alleles.
 
 **Sources**
 
@@ -435,14 +432,15 @@ objects (which would otherwise be represented using symbolic shorthand).
   set of alleles at multiple locations and/or with ploidy other than
   two. VRS Genotype entity is based on this broader definition.
 * The term "diplotype" is often used to refer to two in-trans haplotypes at a locus.
-  VRS Genotype entity subsumes the conventional definition of diplotype. Therefore,
+  VRS Genotype entity subsumes the conventional definition of diplotype, though
+  it describes no explicit in-trans phase relationship. Therefore,
   VRS does not include an explicit entity for diplotypes. See :ref:`this note
   <genotypes-represent-haplotypes-with-arbitrary-ploidy>` for a discussion.
 * VRS makes no assumptions about ploidy of an organism or individual nor any
   polysomy affecting a locus. The `genotype.count` attribute explicitly captures the total
-  count of in-trans molecules at a genomic locus represented by the Genotype.
+  count of molecules associated with a genomic locus represented by the Genotype.
 * In diploid organisms, there are typically two instances of each autosomal chromosome,
-  and therefore two instances of sequence at a particular location. Thus, Genotypes will
+  and therefore two instances of sequence at a particular locus. Thus, Genotypes will
   often list two GenotypeMembers each based on a distinct Haplotype or Allele. In the case
   of haploid chromosomes or haploinsufficiency, the Genotype consists of a single GenotypeMember.
 * A consequence of the computational definition is that in-cis Haplotypes at overlapping or
@@ -451,10 +449,11 @@ objects (which would otherwise be represented using symbolic shorthand).
   When more than one Genotype Member would have the same `variation` value (e.g. in the case
   of a homozygous variant), this would be represented as a Genotype Value with a corresponding
   `count` (i.e. for a diploid homozygous variant, `GenotypeMember.count = 2`).
-* The rationale for permitting Genotypes with Haplotypes defined on
-  different reference sequences is to enable the accurate
-  representation of segments of DNA with the most appropriate
-  population-specific reference sequence.
+* The rationale for permitting Genotypes with Haplotypes defined on different reference
+  sequences is to enable the accurate representation of segments of DNA with the most
+  appropriate population-specific reference sequence.
+* Deletion of sequence at locus would be represented by the presence of Alleles of deleted
+  sequence, not absence of Alleles; therefore Genotypes MAY NOT have count < 1.
 
 **Sources**
 
@@ -465,8 +464,8 @@ SO: `Genotype (SO:0001027)
 .. _genotypes-represent-haplotypes-with-arbitrary-ploidy:
 
 .. note::
-     VRS defines Genotypes as a list of GenotypeMembers defined by Haplotypes
-     or Alleles. In essence, Haplotypes and Genotypes represent
+     VRS defines Genotypes using a list of GenotypeMembers defined by
+     Haplotypes or Alleles. In essence, Haplotypes and Genotypes represent
      two distinct dimensions of containment: Haplotypes represent the "in
      phase" relationship of Alleles while Genotypes represents sets of
      Haplotypes of arbitrary ploidy.
@@ -482,9 +481,9 @@ SO: `Genotype (SO:0001027)
      states, copy number loss, and copy number gain, all of which occur
      when representing human data. In addition, inferred ploidy = 2 makes
      software incompatible with organisms with other ploidy. VRS
-     requires explicit definition of the in-trans molecules at a genomic locus
-     with the `count` attribute, though this count may be inexact (e.g. a
-     :ref:`DefiniteRange` or :ref:`IndefiniteRange`.
+     requires explicit definition of the count of molecules associated with
+     a genomic locus using the `count` attribute, though this count may be inexact
+     (e.g. a :ref:`DefiniteRange` or :ref:`IndefiniteRange`).
 
 .. _UtilityVariation:
 

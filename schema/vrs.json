@@ -363,7 +363,7 @@
          "additionalProperties": false
       },
       "Genotype": {
-         "description": "A quantified set of *in-trans* MolecularVariation at a genomic locus.",
+         "description": "A quantified set of MolecularVariation associated with a genomic locus.",
          "type": "object",
          "properties": {
             "_id": {
@@ -398,7 +398,7 @@
                      "$ref": "#/definitions/Number"
                   }
                ],
-               "description": "The total number of copies of all MolecularVariation at this locus, MUST be greater than or equal to the sum of GenotypeMember copy counts. If greater than the total counts, this implies additional  MolecularVariation that are expected to exist but are not explicitly indicated."
+               "description": "The total number of copies of all MolecularVariation at this locus, MUST be greater than or equal to the sum of GenotypeMember copy counts and MUST be greater than or equal to 1. If greater than the total of GenotypeMember counts, this field describes  additional MolecularVariation that exist but are not  explicitly described."
             }
          },
          "required": [
