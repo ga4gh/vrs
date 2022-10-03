@@ -26,5 +26,5 @@ Some Haplotype attributes are inherited from :ref:`Variation`.
       - MUST be "Haplotype"
    *  - members
       - :ref:`Allele` | :ref:`CURIE`
-      - 1..m
+      - 2..m
       - List of Alleles, or references to Alleles, that comprise this Haplotype.

@@ -25,4 +25,4 @@ A contiguous span on a chromosome defined by cytoband features. The span include
    *  - end
       - :ref:`HumanCytoband`
       - 1..1
-      - The start cytoband region. MUST specify a region nearer the terminal end (telomere) of the chromosome q-arm than `start`.
+      - The end cytoband region. MUST specify a region nearer the terminal end (telomere) of the chromosome q-arm than `start`.
