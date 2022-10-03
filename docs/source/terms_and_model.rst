@@ -443,6 +443,9 @@ objects (which would otherwise be represented using symbolic shorthand).
   and therefore two instances of sequence at a particular locus. Thus, Genotypes will
   often list two GenotypeMembers each based on a distinct Haplotype or Allele. In the case
   of haploid chromosomes or haploinsufficiency, the Genotype consists of a single GenotypeMember.
+* A specific (heterozygous) diplotype SHOULD be represented as a Genotype of two GenotypeMember
+  instances each containing a constituent :ref:`Haplotype`. A homozygous diplotype SHOULD be
+  represented as a Genotype of one constituent GenotypeMember (with `GenotypeMember.count=2`).
 * A consequence of the computational definition is that in-cis Haplotypes at overlapping or
   adjacent intervals MUST be merged into a single Haplotype for the same Genotype.
 * A `GenotypeMember.variation` value MUST be unique among Genotype Members within a Genotype.
