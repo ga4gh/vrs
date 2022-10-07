@@ -366,7 +366,7 @@ definitions:
           end (telomere) of the chromosome p-arm than `end`.
       end:
         $ref: '#/definitions/HumanCytoband'
-        description: The start cytoband region. MUST specify a region nearer the terminal
+        description: The end cytoband region. MUST specify a region nearer the terminal
           end (telomere) of the chromosome q-arm than `start`.
     example:
       type: CytobandInterval
