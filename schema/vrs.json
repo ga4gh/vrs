@@ -7,13 +7,25 @@
          "description": "A representation of the state of one or more biomolecules.",
          "oneOf": [
             {
-               "$ref": "#/definitions/MolecularVariation"
+               "$ref": "#/definitions/AbsoluteCopyNumber"
             },
             {
-               "$ref": "#/definitions/SystemicVariation"
+               "$ref": "#/definitions/Allele"
             },
             {
-               "$ref": "#/definitions/UtilityVariation"
+               "$ref": "#/definitions/Genotype"
+            },
+            {
+               "$ref": "#/definitions/Haplotype"
+            },
+            {
+               "$ref": "#/definitions/RelativeCopyNumber"
+            },
+            {
+               "$ref": "#/definitions/Text"
+            },
+            {
+               "$ref": "#/definitions/VariationSet"
             }
          ],
          "discriminator": {
@@ -55,6 +67,9 @@
                "$ref": "#/definitions/AbsoluteCopyNumber"
             },
             {
+               "$ref": "#/definitions/Genotype"
+            },
+            {
                "$ref": "#/definitions/RelativeCopyNumber"
             }
          ],
@@ -64,7 +79,6 @@
       },
       "Allele": {
          "description": "The state of a molecule at a Location.",
-         "additionalProperties": false,
          "type": "object",
          "properties": {
             "_id": {
@@ -83,7 +97,10 @@
                      "$ref": "#/definitions/CURIE"
                   },
                   {
-                     "$ref": "#/definitions/Location"
+                     "$ref": "#/definitions/ChromosomeLocation"
+                  },
+                  {
+                     "$ref": "#/definitions/SequenceLocation"
                   }
                ],
                "description": "Where Allele is located"
@@ -91,7 +108,16 @@
             "state": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/SequenceExpression"
+                     "$ref": "#/definitions/ComposedSequenceExpression"
+                  },
+                  {
+                     "$ref": "#/definitions/DerivedSequenceExpression"
+                  },
+                  {
+                     "$ref": "#/definitions/LiteralSequenceExpression"
+                  },
+                  {
+                     "$ref": "#/definitions/RepeatedSequenceExpression"
                   },
                   {
                      "$ref": "#/definitions/SequenceState"
@@ -109,11 +135,11 @@
             "location",
             "state",
             "type"
-         ]
+         ],
+         "additionalProperties": false
       },
       "Haplotype": {
          "description": "A set of non-overlapping Allele members that co-occur on the same molecule.",
-         "additionalProperties": false,
          "type": "object",
          "properties": {
             "_id": {
@@ -130,6 +156,7 @@
                "type": "array",
                "minItems": 2,
                "uniqueItems": true,
+               "ordered": false,
                "items": {
                   "oneOf": [
                      {
@@ -146,11 +173,11 @@
          "required": [
             "members",
             "type"
-         ]
+         ],
+         "additionalProperties": false
       },
       "Text": {
          "description": "A free-text definition of variation.",
-         "additionalProperties": false,
          "type": "object",
          "properties": {
             "_id": {
@@ -171,12 +198,12 @@
          "required": [
             "definition",
             "type"
-         ]
+         ],
+         "additionalProperties": false
       },
       "VariationSet": {
          "description": "An unconstrained set of Variation members.",
          "type": "object",
-         "additionalProperties": false,
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE",
@@ -191,13 +218,32 @@
             "members": {
                "type": "array",
                "uniqueItems": true,
+               "ordered": false,
                "items": {
                   "oneOf": [
+                     {
+                        "$ref": "#/definitions/AbsoluteCopyNumber"
+                     },
+                     {
+                        "$ref": "#/definitions/Allele"
+                     },
                      {
                         "$ref": "#/definitions/CURIE"
                      },
                      {
-                        "$ref": "#/definitions/Variation"
+                        "$ref": "#/definitions/Genotype"
+                     },
+                     {
+                        "$ref": "#/definitions/Haplotype"
+                     },
+                     {
+                        "$ref": "#/definitions/RelativeCopyNumber"
+                     },
+                     {
+                        "$ref": "#/definitions/Text"
+                     },
+                     {
+                        "$ref": "#/definitions/VariationSet"
                      }
                   ]
                },
@@ -207,13 +253,13 @@
          "required": [
             "members",
             "type"
-         ]
+         ],
+         "additionalProperties": false
       },
       "AbsoluteCopyNumber": {
-         "additionalProperties": false,
          "type": "object",
          "maturity": "draft",
-         "description": "The absolute count of discrete copies of a MolecularVariation, Feature, SequenceExpression, or a CURIE reference within a system (e.g. genome, cell, etc.).",
+         "description": "The absolute count of discrete copies of a Location, within a system (e.g. genome, cell, etc.).",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE",
@@ -228,111 +274,43 @@
             "subject": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/MolecularVariation"
-                  },
-                  {
-                     "$ref": "#/definitions/Feature"
-                  },
-                  {
-                     "$ref": "#/definitions/SequenceExpression"
-                  },
-                  {
                      "$ref": "#/definitions/CURIE"
+                  },
+                  {
+                     "$ref": "#/definitions/ChromosomeLocation"
+                  },
+                  {
+                     "$ref": "#/definitions/SequenceLocation"
                   }
                ],
-               "description": "Subject of the Copy Number object"
+               "description": "A location for which the number of systemic copies is described."
             },
             "copies": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Number"
+                     "$ref": "#/definitions/DefiniteRange"
                   },
                   {
                      "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/DefiniteRange"
+                     "$ref": "#/definitions/Number"
                   }
                ],
                "description": "The integral number of copies of the subject in a system"
             }
          },
-         "allOf": [
-            {
-               "if": {
-                  "properties": {
-                     "copies": {
-                        "$ref": "#/definitions/Number"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "copies": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "copies": {
-                        "$ref": "#/definitions/IndefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "copies": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "copies": {
-                        "$ref": "#/definitions/DefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "copies": {
-                        "properties": {
-                           "min": {
-                              "minimum": 0
-                           },
-                           "max": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            }
-         ],
          "required": [
             "copies",
             "subject",
             "type"
-         ]
+         ],
+         "additionalProperties": false
       },
       "RelativeCopyNumber": {
-         "additionalProperties": false,
          "type": "object",
          "maturity": "draft",
-         "description": "The relative copies of a MolecularVariation, Feature, SequenceExpression, or a CURIE reference against an unspecified baseline in a system (e.g. genome, cell, etc.).",
+         "description": "The copies of a Location within a system (e.g. genome, cell, etc.) relative to a baseline state.",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE",
@@ -347,19 +325,16 @@
             "subject": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/MolecularVariation"
-                  },
-                  {
-                     "$ref": "#/definitions/Feature"
-                  },
-                  {
-                     "$ref": "#/definitions/SequenceExpression"
-                  },
-                  {
                      "$ref": "#/definitions/CURIE"
+                  },
+                  {
+                     "$ref": "#/definitions/ChromosomeLocation"
+                  },
+                  {
+                     "$ref": "#/definitions/SequenceLocation"
                   }
                ],
-               "description": "Subject of the Copy Number object"
+               "description": "A location for which the number of systemic copies is described."
             },
             "relative_copy_class": {
                "type": "string",
@@ -377,7 +352,54 @@
             "relative_copy_class",
             "subject",
             "type"
-         ]
+         ],
+         "additionalProperties": false
+      },
+      "Genotype": {
+         "description": "A quantified set of MolecularVariation associated with a genomic locus.",
+         "type": "object",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE",
+               "description": "Variation Id. MUST be unique within document."
+            },
+            "type": {
+               "type": "string",
+               "const": "Genotype",
+               "default": "Genotype",
+               "description": "MUST be \"Genotype\""
+            },
+            "members": {
+               "type": "array",
+               "uniqueItems": true,
+               "minItems": 1,
+               "ordered": false,
+               "items": {
+                  "$ref": "#/definitions/GenotypeMember"
+               },
+               "description": "Each GenotypeMember in `members` describes a MolecularVariation and the count of that variation at the locus."
+            },
+            "count": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/DefiniteRange"
+                  },
+                  {
+                     "$ref": "#/definitions/IndefiniteRange"
+                  },
+                  {
+                     "$ref": "#/definitions/Number"
+                  }
+               ],
+               "description": "The total number of copies of all MolecularVariation at this locus, MUST be greater than or equal to the sum of GenotypeMember copy counts and MUST be greater than or equal to 1. If greater than the total of GenotypeMember counts, this field describes  additional MolecularVariation that exist but are not  explicitly described."
+            }
+         },
+         "required": [
+            "count",
+            "members",
+            "type"
+         ],
+         "additionalProperties": false
       },
       "Location": {
          "description": "A contiguous segment of a biological sequence.",
@@ -394,7 +416,6 @@
          }
       },
       "ChromosomeLocation": {
-         "additionalProperties": false,
          "description": "A Location on a chromosome defined by a species and chromosome name.",
          "type": "object",
          "properties": {
@@ -427,10 +448,10 @@
             "interval",
             "species_id",
             "type"
-         ]
+         ],
+         "additionalProperties": false
       },
       "SequenceLocation": {
-         "additionalProperties": false,
          "description": "A Location defined by an interval on a referenced Sequence.",
          "type": "object",
          "properties": {
@@ -464,12 +485,12 @@
             "interval",
             "sequence_id",
             "type"
-         ]
+         ],
+         "additionalProperties": false
       },
       "SequenceInterval": {
          "description": "A SequenceInterval represents a span on a Sequence. Positions are always represented by contiguous spans using interbase coordinates or coordinate ranges.",
          "type": "object",
-         "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
@@ -480,13 +501,13 @@
             "start": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Number"
+                     "$ref": "#/definitions/DefiniteRange"
                   },
                   {
                      "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/DefiniteRange"
+                     "$ref": "#/definitions/Number"
                   }
                ],
                "description": "The start coordinate or range of the interval. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range less than the value of `end`."
@@ -494,156 +515,28 @@
             "end": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Number"
+                     "$ref": "#/definitions/DefiniteRange"
                   },
                   {
                      "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/DefiniteRange"
+                     "$ref": "#/definitions/Number"
                   }
                ],
                "description": "The end coordinate or range of the interval. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range greater than the value of `start`."
             }
          },
-         "allOf": [
-            {
-               "if": {
-                  "properties": {
-                     "start": {
-                        "$ref": "#/definitions/Number"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "start": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "start": {
-                        "$ref": "#/definitions/IndefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "start": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "start": {
-                        "$ref": "#/definitions/DefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "start": {
-                        "properties": {
-                           "min": {
-                              "minimum": 0
-                           },
-                           "max": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "end": {
-                        "$ref": "#/definitions/Number"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "end": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "end": {
-                        "$ref": "#/definitions/IndefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "end": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "end": {
-                        "$ref": "#/definitions/DefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "end": {
-                        "properties": {
-                           "min": {
-                              "minimum": 0
-                           },
-                           "max": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            }
-         ],
          "required": [
             "end",
             "start",
             "type"
-         ]
+         ],
+         "additionalProperties": false
       },
       "CytobandInterval": {
          "description": "A contiguous span on a chromosome defined by cytoband features. The span includes the constituent regions described by the start and end cytobands, as well as any intervening regions.",
          "type": "object",
-         "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
@@ -669,22 +562,23 @@
             "end",
             "start",
             "type"
-         ]
+         ],
+         "additionalProperties": false
       },
       "SequenceExpression": {
          "description": "An expression describing a Sequence.",
          "oneOf": [
             {
-               "$ref": "#/definitions/LiteralSequenceExpression"
+               "$ref": "#/definitions/ComposedSequenceExpression"
             },
             {
                "$ref": "#/definitions/DerivedSequenceExpression"
             },
             {
-               "$ref": "#/definitions/RepeatedSequenceExpression"
+               "$ref": "#/definitions/LiteralSequenceExpression"
             },
             {
-               "$ref": "#/definitions/ComposedSequenceExpression"
+               "$ref": "#/definitions/RepeatedSequenceExpression"
             }
          ],
          "discriminator": {
@@ -694,7 +588,6 @@
       "LiteralSequenceExpression": {
          "description": "An explicit expression of a Sequence.",
          "type": "object",
-         "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
@@ -710,12 +603,12 @@
          "required": [
             "sequence",
             "type"
-         ]
+         ],
+         "additionalProperties": false
       },
       "DerivedSequenceExpression": {
          "description": "An approximate expression of a sequence that is derived from a referenced sequence location. Use of this class indicates that the derived sequence is *approximately equivalent* to the reference indicated, and is typically used for describing large regions in contexts where the use of an approximate sequence is inconsequential.",
          "type": "object",
-         "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
@@ -736,11 +629,11 @@
             "location",
             "reverse_complement",
             "type"
-         ]
+         ],
+         "additionalProperties": false
       },
       "RepeatedSequenceExpression": {
          "description": "An expression of a sequence comprised of a tandem repeating subsequence.",
-         "additionalProperties": false,
          "type": "object",
          "properties": {
             "type": {
@@ -752,10 +645,10 @@
             "seq_expr": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/LiteralSequenceExpression"
+                     "$ref": "#/definitions/DerivedSequenceExpression"
                   },
                   {
-                     "$ref": "#/definitions/DerivedSequenceExpression"
+                     "$ref": "#/definitions/LiteralSequenceExpression"
                   }
                ],
                "description": "An expression of the repeating subsequence"
@@ -763,88 +656,24 @@
             "count": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Number"
+                     "$ref": "#/definitions/DefiniteRange"
                   },
                   {
                      "$ref": "#/definitions/IndefiniteRange"
                   },
                   {
-                     "$ref": "#/definitions/DefiniteRange"
+                     "$ref": "#/definitions/Number"
                   }
                ],
                "description": "The count of repeated units, as an integer or inclusive range"
             }
          },
-         "allOf": [
-            {
-               "if": {
-                  "properties": {
-                     "count": {
-                        "$ref": "#/definitions/Number"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "count": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "count": {
-                        "$ref": "#/definitions/IndefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "count": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "count": {
-                        "$ref": "#/definitions/DefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "count": {
-                        "properties": {
-                           "min": {
-                              "minimum": 0
-                           },
-                           "max": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            }
-         ],
          "required": [
             "count",
             "seq_expr",
             "type"
-         ]
+         ],
+         "additionalProperties": false
       },
       "ComposedSequenceExpression": {
          "description": "An expression of a sequence composed from multiple other Sequence Expressions objects. MUST have at least one component that is not a ref:`LiteralSequenceExpression`. CANNOT be composed from nested composed sequence expressions.",
@@ -861,16 +690,17 @@
                "type": "array",
                "uniqueItems": true,
                "minItems": 2,
+               "ordered": true,
                "items": {
                   "oneOf": [
+                     {
+                        "$ref": "#/definitions/DerivedSequenceExpression"
+                     },
                      {
                         "$ref": "#/definitions/LiteralSequenceExpression"
                      },
                      {
                         "$ref": "#/definitions/RepeatedSequenceExpression"
-                     },
-                     {
-                        "$ref": "#/definitions/DerivedSequenceExpression"
                      }
                   ]
                },
@@ -884,13 +714,55 @@
                      }
                   ]
                },
-               "description": "An ordered list of SequenceExpression components comprising the expression."
+               "description": "An ordered list of SequenceExpression components   comprising the expression."
             }
          },
          "required": [
-            "components",
-            "type"
+            "components"
          ]
+      },
+      "GenotypeMember": {
+         "description": "A class for expressing the count of a specific MolecularVariation present *in-trans* at a genomic locus represented by a Genotype.",
+         "type": "object",
+         "properties": {
+            "type": {
+               "type": "string",
+               "const": "GenotypeMember",
+               "default": "GenotypeMember",
+               "description": "MUST be \"GenotypeMember\"."
+            },
+            "count": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/DefiniteRange"
+                  },
+                  {
+                     "$ref": "#/definitions/IndefiniteRange"
+                  },
+                  {
+                     "$ref": "#/definitions/Number"
+                  }
+               ],
+               "description": "The number of copies of the `variation` at a Genotype locus."
+            },
+            "variation": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/Allele"
+                  },
+                  {
+                     "$ref": "#/definitions/Haplotype"
+                  }
+               ],
+               "description": "A MolecularVariation at a Genotype locus."
+            }
+         },
+         "required": [
+            "count",
+            "type",
+            "variation"
+         ],
+         "additionalProperties": false
       },
       "Feature": {
          "description": "A named entity that can be mapped to a Location. Genes, protein domains, exons, and chromosomes are some examples of common biological entities that may be Features.",
@@ -906,7 +778,6 @@
       "Gene": {
          "description": "A reference to a Gene as defined by an authority. For human genes, the use of [hgnc](https://registry.identifiers.org/registry/hgnc) as the gene authority is RECOMMENDED.",
          "type": "object",
-         "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
@@ -922,12 +793,12 @@
          "required": [
             "gene_id",
             "type"
-         ]
+         ],
+         "additionalProperties": false
       },
       "Number": {
          "description": "A simple integer value as a VRS class.",
          "type": "object",
-         "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
@@ -943,12 +814,12 @@
          "required": [
             "type",
             "value"
-         ]
+         ],
+         "additionalProperties": false
       },
       "DefiniteRange": {
          "description": "A bounded, inclusive range of numbers.",
          "type": "object",
-         "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
@@ -969,12 +840,12 @@
             "max",
             "min",
             "type"
-         ]
+         ],
+         "additionalProperties": false
       },
       "IndefiniteRange": {
          "description": "A half-bounded range of numbers represented as a number bound and associated comparator. The bound operator is interpreted as follows: '>=' are all numbers greater than and including `value`, '<=' are all numbers less than and including `value`.",
          "type": "object",
-         "additionalProperties": false,
          "properties": {
             "type": {
                "type": "string",
@@ -999,30 +870,27 @@
             "comparator",
             "type",
             "value"
-         ]
+         ],
+         "additionalProperties": false
       },
       "CURIE": {
-         "additionalProperties": false,
          "description": "A [W3C Compact URI](https://www.w3.org/TR/curie/) formatted string. A CURIE string has the structure ``prefix``:``reference``, as defined by the W3C syntax.",
          "type": "string",
          "pattern": "^\\w[^:]*:.+$",
          "example": "ensembl:ENSG00000139618"
       },
       "HumanCytoband": {
-         "additionalProperties": false,
          "description": "A character string representing cytobands derived from the *International System for Human Cytogenomic Nomenclature* (ISCN) [guidelines](http://doi.org/10.1159/isbn.978-3-318-06861-0).",
          "type": "string",
          "pattern": "^cen|[pq](ter|([1-9][0-9]*(\\.[1-9][0-9]*)?))$",
          "example": "q22.3"
       },
       "Residue": {
-         "additionalProperties": false,
          "description": "A character representing a specific residue (i.e., molecular species) or groupings of these (\"ambiguity codes\"), using [one-letter IUPAC abbreviations](https://en.wikipedia.org/wiki/International_Union_of_Pure_and_Applied_Chemistry#Amino_acid_and_nucleotide_base_codes) for nucleic acids and amino acids.",
          "type": "string",
          "pattern": "[A-Z*\\-]"
       },
       "Sequence": {
-         "additionalProperties": false,
          "description": "A character string of Residues that represents a biological sequence using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequences.",
          "type": "string",
          "pattern": "^[A-Z*\\-]*$"
@@ -1030,7 +898,6 @@
       "SequenceState": {
          "deprecated": true,
          "description": "DEPRECATED. A Sequence as a State. This is the State class to use for representing \"ref-alt\" style variation, including SNVs, MNVs, del, ins, and delins. This class is deprecated. Use LiteralSequenceExpression instead.",
-         "additionalProperties": false,
          "type": "object",
          "properties": {
             "type": {
@@ -1051,12 +918,12 @@
          "required": [
             "sequence",
             "type"
-         ]
+         ],
+         "additionalProperties": false
       },
       "SimpleInterval": {
          "deprecated": true,
          "description": "DEPRECATED: A SimpleInterval represents a span of sequence. Positions are always represented by contiguous spans using interbase coordinates. This class is deprecated. Use SequenceInterval instead.",
-         "additionalProperties": false,
          "type": "object",
          "properties": {
             "type": {
@@ -1083,7 +950,8 @@
             "end",
             "start",
             "type"
-         ]
+         ],
+         "additionalProperties": false
       }
    }
 }

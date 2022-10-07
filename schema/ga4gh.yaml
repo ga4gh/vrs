@@ -23,7 +23,7 @@ identifiers:
     Allele: VA
     VariationSet: VS
     Text: VT
-    # Genotype: VG
+    Genotype: GT
     Haplotype: VH
     AbsoluteCopyNumber: VAC
     RelativeCopyNumber: VRC

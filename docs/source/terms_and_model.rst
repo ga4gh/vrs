@@ -267,11 +267,8 @@ genetic markers that tend to be transmitted together.
 * The locations of Alleles within the Haplotype MUST be interpreted
   independently.  Alleles that create a net insertion or deletion of
   sequence MUST NOT change the location of "downstream" Alleles.
-* The `members` attribute is required and MUST contain at least one
-  Allele.
-* Haplotypes with one Allele are intended to be distinct entities from
-  the Allele by itself. See discussion on :ref:`equivalence`.
-
+* The `members` attribute is required and MUST contain at least two
+  Alleles.
 
 **Sources**
 
@@ -434,6 +431,90 @@ Low-level copy gain of BRCA1:
       },
       "type": "RelativeCopyNumber"
     }
+
+.. _genotype:
+
+Genotype
+$$$$$$$$
+
+A *genotype* is a representation of the variants present at a given genomic locus, and may be referred
+to either by individual nucleotide representations (e.g. GT representation in VCF files) or symbolically
+(e.g. A/B/O blood type reporting). To support these use cases, VRS genotypes enable representation of
+genotypes using either :ref:`Allele` objects (as commonly done in VCF records) or larger :ref:`Haplotype`
+objects (which would otherwise be represented using symbolic shorthand).
+
+.. include:: defs/Genotype.rst
+
+**Implementation guidance**
+
+* Haplotypes or Alleles in :ref:`GenotypeMember` objects MAY occur at different locations or on
+  different reference sequences. For example, an individual may have haplotypes on two
+  population-specific references.
+
+**Notes**
+
+* The term "genotype" has two, related definitions in common use. The
+  narrower definition is a set of alleles observed at a single
+  location and often with a ploidy of two, such as a pair of single residue
+  variants on an autosome. The broader, generalized definition is a
+  set of alleles at multiple locations and/or with ploidy other than
+  two. VRS Genotype entity is based on this broader definition.
+* The term "diplotype" is often used to refer to two in-trans haplotypes at a locus.
+  VRS Genotype entity subsumes the conventional definition of diplotype, though
+  it describes no explicit in-trans phase relationship. Therefore,
+  VRS does not include an explicit entity for diplotypes. See :ref:`this note
+  <genotypes-represent-haplotypes-with-arbitrary-ploidy>` for a discussion.
+* VRS makes no assumptions about ploidy of an organism or individual nor any
+  polysomy affecting a locus. The `genotype.count` attribute explicitly captures the total
+  count of molecules associated with a genomic locus represented by the Genotype.
+* In diploid organisms, there are typically two instances of each autosomal chromosome,
+  and therefore two instances of sequence at a particular locus. Thus, Genotypes will
+  often list two GenotypeMembers each based on a distinct Haplotype or Allele. In the case
+  of haploid chromosomes or haploinsufficiency, the Genotype consists of a single GenotypeMember.
+* A specific (heterozygous) diplotype SHOULD be represented as a Genotype of two GenotypeMember
+  instances each containing a constituent :ref:`Haplotype`. A homozygous diplotype SHOULD be
+  represented as a Genotype of one constituent GenotypeMember (with `GenotypeMember.count=2`).
+* A consequence of the computational definition is that in-cis Haplotypes at overlapping or
+  adjacent intervals MUST be merged into a single Haplotype for the same Genotype.
+* A `GenotypeMember.variation` value MUST be unique among Genotype Members within a Genotype.
+  When more than one Genotype Member would have the same `variation` value (e.g. in the case
+  of a homozygous variant), this would be represented as a Genotype Value with a corresponding
+  `count` (i.e. for a diploid homozygous variant, `GenotypeMember.count = 2`).
+* The rationale for permitting Genotypes with Haplotypes defined on different reference
+  sequences is to enable the accurate representation of segments of DNA with the most
+  appropriate population-specific reference sequence.
+* Deletion of sequence at locus would be represented by the presence of Alleles of deleted
+  sequence, not absence of Alleles; therefore Genotypes MAY NOT have count < 1.
+
+**Sources**
+
+SO: `Genotype (SO:0001027)
+<http://www.sequenceontology.org/browser/current_svn/term/SO:0001027>`__
+— A genotype is a variant genome, complete or incomplete.
+
+.. _genotypes-represent-haplotypes-with-arbitrary-ploidy:
+
+.. note::
+     VRS defines Genotypes using a list of GenotypeMembers defined by
+     Haplotypes or Alleles. In essence, Haplotypes and Genotypes represent
+     two distinct dimensions of containment: Haplotypes represent the "in
+     phase" relationship of Alleles while Genotypes represents sets of
+     Haplotypes of arbitrary ploidy.
+
+     There are two important consequences of these definitions: There is no
+     single-location Genotype. Users of SNP data will be familiar with
+     representations like rs7412 C/C, which indicates the diploid state at
+     a position. In VRS, this is merely a special case of a
+     Genotype with one GenotypeMember, defined by a single Allele with
+     two copies.  VRS does not define a diplotype class. A diplotype
+     is a special case of a VRS Genotype with count = 2. In practice, software
+     data types that assume a ploidy of 2 make it very difficult to represent haploid
+     states, copy number loss, and copy number gain, all of which occur
+     when representing human data. In addition, inferred ploidy = 2 makes
+     software incompatible with organisms with other ploidy. VRS
+     requires explicit definition of the count of molecules associated with
+     a genomic locus using the `count` attribute, though this count may be inexact
+     (e.g. a :ref:`DefiniteRange` or :ref:`IndefiniteRange`).
 
 .. _UtilityVariation:
 
@@ -946,47 +1027,6 @@ large-scale tandem duplications.
       "type": "RepeatedSequenceExpression"
     }
 
-.. _ComposedSequenceExpression:
-
-ComposedSequenceExpression
-##########################
-
-*Composed Sequence* is a class of sequence expression where two or more
-constitutive sequence expressions are expressed as an ordered list,
-representing a concatenated sequence. This class is useful for expressing
-concepts such as the OPMD polyalanine alleles [2]_.
-
-.. [2] Brais b, et al. *Short CCG expansions in the PABP2 gene cause
-       oculopharyngeal muscular dystrophy* Nat Genet. (1998).
-
-.. include:: defs/ComposedSequenceExpression.rst
-
-**Examples**
-
-.. parsed-literal::
-
-   {
-     "type": "ComposedSequenceExpression",
-     "components": [
-       {
-         "type": "RepeatedSequenceExpression",
-         "seq_expr": { "type": "LiteralSequenceExpression", "sequence": "GCG" },
-         "count": { "type": "Number", "value": 11 }
-       },
-       {
-         "type": "RepeatedSequenceExpression",
-         "seq_expr": { "type": "LiteralSequenceExpression", "sequence": "GCA" },
-         "count": { "type": "Number", "value": 3 }
-       },
-       {
-         "type": "RepeatedSequenceExpression",
-         "seq_expr": { "type": "LiteralSequenceExpression", "sequence": "GCG" },
-         "count": { "type": "Number", "value": 1 }
-       }
-     ]
-   }
-
-
 .. _Feature:
 
 Feature
@@ -1113,6 +1153,13 @@ This value is equivalent to the concept of "equal to or greater than
       "value": 22
     }
 
+.. _genotypemember:
+
+GenotypeMember
+##############
+
+.. include:: defs/GenotypeMember.rst
+
 Primitives
 @@@@@@@@@@
 
@@ -1222,7 +1269,7 @@ derived from the IUPAC one-letter nucleic acid and amino acid codes.
   to define an :ref:`Allele`. A Sequence that replaces another Sequence is
   called a "replacement sequence".
 * In some contexts outside VRS, "reference sequence" may refer
-  to a member of set of sequences that comprise a genome assembly. In the VRS
+  to a member of set of sequences that comprise a genome assembly. In VRS
   specification, any sequence may be a "reference sequence", including those in
   a genome assembly.
 * For the purposes of representing sequence variation, it is not

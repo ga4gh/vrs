@@ -4,8 +4,6 @@ An expression of a sequence composed from multiple other :ref:`Sequence Expressi
 
 **Information Model**
 
-Some ComposedSequenceExpression attributes are inherited from :ref:`SequenceExpression`.
-
 .. list-table::
    :class: clean-wrap
    :header-rows: 1
@@ -18,9 +16,9 @@ Some ComposedSequenceExpression attributes are inherited from :ref:`SequenceExpr
       - Description
    *  - type
       - string
-      - 1..1
+      - 0..1
       - MUST be "ComposedSequenceExpression"
    *  - components
       - :ref:`LiteralSequenceExpression` | :ref:`RepeatedSequenceExpression` | :ref:`DerivedSequenceExpression`
       - 2..m
-      - An ordered list of :ref:`SequenceExpression` components comprising the expression.
+      - An ordered list of :ref:`SequenceExpression` components   comprising the expression.

@@ -11,6 +11,7 @@
 $schema: "http://json-schema.org/draft-07/schema"
 title: "GA4GH-VRS-Definitions"
 type: object
+strict: true
 
 definitions:
   # VRS definitions are presented top-down.  Everything rolls up to
@@ -43,6 +44,7 @@ definitions:
       propertyName: type
 
   MolecularVariation:
+    inherits: Variation
     description: >-
       A :ref:`variation` on a contiguous molecule.
     oneOf:
@@ -52,6 +54,7 @@ definitions:
       propertyName: type
 
   UtilityVariation:
+    inherits: Variation
     description: >-
       A collection of :ref:`Variation` subclasses that cannot be
       constrained to a specific class of biological variation, but
@@ -63,12 +66,13 @@ definitions:
       propertyName: type
 
   SystemicVariation:
+    inherits: Variation
     description: >-
       A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
     oneOf:
-      - $ref: "#/definitions/AbsoluteCopyNumber"
-      - $ref: "#/definitions/RelativeCopyNumber"
+      - $ref: "#/definitions/CopyNumber"
+      - $ref: "#/definitions/Genotype"
     discriminator:
       propertyName: type
 
@@ -81,9 +85,9 @@ definitions:
   # Molecular Variation
 
   Allele:
+    inherits: MolecularVariation
     description: >-
       The state of a molecule at a :ref:`Location`.
-    additionalProperties: false
     type: object
     properties:
       type:
@@ -109,9 +113,9 @@ definitions:
     required: [ "location", "state" ]
 
   Haplotype:
+    inherits: MolecularVariation
     description: >-
       A set of non-overlapping :ref:`Allele` members that co-occur on the same molecule.
-    additionalProperties: false
     type: "object"
     properties:
       type:
@@ -124,6 +128,7 @@ definitions:
         type: array
         minItems: 2
         uniqueItems: true
+        ordered: false
         items:
           oneOf:
             - $ref: "#/definitions/Allele"
@@ -137,9 +142,9 @@ definitions:
   # UtilityVariation
 
   Text:
+    inherits: UtilityVariation
     description: >-
       A free-text definition of variation.
-    additionalProperties: false
     type: object
     properties:
       type:
@@ -155,10 +160,10 @@ definitions:
     required: [ "definition" ]
 
   VariationSet:
+    inherits: UtilityVariation
     description: >-
       An unconstrained set of Variation members.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -168,6 +173,7 @@ definitions:
       members:
         type: array
         uniqueItems: true
+        ordered: false
         items:
           oneOf:
             - $ref: "#/definitions/CURIE"
@@ -181,13 +187,27 @@ definitions:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # SystemicVariation
 
+  CopyNumber:
+    inherits: SystemicVariation
+    description: >-
+      The copies of :ref:`Location` in a system, expressed as an absolute integer
+      quantity (:ref:`AbsoluteCopyNumber`) or a qualitative description of copies 
+      relative to a baseline state (:ref:`RelativeCopyNumber`).
+    heritable_properties:
+      subject:
+        oneOf:
+          - $ref: "#/definitions/Location"
+          - $ref: "#/definitions/CURIE"
+        description: >-
+          A location for which the number of systemic copies is described.
+    heritable_required: [ "subject" ]
+
   AbsoluteCopyNumber:
-    additionalProperties: false
+    inherits: CopyNumber
     type: object
     maturity: draft
     description: >-
-      The absolute count of discrete copies of a :ref:`MolecularVariation`,
-      :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference
+      The absolute count of discrete copies of a :ref:`Location`,
       within a system (e.g. genome, cell, etc.).
     properties:
       type:
@@ -196,14 +216,6 @@ definitions:
         default: "AbsoluteCopyNumber"
         description: >-
           MUST be "AbsoluteCopyNumber"
-      subject:
-        oneOf:
-          - $ref: "#/definitions/MolecularVariation"
-          - $ref: "#/definitions/Feature"
-          - $ref: "#/definitions/SequenceExpression"
-          - $ref: "#/definitions/CURIE"
-        description: >-
-          Subject of the Copy Number object
       copies:
         oneOf:
           - $ref: "#/definitions/Number"
@@ -211,50 +223,15 @@ definitions:
           - $ref: "#/definitions/DefiniteRange"
         description: >-
           The integral number of copies of the subject in a system
-    allOf:
-      - if:
-          properties:
-            copies:
-              $ref: "#/definitions/Number"
-        then:
-          properties:
-            copies:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            copies:
-              $ref: "#/definitions/IndefiniteRange"
-        then:
-          properties:
-            copies:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            copies:
-              $ref: "#/definitions/DefiniteRange"
-        then:
-          properties:
-            copies:
-              properties:
-                min:
-                  minimum: 0
-                max:
-                  minimum: 0
-
-    required: [ "subject", "copies" ]
+    required: [ "copies" ]
 
   RelativeCopyNumber:
-    additionalProperties: false
+    inherits: CopyNumber
     type: object
     maturity: draft
     description: >-
-      The relative copies of a :ref:`MolecularVariation`,
-      :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference
-      against an unspecified baseline in a system (e.g. genome, cell, etc.).
+      The copies of a :ref:`Location` within a system (e.g. genome, cell, etc.)
+      relative to a baseline state.
     properties:
       type:
         type: string
@@ -262,20 +239,48 @@ definitions:
         default: "RelativeCopyNumber"
         description: >-
           MUST be "RelativeCopyNumber"
-      subject:
-        oneOf:
-          - $ref: "#/definitions/MolecularVariation"
-          - $ref: "#/definitions/Feature"
-          - $ref: "#/definitions/SequenceExpression"
-          - $ref: "#/definitions/CURIE"
-        description: >-
-          Subject of the Copy Number object
       relative_copy_class:
         type: string
         enum: [ "complete loss", "partial loss", "copy neutral", "low-level gain", "high-level gain" ]
         description: >-
           MUST be one of "complete loss", "partial loss", "copy neutral", "low-level gain" or "high-level gain".
-    required: [ "subject", "relative_copy_class" ]
+    required: [  "relative_copy_class" ]
+
+  Genotype:
+    inherits: SystemicVariation
+    description: >-
+      A quantified set of :ref:`MolecularVariation` associated with a genomic locus.
+    type: object
+    properties:
+      type:
+        type: string
+        const: "Genotype"
+        default: "Genotype"
+        description: >-
+          MUST be "Genotype"
+      members:
+        type: array
+        uniqueItems: true
+        minItems: 1
+        ordered: false
+        items:
+          $ref: "#/definitions/GenotypeMember"
+        description: >-
+          Each GenotypeMember in `members` describes a :ref:`MolecularVariation`
+          and the count of that variation at the locus.
+      count:
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
+        description: >-
+          The total number of copies of all :ref:`MolecularVariation` at this locus,
+          MUST be greater than or equal to the sum of :ref:`GenotypeMember` copy counts
+          and MUST be greater than or equal to 1.
+          If greater than the total of GenotypeMember counts, this field describes 
+          additional :ref:`MolecularVariation` that exist but are not 
+          explicitly described.
+    required: [ "members", "count" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations
@@ -300,7 +305,7 @@ definitions:
       propertyName: type
 
   ChromosomeLocation:
-    additionalProperties: false
+    inherits: Location
     description: >-
       A Location on a chromosome defined by a species and chromosome name.
     type: object
@@ -329,7 +334,7 @@ definitions:
     required: [ "species_id", "chr", "interval" ]
 
   SequenceLocation:
-    additionalProperties: false
+    inherits: Location
     description: >-
       A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
     type: object
@@ -367,7 +372,6 @@ definitions:
       always represented by contiguous spans using interbase coordinates or
       coordinate ranges.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -392,71 +396,6 @@ definitions:
           The end coordinate or range of the interval.
           The minimum value of this coordinate or range is 0.
           MUST represent a coordinate or range greater than the value of `start`.
-    allOf:
-      - if:
-          properties:
-            start:
-              $ref: "#/definitions/Number"
-        then:
-          properties:
-            start:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            start:
-              $ref: "#/definitions/IndefiniteRange"
-        then:
-          properties:
-            start:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            start:
-              $ref: "#/definitions/DefiniteRange"
-        then:
-          properties:
-            start:
-              properties:
-                min:
-                  minimum: 0
-                max:
-                  minimum: 0
-      - if:
-          properties:
-            end:
-              $ref: "#/definitions/Number"
-        then:
-          properties:
-            end:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            end:
-              $ref: "#/definitions/IndefiniteRange"
-        then:
-          properties:
-            end:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            end:
-              $ref: "#/definitions/DefiniteRange"
-        then:
-          properties:
-            end:
-              properties:
-                min:
-                  minimum: 0
-                max:
-                  minimum: 0
     required: [ "type", "start", "end" ]
 
   # SimpleInterval has been moved to DEPRECATED section at bottom.
@@ -467,7 +406,6 @@ definitions:
       The span includes the constituent regions described by the start and
       end cytobands, as well as any intervening regions.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -512,10 +450,10 @@ definitions:
     heritable_required: ["type"]
 
   LiteralSequenceExpression:
+    inherits: SequenceExpression
     description: >-
       An explicit expression of a Sequence.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -528,6 +466,7 @@ definitions:
     required: [ "sequence" ]
 
   DerivedSequenceExpression:
+    inherits: SequenceExpression
     description: >-
       An approximate expression of a sequence that is derived from
       a referenced sequence location. Use of this class
@@ -536,7 +475,6 @@ definitions:
       large regions in contexts where the use of an approximate sequence
       is inconsequential.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -555,9 +493,9 @@ definitions:
     required: [ "location", "reverse_complement" ]
 
   RepeatedSequenceExpression:
+    inherits: SequenceExpression
     description: >-
       An expression of a sequence comprised of a tandem repeating subsequence.
-    additionalProperties: false
     type: object
     properties:
       type:
@@ -578,39 +516,6 @@ definitions:
           - $ref: "#/definitions/DefiniteRange"
         description: >-
           The count of repeated units, as an integer or inclusive range
-    allOf:
-      - if:
-          properties:
-            count:
-              $ref: "#/definitions/Number"
-        then:
-          properties:
-            count:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            count:
-              $ref: "#/definitions/IndefiniteRange"
-        then:
-          properties:
-            count:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            count:
-              $ref: "#/definitions/DefiniteRange"
-        then:
-          properties:
-            count:
-              properties:
-                min:
-                  minimum: 0
-                max:
-                  minimum: 0
     required: [ "seq_expr", "count" ]
 
   ComposedSequenceExpression:
@@ -632,6 +537,7 @@ definitions:
         type: array
         uniqueItems: true
         minItems: 2
+        ordered: true
         items:
           oneOf:
             - $ref: "#/definitions/LiteralSequenceExpression"
@@ -642,9 +548,38 @@ definitions:
             - $ref: "#/definitions/RepeatedSequenceExpression"
             - $ref: "#/definitions/DerivedSequenceExpression"
         description: >-
-          An ordered list of :ref:`SequenceExpression` components
+          An ordered list of :ref:`SequenceExpression` components  
           comprising the expression.
     required: [ "components" ]
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Nested Classes
+
+  GenotypeMember:
+    description: >-
+      A class for expressing the count of a specific :ref:`MolecularVariation` present
+      *in-trans* at a genomic locus represented by a :ref:`Genotype`.
+    type: object
+    properties:
+      type:
+        type: string
+        const: "GenotypeMember"
+        default: "GenotypeMember"
+        description: MUST be "GenotypeMember".
+      count:
+        oneOf:
+          - $ref: "#/definitions/Number"
+          - $ref: "#/definitions/IndefiniteRange"
+          - $ref: "#/definitions/DefiniteRange"
+        description: >-
+          The number of copies of the `variation` at a :ref:`Genotype` locus.
+      variation:
+        oneOf:
+          - $ref: "#/definitions/Allele"
+          - $ref: "#/definitions/Haplotype"
+        description: >-
+          A :ref:`MolecularVariation` at a :ref:`Genotype` locus.
+    required: [ "type", "count", "variation" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Feature
@@ -666,12 +601,12 @@ definitions:
     heritable_required: [ "type" ]
 
   Gene:
+    inherits: Feature
     description: >-
       A reference to a Gene as defined by an authority. For human genes,
       the use of `hgnc <https://registry.identifiers.org/registry/hgnc>`_
       as the gene authority is RECOMMENDED.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -691,7 +626,6 @@ definitions:
     description: >-
       A simple integer value as a VRS class.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -707,7 +641,6 @@ definitions:
     description: >-
       A bounded, inclusive range of numbers.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -729,7 +662,6 @@ definitions:
       '>=' are all numbers greater than and including `value`, '<=' are all
       numbers less than and including `value`.
     type: object
-    additionalProperties: false
     properties:
       type:
         type: string
@@ -754,7 +686,6 @@ definitions:
   # =============================================================================
 
   CURIE:
-    additionalProperties: false
     description: >-
       A `W3C Compact URI <https://www.w3.org/TR/curie/>`_ formatted string.
       A CURIE string has the structure ``prefix``:``reference``, as defined by
@@ -764,7 +695,6 @@ definitions:
     example: "ensembl:ENSG00000139618"
 
   HumanCytoband:
-    additionalProperties: false
     description: >-
       A character string representing cytobands derived from the
       *International System for Human Cytogenomic Nomenclature* (ISCN)
@@ -774,7 +704,6 @@ definitions:
     example: "q22.3"
 
   Residue:
-    additionalProperties: false
     description: >-
       A character representing a specific residue (i.e., molecular species)
       or groupings of these ("ambiguity codes"), using `one-letter IUPAC
@@ -784,7 +713,6 @@ definitions:
     pattern: '[A-Z*\-]'
 
   Sequence:
-    additionalProperties: false
     description: >-
       A character string of :ref:`Residues <Residue>` that represents a biological
       sequence using the conventional sequence order (5’-to-3’ for
@@ -805,7 +733,6 @@ definitions:
       to use for representing "ref-alt" style variation, including SNVs, MNVs,
       del, ins, and delins.
       This class is deprecated. Use :ref:`LiteralSequenceExpression` instead.
-    additionalProperties: false
     type: object
     properties:
       type:
@@ -828,7 +755,6 @@ definitions:
       always represented by contiguous spans using interbase coordinates.
 
       This class is deprecated. Use SequenceInterval instead.
-    additionalProperties: false
     type: object
     properties:
       type:

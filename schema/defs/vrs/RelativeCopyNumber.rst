@@ -1,6 +1,6 @@
 **Computational Definition**
 
-The relative copies of a :ref:`MolecularVariation`, :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference against an unspecified baseline in a system (e.g. genome, cell, etc.).
+The copies of a :ref:`Location` within a system (e.g. genome, cell, etc.) relative to a baseline state.
 
 **Information Model**
 
@@ -25,9 +25,9 @@ Some RelativeCopyNumber attributes are inherited from :ref:`Variation`.
       - 1..1
       - MUST be "RelativeCopyNumber"
    *  - subject
-      - :ref:`MolecularVariation` | :ref:`Feature` | :ref:`SequenceExpression` | :ref:`CURIE`
+      - :ref:`Location` | :ref:`CURIE`
       - 1..1
-      - Subject of the Copy Number object
+      - A location for which the number of systemic copies is described.
    *  - relative_copy_class
       - string
       - 1..1

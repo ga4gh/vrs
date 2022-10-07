@@ -1,6 +1,6 @@
 **Computational Definition**
 
-The absolute count of discrete copies of a :ref:`MolecularVariation`, :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference within a system (e.g. genome, cell, etc.).
+The absolute count of discrete copies of a :ref:`Location`, within a system (e.g. genome, cell, etc.).
 
 **Information Model**
 
@@ -25,9 +25,9 @@ Some AbsoluteCopyNumber attributes are inherited from :ref:`Variation`.
       - 1..1
       - MUST be "AbsoluteCopyNumber"
    *  - subject
-      - :ref:`MolecularVariation` | :ref:`Feature` | :ref:`SequenceExpression` | :ref:`CURIE`
+      - :ref:`Location` | :ref:`CURIE`
       - 1..1
-      - Subject of the Copy Number object
+      - A location for which the number of systemic copies is described.
    *  - copies
       - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`
       - 1..1
