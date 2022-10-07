@@ -7,13 +7,25 @@
          "description": "A representation of the state of one or more biomolecules.",
          "oneOf": [
             {
-               "$ref": "#/definitions/MolecularVariation"
+               "$ref": "#/definitions/AbsoluteCopyNumber"
             },
             {
-               "$ref": "#/definitions/SystemicVariation"
+               "$ref": "#/definitions/Allele"
             },
             {
-               "$ref": "#/definitions/UtilityVariation"
+               "$ref": "#/definitions/Genotype"
+            },
+            {
+               "$ref": "#/definitions/Haplotype"
+            },
+            {
+               "$ref": "#/definitions/RelativeCopyNumber"
+            },
+            {
+               "$ref": "#/definitions/Text"
+            },
+            {
+               "$ref": "#/definitions/VariationSet"
             }
          ],
          "discriminator": {
@@ -52,10 +64,13 @@
          "description": "A Variation of multiple molecules in the context of a system, e.g. a genome, sample, or homologous chromosomes.",
          "oneOf": [
             {
-               "$ref": "#/definitions/CopyNumber"
+               "$ref": "#/definitions/AbsoluteCopyNumber"
             },
             {
                "$ref": "#/definitions/Genotype"
+            },
+            {
+               "$ref": "#/definitions/RelativeCopyNumber"
             }
          ],
          "discriminator": {
@@ -92,6 +107,9 @@
             },
             "state": {
                "oneOf": [
+                  {
+                     "$ref": "#/definitions/ComposedSequenceExpression"
+                  },
                   {
                      "$ref": "#/definitions/DerivedSequenceExpression"
                   },
@@ -204,19 +222,22 @@
                "items": {
                   "oneOf": [
                      {
+                        "$ref": "#/definitions/AbsoluteCopyNumber"
+                     },
+                     {
                         "$ref": "#/definitions/Allele"
                      },
                      {
                         "$ref": "#/definitions/CURIE"
                      },
                      {
-                        "$ref": "#/definitions/CopyNumber"
-                     },
-                     {
                         "$ref": "#/definitions/Genotype"
                      },
                      {
                         "$ref": "#/definitions/Haplotype"
+                     },
+                     {
+                        "$ref": "#/definitions/RelativeCopyNumber"
                      },
                      {
                         "$ref": "#/definitions/Text"
@@ -235,9 +256,10 @@
          ],
          "additionalProperties": false
       },
-      "CopyNumber": {
+      "AbsoluteCopyNumber": {
          "type": "object",
-         "description": "The absolute count of discrete copies of a MolecularVariation, Feature, SequenceExpression, or a CURIE reference within a system (e.g. genome, cell, etc.).",
+         "maturity": "draft",
+         "description": "The absolute count of discrete copies of a Location, within a system (e.g. genome, cell, etc.).",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE",
@@ -245,35 +267,23 @@
             },
             "type": {
                "type": "string",
-               "const": "CopyNumber",
-               "default": "CopyNumber",
-               "description": "MUST be \"CopyNumber\""
+               "const": "AbsoluteCopyNumber",
+               "default": "AbsoluteCopyNumber",
+               "description": "MUST be \"AbsoluteCopyNumber\""
             },
             "subject": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/Allele"
-                  },
-                  {
                      "$ref": "#/definitions/CURIE"
                   },
                   {
-                     "$ref": "#/definitions/DerivedSequenceExpression"
+                     "$ref": "#/definitions/ChromosomeLocation"
                   },
                   {
-                     "$ref": "#/definitions/Gene"
-                  },
-                  {
-                     "$ref": "#/definitions/Haplotype"
-                  },
-                  {
-                     "$ref": "#/definitions/LiteralSequenceExpression"
-                  },
-                  {
-                     "$ref": "#/definitions/RepeatedSequenceExpression"
+                     "$ref": "#/definitions/SequenceLocation"
                   }
                ],
-               "description": "Subject of the Copy Number object"
+               "description": "A location for which the number of systemic copies is described."
             },
             "copies": {
                "oneOf": [
@@ -290,73 +300,56 @@
                "description": "The integral number of copies of the subject in a system"
             }
          },
-         "allOf": [
-            {
-               "if": {
-                  "properties": {
-                     "copies": {
-                        "$ref": "#/definitions/Number"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "copies": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "copies": {
-                        "$ref": "#/definitions/IndefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "copies": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "copies": {
-                        "$ref": "#/definitions/DefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "copies": {
-                        "properties": {
-                           "min": {
-                              "minimum": 0
-                           },
-                           "max": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            }
-         ],
          "required": [
             "copies",
+            "subject",
+            "type"
+         ],
+         "additionalProperties": false
+      },
+      "RelativeCopyNumber": {
+         "type": "object",
+         "maturity": "draft",
+         "description": "The copies of a Location within a system (e.g. genome, cell, etc.) relative to a baseline state.",
+         "properties": {
+            "_id": {
+               "$ref": "#/definitions/CURIE",
+               "description": "Variation Id. MUST be unique within document."
+            },
+            "type": {
+               "type": "string",
+               "const": "RelativeCopyNumber",
+               "default": "RelativeCopyNumber",
+               "description": "MUST be \"RelativeCopyNumber\""
+            },
+            "subject": {
+               "oneOf": [
+                  {
+                     "$ref": "#/definitions/CURIE"
+                  },
+                  {
+                     "$ref": "#/definitions/ChromosomeLocation"
+                  },
+                  {
+                     "$ref": "#/definitions/SequenceLocation"
+                  }
+               ],
+               "description": "A location for which the number of systemic copies is described."
+            },
+            "relative_copy_class": {
+               "type": "string",
+               "enum": [
+                  "complete loss",
+                  "partial loss",
+                  "copy neutral",
+                  "low-level gain",
+                  "high-level gain"
+               ],
+               "description": "MUST be one of \"complete loss\", \"partial loss\", \"copy neutral\", \"low-level gain\" or \"high-level gain\"."
+            }
+         },
+         "required": [
+            "relative_copy_class",
             "subject",
             "type"
          ],
@@ -534,134 +527,6 @@
                "description": "The end coordinate or range of the interval. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range greater than the value of `start`."
             }
          },
-         "allOf": [
-            {
-               "if": {
-                  "properties": {
-                     "start": {
-                        "$ref": "#/definitions/Number"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "start": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "start": {
-                        "$ref": "#/definitions/IndefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "start": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "start": {
-                        "$ref": "#/definitions/DefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "start": {
-                        "properties": {
-                           "min": {
-                              "minimum": 0
-                           },
-                           "max": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "end": {
-                        "$ref": "#/definitions/Number"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "end": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "end": {
-                        "$ref": "#/definitions/IndefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "end": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "end": {
-                        "$ref": "#/definitions/DefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "end": {
-                        "properties": {
-                           "min": {
-                              "minimum": 0
-                           },
-                           "max": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            }
-         ],
          "required": [
             "end",
             "start",
@@ -704,10 +569,13 @@
          "description": "An expression describing a Sequence.",
          "oneOf": [
             {
-               "$ref": "#/definitions/LiteralSequenceExpression"
+               "$ref": "#/definitions/ComposedSequenceExpression"
             },
             {
                "$ref": "#/definitions/DerivedSequenceExpression"
+            },
+            {
+               "$ref": "#/definitions/LiteralSequenceExpression"
             },
             {
                "$ref": "#/definitions/RepeatedSequenceExpression"
@@ -800,77 +668,58 @@
                "description": "The count of repeated units, as an integer or inclusive range"
             }
          },
-         "allOf": [
-            {
-               "if": {
-                  "properties": {
-                     "count": {
-                        "$ref": "#/definitions/Number"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "count": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "count": {
-                        "$ref": "#/definitions/IndefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "count": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "count": {
-                        "$ref": "#/definitions/DefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "count": {
-                        "properties": {
-                           "min": {
-                              "minimum": 0
-                           },
-                           "max": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            }
-         ],
          "required": [
             "count",
             "seq_expr",
             "type"
          ],
          "additionalProperties": false
+      },
+      "ComposedSequenceExpression": {
+         "description": "An expression of a sequence composed from multiple other Sequence Expressions objects. MUST have at least one component that is not a ref:`LiteralSequenceExpression`. CANNOT be composed from nested composed sequence expressions.",
+         "additionalProperties": false,
+         "type": "object",
+         "properties": {
+            "type": {
+               "type": "string",
+               "const": "ComposedSequenceExpression",
+               "default": "ComposedSequenceExpression",
+               "description": "MUST be \"ComposedSequenceExpression\""
+            },
+            "components": {
+               "type": "array",
+               "uniqueItems": true,
+               "minItems": 2,
+               "ordered": true,
+               "items": {
+                  "oneOf": [
+                     {
+                        "$ref": "#/definitions/DerivedSequenceExpression"
+                     },
+                     {
+                        "$ref": "#/definitions/LiteralSequenceExpression"
+                     },
+                     {
+                        "$ref": "#/definitions/RepeatedSequenceExpression"
+                     }
+                  ]
+               },
+               "contains": {
+                  "oneOf": [
+                     {
+                        "$ref": "#/definitions/RepeatedSequenceExpression"
+                     },
+                     {
+                        "$ref": "#/definitions/DerivedSequenceExpression"
+                     }
+                  ]
+               },
+               "description": "An ordered list of SequenceExpression components   comprising the expression."
+            }
+         },
+         "required": [
+            "components"
+         ]
       },
       "GenotypeMember": {
          "description": "A class for expressing the count of a specific MolecularVariation present *in-trans* at a genomic locus represented by a Genotype.",
@@ -1054,6 +903,7 @@
             "type": {
                "type": "string",
                "const": "SequenceState",
+               "default": "SequenceState",
                "description": "MUST be \"SequenceState\""
             },
             "sequence": {
@@ -1079,6 +929,7 @@
             "type": {
                "type": "string",
                "const": "SimpleInterval",
+               "default": "SimpleInterval",
                "description": "MUST be \"SimpleInterval\""
             },
             "start": {

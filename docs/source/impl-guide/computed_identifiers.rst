@@ -193,7 +193,7 @@ Truncated Digest (sha512t24u)
 The sha512t24u truncated digest algorithm [Hart2020]_ computes an ASCII digest
 from binary data.  The method uses two well-established standard
 algorithms, the `SHA-512`_ hash function, which generates a binary
-digest from binary data, and `Base64`_ URL encoding, which encodes
+digest from binary data, and a URL-safe variant of `Base64`_ encoding, which encodes
 binary data using printable characters.
 
 Computing the sha512t24u truncated digest for binary data consists of

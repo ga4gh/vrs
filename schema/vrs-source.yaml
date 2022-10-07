@@ -104,8 +104,8 @@ definitions:
           Where Allele is located
       state:
         oneOf:
-          - $ref: "#/definitions/SequenceState" # DEPRECATED; remove in 2.0
           - $ref: "#/definitions/SequenceExpression"
+          - $ref: "#/definitions/SequenceState" # DEPRECATED; remove in 2.0
         description: >-
           An expression of the sequence state
         deprecated:
@@ -189,26 +189,33 @@ definitions:
 
   CopyNumber:
     inherits: SystemicVariation
-    type: object
     description: >-
-      The absolute count of discrete copies of a :ref:`MolecularVariation`,
-      :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference
+      The copies of :ref:`Location` in a system, expressed as an absolute integer
+      quantity (:ref:`AbsoluteCopyNumber`) or a qualitative description of copies 
+      relative to a baseline state (:ref:`RelativeCopyNumber`).
+    heritable_properties:
+      subject:
+        oneOf:
+          - $ref: "#/definitions/Location"
+          - $ref: "#/definitions/CURIE"
+        description: >-
+          A location for which the number of systemic copies is described.
+    heritable_required: [ "subject" ]
+
+  AbsoluteCopyNumber:
+    inherits: CopyNumber
+    type: object
+    maturity: draft
+    description: >-
+      The absolute count of discrete copies of a :ref:`Location`,
       within a system (e.g. genome, cell, etc.).
     properties:
       type:
         type: string
-        const: "CopyNumber"
-        default: "CopyNumber"
+        const: "AbsoluteCopyNumber"
+        default: "AbsoluteCopyNumber"
         description: >-
-          MUST be "CopyNumber"
-      subject:
-        oneOf:
-          - $ref: "#/definitions/MolecularVariation"
-          - $ref: "#/definitions/Feature"
-          - $ref: "#/definitions/SequenceExpression"
-          - $ref: "#/definitions/CURIE"
-        description: >-
-          Subject of the Copy Number object
+          MUST be "AbsoluteCopyNumber"
       copies:
         oneOf:
           - $ref: "#/definitions/Number"
@@ -216,41 +223,28 @@ definitions:
           - $ref: "#/definitions/DefiniteRange"
         description: >-
           The integral number of copies of the subject in a system
-    allOf:
-      - if:
-          properties:
-            copies:
-              $ref: "#/definitions/Number"
-        then:
-          properties:
-            copies:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            copies:
-              $ref: "#/definitions/IndefiniteRange"
-        then:
-          properties:
-            copies:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            copies:
-              $ref: "#/definitions/DefiniteRange"
-        then:
-          properties:
-            copies:
-              properties:
-                min:
-                  minimum: 0
-                max:
-                  minimum: 0
+    required: [ "copies" ]
 
-    required: [ "subject", "copies" ]
+  RelativeCopyNumber:
+    inherits: CopyNumber
+    type: object
+    maturity: draft
+    description: >-
+      The copies of a :ref:`Location` within a system (e.g. genome, cell, etc.)
+      relative to a baseline state.
+    properties:
+      type:
+        type: string
+        const: "RelativeCopyNumber"
+        default: "RelativeCopyNumber"
+        description: >-
+          MUST be "RelativeCopyNumber"
+      relative_copy_class:
+        type: string
+        enum: [ "complete loss", "partial loss", "copy neutral", "low-level gain", "high-level gain" ]
+        description: >-
+          MUST be one of "complete loss", "partial loss", "copy neutral", "low-level gain" or "high-level gain".
+    required: [  "relative_copy_class" ]
 
   Genotype:
     inherits: SystemicVariation
@@ -287,8 +281,6 @@ definitions:
           additional :ref:`MolecularVariation` that exist but are not 
           explicitly described.
     required: [ "members", "count" ]
-
-
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations
@@ -404,71 +396,6 @@ definitions:
           The end coordinate or range of the interval.
           The minimum value of this coordinate or range is 0.
           MUST represent a coordinate or range greater than the value of `start`.
-    allOf:
-      - if:
-          properties:
-            start:
-              $ref: "#/definitions/Number"
-        then:
-          properties:
-            start:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            start:
-              $ref: "#/definitions/IndefiniteRange"
-        then:
-          properties:
-            start:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            start:
-              $ref: "#/definitions/DefiniteRange"
-        then:
-          properties:
-            start:
-              properties:
-                min:
-                  minimum: 0
-                max:
-                  minimum: 0
-      - if:
-          properties:
-            end:
-              $ref: "#/definitions/Number"
-        then:
-          properties:
-            end:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            end:
-              $ref: "#/definitions/IndefiniteRange"
-        then:
-          properties:
-            end:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            end:
-              $ref: "#/definitions/DefiniteRange"
-        then:
-          properties:
-            end:
-              properties:
-                min:
-                  minimum: 0
-                max:
-                  minimum: 0
     required: [ "type", "start", "end" ]
 
   # SimpleInterval has been moved to DEPRECATED section at bottom.
@@ -512,6 +439,7 @@ definitions:
       - $ref: "#/definitions/LiteralSequenceExpression"
       - $ref: "#/definitions/DerivedSequenceExpression"
       - $ref: "#/definitions/RepeatedSequenceExpression"
+      - $ref: "#/definitions/ComposedSequenceExpression"
     discriminator:
       propertyName: type
     heritable_properties:
@@ -588,40 +516,41 @@ definitions:
           - $ref: "#/definitions/DefiniteRange"
         description: >-
           The count of repeated units, as an integer or inclusive range
-    allOf:
-      - if:
-          properties:
-            count:
-              $ref: "#/definitions/Number"
-        then:
-          properties:
-            count:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            count:
-              $ref: "#/definitions/IndefiniteRange"
-        then:
-          properties:
-            count:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            count:
-              $ref: "#/definitions/DefiniteRange"
-        then:
-          properties:
-            count:
-              properties:
-                min:
-                  minimum: 0
-                max:
-                  minimum: 0
     required: [ "seq_expr", "count" ]
+
+  ComposedSequenceExpression:
+    description: >-
+      An expression of a sequence composed from multiple other
+      :ref:`Sequence Expressions<SequenceExpression>`
+      objects. MUST have at least one component that is not a
+      ref:`LiteralSequenceExpression`. CANNOT be composed from
+      nested composed sequence expressions.
+    additionalProperties: false
+    type: object
+    properties:
+      type:
+        type: string
+        const: "ComposedSequenceExpression"
+        default: "ComposedSequenceExpression"
+        description: MUST be "ComposedSequenceExpression"
+      components:
+        type: array
+        uniqueItems: true
+        minItems: 2
+        ordered: true
+        items:
+          oneOf:
+            - $ref: "#/definitions/LiteralSequenceExpression"
+            - $ref: "#/definitions/RepeatedSequenceExpression"
+            - $ref: "#/definitions/DerivedSequenceExpression"
+        contains:
+          oneOf:
+            - $ref: "#/definitions/RepeatedSequenceExpression"
+            - $ref: "#/definitions/DerivedSequenceExpression"
+        description: >-
+          An ordered list of :ref:`SequenceExpression` components  
+          comprising the expression.
+    required: [ "components" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Nested Classes
@@ -809,6 +738,7 @@ definitions:
       type:
         type: string
         const: "SequenceState"
+        default: "SequenceState"
         description: MUST be "SequenceState"
       sequence:
         $ref: "#/definitions/Sequence"
@@ -830,6 +760,7 @@ definitions:
       type:
         type: string
         const: "SimpleInterval"
+        default: "SimpleInterval"
         description: MUST be "SimpleInterval"
       start:
         type: integer
