@@ -343,3 +343,135 @@ VariationSet:
       ga4gh_digest: QLQXSNSIFlqNYWmQbw-YkfmexPi4NeDE
       ga4gh_identify: ga4gh:VS.QLQXSNSIFlqNYWmQbw-YkfmexPi4NeDE
       ga4gh_serialize: '{"members":["-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x","Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"],"type":"VariationSet"}'
+GenotypeMember:
+  - name: "GenotypeMember w/ Allele"
+    in:
+      count:
+        value: 1
+        type: Number
+      variation:
+        location:
+          interval:
+            end:
+              type: Number
+              value: 94842866
+            start:
+              type: Number
+              value: 94842865
+            type: SequenceInterval
+          sequence_id: ga4gh:SQ.ss8r_wB0-b9r44TQTMmVTI92884QvBiB
+          type: SequenceLocation
+        state:
+          sequence: G
+          type: LiteralSequenceExpression
+        type: Allele
+      type: GenotypeMember
+    out:
+      ga4gh_serialize: '{"count":{"type":"Number","value":1},"type":"GenotypeMember","variation":"geQCxa1Enel8UBUAQQ2-rbphDjIR-cq0"}'
+GenotypeMember:
+  - name: "GenotypeMember w/ Haplotype"
+    in:
+      count:
+        value: 1
+        type: Number
+      variation:
+        members:
+        - location:
+            interval:
+              end:
+                type: Number
+                value: 94761900
+              start:
+                type: Number
+                value: 94761899
+            sequence_id: ga4gh:SQ.ss8r_wB0-b9r44TQTMmVTI92884QvBiB
+            type: SequenceLocation
+          state:
+            sequence: T
+            type: LiteralSequenceExpression
+          type: Allele
+        - location:
+            interval:
+              end:
+                type: Number
+                value: 94842866
+              start:
+                type: Number
+                value: 94842865
+            sequence_id: ga4gh:SQ.ss8r_wB0-b9r44TQTMmVTI92884QvBiB
+            type: SequenceLocation
+          state:
+            sequence: G
+            type: LiteralSequenceExpression
+          type: Allele
+        type: Haplotype
+      type: GenotypeMember
+    out:
+     ga4gh_serialize: '{"count":{"type":"Number","value":1},"type":"GenotypeMember","variation":"746-M4L_EZL-CiduWjqODaYN26lTkEN1"}'
+Genotype:
+  -
+    in:
+      members:
+        - count:
+            value: 1
+            type: Number
+          variation:
+            location:
+              interval:
+                end:
+                  type: Number
+                  value: 94842866
+                start:
+                  type: Number
+                  value: 94842865
+                type: SequenceInterval
+              sequence_id: ga4gh:SQ.ss8r_wB0-b9r44TQTMmVTI92884QvBiB
+              type: SequenceLocation
+            state:
+              sequence: G
+              type: LiteralSequenceExpression
+            type: Allele
+          type: GenotypeMember
+        - count:
+            value: 1
+            type: Number
+          variation:
+            members:
+            - location:
+                interval:
+                  end:
+                    type: Number
+                    value: 94761900
+                  start:
+                    type: Number
+                    value: 94761899
+                sequence_id: ga4gh:SQ.ss8r_wB0-b9r44TQTMmVTI92884QvBiB
+                type: SequenceLocation
+              state:
+                sequence: T
+                type: LiteralSequenceExpression
+              type: Allele
+            - location:
+                interval:
+                  end:
+                    type: Number
+                    value: 94842866
+                  start:
+                    type: Number
+                    value: 94842865
+                sequence_id: ga4gh:SQ.ss8r_wB0-b9r44TQTMmVTI92884QvBiB
+                type: SequenceLocation
+              state:
+                sequence: G
+                type: LiteralSequenceExpression
+              type: Allele
+            type: Haplotype
+          type: GenotypeMember
+      count:
+        type: Number
+        value: 2
+      type: Genotype
+    out:
+      ga4gh_digest: wuTcSAvkSCHgpCAPOvt88K5VVyT6oEZ5
+      ga4gh_identify: ga4gh:GT.wuTcSAvkSCHgpCAPOvt88K5VVyT6oEZ5
+      ga4gh_serialize: '{"count":{"type":"Number","value":2},"members":[{"count":{"type":"Number","value":1},"type":"GenotypeMember","variation":"geQCxa1Enel8UBUAQQ2-rbphDjIR-cq0"},{"count":{"type":"Number","value":1},"type":"GenotypeMember","variation":"746-M4L_EZL-CiduWjqODaYN26lTkEN1"}],"type":"Genotype"}'
