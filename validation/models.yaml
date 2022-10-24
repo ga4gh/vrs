@@ -269,26 +269,22 @@ AbsoluteCopyNumber:
         comparator: '>='
         type: IndefiniteRange
         value: 3
-      subject:
-        gene_id: ncbigene:348
-        type: Gene
+      subject: ncbigene:348
       type: AbsoluteCopyNumber
     out:
-      ga4gh_digest: 5DNZrhIFslE6Eeo0CsDyQQERR6x7v9OE
-      ga4gh_identify: ga4gh:VAC.5DNZrhIFslE6Eeo0CsDyQQERR6x7v9OE
-      ga4gh_serialize: '{"copies":{"comparator":">=","type":"IndefiniteRange","value":3},"subject":{"gene_id":"ncbigene:348","type":"Gene"},"type":"AbsoluteCopyNumber"}'
+      ga4gh_digest: jwTswRixKm46exoepUPTnCvKCJIWDO3j
+      ga4gh_identify: ga4gh:VAC.jwTswRixKm46exoepUPTnCvKCJIWDO3j
+      ga4gh_serialize: '{"copies":{"comparator":">=","type":"IndefiniteRange","value":3},"subject":"ncbigene:348","type":"AbsoluteCopyNumber"}'
 RelativeCopyNumber:
   - name: "Low-level copy gain of BRCA1"
     in:
       relative_copy_class: low-level gain
-      subject:
-        gene_id: ncbigene:348
-        type: Gene
+      subject: ncbigene:348
       type: RelativeCopyNumber
     out:
-      ga4gh_digest: CUf7xZJd36mapcm0h3cOZR8kjM_Aj4UV
-      ga4gh_identify: ga4gh:VRC.CUf7xZJd36mapcm0h3cOZR8kjM_Aj4UV
-      ga4gh_serialize: '{"relative_copy_class":"low-level gain","subject":{"gene_id":"ncbigene:348","type":"Gene"},"type":"RelativeCopyNumber"}'
+      ga4gh_digest: fdoeFEYsGiCe5jY4pw8xKiGqowvg-F47
+      ga4gh_identify: ga4gh:VRC.fdoeFEYsGiCe5jY4pw8xKiGqowvg-F47
+      ga4gh_serialize: '{"relative_copy_class":"low-level gain","subject":"ncbigene:348","type":"RelativeCopyNumber"}'
 Text:
   -
     in:
