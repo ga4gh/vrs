@@ -427,7 +427,7 @@ GenotypeMember:
         type: Haplotype
       type: GenotypeMember
     out:
-     ga4gh_serialize: '{"count":{"type":"Number","value":1},"type":"GenotypeMember","variation":"746-M4L_EZL-CiduWjqODaYN26lTkEN1"}'
+     ga4gh_serialize: '{"count":{"type":"Number","value":1},"type":"GenotypeMember","variation":"Ow_uE0YaVWHIno4pQfdmYpWmlGPNtXQr"}'
 Genotype:
   -
     in:
@@ -492,6 +492,6 @@ Genotype:
         value: 2
       type: Genotype
     out:
-      ga4gh_digest: wuTcSAvkSCHgpCAPOvt88K5VVyT6oEZ5
-      ga4gh_identify: ga4gh:GT.wuTcSAvkSCHgpCAPOvt88K5VVyT6oEZ5
-      ga4gh_serialize: '{"count":{"type":"Number","value":2},"members":[{"count":{"type":"Number","value":1},"type":"GenotypeMember","variation":"geQCxa1Enel8UBUAQQ2-rbphDjIR-cq0"},{"count":{"type":"Number","value":1},"type":"GenotypeMember","variation":"746-M4L_EZL-CiduWjqODaYN26lTkEN1"}],"type":"Genotype"}'
+      ga4gh_digest: fz-TMM88G2hmK6cQ-JwrpVAr8d_3eTVq
+      ga4gh_identify: ga4gh:GT.fz-TMM88G2hmK6cQ-JwrpVAr8d_3eTVq
+      ga4gh_serialize: '{"count":{"type":"Number","value":2},"members":["EhA9scQ-F-n1eQdQOJYClDXq613IZLQm","oJg9piBqrJ-_t3PSLA21d4z8f4tJHKqI"],"type":"Genotype"}'
