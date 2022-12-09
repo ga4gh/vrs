@@ -31,4 +31,4 @@ Some RelativeCopyNumber attributes are inherited from :ref:`Entity`.
    *  - relative_copy_class
       - string
       - 1..1
-      - MUST be one of "complete loss", "partial loss", "copy neutral", "low-level gain" or "high-level gain".
+      - MUST be one of "EFO:0030070", "EFO:0030072", "EFO:0030073", "EFO:0030071", "EFO:0030067", "EFO:0030069", or "EFO:0030068".

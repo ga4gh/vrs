@@ -347,7 +347,7 @@ An APOE ε2 Haplotype with inline Alleles:
     }
 
 The same APOE ε2 Haplotype with referenced Alleles:
-  
+
 .. parsed-literal::
 
     {
@@ -427,7 +427,7 @@ Low-level copy gain of BRCA1:
 .. parsed-literal::
 
     {
-      "relative_copy_class": "low-level gain",
+      "relative_copy_class": "EFO:0030071",
       "subject": {
         "gene_id": "ncbigene:348",
         "type": "Gene"
@@ -907,7 +907,7 @@ large) reference subsequences specified by a :ref:`SequenceLocation`.
       "type": "DerivedSequenceExpression"
     }
 
-    
+
 .. _RepeatedSequenceExpression:
 
 RepeatedSequenceExpression
