@@ -1,5 +1,5 @@
 pytest
-python-jsonschema-objects>=0.3,<=0.3.10
+python-jsonschema-objects>=0.3.13
 jsonschema==3.2.0
 ipython
 pyyaml
