@@ -239,9 +239,9 @@ definitions:
           MUST be "RelativeCopyNumber"
       relative_copy_class:
         type: string
-        enum: [ "EFO:0030070", "EFO:0030072", "EFO:0030073", "EFO:0030071", "EFO:0030067", "EFO:0030069", "EFO:0030068" ]
+        enum: [ "EFO:0030070", "EFO:0030072", "EFO:0030071", "EFO:0030067", "EFO:0030069", "EFO:0030068" ]
         description: >-
-          MUST be one of "EFO:0030070", "EFO:0030072", "EFO:0030073", "EFO:0030071", "EFO:0030067", "EFO:0030069", or "EFO:0030068".
+          MUST be one of "EFO:0030070", "EFO:0030072", "EFO:0030071", "EFO:0030067", "EFO:0030069", or "EFO:0030068".
     required: [ "relative_copy_class" ]
 
   Genotype:
