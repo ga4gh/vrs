@@ -404,6 +404,7 @@ GenotypeMember:
               start:
                 type: Number
                 value: 94761899
+              type: SequenceInterval
             sequence_id: ga4gh:SQ.ss8r_wB0-b9r44TQTMmVTI92884QvBiB
             type: SequenceLocation
           state:
@@ -418,6 +419,7 @@ GenotypeMember:
               start:
                 type: Number
                 value: 94842865
+              type: SequenceInterval
             sequence_id: ga4gh:SQ.ss8r_wB0-b9r44TQTMmVTI92884QvBiB
             type: SequenceLocation
           state:
@@ -465,6 +467,7 @@ Genotype:
                   start:
                     type: Number
                     value: 94761899
+                  type: SequenceInterval
                 sequence_id: ga4gh:SQ.ss8r_wB0-b9r44TQTMmVTI92884QvBiB
                 type: SequenceLocation
               state:
@@ -479,6 +482,7 @@ Genotype:
                   start:
                     type: Number
                     value: 94842865
+                  type: SequenceInterval
                 sequence_id: ga4gh:SQ.ss8r_wB0-b9r44TQTMmVTI92884QvBiB
                 type: SequenceLocation
               state:
