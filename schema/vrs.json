@@ -71,6 +71,7 @@
             "type": {
                "type": "string",
                "const": "Allele",
+               "default": "Allele",
                "description": "MUST be \"Allele\""
             },
             "location": {
@@ -87,10 +88,10 @@
             "state": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/SequenceState"
+                     "$ref": "#/definitions/SequenceExpression"
                   },
                   {
-                     "$ref": "#/definitions/SequenceExpression"
+                     "$ref": "#/definitions/SequenceState"
                   }
                ],
                "description": "An expression of the sequence state",
@@ -119,6 +120,7 @@
             "type": {
                "type": "string",
                "const": "Haplotype",
+               "default": "Haplotype",
                "description": "MUST be \"Haplotype\""
             },
             "members": {
@@ -155,6 +157,7 @@
             "type": {
                "type": "string",
                "const": "Text",
+               "default": "Text",
                "description": "MUST be \"Text\""
             },
             "definition": {
@@ -179,6 +182,7 @@
             "type": {
                "type": "string",
                "const": "VariationSet",
+               "default": "VariationSet",
                "description": "MUST be \"VariationSet\""
             },
             "members": {
@@ -214,6 +218,7 @@
             "type": {
                "type": "string",
                "const": "CopyNumber",
+               "default": "CopyNumber",
                "description": "MUST be \"CopyNumber\""
             },
             "subject": {
@@ -345,6 +350,7 @@
             "type": {
                "type": "string",
                "const": "ChromosomeLocation",
+               "default": "ChromosomeLocation",
                "description": "MUST be \"ChromosomeLocation\""
             },
             "species_id": {
@@ -380,6 +386,7 @@
             "type": {
                "type": "string",
                "const": "SequenceLocation",
+               "default": "SequenceLocation",
                "description": "MUST be \"SequenceLocation\""
             },
             "sequence_id": {
@@ -412,6 +419,7 @@
             "type": {
                "type": "string",
                "const": "SequenceInterval",
+               "default": "SequenceInterval",
                "description": "MUST be \"SequenceInterval\""
             },
             "start": {
@@ -585,6 +593,7 @@
             "type": {
                "type": "string",
                "const": "CytobandInterval",
+               "default": "CytobandInterval",
                "description": "MUST be \"CytobandInterval\""
             },
             "start": {
@@ -632,6 +641,7 @@
             "type": {
                "type": "string",
                "const": "LiteralSequenceExpression",
+               "default": "LiteralSequenceExpression",
                "description": "MUST be \"LiteralSequenceExpression\""
             },
             "sequence": {
@@ -652,6 +662,7 @@
             "type": {
                "type": "string",
                "const": "DerivedSequenceExpression",
+               "default": "DerivedSequenceExpression",
                "description": "MUST be \"DerivedSequenceExpression\""
             },
             "location": {
@@ -677,6 +688,7 @@
             "type": {
                "type": "string",
                "const": "RepeatedSequenceExpression",
+               "default": "RepeatedSequenceExpression",
                "description": "MUST be \"RepeatedSequenceExpression\""
             },
             "seq_expr": {
@@ -795,6 +807,7 @@
             "type": {
                "type": "string",
                "const": "Gene",
+               "default": "Gene",
                "description": "MUST be \"Gene\""
             },
             "gene_id": {
@@ -815,6 +828,7 @@
             "type": {
                "type": "string",
                "const": "Number",
+               "default": "Number",
                "description": "MUST be \"Number\""
             },
             "value": {
@@ -835,6 +849,7 @@
             "type": {
                "type": "string",
                "const": "DefiniteRange",
+               "default": "DefiniteRange",
                "description": "MUST be \"DefiniteRange\""
             },
             "min": {
@@ -860,6 +875,7 @@
             "type": {
                "type": "string",
                "const": "IndefiniteRange",
+               "default": "IndefiniteRange",
                "description": "MUST be \"IndefiniteRange\""
             },
             "value": {
@@ -916,6 +932,7 @@
             "type": {
                "type": "string",
                "const": "SequenceState",
+               "default": "SequenceState",
                "description": "MUST be \"SequenceState\""
             },
             "sequence": {
@@ -941,6 +958,7 @@
             "type": {
                "type": "string",
                "const": "SimpleInterval",
+               "default": "SimpleInterval",
                "description": "MUST be \"SimpleInterval\""
             },
             "start": {
