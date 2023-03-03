@@ -377,7 +377,7 @@ CopyNumber:
       type: CopyNumber
     out:
       ga4gh_digest: gwEL4SJx8fTbpWGwymtbPQoQGVYJkhGq
-      ga4gh_identify: ga4gh:VAC.gwEL4SJx8fTbpWGwymtbPQoQGVYJkhGq
+      ga4gh_identify: ga4gh:CNV.gwEL4SJx8fTbpWGwymtbPQoQGVYJkhGq
       ga4gh_serialize: '{"copies":{"comparator":">=","type":"IndefiniteRange","value":3},"subject":"oz3NEuhtbBep3yqu3wrhqfDKbLPK7vcE","type":"CopyNumber"}'
 CopyNumberAssessment:
   - name: "Low-level copy gain of BRCA1"
@@ -397,8 +397,8 @@ CopyNumberAssessment:
       type: CopyNumberAssessment
     out:
       ga4gh_digest: bz33TOKnjKKcuy_sle4xGZM3mRcazEvJ
-      ga4gh_identify: ga4gh:VRC.bz33TOKnjKKcuy_sle4xGZM3mRcazEvJ
-      ga4gh_serialize: '{"copy_assessment":"low-level gain","subject":"oz3NEuhtbBep3yqu3wrhqfDKbLPK7vcE","type":"CopyNumberAssessment"}'
+      ga4gh_identify: ga4gh:CNA.bz33TOKnjKKcuy_sle4xGZM3mRcazEvJ
+      ga4gh_serialize: '{"copy_assessment":"EFO_0030071","subject":"oz3NEuhtbBep3yqu3wrhqfDKbLPK7vcE","type":"CopyNumberAssessment"}'
 Text:
   -
     in:
