@@ -356,7 +356,7 @@ Haplotype:
       ga4gh_digest: i8owCOBHIlRCPtcw_WzRFNTunwJRy99-
       ga4gh_identify: ga4gh:VH.i8owCOBHIlRCPtcw_WzRFNTunwJRy99-
       ga4gh_serialize: '{"members":["-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x","Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"],"type":"Haplotype"}'
-AbsoluteCopyNumber:
+CopyNumber:
   - name: ">=3 copies APOE"
     in:
       copies:
@@ -374,15 +374,15 @@ AbsoluteCopyNumber:
             value: 44905795
           type: SequenceInterval
         type: SequenceLocation
-      type: AbsoluteCopyNumber
+      type: CopyNumber
     out:
       ga4gh_digest: New2SZ7NZU_gBbjzcmA8IwmA-EShG5JI
       ga4gh_identify: ga4gh:VAC.New2SZ7NZU_gBbjzcmA8IwmA-EShG5JI
       ga4gh_serialize: '{"copies":{"comparator":">=","type":"IndefiniteRange","value":3},"subject":"oz3NEuhtbBep3yqu3wrhqfDKbLPK7vcE","type":"AbsoluteCopyNumber"}'
-RelativeCopyNumber:
+CopyNumberAssessment:
   - name: "Low-level copy gain of BRCA1"
     in:
-      relative_copy_class: low-level gain
+      copy_assessment: EFO_0030071
       subject:
         sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
         interval:
@@ -394,7 +394,7 @@ RelativeCopyNumber:
             value: 44905795
           type: SequenceInterval
         type: SequenceLocation
-      type: RelativeCopyNumber
+      type: CopyNumberAssessment
     out:
       ga4gh_digest: 69x30aZU0KQF0RDqq3CaaVBid_xrgzrI
       ga4gh_identify: ga4gh:VRC.69x30aZU0KQF0RDqq3CaaVBid_xrgzrI
