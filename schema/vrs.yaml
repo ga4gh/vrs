@@ -6,8 +6,8 @@ definitions:
     description: A representation of the state of one or more biomolecules.
     oneOf:
     - $ref: '#/definitions/Allele'
-    - $ref: '#/definitions/CopyNumber'
-    - $ref: '#/definitions/CopyNumberAssessment'
+    - $ref: '#/definitions/CopyNumberChange'
+    - $ref: '#/definitions/CopyNumberCount'
     - $ref: '#/definitions/Genotype'
     - $ref: '#/definitions/Haplotype'
     - $ref: '#/definitions/Text'
@@ -34,8 +34,8 @@ definitions:
     description: A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
     oneOf:
-    - $ref: '#/definitions/CopyNumber'
-    - $ref: '#/definitions/CopyNumberAssessment'
+    - $ref: '#/definitions/CopyNumberChange'
+    - $ref: '#/definitions/CopyNumberCount'
     - $ref: '#/definitions/Genotype'
     discriminator:
       propertyName: type
@@ -140,8 +140,8 @@ definitions:
           oneOf:
           - $ref: '#/definitions/Allele'
           - $ref: '#/definitions/CURIE'
-          - $ref: '#/definitions/CopyNumber'
-          - $ref: '#/definitions/CopyNumberAssessment'
+          - $ref: '#/definitions/CopyNumberChange'
+          - $ref: '#/definitions/CopyNumberCount'
           - $ref: '#/definitions/Genotype'
           - $ref: '#/definitions/Haplotype'
           - $ref: '#/definitions/Text'
@@ -152,7 +152,7 @@ definitions:
     - members
     - type
     additionalProperties: false
-  CopyNumber:
+  CopyNumberCount:
     type: object
     description: The absolute count of discrete copies of a Location or Feature, within
       a system (e.g. genome, cell, etc.).
@@ -162,9 +162,9 @@ definitions:
         description: Variation Id. MUST be unique within document.
       type:
         type: string
-        const: CopyNumber
-        default: CopyNumber
-        description: MUST be "CopyNumber"
+        const: CopyNumberCount
+        default: CopyNumberCount
+        description: MUST be "CopyNumberCount"
       subject:
         oneOf:
         - $ref: '#/definitions/CURIE'
@@ -183,7 +183,7 @@ definitions:
     - subject
     - type
     additionalProperties: false
-  CopyNumberAssessment:
+  CopyNumberChange:
     type: object
     maturity: draft
     description: An assessment of the copy number of a Location or a Feature within
@@ -194,9 +194,9 @@ definitions:
         description: Variation Id. MUST be unique within document.
       type:
         type: string
-        const: CopyNumberAssessment
-        default: CopyNumberAssessment
-        description: MUST be "CopyNumberAssessment"
+        const: CopyNumberChange
+        default: CopyNumberChange
+        description: MUST be "CopyNumberChange"
       subject:
         oneOf:
         - $ref: '#/definitions/CURIE'
@@ -208,14 +208,14 @@ definitions:
         type: string
         enum:
         - EFO_0030069
-        - EFO_XXXXXXX
+        - EFO_0020073
         - EFO_0030068
         - EFO_0030067
         - EFO_0030064
         - EFO_0030070
         - EFO_0030071
         - EFO_0030072
-        description: MUST be one of "EFO_0030069" (complete genomic loss), <HLL code>
+        description: MUST be one of "EFO_0030069" (complete genomic loss), "EFO_0020073"
           (high-level loss),  "EFO_0030068" (low-level loss), "EFO_0030067" (loss),
           "EFO_0030064" (regional base ploidy),  "EFO_0030070" (gain), "EFO_0030071"
           (low-level gain), "EFO_0030072" (high-level gain).

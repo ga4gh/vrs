@@ -4,7 +4,7 @@ An assessment of the copy number of a :ref:`Location` or a :ref:`Feature` within
 
 **Information Model**
 
-Some CopyNumberAssessment attributes are inherited from :ref:`Variation`.
+Some CopyNumberChange attributes are inherited from :ref:`Variation`.
 
 .. list-table::
    :class: clean-wrap
@@ -23,7 +23,7 @@ Some CopyNumberAssessment attributes are inherited from :ref:`Variation`.
    *  - type
       - string
       - 1..1
-      - MUST be "CopyNumberAssessment"
+      - MUST be "CopyNumberChange"
    *  - subject
       - :ref:`Location` | :ref:`CURIE` | :ref:`Feature`
       - 1..1
@@ -31,4 +31,4 @@ Some CopyNumberAssessment attributes are inherited from :ref:`Variation`.
    *  - copy_assessment
       - string
       - 1..1
-      - MUST be one of "EFO_0030069" (complete genomic loss), <HLL code> (high-level loss),  "EFO_0030068" (low-level loss), "EFO_0030067" (loss), "EFO_0030064" (regional base ploidy),  "EFO_0030070" (gain), "EFO_0030071" (low-level gain), "EFO_0030072" (high-level gain).
+      - MUST be one of "EFO_0030069" (complete genomic loss), "EFO_0020073" (high-level loss),  "EFO_0030068" (low-level loss), "EFO_0030067" (loss), "EFO_0030064" (regional base ploidy),  "EFO_0030070" (gain), "EFO_0030071" (low-level gain), "EFO_0030072" (high-level gain).

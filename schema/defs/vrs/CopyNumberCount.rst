@@ -4,7 +4,7 @@ The absolute count of discrete copies of a :ref:`Location` or :ref:`Feature`, wi
 
 **Information Model**
 
-Some CopyNumber attributes are inherited from :ref:`Variation`.
+Some CopyNumberCount attributes are inherited from :ref:`Variation`.
 
 .. list-table::
    :class: clean-wrap
@@ -23,7 +23,7 @@ Some CopyNumber attributes are inherited from :ref:`Variation`.
    *  - type
       - string
       - 1..1
-      - MUST be "CopyNumber"
+      - MUST be "CopyNumberCount"
    *  - subject
       - :ref:`Location` | :ref:`CURIE` | :ref:`Feature`
       - 1..1

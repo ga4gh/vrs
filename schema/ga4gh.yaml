@@ -25,8 +25,8 @@ identifiers:
     Text: VT
     Genotype: GT
     Haplotype: VH
-    CopyNumber: CNV
-    CopyNumberAssessment: CNA
+    CopyNumberCount: CN
+    CopyNumberChange: CX
     SequenceLocation: VSL
     ChromosomeLocation: VCL
 
