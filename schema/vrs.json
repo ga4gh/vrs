@@ -312,7 +312,7 @@
       "CopyNumberChange": {
          "type": "object",
          "maturity": "draft",
-         "description": "An assessment of the copy number of a Location or a Feature within a system (e.g. genome, cell,  etc.) relative to a baseline state.",
+         "description": "An assessment of the copy number of a Location or a Feature within a system (e.g. genome, cell,  etc.) relative to a baseline ploidy.",
          "properties": {
             "_id": {
                "$ref": "#/definitions/CURIE",

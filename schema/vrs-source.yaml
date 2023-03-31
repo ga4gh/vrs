@@ -223,7 +223,7 @@ definitions:
     maturity: draft
     description: >-
       An assessment of the copy number of a :ref:`Location` or a :ref:`Feature` within a system (e.g. genome, cell, 
-      etc.) relative to a baseline state.
+      etc.) relative to a baseline ploidy.
     properties:
       type:
         type: string

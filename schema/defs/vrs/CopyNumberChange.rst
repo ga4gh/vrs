@@ -1,6 +1,6 @@
 **Computational Definition**
 
-An assessment of the copy number of a :ref:`Location` or a :ref:`Feature` within a system (e.g. genome, cell,  etc.) relative to a baseline state.
+An assessment of the copy number of a :ref:`Location` or a :ref:`Feature` within a system (e.g. genome, cell,  etc.) relative to a baseline ploidy.
 
 **Information Model**
 
