@@ -1029,6 +1029,53 @@ large-scale tandem duplications.
       "type": "RepeatedSequenceExpression"
     }
 
+ComposedSequenceExpression
+##########################
+
+*Composed Sequence* is a class of sequence expression composed of other sequence expression
+types. It is useful, for example, when representing multiple repeating subunits that occur
+in tandem, such as in the description of *PABPN1* alleles in the diagnosis of
+oculopharyngeal muscular dystrophy (OPMD).
+
+.. include:: defs/ComposedSequenceExpression.rst
+
+**Examples**
+
+.. parsed-literal::
+
+    {
+      "type": "Allele",
+      "location": {
+        "type": "SequenceLocation",
+        "sequence_id": "ga4gh:SQ.sH4gymNtL5nxNdTE3evfxzZa4dg3fqDz",
+        "interval": {
+          "type": "SequenceInterval",
+          "start": { "type": "Number", "value": 3  },
+          "end":   { "type": "Number", "value": 33 }
+        }
+      },
+      "state": {
+        "type": "ComposedSequenceExpression",
+        "components": [
+          {
+            "type": "RepeatedSequenceExpression",
+            "seq_expr": { "type": "LiteralSequenceExpression", "sequence": "GCG" },
+            "count": { "type": "Number", "value": 11 }
+          },
+          {
+            "type": "RepeatedSequenceExpression",
+            "seq_expr": { "type": "LiteralSequenceExpression", "sequence": "GCA" },
+            "count": { "type": "Number", "value": 3 }
+          },
+          {
+            "type": "RepeatedSequenceExpression",
+            "seq_expr": { "type": "LiteralSequenceExpression", "sequence": "GCG" },
+            "count": { "type": "Number", "value": 1 }
+          }
+        ]
+      }
+    }
+
 .. _Feature:
 
 Feature
