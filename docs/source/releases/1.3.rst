@@ -15,7 +15,7 @@ Major Changes
 #############
 
   * :ref:`CopyNumberChange` introduced for relative copy number calls
-  * :ref:`CopyNumberCount` replaces `CopyNumber`
+  * :ref:`CopyNumberCount` replaces ```CopyNumber```
   * :ref:`Genotype` introduced for describing genotypes
   * :ref:`ComposedSequenceExpression` introduced for composing expressions from multiple other sequence expressions
 
