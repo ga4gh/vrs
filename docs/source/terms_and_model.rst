@@ -427,7 +427,7 @@ Low-level copy gain of BRCA1:
 .. parsed-literal::
 
     {
-      "copy_assessment": "EFO_0030071", # low-level gain
+      "copy_change": "EFO_0030071", # low-level gain
       "subject": {
         "gene_id": "ncbigene:348",          # BRCA1 gene
         "type": "Gene"
