@@ -15,7 +15,7 @@ Major Changes
 #############
 
   * :ref:`CopyNumberChange` introduced for relative copy number calls
-  * :ref:`CopyNumberCount` replaces ``CopyNumber``
+  * :ref:`CopyNumberCount` replaces `CopyNumber (v1.2) <https://vrs.ga4gh.org/en/1.2.1/terms_and_model.html#copynumber>`_
   * :ref:`Genotype` introduced as a new systemic variation concept
   * :ref:`ComposedSequenceExpression` introduced for composing expressions from multiple other sequence expressions
 
