@@ -16,7 +16,7 @@ Major Changes
 
   * :ref:`CopyNumberChange` introduced for relative copy number calls
   * :ref:`CopyNumberCount` replaces ``CopyNumber``
-  * :ref:`Genotype` introduced for describing genotypes
+  * :ref:`Genotype` introduced as a new systemic variation concept
   * :ref:`ComposedSequenceExpression` introduced for composing expressions from multiple other sequence expressions
 
 Minor Changes
