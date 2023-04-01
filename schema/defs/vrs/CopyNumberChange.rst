@@ -28,7 +28,7 @@ Some CopyNumberChange attributes are inherited from :ref:`Variation`.
       - :ref:`Location` | :ref:`CURIE` | :ref:`Feature`
       - 1..1
       - A location for which the number of systemic copies is described.
-   *  - copy_assessment
+   *  - copy_change
       - string
       - 1..1
       - MUST be one of "EFO_0030069" (complete genomic loss), "EFO_0020073" (high-level loss),  "EFO_0030068" (low-level loss), "EFO_0030067" (loss), "EFO_0030064" (regional base ploidy),  "EFO_0030070" (gain), "EFO_0030071" (low-level gain), "EFO_0030072" (high-level gain).

@@ -204,7 +204,7 @@ definitions:
         - $ref: '#/definitions/Gene'
         - $ref: '#/definitions/SequenceLocation'
         description: A location for which the number of systemic copies is described.
-      copy_assessment:
+      copy_change:
         type: string
         enum:
         - EFO_0030069
@@ -220,7 +220,7 @@ definitions:
           "EFO_0030064" (regional base ploidy),  "EFO_0030070" (gain), "EFO_0030071"
           (low-level gain), "EFO_0030072" (high-level gain).
     required:
-    - copy_assessment
+    - copy_change
     - subject
     - type
     additionalProperties: false
