@@ -25,8 +25,8 @@ identifiers:
     Text: VT
     Genotype: GT
     Haplotype: VH
-    AbsoluteCopyNumber: VAC
-    RelativeCopyNumber: VRC
+    CopyNumberCount: CN
+    CopyNumberChange: CX
     SequenceLocation: VSL
     ChromosomeLocation: VCL
 

@@ -368,14 +368,13 @@ Systemic Variation
 
 .. include:: defs/SystemicVariation.rst
 
-.. _AbsoluteCopyNumber:
+.. _CopyNumberCount:
 
-AbsoluteCopyNumber
-$$$$$$$$$$$$$$$$$$
+CopyNumberCount
+$$$$$$$$$$$$$$$
 
-*Absolute Copy Number Variation* captures the copies of a molecule within a
-genome, and can be used to express concepts such as amplification
-and copy loss. Copy Number Variation has conflated meanings in the
+*Copy Number Count* captures the integral copies of a molecule within a
+genome. Copy Number Count has conflated meanings in the
 genomics community, and can mean either (or both) the notion of copy
 number *in a genome* or copy number *on a molecule*. VRS separates
 the concerns of these two types of statements; this concept is a type
@@ -383,7 +382,7 @@ of :ref:`SystemicVariation` and so describes the number of copies in a
 genome. The related :ref:`MolecularVariation` concept can be expressed
 as an :ref:`Allele` with a :ref:`RepeatedSequenceExpression`.
 
-.. include:: defs/AbsoluteCopyNumber.rst
+.. include:: defs/CopyNumberCount.rst
 
 **Examples**
 
@@ -401,21 +400,24 @@ Two, three, or four total copies of BRCA1:
         "gene_id": "ncbigene:348",
         "type": "Gene"
       },
-      "type": "AbsoluteCopyNumber"
+      "type": "CopyNumberCount"
     }
 
-.. _RelativeCopyNumber:
+.. _CopyNumberChange:
 
-RelativeCopyNumber
-$$$$$$$$$$$$$$$$$$
+CopyNumberChange
+$$$$$$$$$$$$$$$$
 
-*Relative Copy Number Variation* captures a classification of copies
+*Copy Number Change* captures a categorization of copies
 of a molecule within a system, relative to a baseline. These types
 of Variation are common outputs from CNV callers, particularly in the
-somatic domain where Absolute Copy Counts are difficult to estimate
-and less useful in practice than relative statements.
+somatic domain where integral :ref:`CopyNumberCount` are difficult to
+estimate and less useful in practice than relative statements. Somatic CNV
+callers typically express changes as relative statements, and many HGVS
+expressions submitted to express copy number variation are interpreted to be
+relative copy changes.
 
-.. include:: defs/RelativeCopyNumber.rst
+.. include:: defs/CopyNumberChange.rst
 
 **Examples**
 
@@ -424,12 +426,12 @@ Low-level copy gain of BRCA1:
 .. parsed-literal::
 
     {
-      "relative_copy_class": "low-level gain",
+      "relative_copy_class": "EFO_0030071", # low-level gain
       "subject": {
-        "gene_id": "ncbigene:348",
+        "gene_id": "ncbigene:348",          # BRCA1 gene
         "type": "Gene"
       },
-      "type": "RelativeCopyNumber"
+      "type": "CopyNumberChange"
     }
 
 .. _genotype:

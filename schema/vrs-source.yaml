@@ -71,7 +71,8 @@ definitions:
       A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
     oneOf:
-      - $ref: "#/definitions/CopyNumber"
+      - $ref: "#/definitions/CopyNumberCount"
+      - $ref: "#/definitions/CopyNumberChange"
       - $ref: "#/definitions/Genotype"
     discriminator:
       propertyName: type
@@ -187,35 +188,26 @@ definitions:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # SystemicVariation
 
-  CopyNumber:
+  CopyNumberCount:
     inherits: SystemicVariation
-    description: >-
-      The copies of :ref:`Location` in a system, expressed as an absolute integer
-      quantity (:ref:`AbsoluteCopyNumber`) or a qualitative description of copies 
-      relative to a baseline state (:ref:`RelativeCopyNumber`).
-    heritable_properties:
-      subject:
-        oneOf:
-          - $ref: "#/definitions/Location"
-          - $ref: "#/definitions/CURIE"
-        description: >-
-          A location for which the number of systemic copies is described.
-    heritable_required: [ "subject" ]
-
-  AbsoluteCopyNumber:
-    inherits: CopyNumber
     type: object
-    maturity: draft
     description: >-
-      The absolute count of discrete copies of a :ref:`Location`,
+      The absolute count of discrete copies of a :ref:`Location` or :ref:`Feature`,
       within a system (e.g. genome, cell, etc.).
     properties:
       type:
         type: string
-        const: "AbsoluteCopyNumber"
-        default: "AbsoluteCopyNumber"
+        const: "CopyNumberCount"
+        default: "CopyNumberCount"
         description: >-
-          MUST be "AbsoluteCopyNumber"
+          MUST be "CopyNumberCount"
+      subject:
+        oneOf:
+          - $ref: "#/definitions/Location"
+          - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Feature"
+        description: >-
+          A location for which the number of systemic copies is described.
       copies:
         oneOf:
           - $ref: "#/definitions/Number"
@@ -223,28 +215,37 @@ definitions:
           - $ref: "#/definitions/DefiniteRange"
         description: >-
           The integral number of copies of the subject in a system
-    required: [ "copies" ]
+    required: [ "subject", "copies" ]
 
-  RelativeCopyNumber:
-    inherits: CopyNumber
+  CopyNumberChange:
+    inherits: SystemicVariation
     type: object
     maturity: draft
     description: >-
-      The copies of a :ref:`Location` within a system (e.g. genome, cell, etc.)
-      relative to a baseline state.
+      An assessment of the copy number of a :ref:`Location` or a :ref:`Feature` within a system (e.g. genome, cell, 
+      etc.) relative to a baseline ploidy.
     properties:
       type:
         type: string
-        const: "RelativeCopyNumber"
-        default: "RelativeCopyNumber"
+        const: "CopyNumberChange"
+        default: "CopyNumberChange"
         description: >-
-          MUST be "RelativeCopyNumber"
-      relative_copy_class:
+          MUST be "CopyNumberChange"
+      subject:
+        oneOf:
+          - $ref: "#/definitions/Location"
+          - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Feature"
+        description: >-
+          A location for which the number of systemic copies is described.
+      copy_assessment:
         type: string
-        enum: [ "complete loss", "partial loss", "copy neutral", "low-level gain", "high-level gain" ]
+        enum: [ "EFO_0030069", "EFO_0020073", "EFO_0030068", "EFO_0030067", "EFO_0030064", "EFO_0030070", "EFO_0030071", "EFO_0030072" ]
         description: >-
-          MUST be one of "complete loss", "partial loss", "copy neutral", "low-level gain" or "high-level gain".
-    required: [  "relative_copy_class" ]
+          MUST be one of "EFO_0030069" (complete genomic loss), "EFO_0020073" (high-level loss), 
+          "EFO_0030068" (low-level loss), "EFO_0030067" (loss), "EFO_0030064" (regional base ploidy), 
+          "EFO_0030070" (gain), "EFO_0030071" (low-level gain), "EFO_0030072" (high-level gain).
+    required: [  "subject", "copy_assessment" ]
 
   Genotype:
     inherits: SystemicVariation

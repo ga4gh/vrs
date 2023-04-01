@@ -356,7 +356,7 @@ Haplotype:
       ga4gh_digest: i8owCOBHIlRCPtcw_WzRFNTunwJRy99-
       ga4gh_identify: ga4gh:VH.i8owCOBHIlRCPtcw_WzRFNTunwJRy99-
       ga4gh_serialize: '{"members":["-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x","Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"],"type":"Haplotype"}'
-AbsoluteCopyNumber:
+CopyNumberCount:
   - name: ">=3 copies APOE"
     in:
       copies:
@@ -374,15 +374,15 @@ AbsoluteCopyNumber:
             value: 44905795
           type: SequenceInterval
         type: SequenceLocation
-      type: AbsoluteCopyNumber
+      type: CopyNumberCount
     out:
-      ga4gh_digest: New2SZ7NZU_gBbjzcmA8IwmA-EShG5JI
-      ga4gh_identify: ga4gh:VAC.New2SZ7NZU_gBbjzcmA8IwmA-EShG5JI
-      ga4gh_serialize: '{"copies":{"comparator":">=","type":"IndefiniteRange","value":3},"subject":"oz3NEuhtbBep3yqu3wrhqfDKbLPK7vcE","type":"AbsoluteCopyNumber"}'
-RelativeCopyNumber:
+      ga4gh_digest: salZa9yW-GduRxsRFwIGCQvi_YfpjeF4
+      ga4gh_identify: ga4gh:CN.salZa9yW-GduRxsRFwIGCQvi_YfpjeF4
+      ga4gh_serialize: '{"copies":{"comparator":">=","type":"IndefiniteRange","value":3},"subject":"oz3NEuhtbBep3yqu3wrhqfDKbLPK7vcE","type":"CopyNumberCount"}'
+CopyNumberChange:
   - name: "Low-level copy gain of BRCA1"
     in:
-      relative_copy_class: low-level gain
+      copy_assessment: EFO_0030071
       subject:
         sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
         interval:
@@ -394,11 +394,11 @@ RelativeCopyNumber:
             value: 44905795
           type: SequenceInterval
         type: SequenceLocation
-      type: RelativeCopyNumber
+      type: CopyNumberChange
     out:
-      ga4gh_digest: 69x30aZU0KQF0RDqq3CaaVBid_xrgzrI
-      ga4gh_identify: ga4gh:VRC.69x30aZU0KQF0RDqq3CaaVBid_xrgzrI
-      ga4gh_serialize: '{"relative_copy_class":"low-level gain","subject":"oz3NEuhtbBep3yqu3wrhqfDKbLPK7vcE","type":"RelativeCopyNumber"}'
+      ga4gh_digest: MLA_TGdelT-_jrlsC6N19S2itmcWqHfj
+      ga4gh_identify: ga4gh:CX.MLA_TGdelT-_jrlsC6N19S2itmcWqHfj
+      ga4gh_serialize: '{"copy_assessment":"EFO_0030071","subject":"oz3NEuhtbBep3yqu3wrhqfDKbLPK7vcE","type":"CopyNumberChange"}'
 Text:
   -
     in:

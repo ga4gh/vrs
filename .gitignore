@@ -3,3 +3,4 @@ __pycache__
 archive
 docs/build
 venv
+pyproject.toml
