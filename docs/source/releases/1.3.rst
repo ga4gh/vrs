@@ -23,7 +23,8 @@ Major Changes
 Minor Changes
 #############
 
-  * Clarifying updates for :ref:`Allele normalization guidance <>`
+  * Clarifying updates for :ref:`Allele normalization guidance
+    <should-normalize>`
   * :ref:`Haplotype` allele member minimum was revised from 1 to 2
   * Updated metaschema processor version
   * Introduced ordered / unordered attribute in array declarations

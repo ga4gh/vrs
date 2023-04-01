@@ -368,6 +368,7 @@ Systemic Variation
 
 .. include:: defs/SystemicVariation.rst
 
+.. _CopyNumber:
 .. _CopyNumberCount:
 
 CopyNumberCount
@@ -1028,6 +1029,8 @@ large-scale tandem duplications.
       },
       "type": "RepeatedSequenceExpression"
     }
+
+.. _ComposedSequenceExpression:
 
 ComposedSequenceExpression
 ##########################
