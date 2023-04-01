@@ -26,7 +26,7 @@ Major Changes
   * New classification of variation types.
 
     * :ref:`MolecularVariation` refers to variation within or of a
-      contiguous molecular
+      contiguous molecule
     * :ref:`SystemicVariation` refers to variation in the context of a
       system, such as a genome, sample, or homologous chromosomes
     * :ref:`UtilityVariation` classes provide useful representations
