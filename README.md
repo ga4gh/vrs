@@ -97,5 +97,4 @@ $ source venv/bin/activate
 $ pip install -U setuptools pip
 $ pip install -r .requirements.txt
 $ python3 -m pytest
-
 ```
