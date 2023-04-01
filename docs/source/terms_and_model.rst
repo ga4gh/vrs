@@ -1034,7 +1034,8 @@ ComposedSequenceExpression
 
 *Composed Sequence* is a class of sequence expression composed of other sequence expression
 types. It is useful, for example, when representing multiple repeating subunits that occur
-in tandem.
+in tandem, such as in the description of *PABPN1* alleles in the diagnosis of
+oculopharyngeal muscular dystrophy (OPMD).
 
 .. include:: defs/ComposedSequenceExpression.rst
 
