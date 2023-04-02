@@ -341,7 +341,7 @@
                ],
                "description": "A location for which the number of systemic copies is described."
             },
-            "copy_assessment": {
+            "copy_change": {
                "type": "string",
                "enum": [
                   "EFO_0030069",
@@ -357,7 +357,7 @@
             }
          },
          "required": [
-            "copy_assessment",
+            "copy_change",
             "subject",
             "type"
          ],
