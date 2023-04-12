@@ -31,4 +31,4 @@ Some CopyNumberChange attributes are inherited from :ref:`Entity`.
    *  - copy_change
       - string
       - 1..1
-      - MUST be one of "EFO_0030069" (complete genomic loss), "EFO_0020073" (high-level loss), "EFO_0030068" (low-level loss), "EFO_0030067" (loss), "EFO_0030064" (regional base ploidy), "EFO_0030070" (gain), "EFO_0030071" (low-level gain), "EFO_0030072" (high-level gain).
+      - MUST be one of "EFO:0030069" (complete genomic loss), "EFO:0020073" (high-level loss), "EFO:0030068" (low-level loss), "EFO:0030067" (loss), "EFO:0030064" (regional base ploidy), "EFO:0030070" (gain), "EFO:0030071" (low-level gain), "EFO:0030072" (high-level gain).
