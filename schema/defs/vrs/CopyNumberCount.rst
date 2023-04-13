@@ -25,7 +25,7 @@ Some CopyNumberCount attributes are inherited from :ref:`Entity`.
       - 1..1
       - MUST be "CopyNumberCount"
    *  - subject
-      - :ref:`Location` | :ref:`CURIE` | :ref:`Gene`
+      - `CURIE <core.json#/$defs/CURIE>`_ | :ref:`Location` | :ref:`Gene`
       - 1..1
       - A location for which the number of systemic copies is described.
    *  - copies

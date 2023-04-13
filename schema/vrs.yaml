@@ -180,10 +180,10 @@ definitions:
         description: MUST be "CopyNumberCount"
       subject:
         oneOf:
-        - $ref: '#/definitions/CURIE'
         - $ref: '#/definitions/ChromosomeLocation'
         - $ref: '#/definitions/Gene'
         - $ref: '#/definitions/SequenceLocation'
+        - $ref: core.json#/$defs/CURIE
         description: A location for which the number of systemic copies is described.
       copies:
         oneOf:
@@ -215,10 +215,10 @@ definitions:
         description: MUST be "CopyNumberChange"
       subject:
         oneOf:
-        - $ref: '#/definitions/CURIE'
         - $ref: '#/definitions/ChromosomeLocation'
         - $ref: '#/definitions/Gene'
         - $ref: '#/definitions/SequenceLocation'
+        - $ref: core.json#/$defs/CURIE
         description: A location for which the number of systemic copies is described.
       copy_change:
         type: string

@@ -258,9 +258,6 @@
             "subject": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/CURIE"
-                  },
-                  {
                      "$ref": "#/definitions/ChromosomeLocation"
                   },
                   {
@@ -268,6 +265,9 @@
                   },
                   {
                      "$ref": "#/definitions/SequenceLocation"
+                  },
+                  {
+                     "$ref": "core.json#/$defs/CURIE"
                   }
                ],
                "description": "A location for which the number of systemic copies is described."
@@ -312,9 +312,6 @@
             "subject": {
                "oneOf": [
                   {
-                     "$ref": "#/definitions/CURIE"
-                  },
-                  {
                      "$ref": "#/definitions/ChromosomeLocation"
                   },
                   {
@@ -322,6 +319,9 @@
                   },
                   {
                      "$ref": "#/definitions/SequenceLocation"
+                  },
+                  {
+                     "$ref": "core.json#/$defs/CURIE"
                   }
                ],
                "description": "A location for which the number of systemic copies is described."

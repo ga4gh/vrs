@@ -184,9 +184,24 @@ definitions:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # SystemicVariation
 
+  CopyNumber:
+    inherits: SystemicVariation
+    description: >-
+      A measure of the copies of a :ref:`Location` or :ref:`Gene`, within a system
+      (e.g. genome, cell, etc.)
+    heritable_properties:
+      subject:
+        oneOf:
+          - $ref_curie: gks.core:CURIE
+          - $ref: "#/definitions/Location"
+          - $ref: "#/definitions/Gene"
+        description: >-
+          A location for which the number of systemic copies is described.
+    heritable_required: [ "subject" ]
+
   CopyNumberCount:
     ga4gh_prefix: CN
-    inherits: SystemicVariation
+    inherits: CopyNumber
     type: object
     description: >-
       The absolute count of discrete copies of a :ref:`Location` or :ref:`Gene`,
@@ -198,13 +213,6 @@ definitions:
         default: "CopyNumberCount"
         description: >-
           MUST be "CopyNumberCount"
-      subject:
-        oneOf:
-          - $ref: "#/definitions/Location"
-          - $ref: "#/definitions/CURIE"
-          - $ref: "#/definitions/Gene"
-        description: >-
-          A location for which the number of systemic copies is described.
       copies:
         oneOf:
           - $ref: "#/definitions/Number"
@@ -212,11 +220,11 @@ definitions:
           - $ref: "#/definitions/DefiniteRange"
         description: >-
           The integral number of copies of the subject in a system
-    required: [ "subject", "copies" ]
+    required: [ "copies" ]
 
   CopyNumberChange:
     ga4gh_prefix: CX
-    inherits: SystemicVariation
+    inherits: CopyNumber
     type: object
     description: >-
       An assessment of the copy number of a :ref:`Location` or a :ref:`Gene` within a system (e.g. genome, cell,
@@ -228,13 +236,6 @@ definitions:
         default: "CopyNumberChange"
         description: >-
           MUST be "CopyNumberChange"
-      subject:
-        oneOf:
-          - $ref: "#/definitions/Location"
-          - $ref: "#/definitions/CURIE"
-          - $ref: "#/definitions/Gene"
-        description: >-
-          A location for which the number of systemic copies is described.
       copy_change:
         type: string
         enum: [ "EFO:0030069", "EFO:0020073", "EFO:0030068", "EFO:0030067", "EFO:0030064", "EFO:0030070", "EFO:0030071", "EFO:0030072" ]
@@ -242,7 +243,7 @@ definitions:
           MUST be one of "EFO:0030069" (complete genomic loss), "EFO:0020073" (high-level loss),
           "EFO:0030068" (low-level loss), "EFO:0030067" (loss), "EFO:0030064" (regional base ploidy),
           "EFO:0030070" (gain), "EFO:0030071" (low-level gain), "EFO:0030072" (high-level gain).
-    required: [  "subject", "copy_change" ]
+    required: [  "copy_change" ]
 
   Genotype:
     ga4gh_prefix: GT
