@@ -189,8 +189,8 @@ definitions:
     inherits: SystemicVariation
     type: object
     description: >-
-      The absolute count of discrete copies of a :ref:`Location` within a system
-      (e.g. genome, cell, etc.).
+      The absolute count of discrete copies of a :ref:`Location` or :ref:`Gene`,
+      within a system (e.g. genome, cell, etc.).
     properties:
       type:
         type: string
@@ -202,6 +202,7 @@ definitions:
         oneOf:
           - $ref: "#/definitions/Location"
           - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Gene"
         description: >-
           A location for which the number of systemic copies is described.
       copies:
@@ -218,7 +219,7 @@ definitions:
     inherits: SystemicVariation
     type: object
     description: >-
-      An assessment of the copy number of a :ref:`Location` or a :ref:`Feature` within a system (e.g. genome, cell,
+      An assessment of the copy number of a :ref:`Location` or a :ref:`Gene` within a system (e.g. genome, cell,
       etc.) relative to a baseline ploidy.
     properties:
       type:
@@ -231,6 +232,7 @@ definitions:
         oneOf:
           - $ref: "#/definitions/Location"
           - $ref: "#/definitions/CURIE"
+          - $ref: "#/definitions/Gene"
         description: >-
           A location for which the number of systemic copies is described.
       copy_change:

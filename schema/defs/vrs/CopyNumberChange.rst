@@ -1,6 +1,6 @@
 **Computational Definition**
 
-An assessment of the copy number of a :ref:`Location` or a :ref:`Feature` within a system (e.g. genome, cell, etc.) relative to a baseline ploidy.
+An assessment of the copy number of a :ref:`Location` or a :ref:`Gene` within a system (e.g. genome, cell, etc.) relative to a baseline ploidy.
 
 **Information Model**
 
@@ -25,7 +25,7 @@ Some CopyNumberChange attributes are inherited from :ref:`Entity`.
       - 1..1
       - MUST be "CopyNumberChange"
    *  - subject
-      - :ref:`Location` | :ref:`CURIE`
+      - :ref:`Location` | :ref:`CURIE` | :ref:`Gene`
       - 1..1
       - A location for which the number of systemic copies is described.
    *  - copy_change

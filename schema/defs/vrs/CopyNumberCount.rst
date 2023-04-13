@@ -1,6 +1,6 @@
 **Computational Definition**
 
-The absolute count of discrete copies of a :ref:`Location` within a system (e.g. genome, cell, etc.).
+The absolute count of discrete copies of a :ref:`Location` or :ref:`Gene`, within a system (e.g. genome, cell, etc.).
 
 **Information Model**
 
@@ -25,7 +25,7 @@ Some CopyNumberCount attributes are inherited from :ref:`Entity`.
       - 1..1
       - MUST be "CopyNumberCount"
    *  - subject
-      - :ref:`Location` | :ref:`CURIE`
+      - :ref:`Location` | :ref:`CURIE` | :ref:`Gene`
       - 1..1
       - A location for which the number of systemic copies is described.
    *  - copies

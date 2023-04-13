@@ -243,7 +243,7 @@
       "CopyNumberCount": {
          "ga4gh_prefix": "CN",
          "type": "object",
-         "description": "The absolute count of discrete copies of a Location within a system (e.g. genome, cell, etc.).",
+         "description": "The absolute count of discrete copies of a Location or Gene, within a system (e.g. genome, cell, etc.).",
          "properties": {
             "id": {
                "$ref": "#/definitions/CURIE",
@@ -262,6 +262,9 @@
                   },
                   {
                      "$ref": "#/definitions/ChromosomeLocation"
+                  },
+                  {
+                     "$ref": "#/definitions/Gene"
                   },
                   {
                      "$ref": "#/definitions/SequenceLocation"
@@ -294,7 +297,7 @@
       "CopyNumberChange": {
          "ga4gh_prefix": "CX",
          "type": "object",
-         "description": "An assessment of the copy number of a Location or a Feature within a system (e.g. genome, cell, etc.) relative to a baseline ploidy.",
+         "description": "An assessment of the copy number of a Location or a Gene within a system (e.g. genome, cell, etc.) relative to a baseline ploidy.",
          "properties": {
             "id": {
                "$ref": "#/definitions/CURIE",
@@ -313,6 +316,9 @@
                   },
                   {
                      "$ref": "#/definitions/ChromosomeLocation"
+                  },
+                  {
+                     "$ref": "#/definitions/Gene"
                   },
                   {
                      "$ref": "#/definitions/SequenceLocation"
