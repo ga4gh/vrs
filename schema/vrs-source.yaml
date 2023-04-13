@@ -194,7 +194,7 @@ definitions:
         oneOf:
           - $ref_curie: gks.core:CURIE
           - $ref: "#/definitions/Location"
-          - $ref: "#/definitions/Gene"
+          - $ref_curie: gks.core:Gene
         description: >-
           A location for which the number of systemic copies is described.
     heritable_required: [ "subject" ]

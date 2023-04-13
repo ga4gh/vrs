@@ -25,7 +25,7 @@ Some CopyNumberChange attributes are inherited from :ref:`Entity`.
       - 1..1
       - MUST be "CopyNumberChange"
    *  - subject
-      - `CURIE <core.json#/$defs/CURIE>`_ | :ref:`Location` | :ref:`Gene`
+      - `CURIE <core.json#/$defs/CURIE>`_ | :ref:`Location` | `Gene <core.json#/$defs/Gene>`_
       - 1..1
       - A location for which the number of systemic copies is described.
    *  - copy_change

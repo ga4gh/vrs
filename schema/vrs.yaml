@@ -181,9 +181,9 @@ definitions:
       subject:
         oneOf:
         - $ref: '#/definitions/ChromosomeLocation'
-        - $ref: '#/definitions/Gene'
         - $ref: '#/definitions/SequenceLocation'
         - $ref: core.json#/$defs/CURIE
+        - $ref: core.json#/$defs/Gene
         description: A location for which the number of systemic copies is described.
       copies:
         oneOf:
@@ -216,9 +216,9 @@ definitions:
       subject:
         oneOf:
         - $ref: '#/definitions/ChromosomeLocation'
-        - $ref: '#/definitions/Gene'
         - $ref: '#/definitions/SequenceLocation'
         - $ref: core.json#/$defs/CURIE
+        - $ref: core.json#/$defs/Gene
         description: A location for which the number of systemic copies is described.
       copy_change:
         type: string
