@@ -23,12 +23,11 @@ identifiers:
     Allele: VA
     VariationSet: VS
     Text: VT
-    # Genotype: VG
+    Genotype: GT
     Haplotype: VH
-    CopyNumber: VCN
-
+    CopyNumberCount: CN
+    CopyNumberChange: CX
     SequenceLocation: VSL
     ChromosomeLocation: VCL
-
 
   regexp: '^ga4gh:(?P<type>[^.]+)\.(?P<digest>.+)$'

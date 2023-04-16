@@ -6,13 +6,13 @@
 JSYAMLS:=vrs.yaml
 JSONS:=${JSYAMLS:.yaml=.json}
 
-all: vrs.json defs
+all: ${JSONS} defs
 
-vrs.json: vrs.yaml
+%.json: %.yaml
 	jsy2js.py <$< >$@
 
-vrs.yaml: vrs-source.yaml
-	source2jsy.py <$< >$@
+%.yaml: %-source.yaml
+	source2jsy.py $< >$@
 
 defs:
 	rm -rf defs

@@ -1,10 +1,10 @@
 **Computational Definition**
 
-The absolute count of discrete copies of a :ref:`MolecularVariation`, :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference within a system (e.g. genome, cell, etc.).
+The absolute count of discrete copies of a :ref:`Location` or :ref:`Feature`, within a system (e.g. genome, cell, etc.).
 
 **Information Model**
 
-Some CopyNumber attributes are inherited from :ref:`Variation`.
+Some CopyNumberCount attributes are inherited from :ref:`Variation`.
 
 .. list-table::
    :class: clean-wrap
@@ -23,11 +23,11 @@ Some CopyNumber attributes are inherited from :ref:`Variation`.
    *  - type
       - string
       - 1..1
-      - MUST be "CopyNumber"
+      - MUST be "CopyNumberCount"
    *  - subject
-      - :ref:`MolecularVariation` | :ref:`Feature` | :ref:`SequenceExpression` | :ref:`CURIE`
+      - :ref:`Location` | :ref:`CURIE` | :ref:`Feature`
       - 1..1
-      - Subject of the Copy Number object
+      - A location for which the number of systemic copies is described.
    *  - copies
       - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`
       - 1..1

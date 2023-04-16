@@ -119,9 +119,7 @@ If the object is an instance of a VRS class, implementations MUST:
     * ensure that objects are referenced with identifiers in the
       ``ga4gh`` namespace
     * replace each nested :term:`identifiable object` with their
-      corresponding *digests*. (Note: Attributes of some objects, such
-      as :ref:`CopyNumber`, permit a mix of identifiable and
-      non-identifiable values.)
+      corresponding *digests*.
     * order arrays of digests and ids by Unicode Character Set values
     * filter out fields that start with underscore (e.g., `_id`)
     * filter out fields with null values
@@ -193,7 +191,7 @@ Truncated Digest (sha512t24u)
 The sha512t24u truncated digest algorithm [Hart2020]_ computes an ASCII digest
 from binary data.  The method uses two well-established standard
 algorithms, the `SHA-512`_ hash function, which generates a binary
-digest from binary data, and `Base64`_ URL encoding, which encodes
+digest from binary data, and a URL-safe variant of `Base64`_ encoding, which encodes
 binary data using printable characters.
 
 Computing the sha512t24u truncated digest for binary data consists of

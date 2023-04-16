@@ -15,15 +15,15 @@ Major Changes
 #############
 
   * :ref:`CopyNumberChange` introduced for relative copy number calls
-  * :ref:`CopyNumberCount` replaces `CopyNumber`
-  * :ref:`Genotype` introduced for describing genotypes
-  * :ref:`ComposedSequenceExpression` introduced for composing expressions
-      from multiple other sequence expressions
+  * :ref:`CopyNumberCount` replaces `CopyNumber (v1.2) <https://vrs.ga4gh.org/en/1.2.1/terms_and_model.html#copynumber>`_
+  * :ref:`Genotype` introduced as a new systemic variation concept
+  * :ref:`ComposedSequenceExpression` introduced for composing expressions from multiple other sequence expressions
 
 Minor Changes
 #############
 
-  * Clarifying updates for :ref:`Allele normalization guidance <>`
+  * Clarifying updates for :ref:`Allele normalization guidance
+    <should-normalize>`
   * :ref:`Haplotype` allele member minimum was revised from 1 to 2
   * Updated metaschema processor version
   * Introduced ordered / unordered attribute in array declarations

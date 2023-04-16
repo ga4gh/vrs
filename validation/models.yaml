@@ -1,19 +1,19 @@
 Number:
-  - 
+  -
     in:
       type: Number
       value: 55
     out:
       ga4gh_serialize: '{"type":"Number","value":55}'
 Gene:
-  - 
+  -
     in:
       gene_id: ncbigene:384
       type: Gene
     out:
       ga4gh_serialize: '{"gene_id":"ncbigene:384","type":"Gene"}'
 SimpleInterval:
-  - 
+  -
     in:
       end: 44908822
       start: 44908821
@@ -169,6 +169,38 @@ RepeatedSequenceExpression:
       type: RepeatedSequenceExpression
     out:
       ga4gh_serialize: '{"count":{"comparator":">=","type":"IndefiniteRange","value":6},"seq_expr":{"location":"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg","reverse_complement":false,"type":"DerivedSequenceExpression"},"type":"RepeatedSequenceExpression"}'
+ComposedSequenceExpression:
+  - name: "Composed Sequence Expression w/ order 1"
+    in:
+      components:
+        - type: LiteralSequenceExpression
+          sequence: CGC
+        - type: RepeatedSequenceExpression
+          seq_expr:
+            type: LiteralSequenceExpression
+            sequence: CGA
+          count:
+            type: Number
+            value: 3
+      type: ComposedSequenceExpression
+    out:
+      ga4gh_serialize: '{"components":[{"sequence":"CGC","type":"LiteralSequenceExpression"},{"count":{"type":"Number","value":3},"seq_expr":{"sequence":"CGA","type":"LiteralSequenceExpression"},"type":"RepeatedSequenceExpression"}],"type":"ComposedSequenceExpression"}'
+ComposedSequenceExpression:
+  - name: "Composed Sequence Expression w/ order 2"
+    in:
+      components:
+        - type: RepeatedSequenceExpression
+          seq_expr:
+            type: LiteralSequenceExpression
+            sequence: CGA
+          count:
+            type: Number
+            value: 3
+        - type: LiteralSequenceExpression
+          sequence: CGC
+      type: ComposedSequenceExpression
+    out:
+      ga4gh_serialize: '{"components":[{"count":{"type":"Number","value":3},"seq_expr":{"sequence":"CGA","type":"LiteralSequenceExpression"},"type":"RepeatedSequenceExpression"},{"sequence":"CGC","type":"LiteralSequenceExpression"}],"type":"ComposedSequenceExpression"}'
 Allele:
   - name: "rs7412@GRCh38>T w/SequenceState"
     in:
@@ -213,6 +245,68 @@ Allele:
       ga4gh_digest: CxiA_hvYbkD8Vqwjhx5AYuyul4mtlkpD
       ga4gh_identify: ga4gh:VA.CxiA_hvYbkD8Vqwjhx5AYuyul4mtlkpD
       ga4gh_serialize: '{"location":"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}'
+Allele:
+  - name: "Allele w/ Composed Sequence Expression w/ order 1"
+    in:
+      location:
+        interval:
+          end:
+            type: Number
+            value: 44908822
+          start:
+            type: Number
+            value: 44908821
+          type: SequenceInterval
+        sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+        type: SequenceLocation
+      state:
+        components:
+          - type: LiteralSequenceExpression
+            sequence: CGC
+          - type: RepeatedSequenceExpression
+            seq_expr:
+              type: LiteralSequenceExpression
+              sequence: CGA
+            count:
+              type: Number
+              value: 3
+        type: ComposedSequenceExpression
+      type: Allele
+    out:
+      ga4gh_digest: obWIAB54mfRE2HAwQiIzKZeIx0REPG-8
+      ga4gh_identify: ga4gh:VA.obWIAB54mfRE2HAwQiIzKZeIx0REPG-8
+      ga4gh_serialize: '{"location":"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg","state":{"components":[{"sequence":"CGC","type":"LiteralSequenceExpression"},{"count":{"type":"Number","value":3},"seq_expr":{"sequence":"CGA","type":"LiteralSequenceExpression"},"type":"RepeatedSequenceExpression"}],"type":"ComposedSequenceExpression"},"type":"Allele"}'
+Allele:
+  - name: "Allele w/ Composed Sequence Expression w/ order 2"
+    in:
+      location:
+        interval:
+          end:
+            type: Number
+            value: 44908822
+          start:
+            type: Number
+            value: 44908821
+          type: SequenceInterval
+        sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+        type: SequenceLocation
+      state:
+        components:
+          - type: RepeatedSequenceExpression
+            seq_expr:
+              type: LiteralSequenceExpression
+              sequence: CGA
+            count:
+              type: Number
+              value: 3
+          - type: LiteralSequenceExpression
+            sequence: CGC
+        type: ComposedSequenceExpression
+      type: Allele
+    out:
+      ga4gh_digest: KDrbvmR-Y2dccsgckQnpEsQuLMq4p10d
+      ga4gh_identify: ga4gh:VA.KDrbvmR-Y2dccsgckQnpEsQuLMq4p10d
+      ga4gh_serialize: '{"location":"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg","state":{"components":[{"count":{"type":"Number","value":3},"seq_expr":{"sequence":"CGA","type":"LiteralSequenceExpression"},"type":"RepeatedSequenceExpression"},{"sequence":"CGC","type":"LiteralSequenceExpression"}],"type":"ComposedSequenceExpression"},"type":"Allele"}'
 Haplotype:
   - name: "APOE1 on GRCh38, inline"
     in:
@@ -262,7 +356,7 @@ Haplotype:
       ga4gh_digest: i8owCOBHIlRCPtcw_WzRFNTunwJRy99-
       ga4gh_identify: ga4gh:VH.i8owCOBHIlRCPtcw_WzRFNTunwJRy99-
       ga4gh_serialize: '{"members":["-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x","Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"],"type":"Haplotype"}'
-CopyNumber:
+CopyNumberCount:
   - name: ">=3 copies APOE"
     in:
       copies:
@@ -270,13 +364,41 @@ CopyNumber:
         type: IndefiniteRange
         value: 3
       subject:
-        gene_id: ncbigene:384
-        type: Gene
-      type: CopyNumber
+        sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+        interval:
+          end:
+            type: Number
+            value: 44909393
+          start:
+            type: Number
+            value: 44905795
+          type: SequenceInterval
+        type: SequenceLocation
+      type: CopyNumberCount
     out:
-      ga4gh_digest: xksSWn--_z28Qaj-Udlhot4OKqYGkywy
-      ga4gh_identify: ga4gh:VCN.xksSWn--_z28Qaj-Udlhot4OKqYGkywy
-      ga4gh_serialize: '{"copies":{"comparator":">=","type":"IndefiniteRange","value":3},"subject":{"gene_id":"ncbigene:384","type":"Gene"},"type":"CopyNumber"}'
+      ga4gh_digest: salZa9yW-GduRxsRFwIGCQvi_YfpjeF4
+      ga4gh_identify: ga4gh:CN.salZa9yW-GduRxsRFwIGCQvi_YfpjeF4
+      ga4gh_serialize: '{"copies":{"comparator":">=","type":"IndefiniteRange","value":3},"subject":"oz3NEuhtbBep3yqu3wrhqfDKbLPK7vcE","type":"CopyNumberCount"}'
+CopyNumberChange:
+  - name: "Low-level copy gain of BRCA1"
+    in:
+      copy_change: efo:0030071
+      subject:
+        sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+        interval:
+          end:
+            type: Number
+            value: 44909393
+          start:
+            type: Number
+            value: 44905795
+          type: SequenceInterval
+        type: SequenceLocation
+      type: CopyNumberChange
+    out:
+      ga4gh_digest: zRqNmX-TVTU5FOFxfR4y0jwBysw7ztPn
+      ga4gh_identify: ga4gh:CX.zRqNmX-TVTU5FOFxfR4y0jwBysw7ztPn
+      ga4gh_serialize: '{"copy_change":"efo:0030071","subject":"oz3NEuhtbBep3yqu3wrhqfDKbLPK7vcE","type":"CopyNumberChange"}'
 Text:
   -
     in:
@@ -335,3 +457,139 @@ VariationSet:
       ga4gh_digest: QLQXSNSIFlqNYWmQbw-YkfmexPi4NeDE
       ga4gh_identify: ga4gh:VS.QLQXSNSIFlqNYWmQbw-YkfmexPi4NeDE
       ga4gh_serialize: '{"members":["-kUJh47Pu24Y3Wdsk1rXEDKsXWNY-68x","Z_rYRxpUvwqCLsCBO3YLl70o2uf9_Op1"],"type":"VariationSet"}'
+GenotypeMember:
+  - name: "GenotypeMember w/ Allele"
+    in:
+      count:
+        value: 1
+        type: Number
+      variation:
+        location:
+          interval:
+            end:
+              type: Number
+              value: 94842866
+            start:
+              type: Number
+              value: 94842865
+            type: SequenceInterval
+          sequence_id: ga4gh:SQ.ss8r_wB0-b9r44TQTMmVTI92884QvBiB
+          type: SequenceLocation
+        state:
+          sequence: G
+          type: LiteralSequenceExpression
+        type: Allele
+      type: GenotypeMember
+    out:
+      ga4gh_serialize: '{"count":{"type":"Number","value":1},"type":"GenotypeMember","variation":"geQCxa1Enel8UBUAQQ2-rbphDjIR-cq0"}'
+GenotypeMember:
+  - name: "GenotypeMember w/ Haplotype"
+    in:
+      count:
+        value: 1
+        type: Number
+      variation:
+        members:
+        - location:
+            interval:
+              end:
+                type: Number
+                value: 94761900
+              start:
+                type: Number
+                value: 94761899
+              type: SequenceInterval
+            sequence_id: ga4gh:SQ.ss8r_wB0-b9r44TQTMmVTI92884QvBiB
+            type: SequenceLocation
+          state:
+            sequence: T
+            type: LiteralSequenceExpression
+          type: Allele
+        - location:
+            interval:
+              end:
+                type: Number
+                value: 94842866
+              start:
+                type: Number
+                value: 94842865
+              type: SequenceInterval
+            sequence_id: ga4gh:SQ.ss8r_wB0-b9r44TQTMmVTI92884QvBiB
+            type: SequenceLocation
+          state:
+            sequence: G
+            type: LiteralSequenceExpression
+          type: Allele
+        type: Haplotype
+      type: GenotypeMember
+    out:
+     ga4gh_serialize: '{"count":{"type":"Number","value":1},"type":"GenotypeMember","variation":"Ow_uE0YaVWHIno4pQfdmYpWmlGPNtXQr"}'
+Genotype:
+  -
+    in:
+      members:
+        - count:
+            value: 1
+            type: Number
+          variation:
+            location:
+              interval:
+                end:
+                  type: Number
+                  value: 94842866
+                start:
+                  type: Number
+                  value: 94842865
+                type: SequenceInterval
+              sequence_id: ga4gh:SQ.ss8r_wB0-b9r44TQTMmVTI92884QvBiB
+              type: SequenceLocation
+            state:
+              sequence: G
+              type: LiteralSequenceExpression
+            type: Allele
+          type: GenotypeMember
+        - count:
+            value: 1
+            type: Number
+          variation:
+            members:
+            - location:
+                interval:
+                  end:
+                    type: Number
+                    value: 94761900
+                  start:
+                    type: Number
+                    value: 94761899
+                  type: SequenceInterval
+                sequence_id: ga4gh:SQ.ss8r_wB0-b9r44TQTMmVTI92884QvBiB
+                type: SequenceLocation
+              state:
+                sequence: T
+                type: LiteralSequenceExpression
+              type: Allele
+            - location:
+                interval:
+                  end:
+                    type: Number
+                    value: 94842866
+                  start:
+                    type: Number
+                    value: 94842865
+                  type: SequenceInterval
+                sequence_id: ga4gh:SQ.ss8r_wB0-b9r44TQTMmVTI92884QvBiB
+                type: SequenceLocation
+              state:
+                sequence: G
+                type: LiteralSequenceExpression
+              type: Allele
+            type: Haplotype
+          type: GenotypeMember
+      count:
+        type: Number
+        value: 2
+      type: Genotype
+    out:
+      ga4gh_digest: fz-TMM88G2hmK6cQ-JwrpVAr8d_3eTVq
+      ga4gh_identify: ga4gh:GT.fz-TMM88G2hmK6cQ-JwrpVAr8d_3eTVq
+      ga4gh_serialize: '{"count":{"type":"Number","value":2},"members":["EhA9scQ-F-n1eQdQOJYClDXq613IZLQm","oJg9piBqrJ-_t3PSLA21d4z8f4tJHKqI"],"type":"Genotype"}'
