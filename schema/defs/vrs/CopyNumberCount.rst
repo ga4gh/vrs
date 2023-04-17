@@ -1,10 +1,10 @@
 **Computational Definition**
 
-The relative copies of a :ref:`MolecularVariation`, :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference against an unspecified baseline in a system (e.g. genome, cell, etc.).
+The absolute count of discrete copies of a :ref:`Location` or :ref:`Gene`, within a system (e.g. genome, cell, etc.).
 
 **Information Model**
 
-Some RelativeCopyNumber attributes are inherited from :ref:`Entity`.
+Some CopyNumberCount attributes are inherited from :ref:`Entity`.
 
 .. list-table::
    :class: clean-wrap
@@ -23,12 +23,12 @@ Some RelativeCopyNumber attributes are inherited from :ref:`Entity`.
    *  - type
       - string
       - 1..1
-      - MUST be "RelativeCopyNumber"
-   *  - location
-      - `CURIE <core.json#/$defs/CURIE>`_ | :ref:`Location`
+      - MUST be "CopyNumberCount"
+   *  - subject
+      - `CURIE <core.json#/$defs/CURIE>`_ | :ref:`Location` | `Gene <core.json#/$defs/Gene>`_
       - 1..1
-      - The location within the system.
-   *  - relative_copy_class
-      - string
+      - A location for which the number of systemic copies is described.
+   *  - copies
+      - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`
       - 1..1
-      - MUST be one of "EFO:0030070", "EFO:0030072", "EFO:0030071", "EFO:0030067", "EFO:0030069", or "EFO:0030068".
+      - The integral number of copies of the subject in a system

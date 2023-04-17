@@ -69,8 +69,8 @@ definitions:
       a genome, sample, or homologous chromosomes.
     oneOf:
       - $ref: "#/definitions/Genotype"
-      - $ref: "#/definitions/AbsoluteCopyNumber"
-      - $ref: "#/definitions/RelativeCopyNumber"
+      - $ref: "#/definitions/CopyNumberCount"
+      - $ref: "#/definitions/CopyNumberChange"
     discriminator:
       propertyName: type
 
@@ -187,62 +187,63 @@ definitions:
   CopyNumber:
     inherits: SystemicVariation
     description: >-
-      A measure of the copies of a :ref:`Location` within a system (e.g. a genome)
+      A measure of the copies of a :ref:`Location` or :ref:`Gene`, within a system
+      (e.g. genome, cell, etc.)
     heritable_properties:
-      location:
+      subject:
         oneOf:
           - $ref_curie: gks.core:CURIE
           - $ref: "#/definitions/Location"
+          - $ref_curie: gks.core:Gene
         description: >-
-          The location within the system.
-    heritable_required: [ "location" ]
+          A location for which the number of systemic copies is described.
+    heritable_required: [ "subject" ]
 
-  AbsoluteCopyNumber:
-    ga4gh_prefix: ACN
+  CopyNumberCount:
+    ga4gh_prefix: CN
     inherits: CopyNumber
     type: object
     description: >-
-      The absolute count of discrete copies of a :ref:`MolecularVariation`,
-      :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference
+      The absolute count of discrete copies of a :ref:`Location` or :ref:`Gene`,
       within a system (e.g. genome, cell, etc.).
     properties:
       type:
         type: string
-        const: "AbsoluteCopyNumber"
-        default: "AbsoluteCopyNumber"
+        const: "CopyNumberCount"
+        default: "CopyNumberCount"
         description: >-
-          MUST be "AbsoluteCopyNumber".
+          MUST be "CopyNumberCount"
       copies:
         oneOf:
           - $ref: "#/definitions/Number"
           - $ref: "#/definitions/IndefiniteRange"
           - $ref: "#/definitions/DefiniteRange"
         description: >-
-          The integral number of copies of the subject in a system.
+          The integral number of copies of the subject in a system
     required: [ "copies" ]
 
-  RelativeCopyNumber:
-    ga4gh_prefix: RCN
+  CopyNumberChange:
+    ga4gh_prefix: CX
     inherits: CopyNumber
     type: object
-    maturity: draft
     description: >-
-      The relative copies of a :ref:`MolecularVariation`,
-      :ref:`Feature`, :ref:`SequenceExpression`, or a :ref:`CURIE` reference
-      against an unspecified baseline in a system (e.g. genome, cell, etc.).
+      An assessment of the copy number of a :ref:`Location` or a :ref:`Gene` within a system (e.g. genome, cell,
+      etc.) relative to a baseline ploidy.
     properties:
       type:
         type: string
-        const: "RelativeCopyNumber"
-        default: "RelativeCopyNumber"
+        const: "CopyNumberChange"
+        default: "CopyNumberChange"
         description: >-
-          MUST be "RelativeCopyNumber"
-      relative_copy_class:
+          MUST be "CopyNumberChange"
+      copy_change:
         type: string
-        enum: [ "EFO:0030070", "EFO:0030072", "EFO:0030071", "EFO:0030067", "EFO:0030069", "EFO:0030068" ]
+        enum: [ "efo:0030069", "efo:0020073", "efo:0030068", "efo:0030067", "efo:0030064", "efo:0030070", "efo:0030071", "efo:0030072" ]
         description: >-
-          MUST be one of "EFO:0030070", "EFO:0030072", "EFO:0030071", "EFO:0030067", "EFO:0030069", or "EFO:0030068".
-    required: [ "relative_copy_class" ]
+          MUST be one of "efo:0030069" (complete genomic loss), "efo:0020073" (high-level loss),
+          "efo:0030068" (low-level loss), "efo:0030067" (loss), "efo:0030064" (regional base ploidy),
+          "efo:0030070" (gain), "efo:0030071" (low-level gain), "efo:0030072" (high-level gain).
+    required: [  "copy_change" ]
 
   Genotype:
     ga4gh_prefix: GT
@@ -275,7 +276,7 @@ definitions:
         description: >-
           The total number of copies of all :ref:`MolecularVariation` at this locus,
           MUST be greater than or equal to the sum of :ref:`GenotypeMember` copy counts.
-          If greater than the total counts, this implies additional 
+          If greater than the total counts, this implies additional
           :ref:`MolecularVariation` that are expected to exist but are not explicitly
           indicated.
     required: [ "members", "count" ]

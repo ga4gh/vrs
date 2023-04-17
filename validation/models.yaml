@@ -202,29 +202,45 @@ Haplotype:
       ga4gh_digest: yzu0AkAaqDYbO0vtuatRi49FmYhkVIqr
       ga4gh_identify: ga4gh:HT.yzu0AkAaqDYbO0vtuatRi49FmYhkVIqr
       ga4gh_serialize: '{"members":["khD7xy2qdhEmCtv2mFnNfc6BGibim97K","zxokbi7DQc5Eq5iLxlEFVzK3hOBEJMxr"],"type":"Haplotype"}'
-AbsoluteCopyNumber:
+CopyNumberCount:
   - name: ">=3 copies APOE"
     in:
       copies:
         comparator: '>='
         type: IndefiniteRange
         value: 3
-      location: ncbigene:348
-      type: AbsoluteCopyNumber
+      subject:
+        sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+        end:
+          type: Number
+          value: 44909393
+        start:
+          type: Number
+          value: 44905795
+        type: SequenceLocation
+      type: CopyNumberCount
     out:
-      ga4gh_digest: dWDGePNUT_GEsLmt9RJvvJWEQcN_rdtq
-      ga4gh_identify: ga4gh:ACN.dWDGePNUT_GEsLmt9RJvvJWEQcN_rdtq
-      ga4gh_serialize: '{"copies":{"comparator":">=","type":"IndefiniteRange","value":3},"location":"ncbigene:348","type":"AbsoluteCopyNumber"}'
-RelativeCopyNumber:
+      ga4gh_digest: CVJp5q2d2hlTSC23l0Haovmmy884w3lR
+      ga4gh_identify: ga4gh:CN.CVJp5q2d2hlTSC23l0Haovmmy884w3lR
+      ga4gh_serialize: '{"copies":{"comparator":">=","type":"IndefiniteRange","value":3},"subject":"qKrpUL5p3w6Wks1zrJmzSns6YBSY0IBy","type":"CopyNumberCount"}'
+CopyNumberChange:
   - name: "Low-level copy gain of BRCA1"
     in:
-      relative_copy_class: EFO:0030071
-      location: ncbigene:348
-      type: RelativeCopyNumber
+      copy_change: efo:0030071
+      subject:
+        sequence_id: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+        end:
+          type: Number
+          value: 44909393
+        start:
+          type: Number
+          value: 44905795
+        type: SequenceLocation
+      type: CopyNumberChange
     out:
-      ga4gh_digest: FVF5b4VwXSJwgjPNwdZwFbF3Xtv3MqNq
-      ga4gh_identify: ga4gh:RCN.FVF5b4VwXSJwgjPNwdZwFbF3Xtv3MqNq
-      ga4gh_serialize: '{"location":"ncbigene:348","relative_copy_class":"EFO:0030071","type":"RelativeCopyNumber"}'
+      ga4gh_digest: B7uC_J6ey-Ps8S3TeZeSD4c1PMdgCLMJ
+      ga4gh_identify: ga4gh:CX.B7uC_J6ey-Ps8S3TeZeSD4c1PMdgCLMJ
+      ga4gh_serialize: '{"copy_change":"efo:0030071","subject":"qKrpUL5p3w6Wks1zrJmzSns6YBSY0IBy","type":"CopyNumberChange"}'
 Text:
   -
     in:
