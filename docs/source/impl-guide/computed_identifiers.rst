@@ -119,9 +119,7 @@ If the object is an instance of a VRS class, implementations MUST:
     * ensure that objects are referenced with identifiers in the
       ``ga4gh`` namespace
     * replace each nested :term:`identifiable object` with their
-      corresponding *digests*. (Note: Attributes of some objects, such
-      as :ref:`CopyNumber`, permit a mix of identifiable and
-      non-identifiable values.)
+      corresponding *digests*.
     * order arrays of digests and ids by Unicode Character Set values
     * filter out fields that start with underscore (e.g., `_id`)
     * filter out fields with null values

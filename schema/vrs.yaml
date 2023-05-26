@@ -5,9 +5,13 @@ definitions:
   Variation:
     description: A representation of the state of one or more biomolecules.
     oneOf:
-    - $ref: '#/definitions/MolecularVariation'
-    - $ref: '#/definitions/SystemicVariation'
-    - $ref: '#/definitions/UtilityVariation'
+    - $ref: '#/definitions/Allele'
+    - $ref: '#/definitions/CopyNumberChange'
+    - $ref: '#/definitions/CopyNumberCount'
+    - $ref: '#/definitions/Genotype'
+    - $ref: '#/definitions/Haplotype'
+    - $ref: '#/definitions/Text'
+    - $ref: '#/definitions/VariationSet'
     discriminator:
       propertyName: type
   MolecularVariation:
@@ -30,9 +34,9 @@ definitions:
     description: A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
     oneOf:
-    - $ref: '#/definitions/Genotype'
-    - $ref: '#/definitions/CopyNumberCount'
     - $ref: '#/definitions/CopyNumberChange'
+    - $ref: '#/definitions/CopyNumberCount'
+    - $ref: '#/definitions/Genotype'
     discriminator:
       propertyName: type
   Allele:
@@ -370,10 +374,10 @@ definitions:
   SequenceExpression:
     description: An expression describing a Sequence.
     oneOf:
-    - $ref: '#/definitions/LiteralSequenceExpression'
-    - $ref: '#/definitions/DerivedSequenceExpression'
-    - $ref: '#/definitions/RepeatedSequenceExpression'
     - $ref: '#/definitions/ComposedSequenceExpression'
+    - $ref: '#/definitions/DerivedSequenceExpression'
+    - $ref: '#/definitions/LiteralSequenceExpression'
+    - $ref: '#/definitions/RepeatedSequenceExpression'
     discriminator:
       propertyName: type
   LiteralSequenceExpression:

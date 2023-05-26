@@ -7,13 +7,25 @@
          "description": "A representation of the state of one or more biomolecules.",
          "oneOf": [
             {
-               "$ref": "#/definitions/MolecularVariation"
+               "$ref": "#/definitions/Allele"
             },
             {
-               "$ref": "#/definitions/SystemicVariation"
+               "$ref": "#/definitions/CopyNumberChange"
             },
             {
-               "$ref": "#/definitions/UtilityVariation"
+               "$ref": "#/definitions/CopyNumberCount"
+            },
+            {
+               "$ref": "#/definitions/Genotype"
+            },
+            {
+               "$ref": "#/definitions/Haplotype"
+            },
+            {
+               "$ref": "#/definitions/Text"
+            },
+            {
+               "$ref": "#/definitions/VariationSet"
             }
          ],
          "discriminator": {
@@ -52,13 +64,13 @@
          "description": "A Variation of multiple molecules in the context of a system, e.g. a genome, sample, or homologous chromosomes.",
          "oneOf": [
             {
-               "$ref": "#/definitions/Genotype"
+               "$ref": "#/definitions/CopyNumberChange"
             },
             {
                "$ref": "#/definitions/CopyNumberCount"
             },
             {
-               "$ref": "#/definitions/CopyNumberChange"
+               "$ref": "#/definitions/Genotype"
             }
          ],
          "discriminator": {
@@ -511,16 +523,16 @@
          "description": "An expression describing a Sequence.",
          "oneOf": [
             {
-               "$ref": "#/definitions/LiteralSequenceExpression"
+               "$ref": "#/definitions/ComposedSequenceExpression"
             },
             {
                "$ref": "#/definitions/DerivedSequenceExpression"
             },
             {
-               "$ref": "#/definitions/RepeatedSequenceExpression"
+               "$ref": "#/definitions/LiteralSequenceExpression"
             },
             {
-               "$ref": "#/definitions/ComposedSequenceExpression"
+               "$ref": "#/definitions/RepeatedSequenceExpression"
             }
          ],
          "discriminator": {

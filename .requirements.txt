@@ -1,7 +1,8 @@
 pytest
-python-jsonschema-objects>=0.3.13
+python-jsonschema-objects>=0.4.0
 jsonschema==3.2.0
 ipython
 pyyaml
-ga4gh.gks.metaschema==0.2.0rc3
-sphinx ~= 3.5
+ga4gh.gks.metaschema==0.2.0rc4
+sphinx ~= 4.5
+sphinx-rtd-theme ~= 1.2
