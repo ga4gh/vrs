@@ -30,17 +30,17 @@ Some Mapping attributes are inherited from :ref:`Entity`.
       - 
    *  - system
       - string
-      - 0..1
+      - 1..1
       - Identity of the terminology system.
    *  - version
       - string
       - 0..1
       - Version of the terminology system.
    *  - code
-      - #/$defs/Code
-      - 0..1
+      - :ref:`Code`
+      - 1..1
       - Symbol in syntax defined by the terminology system.
    *  - mapping
       - string
-      - 0..1
+      - 1..1
       - A mapping between concepts as defined by the Simple Knowledge Organization System (SKOS).

@@ -97,7 +97,7 @@ definitions:
           MUST be "Allele"
       location:
         oneOf:
-          - $ref_curie: gks.core:CURIE
+          - $ref_curie: gks.core:URI
           - $ref: "#/definitions/Location"
         description: >-
           Where Allele is located
@@ -128,7 +128,7 @@ definitions:
         items:
           oneOf:
             - $ref: "#/definitions/Allele"
-            - $ref_curie: gks.core:CURIE
+            - $ref_curie: gks.core:URI
         description: >-
           List of Alleles, or references to Alleles, that comprise this Haplotype.
     required: [ "members" ]
@@ -173,7 +173,7 @@ definitions:
         uniqueItems: true
         items:
           oneOf:
-            - $ref_curie: gks.core:CURIE
+            - $ref_curie: gks.core:URI
             - $ref: "#/definitions/Variation"
         description: >-
           List of Variation objects or identifiers. Attribute is
@@ -187,14 +187,12 @@ definitions:
   CopyNumber:
     inherits: SystemicVariation
     description: >-
-      A measure of the copies of a :ref:`Location` or :ref:`Gene`, within a system
-      (e.g. genome, cell, etc.)
+      A measure of the copies of a :ref:`Location` within a system (e.g. genome, cell, etc.)
     heritable_properties:
       subject:
         oneOf:
-          - $ref_curie: gks.core:CURIE
+          - $ref_curie: gks.core:URI
           - $ref: "#/definitions/Location"
-          - $ref_curie: gks.core:Gene
         description: >-
           A location for which the number of systemic copies is described.
     heritable_required: [ "subject" ]
@@ -289,46 +287,46 @@ definitions:
     description: >-
       A contiguous segment of a biological sequence.
     oneOf:
-      - $ref: "#/definitions/ChromosomeLocation"
+#      - $ref: "#/definitions/ChromosomeLocation"
       - $ref: "#/definitions/SequenceLocation"
     discriminator:
       propertyName: type
 
-  ChromosomeLocation:
-    ga4gh_prefix: CL
-    inherits: Location
-    description: >-
-      A Location on a chromosome defined by a species and chromosome name.
-    type: object
-    properties:
-      type:
-        type: string
-        const: "ChromosomeLocation"
-        default: "ChromosomeLocation"
-        description: MUST be "ChromosomeLocation"
-      species_id:
-        $ref_curie: gks.core:CURIE
-        default: "taxonomy:9606"
-        description: >-
-          :ref:`CURIE` representing a species from the
-          `NCBI species taxonomy <https://registry.identifiers.org/registry/taxonomy>`_.
-          Default: "taxonomy:9606" (human)
-      chr:
-        type: string
-        description: >-
-          The symbolic chromosome name. For humans, For humans,
-          chromosome names MUST be one of 1..22, X, Y (case-sensitive)
-      start:
-        $ref: "#/definitions/HumanCytoband"
-        description: >-
-          The start cytoband region. MUST specify a region nearer the
-          terminal end (telomere) of the chromosome p-arm than `end`.
-      end:
-        $ref: "#/definitions/HumanCytoband"
-        description: >-
-          The start cytoband region. MUST specify a region nearer the
-          terminal end (telomere) of the chromosome q-arm than `start`.
-    required: [ "species_id", "chr", "start", "end" ]
+#  ChromosomeLocation:
+#    ga4gh_prefix: CL
+#    inherits: Location
+#    description: >-
+#      A Location on a chromosome defined by a species and chromosome name.
+#    type: object
+#    properties:
+#      type:
+#        type: string
+#        const: "ChromosomeLocation"
+#        default: "ChromosomeLocation"
+#        description: MUST be "ChromosomeLocation"
+#      species_id:
+#        $ref_curie: gks.core:URI
+#        default: "taxonomy:9606"
+#        description: >-
+#          :ref:`CURIE` representing a species from the
+#          `NCBI species taxonomy <https://registry.identifiers.org/registry/taxonomy>`_.
+#          Default: "taxonomy:9606" (human)
+#      chr:
+#        type: string
+#        description: >-
+#          The symbolic chromosome name. For humans, For humans,
+#          chromosome names MUST be one of 1..22, X, Y (case-sensitive)
+#      start:
+#        $ref: "#/definitions/HumanCytoband"
+#        description: >-
+#          The start cytoband region. MUST specify a region nearer the
+#          terminal end (telomere) of the chromosome p-arm than `end`.
+#      end:
+#        $ref: "#/definitions/HumanCytoband"
+#        description: >-
+#          The start cytoband region. MUST specify a region nearer the
+#          terminal end (telomere) of the chromosome q-arm than `start`.
+#    required: [ "species_id", "chr", "start", "end" ]
 
   SequenceLocation:
     ga4gh_prefix: SL
@@ -343,7 +341,7 @@ definitions:
         default: "SequenceLocation"
         description: MUST be "SequenceLocation"
       sequence_id:
-        $ref_curie: gks.core:CURIE
+        $ref_curie: gks.core:URI
         description: >-
           A VRS :ref:`Computed Identifier <computed-identifiers>`
           for the reference :ref:`Sequence`.

@@ -33,7 +33,7 @@ Some Allele attributes are inherited from :ref:`gks.core:Entity`.
       - 0..1
       - MUST be "Allele"
    *  - location
-      - `CURIE <core.json#/$defs/CURIE>`_ | :ref:`Location`
+      - `URI <core.json#/$defs/URI>`_ | :ref:`Location`
       - 1..1
       - Where Allele is located
    *  - state

@@ -39,7 +39,7 @@ $defs:
         type: string
         description: Version of the terminology system.
       code:
-        type: "#/$defs/Code"
+        $ref: '#/$defs/Code'
         description: Symbol in syntax defined by the terminology system.
       mapping:
         description: >-
@@ -51,6 +51,10 @@ $defs:
           - broadMatch
           - narrowMatch
           - relatedMatch
+    required:
+      - mapping
+      - code
+      - system
 
   Extension:
     type: object
@@ -80,6 +84,11 @@ $defs:
     type: string
     pattern: '\S+( \S+)*'
     example: ENSG00000139618
+
+  URI:
+    description: A URI Reference (either a URI or a relative-reference), according to RFC3986, section 4.1.
+    type: string
+    format: uri-reference
 
 #  CodeableEntity:  # TODO: Discussion on CodeableConcept analog pending
 #    inherits: Entity

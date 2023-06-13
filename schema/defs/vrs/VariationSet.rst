@@ -33,6 +33,6 @@ Some VariationSet attributes are inherited from :ref:`gks.core:Entity`.
       - 0..1
       - MUST be "VariationSet"
    *  - members
-      - `CURIE <core.json#/$defs/CURIE>`_ | :ref:`Variation`
+      - `URI <core.json#/$defs/URI>`_ | :ref:`Variation`
       - 0..m
       - List of Variation objects or identifiers. Attribute is required, but MAY be empty.

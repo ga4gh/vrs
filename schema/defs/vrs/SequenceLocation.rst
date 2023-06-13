@@ -33,7 +33,7 @@ Some SequenceLocation attributes are inherited from :ref:`gks.core:Entity`.
       - 0..1
       - MUST be "SequenceLocation"
    *  - sequence_id
-      - `CURIE <core.json#/$defs/CURIE>`_
+      - `URI <core.json#/$defs/URI>`_
       - 1..1
       - A VRS :ref:`Computed Identifier <computed-identifiers>` for the reference :ref:`Sequence`.
    *  - start

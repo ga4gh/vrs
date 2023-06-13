@@ -33,6 +33,6 @@ Some Haplotype attributes are inherited from :ref:`gks.core:Entity`.
       - 0..1
       - MUST be "Haplotype"
    *  - members
-      - :ref:`Allele` | `CURIE <core.json#/$defs/CURIE>`_
+      - :ref:`Allele` | `URI <core.json#/$defs/URI>`_
       - 2..m
       - List of Alleles, or references to Alleles, that comprise this Haplotype.

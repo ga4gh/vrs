@@ -29,7 +29,7 @@ Some CopyNumberCount attributes are inherited from :ref:`gks.core:Entity`.
       - 0..m
       - 
    *  - subject
-      - `CURIE <core.json#/$defs/CURIE>`_ | :ref:`Location` | `Gene <core.json#/$defs/Gene>`_
+      - `URI <core.json#/$defs/URI>`_ | :ref:`Location`
       - 1..1
       - A location for which the number of systemic copies is described.
    *  - type
