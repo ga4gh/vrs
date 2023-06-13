@@ -1,8 +1,8 @@
+import copy
 import json
 
-import python_jsonschema_objects as pjs
+import jsonschema as js
 import yaml
-from schema.helpers import pjs_filter
 from ga4gh.gks.metaschema.tools.source_proc import YamlSchemaProcessor
 
 from config import vrs_json_path, vrs_yaml_path, vrs_merged_yaml_path
@@ -18,6 +18,18 @@ def test_json_yaml_match():
 
 
 # Can pjs handle this schema?
-def test_pjs_smoke():
-    ob = pjs.ObjectBuilder(pjs_filter(m))
-    assert ob.build_classes()              # no exception => okay
+# def test_pjs_smoke():
+#     ob = pjs.ObjectBuilder(pjs_filter(m))
+#     assert ob.build_classes()              # no exception => okay
+
+# Does the schema validate against a simple sequence location?
+def test_sequence_location():
+    sl = {
+        'sequence_id': 'ga4gh:SQ.12345',
+        'start': 100,
+        'end': [None, 150]
+    }
+    schema = copy.deepcopy(j)
+    schema['$ref'] = '#/$defs/SequenceLocation'
+    schema['$id'] = vrs_json_path.as_uri()
+    js.validate(sl, schema)
