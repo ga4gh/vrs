@@ -23,7 +23,7 @@ def test_json_yaml_match():
 #     assert ob.build_classes()              # no exception => okay
 
 # Does the schema validate against a simple sequence location?
-def test_sequence_location():
+def test_models():
     sl = {
         'sequence_id': 'ga4gh:SQ.12345',
         'start': 100,
@@ -33,3 +33,12 @@ def test_sequence_location():
     schema['$ref'] = '#/$defs/SequenceLocation'
     schema['$id'] = vrs_json_path.as_uri()
     js.validate(sl, schema)
+
+    schema['$ref'] = '#/$defs/Allele'
+    a = {
+        'location': sl,
+        'state': {
+            'length': [32, 35]
+        }
+    }
+    js.validate(a, schema)

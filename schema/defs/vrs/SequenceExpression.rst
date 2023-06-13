@@ -16,5 +16,5 @@ An expression describing a :ref:`Sequence`.
       - Description
    *  - type
       - string
-      - 1..1
+      - 0..1
       - The SequenceExpression class type. MUST match child class type.

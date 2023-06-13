@@ -83,7 +83,7 @@ $defs:
   # Molecular Variation
 
   Allele:
-    ga4gh_prefix: VA
+    ga4ghPrefix: VA
     inherits: MolecularVariation
     description: >-
       The state of a molecule at a :ref:`Location`.
@@ -108,7 +108,7 @@ $defs:
     required: [ "location", "state" ]
 
   Haplotype:
-    ga4gh_prefix: HT
+    ga4ghPrefix: HT
     inherits: MolecularVariation
     description: >-
       A set of non-overlapping :ref:`Allele` members that co-occur on the same molecule.
@@ -137,7 +137,7 @@ $defs:
   # UtilityVariation
 
 #  Text:
-#    ga4gh_prefix: VT
+#    ga4ghPrefix: VT
 #    inherits: UtilityVariation
 #    description: >-
 #      A free-text definition of variation.
@@ -156,7 +156,7 @@ $defs:
 #    required: [ "definition" ]
 #
 #  VariationSet:
-#    ga4gh_prefix: VS
+#    ga4ghPrefix: VS
 #    inherits: UtilityVariation
 #    description: >-
 #      An unconstrained set of Variation members.
@@ -198,7 +198,7 @@ $defs:
     heritable_required: [ "subject" ]
 
   CopyNumberCount:
-    ga4gh_prefix: CN
+    ga4ghPrefix: CN
     inherits: CopyNumber
     type: object
     description: >-
@@ -220,7 +220,7 @@ $defs:
     required: [ "copies" ]
 
   CopyNumberChange:
-    ga4gh_prefix: CX
+    ga4ghPrefix: CX
     inherits: CopyNumber
     type: object
     description: >-
@@ -243,7 +243,7 @@ $defs:
     required: [  "copy_change" ]
 
   Genotype:
-    ga4gh_prefix: GT
+    ga4ghPrefix: GT
     inherits: SystemicVariation
     description: >-
       A quantified set of _in-trans_ :ref:`MolecularVariation` at a genomic locus.
@@ -291,7 +291,7 @@ $defs:
       propertyName: type
 
 #  ChromosomeLocation:
-#    ga4gh_prefix: CL
+#    ga4ghPrefix: CL
 #    inherits: Location
 #    description: >-
 #      A Location on a chromosome defined by a species and chromosome name.
@@ -327,7 +327,7 @@ $defs:
 #    required: [ "species_id", "chr", "start", "end" ]
 
   SequenceLocation:
-    ga4gh_prefix: SL
+    ga4ghPrefix: SL
     inherits: Location
     description: >-
       A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
@@ -359,7 +359,7 @@ $defs:
           The end coordinate or range of the SequenceLocation.
           The minimum value of this coordinate or range is 0.
           MUST represent a coordinate or range greater than the value of `start`.
-    required: [ "sequence_id", "start", "end" ]
+    required: [ "start", "end" ]
 
 
   # =============================================================================
@@ -375,9 +375,10 @@ $defs:
       An expression describing a :ref:`Sequence`.
     oneOf:
       - $ref: "#/$defs/LiteralSequenceExpression"
-      - $ref: "#/$defs/DerivedSequenceExpression"
-      - $ref: "#/$defs/RepeatedSequenceExpression"
-      - $ref: "#/$defs/ComposedSequenceExpression"
+      - $ref: "#/$defs/ReferenceLengthExpression"
+#      - $ref: "#/$defs/DerivedSequenceExpression"
+#      - $ref: "#/$defs/RepeatedSequenceExpression"
+#      - $ref: "#/$defs/ComposedSequenceExpression"
     discriminator:
       propertyName: type
     heritable_properties:
@@ -385,7 +386,33 @@ $defs:
         type: string
         description: >-
           The SequenceExpression class type. MUST match child class type.
-    heritable_required: [ "type" ]
+
+  ReferenceLengthExpression:
+    inherits: SequenceExpression
+    description: >-
+      An expression of a length of a sequence from a repeating reference.
+    type: object
+    properties:
+      type:
+        type: string
+        const: "ReferenceLengthExpression"
+        default: "ReferenceLengthExpression"
+        description: MUST be "ReferenceLengthExpression"
+      length:
+        oneOf:
+          - type: integer
+          - $ref: "#/$defs/Range"
+        description: >-
+          The number of residues in the expressed sequence.
+      sequence:
+        $ref: "#/$defs/Sequence"
+        description: the :ref:`Sequence` encoded by the Reference Length Expression.
+      repeatSubunitLength:
+        type: integer
+        description: >-
+          The number of residues in the repeat subunit.
+    required:
+      - length
 
   LiteralSequenceExpression:
     inherits: SequenceExpression
@@ -401,124 +428,125 @@ $defs:
       sequence:
         $ref: "#/$defs/Sequence"
         description: the literal :ref:`Sequence` expressed
-    required: [ "sequence" ]
+    required:
+      - sequence
 
-  DerivedSequenceExpression:
-    inherits: SequenceExpression
-    description: >-
-      An approximate expression of a sequence that is derived from
-      a referenced sequence location. Use of this class
-      indicates that the derived sequence is *approximately equivalent*
-      to the reference indicated, and is typically used for describing
-      large regions in contexts where the use of an approximate sequence
-      is inconsequential.
-    type: object
-    properties:
-      type:
-        type: string
-        const: "DerivedSequenceExpression"
-        default: "DerivedSequenceExpression"
-        description: MUST be "DerivedSequenceExpression"
-      location:
-        $ref: "#/$defs/SequenceLocation"
-        description: >-
-          The location from which the approximate sequence is derived
-      reverse_complement:
-        type: boolean
-        description: >-
-          A flag indicating if the expressed sequence is the reverse
-          complement of the sequence referred to by `location`
-    required: [ "location", "reverse_complement" ]
-
-  RepeatedSequenceExpression:
-    inherits: SequenceExpression
-    description: >-
-      An expression of a sequence comprised of a tandem repeating subsequence.
-    type: object
-    properties:
-      type:
-        type: string
-        const: "RepeatedSequenceExpression"
-        default: "RepeatedSequenceExpression"
-        description: MUST be "RepeatedSequenceExpression"
-      seq_expr:
-        oneOf:
-          - $ref: "#/$defs/LiteralSequenceExpression"
-          - $ref: "#/$defs/DerivedSequenceExpression"
-        description: >-
-          An expression of the repeating subsequence
-      count:
-        oneOf:
-          - $ref: "#/$defs/Number"
-          - $ref: "#/$defs/IndefiniteRange"
-          - $ref: "#/$defs/DefiniteRange"
-        description: >-
-          The count of repeated units, as an integer or inclusive range
-    allOf:
-      - if:
-          properties:
-            count:
-              $ref: "#/$defs/Number"
-        then:
-          properties:
-            count:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            count:
-              $ref: "#/$defs/IndefiniteRange"
-        then:
-          properties:
-            count:
-              properties:
-                value:
-                  minimum: 0
-      - if:
-          properties:
-            count:
-              $ref: "#/$defs/DefiniteRange"
-        then:
-          properties:
-            count:
-              properties:
-                min:
-                  minimum: 0
-                max:
-                  minimum: 0
-    required: [ "seq_expr", "count" ]
-
-  ComposedSequenceExpression:
-    description: >-
-      An expression of a sequence composed from multiple other
-      :ref:`Sequence Expressions<SequenceExpression>`
-      objects. MUST have at least one component that is not a
-      ref:`LiteralSequenceExpression`. CANNOT be composed from
-      nested composed sequence expressions.
-    additionalProperties: false
-    type: object
-    properties:
-      type:
-        type: string
-        const: "ComposedSequenceExpression"
-        default: "ComposedSequenceExpression"
-        description: MUST be "ComposedSequenceExpression"
-      components:
-        type: array
-        ordered: true
-        uniqueItems: true
-        minItems: 2
-        items:
-          anyOf:
-            - $ref: "#/$defs/LiteralSequenceExpression"
-            - $ref: "#/$defs/RepeatedSequenceExpression"
-            - $ref: "#/$defs/DerivedSequenceExpression"
-        description: >-
-          An ordered list of :ref:`SequenceExpression` components
-          comprising the expression. MUST NOT have two adjacent
-          :ref:`LiteralSequenceExpression` objects.
-    required: [ "components" ]
+#  DerivedSequenceExpression:
+#    inherits: SequenceExpression
+#    description: >-
+#      An approximate expression of a sequence that is derived from
+#      a referenced sequence location. Use of this class
+#      indicates that the derived sequence is *approximately equivalent*
+#      to the reference indicated, and is typically used for describing
+#      large regions in contexts where the use of an approximate sequence
+#      is inconsequential.
+#    type: object
+#    properties:
+#      type:
+#        type: string
+#        const: "DerivedSequenceExpression"
+#        default: "DerivedSequenceExpression"
+#        description: MUST be "DerivedSequenceExpression"
+#      location:
+#        $ref: "#/$defs/SequenceLocation"
+#        description: >-
+#          The location from which the approximate sequence is derived
+#      reverse_complement:
+#        type: boolean
+#        description: >-
+#          A flag indicating if the expressed sequence is the reverse
+#          complement of the sequence referred to by `location`
+#    required: [ "location", "reverse_complement" ]
+#
+#  RepeatedSequenceExpression:
+#    inherits: SequenceExpression
+#    description: >-
+#      An expression of a sequence comprised of a tandem repeating subsequence.
+#    type: object
+#    properties:
+#      type:
+#        type: string
+#        const: "RepeatedSequenceExpression"
+#        default: "RepeatedSequenceExpression"
+#        description: MUST be "RepeatedSequenceExpression"
+#      seq_expr:
+#        oneOf:
+#          - $ref: "#/$defs/LiteralSequenceExpression"
+#          - $ref: "#/$defs/DerivedSequenceExpression"
+#        description: >-
+#          An expression of the repeating subsequence
+#      count:
+#        oneOf:
+#          - $ref: "#/$defs/Number"
+#          - $ref: "#/$defs/IndefiniteRange"
+#          - $ref: "#/$defs/DefiniteRange"
+#        description: >-
+#          The count of repeated units, as an integer or inclusive range
+#    allOf:
+#      - if:
+#          properties:
+#            count:
+#              $ref: "#/$defs/Number"
+#        then:
+#          properties:
+#            count:
+#              properties:
+#                value:
+#                  minimum: 0
+#      - if:
+#          properties:
+#            count:
+#              $ref: "#/$defs/IndefiniteRange"
+#        then:
+#          properties:
+#            count:
+#              properties:
+#                value:
+#                  minimum: 0
+#      - if:
+#          properties:
+#            count:
+#              $ref: "#/$defs/DefiniteRange"
+#        then:
+#          properties:
+#            count:
+#              properties:
+#                min:
+#                  minimum: 0
+#                max:
+#                  minimum: 0
+#    required: [ "seq_expr", "count" ]
+#
+#  ComposedSequenceExpression:
+#    description: >-
+#      An expression of a sequence composed from multiple other
+#      :ref:`Sequence Expressions<SequenceExpression>`
+#      objects. MUST have at least one component that is not a
+#      ref:`LiteralSequenceExpression`. CANNOT be composed from
+#      nested composed sequence expressions.
+#    additionalProperties: false
+#    type: object
+#    properties:
+#      type:
+#        type: string
+#        const: "ComposedSequenceExpression"
+#        default: "ComposedSequenceExpression"
+#        description: MUST be "ComposedSequenceExpression"
+#      components:
+#        type: array
+#        ordered: true
+#        uniqueItems: true
+#        minItems: 2
+#        items:
+#          anyOf:
+#            - $ref: "#/$defs/LiteralSequenceExpression"
+#            - $ref: "#/$defs/RepeatedSequenceExpression"
+#            - $ref: "#/$defs/DerivedSequenceExpression"
+#        description: >-
+#          An ordered list of :ref:`SequenceExpression` components
+#          comprising the expression. MUST NOT have two adjacent
+#          :ref:`LiteralSequenceExpression` objects.
+#    required: [ "components" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Nested Classes
@@ -624,14 +652,14 @@ $defs:
   # These types are used solely within other definitions.
   # =============================================================================
 
-  HumanCytoband:
-    description: >-
-      A character string representing cytobands derived from the
-      *International System for Human Cytogenomic Nomenclature* (ISCN)
-      `guidelines <http://doi.org/10.1159/isbn.978-3-318-06861-0>`_.
-    type: string
-    pattern: '^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$'
-    example: "q22.3"
+#  HumanCytoband:
+#    description: >-
+#      A character string representing cytobands derived from the
+#      *International System for Human Cytogenomic Nomenclature* (ISCN)
+#      `guidelines <http://doi.org/10.1159/isbn.978-3-318-06861-0>`_.
+#    type: string
+#    pattern: '^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$'
+#    example: "q22.3"
 
   Residue:
     description: >-

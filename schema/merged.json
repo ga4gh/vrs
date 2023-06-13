@@ -58,7 +58,7 @@
          }
       },
       "Allele": {
-         "ga4gh_prefix": "VA",
+         "ga4ghPrefix": "VA",
          "description": "The state of a molecule at a Location.",
          "type": "object",
          "properties": {
@@ -97,16 +97,10 @@
                "description": "An expression of the sequence state",
                "oneOf": [
                   {
-                     "$ref": "#/$defs/ComposedSequenceExpression"
-                  },
-                  {
-                     "$ref": "#/$defs/DerivedSequenceExpression"
-                  },
-                  {
                      "$ref": "#/$defs/LiteralSequenceExpression"
                   },
                   {
-                     "$ref": "#/$defs/RepeatedSequenceExpression"
+                     "$ref": "#/$defs/ReferenceLengthExpression"
                   }
                ]
             }
@@ -118,7 +112,7 @@
          "additionalProperties": false
       },
       "Haplotype": {
-         "ga4gh_prefix": "HT",
+         "ga4ghPrefix": "HT",
          "description": "A set of non-overlapping Allele members that co-occur on the same molecule.",
          "type": "object",
          "properties": {
@@ -166,7 +160,7 @@
          "additionalProperties": false
       },
       "CopyNumberCount": {
-         "ga4gh_prefix": "CN",
+         "ga4ghPrefix": "CN",
          "type": "object",
          "description": "The absolute count of discrete copies of a Location or Gene, within a system (e.g. genome, cell, etc.).",
          "properties": {
@@ -220,7 +214,7 @@
          "additionalProperties": false
       },
       "CopyNumberChange": {
-         "ga4gh_prefix": "CX",
+         "ga4ghPrefix": "CX",
          "type": "object",
          "description": "An assessment of the copy number of a Location or a Gene within a system (e.g. genome, cell, etc.) relative to a baseline ploidy.",
          "properties": {
@@ -277,7 +271,7 @@
          "additionalProperties": false
       },
       "Genotype": {
-         "ga4gh_prefix": "GT",
+         "ga4ghPrefix": "GT",
          "description": "A quantified set of _in-trans_ MolecularVariation at a genomic locus.",
          "type": "object",
          "properties": {
@@ -341,7 +335,7 @@
          }
       },
       "SequenceLocation": {
-         "ga4gh_prefix": "SL",
+         "ga4ghPrefix": "SL",
          "description": "A Location defined by an interval on a referenced Sequence.",
          "type": "object",
          "properties": {
@@ -394,7 +388,6 @@
          },
          "required": [
             "end",
-            "sequence_id",
             "start"
          ],
          "additionalProperties": false
@@ -403,21 +396,50 @@
          "description": "An expression describing a Sequence.",
          "oneOf": [
             {
-               "$ref": "#/$defs/ComposedSequenceExpression"
-            },
-            {
-               "$ref": "#/$defs/DerivedSequenceExpression"
-            },
-            {
                "$ref": "#/$defs/LiteralSequenceExpression"
             },
             {
-               "$ref": "#/$defs/RepeatedSequenceExpression"
+               "$ref": "#/$defs/ReferenceLengthExpression"
             }
          ],
          "discriminator": {
             "propertyName": "type"
          }
+      },
+      "ReferenceLengthExpression": {
+         "description": "An expression of a length of a sequence from a repeating reference.",
+         "type": "object",
+         "properties": {
+            "type": {
+               "type": "string",
+               "const": "ReferenceLengthExpression",
+               "default": "ReferenceLengthExpression",
+               "description": "MUST be \"ReferenceLengthExpression\""
+            },
+            "length": {
+               "oneOf": [
+                  {
+                     "$ref": "#/$defs/Range"
+                  },
+                  {
+                     "type": "integer"
+                  }
+               ],
+               "description": "The number of residues in the expressed sequence."
+            },
+            "sequence": {
+               "$ref": "#/$defs/Sequence",
+               "description": "the Sequence encoded by the Reference Length Expression."
+            },
+            "repeatSubunitLength": {
+               "type": "integer",
+               "description": "The number of residues in the repeat subunit."
+            }
+         },
+         "required": [
+            "length"
+         ],
+         "additionalProperties": false
       },
       "LiteralSequenceExpression": {
          "description": "An explicit expression of a Sequence.",
@@ -435,180 +457,9 @@
             }
          },
          "required": [
-            "sequence",
-            "type"
+            "sequence"
          ],
          "additionalProperties": false
-      },
-      "DerivedSequenceExpression": {
-         "description": "An approximate expression of a sequence that is derived from a referenced sequence location. Use of this class indicates that the derived sequence is *approximately equivalent* to the reference indicated, and is typically used for describing large regions in contexts where the use of an approximate sequence is inconsequential.",
-         "type": "object",
-         "properties": {
-            "type": {
-               "type": "string",
-               "const": "DerivedSequenceExpression",
-               "default": "DerivedSequenceExpression",
-               "description": "MUST be \"DerivedSequenceExpression\""
-            },
-            "location": {
-               "$ref": "#/$defs/SequenceLocation",
-               "description": "The location from which the approximate sequence is derived"
-            },
-            "reverse_complement": {
-               "type": "boolean",
-               "description": "A flag indicating if the expressed sequence is the reverse complement of the sequence referred to by `location`"
-            }
-         },
-         "required": [
-            "location",
-            "reverse_complement",
-            "type"
-         ],
-         "additionalProperties": false
-      },
-      "RepeatedSequenceExpression": {
-         "description": "An expression of a sequence comprised of a tandem repeating subsequence.",
-         "type": "object",
-         "properties": {
-            "type": {
-               "type": "string",
-               "const": "RepeatedSequenceExpression",
-               "default": "RepeatedSequenceExpression",
-               "description": "MUST be \"RepeatedSequenceExpression\""
-            },
-            "seq_expr": {
-               "oneOf": [
-                  {
-                     "$ref": "#/$defs/DerivedSequenceExpression"
-                  },
-                  {
-                     "$ref": "#/$defs/LiteralSequenceExpression"
-                  }
-               ],
-               "description": "An expression of the repeating subsequence"
-            },
-            "count": {
-               "oneOf": [
-                  {
-                     "$ref": "#/$defs/DefiniteRange"
-                  },
-                  {
-                     "$ref": "#/$defs/IndefiniteRange"
-                  },
-                  {
-                     "$ref": "#/$defs/Number"
-                  }
-               ],
-               "description": "The count of repeated units, as an integer or inclusive range"
-            }
-         },
-         "allOf": [
-            {
-               "if": {
-                  "properties": {
-                     "count": {
-                        "$ref": "#/$defs/Number"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "count": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "count": {
-                        "$ref": "#/$defs/IndefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "count": {
-                        "properties": {
-                           "value": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            {
-               "if": {
-                  "properties": {
-                     "count": {
-                        "$ref": "#/$defs/DefiniteRange"
-                     }
-                  }
-               },
-               "then": {
-                  "properties": {
-                     "count": {
-                        "properties": {
-                           "min": {
-                              "minimum": 0
-                           },
-                           "max": {
-                              "minimum": 0
-                           }
-                        }
-                     }
-                  }
-               }
-            }
-         ],
-         "required": [
-            "count",
-            "seq_expr",
-            "type"
-         ],
-         "additionalProperties": false
-      },
-      "ComposedSequenceExpression": {
-         "description": "An expression of a sequence composed from multiple other Sequence Expressions objects. MUST have at least one component that is not a ref:`LiteralSequenceExpression`. CANNOT be composed from nested composed sequence expressions.",
-         "additionalProperties": false,
-         "type": "object",
-         "properties": {
-            "type": {
-               "type": "string",
-               "const": "ComposedSequenceExpression",
-               "default": "ComposedSequenceExpression",
-               "description": "MUST be \"ComposedSequenceExpression\""
-            },
-            "components": {
-               "type": "array",
-               "ordered": true,
-               "uniqueItems": true,
-               "minItems": 2,
-               "items": {
-                  "anyOf": [
-                     {
-                        "$ref": "#/$defs/LiteralSequenceExpression"
-                     },
-                     {
-                        "$ref": "#/$defs/RepeatedSequenceExpression"
-                     },
-                     {
-                        "$ref": "#/$defs/DerivedSequenceExpression"
-                     }
-                  ]
-               },
-               "description": "An ordered list of SequenceExpression components comprising the expression. MUST NOT have two adjacent LiteralSequenceExpression objects."
-            }
-         },
-         "required": [
-            "components"
-         ]
       },
       "GenotypeMember": {
          "description": "A class for expressing the count of a specific MolecularVariation present _in-trans_ at a genomic locus represented by a Genotype.",
@@ -666,12 +517,6 @@
                }
             ]
          }
-      },
-      "HumanCytoband": {
-         "description": "A character string representing cytobands derived from the *International System for Human Cytogenomic Nomenclature* (ISCN) [guidelines](http://doi.org/10.1159/isbn.978-3-318-06861-0).",
-         "type": "string",
-         "pattern": "^cen|[pq](ter|([1-9][0-9]*(\\.[1-9][0-9]*)?))$",
-         "example": "q22.3"
       },
       "Residue": {
          "description": "A character representing a specific residue (i.e., molecular species) or groupings of these (\"ambiguity codes\"), using [one-letter IUPAC abbreviations](https://en.wikipedia.org/wiki/International_Union_of_Pure_and_Applied_Chemistry#Amino_acid_and_nucleotide_base_codes) for nucleic acids and amino acids.",

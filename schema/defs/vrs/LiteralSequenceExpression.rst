@@ -18,7 +18,7 @@ Some LiteralSequenceExpression attributes are inherited from :ref:`SequenceExpre
       - Description
    *  - type
       - string
-      - 1..1
+      - 0..1
       - MUST be "LiteralSequenceExpression"
    *  - sequence
       - :ref:`Sequence`
