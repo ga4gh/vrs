@@ -45,11 +45,18 @@ definitions:
     type: object
     properties:
       id:
-        $ref: core.json#/$defs/CURIE
+        type: string
         description: The 'logical' identifier of the entity in the system of record,
-          and MUST be represented as a CURIE. This 'id' is unique within a given system,
-          but may also refer to an 'id' for the shared concept in  another system
-          (represented by namespace, accordingly).
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: core.json#/$defs/Extension
       type:
         type: string
         const: Allele
@@ -71,7 +78,6 @@ definitions:
     required:
     - location
     - state
-    - type
     additionalProperties: false
   Haplotype:
     ga4gh_prefix: HT
@@ -80,11 +86,18 @@ definitions:
     type: object
     properties:
       id:
-        $ref: core.json#/$defs/CURIE
+        type: string
         description: The 'logical' identifier of the entity in the system of record,
-          and MUST be represented as a CURIE. This 'id' is unique within a given system,
-          but may also refer to an 'id' for the shared concept in  another system
-          (represented by namespace, accordingly).
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: core.json#/$defs/Extension
       type:
         type: string
         const: Haplotype
@@ -103,7 +116,6 @@ definitions:
           Haplotype.
     required:
     - members
-    - type
     additionalProperties: false
   Text:
     ga4gh_prefix: VT
@@ -111,11 +123,18 @@ definitions:
     type: object
     properties:
       id:
-        $ref: core.json#/$defs/CURIE
+        type: string
         description: The 'logical' identifier of the entity in the system of record,
-          and MUST be represented as a CURIE. This 'id' is unique within a given system,
-          but may also refer to an 'id' for the shared concept in  another system
-          (represented by namespace, accordingly).
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: core.json#/$defs/Extension
       type:
         type: string
         const: Text
@@ -127,7 +146,6 @@ definitions:
           subclasses of Variation.
     required:
     - definition
-    - type
     additionalProperties: false
   VariationSet:
     ga4gh_prefix: VS
@@ -135,11 +153,18 @@ definitions:
     type: object
     properties:
       id:
-        $ref: core.json#/$defs/CURIE
+        type: string
         description: The 'logical' identifier of the entity in the system of record,
-          and MUST be represented as a CURIE. This 'id' is unique within a given system,
-          but may also refer to an 'id' for the shared concept in  another system
-          (represented by namespace, accordingly).
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: core.json#/$defs/Extension
       type:
         type: string
         const: VariationSet
@@ -163,7 +188,6 @@ definitions:
           but MAY be empty.
     required:
     - members
-    - type
     additionalProperties: false
   CopyNumberCount:
     ga4gh_prefix: CN
@@ -172,16 +196,18 @@ definitions:
       a system (e.g. genome, cell, etc.).
     properties:
       id:
-        $ref: core.json#/$defs/CURIE
-        description: The 'logical' identifier of the entity in the system of record,
-          and MUST be represented as a CURIE. This 'id' is unique within a given system,
-          but may also refer to an 'id' for the shared concept in  another system
-          (represented by namespace, accordingly).
-      type:
         type: string
-        const: CopyNumberCount
-        default: CopyNumberCount
-        description: MUST be "CopyNumberCount"
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: core.json#/$defs/Extension
       subject:
         oneOf:
         - $ref: '#/definitions/ChromosomeLocation'
@@ -189,6 +215,11 @@ definitions:
         - $ref: core.json#/$defs/CURIE
         - $ref: core.json#/$defs/Gene
         description: A location for which the number of systemic copies is described.
+      type:
+        type: string
+        const: CopyNumberCount
+        default: CopyNumberCount
+        description: MUST be "CopyNumberCount"
       copies:
         oneOf:
         - $ref: '#/definitions/DefiniteRange'
@@ -198,7 +229,6 @@ definitions:
     required:
     - copies
     - subject
-    - type
     additionalProperties: false
   CopyNumberChange:
     ga4gh_prefix: CX
@@ -207,16 +237,18 @@ definitions:
       system (e.g. genome, cell, etc.) relative to a baseline ploidy.
     properties:
       id:
-        $ref: core.json#/$defs/CURIE
-        description: The 'logical' identifier of the entity in the system of record,
-          and MUST be represented as a CURIE. This 'id' is unique within a given system,
-          but may also refer to an 'id' for the shared concept in  another system
-          (represented by namespace, accordingly).
-      type:
         type: string
-        const: CopyNumberChange
-        default: CopyNumberChange
-        description: MUST be "CopyNumberChange"
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: core.json#/$defs/Extension
       subject:
         oneOf:
         - $ref: '#/definitions/ChromosomeLocation'
@@ -224,6 +256,11 @@ definitions:
         - $ref: core.json#/$defs/CURIE
         - $ref: core.json#/$defs/Gene
         description: A location for which the number of systemic copies is described.
+      type:
+        type: string
+        const: CopyNumberChange
+        default: CopyNumberChange
+        description: MUST be "CopyNumberChange"
       copy_change:
         type: string
         enum:
@@ -242,7 +279,6 @@ definitions:
     required:
     - copy_change
     - subject
-    - type
     additionalProperties: false
   Genotype:
     ga4gh_prefix: GT
@@ -250,11 +286,18 @@ definitions:
     type: object
     properties:
       id:
-        $ref: core.json#/$defs/CURIE
+        type: string
         description: The 'logical' identifier of the entity in the system of record,
-          and MUST be represented as a CURIE. This 'id' is unique within a given system,
-          but may also refer to an 'id' for the shared concept in  another system
-          (represented by namespace, accordingly).
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: core.json#/$defs/Extension
       type:
         type: string
         const: Genotype
@@ -281,7 +324,6 @@ definitions:
     required:
     - count
     - members
-    - type
     additionalProperties: false
   Location:
     description: A contiguous segment of a biological sequence.
@@ -296,11 +338,18 @@ definitions:
     type: object
     properties:
       id:
-        $ref: core.json#/$defs/CURIE
+        type: string
         description: The 'logical' identifier of the entity in the system of record,
-          and MUST be represented as a CURIE. This 'id' is unique within a given system,
-          but may also refer to an 'id' for the shared concept in  another system
-          (represented by namespace, accordingly).
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: core.json#/$defs/Extension
       type:
         type: string
         const: ChromosomeLocation
@@ -328,7 +377,6 @@ definitions:
     - end
     - species_id
     - start
-    - type
     additionalProperties: false
   SequenceLocation:
     ga4gh_prefix: SL
@@ -336,11 +384,18 @@ definitions:
     type: object
     properties:
       id:
-        $ref: core.json#/$defs/CURIE
+        type: string
         description: The 'logical' identifier of the entity in the system of record,
-          and MUST be represented as a CURIE. This 'id' is unique within a given system,
-          but may also refer to an 'id' for the shared concept in  another system
-          (represented by namespace, accordingly).
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: core.json#/$defs/Extension
       type:
         type: string
         const: SequenceLocation
@@ -369,7 +424,6 @@ definitions:
     - end
     - sequence_id
     - start
-    - type
     additionalProperties: false
   SequenceExpression:
     description: An expression describing a Sequence.

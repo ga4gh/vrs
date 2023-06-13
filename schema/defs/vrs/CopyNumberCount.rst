@@ -4,7 +4,7 @@ The absolute count of discrete copies of a :ref:`Location` or :ref:`Gene`, withi
 
 **Information Model**
 
-Some CopyNumberCount attributes are inherited from :ref:`Entity`.
+Some CopyNumberCount attributes are inherited from :ref:`gks.core:Entity`.
 
 .. list-table::
    :class: clean-wrap
@@ -17,17 +17,25 @@ Some CopyNumberCount attributes are inherited from :ref:`Entity`.
       - Limits
       - Description
    *  - id
-      - `CURIE <core.json#/$defs/CURIE>`_
-      - 0..1
-      - The 'logical' identifier of the entity in the system of record, and MUST be represented as a CURIE. This 'id' is unique within a given system, but may also refer to an 'id' for the shared concept in  another system (represented by namespace, accordingly).
-   *  - type
       - string
-      - 1..1
-      - MUST be "CopyNumberCount"
+      - 0..1
+      - The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE).
+   *  - label
+      - string
+      - 0..1
+      - 
+   *  - extensions
+      - `Extension <core.json#/$defs/Extension>`_
+      - 0..m
+      - 
    *  - subject
       - `CURIE <core.json#/$defs/CURIE>`_ | :ref:`Location` | `Gene <core.json#/$defs/Gene>`_
       - 1..1
       - A location for which the number of systemic copies is described.
+   *  - type
+      - string
+      - 0..1
+      - MUST be "CopyNumberCount"
    *  - copies
       - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`
       - 1..1

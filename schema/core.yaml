@@ -2,12 +2,9 @@ $schema: http://json-schema.org/draft/2020-12/schema
 title: GA4GH-GKS-Core-Definitions
 type: object
 $defs:
-  RecordMetadata:
+  Mapping:
     type: object
-    description: A re-usable structure that encapsulates provenance metadata that
-      applies to a specific concrete record of information as encoded in a particular
-      system, as opposed to  provenance of the abstract information content/knowledge
-      the record represents.
+    description: A mapping to a concept in a terminology system.
     properties:
       id:
         type: string
@@ -15,11 +12,6 @@ $defs:
           e.g. a UUID. This 'id' is  unique within a given system. The identified
           entity may have a different 'id' in a different  system, or may refer to
           an 'id' for the shared concept in another system (e.g. a CURIE).
-      type:
-        type: string
-        const: RecordMetadata
-        default: RecordMetadata
-        description: MUST be "RecordMetadata".
       label:
         type: string
       extensions:
@@ -27,37 +19,26 @@ $defs:
         ordered: true
         items:
           $ref: '#/$defs/Extension'
-      is_version_of:
-        $ref: '#/$defs/CURIE'
+      system:
+        type: string
+        description: Identity of the terminology system.
       version:
         type: string
-    required:
-    - type
-    additionalProperties: false
-  Coding:
-    type: object
-    description: A `coding` is an extensible entity for labeling or otherwise annotating
-      globally  namespaced identifiers known as "codes".
-    properties:
-      id:
-        $ref: '#/$defs/CURIE'
-        description: The `coding.id` field is used to capture the code as a CURIE.
-      type:
+        description: Version of the terminology system.
+      code:
+        type: '#/$defs/Code'
+        description: Symbol in syntax defined by the terminology system.
+      mapping:
+        description: A mapping between concepts as defined by the Simple Knowledge
+          Organization System (SKOS).
         type: string
-        const: Coding
-        default: Coding
-        description: MUST be "Coding".
-      label:
-        type: string
-      extensions:
-        type: array
-        ordered: true
-        items:
-          $ref: '#/$defs/Extension'
-      record_metadata:
-        $ref: '#/$defs/RecordMetadata'
-    required:
-    - type
+        enum:
+        - closeMatch
+        - exactMatch
+        - broadMatch
+        - narrowMatch
+        - relatedMatch
+    required: []
     additionalProperties: false
   Extension:
     type: object
@@ -85,171 +66,11 @@ $defs:
     required:
     - name
     additionalProperties: false
-  CURIE:
-    description: A [W3C Compact URI](https://www.w3.org/TR/curie/) formatted string.
-      A CURIE string has the structure ``prefix``:``reference``, as defined by the
-      W3C syntax.
+  Code:
+    description: Indicates that the value is taken from a set of controlled strings
+      defined elsewhere. Technically, a code is restricted to a string which has at
+      least one character and no leading or  trailing whitespace, and where there
+      is no whitespace other than single spaces in the contents.
     type: string
-    pattern: ^\w[^:]*:.+$
-    example: ensembl:ENSG00000139618
-  Disease:
-    type: object
-    description: A reference to a Disease as defined by an authority. For human diseases,
-      the use of [MONDO](https://registry.identifiers.org/registry/mondo) as the disease
-      authority is RECOMMENDED.
-    properties:
-      id:
-        $ref: '#/$defs/CURIE'
-        description: The 'logical' identifier of the entity in the system of record,
-          and MUST be represented as a CURIE. This 'id' is unique within a given system,
-          but may also refer to an 'id' for the shared concept in  another system
-          (represented by namespace, accordingly).
-      type:
-        type: string
-        const: Disease
-        default: Disease
-        description: MUST be "Disease".
-    required:
-    - id
-    - type
-    additionalProperties: false
-  Phenotype:
-    type: object
-    description: A reference to a Phenotype as defined by an authority. For human
-      phenotypes, the use of [HPO](https://registry.identifiers.org/registry/hpo)
-      as the disease authority is RECOMMENDED.
-    properties:
-      id:
-        $ref: '#/$defs/CURIE'
-        description: The 'logical' identifier of the entity in the system of record,
-          and MUST be represented as a CURIE. This 'id' is unique within a given system,
-          but may also refer to an 'id' for the shared concept in  another system
-          (represented by namespace, accordingly).
-      type:
-        type: string
-        const: Phenotype
-        default: Phenotype
-        description: MUST be "Phenotype".
-    required:
-    - id
-    - type
-    additionalProperties: false
-  Gene:
-    description: A reference to a Gene as defined by an authority. For human genes,
-      the use of [hgnc](https://registry.identifiers.org/registry/hgnc) as the gene
-      authority is RECOMMENDED.
-    type: object
-    properties:
-      id:
-        $ref: '#/$defs/CURIE'
-        description: The 'logical' identifier of the entity in the system of record,
-          and MUST be represented as a CURIE. This 'id' is unique within a given system,
-          but may also refer to an 'id' for the shared concept in  another system
-          (represented by namespace, accordingly).
-      type:
-        type: string
-        const: Gene
-        default: Gene
-        description: MUST be "Gene"
-    required:
-    - id
-    - type
-    additionalProperties: false
-  Condition:
-    type: object
-    description: A set of phenotype and/or disease concepts that constitute a condition.
-    properties:
-      id:
-        $ref: '#/$defs/CURIE'
-        description: The 'logical' identifier of the entity in the system of record,
-          and MUST be represented as a CURIE. This 'id' is unique within a given system,
-          but may also refer to an 'id' for the shared concept in  another system
-          (represented by namespace, accordingly).
-      type:
-        type: string
-        description: The schema class that is instantiated by the data object. Must
-          be the name of a class from  the VA schema.
-      members:
-        type: array
-        ordered: false
-        items:
-          anyOf:
-          - $ref: '#/$defs/Disease'
-          - $ref: '#/$defs/Phenotype'
-        minItems: 2
-    required:
-    - members
-    - type
-    additionalProperties: false
-  Therapeutic:
-    type: object
-    description: A treatment, therapy, or drug.
-    properties:
-      id:
-        $ref: '#/$defs/CURIE'
-        description: The 'logical' identifier of the entity in the system of record,
-          and MUST be represented as a CURIE. This 'id' is unique within a given system,
-          but may also refer to an 'id' for the shared concept in  another system
-          (represented by namespace, accordingly).
-      type:
-        type: string
-        const: Therapeutic
-        default: Therapeutic
-        description: MUST be "Therapeutic".
-    required:
-    - id
-    - type
-    additionalProperties: false
-  CombinationTherapeuticCollection:
-    type: object
-    description: A collection of therapeutics that are taken during a course of treatment.
-    properties:
-      id:
-        $ref: '#/$defs/CURIE'
-        description: The 'logical' identifier of the entity in the system of record,
-          and MUST be represented as a CURIE. This 'id' is unique within a given system,
-          but may also refer to an 'id' for the shared concept in  another system
-          (represented by namespace, accordingly).
-      type:
-        type: string
-        const: CombinationTherapeutics
-        default: CombinationTherapeutics
-        description: MUST be "CombinationTherapeutics"
-      members:
-        type: array
-        ordered: false
-        description: The therapeutics that constitute the described collection.
-        items:
-          $ref: '#/$defs/Therapeutic'
-        minItems: 2
-    required:
-    - members
-    - type
-    additionalProperties: false
-  SubstituteTherapeuticCollection:
-    type: object
-    description: A collection of therapeutics that are considered as valid alternative
-      entities.
-    properties:
-      id:
-        $ref: '#/$defs/CURIE'
-        description: The 'logical' identifier of the entity in the system of record,
-          and MUST be represented as a CURIE. This 'id' is unique within a given system,
-          but may also refer to an 'id' for the shared concept in  another system
-          (represented by namespace, accordingly).
-      type:
-        type: string
-        const: SubstituteTherapeutics
-        default: SubstituteTherapeutics
-        description: MUST be "SubstituteTherapeutics"
-      members:
-        type: array
-        ordered: false
-        description: The therapeutics that constitute the described collection.
-        items:
-          $ref: '#/$defs/Therapeutic'
-        minItems: 2
-    required:
-    - members
-    - type
-    additionalProperties: false
+    pattern: \S+( \S+)*
+    example: ENSG00000139618

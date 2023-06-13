@@ -16,42 +16,6 @@ $defs:
           The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is 
           unique within a given system. The identified entity may have a different 'id' in a different 
           system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE).
-      type:
-        type: string
-        description: >-
-          The schema class that is instantiated by the data object. Must be the name of a class from 
-          the VA schema.
-    heritable_required: [ "type" ]
-    discriminator:
-      propertyName: type
-
-  ValueEntity:
-    inherits: Entity
-    description: >-
-      ValueEntity is the root class for classes that instantiate Value Objects. ValueEntity classes
-      are not extensible and MUST NOT have optional properties.
-    heritable_properties:
-      id:
-        $ref: "#/$defs/CURIE"
-        description: >-
-          The 'logical' identifier of the entity in the system of record, and MUST be represented as a CURIE.
-          This 'id' is unique within a given system, but may also refer to an 'id' for the shared concept in 
-          another system (represented by namespace, accordingly).
-
-  DomainEntity:
-    inherits: ValueEntity
-    description: >-
-      An abstract :ref:`ValueEntity` class extended to capture specific domain entities by reference
-      to an external identifier.
-    heritable_required:
-      [ "id" ]
-
-  ExtensibleEntity:
-    inherits: Entity
-    description: >-
-      ExtensibleEntity is the root class for classes that instantiate Extensible Objects. Extensible
-      Objects are extensible using the extensions property and MAY have optional properties.
-    heritable_properties:
       label:
         type: string
       extensions:
@@ -59,43 +23,34 @@ $defs:
         ordered: true
         items:
           $ref: "#/$defs/Extension"
+    discriminator:
+      propertyName: type
 
-  RecordMetadata:
+  Mapping:
     type: object
-    inherits: ExtensibleEntity
+    inherits: Entity
     description: >-
-      A re-usable structure that encapsulates provenance metadata that applies to a specific
-      concrete record of information as encoded in a particular system, as opposed to 
-      provenance of the abstract information content/knowledge the record represents.
+      A mapping to a concept in a terminology system.
     properties:
-      type:
+      system:
         type: string
-        const: RecordMetadata
-        default: RecordMetadata
-        description: MUST be "RecordMetadata".
-      is_version_of:
-        $ref: "#/$defs/CURIE"
+        description: Identity of the terminology system.
       version:
         type: string
-
-  Coding:
-    type: object
-    inherits: ExtensibleEntity
-    description: >-
-      A `coding` is an extensible entity for labeling or otherwise annotating globally 
-      namespaced identifiers known as "codes".
-    properties:
-      type:
-        type: string
-        const: Coding
-        default: Coding
-        description: MUST be "Coding".
-      id:
-        $ref: "#/$defs/CURIE"
+        description: Version of the terminology system.
+      code:
+        type: "#/$defs/Code"
+        description: Symbol in syntax defined by the terminology system.
+      mapping:
         description: >-
-          The `coding.id` field is used to capture the code as a CURIE.
-      record_metadata:
-        $ref: "#/$defs/RecordMetadata"
+          A mapping between concepts as defined by the Simple Knowledge Organization System (SKOS).
+        type: string
+        enum:
+          - closeMatch
+          - exactMatch
+          - broadMatch
+          - narrowMatch
+          - relatedMatch
 
   Extension:
     type: object
@@ -117,117 +72,123 @@ $defs:
         description: Any primitive or structured object
     required: [ "name" ]
 
-  CURIE:
+  Code:
     description: >-
-      A `W3C Compact URI <https://www.w3.org/TR/curie/>`_ formatted string.
-      A CURIE string has the structure ``prefix``:``reference``, as defined by
-      the W3C syntax.
+      Indicates that the value is taken from a set of controlled strings defined elsewhere.
+      Technically, a code is restricted to a string which has at least one character and no leading or 
+      trailing whitespace, and where there is no whitespace other than single spaces in the contents.
     type: string
-    pattern: '^\w[^:]*:.+$'
-    example: "ensembl:ENSG00000139618"
+    pattern: '\S+( \S+)*'
+    example: ENSG00000139618
 
-  Disease:
-    type: object
-    inherits: DomainEntity
-    description: >-
-      A reference to a Disease as defined by an authority. For human diseases,
-      the use of `MONDO <https://registry.identifiers.org/registry/mondo>`_
-      as the disease authority is RECOMMENDED.
-    properties:
-      type:
-        type: string
-        const: Disease
-        default: Disease
-        description: MUST be "Disease".
+#  CodeableEntity:  # TODO: Discussion on CodeableConcept analog pending
+#    inherits: Entity
+#    description: >-
+#      An entity that may be associated with codes in one or more systems.
+#    properties:
 
-  Phenotype:
-    type: object
-    inherits: DomainEntity
-    description: >-
-      A reference to a Phenotype as defined by an authority. For human phenotypes,
-      the use of `HPO <https://registry.identifiers.org/registry/hpo>`_
-      as the disease authority is RECOMMENDED.
-    properties:
-      type:
-        type: string
-        const: Phenotype
-        default: Phenotype
-        description: MUST be "Phenotype".
-
-  Gene:
-    inherits: DomainEntity
-    description: >-
-      A reference to a Gene as defined by an authority. For human genes,
-      the use of `hgnc <https://registry.identifiers.org/registry/hgnc>`_
-      as the gene authority is RECOMMENDED.
-    type: object
-    properties:
-      type:
-        type: string
-        const: "Gene"
-        default: "Gene"
-        description: MUST be "Gene"
-
-  Condition:
-    type: object
-    description: A set of phenotype and/or disease concepts that constitute a condition.
-    inherits: ValueEntity
-    properties:
-      members:
-        type: array
-        ordered: false
-        items:
-          anyOf:
-            - $ref: "#/$defs/Disease"
-            - $ref: "#/$defs/Phenotype"
-        minItems: 2
-    required: [ "members" ]
-
-  Therapeutic:
-    type: object
-    inherits: DomainEntity
-    description: A treatment, therapy, or drug.
-    properties:
-      type:
-        type: string
-        const: Therapeutic
-        default: Therapeutic
-        description: MUST be "Therapeutic".
-
-  TherapeuticCollection:
-    inherits: ValueEntity
-    description: A collection of therapeutics.
-    heritable_properties:
-      members:
-        type: array
-        ordered: false
-        description: >-
-          The therapeutics that constitute the described collection.
-        items:
-          $ref: "#/$defs/Therapeutic"
-        minItems: 2
-    heritable_required: [ "members" ]
-
-  CombinationTherapeuticCollection:
-    type: object
-    inherits: TherapeuticCollection
-    description: >-
-      A collection of therapeutics that are taken during a course of treatment.
-    properties:
-      type:
-        type: string
-        const: CombinationTherapeutics
-        default: CombinationTherapeutics
-        description: MUST be "CombinationTherapeutics"
-
-  SubstituteTherapeuticCollection:
-    type: object
-    inherits: TherapeuticCollection
-    description: >-
-      A collection of therapeutics that are considered as valid alternative entities.
-    properties:
-      type:
-        type: string
-        const: SubstituteTherapeutics
-        default: SubstituteTherapeutics
-        description: MUST be "SubstituteTherapeutics"
+#  Disease:
+#    type: object
+#    inherits: DomainEntity
+#    description: >-
+#      A reference to a Disease as defined by an authority. For human diseases,
+#      the use of `MONDO <https://registry.identifiers.org/registry/mondo>`_
+#      as the disease authority is RECOMMENDED.
+#    properties:
+#      type:
+#        type: string
+#        const: Disease
+#        default: Disease
+#        description: MUST be "Disease".
+#
+#  Phenotype:
+#    type: object
+#    inherits: DomainEntity
+#    description: >-
+#      A reference to a Phenotype as defined by an authority. For human phenotypes,
+#      the use of `HPO <https://registry.identifiers.org/registry/hpo>`_
+#      as the disease authority is RECOMMENDED.
+#    properties:
+#      type:
+#        type: string
+#        const: Phenotype
+#        default: Phenotype
+#        description: MUST be "Phenotype".
+#
+#  Gene:
+#    inherits: DomainEntity
+#    description: >-
+#      A reference to a Gene as defined by an authority. For human genes,
+#      the use of `hgnc <https://registry.identifiers.org/registry/hgnc>`_
+#      as the gene authority is RECOMMENDED.
+#    type: object
+#    properties:
+#      type:
+#        type: string
+#        const: "Gene"
+#        default: "Gene"
+#        description: MUST be "Gene"
+#
+#  Condition:
+#    type: object
+#    description: A set of phenotype and/or disease concepts that constitute a condition.
+#    inherits: ValueEntity
+#    properties:
+#      members:
+#        type: array
+#        ordered: false
+#        items:
+#          anyOf:
+#            - $ref: "#/$defs/Disease"
+#            - $ref: "#/$defs/Phenotype"
+#        minItems: 2
+#    required: [ "members" ]
+#
+#  Therapeutic:
+#    type: object
+#    inherits: DomainEntity
+#    description: A treatment, therapy, or drug.
+#    properties:
+#      type:
+#        type: string
+#        const: Therapeutic
+#        default: Therapeutic
+#        description: MUST be "Therapeutic".
+#
+#  TherapeuticCollection:
+#    inherits: ValueEntity
+#    description: A collection of therapeutics.
+#    heritable_properties:
+#      members:
+#        type: array
+#        ordered: false
+#        description: >-
+#          The therapeutics that constitute the described collection.
+#        items:
+#          $ref: "#/$defs/Therapeutic"
+#        minItems: 2
+#    heritable_required: [ "members" ]
+#
+#  CombinationTherapeuticCollection:
+#    type: object
+#    inherits: TherapeuticCollection
+#    description: >-
+#      A collection of therapeutics that are taken during a course of treatment.
+#    properties:
+#      type:
+#        type: string
+#        const: CombinationTherapeutics
+#        default: CombinationTherapeutics
+#        description: MUST be "CombinationTherapeutics"
+#
+#  SubstituteTherapeuticCollection:
+#    type: object
+#    inherits: TherapeuticCollection
+#    description: >-
+#      A collection of therapeutics that are considered as valid alternative entities.
+#    properties:
+#      type:
+#        type: string
+#        const: SubstituteTherapeutics
+#        default: SubstituteTherapeutics
+#        description: MUST be "SubstituteTherapeutics"

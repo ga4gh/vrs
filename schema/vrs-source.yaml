@@ -29,7 +29,7 @@ definitions:
   # =============================================================================
 
   Variation:
-    inherits: gks.core:ValueEntity
+    inherits: gks.core:Entity
     description: >-
       A representation of the state of one or more biomolecules.
     oneOf:
@@ -285,7 +285,7 @@ definitions:
   # Locations
 
   Location:
-    inherits: gks.core:ValueEntity
+    inherits: gks.core:Entity
     description: >-
       A contiguous segment of a biological sequence.
     oneOf:
