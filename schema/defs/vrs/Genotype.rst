@@ -37,6 +37,6 @@ Some Genotype attributes are inherited from :ref:`gks.core:Entity`.
       - 1..m
       - Each GenotypeMember in `members` describes a :ref:`MolecularVariation` and the count of that variation at the locus.
    *  - count
-      - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`
+      - integer | :ref:`Range`
       - 1..1
       - The total number of copies of all :ref:`MolecularVariation` at this locus, MUST be greater than or equal to the sum of :ref:`GenotypeMember` copy counts. If greater than the total counts, this implies additional :ref:`MolecularVariation` that are expected to exist but are not explicitly indicated.

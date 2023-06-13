@@ -8,7 +8,7 @@
 #   make watch &
 
 # https://json-schema.org/understanding-json-schema/reference/schema.html
-$schema: "http://json-schema.org/draft-07/schema"
+$schema: "http://json-schema.org/draft/2020-12/schema"
 title: "GA4GH-VRS-Definitions"
 type: object
 strict: true
@@ -19,7 +19,7 @@ imports:
 namespaces:
   gks.core: core.json#/$defs/
 
-definitions:
+$defs:
   # VRS definitions are presented top-down.  Everything rolls up to
   # Variation, which is a polymorphic abstraction of many kinds of
   # variation.
@@ -33,9 +33,9 @@ definitions:
     description: >-
       A representation of the state of one or more biomolecules.
     oneOf:
-      - $ref: "#/definitions/MolecularVariation"
-      - $ref: "#/definitions/SystemicVariation"
-      - $ref: "#/definitions/UtilityVariation"
+      - $ref: "#/$defs/MolecularVariation"
+      - $ref: "#/$defs/SystemicVariation"
+#      - $ref: "#/$defs/UtilityVariation"
 
     discriminator:
       propertyName: type
@@ -45,22 +45,22 @@ definitions:
     description: >-
       A :ref:`variation` on a contiguous molecule.
     oneOf:
-      - $ref: "#/definitions/Allele"
-      - $ref: "#/definitions/Haplotype"
+      - $ref: "#/$defs/Allele"
+      - $ref: "#/$defs/Haplotype"
     discriminator:
       propertyName: type
 
-  UtilityVariation:
-    inherits: Variation
-    description: >-
-      A collection of :ref:`Variation` subclasses that cannot be
-      constrained to a specific class of biological variation, but
-      are necessary for some applications of VRS.
-    oneOf:
-      - $ref: "#/definitions/Text"
-      - $ref: "#/definitions/VariationSet"
-    discriminator:
-      propertyName: type
+#  UtilityVariation:
+#    inherits: Variation
+#    description: >-
+#      A collection of :ref:`Variation` subclasses that cannot be
+#      constrained to a specific class of biological variation, but
+#      are necessary for some applications of VRS.
+#    oneOf:
+#      - $ref: "#/$defs/Text"
+#      - $ref: "#/$defs/VariationSet"
+#    discriminator:
+#      propertyName: type
 
   SystemicVariation:
     inherits: Variation
@@ -68,9 +68,9 @@ definitions:
       A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
     oneOf:
-      - $ref: "#/definitions/Genotype"
-      - $ref: "#/definitions/CopyNumberCount"
-      - $ref: "#/definitions/CopyNumberChange"
+      - $ref: "#/$defs/Genotype"
+      - $ref: "#/$defs/CopyNumberCount"
+      - $ref: "#/$defs/CopyNumberChange"
     discriminator:
       propertyName: type
 
@@ -98,11 +98,11 @@ definitions:
       location:
         oneOf:
           - $ref_curie: gks.core:URI
-          - $ref: "#/definitions/Location"
+          - $ref: "#/$defs/Location"
         description: >-
           Where Allele is located
       state:
-        $ref: "#/definitions/SequenceExpression"
+        $ref: "#/$defs/SequenceExpression"
         description: >-
           An expression of the sequence state
     required: [ "location", "state" ]
@@ -127,7 +127,7 @@ definitions:
         uniqueItems: true
         items:
           oneOf:
-            - $ref: "#/definitions/Allele"
+            - $ref: "#/$defs/Allele"
             - $ref_curie: gks.core:URI
         description: >-
           List of Alleles, or references to Alleles, that comprise this Haplotype.
@@ -136,49 +136,49 @@ definitions:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # UtilityVariation
 
-  Text:
-    ga4gh_prefix: VT
-    inherits: UtilityVariation
-    description: >-
-      A free-text definition of variation.
-    type: object
-    properties:
-      type:
-        type: string
-        const: "Text"
-        default: "Text"
-        description: MUST be "Text"
-      definition:
-        type: string
-        description: >-
-          A textual representation of variation not representable by
-          other subclasses of Variation.
-    required: [ "definition" ]
-
-  VariationSet:
-    ga4gh_prefix: VS
-    inherits: UtilityVariation
-    description: >-
-      An unconstrained set of Variation members.
-    type: object
-    properties:
-      type:
-        type: string
-        const: "VariationSet"
-        default: "VariationSet"
-        description: MUST be "VariationSet"
-      members:
-        type: array
-        ordered: false
-        uniqueItems: true
-        items:
-          oneOf:
-            - $ref_curie: gks.core:URI
-            - $ref: "#/definitions/Variation"
-        description: >-
-          List of Variation objects or identifiers. Attribute is
-          required, but MAY be empty.
-    required: [ "members" ]
+#  Text:
+#    ga4gh_prefix: VT
+#    inherits: UtilityVariation
+#    description: >-
+#      A free-text definition of variation.
+#    type: object
+#    properties:
+#      type:
+#        type: string
+#        const: "Text"
+#        default: "Text"
+#        description: MUST be "Text"
+#      definition:
+#        type: string
+#        description: >-
+#          A textual representation of variation not representable by
+#          other subclasses of Variation.
+#    required: [ "definition" ]
+#
+#  VariationSet:
+#    ga4gh_prefix: VS
+#    inherits: UtilityVariation
+#    description: >-
+#      An unconstrained set of Variation members.
+#    type: object
+#    properties:
+#      type:
+#        type: string
+#        const: "VariationSet"
+#        default: "VariationSet"
+#        description: MUST be "VariationSet"
+#      members:
+#        type: array
+#        ordered: false
+#        uniqueItems: true
+#        items:
+#          oneOf:
+#            - $ref_curie: gks.core:URI
+#            - $ref: "#/$defs/Variation"
+#        description: >-
+#          List of Variation objects or identifiers. Attribute is
+#          required, but MAY be empty.
+#    required: [ "members" ]
 
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -192,7 +192,7 @@ definitions:
       subject:
         oneOf:
           - $ref_curie: gks.core:URI
-          - $ref: "#/definitions/Location"
+          - $ref: "#/$defs/Location"
         description: >-
           A location for which the number of systemic copies is described.
     heritable_required: [ "subject" ]
@@ -213,9 +213,8 @@ definitions:
           MUST be "CopyNumberCount"
       copies:
         oneOf:
-          - $ref: "#/definitions/Number"
-          - $ref: "#/definitions/IndefiniteRange"
-          - $ref: "#/definitions/DefiniteRange"
+          - type: integer
+          - $ref: "#/$defs/Range"
         description: >-
           The integral number of copies of the subject in a system
     required: [ "copies" ]
@@ -262,15 +261,14 @@ definitions:
         uniqueItems: true
         minItems: 1
         items:
-          $ref: "#/definitions/GenotypeMember"
+          $ref: "#/$defs/GenotypeMember"
         description: >-
           Each GenotypeMember in `members` describes a :ref:`MolecularVariation`
           and the count of that variation at the locus.
       count:
         oneOf:
-          - $ref: "#/definitions/Number"
-          - $ref: "#/definitions/IndefiniteRange"
-          - $ref: "#/definitions/DefiniteRange"
+          - type: integer
+          - $ref: "#/$defs/Range"
         description: >-
           The total number of copies of all :ref:`MolecularVariation` at this locus,
           MUST be greater than or equal to the sum of :ref:`GenotypeMember` copy counts.
@@ -287,8 +285,8 @@ definitions:
     description: >-
       A contiguous segment of a biological sequence.
     oneOf:
-#      - $ref: "#/definitions/ChromosomeLocation"
-      - $ref: "#/definitions/SequenceLocation"
+#      - $ref: "#/$defs/ChromosomeLocation"
+      - $ref: "#/$defs/SequenceLocation"
     discriminator:
       propertyName: type
 
@@ -317,12 +315,12 @@ definitions:
 #          The symbolic chromosome name. For humans, For humans,
 #          chromosome names MUST be one of 1..22, X, Y (case-sensitive)
 #      start:
-#        $ref: "#/definitions/HumanCytoband"
+#        $ref: "#/$defs/HumanCytoband"
 #        description: >-
 #          The start cytoband region. MUST specify a region nearer the
 #          terminal end (telomere) of the chromosome p-arm than `end`.
 #      end:
-#        $ref: "#/definitions/HumanCytoband"
+#        $ref: "#/$defs/HumanCytoband"
 #        description: >-
 #          The start cytoband region. MUST specify a region nearer the
 #          terminal end (telomere) of the chromosome q-arm than `start`.
@@ -347,18 +345,16 @@ definitions:
           for the reference :ref:`Sequence`.
       start:
         oneOf:
-          - $ref: "#/definitions/Number"
-          - $ref: "#/definitions/IndefiniteRange"
-          - $ref: "#/definitions/DefiniteRange"
+          - type: integer
+          - $ref: "#/$defs/Range"
         description: >-
           The start coordinate or range of the SequenceLocation.
           The minimum value of this coordinate or range is 0.
           MUST represent a coordinate or range less than the value of `end`.
       end:
         oneOf:
-          - $ref: "#/definitions/Number"
-          - $ref: "#/definitions/IndefiniteRange"
-          - $ref: "#/definitions/DefiniteRange"
+          - type: integer
+          - $ref: "#/$defs/Range"
         description: >-
           The end coordinate or range of the SequenceLocation.
           The minimum value of this coordinate or range is 0.
@@ -378,10 +374,10 @@ definitions:
     description: >-
       An expression describing a :ref:`Sequence`.
     oneOf:
-      - $ref: "#/definitions/LiteralSequenceExpression"
-      - $ref: "#/definitions/DerivedSequenceExpression"
-      - $ref: "#/definitions/RepeatedSequenceExpression"
-      - $ref: "#/definitions/ComposedSequenceExpression"
+      - $ref: "#/$defs/LiteralSequenceExpression"
+      - $ref: "#/$defs/DerivedSequenceExpression"
+      - $ref: "#/$defs/RepeatedSequenceExpression"
+      - $ref: "#/$defs/ComposedSequenceExpression"
     discriminator:
       propertyName: type
     heritable_properties:
@@ -403,7 +399,7 @@ definitions:
         default: "LiteralSequenceExpression"
         description: MUST be "LiteralSequenceExpression"
       sequence:
-        $ref: "#/definitions/Sequence"
+        $ref: "#/$defs/Sequence"
         description: the literal :ref:`Sequence` expressed
     required: [ "sequence" ]
 
@@ -424,7 +420,7 @@ definitions:
         default: "DerivedSequenceExpression"
         description: MUST be "DerivedSequenceExpression"
       location:
-        $ref: "#/definitions/SequenceLocation"
+        $ref: "#/$defs/SequenceLocation"
         description: >-
           The location from which the approximate sequence is derived
       reverse_complement:
@@ -447,22 +443,22 @@ definitions:
         description: MUST be "RepeatedSequenceExpression"
       seq_expr:
         oneOf:
-          - $ref: "#/definitions/LiteralSequenceExpression"
-          - $ref: "#/definitions/DerivedSequenceExpression"
+          - $ref: "#/$defs/LiteralSequenceExpression"
+          - $ref: "#/$defs/DerivedSequenceExpression"
         description: >-
           An expression of the repeating subsequence
       count:
         oneOf:
-          - $ref: "#/definitions/Number"
-          - $ref: "#/definitions/IndefiniteRange"
-          - $ref: "#/definitions/DefiniteRange"
+          - $ref: "#/$defs/Number"
+          - $ref: "#/$defs/IndefiniteRange"
+          - $ref: "#/$defs/DefiniteRange"
         description: >-
           The count of repeated units, as an integer or inclusive range
     allOf:
       - if:
           properties:
             count:
-              $ref: "#/definitions/Number"
+              $ref: "#/$defs/Number"
         then:
           properties:
             count:
@@ -472,7 +468,7 @@ definitions:
       - if:
           properties:
             count:
-              $ref: "#/definitions/IndefiniteRange"
+              $ref: "#/$defs/IndefiniteRange"
         then:
           properties:
             count:
@@ -482,7 +478,7 @@ definitions:
       - if:
           properties:
             count:
-              $ref: "#/definitions/DefiniteRange"
+              $ref: "#/$defs/DefiniteRange"
         then:
           properties:
             count:
@@ -515,9 +511,9 @@ definitions:
         minItems: 2
         items:
           anyOf:
-            - $ref: "#/definitions/LiteralSequenceExpression"
-            - $ref: "#/definitions/RepeatedSequenceExpression"
-            - $ref: "#/definitions/DerivedSequenceExpression"
+            - $ref: "#/$defs/LiteralSequenceExpression"
+            - $ref: "#/$defs/RepeatedSequenceExpression"
+            - $ref: "#/$defs/DerivedSequenceExpression"
         description: >-
           An ordered list of :ref:`SequenceExpression` components
           comprising the expression. MUST NOT have two adjacent
@@ -540,15 +536,15 @@ definitions:
         description: MUST be "GenotypeMember".
       count:
         oneOf:
-          - $ref: "#/definitions/Number"
-          - $ref: "#/definitions/IndefiniteRange"
-          - $ref: "#/definitions/DefiniteRange"
+          - $ref: "#/$defs/Number"
+          - $ref: "#/$defs/IndefiniteRange"
+          - $ref: "#/$defs/DefiniteRange"
         description: >-
           The number of copies of the `variation` at a :ref:`Genotype` locus.
       variation:
         oneOf:
-          - $ref: "#/definitions/Allele"
-          - $ref: "#/definitions/Haplotype"
+          - $ref: "#/$defs/Allele"
+          - $ref: "#/$defs/Haplotype"
         description: >-
           A :ref:`MolecularVariation` at a :ref:`Genotype` locus.
     required: [ "count", "variation" ]
@@ -556,62 +552,71 @@ definitions:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Numerics, Comparators, and Ranges
 
-  Number:
-    description: >-
-      A simple integer value as a VRS class.
-    type: object
-    properties:
-      type:
-        type: string
-        const: "Number"
-        default: "Number"
-        description: MUST be "Number"
-      value:
-        type: integer
-        description: The value represented by Number
-    required: [ "type", "value" ]
+  Range:
+    description: An inclusive range of values bounded by one or more integers.
+    type: array
+    ordered: true
+    items:
+      oneOf:
+        - type: integer
+        - type: 'null'
 
-  DefiniteRange:
-    description: >-
-      A bounded, inclusive range of numbers.
-    type: object
-    properties:
-      type:
-        type: string
-        const: "DefiniteRange"
-        default: "DefiniteRange"
-        description: MUST be "DefiniteRange"
-      min:
-        type: number
-        description: The minimum value; inclusive
-      max:
-        type: number
-        description: The maximum value; inclusive
-    required: ["type", "min", "max"]
-
-  IndefiniteRange:
-    description: >-
-      A half-bounded range of numbers represented as a number bound and
-      associated comparator. The bound operator is interpreted as follows:
-      '>=' are all numbers greater than and including `value`, '<=' are all
-      numbers less than and including `value`.
-    type: object
-    properties:
-      type:
-        type: string
-        const: "IndefiniteRange"
-        default: "IndefiniteRange"
-        description: MUST be "IndefiniteRange"
-      value:
-        type: number
-        description: The bounded value; inclusive
-      comparator:
-        type: string
-        enum: [ "<=", ">=" ]
-        description: >-
-          MUST be one of "<=" or ">=", indicating which direction the range
-          is indefinite
-    required: [ "type", "value", "comparator" ]
+#  Number:
+#    description: >-
+#      A simple integer value as a VRS class.
+#    type: object
+#    properties:
+#      type:
+#        type: string
+#        const: "Number"
+#        default: "Number"
+#        description: MUST be "Number"
+#      value:
+#        type: integer
+#        description: The value represented by Number
+#    required: [ "type", "value" ]
+#
+#  DefiniteRange:
+#    description: >-
+#      A bounded, inclusive range of numbers.
+#    type: object
+#    properties:
+#      type:
+#        type: string
+#        const: "DefiniteRange"
+#        default: "DefiniteRange"
+#        description: MUST be "DefiniteRange"
+#      min:
+#        type: number
+#        description: The minimum value; inclusive
+#      max:
+#        type: number
+#        description: The maximum value; inclusive
+#    required: ["type", "min", "max"]
+#
+#  IndefiniteRange:
+#    description: >-
+#      A half-bounded range of numbers represented as a number bound and
+#      associated comparator. The bound operator is interpreted as follows:
+#      '>=' are all numbers greater than and including `value`, '<=' are all
+#      numbers less than and including `value`.
+#    type: object
+#    properties:
+#      type:
+#        type: string
+#        const: "IndefiniteRange"
+#        default: "IndefiniteRange"
+#        description: MUST be "IndefiniteRange"
+#      value:
+#        type: number
+#        description: The bounded value; inclusive
+#      comparator:
+#        type: string
+#        enum: [ "<=", ">=" ]
+#        description: >-
+#          MUST be one of "<=" or ">=", indicating which direction the range
+#          is indefinite
+#    required: [ "type", "value", "comparator" ]
 
   # =============================================================================
   # BASIC TYPES (STRUCTURES)

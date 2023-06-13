@@ -1,42 +1,31 @@
-$schema: http://json-schema.org/draft-07/schema
+$schema: http://json-schema.org/draft/2020-12/schema
 title: GA4GH-VRS-Definitions-Merged-Imports
 type: object
-definitions:
+$defs:
   Variation:
     description: A representation of the state of one or more biomolecules.
     oneOf:
-    - $ref: '#/definitions/Allele'
-    - $ref: '#/definitions/CopyNumberChange'
-    - $ref: '#/definitions/CopyNumberCount'
-    - $ref: '#/definitions/Genotype'
-    - $ref: '#/definitions/Haplotype'
-    - $ref: '#/definitions/Text'
-    - $ref: '#/definitions/VariationSet'
+    - $ref: '#/$defs/Allele'
+    - $ref: '#/$defs/CopyNumberChange'
+    - $ref: '#/$defs/CopyNumberCount'
+    - $ref: '#/$defs/Genotype'
+    - $ref: '#/$defs/Haplotype'
     discriminator:
       propertyName: type
   MolecularVariation:
     description: A variation on a contiguous molecule.
     oneOf:
-    - $ref: '#/definitions/Allele'
-    - $ref: '#/definitions/Haplotype'
-    discriminator:
-      propertyName: type
-  UtilityVariation:
-    description: A collection of Variation subclasses that cannot be constrained to
-      a specific class of biological variation, but are necessary for some applications
-      of VRS.
-    oneOf:
-    - $ref: '#/definitions/Text'
-    - $ref: '#/definitions/VariationSet'
+    - $ref: '#/$defs/Allele'
+    - $ref: '#/$defs/Haplotype'
     discriminator:
       propertyName: type
   SystemicVariation:
     description: A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
     oneOf:
-    - $ref: '#/definitions/CopyNumberChange'
-    - $ref: '#/definitions/CopyNumberCount'
-    - $ref: '#/definitions/Genotype'
+    - $ref: '#/$defs/CopyNumberChange'
+    - $ref: '#/$defs/CopyNumberCount'
+    - $ref: '#/$defs/Genotype'
     discriminator:
       propertyName: type
   Allele:
@@ -56,7 +45,7 @@ definitions:
         type: array
         ordered: true
         items:
-          $ref: '#/definitions/Extension'
+          $ref: '#/$defs/Extension'
       type:
         type: string
         const: Allele
@@ -64,16 +53,16 @@ definitions:
         description: MUST be "Allele"
       location:
         oneOf:
-        - $ref: '#/definitions/SequenceLocation'
-        - $ref: '#/definitions/URI'
+        - $ref: '#/$defs/SequenceLocation'
+        - $ref: '#/$defs/URI'
         description: Where Allele is located
       state:
         description: An expression of the sequence state
         oneOf:
-        - $ref: '#/definitions/ComposedSequenceExpression'
-        - $ref: '#/definitions/DerivedSequenceExpression'
-        - $ref: '#/definitions/LiteralSequenceExpression'
-        - $ref: '#/definitions/RepeatedSequenceExpression'
+        - $ref: '#/$defs/ComposedSequenceExpression'
+        - $ref: '#/$defs/DerivedSequenceExpression'
+        - $ref: '#/$defs/LiteralSequenceExpression'
+        - $ref: '#/$defs/RepeatedSequenceExpression'
     required:
     - location
     - state
@@ -96,7 +85,7 @@ definitions:
         type: array
         ordered: true
         items:
-          $ref: '#/definitions/Extension'
+          $ref: '#/$defs/Extension'
       type:
         type: string
         const: Haplotype
@@ -109,82 +98,10 @@ definitions:
         uniqueItems: true
         items:
           oneOf:
-          - $ref: '#/definitions/Allele'
-          - $ref: '#/definitions/URI'
+          - $ref: '#/$defs/Allele'
+          - $ref: '#/$defs/URI'
         description: List of Alleles, or references to Alleles, that comprise this
           Haplotype.
-    required:
-    - members
-    additionalProperties: false
-  Text:
-    ga4gh_prefix: VT
-    description: A free-text definition of variation.
-    type: object
-    properties:
-      id:
-        type: string
-        description: The 'logical' identifier of the entity in the system of record,
-          e.g. a UUID. This 'id' is  unique within a given system. The identified
-          entity may have a different 'id' in a different  system, or may refer to
-          an 'id' for the shared concept in another system (e.g. a CURIE).
-      label:
-        type: string
-      extensions:
-        type: array
-        ordered: true
-        items:
-          $ref: '#/definitions/Extension'
-      type:
-        type: string
-        const: Text
-        default: Text
-        description: MUST be "Text"
-      definition:
-        type: string
-        description: A textual representation of variation not representable by other
-          subclasses of Variation.
-    required:
-    - definition
-    additionalProperties: false
-  VariationSet:
-    ga4gh_prefix: VS
-    description: An unconstrained set of Variation members.
-    type: object
-    properties:
-      id:
-        type: string
-        description: The 'logical' identifier of the entity in the system of record,
-          e.g. a UUID. This 'id' is  unique within a given system. The identified
-          entity may have a different 'id' in a different  system, or may refer to
-          an 'id' for the shared concept in another system (e.g. a CURIE).
-      label:
-        type: string
-      extensions:
-        type: array
-        ordered: true
-        items:
-          $ref: '#/definitions/Extension'
-      type:
-        type: string
-        const: VariationSet
-        default: VariationSet
-        description: MUST be "VariationSet"
-      members:
-        type: array
-        ordered: false
-        uniqueItems: true
-        items:
-          oneOf:
-          - $ref: '#/definitions/Allele'
-          - $ref: '#/definitions/CopyNumberChange'
-          - $ref: '#/definitions/CopyNumberCount'
-          - $ref: '#/definitions/Genotype'
-          - $ref: '#/definitions/Haplotype'
-          - $ref: '#/definitions/Text'
-          - $ref: '#/definitions/URI'
-          - $ref: '#/definitions/VariationSet'
-        description: List of Variation objects or identifiers. Attribute is required,
-          but MAY be empty.
     required:
     - members
     additionalProperties: false
@@ -206,11 +123,11 @@ definitions:
         type: array
         ordered: true
         items:
-          $ref: '#/definitions/Extension'
+          $ref: '#/$defs/Extension'
       subject:
         oneOf:
-        - $ref: '#/definitions/SequenceLocation'
-        - $ref: '#/definitions/URI'
+        - $ref: '#/$defs/SequenceLocation'
+        - $ref: '#/$defs/URI'
         description: A location for which the number of systemic copies is described.
       type:
         type: string
@@ -219,9 +136,8 @@ definitions:
         description: MUST be "CopyNumberCount"
       copies:
         oneOf:
-        - $ref: '#/definitions/DefiniteRange'
-        - $ref: '#/definitions/IndefiniteRange'
-        - $ref: '#/definitions/Number'
+        - $ref: '#/$defs/Range'
+        - type: integer
         description: The integral number of copies of the subject in a system
     required:
     - copies
@@ -245,11 +161,11 @@ definitions:
         type: array
         ordered: true
         items:
-          $ref: '#/definitions/Extension'
+          $ref: '#/$defs/Extension'
       subject:
         oneOf:
-        - $ref: '#/definitions/SequenceLocation'
-        - $ref: '#/definitions/URI'
+        - $ref: '#/$defs/SequenceLocation'
+        - $ref: '#/$defs/URI'
         description: A location for which the number of systemic copies is described.
       type:
         type: string
@@ -292,7 +208,7 @@ definitions:
         type: array
         ordered: true
         items:
-          $ref: '#/definitions/Extension'
+          $ref: '#/$defs/Extension'
       type:
         type: string
         const: Genotype
@@ -304,14 +220,13 @@ definitions:
         uniqueItems: true
         minItems: 1
         items:
-          $ref: '#/definitions/GenotypeMember'
+          $ref: '#/$defs/GenotypeMember'
         description: Each GenotypeMember in `members` describes a MolecularVariation
           and the count of that variation at the locus.
       count:
         oneOf:
-        - $ref: '#/definitions/DefiniteRange'
-        - $ref: '#/definitions/IndefiniteRange'
-        - $ref: '#/definitions/Number'
+        - $ref: '#/$defs/Range'
+        - type: integer
         description: The total number of copies of all MolecularVariation at this
           locus, MUST be greater than or equal to the sum of GenotypeMember copy counts.
           If greater than the total counts, this implies additional MolecularVariation
@@ -323,7 +238,7 @@ definitions:
   Location:
     description: A contiguous segment of a biological sequence.
     oneOf:
-    - $ref: '#/definitions/SequenceLocation'
+    - $ref: '#/$defs/SequenceLocation'
     discriminator:
       propertyName: type
   SequenceLocation:
@@ -343,7 +258,7 @@ definitions:
         type: array
         ordered: true
         items:
-          $ref: '#/definitions/Extension'
+          $ref: '#/$defs/Extension'
       type:
         type: string
         const: SequenceLocation
@@ -351,20 +266,18 @@ definitions:
         description: MUST be "SequenceLocation"
       sequence_id:
         description: A VRS Computed Identifier for the reference Sequence.
-        $ref: '#/definitions/URI'
+        $ref: '#/$defs/URI'
       start:
         oneOf:
-        - $ref: '#/definitions/DefiniteRange'
-        - $ref: '#/definitions/IndefiniteRange'
-        - $ref: '#/definitions/Number'
+        - $ref: '#/$defs/Range'
+        - type: integer
         description: The start coordinate or range of the SequenceLocation. The minimum
           value of this coordinate or range is 0. MUST represent a coordinate or range
           less than the value of `end`.
       end:
         oneOf:
-        - $ref: '#/definitions/DefiniteRange'
-        - $ref: '#/definitions/IndefiniteRange'
-        - $ref: '#/definitions/Number'
+        - $ref: '#/$defs/Range'
+        - type: integer
         description: The end coordinate or range of the SequenceLocation. The minimum
           value of this coordinate or range is 0. MUST represent a coordinate or range
           greater than the value of `start`.
@@ -376,10 +289,10 @@ definitions:
   SequenceExpression:
     description: An expression describing a Sequence.
     oneOf:
-    - $ref: '#/definitions/ComposedSequenceExpression'
-    - $ref: '#/definitions/DerivedSequenceExpression'
-    - $ref: '#/definitions/LiteralSequenceExpression'
-    - $ref: '#/definitions/RepeatedSequenceExpression'
+    - $ref: '#/$defs/ComposedSequenceExpression'
+    - $ref: '#/$defs/DerivedSequenceExpression'
+    - $ref: '#/$defs/LiteralSequenceExpression'
+    - $ref: '#/$defs/RepeatedSequenceExpression'
     discriminator:
       propertyName: type
   LiteralSequenceExpression:
@@ -392,7 +305,7 @@ definitions:
         default: LiteralSequenceExpression
         description: MUST be "LiteralSequenceExpression"
       sequence:
-        $ref: '#/definitions/Sequence'
+        $ref: '#/$defs/Sequence'
         description: the literal Sequence expressed
     required:
     - sequence
@@ -412,7 +325,7 @@ definitions:
         default: DerivedSequenceExpression
         description: MUST be "DerivedSequenceExpression"
       location:
-        $ref: '#/definitions/SequenceLocation'
+        $ref: '#/$defs/SequenceLocation'
         description: The location from which the approximate sequence is derived
       reverse_complement:
         type: boolean
@@ -434,20 +347,20 @@ definitions:
         description: MUST be "RepeatedSequenceExpression"
       seq_expr:
         oneOf:
-        - $ref: '#/definitions/DerivedSequenceExpression'
-        - $ref: '#/definitions/LiteralSequenceExpression'
+        - $ref: '#/$defs/DerivedSequenceExpression'
+        - $ref: '#/$defs/LiteralSequenceExpression'
         description: An expression of the repeating subsequence
       count:
         oneOf:
-        - $ref: '#/definitions/DefiniteRange'
-        - $ref: '#/definitions/IndefiniteRange'
-        - $ref: '#/definitions/Number'
+        - $ref: '#/$defs/DefiniteRange'
+        - $ref: '#/$defs/IndefiniteRange'
+        - $ref: '#/$defs/Number'
         description: The count of repeated units, as an integer or inclusive range
     allOf:
     - if:
         properties:
           count:
-            $ref: '#/definitions/Number'
+            $ref: '#/$defs/Number'
       then:
         properties:
           count:
@@ -457,7 +370,7 @@ definitions:
     - if:
         properties:
           count:
-            $ref: '#/definitions/IndefiniteRange'
+            $ref: '#/$defs/IndefiniteRange'
       then:
         properties:
           count:
@@ -467,7 +380,7 @@ definitions:
     - if:
         properties:
           count:
-            $ref: '#/definitions/DefiniteRange'
+            $ref: '#/$defs/DefiniteRange'
       then:
         properties:
           count:
@@ -500,9 +413,9 @@ definitions:
         minItems: 2
         items:
           anyOf:
-          - $ref: '#/definitions/LiteralSequenceExpression'
-          - $ref: '#/definitions/RepeatedSequenceExpression'
-          - $ref: '#/definitions/DerivedSequenceExpression'
+          - $ref: '#/$defs/LiteralSequenceExpression'
+          - $ref: '#/$defs/RepeatedSequenceExpression'
+          - $ref: '#/$defs/DerivedSequenceExpression'
         description: An ordered list of SequenceExpression components comprising the
           expression. MUST NOT have two adjacent LiteralSequenceExpression objects.
     required:
@@ -519,82 +432,27 @@ definitions:
         description: MUST be "GenotypeMember".
       count:
         oneOf:
-        - $ref: '#/definitions/DefiniteRange'
-        - $ref: '#/definitions/IndefiniteRange'
-        - $ref: '#/definitions/Number'
+        - $ref: '#/$defs/DefiniteRange'
+        - $ref: '#/$defs/IndefiniteRange'
+        - $ref: '#/$defs/Number'
         description: The number of copies of the `variation` at a Genotype locus.
       variation:
         oneOf:
-        - $ref: '#/definitions/Allele'
-        - $ref: '#/definitions/Haplotype'
+        - $ref: '#/$defs/Allele'
+        - $ref: '#/$defs/Haplotype'
         description: A MolecularVariation at a Genotype locus.
     required:
     - count
     - variation
     additionalProperties: false
-  Number:
-    description: A simple integer value as a VRS class.
-    type: object
-    properties:
-      type:
-        type: string
-        const: Number
-        default: Number
-        description: MUST be "Number"
-      value:
-        type: integer
-        description: The value represented by Number
-    required:
-    - type
-    - value
-    additionalProperties: false
-  DefiniteRange:
-    description: A bounded, inclusive range of numbers.
-    type: object
-    properties:
-      type:
-        type: string
-        const: DefiniteRange
-        default: DefiniteRange
-        description: MUST be "DefiniteRange"
-      min:
-        type: number
-        description: The minimum value; inclusive
-      max:
-        type: number
-        description: The maximum value; inclusive
-    required:
-    - max
-    - min
-    - type
-    additionalProperties: false
-  IndefiniteRange:
-    description: 'A half-bounded range of numbers represented as a number bound and
-      associated comparator. The bound operator is interpreted as follows: ''>=''
-      are all numbers greater than and including `value`, ''<='' are all numbers less
-      than and including `value`.'
-    type: object
-    properties:
-      type:
-        type: string
-        const: IndefiniteRange
-        default: IndefiniteRange
-        description: MUST be "IndefiniteRange"
-      value:
-        type: number
-        description: The bounded value; inclusive
-      comparator:
-        type: string
-        enum:
-        - <=
-        - '>='
-        description: MUST be one of "<=" or ">=", indicating which direction the range
-          is indefinite
-    required:
-    - comparator
-    - type
-    - value
-    additionalProperties: false
+  Range:
+    description: An inclusive range of values bounded by one or more integers.
+    type: array
+    ordered: true
+    items:
+      oneOf:
+      - type: integer
+      - type: 'null'
   HumanCytoband:
     description: A character string representing cytobands derived from the *International
       System for Human Cytogenomic Nomenclature* (ISCN) [guidelines](http://doi.org/10.1159/isbn.978-3-318-06861-0).
@@ -630,7 +488,7 @@ definitions:
         type: array
         ordered: true
         items:
-          $ref: '#/definitions/Extension'
+          $ref: '#/$defs/Extension'
       system:
         type: string
         description: Identity of the terminology system.
@@ -638,7 +496,7 @@ definitions:
         type: string
         description: Version of the terminology system.
       code:
-        $ref: '#/definitions/Code'
+        $ref: '#/$defs/Code'
         description: Symbol in syntax defined by the terminology system.
       mapping:
         description: A mapping between concepts as defined by the Simple Knowledge

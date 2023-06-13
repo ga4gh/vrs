@@ -37,10 +37,10 @@ Some SequenceLocation attributes are inherited from :ref:`gks.core:Entity`.
       - 1..1
       - A VRS :ref:`Computed Identifier <computed-identifiers>` for the reference :ref:`Sequence`.
    *  - start
-      - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`
+      - integer | :ref:`Range`
       - 1..1
       - The start coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range less than the value of `end`.
    *  - end
-      - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`
+      - integer | :ref:`Range`
       - 1..1
       - The end coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range greater than the value of `start`.

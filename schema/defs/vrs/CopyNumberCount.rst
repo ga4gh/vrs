@@ -37,6 +37,6 @@ Some CopyNumberCount attributes are inherited from :ref:`gks.core:Entity`.
       - 0..1
       - MUST be "CopyNumberCount"
    *  - copies
-      - :ref:`Number` | :ref:`IndefiniteRange` | :ref:`DefiniteRange`
+      - integer | :ref:`Range`
       - 1..1
       - The integral number of copies of the subject in a system
