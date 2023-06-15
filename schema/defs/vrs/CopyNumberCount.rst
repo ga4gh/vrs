@@ -28,14 +28,18 @@ Some CopyNumberCount attributes are inherited from :ref:`gks.core:Entity`.
       - `Extension <core.json#/$defs/Extension>`_
       - 0..m
       - 
-   *  - subject
-      - `URI <core.json#/$defs/URI>`_ | :ref:`Location`
-      - 1..1
-      - A location for which the number of systemic copies is described.
    *  - type
       - string
       - 0..1
       - MUST be "CopyNumberCount"
+   *  - digest
+      - string
+      - 0..1
+      - A sha512t24u digest created using the VRS Computed Identifier algorithm.
+   *  - subject
+      - `URI <core.json#/$defs/URI>`_ | :ref:`Location`
+      - 1..1
+      - A location for which the number of systemic copies is described.
    *  - copies
       - integer | :ref:`Range`
       - 1..1

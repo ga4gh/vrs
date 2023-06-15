@@ -32,6 +32,10 @@ Some Haplotype attributes are inherited from :ref:`gks.core:Entity`.
       - string
       - 0..1
       - MUST be "Haplotype"
+   *  - digest
+      - string
+      - 0..1
+      - A sha512t24u digest created using the VRS Computed Identifier algorithm.
    *  - members
       - :ref:`Allele` | `URI <core.json#/$defs/URI>`_
       - 2..m

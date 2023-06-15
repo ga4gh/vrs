@@ -32,6 +32,10 @@ Some SequenceLocation attributes are inherited from :ref:`gks.core:Entity`.
       - string
       - 0..1
       - MUST be "SequenceLocation"
+   *  - digest
+      - string
+      - 0..1
+      - A sha512t24u digest created using the VRS Computed Identifier algorithm.
    *  - sequence_id
       - `URI <core.json#/$defs/URI>`_
       - 0..1
