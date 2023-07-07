@@ -37,7 +37,7 @@ Some Allele attributes are inherited from :ref:`gks.core:Entity`.
       - 0..1
       - A sha512t24u digest created using the VRS Computed Identifier algorithm.
    *  - location
-      - `URI <core.json#/$defs/URI>`_ | :ref:`Location`
+      - `IRI <core.json#/$defs/IRI>`_ | :ref:`Location`
       - 1..1
       - Where Allele is located
    *  - state

@@ -93,7 +93,7 @@
                      "$ref": "#/$defs/SequenceLocation"
                   },
                   {
-                     "$ref": "core.json#/$defs/URI"
+                     "$ref": "core.json#/$defs/IRI"
                   }
                ],
                "description": "Where Allele is located"
@@ -157,7 +157,7 @@
                         "$ref": "#/$defs/Allele"
                      },
                      {
-                        "$ref": "core.json#/$defs/URI"
+                        "$ref": "core.json#/$defs/IRI"
                      }
                   ]
                },
@@ -205,7 +205,7 @@
                      "$ref": "#/$defs/SequenceLocation"
                   },
                   {
-                     "$ref": "core.json#/$defs/URI"
+                     "$ref": "core.json#/$defs/IRI"
                   }
                ],
                "description": "A location for which the number of systemic copies is described."
@@ -264,7 +264,7 @@
                      "$ref": "#/$defs/SequenceLocation"
                   },
                   {
-                     "$ref": "core.json#/$defs/URI"
+                     "$ref": "core.json#/$defs/IRI"
                   }
                ],
                "description": "A location for which the number of systemic copies is described."
@@ -391,7 +391,7 @@
             },
             "sequence_id": {
                "description": "A VRS Computed Identifier for the reference Sequence.",
-               "$ref": "core.json#/$defs/URI"
+               "$ref": "core.json#/$defs/IRI"
             },
             "start": {
                "oneOf": [

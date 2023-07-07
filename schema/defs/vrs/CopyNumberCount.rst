@@ -37,7 +37,7 @@ Some CopyNumberCount attributes are inherited from :ref:`gks.core:Entity`.
       - 0..1
       - A sha512t24u digest created using the VRS Computed Identifier algorithm.
    *  - subject
-      - `URI <core.json#/$defs/URI>`_ | :ref:`Location`
+      - `IRI <core.json#/$defs/IRI>`_ | :ref:`Location`
       - 1..1
       - A location for which the number of systemic copies is described.
    *  - copies

@@ -59,7 +59,7 @@ $defs:
       location:
         oneOf:
         - $ref: '#/$defs/SequenceLocation'
-        - $ref: core.json#/$defs/URI
+        - $ref: core.json#/$defs/IRI
         description: Where Allele is located
       state:
         description: An expression of the sequence state
@@ -107,7 +107,7 @@ $defs:
         items:
           oneOf:
           - $ref: '#/$defs/Allele'
-          - $ref: core.json#/$defs/URI
+          - $ref: core.json#/$defs/IRI
         description: List of Alleles, or references to Alleles, that comprise this
           Haplotype.
     required:
@@ -145,7 +145,7 @@ $defs:
       subject:
         oneOf:
         - $ref: '#/$defs/SequenceLocation'
-        - $ref: core.json#/$defs/URI
+        - $ref: core.json#/$defs/IRI
         description: A location for which the number of systemic copies is described.
       copies:
         oneOf:
@@ -188,7 +188,7 @@ $defs:
       subject:
         oneOf:
         - $ref: '#/$defs/SequenceLocation'
-        - $ref: core.json#/$defs/URI
+        - $ref: core.json#/$defs/IRI
         description: A location for which the number of systemic copies is described.
       copy_change:
         type: string
@@ -294,7 +294,7 @@ $defs:
         pattern: '[0-9A-Za-z_\-]{32}'
       sequence_id:
         description: A VRS Computed Identifier for the reference Sequence.
-        $ref: core.json#/$defs/URI
+        $ref: core.json#/$defs/IRI
       start:
         oneOf:
         - $ref: '#/$defs/Range'

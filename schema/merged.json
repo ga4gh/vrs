@@ -90,10 +90,10 @@
             "location": {
                "oneOf": [
                   {
-                     "$ref": "#/$defs/SequenceLocation"
+                     "$ref": "#/$defs/IRI"
                   },
                   {
-                     "$ref": "#/$defs/URI"
+                     "$ref": "#/$defs/SequenceLocation"
                   }
                ],
                "description": "Where Allele is located"
@@ -157,7 +157,7 @@
                         "$ref": "#/$defs/Allele"
                      },
                      {
-                        "$ref": "#/$defs/URI"
+                        "$ref": "#/$defs/IRI"
                      }
                   ]
                },
@@ -202,10 +202,10 @@
             "subject": {
                "oneOf": [
                   {
-                     "$ref": "#/$defs/SequenceLocation"
+                     "$ref": "#/$defs/IRI"
                   },
                   {
-                     "$ref": "#/$defs/URI"
+                     "$ref": "#/$defs/SequenceLocation"
                   }
                ],
                "description": "A location for which the number of systemic copies is described."
@@ -261,10 +261,10 @@
             "subject": {
                "oneOf": [
                   {
-                     "$ref": "#/$defs/SequenceLocation"
+                     "$ref": "#/$defs/IRI"
                   },
                   {
-                     "$ref": "#/$defs/URI"
+                     "$ref": "#/$defs/SequenceLocation"
                   }
                ],
                "description": "A location for which the number of systemic copies is described."
@@ -391,7 +391,7 @@
             },
             "sequence_id": {
                "description": "A VRS Computed Identifier for the reference Sequence.",
-               "$ref": "#/$defs/URI"
+               "$ref": "#/$defs/IRI"
             },
             "start": {
                "oneOf": [
@@ -724,10 +724,10 @@
          "pattern": "\\S+( \\S+)*",
          "example": "ENSG00000139618"
       },
-      "URI": {
-         "description": "A URI Reference (either a URI or a relative-reference), according to RFC3986, section 4.1.",
+      "IRI": {
+         "description": "An IRI Reference (either an IRI or a relative-reference), according to `RFC3986 section 4.1  <https://datatracker.ietf.org/doc/html/rfc3986#section-4.1>`. MAY be a JSON Pointer as an IRI fragment, as  described by `RFC6901 section 6 <https://datatracker.ietf.org/doc/html/rfc6901#section-6>`.",
          "type": "string",
-         "format": "uri-reference"
+         "format": "iri-reference"
       }
    }
 }

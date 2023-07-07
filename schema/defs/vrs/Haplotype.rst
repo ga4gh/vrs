@@ -37,6 +37,6 @@ Some Haplotype attributes are inherited from :ref:`gks.core:Entity`.
       - 0..1
       - A sha512t24u digest created using the VRS Computed Identifier algorithm.
    *  - members
-      - :ref:`Allele` | `URI <core.json#/$defs/URI>`_
+      - :ref:`Allele` | `IRI <core.json#/$defs/IRI>`_
       - 2..m
       - List of Alleles, or references to Alleles, that comprise this Haplotype.
