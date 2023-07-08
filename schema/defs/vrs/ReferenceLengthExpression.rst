@@ -4,7 +4,7 @@ An expression of a length of a sequence from a repeating reference.
 
 **Information Model**
 
-Some ReferenceLengthExpression attributes are inherited from :ref:`gks.core:Entity`.
+Some ReferenceLengthExpression attributes are inherited from :ref:`SequenceExpression`.
 
 .. list-table::
    :class: clean-wrap
@@ -30,7 +30,7 @@ Some ReferenceLengthExpression attributes are inherited from :ref:`gks.core:Enti
       - 
    *  - type
       - string
-      - 0..1
+      - 1..1
       - MUST be "ReferenceLengthExpression"
    *  - length
       - integer | :ref:`Range`

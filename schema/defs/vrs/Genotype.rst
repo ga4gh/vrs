@@ -4,7 +4,7 @@ A quantified set of _in-trans_ :ref:`MolecularVariation` at a genomic locus.
 
 **Information Model**
 
-Some Genotype attributes are inherited from :ref:`gks.core:Entity`.
+Some Genotype attributes are inherited from :ref:`ValueObject`.
 
 .. list-table::
    :class: clean-wrap
@@ -30,7 +30,7 @@ Some Genotype attributes are inherited from :ref:`gks.core:Entity`.
       - 
    *  - type
       - string
-      - 0..1
+      - 1..1
       - MUST be "Genotype"
    *  - digest
       - string

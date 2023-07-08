@@ -58,7 +58,14 @@
          }
       },
       "Allele": {
-         "ga4ghPrefix": "VA",
+         "ga4ghDigest": {
+            "prefix": "VA",
+            "keys": [
+               "location",
+               "state",
+               "type"
+            ]
+         },
          "description": "The state of a molecule at a Location.",
          "type": "object",
          "properties": {
@@ -112,12 +119,19 @@
          },
          "required": [
             "location",
-            "state"
+            "state",
+            "type"
          ],
          "additionalProperties": false
       },
       "Haplotype": {
-         "ga4ghPrefix": "HT",
+         "ga4ghDigest": {
+            "prefix": "HT",
+            "keys": [
+               "members",
+               "type"
+            ]
+         },
          "description": "A set of non-overlapping Allele members that co-occur on the same molecule.",
          "type": "object",
          "properties": {
@@ -165,12 +179,20 @@
             }
          },
          "required": [
-            "members"
+            "members",
+            "type"
          ],
          "additionalProperties": false
       },
       "CopyNumberCount": {
-         "ga4ghPrefix": "CN",
+         "ga4ghDigest": {
+            "keys": [
+               "copies",
+               "subject",
+               "type"
+            ],
+            "prefix": "CN"
+         },
          "type": "object",
          "description": "The absolute count of discrete copies of a Location or Gene, within a system (e.g. genome, cell, etc.).",
          "properties": {
@@ -224,12 +246,20 @@
          },
          "required": [
             "copies",
-            "subject"
+            "subject",
+            "type"
          ],
          "additionalProperties": false
       },
       "CopyNumberChange": {
-         "ga4ghPrefix": "CX",
+         "ga4ghDigest": {
+            "keys": [
+               "copy_change",
+               "subject",
+               "type"
+            ],
+            "prefix": "CX"
+         },
          "type": "object",
          "description": "An assessment of the copy number of a Location or a Gene within a system (e.g. genome, cell, etc.) relative to a baseline ploidy.",
          "properties": {
@@ -286,12 +316,20 @@
          },
          "required": [
             "copy_change",
-            "subject"
+            "subject",
+            "type"
          ],
          "additionalProperties": false
       },
       "Genotype": {
-         "ga4ghPrefix": "GT",
+         "ga4ghDigest": {
+            "keys": [
+               "count",
+               "members",
+               "type"
+            ],
+            "prefix": "GT"
+         },
          "description": "A quantified set of _in-trans_ MolecularVariation at a genomic locus.",
          "type": "object",
          "properties": {
@@ -344,7 +382,8 @@
          },
          "required": [
             "count",
-            "members"
+            "members",
+            "type"
          ],
          "additionalProperties": false
       },
@@ -360,7 +399,14 @@
          }
       },
       "SequenceLocation": {
-         "ga4ghPrefix": "SL",
+         "ga4ghDigest": {
+            "keys": [
+               "count",
+               "members",
+               "type"
+            ],
+            "prefix": "SL"
+         },
          "description": "A Location defined by an interval on a referenced Sequence.",
          "type": "object",
          "properties": {
@@ -389,9 +435,16 @@
                "type": "string",
                "pattern": "[0-9A-Za-z_\\-]{32}"
             },
-            "sequence_id": {
-               "description": "A VRS Computed Identifier for the reference Sequence.",
-               "$ref": "core.json#/$defs/IRI"
+            "sequence": {
+               "oneOf": [
+                  {
+                     "$ref": "#/$defs/SequenceReference"
+                  },
+                  {
+                     "$ref": "core.json#/$defs/IRI"
+                  }
+               ],
+               "description": "A SequenceReference."
             },
             "start": {
                "oneOf": [
@@ -418,11 +471,19 @@
          },
          "required": [
             "end",
-            "start"
+            "start",
+            "type"
          ],
          "additionalProperties": false
       },
-      "Sequence": {
+      "SequenceReference": {
+         "ga4ghDigest": {
+            "prefix": "SQR",
+            "keys": [
+               "refgetAccession",
+               "type"
+            ]
+         },
          "type": "object",
          "description": "A sequence of nucleic or amino acid character codes.",
          "properties": {
@@ -451,6 +512,11 @@
                "type": "string",
                "pattern": "[0-9A-Za-z_\\-]{32}"
             },
+            "refgetAccession": {
+               "description": "A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence, using the sha512t24u digest.",
+               "type": "string",
+               "pattern": "SQ.[0-9A-Za-z_\\-]{32}"
+            },
             "residueAlphabet": {
                "type": "string",
                "enum": [
@@ -459,7 +525,9 @@
                ]
             }
          },
-         "required": [],
+         "required": [
+            "type"
+         ],
          "additionalProperties": false
       },
       "SequenceExpression": {
@@ -521,7 +589,8 @@
             }
          },
          "required": [
-            "length"
+            "length",
+            "type"
          ],
          "additionalProperties": false
       },
@@ -555,7 +624,8 @@
             }
          },
          "required": [
-            "sequence"
+            "sequence",
+            "type"
          ],
          "additionalProperties": false
       },
@@ -635,7 +705,7 @@
          "pattern": "[A-Z*\\-]"
       },
       "SequenceString": {
-         "description": "A character string of Residues that represents a biological sequence using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequences.",
+         "description": "A character string of Residues that represents a biological sequence using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequence Strings.",
          "type": "string",
          "pattern": "^[A-Z*\\-]*$"
       }

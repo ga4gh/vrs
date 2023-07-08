@@ -4,7 +4,7 @@ An assessment of the copy number of a :ref:`Location` or a :ref:`Gene` within a 
 
 **Information Model**
 
-Some CopyNumberChange attributes are inherited from :ref:`gks.core:Entity`.
+Some CopyNumberChange attributes are inherited from :ref:`CopyNumber`.
 
 .. list-table::
    :class: clean-wrap
@@ -30,7 +30,7 @@ Some CopyNumberChange attributes are inherited from :ref:`gks.core:Entity`.
       - 
    *  - type
       - string
-      - 0..1
+      - 1..1
       - MUST be "CopyNumberChange"
    *  - digest
       - string

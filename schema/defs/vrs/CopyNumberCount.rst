@@ -4,7 +4,7 @@ The absolute count of discrete copies of a :ref:`Location` or :ref:`Gene`, withi
 
 **Information Model**
 
-Some CopyNumberCount attributes are inherited from :ref:`gks.core:Entity`.
+Some CopyNumberCount attributes are inherited from :ref:`CopyNumber`.
 
 .. list-table::
    :class: clean-wrap
@@ -30,7 +30,7 @@ Some CopyNumberCount attributes are inherited from :ref:`gks.core:Entity`.
       - 
    *  - type
       - string
-      - 0..1
+      - 1..1
       - MUST be "CopyNumberCount"
    *  - digest
       - string

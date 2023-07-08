@@ -4,7 +4,7 @@ The state of a molecule at a :ref:`Location`.
 
 **Information Model**
 
-Some Allele attributes are inherited from :ref:`gks.core:Entity`.
+Some Allele attributes are inherited from :ref:`ValueObject`.
 
 .. list-table::
    :class: clean-wrap
@@ -30,7 +30,7 @@ Some Allele attributes are inherited from :ref:`gks.core:Entity`.
       - 
    *  - type
       - string
-      - 0..1
+      - 1..1
       - MUST be "Allele"
    *  - digest
       - string

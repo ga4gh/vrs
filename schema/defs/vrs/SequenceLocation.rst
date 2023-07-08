@@ -4,7 +4,7 @@ A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
 
 **Information Model**
 
-Some SequenceLocation attributes are inherited from :ref:`gks.core:Entity`.
+Some SequenceLocation attributes are inherited from :ref:`ValueObject`.
 
 .. list-table::
    :class: clean-wrap
@@ -30,16 +30,16 @@ Some SequenceLocation attributes are inherited from :ref:`gks.core:Entity`.
       - 
    *  - type
       - string
-      - 0..1
+      - 1..1
       - MUST be "SequenceLocation"
    *  - digest
       - string
       - 0..1
       - A sha512t24u digest created using the VRS Computed Identifier algorithm.
-   *  - sequence_id
-      - `IRI <core.json#/$defs/IRI>`_
+   *  - sequence
+      - `IRI <core.json#/$defs/IRI>`_ | :ref:`SequenceReference`
       - 0..1
-      - A VRS :ref:`Computed Identifier <computed-identifiers>` for the reference :ref:`Sequence`.
+      - A :ref:`SequenceReference`.
    *  - start
       - integer | :ref:`Range`
       - 1..1

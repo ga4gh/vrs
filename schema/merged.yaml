@@ -29,7 +29,12 @@ $defs:
     discriminator:
       propertyName: type
   Allele:
-    ga4ghPrefix: VA
+    ga4ghDigest:
+      prefix: VA
+      keys:
+      - location
+      - state
+      - type
     description: The state of a molecule at a Location.
     type: object
     properties:
@@ -69,9 +74,14 @@ $defs:
     required:
     - location
     - state
+    - type
     additionalProperties: false
   Haplotype:
-    ga4ghPrefix: HT
+    ga4ghDigest:
+      prefix: HT
+      keys:
+      - members
+      - type
     description: A set of non-overlapping Allele members that co-occur on the same
       molecule.
     type: object
@@ -112,9 +122,15 @@ $defs:
           Haplotype.
     required:
     - members
+    - type
     additionalProperties: false
   CopyNumberCount:
-    ga4ghPrefix: CN
+    ga4ghDigest:
+      keys:
+      - copies
+      - subject
+      - type
+      prefix: CN
     type: object
     description: The absolute count of discrete copies of a Location or Gene, within
       a system (e.g. genome, cell, etc.).
@@ -155,9 +171,15 @@ $defs:
     required:
     - copies
     - subject
+    - type
     additionalProperties: false
   CopyNumberChange:
-    ga4ghPrefix: CX
+    ga4ghDigest:
+      keys:
+      - copy_change
+      - subject
+      - type
+      prefix: CX
     type: object
     description: An assessment of the copy number of a Location or a Gene within a
       system (e.g. genome, cell, etc.) relative to a baseline ploidy.
@@ -208,9 +230,15 @@ $defs:
     required:
     - copy_change
     - subject
+    - type
     additionalProperties: false
   Genotype:
-    ga4ghPrefix: GT
+    ga4ghDigest:
+      keys:
+      - count
+      - members
+      - type
+      prefix: GT
     description: A quantified set of _in-trans_ MolecularVariation at a genomic locus.
     type: object
     properties:
@@ -257,6 +285,7 @@ $defs:
     required:
     - count
     - members
+    - type
     additionalProperties: false
   Location:
     description: A contiguous segment of a biological sequence.
@@ -265,7 +294,12 @@ $defs:
     discriminator:
       propertyName: type
   SequenceLocation:
-    ga4ghPrefix: SL
+    ga4ghDigest:
+      keys:
+      - count
+      - members
+      - type
+      prefix: SL
     description: A Location defined by an interval on a referenced Sequence.
     type: object
     properties:
@@ -292,9 +326,11 @@ $defs:
           algorithm.
         type: string
         pattern: '[0-9A-Za-z_\-]{32}'
-      sequence_id:
-        description: A VRS Computed Identifier for the reference Sequence.
-        $ref: '#/$defs/IRI'
+      sequence:
+        oneOf:
+        - $ref: '#/$defs/IRI'
+        - $ref: '#/$defs/SequenceReference'
+        description: A SequenceReference.
       start:
         oneOf:
         - $ref: '#/$defs/Range'
@@ -312,8 +348,14 @@ $defs:
     required:
     - end
     - start
+    - type
     additionalProperties: false
-  Sequence:
+  SequenceReference:
+    ga4ghDigest:
+      prefix: SQR
+      keys:
+      - refgetAccession
+      - type
     type: object
     description: A sequence of nucleic or amino acid character codes.
     properties:
@@ -340,12 +382,18 @@ $defs:
           algorithm.
         type: string
         pattern: '[0-9A-Za-z_\-]{32}'
+      refgetAccession:
+        description: A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>`
+          identifier for the referenced sequence, using the sha512t24u digest.
+        type: string
+        pattern: SQ.[0-9A-Za-z_\-]{32}
       residueAlphabet:
         type: string
         enum:
         - amino acid
         - nucleic acid
-    required: []
+    required:
+    - type
     additionalProperties: false
   SequenceExpression:
     description: An expression describing a Sequence.
@@ -389,6 +437,7 @@ $defs:
         description: The number of residues in the repeat subunit.
     required:
     - length
+    - type
     additionalProperties: false
   LiteralSequenceExpression:
     description: An explicit expression of a Sequence.
@@ -417,6 +466,7 @@ $defs:
         description: the literal sequence
     required:
     - sequence
+    - type
     additionalProperties: false
   GenotypeMember:
     description: A class for expressing the count of a specific MolecularVariation
@@ -475,7 +525,7 @@ $defs:
     description: "A character string of Residues that represents a biological sequence\
       \ using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid\
       \ sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity\
-      \ codes are permitted in Sequences."
+      \ codes are permitted in Sequence Strings."
     type: string
     pattern: ^[A-Z*\-]*$
   Mapping:
@@ -555,7 +605,8 @@ $defs:
     example: ENSG00000139618
   IRI:
     description: An IRI Reference (either an IRI or a relative-reference), according
-      to `RFC3986 section 4.1  <https://datatracker.ietf.org/doc/html/rfc3986#section-4.1>`.
+      to `RFC3986 section 4.1  <https://datatracker.ietf.org/doc/html/rfc3986#section-4.1>`
+      and `RFC3987 section 2.1 <https://datatracker.ietf.org/doc/html/rfc3987#section-2.1>`.
       MAY be a JSON Pointer as an IRI fragment, as  described by `RFC6901 section
       6 <https://datatracker.ietf.org/doc/html/rfc6901#section-6>`.
     type: string

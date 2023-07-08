@@ -4,7 +4,7 @@ A sequence of nucleic or amino acid character codes.
 
 **Information Model**
 
-Some Sequence attributes are inherited from :ref:`gks.core:Entity`.
+Some SequenceReference attributes are inherited from :ref:`ValueObject`.
 
 .. list-table::
    :class: clean-wrap
@@ -30,12 +30,16 @@ Some Sequence attributes are inherited from :ref:`gks.core:Entity`.
       - 
    *  - type
       - string
-      - 0..1
+      - 1..1
       - MUST be "Sequence"
    *  - digest
       - string
       - 0..1
       - A sha512t24u digest created using the VRS Computed Identifier algorithm.
+   *  - refgetAccession
+      - string
+      - 0..1
+      - A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence, using the sha512t24u digest.
    *  - residueAlphabet
       - string
       - 0..1

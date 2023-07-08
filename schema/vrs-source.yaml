@@ -30,6 +30,9 @@ $defs:
 
   ValueObject:
     inherits: gks.core:Entity
+    ga4ghDigest:
+      keys:
+        - type
     description: >-
       An object whose equality is based on value, not identity. All VRS Value Objects
       may have computed digests from the VRS Computed Identifier algorithm.
@@ -41,6 +44,8 @@ $defs:
         description: A sha512t24u digest created using the VRS Computed Identifier algorithm.
         type: string
         pattern: '[0-9A-Za-z_\-]{32}'
+    heritable_required:
+      - type
 
   # TODO: Draft recomposition of Allele as "AlleleMember" plus seq requirement
   # TODO: Explore "typed entity"
@@ -100,7 +105,11 @@ $defs:
   # Molecular Variation
 
   Allele:
-    ga4ghPrefix: VA
+    ga4ghDigest:
+      prefix: VA
+      keys:
+        - location
+        - state
     inherits: MolecularVariation
     description: >-
       The state of a molecule at a :ref:`Location`.
@@ -125,7 +134,10 @@ $defs:
     required: [ "location", "state" ]
 
   Haplotype:
-    ga4ghPrefix: HT
+    ga4ghDigest:
+      prefix: HT
+      keys:
+        - members
     inherits: MolecularVariation
     description: >-
       A set of non-overlapping :ref:`Allele` members that co-occur on the same molecule.
@@ -202,6 +214,9 @@ $defs:
   # SystemicVariation
 
   CopyNumber:
+    ga4ghDigest:
+      keys:
+        - subject
     inherits: SystemicVariation
     description: >-
       A measure of the copies of a :ref:`Location` within a system (e.g. genome, cell, etc.)
@@ -215,7 +230,10 @@ $defs:
     heritable_required: [ "subject" ]
 
   CopyNumberCount:
-    ga4ghPrefix: CN
+    ga4ghDigest:
+      keys:
+        - copies
+      prefix: CN
     inherits: CopyNumber
     type: object
     description: >-
@@ -237,7 +255,10 @@ $defs:
     required: [ "copies" ]
 
   CopyNumberChange:
-    ga4ghPrefix: CX
+    ga4ghDigest:
+      keys:
+        - copy_change
+      prefix: CX
     inherits: CopyNumber
     type: object
     description: >-
@@ -257,10 +278,14 @@ $defs:
           MUST be one of "efo:0030069" (complete genomic loss), "efo:0020073" (high-level loss),
           "efo:0030068" (low-level loss), "efo:0030067" (loss), "efo:0030064" (regional base ploidy),
           "efo:0030070" (gain), "efo:0030071" (low-level gain), "efo:0030072" (high-level gain).
-    required: [  "copy_change" ]
+    required: [ "copy_change" ]
 
   Genotype:
-    ga4ghPrefix: GT
+    ga4ghDigest:
+      keys:
+        - members
+        - count
+      prefix: GT
     inherits: SystemicVariation
     description: >-
       A quantified set of _in-trans_ :ref:`MolecularVariation` at a genomic locus.
@@ -344,7 +369,11 @@ $defs:
 #    required: [ "species_id", "chr", "start", "end" ]
 
   SequenceLocation:
-    ga4ghPrefix: SL
+    ga4ghDigest:
+      keys:
+        - members
+        - count
+      prefix: SL
     inherits: Location
     description: >-
       A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
@@ -355,11 +384,12 @@ $defs:
         const: "SequenceLocation"
         default: "SequenceLocation"
         description: MUST be "SequenceLocation"
-      sequence_id:
-        $ref_curie: gks.core:IRI
+      sequence:
+        oneOf:
+          - $ref_curie: gks.core:IRI
+          - $ref: "#/$defs/SequenceReference"
         description: >-
-          A VRS :ref:`Computed Identifier <computed-identifiers>`
-          for the reference :ref:`Sequence`.
+          A :ref:`SequenceReference`.
       start:
         oneOf:
           - type: integer
@@ -378,8 +408,12 @@ $defs:
           MUST represent a coordinate or range greater than the value of `start`.
     required: [ "start", "end" ]
 
-  Sequence:
+  SequenceReference:
     inherits: ValueObject
+    ga4ghDigest:
+      prefix: SQR
+      keys:
+        - refgetAccession
     type: object
     description: A sequence of nucleic or amino acid character codes.
     properties:
@@ -388,6 +422,10 @@ $defs:
         const: "Sequence"
         default: "Sequence"
         description: MUST be "Sequence"
+      refgetAccession:
+        description: A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence, using the sha512t24u digest.
+        type: string
+        pattern: 'SQ.[0-9A-Za-z_\-]{32}'
       residueAlphabet:
         type: string
         enum:
@@ -422,6 +460,8 @@ $defs:
         type: string
         description: >-
           The SequenceExpression class type. MUST match child class type.
+    heritable_required:
+      - type
 
   ReferenceLengthExpression:
     inherits: SequenceExpression
@@ -587,6 +627,12 @@ $defs:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Nested Classes
 
+#  HaplotypeMember:
+#    inherits: gks.core:Entity
+#    description: >-
+#      A class for compact representation of :ref:`Allele` members in the context of a :ref:`Haplotype`.
+#    type: object
+
   GenotypeMember:
     inherits: gks.core:Entity
     description: >-
@@ -713,6 +759,6 @@ $defs:
       A character string of :ref:`Residues <Residue>` that represents a biological
       sequence using the conventional sequence order (5’-to-3’ for
       nucleic acid sequences, and amino-to-carboxyl for amino acid
-      sequences). IUPAC ambiguity codes are permitted in Sequences.
+      sequences). IUPAC ambiguity codes are permitted in Sequence Strings.
     type: string
     pattern: '^[A-Z*\-]*$'

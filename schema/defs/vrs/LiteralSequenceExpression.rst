@@ -4,7 +4,7 @@ An explicit expression of a Sequence.
 
 **Information Model**
 
-Some LiteralSequenceExpression attributes are inherited from :ref:`gks.core:Entity`.
+Some LiteralSequenceExpression attributes are inherited from :ref:`SequenceExpression`.
 
 .. list-table::
    :class: clean-wrap
@@ -30,7 +30,7 @@ Some LiteralSequenceExpression attributes are inherited from :ref:`gks.core:Enti
       - 
    *  - type
       - string
-      - 0..1
+      - 1..1
       - MUST be "LiteralSequenceExpression"
    *  - sequence
       - :ref:`SequenceString`

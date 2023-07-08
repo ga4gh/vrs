@@ -4,7 +4,7 @@ A set of non-overlapping :ref:`Allele` members that co-occur on the same molecul
 
 **Information Model**
 
-Some Haplotype attributes are inherited from :ref:`gks.core:Entity`.
+Some Haplotype attributes are inherited from :ref:`ValueObject`.
 
 .. list-table::
    :class: clean-wrap
@@ -30,7 +30,7 @@ Some Haplotype attributes are inherited from :ref:`gks.core:Entity`.
       - 
    *  - type
       - string
-      - 0..1
+      - 1..1
       - MUST be "Haplotype"
    *  - digest
       - string
