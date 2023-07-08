@@ -29,6 +29,7 @@ $defs:
   Mapping:
     type: object
     inherits: Entity
+    maturity: Alpha
     description: >-
       A mapping to a concept in a terminology system.
     properties:
@@ -58,6 +59,7 @@ $defs:
 
   Extension:
     type: object
+    maturity: Alpha
     description: >-
       The Extension class provides VODs with a means to extend descriptions
       with other attributes unique to a content provider. These extensions
@@ -77,6 +79,7 @@ $defs:
     required: [ "name" ]
 
   Code:
+    maturity: Alpha
     description: >-
       Indicates that the value is taken from a set of controlled strings defined elsewhere.
       Technically, a code is restricted to a string which has at least one character and no leading or 
@@ -86,6 +89,7 @@ $defs:
     example: ENSG00000139618
 
   IRI:
+    maturity: Alpha
     description: >-
       An IRI Reference (either an IRI or a relative-reference), according to `RFC3986 section 4.1 
       <https://datatracker.ietf.org/doc/html/rfc3986#section-4.1>` and `RFC3987 section 2.1

@@ -105,6 +105,7 @@ $defs:
   # Molecular Variation
 
   Allele:
+    maturity: Alpha
     ga4ghDigest:
       prefix: VA
       keys:
@@ -126,7 +127,7 @@ $defs:
           - $ref_curie: gks.core:IRI
           - $ref: "#/$defs/Location"
         description: >-
-          Where Allele is located
+          The location of the Allele
       state:
         $ref: "#/$defs/SequenceExpression"
         description: >-
@@ -134,6 +135,7 @@ $defs:
     required: [ "location", "state" ]
 
   Haplotype:
+    maturity: Alpha
     ga4ghDigest:
       prefix: HT
       keys:
@@ -230,6 +232,7 @@ $defs:
     heritable_required: [ "subject" ]
 
   CopyNumberCount:
+    maturity: Alpha
     ga4ghDigest:
       keys:
         - copies
@@ -255,6 +258,7 @@ $defs:
     required: [ "copies" ]
 
   CopyNumberChange:
+    maturity: Alpha
     ga4ghDigest:
       keys:
         - copy_change
@@ -281,6 +285,7 @@ $defs:
     required: [ "copy_change" ]
 
   Genotype:
+    maturity: Alpha
     ga4ghDigest:
       keys:
         - members
@@ -369,6 +374,7 @@ $defs:
 #    required: [ "species_id", "chr", "start", "end" ]
 
   SequenceLocation:
+    maturity: Alpha
     ga4ghDigest:
       keys:
         - members
@@ -409,6 +415,7 @@ $defs:
     required: [ "start", "end" ]
 
   SequenceReference:
+    maturity: Alpha
     inherits: ValueObject
     ga4ghDigest:
       prefix: SQR
@@ -464,6 +471,7 @@ $defs:
       - type
 
   ReferenceLengthExpression:
+    maturity: Alpha
     inherits: SequenceExpression
     description: >-
       An expression of a length of a sequence from a repeating reference.
@@ -491,6 +499,7 @@ $defs:
       - length
 
   LiteralSequenceExpression:
+    maturity: Alpha
     inherits: SequenceExpression
     description: >-
       An explicit expression of a Sequence.
@@ -634,6 +643,7 @@ $defs:
 #    type: object
 
   GenotypeMember:
+    privateTo: Genotype
     inherits: gks.core:Entity
     description: >-
       A class for expressing the count of a specific :ref:`MolecularVariation` present
@@ -663,6 +673,7 @@ $defs:
   # Numerics, Comparators, and Ranges
 
   Range:
+    maturity: Alpha
     description: An inclusive range of values bounded by one or more integers.
     type: array
     ordered: true
@@ -746,6 +757,7 @@ $defs:
 #    example: "q22.3"
 
   Residue:
+    maturity: Alpha
     description: >-
       A character representing a specific residue (i.e., molecular species)
       or groupings of these ("ambiguity codes"), using `one-letter IUPAC
@@ -755,6 +767,7 @@ $defs:
     pattern: '[A-Z*\-]'
 
   SequenceString:
+    maturity: Alpha
     description: >-
       A character string of :ref:`Residues <Residue>` that represents a biological
       sequence using the conventional sequence order (5’-to-3’ for

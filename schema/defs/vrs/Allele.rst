@@ -39,7 +39,7 @@ Some Allele attributes are inherited from :ref:`ValueObject`.
    *  - location
       - `IRI <core.json#/$defs/IRI>`_ | :ref:`Location`
       - 1..1
-      - Where Allele is located
+      - The location of the Allele
    *  - state
       - :ref:`SequenceExpression`
       - 1..1

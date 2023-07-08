@@ -29,6 +29,7 @@ $defs:
     discriminator:
       propertyName: type
   Allele:
+    maturity: Alpha
     ga4ghDigest:
       prefix: VA
       keys:
@@ -65,7 +66,7 @@ $defs:
         oneOf:
         - $ref: '#/$defs/SequenceLocation'
         - $ref: core.json#/$defs/IRI
-        description: Where Allele is located
+        description: The location of the Allele
       state:
         description: An expression of the sequence state
         oneOf:
@@ -77,6 +78,7 @@ $defs:
     - type
     additionalProperties: false
   Haplotype:
+    maturity: Alpha
     ga4ghDigest:
       prefix: HT
       keys:
@@ -125,6 +127,7 @@ $defs:
     - type
     additionalProperties: false
   CopyNumberCount:
+    maturity: Alpha
     ga4ghDigest:
       keys:
       - copies
@@ -174,6 +177,7 @@ $defs:
     - type
     additionalProperties: false
   CopyNumberChange:
+    maturity: Alpha
     ga4ghDigest:
       keys:
       - copy_change
@@ -233,6 +237,7 @@ $defs:
     - type
     additionalProperties: false
   Genotype:
+    maturity: Alpha
     ga4ghDigest:
       keys:
       - count
@@ -294,6 +299,7 @@ $defs:
     discriminator:
       propertyName: type
   SequenceLocation:
+    maturity: Alpha
     ga4ghDigest:
       keys:
       - count
@@ -351,6 +357,7 @@ $defs:
     - type
     additionalProperties: false
   SequenceReference:
+    maturity: Alpha
     ga4ghDigest:
       prefix: SQR
       keys:
@@ -403,6 +410,7 @@ $defs:
     discriminator:
       propertyName: type
   ReferenceLengthExpression:
+    maturity: Alpha
     description: An expression of a length of a sequence from a repeating reference.
     type: object
     properties:
@@ -440,6 +448,7 @@ $defs:
     - type
     additionalProperties: false
   LiteralSequenceExpression:
+    maturity: Alpha
     description: An explicit expression of a Sequence.
     type: object
     properties:
@@ -469,6 +478,7 @@ $defs:
     - type
     additionalProperties: false
   GenotypeMember:
+    privateTo: Genotype
     description: A class for expressing the count of a specific MolecularVariation
       present _in-trans_ at a genomic locus represented by a Genotype.
     type: object
@@ -506,6 +516,7 @@ $defs:
     - variation
     additionalProperties: false
   Range:
+    maturity: Alpha
     description: An inclusive range of values bounded by one or more integers.
     type: array
     ordered: true
@@ -516,12 +527,14 @@ $defs:
     maxItems: 2
     minItems: 2
   Residue:
+    maturity: Alpha
     description: A character representing a specific residue (i.e., molecular species)
       or groupings of these ("ambiguity codes"), using [one-letter IUPAC abbreviations](https://en.wikipedia.org/wiki/International_Union_of_Pure_and_Applied_Chemistry#Amino_acid_and_nucleotide_base_codes)
       for nucleic acids and amino acids.
     type: string
     pattern: '[A-Z*\-]'
   SequenceString:
+    maturity: Alpha
     description: "A character string of Residues that represents a biological sequence\
       \ using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid\
       \ sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity\
