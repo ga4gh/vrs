@@ -25,7 +25,10 @@ def test_json_yaml_match():
 # Does the schema validate against a simple sequence location?
 def test_models():
     sl = {
-        'sequence_id': 'ga4gh:SQ.12345',
+        'sequence': {
+            'refgetAccession': 'SQ.9W6SPR3RMCHWCSGJLQHE6KBOD285V5SW',
+            'type': 'SequenceReference'
+        },
         'start': 100,
         'end': [None, 150],
         'type': 'SequenceLocation'
@@ -39,7 +42,9 @@ def test_models():
     a = {
         'location': sl,
         'state': {
-            'length': [32, 35]
+            'type': 'ReferenceLengthExpression',
+            'length': [32, 35],
+            'repeatSubunitLength': 3
         },
         'type': 'Allele'
     }

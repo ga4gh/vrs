@@ -426,9 +426,9 @@ $defs:
     properties:
       type:
         type: string
-        const: "Sequence"
-        default: "Sequence"
-        description: MUST be "Sequence"
+        const: "SequenceReference"
+        default: "SequenceReference"
+        description: MUST be "SequenceReference"
       refgetAccession:
         description: A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence, using the sha512t24u digest.
         type: string
@@ -438,6 +438,8 @@ $defs:
         enum:
           - amino acid
           - nucleic acid
+    required:
+      - refgetAccession
 
       #TODO: add VRSATILE
       #TODO: implementation guidance: digest property is RefGet TRUNC512

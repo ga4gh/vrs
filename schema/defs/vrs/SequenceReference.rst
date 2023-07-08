@@ -31,14 +31,14 @@ Some SequenceReference attributes are inherited from :ref:`ValueObject`.
    *  - type
       - string
       - 1..1
-      - MUST be "Sequence"
+      - MUST be "SequenceReference"
    *  - digest
       - string
       - 0..1
       - A sha512t24u digest created using the VRS Computed Identifier algorithm.
    *  - refgetAccession
       - string
-      - 0..1
+      - 1..1
       - A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence, using the sha512t24u digest.
    *  - residueAlphabet
       - string

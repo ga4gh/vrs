@@ -510,9 +510,9 @@
             },
             "type": {
                "type": "string",
-               "const": "Sequence",
-               "default": "Sequence",
-               "description": "MUST be \"Sequence\""
+               "const": "SequenceReference",
+               "default": "SequenceReference",
+               "description": "MUST be \"SequenceReference\""
             },
             "digest": {
                "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
@@ -533,6 +533,7 @@
             }
          },
          "required": [
+            "refgetAccession",
             "type"
          ],
          "additionalProperties": false
