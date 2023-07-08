@@ -3,6 +3,6 @@ python-jsonschema-objects>=0.4.0
 jsonschema==3.2.0
 ipython
 pyyaml
-ga4gh.gks.metaschema==0.2.0rc4
+ga4gh.gks.metaschema==0.2.0rc5
 sphinx ~= 4.5
 sphinx-rtd-theme ~= 1.2
