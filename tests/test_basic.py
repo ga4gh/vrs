@@ -27,7 +27,8 @@ def test_models():
     sl = {
         'sequence_id': 'ga4gh:SQ.12345',
         'start': 100,
-        'end': [None, 150]
+        'end': [None, 150],
+        'type': 'SequenceLocation'
     }
     schema = copy.deepcopy(j)
     schema['$ref'] = '#/$defs/SequenceLocation'
@@ -39,6 +40,7 @@ def test_models():
         'location': sl,
         'state': {
             'length': [32, 35]
-        }
+        },
+        'type': 'Allele'
     }
     js.validate(a, schema)
