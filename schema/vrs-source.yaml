@@ -37,14 +37,14 @@ $defs:
       An object whose equality is based on value, not identity. All VRS Value Objects
       may have computed digests from the VRS Computed Identifier algorithm.
       See https://en.wikipedia.org/wiki/Value_object for more on Value Objects.
-    heritable_properties:
+    heritableProperties:
       type:
         type: string
       digest:
         description: A sha512t24u digest created using the VRS Computed Identifier algorithm.
         type: string
         pattern: '[0-9A-Za-z_\-]{32}'
-    heritable_required:
+    heritableRequired:
       - type
 
   # TODO: Draft recomposition of Allele as "AlleleMember" plus seq requirement
@@ -222,14 +222,14 @@ $defs:
     inherits: SystemicVariation
     description: >-
       A measure of the copies of a :ref:`Location` within a system (e.g. genome, cell, etc.)
-    heritable_properties:
+    heritableProperties:
       subject:
         oneOf:
           - $ref_curie: gks.core:IRI
           - $ref: "#/$defs/Location"
         description: >-
           A location for which the number of systemic copies is described.
-    heritable_required: [ "subject" ]
+    heritableRequired: [ "subject" ]
 
   CopyNumberCount:
     maturity: Alpha
@@ -464,12 +464,12 @@ $defs:
 #      - $ref: "#/$defs/ComposedSequenceExpression"
     discriminator:
       propertyName: type
-    heritable_properties:
+    heritableProperties:
       type:
         type: string
         description: >-
           The SequenceExpression class type. MUST match child class type.
-    heritable_required:
+    heritableRequired:
       - type
 
   ReferenceLengthExpression:

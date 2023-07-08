@@ -9,7 +9,7 @@ $defs:
       Entity is the root class of ‘core’ classes model - those that have identifiers and other general 
       metadata like labels, xrefs, urls, descriptions, etc. All core classes descend from and inherit 
       its attributes.
-    heritable_properties:
+    heritableProperties:
       id:
         type: string
         description: >-
@@ -175,7 +175,7 @@ $defs:
 #  TherapeuticCollection:
 #    inherits: ValueEntity
 #    description: A collection of therapeutics.
-#    heritable_properties:
+#    heritableProperties:
 #      members:
 #        type: array
 #        ordered: false
@@ -184,7 +184,7 @@ $defs:
 #        items:
 #          $ref: "#/$defs/Therapeutic"
 #        minItems: 2
-#    heritable_required: [ "members" ]
+#    heritableRequired: [ "members" ]
 #
 #  CombinationTherapeuticCollection:
 #    type: object
