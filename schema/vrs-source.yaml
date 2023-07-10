@@ -158,10 +158,15 @@ $defs:
         uniqueItems: true
         items:
           oneOf:
-            - $ref: "#/$defs/Allele"
-            - $ref_curie: gks.core:IRI
+          - $ref: "#/$defs/HaplotypeMemberAllele"
+          - $ref: "#/defs/Allele"
+          - $ref_curie: gks.core:IRI
         description: >-
-          List of Alleles, or references to Alleles, that comprise this Haplotype.
+          A list of :ref:`Alleles <Allele>` (or IRI references to `Alleles`) that comprise a Haplotype. Since each 
+          `Haplotype` member MUST be an `Allele`, and all members MUST share a common :ref:`SequenceReference`, 
+          implementations MAY use a compact representation of Haplotype that omits type and :ref:`SequenceReference` 
+          information in individual Haplotype members. Implementations MUST transform compact `Allele` representations 
+          into an `Allele` when computing GA4GH identifiers.
     required: [ "members" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -638,7 +643,7 @@ $defs:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Nested Classes
 
-#  HaplotypeMember:
+#  HaplotypeMemberAllele:
 #    inherits: gks.core:Entity
 #    description: >-
 #      A class for compact representation of :ref:`Allele` members in the context of a :ref:`Haplotype`.
