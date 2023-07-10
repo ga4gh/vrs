@@ -83,14 +83,16 @@ the following normalization rules apply:
 #. Compare the two Allele sequences, if:
 
    a. both are empty, the input Allele is a reference Allele. Return the
-      input Allele unmodified.
+      input Allele unmodified. **Discussion point**: should this return a
+      reference length expression?
 
    #. both are non-empty, the input Allele has been normalized to a
       substitution. Return a new Allele with the modified `start`, `end`,
       and `Alternate Allele Sequence`.
 
    #. one is empty, the input Allele is an insertion (empty `reference
-      sequence`) or a deletion (empty `alternate sequence`). Continue to
+      sequence`) or a deletion (empty `alternate sequence`). Store the length
+      of the non-empty sequence: this is the `Repeat Subunit Length`. Continue to
       step 3.
 
 #. Determine bounds of ambiguity.
@@ -110,15 +112,15 @@ the following normalization rules apply:
 
 #. Construct a new Allele covering the entire region of ambiguity.
 
-   a. Prepend characters from `left_roll_bound` to `start` to both
-      Allele Sequences.
+   a. If the `reference sequence` is empty, this is an unambiguous
+      insertion. Return a new `Allele` with the trimmed `alternate
+      sequence` as a `Literal Sequence Expression`.
 
-   #. Append characters from `start` to `right_roll_bound` to both
-      Allele Sequences.
-
-   #. Set `start` to `left_roll_bound` and `end` to `right_roll_bound`,
-      and return a new Allele with the modified `start`, `end`, and
-      `Alternate Allele Sequence`.
+   #. Otherwise, return a new `Allele` using a `reference length
+      expression`, using a `Location` specified by the coordinates
+      of the `left_roll_bound` and `right_roll_bound`, a `length`
+      specified by the length of the `alternate allele`, and a
+      `repeat subunit length` as determined in step 2c.
 
 .. _normalization-diagram:
 
