@@ -504,6 +504,7 @@ $defs:
           The number of residues in the repeat subunit.
     required:
       - length
+      - repeatSubunitLength
 
   LiteralSequenceExpression:
     maturity: Alpha
