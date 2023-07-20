@@ -100,6 +100,18 @@
                      "$ref": "#/definitions/ChromosomeLocation"
                   },
                   {
+                     "$ref": "#/definitions/ComposedSequenceExpression"
+                  },
+                  {
+                     "$ref": "#/definitions/DerivedSequenceExpression"
+                  },
+                  {
+                     "$ref": "#/definitions/LiteralSequenceExpression"
+                  },
+                  {
+                     "$ref": "#/definitions/RepeatedSequenceExpression"
+                  },
+                  {
                      "$ref": "#/definitions/SequenceLocation"
                   }
                ],

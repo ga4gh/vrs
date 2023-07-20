@@ -55,6 +55,10 @@ definitions:
         oneOf:
         - $ref: '#/definitions/CURIE'
         - $ref: '#/definitions/ChromosomeLocation'
+        - $ref: '#/definitions/ComposedSequenceExpression'
+        - $ref: '#/definitions/DerivedSequenceExpression'
+        - $ref: '#/definitions/LiteralSequenceExpression'
+        - $ref: '#/definitions/RepeatedSequenceExpression'
         - $ref: '#/definitions/SequenceLocation'
         description: Where Allele is located
       state:

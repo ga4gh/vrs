@@ -101,6 +101,7 @@ definitions:
         oneOf:
           - $ref: "#/definitions/CURIE"
           - $ref: "#/definitions/Location"
+          - $ref: "#/definitions/SequenceExpression"
         description: >-
           Where Allele is located
       state:

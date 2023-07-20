@@ -25,7 +25,7 @@ Some Allele attributes are inherited from :ref:`Variation`.
       - 1..1
       - MUST be "Allele"
    *  - location
-      - :ref:`CURIE` | :ref:`Location`
+      - :ref:`CURIE` | :ref:`Location` | :ref:`SequenceExpression`
       - 1..1
       - Where Allele is located
    *  - state
