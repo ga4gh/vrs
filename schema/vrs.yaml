@@ -1,5 +1,5 @@
 $schema: http://json-schema.org/draft/2020-12/schema
-title: GA4GH-VRS-Definitions-Merged-Imports
+title: GA4GH-VRS-Definitions
 type: object
 $defs:
   Variation:
@@ -51,7 +51,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: '#/$defs/Extension'
+          $ref: core.json#/$defs/Extension
       type:
         type: string
         const: Allele
@@ -64,8 +64,8 @@ $defs:
         pattern: '[0-9A-Za-z_\-]{32}'
       location:
         oneOf:
-        - $ref: '#/$defs/IRI'
         - $ref: '#/$defs/SequenceLocation'
+        - $ref: core.json#/$defs/IRI
         description: The location of the Allele
       state:
         description: An expression of the sequence state
@@ -100,7 +100,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: '#/$defs/Extension'
+          $ref: core.json#/$defs/Extension
       type:
         type: string
         const: Haplotype
@@ -118,10 +118,15 @@ $defs:
         uniqueItems: true
         items:
           oneOf:
-          - $ref: '#/$defs/Allele'
-          - $ref: '#/$defs/IRI'
-        description: List of Alleles, or references to Alleles, that comprise this
-          Haplotype.
+          - $ref: '#/$defs/HaplotypeMemberAllele'
+          - $ref: '#/defs/Allele'
+          - $ref: core.json#/$defs/IRI
+        description: A list of Alleles (or IRI references to `Alleles`) that comprise
+          a Haplotype. Since each  `Haplotype` member MUST be an `Allele`, and all
+          members MUST share a common SequenceReference,  implementations MAY use
+          a compact representation of Haplotype that omits type and SequenceReference  information
+          in individual Haplotype members. Implementations MUST transform compact
+          `Allele` representations  into an `Allele` when computing GA4GH identifiers.
     required:
     - members
     - type
@@ -150,7 +155,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: '#/$defs/Extension'
+          $ref: core.json#/$defs/Extension
       type:
         type: string
         const: CopyNumberCount
@@ -163,8 +168,8 @@ $defs:
         pattern: '[0-9A-Za-z_\-]{32}'
       subject:
         oneOf:
-        - $ref: '#/$defs/IRI'
         - $ref: '#/$defs/SequenceLocation'
+        - $ref: core.json#/$defs/IRI
         description: A location for which the number of systemic copies is described.
       copies:
         oneOf:
@@ -200,7 +205,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: '#/$defs/Extension'
+          $ref: core.json#/$defs/Extension
       type:
         type: string
         const: CopyNumberChange
@@ -213,8 +218,8 @@ $defs:
         pattern: '[0-9A-Za-z_\-]{32}'
       subject:
         oneOf:
-        - $ref: '#/$defs/IRI'
         - $ref: '#/$defs/SequenceLocation'
+        - $ref: core.json#/$defs/IRI
         description: A location for which the number of systemic copies is described.
       copy_change:
         type: string
@@ -259,7 +264,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: '#/$defs/Extension'
+          $ref: core.json#/$defs/Extension
       type:
         type: string
         const: Genotype
@@ -321,7 +326,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: '#/$defs/Extension'
+          $ref: core.json#/$defs/Extension
       type:
         type: string
         const: SequenceLocation
@@ -334,8 +339,8 @@ $defs:
         pattern: '[0-9A-Za-z_\-]{32}'
       sequence:
         oneOf:
-        - $ref: '#/$defs/IRI'
         - $ref: '#/$defs/SequenceReference'
+        - $ref: core.json#/$defs/IRI
         description: A SequenceReference.
       start:
         oneOf:
@@ -378,7 +383,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: '#/$defs/Extension'
+          $ref: core.json#/$defs/Extension
       type:
         type: string
         const: SequenceReference
@@ -427,7 +432,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: '#/$defs/Extension'
+          $ref: core.json#/$defs/Extension
       type:
         type: string
         const: ReferenceLengthExpression
@@ -446,6 +451,7 @@ $defs:
         description: The number of residues in the repeat subunit.
     required:
     - length
+    - repeatSubunitLength
     - type
     additionalProperties: false
   LiteralSequenceExpression:
@@ -465,7 +471,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: '#/$defs/Extension'
+          $ref: core.json#/$defs/Extension
       type:
         type: string
         const: LiteralSequenceExpression
@@ -496,7 +502,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: '#/$defs/Extension'
+          $ref: core.json#/$defs/Extension
       type:
         type: string
         const: GenotypeMember
@@ -542,90 +548,3 @@ $defs:
       \ codes are permitted in Sequence Strings."
     type: string
     pattern: ^[A-Z*\-]*$
-  Mapping:
-    type: object
-    maturity: Alpha
-    description: A mapping to a concept in a terminology system.
-    properties:
-      id:
-        type: string
-        description: The 'logical' identifier of the entity in the system of record,
-          e.g. a UUID. This 'id' is  unique within a given system. The identified
-          entity may have a different 'id' in a different  system, or may refer to
-          an 'id' for the shared concept in another system (e.g. a CURIE).
-      label:
-        type: string
-      extensions:
-        type: array
-        ordered: true
-        items:
-          $ref: '#/$defs/Extension'
-      system:
-        type: string
-        description: Identity of the terminology system.
-      version:
-        type: string
-        description: Version of the terminology system.
-      code:
-        $ref: '#/$defs/Code'
-        description: Symbol in syntax defined by the terminology system.
-      mapping:
-        description: A mapping between concepts as defined by the Simple Knowledge
-          Organization System (SKOS).
-        type: string
-        enum:
-        - closeMatch
-        - exactMatch
-        - broadMatch
-        - narrowMatch
-        - relatedMatch
-    required:
-    - code
-    - mapping
-    - system
-    additionalProperties: false
-  Extension:
-    type: object
-    maturity: Alpha
-    description: The Extension class provides VODs with a means to extend descriptions
-      with other attributes unique to a content provider. These extensions are not
-      expected to be natively understood under VRSATILE, but may be used for pre-negotiated
-      exchange of message attributes when needed.
-    properties:
-      type:
-        type: string
-        const: Extension
-        description: MUST be "Extension".
-      name:
-        type: string
-        description: A name for the Extension
-      value:
-        type:
-        - number
-        - string
-        - boolean
-        - object
-        - array
-        - 'null'
-        description: Any primitive or structured object
-    required:
-    - name
-    additionalProperties: false
-  Code:
-    maturity: Alpha
-    description: Indicates that the value is taken from a set of controlled strings
-      defined elsewhere. Technically, a code is restricted to a string which has at
-      least one character and no leading or  trailing whitespace, and where there
-      is no whitespace other than single spaces in the contents.
-    type: string
-    pattern: \S+( \S+)*
-    example: ENSG00000139618
-  IRI:
-    maturity: Alpha
-    description: An IRI Reference (either an IRI or a relative-reference), according
-      to `RFC3986 section 4.1  <https://datatracker.ietf.org/doc/html/rfc3986#section-4.1>`
-      and `RFC3987 section 2.1 <https://datatracker.ietf.org/doc/html/rfc3987#section-2.1>`.
-      MAY be a JSON Pointer as an IRI fragment, as  described by `RFC6901 section
-      6 <https://datatracker.ietf.org/doc/html/rfc6901#section-6>`.
-    type: string
-    format: iri-reference

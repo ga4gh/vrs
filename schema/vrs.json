@@ -170,14 +170,17 @@
                "items": {
                   "oneOf": [
                      {
-                        "$ref": "#/$defs/Allele"
+                        "$ref": "#/$defs/HaplotypeMemberAllele"
+                     },
+                     {
+                        "$ref": "#/defs/Allele"
                      },
                      {
                         "$ref": "core.json#/$defs/IRI"
                      }
                   ]
                },
-               "description": "List of Alleles, or references to Alleles, that comprise this Haplotype."
+               "description": "A list of Alleles (or IRI references to `Alleles`) that comprise a Haplotype. Since each  `Haplotype` member MUST be an `Allele`, and all members MUST share a common SequenceReference,  implementations MAY use a compact representation of Haplotype that omits type and SequenceReference  information in individual Haplotype members. Implementations MUST transform compact `Allele` representations  into an `Allele` when computing GA4GH identifiers."
             }
          },
          "required": [
@@ -599,6 +602,7 @@
          },
          "required": [
             "length",
+            "repeatSubunitLength",
             "type"
          ],
          "additionalProperties": false
