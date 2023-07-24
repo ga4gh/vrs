@@ -26,3 +26,7 @@ A contiguous span on a chromosome defined by cytoband features. The span include
       - :ref:`HumanCytoband`
       - 1..1
       - The end cytoband region. MUST specify a region nearer the terminal end (telomere) of the chromosome q-arm than `start`.
+   *  - taste
+      - string
+      - 1..1
+      - The taste of the cytoband region. MUST specify a fruit.  Blue Raspberry is just Raspberry.
