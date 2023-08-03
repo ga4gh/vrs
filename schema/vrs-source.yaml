@@ -30,20 +30,26 @@ $defs:
 
   ValueObject:
     inherits: gks.core:Entity
-    ga4ghDigest:
-      keys:
-        - type
     description: >-
-      An object whose equality is based on value, not identity. All VRS Value Objects
+      A contextual value whose equality is based on value, not identity. All VRS Value Objects
       may have computed digests from the VRS Computed Identifier algorithm.
       See https://en.wikipedia.org/wiki/Value_object for more on Value Objects.
     heritableProperties:
-      type:
-        type: string
       digest:
         description: A sha512t24u digest created using the VRS Computed Identifier algorithm.
         type: string
         pattern: '[0-9A-Za-z_\-]{32}'
+
+  Ga4ghIdentifiableObject:
+    inherits: ValueObject
+    description: >-
+      A contextual value object for which a GA4GH computed identifier can be created.
+    ga4ghDigest:
+      keys:
+        - type
+    heritableProperties:
+      type:
+        type: string
     heritableRequired:
       - type
 
@@ -51,7 +57,7 @@ $defs:
   # TODO: Explore "typed entity"
 
   Variation:
-    inherits: ValueObject
+    inherits: Ga4ghIdentifiableObject
     description: >-
       A representation of the state of one or more biomolecules.
     oneOf:
@@ -333,7 +339,7 @@ $defs:
   # Locations
 
   Location:
-    inherits: ValueObject
+    inherits: Ga4ghIdentifiableObject
     description: >-
       A contiguous segment of a biological sequence.
     oneOf:
@@ -382,8 +388,9 @@ $defs:
     maturity: Alpha
     ga4ghDigest:
       keys:
-        - members
-        - count
+        - start
+        - end
+        - sequence
       prefix: SL
     inherits: Location
     description: >-
@@ -417,32 +424,31 @@ $defs:
           The end coordinate or range of the SequenceLocation.
           The minimum value of this coordinate or range is 0.
           MUST represent a coordinate or range greater than the value of `start`.
-    required: [ "start", "end" ]
+    required:
+      - start
+      - end
 
   SequenceReference:
     maturity: Alpha
     inherits: ValueObject
     ga4ghDigest:
-      prefix: SQR
       keys:
         - refgetAccession
     type: object
     description: A sequence of nucleic or amino acid character codes.
     properties:
-      type:
-        type: string
-        const: "SequenceReference"
-        default: "SequenceReference"
-        description: MUST be "SequenceReference"
       refgetAccession:
         description: A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence, using the sha512t24u digest.
         type: string
         pattern: 'SQ.[0-9A-Za-z_\-]{32}'
       residueAlphabet:
         type: string
+        description: >-
+          The interpretation of the character codes referred to by the refget accession, where "aa" specifies an
+          amino acid character set, and "na" specifies a nucleic acid character set.
         enum:
-          - amino acid
-          - nucleic acid
+          - aa
+          - na
     required:
       - refgetAccession
 
@@ -458,7 +464,7 @@ $defs:
   # SequenceExpression
 
   SequenceExpression:
-    inherits: gks.core:Entity
+    inherits: ValueObject
     description: >-
       An expression describing a :ref:`Sequence`.
     oneOf:
@@ -652,17 +658,12 @@ $defs:
 
   GenotypeMember:
     privateTo: Genotype
-    inherits: gks.core:Entity
+    inherits: gks.core:ValueObject
     description: >-
       A class for expressing the count of a specific :ref:`MolecularVariation` present
       _in-trans_ at a genomic locus represented by a :ref:`Genotype`.
     type: object
     properties:
-      type:
-        type: string
-        const: "GenotypeMember"
-        default: "GenotypeMember"
-        description: MUST be "GenotypeMember".
       count:
         oneOf:
           - $ref: '#/$defs/Range'

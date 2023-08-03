@@ -18,6 +18,17 @@ $defs:
           system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE).
       label:
         type: string
+        description: >-
+          A primary label for the entity.
+      description:
+        type: string
+        description: >-
+          A free-text description of the entity.
+      mapping:
+        type: array
+        ordered: false
+        items:
+          $ref: "#/$defs/Mapping"
       extensions:
         type: array
         ordered: true
