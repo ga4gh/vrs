@@ -24,11 +24,6 @@ $defs:
         type: string
         description: >-
           A free-text description of the entity.
-      mapping:
-        type: array
-        ordered: false
-        items:
-          $ref: "#/$defs/Mapping"
       extensions:
         type: array
         ordered: true
@@ -36,6 +31,16 @@ $defs:
           $ref: "#/$defs/Extension"
     discriminator:
       propertyName: type
+
+  MappableEntity:
+    type: object
+    inherits: Entity
+    heritableProperties:
+      mappings:
+        type: array
+        ordered: false
+        items:
+          $ref: "#/$defs/Mapping"
 
   Mapping:
     type: object
@@ -53,9 +58,9 @@ $defs:
       code:
         $ref: '#/$defs/Code'
         description: Symbol in syntax defined by the terminology system.
-      mapping:
+      relation:
         description: >-
-          A mapping between concepts as defined by the Simple Knowledge Organization System (SKOS).
+          A mapping relation between concepts as defined by the Simple Knowledge Organization System (SKOS).
         type: string
         enum:
           - closeMatch
@@ -64,7 +69,7 @@ $defs:
           - narrowMatch
           - relatedMatch
     required:
-      - mapping
+      - relation
       - code
       - system
 
