@@ -241,7 +241,7 @@ CopyNumberCount:
 CopyNumberChange:
   - name: "Low-level copy gain of BRCA1"
     in:
-      copy_change: efo:0030071
+      copyChange: efo:0030071
       subject:
         sequence: ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
         end: 44909393
@@ -249,9 +249,9 @@ CopyNumberChange:
         type: SequenceLocation
       type: CopyNumberChange
     out:
-      ga4gh_digest: KlD6II_vICHI1nhRRxMRsO0UuY0qE0WJ
-      ga4gh_identify: ga4gh:CX.KlD6II_vICHI1nhRRxMRsO0UuY0qE0WJ
-      ga4gh_serialize: '{"copy_change":"efo:0030071","subject":"pwXpQIUlYM2W2DNhPPn82-95OSi2TZXj","type":"CopyNumberChange"}'
+      ga4gh_digest: Zc9sRUG1Lyzm4sKjUQ9npjxkdlsTvY7i
+      ga4gh_identify: ga4gh:CX.Zc9sRUG1Lyzm4sKjUQ9npjxkdlsTvY7i
+      ga4gh_serialize: '{"copyChange":"efo:0030071","subject":"pwXpQIUlYM2W2DNhPPn82-95OSi2TZXj","type":"CopyNumberChange"}'
 #Text: TODO Text not currently supported in 2-alpha
 #  -
 #    in:
