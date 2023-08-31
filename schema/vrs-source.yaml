@@ -38,7 +38,7 @@ $defs:
       digest:
         description: A sha512t24u digest created using the VRS Computed Identifier algorithm.
         type: string
-        pattern: '[0-9A-Za-z_\-]{32}'
+        pattern: '^[0-9A-Za-z_\-]{32}$'
 
   Ga4ghIdentifiableObject:
     inherits: ValueObject
@@ -440,7 +440,7 @@ $defs:
       refgetAccession:
         description: A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence, using the sha512t24u digest.
         type: string
-        pattern: 'SQ.[0-9A-Za-z_\-]{32}'
+        pattern: '^SQ.[0-9A-Za-z_\-]{32}$'
       residueAlphabet:
         type: string
         description: >-
