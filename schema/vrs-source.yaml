@@ -168,10 +168,10 @@ $defs:
           - $ref: "#/defs/Allele"
           - $ref_curie: gks.core:IRI
         description: >-
-          A list of :ref:`Alleles <Allele>` (or IRI references to `Alleles`) that comprise a Haplotype. Since each 
-          `Haplotype` member MUST be an `Allele`, and all members MUST share a common :ref:`SequenceReference`, 
-          implementations MAY use a compact representation of Haplotype that omits type and :ref:`SequenceReference` 
-          information in individual Haplotype members. Implementations MUST transform compact `Allele` representations 
+          A list of :ref:`Alleles <Allele>` (or IRI references to `Alleles`) that comprise a Haplotype. Since each
+          `Haplotype` member MUST be an `Allele`, and all members MUST share a common :ref:`SequenceReference`,
+          implementations MAY use a compact representation of Haplotype that omits type and :ref:`SequenceReference`
+          information in individual Haplotype members. Implementations MUST transform compact `Allele` representations
           into an `Allele` when computing GA4GH identifiers.
     required: [ "members" ]
 
@@ -402,7 +402,7 @@ $defs:
         const: "SequenceLocation"
         default: "SequenceLocation"
         description: MUST be "SequenceLocation"
-      sequence:
+      sequenceReference:
         oneOf:
           - $ref_curie: gks.core:IRI
           - $ref: "#/$defs/SequenceReference"

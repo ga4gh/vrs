@@ -337,7 +337,7 @@ $defs:
           algorithm.
         type: string
         pattern: '[0-9A-Za-z_\-]{32}'
-      sequence:
+      sequenceReference:
         oneOf:
         - $ref: '#/$defs/SequenceReference'
         - $ref: core.json#/$defs/IRI
