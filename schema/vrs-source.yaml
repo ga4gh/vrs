@@ -130,7 +130,7 @@ $defs:
           MUST be "Allele"
       location:
         oneOf:
-          - $ref_curie: gks.core:IRI
+          - $refCurie: gks.core:IRI
           - $ref: "#/$defs/Location"
         description: >-
           The location of the Allele
@@ -166,7 +166,7 @@ $defs:
           oneOf:
           - $ref: "#/$defs/HaplotypeMemberAllele"
           - $ref: "#/defs/Allele"
-          - $ref_curie: gks.core:IRI
+          - $refCurie: gks.core:IRI
         description: >-
           A list of :ref:`Alleles <Allele>` (or IRI references to `Alleles`) that comprise a Haplotype. Since each
           `Haplotype` member MUST be an `Allele`, and all members MUST share a common :ref:`SequenceReference`,
@@ -215,7 +215,7 @@ $defs:
 #        uniqueItems: true
 #        items:
 #          oneOf:
-#            - $ref_curie: gks.core:IRI
+#            - $refCurie: gks.core:IRI
 #            - $ref: "#/$defs/Variation"
 #        description: >-
 #          List of Variation objects or identifiers. Attribute is
@@ -236,7 +236,7 @@ $defs:
     heritableProperties:
       subject:
         oneOf:
-          - $ref_curie: gks.core:IRI
+          - $refCurie: gks.core:IRI
           - $ref: "#/$defs/Location"
         description: >-
           A location for which the number of systemic copies is described.
@@ -361,7 +361,7 @@ $defs:
 #        default: "ChromosomeLocation"
 #        description: MUST be "ChromosomeLocation"
 #      species_id:
-#        $ref_curie: gks.core:IRI
+#        $refCurie: gks.core:IRI
 #        default: "taxonomy:9606"
 #        description: >-
 #          :ref:`CURIE` representing a species from the
@@ -404,7 +404,7 @@ $defs:
         description: MUST be "SequenceLocation"
       sequenceReference:
         oneOf:
-          - $ref_curie: gks.core:IRI
+          - $refCurie: gks.core:IRI
           - $ref: "#/$defs/SequenceReference"
         description: >-
           A :ref:`SequenceReference`.
