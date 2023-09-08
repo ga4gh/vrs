@@ -40,7 +40,7 @@ Some CopyNumberChange attributes are inherited from :ref:`CopyNumber`.
           - string
           - 1..1
           - MUST be "CopyNumberChange"
-       *  - subject
+       *  - location
           - gks.core:IRI | :ref:`Location`
           - 1..1
           - A location for which the number of systemic copies is described.

@@ -242,7 +242,7 @@
                "default": "CopyNumberCount",
                "description": "MUST be \"CopyNumberCount\""
             },
-            "subject": {
+            "location": {
                "oneOf": [
                   {
                      "$ref": "#/$defs/SequenceLocation"
@@ -267,7 +267,7 @@
          },
          "required": [
             "copies",
-            "subject",
+            "location",
             "type"
          ],
          "additionalProperties": false
@@ -315,7 +315,7 @@
                "default": "CopyNumberChange",
                "description": "MUST be \"CopyNumberChange\""
             },
-            "subject": {
+            "location": {
                "oneOf": [
                   {
                      "$ref": "#/$defs/SequenceLocation"
@@ -343,7 +343,7 @@
          },
          "required": [
             "copyChange",
-            "subject",
+            "location",
             "type"
          ],
          "additionalProperties": false

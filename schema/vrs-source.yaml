@@ -234,13 +234,13 @@ $defs:
     description: >-
       A measure of the copies of a :ref:`Location` within a system (e.g. genome, cell, etc.)
     heritableProperties:
-      subject:
+      location:
         oneOf:
           - $refCurie: gks.core:IRI
           - $ref: "#/$defs/Location"
         description: >-
           A location for which the number of systemic copies is described.
-    heritableRequired: [ "subject" ]
+    heritableRequired: [ "location" ]
 
   CopyNumberCount:
     maturity: Alpha

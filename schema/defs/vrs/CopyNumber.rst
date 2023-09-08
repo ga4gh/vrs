@@ -40,7 +40,7 @@ Some CopyNumber attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
           - string
           - 1..1
           - 
-       *  - subject
+       *  - location
           - gks.core:IRI | :ref:`Location`
           - 1..1
           - A location for which the number of systemic copies is described.

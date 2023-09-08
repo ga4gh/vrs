@@ -178,7 +178,7 @@ $defs:
         const: CopyNumberCount
         default: CopyNumberCount
         description: MUST be "CopyNumberCount"
-      subject:
+      location:
         oneOf:
         - $ref: '#/$defs/SequenceLocation'
         - $refCurie: gks.core:IRI
@@ -190,7 +190,7 @@ $defs:
         description: The integral number of copies of the subject in a system
     required:
     - copies
-    - subject
+    - location
     - type
     additionalProperties: false
   CopyNumberChange:
@@ -232,7 +232,7 @@ $defs:
         const: CopyNumberChange
         default: CopyNumberChange
         description: MUST be "CopyNumberChange"
-      subject:
+      location:
         oneOf:
         - $ref: '#/$defs/SequenceLocation'
         - $refCurie: gks.core:IRI
@@ -254,7 +254,7 @@ $defs:
           (low-level gain), "efo:0030072" (high-level gain).
     required:
     - copyChange
-    - subject
+    - location
     - type
     additionalProperties: false
   Genotype:
