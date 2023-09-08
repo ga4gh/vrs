@@ -41,6 +41,6 @@ Some Haplotype attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
           - 1..1
           - MUST be "Haplotype"
        *  - members
-          - :ref:`HaplotypeMemberAllele` | :ref:`Allele` | gks.core:IRI
+          - :ref:`HaplotypeMemberAllele` | :ref:`Allele` | `IRI <core.json#/$defs/IRI>`_
           - 2..m
           - A list of :ref:`Alleles <Allele>` (or IRI references to `Alleles`) that comprise a Haplotype. Since each `Haplotype` member MUST be an `Allele`, and all members MUST share a common :ref:`SequenceReference`, implementations MAY use a compact representation of Haplotype that omits type and :ref:`SequenceReference` information in individual Haplotype members. Implementations MUST transform compact `Allele` representations into an `Allele` when computing GA4GH identifiers.

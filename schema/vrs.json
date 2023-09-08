@@ -106,7 +106,7 @@
                      "$ref": "#/$defs/SequenceLocation"
                   },
                   {
-                     "$refCurie": "gks.core:IRI"
+                     "$ref": "core.json#/$defs/IRI"
                   }
                ],
                "description": "The location of the Allele"
@@ -186,7 +186,7 @@
                         "$ref": "#/$defs/HaplotypeMemberAllele"
                      },
                      {
-                        "$refCurie": "gks.core:IRI"
+                        "$ref": "core.json#/$defs/IRI"
                      }
                   ]
                },
@@ -248,7 +248,7 @@
                      "$ref": "#/$defs/SequenceLocation"
                   },
                   {
-                     "$refCurie": "gks.core:IRI"
+                     "$ref": "core.json#/$defs/IRI"
                   }
                ],
                "description": "A location for which the number of systemic copies is described."
@@ -321,7 +321,7 @@
                      "$ref": "#/$defs/SequenceLocation"
                   },
                   {
-                     "$refCurie": "gks.core:IRI"
+                     "$ref": "core.json#/$defs/IRI"
                   }
                ],
                "description": "A location for which the number of systemic copies is described."
@@ -420,17 +420,6 @@
          ],
          "additionalProperties": false
       },
-      "Location": {
-         "description": "A contiguous segment of a biological sequence.",
-         "oneOf": [
-            {
-               "$ref": "#/$defs/SequenceLocation"
-            }
-         ],
-         "discriminator": {
-            "propertyName": "type"
-         }
-      },
       "SequenceLocation": {
          "maturity": "Alpha",
          "ga4ghDigest": {
@@ -481,7 +470,7 @@
                      "$ref": "#/$defs/SequenceReference"
                   },
                   {
-                     "$refCurie": "gks.core:IRI"
+                     "$ref": "core.json#/$defs/IRI"
                   }
                ],
                "description": "A SequenceReference."
@@ -519,9 +508,7 @@
       "SequenceReference": {
          "maturity": "Alpha",
          "ga4ghDigest": {
-            "keys": [
-               "refgetAccession"
-            ]
+            "assigned": true
          },
          "type": "object",
          "description": "A sequence of nucleic or amino acid character codes.",
@@ -550,6 +537,10 @@
                "type": "string",
                "pattern": "[0-9A-Za-z_\\-]{32}"
             },
+            "type": {
+               "type": "string",
+               "const": "SequenceReference"
+            },
             "refgetAccession": {
                "description": "A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence, using the sha512t24u digest.",
                "type": "string",
@@ -565,7 +556,8 @@
             }
          },
          "required": [
-            "refgetAccession"
+            "refgetAccession",
+            "type"
          ],
          "additionalProperties": false
       },

@@ -25,9 +25,9 @@ def test_json_yaml_match():
 # Does the schema validate against a simple sequence location?
 def test_models():
     sl = {
-        'sequence': {
+        'sequenceReference': {
             'refgetAccession': 'SQ.9W6SPR3RMCHWCSGJLQHE6KBOD285V5SW',
-            'type': 'SequenceReference'
+            'type':'SequenceReference'
         },
         'start': 100,
         'end': [None, 150],

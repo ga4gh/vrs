@@ -41,7 +41,7 @@ Some Allele attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
           - 1..1
           - MUST be "Allele"
        *  - location
-          - gks.core:IRI | :ref:`Location`
+          - `IRI <core.json#/$defs/IRI>`_ | :ref:`Location`
           - 1..1
           - The location of the Allele
        *  - state

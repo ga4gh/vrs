@@ -41,7 +41,7 @@ Some SequenceLocation attributes are inherited from :ref:`Ga4ghIdentifiableObjec
           - 1..1
           - MUST be "SequenceLocation"
        *  - sequenceReference
-          - gks.core:IRI | :ref:`SequenceReference`
+          - `IRI <core.json#/$defs/IRI>`_ | :ref:`SequenceReference`
           - 0..1
           - A :ref:`SequenceReference`.
        *  - start

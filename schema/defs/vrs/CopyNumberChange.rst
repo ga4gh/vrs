@@ -41,7 +41,7 @@ Some CopyNumberChange attributes are inherited from :ref:`CopyNumber`.
           - 1..1
           - MUST be "CopyNumberChange"
        *  - location
-          - gks.core:IRI | :ref:`Location`
+          - `IRI <core.json#/$defs/IRI>`_ | :ref:`Location`
           - 1..1
           - A location for which the number of systemic copies is described.
        *  - copyChange
