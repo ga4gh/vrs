@@ -771,6 +771,34 @@
          "type": "string",
          "pattern": "^[A-Z*\\-]*$"
       },
+      "Coding": {
+         "type": "object",
+         "maturity": "Alpha",
+         "description": "a concept codified by a terminology system.",
+         "properties": {
+            "label": {
+               "type": "string",
+               "description": "A primary label for the coding."
+            },
+            "system": {
+               "type": "string",
+               "description": "Identity of the terminology system."
+            },
+            "version": {
+               "type": "string",
+               "description": "Version of the terminology system."
+            },
+            "code": {
+               "$ref": "#/$defs/Code",
+               "description": "Symbol in syntax defined by the terminology system."
+            }
+         },
+         "required": [
+            "code",
+            "system"
+         ],
+         "additionalProperties": false
+      },
       "Mapping": {
          "type": "object",
          "maturity": "Alpha",
@@ -795,17 +823,8 @@
                   "$ref": "#/$defs/Extension"
                }
             },
-            "system": {
-               "type": "string",
-               "description": "Identity of the terminology system."
-            },
-            "version": {
-               "type": "string",
-               "description": "Version of the terminology system."
-            },
-            "code": {
-               "$ref": "#/$defs/Code",
-               "description": "Symbol in syntax defined by the terminology system."
+            "coding": {
+               "$ref": "#/$defs/Coding"
             },
             "relation": {
                "description": "A mapping relation between concepts as defined by the Simple Knowledge Organization System (SKOS).",
@@ -820,9 +839,8 @@
             }
          },
          "required": [
-            "code",
-            "relation",
-            "system"
+            "coding",
+            "relation"
          ],
          "additionalProperties": false
       },

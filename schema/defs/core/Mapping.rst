@@ -32,18 +32,10 @@ Some Mapping attributes are inherited from :ref:`Entity`.
           - :ref:`Extension`
           - 0..m
           - 
-       *  - system
-          - string
+       *  - coding
+          - :ref:`Coding`
           - 1..1
-          - Identity of the terminology system.
-       *  - version
-          - string
-          - 0..1
-          - Version of the terminology system.
-       *  - code
-          - :ref:`Code`
-          - 1..1
-          - Symbol in syntax defined by the terminology system.
+          - 
        *  - relation
           - string
           - 1..1

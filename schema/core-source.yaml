@@ -18,12 +18,10 @@ $defs:
           system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE).
       label:
         type: string
-        description: >-
-          A primary label for the entity.
+        description: A primary label for the entity.
       description:
         type: string
-        description: >-
-          A free-text description of the entity.
+        description: A free-text description of the entity.
       extensions:
         type: array
         ordered: true
@@ -42,13 +40,14 @@ $defs:
         items:
           $ref: "#/$defs/Mapping"
 
-  Mapping:
+  Coding:
     type: object
-    inherits: Entity
     maturity: Alpha
-    description: >-
-      A mapping to a concept in a terminology system.
+    description: a concept codified by a terminology system.
     properties:
+      label:
+        type: string
+        description: A primary label for the coding.
       system:
         type: string
         description: Identity of the terminology system.
@@ -58,6 +57,19 @@ $defs:
       code:
         $ref: '#/$defs/Code'
         description: Symbol in syntax defined by the terminology system.
+    required:
+      - system
+      - code
+
+  Mapping:
+    type: object
+    inherits: Entity
+    maturity: Alpha
+    description: >-
+      A mapping to a concept in a terminology system.
+    properties:
+      coding:
+        $ref: '#/$defs/Coding'
       relation:
         description: >-
           A mapping relation between concepts as defined by the Simple Knowledge Organization System (SKOS).
@@ -70,8 +82,7 @@ $defs:
           - relatedMatch
     required:
       - relation
-      - code
-      - system
+      - coding
 
   Extension:
     type: object
