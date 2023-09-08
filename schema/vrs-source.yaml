@@ -165,7 +165,7 @@ $defs:
         items:
           oneOf:
           - $ref: "#/$defs/HaplotypeMemberAllele"
-          - $ref: "#/defs/Allele"
+          - $ref: "#/$defs/Allele"
           - $refCurie: gks.core:IRI
         description: >-
           A list of :ref:`Alleles <Allele>` (or IRI references to `Alleles`) that comprise a Haplotype. Since each
@@ -658,7 +658,7 @@ $defs:
 
   GenotypeMember:
     privateTo: Genotype
-    inherits: gks.core:ValueObject
+    inherits: ValueObject
     description: >-
       A class for expressing the count of a specific :ref:`MolecularVariation` present
       _in-trans_ at a genomic locus represented by a :ref:`Genotype`.

@@ -33,8 +33,8 @@ $defs:
       propertyName: type
 
   MappableEntity:
-    type: object
     inherits: Entity
+    description: an Entity that is mappable to codings in other terminology systems.
     heritableProperties:
       mappings:
         type: array

@@ -1,10 +1,10 @@
 **Computational Definition**
 
-A mapping to a concept in a terminology system.
+an Entity that is mappable to codings in other terminology systems.
 
     **Information Model**
     
-Some Mapping attributes are inherited from :ref:`Entity`.
+Some MappableEntity attributes are inherited from :ref:`Entity`.
 
     .. list-table::
        :class: clean-wrap
@@ -32,19 +32,7 @@ Some Mapping attributes are inherited from :ref:`Entity`.
           - :ref:`Extension`
           - 0..m
           - 
-       *  - system
-          - string
-          - 1..1
-          - Identity of the terminology system.
-       *  - version
-          - string
-          - 0..1
-          - Version of the terminology system.
-       *  - code
-          - :ref:`Code`
-          - 1..1
-          - Symbol in syntax defined by the terminology system.
-       *  - relation
-          - string
-          - 1..1
-          - A mapping relation between concepts as defined by the Simple Knowledge Organization System (SKOS).
+       *  - mappings
+          - :ref:`Mapping`
+          - 0..m
+          - 

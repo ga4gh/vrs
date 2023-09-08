@@ -75,7 +75,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -84,24 +89,24 @@
                   "$ref": "#/$defs/Extension"
                }
             },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "[0-9A-Za-z_\\-]{32}"
+            },
             "type": {
                "type": "string",
                "const": "Allele",
                "default": "Allele",
                "description": "MUST be \"Allele\""
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
-            },
             "location": {
                "oneOf": [
                   {
-                     "$ref": "#/$defs/IRI"
+                     "$ref": "#/$defs/SequenceLocation"
                   },
                   {
-                     "$ref": "#/$defs/SequenceLocation"
+                     "$refCurie": "gks.core:IRI"
                   }
                ],
                "description": "The location of the Allele"
@@ -142,7 +147,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -151,16 +161,16 @@
                   "$ref": "#/$defs/Extension"
                }
             },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "[0-9A-Za-z_\\-]{32}"
+            },
             "type": {
                "type": "string",
                "const": "Haplotype",
                "default": "Haplotype",
                "description": "MUST be \"Haplotype\""
-            },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
             },
             "members": {
                "type": "array",
@@ -173,11 +183,14 @@
                         "$ref": "#/$defs/Allele"
                      },
                      {
-                        "$ref": "#/$defs/IRI"
+                        "$ref": "#/$defs/HaplotypeMemberAllele"
+                     },
+                     {
+                        "$refCurie": "gks.core:IRI"
                      }
                   ]
                },
-               "description": "List of Alleles, or references to Alleles, that comprise this Haplotype."
+               "description": "A list of Alleles (or IRI references to `Alleles`) that comprise a Haplotype. Since each `Haplotype` member MUST be an `Allele`, and all members MUST share a common SequenceReference, implementations MAY use a compact representation of Haplotype that omits type and SequenceReference information in individual Haplotype members. Implementations MUST transform compact `Allele` representations into an `Allele` when computing GA4GH identifiers."
             }
          },
          "required": [
@@ -204,7 +217,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -213,24 +231,24 @@
                   "$ref": "#/$defs/Extension"
                }
             },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "[0-9A-Za-z_\\-]{32}"
+            },
             "type": {
                "type": "string",
                "const": "CopyNumberCount",
                "default": "CopyNumberCount",
                "description": "MUST be \"CopyNumberCount\""
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
-            },
             "subject": {
                "oneOf": [
                   {
-                     "$ref": "#/$defs/IRI"
+                     "$ref": "#/$defs/SequenceLocation"
                   },
                   {
-                     "$ref": "#/$defs/SequenceLocation"
+                     "$refCurie": "gks.core:IRI"
                   }
                ],
                "description": "A location for which the number of systemic copies is described."
@@ -258,7 +276,7 @@
          "maturity": "Alpha",
          "ga4ghDigest": {
             "keys": [
-               "copy_change",
+               "copyChange",
                "subject",
                "type"
             ],
@@ -272,7 +290,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -281,29 +304,29 @@
                   "$ref": "#/$defs/Extension"
                }
             },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "[0-9A-Za-z_\\-]{32}"
+            },
             "type": {
                "type": "string",
                "const": "CopyNumberChange",
                "default": "CopyNumberChange",
                "description": "MUST be \"CopyNumberChange\""
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
-            },
             "subject": {
                "oneOf": [
                   {
-                     "$ref": "#/$defs/IRI"
+                     "$ref": "#/$defs/SequenceLocation"
                   },
                   {
-                     "$ref": "#/$defs/SequenceLocation"
+                     "$refCurie": "gks.core:IRI"
                   }
                ],
                "description": "A location for which the number of systemic copies is described."
             },
-            "copy_change": {
+            "copyChange": {
                "type": "string",
                "enum": [
                   "efo:0030069",
@@ -319,7 +342,7 @@
             }
          },
          "required": [
-            "copy_change",
+            "copyChange",
             "subject",
             "type"
          ],
@@ -343,7 +366,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -352,16 +380,16 @@
                   "$ref": "#/$defs/Extension"
                }
             },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "[0-9A-Za-z_\\-]{32}"
+            },
             "type": {
                "type": "string",
                "const": "Genotype",
                "default": "Genotype",
                "description": "MUST be \"Genotype\""
-            },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
             },
             "members": {
                "type": "array",
@@ -407,8 +435,9 @@
          "maturity": "Alpha",
          "ga4ghDigest": {
             "keys": [
-               "count",
-               "members",
+               "end",
+               "sequence",
+               "start",
                "type"
             ],
             "prefix": "SL"
@@ -421,7 +450,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -430,24 +464,24 @@
                   "$ref": "#/$defs/Extension"
                }
             },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "[0-9A-Za-z_\\-]{32}"
+            },
             "type": {
                "type": "string",
                "const": "SequenceLocation",
                "default": "SequenceLocation",
                "description": "MUST be \"SequenceLocation\""
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
-            },
-            "sequence": {
+            "sequenceReference": {
                "oneOf": [
                   {
-                     "$ref": "#/$defs/IRI"
+                     "$ref": "#/$defs/SequenceReference"
                   },
                   {
-                     "$ref": "#/$defs/SequenceReference"
+                     "$refCurie": "gks.core:IRI"
                   }
                ],
                "description": "A SequenceReference."
@@ -485,10 +519,8 @@
       "SequenceReference": {
          "maturity": "Alpha",
          "ga4ghDigest": {
-            "prefix": "SQR",
             "keys": [
-               "refgetAccession",
-               "type"
+               "refgetAccession"
             ]
          },
          "type": "object",
@@ -499,7 +531,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -507,12 +544,6 @@
                "items": {
                   "$ref": "#/$defs/Extension"
                }
-            },
-            "type": {
-               "type": "string",
-               "const": "SequenceReference",
-               "default": "SequenceReference",
-               "description": "MUST be \"SequenceReference\""
             },
             "digest": {
                "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
@@ -526,15 +557,15 @@
             },
             "residueAlphabet": {
                "type": "string",
+               "description": "The interpretation of the character codes referred to by the refget accession, where \"aa\" specifies an amino acid character set, and \"na\" specifies a nucleic acid character set.",
                "enum": [
-                  "amino acid",
-                  "nucleic acid"
+                  "aa",
+                  "na"
                ]
             }
          },
          "required": [
-            "refgetAccession",
-            "type"
+            "refgetAccession"
          ],
          "additionalProperties": false
       },
@@ -562,7 +593,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -570,6 +606,11 @@
                "items": {
                   "$ref": "#/$defs/Extension"
                }
+            },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "[0-9A-Za-z_\\-]{32}"
             },
             "type": {
                "type": "string",
@@ -599,6 +640,7 @@
          },
          "required": [
             "length",
+            "repeatSubunitLength",
             "type"
          ],
          "additionalProperties": false
@@ -613,7 +655,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -621,6 +668,11 @@
                "items": {
                   "$ref": "#/$defs/Extension"
                }
+            },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "[0-9A-Za-z_\\-]{32}"
             },
             "type": {
                "type": "string",
@@ -649,7 +701,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -658,11 +715,10 @@
                   "$ref": "#/$defs/Extension"
                }
             },
-            "type": {
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
                "type": "string",
-               "const": "GenotypeMember",
-               "default": "GenotypeMember",
-               "description": "MUST be \"GenotypeMember\"."
+               "pattern": "[0-9A-Za-z_\\-]{32}"
             },
             "count": {
                "oneOf": [
@@ -733,7 +789,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -754,8 +815,8 @@
                "$ref": "#/$defs/Code",
                "description": "Symbol in syntax defined by the terminology system."
             },
-            "mapping": {
-               "description": "A mapping between concepts as defined by the Simple Knowledge Organization System (SKOS).",
+            "relation": {
+               "description": "A mapping relation between concepts as defined by the Simple Knowledge Organization System (SKOS).",
                "type": "string",
                "enum": [
                   "closeMatch",
@@ -768,7 +829,7 @@
          },
          "required": [
             "code",
-            "mapping",
+            "relation",
             "system"
          ],
          "additionalProperties": false

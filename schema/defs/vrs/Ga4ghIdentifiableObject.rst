@@ -1,10 +1,10 @@
 **Computational Definition**
 
-An expression of a length of a sequence from a repeating reference.
+A contextual value object for which a GA4GH computed identifier can be created.
 
     **Information Model**
     
-Some ReferenceLengthExpression attributes are inherited from :ref:`SequenceExpression`.
+Some Ga4ghIdentifiableObject attributes are inherited from :ref:`ValueObject`.
 
     .. list-table::
        :class: clean-wrap
@@ -39,16 +39,4 @@ Some ReferenceLengthExpression attributes are inherited from :ref:`SequenceExpre
        *  - type
           - string
           - 1..1
-          - MUST be "ReferenceLengthExpression"
-       *  - length
-          - integer | :ref:`Range`
-          - 1..1
-          - The number of residues in the expressed sequence.
-       *  - sequence
-          - :ref:`SequenceString`
-          - 0..1
-          - the :ref:`Sequence` encoded by the Reference Length Expression.
-       *  - repeatSubunitLength
-          - integer
-          - 1..1
-          - The number of residues in the repeat subunit.
+          - 
