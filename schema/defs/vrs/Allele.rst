@@ -4,7 +4,7 @@ The state of a molecule at a :ref:`Location`.
 
     **Information Model**
     
-Some Allele attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
+Some Allele attributes are inherited from :ref:`Variation`.
 
     .. list-table::
        :class: clean-wrap
@@ -40,6 +40,10 @@ Some Allele attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
           - string
           - 1..1
           - MUST be "Allele"
+       *  - expressions
+          - :ref:`Expression`
+          - 0..m
+          - 
        *  - location
           - `IRI <core.json#/$defs/IRI>`_ | :ref:`Location`
           - 1..1

@@ -40,6 +40,10 @@ Some CopyNumberCount attributes are inherited from :ref:`CopyNumber`.
           - string
           - 1..1
           - MUST be "CopyNumberCount"
+       *  - expressions
+          - :ref:`Expression`
+          - 0..m
+          - 
        *  - location
           - `IRI <core.json#/$defs/IRI>`_ | :ref:`Location`
           - 1..1

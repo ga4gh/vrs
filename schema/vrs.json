@@ -26,6 +26,39 @@
             "propertyName": "type"
          }
       },
+      "Expression": {
+         "type": "object",
+         "privateTo": "Variation",
+         "maturity": "Alpha",
+         "description": "Representation of a variation by a specified nomenclature or syntax for a Variation object.  Common examples of expressions for the description of molecular variation include the HGVS  and ISCN nomenclatures.",
+         "properties": {
+            "syntax": {
+               "type": "string",
+               "enum": [
+                  "hgvs.c",
+                  "hgvs.p",
+                  "hgvs.g",
+                  "hgvs.m",
+                  "hgvs.n",
+                  "hgvs.r",
+                  "iscn",
+                  "gnomad",
+                  "spdi"
+               ]
+            },
+            "value": {
+               "type": "string"
+            },
+            "syntax_version": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "syntax",
+            "value"
+         ],
+         "additionalProperties": false
+      },
       "MolecularVariation": {
          "description": "A variation on a contiguous molecule.",
          "oneOf": [
@@ -100,6 +133,13 @@
                "default": "Allele",
                "description": "MUST be \"Allele\""
             },
+            "expressions": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Expression"
+               }
+            },
             "location": {
                "oneOf": [
                   {
@@ -172,6 +212,13 @@
                "default": "Haplotype",
                "description": "MUST be \"Haplotype\""
             },
+            "expressions": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Expression"
+               }
+            },
             "members": {
                "type": "array",
                "ordered": false,
@@ -241,6 +288,13 @@
                "const": "CopyNumberCount",
                "default": "CopyNumberCount",
                "description": "MUST be \"CopyNumberCount\""
+            },
+            "expressions": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Expression"
+               }
             },
             "location": {
                "oneOf": [
@@ -314,6 +368,13 @@
                "const": "CopyNumberChange",
                "default": "CopyNumberChange",
                "description": "MUST be \"CopyNumberChange\""
+            },
+            "expressions": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Expression"
+               }
             },
             "location": {
                "oneOf": [
@@ -390,6 +451,13 @@
                "const": "Genotype",
                "default": "Genotype",
                "description": "MUST be \"Genotype\""
+            },
+            "expressions": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Expression"
+               }
             },
             "members": {
                "type": "array",

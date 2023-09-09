@@ -4,7 +4,7 @@ A measure of the copies of a :ref:`Location` within a system (e.g. genome, cell,
 
     **Information Model**
     
-Some CopyNumber attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
+Some CopyNumber attributes are inherited from :ref:`Variation`.
 
     .. list-table::
        :class: clean-wrap
@@ -39,6 +39,10 @@ Some CopyNumber attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
        *  - type
           - string
           - 1..1
+          - 
+       *  - expressions
+          - :ref:`Expression`
+          - 0..m
           - 
        *  - location
           - `IRI <core.json#/$defs/IRI>`_ | :ref:`Location`

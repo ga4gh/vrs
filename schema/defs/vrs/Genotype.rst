@@ -4,7 +4,7 @@ A quantified set of _in-trans_ :ref:`MolecularVariation` at a genomic locus.
 
     **Information Model**
     
-Some Genotype attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
+Some Genotype attributes are inherited from :ref:`Variation`.
 
     .. list-table::
        :class: clean-wrap
@@ -40,6 +40,10 @@ Some Genotype attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
           - string
           - 1..1
           - MUST be "Genotype"
+       *  - expressions
+          - :ref:`Expression`
+          - 0..m
+          - 
        *  - members
           - :ref:`GenotypeMember`
           - 1..m

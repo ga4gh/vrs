@@ -4,7 +4,7 @@ A set of non-overlapping :ref:`Allele` members that co-occur on the same molecul
 
     **Information Model**
     
-Some Haplotype attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
+Some Haplotype attributes are inherited from :ref:`Variation`.
 
     .. list-table::
        :class: clean-wrap
@@ -40,6 +40,10 @@ Some Haplotype attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
           - string
           - 1..1
           - MUST be "Haplotype"
+       *  - expressions
+          - :ref:`Expression`
+          - 0..m
+          - 
        *  - members
           - :ref:`HaplotypeMemberAllele` | :ref:`Allele` | `IRI <core.json#/$defs/IRI>`_
           - 2..m
