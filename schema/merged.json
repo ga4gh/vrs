@@ -1002,7 +1002,10 @@
                }
             },
             "type": {
-               "type": "string"
+               "type": "string",
+               "const": "TraitSet",
+               "default": "TraitSet",
+               "description": "MUST be \"TraitSet\"."
             },
             "traits": {
                "type": "array",
@@ -1161,7 +1164,10 @@
                }
             },
             "type": {
-               "type": "string"
+               "type": "string",
+               "const": "TherapeuticAction",
+               "default": "TherapeuticAction",
+               "description": "MUST be \"TherapeuticAction\"."
             },
             "action": {
                "description": "The therapeutic action taken.",
@@ -1228,7 +1234,10 @@
                }
             },
             "type": {
-               "type": "string"
+               "type": "string",
+               "const": "TherapeuticAgent",
+               "default": "TherapeuticAgent",
+               "description": "MUST be \"TherapeuticAgent\"."
             },
             "agent": {
                "description": "The therapeutic agent administered.",
@@ -1295,7 +1304,10 @@
                }
             },
             "type": {
-               "type": "string"
+               "type": "string",
+               "const": "CombinationTherapy",
+               "default": "CombinationTherapy",
+               "description": "MUST be \"CombinationTherapy\"."
             },
             "components": {
                "type": "array",
@@ -1355,7 +1367,10 @@
                }
             },
             "type": {
-               "type": "string"
+               "type": "string",
+               "const": "TherapeuticSubstituteGroup",
+               "default": "TherapeuticSubstituteGroup",
+               "description": "MUST be \"TherapeuticSubstituteGroup\"."
             },
             "substitutes": {
                "type": "array",

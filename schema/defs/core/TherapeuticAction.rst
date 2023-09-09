@@ -39,7 +39,7 @@ Some TherapeuticAction attributes are inherited from :ref:`DomainEntity`.
        *  - type
           - string
           - 1..1
-          - 
+          - MUST be "TherapeuticAction".
        *  - action
           - :ref:`MappableEntity`
           - 1..1

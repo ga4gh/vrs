@@ -39,7 +39,7 @@ Some TherapeuticSubstituteGroup attributes are inherited from :ref:`DomainEntity
        *  - type
           - string
           - 1..1
-          - 
+          - MUST be "TherapeuticSubstituteGroup".
        *  - substitutes
           - :ref:`TherapeuticAction` | :ref:`TherapeuticAgent`
           - 2..m

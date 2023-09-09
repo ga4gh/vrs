@@ -39,7 +39,7 @@ Some TraitSet attributes are inherited from :ref:`DomainEntity`.
        *  - type
           - string
           - 1..1
-          - 
+          - MUST be "TraitSet".
        *  - traits
           - :ref:`Disease` | :ref:`Phenotype`
           - 2..m

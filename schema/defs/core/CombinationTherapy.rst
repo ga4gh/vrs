@@ -39,7 +39,7 @@ Some CombinationTherapy attributes are inherited from :ref:`DomainEntity`.
        *  - type
           - string
           - 1..1
-          - 
+          - MUST be "CombinationTherapy".
        *  - components
           - :ref:`TherapeuticSubstituteGroup` | :ref:`TherapeuticAction` | :ref:`TherapeuticAgent`
           - 2..m

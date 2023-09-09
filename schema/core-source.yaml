@@ -152,6 +152,11 @@ $defs:
       A set of phenotype and/or disease concepts that together constitute a condition.
     inherits: Condition
     properties:
+      type:
+        extends: type
+        const: TraitSet
+        default: TraitSet
+        description: MUST be "TraitSet".
       traits:
         type: array
         ordered: false
@@ -172,7 +177,7 @@ $defs:
       of all or part of an organism and is not immediately due to any external injury.
     properties:
       type:
-        type: string
+        extends: type
         const: Disease
         default: Disease
         description: MUST be "Disease".
@@ -185,7 +190,7 @@ $defs:
       An observable characteristic or trait of an organism.
     properties:
       type:
-        type: string
+        extends: type
         const: Phenotype
         default: Phenotype
         description: MUST be "Phenotype".
@@ -209,6 +214,11 @@ $defs:
       A therapeutic action taken that is intended to alter or stop a pathologic
       process.
     properties:
+      type:
+        extends: type
+        const: TherapeuticAction
+        default: TherapeuticAction
+        description: MUST be "TherapeuticAction".
       action:
         description: The therapeutic action taken.
         $ref: "#/$defs/MappableEntity"
@@ -223,6 +233,11 @@ $defs:
       An administered therapeutic agent that is intended to alter or stop a pathologic
       process.
     properties:
+      type:
+        extends: type
+        const: TherapeuticAgent
+        default: TherapeuticAgent
+        description: MUST be "TherapeuticAgent".
       agent:
         description: The therapeutic agent administered.
         $ref: "#/$defs/MappableEntity"
@@ -237,6 +252,11 @@ $defs:
       A therapeutic procedure that involves multiple different therapeutic procedures 
       performed in combination.
     properties:
+      type:
+        extends: type
+        const: CombinationTherapy
+        default: CombinationTherapy
+        description: MUST be "CombinationTherapy".
       components:
         type: array
         ordered: false
@@ -258,6 +278,11 @@ $defs:
     description: >-
       A group of therapeutic procedures that may be treated as substitutes for one another.
     properties:
+      type:
+        extends: type
+        const: TherapeuticSubstituteGroup
+        default: TherapeuticSubstituteGroup
+        description: MUST be "TherapeuticSubstituteGroup".
       substitutes:
         type: array
         ordered: false

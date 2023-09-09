@@ -784,6 +784,9 @@ $defs:
           $ref: '#/$defs/Mapping'
       type:
         type: string
+        const: TraitSet
+        default: TraitSet
+        description: MUST be "TraitSet".
       traits:
         type: array
         ordered: false
@@ -906,6 +909,9 @@ $defs:
           $ref: '#/$defs/Mapping'
       type:
         type: string
+        const: TherapeuticAction
+        default: TherapeuticAction
+        description: MUST be "TherapeuticAction".
       action:
         description: The therapeutic action taken.
         oneOf:
@@ -950,6 +956,9 @@ $defs:
           $ref: '#/$defs/Mapping'
       type:
         type: string
+        const: TherapeuticAgent
+        default: TherapeuticAgent
+        description: MUST be "TherapeuticAgent".
       agent:
         description: The therapeutic agent administered.
         oneOf:
@@ -994,6 +1003,9 @@ $defs:
           $ref: '#/$defs/Mapping'
       type:
         type: string
+        const: CombinationTherapy
+        default: CombinationTherapy
+        description: MUST be "CombinationTherapy".
       components:
         type: array
         ordered: false
@@ -1039,6 +1051,9 @@ $defs:
           $ref: '#/$defs/Mapping'
       type:
         type: string
+        const: TherapeuticSubstituteGroup
+        default: TherapeuticSubstituteGroup
+        description: MUST be "TherapeuticSubstituteGroup".
       substitutes:
         type: array
         ordered: false

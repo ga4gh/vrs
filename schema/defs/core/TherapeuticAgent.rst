@@ -39,7 +39,7 @@ Some TherapeuticAgent attributes are inherited from :ref:`DomainEntity`.
        *  - type
           - string
           - 1..1
-          - 
+          - MUST be "TherapeuticAgent".
        *  - agent
           - :ref:`MappableEntity`
           - 0..1
