@@ -106,3 +106,308 @@ $defs:
       6 <https://datatracker.ietf.org/doc/html/rfc6901#section-6>`.
     type: string
     format: iri-reference
+  Condition:
+    description: A disease or other medical disorder.
+    oneOf:
+    - $ref: '#/$defs/Disease'
+    - $ref: '#/$defs/Phenotype'
+    - $ref: '#/$defs/TraitSet'
+  TraitSet:
+    type: object
+    maturity: Alpha
+    description: A set of phenotype and/or disease concepts that together constitute
+      a condition.
+    properties:
+      id:
+        type: string
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+        description: A primary label for the entity.
+      description:
+        type: string
+        description: A free-text description of the entity.
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: '#/$defs/Extension'
+      mappings:
+        type: array
+        ordered: false
+        items:
+          $ref: '#/$defs/Mapping'
+      type:
+        type: string
+      traits:
+        type: array
+        ordered: false
+        items:
+          anyOf:
+          - $ref: '#/$defs/Disease'
+          - $ref: '#/$defs/Phenotype'
+        minItems: 2
+    required:
+    - traits
+    - type
+    additionalProperties: false
+  Disease:
+    type: object
+    maturity: Alpha
+    description: A particular abnormal condition that negatively affects the structure
+      or function  of all or part of an organism and is not immediately due to any
+      external injury.
+    properties:
+      id:
+        type: string
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+        description: A primary label for the entity.
+      description:
+        type: string
+        description: A free-text description of the entity.
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: '#/$defs/Extension'
+      mappings:
+        type: array
+        ordered: false
+        items:
+          $ref: '#/$defs/Mapping'
+      type:
+        type: string
+        const: Disease
+        default: Disease
+        description: MUST be "Disease".
+    required:
+    - type
+    additionalProperties: false
+  Phenotype:
+    type: object
+    maturity: Alpha
+    description: An observable characteristic or trait of an organism.
+    properties:
+      id:
+        type: string
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+        description: A primary label for the entity.
+      description:
+        type: string
+        description: A free-text description of the entity.
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: '#/$defs/Extension'
+      mappings:
+        type: array
+        ordered: false
+        items:
+          $ref: '#/$defs/Mapping'
+      type:
+        type: string
+        const: Phenotype
+        default: Phenotype
+        description: MUST be "Phenotype".
+    required:
+    - type
+    additionalProperties: false
+  TherapeuticProcedure:
+    description: An action or administration of therapeutic agents to produce an effect  that
+      is intended to alter or stop a pathologic process.
+    oneOf:
+    - $ref: '#/$defs/CombinationTherapy'
+    - $ref: '#/$defs/TherapeuticAction'
+    - $ref: '#/$defs/TherapeuticAgent'
+    - $ref: '#/$defs/TherapeuticSubstituteGroup'
+  TherapeuticAction:
+    type: object
+    maturity: Alpha
+    description: A therapeutic action taken that is intended to alter or stop a pathologic
+      process.
+    properties:
+      id:
+        type: string
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+        description: A primary label for the entity.
+      description:
+        type: string
+        description: A free-text description of the entity.
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: '#/$defs/Extension'
+      mappings:
+        type: array
+        ordered: false
+        items:
+          $ref: '#/$defs/Mapping'
+      type:
+        type: string
+      action:
+        description: The therapeutic action taken.
+        oneOf:
+        - $ref: '#/$defs/CombinationTherapy'
+        - $ref: '#/$defs/Disease'
+        - $ref: '#/$defs/Phenotype'
+        - $ref: '#/$defs/TherapeuticAction'
+        - $ref: '#/$defs/TherapeuticAgent'
+        - $ref: '#/$defs/TherapeuticSubstituteGroup'
+        - $ref: '#/$defs/TraitSet'
+    required:
+    - action
+    - type
+    additionalProperties: false
+  TherapeuticAgent:
+    type: object
+    maturity: Alpha
+    description: An administered therapeutic agent that is intended to alter or stop
+      a pathologic process.
+    properties:
+      id:
+        type: string
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+        description: A primary label for the entity.
+      description:
+        type: string
+        description: A free-text description of the entity.
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: '#/$defs/Extension'
+      mappings:
+        type: array
+        ordered: false
+        items:
+          $ref: '#/$defs/Mapping'
+      type:
+        type: string
+      agent:
+        description: The therapeutic agent administered.
+        oneOf:
+        - $ref: '#/$defs/CombinationTherapy'
+        - $ref: '#/$defs/Disease'
+        - $ref: '#/$defs/Phenotype'
+        - $ref: '#/$defs/TherapeuticAction'
+        - $ref: '#/$defs/TherapeuticAgent'
+        - $ref: '#/$defs/TherapeuticSubstituteGroup'
+        - $ref: '#/$defs/TraitSet'
+    required:
+    - action
+    - type
+    additionalProperties: false
+  CombinationTherapy:
+    type: object
+    maturity: Alpha
+    description: A therapeutic procedure that involves multiple different therapeutic
+      procedures  performed in combination.
+    properties:
+      id:
+        type: string
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+        description: A primary label for the entity.
+      description:
+        type: string
+        description: A free-text description of the entity.
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: '#/$defs/Extension'
+      mappings:
+        type: array
+        ordered: false
+        items:
+          $ref: '#/$defs/Mapping'
+      type:
+        type: string
+      components:
+        type: array
+        ordered: false
+        description: The individual therapeutic procedure components that constitute
+          the combination therapy.
+        items:
+          anyOf:
+          - $ref: '#/$defs/TherapeuticSubstituteGroup'
+          - $ref: '#/$defs/TherapeuticAction'
+          - $ref: '#/$defs/TherapeuticAgent'
+        minItems: 2
+    required:
+    - procedures
+    - type
+    additionalProperties: false
+  TherapeuticSubstituteGroup:
+    type: object
+    maturity: Alpha
+    description: A group of therapeutic procedures that may be treated as substitutes
+      for one another.
+    properties:
+      id:
+        type: string
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+        description: A primary label for the entity.
+      description:
+        type: string
+        description: A free-text description of the entity.
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: '#/$defs/Extension'
+      mappings:
+        type: array
+        ordered: false
+        items:
+          $ref: '#/$defs/Mapping'
+      type:
+        type: string
+      substitutes:
+        type: array
+        ordered: false
+        description: The individual therapeutic procedures that may be treated as
+          substitutes.
+        items:
+          anyOf:
+          - $ref: '#/$defs/TherapeuticAction'
+          - $ref: '#/$defs/TherapeuticAgent'
+        minItems: 2
+    required:
+    - procedures
+    - type
+    additionalProperties: false

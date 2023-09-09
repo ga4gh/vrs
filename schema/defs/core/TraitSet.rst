@@ -1,0 +1,46 @@
+**Computational Definition**
+
+A set of phenotype and/or disease concepts that together constitute a condition.
+
+    **Information Model**
+    
+Some TraitSet attributes are inherited from :ref:`DomainEntity`.
+
+    .. list-table::
+       :class: clean-wrap
+       :header-rows: 1
+       :align: left
+       :widths: auto
+       
+       *  - Field
+          - Type
+          - Limits
+          - Description
+       *  - id
+          - string
+          - 0..1
+          - The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE).
+       *  - label
+          - string
+          - 0..1
+          - A primary label for the entity.
+       *  - description
+          - string
+          - 0..1
+          - A free-text description of the entity.
+       *  - extensions
+          - :ref:`Extension`
+          - 0..m
+          - 
+       *  - mappings
+          - :ref:`Mapping`
+          - 0..m
+          - 
+       *  - type
+          - string
+          - 1..1
+          - 
+       *  - traits
+          - :ref:`Disease` | :ref:`Phenotype`
+          - 2..m
+          - 

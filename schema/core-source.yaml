@@ -125,40 +125,152 @@ $defs:
     type: string
     format: iri-reference
 
-#  CodeableEntity:  # TODO: Discussion on CodeableConcept analog pending
-#    inherits: Entity
-#    description: >-
-#      An entity that may be associated with codes in one or more systems.
-#    properties:
+  DomainEntity:
+    inherits: MappableEntity
+    description: >-
+      An Entity that is specific to a particular biomedical domain such as disease, therapeutics,
+      or genes.
+    heritableProperties:
+      type:
+        type: string
+    heritableRequired:
+      - type
 
-#  Disease:
-#    type: object
-#    inherits: DomainEntity
-#    description: >-
-#      A reference to a Disease as defined by an authority. For human diseases,
-#      the use of `MONDO <https://registry.identifiers.org/registry/mondo>`_
-#      as the disease authority is RECOMMENDED.
-#    properties:
-#      type:
-#        type: string
-#        const: Disease
-#        default: Disease
-#        description: MUST be "Disease".
-#
-#  Phenotype:
-#    type: object
-#    inherits: DomainEntity
-#    description: >-
-#      A reference to a Phenotype as defined by an authority. For human phenotypes,
-#      the use of `HPO <https://registry.identifiers.org/registry/hpo>`_
-#      as the disease authority is RECOMMENDED.
-#    properties:
-#      type:
-#        type: string
-#        const: Phenotype
-#        default: Phenotype
-#        description: MUST be "Phenotype".
-#
+  Condition:
+    inherits: DomainEntity
+    description: >-
+      A disease or other medical disorder.
+    oneOf:
+      - $ref: "#/$defs/TraitSet"
+      - $ref: "#/$defs/Disease"
+      - $ref: "#/$defs/Phenotype"
+
+  TraitSet:
+    type: object
+    maturity: Alpha
+    description: >-
+      A set of phenotype and/or disease concepts that together constitute a condition.
+    inherits: Condition
+    properties:
+      traits:
+        type: array
+        ordered: false
+        items:
+          anyOf:
+            - $ref: "#/$defs/Disease"
+            - $ref: "#/$defs/Phenotype"
+        minItems: 2
+    required:
+      - traits
+
+  Disease:
+    type: object
+    maturity: Alpha
+    inherits: Condition
+    description: >-
+      A particular abnormal condition that negatively affects the structure or function 
+      of all or part of an organism and is not immediately due to any external injury.
+    properties:
+      type:
+        type: string
+        const: Disease
+        default: Disease
+        description: MUST be "Disease".
+
+  Phenotype:
+    type: object
+    maturity: Alpha
+    inherits: Condition
+    description: >-
+      An observable characteristic or trait of an organism.
+    properties:
+      type:
+        type: string
+        const: Phenotype
+        default: Phenotype
+        description: MUST be "Phenotype".
+
+  TherapeuticProcedure:
+    inherits: DomainEntity
+    description: >-
+      An action or administration of therapeutic agents to produce an effect 
+      that is intended to alter or stop a pathologic process.
+    oneOf:
+      - $ref: "#/$defs/CombinationTherapy"
+      - $ref: "#/$defs/TherapeuticSubstituteGroup"
+      - $ref: "#/$defs/TherapeuticAction"
+      - $ref: "#/$defs/TherapeuticAgent"
+
+  TherapeuticAction:
+    type: object
+    maturity: Alpha
+    inherits: TherapeuticProcedure
+    description: >-
+      A therapeutic action taken that is intended to alter or stop a pathologic
+      process.
+    properties:
+      action:
+        description: The therapeutic action taken.
+        $ref: "#/$defs/MappableEntity"
+    required:
+      - action
+
+  TherapeuticAgent:
+    type: object
+    maturity: Alpha
+    inherits: TherapeuticProcedure
+    description: >-
+      An administered therapeutic agent that is intended to alter or stop a pathologic
+      process.
+    properties:
+      agent:
+        description: The therapeutic agent administered.
+        $ref: "#/$defs/MappableEntity"
+    required:
+      - action
+
+  CombinationTherapy:
+    type: object
+    maturity: Alpha
+    inherits: TherapeuticProcedure
+    description: >-
+      A therapeutic procedure that involves multiple different therapeutic procedures 
+      performed in combination.
+    properties:
+      components:
+        type: array
+        ordered: false
+        description: >-
+          The individual therapeutic procedure components that constitute the combination therapy.
+        items:
+          anyOf:
+            - $ref: "#/$defs/TherapeuticSubstituteGroup"
+            - $ref: "#/$defs/TherapeuticAction"
+            - $ref: "#/$defs/TherapeuticAgent"
+        minItems: 2
+    required:
+      - procedures
+
+  TherapeuticSubstituteGroup:
+    type: object
+    maturity: Alpha
+    inherits: TherapeuticProcedure
+    description: >-
+      A group of therapeutic procedures that may be treated as substitutes for one another.
+    properties:
+      substitutes:
+        type: array
+        ordered: false
+        description: >-
+          The individual therapeutic procedures that may be treated as substitutes.
+        items:
+          anyOf:
+            - $ref: "#/$defs/TherapeuticAction"
+            - $ref: "#/$defs/TherapeuticAgent"
+        minItems: 2
+    required:
+      - procedures
+
 #  Gene:
 #    inherits: DomainEntity
 #    description: >-
