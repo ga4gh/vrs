@@ -230,9 +230,6 @@
                         "$ref": "#/$defs/Allele"
                      },
                      {
-                        "$ref": "#/$defs/HaplotypeMemberAllele"
-                     },
-                     {
                         "$ref": "#/$defs/IRI"
                      }
                   ]
@@ -1001,6 +998,14 @@
                   "$ref": "#/$defs/Mapping"
                }
             },
+            "aliases": {
+               "description": "Aliases are alternate labels for a Domain Entity.",
+               "ordered": false,
+               "type": "array",
+               "items": {
+                  "type": "string"
+               }
+            },
             "type": {
                "type": "string",
                "const": "TraitSet",
@@ -1060,6 +1065,14 @@
                   "$ref": "#/$defs/Mapping"
                }
             },
+            "aliases": {
+               "description": "Aliases are alternate labels for a Domain Entity.",
+               "ordered": false,
+               "type": "array",
+               "items": {
+                  "type": "string"
+               }
+            },
             "type": {
                "type": "string",
                "const": "Disease",
@@ -1101,6 +1114,14 @@
                "ordered": false,
                "items": {
                   "$ref": "#/$defs/Mapping"
+               }
+            },
+            "aliases": {
+               "description": "Aliases are alternate labels for a Domain Entity.",
+               "ordered": false,
+               "type": "array",
+               "items": {
+                  "type": "string"
                }
             },
             "type": {
@@ -1161,6 +1182,14 @@
                "ordered": false,
                "items": {
                   "$ref": "#/$defs/Mapping"
+               }
+            },
+            "aliases": {
+               "description": "Aliases are alternate labels for a Domain Entity.",
+               "ordered": false,
+               "type": "array",
+               "items": {
+                  "type": "string"
                }
             },
             "type": {
@@ -1233,6 +1262,14 @@
                   "$ref": "#/$defs/Mapping"
                }
             },
+            "aliases": {
+               "description": "Aliases are alternate labels for a Domain Entity.",
+               "ordered": false,
+               "type": "array",
+               "items": {
+                  "type": "string"
+               }
+            },
             "type": {
                "type": "string",
                "const": "TherapeuticAgent",
@@ -1303,6 +1340,14 @@
                   "$ref": "#/$defs/Mapping"
                }
             },
+            "aliases": {
+               "description": "Aliases are alternate labels for a Domain Entity.",
+               "ordered": false,
+               "type": "array",
+               "items": {
+                  "type": "string"
+               }
+            },
             "type": {
                "type": "string",
                "const": "CombinationTherapy",
@@ -1364,6 +1409,14 @@
                "ordered": false,
                "items": {
                   "$ref": "#/$defs/Mapping"
+               }
+            },
+            "aliases": {
+               "description": "Aliases are alternate labels for a Domain Entity.",
+               "ordered": false,
+               "type": "array",
+               "items": {
+                  "type": "string"
                }
             },
             "type": {

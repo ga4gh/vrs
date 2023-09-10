@@ -165,7 +165,6 @@ $defs:
         items:
           oneOf:
           - $ref: '#/$defs/Allele'
-          - $ref: '#/$defs/HaplotypeMemberAllele'
           - $ref: core.json#/$defs/IRI
         description: A list of Alleles (or IRI references to `Alleles`) that comprise
           a Haplotype. Since each `Haplotype` member MUST be an `Allele`, and all

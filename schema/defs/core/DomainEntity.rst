@@ -40,3 +40,7 @@ Some DomainEntity attributes are inherited from :ref:`MappableEntity`.
           - string
           - 1..1
           - 
+       *  - aliases
+          - string
+          - 0..m
+          - Aliases are alternate labels for a Domain Entity.

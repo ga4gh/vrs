@@ -230,9 +230,6 @@
                         "$ref": "#/$defs/Allele"
                      },
                      {
-                        "$ref": "#/$defs/HaplotypeMemberAllele"
-                     },
-                     {
                         "$ref": "core.json#/$defs/IRI"
                      }
                   ]

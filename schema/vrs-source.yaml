@@ -102,18 +102,6 @@ $defs:
     discriminator:
       propertyName: type
 
-#  UtilityVariation:
-#    inherits: Variation
-#    description: >-
-#      A collection of :ref:`Variation` subclasses that cannot be
-#      constrained to a specific class of biological variation, but
-#      are necessary for some applications of VRS.
-#    oneOf:
-#      - $ref: "#/$defs/Text"
-#      - $ref: "#/$defs/VariationSet"
-#    discriminator:
-#      propertyName: type
-
   SystemicVariation:
     inherits: Variation
     description: >-
@@ -188,7 +176,6 @@ $defs:
         uniqueItems: true
         items:
           oneOf:
-          - $ref: "#/$defs/HaplotypeMemberAllele"
           - $ref: "#/$defs/Allele"
           - $refCurie: gks.core:IRI
         description: >-
@@ -678,12 +665,6 @@ $defs:
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Nested Classes
-
-#  HaplotypeMemberAllele:
-#    inherits: gks.core:Entity
-#    description: >-
-#      A class for compact representation of :ref:`Allele` members in the context of a :ref:`Haplotype`.
-#    type: object
 
   GenotypeMember:
     privateTo: Genotype

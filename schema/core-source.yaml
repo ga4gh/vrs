@@ -133,6 +133,12 @@ $defs:
     heritableProperties:
       type:
         type: string
+      aliases:
+        description: Aliases are alternate labels for a Domain Entity.
+        ordered: false
+        type: array
+        items:
+          type: string
     heritableRequired:
       - type
 

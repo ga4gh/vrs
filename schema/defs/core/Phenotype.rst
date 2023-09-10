@@ -36,6 +36,10 @@ Some Phenotype attributes are inherited from :ref:`DomainEntity`.
           - :ref:`Mapping`
           - 0..m
           - 
+       *  - aliases
+          - string
+          - 0..m
+          - Aliases are alternate labels for a Domain Entity.
        *  - type
           - string
           - 1..1
