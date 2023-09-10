@@ -1,10 +1,10 @@
 **Computational Definition**
 
-An administered therapeutic agent that is intended to alter or stop a pathologic process.
+A basic physical and functional unit of heredity.
 
     **Information Model**
     
-Some TherapeuticAgent attributes are inherited from :ref:`DomainEntity`.
+Some Gene attributes are inherited from :ref:`DomainEntity`.
 
     .. list-table::
        :class: clean-wrap
@@ -36,15 +36,11 @@ Some TherapeuticAgent attributes are inherited from :ref:`DomainEntity`.
           - :ref:`Mapping`
           - 0..m
           - 
+       *  - type
+          - string
+          - 1..1
+          - MUST be "Gene"
        *  - aliases
           - string
           - 0..m
           - Aliases are alternate labels for a Domain Entity.
-       *  - type
-          - string
-          - 1..1
-          - MUST be "TherapeuticAgent".
-       *  - agent
-          - :ref:`MappableEntity`
-          - 1..1
-          - The therapeutic agent administered.
