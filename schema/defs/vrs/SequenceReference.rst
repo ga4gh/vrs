@@ -43,7 +43,7 @@ Some SequenceReference attributes are inherited from :ref:`ValueObject`.
        *  - refgetAccession
           - string
           - 1..1
-          - A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence, using the sha512t24u digest.
+          - A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence,  using the sha512t24u digest.
        *  - residueAlphabet
           - string
           - 0..1

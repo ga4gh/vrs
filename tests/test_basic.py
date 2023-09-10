@@ -17,10 +17,19 @@ def test_json_yaml_match():
     assert p.for_js == j, "parsed yaml and json do not match"
 
 
-# Can pjs handle this schema?
-# def test_pjs_smoke():
-#     ob = pjs.ObjectBuilder(pjs_filter(m))
-#     assert ob.build_classes()              # no exception => okay
+def test_all_value_objects_with_digest_keys():
+    for pc in p.processed_classes:
+        if p.class_is_abstract(pc) or p.class_is_primitive(pc) or not p.class_is_subclass(pc, 'ValueObject'):
+            continue
+        pc_properties = set(p.defs[pc]['properties'].keys())
+        try:
+            pc_digest_keys = set(p.defs[pc]['ga4ghDigest']['keys'])
+        except KeyError:
+            if p.defs[pc]['ga4ghDigest']['assigned']:
+                continue
+            raise KeyError(f'{pc} has no keys defined.')
+        assert pc_digest_keys <= pc_properties
+
 
 # Does the schema validate against a simple sequence location?
 def test_models():

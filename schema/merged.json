@@ -248,7 +248,7 @@
          "ga4ghDigest": {
             "keys": [
                "copies",
-               "subject",
+               "location",
                "type"
             ],
             "prefix": "CN"
@@ -328,7 +328,7 @@
          "ga4ghDigest": {
             "keys": [
                "copyChange",
-               "subject",
+               "location",
                "type"
             ],
             "prefix": "CX"
@@ -490,7 +490,7 @@
          "ga4ghDigest": {
             "keys": [
                "end",
-               "sequence",
+               "sequenceReference",
                "start",
                "type"
             ],
@@ -607,7 +607,7 @@
                "const": "SequenceReference"
             },
             "refgetAccession": {
-               "description": "A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence, using the sha512t24u digest.",
+               "description": "A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence,  using the sha512t24u digest.",
                "type": "string",
                "pattern": "SQ.[0-9A-Za-z_\\-]{32}"
             },
@@ -642,6 +642,13 @@
       },
       "ReferenceLengthExpression": {
          "maturity": "Alpha",
+         "ga4ghDigest": {
+            "keys": [
+               "length",
+               "repeatSubunitLength",
+               "type"
+            ]
+         },
          "description": "An expression of a length of a sequence from a repeating reference.",
          "type": "object",
          "properties": {
@@ -704,6 +711,12 @@
       },
       "LiteralSequenceExpression": {
          "maturity": "Alpha",
+         "ga4ghDigest": {
+            "keys": [
+               "sequence",
+               "type"
+            ]
+         },
          "description": "An explicit expression of a Sequence.",
          "type": "object",
          "properties": {
@@ -750,6 +763,12 @@
       },
       "GenotypeMember": {
          "privateTo": "Genotype",
+         "ga4ghDigest": {
+            "keys": [
+               "count",
+               "variation"
+            ]
+         },
          "description": "A class for expressing the count of a specific MolecularVariation present _in-trans_ at a genomic locus represented by a Genotype.",
          "type": "object",
          "properties": {

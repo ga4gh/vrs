@@ -53,9 +53,6 @@ $defs:
     heritableRequired:
       - type
 
-  # TODO: Draft recomposition of Allele as "AlleleMember" plus seq requirement
-  # TODO: Explore "typed entity"
-
   Variation:
     inherits: Ga4ghIdentifiableObject
     description: >-
@@ -187,60 +184,12 @@ $defs:
     required: [ "members" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # UtilityVariation
-
-#  Text:
-#    ga4ghPrefix: VT
-#    inherits: UtilityVariation
-#    description: >-
-#      A free-text definition of variation.
-#    type: object
-#    properties:
-#      type:
-#        type: string
-#        const: "Text"
-#        default: "Text"
-#        description: MUST be "Text"
-#      definition:
-#        type: string
-#        description: >-
-#          A textual representation of variation not representable by
-#          other subclasses of Variation.
-#    required: [ "definition" ]
-#
-#  VariationSet:
-#    ga4ghPrefix: VS
-#    inherits: UtilityVariation
-#    description: >-
-#      An unconstrained set of Variation members.
-#    type: object
-#    properties:
-#      type:
-#        type: string
-#        const: "VariationSet"
-#        default: "VariationSet"
-#        description: MUST be "VariationSet"
-#      members:
-#        type: array
-#        ordered: false
-#        uniqueItems: true
-#        items:
-#          oneOf:
-#            - $refCurie: gks.core:IRI
-#            - $ref: "#/$defs/Variation"
-#        description: >-
-#          List of Variation objects or identifiers. Attribute is
-#          required, but MAY be empty.
-#    required: [ "members" ]
-
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # SystemicVariation
 
   CopyNumber:
     ga4ghDigest:
       keys:
-        - subject
+        - location
     inherits: SystemicVariation
     description: >-
       A measure of the copies of a :ref:`Location` within a system (e.g. genome, cell, etc.)
@@ -299,7 +248,8 @@ $defs:
           MUST be "CopyNumberChange"
       copyChange:
         type: string
-        enum: [ "efo:0030069", "efo:0020073", "efo:0030068", "efo:0030067", "efo:0030064", "efo:0030070", "efo:0030071", "efo:0030072" ]
+        enum: [ "efo:0030069", "efo:0020073", "efo:0030068", "efo:0030067", "efo:0030064", "efo:0030070",
+                "efo:0030071", "efo:0030072" ]
         description: >-
           MUST be one of "efo:0030069" (complete genomic loss), "efo:0020073" (high-level loss),
           "efo:0030068" (low-level loss), "efo:0030067" (loss), "efo:0030064" (regional base ploidy),
@@ -402,7 +352,7 @@ $defs:
       keys:
         - start
         - end
-        - sequence
+        - sequenceReference
       prefix: SL
     inherits: Location
     description: >-
@@ -445,7 +395,8 @@ $defs:
     inherits: ValueObject
     ga4ghDigest:
       assigned: true # This special property indicates that the `digest` field follows an alternate convention
-                     # and is expected to have the value assigned following that convention.
+                     # and is expected to have the value assigned following that convention. For SequenceReference,
+                     # it is expected the digest will be the refget accession value without the `SQ.` prefix.
     type: object
     description: A sequence of nucleic or amino acid character codes.
     properties:
@@ -453,7 +404,9 @@ $defs:
         type: string
         const: SequenceReference
       refgetAccession:
-        description: A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence, using the sha512t24u digest.
+        description: >-
+          A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence, 
+          using the sha512t24u digest.
         type: string
         pattern: 'SQ.[0-9A-Za-z_\-]{32}'
       residueAlphabet:
@@ -468,7 +421,6 @@ $defs:
       - refgetAccession
       - type
 
-      #TODO: add VRSATILE
       #TODO: implementation guidance: digest property is RefGet TRUNC512
 
   # =============================================================================
@@ -481,6 +433,9 @@ $defs:
 
   SequenceExpression:
     inherits: ValueObject
+    ga4ghDigest:
+      keys:
+        - type
     description: >-
       An expression describing a :ref:`Sequence`.
     oneOf:
@@ -502,6 +457,10 @@ $defs:
   ReferenceLengthExpression:
     maturity: Alpha
     inherits: SequenceExpression
+    ga4ghDigest:
+      keys:
+        - length
+        - repeatSubunitLength
     description: >-
       An expression of a length of a sequence from a repeating reference.
     type: object
@@ -531,6 +490,9 @@ $defs:
   LiteralSequenceExpression:
     maturity: Alpha
     inherits: SequenceExpression
+    ga4ghDigest:
+      keys:
+        - sequence
     description: >-
       An explicit expression of a Sequence.
     type: object
@@ -669,6 +631,10 @@ $defs:
   GenotypeMember:
     privateTo: Genotype
     inherits: ValueObject
+    ga4ghDigest:
+      keys:
+        - count
+        - variation
     description: >-
       A class for expressing the count of a specific :ref:`MolecularVariation` present
       _in-trans_ at a genomic locus represented by a :ref:`Genotype`.
