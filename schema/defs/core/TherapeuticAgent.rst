@@ -44,7 +44,3 @@ Some TherapeuticAgent attributes are inherited from :ref:`DomainEntity`.
           - string
           - 1..1
           - MUST be "TherapeuticAgent".
-       *  - agent
-          - :ref:`MappableEntity`
-          - 1..1
-          - The therapeutic agent administered.

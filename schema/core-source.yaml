@@ -225,11 +225,6 @@ $defs:
         const: TherapeuticAction
         default: TherapeuticAction
         description: MUST be "TherapeuticAction".
-      action:
-        description: The therapeutic action taken.
-        $ref: "#/$defs/MappableEntity"
-    required:
-      - action
 
   TherapeuticAgent:
     type: object
@@ -244,11 +239,6 @@ $defs:
         const: TherapeuticAgent
         default: TherapeuticAgent
         description: MUST be "TherapeuticAgent".
-      agent:
-        description: The therapeutic agent administered.
-        $ref: "#/$defs/MappableEntity"
-    required:
-      - agent
 
   CombinationTherapy:
     type: object
@@ -275,7 +265,7 @@ $defs:
             - $ref: "#/$defs/TherapeuticAgent"
         minItems: 2
     required:
-      - procedures
+      - components
 
   TherapeuticSubstituteGroup:
     type: object
@@ -300,7 +290,7 @@ $defs:
             - $ref: "#/$defs/TherapeuticAgent"
         minItems: 2
     required:
-      - procedures
+      - substitutes
 
   Gene:
     inherits: DomainEntity

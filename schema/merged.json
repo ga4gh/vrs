@@ -1216,39 +1216,9 @@
                "const": "TherapeuticAction",
                "default": "TherapeuticAction",
                "description": "MUST be \"TherapeuticAction\"."
-            },
-            "action": {
-               "description": "The therapeutic action taken.",
-               "oneOf": [
-                  {
-                     "$ref": "#/$defs/CombinationTherapy"
-                  },
-                  {
-                     "$ref": "#/$defs/Disease"
-                  },
-                  {
-                     "$ref": "#/$defs/Gene"
-                  },
-                  {
-                     "$ref": "#/$defs/Phenotype"
-                  },
-                  {
-                     "$ref": "#/$defs/TherapeuticAction"
-                  },
-                  {
-                     "$ref": "#/$defs/TherapeuticAgent"
-                  },
-                  {
-                     "$ref": "#/$defs/TherapeuticSubstituteGroup"
-                  },
-                  {
-                     "$ref": "#/$defs/TraitSet"
-                  }
-               ]
             }
          },
          "required": [
-            "action",
             "type"
          ],
          "additionalProperties": false
@@ -1297,39 +1267,9 @@
                "const": "TherapeuticAgent",
                "default": "TherapeuticAgent",
                "description": "MUST be \"TherapeuticAgent\"."
-            },
-            "agent": {
-               "description": "The therapeutic agent administered.",
-               "oneOf": [
-                  {
-                     "$ref": "#/$defs/CombinationTherapy"
-                  },
-                  {
-                     "$ref": "#/$defs/Disease"
-                  },
-                  {
-                     "$ref": "#/$defs/Gene"
-                  },
-                  {
-                     "$ref": "#/$defs/Phenotype"
-                  },
-                  {
-                     "$ref": "#/$defs/TherapeuticAction"
-                  },
-                  {
-                     "$ref": "#/$defs/TherapeuticAgent"
-                  },
-                  {
-                     "$ref": "#/$defs/TherapeuticSubstituteGroup"
-                  },
-                  {
-                     "$ref": "#/$defs/TraitSet"
-                  }
-               ]
             }
          },
          "required": [
-            "agent",
             "type"
          ],
          "additionalProperties": false
@@ -1400,7 +1340,7 @@
             }
          },
          "required": [
-            "procedures",
+            "components",
             "type"
          ],
          "additionalProperties": false
@@ -1468,7 +1408,7 @@
             }
          },
          "required": [
-            "procedures",
+            "substitutes",
             "type"
          ],
          "additionalProperties": false
