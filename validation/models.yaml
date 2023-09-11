@@ -89,6 +89,8 @@ LiteralSequenceExpression:
       sequence: ACGT
       type: LiteralSequenceExpression
     out:
+      ga4gh_identify: null
+      ga4gh_digest: ECvt22ZFJ6RcLutlH07yAkd2-hNb-dwV
       ga4gh_serialize: '{"sequence":"ACGT","type":"LiteralSequenceExpression"}'
 #RepeatedSequenceExpression:
 #  -
