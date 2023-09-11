@@ -5,7 +5,9 @@ SequenceReference:
       type: SequenceReference
       refgetAccession: SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul
     out:
+      ga4gh_identify: null
       ga4gh_digest: F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul
+      ga4gh_serialize: null
 SequenceLocation:
   - name: "SequenceLocation w/ SequenceReference"
     in:
