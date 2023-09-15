@@ -132,7 +132,7 @@ VRS JSON Schema.
 
 
 
-Generate a computed identifer
+Generate a computed identifier
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 A key feature of VRS is an easily-implemented algorithm to
@@ -149,19 +149,19 @@ computed identifiers.  Using GA4GH sequence identifiers collapses
 differences between alleles due to trivial differences in reference
 naming.  The same variation reported on NC_000019.10, CM000681.2,
 GRCh38:19, GRCh38.p13:19 would appear to be distinct variation; using
-a digest identifer will ensure that variation is reported on a single
+a digest identifier will ensure that variation is reported on a single
 sequence identifier.  Furthermore, using digest-based sequence
 identifiers enables the use of custom reference sequences.
 
 .. important:: VRS permits the use of conventional sequence accessions
-	       from RefSeq, Ensemble, or other sources.  However, when
-	       generating copmuted identifiers, implementations MUST
+	       from RefSeq, Ensembl, or other sources.  However, when
+	       generating computed identifiers, implementations MUST
 	       use GA4GH-sequence accessions.
 
 In this example, the sequence identifier ``refseq:NC_000019.10`` MUST
-be transformed into digest-based identifer
+be transformed into digest-based identifier
 ``ga4gh:GS.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl`` as described in
-:ref:`computed-identifiers`.  In practice, implmentations should
+:ref:`computed-identifiers`.  In practice, implementations should
 precompute sequence digests or should use an existing service that
 does so. (See :ref:`required-data` for a description of data that are
 needed to implement VRS.) Subsitituing the GA4GH sequence identifier
@@ -224,7 +224,7 @@ following computed identifier for our example::
 
   ga4gh:VA._YNe5V9kyydfkGU0NRyCMHDSKHL4YNvc
 
-Importantly, GA4GH computed identifers may be used literally (without
+Importantly, GA4GH computed identifiers may be used literally (without
 escaping) in URIs.
 
 Variation and Location objects contain an OPTIONAL ``_id`` attribute
