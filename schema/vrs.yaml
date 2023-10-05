@@ -93,8 +93,6 @@ definitions:
       members:
         type: array
         minItems: 2
-        # By allowing repeats and defining an order on the
-        # members within a haplotype, we get a
         # By allowing repeats within a Haplotype, we can now represent
         # variants within SV. Notably, we can define SNVs that
         # occur multiple times within a duplication.
@@ -117,15 +115,7 @@ definitions:
           oneOf:
           - $ref: '#/definitions/Allele'
           - $ref: '#/definitions/CURIE'
-          # Allowing Breakends and Breakpoints within Haplotypes
-          # is the lowest impact change to the existing VRS model.
-          # Conceptually, one might consider these to be Alleles,
-          # but they violate many of the assumptions that the existing
-          # Allele model has. Notably, breakpoints have two locations.
-          # Is this low-impact approach the best approach or should we
-          # be redefining Allele?
           - $ref: '#/definitions/Breakpoint'
-          - $ref: '#/definitions/Breakend'
         description: List of Alleles, or references to Alleles, that comprise this
           Haplotype.
     required:
@@ -178,6 +168,7 @@ definitions:
           - $ref: '#/definitions/Haplotype'
           - $ref: '#/definitions/Text'
           - $ref: '#/definitions/VariationSet'
+          - $ref: '#/definitions/Breakpoint'
         description: List of Variation objects or identifiers. Attribute is required,
           but MAY be empty.
     required:
@@ -734,24 +725,6 @@ definitions:
           MUST be one of "DivergesAfter" or "DivergesBefore" indicating whether the
           sequences diverges from the reference after or before any position in the
           interval.
-      # Does anyone have a need to support anything other than a LiteralSequenceExpression?
-      # I'd prefer not to as allowing reference-based sequences in here is just an
-      # alternate representation of multiple breaks and we want to minimise the number
-      # of different ways a sequence can be represented.
-      sequence:
-        type: LiteralSequenceExpression
-        description:
-          # TODO: clarify what this sequence is. We can define this as:
-          # - Traversal from the anchoring sequence (i.e RevComp DivergesBefore sequences)
-          # - Sequence prepend/concatenation
-          # TODO: What happens when the sequence itself has DerivedSequenceExpression.reverse_complement=true?
-          Sequence occuring after the break.
-      terminal:
-        # TODO: can the schema encode a constraint that a terminal breakend cannot
-        # be part of a breakpoint?
-        type: boolean
-        default: false
-        description: Indicates the end of the molecule
     required:
       - type
       - location
@@ -792,17 +765,8 @@ definitions:
         ordered: false
         items:
           type: Breakend
-        # TODO: how should the Breakend.sequence be interpreted?
-        # Option 1: be1 <-> seq1 <-> seq2 <-> be2
-        # That is, concatenate the sequences of both of them.
-        # Pros: no possibility of data inconsistency
-        # Cons: need to 'allocate' the sequence to one of the breakends
-        #
-        # Option2: be1 <-> seq <-> be2
-        # Pros: more intuitive interpretation
-        # Cons: possibility of data inconsistency (when seq1 != seq2)
         description: Breakends involed in the sequence
-        minItems: 2
+        minItems: 1
         maxItems: 2
       # Needed to support optical mapping gaps where the sequence between the
       # breaks is not known but the approximate length is
@@ -810,9 +774,7 @@ definitions:
         type: DefiniteRange
         description: Approximate length of unknown sequence between the breaks.
       homology:
-        # I've defined the homology
-        # TODO: this has the potential for data inconsistency
-        #is defining a homology
+        # Only valid for breakends=2
         type: boolean
         default: false
         description:
@@ -820,7 +782,48 @@ definitions:
           is due to the sequences at the breakends being homologous or
           whether the interval is due to uncertainty regarding the actual
           locations of the breakends.
+      # Does anyone have a need to support anything other than a LiteralSequenceExpression?
+      # I'd prefer not to as allowing reference-based sequences in here is just an
+      # alternate representation of multiple breaks and we want to minimise the number
+      # of different ways a sequence can be represented.
+      sequence:
+        type: LiteralSequenceExpression
+        description:
+          # TODO: clarify what this sequence is. We can define this as:
+          # - Traversal from the anchoring sequence (i.e RevComp DivergesBefore sequences)
+          # - Sequence prepend/concatenation
+          # TODO: What happens when the sequence itself has DerivedSequenceExpression.reverse_complement=true?
+          Sequence occuring after the break.
+      terminal:
+        # TODO: can the schema encode a constraint that a terminal breakend cannot
+        # be part of a breakpoint?
+        type: boolean
+        default: false
+        description:
+          # Only valid for breakends=1
+          Indicates the end of the molecule
     required:
       - type
       - breakends
     additionalProperties: false
+  Event:
+    description:
+      An event that results in a set of variants.
+    type: object
+    properties:
+      type:
+        type: string
+        const: Event
+        default: Event
+        description: MUST be "Event"
+      variants:
+        $ref: '#/definitions/VariationSet'
+      classification:
+        # TODO: what event ontology should we use?
+        type: string
+        description: Category of event
+    required:
+      - type
+      - variants
+      - classification
+    additionalProperties: true
