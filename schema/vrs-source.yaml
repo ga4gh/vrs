@@ -789,6 +789,7 @@ $defs:
   # =============================================================================
 
   Breakend:
+    maturity: Alpha
     description:
       "A break in a molecule with respect to a reference sequence indicating
       the sequence deviates from the reference sequence after or before this
@@ -818,6 +819,7 @@ $defs:
       - orientation
     additionalProperties: false
   Breakpoint:
+    maturity: Alpha
     description:
       A rearrangement resulting in sequences flanking the two breakends becoming
       adjacent sequences on the same molecule.
@@ -893,24 +895,25 @@ $defs:
       - type
       - breakends
     additionalProperties: false
-  Event:
-    description:
-      An event that results in a set of variants.
-    type: object
-    properties:
-      type:
-        type: string
-        const: Event
-        default: Event
-        description: MUST be "Event"
-      variants:
-        $ref: '#/definitions/VariationSet'
-      classification:
-        # TODO: what event ontology should we use?
-        type: string
-        description: Category of event
-    required:
-      - type
-      - variants
-      - classification
-    additionalProperties: true
+
+#  Event:
+#    description:
+#      An event that results in a set of variants.
+#    type: object
+#    properties:
+#      type:
+#        type: string
+#        const: Event
+#        default: Event
+#        description: MUST be "Event"
+#      variants:
+#        $ref: '#/definitions/VariationSet'
+#      classification:
+#        # TODO: what event ontology should we use?
+#        type: string
+#        description: Category of event
+#    required:
+#      - type
+#      - variants
+#      - classification
+#    additionalProperties: true

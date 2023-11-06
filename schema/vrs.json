@@ -221,13 +221,16 @@
             },
             "members": {
                "type": "array",
-               "ordered": false,
+               "ordered": true,
                "minItems": 2,
-               "uniqueItems": true,
+               "uniqueItems": false,
                "items": {
                   "oneOf": [
                      {
                         "$ref": "#/$defs/Allele"
+                     },
+                     {
+                        "$ref": "#/$defs/Breakpoint"
                      },
                      {
                         "$ref": "core.json#/$defs/IRI"
@@ -549,7 +552,7 @@
                      "type": "integer"
                   }
                ],
-               "description": "The start coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range less than the value of `end`."
+               "description": "The start coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range less than or equal to the value of `end`."
             },
             "end": {
                "oneOf": [
@@ -560,7 +563,7 @@
                      "type": "integer"
                   }
                ],
-               "description": "The end coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range greater than the value of `start`."
+               "description": "The end coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range greater than or equal to the value of `start`."
             }
          },
          "required": [
@@ -854,6 +857,84 @@
          "description": "A character string of Residues that represents a biological sequence using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequence Strings.",
          "type": "string",
          "pattern": "^[A-Z*\\-]*$"
+      },
+      "Breakend": {
+         "maturity": "Alpha",
+         "description": "A break in a molecule with respect to a reference sequence indicating the sequence deviates from the reference sequence after or before this location.",
+         "type": "object",
+         "properties": {
+            "type": {
+               "type": "string",
+               "const": "Breakend",
+               "default": "Breakend",
+               "description": "MUST be \"Breakend\""
+            },
+            "location": {
+               "type": "Location",
+               "description": "The interval over which the break could occur in"
+            },
+            "orientation": {
+               "type": "string",
+               "enum": [
+                  "DivergesAfter",
+                  "DivergesBefore"
+               ],
+               "description": "MUST be one of \"DivergesAfter\" or \"DivergesBefore\" indicating whether the sequences diverges from the reference after or before any position in the interval."
+            }
+         },
+         "required": [
+            "location",
+            "orientation",
+            "type"
+         ],
+         "additionalProperties": false
+      },
+      "Breakpoint": {
+         "maturity": "Alpha",
+         "description": "A rearrangement resulting in sequences flanking the two breakends becoming adjacent sequences on the same molecule.",
+         "type": "object",
+         "properties": {
+            "type": {
+               "type": "string",
+               "const": "Breakpoint",
+               "default": "Breakpoint",
+               "description": "MUST be \"Breakpoint\""
+            },
+            "breakends": {
+               "type": "array",
+               "uniqueItems": false,
+               "ordered": false,
+               "items": {
+                  "type": "Breakend"
+               },
+               "description": "Breakends involed in the sequence",
+               "minItems": 1,
+               "maxItems": 2
+            },
+            "insertion": {
+               "type": "DefiniteRange",
+               "description": "Approximate length of unknown sequence between the breaks."
+            },
+            "homology": {
+               "type": "boolean",
+               "default": false,
+               "description": "A flag indicating whether the location interval of the breakend is due to the sequences at the breakends being homologous or whether the interval is due to uncertainty regarding the actual locations of the breakends."
+            },
+            "sequence": {
+               "type": "LiteralSequenceExpression",
+               "description": "Sequence occuring after the break."
+            },
+            "terminal": {
+               "type": "boolean",
+               "default": false,
+               "description": "Indicates the end of the molecule"
+            }
+         },
+         "required": [
+            "breakends",
+            "type"
+         ],
+         "additionalProperties": false
       }
    }
 }
