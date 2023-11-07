@@ -1,0 +1,24 @@
+id: sequence_homology
+type: Breakpoint
+homology: true
+breakends:
+  - type: Breakend
+    location:
+      type: SequenceLocation
+      sequenceReference:
+        refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+        residueAlphabet: na
+        id: NC_000001.10
+      start: 120
+      end: 126
+    orientation: DivergesAfter
+  - type: Breakend
+    location:
+      type: SequenceLocation
+      sequenceReference:
+        refgetAccession: SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO
+        residueAlphabet: na
+        id: NC_000002.11
+      start: 453
+      end: 459
+    orientation: DivergesBefore

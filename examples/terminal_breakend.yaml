@@ -1,0 +1,14 @@
+id: terminal_breakend
+type: Breakpoint
+terminal: true
+breakends:
+  - type: Breakend
+    location:
+      type: SequenceLocation
+      sequenceReference:
+        refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+        residueAlphabet: na
+        id: NC_000001.10
+      start: 123000
+      end: 1230000
+    orientation: DivergesAfter

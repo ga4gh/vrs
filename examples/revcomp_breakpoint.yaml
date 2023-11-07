@@ -1,0 +1,23 @@
+id: truthset_1_1
+type: Breakpoint
+breakends:
+  - type: Breakend
+    location:
+      type: SequenceLocation
+      sequenceReference:
+        id: NC_000001.10
+        refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+        residueAlphabet: na
+      start: 87337011
+      end: 87337011
+    orientation: DivergesAfter
+  - type: Breakend
+    location:
+      type: SequenceLocation
+      sequenceReference:
+        refgetAccession: SQ.-BOZ8Esn8J88qDwNiSEwUr5425UXdiGX
+        residueAlphabet: na
+        id: NC_000010.10
+      start: 36119127
+      end: 36119127
+    orientation: DivergesAfter

@@ -1,0 +1,67 @@
+id: sv_haplotype
+type: Haplotype
+members:
+  - id: breakpoint1
+    type: Breakpoint
+    sequence:
+      type: LiteralSequenceExpression
+      sequence: GTC
+    breakends:
+      - type: Breakend
+        location:
+          type: SequenceLocation
+          sequenceReference:
+            refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+            residueAlphabet: na
+            id: NC_000001.10
+          start: 123
+          end: 123
+        orientation: DivergesAfter
+      - type: Breakend
+        location:
+          type: SequenceLocation
+          sequenceReference:
+            refgetAccession: SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO
+            residueAlphabet: na
+            id: NC_000002.11
+          start: 500
+          end: 500
+        orientation: DivergesBefore
+  - type: Allele
+    location:
+      type: SequenceLocation
+      sequenceReference:
+        refgetAccession: SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO
+        residueAlphabet: na
+        id: NC_000002.11
+      start: 601
+      end: 602
+    state:
+      type: LiteralSequenceExpression
+      sequence: C
+  - id: breakpoint2
+    type: Breakpoint
+    sequence:
+      type: LiteralSequenceExpression
+      sequence: GTC
+    breakends:
+    - type: Breakend
+      location:
+        type: SequenceLocation
+        sequenceReference:
+          refgetAccession: SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO
+          residueAlphabet: na
+          id: NC_000002.11
+        start: 15000
+        end: 15000
+      orientation: DivergesAfter
+    - type: Breakend
+      location:
+        type: SequenceLocation
+        sequenceReference:
+          refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+          residueAlphabet: na
+          id: NC_000001.10
+        start: 10000
+        end: 10000
+      orientation: DivergesBefore

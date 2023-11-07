@@ -3,3 +3,27 @@ tests:
     description: https://docs.google.com/presentation/d/11Hm-_IvKGFUpdsqh_LiIrxjpvQazTxg1/edit#slide=id.p2
     schema: vrs
     definition: Breakpoint
+  - test_file: revcomp_breakpoint.yaml
+    description: https://docs.google.com/presentation/d/11Hm-_IvKGFUpdsqh_LiIrxjpvQazTxg1/edit#slide=id.p8
+    schema: vrs
+    definition: Breakpoint
+  - test_file: terminal_breakend.yaml
+    description: https://docs.google.com/presentation/d/11Hm-_IvKGFUpdsqh_LiIrxjpvQazTxg1/edit#slide=id.p9
+    schema: vrs
+    definition: Breakpoint
+  - test_file: sequence_homology.yaml
+    description: https://docs.google.com/presentation/d/11Hm-_IvKGFUpdsqh_LiIrxjpvQazTxg1/edit#slide=id.p11
+    schema: vrs
+    definition: Breakpoint
+  - test_file: precise_linker.yaml
+    description: https://docs.google.com/presentation/d/11Hm-_IvKGFUpdsqh_LiIrxjpvQazTxg1/edit#slide=id.p12
+    schema: vrs
+    definition: Breakpoint
+  - test_file: ambiguous_linker.yaml
+    description: https://docs.google.com/presentation/d/11Hm-_IvKGFUpdsqh_LiIrxjpvQazTxg1/edit#slide=id.p13
+    schema: vrs
+    definition: Breakpoint
+  - test_file: sv_haplotype.yaml
+    description: https://docs.google.com/presentation/d/11Hm-_IvKGFUpdsqh_LiIrxjpvQazTxg1/edit#slide=id.p15
+    schema: vrs
+    definition: Haplotype
