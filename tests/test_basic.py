@@ -32,7 +32,7 @@ def test_all_value_objects_with_digest_keys():
 
 
 # Does the schema validate against a simple sequence location?
-def test_models():
+def test_simple_sequence_location():
     sl = {
         'sequenceReference': {
             'refgetAccession': 'SQ.9W6SPR3RMCHWCSGJLQHE6KBOD285V5SW',

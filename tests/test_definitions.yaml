@@ -1,0 +1,5 @@
+tests:
+  - test_file: simple_breakpoint.yaml
+    description: https://docs.google.com/presentation/d/11Hm-_IvKGFUpdsqh_LiIrxjpvQazTxg1/edit#slide=id.p2
+    schema: vrs
+    definition: Breakpoint

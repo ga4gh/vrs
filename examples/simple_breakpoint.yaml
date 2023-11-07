@@ -1,0 +1,23 @@
+id: simple_breakpoint
+type: Breakpoint
+breakends:
+  - type: Breakend
+    location:
+      type: SequenceLocation
+      sequenceReference:
+        refgetAccession: 7aI9u0vheriv13er
+        residueAlphabet: na
+        id: NC_000001.10
+      start: 123
+      end: 123
+    orientation: DivergesAfter
+  - type: Breakend
+    location:
+      type: SequenceLocation
+      sequenceReference:
+        refgetAccession: hiu2gii33iv13er
+        residueAlphabet: na
+        id: NC_000002.11
+      start: 456
+      end: 456
+    orientation: DivergesBefore
