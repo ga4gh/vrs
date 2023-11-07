@@ -5,7 +5,7 @@ breakends:
     location:
       type: SequenceLocation
       sequenceReference:
-        refgetAccession: 7aI9u0vheriv13er
+        refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
         residueAlphabet: na
         id: NC_000001.10
       start: 123
@@ -15,7 +15,7 @@ breakends:
     location:
       type: SequenceLocation
       sequenceReference:
-        refgetAccession: hiu2gii33iv13er
+        refgetAccession: SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO
         residueAlphabet: na
         id: NC_000002.11
       start: 456

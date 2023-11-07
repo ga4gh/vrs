@@ -38,7 +38,7 @@ Some SequenceReference attributes are inherited from :ref:`ValueObject`.
           - A sha512t24u digest created using the VRS Computed Identifier algorithm.
        *  - type
           - string
-          - 1..1
+          - 0..1
           - 
        *  - refgetAccession
           - string

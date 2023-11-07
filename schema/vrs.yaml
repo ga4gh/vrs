@@ -480,7 +480,6 @@ $defs:
         - na
     required:
     - refgetAccession
-    - type
     additionalProperties: false
   SequenceExpression:
     description: An expression describing a Sequence.
@@ -659,6 +658,11 @@ $defs:
     pattern: ^[A-Z*\-]*$
   Breakend:
     maturity: Alpha
+    ga4ghDigest:
+      keys:
+      - type
+      - location
+      - orientation
     description: A break in a molecule with respect to a reference sequence indicating
       the sequence deviates from the reference sequence after or before this location.
     type: object
@@ -669,7 +673,9 @@ $defs:
         default: Breakend
         description: MUST be "Breakend"
       location:
-        type: Location
+        oneOf:
+        - $ref: '#/$defs/SequenceLocation'
+        - $ref: core.json#/$defs/IRI
         description: The interval over which the break could occur in
       orientation:
         type: string
@@ -686,10 +692,36 @@ $defs:
     additionalProperties: false
   Breakpoint:
     maturity: Alpha
+    ga4ghDigest:
+      keys:
+      - type
+      - breakends
     description: A rearrangement resulting in sequences flanking the two breakends
       becoming adjacent sequences on the same molecule.
     type: object
     properties:
+      id:
+        type: string
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+        description: A primary label for the entity.
+      description:
+        type: string
+        description: A free-text description of the entity.
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: core.json#/$defs/Extension
+      digest:
+        description: A sha512t24u digest created using the VRS Computed Identifier
+          algorithm.
+        type: string
+        pattern: '[0-9A-Za-z_\-]{32}'
       type:
         type: string
         const: Breakpoint
@@ -700,12 +732,14 @@ $defs:
         uniqueItems: false
         ordered: false
         items:
-          type: Breakend
-        description: Breakends involed in the sequence
+          oneOf:
+          - $ref: '#/$defs/Breakend'
+          - $ref: core.json#/$defs/IRI
+        description: Breakends involved in the sequence
         minItems: 1
         maxItems: 2
       insertion:
-        type: DefiniteRange
+        $ref: '#/$defs/Range'
         description: Approximate length of unknown sequence between the breaks.
       homology:
         type: boolean
@@ -714,8 +748,11 @@ $defs:
           is due to the sequences at the breakends being homologous or whether the
           interval is due to uncertainty regarding the actual locations of the breakends.
       sequence:
-        type: LiteralSequenceExpression
-        description: Sequence occuring after the break.
+        oneOf:
+        - $ref: '#/$defs/LiteralSequenceExpression'
+        - $ref: '#/$defs/ReferenceLengthExpression'
+        - $ref: core.json#/$defs/IRI
+        description: Sequence occurring after the break.
       terminal:
         type: boolean
         default: false

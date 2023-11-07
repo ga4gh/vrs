@@ -19,7 +19,7 @@ A break in a molecule with respect to a reference sequence indicating the sequen
           - 1..1
           - MUST be "Breakend"
        *  - location
-          - Location
+          - :ref:`Location` | `IRI <core.json#/$defs/IRI>`_
           - 1..1
           - The interval over which the break could occur in
        *  - orientation

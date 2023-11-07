@@ -439,7 +439,6 @@ $defs:
           - na
     required:
       - refgetAccession
-      - type
 
       #TODO: implementation guidance: digest property is RefGet TRUNC512
 
@@ -790,6 +789,11 @@ $defs:
 
   Breakend:
     maturity: Alpha
+    ga4ghDigest:
+      keys:
+        - type
+        - location
+        - orientation
     description:
       "A break in a molecule with respect to a reference sequence indicating
       the sequence deviates from the reference sequence after or before this
@@ -802,7 +806,9 @@ $defs:
         default: Breakend
         description: MUST be "Breakend"
       location:
-        type: Location
+        oneOf:
+          - $ref: "#/$defs/Location"
+          - $refCurie: gks.core:IRI
         description: The interval over which the break could occur in
       orientation:
         type: string
@@ -820,6 +826,11 @@ $defs:
     additionalProperties: false
   Breakpoint:
     maturity: Alpha
+    ga4ghDigest:
+      keys:
+        - type
+        - breakends
+    inherits: ValueObject
     description:
       A rearrangement resulting in sequences flanking the two breakends becoming
       adjacent sequences on the same molecule.
@@ -853,14 +864,16 @@ $defs:
         uniqueItems: false
         ordered: false
         items:
-          type: Breakend
-        description: Breakends involed in the sequence
+          oneOf:
+          - $refCurie: gks.core:IRI
+          - $ref: '#/$defs/Breakend'
+        description: Breakends involved in the sequence
         minItems: 1
         maxItems: 2
       # Needed to support optical mapping gaps where the sequence between the
       # breaks is not known but the approximate length is
       insertion:
-        type: DefiniteRange
+        $ref: "#/$defs/Range"
         description: Approximate length of unknown sequence between the breaks.
       homology:
         # Only valid for breakends=2
@@ -876,13 +889,15 @@ $defs:
       # alternate representation of multiple breaks and we want to minimise the number
       # of different ways a sequence can be represented.
       sequence:
-        type: LiteralSequenceExpression
+        oneOf:
+          - $refCurie: gks.core:IRI
+          - $ref: '#/$defs/SequenceExpression'
         description:
           # TODO: clarify what this sequence is. We can define this as:
           # - Traversal from the anchoring sequence (i.e RevComp DivergesBefore sequences)
           # - Sequence prepend/concatenation
           # TODO: What happens when the sequence itself has DerivedSequenceExpression.reverse_complement=true?
-          Sequence occuring after the break.
+          Sequence occurring after the break.
       terminal:
         # TODO: can the schema encode a constraint that a terminal breakend cannot
         # be part of a breakpoint?
