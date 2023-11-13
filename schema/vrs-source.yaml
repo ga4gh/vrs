@@ -96,6 +96,7 @@ $defs:
     oneOf:
       - $ref: "#/$defs/Allele"
       - $ref: "#/$defs/Haplotype"
+      - $ref: "#/$defs/StructuralVariant"
     discriminator:
       propertyName: type
 
@@ -787,53 +788,14 @@ $defs:
   # These classes are under active discussion.
   # =============================================================================
 
-  Breakend:
+  StructuralVariant:
     maturity: Alpha
     ga4ghDigest:
       keys:
-        - type
-        - location
-        - orientation
+        - components
+    inherits: MolecularVariation
     description:
-      "A break in a molecule with respect to a reference sequence indicating
-      the sequence deviates from the reference sequence after or before this
-      location."
-    type: object
-    properties:
-      type:
-        type: string
-        const: Breakend
-        default: Breakend
-        description: MUST be "Breakend"
-      location:
-        oneOf:
-          - $ref: "#/$defs/Location"
-          - $refCurie: gks.core:IRI
-        description: The interval over which the break could occur in
-      orientation:
-        type: string
-        enum:
-          - DivergesAfter
-          - DivergesBefore
-        description:
-          MUST be one of "DivergesAfter" or "DivergesBefore" indicating whether the
-          sequences diverges from the reference after or before any position in the
-          interval.
-    required:
-      - type
-      - location
-      - orientation
-    additionalProperties: false
-  Breakpoint:
-    maturity: Alpha
-    ga4ghDigest:
-      keys:
-        - type
-        - breakends
-    inherits: ValueObject
-    description:
-      A rearrangement resulting in sequences flanking the two breakends becoming
-      adjacent sequences on the same molecule.
+      A contiguous molecule variation created by the rearrangement of sequences.
     type: object
     properties:
       type:
@@ -859,57 +821,38 @@ $defs:
       #
       # VCF has a CILEN field that can encode this sort of information.
       # Do we need an equivalent for VRS?
-      breakends:
+      components:
         type: array
         uniqueItems: false
         ordered: false
         items:
           oneOf:
           - $refCurie: gks.core:IRI
-          - $ref: '#/$defs/Breakend'
-        description: Breakends involved in the sequence
+          - $ref: "#/$defs/Location"
+          - $ref: "#/$defs/SequenceExpression"
+        description:
+          A set of sequence representations that are adjoined to compose the structural variant, 
+          arranged in a 5' to 3' (nucleic acids)  or N-terminus to C-terminus (amino acids) 
+          orientation.
         minItems: 1
-        maxItems: 2
-      # Needed to support optical mapping gaps where the sequence between the
-      # breaks is not known but the approximate length is
-      insertion:
-        $ref: "#/$defs/Range"
-        description: Approximate length of unknown sequence between the breaks.
-      homology:
-        # Only valid for breakends=2
-        type: boolean
-        default: false
-        description:
-          A flag indicating whether the location interval of the breakend
-          is due to the sequences at the breakends being homologous or
-          whether the interval is due to uncertainty regarding the actual
-          locations of the breakends.
-      # Does anyone have a need to support anything other than a LiteralSequenceExpression?
-      # I'd prefer not to as allowing reference-based sequences in here is just an
-      # alternate representation of multiple breaks and we want to minimise the number
-      # of different ways a sequence can be represented.
-      sequence:
-        oneOf:
-          - $refCurie: gks.core:IRI
-          - $ref: '#/$defs/SequenceExpression'
-        description:
-          # TODO: clarify what this sequence is. We can define this as:
-          # - Traversal from the anchoring sequence (i.e RevComp DivergesBefore sequences)
-          # - Sequence prepend/concatenation
-          # TODO: What happens when the sequence itself has DerivedSequenceExpression.reverse_complement=true?
-          Sequence occurring after the break.
-      terminal:
-        # TODO: can the schema encode a constraint that a terminal breakend cannot
-        # be part of a breakpoint?
-        type: boolean
-        default: false
-        description:
-          # Only valid for breakends=1
-          Indicates the end of the molecule
+#      homology:
+#        # Only valid for breakends=2
+#        type: boolean
+#        default: false
+#        description:
+#          A flag indicating whether the location interval of the breakend
+#          is due to the sequences at the breakends being homologous or
+#          whether the interval is due to uncertainty regarding the actual
+#          locations of the breakends.
+#      terminal:
+#        # TODO: can the schema encode a constraint that a terminal breakend cannot be part of a breakpoint?
+#        type: boolean
+#        default: false
+#        description:
+#          # Only valid for breakends=1
+#          Indicates the end of the molecule
     required:
-      - type
-      - breakends
-    additionalProperties: false
+      - components
 
 #  Event:
 #    description:
