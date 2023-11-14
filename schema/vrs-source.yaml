@@ -150,9 +150,6 @@ $defs:
     required: [ "location", "state" ]
 
   Haplotype:
-    # For SV-VRS 'non-overlapping' is defined with respect to the derivate chromosome
-    # This allows SNVs within duplications to be reported as they can overlap in reference
-    # coordinate space, but not on the sample molecule.
     maturity: Alpha
     ga4ghDigest:
       prefix: HT
@@ -160,7 +157,7 @@ $defs:
         - members
     inherits: MolecularVariation
     description: >-
-      A set of non-overlapping :ref:`Allele` members that co-occur on the same molecule.
+      An ordered set of co-occurring :ref:`variants <Variation>` on the same molecule.
     type: "object"
     properties:
       type:
@@ -171,36 +168,20 @@ $defs:
           MUST be "Haplotype"
       members:
         type: array
-        # The ordering of members within a Haplotype defines a traversal
-        # order for the derivate chromosome. This allows phasing of
-        # breakpoints as well as the Alleles between them.
-        # This is equivalent to the VCF phase set list (PSL) field
-        # with the VCF PSO field implicitly encoded in the member
-        # ordering within the Haplotype.
-        #
-        # Is this model appropriate? It doesn't support scenarios
-        # such as knowing two SNVs within a duplication are on the same
-        # molecule but not being able to place them to the first or
-        # second copy.
-        # (Note that the current VRS model does not support this
-        # scenario as the Alleles must be non-overlapping).
         ordered: true
         minItems: 2
-        # By allowing repeats within a Haplotype, we can now represent
-        # variants within SV. Notably, we can define SNVs that
-        # occur multiple times within a duplication.
         uniqueItems: false
         items:
           oneOf:
+          - $ref: "#/$defs/Adjacency"
           - $ref: "#/$defs/Allele"
           - $refCurie: gks.core:IRI
-          - $ref: '#/$defs/Breakpoint'
         description: >-
-          A list of :ref:`Alleles <Allele>` (or IRI references to `Alleles`) that comprise a Haplotype. Since each
-          `Haplotype` member MUST be an `Allele`, and all members MUST share a common :ref:`SequenceReference`,
-          implementations MAY use a compact representation of Haplotype that omits type and :ref:`SequenceReference`
-          information in individual Haplotype members. Implementations MUST transform compact `Allele` representations
-          into an `Allele` when computing GA4GH identifiers.
+          A list of :ref:`Alleles <Allele>` and :ref:`Adjacencies <Adjacency>` that comprise a Haplotype. 
+          Allele members must share the same reference sequence as adjacent members. Alleles should not have
+          overlapping or adjacent coordinates. Adjacent alleles should be ordered in ascending coordinates,
+          unless represented on a DNA inversion (following an end-defined sequence terminal), in which case
+          they should be ordered in descending coordinates.
     required: [ "members" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -388,8 +369,7 @@ $defs:
         oneOf:
           - $refCurie: gks.core:IRI
           - $ref: "#/$defs/SequenceReference"
-        description: >-
-          A :ref:`SequenceReference`.
+        description: A :ref:`SequenceReference`.
       start:
         oneOf:
           - type: integer
@@ -493,18 +473,31 @@ $defs:
         oneOf:
           - type: integer
           - $ref: "#/$defs/Range"
-        description: >-
-          The number of residues in the expressed sequence.
+        description: The number of residues in the expressed sequence.
       sequence:
         $ref: "#/$defs/SequenceString"
         description: the :ref:`Sequence` encoded by the Reference Length Expression.
       repeatSubunitLength:
         type: integer
-        description: >-
-          The number of residues in the repeat subunit.
+        description: The number of residues in the repeat subunit.
     required:
       - length
       - repeatSubunitLength
+
+  LengthExpression:
+    maturity: Alpha
+    inherits: SequenceExpression
+    ga4ghDigest:
+      keys:
+        - length
+    type: object
+    description: A sequence expressed only by its length.
+    properties:
+      type:
+        type: string
+        const: "LengthExpression"
+        default: "LengthExpression"
+        description: MUST be "LengthExpression"
 
   LiteralSequenceExpression:
     maturity: Alpha
@@ -512,8 +505,7 @@ $defs:
     ga4ghDigest:
       keys:
         - sequence
-    description: >-
-      An explicit expression of a Sequence.
+    description: An explicit expression of a Sequence.
     type: object
     properties:
       type:
@@ -787,129 +779,56 @@ $defs:
   # These classes are under active discussion.
   # =============================================================================
 
-  Breakend:
-    maturity: Alpha
-    ga4ghDigest:
-      keys:
-        - type
-        - location
-        - orientation
-    description:
-      "A break in a molecule with respect to a reference sequence indicating
-      the sequence deviates from the reference sequence after or before this
-      location."
-    type: object
-    properties:
-      type:
-        type: string
-        const: Breakend
-        default: Breakend
-        description: MUST be "Breakend"
-      location:
-        oneOf:
-          - $ref: "#/$defs/Location"
-          - $refCurie: gks.core:IRI
-        description: The interval over which the break could occur in
-      orientation:
-        type: string
-        enum:
-          - DivergesAfter
-          - DivergesBefore
-        description:
-          MUST be one of "DivergesAfter" or "DivergesBefore" indicating whether the
-          sequences diverges from the reference after or before any position in the
-          interval.
-    required:
-      - type
-      - location
-      - orientation
-    additionalProperties: false
-  Breakpoint:
+  Adjacency:
     maturity: Alpha
     ga4ghDigest:
       keys:
         - type
         - breakends
-    inherits: ValueObject
+    inherits: Ga4ghIdentifiableObject
     description:
-      A rearrangement resulting in sequences flanking the two breakends becoming
-      adjacent sequences on the same molecule.
+      The `Adjacency` class represents the termination of a sequence and (when present)
+      the beginning of an adjacent sequence, potentially with an intervening linker sequence.
     type: object
     properties:
       type:
         type: string
-        const: Breakpoint
-        default: Breakpoint
-        description: MUST be "Breakpoint"
-      # I've taken the VCF-style model
-      # This is actually a lossy representation as many variant callers
-      # can constrain the actual location much more than anywhere in the
-      # [(start1, end1), (start2, end2)] range.
-      # for example, when the interval are due to homology, then the
-      # interval widths must be the same and, for any given position
-      # in the first breakend interval, there is only one possible position
-      # in the second breakend interval that is possible.
-      # Just specifying the two intervals independently as is done in this
-      # model does not intrinsically encode this information.
-      #
-      # Similarly, even imprecise calls have possibilities that are less
-      # likely than others. For example if a deletion break1 was at start1, then
-      # break2 might be constrained so something like [start2, start2 + (end2 - start2) / 3]
-      # because that would imply a longer deletion length that is plausible.
-      #
-      # VCF has a CILEN field that can encode this sort of information.
-      # Do we need an equivalent for VRS?
-      breakends:
+        const: Adjacency
+        default: Adjacency
+        description: MUST be "Adjacency".
+      sequenceTerminals:
         type: array
         uniqueItems: false
-        ordered: false
+        ordered: true
         items:
           oneOf:
           - $refCurie: gks.core:IRI
-          - $ref: '#/$defs/Breakend'
-        description: Breakends involved in the sequence
+          - $ref: '#/$defs/Location'
+        description: Sequence terminals involved in the adjacency.
         minItems: 1
         maxItems: 2
-      # Needed to support optical mapping gaps where the sequence between the
-      # breaks is not known but the approximate length is
-      insertion:
-        $ref: "#/$defs/Range"
-        description: Approximate length of unknown sequence between the breaks.
-      homology:
-        # Only valid for breakends=2
-        type: boolean
-        default: false
-        description:
-          A flag indicating whether the location interval of the breakend
-          is due to the sequences at the breakends being homologous or
-          whether the interval is due to uncertainty regarding the actual
-          locations of the breakends.
-      # Does anyone have a need to support anything other than a LiteralSequenceExpression?
-      # I'd prefer not to as allowing reference-based sequences in here is just an
-      # alternate representation of multiple breaks and we want to minimise the number
-      # of different ways a sequence can be represented.
-      sequence:
-        oneOf:
-          - $refCurie: gks.core:IRI
-          - $ref: '#/$defs/SequenceExpression'
-        description:
-          # TODO: clarify what this sequence is. We can define this as:
-          # - Traversal from the anchoring sequence (i.e RevComp DivergesBefore sequences)
-          # - Sequence prepend/concatenation
-          # TODO: What happens when the sequence itself has DerivedSequenceExpression.reverse_complement=true?
-          Sequence occurring after the break.
-      terminal:
-        # TODO: can the schema encode a constraint that a terminal breakend cannot
-        # be part of a breakpoint?
-        type: boolean
-        default: false
-        description:
-          # Only valid for breakends=1
-          Indicates the end of the molecule
+      linker:
+        $ref: '#/$defs/SequenceExpression'
+        description: A linker sequence found between the sequence terminals.
+#      homology:
+#        # Only valid for breakends=2
+#        type: boolean
+#        default: false
+#        description:
+#          A flag indicating whether the location interval of the breakend
+#          is due to the sequences at the breakends being homologous or
+#          whether the interval is due to uncertainty regarding the actual
+#          locations of the breakends.
+#      terminal:
+#        # TODO: can the schema encode a constraint that a terminal breakend cannot
+#        # be part of a breakpoint?
+#        type: boolean
+#        default: false
+#        description:
+#          # Only valid for breakends=1
+#          Indicates the end of the molecule
     required:
-      - type
-      - breakends
-    additionalProperties: false
+      - sequenceTerminals
 
 #  Event:
 #    description:
