@@ -429,8 +429,6 @@ $defs:
           value of this coordinate or range is 0. MUST represent a coordinate or range
           greater than or equal to the value of `start`.
     required:
-    - end
-    - start
     - type
     additionalProperties: false
   SequenceReference:
@@ -577,6 +575,10 @@ $defs:
         const: LengthExpression
         default: LengthExpression
         description: MUST be "LengthExpression"
+      length:
+        oneOf:
+        - $ref: '#/$defs/Range'
+        - type: integer
     required:
     - type
     additionalProperties: false
@@ -699,7 +701,8 @@ $defs:
     maturity: Alpha
     ga4ghDigest:
       keys:
-      - breakends
+      - linker
+      - sequenceTerminals
       - type
     description: The `Adjacency` class represents the termination of a sequence and
       (when present) the beginning of an adjacent sequence, potentially with an intervening

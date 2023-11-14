@@ -173,9 +173,9 @@ $defs:
         uniqueItems: false
         items:
           oneOf:
-          - $ref: "#/$defs/Adjacency"
-          - $ref: "#/$defs/Allele"
-          - $refCurie: gks.core:IRI
+            - $ref: "#/$defs/Adjacency"
+            - $ref: "#/$defs/Allele"
+            - $refCurie: gks.core:IRI
         description: >-
           A list of :ref:`Alleles <Allele>` and :ref:`Adjacencies <Adjacency>` that comprise a Haplotype. 
           Allele members must share the same reference sequence as adjacent members. Alleles should not have
@@ -386,9 +386,6 @@ $defs:
           The end coordinate or range of the SequenceLocation.
           The minimum value of this coordinate or range is 0.
           MUST represent a coordinate or range greater than or equal to the value of `start`.
-    required:
-      - start
-      - end
 
   SequenceReference:
     maturity: Alpha
@@ -498,6 +495,10 @@ $defs:
         const: "LengthExpression"
         default: "LengthExpression"
         description: MUST be "LengthExpression"
+      length:
+        oneOf:
+          - $ref: "#/$defs/Range"
+          - type: integer
 
   LiteralSequenceExpression:
     maturity: Alpha
@@ -784,7 +785,8 @@ $defs:
     ga4ghDigest:
       keys:
         - type
-        - breakends
+        - sequenceTerminals
+        - linker
     inherits: Ga4ghIdentifiableObject
     description:
       The `Adjacency` class represents the termination of a sequence and (when present)

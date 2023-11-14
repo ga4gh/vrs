@@ -40,3 +40,7 @@ Some LengthExpression attributes are inherited from :ref:`SequenceExpression`.
           - string
           - 1..1
           - MUST be "LengthExpression"
+       *  - length
+          - :ref:`Range` | integer
+          - 0..1
+          - 

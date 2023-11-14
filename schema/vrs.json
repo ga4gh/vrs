@@ -570,8 +570,6 @@
             }
          },
          "required": [
-            "end",
-            "start",
             "type"
          ],
          "additionalProperties": false
@@ -754,6 +752,16 @@
                "const": "LengthExpression",
                "default": "LengthExpression",
                "description": "MUST be \"LengthExpression\""
+            },
+            "length": {
+               "oneOf": [
+                  {
+                     "$ref": "#/$defs/Range"
+                  },
+                  {
+                     "type": "integer"
+                  }
+               ]
             }
          },
          "required": [
@@ -911,7 +919,8 @@
          "maturity": "Alpha",
          "ga4ghDigest": {
             "keys": [
-               "breakends",
+               "linker",
+               "sequenceTerminals",
                "type"
             ]
          },
