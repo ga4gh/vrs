@@ -168,8 +168,7 @@
          },
          "required": [
             "location",
-            "state",
-            "type"
+            "state"
          ],
          "additionalProperties": false
       },
@@ -240,12 +239,11 @@
                      }
                   ]
                },
-               "description": "A list of Alleles that comprise a Haplotype.  Allele members must share the same reference sequence as adjacent members. Alleles should not have overlapping or adjacent coordinates. Adjacent alleles should be ordered in ascending coordinates, unless represented on a DNA inversion (following an end-defined sequence terminal), in which case they should be ordered in descending coordinates."
+               "description": "A list of Alleles that comprise a Haplotype.  Members must share the same reference sequence as adjacent members. Alleles should not have overlapping or adjacent coordinates with neighboring Alleles. Neighboring alleles should be ordered  by ascending coordinates, unless represented on a DNA inversion (following an end-defined sequence  terminal), in which case they should be ordered in descending coordinates. Sequence references MUST be consistent for all members between and including the end of one Adjacency and the beginning of  another."
             }
          },
          "required": [
-            "members",
-            "type"
+            "members"
          ],
          "additionalProperties": false
       },
@@ -324,8 +322,7 @@
          },
          "required": [
             "copies",
-            "location",
-            "type"
+            "location"
          ],
          "additionalProperties": false
       },
@@ -407,8 +404,7 @@
          },
          "required": [
             "copyChange",
-            "location",
-            "type"
+            "location"
          ],
          "additionalProperties": false
       },
@@ -486,8 +482,7 @@
          },
          "required": [
             "count",
-            "members",
-            "type"
+            "members"
          ],
          "additionalProperties": false
       },
@@ -569,9 +564,7 @@
                "description": "The end coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range greater than or equal to the value of `start`."
             }
          },
-         "required": [
-            "type"
-         ],
+         "required": [],
          "additionalProperties": false
       },
       "SequenceReference": {
@@ -918,6 +911,7 @@
       "Adjacency": {
          "maturity": "Alpha",
          "ga4ghDigest": {
+            "prefix": "AJ",
             "keys": [
                "linker",
                "sequenceTerminals",
@@ -991,8 +985,7 @@
             }
          },
          "required": [
-            "sequenceTerminals",
-            "type"
+            "sequenceTerminals"
          ],
          "additionalProperties": false
       }

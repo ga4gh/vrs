@@ -38,7 +38,7 @@ Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
           - A sha512t24u digest created using the VRS Computed Identifier algorithm.
        *  - type
           - string
-          - 1..1
+          - 0..1
           - 
        *  - expressions
           - :ref:`Expression`

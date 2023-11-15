@@ -38,7 +38,7 @@ Some Adjacency attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
           - A sha512t24u digest created using the VRS Computed Identifier algorithm.
        *  - type
           - string
-          - 1..1
+          - 0..1
           - MUST be "Adjacency".
        *  - sequenceTerminals
           - `IRI <core.json#/$defs/IRI>`_ | :ref:`Location`
