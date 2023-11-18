@@ -7,6 +7,9 @@
          "description": "A representation of the state of one or more biomolecules.",
          "oneOf": [
             {
+               "$ref": "#/$defs/Adjacency"
+            },
+            {
                "$ref": "#/$defs/Allele"
             },
             {
@@ -950,6 +953,13 @@
                "const": "Adjacency",
                "default": "Adjacency",
                "description": "MUST be \"Adjacency\"."
+            },
+            "expressions": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Expression"
+               }
             },
             "sequenceTerminals": {
                "type": "array",

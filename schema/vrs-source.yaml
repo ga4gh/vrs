@@ -788,7 +788,7 @@ $defs:
         - type
         - sequenceTerminals
         - linker
-    inherits: Ga4ghIdentifiableObject
+    inherits: MolecularVariation
     description:
       The `Adjacency` class represents the termination of a sequence and (when present)
       the beginning of an adjacent sequence, potentially with an intervening linker sequence.

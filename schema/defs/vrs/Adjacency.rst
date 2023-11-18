@@ -4,7 +4,7 @@ The `Adjacency` class represents the termination of a sequence and (when present
 
     **Information Model**
     
-Some Adjacency attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
+Some Adjacency attributes are inherited from :ref:`Variation`.
 
     .. list-table::
        :class: clean-wrap
@@ -40,6 +40,10 @@ Some Adjacency attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
           - string
           - 0..1
           - MUST be "Adjacency".
+       *  - expressions
+          - :ref:`Expression`
+          - 0..m
+          - 
        *  - sequenceTerminals
           - `IRI <core.json#/$defs/IRI>`_ | :ref:`Location`
           - 1..2

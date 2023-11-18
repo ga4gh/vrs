@@ -5,6 +5,7 @@ $defs:
   Variation:
     description: A representation of the state of one or more biomolecules.
     oneOf:
+    - $ref: '#/$defs/Adjacency'
     - $ref: '#/$defs/Allele'
     - $ref: '#/$defs/CopyNumberChange'
     - $ref: '#/$defs/CopyNumberCount'
@@ -733,6 +734,11 @@ $defs:
         const: Adjacency
         default: Adjacency
         description: MUST be "Adjacency".
+      expressions:
+        type: array
+        ordered: false
+        items:
+          $ref: '#/$defs/Expression'
       sequenceTerminals:
         type: array
         uniqueItems: false

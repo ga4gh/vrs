@@ -1,0 +1,23 @@
+id: simple_haplotype
+type: Haplotype
+members:
+  - type: Allele
+    location:
+      type: SequenceLocation
+      sequenceReference:
+        refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+        residueAlphabet: na
+        id: NC_000001.10
+      start: 601
+      end: 602
+    state:
+      type: LiteralSequenceExpression
+      sequence: C
+  - type: Allele
+    location:
+      type: SequenceLocation
+      start: 701
+      end: 702
+    state:
+      type: LiteralSequenceExpression
+      sequence: C
