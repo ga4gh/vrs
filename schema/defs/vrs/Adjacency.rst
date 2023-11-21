@@ -1,10 +1,10 @@
 **Computational Definition**
 
-A rearrangement resulting in sequences flanking the two breakends becoming adjacent sequences on the same molecule.
+The `Adjacency` class represents the termination of a sequence and (when present) the beginning of an adjacent sequence, potentially with an intervening linker sequence.
 
     **Information Model**
     
-Some Breakpoint attributes are inherited from :ref:`ValueObject`.
+Some Adjacency attributes are inherited from :ref:`Variation`.
 
     .. list-table::
        :class: clean-wrap
@@ -38,25 +38,17 @@ Some Breakpoint attributes are inherited from :ref:`ValueObject`.
           - A sha512t24u digest created using the VRS Computed Identifier algorithm.
        *  - type
           - string
-          - 1..1
-          - MUST be "Breakpoint"
-       *  - breakends
-          - `IRI <core.json#/$defs/IRI>`_ | :ref:`Breakend`
+          - 0..1
+          - MUST be "Adjacency".
+       *  - expressions
+          - :ref:`Expression`
+          - 0..m
+          - 
+       *  - sequenceTerminals
+          - `IRI <core.json#/$defs/IRI>`_ | :ref:`Location`
           - 1..2
-          - Breakends involved in the sequence
-       *  - insertion
-          - :ref:`Range`
+          - Sequence terminals involved in the adjacency.
+       *  - linker
+          - :ref:`SequenceExpression`
           - 0..1
-          - Approximate length of unknown sequence between the breaks.
-       *  - homology
-          - boolean
-          - 0..1
-          - A flag indicating whether the location interval of the breakend is due to the sequences at the breakends being homologous or whether the interval is due to uncertainty regarding the actual locations of the breakends.
-       *  - sequence
-          - `IRI <core.json#/$defs/IRI>`_ | :ref:`SequenceExpression`
-          - 0..1
-          - Sequence occurring after the break.
-       *  - terminal
-          - boolean
-          - 0..1
-          - Indicates the end of the molecule
+          - A linker sequence found between the sequence terminals.
