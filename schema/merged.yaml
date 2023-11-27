@@ -5,6 +5,7 @@ $defs:
   Variation:
     description: A representation of the state of one or more biomolecules.
     oneOf:
+    - $ref: '#/$defs/Adjacency'
     - $ref: '#/$defs/Allele'
     - $ref: '#/$defs/CopyNumberChange'
     - $ref: '#/$defs/CopyNumberCount'
@@ -107,12 +108,12 @@ $defs:
       state:
         description: An expression of the sequence state
         oneOf:
+        - $ref: '#/$defs/LengthExpression'
         - $ref: '#/$defs/LiteralSequenceExpression'
         - $ref: '#/$defs/ReferenceLengthExpression'
     required:
     - location
     - state
-    - type
     additionalProperties: false
   Haplotype:
     maturity: Alpha
@@ -121,8 +122,7 @@ $defs:
       keys:
       - members
       - type
-    description: A set of non-overlapping Allele members that co-occur on the same
-      molecule.
+    description: An ordered set of co-occurring variants on the same molecule.
     type: object
     properties:
       id:
@@ -159,22 +159,24 @@ $defs:
           $ref: '#/$defs/Expression'
       members:
         type: array
-        ordered: false
+        ordered: true
         minItems: 2
-        uniqueItems: true
+        uniqueItems: false
         items:
           oneOf:
+          - $ref: '#/$defs/Adjacency'
           - $ref: '#/$defs/Allele'
           - $ref: '#/$defs/IRI'
-        description: A list of Alleles (or IRI references to `Alleles`) that comprise
-          a Haplotype. Since each `Haplotype` member MUST be an `Allele`, and all
-          members MUST share a common SequenceReference, implementations MAY use a
-          compact representation of Haplotype that omits type and SequenceReference
-          information in individual Haplotype members. Implementations MUST transform
-          compact `Allele` representations into an `Allele` when computing GA4GH identifiers.
+        description: A list of Alleles that comprise a Haplotype.  Members must share
+          the same reference sequence as adjacent members. Alleles should not have
+          overlapping or adjacent coordinates with neighboring Alleles. Neighboring
+          alleles should be ordered  by ascending coordinates, unless represented
+          on a DNA inversion (following an end-defined sequence  terminal), in which
+          case they should be ordered in descending coordinates. Sequence references
+          MUST be consistent for all members between and including the end of one
+          Adjacency and the beginning of  another.
     required:
     - members
-    - type
     additionalProperties: false
   CopyNumberCount:
     maturity: Alpha
@@ -233,7 +235,6 @@ $defs:
     required:
     - copies
     - location
-    - type
     additionalProperties: false
   CopyNumberChange:
     maturity: Alpha
@@ -302,7 +303,6 @@ $defs:
     required:
     - copyChange
     - location
-    - type
     additionalProperties: false
   Genotype:
     maturity: Alpha
@@ -367,7 +367,6 @@ $defs:
     required:
     - count
     - members
-    - type
     additionalProperties: false
   SequenceLocation:
     maturity: Alpha
@@ -419,18 +418,15 @@ $defs:
         - type: integer
         description: The start coordinate or range of the SequenceLocation. The minimum
           value of this coordinate or range is 0. MUST represent a coordinate or range
-          less than the value of `end`.
+          less than or equal to the value of `end`.
       end:
         oneOf:
         - $ref: '#/$defs/Range'
         - type: integer
         description: The end coordinate or range of the SequenceLocation. The minimum
           value of this coordinate or range is 0. MUST represent a coordinate or range
-          greater than the value of `start`.
-    required:
-    - end
-    - start
-    - type
+          greater than or equal to the value of `start`.
+    required: []
     additionalProperties: false
   SequenceReference:
     maturity: Alpha
@@ -479,7 +475,6 @@ $defs:
         - na
     required:
     - refgetAccession
-    - type
     additionalProperties: false
   SequenceExpression:
     description: An expression describing a Sequence.
@@ -539,6 +534,49 @@ $defs:
     required:
     - length
     - repeatSubunitLength
+    - type
+    additionalProperties: false
+  LengthExpression:
+    maturity: Alpha
+    ga4ghDigest:
+      keys:
+      - length
+      - type
+    type: object
+    description: A sequence expressed only by its length.
+    properties:
+      id:
+        type: string
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+        description: A primary label for the entity.
+      description:
+        type: string
+        description: A free-text description of the entity.
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: '#/$defs/Extension'
+      digest:
+        description: A sha512t24u digest created using the VRS Computed Identifier
+          algorithm.
+        type: string
+        pattern: '[0-9A-Za-z_\-]{32}'
+      type:
+        type: string
+        const: LengthExpression
+        default: LengthExpression
+        description: MUST be "LengthExpression"
+      length:
+        oneOf:
+        - $ref: '#/$defs/Range'
+        - type: integer
+    required:
     - type
     additionalProperties: false
   LiteralSequenceExpression:
@@ -656,6 +694,71 @@ $defs:
       \ codes are permitted in Sequence Strings."
     type: string
     pattern: ^[A-Z*\-]*$
+  Adjacency:
+    maturity: Alpha
+    ga4ghDigest:
+      prefix: AJ
+      keys:
+      - linker
+      - sequenceTerminals
+      - type
+    description: The `Adjacency` class represents the termination of a sequence and
+      (when present) the beginning of an adjacent sequence, potentially with an intervening
+      linker sequence.
+    type: object
+    properties:
+      id:
+        type: string
+        description: The 'logical' identifier of the entity in the system of record,
+          e.g. a UUID. This 'id' is  unique within a given system. The identified
+          entity may have a different 'id' in a different  system, or may refer to
+          an 'id' for the shared concept in another system (e.g. a CURIE).
+      label:
+        type: string
+        description: A primary label for the entity.
+      description:
+        type: string
+        description: A free-text description of the entity.
+      extensions:
+        type: array
+        ordered: true
+        items:
+          $ref: '#/$defs/Extension'
+      digest:
+        description: A sha512t24u digest created using the VRS Computed Identifier
+          algorithm.
+        type: string
+        pattern: '[0-9A-Za-z_\-]{32}'
+      type:
+        type: string
+        const: Adjacency
+        default: Adjacency
+        description: MUST be "Adjacency".
+      expressions:
+        type: array
+        ordered: false
+        items:
+          $ref: '#/$defs/Expression'
+      sequenceTerminals:
+        type: array
+        uniqueItems: false
+        ordered: true
+        items:
+          oneOf:
+          - $ref: '#/$defs/IRI'
+          - $ref: '#/$defs/SequenceLocation'
+        description: Sequence terminals involved in the adjacency.
+        minItems: 1
+        maxItems: 2
+      linker:
+        description: A linker sequence found between the sequence terminals.
+        oneOf:
+        - $ref: '#/$defs/LengthExpression'
+        - $ref: '#/$defs/LiteralSequenceExpression'
+        - $ref: '#/$defs/ReferenceLengthExpression'
+    required:
+    - sequenceTerminals
+    additionalProperties: false
   Coding:
     type: object
     maturity: Alpha

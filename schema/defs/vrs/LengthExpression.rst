@@ -1,10 +1,10 @@
 **Computational Definition**
 
-A representation of the state of one or more biomolecules.
+A sequence expressed only by its length.
 
     **Information Model**
     
-Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
+Some LengthExpression attributes are inherited from :ref:`SequenceExpression`.
 
     .. list-table::
        :class: clean-wrap
@@ -38,9 +38,9 @@ Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
           - A sha512t24u digest created using the VRS Computed Identifier algorithm.
        *  - type
           - string
+          - 1..1
+          - MUST be "LengthExpression"
+       *  - length
+          - :ref:`Range` | integer
           - 0..1
-          - 
-       *  - expressions
-          - :ref:`Expression`
-          - 0..m
           - 

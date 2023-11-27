@@ -50,8 +50,6 @@ $defs:
     heritableProperties:
       type:
         type: string
-    heritableRequired:
-      - type
 
   Variation:
     inherits: Ga4ghIdentifiableObject
@@ -157,7 +155,7 @@ $defs:
         - members
     inherits: MolecularVariation
     description: >-
-      A set of non-overlapping :ref:`Allele` members that co-occur on the same molecule.
+      An ordered set of co-occurring :ref:`variants <Variation>` on the same molecule.
     type: "object"
     properties:
       type:
@@ -168,19 +166,22 @@ $defs:
           MUST be "Haplotype"
       members:
         type: array
-        ordered: false
+        ordered: true
         minItems: 2
-        uniqueItems: true
+        uniqueItems: false
         items:
           oneOf:
-          - $ref: "#/$defs/Allele"
-          - $refCurie: gks.core:IRI
+            - $ref: "#/$defs/Adjacency"
+            - $ref: "#/$defs/Allele"
+            - $refCurie: gks.core:IRI
         description: >-
-          A list of :ref:`Alleles <Allele>` (or IRI references to `Alleles`) that comprise a Haplotype. Since each
-          `Haplotype` member MUST be an `Allele`, and all members MUST share a common :ref:`SequenceReference`,
-          implementations MAY use a compact representation of Haplotype that omits type and :ref:`SequenceReference`
-          information in individual Haplotype members. Implementations MUST transform compact `Allele` representations
-          into an `Allele` when computing GA4GH identifiers.
+          A list of :ref:`Alleles <Allele>` and :ref:`Adjacencies <Adjacency>` that comprise a Haplotype. 
+          Members must share the same reference sequence as adjacent members. Alleles should not have
+          overlapping or adjacent coordinates with neighboring Alleles. Neighboring alleles should be ordered 
+          by ascending coordinates, unless represented on a DNA inversion (following an end-defined sequence 
+          terminal), in which case they should be ordered in descending coordinates. Sequence references MUST
+          be consistent for all members between and including the end of one Adjacency and the beginning of 
+          another.
     required: [ "members" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -368,8 +369,7 @@ $defs:
         oneOf:
           - $refCurie: gks.core:IRI
           - $ref: "#/$defs/SequenceReference"
-        description: >-
-          A :ref:`SequenceReference`.
+        description: A :ref:`SequenceReference`.
       start:
         oneOf:
           - type: integer
@@ -377,7 +377,7 @@ $defs:
         description: >-
           The start coordinate or range of the SequenceLocation.
           The minimum value of this coordinate or range is 0.
-          MUST represent a coordinate or range less than the value of `end`.
+          MUST represent a coordinate or range less than or equal to the value of `end`.
       end:
         oneOf:
           - type: integer
@@ -385,10 +385,7 @@ $defs:
         description: >-
           The end coordinate or range of the SequenceLocation.
           The minimum value of this coordinate or range is 0.
-          MUST represent a coordinate or range greater than the value of `start`.
-    required:
-      - start
-      - end
+          MUST represent a coordinate or range greater than or equal to the value of `start`.
 
   SequenceReference:
     maturity: Alpha
@@ -419,7 +416,6 @@ $defs:
           - na
     required:
       - refgetAccession
-      - type
 
       #TODO: implementation guidance: digest property is RefGet TRUNC512
 
@@ -474,18 +470,35 @@ $defs:
         oneOf:
           - type: integer
           - $ref: "#/$defs/Range"
-        description: >-
-          The number of residues in the expressed sequence.
+        description: The number of residues in the expressed sequence.
       sequence:
         $ref: "#/$defs/SequenceString"
         description: the :ref:`Sequence` encoded by the Reference Length Expression.
       repeatSubunitLength:
         type: integer
-        description: >-
-          The number of residues in the repeat subunit.
+        description: The number of residues in the repeat subunit.
     required:
       - length
       - repeatSubunitLength
+
+  LengthExpression:
+    maturity: Alpha
+    inherits: SequenceExpression
+    ga4ghDigest:
+      keys:
+        - length
+    type: object
+    description: A sequence expressed only by its length.
+    properties:
+      type:
+        type: string
+        const: "LengthExpression"
+        default: "LengthExpression"
+        description: MUST be "LengthExpression"
+      length:
+        oneOf:
+          - $ref: "#/$defs/Range"
+          - type: integer
 
   LiteralSequenceExpression:
     maturity: Alpha
@@ -493,8 +506,7 @@ $defs:
     ga4ghDigest:
       keys:
         - sequence
-    description: >-
-      An explicit expression of a Sequence.
+    description: An explicit expression of a Sequence.
     type: object
     properties:
       type:
@@ -760,3 +772,85 @@ $defs:
       sequences). IUPAC ambiguity codes are permitted in Sequence Strings.
     type: string
     pattern: '^[A-Z*\-]*$'
+
+
+  # =============================================================================
+  # NEW PROPOSED SV Classes
+  # These classes are not yet organized within the vrs-source.yaml document
+  # These classes are under active discussion.
+  # =============================================================================
+
+  Adjacency:
+    maturity: Alpha
+    ga4ghDigest:
+      prefix: AJ
+      keys:
+        - type
+        - sequenceTerminals
+        - linker
+    inherits: MolecularVariation
+    description:
+      The `Adjacency` class represents the termination of a sequence and (when present)
+      the beginning of an adjacent sequence, potentially with an intervening linker sequence.
+    type: object
+    properties:
+      type:
+        type: string
+        const: Adjacency
+        default: Adjacency
+        description: MUST be "Adjacency".
+      sequenceTerminals:
+        type: array
+        uniqueItems: false
+        ordered: true
+        items:
+          oneOf:
+          - $refCurie: gks.core:IRI
+          - $ref: '#/$defs/Location'
+        description: Sequence terminals involved in the adjacency.
+        minItems: 1
+        maxItems: 2
+      linker:
+        $ref: '#/$defs/SequenceExpression'
+        description: A linker sequence found between the sequence terminals.
+#      homology:
+#        # Only valid for breakends=2
+#        type: boolean
+#        default: false
+#        description:
+#          A flag indicating whether the location interval of the breakend
+#          is due to the sequences at the breakends being homologous or
+#          whether the interval is due to uncertainty regarding the actual
+#          locations of the breakends.
+#      terminal:
+#        # TODO: can the schema encode a constraint that a terminal breakend cannot
+#        # be part of a breakpoint?
+#        type: boolean
+#        default: false
+#        description:
+#          # Only valid for breakends=1
+#          Indicates the end of the molecule
+    required:
+      - sequenceTerminals
+
+#  Event:
+#    description:
+#      An event that results in a set of variants.
+#    type: object
+#    properties:
+#      type:
+#        type: string
+#        const: Event
+#        default: Event
+#        description: MUST be "Event"
+#      variants:
+#        $ref: '#/definitions/VariationSet'
+#      classification:
+#        # TODO: what event ontology should we use?
+#        type: string
+#        description: Category of event
+#    required:
+#      - type
+#      - variants
+#      - classification
+#    additionalProperties: true

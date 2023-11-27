@@ -1,10 +1,10 @@
 **Computational Definition**
 
-A representation of the state of one or more biomolecules.
+The `Adjacency` class represents the termination of a sequence and (when present) the beginning of an adjacent sequence, potentially with an intervening linker sequence.
 
     **Information Model**
     
-Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
+Some Adjacency attributes are inherited from :ref:`Variation`.
 
     .. list-table::
        :class: clean-wrap
@@ -39,8 +39,16 @@ Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
        *  - type
           - string
           - 0..1
-          - 
+          - MUST be "Adjacency".
        *  - expressions
           - :ref:`Expression`
           - 0..m
           - 
+       *  - sequenceTerminals
+          - `IRI <core.json#/$defs/IRI>`_ | :ref:`Location`
+          - 1..2
+          - Sequence terminals involved in the adjacency.
+       *  - linker
+          - :ref:`SequenceExpression`
+          - 0..1
+          - A linker sequence found between the sequence terminals.

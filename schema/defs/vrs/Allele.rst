@@ -38,7 +38,7 @@ Some Allele attributes are inherited from :ref:`Variation`.
           - A sha512t24u digest created using the VRS Computed Identifier algorithm.
        *  - type
           - string
-          - 1..1
+          - 0..1
           - MUST be "Allele"
        *  - expressions
           - :ref:`Expression`
