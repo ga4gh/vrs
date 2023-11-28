@@ -1,0 +1,3 @@
+[submodule "schema/gks-common"]
+	path = submodules/gks-common
+	url = https://github.com/ga4gh/gks-common.git

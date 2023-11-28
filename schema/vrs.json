@@ -122,7 +122,7 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
@@ -149,7 +149,7 @@
                      "$ref": "#/$defs/SequenceLocation"
                   },
                   {
-                     "$ref": "core.json#/$defs/IRI"
+                     "$ref": "gks.common.json#/$defs/IRI"
                   }
                ],
                "description": "The location of the Allele"
@@ -203,7 +203,7 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
@@ -238,7 +238,7 @@
                         "$ref": "#/$defs/Allele"
                      },
                      {
-                        "$ref": "core.json#/$defs/IRI"
+                        "$ref": "gks.common.json#/$defs/IRI"
                      }
                   ]
                },
@@ -279,7 +279,7 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
@@ -306,7 +306,7 @@
                      "$ref": "#/$defs/SequenceLocation"
                   },
                   {
-                     "$ref": "core.json#/$defs/IRI"
+                     "$ref": "gks.common.json#/$defs/IRI"
                   }
                ],
                "description": "A location for which the number of systemic copies is described."
@@ -358,7 +358,7 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
@@ -385,7 +385,7 @@
                      "$ref": "#/$defs/SequenceLocation"
                   },
                   {
-                     "$ref": "core.json#/$defs/IRI"
+                     "$ref": "gks.common.json#/$defs/IRI"
                   }
                ],
                "description": "A location for which the number of systemic copies is described."
@@ -440,7 +440,7 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
@@ -519,7 +519,7 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
@@ -539,7 +539,7 @@
                      "$ref": "#/$defs/SequenceReference"
                   },
                   {
-                     "$ref": "core.json#/$defs/IRI"
+                     "$ref": "gks.common.json#/$defs/IRI"
                   }
                ],
                "description": "A SequenceReference."
@@ -594,7 +594,7 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
@@ -667,7 +667,7 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
@@ -735,7 +735,7 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
@@ -792,7 +792,7 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
@@ -844,7 +844,7 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
@@ -940,7 +940,7 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
@@ -971,7 +971,7 @@
                         "$ref": "#/$defs/SequenceLocation"
                      },
                      {
-                        "$ref": "core.json#/$defs/IRI"
+                        "$ref": "gks.common.json#/$defs/IRI"
                      }
                   ]
                },

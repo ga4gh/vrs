@@ -29,7 +29,7 @@ Some SequenceLocation attributes are inherited from :ref:`Ga4ghIdentifiableObjec
           - 0..1
           - A free-text description of the entity.
        *  - extensions
-          - `Extension <core.json#/$defs/Extension>`_
+          - `Extension <gks.common.json#/$defs/Extension>`_
           - 0..m
           - 
        *  - digest
@@ -41,7 +41,7 @@ Some SequenceLocation attributes are inherited from :ref:`Ga4ghIdentifiableObjec
           - 0..1
           - MUST be "SequenceLocation"
        *  - sequenceReference
-          - `IRI <core.json#/$defs/IRI>`_ | :ref:`SequenceReference`
+          - `IRI <gks.common.json#/$defs/IRI>`_ | :ref:`SequenceReference`
           - 0..1
           - A :ref:`SequenceReference`.
        *  - start

@@ -20,4 +20,7 @@ def test_examples():
             test['definition'],
             test.get('kw', '$defs')
         )
-        assert validate(data, schema) is None
+        try:
+            assert validate(data, schema) is None
+        except AssertionError as e:
+            raise AssertionError(f"AssertionError in {test['test_file']}: {e}")

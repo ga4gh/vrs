@@ -14,10 +14,10 @@ type: object
 strict: true
 
 imports:
-  gks.core: core-source.yaml
+  gks.core: gks.common-source.yaml
 
 namespaces:
-  gks.core: core.json#/$defs/
+  gks.core: gks.common.json#/$defs/
 
 $defs:
   # VRS definitions are presented top-down.  Everything rolls up to

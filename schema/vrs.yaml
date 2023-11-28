@@ -84,7 +84,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: core.json#/$defs/Extension
+          $ref: gks.common.json#/$defs/Extension
       digest:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
@@ -103,7 +103,7 @@ $defs:
       location:
         oneOf:
         - $ref: '#/$defs/SequenceLocation'
-        - $ref: core.json#/$defs/IRI
+        - $ref: gks.common.json#/$defs/IRI
         description: The location of the Allele
       state:
         description: An expression of the sequence state
@@ -141,7 +141,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: core.json#/$defs/Extension
+          $ref: gks.common.json#/$defs/Extension
       digest:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
@@ -166,7 +166,7 @@ $defs:
           oneOf:
           - $ref: '#/$defs/Adjacency'
           - $ref: '#/$defs/Allele'
-          - $ref: core.json#/$defs/IRI
+          - $ref: gks.common.json#/$defs/IRI
         description: A list of Alleles that comprise a Haplotype.  Members must share
           the same reference sequence as adjacent members. Alleles should not have
           overlapping or adjacent coordinates with neighboring Alleles. Neighboring
@@ -206,7 +206,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: core.json#/$defs/Extension
+          $ref: gks.common.json#/$defs/Extension
       digest:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
@@ -225,7 +225,7 @@ $defs:
       location:
         oneOf:
         - $ref: '#/$defs/SequenceLocation'
-        - $ref: core.json#/$defs/IRI
+        - $ref: gks.common.json#/$defs/IRI
         description: A location for which the number of systemic copies is described.
       copies:
         oneOf:
@@ -264,7 +264,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: core.json#/$defs/Extension
+          $ref: gks.common.json#/$defs/Extension
       digest:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
@@ -283,7 +283,7 @@ $defs:
       location:
         oneOf:
         - $ref: '#/$defs/SequenceLocation'
-        - $ref: core.json#/$defs/IRI
+        - $ref: gks.common.json#/$defs/IRI
         description: A location for which the number of systemic copies is described.
       copyChange:
         type: string
@@ -331,7 +331,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: core.json#/$defs/Extension
+          $ref: gks.common.json#/$defs/Extension
       digest:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
@@ -396,7 +396,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: core.json#/$defs/Extension
+          $ref: gks.common.json#/$defs/Extension
       digest:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
@@ -410,7 +410,7 @@ $defs:
       sequenceReference:
         oneOf:
         - $ref: '#/$defs/SequenceReference'
-        - $ref: core.json#/$defs/IRI
+        - $ref: gks.common.json#/$defs/IRI
         description: A SequenceReference.
       start:
         oneOf:
@@ -451,7 +451,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: core.json#/$defs/Extension
+          $ref: gks.common.json#/$defs/Extension
       digest:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
@@ -509,7 +509,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: core.json#/$defs/Extension
+          $ref: gks.common.json#/$defs/Extension
       digest:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
@@ -561,7 +561,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: core.json#/$defs/Extension
+          $ref: gks.common.json#/$defs/Extension
       digest:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
@@ -604,7 +604,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: core.json#/$defs/Extension
+          $ref: gks.common.json#/$defs/Extension
       digest:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
@@ -648,7 +648,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: core.json#/$defs/Extension
+          $ref: gks.common.json#/$defs/Extension
       digest:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
@@ -723,7 +723,7 @@ $defs:
         type: array
         ordered: true
         items:
-          $ref: core.json#/$defs/Extension
+          $ref: gks.common.json#/$defs/Extension
       digest:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
@@ -746,7 +746,7 @@ $defs:
         items:
           oneOf:
           - $ref: '#/$defs/SequenceLocation'
-          - $ref: core.json#/$defs/IRI
+          - $ref: gks.common.json#/$defs/IRI
         description: Sequence terminals involved in the adjacency.
         minItems: 1
         maxItems: 2
