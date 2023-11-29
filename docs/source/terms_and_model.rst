@@ -387,18 +387,18 @@ as an :ref:`Allele` with a :ref:`RepeatedSequenceExpression`.
 
 **Examples**
 
-Two, three, or four total copies of BRCA1:
+Two, three, or four total copies of APOE:
 
 .. parsed-literal::
 
     {
       "copies": {
-        "comparator": ">=",
-        "type": "IndefiniteRange",
-        "value": 3
+        "type": "DefiniteRange",
+        "min":2,
+        "max":4
       },
       "subject": {
-        "gene_id": "ncbigene:348",
+        "gene_id": "ncbigene:672",
         "type": "Gene"
       },
       "type": "CopyNumberCount"
