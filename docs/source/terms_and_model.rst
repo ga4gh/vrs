@@ -387,7 +387,7 @@ as an :ref:`Allele` with a :ref:`RepeatedSequenceExpression`.
 
 **Examples**
 
-Two, three, or four total copies of APOE:
+Two, three, or four total copies of BRCA1:
 
 .. parsed-literal::
 
