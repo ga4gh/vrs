@@ -398,7 +398,7 @@ Two, three, or four total copies of BRCA1:
         "max":4
       },
       "subject": {
-        "gene_id": "ncbigene:672",
+        "gene_id": "ncbigene:348",
         "type": "Gene"
       },
       "type": "CopyNumberCount"
