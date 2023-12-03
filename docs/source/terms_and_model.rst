@@ -393,9 +393,9 @@ Two, three, or four total copies of BRCA1:
 
     {
       "copies": {
-        "comparator": ">=",
-        "type": "IndefiniteRange",
-        "value": 3
+        "type": "DefiniteRange",
+        "min":2,
+        "max":4
       },
       "subject": {
         "gene_id": "ncbigene:348",
