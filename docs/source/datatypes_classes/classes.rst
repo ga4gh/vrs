@@ -9,7 +9,7 @@ $$$$$$$$$$$$$$$$
 A *Sequence Location* is a specified subsequence of a reference :ref:`Sequence`.
 The reference is typically a chromosome, transcript, or protein sequence.
 
-.. include:: ../defs/SequenceLocation.rst
+.. include::  ../defs/vrs/SequenceLocation.rst
 
 **Implementation Guidance**
 
@@ -64,7 +64,7 @@ genetic locus. In the genetics community, *allele* may also refer to a
 specific haplotype. In the context of biological sequences, "allele" refers
 to a distinct state of a molecule at a location.
 
-.. include:: ../defs/Allele.rst
+.. include::  ../defs/vrs/Allele.rst
 
 **Implementation Guidance**
 
@@ -178,7 +178,7 @@ on the same physical molecule. Haplotypes are commonly described with respect
 to locations on a gene, a set of nearby genes, or other physically proximal
 genetic markers that tend to be transmitted together.
 
-.. include:: ../defs/Haplotype.rst
+.. include::  ../defs/vrs/Haplotype.rst
 
 **Implementation Guidance**
 
@@ -300,7 +300,7 @@ of :ref:`SystemicVariation` and so describes the number of copies in a
 genome. The related :ref:`MolecularVariation` concept can be expressed
 as an :ref:`Allele` with a :ref:`RepeatedSequenceExpression`.
 
-.. include:: ../defs/CopyNumberCount.rst
+.. include::  ../defs/vrs/CopyNumberCount.rst
 
 **Examples**
 
@@ -335,7 +335,7 @@ callers typically express changes as relative statements, and many HGVS
 expressions submitted to express copy number variation are interpreted to be
 relative copy changes.
 
-.. include:: ../defs/CopyNumberChange.rst
+.. include::  ../defs/vrs/CopyNumberChange.rst
 
 **Examples**
 
@@ -363,7 +363,7 @@ to either by individual nucleotide representations (e.g. GT representation in VC
 genotypes using either :ref:`Allele` objects (as commonly done in VCF records) or larger :ref:`Haplotype`
 objects (which would otherwise be represented using symbolic shorthand).
 
-.. include:: ../defs/Genotype.rst
+.. include::  ../defs/vrs/Genotype.rst
 
 **Implementation guidance**
 

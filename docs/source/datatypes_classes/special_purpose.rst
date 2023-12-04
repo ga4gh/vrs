@@ -18,7 +18,7 @@ sequence, but are intended to be semantically distinct. There MAY be
 reasons to select or enforce one form over another that SHOULD be
 managed by implementations. See discussion on :ref:`equivalence`.
 
-.. include:: ../defs/SequenceExpression.rst
+.. include::  ../defs/vrs/SequenceExpression.rst
 
 .. _ReferenceLengthExpression:
 
@@ -27,7 +27,7 @@ ReferenceLengthExpression
 
 A ReferenceLengthExpression ...
 
-.. include:: ../defs/ReferenceLengthExpression.rst
+.. include::  ../defs/vrs/ReferenceLengthExpression.rst
 
 **Examples**
 
@@ -42,7 +42,7 @@ LengthExpression
 
 A LengthExpression ...
 
-.. include:: ../defs/LengthExpression.rst
+.. include::  ../defs/vrs/LengthExpression.rst
 
 **Examples**
 
@@ -58,7 +58,7 @@ LiteralSequenceExpression
 A LiteralSequenceExpression "wraps" a string representation of a
 sequence for parallelism with other SequenceExpressions.
 
-.. include:: ../defs/LiteralSequenceExpression.rst
+.. include::  ../defs/vrs/LiteralSequenceExpression.rst
 
 **Examples**
 
@@ -77,11 +77,11 @@ Sequence Reference
 
 tbd
 
-.. include:: ../defs/SequenceReference.rst
+.. include::  ../defs/vrs/SequenceReference.rst
 
 .. _genotypemember:
 
 GenotypeMember
 @@@@@@@@@@@@@@
 
-.. include:: ../defs/GenotypeMember.rst
+.. include::  ../defs/vrs/GenotypeMember.rst

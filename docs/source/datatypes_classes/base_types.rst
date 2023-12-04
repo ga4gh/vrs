@@ -1,14 +1,29 @@
-VRS Type Framework
-@@@@@@@@@@@@@@@@@@
+VRS Base Types
+@@@@@@@@@@@@@@
 
-The VRS Type Framework is a set of classes that can be used to create 
+The VRS Base Types are a set of classes that can be used to create 
 VRS data classes that can be used to represent variation and location
-data. It uses core elements of the GKS Common Framework as a foundation.
+data. It uses core elements of the GKS Common as a foundation.
 
-    entity
-    value_object
+.. _Entity:
 
+.. include:: ../defs/gks.common/Entity.rst
 
+Entity
+######
+
+.. _ValueObject:
+
+ValueObject
+###########
+
+.. include:: ../defs/vrs/ValueObject.rst
+
+Ga4ghIdentifiableObject
+#######################
+
+.. include:: ../defs/vrs/Ga4ghIdentifiableObject.rst
+  
 .. _Location:
 
 Location
@@ -24,7 +39,7 @@ The most common and concrete Location is a :ref:`SequenceLocation`, i.e.,
 a Location based on a named sequence and an Interval on that sequence. Other 
 types of Location may be added based on community need.
 
-.. include:: defs/Location.rst
+.. include:: ../defs/vrs/Location.rst
 
 **Implementation Guidance**
 
@@ -52,20 +67,24 @@ subclass <utilityvariation>`. Types of variation are widely varied, and
 there are several :ref:`planned-variation` currently under consideration
 to capture this diversity.
 
-.. include:: defs/Variation.rst
+.. include:: ../defs/vrs/Variation.rst
 
 .. _MolecularVariation:
 
 Molecular Variation
 $$$$$$$$$$$$$$$$$$$
 
-.. include:: defs/MolecularVariation.rst
+.. include:: ../defs/vrs/MolecularVariation.rst
 
 .. _SystemicVariation:
 
 Systemic Variation
 $$$$$$$$$$$$$$$$$$
 
-.. include:: defs/SystemicVariation.rst
+.. include:: ../defs/vrs/SystemicVariation.rst
 
 
+CopyNumber
+##########
+
+.. include:: ../defs/vrs/CopyNumber.rst

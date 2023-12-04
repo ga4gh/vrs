@@ -4,58 +4,12 @@ Primitive Types
 Primitive types represent simple values with syntactic or other
 constraints. They enable correctness for values stored in VRS.
 
-.. _CURIE:
+.. _IRI:
 
-CURIE
-#####
+IRI
+###
 
-.. include:: ../defs/CURIE.rst
-
-**Implementation Guidance**
-
-* All identifiers in VRS MUST be a valid CURIE, regardless of
-  whether the identifier refers to GA4GH VRS objects or external data.
-* For GA4GH VRS objects, this specification RECOMMENDS using globally
-  unique :ref:`computed-identifiers` for use within *and* between
-  systems.
-* For external data, CURIE-formatted identifiers MUST be used.  When
-  an appropriate namespace exists at `identifiers.org
-  <http://identifiers.org/>`__, that namespace MUST be used.  When an
-  appropriate namespace does not exist at `identifiers.org
-  <http://identifiers.org/>`__, support is implementation-dependent.
-  That is, implementations MAY choose whether and how to support
-  informal or local namespaces.
-* Implementations MUST use CURIE identifiers verbatim. Implementations
-  MAY NOT modify CURIEs in any way (e.g., case-folding).
-
-**Examples**
-
-Identifiers for GRCh38 chromosome 19:
-
-.. parsed-literal::
-
-    ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
-    refseq:NC_000019.10
-    grch38:19
-
-See :ref:`identify` for examples of CURIE-based identifiers for VRS
-objects.
-
-
-**Information Model**
-
-A string constrained to match the regular expression
-``^cen|[pq](ter|([1-9][0-9]*(\.[1-9][0-9]*)?))$``, derived from the
-ISCN guidelines [1]_.
-
-.. [1] McGowan-Jordan J (Ed.). *ISCN 2016: An international system
-       for human cytogenomic nomenclature (2016).* Karger (2016).
-
-**Examples**
-
-.. parsed-literal::
-
-   "q13.32" (string)
+.. include::  ../defs/vrs/IRI.rst
 
 .. _Residue:
 
@@ -66,19 +20,19 @@ A residue refers to a specific `monomer`_ within the `polymeric
 chain`_ of a `protein`_ or `nucleic acid`_ (Source: `Wikipedia
 Residue page`_).
 
-.. include:: ../defs/Residue.rst
+.. include::  ../defs/vrs/Residue.rst
 
-.. _Sequence:
+.. _SequenceString:
 
-Sequence
-########
+SequenceString
+##############
 
 A *sequence* is a character string representation of a contiguous,
 linear polymer of nucleic acid or amino acid :ref:`Residues <Residue>`.
 Sequences are the prevalent representation of these polymers,
 particularly in the domain of variant representation.
 
-.. include:: ../defs/Sequence.rst
+.. include::  ../defs/vrs/SequenceString.rst
 
 **Information Model**
 
