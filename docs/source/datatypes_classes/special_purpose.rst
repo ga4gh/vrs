@@ -4,7 +4,7 @@ Special Purpose Types
 .. _SequenceExpression:
 
 Sequence Expressions
-@@@@@@@@@@@@@@@@@@@@@@
+####################
 
 VRS provides several syntaxes for expressing a sequence,
 collectively referred to as *Sequence Expressions*. They are:
@@ -23,7 +23,7 @@ managed by implementations. See discussion on :ref:`equivalence`.
 .. _ReferenceLengthExpression:
 
 ReferenceLengthExpression
-#########################
+$$$$$$$$$$$$$$$$$$$$$$$$$
 
 A ReferenceLengthExpression ...
 
@@ -38,7 +38,7 @@ A ReferenceLengthExpression ...
 .. _LengthExpression:
 
 LengthExpression
-################
+$$$$$$$$$$$$$$$$
 
 A LengthExpression ...
 
@@ -53,7 +53,7 @@ A LengthExpression ...
 .. _LiteralSequenceExpression:
 
 LiteralSequenceExpression
-#########################
+$$$$$$$$$$$$$$$$$$$$$$$$$
 
 A LiteralSequenceExpression "wraps" a string representation of a
 sequence for parallelism with other SequenceExpressions.
@@ -73,7 +73,7 @@ sequence for parallelism with other SequenceExpressions.
 .. _SequenceReference:
 
 Sequence Reference
-@@@@@@@@@@@@@@@@@@
+##################
 
 tbd
 
@@ -82,6 +82,6 @@ tbd
 .. _genotypemember:
 
 GenotypeMember
-@@@@@@@@@@@@@@
+##############
 
 .. include::  ../defs/vrs/GenotypeMember.rst
