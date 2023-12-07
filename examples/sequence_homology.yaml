@@ -1,6 +1,6 @@
 id: sequence_homology
 type: Adjacency
-sequenceTerminals:
+connection:
   - type: SequenceLocation
     sequenceReference:
       refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
