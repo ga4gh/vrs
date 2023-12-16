@@ -7,6 +7,9 @@
          "description": "A representation of the state of one or more biomolecules.",
          "oneOf": [
             {
+               "$ref": "#/$defs/Adjacency"
+            },
+            {
                "$ref": "#/$defs/Allele"
             },
             {
@@ -25,6 +28,39 @@
          "discriminator": {
             "propertyName": "type"
          }
+      },
+      "Expression": {
+         "type": "object",
+         "privateTo": "Variation",
+         "maturity": "Alpha",
+         "description": "Representation of a variation by a specified nomenclature or syntax for a Variation object.  Common examples of expressions for the description of molecular variation include the HGVS  and ISCN nomenclatures.",
+         "properties": {
+            "syntax": {
+               "type": "string",
+               "enum": [
+                  "hgvs.c",
+                  "hgvs.p",
+                  "hgvs.g",
+                  "hgvs.m",
+                  "hgvs.n",
+                  "hgvs.r",
+                  "iscn",
+                  "gnomad",
+                  "spdi"
+               ]
+            },
+            "value": {
+               "type": "string"
+            },
+            "syntax_version": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "syntax",
+            "value"
+         ],
+         "additionalProperties": false
       },
       "MolecularVariation": {
          "description": "A variation on a contiguous molecule.",
@@ -75,7 +111,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -84,16 +125,23 @@
                   "$ref": "#/$defs/Extension"
                }
             },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
+            },
             "type": {
                "type": "string",
                "const": "Allele",
                "default": "Allele",
                "description": "MUST be \"Allele\""
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
+            "expressions": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Expression"
+               }
             },
             "location": {
                "oneOf": [
@@ -110,6 +158,9 @@
                "description": "An expression of the sequence state",
                "oneOf": [
                   {
+                     "$ref": "#/$defs/LengthExpression"
+                  },
+                  {
                      "$ref": "#/$defs/LiteralSequenceExpression"
                   },
                   {
@@ -120,8 +171,7 @@
          },
          "required": [
             "location",
-            "state",
-            "type"
+            "state"
          ],
          "additionalProperties": false
       },
@@ -134,7 +184,7 @@
                "type"
             ]
          },
-         "description": "A set of non-overlapping Allele members that co-occur on the same molecule.",
+         "description": "An ordered set of co-occurring variants on the same molecule.",
          "type": "object",
          "properties": {
             "id": {
@@ -142,7 +192,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -151,24 +206,34 @@
                   "$ref": "#/$defs/Extension"
                }
             },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
+            },
             "type": {
                "type": "string",
                "const": "Haplotype",
                "default": "Haplotype",
                "description": "MUST be \"Haplotype\""
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
+            "expressions": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Expression"
+               }
             },
             "members": {
                "type": "array",
-               "ordered": false,
+               "ordered": true,
                "minItems": 2,
-               "uniqueItems": true,
+               "uniqueItems": false,
                "items": {
                   "oneOf": [
+                     {
+                        "$ref": "#/$defs/Adjacency"
+                     },
                      {
                         "$ref": "#/$defs/Allele"
                      },
@@ -177,12 +242,11 @@
                      }
                   ]
                },
-               "description": "List of Alleles, or references to Alleles, that comprise this Haplotype."
+               "description": "A list of Alleles that comprise a Haplotype.  Members must share the same reference sequence as adjacent members. Alleles should not have overlapping or adjacent coordinates with neighboring Alleles. Neighboring alleles should be ordered  by ascending coordinates, unless represented on a DNA inversion (following an end-defined sequence  terminal), in which case they should be ordered in descending coordinates. Sequence references MUST be consistent for all members between and including the end of one Adjacency and the beginning of  another."
             }
          },
          "required": [
-            "members",
-            "type"
+            "members"
          ],
          "additionalProperties": false
       },
@@ -191,7 +255,7 @@
          "ga4ghDigest": {
             "keys": [
                "copies",
-               "subject",
+               "location",
                "type"
             ],
             "prefix": "CN"
@@ -204,7 +268,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -213,18 +282,25 @@
                   "$ref": "#/$defs/Extension"
                }
             },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
+            },
             "type": {
                "type": "string",
                "const": "CopyNumberCount",
                "default": "CopyNumberCount",
                "description": "MUST be \"CopyNumberCount\""
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
+            "expressions": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Expression"
+               }
             },
-            "subject": {
+            "location": {
                "oneOf": [
                   {
                      "$ref": "#/$defs/IRI"
@@ -249,8 +325,7 @@
          },
          "required": [
             "copies",
-            "subject",
-            "type"
+            "location"
          ],
          "additionalProperties": false
       },
@@ -258,8 +333,8 @@
          "maturity": "Alpha",
          "ga4ghDigest": {
             "keys": [
-               "copy_change",
-               "subject",
+               "copyChange",
+               "location",
                "type"
             ],
             "prefix": "CX"
@@ -272,7 +347,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -281,18 +361,25 @@
                   "$ref": "#/$defs/Extension"
                }
             },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
+            },
             "type": {
                "type": "string",
                "const": "CopyNumberChange",
                "default": "CopyNumberChange",
                "description": "MUST be \"CopyNumberChange\""
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
+            "expressions": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Expression"
+               }
             },
-            "subject": {
+            "location": {
                "oneOf": [
                   {
                      "$ref": "#/$defs/IRI"
@@ -303,7 +390,7 @@
                ],
                "description": "A location for which the number of systemic copies is described."
             },
-            "copy_change": {
+            "copyChange": {
                "type": "string",
                "enum": [
                   "efo:0030069",
@@ -319,9 +406,8 @@
             }
          },
          "required": [
-            "copy_change",
-            "subject",
-            "type"
+            "copyChange",
+            "location"
          ],
          "additionalProperties": false
       },
@@ -343,7 +429,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -352,16 +443,23 @@
                   "$ref": "#/$defs/Extension"
                }
             },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
+            },
             "type": {
                "type": "string",
                "const": "Genotype",
                "default": "Genotype",
                "description": "MUST be \"Genotype\""
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
+            "expressions": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Expression"
+               }
             },
             "members": {
                "type": "array",
@@ -387,28 +485,17 @@
          },
          "required": [
             "count",
-            "members",
-            "type"
+            "members"
          ],
          "additionalProperties": false
-      },
-      "Location": {
-         "description": "A contiguous segment of a biological sequence.",
-         "oneOf": [
-            {
-               "$ref": "#/$defs/SequenceLocation"
-            }
-         ],
-         "discriminator": {
-            "propertyName": "type"
-         }
       },
       "SequenceLocation": {
          "maturity": "Alpha",
          "ga4ghDigest": {
             "keys": [
-               "count",
-               "members",
+               "end",
+               "sequenceReference",
+               "start",
                "type"
             ],
             "prefix": "SL"
@@ -421,7 +508,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -430,18 +522,18 @@
                   "$ref": "#/$defs/Extension"
                }
             },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
+            },
             "type": {
                "type": "string",
                "const": "SequenceLocation",
                "default": "SequenceLocation",
                "description": "MUST be \"SequenceLocation\""
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
-            },
-            "sequence": {
+            "sequenceReference": {
                "oneOf": [
                   {
                      "$ref": "#/$defs/IRI"
@@ -461,7 +553,7 @@
                      "type": "integer"
                   }
                ],
-               "description": "The start coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range less than the value of `end`."
+               "description": "The start coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range less than or equal to the value of `end`."
             },
             "end": {
                "oneOf": [
@@ -472,24 +564,16 @@
                      "type": "integer"
                   }
                ],
-               "description": "The end coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range greater than the value of `start`."
+               "description": "The end coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range greater than or equal to the value of `start`."
             }
          },
-         "required": [
-            "end",
-            "start",
-            "type"
-         ],
+         "required": [],
          "additionalProperties": false
       },
       "SequenceReference": {
          "maturity": "Alpha",
          "ga4ghDigest": {
-            "prefix": "SQR",
-            "keys": [
-               "refgetAccession",
-               "type"
-            ]
+            "assigned": true
          },
          "type": "object",
          "description": "A sequence of nucleic or amino acid character codes.",
@@ -499,7 +583,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -508,33 +597,31 @@
                   "$ref": "#/$defs/Extension"
                }
             },
-            "type": {
-               "type": "string",
-               "const": "SequenceReference",
-               "default": "SequenceReference",
-               "description": "MUST be \"SequenceReference\""
-            },
             "digest": {
                "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
                "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
+            },
+            "type": {
+               "type": "string",
+               "const": "SequenceReference"
             },
             "refgetAccession": {
-               "description": "A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence, using the sha512t24u digest.",
+               "description": "A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence,  using the sha512t24u digest.",
                "type": "string",
-               "pattern": "SQ.[0-9A-Za-z_\\-]{32}"
+               "pattern": "^SQ.[0-9A-Za-z_\\-]{32}$"
             },
             "residueAlphabet": {
                "type": "string",
+               "description": "The interpretation of the character codes referred to by the refget accession, where \"aa\" specifies an amino acid character set, and \"na\" specifies a nucleic acid character set.",
                "enum": [
-                  "amino acid",
-                  "nucleic acid"
+                  "aa",
+                  "na"
                ]
             }
          },
          "required": [
-            "refgetAccession",
-            "type"
+            "refgetAccession"
          ],
          "additionalProperties": false
       },
@@ -554,6 +641,13 @@
       },
       "ReferenceLengthExpression": {
          "maturity": "Alpha",
+         "ga4ghDigest": {
+            "keys": [
+               "length",
+               "repeatSubunitLength",
+               "type"
+            ]
+         },
          "description": "An expression of a length of a sequence from a repeating reference.",
          "type": "object",
          "properties": {
@@ -562,7 +656,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -570,6 +669,11 @@
                "items": {
                   "$ref": "#/$defs/Extension"
                }
+            },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "type": {
                "type": "string",
@@ -599,12 +703,76 @@
          },
          "required": [
             "length",
+            "repeatSubunitLength",
+            "type"
+         ],
+         "additionalProperties": false
+      },
+      "LengthExpression": {
+         "maturity": "Alpha",
+         "ga4ghDigest": {
+            "keys": [
+               "length",
+               "type"
+            ]
+         },
+         "type": "object",
+         "description": "A sequence expressed only by its length.",
+         "properties": {
+            "id": {
+               "type": "string",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
+            },
+            "label": {
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
+            },
+            "extensions": {
+               "type": "array",
+               "ordered": true,
+               "items": {
+                  "$ref": "#/$defs/Extension"
+               }
+            },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
+            },
+            "type": {
+               "type": "string",
+               "const": "LengthExpression",
+               "default": "LengthExpression",
+               "description": "MUST be \"LengthExpression\""
+            },
+            "length": {
+               "oneOf": [
+                  {
+                     "$ref": "#/$defs/Range"
+                  },
+                  {
+                     "type": "integer"
+                  }
+               ]
+            }
+         },
+         "required": [
             "type"
          ],
          "additionalProperties": false
       },
       "LiteralSequenceExpression": {
          "maturity": "Alpha",
+         "ga4ghDigest": {
+            "keys": [
+               "sequence",
+               "type"
+            ]
+         },
          "description": "An explicit expression of a Sequence.",
          "type": "object",
          "properties": {
@@ -613,7 +781,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -621,6 +794,11 @@
                "items": {
                   "$ref": "#/$defs/Extension"
                }
+            },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "type": {
                "type": "string",
@@ -641,6 +819,12 @@
       },
       "GenotypeMember": {
          "privateTo": "Genotype",
+         "ga4ghDigest": {
+            "keys": [
+               "count",
+               "variation"
+            ]
+         },
          "description": "A class for expressing the count of a specific MolecularVariation present _in-trans_ at a genomic locus represented by a Genotype.",
          "type": "object",
          "properties": {
@@ -649,7 +833,12 @@
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -658,11 +847,10 @@
                   "$ref": "#/$defs/Extension"
                }
             },
-            "type": {
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
                "type": "string",
-               "const": "GenotypeMember",
-               "default": "GenotypeMember",
-               "description": "MUST be \"GenotypeMember\"."
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "count": {
                "oneOf": [
@@ -723,17 +911,30 @@
          "type": "string",
          "pattern": "^[A-Z*\\-]*$"
       },
-      "Mapping": {
-         "type": "object",
+      "Adjacency": {
          "maturity": "Alpha",
-         "description": "A mapping to a concept in a terminology system.",
+         "ga4ghDigest": {
+            "prefix": "AJ",
+            "keys": [
+               "linker",
+               "sequenceTerminals",
+               "type"
+            ]
+         },
+         "description": "The `Adjacency` class represents the termination of a sequence and (when present) the beginning of an adjacent sequence, potentially with an intervening linker sequence.",
+         "type": "object",
          "properties": {
             "id": {
                "type": "string",
                "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
             "label": {
-               "type": "string"
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
             },
             "extensions": {
                "type": "array",
@@ -741,6 +942,71 @@
                "items": {
                   "$ref": "#/$defs/Extension"
                }
+            },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
+            },
+            "type": {
+               "type": "string",
+               "const": "Adjacency",
+               "default": "Adjacency",
+               "description": "MUST be \"Adjacency\"."
+            },
+            "expressions": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Expression"
+               }
+            },
+            "sequenceTerminals": {
+               "type": "array",
+               "uniqueItems": false,
+               "ordered": true,
+               "items": {
+                  "oneOf": [
+                     {
+                        "$ref": "#/$defs/IRI"
+                     },
+                     {
+                        "$ref": "#/$defs/SequenceLocation"
+                     }
+                  ]
+               },
+               "description": "Sequence terminals involved in the adjacency.",
+               "minItems": 1,
+               "maxItems": 2
+            },
+            "linker": {
+               "description": "A linker sequence found between the sequence terminals.",
+               "oneOf": [
+                  {
+                     "$ref": "#/$defs/LengthExpression"
+                  },
+                  {
+                     "$ref": "#/$defs/LiteralSequenceExpression"
+                  },
+                  {
+                     "$ref": "#/$defs/ReferenceLengthExpression"
+                  }
+               ]
+            }
+         },
+         "required": [
+            "sequenceTerminals"
+         ],
+         "additionalProperties": false
+      },
+      "Coding": {
+         "type": "object",
+         "maturity": "Alpha",
+         "description": "a concept codified by a terminology system.",
+         "properties": {
+            "label": {
+               "type": "string",
+               "description": "A primary label for the coding."
             },
             "system": {
                "type": "string",
@@ -753,9 +1019,43 @@
             "code": {
                "$ref": "#/$defs/Code",
                "description": "Symbol in syntax defined by the terminology system."
+            }
+         },
+         "required": [
+            "code",
+            "system"
+         ],
+         "additionalProperties": false
+      },
+      "Mapping": {
+         "type": "object",
+         "maturity": "Alpha",
+         "description": "A mapping to a concept in a terminology system.",
+         "properties": {
+            "id": {
+               "type": "string",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
             },
-            "mapping": {
-               "description": "A mapping between concepts as defined by the Simple Knowledge Organization System (SKOS).",
+            "label": {
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
+            },
+            "extensions": {
+               "type": "array",
+               "ordered": true,
+               "items": {
+                  "$ref": "#/$defs/Extension"
+               }
+            },
+            "coding": {
+               "$ref": "#/$defs/Coding"
+            },
+            "relation": {
+               "description": "A mapping relation between concepts as defined by the Simple Knowledge Organization System (SKOS).",
                "type": "string",
                "enum": [
                   "closeMatch",
@@ -767,9 +1067,8 @@
             }
          },
          "required": [
-            "code",
-            "mapping",
-            "system"
+            "coding",
+            "relation"
          ],
          "additionalProperties": false
       },
@@ -816,6 +1115,498 @@
          "description": "An IRI Reference (either an IRI or a relative-reference), according to `RFC3986 section 4.1  <https://datatracker.ietf.org/doc/html/rfc3986#section-4.1>` and `RFC3987 section 2.1 <https://datatracker.ietf.org/doc/html/rfc3987#section-2.1>`. MAY be a JSON Pointer as an IRI fragment, as  described by `RFC6901 section 6 <https://datatracker.ietf.org/doc/html/rfc6901#section-6>`.",
          "type": "string",
          "format": "iri-reference"
+      },
+      "Condition": {
+         "description": "A disease or other medical disorder.",
+         "oneOf": [
+            {
+               "$ref": "#/$defs/Disease"
+            },
+            {
+               "$ref": "#/$defs/Phenotype"
+            },
+            {
+               "$ref": "#/$defs/TraitSet"
+            }
+         ]
+      },
+      "TraitSet": {
+         "type": "object",
+         "maturity": "Alpha",
+         "description": "A set of phenotype and/or disease concepts that together constitute a condition.",
+         "properties": {
+            "id": {
+               "type": "string",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
+            },
+            "label": {
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
+            },
+            "extensions": {
+               "type": "array",
+               "ordered": true,
+               "items": {
+                  "$ref": "#/$defs/Extension"
+               }
+            },
+            "mappings": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Mapping"
+               }
+            },
+            "aliases": {
+               "description": "Aliases are alternate labels for a Domain Entity.",
+               "ordered": false,
+               "type": "array",
+               "items": {
+                  "type": "string"
+               }
+            },
+            "type": {
+               "type": "string",
+               "const": "TraitSet",
+               "default": "TraitSet",
+               "description": "MUST be \"TraitSet\"."
+            },
+            "traits": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "anyOf": [
+                     {
+                        "$ref": "#/$defs/Disease"
+                     },
+                     {
+                        "$ref": "#/$defs/Phenotype"
+                     }
+                  ]
+               },
+               "minItems": 2
+            }
+         },
+         "required": [
+            "traits",
+            "type"
+         ],
+         "additionalProperties": false
+      },
+      "Disease": {
+         "type": "object",
+         "maturity": "Alpha",
+         "description": "A particular abnormal condition that negatively affects the structure or function  of all or part of an organism and is not immediately due to any external injury.",
+         "properties": {
+            "id": {
+               "type": "string",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
+            },
+            "label": {
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
+            },
+            "extensions": {
+               "type": "array",
+               "ordered": true,
+               "items": {
+                  "$ref": "#/$defs/Extension"
+               }
+            },
+            "mappings": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Mapping"
+               }
+            },
+            "aliases": {
+               "description": "Aliases are alternate labels for a Domain Entity.",
+               "ordered": false,
+               "type": "array",
+               "items": {
+                  "type": "string"
+               }
+            },
+            "type": {
+               "type": "string",
+               "const": "Disease",
+               "default": "Disease",
+               "description": "MUST be \"Disease\"."
+            }
+         },
+         "required": [
+            "type"
+         ],
+         "additionalProperties": false
+      },
+      "Phenotype": {
+         "type": "object",
+         "maturity": "Alpha",
+         "description": "An observable characteristic or trait of an organism.",
+         "properties": {
+            "id": {
+               "type": "string",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
+            },
+            "label": {
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
+            },
+            "extensions": {
+               "type": "array",
+               "ordered": true,
+               "items": {
+                  "$ref": "#/$defs/Extension"
+               }
+            },
+            "mappings": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Mapping"
+               }
+            },
+            "aliases": {
+               "description": "Aliases are alternate labels for a Domain Entity.",
+               "ordered": false,
+               "type": "array",
+               "items": {
+                  "type": "string"
+               }
+            },
+            "type": {
+               "type": "string",
+               "const": "Phenotype",
+               "default": "Phenotype",
+               "description": "MUST be \"Phenotype\"."
+            }
+         },
+         "required": [
+            "type"
+         ],
+         "additionalProperties": false
+      },
+      "TherapeuticProcedure": {
+         "description": "An action or administration of therapeutic agents to produce an effect  that is intended to alter or stop a pathologic process.",
+         "oneOf": [
+            {
+               "$ref": "#/$defs/CombinationTherapy"
+            },
+            {
+               "$ref": "#/$defs/TherapeuticAction"
+            },
+            {
+               "$ref": "#/$defs/TherapeuticAgent"
+            },
+            {
+               "$ref": "#/$defs/TherapeuticSubstituteGroup"
+            }
+         ]
+      },
+      "TherapeuticAction": {
+         "type": "object",
+         "maturity": "Alpha",
+         "description": "A therapeutic action taken that is intended to alter or stop a pathologic process.",
+         "properties": {
+            "id": {
+               "type": "string",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
+            },
+            "label": {
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
+            },
+            "extensions": {
+               "type": "array",
+               "ordered": true,
+               "items": {
+                  "$ref": "#/$defs/Extension"
+               }
+            },
+            "mappings": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Mapping"
+               }
+            },
+            "aliases": {
+               "description": "Aliases are alternate labels for a Domain Entity.",
+               "ordered": false,
+               "type": "array",
+               "items": {
+                  "type": "string"
+               }
+            },
+            "type": {
+               "type": "string",
+               "const": "TherapeuticAction",
+               "default": "TherapeuticAction",
+               "description": "MUST be \"TherapeuticAction\"."
+            }
+         },
+         "required": [
+            "type"
+         ],
+         "additionalProperties": false
+      },
+      "TherapeuticAgent": {
+         "type": "object",
+         "maturity": "Alpha",
+         "description": "An administered therapeutic agent that is intended to alter or stop a pathologic process.",
+         "properties": {
+            "id": {
+               "type": "string",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
+            },
+            "label": {
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
+            },
+            "extensions": {
+               "type": "array",
+               "ordered": true,
+               "items": {
+                  "$ref": "#/$defs/Extension"
+               }
+            },
+            "mappings": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Mapping"
+               }
+            },
+            "aliases": {
+               "description": "Aliases are alternate labels for a Domain Entity.",
+               "ordered": false,
+               "type": "array",
+               "items": {
+                  "type": "string"
+               }
+            },
+            "type": {
+               "type": "string",
+               "const": "TherapeuticAgent",
+               "default": "TherapeuticAgent",
+               "description": "MUST be \"TherapeuticAgent\"."
+            }
+         },
+         "required": [
+            "type"
+         ],
+         "additionalProperties": false
+      },
+      "CombinationTherapy": {
+         "type": "object",
+         "maturity": "Alpha",
+         "description": "A therapeutic procedure that involves multiple different therapeutic procedures  performed in combination.",
+         "properties": {
+            "id": {
+               "type": "string",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
+            },
+            "label": {
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
+            },
+            "extensions": {
+               "type": "array",
+               "ordered": true,
+               "items": {
+                  "$ref": "#/$defs/Extension"
+               }
+            },
+            "mappings": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Mapping"
+               }
+            },
+            "aliases": {
+               "description": "Aliases are alternate labels for a Domain Entity.",
+               "ordered": false,
+               "type": "array",
+               "items": {
+                  "type": "string"
+               }
+            },
+            "type": {
+               "type": "string",
+               "const": "CombinationTherapy",
+               "default": "CombinationTherapy",
+               "description": "MUST be \"CombinationTherapy\"."
+            },
+            "components": {
+               "type": "array",
+               "ordered": false,
+               "description": "The individual therapeutic procedure components that constitute the combination therapy.",
+               "items": {
+                  "anyOf": [
+                     {
+                        "$ref": "#/$defs/TherapeuticSubstituteGroup"
+                     },
+                     {
+                        "$ref": "#/$defs/TherapeuticAction"
+                     },
+                     {
+                        "$ref": "#/$defs/TherapeuticAgent"
+                     }
+                  ]
+               },
+               "minItems": 2
+            }
+         },
+         "required": [
+            "components",
+            "type"
+         ],
+         "additionalProperties": false
+      },
+      "TherapeuticSubstituteGroup": {
+         "type": "object",
+         "maturity": "Alpha",
+         "description": "A group of therapeutic procedures that may be treated as substitutes for one another.",
+         "properties": {
+            "id": {
+               "type": "string",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
+            },
+            "label": {
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
+            },
+            "extensions": {
+               "type": "array",
+               "ordered": true,
+               "items": {
+                  "$ref": "#/$defs/Extension"
+               }
+            },
+            "mappings": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Mapping"
+               }
+            },
+            "aliases": {
+               "description": "Aliases are alternate labels for a Domain Entity.",
+               "ordered": false,
+               "type": "array",
+               "items": {
+                  "type": "string"
+               }
+            },
+            "type": {
+               "type": "string",
+               "const": "TherapeuticSubstituteGroup",
+               "default": "TherapeuticSubstituteGroup",
+               "description": "MUST be \"TherapeuticSubstituteGroup\"."
+            },
+            "substitutes": {
+               "type": "array",
+               "ordered": false,
+               "description": "The individual therapeutic procedures that may be treated as substitutes.",
+               "items": {
+                  "anyOf": [
+                     {
+                        "$ref": "#/$defs/TherapeuticAction"
+                     },
+                     {
+                        "$ref": "#/$defs/TherapeuticAgent"
+                     }
+                  ]
+               },
+               "minItems": 2
+            }
+         },
+         "required": [
+            "substitutes",
+            "type"
+         ],
+         "additionalProperties": false
+      },
+      "Gene": {
+         "maturity": "Alpha",
+         "description": "A basic physical and functional unit of heredity.",
+         "type": "object",
+         "properties": {
+            "id": {
+               "type": "string",
+               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
+            },
+            "label": {
+               "type": "string",
+               "description": "A primary label for the entity."
+            },
+            "description": {
+               "type": "string",
+               "description": "A free-text description of the entity."
+            },
+            "extensions": {
+               "type": "array",
+               "ordered": true,
+               "items": {
+                  "$ref": "#/$defs/Extension"
+               }
+            },
+            "mappings": {
+               "type": "array",
+               "ordered": false,
+               "items": {
+                  "$ref": "#/$defs/Mapping"
+               }
+            },
+            "type": {
+               "type": "string",
+               "const": "Gene",
+               "default": "Gene",
+               "description": "MUST be \"Gene\""
+            },
+            "aliases": {
+               "description": "Aliases are alternate labels for a Domain Entity.",
+               "ordered": false,
+               "type": "array",
+               "items": {
+                  "type": "string"
+               }
+            }
+         },
+         "required": [
+            "type"
+         ],
+         "additionalProperties": false
       }
    }
 }

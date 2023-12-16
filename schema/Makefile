@@ -3,7 +3,7 @@
 .SUFFIXES:
 .DELETE_ON_ERROR:
 
-JSYAMLS:=vrs.yaml core.yaml
+JSYAMLS:=vrs.yaml
 JSONS:=${JSYAMLS:.yaml=.json}
 
 all: ${JSONS} merged.json defs
@@ -20,11 +20,7 @@ merged.yaml: vrs-source.yaml
 defs:
 	rm -rf defs
 	y2t.py vrs-source.yaml
-	y2t.py core-source.yaml
-
-## # npm install -g json-dereference-cli
-## %.json: %.yaml
-## 	json-dereference -s $< -o $@
+	ln -s ../../submodules/gks-common/schema/defs/gks.common defs/gks.common
 
 
 watch:

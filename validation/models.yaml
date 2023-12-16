@@ -5,9 +5,9 @@ SequenceReference:
       type: SequenceReference
       refgetAccession: SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul
     out:
-      ga4gh_digest: OFEyBMeo55q3QRrxAY5FiDqnkdyf0GTV
-      ga4gh_identify: ga4gh:SQR.OFEyBMeo55q3QRrxAY5FiDqnkdyf0GTV
-      ga4gh_serialize: '{"refgetAccession":"SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul","type":"SequenceReference"}'
+      ga4gh_identify: null
+      ga4gh_digest: F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul
+      ga4gh_serialize: null
 SequenceLocation:
   - name: "SequenceLocation w/ SequenceReference"
     in:
@@ -18,9 +18,9 @@ SequenceLocation:
         refgetAccession: SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul
       type: SequenceLocation
     out:
-      ga4gh_digest: p71XUj3t5PFaHqAA_oKteJbBBhG_T4rQ
-      ga4gh_identify: ga4gh:SL.p71XUj3t5PFaHqAA_oKteJbBBhG_T4rQ
-      ga4gh_serialize: '{"end":44908822,"sequenceReference":"OFEyBMeo55q3QRrxAY5FiDqnkdyf0GTV","start":44908821,"type":"SequenceLocation"}'
+      ga4gh_digest: wwZVMOTdfGY8zOwKV5SeI2o3NdHRhg18
+      ga4gh_identify: ga4gh:SL.wwZVMOTdfGY8zOwKV5SeI2o3NdHRhg18
+      ga4gh_serialize: '{"end":44908822,"sequenceReference":"F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul","start":44908821,"type":"SequenceLocation"}'
   - name: "SequenceLocation w/ SequenceReference and Ranges"
     in:
       end: [44908822,44908922]
@@ -30,9 +30,9 @@ SequenceLocation:
         refgetAccession: SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul
       type: SequenceLocation
     out:
-      ga4gh_digest: NKkfN6jqDOiMfSl-53n4DVWwx0ffHaD_
-      ga4gh_identify: ga4gh:SL.NKkfN6jqDOiMfSl-53n4DVWwx0ffHaD_
-      ga4gh_serialize: '{"end":[44908822,44908922],"sequenceReference":"OFEyBMeo55q3QRrxAY5FiDqnkdyf0GTV","start":[44908721,44908821],"type":"SequenceLocation"}'
+      ga4gh_digest: RJTG9Cd_SsMCElyE-4ynqk1r1Nu2OgNr
+      ga4gh_identify: ga4gh:SL.RJTG9Cd_SsMCElyE-4ynqk1r1Nu2OgNr
+      ga4gh_serialize: '{"end":[44908822,44908922],"sequenceReference":"F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul","start":[44908721,44908821],"type":"SequenceLocation"}'
   - name: "SequenceLocation w/Definite and Indefinite Ranges"
     in:
       end: [44908822,null]
@@ -42,9 +42,9 @@ SequenceLocation:
         refgetAccession: SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ
       type: SequenceLocation
     out:
-      ga4gh_digest: _keTJceln2psdQ26ZmAiZ5AL9AGyUrsR
-      ga4gh_identify: ga4gh:SL._keTJceln2psdQ26ZmAiZ5AL9AGyUrsR
-      ga4gh_serialize: '{"end":[44908822,null],"sequenceReference":"UCYJSoScPO00LY6YI7YRIwnrdgM_MUxZ","start":[44908721,44908821],"type":"SequenceLocation"}'
+      ga4gh_digest: qyBZfC2w5fr-jA_B4XEvUH4MgPgk_mMm
+      ga4gh_identify: ga4gh:SL.qyBZfC2w5fr-jA_B4XEvUH4MgPgk_mMm
+      ga4gh_serialize: '{"end":[44908822,null],"sequenceReference":"jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ","start":[44908721,44908821],"type":"SequenceLocation"}'
   - name: "SequenceLocation w/more Definite and Indefinite Ranges"
     in:
       end: [null,44908822]
@@ -54,9 +54,9 @@ SequenceLocation:
         refgetAccession: SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ
       type: SequenceLocation
     out:
-      ga4gh_digest: 0mQP-Oxr6Lb_2N5yMZvj-m7Lgn5uLiAR
-      ga4gh_identify: ga4gh:SL.0mQP-Oxr6Lb_2N5yMZvj-m7Lgn5uLiAR
-      ga4gh_serialize: '{"end":[null,44908822],"sequenceReference":"UCYJSoScPO00LY6YI7YRIwnrdgM_MUxZ","start":[44908721,44908821],"type":"SequenceLocation"}'
+      ga4gh_digest: D7j6AoTcSOSUYYP650OJy_ME16HLmDD4
+      ga4gh_identify: ga4gh:SL.D7j6AoTcSOSUYYP650OJy_ME16HLmDD4
+      ga4gh_serialize: '{"end":[null,44908822],"sequenceReference":"jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ","start":[44908721,44908821],"type":"SequenceLocation"}'
 #ChromosomeLocation: TODO - how to replace ChromosomeLocation in 2-alpha
 #  - name: "19q13.32 Example"
 #    in:
@@ -91,6 +91,8 @@ LiteralSequenceExpression:
       sequence: ACGT
       type: LiteralSequenceExpression
     out:
+      ga4gh_identify: null
+      ga4gh_digest: ECvt22ZFJ6RcLutlH07yAkd2-hNb-dwV
       ga4gh_serialize: '{"sequence":"ACGT","type":"LiteralSequenceExpression"}'
 #RepeatedSequenceExpression:
 #  -
@@ -129,9 +131,9 @@ Allele:
         type: LiteralSequenceExpression
       type: Allele
     out:
-      ga4gh_digest: P4Jonp408BOHLR0fDWwgCLmd-cmML0-0
-      ga4gh_identify: ga4gh:VA.P4Jonp408BOHLR0fDWwgCLmd-cmML0-0
-      ga4gh_serialize: '{"location":"C6TfiPZdUx7ix-rtlvs06vjVUlp7niVs","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}'
+      ga4gh_digest: PkeY9RbMt9CEFakQ0AgDdAQ7POUeoWR0
+      ga4gh_identify: ga4gh:VA.PkeY9RbMt9CEFakQ0AgDdAQ7POUeoWR0
+      ga4gh_serialize: '{"location":"7gpsYFTLxYPNrBIhA0X4Q5h7vcKFsS8m","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}'
 Haplotype:
   - name: "APOE1 on GRCh38, inline"
     in:
@@ -160,9 +162,9 @@ Haplotype:
         type: Allele
       type: Haplotype
     out:
-      ga4gh_digest: j4MvWwApHLtKp6arfMAwuQQyc4ZFOXHi
-      ga4gh_identify: ga4gh:HT.j4MvWwApHLtKp6arfMAwuQQyc4ZFOXHi
-      ga4gh_serialize: '{"members":["Jnm5HEvns3AfW_C242rTpJRqR5eBAF9s","ssuHPJTyZ_NziLGr38aHXwXW7m--P7wF"],"type":"Haplotype"}'
+      ga4gh_digest: M5mRmkWX_fp61XwRRGdsW5W2Lhbgi1wB
+      ga4gh_identify: ga4gh:HT.M5mRmkWX_fp61XwRRGdsW5W2Lhbgi1wB
+      ga4gh_serialize: '{"members":["ATTX0ayZJ46HjJbrxrmQI4V9MXdDPI5B","iZ1yy9oSeDb7YPFMDY4xSMrsl2AtJPvG"],"type":"Haplotype"}'
   - name: "APOE1 on GRCh38, referenced"
     in:
       members:
@@ -221,14 +223,14 @@ Genotype:
               sequence: G
       count: 1
     out:
-      ga4gh_digest: 2KEf9sLt_tilMr4qqrXvqrAjKDwhDNjC
-      ga4gh_identify: ga4gh:GT.2KEf9sLt_tilMr4qqrXvqrAjKDwhDNjC
-      ga4gh_serialize: '{"count":1,"members":[{"count":1,"type":"GenotypeMember","variation":"_dvISJcVVmZdJ8oLfojt-GKsaFVFbdhz"},{"count":1,"type":"GenotypeMember","variation":"1iuxFspkgxPDFYlGwVBox3XiMwsNLGVV"}],"type":"Genotype"}'
+      ga4gh_digest: 51J0mMryCGjdce3qBpqNt4n_hXUQmw83
+      ga4gh_identify: ga4gh:GT.51J0mMryCGjdce3qBpqNt4n_hXUQmw83
+      ga4gh_serialize: '{"count":1,"members":[{"count":1,"type":"GenotypeMember","variation":"fFR5oRpeD8Cuq2hfs3bXd1rgJUQrQA26"},{"count":1,"type":"GenotypeMember","variation":"AUYSTKn2HElZ_Gg-Cv9Pm6Yx9Xpvx8Tm"}],"type":"Genotype"}'
 CopyNumberCount:
   - name: ">=3 copies APOE"
     in:
       copies: [3,null]
-      subject:
+      location:
         sequenceReference:
           type: SequenceReference
           refgetAccession: SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ
@@ -237,14 +239,14 @@ CopyNumberCount:
         type: SequenceLocation
       type: CopyNumberCount
     out:
-      ga4gh_digest: mXhoZQwAHwpeolsIEb9snxZAVqtjsk79
-      ga4gh_identify: ga4gh:CN.mXhoZQwAHwpeolsIEb9snxZAVqtjsk79
-      ga4gh_serialize: '{"copies":[3,null],"subject":"k2jqs0d7563nxAUJA1UItMG549mx36A0","type":"CopyNumberCount"}'
+      ga4gh_digest: _EIIv4iuJqAveZ0GCnlo6Xf7Fk_BOo4Z
+      ga4gh_identify: ga4gh:CN._EIIv4iuJqAveZ0GCnlo6Xf7Fk_BOo4Z
+      ga4gh_serialize: '{"copies":[3,null],"location":"VUi4qjddguRoAOA2oLFQmncze0yGqhjS","type":"CopyNumberCount"}'
 CopyNumberChange:
   - name: "Low-level copy gain of BRCA1"
     in:
       copyChange: efo:0030071
-      subject:
+      location:
         sequenceReference:
           type: SequenceReference
           refgetAccession: SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ
@@ -253,9 +255,9 @@ CopyNumberChange:
         type: SequenceLocation
       type: CopyNumberChange
     out:
-      ga4gh_digest: hD5zkLJuTb9v7Ji_qTM9IazfZTWMM78L
-      ga4gh_identify: ga4gh:CX.hD5zkLJuTb9v7Ji_qTM9IazfZTWMM78L
-      ga4gh_serialize: '{"copyChange":"efo:0030071","subject":"k2jqs0d7563nxAUJA1UItMG549mx36A0","type":"CopyNumberChange"}'
+      ga4gh_digest: -1h3Y8yYh9BTA_IsjIJkVVkXcP_rvYTx
+      ga4gh_identify: ga4gh:CX.-1h3Y8yYh9BTA_IsjIJkVVkXcP_rvYTx
+      ga4gh_serialize: '{"copyChange":"efo:0030071","location":"VUi4qjddguRoAOA2oLFQmncze0yGqhjS","type":"CopyNumberChange"}'
 #Text: TODO Text not currently supported in 2-alpha
 #  -
 #    in:
