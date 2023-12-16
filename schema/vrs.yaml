@@ -89,7 +89,7 @@ $defs:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
         type: string
-        pattern: '[0-9A-Za-z_\-]{32}'
+        pattern: ^[0-9A-Za-z_\-]{32}$
       type:
         type: string
         const: Allele
@@ -146,7 +146,7 @@ $defs:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
         type: string
-        pattern: '[0-9A-Za-z_\-]{32}'
+        pattern: ^[0-9A-Za-z_\-]{32}$
       type:
         type: string
         const: Haplotype
@@ -211,7 +211,7 @@ $defs:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
         type: string
-        pattern: '[0-9A-Za-z_\-]{32}'
+        pattern: ^[0-9A-Za-z_\-]{32}$
       type:
         type: string
         const: CopyNumberCount
@@ -269,7 +269,7 @@ $defs:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
         type: string
-        pattern: '[0-9A-Za-z_\-]{32}'
+        pattern: ^[0-9A-Za-z_\-]{32}$
       type:
         type: string
         const: CopyNumberChange
@@ -336,7 +336,7 @@ $defs:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
         type: string
-        pattern: '[0-9A-Za-z_\-]{32}'
+        pattern: ^[0-9A-Za-z_\-]{32}$
       type:
         type: string
         const: Genotype
@@ -401,7 +401,7 @@ $defs:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
         type: string
-        pattern: '[0-9A-Za-z_\-]{32}'
+        pattern: ^[0-9A-Za-z_\-]{32}$
       type:
         type: string
         const: SequenceLocation
@@ -456,7 +456,7 @@ $defs:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
         type: string
-        pattern: '[0-9A-Za-z_\-]{32}'
+        pattern: ^[0-9A-Za-z_\-]{32}$
       type:
         type: string
         const: SequenceReference
@@ -464,7 +464,7 @@ $defs:
         description: A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>`
           identifier for the referenced sequence,  using the sha512t24u digest.
         type: string
-        pattern: SQ.[0-9A-Za-z_\-]{32}
+        pattern: ^SQ.[0-9A-Za-z_\-]{32}$
       residueAlphabet:
         type: string
         description: The interpretation of the character codes referred to by the
@@ -514,7 +514,7 @@ $defs:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
         type: string
-        pattern: '[0-9A-Za-z_\-]{32}'
+        pattern: ^[0-9A-Za-z_\-]{32}$
       type:
         type: string
         const: ReferenceLengthExpression
@@ -566,7 +566,7 @@ $defs:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
         type: string
-        pattern: '[0-9A-Za-z_\-]{32}'
+        pattern: ^[0-9A-Za-z_\-]{32}$
       type:
         type: string
         const: LengthExpression
@@ -609,7 +609,7 @@ $defs:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
         type: string
-        pattern: '[0-9A-Za-z_\-]{32}'
+        pattern: ^[0-9A-Za-z_\-]{32}$
       type:
         type: string
         const: LiteralSequenceExpression
@@ -653,7 +653,7 @@ $defs:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
         type: string
-        pattern: '[0-9A-Za-z_\-]{32}'
+        pattern: ^[0-9A-Za-z_\-]{32}$
       count:
         oneOf:
         - $ref: '#/$defs/Range'
@@ -728,7 +728,7 @@ $defs:
         description: A sha512t24u digest created using the VRS Computed Identifier
           algorithm.
         type: string
-        pattern: '[0-9A-Za-z_\-]{32}'
+        pattern: ^[0-9A-Za-z_\-]{32}$
       type:
         type: string
         const: Adjacency

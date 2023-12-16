@@ -5,3 +5,6 @@ docs/build
 venv
 pyproject.toml
 .vscode/settings.json
+.python-version
+.idea/
+.DS_Store
