@@ -29,7 +29,7 @@ Some CopyNumber attributes are inherited from :ref:`Variation`.
           - 0..1
           - A free-text description of the entity.
        *  - extensions
-          - `Extension <core.json#/$defs/Extension>`_
+          - `Extension <gks.common.json#/$defs/Extension>`_
           - 0..m
           - 
        *  - digest
@@ -45,6 +45,6 @@ Some CopyNumber attributes are inherited from :ref:`Variation`.
           - 0..m
           - 
        *  - location
-          - `IRI <core.json#/$defs/IRI>`_ | :ref:`Location`
+          - `IRI <gks.common.json#/$defs/IRI>`_ | :ref:`Location`
           - 1..1
           - A location for which the number of systemic copies is described.

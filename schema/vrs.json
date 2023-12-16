@@ -122,13 +122,13 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
                "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
                "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "type": {
                "type": "string",
@@ -149,7 +149,7 @@
                      "$ref": "#/$defs/SequenceLocation"
                   },
                   {
-                     "$ref": "core.json#/$defs/IRI"
+                     "$ref": "gks.common.json#/$defs/IRI"
                   }
                ],
                "description": "The location of the Allele"
@@ -203,13 +203,13 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
                "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
                "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "type": {
                "type": "string",
@@ -238,7 +238,7 @@
                         "$ref": "#/$defs/Allele"
                      },
                      {
-                        "$ref": "core.json#/$defs/IRI"
+                        "$ref": "gks.common.json#/$defs/IRI"
                      }
                   ]
                },
@@ -279,13 +279,13 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
                "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
                "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "type": {
                "type": "string",
@@ -306,7 +306,7 @@
                      "$ref": "#/$defs/SequenceLocation"
                   },
                   {
-                     "$ref": "core.json#/$defs/IRI"
+                     "$ref": "gks.common.json#/$defs/IRI"
                   }
                ],
                "description": "A location for which the number of systemic copies is described."
@@ -358,13 +358,13 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
                "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
                "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "type": {
                "type": "string",
@@ -385,7 +385,7 @@
                      "$ref": "#/$defs/SequenceLocation"
                   },
                   {
-                     "$ref": "core.json#/$defs/IRI"
+                     "$ref": "gks.common.json#/$defs/IRI"
                   }
                ],
                "description": "A location for which the number of systemic copies is described."
@@ -440,13 +440,13 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
                "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
                "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "type": {
                "type": "string",
@@ -519,13 +519,13 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
                "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
                "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "type": {
                "type": "string",
@@ -539,7 +539,7 @@
                      "$ref": "#/$defs/SequenceReference"
                   },
                   {
-                     "$ref": "core.json#/$defs/IRI"
+                     "$ref": "gks.common.json#/$defs/IRI"
                   }
                ],
                "description": "A SequenceReference."
@@ -594,13 +594,13 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
                "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
                "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "type": {
                "type": "string",
@@ -609,7 +609,7 @@
             "refgetAccession": {
                "description": "A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence,  using the sha512t24u digest.",
                "type": "string",
-               "pattern": "SQ.[0-9A-Za-z_\\-]{32}"
+               "pattern": "^SQ.[0-9A-Za-z_\\-]{32}$"
             },
             "residueAlphabet": {
                "type": "string",
@@ -667,13 +667,13 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
                "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
                "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "type": {
                "type": "string",
@@ -735,13 +735,13 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
                "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
                "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "type": {
                "type": "string",
@@ -792,13 +792,13 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
                "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
                "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "type": {
                "type": "string",
@@ -844,13 +844,13 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
                "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
                "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "count": {
                "oneOf": [
@@ -940,13 +940,13 @@
                "type": "array",
                "ordered": true,
                "items": {
-                  "$ref": "core.json#/$defs/Extension"
+                  "$ref": "gks.common.json#/$defs/Extension"
                }
             },
             "digest": {
                "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
                "type": "string",
-               "pattern": "[0-9A-Za-z_\\-]{32}"
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "type": {
                "type": "string",
@@ -971,7 +971,7 @@
                         "$ref": "#/$defs/SequenceLocation"
                      },
                      {
-                        "$ref": "core.json#/$defs/IRI"
+                        "$ref": "gks.common.json#/$defs/IRI"
                      }
                   ]
                },
