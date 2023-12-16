@@ -5,7 +5,7 @@ expressions:
 location:
   type: SequenceLocation
   sequenceReference:
-    refgetAccession: ga4gh:SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO
+    refgetAccession: SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO
     residueAlphabet: na
     id: NC_000001.11
   start: 40819438
