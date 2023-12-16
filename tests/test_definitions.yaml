@@ -31,3 +31,11 @@ tests:
     description: A haplotype of two alleles on a shared chromosome reference sequence.
     schema: vrs
     definition: Haplotype
+  - test_file: SPDI_contraction.yaml
+    description: A simple RLE contraction from SPDI representation
+    schema: vrs
+    definition: Allele
+  - test_file: SPDI_expansion.yaml
+    description: A simple RLE expansion from SPDI representation
+    schema: vrs
+    definition: Allele
