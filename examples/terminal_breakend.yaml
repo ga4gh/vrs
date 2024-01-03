@@ -1,6 +1,6 @@
 id: terminal_breakend
 type: Adjacency
-sequenceTerminals:
+adjoinedSequences:
   - type: SequenceLocation
     sequenceReference:
       refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU

@@ -171,10 +171,10 @@ $defs:
           the same reference sequence as adjacent members. Alleles should not have
           overlapping or adjacent coordinates with neighboring Alleles. Neighboring
           alleles should be ordered  by ascending coordinates, unless represented
-          on a DNA inversion (following an end-defined sequence  terminal), in which
-          case they should be ordered in descending coordinates. Sequence references
-          MUST be consistent for all members between and including the end of one
-          Adjacency and the beginning of  another.
+          on a DNA inversion (following an Adjacency with  end-defined adjoinedSequences),
+          in which case they should be ordered in descending coordinates.  Sequence
+          references MUST be consistent for all members between and including the
+          end of one  Adjacency and the beginning of another.
     required:
     - members
     additionalProperties: false
@@ -699,12 +699,12 @@ $defs:
     ga4ghDigest:
       prefix: AJ
       keys:
+      - adjoinedSequences
       - linker
-      - sequenceTerminals
       - type
-    description: The `Adjacency` class represents the termination of a sequence and
-      (when present) the beginning of an adjacent sequence, potentially with an intervening
-      linker sequence.
+    description: The `Adjacency` class can represent either the termination of a sequence
+      or the adjoining of the end of a sequence with the beginning of an adjacent
+      sequence, potentially with an intervening linker sequence.
     type: object
     properties:
       id:
@@ -739,7 +739,7 @@ $defs:
         ordered: false
         items:
           $ref: '#/$defs/Expression'
-      sequenceTerminals:
+      adjoinedSequences:
         type: array
         uniqueItems: false
         ordered: true
@@ -747,15 +747,16 @@ $defs:
           oneOf:
           - $ref: '#/$defs/SequenceLocation'
           - $ref: gks.common.json#/$defs/IRI
-        description: Sequence terminals involved in the adjacency.
+        description: The terminal sequence or pair of adjoined sequences that defines
+          in the adjacency.
         minItems: 1
         maxItems: 2
       linker:
-        description: A linker sequence found between the sequence terminals.
+        description: The sequence found between adjoined sequences.
         oneOf:
         - $ref: '#/$defs/LengthExpression'
         - $ref: '#/$defs/LiteralSequenceExpression'
         - $ref: '#/$defs/ReferenceLengthExpression'
     required:
-    - sequenceTerminals
+    - adjoinedSequences
     additionalProperties: false

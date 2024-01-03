@@ -1,6 +1,6 @@
 **Computational Definition**
 
-The `Adjacency` class represents the termination of a sequence and (when present) the beginning of an adjacent sequence, potentially with an intervening linker sequence.
+The `Adjacency` class can represent either the termination of a sequence or the adjoining of the end of a sequence with the beginning of an adjacent sequence, potentially with an intervening linker sequence.
 
     **Information Model**
     
@@ -44,11 +44,11 @@ Some Adjacency attributes are inherited from :ref:`Variation`.
           - :ref:`Expression`
           - 0..m
           - 
-       *  - sequenceTerminals
+       *  - adjoinedSequences
           - `IRI <gks.common.json#/$defs/IRI>`_ | :ref:`Location`
           - 1..2
-          - Sequence terminals involved in the adjacency.
+          - The terminal sequence or pair of adjoined sequences that defines in the adjacency.
        *  - linker
           - :ref:`SequenceExpression`
           - 0..1
-          - A linker sequence found between the sequence terminals.
+          - The sequence found between adjoined sequences.
