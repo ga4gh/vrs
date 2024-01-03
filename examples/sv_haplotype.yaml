@@ -6,7 +6,7 @@ members:
     linker:
       type: LiteralSequenceExpression
       sequence: GTC
-    connection:
+    adjoinedSequences:
       - type: SequenceLocation
         sequenceReference:
           refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
@@ -29,7 +29,7 @@ members:
       sequence: C
   - id: ga4gh:AJ.iQ1RGkhW9AyVBLl53silKqgGSBOJaFOr
     type: Adjacency
-    connection:
+    adjoinedSequences:
     - type: SequenceLocation
       end: 15000
     - type: SequenceLocation

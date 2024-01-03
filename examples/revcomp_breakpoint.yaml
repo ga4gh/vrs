@@ -1,6 +1,6 @@
 id: truthset_1_1
 type: Adjacency
-connection:
+adjoinedSequences:
   - type: SequenceLocation
     sequenceReference:
       id: NC_000001.10

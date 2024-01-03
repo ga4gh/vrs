@@ -178,9 +178,10 @@ $defs:
           A list of :ref:`Alleles <Allele>` and :ref:`Adjacencies <Adjacency>` that comprise a Haplotype. 
           Members must share the same reference sequence as adjacent members. Alleles should not have
           overlapping or adjacent coordinates with neighboring Alleles. Neighboring alleles should be ordered 
-          by ascending coordinates, unless represented on a DNA inversion (following an end-defined connection), in which case they should be ordered in descending coordinates. Sequence references MUST
-          be consistent for all members between and including the end of one Adjacency and the beginning of 
-          another.
+          by ascending coordinates, unless represented on a DNA inversion (following an Adjacency with 
+          end-defined adjoinedSequences), in which case they should be ordered in descending coordinates. 
+          Sequence references MUST be consistent for all members between and including the end of one 
+          Adjacency and the beginning of another.
     required: [ "members" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -785,12 +786,12 @@ $defs:
       prefix: AJ
       keys:
         - type
-        - connection
+        - adjoinedSequences
         - linker
     inherits: MolecularVariation
     description:
       The `Adjacency` class can represent either the termination of a sequence 
-      or a connection between the end of a sequence with the beginning of an 
+      or the adjoining of the end of a sequence with the beginning of an
       adjacent sequence, potentially with an intervening linker sequence.
     type: object
     properties:
@@ -799,7 +800,7 @@ $defs:
         const: Adjacency
         default: Adjacency
         description: MUST be "Adjacency".
-      connection:
+      adjoinedSequences:
         type: array
         uniqueItems: false
         ordered: true
@@ -807,12 +808,12 @@ $defs:
           oneOf:
           - $refCurie: gks.core:IRI
           - $ref: '#/$defs/Location'
-        description: The connection that defines in the adjacency.
+        description: The terminal sequence or pair of adjoined sequences that defines in the adjacency.
         minItems: 1
         maxItems: 2
       linker:
         $ref: '#/$defs/SequenceExpression'
-        description: The sequence found between a connection's two sequences.
+        description: The sequence found between adjoined sequences.
 #      homology:
 #        # Only valid for breakends=2
 #        type: boolean
@@ -831,7 +832,7 @@ $defs:
 #          # Only valid for breakends=1
 #          Indicates the end of the molecule
     required:
-      - connection
+      - adjoinedSequences
 
 #  Event:
 #    description:
