@@ -1,6 +1,6 @@
 .. _associating_annotations:
 
-Associating Annotations with VRS Objects
+(Rewrite) Associating Annotations with VRS Objects
 ========================================
 
 Information is never embedded within VRS objects. Instead, it is
