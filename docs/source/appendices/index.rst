@@ -7,6 +7,7 @@ Appendices
    getting_involved    
    design_decisions
    development_process
+   mm_and_versioning
    future_plans
 
    implementations

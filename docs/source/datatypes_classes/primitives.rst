@@ -9,7 +9,7 @@ constraints. They enable correctness for values stored in VRS.
 IRI
 ###
 
-.. include::  ../defs/vrs/IRI.rst
+.. include::  ../defs/gks.common/IRI.rst
 
 .. _Residue:
 

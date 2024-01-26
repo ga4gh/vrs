@@ -21,7 +21,6 @@ implementation that promotes adoption of the standard.
    :includehidden:
 
    introduction
-   mm_and_versioning
    terms_and_model
    datatypes_classes/index
    schema
