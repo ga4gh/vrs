@@ -24,7 +24,7 @@ These are the identifiable classes in scope for VRS:
   :includehidden:
 
   base_types
-  primitive
+  primitives
   general_purpose
   special_purpose
   classes
