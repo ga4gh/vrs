@@ -68,6 +68,17 @@ LiteralSequenceExpression:
       ga4gh_digest: ECvt22ZFJ6RcLutlH07yAkd2-hNb-dwV
       ga4gh_serialize: '{"sequence":"ACGT","type":"LiteralSequenceExpression"}'
 
+ReferenceLengthExpression:
+  -
+    in:
+      type: ReferenceLengthExpression
+      length: 11
+      repeatSubunitLength: 3
+    out:
+      ga4gh_identify: null
+      ga4gh_digest: ir--KEiFgGke1N__iRkSaQdPK4_oxBmc
+      ga4gh_serialize: '{"length":11,"repeatSubunitLength":3,"sequence":"CTCCTCCTCCT","type":"ReferenceLengthExpression"}'
+
 Allele:
   - name: "rs7412@GRCh38>T w/LiteralSequenceExpression"
     in:
@@ -86,6 +97,28 @@ Allele:
       ga4gh_digest: PkeY9RbMt9CEFakQ0AgDdAQ7POUeoWR0
       ga4gh_identify: ga4gh:VA.PkeY9RbMt9CEFakQ0AgDdAQ7POUeoWR0
       ga4gh_serialize: '{"location":"7gpsYFTLxYPNrBIhA0X4Q5h7vcKFsS8m","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}'
+  - name: "NC_000001.11:40819438:CTCCTCCT:CTCCTCCTCCT w/ReferenceLengthExpression"
+    in:
+      type: Allele
+      expressions:
+        - syntax: spdi
+          value: NC_000001.11:40819438:CTCCTCCT:CTCCTCCTCCT
+      location:
+        type: SequenceLocation
+        sequenceReference:
+          refgetAccession: SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO
+          residueAlphabet: na
+          id: NC_000001.11
+        start: 40819438
+        end: 40819446
+      state:
+        type: ReferenceLengthExpression
+        length: 11
+        repeatSubunitLength: 3
+    out:
+      ga4gh_digest: FbiZxPysKpR5m1YI09JJ7S1U6RLpzWHs
+      ga4gh_identify: 'ga4gh:VA.FbiZxPysKpR5m1YI09JJ7S1U6RLpzWHs'
+      ga4gh_serialize: '{"location":"Z1UhRc7UvhuJB2fMAC2NJo9UsCfsUoKB","state":{"length":11,"repeatSubunitLength":3,"type":"ReferenceLengthExpression"},"type":"Allele"}'
 
 Haplotype:
   - name: "APOE1 on GRCh38, inline"
