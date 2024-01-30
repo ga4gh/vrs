@@ -86,28 +86,6 @@ Allele:
       ga4gh_digest: PkeY9RbMt9CEFakQ0AgDdAQ7POUeoWR0
       ga4gh_identify: ga4gh:VA.PkeY9RbMt9CEFakQ0AgDdAQ7POUeoWR0
       ga4gh_serialize: '{"location":"7gpsYFTLxYPNrBIhA0X4Q5h7vcKFsS8m","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}'
-  - name: "NC_000001.11:40819438:CTCCTCCT:CTCCTCCTCCT w/ReferenceLengthExpression"
-      in:
-        type: Allele
-        expressions:
-          - syntax: spdi
-            value: NC_000001.11:40819438:CTCCTCCT:CTCCTCCTCCT
-        location:
-          type: SequenceLocation
-          sequenceReference:
-            refgetAccession: SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO
-            residueAlphabet: na
-            id: NC_000001.11
-          start: 40819438
-          end: 40819446
-        state:
-          type: ReferenceLengthExpression
-          length: 11
-          repeatSubunitLength: 3
-      out:
-        ga4gh_digest: xxx
-        ga4gh_identify: xxx
-        ga4gh_serialize: xxx
 
 Haplotype:
   - name: "APOE1 on GRCh38, inline"
