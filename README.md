@@ -89,7 +89,7 @@ those implementing tools with VRS.
 
 ## Using smoketests
 
-The smoketests require python 3.8+. This is the recommended setup:
+The smoketests require python 3.9+. This is the recommended setup:
 
 ```
 $ python3 -m venv venv
