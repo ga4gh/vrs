@@ -1,0 +1,44 @@
+id: sv_genotype
+type: Genotype
+count: 2
+members:
+- id: genotype_member1
+  count: 1
+  variation:
+    id: haplotype1
+    type: Haplotype
+    members:
+    - id: ga4gh:AJ.WSHvYBlk-fTVCyCYeDeGuhK6z61cQfB4
+      type: Adjacency
+      adjoinedSequences:
+        - type: SequenceLocation
+          sequenceReference:
+            refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+            residueAlphabet: na
+            id: NC_000001.10
+          end: 2000
+        - type: SequenceLocation
+          start: 1000
+    - id: ga4gh:VA.-tOc0wAbtHAU8uIK3t9OQzm95aTD7yOx
+      type: Allele
+      location:
+        type: SequenceLocation
+        start: 1500
+        end: 1501
+      state:
+        type: LiteralSequenceExpression
+        sequence: C
+- id: genotype_member2
+  count: 1
+  variation:
+    id: ga4gh:AJ.kfptigQUh7Gj7IIYtXiA1talIvXu9w6x
+    type: Adjacency
+    adjoinedSequences:
+      - type: SequenceLocation
+        sequenceReference:
+          refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+          residueAlphabet: na
+          id: NC_000001.10
+        end: 850
+      - type: SequenceLocation
+        start: 950

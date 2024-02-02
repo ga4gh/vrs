@@ -1,6 +1,6 @@
 from config import test_dir, schema_dir, examples_dir
 import yaml
-from jsonschema import validate
+from jsonschema import validate, ValidationError
 
 
 def get_schema(schema_file, schema_class, kw="$defs"):
@@ -22,5 +22,5 @@ def test_examples():
         )
         try:
             assert validate(data, schema) is None
-        except AssertionError as e:
-            raise AssertionError(f"AssertionError in {test['test_file']}: {e}")
+        except ValidationError as e:
+            raise ValidationError(f"AssertionError in {test['test_file']}: {e}")

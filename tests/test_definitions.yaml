@@ -1,39 +1,44 @@
 tests:
   - test_file: simple_breakpoint.yaml
     description: An adjacency between two sequence locations.
-    image: ../../docs/images/ex_simple_breakpoint.png
+    image: ../docs/source/images/tests/ex_simple_breakpoint.png
     schema: vrs
     definition: Adjacency
   - test_file: revcomp_breakpoint.yaml
     description: An adjacency between two sequence locations, the 2nd of which is in reverse orientation.
-    image: ../../docs/images/ex_revcomp_breakpoint.png
+    image: ../docs/source/images/tests/ex_revcomp_breakpoint.png
     schema: vrs
     definition: Adjacency
   - test_file: terminal_breakend.yaml
     description: An adjacency with only the starting sequence location. defining the break at which the adjacency ends or terminates.
-    image: ../../docs/images/ex_terminal_breakend.png
+    image: ../docs/source/images/tests/ex_terminal_breakend.png
     schema: vrs
     definition: Adjacency
   - test_file: sequence_homology.yaml
     description: An adjacency in which the two sequence locations have a homologous overlapping adjoined sequences.
-    image: ../../docs/images/ex_sequence_homology.png
+    image: ../docs/source/images/tests/ex_sequence_homology.png
     schema: vrs
     definition: Adjacency
   - test_file: precise_linker.yaml
     description: An adjacency with a literal sequence linking the two sequence locations that make up the adjoined sequences.
-    image: ../../docs/images/ex_precise_linker.png
+    image: ../docs/source/images/tests/ex_precise_linker.png
     schema: vrs
     definition: Adjacency
   - test_file: ambiguous_linker.yaml
     description: An adjacency with a length expression linking the two sequence locations that make up the adjoined sequences.
-    image: ../../docs/images/ex_ambiguous_linker.png
+    image: ../docs/source/images/tests/ex_ambiguous_linker.png
     schema: vrs
     definition: Adjacency
   - test_file: sv_haplotype.yaml
     description: A haplotype of 3 members. First an adjacency with a litereal sequence linker followed by an SNV on the 2nd sequence and ending with a simple breakpoint adjacency that ends with the 1st sequence in the haplotype.
-    image: ../../docs/images/ex_sv_haplotype.png
+    image: ../docs/source/images/tests/ex_sv_haplotype.png
     schema: vrs
     definition: Haplotype
+  - test_file: sv_genotype.yaml
+    description: A genotype consisting of 2 members. The first member has a tandem duplication with a SNV on the second copy of the duplicated region. The second member has a deletion.
+    image: ../docs/source/images/tests/ex_sv_genotype.png
+    schema: vrs
+    definition: Genotype
   - test_file: simple_haplotype.yaml
     description: A haplotype of two alleles on a shared chromosome reference sequence.
     schema: vrs

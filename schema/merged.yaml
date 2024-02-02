@@ -44,6 +44,7 @@ $defs:
   MolecularVariation:
     description: A variation on a contiguous molecule.
     oneOf:
+    - $ref: '#/$defs/Adjacency'
     - $ref: '#/$defs/Allele'
     - $ref: '#/$defs/Haplotype'
     discriminator:
@@ -661,6 +662,7 @@ $defs:
         description: The number of copies of the `variation` at a Genotype locus.
       variation:
         oneOf:
+        - $ref: '#/$defs/Adjacency'
         - $ref: '#/$defs/Allele'
         - $ref: '#/$defs/Haplotype'
         description: A MolecularVariation at a Genotype locus.
