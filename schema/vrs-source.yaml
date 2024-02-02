@@ -94,6 +94,7 @@ $defs:
     oneOf:
       - $ref: "#/$defs/Allele"
       - $ref: "#/$defs/Haplotype"
+      - $ref: "#/$defs/Adjacency"
     discriminator:
       propertyName: type
 
@@ -506,6 +507,7 @@ $defs:
         oneOf:
           - $ref: "#/$defs/Allele"
           - $ref: "#/$defs/Haplotype"
+          - $ref: "#/$defs/Adjacency"
         description: >-
           A :ref:`MolecularVariation` at a :ref:`Genotype` locus.
     required: [ "count", "variation" ]

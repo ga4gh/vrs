@@ -66,6 +66,9 @@
          "description": "A variation on a contiguous molecule.",
          "oneOf": [
             {
+               "$ref": "#/$defs/Adjacency"
+            },
+            {
                "$ref": "#/$defs/Allele"
             },
             {
@@ -865,6 +868,9 @@
             },
             "variation": {
                "oneOf": [
+                  {
+                     "$ref": "#/$defs/Adjacency"
+                  },
                   {
                      "$ref": "#/$defs/Allele"
                   },

@@ -34,6 +34,11 @@ tests:
     image: ../docs/source/images/tests/ex_sv_haplotype.png
     schema: vrs
     definition: Haplotype
+  - test_file: sv_genotype.yaml
+    description: A genotype consisting of 2 members. The first member has a tandem duplication with a SNV on the second copy of the duplicated region. The second member has a deletion.
+    image: ../docs/source/images/tests/ex_sv_genotype.png
+    schema: vrs
+    definition: Genotype
   - test_file: simple_haplotype.yaml
     description: A haplotype of two alleles on a shared chromosome reference sequence.
     schema: vrs
