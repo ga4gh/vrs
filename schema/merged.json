@@ -19,9 +19,6 @@
                "$ref": "#/$defs/CopyNumberCount"
             },
             {
-               "$ref": "#/$defs/Genotype"
-            },
-            {
                "$ref": "#/$defs/Haplotype"
             }
          ],
@@ -84,9 +81,6 @@
             },
             {
                "$ref": "#/$defs/CopyNumberCount"
-            },
-            {
-               "$ref": "#/$defs/Genotype"
             }
          ],
          "discriminator": {
@@ -125,16 +119,16 @@
                   "$ref": "#/$defs/Extension"
                }
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "^[0-9A-Za-z_\\-]{32}$"
-            },
             "type": {
                "type": "string",
                "const": "Allele",
                "default": "Allele",
                "description": "MUST be \"Allele\""
+            },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "expressions": {
                "type": "array",
@@ -206,16 +200,16 @@
                   "$ref": "#/$defs/Extension"
                }
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "^[0-9A-Za-z_\\-]{32}$"
-            },
             "type": {
                "type": "string",
                "const": "Haplotype",
                "default": "Haplotype",
                "description": "MUST be \"Haplotype\""
+            },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "expressions": {
                "type": "array",
@@ -282,16 +276,16 @@
                   "$ref": "#/$defs/Extension"
                }
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "^[0-9A-Za-z_\\-]{32}$"
-            },
             "type": {
                "type": "string",
                "const": "CopyNumberCount",
                "default": "CopyNumberCount",
                "description": "MUST be \"CopyNumberCount\""
+            },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "expressions": {
                "type": "array",
@@ -361,16 +355,16 @@
                   "$ref": "#/$defs/Extension"
                }
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "^[0-9A-Za-z_\\-]{32}$"
-            },
             "type": {
                "type": "string",
                "const": "CopyNumberChange",
                "default": "CopyNumberChange",
                "description": "MUST be \"CopyNumberChange\""
+            },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "expressions": {
                "type": "array",
@@ -411,84 +405,6 @@
          ],
          "additionalProperties": false
       },
-      "Genotype": {
-         "maturity": "Alpha",
-         "ga4ghDigest": {
-            "keys": [
-               "count",
-               "members",
-               "type"
-            ],
-            "prefix": "GT"
-         },
-         "description": "A quantified set of _in-trans_ MolecularVariation at a genomic locus.",
-         "type": "object",
-         "properties": {
-            "id": {
-               "type": "string",
-               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
-            },
-            "label": {
-               "type": "string",
-               "description": "A primary label for the entity."
-            },
-            "description": {
-               "type": "string",
-               "description": "A free-text description of the entity."
-            },
-            "extensions": {
-               "type": "array",
-               "ordered": true,
-               "items": {
-                  "$ref": "#/$defs/Extension"
-               }
-            },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "^[0-9A-Za-z_\\-]{32}$"
-            },
-            "type": {
-               "type": "string",
-               "const": "Genotype",
-               "default": "Genotype",
-               "description": "MUST be \"Genotype\""
-            },
-            "expressions": {
-               "type": "array",
-               "ordered": false,
-               "items": {
-                  "$ref": "#/$defs/Expression"
-               }
-            },
-            "members": {
-               "type": "array",
-               "ordered": false,
-               "uniqueItems": true,
-               "minItems": 1,
-               "items": {
-                  "$ref": "#/$defs/GenotypeMember"
-               },
-               "description": "Each GenotypeMember in `members` describes a MolecularVariation and the count of that variation at the locus."
-            },
-            "count": {
-               "oneOf": [
-                  {
-                     "$ref": "#/$defs/Range"
-                  },
-                  {
-                     "type": "integer"
-                  }
-               ],
-               "description": "The total number of copies of all MolecularVariation at this locus, MUST be greater than or equal to the sum of GenotypeMember copy counts. If greater than the total counts, this implies additional MolecularVariation that are expected to exist but are not explicitly indicated."
-            }
-         },
-         "required": [
-            "count",
-            "members"
-         ],
-         "additionalProperties": false
-      },
       "SequenceLocation": {
          "maturity": "Alpha",
          "ga4ghDigest": {
@@ -522,16 +438,16 @@
                   "$ref": "#/$defs/Extension"
                }
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "^[0-9A-Za-z_\\-]{32}$"
-            },
             "type": {
                "type": "string",
                "const": "SequenceLocation",
                "default": "SequenceLocation",
                "description": "MUST be \"SequenceLocation\""
+            },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "sequenceReference": {
                "oneOf": [
@@ -596,11 +512,6 @@
                "items": {
                   "$ref": "#/$defs/Extension"
                }
-            },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "type": {
                "type": "string",
@@ -670,11 +581,6 @@
                   "$ref": "#/$defs/Extension"
                }
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "^[0-9A-Za-z_\\-]{32}$"
-            },
             "type": {
                "type": "string",
                "const": "ReferenceLengthExpression",
@@ -738,11 +644,6 @@
                   "$ref": "#/$defs/Extension"
                }
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "^[0-9A-Za-z_\\-]{32}$"
-            },
             "type": {
                "type": "string",
                "const": "LengthExpression",
@@ -795,11 +696,6 @@
                   "$ref": "#/$defs/Extension"
                }
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "^[0-9A-Za-z_\\-]{32}$"
-            },
             "type": {
                "type": "string",
                "const": "LiteralSequenceExpression",
@@ -814,70 +710,6 @@
          "required": [
             "sequence",
             "type"
-         ],
-         "additionalProperties": false
-      },
-      "GenotypeMember": {
-         "privateTo": "Genotype",
-         "ga4ghDigest": {
-            "keys": [
-               "count",
-               "variation"
-            ]
-         },
-         "description": "A class for expressing the count of a specific MolecularVariation present _in-trans_ at a genomic locus represented by a Genotype.",
-         "type": "object",
-         "properties": {
-            "id": {
-               "type": "string",
-               "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
-            },
-            "label": {
-               "type": "string",
-               "description": "A primary label for the entity."
-            },
-            "description": {
-               "type": "string",
-               "description": "A free-text description of the entity."
-            },
-            "extensions": {
-               "type": "array",
-               "ordered": true,
-               "items": {
-                  "$ref": "#/$defs/Extension"
-               }
-            },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "^[0-9A-Za-z_\\-]{32}$"
-            },
-            "count": {
-               "oneOf": [
-                  {
-                     "$ref": "#/$defs/Range"
-                  },
-                  {
-                     "type": "integer"
-                  }
-               ],
-               "description": "The number of copies of the `variation` at a Genotype locus."
-            },
-            "variation": {
-               "oneOf": [
-                  {
-                     "$ref": "#/$defs/Allele"
-                  },
-                  {
-                     "$ref": "#/$defs/Haplotype"
-                  }
-               ],
-               "description": "A MolecularVariation at a Genotype locus."
-            }
-         },
-         "required": [
-            "count",
-            "variation"
          ],
          "additionalProperties": false
       },
@@ -943,16 +775,16 @@
                   "$ref": "#/$defs/Extension"
                }
             },
-            "digest": {
-               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-               "type": "string",
-               "pattern": "^[0-9A-Za-z_\\-]{32}$"
-            },
             "type": {
                "type": "string",
                "const": "Adjacency",
                "default": "Adjacency",
                "description": "MUST be \"Adjacency\"."
+            },
+            "digest": {
+               "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+               "type": "string",
+               "pattern": "^[0-9A-Za-z_\\-]{32}$"
             },
             "expressions": {
                "type": "array",

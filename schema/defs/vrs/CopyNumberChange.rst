@@ -32,14 +32,14 @@ Some CopyNumberChange attributes are inherited from :ref:`CopyNumber`.
           - `Extension <gks.common.json#/$defs/Extension>`_
           - 0..m
           - 
-       *  - digest
-          - string
-          - 0..1
-          - A sha512t24u digest created using the VRS Computed Identifier algorithm.
        *  - type
           - string
           - 0..1
           - MUST be "CopyNumberChange"
+       *  - digest
+          - string
+          - 0..1
+          - A sha512t24u digest created using the VRS Computed Identifier algorithm.
        *  - expressions
           - :ref:`Expression`
           - 0..m

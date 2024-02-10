@@ -5,8 +5,8 @@ SequenceReference:
       refgetAccession: SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul
     out:
       ga4gh_identify: null
-      ga4gh_digest: F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul
-      ga4gh_serialize: null
+      ga4gh_digest: null
+      ga4gh_serialize: '{"refgetAccession":"SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul","type":"SequenceReference"}'
 
 SequenceLocation:
   - name: "SequenceLocation w/ SequenceReference"
@@ -18,21 +18,22 @@ SequenceLocation:
         refgetAccession: SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul
       type: SequenceLocation
     out:
-      ga4gh_digest: wwZVMOTdfGY8zOwKV5SeI2o3NdHRhg18
-      ga4gh_identify: ga4gh:SL.wwZVMOTdfGY8zOwKV5SeI2o3NdHRhg18
-      ga4gh_serialize: '{"end":44908822,"sequenceReference":"F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul","start":44908821,"type":"SequenceLocation"}'
+      ga4gh_digest: 4t6JnYWqHwYw9WzBT_lmWBb3tLQNalkT
+      ga4gh_identify: ga4gh:SL.4t6JnYWqHwYw9WzBT_lmWBb3tLQNalkT
+      ga4gh_serialize: '{"end":44908822,"sequenceReference":{"refgetAccession":"SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul","type":"SequenceReference"},"start":44908821,"type":"SequenceLocation"}'
   - name: "SequenceLocation w/ SequenceReference and Ranges"
     in:
       end: [44908822,44908922]
       start: [44908721,44908821]
       sequenceReference:
+        id: GRCh38:chr7
         type: SequenceReference
         refgetAccession: SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul
       type: SequenceLocation
     out:
-      ga4gh_digest: RJTG9Cd_SsMCElyE-4ynqk1r1Nu2OgNr
-      ga4gh_identify: ga4gh:SL.RJTG9Cd_SsMCElyE-4ynqk1r1Nu2OgNr
-      ga4gh_serialize: '{"end":[44908822,44908922],"sequenceReference":"F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul","start":[44908721,44908821],"type":"SequenceLocation"}'
+      ga4gh_digest: 8-sGv9AY7GJT6QVgqbxhMXFNamnWcFJu
+      ga4gh_identify: ga4gh:SL.8-sGv9AY7GJT6QVgqbxhMXFNamnWcFJu
+      ga4gh_serialize: '{"end":[44908822,44908922],"sequenceReference":{"refgetAccession":"SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul","type":"SequenceReference"},"start":[44908721,44908821],"type":"SequenceLocation"}'
   - name: "SequenceLocation w/Definite and Indefinite Ranges"
     in:
       end: [44908822,null]
@@ -42,9 +43,9 @@ SequenceLocation:
         refgetAccession: SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ
       type: SequenceLocation
     out:
-      ga4gh_digest: qyBZfC2w5fr-jA_B4XEvUH4MgPgk_mMm
-      ga4gh_identify: ga4gh:SL.qyBZfC2w5fr-jA_B4XEvUH4MgPgk_mMm
-      ga4gh_serialize: '{"end":[44908822,null],"sequenceReference":"jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ","start":[44908721,44908821],"type":"SequenceLocation"}'
+      ga4gh_digest: CyBy1ACd1JO3erBh3TG2ZE4zHe0LFhdL
+      ga4gh_identify: ga4gh:SL.CyBy1ACd1JO3erBh3TG2ZE4zHe0LFhdL
+      ga4gh_serialize: '{"end":[44908822,null],"sequenceReference":{"refgetAccession":"SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ","type":"SequenceReference"},"start":[44908721,44908821],"type":"SequenceLocation"}'
   - name: "SequenceLocation w/more Definite and Indefinite Ranges"
     in:
       end: [null,44908822]
@@ -54,9 +55,9 @@ SequenceLocation:
         refgetAccession: SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ
       type: SequenceLocation
     out:
-      ga4gh_digest: D7j6AoTcSOSUYYP650OJy_ME16HLmDD4
-      ga4gh_identify: ga4gh:SL.D7j6AoTcSOSUYYP650OJy_ME16HLmDD4
-      ga4gh_serialize: '{"end":[null,44908822],"sequenceReference":"jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ","start":[44908721,44908821],"type":"SequenceLocation"}'
+      ga4gh_digest: eKeAwwmhtcMK_qdvcsw8xERJWC5IEPB1
+      ga4gh_identify: ga4gh:SL.eKeAwwmhtcMK_qdvcsw8xERJWC5IEPB1
+      ga4gh_serialize: '{"end":[null,44908822],"sequenceReference":{"refgetAccession":"SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ","type":"SequenceReference"},"start":[44908721,44908821],"type":"SequenceLocation"}'
 
 LiteralSequenceExpression:
   -
@@ -65,7 +66,7 @@ LiteralSequenceExpression:
       type: LiteralSequenceExpression
     out:
       ga4gh_identify: null
-      ga4gh_digest: ECvt22ZFJ6RcLutlH07yAkd2-hNb-dwV
+      ga4gh_digest: null
       ga4gh_serialize: '{"sequence":"ACGT","type":"LiteralSequenceExpression"}'
 
 ReferenceLengthExpression:
@@ -74,10 +75,11 @@ ReferenceLengthExpression:
       type: ReferenceLengthExpression
       length: 11
       repeatSubunitLength: 3
+      sequence: CTCCTCCTCCT
     out:
       ga4gh_identify: null
-      ga4gh_digest: ir--KEiFgGke1N__iRkSaQdPK4_oxBmc
-      ga4gh_serialize: '{"length":11,"repeatSubunitLength":3,"sequence":"CTCCTCCTCCT","type":"ReferenceLengthExpression"}'
+      ga4gh_digest: null
+      ga4gh_serialize: '{"length":11,"repeatSubunitLength":3,"type":"ReferenceLengthExpression"}'
 
 Allele:
   - name: "rs7412@GRCh38>T w/LiteralSequenceExpression"
@@ -94,9 +96,9 @@ Allele:
         type: LiteralSequenceExpression
       type: Allele
     out:
-      ga4gh_digest: PkeY9RbMt9CEFakQ0AgDdAQ7POUeoWR0
-      ga4gh_identify: ga4gh:VA.PkeY9RbMt9CEFakQ0AgDdAQ7POUeoWR0
-      ga4gh_serialize: '{"location":"7gpsYFTLxYPNrBIhA0X4Q5h7vcKFsS8m","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}'
+      ga4gh_digest: NRUtY5Jcoevxr0tIgbNa-oIFm-Gv4qas
+      ga4gh_identify: ga4gh:VA.NRUtY5Jcoevxr0tIgbNa-oIFm-Gv4qas
+      ga4gh_serialize: '{"location":"DLRL0aHPUV-AS7_bgdWlQUdGT7aD_ys8","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}'
   - name: "NC_000001.11:40819438:CTCCTCCT:CTCCTCCTCCT w/ReferenceLengthExpression"
     in:
       type: Allele
@@ -116,9 +118,9 @@ Allele:
         length: 11
         repeatSubunitLength: 3
     out:
-      ga4gh_digest: FbiZxPysKpR5m1YI09JJ7S1U6RLpzWHs
-      ga4gh_identify: 'ga4gh:VA.FbiZxPysKpR5m1YI09JJ7S1U6RLpzWHs'
-      ga4gh_serialize: '{"location":"Z1UhRc7UvhuJB2fMAC2NJo9UsCfsUoKB","state":{"length":11,"repeatSubunitLength":3,"type":"ReferenceLengthExpression"},"type":"Allele"}'
+      ga4gh_digest: Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT
+      ga4gh_identify: ga4gh:VA.Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT
+      ga4gh_serialize: '{"location":"nQGBuvRQOLEboA5TYtcz975fp_GulxbZ","state":{"length":11,"repeatSubunitLength":3,"type":"ReferenceLengthExpression"},"type":"Allele"}'
 
 Haplotype:
   - name: "APOE1 on GRCh38, inline"
@@ -148,9 +150,9 @@ Haplotype:
         type: Allele
       type: Haplotype
     out:
-      ga4gh_digest: M5mRmkWX_fp61XwRRGdsW5W2Lhbgi1wB
-      ga4gh_identify: ga4gh:HT.M5mRmkWX_fp61XwRRGdsW5W2Lhbgi1wB
-      ga4gh_serialize: '{"members":["ATTX0ayZJ46HjJbrxrmQI4V9MXdDPI5B","iZ1yy9oSeDb7YPFMDY4xSMrsl2AtJPvG"],"type":"Haplotype"}'
+      ga4gh_digest: INEbVdrxv2YgfkREl0A1suBM6AL-3Fo3
+      ga4gh_identify: ga4gh:HT.INEbVdrxv2YgfkREl0A1suBM6AL-3Fo3
+      ga4gh_serialize: '{"members":["CvJUnTllC5zQ-M1Hbj9oj6BQitKw67J9","QZGrlXd07EPr1mUVyhfaEN8mJVmN1PGF"],"type":"Haplotype"}'
   - name: "APOE1 on GRCh38, referenced"
     in:
       members:
@@ -158,9 +160,9 @@ Haplotype:
       - ga4gh:VA.khD7xy2qdhEmCtv2mFnNfc6BGibim97K
       type: Haplotype
     out:
-      ga4gh_digest: l7-xJdcBazGcY0uuAptacpUDCQz6JL-x
-      ga4gh_identify: ga4gh:HT.l7-xJdcBazGcY0uuAptacpUDCQz6JL-x
-      ga4gh_serialize: '{"members":["zxokbi7DQc5Eq5iLxlEFVzK3hOBEJMxr","khD7xy2qdhEmCtv2mFnNfc6BGibim97K"],"type":"Haplotype"}'
+      ga4gh_digest: yzu0AkAaqDYbO0vtuatRi49FmYhkVIqr
+      ga4gh_identify: ga4gh:HT.yzu0AkAaqDYbO0vtuatRi49FmYhkVIqr
+      ga4gh_serialize: '{"members":["khD7xy2qdhEmCtv2mFnNfc6BGibim97K","zxokbi7DQc5Eq5iLxlEFVzK3hOBEJMxr"],"type":"Haplotype"}'
 
 CopyNumberCount:
   - name: ">=3 copies APOE"
@@ -175,9 +177,9 @@ CopyNumberCount:
         type: SequenceLocation
       type: CopyNumberCount
     out:
-      ga4gh_digest: _EIIv4iuJqAveZ0GCnlo6Xf7Fk_BOo4Z
-      ga4gh_identify: ga4gh:CN._EIIv4iuJqAveZ0GCnlo6Xf7Fk_BOo4Z
-      ga4gh_serialize: '{"copies":[3,null],"location":"VUi4qjddguRoAOA2oLFQmncze0yGqhjS","type":"CopyNumberCount"}'
+      ga4gh_digest: ezEUXykQvIhX8jHADILwC9f8k-jp8tZC
+      ga4gh_identify: ga4gh:CN.ezEUXykQvIhX8jHADILwC9f8k-jp8tZC
+      ga4gh_serialize: '{"copies":[3,null],"location":"d9h3FkfTWFkJSH56L1A26y-N2oq_SSuB","type":"CopyNumberCount"}'
 
 CopyNumberChange:
   - name: "Low-level copy gain of BRCA1"
@@ -192,6 +194,6 @@ CopyNumberChange:
         type: SequenceLocation
       type: CopyNumberChange
     out:
-      ga4gh_digest: -1h3Y8yYh9BTA_IsjIJkVVkXcP_rvYTx
-      ga4gh_identify: ga4gh:CX.-1h3Y8yYh9BTA_IsjIJkVVkXcP_rvYTx
-      ga4gh_serialize: '{"copyChange":"efo:0030071","location":"VUi4qjddguRoAOA2oLFQmncze0yGqhjS","type":"CopyNumberChange"}'
+      ga4gh_digest: 4_sKBXNG9zYX62D-FR2K-hUp1la-eaYc
+      ga4gh_identify: ga4gh:CX.4_sKBXNG9zYX62D-FR2K-hUp1la-eaYc
+      ga4gh_serialize: '{"copyChange":"efo:0030071","location":"d9h3FkfTWFkJSH56L1A26y-N2oq_SSuB","type":"CopyNumberChange"}'

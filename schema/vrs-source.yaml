@@ -31,14 +31,8 @@ $defs:
   ValueObject:
     inherits: gks.core:Entity
     description: >-
-      A contextual value whose equality is based on value, not identity. All VRS Value Objects
-      may have computed digests from the VRS Computed Identifier algorithm.
+      A contextual value whose equality is based on value, not identity.
       See https://en.wikipedia.org/wiki/Value_object for more on Value Objects.
-    heritableProperties:
-      digest:
-        description: A sha512t24u digest created using the VRS Computed Identifier algorithm.
-        type: string
-        pattern: '^[0-9A-Za-z_\-]{32}$'
 
   Ga4ghIdentifiableObject:
     inherits: ValueObject
@@ -50,6 +44,10 @@ $defs:
     heritableProperties:
       type:
         type: string
+      digest:
+        description: A sha512t24u digest created using the VRS Computed Identifier algorithm.
+        type: string
+        pattern: '^[0-9A-Za-z_\-]{32}$'
 
   Variation:
     inherits: Ga4ghIdentifiableObject
@@ -103,7 +101,6 @@ $defs:
       A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
     oneOf:
-      - $ref: "#/$defs/Genotype"
       - $ref: "#/$defs/CopyNumberCount"
       - $ref: "#/$defs/CopyNumberChange"
     discriminator:
@@ -257,45 +254,45 @@ $defs:
           "efo:0030070" (gain), "efo:0030071" (low-level gain), "efo:0030072" (high-level gain).
     required: [ "copyChange" ]
 
-  Genotype:
-    maturity: Alpha
-    ga4ghDigest:
-      keys:
-        - members
-        - count
-      prefix: GT
-    inherits: SystemicVariation
-    description: >-
-      A quantified set of _in-trans_ :ref:`MolecularVariation` at a genomic locus.
-    type: object
-    properties:
-      type:
-        type: string
-        const: "Genotype"
-        default: "Genotype"
-        description: >-
-          MUST be "Genotype"
-      members:
-        type: array
-        ordered: false
-        uniqueItems: true
-        minItems: 1
-        items:
-          $ref: "#/$defs/GenotypeMember"
-        description: >-
-          Each GenotypeMember in `members` describes a :ref:`MolecularVariation`
-          and the count of that variation at the locus.
-      count:
-        oneOf:
-          - type: integer
-          - $ref: "#/$defs/Range"
-        description: >-
-          The total number of copies of all :ref:`MolecularVariation` at this locus,
-          MUST be greater than or equal to the sum of :ref:`GenotypeMember` copy counts.
-          If greater than the total counts, this implies additional
-          :ref:`MolecularVariation` that are expected to exist but are not explicitly
-          indicated.
-    required: [ "members", "count" ]
+#  Genotype:
+#    maturity: Alpha
+#    ga4ghDigest:
+#      keys:
+#        - members
+#        - count
+#      prefix: GT
+#    inherits: SystemicVariation
+#    description: >-
+#      A quantified set of _in-trans_ :ref:`MolecularVariation` at a genomic locus.
+#    type: object
+#    properties:
+#      type:
+#        type: string
+#        const: "Genotype"
+#        default: "Genotype"
+#        description: >-
+#          MUST be "Genotype"
+#      members:
+#        type: array
+#        ordered: false
+#        uniqueItems: true
+#        minItems: 1
+#        items:
+#          $ref: "#/$defs/GenotypeMember"
+#        description: >-
+#          Each GenotypeMember in `members` describes a :ref:`MolecularVariation`
+#          and the count of that variation at the locus.
+#      count:
+#        oneOf:
+#          - type: integer
+#          - $ref: "#/$defs/Range"
+#        description: >-
+#          The total number of copies of all :ref:`MolecularVariation` at this locus,
+#          MUST be greater than or equal to the sum of :ref:`GenotypeMember` copy counts.
+#          If greater than the total counts, this implies additional
+#          :ref:`MolecularVariation` that are expected to exist but are not explicitly
+#          indicated.
+#    required: [ "members", "count" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations
@@ -484,31 +481,31 @@ $defs:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Nested Classes
 
-  GenotypeMember:
-    privateTo: Genotype
-    inherits: ValueObject
-    ga4ghDigest:
-      keys:
-        - count
-        - variation
-    description: >-
-      A class for expressing the count of a specific :ref:`MolecularVariation` present
-      _in-trans_ at a genomic locus represented by a :ref:`Genotype`.
-    type: object
-    properties:
-      count:
-        oneOf:
-          - $ref: '#/$defs/Range'
-          - type: integer
-        description: >-
-          The number of copies of the `variation` at a :ref:`Genotype` locus.
-      variation:
-        oneOf:
-          - $ref: "#/$defs/Allele"
-          - $ref: "#/$defs/Haplotype"
-        description: >-
-          A :ref:`MolecularVariation` at a :ref:`Genotype` locus.
-    required: [ "count", "variation" ]
+#  GenotypeMember:
+#    privateTo: Genotype
+#    inherits: ValueObject
+#    ga4ghDigest:
+#      keys:
+#        - count
+#        - variation
+#    description: >-
+#      A class for expressing the count of a specific :ref:`MolecularVariation` present
+#      _in-trans_ at a genomic locus represented by a :ref:`Genotype`.
+#    type: object
+#    properties:
+#      count:
+#        oneOf:
+#          - $ref: '#/$defs/Range'
+#          - type: integer
+#        description: >-
+#          The number of copies of the `variation` at a :ref:`Genotype` locus.
+#      variation:
+#        oneOf:
+#          - $ref: "#/$defs/Allele"
+#          - $ref: "#/$defs/Haplotype"
+#        description: >-
+#          A :ref:`MolecularVariation` at a :ref:`Genotype` locus.
+#    required: [ "count", "variation" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Numerics, Comparators, and Ranges

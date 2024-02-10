@@ -32,14 +32,14 @@ Some SequenceLocation attributes are inherited from :ref:`Ga4ghIdentifiableObjec
           - `Extension <gks.common.json#/$defs/Extension>`_
           - 0..m
           - 
-       *  - digest
-          - string
-          - 0..1
-          - A sha512t24u digest created using the VRS Computed Identifier algorithm.
        *  - type
           - string
           - 0..1
           - MUST be "SequenceLocation"
+       *  - digest
+          - string
+          - 0..1
+          - A sha512t24u digest created using the VRS Computed Identifier algorithm.
        *  - sequenceReference
           - `IRI <gks.common.json#/$defs/IRI>`_ | :ref:`SequenceReference`
           - 0..1

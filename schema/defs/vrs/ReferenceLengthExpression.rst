@@ -32,10 +32,6 @@ Some ReferenceLengthExpression attributes are inherited from :ref:`SequenceExpre
           - `Extension <gks.common.json#/$defs/Extension>`_
           - 0..m
           - 
-       *  - digest
-          - string
-          - 0..1
-          - A sha512t24u digest created using the VRS Computed Identifier algorithm.
        *  - type
           - string
           - 1..1
