@@ -91,8 +91,7 @@ the following normalization rules apply:
       and `Alternate Allele Sequence`.
 
    #. one is empty, the input Allele is an insertion (empty `reference
-      sequence`) or a deletion (empty `alternate sequence`). Store the length
-      of the non-empty sequence: this is the `Repeat Subunit Length`. Continue to
+      sequence`) or a deletion (empty `alternate sequence`). Continue to
       step 3.
 
 #. Determine bounds of ambiguity.
@@ -112,12 +111,35 @@ the following normalization rules apply:
 
 #. Construct a new Allele covering the entire region of ambiguity.
 
-   a. If the `reference sequence` is empty, this is an unambiguous
-      insertion. Return a new `Allele` with the trimmed `alternate
-      sequence` as a `Literal Sequence Expression`.
+   a. If the expanded `Reference Allele Sequence` is empty, this is an unambiguous insertion.
+      Return a new `Allele` with the trimmed `Alternate Allele Sequence` as a `Literal
+      Sequence Expression`.
 
-   #. Otherwise, return a new `Allele` using a `reference length
-      expression`, using a `Location` specified by the coordinates
+   #. Otherwise, find the greatest common denominator between the length of the expanded `Reference
+      Allele Sequence` and the expanded `Alternate Allele Sequence`. This is the `repeat  subunit length`.
+
+   #. If the Allele is a deletion (the `Alternate Allele Sequence` is shorter than the
+      `Reference Allele Sequence`) return a new Allele using a `Location` specified by the coordinates
+      of the `left_roll_bound` and `right_roll_bound`, a `length` specified by the length of the
+      `Alternate Allele Sequence`, and a `repeat subunit length` as calculated in the prior step.
+
+   #. If the Allele is an insertion (the `Reference Allele Sequence` is shorter than the
+      `Alternate Allele Sequence`), check that the first `repeat subunit length` number of characters
+      of the `Reference Allele Sequence` can be cycled to reconstruct the `Alternate Allele Sequence`.
+
+      1. If so, return a new Allele using a `Location` specified by the coordinates of the `left_roll_bound`
+         and `right_roll_bound`, and a `Reference Length Expression` with a `length` specified by the length
+         of the `Alternate Allele Sequence`, and a `repeat subunit length` as previously calculated.
+
+      #. If not, return a new Allele using a `Location` specified by the coordinates of the `left_roll_bound`
+         and `right_roll_bound`, and a `Literal Sequence Expression` with the expanded `Alternate Allele Sequence`.
+
+
+return a new Allele using a `Location` specified by the coordinates
+      of the `left_roll_bound` and `right_roll_bound`, a `length` specified by the length of the
+      `Alternate Allele Sequence`, and a `repeat subunit length` as calculated in the prior step.
+
+using a `Location` specified by the coordinates
       of the `left_roll_bound` and `right_roll_bound`, a `length`
       specified by the length of the `alternate allele`, and a
       `repeat subunit length` as determined in step 2c.
