@@ -91,8 +91,8 @@ the following normalization rules apply:
       and `Alternate Allele Sequence`.
 
    #. one is empty, the input Allele is an insertion (empty `reference
-      sequence`) or a deletion (empty `alternate sequence`). Continue to
-      step 3.
+      sequence`) or a deletion (empty `alternate sequence`). The length of the
+      non-empty sequence is the `repeat subunit length`. Continue to step 3.
 
 #. Determine bounds of ambiguity.
 
@@ -115,13 +115,9 @@ the following normalization rules apply:
       Return a new `Allele` with the trimmed `Alternate Allele Sequence` as a `Literal
       Sequence Expression`.
 
-   #. Otherwise, find the greatest common denominator between the length of the expanded `Reference
-      Allele Sequence` and the expanded `Alternate Allele Sequence`. This is the `repeat  subunit length`.
-
-   #. If the Allele is a deletion (the `Alternate Allele Sequence` is shorter than the
-      `Reference Allele Sequence`) return a new Allele using a `Location` specified by the coordinates
+   #. If the Allele is a deletion, return a new Allele using a `Location` specified by the coordinates
       of the `left_roll_bound` and `right_roll_bound`, a `length` specified by the length of the
-      `Alternate Allele Sequence`, and a `repeat subunit length` as calculated in the prior step.
+      expanded `Alternate Allele Sequence`, and a `repeat subunit length` as previously calculated.
 
    #. If the Allele is an insertion (the `Reference Allele Sequence` is shorter than the
       `Alternate Allele Sequence`), check that the first `repeat subunit length` number of characters
