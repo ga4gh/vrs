@@ -68,7 +68,7 @@ $defs:
   Expression:
     type: object
     privateTo: Variation
-    maturity: Alpha
+    maturity: draft
     description: >-
       Representation of a variation by a specified nomenclature or syntax for a Variation object. 
       Common examples of expressions for the description of molecular variation include the HGVS 
@@ -115,7 +115,7 @@ $defs:
   # Molecular Variation
 
   Allele:
-    maturity: Alpha
+    maturity: draft
     ga4ghDigest:
       prefix: VA
       keys:
@@ -145,7 +145,7 @@ $defs:
     required: [ "location", "state" ]
 
   Haplotype:
-    maturity: Alpha
+    maturity: draft
     ga4ghDigest:
       prefix: HT
       keys:
@@ -201,7 +201,7 @@ $defs:
     heritableRequired: [ "location" ]
 
   CopyNumberCount:
-    maturity: Alpha
+    maturity: draft
     ga4ghDigest:
       keys:
         - copies
@@ -227,7 +227,7 @@ $defs:
     required: [ "copies" ]
 
   CopyNumberChange:
-    maturity: Alpha
+    maturity: draft
     ga4ghDigest:
       keys:
         - copyChange
@@ -255,7 +255,7 @@ $defs:
     required: [ "copyChange" ]
 
 #  Genotype:
-#    maturity: Alpha
+#    maturity: draft
 #    ga4ghDigest:
 #      keys:
 #        - members
@@ -306,7 +306,7 @@ $defs:
       propertyName: type
 
   SequenceLocation:
-    maturity: Alpha
+    maturity: draft
     ga4ghDigest:
       keys:
         - start
@@ -346,7 +346,7 @@ $defs:
           MUST represent a coordinate or range greater than or equal to the value of `start`.
 
   SequenceReference:
-    maturity: Alpha
+    maturity: draft
     inherits: ValueObject
     ga4ghDigest:
       assigned: true # This special property indicates that the `digest` field follows an alternate convention
@@ -409,7 +409,7 @@ $defs:
       - type
 
   ReferenceLengthExpression:
-    maturity: Alpha
+    maturity: draft
     inherits: SequenceExpression
     ga4ghDigest:
       keys:
@@ -440,7 +440,7 @@ $defs:
       - repeatSubunitLength
 
   LengthExpression:
-    maturity: Alpha
+    maturity: draft
     inherits: SequenceExpression
     ga4ghDigest:
       keys:
@@ -459,7 +459,7 @@ $defs:
           - type: integer
 
   LiteralSequenceExpression:
-    maturity: Alpha
+    maturity: draft
     inherits: SequenceExpression
     ga4ghDigest:
       keys:
@@ -511,7 +511,7 @@ $defs:
   # Numerics, Comparators, and Ranges
 
   Range:
-    maturity: Alpha
+    maturity: draft
     description: An inclusive range of values bounded by one or more integers.
     type: array
     ordered: true
@@ -523,7 +523,7 @@ $defs:
     minItems: 2
 
   Residue:
-    maturity: Alpha
+    maturity: draft
     description: >-
       A character representing a specific residue (i.e., molecular species)
       or groupings of these ("ambiguity codes"), using `one-letter IUPAC
@@ -533,7 +533,7 @@ $defs:
     pattern: '[A-Z*\-]'
 
   SequenceString:
-    maturity: Alpha
+    maturity: draft
     description: >-
       A character string of :ref:`Residues <Residue>` that represents a biological
       sequence using the conventional sequence order (5’-to-3’ for
@@ -550,7 +550,7 @@ $defs:
   # =============================================================================
 
   Adjacency:
-    maturity: Alpha
+    maturity: draft
     ga4ghDigest:
       prefix: AJ
       keys:
