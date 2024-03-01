@@ -32,7 +32,7 @@
       "Expression": {
          "type": "object",
          "privateTo": "Variation",
-         "maturity": "Alpha",
+         "maturity": "draft",
          "description": "Representation of a variation by a specified nomenclature or syntax for a Variation object.  Common examples of expressions for the description of molecular variation include the HGVS  and ISCN nomenclatures.",
          "properties": {
             "syntax": {
@@ -94,7 +94,7 @@
          }
       },
       "Allele": {
-         "maturity": "Alpha",
+         "maturity": "draft",
          "ga4ghDigest": {
             "prefix": "VA",
             "keys": [
@@ -176,7 +176,7 @@
          "additionalProperties": false
       },
       "Haplotype": {
-         "maturity": "Alpha",
+         "maturity": "draft",
          "ga4ghDigest": {
             "prefix": "HT",
             "keys": [
@@ -251,7 +251,7 @@
          "additionalProperties": false
       },
       "CopyNumberCount": {
-         "maturity": "Alpha",
+         "maturity": "draft",
          "ga4ghDigest": {
             "keys": [
                "copies",
@@ -330,7 +330,7 @@
          "additionalProperties": false
       },
       "CopyNumberChange": {
-         "maturity": "Alpha",
+         "maturity": "draft",
          "ga4ghDigest": {
             "keys": [
                "copyChange",
@@ -490,7 +490,7 @@
          "additionalProperties": false
       },
       "SequenceLocation": {
-         "maturity": "Alpha",
+         "maturity": "draft",
          "ga4ghDigest": {
             "keys": [
                "end",
@@ -571,7 +571,7 @@
          "additionalProperties": false
       },
       "SequenceReference": {
-         "maturity": "Alpha",
+         "maturity": "draft",
          "ga4ghDigest": {
             "assigned": true
          },
@@ -640,7 +640,7 @@
          }
       },
       "ReferenceLengthExpression": {
-         "maturity": "Alpha",
+         "maturity": "draft",
          "ga4ghDigest": {
             "keys": [
                "length",
@@ -709,7 +709,7 @@
          "additionalProperties": false
       },
       "LengthExpression": {
-         "maturity": "Alpha",
+         "maturity": "draft",
          "ga4ghDigest": {
             "keys": [
                "length",
@@ -766,7 +766,7 @@
          "additionalProperties": false
       },
       "LiteralSequenceExpression": {
-         "maturity": "Alpha",
+         "maturity": "draft",
          "ga4ghDigest": {
             "keys": [
                "sequence",
@@ -882,7 +882,7 @@
          "additionalProperties": false
       },
       "Range": {
-         "maturity": "Alpha",
+         "maturity": "draft",
          "description": "An inclusive range of values bounded by one or more integers.",
          "type": "array",
          "ordered": true,
@@ -900,19 +900,19 @@
          "minItems": 2
       },
       "Residue": {
-         "maturity": "Alpha",
+         "maturity": "draft",
          "description": "A character representing a specific residue (i.e., molecular species) or groupings of these (\"ambiguity codes\"), using [one-letter IUPAC abbreviations](https://en.wikipedia.org/wiki/International_Union_of_Pure_and_Applied_Chemistry#Amino_acid_and_nucleotide_base_codes) for nucleic acids and amino acids.",
          "type": "string",
          "pattern": "[A-Z*\\-]"
       },
       "SequenceString": {
-         "maturity": "Alpha",
+         "maturity": "draft",
          "description": "A character string of Residues that represents a biological sequence using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequence Strings.",
          "type": "string",
          "pattern": "^[A-Z*\\-]*$"
       },
       "Adjacency": {
-         "maturity": "Alpha",
+         "maturity": "draft",
          "ga4ghDigest": {
             "prefix": "AJ",
             "keys": [
