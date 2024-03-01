@@ -4,7 +4,7 @@ A contextual value object for which a GA4GH computed identifier can be created.
 
     **Information Model**
     
-Some Ga4ghIdentifiableObject attributes are inherited from :ref:`ValueObject`.
+Some Ga4ghIdentifiableObject attributes are inherited from :ref:`gks.core:Entity`.
 
     .. list-table::
        :class: clean-wrap
@@ -32,11 +32,11 @@ Some Ga4ghIdentifiableObject attributes are inherited from :ref:`ValueObject`.
           - `Extension <gks.common.json#/$defs/Extension>`_
           - 0..m
           - 
-       *  - digest
-          - string
-          - 0..1
-          - A sha512t24u digest created using the VRS Computed Identifier algorithm.
        *  - type
           - string
           - 0..1
           - 
+       *  - digest
+          - string
+          - 0..1
+          - A sha512t24u digest created using the VRS Computed Identifier algorithm.
