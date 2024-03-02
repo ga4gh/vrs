@@ -164,7 +164,7 @@ the following normalization rules apply:
       #. a `ReferenceLengthExpression` for the `state` using `d` as the `repeatSubunitLength`
          and the length of the modified `alternate sequence` as the `length`.
 
-   #. If the Allele is not a reference-derived ambiguous insertion, return a new Allele using:
+   #. Otherwise, return a new Allele using:
 
       i. a `location` using the modified `start` and `end`.
 
