@@ -82,17 +82,25 @@ the following normalization rules apply:
 
 #. Compare the two Allele sequences, if:
 
-   a. both are empty, the input Allele is a reference Allele. Return the
-      input Allele unmodified. **Discussion point**: should this return a
-      reference length expression?
+   a. both are empty, the input Allele is a reference Allele. Return a new
+      Allele with:
+
+      i. the `location` from the input Allele.
+
+      #. a `ReferenceLengthExpression` for the `state` with `length` and
+         `repeatSubunitLength` both set to the length of the input `location`.
 
    #. both are non-empty, the input Allele has been normalized to a
-      substitution. Return a new Allele with the modified `start`, `end`,
-      and `Alternate Allele Sequence`.
+      substitution. Return a new Allele with:
 
-   #. one is empty, the input Allele is an insertion (empty `reference
-      sequence`) or a deletion (empty `alternate sequence`). The length of the
-      non-empty sequence is the `repeat subunit length`. Continue to step 3.
+      i. a `location` using the modified `start` and `end` for the `location`.
+
+      #. a `LiteralSequenceExpression` for the `state` using the trimmed
+         `Alternate Allele Sequence`.
+
+   #. one is empty, the input Allele is an insertion (empty `Reference Allele
+      Sequence`) or a deletion (empty `Alternate Allele Sequence`). The length
+      of the non-empty sequence is the `seed_length`. Continue to step 3.
 
 #. Determine bounds of ambiguity.
 
@@ -109,36 +117,51 @@ the following normalization rules apply:
       the Allele sequence by removing the first character of the Allele
       sequence, then appending the character to the resulting Allele sequence.
 
-#. Construct a new Allele covering the entire region of ambiguity.
+#. Expand the Allele to cover the entire region of ambiguity.
 
-   a. If the expanded `Reference Allele Sequence` is empty, this is an unambiguous insertion.
-      Return a new `Allele` with the trimmed `Alternate Allele Sequence` as a `Literal
-      Sequence Expression`.
+   a. Prepend reference sequence from `left_roll_bound` to `start` to both Allele Sequences.
 
-   #. If the Allele is a deletion, return a new Allele using a `Location` specified by the coordinates
-      of the `left_roll_bound` and `right_roll_bound`, a `length` specified by the length of the
-      expanded `Alternate Allele Sequence`, and a `repeat subunit length` as previously calculated.
+   #. Append reference sequence from `start` to `right_roll_bound` to both Allele Sequences.
 
-   #. If the Allele is an insertion (the `Reference Allele Sequence` is shorter than the
-      `Alternate Allele Sequence`), check that the first `repeat subunit length` number of characters
-      of the `Reference Allele Sequence` can be cycled to reconstruct the `Alternate Allele Sequence`.
+   #. Set `start` to `left_roll_bound` and `end` to `right_roll_bound`.
 
-      1. If so, return a new Allele using a `Location` specified by the coordinates of the `left_roll_bound`
-         and `right_roll_bound`, and a `Reference Length Expression` with a `length` specified by the length
-         of the `Alternate Allele Sequence`, and a `repeat subunit length` as previously calculated.
+#. Construct and return a new Allele.
 
-      #. If not, return a new Allele using a `Location` specified by the coordinates of the `left_roll_bound`
-         and `right_roll_bound`, and a `Literal Sequence Expression` with the expanded `Alternate Allele Sequence`.
+   a. If the `left_roll_bound` and `right_roll_bound` are equal, the Allele is an
+      unambiguous insertion. Return a new `Allele` with:
 
+      i. a `location` using the modified `start` and `end`.
 
-return a new Allele using a `Location` specified by the coordinates
-      of the `left_roll_bound` and `right_roll_bound`, a `length` specified by the length of the
-      `Alternate Allele Sequence`, and a `repeat subunit length` as calculated in the prior step.
+      #. a `LiteralSequenceExpression` for the `state` using the modified `Alternate Allele Sequence`.
 
-using a `Location` specified by the coordinates
-      of the `left_roll_bound` and `right_roll_bound`, a `length`
-      specified by the length of the `alternate allele`, and a
-      `repeat subunit length` as determined in step 2c.
+   #. If the Allele is a deletion, it is reference derived. Return a new Allele with:
+
+      i. a `location` using the modified `start` and `end`.
+
+      #. a `ReferenceLengthExpression` for the `state` using the `seed length` as the `repeatSubunitLength`
+         and the length of the modified `Alternate Allele Sequence` as the `length`.
+
+   #. If the Allele is an ambiguous insertion, it MAY be reference derived.
+
+      i. Determine the greatest factor `d` of the `seed length` such that:
+
+         1. `d` is less than or equal to the length of the expanded `Reference Allele Sequence`.
+
+         #. there exists a subsequence of length `d` derived from the expanded `Reference Allele Sequence`
+            that can be circularly expanded to recreate the expanded `Alternate Allele Sequence`.
+
+      #. If a valid factor `d` is found, the insertion is reference-derived. Return a new Allele using:
+
+         1. a `location` using the modified `start` and `end`.
+
+         #. a `ReferenceLengthExpression` for the `state` using `d` as the `repeatSubunitLength`
+            and the length of the modified `Alternate Allele Sequence` as the `length`.
+
+      #. If a valid factor `d` is not found, the insertion is not reference derived. Return a new Allele using:
+
+         1. a `location` using the modified `start` and `end`.
+
+         #. a `LiteralSequenceExpression` for the `state` using the modified `Alternate Allele Sequence`.
 
 .. _normalization-diagram:
 
