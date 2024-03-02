@@ -172,6 +172,8 @@ the following normalization rules apply:
 
 .. _normalization-diagram:
 
+.. todo: update the below diagram to match new text
+
 .. figure:: ../images/normalize.png
 
     A demonstration of fully justifying an insertion allele.
