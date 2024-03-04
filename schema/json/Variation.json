@@ -1,0 +1,26 @@
+{
+   "$schema": "http://json-schema.org/draft/2020-12/schema",
+   "title": "Variation",
+   "type": "object",
+   "description": "A representation of the state of one or more biomolecules.",
+   "oneOf": [
+      {
+         "$ref": "Adjacency.json"
+      },
+      {
+         "$ref": "Allele.json"
+      },
+      {
+         "$ref": "CopyNumberChange.json"
+      },
+      {
+         "$ref": "CopyNumberCount.json"
+      },
+      {
+         "$ref": "Haplotype.json"
+      }
+   ],
+   "discriminator": {
+      "propertyName": "type"
+   }
+}

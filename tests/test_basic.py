@@ -1,20 +1,16 @@
-import copy
 import json
 
 import jsonschema as js
-import yaml
 from ga4gh.gks.metaschema.tools.source_proc import YamlSchemaProcessor
 
-from config import vrs_json_path, vrs_yaml_path, vrs_merged_yaml_path
+from config import vrs_yaml_path, vrs_jsons_path
 
-# Are the yaml and json parsable and do they match?
+# Is the YAML parseable?
 p = YamlSchemaProcessor(vrs_yaml_path)
-j = json.load(open(vrs_json_path))
-m = yaml.safe_load(open(vrs_merged_yaml_path))
 
 
-def test_json_yaml_match():
-    assert p.for_js == j, "parsed yaml and json do not match"
+def test_yaml_process():
+    assert p.for_js, "processor loads and processes yaml"
 
 
 def test_all_value_objects_with_digest_keys():
@@ -42,12 +38,10 @@ def test_simple_sequence_location():
         'end': [None, 150],
         'type': 'SequenceLocation'
     }
-    schema = copy.deepcopy(j)
-    schema['$ref'] = '#/$defs/SequenceLocation'
-    schema['$id'] = vrs_json_path.as_uri()
-    js.validate(sl, schema)
+    with open(vrs_jsons_path / 'SequenceLocation.json', 'r') as sl_js_file:
+        sl_schema = json.load(sl_js_file)
+    js.validate(sl, sl_schema)
 
-    schema['$ref'] = '#/$defs/Allele'
     a = {
         'location': sl,
         'state': {
@@ -57,4 +51,6 @@ def test_simple_sequence_location():
         },
         'type': 'Allele'
     }
-    js.validate(a, schema)
+    with open(vrs_jsons_path / 'SequenceLocation.json', 'r') as a_js_file:
+        a_schema = json.load(a_js_file)
+    js.validate(a, a_schema)

@@ -1,0 +1,17 @@
+{
+   "$schema": "http://json-schema.org/draft/2020-12/schema",
+   "title": "SequenceExpression",
+   "type": "object",
+   "description": "An expression describing a Sequence.",
+   "oneOf": [
+      {
+         "$ref": "LiteralSequenceExpression.json"
+      },
+      {
+         "$ref": "ReferenceLengthExpression.json"
+      }
+   ],
+   "discriminator": {
+      "propertyName": "type"
+   }
+}

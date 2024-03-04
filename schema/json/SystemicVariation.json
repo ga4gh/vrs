@@ -1,0 +1,17 @@
+{
+   "$schema": "http://json-schema.org/draft/2020-12/schema",
+   "title": "SystemicVariation",
+   "type": "object",
+   "description": "A Variation of multiple molecules in the context of a system, e.g. a genome, sample, or homologous chromosomes.",
+   "oneOf": [
+      {
+         "$ref": "CopyNumberChange.json"
+      },
+      {
+         "$ref": "CopyNumberCount.json"
+      }
+   ],
+   "discriminator": {
+      "propertyName": "type"
+   }
+}

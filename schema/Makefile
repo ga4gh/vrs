@@ -1,27 +1,40 @@
-.PHONY: defs FORCE
 .SECONDARY:
-.SUFFIXES:
 .DELETE_ON_ERROR:
 
-JSYAMLS:=vrs.yaml
-JSONS:=${JSYAMLS:.yaml=.json}
+BUILD_DIR := build
+IMPORT_DIR := import
 
-all: ${JSONS} merged.json defs
+vpath %tag $(BUILD_DIR)
+vpath %.classes $(BUILD_DIR)
 
-%.json: %.yaml
-	jsy2js.py <$< >$@
+SOURCES := $(wildcard *-source.yaml)
+TAGS := $(SOURCES:-source.yaml=.tag)
+IMPORTS := $(wildcard $(IMPORT_DIR)/*-source.yaml)
 
-%.yaml: %-source.yaml
-	source2jsy.py $< >$@
+all: build-ordered ${TAGS} prune.tag
 
-merged.yaml: vrs-source.yaml
-	source2mergedjsy.py $< >$@
+build-ordered: | $(BUILD_DIR)
 
-defs:
-	rm -rf defs
-	y2t.py vrs-source.yaml
-	ln -s ../../submodules/gks-common/schema/defs/gks.common defs/gks.common
+$(BUILD_DIR):
+	mkdir $(BUILD_DIR)
 
+%.tag: %.classes %.json-tag %.defs-tag
+	touch $(BUILD_DIR)/$@
 
-watch:
-	-while true; do ls -1 *.yaml | entr -dn make ${JSONS}; done
+%.classes: %-source.yaml
+	source2classes.py $< >${BUILD_DIR}/$@
+
+%.json-tag: %-source.yaml ${IMPORTS}
+	source2splitjs.py $<
+	touch $(BUILD_DIR)/$@
+
+%.defs-tag: %-source.yaml ${IMPORTS}
+	y2t.py $<
+	touch $(BUILD_DIR)/$@
+
+prune.tag: ${TAGS}
+	$(MAKE) -f prune.mk
+	touch $(BUILD_DIR)/$@
+
+clean:
+	rm $(BUILD_DIR)/*
