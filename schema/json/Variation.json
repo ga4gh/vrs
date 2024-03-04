@@ -1,5 +1,5 @@
 {
-   "$schema": "http://json-schema.org/draft/2020-12/schema",
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
    "title": "Variation",
    "type": "object",
    "description": "A representation of the state of one or more biomolecules.",

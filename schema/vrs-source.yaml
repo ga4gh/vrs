@@ -8,7 +8,7 @@
 #   make watch &
 
 # https://json-schema.org/understanding-json-schema/reference/schema.html
-$schema: "http://json-schema.org/draft/2020-12/schema"
+$schema: "https://json-schema.org/draft/2020-12/schema"
 title: "GA4GH-VRS-Definitions"
 type: object
 strict: true

@@ -6,3 +6,5 @@ pyyaml
 ga4gh.gks.metaschema==0.3.0b4
 sphinx ~= 7.2
 sphinx-rtd-theme ~= 1.2
+jupyterlab
+notebook

@@ -11,7 +11,7 @@ SOURCES := $(wildcard *-source.yaml)
 TAGS := $(SOURCES:-source.yaml=.tag)
 IMPORTS := $(wildcard $(IMPORT_DIR)/*-source.yaml)
 
-all: build-ordered ${TAGS} prune.tag
+all: build-ordered ${TAGS} prune-tag
 
 build-ordered: | $(BUILD_DIR)
 
@@ -32,7 +32,7 @@ $(BUILD_DIR):
 	y2t.py $<
 	touch $(BUILD_DIR)/$@
 
-prune.tag: ${TAGS}
+prune-tag: ${TAGS}
 	$(MAKE) -f prune.mk
 	touch $(BUILD_DIR)/$@
 
