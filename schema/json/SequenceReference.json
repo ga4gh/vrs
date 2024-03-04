@@ -24,7 +24,7 @@
          "type": "array",
          "ordered": true,
          "items": {
-            "$ref": "../import/gks-common/json/Extension.json"
+            "$ref": "import/gks-common/Extension.json"
          }
       },
       "type": {

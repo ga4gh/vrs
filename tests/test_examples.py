@@ -1,12 +1,11 @@
 from config import test_dir, schema_dir, examples_dir
 import yaml
-from jsonschema import validate
+from config import vrs_validator
 
 
-def get_schema(schema_file, schema_class, kw="$defs"):
-    return {
-      "$ref": schema_dir.as_uri() + f"/{schema_file}.json#/{kw}/{schema_class}"
-    }
+def get_validator(schema_file, schema_class):
+    validator = globals()[f'{schema_file}_validator'][schema_class]
+    return validator
 
 
 def test_examples():
@@ -15,12 +14,11 @@ def test_examples():
     for test in test_spec['tests']:
         with open(examples_dir / test['test_file']) as datafile:
             data = yaml.safe_load(datafile)
-        schema = get_schema(
+        validator = get_validator(
             test['schema'],
-            test['definition'],
-            test.get('kw', '$defs')
+            test['definition']
         )
         try:
-            assert validate(data, schema) is None
+            assert validator.validate(data) is None
         except AssertionError as e:
             raise AssertionError(f"AssertionError in {test['test_file']}: {e}")

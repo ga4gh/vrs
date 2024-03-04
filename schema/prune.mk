@@ -2,7 +2,7 @@ BUILD_DIR := build
 SOURCES := $(wildcard *-source.yaml)
 CLASS_FILTER_FILES = $(SOURCES:%-source.yaml=${BUILD_DIR}/%.classes)
 FILTER_CLASSES := $(shell cat ${CLASS_FILTER_FILES})
-FILTER_JSONS = $(FILTER_CLASSES:%=json/%.json)
+FILTER_JSONS = $(FILTER_CLASSES:%=json/%.json) json/import
 FILTER_DEFS = $(FILTER_CLASSES:%=def/%.rst)
 
 .DEFAULT: prune

@@ -17,7 +17,7 @@ imports:
   gks.core: import/gks-common/core-source.yaml
 
 namespaces:
-  gks.common: import/gks-common/json/
+  gks.common: import/gks-common/
 
 $defs:
   # VRS definitions are presented top-down.  Everything rolls up to

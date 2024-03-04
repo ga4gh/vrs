@@ -45,7 +45,7 @@ Some CopyNumberCount attributes are inherited from :ref:`CopyNumber`.
           - 0..m
           - 
        *  - location
-          - `IRI.json <import/gks-common/json/IRI.json>`_ | :ref:`Location`
+          - `IRI.json <import/gks-common/IRI.json>`_ | :ref:`Location`
           - 1..1
           - A location for which the number of systemic copies is described.
        *  - copies

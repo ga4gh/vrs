@@ -45,7 +45,7 @@ Some Adjacency attributes are inherited from :ref:`Variation`.
           - 0..m
           - 
        *  - adjoinedSequences
-          - `IRI.json <import/gks-common/json/IRI.json>`_ | :ref:`Location`
+          - `IRI.json <import/gks-common/IRI.json>`_ | :ref:`Location`
           - 1..2
           - The terminal sequence or pair of adjoined sequences that defines in the adjacency.
        *  - linker

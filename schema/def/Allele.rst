@@ -45,7 +45,7 @@ Some Allele attributes are inherited from :ref:`Variation`.
           - 0..m
           - 
        *  - location
-          - `IRI.json <import/gks-common/json/IRI.json>`_ | :ref:`Location`
+          - `IRI.json <import/gks-common/IRI.json>`_ | :ref:`Location`
           - 1..1
           - The location of the Allele
        *  - state

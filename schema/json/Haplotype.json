@@ -28,7 +28,7 @@
          "type": "array",
          "ordered": true,
          "items": {
-            "$ref": "../import/gks-common/json/Extension.json"
+            "$ref": "import/gks-common/Extension.json"
          }
       },
       "type": {
@@ -63,7 +63,7 @@
                   "$ref": "Allele.json"
                },
                {
-                  "$ref": "../import/gks-common/json/IRI.json"
+                  "$ref": "import/gks-common/IRI.json"
                }
             ]
          },
