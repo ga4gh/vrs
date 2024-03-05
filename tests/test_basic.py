@@ -1,6 +1,3 @@
-import json
-
-import jsonschema as js
 from ga4gh.gks.metaschema.tools.source_proc import YamlSchemaProcessor
 
 from config import vrs_source_path, validator
