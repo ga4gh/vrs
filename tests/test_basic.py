@@ -1,20 +1,16 @@
-import copy
 import json
 
 import jsonschema as js
-import yaml
 from ga4gh.gks.metaschema.tools.source_proc import YamlSchemaProcessor
 
-from config import vrs_json_path, vrs_yaml_path, vrs_merged_yaml_path
+from config import vrs_source_path, vrs_validator
 
-# Are the yaml and json parsable and do they match?
-p = YamlSchemaProcessor(vrs_yaml_path)
-j = json.load(open(vrs_json_path))
-m = yaml.safe_load(open(vrs_merged_yaml_path))
+# Is the YAML parseable?
+p = YamlSchemaProcessor(vrs_source_path)
 
 
-def test_json_yaml_match():
-    assert p.for_js == j, "parsed yaml and json do not match"
+def test_yaml_process():
+    assert p.for_js, "processor loads and processes yaml"
 
 
 def test_all_value_objects_with_digest_keys():
@@ -42,12 +38,8 @@ def test_simple_sequence_location():
         'end': [None, 150],
         'type': 'SequenceLocation'
     }
-    schema = copy.deepcopy(j)
-    schema['$ref'] = '#/$defs/SequenceLocation'
-    schema['$id'] = vrs_json_path.as_uri()
-    js.validate(sl, schema)
+    vrs_validator['SequenceLocation'].validate(sl)
 
-    schema['$ref'] = '#/$defs/Allele'
     a = {
         'location': sl,
         'state': {
@@ -57,4 +49,4 @@ def test_simple_sequence_location():
         },
         'type': 'Allele'
     }
-    js.validate(a, schema)
+    vrs_validator['Allele'].validate(a)

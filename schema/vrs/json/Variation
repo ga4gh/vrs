@@ -1,0 +1,27 @@
+{
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/Variation",
+   "title": "Variation",
+   "type": "object",
+   "description": "A representation of the state of one or more biomolecules.",
+   "oneOf": [
+      {
+         "$ref": "/ga4gh/schema/vrs/2.x/json/Adjacency"
+      },
+      {
+         "$ref": "/ga4gh/schema/vrs/2.x/json/Allele"
+      },
+      {
+         "$ref": "/ga4gh/schema/vrs/2.x/json/CopyNumberChange"
+      },
+      {
+         "$ref": "/ga4gh/schema/vrs/2.x/json/CopyNumberCount"
+      },
+      {
+         "$ref": "/ga4gh/schema/vrs/2.x/json/Haplotype"
+      }
+   ],
+   "discriminator": {
+      "propertyName": "type"
+   }
+}
