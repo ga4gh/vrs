@@ -54,19 +54,24 @@ object. We also anticipate that these edge cases will not be common,
 and encourage adopters to use the VRS Allele Normalization Algorithm
 whenever possible.
 
+Beginning with VRS 2.0, the normalization algorithm was extended to
+leverage reference-encoded variant states, providing a mechanism for
+compact representation of alleles that can be derived directly from the
+reference sequence.
+
 LiteralSequenceExpression Alleles
 #################################
 
 When normalizing an Allele with a `LiteralSequenceExpression` state,
 the following normalization rules apply:
 
-0. Start with an unnormalized Allele, with corresponding `reference`
-   and `alternate` Allele Sequences.
+0. Start with an unnormalized Allele, with corresponding `reference sequence`
+   and `alternate sequence`.
 
-   a. The `Reference Allele Sequence` refers to the subsequence at the
+   a. The `reference sequence` refers to the subsequence at the
       Allele SequenceLocation.
 
-   #. The `Alternate Allele Sequence` refers to the Sequence described
+   #. The `alternate sequence` refers to the Sequence described
       by the Allele `state` attribute.
 
    #. Let `start` and `end` initially be the start and end of the Allele
@@ -82,18 +87,25 @@ the following normalization rules apply:
 
 #. Compare the two Allele sequences, if:
 
-   a. both are empty, the input Allele is a reference Allele. Return the
-      input Allele unmodified. **Discussion point**: should this return a
-      reference length expression?
+   a. both are empty, the input Allele is a reference Allele. Return a new
+      Allele with:
+
+      i. the `location` from the input Allele.
+
+      #. a `ReferenceLengthExpression` for the `state` with `length` and
+         `repeatSubunitLength` both set to the length of the input `location`.
 
    #. both are non-empty, the input Allele has been normalized to a
-      substitution. Return a new Allele with the modified `start`, `end`,
-      and `Alternate Allele Sequence`.
+      substitution. Return a new Allele with:
 
-   #. one is empty, the input Allele is an insertion (empty `reference
-      sequence`) or a deletion (empty `alternate sequence`). Store the length
-      of the non-empty sequence: this is the `Repeat Subunit Length`. Continue to
-      step 3.
+      i. a `location` using the modified `start` and `end` for the `location`.
+
+      #. a `LiteralSequenceExpression` for the `state` using the trimmed
+         `alternate sequence`.
+
+   #. one is empty, the input Allele is an insertion (empty `Reference Allele
+      Sequence`) or a deletion (empty `alternate sequence`). The length
+      of the non-empty sequence is the `seed_length`. Continue to step 3.
 
 #. Determine bounds of ambiguity.
 
@@ -110,42 +122,63 @@ the following normalization rules apply:
       the Allele sequence by removing the first character of the Allele
       sequence, then appending the character to the resulting Allele sequence.
 
-#. Construct a new Allele covering the entire region of ambiguity.
+#. Expand the Allele to cover the entire region of ambiguity.
 
-   a. If the `reference sequence` is empty, this is an unambiguous
-      insertion. Return a new `Allele` with the trimmed `alternate
-      sequence` as a `Literal Sequence Expression`.
+   a. Prepend reference sequence from `left_roll_bound` to `start` to both Allele Sequences.
 
-   #. Otherwise, return a new `Allele` using a `reference length
-      expression`, using a `Location` specified by the coordinates
-      of the `left_roll_bound` and `right_roll_bound`, a `length`
-      specified by the length of the `alternate allele`, and a
-      `repeat subunit length` as determined in step 2c.
+   #. Append reference sequence from `start` to `right_roll_bound` to both Allele Sequences.
+
+   #. Set `start` to `left_roll_bound` and `end` to `right_roll_bound`.
+
+#. Construct and return a new Allele.
+
+   a. If the `left_roll_bound` and `right_roll_bound` are equal, the Allele is an
+      unambiguous insertion. Return a new `Allele` with:
+
+      i. a `location` using the modified `start` and `end`.
+
+      #. a `LiteralSequenceExpression` for the `state` using the modified `alternate sequence`.
+
+   #. If the Allele is a deletion, it is reference derived. Return a new Allele with:
+
+      i. a `location` using the modified `start` and `end`.
+
+      #. a `ReferenceLengthExpression` for the `state` using the `seed length` as the `repeatSubunitLength`
+         and the length of the modified `alternate sequence` as the `length`.
+
+   #. If the Allele is an ambiguous insertion, determine if it is reference derived.
+
+      i. Determine the greatest factor `d` of the `seed length` such that `d` is less than or equal to the 
+         length of the modified `reference sequence`, and there exists a subsequence of length `d` 
+         derived from the modified `reference sequence` that can be circularly expanded to recreate 
+         the modified `alternate sequence`.
+
+      #. If a valid factor `d` is found, the insertion is reference-derived.
+
+      #. If a valid factor `d` is not found, the insertion is not reference-derived.
+
+   #. If the Allele is a reference-derived ambiguous insertion, return a new Allele using:
+
+      i. a `location` using the modified `start` and `end`.
+
+      #. a `ReferenceLengthExpression` for the `state` using `d` as the `repeatSubunitLength`
+         and the length of the modified `alternate sequence` as the `length`.
+
+   #. Otherwise, return a new Allele using:
+
+      i. a `location` using the modified `start` and `end`.
+
+      #. a `LiteralSequenceExpression` for the `state` using the modified `alternate sequence`.
 
 .. _normalization-diagram:
+
+.. todo: update the below diagram to match new text
 
 .. figure:: ../images/normalize.png
 
     A demonstration of fully justifying an insertion allele.
 
     Reproduced from [2]_
-
-RepeatedSequenceExpression Alleles
-##################################
-
-When normalizing an Allele with a :ref:`RepeatedSequenceExpression` state,
-normalization is similar to that of :ref:`LiteralSequenceExpression`, expanding
-the `Reference Allele Sequence` to capture the entire region of ambiguity.
-Unlike :ref:`LiteralSequenceExpression` normalization, however, the region of
-ambiguity is defined by full-length repeat subunits. The `Alternate Allele Sequence`
-is also expanded in this way, but is represented by altering the
-`RepeatedSequenceExpression.count` attribute, rather than the `seq_expr` attribute.
-
-The above only applies if `RepeatedSequenceExpression.seq_expr` is set to a
-:ref:`LiteralSequenceExpression` object. If the `RepeatedSequenceExpression.seq_expr`
-is instead a `DerivedSequenceExpression`, the `Allele` SHOULD be returned as-is.
-
-.. todo: Illustrate this process.
 
 **References**
 
