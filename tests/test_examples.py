@@ -1,4 +1,4 @@
-from config import test_dir, schema_dir, examples_dir
+from config import test_dir, examples_dir
 import yaml
 from config import vrs_validator
 

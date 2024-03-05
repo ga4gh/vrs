@@ -1,0 +1,85 @@
+{
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/Allele",
+   "title": "Allele",
+   "type": "object",
+   "maturity": "draft",
+   "ga4ghDigest": {
+      "prefix": "VA",
+      "keys": [
+         "location",
+         "state",
+         "type"
+      ]
+   },
+   "description": "The state of a molecule at a Location.",
+   "properties": {
+      "id": {
+         "type": "string",
+         "description": "The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is  unique within a given system. The identified entity may have a different 'id' in a different  system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE)."
+      },
+      "label": {
+         "type": "string",
+         "description": "A primary label for the entity."
+      },
+      "description": {
+         "type": "string",
+         "description": "A free-text description of the entity."
+      },
+      "extensions": {
+         "type": "array",
+         "ordered": true,
+         "items": {
+            "$ref": "/ga4gh/schema/gks-common/1.x/json/Extension"
+         }
+      },
+      "type": {
+         "type": "string",
+         "const": "Allele",
+         "default": "Allele",
+         "description": "MUST be \"Allele\""
+      },
+      "digest": {
+         "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
+         "type": "string",
+         "pattern": "^[0-9A-Za-z_\\-]{32}$"
+      },
+      "expressions": {
+         "type": "array",
+         "ordered": false,
+         "items": {
+            "$ref": "/ga4gh/schema/vrs/2.x/json/Expression"
+         }
+      },
+      "location": {
+         "oneOf": [
+            {
+               "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceLocation"
+            },
+            {
+               "$ref": "/ga4gh/schema/gks-common/1.x/json/IRI"
+            }
+         ],
+         "description": "The location of the Allele"
+      },
+      "state": {
+         "description": "An expression of the sequence state",
+         "oneOf": [
+            {
+               "$ref": "/ga4gh/schema/vrs/2.x/json/LengthExpression"
+            },
+            {
+               "$ref": "/ga4gh/schema/vrs/2.x/json/LiteralSequenceExpression"
+            },
+            {
+               "$ref": "/ga4gh/schema/vrs/2.x/json/ReferenceLengthExpression"
+            }
+         ]
+      }
+   },
+   "required": [
+      "location",
+      "state"
+   ],
+   "additionalProperties": false
+}

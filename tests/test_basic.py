@@ -3,10 +3,10 @@ import json
 import jsonschema as js
 from ga4gh.gks.metaschema.tools.source_proc import YamlSchemaProcessor
 
-from config import vrs_yaml_path, vrs_validator
+from config import vrs_source_path, vrs_validator
 
 # Is the YAML parseable?
-p = YamlSchemaProcessor(vrs_yaml_path)
+p = YamlSchemaProcessor(vrs_source_path)
 
 
 def test_yaml_process():

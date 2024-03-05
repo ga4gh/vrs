@@ -1,0 +1,21 @@
+{
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/Range",
+   "title": "Range",
+   "type": "array",
+   "maturity": "draft",
+   "description": "An inclusive range of values bounded by one or more integers.",
+   "ordered": true,
+   "items": {
+      "oneOf": [
+         {
+            "type": "integer"
+         },
+         {
+            "type": "null"
+         }
+      ]
+   },
+   "maxItems": 2,
+   "minItems": 2
+}

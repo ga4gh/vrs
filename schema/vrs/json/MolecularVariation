@@ -1,0 +1,18 @@
+{
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/MolecularVariation",
+   "title": "MolecularVariation",
+   "type": "object",
+   "description": "A variation on a contiguous molecule.",
+   "oneOf": [
+      {
+         "$ref": "/ga4gh/schema/vrs/2.x/json/Allele"
+      },
+      {
+         "$ref": "/ga4gh/schema/vrs/2.x/json/Haplotype"
+      }
+   ],
+   "discriminator": {
+      "propertyName": "type"
+   }
+}
