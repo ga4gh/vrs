@@ -3,7 +3,7 @@ import json
 import jsonschema as js
 from ga4gh.gks.metaschema.tools.source_proc import YamlSchemaProcessor
 
-from config import vrs_source_path, vrs_validator
+from config import vrs_source_path, validator
 
 # Is the YAML parseable?
 p = YamlSchemaProcessor(vrs_source_path)
@@ -38,7 +38,7 @@ def test_simple_sequence_location():
         'end': [None, 150],
         'type': 'SequenceLocation'
     }
-    vrs_validator['SequenceLocation'].validate(sl)
+    validator['SequenceLocation'].validate(sl)
 
     a = {
         'location': sl,
@@ -49,4 +49,4 @@ def test_simple_sequence_location():
         },
         'type': 'Allele'
     }
-    vrs_validator['Allele'].validate(a)
+    validator['Allele'].validate(a)
