@@ -135,7 +135,7 @@ $defs:
           MUST be "Allele"
       location:
         oneOf:
-          - $refCurie: gks.common:IRI.json
+          - $refCurie: gks.common:IRI
           - $ref: "#/$defs/Location"
         description: >-
           The location of the Allele
@@ -171,7 +171,7 @@ $defs:
           oneOf:
             - $ref: "#/$defs/Adjacency"
             - $ref: "#/$defs/Allele"
-            - $refCurie: gks.common:IRI.json
+            - $refCurie: gks.common:IRI
         description: >-
           A list of :ref:`Alleles <Allele>` and :ref:`Adjacencies <Adjacency>` that comprise a Haplotype. 
           Members must share the same reference sequence as adjacent members. Alleles should not have
@@ -195,7 +195,7 @@ $defs:
     heritableProperties:
       location:
         oneOf:
-          - $refCurie: gks.common:IRI.json
+          - $refCurie: gks.common:IRI
           - $ref: "#/$defs/Location"
         description: >-
           A location for which the number of systemic copies is described.
@@ -326,7 +326,7 @@ $defs:
         description: MUST be "SequenceLocation"
       sequenceReference:
         oneOf:
-          - $refCurie: gks.common:IRI.json
+          - $refCurie: gks.common:IRI
           - $ref: "#/$defs/SequenceReference"
         description: A :ref:`SequenceReference`.
       start:
@@ -576,7 +576,7 @@ $defs:
         ordered: true
         items:
           oneOf:
-          - $refCurie: gks.common:IRI.json
+          - $refCurie: gks.common:IRI
           - $ref: '#/$defs/Location'
         description: The terminal sequence or pair of adjoined sequences that defines in the adjacency.
         minItems: 1
