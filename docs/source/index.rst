@@ -21,9 +21,9 @@ implementation that promotes adoption of the standard.
    :includehidden:
 
    introduction
-   terms_and_model
-   datatypes_classes/index
-   schema
-   impl-guide/index
+   quickstart
+   concepts/index
+   conventions/index
+   profiles/index
    releases/index
    appendices/index
