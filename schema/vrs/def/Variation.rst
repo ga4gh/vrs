@@ -2,20 +2,20 @@
 
 A representation of the state of one or more biomolecules.
 
-    **Information Model**
-    
+**Information Model**
+
 Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
 
-    .. list-table::
-       :class: clean-wrap
-       :header-rows: 1
-       :align: left
-       :widths: auto
-       
-       *  - Field
-          - Type
-          - Limits
-          - Description
+.. list-table::
+    :class: clean-wrap
+    :header-rows: 1
+    :align: left
+    :widths: auto
+    
+    *  - Field
+        - Type
+        - Limits
+        - Description
        *  - id
           - string
           - 0..1

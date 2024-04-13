@@ -2,20 +2,20 @@
 
 An expression describing a :ref:`Sequence`.
 
-    **Information Model**
-    
+**Information Model**
+
 Some SequenceExpression attributes are inherited from :ref:`gks.core:Entity`.
 
-    .. list-table::
-       :class: clean-wrap
-       :header-rows: 1
-       :align: left
-       :widths: auto
-       
-       *  - Field
-          - Type
-          - Limits
-          - Description
+.. list-table::
+    :class: clean-wrap
+    :header-rows: 1
+    :align: left
+    :widths: auto
+    
+    *  - Field
+        - Type
+        - Limits
+        - Description
        *  - id
           - string
           - 0..1

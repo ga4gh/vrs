@@ -48,7 +48,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/vrs/2.x/json/Expression"
+            "$ref": "/ga4gh/schema/vrs/2.x/json/Variation#/$defs/Expression"
          }
       },
       "location": {

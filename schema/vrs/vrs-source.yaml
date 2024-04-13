@@ -68,7 +68,7 @@ $defs:
 
   Expression:
     type: object
-    privateTo: Variation
+    protectedClassOf: Variation
     maturity: draft
     description: >-
       Representation of a variation by a specified nomenclature or syntax for a Variation object. 

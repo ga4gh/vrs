@@ -2,20 +2,20 @@
 
 An expression of a length of a sequence from a repeating reference.
 
-    **Information Model**
-    
+**Information Model**
+
 Some ReferenceLengthExpression attributes are inherited from :ref:`SequenceExpression`.
 
-    .. list-table::
-       :class: clean-wrap
-       :header-rows: 1
-       :align: left
-       :widths: auto
-       
-       *  - Field
-          - Type
-          - Limits
-          - Description
+.. list-table::
+    :class: clean-wrap
+    :header-rows: 1
+    :align: left
+    :widths: auto
+    
+    *  - Field
+        - Type
+        - Limits
+        - Description
        *  - id
           - string
           - 0..1

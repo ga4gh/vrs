@@ -2,20 +2,20 @@
 
 A measure of the copies of a :ref:`Location` within a system (e.g. genome, cell, etc.)
 
-    **Information Model**
-    
+**Information Model**
+
 Some CopyNumber attributes are inherited from :ref:`Variation`.
 
-    .. list-table::
-       :class: clean-wrap
-       :header-rows: 1
-       :align: left
-       :widths: auto
-       
-       *  - Field
-          - Type
-          - Limits
-          - Description
+.. list-table::
+    :class: clean-wrap
+    :header-rows: 1
+    :align: left
+    :widths: auto
+    
+    *  - Field
+        - Type
+        - Limits
+        - Description
        *  - id
           - string
           - 0..1
