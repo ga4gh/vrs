@@ -1,10 +1,10 @@
-.. _impl-guide:
+.. _conventions:
 
-Implementation Guide
-!!!!!!!!!!!!!!!!!!!!
+VRS Conventions
+!!!!!!!!!!!!!!!
 
 This section describes the data and algorithmic components that are
-REQUIRED for implementations of VRS.
+REQUIRED conventions for implementations of VRS.
 
 * :ref:`required-data`: All implementations will require access to
   sequences and sequence accessions. The Required External Data
@@ -14,8 +14,6 @@ REQUIRED for implementations of VRS.
   representational ambiguity.
 * :ref:`computed-identifiers`: Generate globally unique identifiers
   based solely on the variation definition.
-
-
 
 .. toctree::
    :hidden:
