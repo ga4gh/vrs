@@ -43,7 +43,7 @@ Some SequenceLocation attributes are inherited from :ref:`Ga4ghIdentifiableObjec
        *  - sequenceReference
           - `IRI <../gks-common/$defs/IRI>`_ | :ref:`SequenceReference`
           - 0..1
-          - A :ref:`SequenceReference`.
+          - A reference to a :ref:`Sequence` on which the location is defined.
        *  - start
           - integer | :ref:`Range`
           - 0..1

@@ -54,7 +54,7 @@
                "$ref": "/ga4gh/schema/gks-common/1.x/json/IRI"
             }
          ],
-         "description": "A SequenceReference."
+         "description": "A reference to a Sequence on which the location is defined."
       },
       "start": {
          "oneOf": [
