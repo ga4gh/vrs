@@ -1,5 +1,5 @@
-VRS Concepts
-!!!!!!!!!!!!
+Concepts
+!!!!!!!!
 
 VRS is a collection of data models that are used together to represent molecular and systemic variation.
 These models exist across several related domains:

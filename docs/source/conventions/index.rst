@@ -1,7 +1,7 @@
 .. _conventions:
 
-VRS Conventions
-!!!!!!!!!!!!!!!
+Conventions
+!!!!!!!!!!!
 
 This section describes the data and algorithmic components that are
 REQUIRED conventions for implementations of VRS.
