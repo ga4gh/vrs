@@ -4,8 +4,7 @@ SequenceLocation
 !!!!!!!!!!!!!!!!
 
 The sequence location class is a fundamental concept in VRS, and is used to describe every form of :ref:`Variation`,
-and has stand-alone utility in other GA4GH schemas, including **Sequence Annotation** and 
-`Beacon <https://docs.genomebeacons.org/>`_.
+and has stand-alone utility for describing sequence locations in other (non-variation) contexts.
 This class is used to represent a subsequence of a specified :ref:`SequenceReference`. The reference is typically a 
 chromosome, transcript, or protein sequence.
 
