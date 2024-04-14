@@ -29,7 +29,7 @@ Some Allele attributes are inherited from :ref:`Variation`.
       - 0..1
       - A free-text description of the entity.
    *  - extensions
-      - `Extension <../gks-common/core.json#/$defs/Extension>`_
+      - :ref:`Extension`
       - 0..m
       - 
    *  - type
@@ -45,7 +45,7 @@ Some Allele attributes are inherited from :ref:`Variation`.
       - 0..m
       - 
    *  - location
-      - `IRI <../gks-common/$defs/IRI>`_ | :ref:`Location`
+      - :ref:`IRI` | :ref:`Location`
       - 1..1
       - The location of the Allele
    *  - state

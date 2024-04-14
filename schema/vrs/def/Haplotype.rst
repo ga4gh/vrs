@@ -29,7 +29,7 @@ Some Haplotype attributes are inherited from :ref:`Variation`.
       - 0..1
       - A free-text description of the entity.
    *  - extensions
-      - `Extension <../gks-common/core.json#/$defs/Extension>`_
+      - :ref:`Extension`
       - 0..m
       - 
    *  - type
@@ -45,6 +45,6 @@ Some Haplotype attributes are inherited from :ref:`Variation`.
       - 0..m
       - 
    *  - members
-      - :ref:`Adjacency` | :ref:`Allele` | `IRI <../gks-common/$defs/IRI>`_
+      - :ref:`Adjacency` | :ref:`Allele` | :ref:`IRI`
       - 2..m
       - A list of :ref:`Alleles <Allele>` and :ref:`Adjacencies <Adjacency>` that comprise a Haplotype.  Members must share the same reference sequence as adjacent members. Alleles should not have overlapping or adjacent coordinates with neighboring Alleles. Neighboring alleles should be ordered  by ascending coordinates, unless represented on a DNA inversion (following an Adjacency with  end-defined adjoinedSequences), in which case they should be ordered in descending coordinates.  Sequence references MUST be consistent for all members between and including the end of one  Adjacency and the beginning of another.

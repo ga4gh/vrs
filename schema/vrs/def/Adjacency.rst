@@ -29,7 +29,7 @@ Some Adjacency attributes are inherited from :ref:`Variation`.
       - 0..1
       - A free-text description of the entity.
    *  - extensions
-      - `Extension <../gks-common/core.json#/$defs/Extension>`_
+      - :ref:`Extension`
       - 0..m
       - 
    *  - type
@@ -45,7 +45,7 @@ Some Adjacency attributes are inherited from :ref:`Variation`.
       - 0..m
       - 
    *  - adjoinedSequences
-      - `IRI <../gks-common/$defs/IRI>`_ | :ref:`Location`
+      - :ref:`IRI` | :ref:`Location`
       - 1..2
       - The terminal sequence or pair of adjoined sequences that defines in the adjacency.
    *  - linker

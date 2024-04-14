@@ -29,7 +29,7 @@ Some Ga4ghIdentifiableObject attributes are inherited from :ref:`gks.core:Entity
       - 0..1
       - A free-text description of the entity.
    *  - extensions
-      - `Extension <../gks-common/core.json#/$defs/Extension>`_
+      - :ref:`Extension`
       - 0..m
       - 
    *  - type
