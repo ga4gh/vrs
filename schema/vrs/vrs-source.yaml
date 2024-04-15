@@ -68,7 +68,7 @@ $defs:
 
   Expression:
     type: object
-    privateTo: Variation
+    protectedClassOf: Variation
     maturity: draft
     description: >-
       Representation of a variation by a specified nomenclature or syntax for a Variation object. 
@@ -328,7 +328,7 @@ $defs:
         oneOf:
           - $refCurie: gks.common:IRI
           - $ref: "#/$defs/SequenceReference"
-        description: A :ref:`SequenceReference`.
+        description: A reference to a :ref:`Sequence` on which the location is defined.
       start:
         oneOf:
           - type: integer
