@@ -30,7 +30,7 @@ General Normalization Rules
 * VRS normalization functions are not necessarily homomorphic: That
   is, the input and output objects may be of different types.
 
-
+.. _allele-normalization:
 
 Allele Normalization
 @@@@@@@@@@@@@@@@@@@@
@@ -174,11 +174,11 @@ the following normalization rules apply:
 
 .. todo: update the below diagram to match new text
 
-.. figure:: ../images/normalize.png
+.. .. figure:: ../images/normalize.png
 
-    A demonstration of fully justifying an insertion allele.
+..     A demonstration of fully justifying an insertion allele.
 
-    Reproduced from [2]_
+..     Reproduced from [2]_
 
 **References**
 

@@ -14,3 +14,4 @@ These models exist across several related domains:
     :hidden:
 
     location/SequenceLocation
+    molecular_variation/index
