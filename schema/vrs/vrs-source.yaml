@@ -350,9 +350,8 @@ $defs:
     maturity: draft
     inherits: ValueObject
     ga4ghDigest:
-      assigned: true # This special property indicates that the `digest` field follows an alternate convention
-                     # and is expected to have the value assigned following that convention. For SequenceReference,
-                     # it is expected the digest will be the refget accession value without the `SQ.` prefix.
+      keys:
+        - refgetAccession
     type: object
     description: A sequence of nucleic or amino acid character codes.
     properties:
@@ -373,6 +372,10 @@ $defs:
         enum:
           - aa
           - na
+      circular:
+        type: boolean
+        description: >-
+          A boolean indicating whether the molecule represented by the sequence is circular (true) or linear (false).
     required:
       - refgetAccession
 

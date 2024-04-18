@@ -5,7 +5,9 @@
    "type": "object",
    "maturity": "draft",
    "ga4ghDigest": {
-      "assigned": true
+      "keys": [
+         "refgetAccession"
+      ]
    },
    "description": "A sequence of nucleic or amino acid character codes.",
    "properties": {
@@ -44,6 +46,10 @@
             "aa",
             "na"
          ]
+      },
+      "circular": {
+         "type": "boolean",
+         "description": "A boolean indicating whether a sequence is circular (true) or linear (false)."
       }
    },
    "required": [

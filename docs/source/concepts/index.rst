@@ -13,5 +13,6 @@ These models exist across several related domains:
 .. toctree::
     :hidden:
 
-    location/SequenceLocation
+    location/index
     molecular_variation/index
+    other/index
