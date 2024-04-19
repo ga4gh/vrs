@@ -82,6 +82,12 @@
                "$ref": "/ga4gh/schema/vrs/2.x/json/ReferenceLengthExpression"
             }
          ]
+      },
+      "homology": {
+         "type": "boolean",
+         "maturity": "draft",
+         "$comment": "This flag is under active discussion; see github.com/ga4gh/vrs/discussions/489",
+         "description": "A flag indicating if coordinate ambiguity in the adjoined sequences is from sequence homology (true) or other uncertainty (false)."
       }
    },
    "required": [

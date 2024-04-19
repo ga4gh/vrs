@@ -52,3 +52,7 @@ Some Adjacency attributes are inherited from :ref:`Variation`.
       - :ref:`SequenceExpression`
       - 0..1
       - The sequence found between adjoined sequences.
+   *  - homology
+      - boolean
+      - 0..1
+      - A flag indicating if coordinate ambiguity in the adjoined sequences is from sequence homology (true) or other uncertainty (false).
