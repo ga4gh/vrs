@@ -47,4 +47,4 @@ Some SequenceReference attributes are inherited from :ref:`gks.core:Entity`.
    *  - circular
       - boolean
       - 0..1
-      - A boolean indicating whether a sequence is circular (true) or linear (false).
+      - A boolean indicating whether the molecule represented by the sequence is circular (true) or linear (false).

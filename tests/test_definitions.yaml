@@ -9,11 +9,11 @@ tests:
     image: ../../docs/images/ex_revcomp_breakpoint.png
     schema: vrs
     definition: Adjacency
-  - test_file: terminal_breakend.yaml
-    description: An adjacency with only the starting sequence location. defining the break at which the adjacency ends or terminates.
-    image: ../../docs/images/ex_terminal_breakend.png
-    schema: vrs
-    definition: Adjacency
+  # - test_file: terminal_breakend.yaml
+  #   description: An adjacency with only the starting sequence location. defining the break at which the adjacency ends or terminates.
+  #   image: ../../docs/images/ex_terminal_breakend.png
+  #   schema: vrs
+  #   definition: Adjacency
   - test_file: sequence_homology.yaml
     description: An adjacency in which the two sequence locations have a homologous overlapping adjoined sequences.
     image: ../../docs/images/ex_sequence_homology.png

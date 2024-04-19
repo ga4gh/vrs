@@ -46,9 +46,13 @@ Some Adjacency attributes are inherited from :ref:`Variation`.
       - 
    *  - adjoinedSequences
       - :ref:`IRI` | :ref:`Location`
-      - 1..2
+      - 2..2
       - The terminal sequence or pair of adjoined sequences that defines in the adjacency.
    *  - linker
       - :ref:`SequenceExpression`
       - 0..1
       - The sequence found between adjoined sequences.
+   *  - homology
+      - boolean
+      - 0..1
+      - A flag indicating if coordinate ambiguity in the adjoined sequences is from sequence homology (true) or other uncertainty (false).
