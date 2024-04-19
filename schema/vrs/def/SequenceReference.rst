@@ -44,3 +44,7 @@ Some SequenceReference attributes are inherited from :ref:`gks.core:Entity`.
       - string
       - 0..1
       - The interpretation of the character codes referred to by the refget accession, where "aa" specifies an amino acid character set, and "na" specifies a nucleic acid character set.
+   *  - circular
+      - boolean
+      - 0..1
+      - A boolean indicating whether a sequence is circular (true) or linear (false).

@@ -1,8 +1,5 @@
-Location
-!!!!!!!!
+This is a document describing locations
 
 .. toctree::
-    :hidden:
     
-    SequenceLocation
-   
+   SequenceLocation
