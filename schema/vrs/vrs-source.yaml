@@ -92,7 +92,7 @@ $defs:
       A :ref:`variation` on a contiguous molecule.
     oneOf:
       - $ref: "#/$defs/Allele"
-      - $ref: "#/$defs/Haplotype"
+      - $ref: "#/$defs/CisPhasedBlock"
     discriminator:
       propertyName: type
 
@@ -145,10 +145,10 @@ $defs:
           An expression of the sequence state
     required: [ "location", "state" ]
 
-  Haplotype:
+  CisPhasedBlock:
     maturity: draft
     ga4ghDigest:
-      prefix: HT
+      prefix: CPB
       keys:
         - members
     inherits: MolecularVariation
@@ -158,28 +158,28 @@ $defs:
     properties:
       type:
         type: string
-        const: "Haplotype"
-        default: "Haplotype"
+        const: "CisPhasedBlock"
+        default: "CisPhasedBlock"
         description: >-
-          MUST be "Haplotype"
+          MUST be "CisPhasedBlock"
       members:
         type: array
-        ordered: true
+        ordered: false
         minItems: 2
         uniqueItems: false
         items:
           oneOf:
-            - $ref: "#/$defs/Adjacency"
             - $ref: "#/$defs/Allele"
             - $refCurie: gks.common:IRI
         description: >-
-          A list of :ref:`Alleles <Allele>` and :ref:`Adjacencies <Adjacency>` that comprise a Haplotype. 
-          Members must share the same reference sequence as adjacent members. Alleles should not have
-          overlapping or adjacent coordinates with neighboring Alleles. Neighboring alleles should be ordered 
-          by ascending coordinates, unless represented on a DNA inversion (following an Adjacency with 
-          end-defined adjoinedSequences), in which case they should be ordered in descending coordinates. 
-          Sequence references MUST be consistent for all members between and including the end of one 
-          Adjacency and the beginning of another.
+          A list of :ref:`Alleles <Allele>` that are found in-cis on a shared molecule.
+      sequenceReference:
+        $ref: "#/$defs/SequenceReference"
+        description: >-
+          An optional Sequence Reference on which all of the in-cis Alleles are found.
+          When defined, this may be used to implicitly define the `sequenceReference`
+          attribute for each of the CisPhasedBlock member Alleles.
+
     required: [ "members" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -4,7 +4,7 @@ An ordered set of co-occurring :ref:`variants <Variation>` on the same molecule.
 
 **Information Model**
 
-Some Haplotype attributes are inherited from :ref:`Variation`.
+Some CisPhasedBlock attributes are inherited from :ref:`Variation`.
 
 .. list-table::
    :class: clean-wrap
@@ -35,7 +35,7 @@ Some Haplotype attributes are inherited from :ref:`Variation`.
    *  - type
       - string
       - 0..1
-      - MUST be "Haplotype"
+      - MUST be "CisPhasedBlock"
    *  - digest
       - string
       - 0..1
@@ -45,6 +45,10 @@ Some Haplotype attributes are inherited from :ref:`Variation`.
       - 0..m
       - 
    *  - members
-      - :ref:`Adjacency` | :ref:`Allele` | :ref:`IRI`
+      - :ref:`Allele` | :ref:`IRI`
       - 2..m
-      - A list of :ref:`Alleles <Allele>` and :ref:`Adjacencies <Adjacency>` that comprise a Haplotype.  Members must share the same reference sequence as adjacent members. Alleles should not have overlapping or adjacent coordinates with neighboring Alleles. Neighboring alleles should be ordered  by ascending coordinates, unless represented on a DNA inversion (following an Adjacency with  end-defined adjoinedSequences), in which case they should be ordered in descending coordinates.  Sequence references MUST be consistent for all members between and including the end of one  Adjacency and the beginning of another.
+      - A list of :ref:`Alleles <Allele>` that are found in-cis on a shared molecule.
+   *  - sequenceReference
+      - :ref:`SequenceReference`
+      - 0..1
+      - An optional Sequence Reference on which all of the in-cis Alleles are found. When defined, this may be used to implicitly define the `sequenceReference` attribute for each of the CisPhasedBlock member Alleles.
