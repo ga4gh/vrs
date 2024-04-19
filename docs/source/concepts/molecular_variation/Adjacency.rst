@@ -5,7 +5,7 @@ Adjacency
 
 .. admonition:: New in v2
 
-   The adjacency class was added in v2 to describe structural variation.
+   The Adjacency class was added in v2 to describe structural variation.
 
 The adjacency class is a core concept for structural variation, representing the junction point of 
 two adjoined molecules. This class can be used on its own (e.g. for junctions of chimeric transcript fusions)
