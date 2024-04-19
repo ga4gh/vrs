@@ -1,11 +1,11 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/Haplotype",
-   "title": "Haplotype",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/CisPhasedBlock",
+   "title": "CisPhasedBlock",
    "type": "object",
    "maturity": "draft",
    "ga4ghDigest": {
-      "prefix": "HT",
+      "prefix": "CPB",
       "keys": [
          "members",
          "type"
@@ -34,9 +34,9 @@
       },
       "type": {
          "type": "string",
-         "const": "Haplotype",
-         "default": "Haplotype",
-         "description": "MUST be \"Haplotype\""
+         "const": "CisPhasedBlock",
+         "default": "CisPhasedBlock",
+         "description": "MUST be \"CisPhasedBlock\""
       },
       "digest": {
          "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
@@ -52,14 +52,11 @@
       },
       "members": {
          "type": "array",
-         "ordered": true,
+         "ordered": false,
          "minItems": 2,
          "uniqueItems": false,
          "items": {
             "oneOf": [
-               {
-                  "$ref": "/ga4gh/schema/vrs/2.x/json/Adjacency"
-               },
                {
                   "$ref": "/ga4gh/schema/vrs/2.x/json/Allele"
                },
@@ -68,7 +65,11 @@
                }
             ]
          },
-         "description": "A list of Alleles that comprise a Haplotype.  Members must share the same reference sequence as adjacent members. Alleles should not have overlapping or adjacent coordinates with neighboring Alleles. Neighboring alleles should be ordered  by ascending coordinates, unless represented on a DNA inversion (following an Adjacency with  end-defined adjoinedSequences), in which case they should be ordered in descending coordinates.  Sequence references MUST be consistent for all members between and including the end of one  Adjacency and the beginning of another."
+         "description": "A list of Alleles that are found in-cis on a shared molecule."
+      },
+      "sequenceReference": {
+         "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceReference",
+         "description": "An optional Sequence Reference on which all of the in-cis Alleles are found. When defined, this may be used to implicitly define the `sequenceReference` attribute for each of the CisPhasedBlock member Alleles."
       }
    },
    "required": [

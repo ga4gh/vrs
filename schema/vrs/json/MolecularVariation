@@ -9,7 +9,7 @@
          "$ref": "/ga4gh/schema/vrs/2.x/json/Allele"
       },
       {
-         "$ref": "/ga4gh/schema/vrs/2.x/json/Haplotype"
+         "$ref": "/ga4gh/schema/vrs/2.x/json/CisPhasedBlock"
       }
    ],
    "discriminator": {

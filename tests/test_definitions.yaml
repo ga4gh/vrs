@@ -29,15 +29,15 @@ tests:
     image: ../../docs/images/ex_ambiguous_linker.png
     schema: vrs
     definition: Adjacency
-  - test_file: sv_haplotype.yaml
-    description: A haplotype of 3 members. First an adjacency with a litereal sequence linker followed by an SNV on the 2nd sequence and ending with a simple breakpoint adjacency that ends with the 1st sequence in the haplotype.
-    image: ../../docs/images/ex_sv_haplotype.png
-    schema: vrs
-    definition: Haplotype
+  # - test_file: sv_haplotype.yaml
+  #   description: A haplotype of 3 members. First an adjacency with a litereal sequence linker followed by an SNV on the 2nd sequence and ending with a simple breakpoint adjacency that ends with the 1st sequence in the haplotype.
+  #   image: ../../docs/images/ex_sv_haplotype.png
+  #   schema: vrs
+  #   definition: CisPhasedBlock
   - test_file: simple_haplotype.yaml
     description: A haplotype of two alleles on a shared chromosome reference sequence.
     schema: vrs
-    definition: Haplotype
+    definition: CisPhasedBlock
   - test_file: SPDI_contraction.yaml
     description: A simple RLE contraction from SPDI representation
     schema: vrs
