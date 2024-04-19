@@ -5,6 +5,6 @@ This is a document describing molecular variation
    Allele
    Adjacency
    CisPhasedBlock
-   DerivativeSequence
+   DerivativeMolecule
    SequenceTerminus
    
