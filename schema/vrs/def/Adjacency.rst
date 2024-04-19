@@ -46,7 +46,7 @@ Some Adjacency attributes are inherited from :ref:`Variation`.
       - 
    *  - adjoinedSequences
       - :ref:`IRI` | :ref:`Location`
-      - 1..2
+      - 2..2
       - The terminal sequence or pair of adjoined sequences that defines in the adjacency.
    *  - linker
       - :ref:`SequenceExpression`

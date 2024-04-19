@@ -49,7 +49,7 @@
       },
       "circular": {
          "type": "boolean",
-         "description": "A boolean indicating whether a sequence is circular (true) or linear (false)."
+         "description": "A boolean indicating whether the molecule represented by the sequence is circular (true) or linear (false)."
       }
    },
    "required": [

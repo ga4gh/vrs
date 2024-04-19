@@ -185,12 +185,34 @@ the following normalization rules apply:
 .. [1] Holmes JB, Moyer E, Phan L, Maglott D, Kattman B.
 	   **SPDI: Data Model for Variants and Applications at NCBI.
 	   Bioinformatics.** 2019. `doi:10.1093/bioinformatics/btz856`_
-	   
-.. [2] Wagner AH, Babb L, Alterovitz G, Baudis M, Brush M, Cameron DL,
-	   ..., Hart RK. **The GA4GH Variation Representation Specification (VRS):
-	   a Computational Framework for the Precise Representation and
-	   Federated Identification of Molecular Variation.**
-	   bioRxiv. 2021. `doi:10.1101/2021.01.15.426843`_
 
 .. _doi:10.1101/2021.01.15.426843: https://doi.org/10.1101/2021.01.15.426843
 .. _doi:10.1093/bioinformatics/btz856: https://doi.org/10.1093/bioinformatics/btz856
+
+
+.. _adjacency-normalization:
+
+Adjacency Normalization
+@@@@@@@@@@@@@@@@@@@@@@@
+
+.. admonition:: New in v2
+
+   The adjacency class was added in v2 to describe structural variation.
+
+.. todo: expand on the below text
+
+.. figure:: ../images/ex_sequence_homology.png
+
+   **Describing sequence homology as region of ambiguity.** Adjacency coordinates may be ambiguous
+   when sequence on either side of the adjacency is homologous. This is addressed through expanding
+   the region on both sides. Precise algorithm to be described.
+
+When expressed on a double-stranded nucleic acid molecule, an adjacency can be represented in a forward 
+or reverse orientation. To ensure uniqueness of a computed identifier for these concepts, we require
+a convention for determining the preferred orientation of such adjacencies. The conventional orientation
+will be selected by meeting the following ordered criteria.
+
+1. The first of the adjoined sequences MUST have a forward orientation (location defined by `end`).
+2. The adjoined sequence accessions are equal or in ascending lexicographical order.
+3. The defined adjoined sequence coordinates are in ascending numerical order.
+

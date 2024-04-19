@@ -582,28 +582,11 @@ $defs:
           - $refCurie: gks.common:IRI
           - $ref: '#/$defs/Location'
         description: The terminal sequence or pair of adjoined sequences that defines in the adjacency.
-        minItems: 1
+        minItems: 2
         maxItems: 2
       linker:
         $ref: '#/$defs/SequenceExpression'
         description: The sequence found between adjoined sequences.
-#      homology:
-#        # Only valid for breakends=2
-#        type: boolean
-#        default: false
-#        description:
-#          A flag indicating whether the location interval of the breakend
-#          is due to the sequences at the breakends being homologous or
-#          whether the interval is due to uncertainty regarding the actual
-#          locations of the breakends.
-#      terminal:
-#        # TODO: can the schema encode a constraint that a terminal breakend cannot
-#        # be part of a breakpoint?
-#        type: boolean
-#        default: false
-#        description:
-#          # Only valid for breakends=1
-#          Indicates the end of the molecule
     required:
       - adjoinedSequences
 
