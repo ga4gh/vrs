@@ -52,3 +52,7 @@ Some SequenceLocation attributes are inherited from :ref:`Ga4ghIdentifiableObjec
       - integer | :ref:`Range`
       - 0..1
       - The end coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range greater than or equal to the value of `start`.
+   *  - sequence
+      - :ref:`SequenceString`
+      - 0..1
+      - The literal sequence encoded by the `sequenceReference` at these coordinates.

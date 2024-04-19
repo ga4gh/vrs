@@ -345,6 +345,10 @@ $defs:
           The end coordinate or range of the SequenceLocation.
           The minimum value of this coordinate or range is 0.
           MUST represent a coordinate or range greater than or equal to the value of `start`.
+      sequence:
+        description: >-
+          The literal sequence encoded by the `sequenceReference` at these coordinates.
+        $ref: "#/$defs/SequenceString"
 
   SequenceReference:
     maturity: draft
