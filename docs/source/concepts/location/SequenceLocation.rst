@@ -28,9 +28,21 @@ of a copy number segment), this is specified using the :ref:`Range` class for th
 
 .. admonition:: New in v2
 
-    In VRS v1.x, the ``SequenceLocation`` class had an ``interval`` property which contained ``start`` and ``end``
+    In VRS v1, the ``SequenceLocation`` class had an ``interval`` property which contained ``start`` and ``end``
     attributes. This intermediate object layer has been removed in v2.0, making ``start`` and ``end``
     top-level properties of the ``SequenceLocation``.
+
+The "Ref" Allele
+################
+
+In some variant representation formats (e.g. HGVS, VCF) sequence variants are described by both their "reference"
+(ref) and "alternate" (alt) alleles. When representing an Allele with VRS v2, it is also possible to describe the
+ref sequence (derived from the :ref:SequenceReference at the location) using the `sequence` property.
+
+.. admonition:: New in v2
+
+   In VRS v1, sequence derived from the reference was not transmitted. This feature was added in VRS v2 due to
+   this common practice in other variant formats.
 
 Linear and Circular Sequence Coordinates
 ########################################
