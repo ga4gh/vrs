@@ -24,24 +24,23 @@ Contexts
 
 * **Conversion to other variant formats** When converting to other
   variation formats, implementations SHOULD translate GA4GH VR
-  sequence identifier ( ``ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_``)
+  sequence identifiers ( ``ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_``)
   to primary database identifiers (``refseq:NM_000551.3``) that will
   be more readily recognized by users.
 
 * **Normalization** During :ref:`normalization`, implementations will
-  need access to sequence length and sequence contexts. 
+  need access to sequence length and sequence contexts.
 
 
 
 Data Services
 @@@@@@@@@@@@@
 
-The following tables summarizes data required in the above contexts:
+The following table summarizes data required in the above contexts:
 
 .. list-table:: Data Service Desciptions
-   :class: reece-wrap
-   :widths: auto
    :header-rows: 1
+   :class: reece-wrap
 
    * - Data Service
      - Description

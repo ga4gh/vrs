@@ -10,6 +10,11 @@
    table.reece-wrap {
       overflow: visible !important;
    }
+
+  .wy-table-responsive table.reece-wrap td, .wy-table-responsive table.reece-wrap th {
+      white-space: normal;
+  }
+
 }
 
 
@@ -60,9 +65,9 @@ div.figure div.legend p {
 div.figure div.legend p:last-child {
     margin-bottom: 0px;
 }
-    
 
-/* nested ul leads to awkward spacing of list items. 
+
+/* nested ul leads to awkward spacing of list items.
    This change doesn't seem to induce any other odd spacing */
 .rst-content .section ul p {
     margin-bottom: 0px;
