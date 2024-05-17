@@ -33,10 +33,9 @@ The VRS model is the product of the [GA4GH Variation Representation group](https
 
 ## Using the schema
 
-The schema is available in the [schema/](./schema/) directory, in both yaml and
-json versions.  It conforms to JSON Schema draft-07.  For a list of
-libraries that support JSON schema, see [JSON
-Schema>Implementations](https://json-schema.org/implementations.html).
+The schema is available in the [schema/](./schema/) directory, in both yaml and json versions.
+It conforms to JSON Schema draft-07. For a list of libraries that support JSON schema,
+see [JSONSchema>Implementations](https://json-schema.org/implementations.html).
 
 ## Installing for development
 
@@ -60,12 +59,11 @@ To create the corresponding def and json files after making changes to the sourc
     cd schema
     make all
 
-## Contributing docs
+## Contributing to the docs
 
-The VRS specification documentation is written in reStructuredText and
-located in `docs/source/`. Commits to this repo are built automatically at `vrs.ga4gh.org`.
+The VRS specification documentation is written in reStructuredText and located in [docs/source](docs/source/). Commits to this repo are built automatically at <https://vrs.ga4gh.org>.
 
-To build documentation locally, you must install `entr`
+To build documentation locally, you must install `entr`:
 
     brew install entr
 
@@ -74,20 +72,18 @@ Then from the root directory:
     cd docs
     make clean watch &
 
-Then, open `docs/build/html/index.html`.  The above make command should build docs when
+Then, open `docs/build/html/index.html`. The above make command should build docs when
 source changes. (Some types of changes require recleaning and building.)
 
 ## Testing
 
-The VRS repo contains two kinds of tests. Basic smoketests in `tests/`
-ensure that the schema is parsable and works with certain tools.
-These tests provide a basic sanity check during development.
+The VRS repo contains two kinds of tests. Basic smoke tests in `tests/` ensure that the
+schema is parsable and works with certain tools. These tests provide a basic sanity
+check during development.
 
-Validation tests (in `validation/`) provide language-neutral tests for
-those implementing tools with VRS.
+Validation tests (in `validation/`) provide language-neutral tests for those implementing
+tools with VRS.
 
-### Using smoketests
-
-To run smoketests:
+To run the smoke tests:
 
     make test
