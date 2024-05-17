@@ -88,6 +88,6 @@ those implementing tools with VRS.
 
 ### Using smoketests
 
-The run the smoketests:
+To run smoketests:
 
     make test
