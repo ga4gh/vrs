@@ -17,14 +17,13 @@ VRS is licensed under the [Apache License 2.0](LICENSE).
 
 ## Specific goals
 
-* Develop common language and protocol-neutral information models and nomenclature for
+* Develop common language- and protocol-neutral information models and nomenclature for
   biological sequence variation.
 * From the information models, develop data schemas. The current schema is defined in
   JSON Schema, but other formats are expected.
 * Provide algorithmic guidance and conventions to minimize representational ambiguity.
 * Define a globally unique *computed identifier* for covered data classes.
-* Develop [validation tests](https://github.com/ga4gh/vrs/tree/main/validation) to ensure
-  consistency of implementations.
+* Develop [validation tests](./validation/) to ensure consistency of implementations.
 
 The VRS model is the product of the [GA4GH Variation Representation group](https://www.ga4gh.org/product/variation-representation/).
 
@@ -63,7 +62,7 @@ To create the corresponding def and json files after making changes to the sourc
 
 The VRS specification documentation is written in reStructuredText and located in [docs/source](docs/source/). Commits to this repo are built automatically at <https://vrs.ga4gh.org>.
 
-To build documentation locally, you must install `entr`:
+To build documentation locally, you must install [entr](https://eradman.com/entrproject/):
 
     brew install entr
 
@@ -72,16 +71,16 @@ Then from the root directory:
     cd docs
     make clean watch &
 
-Then, open `docs/build/html/index.html`. The above make command should build docs when
-source changes. (Some types of changes require recleaning and building.)
+Then, open [docs/build/html/index.html](./docs/build/html/index.html). The above make
+command should build docs when source changes. (Some types of changes require recleaning and building.)
 
 ## Testing
 
-The VRS repo contains two kinds of tests. Basic smoke tests in `tests/` ensure that the
+The VRS repo contains two kinds of tests. Basic smoke tests in [tests/](./tests/) ensure that the
 schema is parsable and works with certain tools. These tests provide a basic sanity
 check during development.
 
-Validation tests (in `validation/`) provide language-neutral tests for those implementing
+Validation tests (in [validation/](./validation/)) provide language-neutral tests for those implementing
 tools with VRS.
 
 To run the smoke tests:
