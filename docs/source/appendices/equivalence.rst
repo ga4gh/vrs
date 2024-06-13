@@ -23,6 +23,8 @@ the GA4GH Genomic Knowledge Standards Work Stream is developing a
 specification for resource-defined Variation Concept Origination Policies
 (VCOPs). You can learn more about VCOPs in the `VRSATILE`_ framework.
 
+.. TODO:: rewrite above references to VRSATILE and VCOPs?
+
 .. _using-sequence-expressions:
 
 Using Sequence Expressions

@@ -18,7 +18,7 @@ imports:
   gks.common: ../gks-common/common-source.yaml
 
 namespaces:
-  gks.common: ../gks-common/$defs/
+  gks.common: ../gks-common/common.json#/$defs/
 
 $defs:
   # VRS definitions are presented top-down.  Everything rolls up to
@@ -62,7 +62,7 @@ $defs:
         type: array
         ordered: false
         items:
-          $ref: gks.common:Expression
+          $refCurie: gks.common:Expression
     discriminator:
       propertyName: type
 
