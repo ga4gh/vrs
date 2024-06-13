@@ -1,1 +1,7 @@
-This is a placeholder for the profiles index.
+.. `Profiles`:
+
+Profiles
+!!!!!!!!
+
+
+.. TODO:: Add more information about the profiles.

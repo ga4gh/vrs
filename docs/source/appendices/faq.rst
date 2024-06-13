@@ -30,8 +30,7 @@ Frequently (Asked and) Answered Questions
 
      VRS does not currently structure any of the many notions of
      variant equivalence, although prototypes have been written.  As
-     of VRS mid-2021, readers are advised to consult `VRSATILE
-     <https://github.com/ga4gh/vrsatile>`__.
+     of VRS mid-2021, readers are advised to consult `cat-vrs`_.
    
    How do you represent genotypes, especially for mosaicism and somatic variants (multi-ploidy)?  What existing tools can help bridge single-location variants and genotypes with VRS?
 

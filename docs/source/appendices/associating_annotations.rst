@@ -8,6 +8,8 @@ associated with those objects by means of their ids. This approach to
 annotations scales better in size and distributes better across multiple
 data sources.
 
+.. TODO:: rewrite for 2.x and Categorical Variation integration.
+
 The Genomic Knowledge Standards Work Stream is currently developing
 a Value Object Descriptors policy to provide a standardized way to
 associate common annotations with VRS objects as part of the `VRSATILE`_
