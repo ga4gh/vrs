@@ -74,6 +74,8 @@ $defs:
       - $ref: "#/$defs/Allele"
       - $ref: "#/$defs/CisPhasedBlock"
       - $ref: "#/$defs/Adjacency"
+      - $ref: "#/$defs/SequenceTerminus"
+      - $ref: "#/$defs/DerivativeSequence"
     discriminator:
       propertyName: type
 
