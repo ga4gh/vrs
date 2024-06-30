@@ -1,18 +1,17 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/Adjacency",
-   "title": "Adjacency",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/DerivativeSequence",
+   "title": "DerivativeSequence",
    "type": "object",
    "maturity": "draft",
    "ga4ghDigest": {
-      "prefix": "AJ",
+      "prefix": "DSQ",
       "keys": [
-         "adjoinedSequences",
-         "linker",
+         "components",
          "type"
       ]
    },
-   "description": "The `Adjacency` class can represent either the termination of a sequence  or the adjoining of the end of a sequence with the beginning of an adjacent sequence, potentially with an intervening linker sequence.",
+   "description": "The \"Derivative Sequence\" data class is a structure for describing a derivate sequence composed from mutiple sequence adjacencies.",
    "properties": {
       "id": {
          "type": "string",
@@ -44,9 +43,9 @@
       },
       "type": {
          "type": "string",
-         "const": "Adjacency",
-         "default": "Adjacency",
-         "description": "MUST be \"Adjacency\"."
+         "const": "DerivativeSequence",
+         "default": "DerivativeSequence",
+         "description": "MUST be \"DerivativeSequence\"."
       },
       "digest": {
          "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
@@ -60,47 +59,30 @@
             "$ref": "/ga4gh/schema/gks-common/1.x/json/Expression"
          }
       },
-      "adjoinedSequences": {
+      "components": {
          "type": "array",
          "uniqueItems": false,
          "ordered": true,
          "items": {
             "oneOf": [
                {
-                  "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceLocation"
+                  "$ref": "/ga4gh/schema/vrs/2.x/json/Adjacency"
+               },
+               {
+                  "$ref": "/ga4gh/schema/vrs/2.x/json/CisPhasedBlock"
+               },
+               {
+                  "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceTerminus"
                },
                {
                   "$ref": "/ga4gh/schema/gks-common/1.x/json/IRI"
                }
             ]
          },
-         "description": "The terminal sequence or pair of adjoined sequences that defines in the adjacency.",
-         "minItems": 2,
-         "maxItems": 2
-      },
-      "linker": {
-         "description": "The sequence found between adjoined sequences.",
-         "oneOf": [
-            {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/LengthExpression"
-            },
-            {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/LiteralSequenceExpression"
-            },
-            {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/ReferenceLengthExpression"
-            }
-         ]
-      },
-      "homology": {
-         "type": "boolean",
-         "maturity": "draft",
-         "$comment": "This flag is under active discussion; see github.com/ga4gh/vrs/discussions/489",
-         "description": "A flag indicating if coordinate ambiguity in the adjoined sequences is from sequence homology (true) or other uncertainty (false)."
+         "description": "The sequence components that make up the derivative sequence.",
+         "minItems": 2
       }
    },
-   "required": [
-      "adjoinedSequences"
-   ],
+   "required": [],
    "additionalProperties": false
 }

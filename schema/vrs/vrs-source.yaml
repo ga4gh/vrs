@@ -15,10 +15,10 @@ type: object
 strict: true
 
 imports:
-  gks.common: ../gks-common/common-source.yaml
+  gks.core: ../gks-core-im/core-im-source.yaml
 
 namespaces:
-  gks.common: ../gks-common/common.json#/$defs/
+  gks.core: ../gks-core-im/core-im.json#/$defs/
 
 $defs:
   # VRS definitions are presented top-down.  Everything rolls up to
@@ -30,7 +30,7 @@ $defs:
   # =============================================================================
 
   ValueObject:
-    inherits: gks.common:Entity
+    inherits: gks.core:Entity
     description: >-
       A contextual value whose equality is based on value, not identity.
       See https://en.wikipedia.org/wiki/Value_object for more on Value Objects.
@@ -62,7 +62,7 @@ $defs:
         type: array
         ordered: false
         items:
-          $refCurie: gks.common:Expression
+          $refCurie: gks.core:Expression
     discriminator:
       propertyName: type
 
@@ -73,6 +73,9 @@ $defs:
     oneOf:
       - $ref: "#/$defs/Allele"
       - $ref: "#/$defs/CisPhasedBlock"
+      - $ref: "#/$defs/Adjacency"
+      - $ref: "#/$defs/SequenceTerminus"
+      - $ref: "#/$defs/DerivativeSequence"
     discriminator:
       propertyName: type
 
@@ -115,7 +118,7 @@ $defs:
           MUST be "Allele"
       location:
         oneOf:
-          - $refCurie: gks.common:IRI
+          - $refCurie: gks.core:IRI
           - $ref: "#/$defs/Location"
         description: >-
           The location of the Allele
@@ -150,7 +153,7 @@ $defs:
         items:
           oneOf:
             - $ref: "#/$defs/Allele"
-            - $refCurie: gks.common:IRI
+            - $refCurie: gks.core:IRI
         description: >-
           A list of :ref:`Alleles <Allele>` that are found in-cis on a shared molecule.
       sequenceReference:
@@ -175,7 +178,7 @@ $defs:
     heritableProperties:
       location:
         oneOf:
-          - $refCurie: gks.common:IRI
+          - $refCurie: gks.core:IRI
           - $ref: "#/$defs/Location"
         description: >-
           A location for which the number of systemic copies is described.
@@ -235,46 +238,6 @@ $defs:
           "efo:0030070" (gain), "efo:0030071" (low-level gain), "efo:0030072" (high-level gain).
     required: [ "copyChange" ]
 
-#  Genotype:
-#    maturity: draft
-#    ga4ghDigest:
-#      keys:
-#        - members
-#        - count
-#      prefix: GT
-#    inherits: SystemicVariation
-#    description: >-
-#      A quantified set of _in-trans_ :ref:`MolecularVariation` at a genomic locus.
-#    type: object
-#    properties:
-#      type:
-#        type: string
-#        const: "Genotype"
-#        default: "Genotype"
-#        description: >-
-#          MUST be "Genotype"
-#      members:
-#        type: array
-#        ordered: false
-#        uniqueItems: true
-#        minItems: 1
-#        items:
-#          $ref: "#/$defs/GenotypeMember"
-#        description: >-
-#          Each GenotypeMember in `members` describes a :ref:`MolecularVariation`
-#          and the count of that variation at the locus.
-#      count:
-#        oneOf:
-#          - type: integer
-#          - $ref: "#/$defs/Range"
-#        description: >-
-#          The total number of copies of all :ref:`MolecularVariation` at this locus,
-#          MUST be greater than or equal to the sum of :ref:`GenotypeMember` copy counts.
-#          If greater than the total counts, this implies additional
-#          :ref:`MolecularVariation` that are expected to exist but are not explicitly
-#          indicated.
-#    required: [ "members", "count" ]
-
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations
 
@@ -306,7 +269,7 @@ $defs:
         description: MUST be "SequenceLocation"
       sequenceReference:
         oneOf:
-          - $refCurie: gks.common:IRI
+          - $refCurie: gks.core:IRI
           - $ref: "#/$defs/SequenceReference"
         description: A reference to a :ref:`Sequence` on which the location is defined.
       start:
@@ -360,8 +323,7 @@ $defs:
         type: boolean
         description: >-
           A boolean indicating whether the molecule represented by the sequence is circular (true) or linear (false).
-    required:
-      - refgetAccession
+    required: ["refgetAccession"]
 
       #TODO: implementation guidance: digest property is RefGet TRUNC512
 
@@ -383,9 +345,7 @@ $defs:
     oneOf:
       - $ref: "#/$defs/LiteralSequenceExpression"
       - $ref: "#/$defs/ReferenceLengthExpression"
-#      - $ref: "#/$defs/DerivedSequenceExpression"
-#      - $ref: "#/$defs/RepeatedSequenceExpression"
-#      - $ref: "#/$defs/ComposedSequenceExpression"
+      - $ref: "#/$defs/LengthExpression"
     discriminator:
       propertyName: type
     heritableProperties:
@@ -467,35 +427,6 @@ $defs:
       - sequence
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # Nested Classes
-
-#  GenotypeMember:
-#    privateTo: Genotype
-#    inherits: ValueObject
-#    ga4ghDigest:
-#      keys:
-#        - count
-#        - variation
-#    description: >-
-#      A class for expressing the count of a specific :ref:`MolecularVariation` present
-#      _in-trans_ at a genomic locus represented by a :ref:`Genotype`.
-#    type: object
-#    properties:
-#      count:
-#        oneOf:
-#          - $ref: '#/$defs/Range'
-#          - type: integer
-#        description: >-
-#          The number of copies of the `variation` at a :ref:`Genotype` locus.
-#      variation:
-#        oneOf:
-#          - $ref: "#/$defs/Allele"
-#          - $ref: "#/$defs/Haplotype"
-#        description: >-
-#          A :ref:`MolecularVariation` at a :ref:`Genotype` locus.
-#    required: [ "count", "variation" ]
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Numerics, Comparators, and Ranges
 
   Range:
@@ -546,7 +477,7 @@ $defs:
         - adjoinedSequences
         - linker
     inherits: MolecularVariation
-    description:
+    description: >-
       The `Adjacency` class can represent either the termination of a sequence 
       or the adjoining of the end of a sequence with the beginning of an
       adjacent sequence, potentially with an intervening linker sequence.
@@ -563,7 +494,7 @@ $defs:
         ordered: true
         items:
           oneOf:
-          - $refCurie: gks.common:IRI
+          - $refCurie: gks.core:IRI
           - $ref: '#/$defs/Location'
         description: The terminal sequence or pair of adjoined sequences that defines in the adjacency.
         minItems: 2
@@ -579,27 +510,64 @@ $defs:
           A flag indicating if coordinate ambiguity in the adjoined sequences is from sequence homology
           (true) or other uncertainty (false).
 
-    required:
-      - adjoinedSequences
+    required: ["adjoinedSequences"]
 
-#  Event:
-#    description:
-#      An event that results in a set of variants.
-#    type: object
-#    properties:
-#      type:
-#        type: string
-#        const: Event
-#        default: Event
-#        description: MUST be "Event"
-#      variants:
-#        $ref: '#/definitions/VariationSet'
-#      classification:
-#        # TODO: what event ontology should we use?
-#        type: string
-#        description: Category of event
-#    required:
-#      - type
-#      - variants
-#      - classification
-#    additionalProperties: true
+  SequenceTerminus:
+    maturity: draft
+    ga4ghDigest:
+      prefix: SQX
+      keys:
+        - type
+        - location
+    inherits: MolecularVariation
+    description: >-
+      The `SequenceTerminus` data class provides a structure for describing the end (terminus)
+      of a sequence. Structurally similar to Adjacency but the linker sequence is not allowed
+      and it removes the unnecessary array structure.
+    type: object
+    properties:
+      type:
+        type: string
+        const: SequenceTerminus
+        default: SequenceTerminus
+        description: MUST be "SequenceTerminus".
+      location: 
+        oneOf:
+          - $refCurie: gks.core:IRI
+          - $ref: '#/$defs/Location'
+        description: The location of the terminus.
+      
+    required: ["location"]
+
+  DerivativeSequence:
+    maturity: draft
+    ga4ghDigest:
+      prefix: DSQ
+      keys:
+        - type
+        - components
+    inherits: MolecularVariation
+    description: >-
+      The "Derivative Sequence" data class is a structure for describing a derivate sequence composed
+      from mutiple sequence adjacencies.
+    type: object
+    properties:
+      type:
+        type: string
+        const: DerivativeSequence
+        default: DerivativeSequence
+        description: MUST be "DerivativeSequence".
+      components:
+        type: array
+        uniqueItems: false
+        ordered: true
+        items:
+          oneOf:
+          - $refCurie: gks.core:IRI
+          - $ref: '#/$defs/Adjacency'
+          - $ref: '#/$defs/SequenceTerminus'
+          - $ref: '#/$defs/CisPhasedBlock'
+        description: >-
+          The sequence components that make up the derivative sequence.
+        minItems: 2
+

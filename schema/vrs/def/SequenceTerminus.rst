@@ -1,10 +1,10 @@
 **Computational Definition**
 
-A measure of the copies of a :ref:`Location` within a system (e.g. genome, cell, etc.)
+The `SequenceTerminus` data class provides a structure for describing the end (terminus) of a sequence. Structurally similar to Adjacency but the linker sequence is not allowed and it removes the unnecessary array structure.
 
     **Information Model**
     
-Some CopyNumber attributes are inherited from :ref:`Variation`.
+Some SequenceTerminus attributes are inherited from :ref:`Variation`.
 
     .. list-table::
        :class: clean-wrap
@@ -39,7 +39,7 @@ Some CopyNumber attributes are inherited from :ref:`Variation`.
        *  - type
           - string
           - 0..1
-          - 
+          - MUST be "SequenceTerminus".
        *  - digest
           - string
           - 0..1
@@ -51,4 +51,4 @@ Some CopyNumber attributes are inherited from :ref:`Variation`.
        *  - location
           - `IRI <../gks-core-im/core-im.json#/$defs/IRI>`_ | :ref:`Location`
           - 1..1
-          - A location for which the number of systemic copies is described.
+          - The location of the terminus.

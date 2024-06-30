@@ -1,10 +1,10 @@
 **Computational Definition**
 
-A measure of the copies of a :ref:`Location` within a system (e.g. genome, cell, etc.)
+The "Derivative Sequence" data class is a structure for describing a derivate sequence composed from mutiple sequence adjacencies.
 
     **Information Model**
     
-Some CopyNumber attributes are inherited from :ref:`Variation`.
+Some DerivativeSequence attributes are inherited from :ref:`Variation`.
 
     .. list-table::
        :class: clean-wrap
@@ -39,7 +39,7 @@ Some CopyNumber attributes are inherited from :ref:`Variation`.
        *  - type
           - string
           - 0..1
-          - 
+          - MUST be "DerivativeSequence".
        *  - digest
           - string
           - 0..1
@@ -48,7 +48,7 @@ Some CopyNumber attributes are inherited from :ref:`Variation`.
           - `Expression <../gks-core-im/core-im.json#/$defs/Expression>`_
           - 0..m
           - 
-       *  - location
-          - `IRI <../gks-core-im/core-im.json#/$defs/IRI>`_ | :ref:`Location`
-          - 1..1
-          - A location for which the number of systemic copies is described.
+       *  - components
+          - `IRI <../gks-core-im/core-im.json#/$defs/IRI>`_ | :ref:`Adjacency` | :ref:`SequenceTerminus` | :ref:`CisPhasedBlock`
+          - 2..m
+          - The sequence components that make up the derivative sequence.
