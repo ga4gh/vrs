@@ -4,7 +4,7 @@ An expression describing a :ref:`Sequence`.
 
     **Information Model**
     
-Some SequenceExpression attributes are inherited from :ref:`gks.core:Entity`.
+Some SequenceExpression attributes are inherited from :ref:`gks.core:DomainEntity`.
 
     .. list-table::
        :class: clean-wrap
@@ -40,3 +40,7 @@ Some SequenceExpression attributes are inherited from :ref:`gks.core:Entity`.
           - string
           - 1..1
           - The SequenceExpression class type. MUST match child class type.
+       *  - mappings
+          - `ConceptMapping <../gks-core-im/core.json#/$defs/ConceptMapping>`_
+          - 0..m
+          - A list of mappings to concepts in terminologies or code systems. Each mapping should include a coding and a relation.

@@ -5,6 +5,7 @@ expressions:
 location:
   type: SequenceLocation
   sequenceReference:
+    type: SequenceReference
     refgetAccession: SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO
     residueAlphabet: na
     id: NC_000001.11

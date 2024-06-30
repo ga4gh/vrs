@@ -37,7 +37,7 @@
          "type": "array",
          "ordered": true,
          "items": {
-            "$ref": "/ga4gh/schema/gks-common/1.x/json/Extension"
+            "$ref": "/ga4gh/schema/gks-core-im/1.x/json/Extension"
          },
          "description": "A list of extensions to the entity. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems."
       },
@@ -46,6 +46,14 @@
          "const": "DerivativeSequence",
          "default": "DerivativeSequence",
          "description": "MUST be \"DerivativeSequence\"."
+      },
+      "mappings": {
+         "type": "array",
+         "ordered": false,
+         "items": {
+            "$ref": "/ga4gh/schema/gks-core-im/1.x/json/ConceptMapping"
+         },
+         "description": "A list of mappings to concepts in terminologies or code systems. Each mapping should include a coding and a relation."
       },
       "digest": {
          "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
@@ -56,7 +64,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gks-common/1.x/json/Expression"
+            "$ref": "/ga4gh/schema/gks-core-im/1.x/json/Expression"
          }
       },
       "components": {
@@ -75,7 +83,7 @@
                   "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceTerminus"
                },
                {
-                  "$ref": "/ga4gh/schema/gks-common/1.x/json/IRI"
+                  "$ref": "/ga4gh/schema/gks-core-im/1.x/json/IRI"
                }
             ]
          },
@@ -83,6 +91,8 @@
          "minItems": 2
       }
    },
-   "required": [],
+   "required": [
+      "type"
+   ],
    "additionalProperties": false
 }

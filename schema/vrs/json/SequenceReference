@@ -35,13 +35,23 @@
          "type": "array",
          "ordered": true,
          "items": {
-            "$ref": "/ga4gh/schema/gks-common/1.x/json/Extension"
+            "$ref": "/ga4gh/schema/gks-core-im/1.x/json/Extension"
          },
          "description": "A list of extensions to the entity. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems."
       },
       "type": {
          "type": "string",
-         "const": "SequenceReference"
+         "const": "SequenceReference",
+         "default": "SequenceReference",
+         "description": "MUST be \"SequenceReference\""
+      },
+      "mappings": {
+         "type": "array",
+         "ordered": false,
+         "items": {
+            "$ref": "/ga4gh/schema/gks-core-im/1.x/json/ConceptMapping"
+         },
+         "description": "A list of mappings to concepts in terminologies or code systems. Each mapping should include a coding and a relation."
       },
       "refgetAccession": {
          "description": "A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence,  using the sha512t24u digest.",
@@ -62,7 +72,8 @@
       }
    },
    "required": [
-      "refgetAccession"
+      "refgetAccession",
+      "type"
    ],
    "additionalProperties": false
 }
