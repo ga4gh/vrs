@@ -18,6 +18,7 @@ members:
       type: LiteralSequenceExpression
       sequence: C
 sequenceReference:
+  type: SequenceReference
   refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
   residueAlphabet: na
   id: NC_000001.10

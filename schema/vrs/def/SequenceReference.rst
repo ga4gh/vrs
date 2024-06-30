@@ -39,7 +39,7 @@ Some SequenceReference attributes are inherited from :ref:`gks.core:DomainEntity
        *  - type
           - string
           - 1..1
-          - 
+          - MUST be "SequenceReference"
        *  - mappings
           - `ConceptMapping <../gks-core-im/core.json#/$defs/ConceptMapping>`_
           - 0..m

@@ -304,7 +304,9 @@ $defs:
     properties:
       type:
         type: string
-        const: SequenceReference
+        const: "SequenceReference"
+        default: "SequenceReference"
+        description: MUST be "SequenceReference"
       refgetAccession:
         description: >-
           A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence, 
