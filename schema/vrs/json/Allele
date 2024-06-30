@@ -26,13 +26,13 @@
          "type": "string",
          "description": "A free-text description of the entity."
       },
-      "mappings": {
+      "alternativeLabels": {
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gks-common/1.x/json/ConceptMapping"
+            "type": "string"
          },
-         "description": "A list of mappings to concepts in terminologies or code systems. Each mapping should include a coding and a relation."
+         "description": "Alternative name(s) for the Entity."
       },
       "extensions": {
          "type": "array",

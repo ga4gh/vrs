@@ -28,12 +28,12 @@ Some CisPhasedBlock attributes are inherited from :ref:`Variation`.
           - string
           - 0..1
           - A free-text description of the entity.
-       *  - mappings
-          - `ConceptMapping <../gks-common/common.json#/$defs/ConceptMapping>`_
+       *  - alternativeLabels
+          - string
           - 0..m
-          - A list of mappings to concepts in terminologies or code systems. Each mapping should include a coding and a relation.
+          - Alternative name(s) for the Entity.
        *  - extensions
-          - `Extension <../gks-common/common.json#/$defs/Extension>`_
+          - `Extension <../gks-core-im/core.json#/$defs/Extension>`_
           - 0..m
           - A list of extensions to the entity. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems.
        *  - type
@@ -45,11 +45,11 @@ Some CisPhasedBlock attributes are inherited from :ref:`Variation`.
           - 0..1
           - A sha512t24u digest created using the VRS Computed Identifier algorithm.
        *  - expressions
-          - `Expression <../gks-common/common.json#/$defs/Expression>`_
+          - `Expression <../gks-core-im/core-im.json#/$defs/Expression>`_
           - 0..m
           - 
        *  - members
-          - :ref:`Allele` | `IRI <../gks-common/common.json#/$defs/IRI>`_
+          - :ref:`Allele` | `IRI <../gks-core-im/core-im.json#/$defs/IRI>`_
           - 2..m
           - A list of :ref:`Alleles <Allele>` that are found in-cis on a shared molecule.
        *  - sequenceReference
