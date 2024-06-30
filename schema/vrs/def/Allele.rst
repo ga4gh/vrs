@@ -38,8 +38,12 @@ Some Allele attributes are inherited from :ref:`Variation`.
           - A list of extensions to the entity. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems.
        *  - type
           - string
-          - 0..1
+          - 1..1
           - MUST be "Allele"
+       *  - mappings
+          - `ConceptMapping <../gks-core-im/core.json#/$defs/ConceptMapping>`_
+          - 0..m
+          - A list of mappings to concepts in terminologies or code systems. Each mapping should include a coding and a relation.
        *  - digest
           - string
           - 0..1

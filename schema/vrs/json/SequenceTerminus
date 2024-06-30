@@ -47,6 +47,14 @@
          "default": "SequenceTerminus",
          "description": "MUST be \"SequenceTerminus\"."
       },
+      "mappings": {
+         "type": "array",
+         "ordered": false,
+         "items": {
+            "$ref": "/ga4gh/schema/gks-common/1.x/json/ConceptMapping"
+         },
+         "description": "A list of mappings to concepts in terminologies or code systems. Each mapping should include a coding and a relation."
+      },
       "digest": {
          "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
          "type": "string",
@@ -72,7 +80,8 @@
       }
    },
    "required": [
-      "location"
+      "location",
+      "type"
    ],
    "additionalProperties": false
 }

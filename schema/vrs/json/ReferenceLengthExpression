@@ -47,6 +47,14 @@
          "default": "ReferenceLengthExpression",
          "description": "MUST be \"ReferenceLengthExpression\""
       },
+      "mappings": {
+         "type": "array",
+         "ordered": false,
+         "items": {
+            "$ref": "/ga4gh/schema/gks-common/1.x/json/ConceptMapping"
+         },
+         "description": "A list of mappings to concepts in terminologies or code systems. Each mapping should include a coding and a relation."
+      },
       "length": {
          "oneOf": [
             {

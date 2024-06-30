@@ -40,6 +40,10 @@ Some ReferenceLengthExpression attributes are inherited from :ref:`SequenceExpre
           - string
           - 1..1
           - MUST be "ReferenceLengthExpression"
+       *  - mappings
+          - `ConceptMapping <../gks-core-im/core.json#/$defs/ConceptMapping>`_
+          - 0..m
+          - A list of mappings to concepts in terminologies or code systems. Each mapping should include a coding and a relation.
        *  - length
           - integer | :ref:`Range`
           - 1..1
