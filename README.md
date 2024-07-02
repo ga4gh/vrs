@@ -44,6 +44,7 @@ Fork the repo at <https://github.com/ga4gh/vrs>.
     cd vrs
     make devready
     source venv/3.12/bin/activate
+    pre-commit install
 
 If you already cloned the repo, but forgot to include `--recurse-submodules` you can run:
 
@@ -57,6 +58,9 @@ To create the corresponding def and json files after making changes to the sourc
 
     cd schema
     make all
+
+> _Note: We have a custom pre-commit hook to run these commands after you stage a source
+> document_
 
 ## Contributing to the docs
 

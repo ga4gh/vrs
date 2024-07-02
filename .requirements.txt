@@ -8,3 +8,4 @@ sphinx ~= 7.2
 sphinx-rtd-theme ~= 1.2
 jupyterlab
 notebook
+pre-commit
