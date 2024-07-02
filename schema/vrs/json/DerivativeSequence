@@ -11,7 +11,7 @@
          "type"
       ]
    },
-   "description": "The \"Derivative Sequence\" data class is a structure for describing a derivate sequence composed from mutiple sequence adjacencies.",
+   "description": "The \"Derivative Sequence\" data class is a structure for describing a derivate sequence composed from multiple sequence adjacencies.",
    "properties": {
       "id": {
          "type": "string",
