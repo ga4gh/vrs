@@ -54,7 +54,7 @@
          "description": "A list of mappings to concepts in terminologies or code systems. Each mapping should include a coding and a relation."
       },
       "refgetAccession": {
-         "description": "A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence,  using the sha512t24u digest.",
+         "description": "A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence, using the sha512t24u digest.",
          "type": "string",
          "pattern": "^SQ.[0-9A-Za-z_\\-]{32}$"
       },

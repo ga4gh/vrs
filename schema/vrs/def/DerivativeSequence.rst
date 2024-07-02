@@ -1,9 +1,9 @@
 **Computational Definition**
 
-The "Derivative Sequence" data class is a structure for describing a derivate sequence composed from mutiple sequence adjacencies.
+The "Derivative Sequence" data class is a structure for describing a derivate sequence composed from multiple sequence adjacencies.
 
     **Information Model**
-    
+
 Some DerivativeSequence attributes are inherited from :ref:`Variation`.
 
     .. list-table::
@@ -11,7 +11,7 @@ Some DerivativeSequence attributes are inherited from :ref:`Variation`.
        :header-rows: 1
        :align: left
        :widths: auto
-       
+
        *  - Field
           - Type
           - Limits
@@ -51,7 +51,7 @@ Some DerivativeSequence attributes are inherited from :ref:`Variation`.
        *  - expressions
           - `Expression <../gks-core-im/core-im.json#/$defs/Expression>`_
           - 0..m
-          - 
+          -
        *  - components
           - `IRI <../gks-core-im/core-im.json#/$defs/IRI>`_ | :ref:`Adjacency` | :ref:`SequenceTerminus` | :ref:`CisPhasedBlock`
           - 2..m

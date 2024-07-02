@@ -12,7 +12,7 @@
          "type"
       ]
    },
-   "description": "The `Adjacency` class can represent either the termination of a sequence  or the adjoining of the end of a sequence with the beginning of an adjacent sequence, potentially with an intervening linker sequence.",
+   "description": "The `Adjacency` class can represent either the termination of a sequence or the adjoining of the end of a sequence with the beginning of an adjacent sequence, potentially with an intervening linker sequence.",
    "properties": {
       "id": {
          "type": "string",

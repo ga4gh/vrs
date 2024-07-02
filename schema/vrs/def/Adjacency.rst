@@ -1,9 +1,9 @@
 **Computational Definition**
 
-The `Adjacency` class can represent either the termination of a sequence  or the adjoining of the end of a sequence with the beginning of an adjacent sequence, potentially with an intervening linker sequence.
+The `Adjacency` class can represent either the termination of a sequence or the adjoining of the end of a sequence with the beginning of an adjacent sequence, potentially with an intervening linker sequence.
 
     **Information Model**
-    
+
 Some Adjacency attributes are inherited from :ref:`Variation`.
 
     .. list-table::
@@ -11,7 +11,7 @@ Some Adjacency attributes are inherited from :ref:`Variation`.
        :header-rows: 1
        :align: left
        :widths: auto
-       
+
        *  - Field
           - Type
           - Limits
@@ -51,7 +51,7 @@ Some Adjacency attributes are inherited from :ref:`Variation`.
        *  - expressions
           - `Expression <../gks-core-im/core-im.json#/$defs/Expression>`_
           - 0..m
-          - 
+          -
        *  - adjoinedSequences
           - `IRI <../gks-core-im/core-im.json#/$defs/IRI>`_ | :ref:`Location`
           - 2..2

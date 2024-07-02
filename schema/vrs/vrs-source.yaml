@@ -309,7 +309,7 @@ $defs:
         description: MUST be "SequenceReference"
       refgetAccession:
         description: >-
-          A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence, 
+          A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence,
           using the sha512t24u digest.
         type: string
         pattern: '^SQ.[0-9A-Za-z_\-]{32}$'
@@ -478,7 +478,7 @@ $defs:
         - linker
     inherits: MolecularVariation
     description: >-
-      The `Adjacency` class can represent either the termination of a sequence 
+      The `Adjacency` class can represent either the termination of a sequence
       or the adjoining of the end of a sequence with the beginning of an
       adjacent sequence, potentially with an intervening linker sequence.
     type: object
@@ -531,12 +531,12 @@ $defs:
         const: SequenceTerminus
         default: SequenceTerminus
         description: MUST be "SequenceTerminus".
-      location: 
+      location:
         oneOf:
           - $refCurie: gks.core:IRI
           - $ref: '#/$defs/Location'
         description: The location of the terminus.
-      
+
     required: ["location"]
 
   DerivativeSequence:
@@ -549,7 +549,7 @@ $defs:
     inherits: MolecularVariation
     description: >-
       The "Derivative Sequence" data class is a structure for describing a derivate sequence composed
-      from mutiple sequence adjacencies.
+      from multiple sequence adjacencies.
     type: object
     properties:
       type:
@@ -570,4 +570,3 @@ $defs:
         description: >-
           The sequence components that make up the derivative sequence.
         minItems: 2
-
