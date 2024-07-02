@@ -8,3 +8,4 @@ pyproject.toml
 .python-version
 .idea/
 .DS_Store
+schema/*/build/
