@@ -327,8 +327,6 @@ $defs:
           A boolean indicating whether the molecule represented by the sequence is circular (true) or linear (false).
     required: ["refgetAccession"]
 
-      #TODO: implementation guidance: digest property is RefGet TRUNC512
-
   # =============================================================================
   # NON-IDENTIFIABLE TYPES
   # These types have a `type` attribute
