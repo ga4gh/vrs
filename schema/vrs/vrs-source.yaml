@@ -33,6 +33,7 @@ $defs:
     inherits: gks.core:DomainEntity
     description: >-
       A contextual value whose equality is based on value, not identity.
+      These objects can be serialized but not digested for parent object serialization.
       See https://en.wikipedia.org/wiki/Value_object for more on Value Objects.
 
   Ga4ghIdentifiableObject:
@@ -297,9 +298,10 @@ $defs:
     maturity: draft
     inherits: ValueObject
     ga4ghDigest:
-      assigned: true # This special property indicates that the `digest` field follows an alternate convention
-                # and is expected to have the value assigned following that convention. For SequenceReference,
-                # it is expected the digest will be the refget accession value without the `SQ.` prefix.
+      keys: [
+        "refgetAccession",
+        "type"
+      ]
     type: object
     description: A sequence of nucleic or amino acid character codes.
     properties:
