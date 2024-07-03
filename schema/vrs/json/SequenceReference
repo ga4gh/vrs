@@ -5,7 +5,10 @@
    "type": "object",
    "maturity": "draft",
    "ga4ghDigest": {
-      "assigned": true
+      "keys": [
+         "refgetAccession",
+         "type"
+      ]
    },
    "description": "A sequence of nucleic or amino acid character codes.",
    "properties": {
