@@ -1,12 +1,40 @@
 SequenceReference:
-  -
-    in:
+  - in:
       type: SequenceReference
       refgetAccession: SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul
     out:
       ga4gh_identify: null
       ga4gh_digest: null
       ga4gh_serialize: '{"refgetAccession":"SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul","type":"SequenceReference"}'
+
+LengthExpression:
+  - in:
+      type: LengthExpression
+      length: 20000
+    out:
+      ga4gh_identify: null
+      ga4gh_digest: null
+      ga4gh_serialize: '{"length":20000,"type":"LengthExpression"}'
+
+LiteralSequenceExpression:
+  - in:
+      sequence: ACGT
+      type: LiteralSequenceExpression
+    out:
+      ga4gh_identify: null
+      ga4gh_digest: null
+      ga4gh_serialize: '{"sequence":"ACGT","type":"LiteralSequenceExpression"}'
+
+ReferenceLengthExpression:
+  - in:
+      type: ReferenceLengthExpression
+      length: 11
+      repeatSubunitLength: 3
+      sequence: CTCCTCCTCCT
+    out:
+      ga4gh_identify: null
+      ga4gh_digest: null
+      ga4gh_serialize: '{"length":11,"repeatSubunitLength":3,"type":"ReferenceLengthExpression"}'
 
 SequenceLocation:
   - name: "SequenceLocation w/ SequenceReference"
@@ -23,8 +51,8 @@ SequenceLocation:
       ga4gh_serialize: '{"end":44908822,"sequenceReference":{"refgetAccession":"SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul","type":"SequenceReference"},"start":44908821,"type":"SequenceLocation"}'
   - name: "SequenceLocation w/ SequenceReference and Ranges"
     in:
-      end: [44908822,44908922]
-      start: [44908721,44908821]
+      end: [44908822, 44908922]
+      start: [44908721, 44908821]
       sequenceReference:
         id: GRCh38:chr7
         type: SequenceReference
@@ -36,8 +64,8 @@ SequenceLocation:
       ga4gh_serialize: '{"end":[44908822,44908922],"sequenceReference":{"refgetAccession":"SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul","type":"SequenceReference"},"start":[44908721,44908821],"type":"SequenceLocation"}'
   - name: "SequenceLocation w/Definite and Indefinite Ranges"
     in:
-      end: [44908822,null]
-      start: [44908721,44908821]
+      end: [44908822, null]
+      start: [44908721, 44908821]
       sequenceReference:
         type: SequenceReference
         refgetAccession: SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ
@@ -48,8 +76,8 @@ SequenceLocation:
       ga4gh_serialize: '{"end":[44908822,null],"sequenceReference":{"refgetAccession":"SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ","type":"SequenceReference"},"start":[44908721,44908821],"type":"SequenceLocation"}'
   - name: "SequenceLocation w/more Definite and Indefinite Ranges"
     in:
-      end: [null,44908822]
-      start: [44908721,44908821]
+      end: [null, 44908822]
+      start: [44908721, 44908821]
       sequenceReference:
         type: SequenceReference
         refgetAccession: SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ
@@ -59,27 +87,51 @@ SequenceLocation:
       ga4gh_identify: ga4gh:SL.eKeAwwmhtcMK_qdvcsw8xERJWC5IEPB1
       ga4gh_serialize: '{"end":[null,44908822],"sequenceReference":{"refgetAccession":"SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ","type":"SequenceReference"},"start":[44908721,44908821],"type":"SequenceLocation"}'
 
-LiteralSequenceExpression:
-  -
+Adjacency:
+  - name: "Ambiguous linker (order 1)" # Expect different digest for different order
     in:
-      sequence: ACGT
-      type: LiteralSequenceExpression
+      type: Adjacency
+      adjoinedSequences:
+        - type: SequenceLocation
+          sequenceReference:
+            type: SequenceReference
+            refgetAccession: SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO
+            residueAlphabet: na
+            id: NC_000002.11
+          start: 456
+        - type: SequenceLocation
+          sequenceReference:
+            type: SequenceReference
+            refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+            residueAlphabet: na
+            id: NC_000001.10
+          end: 123
     out:
-      ga4gh_identify: null
-      ga4gh_digest: null
-      ga4gh_serialize: '{"sequence":"ACGT","type":"LiteralSequenceExpression"}'
-
-ReferenceLengthExpression:
-  -
+      ga4gh_digest: O0IbSYyhnBAtUsR51bpdoqeSo4YaDMFo
+      ga4gh_identify: ga4gh:AJ.O0IbSYyhnBAtUsR51bpdoqeSo4YaDMFo
+      ga4gh_serialize: '{"adjoinedSequences":["elmvUghL59i1XrD-Y7cwS__tBR6EEA98","bv1nX0Bsy9udUKaOKAJ-SlrysigguPre"],"linker":null,"type":"Adjacency"}'
+  - name: "Ambiguous linker (order 2)" # Expect different digest for different order
     in:
-      type: ReferenceLengthExpression
-      length: 11
-      repeatSubunitLength: 3
-      sequence: CTCCTCCTCCT
+      type: Adjacency
+      adjoinedSequences:
+        - type: SequenceLocation
+          sequenceReference:
+            type: SequenceReference
+            refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+            residueAlphabet: na
+            id: NC_000001.10
+          end: 123
+        - type: SequenceLocation
+          sequenceReference:
+            type: SequenceReference
+            refgetAccession: SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO
+            residueAlphabet: na
+            id: NC_000002.11
+          start: 456
     out:
-      ga4gh_identify: null
-      ga4gh_digest: null
-      ga4gh_serialize: '{"length":11,"repeatSubunitLength":3,"type":"ReferenceLengthExpression"}'
+      ga4gh_digest: 8nZpyyB_ZRzvXIxWVdhTMRhxz0GlgkNU
+      ga4gh_identify: ga4gh:AJ.8nZpyyB_ZRzvXIxWVdhTMRhxz0GlgkNU
+      ga4gh_serialize: '{"adjoinedSequences":["bv1nX0Bsy9udUKaOKAJ-SlrysigguPre","elmvUghL59i1XrD-Y7cwS__tBR6EEA98"],"linker":null,"type":"Adjacency"}'
 
 Allele:
   - name: "rs7412@GRCh38>T w/LiteralSequenceExpression"
@@ -123,51 +175,162 @@ Allele:
       ga4gh_serialize: '{"location":"nQGBuvRQOLEboA5TYtcz975fp_GulxbZ","state":{"length":11,"repeatSubunitLength":3,"type":"ReferenceLengthExpression"},"type":"Allele"}'
 
 CisPhasedBlock:
-  - name: "APOE1 on GRCh38, inline"
+  - name: "Simple CisPhasedBlock (order 1)" # Expect same digest for different order
     in:
       members:
-      - location:
-          end: 44908822
-          start: 44908821
-          sequenceReference:
-            type: SequenceReference
-            refgetAccession: SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ
-          type: SequenceLocation
-        state:
-          sequence: C
-          type: LiteralSequenceExpression
-        type: Allele
-      - location:
-          end: 44908684
-          start: 44908683
-          sequenceReference:
-            type: SequenceReference
-            refgetAccession: SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ
-          type: SequenceLocation
-        state:
-          sequence: C
-          type: LiteralSequenceExpression
-        type: Allele
+        - location:
+            end: 602
+            start: 601
+            type: SequenceLocation
+          state:
+            sequence: C
+            type: LiteralSequenceExpression
+          type: Allele
+        - location:
+            end: 702
+            start: 701
+            type: SequenceLocation
+          state:
+            sequence: C
+            type: LiteralSequenceExpression
+          type: Allele
+      sequenceReference:
+        type: SequenceReference
+        refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+        residueAlphabet: na
+        id: NC_000001.10
       type: CisPhasedBlock
     out:
-      ga4gh_digest: pS8ubMBiWe0SIAotItLTT0bV3wxycLCj
-      ga4gh_identify: ga4gh:CPB.pS8ubMBiWe0SIAotItLTT0bV3wxycLCj
-      ga4gh_serialize: '{"members":["CvJUnTllC5zQ-M1Hbj9oj6BQitKw67J9","QZGrlXd07EPr1mUVyhfaEN8mJVmN1PGF"],"type":"CisPhasedBlock"}'
-  - name: "APOE1 on GRCh38, referenced"
+      ga4gh_digest: YAWwnFF0e-T7fnuT4wRzZW4Lzg7jc-zQ
+      ga4gh_identify: ga4gh:CPB.YAWwnFF0e-T7fnuT4wRzZW4Lzg7jc-zQ
+      ga4gh_serialize: '{"members":["VJIUKfuj7QCxPI-bplNjh5bv2Y8nkvW7","aYfm-2xhlRwkQdgcnJi8Wd0ILCuvsevm"],"type":"CisPhasedBlock"}'
+  - name: "Simple CisPhasedBlock (order 2)" # Expect same digest for different order
     in:
       members:
-      - ga4gh:VA.zxokbi7DQc5Eq5iLxlEFVzK3hOBEJMxr
-      - ga4gh:VA.khD7xy2qdhEmCtv2mFnNfc6BGibim97K
+        - location:
+            end: 702
+            start: 701
+            type: SequenceLocation
+          state:
+            sequence: C
+            type: LiteralSequenceExpression
+          type: Allele
+        - location:
+            end: 602
+            start: 601
+            type: SequenceLocation
+          state:
+            sequence: C
+            type: LiteralSequenceExpression
+          type: Allele
+      sequenceReference:
+        type: SequenceReference
+        refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+        residueAlphabet: na
+        id: NC_000001.10
       type: CisPhasedBlock
     out:
-      ga4gh_digest: g1vaV3bfbPBQUY9-n5pVE6IlXbhVsYpz
-      ga4gh_identify: ga4gh:CPB.g1vaV3bfbPBQUY9-n5pVE6IlXbhVsYpz
-      ga4gh_serialize: '{"members":["khD7xy2qdhEmCtv2mFnNfc6BGibim97K","zxokbi7DQc5Eq5iLxlEFVzK3hOBEJMxr"],"type":"CisPhasedBlock"}'
+      ga4gh_digest: YAWwnFF0e-T7fnuT4wRzZW4Lzg7jc-zQ
+      ga4gh_identify: ga4gh:CPB.YAWwnFF0e-T7fnuT4wRzZW4Lzg7jc-zQ
+      ga4gh_serialize: '{"members":["VJIUKfuj7QCxPI-bplNjh5bv2Y8nkvW7","aYfm-2xhlRwkQdgcnJi8Wd0ILCuvsevm"],"type":"CisPhasedBlock"}'
+
+DerivativeSequence:
+  - name: "DerivativeSequence (order 1)" # Expect different digest for different order
+    in:
+      components:
+        - type: Adjacency
+          linker:
+            type: LiteralSequenceExpression
+            sequence: GTC
+          adjoinedSequences:
+            - type: SequenceLocation
+              sequenceReference:
+                type: SequenceReference
+                refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+                residueAlphabet: na
+                id: NC_000001.10
+              end: 123
+            - type: SequenceLocation
+              sequenceReference:
+                type: SequenceReference
+                refgetAccession: SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO
+                residueAlphabet: na
+                id: NC_000002.11
+              start: 500
+        - type: Adjacency
+          adjoinedSequences:
+            - type: SequenceLocation
+              end: 15000
+            - type: SequenceLocation
+              sequenceReference:
+                type: SequenceReference
+                refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+                residueAlphabet: na
+                id: NC_000001.10
+              start: 10000
+      type: DerivativeSequence
+    out:
+      ga4gh_digest: WLqmdzbXBEOHltwMVGgj24GioZhAIyZa
+      ga4gh_identify: ga4gh:DSQ.WLqmdzbXBEOHltwMVGgj24GioZhAIyZa
+      ga4gh_serialize: '{"components":["OSbl1_-TZ08ggYKXSQMxAyN5kfj64Axu","lqoM5i-DPwNrC3cJxdTe0YXbzTFVvdgQ"],"type":"DerivativeSequence"}'
+  - name: "DerivativeSequence (order 2)" # Expect different digest for different order
+    in:
+      components:
+        - type: Adjacency
+          adjoinedSequences:
+            - type: SequenceLocation
+              end: 15000
+            - type: SequenceLocation
+              sequenceReference:
+                type: SequenceReference
+                refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+                residueAlphabet: na
+                id: NC_000001.10
+              start: 10000
+        - type: Adjacency
+          linker:
+            type: LiteralSequenceExpression
+            sequence: GTC
+          adjoinedSequences:
+            - type: SequenceLocation
+              sequenceReference:
+                type: SequenceReference
+                refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+                residueAlphabet: na
+                id: NC_000001.10
+              end: 123
+            - type: SequenceLocation
+              sequenceReference:
+                type: SequenceReference
+                refgetAccession: SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO
+                residueAlphabet: na
+                id: NC_000002.11
+              start: 500
+      type: DerivativeSequence
+    out:
+      ga4gh_digest: zUkDkzpmi1pcMcWQW4IMZ8GMbOXY4_W1
+      ga4gh_identify: ga4gh:DSQ.zUkDkzpmi1pcMcWQW4IMZ8GMbOXY4_W1
+      ga4gh_serialize: '{"components":["lqoM5i-DPwNrC3cJxdTe0YXbzTFVvdgQ","OSbl1_-TZ08ggYKXSQMxAyN5kfj64Axu"],"type":"DerivativeSequence"}'
+
+SequenceTerminus:
+  - in:
+      location:
+        end: 44908822
+        start: 44908821
+        sequenceReference:
+          type: SequenceReference
+          refgetAccession: SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul
+        type: SequenceLocation
+      type: SequenceTerminus
+    out:
+      ga4gh_digest: 8RTmLpujNAjKeS4op4cBPCw-uIERA_Zl
+      ga4gh_identify: ga4gh:SQX.8RTmLpujNAjKeS4op4cBPCw-uIERA_Zl
+      ga4gh_serialize: '{"location":"4t6JnYWqHwYw9WzBT_lmWBb3tLQNalkT","type":"SequenceTerminus"}'
 
 CopyNumberCount:
   - name: ">=3 copies APOE"
     in:
-      copies: [3,null]
+      copies: [3, null]
       location:
         sequenceReference:
           type: SequenceReference
