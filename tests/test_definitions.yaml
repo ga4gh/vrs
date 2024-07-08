@@ -9,11 +9,11 @@ tests:
     image: ../../docs/images/ex_revcomp_breakpoint.png
     schema: vrs
     definition: Adjacency
-  # - test_file: terminal_breakend.yaml
-  #   description: An adjacency with only the starting sequence location. defining the break at which the adjacency ends or terminates.
-  #   image: ../../docs/images/ex_terminal_breakend.png
-  #   schema: vrs
-  #   definition: Adjacency
+  - test_file: terminal_breakend.yaml
+    description: An adjacency with only the starting sequence location. defining the break at which the adjacency ends or terminates.
+    image: ../../docs/images/ex_terminal_breakend.png
+    schema: vrs
+    definition: SequenceTerminus
   - test_file: sequence_homology.yaml
     description: An adjacency in which the two sequence locations have a homologous overlapping adjoined sequences.
     image: ../../docs/images/ex_sequence_homology.png
@@ -29,11 +29,11 @@ tests:
     image: ../../docs/images/ex_ambiguous_linker.png
     schema: vrs
     definition: Adjacency
-  # - test_file: sv_haplotype.yaml
-  #   description: A haplotype of 3 members. First an adjacency with a litereal sequence linker followed by an SNV on the 2nd sequence and ending with a simple breakpoint adjacency that ends with the 1st sequence in the haplotype.
-  #   image: ../../docs/images/ex_sv_haplotype.png
-  #   schema: vrs
-  #   definition: CisPhasedBlock
+  - test_file: sv_derivative_sequence.yaml
+    description: A Derivative Sequence of 5 members. First a 5' terminus, then an adjacency with a literal sequence linker followed by an SNV (Allele), followed by a simple breakpoint adjacency and ending with a 3' terminus that ends with the 1st sequence in derivative sequence.
+    image: ../../docs/images/ex_sv_haplotype.png
+    schema: vrs
+    definition: DerivativeSequence
   - test_file: simple_haplotype.yaml
     description: A haplotype of two alleles on a shared chromosome reference sequence.
     schema: vrs

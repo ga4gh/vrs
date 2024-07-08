@@ -33,17 +33,17 @@ Some LengthExpression attributes are inherited from :ref:`SequenceExpression`.
           - 0..m
           - Alternative name(s) for the Entity.
        *  - extensions
-          - `Extension <../gks-core-im/core.json#/$defs/Extension>`_
+          - `Extension <../gks-common/common.json#/$defs/Extension>`_
           - 0..m
           - A list of extensions to the entity. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems.
+       *  - mappings
+          - `ConceptMapping <../gks-common/common.json#/$defs/ConceptMapping>`_
+          - 0..m
+          - A list of mappings to concepts in terminologies or code systems. Each mapping should include a coding and a relation.
        *  - type
           - string
           - 1..1
           - MUST be "LengthExpression"
-       *  - mappings
-          - `ConceptMapping <../gks-core-im/core.json#/$defs/ConceptMapping>`_
-          - 0..m
-          - A list of mappings to concepts in terminologies or code systems. Each mapping should include a coding and a relation.
        *  - length
           - :ref:`Range` | integer
           - 0..1

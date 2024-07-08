@@ -33,23 +33,23 @@ Some SequenceLocation attributes are inherited from :ref:`Ga4ghIdentifiableObjec
           - 0..m
           - Alternative name(s) for the Entity.
        *  - extensions
-          - `Extension <../gks-core-im/core.json#/$defs/Extension>`_
+          - `Extension <../gks-common/common.json#/$defs/Extension>`_
           - 0..m
           - A list of extensions to the entity. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems.
-       *  - type
-          - string
-          - 1..1
-          - MUST be "SequenceLocation"
        *  - mappings
-          - `ConceptMapping <../gks-core-im/core.json#/$defs/ConceptMapping>`_
+          - `ConceptMapping <../gks-common/common.json#/$defs/ConceptMapping>`_
           - 0..m
           - A list of mappings to concepts in terminologies or code systems. Each mapping should include a coding and a relation.
        *  - digest
           - string
           - 0..1
           - A sha512t24u digest created using the VRS Computed Identifier algorithm.
+       *  - type
+          - string
+          - 1..1
+          - MUST be "SequenceLocation"
        *  - sequenceReference
-          - `IRI <../gks-core-im/core-im.json#/$defs/IRI>`_ | :ref:`SequenceReference`
+          - `IRI <../gks-common/common.json#/$defs/IRI>`_ | :ref:`SequenceReference`
           - 0..1
           - A reference to a :ref:`Sequence` on which the location is defined.
        *  - start

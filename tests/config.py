@@ -10,7 +10,6 @@ schema_path = root_path / "schema"
 test_path = root_path / "tests"
 examples_path = root_path / "examples"
 vrs_source_path = schema_path / "vrs" / "vrs-source.yaml"
-vrs_jsons_path = schema_path / "vrs" / "json"
 
 
 ga4gh_re = re.compile(r'.*\/ga4gh\/schema\/([\w\-\.]+)\/[\w\.]+\/(.*)$')
