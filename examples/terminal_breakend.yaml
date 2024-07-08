@@ -1,10 +1,10 @@
 id: terminal_breakend
-type: Adjacency
-adjoinedSequences:
-  - type: SequenceLocation
-    sequenceReference:
-      type: SequenceReference
-      refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
-      residueAlphabet: na
-      id: NC_000001.10
-    end: 1230000
+type: SequenceTerminus
+location:
+  type: SequenceLocation
+  sequenceReference:
+    type: SequenceReference
+    refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+    residueAlphabet: na
+    id: NC_000001.10
+  end: 123
