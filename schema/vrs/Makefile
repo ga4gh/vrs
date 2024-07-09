@@ -2,6 +2,8 @@
 .DELETE_ON_ERROR:
 
 BUILD_DIR := build
+DEF_DIR := def
+JSON_DIR := json
 IMPORT_DIR := import
 
 vpath %tag $(BUILD_DIR)
@@ -38,3 +40,5 @@ prune-tag: ${TAGS}
 
 clean:
 	rm $(BUILD_DIR)/*
+	rm $(DEF_DIR)/*
+	rm $(JSON_DIR)/*
