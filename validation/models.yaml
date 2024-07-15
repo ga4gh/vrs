@@ -42,6 +42,7 @@ SequenceLocation:
       end: 44908822
       start: 44908821
       sequenceReference:
+        id: NC_000007.14
         type: SequenceReference
         refgetAccession: SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul
       type: SequenceLocation
@@ -49,12 +50,14 @@ SequenceLocation:
       ga4gh_digest: 4t6JnYWqHwYw9WzBT_lmWBb3tLQNalkT
       ga4gh_identify: ga4gh:SL.4t6JnYWqHwYw9WzBT_lmWBb3tLQNalkT
       ga4gh_serialize: '{"end":44908822,"sequenceReference":{"refgetAccession":"SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul","type":"SequenceReference"},"start":44908821,"type":"SequenceLocation"}'
+      ga4gh_1_3_serialize: '{"interval":{"end":{"type":"Number","value":44908822},"start":{"type":"Number","value":44908821},"type":"SequenceInterval"},"sequence_id":"F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul","type":"SequenceLocation"}'
+
   - name: "SequenceLocation w/ SequenceReference and Ranges"
     in:
       end: [44908822, 44908922]
       start: [44908721, 44908821]
       sequenceReference:
-        id: GRCh38:chr7
+        id: NC_000007.14
         type: SequenceReference
         refgetAccession: SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul
       type: SequenceLocation
@@ -62,30 +65,36 @@ SequenceLocation:
       ga4gh_digest: 8-sGv9AY7GJT6QVgqbxhMXFNamnWcFJu
       ga4gh_identify: ga4gh:SL.8-sGv9AY7GJT6QVgqbxhMXFNamnWcFJu
       ga4gh_serialize: '{"end":[44908822,44908922],"sequenceReference":{"refgetAccession":"SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul","type":"SequenceReference"},"start":[44908721,44908821],"type":"SequenceLocation"}'
+
   - name: "SequenceLocation w/Definite and Indefinite Ranges"
     in:
       end: [44908822, null]
       start: [44908721, 44908821]
       sequenceReference:
+        id: NC_000007.14
         type: SequenceReference
-        refgetAccession: SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ
+        refgetAccession: SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul
       type: SequenceLocation
     out:
-      ga4gh_digest: CyBy1ACd1JO3erBh3TG2ZE4zHe0LFhdL
-      ga4gh_identify: ga4gh:SL.CyBy1ACd1JO3erBh3TG2ZE4zHe0LFhdL
-      ga4gh_serialize: '{"end":[44908822,null],"sequenceReference":{"refgetAccession":"SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ","type":"SequenceReference"},"start":[44908721,44908821],"type":"SequenceLocation"}'
+      ga4gh_digest: XQAXpesghmuDHziAcDCAmESBOPKTBhwD
+      ga4gh_identify: ga4gh:SL.XQAXpesghmuDHziAcDCAmESBOPKTBhwD
+      ga4gh_1_3_identify: ga4gh:VSL.zGh9Zy42Zu9R0sbyB1rXsxd33BIyiORk
+      ga4gh_serialize: '{"end":[44908822,null],"sequenceReference":{"refgetAccession":"SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul","type":"SequenceReference"},"start":[44908721,44908821],"type":"SequenceLocation"}'
+      ga4gh_1_3_serialize: '{"interval":{"end":{"comparator":">=","type":"IndefiniteRange","value":44908822},"start":{"max":44908821,"min":44908721,"type":"DefiniteRange"},"type":"SequenceInterval"},"sequence_id":"F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul","type":"SequenceLocation"}'
+
   - name: "SequenceLocation w/more Definite and Indefinite Ranges"
     in:
       end: [null, 44908822]
       start: [44908721, 44908821]
       sequenceReference:
+        id: NC_000007.14
         type: SequenceReference
-        refgetAccession: SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ
+        refgetAccession: SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul
       type: SequenceLocation
     out:
-      ga4gh_digest: eKeAwwmhtcMK_qdvcsw8xERJWC5IEPB1
-      ga4gh_identify: ga4gh:SL.eKeAwwmhtcMK_qdvcsw8xERJWC5IEPB1
-      ga4gh_serialize: '{"end":[null,44908822],"sequenceReference":{"refgetAccession":"SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ","type":"SequenceReference"},"start":[44908721,44908821],"type":"SequenceLocation"}'
+      ga4gh_digest: OYplG0vkUojmK2hDejylSykx-np3HPFP
+      ga4gh_identify: ga4gh:SL.OYplG0vkUojmK2hDejylSykx-np3HPFP
+      ga4gh_serialize: '{"end":[null,44908822],"sequenceReference":{"refgetAccession":"SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul","type":"SequenceReference"},"start":[44908721,44908821],"type":"SequenceLocation"}'
 
 Adjacency:
   - name: "Ambiguous linker (order 1)" # Expect different digest for different order
@@ -140,17 +149,20 @@ Allele:
         end: 44908822
         start: 44908821
         sequenceReference:
+          id: NC_0000019.10
           type: SequenceReference
-          refgetAccession: SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ
+          refgetAccession: SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
         type: SequenceLocation
       state:
         sequence: T
         type: LiteralSequenceExpression
       type: Allele
     out:
-      ga4gh_digest: NRUtY5Jcoevxr0tIgbNa-oIFm-Gv4qas
-      ga4gh_identify: ga4gh:VA.NRUtY5Jcoevxr0tIgbNa-oIFm-Gv4qas
-      ga4gh_serialize: '{"location":"DLRL0aHPUV-AS7_bgdWlQUdGT7aD_ys8","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}'
+      ga4gh_digest: 0AePZIWZUNsUlQTamyLrjm2HWUw2opLt
+      ga4gh_identify: ga4gh:VA.0AePZIWZUNsUlQTamyLrjm2HWUw2opLt
+      ga4gh_1_3_identify: ga4gh:VA.CxiA_hvYbkD8Vqwjhx5AYuyul4mtlkpD
+      ga4gh_serialize: '{"location":"wIlaGykfwHIpPY2Fcxtbx4TINbbODFVz","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}'
+      ga4gh_1_3_serialize: '{"location":"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}'
   - name: "NC_000001.11:40819438:CTCCTCCT:CTCCTCCTCCT w/ReferenceLengthExpression"
     in:
       type: Allele
