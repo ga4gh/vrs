@@ -3,7 +3,7 @@
 An assessment of the copy number of a :ref:`Location` or a :ref:`Gene` within a system (e.g. genome, cell, etc.) relative to a baseline ploidy.
 
     **Information Model**
-    
+
 Some CopyNumberChange attributes are inherited from :ref:`CopyNumber`.
 
     .. list-table::
@@ -11,7 +11,7 @@ Some CopyNumberChange attributes are inherited from :ref:`CopyNumber`.
        :header-rows: 1
        :align: left
        :widths: auto
-       
+
        *  - Field
           - Type
           - Limits
@@ -47,7 +47,7 @@ Some CopyNumberChange attributes are inherited from :ref:`CopyNumber`.
        *  - expressions
           - `Expression <../gks-common/common.json#/$defs/Expression>`_
           - 0..m
-          - 
+          -
        *  - location
           - `IRI <../gks-common/common.json#/$defs/IRI>`_ | :ref:`Location`
           - 1..1
@@ -59,4 +59,4 @@ Some CopyNumberChange attributes are inherited from :ref:`CopyNumber`.
        *  - copyChange
           - string
           - 1..1
-          - MUST be one of "efo:0030069" (complete genomic loss), "efo:0020073" (high-level loss), "efo:0030068" (low-level loss), "efo:0030067" (loss), "efo:0030064" (regional base ploidy), "efo:0030070" (gain), "efo:0030071" (low-level gain), "efo:0030072" (high-level gain).
+          - MUST be one of "EFO:0030069" (complete genomic loss), "EFO:0020073" (high-level loss), "EFO:0030068" (low-level loss), "EFO:0030067" (loss), "EFO:0030064" (regional base ploidy), "EFO:0030070" (gain), "EFO:0030071" (low-level gain), "EFO:0030072" (high-level gain).
