@@ -231,12 +231,12 @@ $defs:
           MUST be "CopyNumberChange"
       copyChange:
         type: string
-        enum: [ "efo:0030069", "efo:0020073", "efo:0030068", "efo:0030067", "efo:0030064", "efo:0030070",
-                "efo:0030071", "efo:0030072" ]
+        enum: [ "EFO:0030069", "EFO:0020073", "EFO:0030068", "EFO:0030067", "EFO:0030064", "EFO:0030070",
+                "EFO:0030071", "EFO:0030072" ]
         description: >-
-          MUST be one of "efo:0030069" (complete genomic loss), "efo:0020073" (high-level loss),
-          "efo:0030068" (low-level loss), "efo:0030067" (loss), "efo:0030064" (regional base ploidy),
-          "efo:0030070" (gain), "efo:0030071" (low-level gain), "efo:0030072" (high-level gain).
+          MUST be one of "EFO:0030069" (complete genomic loss), "EFO:0020073" (high-level loss),
+          "EFO:0030068" (low-level loss), "EFO:0030067" (loss), "EFO:0030064" (regional base ploidy),
+          "EFO:0030070" (gain), "EFO:0030071" (low-level gain), "EFO:0030072" (high-level gain).
     required: [ "copyChange" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -298,7 +298,7 @@ $defs:
     maturity: draft
     inherits: ValueObject
     ga4ghDigest:
-      keys: 
+      keys:
         - refgetAccession
         - type
     type: object
@@ -510,7 +510,7 @@ $defs:
         description: >-
           A flag indicating if coordinate ambiguity in the adjoined sequences is from sequence homology
           (true) or other uncertainty (false).
-    required: 
+    required:
       - adjoinedSequences
 
   SequenceTerminus:
@@ -536,7 +536,7 @@ $defs:
           - $refCurie: gks.common:IRI
           - $ref: '#/$defs/Location'
         description: The location of the terminus.
-    required: 
+    required:
       - location
 
   DerivativeSequence:
@@ -570,5 +570,5 @@ $defs:
         description: >-
           The sequence components that make up the derivative sequence.
         minItems: 2
-    required: 
+    required:
       - components
