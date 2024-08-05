@@ -3,7 +3,7 @@
 An assessment of the copy number of a :ref:`Location` or a :ref:`Gene` within a system (e.g. genome, cell, etc.) relative to a baseline ploidy.
 
     **Information Model**
-
+    
 Some CopyNumberChange attributes are inherited from :ref:`CopyNumber`.
 
     .. list-table::
@@ -11,7 +11,7 @@ Some CopyNumberChange attributes are inherited from :ref:`CopyNumber`.
        :header-rows: 1
        :align: left
        :widths: auto
-
+       
        *  - Field
           - Type
           - Limits
@@ -47,7 +47,7 @@ Some CopyNumberChange attributes are inherited from :ref:`CopyNumber`.
        *  - expressions
           - `Expression <../gks-common/common.json#/$defs/Expression>`_
           - 0..m
-          -
+          - 
        *  - location
           - `IRI <../gks-common/common.json#/$defs/IRI>`_ | :ref:`Location`
           - 1..1

@@ -34,7 +34,7 @@
       },
       "extensions": {
          "type": "array",
-         "ordered": true,
+         "ordered": false,
          "items": {
             "$ref": "/ga4gh/schema/gks-common/1.x/common/json/Extension"
          },
