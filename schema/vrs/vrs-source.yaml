@@ -29,17 +29,10 @@ $defs:
   # Kinds of Variation
   # =============================================================================
 
-  ValueObject:
-    inherits: gks.common:DomainEntity
-    description: >-
-      A contextual value whose equality is based on value, not identity.
-      These objects can be serialized but not digested for parent object serialization.
-      See https://en.wikipedia.org/wiki/Value_object for more on Value Objects.
-
   Ga4ghIdentifiableObject:
-    inherits: ValueObject
+    inherits: gks.common:Entity
     description: >-
-      A contextual value object for which a GA4GH computed identifier can be created.
+      An object for which a GA4GH computed identifier can be created.
     ga4ghDigest:
       keys:
         - type
@@ -296,7 +289,7 @@ $defs:
 
   SequenceReference:
     maturity: draft
-    inherits: ValueObject
+    inherits: gks.common:Entity
     ga4ghDigest:
       keys:
         - refgetAccession
@@ -338,7 +331,7 @@ $defs:
   # SequenceExpression
 
   SequenceExpression:
-    inherits: ValueObject
+    inherits: gks.common:Entity
     ga4ghDigest:
       keys:
         - type
