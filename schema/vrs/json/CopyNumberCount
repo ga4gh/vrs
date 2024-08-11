@@ -42,14 +42,6 @@
          },
          "description": "A list of extensions to the entity. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems."
       },
-      "mappings": {
-         "type": "array",
-         "ordered": false,
-         "items": {
-            "$ref": "/ga4gh/schema/gks-common/1.x/common/json/ConceptMapping"
-         },
-         "description": "A list of mappings to concepts in terminologies or code systems. Each mapping should include a coding and a relation."
-      },
       "digest": {
          "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
          "type": "string",
