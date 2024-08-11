@@ -15,10 +15,8 @@ type: object
 strict: true
 
 imports:
-  gks.common: ../gks-common/common-source.yaml
-
-namespaces:
-  gks.common: ../gks-common/common.json#/$defs/
+  gks.core-im: ../core-im/core-im-source.yaml
+  gks.data-types: ../data-types/data-types-source.yaml
 
 $defs:
   # VRS definitions are presented top-down.  Everything rolls up to
@@ -30,7 +28,7 @@ $defs:
   # =============================================================================
 
   Ga4ghIdentifiableObject:
-    inherits: gks.common:Entity
+    inherits: gks.core-im:Entity
     description: >-
       An object for which a GA4GH computed identifier can be created.
     ga4ghDigest:
@@ -56,7 +54,7 @@ $defs:
         type: array
         ordered: false
         items:
-          $refCurie: gks.common:Expression
+          $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/Expression"
     discriminator:
       propertyName: type
 
@@ -112,7 +110,7 @@ $defs:
           MUST be "Allele"
       location:
         oneOf:
-          - $refCurie: gks.common:IRI
+          - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
           - $ref: "#/$defs/Location"
         description: >-
           The location of the Allele
@@ -147,7 +145,7 @@ $defs:
         items:
           oneOf:
             - $ref: "#/$defs/Allele"
-            - $refCurie: gks.common:IRI
+            - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI" 
         description: >-
           A list of :ref:`Alleles <Allele>` that are found in-cis on a shared molecule.
       sequenceReference:
@@ -172,7 +170,7 @@ $defs:
     heritableProperties:
       location:
         oneOf:
-          - $refCurie: gks.common:IRI
+          - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
           - $ref: "#/$defs/Location"
         description: >-
           A location for which the number of systemic copies is described.
@@ -263,7 +261,7 @@ $defs:
         description: MUST be "SequenceLocation"
       sequenceReference:
         oneOf:
-          - $refCurie: gks.common:IRI
+          - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
           - $ref: "#/$defs/SequenceReference"
         description: A reference to a :ref:`Sequence` on which the location is defined.
       start:
@@ -289,7 +287,7 @@ $defs:
 
   SequenceReference:
     maturity: draft
-    inherits: gks.common:Entity
+    inherits: gks.core-im:Entity
     ga4ghDigest:
       keys:
         - refgetAccession
@@ -331,7 +329,7 @@ $defs:
   # SequenceExpression
 
   SequenceExpression:
-    inherits: gks.common:Entity
+    inherits: gks.core-im:Entity
     ga4ghDigest:
       keys:
         - type
@@ -432,7 +430,7 @@ $defs:
     items:
       oneOf:
         - type: integer
-        - type: 'null'
+        - type: "null"
     maxItems: 2
     minItems: 2
 
@@ -488,13 +486,13 @@ $defs:
         ordered: true
         items:
           oneOf:
-          - $refCurie: gks.common:IRI
-          - $ref: '#/$defs/Location'
+          - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
+          - $ref: "#/$defs/Location"
         description: The terminal sequence or pair of adjoined sequences that defines in the adjacency.
         minItems: 2
         maxItems: 2
       linker:
-        $ref: '#/$defs/SequenceExpression'
+        $ref: "#/$defs/SequenceExpression"
         description: The sequence found between adjoined sequences.
       homology:
         type: boolean
@@ -526,8 +524,8 @@ $defs:
         description: MUST be "SequenceTerminus".
       location:
         oneOf:
-          - $refCurie: gks.common:IRI
-          - $ref: '#/$defs/Location'
+          - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
+          - $ref: "#/$defs/Location"
         description: The location of the terminus.
     required:
       - location
@@ -555,11 +553,11 @@ $defs:
         ordered: true
         items:
           oneOf:
-          - $refCurie: gks.common:IRI
-          - $ref: '#/$defs/Adjacency'
-          - $ref: '#/$defs/Allele'
-          - $ref: '#/$defs/SequenceTerminus'
-          - $ref: '#/$defs/CisPhasedBlock'
+          - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
+          - $ref: "#/$defs/Adjacency"
+          - $ref: "#/$defs/Allele"
+          - $ref: "#/$defs/SequenceTerminus"
+          - $ref: "#/$defs/CisPhasedBlock"
         description: >-
           The sequence components that make up the derivative sequence.
         minItems: 2

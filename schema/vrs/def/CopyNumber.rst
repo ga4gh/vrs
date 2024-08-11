@@ -37,7 +37,7 @@ Some CopyNumber attributes are inherited from :ref:`Variation`.
           - 0..m
           - Alternative name(s) for the Entity.
        *  - extensions
-          - `Extension <../gks-common/common.json#/$defs/Extension>`_
+          - `Extension </ga4gh/schema/gks-common/1.x/data-types/json/Extension>`_
           - 0..m
           - A list of extensions to the entity. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems.
        *  - digest
@@ -45,10 +45,10 @@ Some CopyNumber attributes are inherited from :ref:`Variation`.
           - 0..1
           - A sha512t24u digest created using the VRS Computed Identifier algorithm.
        *  - expressions
-          - `Expression <../gks-common/common.json#/$defs/Expression>`_
+          - `Expression </ga4gh/schema/gks-common/1.x/data-types/json/Expression>`_
           - 0..m
           - 
        *  - location
-          - `IRI <../gks-common/common.json#/$defs/IRI>`_ | :ref:`Location`
+          - `IRI </ga4gh/schema/gks-common/1.x/data-types/json/IRI>`_ | :ref:`Location`
           - 1..1
           - A location for which the number of systemic copies is described.

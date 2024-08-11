@@ -33,7 +33,7 @@ Some LengthExpression attributes are inherited from :ref:`SequenceExpression`.
           - 0..m
           - Alternative name(s) for the Entity.
        *  - extensions
-          - `Extension <../gks-common/common.json#/$defs/Extension>`_
+          - `Extension </ga4gh/schema/gks-common/1.x/data-types/json/Extension>`_
           - 0..m
           - A list of extensions to the entity. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems.
        *  - type
