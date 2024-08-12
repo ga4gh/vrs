@@ -288,13 +288,13 @@ DerivativeMolecule:
                 start: 10000
       type: DerivativeMolecule
     out:
-      ga4gh_digest: WLqmdzbXBEOHltwMVGgj24GioZhAIyZa
-      ga4gh_identify: ga4gh:DM.WLqmdzbXBEOHltwMVGgj24GioZhAIyZa
-      ga4gh_serialize: '{"components":["OSbl1_-TZ08ggYKXSQMxAyN5kfj64Axu","lqoM5i-DPwNrC3cJxdTe0YXbzTFVvdgQ"],"type":"DerivativeMolecule"}'
+      ga4gh_digest: wthhP9ryLEU1ueo6V25gqbSVJC8H4z-M
+      ga4gh_identify: ga4gh:DM.wthhP9ryLEU1ueo6V25gqbSVJC8H4z-M
+      # ga4gh_serialize: '{"components":["OSbl1_-TZ08ggYKXSQMxAyN5kfj64Axu","lqoM5i-DPwNrC3cJxdTe0YXbzTFVvdgQ"],"type":"DerivativeMolecule"}'
   - name: "DerivativeMolecule (order 2)" # Expect different digest for different order
     in:
       components:
-        - type: TraveralBlock
+        - type: TraversalBlock
           orientation: forward
           component:
             type: Adjacency
@@ -332,9 +332,9 @@ DerivativeMolecule:
                 start: 500
       type: DerivativeMolecule
     out:
-      ga4gh_digest: zUkDkzpmi1pcMcWQW4IMZ8GMbOXY4_W1
-      ga4gh_identify: ga4gh:DM.zUkDkzpmi1pcMcWQW4IMZ8GMbOXY4_W1
-      ga4gh_serialize: '{"components":["lqoM5i-DPwNrC3cJxdTe0YXbzTFVvdgQ","OSbl1_-TZ08ggYKXSQMxAyN5kfj64Axu"],"type":"DerivativeMolecule"}'
+      ga4gh_digest: NWTt9cZmyKf_tYn9vSJ-8PsAA-xChO4a
+      ga4gh_identify: ga4gh:DM.NWTt9cZmyKf_tYn9vSJ-8PsAA-xChO4a
+      # ga4gh_serialize: '{"components":["lqoM5i-DPwNrC3cJxdTe0YXbzTFVvdgQ","OSbl1_-TZ08ggYKXSQMxAyN5kfj64Axu"],"type":"DerivativeMolecule"}'
 
 Terminus:
   - in:
@@ -347,8 +347,8 @@ Terminus:
         type: SequenceLocation
       type: Terminus
     out:
-      ga4gh_digest: 8RTmLpujNAjKeS4op4cBPCw-uIERA_Zl
-      ga4gh_identify: ga4gh:TM.8RTmLpujNAjKeS4op4cBPCw-uIERA_Zl
+      ga4gh_digest: 8xpg7Q826fQJJ_6rImuqufhTXj0mh5gV
+      ga4gh_identify: ga4gh:TM.8xpg7Q826fQJJ_6rImuqufhTXj0mh5gV
       ga4gh_serialize: '{"location":"4t6JnYWqHwYw9WzBT_lmWBb3tLQNalkT","type":"Terminus"}'
 
 CopyNumberCount:
@@ -381,6 +381,6 @@ CopyNumberChange:
         type: SequenceLocation
       type: CopyNumberChange
     out:
-      ga4gh_digest: 4_sKBXNG9zYX62D-FR2K-hUp1la-eaYc
-      ga4gh_identify: ga4gh:CX.4_sKBXNG9zYX62D-FR2K-hUp1la-eaYc
+      ga4gh_digest: 2_fT_6-IpUm5aS0wp8ZAkJ01MCE569L2
+      ga4gh_identify: ga4gh:CX.2_fT_6-IpUm5aS0wp8ZAkJ01MCE569L2
       ga4gh_serialize: '{"copyChange":"EFO:0030071","location":"d9h3FkfTWFkJSH56L1A26y-N2oq_SSuB","type":"CopyNumberChange"}'
