@@ -95,8 +95,7 @@
       "homology": {
          "type": "boolean",
          "maturity": "draft",
-         "$comment": "This flag is under active discussion; see github.com/ga4gh/vrs/discussions/489",
-         "description": "A flag indicating if coordinate ambiguity in the adjoined sequences is from sequence homology (true) or other uncertainty (false)."
+         "description": "A flag indicating if coordinate ambiguity in the adjoined sequences is from sequence homology (true) or other uncertainty, such as instrument ambiguity (false)."
       }
    },
    "required": [

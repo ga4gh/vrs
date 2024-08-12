@@ -75,6 +75,10 @@
          },
          "description": "The molecular components that constitute the derivative molecule.",
          "minItems": 2
+      },
+      "circular": {
+         "type": "boolean",
+         "description": "A boolean indicating whether the molecule represented by the sequence is circular (true) or linear (false)."
       }
    },
    "required": [
