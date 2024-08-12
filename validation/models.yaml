@@ -274,6 +274,7 @@ DerivativeMolecule:
                 start: 500
         - type: TraversalBlock
           orientation: forward
+          component:
             type: Adjacency
             adjoinedSequences:
               - type: SequenceLocation
