@@ -4,6 +4,13 @@
    "title": "TraversalBlock",
    "type": "object",
    "maturity": "draft",
+   "ga4ghDigest": {
+      "keys": [
+         "type",
+         "component",
+         "orientation"
+      ]
+   },
    "description": "A component used to describe the orientation of a molecular variation within a DerivativeMolecule.",
    "properties": {
       "id": {
