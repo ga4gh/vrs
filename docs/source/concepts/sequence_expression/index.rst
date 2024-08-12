@@ -5,18 +5,13 @@ SequenceExpression
 
 .. TODO:: Add a description of the SequenceExpression class.
 
-Definition and Subclasses
-@@@@@@@@@@@@@@@@@@@@@@@@@
-
 .. include::  ../../def/SequenceExpression.rst
 
-Subclasses
-##########
+**Subclasses**
 
 .. toctree::
+    :titlesonly:
 
     LengthExpression
     LiteralSequenceExpression
     ReferenceLengthExpression
-  
-  """

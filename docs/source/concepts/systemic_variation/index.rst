@@ -9,21 +9,11 @@ rearrangments that form derivative molecules.
 
 Collectively, these types of variation are called molecular variation.
 
-Definition and Subclasses
-@@@@@@@@@@@@@@@@@@@@@@@@@
-
 .. include::  ../../def/SystemicVariation.rst
 
-Subclasses
-##########
-
-:ref:`CopyNumberCount`
-:ref:`CopyNumberChange`
+**Subclasses**
 
 .. toctree::
-   :hidden:
-
-    CopyNumber
-      
-  
+   :titlesonly:
    
+   CopyNumber

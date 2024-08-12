@@ -16,6 +16,6 @@ These models exist across several related domains:
 
     molecular_variation/index
     systemic_variation/index
-    location/SequenceLocation
+    location/index
     sequence_expression/index
     AdditionalDataTypes

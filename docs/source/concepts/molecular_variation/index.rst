@@ -9,15 +9,12 @@ rearrangments that form derivative molecules.
 
 Collectively, these types of variation are called molecular variation.
 
-Definition and Subclasses
-@@@@@@@@@@@@@@@@@@@@@@@@@
-
 .. include::  ../../def/MolecularVariation.rst
 
-Subclasses
-##########
+**Subclasses**
 
 .. toctree::
+   :titlesonly:
 
    Allele
    Adjacency

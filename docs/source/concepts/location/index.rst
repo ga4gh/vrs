@@ -1,5 +1,6 @@
-This is a document describing locations
+This is a document indexing the location classes
 
 .. toctree::
-    
+   :hidden:
+   
    SequenceLocation
