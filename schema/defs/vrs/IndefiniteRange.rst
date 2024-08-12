@@ -19,7 +19,7 @@ A half-bounded range of numbers represented as a number bound and associated com
       - 1..1
       - MUST be "IndefiniteRange"
    *  - value
-      - number
+      - integer
       - 1..1
       - The bounded value; inclusive
    *  - comparator

@@ -589,7 +589,7 @@ definitions:
         default: IndefiniteRange
         description: MUST be "IndefiniteRange"
       value:
-        type: number
+        type: integer
         description: The bounded value; inclusive
       comparator:
         type: string
