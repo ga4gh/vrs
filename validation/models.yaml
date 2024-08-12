@@ -250,36 +250,41 @@ DerivativeMolecule:
   - name: "DerivativeMolecule (order 1)" # Expect different digest for different order
     in:
       components:
-        - type: Adjacency
-          linker:
-            type: LiteralSequenceExpression
-            sequence: GTC
-          adjoinedSequences:
-            - type: SequenceLocation
-              sequenceReference:
-                type: SequenceReference
-                refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
-                residueAlphabet: na
-                id: NC_000001.10
-              end: 123
-            - type: SequenceLocation
-              sequenceReference:
-                type: SequenceReference
-                refgetAccession: SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO
-                residueAlphabet: na
-                id: NC_000002.11
-              start: 500
-        - type: Adjacency
-          adjoinedSequences:
-            - type: SequenceLocation
-              end: 15000
-            - type: SequenceLocation
-              sequenceReference:
-                type: SequenceReference
-                refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
-                residueAlphabet: na
-                id: NC_000001.10
-              start: 10000
+        - type: TraversalBlock
+          orientation: forward
+          component:
+            type: Adjacency
+            linker:
+              type: LiteralSequenceExpression
+              sequence: GTC
+            adjoinedSequences:
+              - type: SequenceLocation
+                sequenceReference:
+                  type: SequenceReference
+                  refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+                  residueAlphabet: na
+                  id: NC_000001.10
+                end: 123
+              - type: SequenceLocation
+                sequenceReference:
+                  type: SequenceReference
+                  refgetAccession: SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO
+                  residueAlphabet: na
+                  id: NC_000002.11
+                start: 500
+        - type: TraversalBlock
+          orientation: forward
+            type: Adjacency
+            adjoinedSequences:
+              - type: SequenceLocation
+                end: 15000
+              - type: SequenceLocation
+                sequenceReference:
+                  type: SequenceReference
+                  refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+                  residueAlphabet: na
+                  id: NC_000001.10
+                start: 10000
       type: DerivativeMolecule
     out:
       ga4gh_digest: WLqmdzbXBEOHltwMVGgj24GioZhAIyZa
@@ -288,36 +293,42 @@ DerivativeMolecule:
   - name: "DerivativeMolecule (order 2)" # Expect different digest for different order
     in:
       components:
-        - type: Adjacency
-          adjoinedSequences:
-            - type: SequenceLocation
-              end: 15000
-            - type: SequenceLocation
-              sequenceReference:
-                type: SequenceReference
-                refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
-                residueAlphabet: na
-                id: NC_000001.10
-              start: 10000
-        - type: Adjacency
-          linker:
-            type: LiteralSequenceExpression
-            sequence: GTC
-          adjoinedSequences:
-            - type: SequenceLocation
-              sequenceReference:
-                type: SequenceReference
-                refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
-                residueAlphabet: na
-                id: NC_000001.10
-              end: 123
-            - type: SequenceLocation
-              sequenceReference:
-                type: SequenceReference
-                refgetAccession: SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO
-                residueAlphabet: na
-                id: NC_000002.11
-              start: 500
+        - type: TraveralBlock
+          orientation: forward
+          component:
+            type: Adjacency
+            adjoinedSequences:
+              - type: SequenceLocation
+                end: 15000
+              - type: SequenceLocation
+                sequenceReference:
+                  type: SequenceReference
+                  refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+                  residueAlphabet: na
+                  id: NC_000001.10
+                start: 10000
+        - type: TraversalBlock
+          orientation: forward
+          component:
+            type: Adjacency
+            linker:
+              type: LiteralSequenceExpression
+              sequence: GTC
+            adjoinedSequences:
+              - type: SequenceLocation
+                sequenceReference:
+                  type: SequenceReference
+                  refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+                  residueAlphabet: na
+                  id: NC_000001.10
+                end: 123
+              - type: SequenceLocation
+                sequenceReference:
+                  type: SequenceReference
+                  refgetAccession: SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO
+                  residueAlphabet: na
+                  id: NC_000002.11
+                start: 500
       type: DerivativeMolecule
     out:
       ga4gh_digest: zUkDkzpmi1pcMcWQW4IMZ8GMbOXY4_W1
