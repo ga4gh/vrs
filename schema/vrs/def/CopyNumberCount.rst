@@ -41,7 +41,7 @@ Some CopyNumberCount attributes are inherited from :ref:`CopyNumber`.
       - 0..1
       - A sha512t24u digest created using the VRS Computed Identifier algorithm.
    *  - expressions
-      - `Expression </ga4gh/schema/gks-common/1.x/data-types/json/Expression>`_
+      - :ref:`Expression`
       - 0..m
       - 
    *  - location

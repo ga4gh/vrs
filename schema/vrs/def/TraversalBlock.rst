@@ -1,10 +1,10 @@
 **Computational Definition**
 
-The `SequenceTerminus` data class provides a structure for describing the end (terminus) of a sequence. Structurally similar to Adjacency but the linker sequence is not allowed and it removes the unnecessary array structure.
+A component used to describe the orientation of a molecular variation within a DerivativeMolecule.
 
 **Information Model**
 
-Some SequenceTerminus attributes are inherited from :ref:`Variation`.
+Some TraversalBlock attributes are inherited from :ref:`gks.core-im:Entity`.
 
 .. list-table::
    :class: clean-wrap
@@ -36,19 +36,15 @@ Some SequenceTerminus attributes are inherited from :ref:`Variation`.
       - `Extension </ga4gh/schema/gks-common/1.x/data-types/json/Extension>`_
       - 0..m
       - A list of extensions to the entity. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems.
-   *  - digest
-      - string
-      - 0..1
-      - A sha512t24u digest created using the VRS Computed Identifier algorithm.
-   *  - expressions
-      - `Expression </ga4gh/schema/gks-common/1.x/data-types/json/Expression>`_
-      - 0..m
-      - 
    *  - type
       - string
       - 1..1
-      - MUST be "SequenceTerminus".
-   *  - location
-      - `IRI </ga4gh/schema/gks-common/1.x/data-types/json/IRI>`_ | :ref:`Location`
-      - 1..1
-      - The location of the terminus.
+      - MUST be "TraversalBlock".
+   *  - component
+      - :ref:`Allele` | :ref:`CisPhasedBlock` | :ref:`Adjacency` | :ref:`Terminus`
+      - 0..1
+      - The unoriented molecular variation component.
+   *  - orientation
+      - string
+      - 0..1
+      - The orientation of the molecular variation component.

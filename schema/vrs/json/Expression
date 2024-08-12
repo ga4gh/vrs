@@ -1,0 +1,38 @@
+{
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/Expression",
+   "title": "Expression",
+   "type": "object",
+   "maturity": "draft",
+   "description": "Representation of a variation by a specified nomenclature or syntax for a Variation object. Common examples of expressions for the description of molecular variation include the HGVS and ISCN nomenclatures.",
+   "properties": {
+      "syntax": {
+         "type": "string",
+         "enum": [
+            "hgvs.c",
+            "hgvs.p",
+            "hgvs.g",
+            "hgvs.m",
+            "hgvs.n",
+            "hgvs.r",
+            "iscn",
+            "gnomad",
+            "spdi"
+         ],
+         "description": "The syntax used to describe the variation. The value should be one of the supported syntaxes."
+      },
+      "value": {
+         "type": "string",
+         "description": "The expression of the variation in the specified syntax. The value should be a valid expression in the specified syntax."
+      },
+      "syntax_version": {
+         "type": "string",
+         "description": "The version of the syntax used to describe the variation. This is particularly important for HGVS expressions, as the syntax has evolved over time."
+      }
+   },
+   "required": [
+      "syntax",
+      "value"
+   ],
+   "additionalProperties": false
+}

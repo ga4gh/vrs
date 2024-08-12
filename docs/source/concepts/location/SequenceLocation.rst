@@ -3,9 +3,9 @@
 SequenceLocation
 !!!!!!!!!!!!!!!!
 
-The sequence location class is a fundamental concept in VRS, and is used to describe every form of :ref:`Variation`,
-and has stand-alone utility for describing sequence locations in other (non-variation) contexts.
-This class is used to represent a subsequence of a specified :ref:`SequenceReference`. The reference is typically a 
+The sequence location class is a fundamental concept in VRS. Sequence locations are used to describe every form of :ref:`Variation`,
+and they have stand-alone utility for describing sequence locations in other (non-variation) contexts.
+This class is used to represent a location on a specified :ref:`SequenceReference`. The sequence reference is typically a 
 chromosome, transcript, or protein sequence.
 
 Definition and Information Model

@@ -51,7 +51,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gks-common/1.x/data-types/json/Expression"
+            "$ref": "/ga4gh/schema/vrs/2.x/json/Expression"
          }
       },
       "type": {

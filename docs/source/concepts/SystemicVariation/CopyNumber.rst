@@ -11,17 +11,13 @@ data in VRS: :ref:`CopyNumberCount`` and :ref:`CopyNumberChange`.
 CopyNumberCount
 @@@@@@@@@@@@@@@
 
-The copy number count class is used to represent the number of copies of a sequence in a genome.
+The copy number count class is used to represent the integer number of copies of 
+a :ref:`SequenceLocation` in a genome.
 
 Definition and Information Model
 ################################
 
 .. include::  ../../def/CopyNumberCount.rst
-
-Implementation Guidance
-#######################
-
-.. TODO:: Add guidance on how to represent copy number count data in VRS.
 
 .. _CopyNumberChange:
 
@@ -34,8 +30,3 @@ Definition and Information Model
 ################################
 
 .. include::  ../../def/CopyNumberChange.rst
-
-Implementation Guidance
-#######################
-
-.. TODO:: Add guidance on how to represent copy number change data in VRS.

@@ -1,10 +1,10 @@
 **Computational Definition**
 
-An ordered set of co-occurring :ref:`variants <Variation>` on the same molecule.
+The `Terminus` data class provides a structure for describing the end (terminus) of a molecule. Structurally similar to Adjacency, but used for describing where a molecule terminates (instead of adjoining another molecule).
 
 **Information Model**
 
-Some CisPhasedBlock attributes are inherited from :ref:`Variation`.
+Some Terminus attributes are inherited from :ref:`Variation`.
 
 .. list-table::
    :class: clean-wrap
@@ -47,12 +47,8 @@ Some CisPhasedBlock attributes are inherited from :ref:`Variation`.
    *  - type
       - string
       - 1..1
-      - MUST be "CisPhasedBlock"
-   *  - members
-      - :ref:`Allele` | `IRI </ga4gh/schema/gks-common/1.x/data-types/json/IRI>`_
-      - 2..m
-      - A list of :ref:`Alleles <Allele>` that are found in-cis on a shared molecule.
-   *  - sequenceReference
-      - :ref:`SequenceReference`
-      - 0..1
-      - An optional Sequence Reference on which all of the in-cis Alleles are found. When defined, this may be used to implicitly define the `sequenceReference` attribute for each of the CisPhasedBlock member Alleles.
+      - MUST be "Terminus".
+   *  - location
+      - `IRI </ga4gh/schema/gks-common/1.x/data-types/json/IRI>`_ | :ref:`Location`
+      - 1..1
+      - The location of the terminus.

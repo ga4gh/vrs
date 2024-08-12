@@ -14,8 +14,9 @@ These models exist across several related domains:
 .. toctree::
     :hidden:
 
-    molecular_variation/index
-    systemic_variation/index
+    MolecularVariation/index
+    SystemicVariation/index
     location/index
-    sequence_expression/index
+    SequenceReference
+    SequenceExpression/index
     AdditionalDataTypes

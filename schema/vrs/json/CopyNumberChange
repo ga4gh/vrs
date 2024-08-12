@@ -51,7 +51,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gks-common/1.x/data-types/json/Expression"
+            "$ref": "/ga4gh/schema/vrs/2.x/json/Expression"
          }
       },
       "location": {
@@ -72,18 +72,8 @@
          "description": "MUST be \"CopyNumberChange\""
       },
       "copyChange": {
-         "type": "string",
-         "enum": [
-            "EFO:0030069",
-            "EFO:0020073",
-            "EFO:0030068",
-            "EFO:0030067",
-            "EFO:0030064",
-            "EFO:0030070",
-            "EFO:0030071",
-            "EFO:0030072"
-         ],
-         "description": "MUST be one of \"EFO:0030069\" (complete genomic loss), \"EFO:0020073\" (high-level loss), \"EFO:0030068\" (low-level loss), \"EFO:0030067\" (loss), \"EFO:0030064\" (regional base ploidy), \"EFO:0030070\" (gain), \"EFO:0030071\" (low-level gain), \"EFO:0030072\" (high-level gain)."
+         "description": "MUST be a `Coding` representing one of \"EFO:0030069\" (complete genomic loss), \"EFO:0020073\" (high-level loss), \"EFO:0030068\" (low-level loss), \"EFO:0030067\" (loss), \"EFO:0030064\" (regional base ploidy), \"EFO:0030070\" (gain), \"EFO:0030071\" (low-level gain), \"EFO:0030072\" (high-level gain).",
+         "$ref": "/ga4gh/schema/gks-common/1.x/data-types/json/Coding"
       }
    },
    "required": [

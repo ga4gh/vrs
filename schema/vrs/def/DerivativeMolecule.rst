@@ -1,10 +1,10 @@
 **Computational Definition**
 
-The "Derivative Sequence" data class is a structure for describing a derivate sequence composed from multiple sequence adjacencies.
+A molecule derived from segments of multiple adjoined molecular sequences, typically resulting from structural variation.
 
 **Information Model**
 
-Some DerivativeSequence attributes are inherited from :ref:`Variation`.
+Some DerivativeMolecule attributes are inherited from :ref:`Variation`.
 
 .. list-table::
    :class: clean-wrap
@@ -41,14 +41,14 @@ Some DerivativeSequence attributes are inherited from :ref:`Variation`.
       - 0..1
       - A sha512t24u digest created using the VRS Computed Identifier algorithm.
    *  - expressions
-      - `Expression </ga4gh/schema/gks-common/1.x/data-types/json/Expression>`_
+      - :ref:`Expression`
       - 0..m
       - 
    *  - type
       - string
       - 1..1
-      - MUST be "DerivativeSequence".
+      - MUST be "DerivativeMolecule".
    *  - components
-      - `IRI </ga4gh/schema/gks-common/1.x/data-types/json/IRI>`_ | :ref:`Adjacency` | :ref:`Allele` | :ref:`SequenceTerminus` | :ref:`CisPhasedBlock`
+      - `IRI </ga4gh/schema/gks-common/1.x/data-types/json/IRI>`_ | :ref:`TraversalBlock`
       - 2..m
-      - The sequence components that make up the derivative sequence.
+      - The molecular components that constitute the derivative molecule.

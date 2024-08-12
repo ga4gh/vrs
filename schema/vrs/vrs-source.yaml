@@ -18,6 +18,10 @@ imports:
   gks.core-im: ../core-im/core-im-source.yaml
   gks.data-types: ../data-types/data-types-source.yaml
 
+namespaces:
+  gks.core-im: ../core-im/core-im-source.json#/$defs/
+  gks.data-types: ../data-types/data-types-source.json#/$defs/
+
 $defs:
   # VRS definitions are presented top-down.  Everything rolls up to
   # Variation, which is a polymorphic abstraction of many kinds of
@@ -54,9 +58,38 @@ $defs:
         type: array
         ordered: false
         items:
-          $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/Expression"
+          $ref: "#/$defs/Expression"
     discriminator:
       propertyName: type
+
+  Expression:
+    type: object
+    maturity: draft
+    # protectedClassOf: Variation
+    description: >-
+      Representation of a variation by a specified nomenclature or syntax for a Variation object.
+      Common examples of expressions for the description of molecular variation include the HGVS
+      and ISCN nomenclatures.
+    properties:
+      syntax:
+        type: string
+        enum: ["hgvs.c", "hgvs.p", "hgvs.g", "hgvs.m", "hgvs.n", "hgvs.r", "iscn", "gnomad", "spdi"]
+        description: >-
+          The syntax used to describe the variation. The value should be one of the supported syntaxes.
+      value:
+        type: string
+        description: >-
+          The expression of the variation in the specified syntax. The value should be a valid
+          expression in the specified syntax.
+      syntax_version:
+        type: string
+        description: >-
+          The version of the syntax used to describe the variation. This is particularly important for
+          HGVS expressions, as the syntax has evolved over time.
+    required:
+      - syntax
+      - value
+
 
   MolecularVariation:
     inherits: Variation
@@ -66,8 +99,8 @@ $defs:
       - $ref: "#/$defs/Allele"
       - $ref: "#/$defs/CisPhasedBlock"
       - $ref: "#/$defs/Adjacency"
-      - $ref: "#/$defs/SequenceTerminus"
-      - $ref: "#/$defs/DerivativeSequence"
+      - $ref: "#/$defs/Terminus"
+      - $ref: "#/$defs/DerivativeMolecule"
     discriminator:
       propertyName: type
 
@@ -221,11 +254,9 @@ $defs:
         description: >-
           MUST be "CopyNumberChange"
       copyChange:
-        type: string
-        enum: [ "EFO:0030069", "EFO:0020073", "EFO:0030068", "EFO:0030067", "EFO:0030064", "EFO:0030070",
-                "EFO:0030071", "EFO:0030072" ]
+        $refCurie: gks.data-types:Coding
         description: >-
-          MUST be one of "EFO:0030069" (complete genomic loss), "EFO:0020073" (high-level loss),
+          MUST be a `Coding` representing one of "EFO:0030069" (complete genomic loss), "EFO:0020073" (high-level loss),
           "EFO:0030068" (low-level loss), "EFO:0030067" (loss), "EFO:0030064" (regional base ploidy),
           "EFO:0030070" (gain), "EFO:0030071" (low-level gain), "EFO:0030072" (high-level gain).
     required: [ "copyChange" ]
@@ -504,24 +535,24 @@ $defs:
     required:
       - adjoinedSequences
 
-  SequenceTerminus:
+  Terminus:
     maturity: draft
     ga4ghDigest:
-      prefix: SQX
+      prefix: TM
       keys:
         - location
     inherits: MolecularVariation
     description: >-
-      The `SequenceTerminus` data class provides a structure for describing the end (terminus)
-      of a sequence. Structurally similar to Adjacency but the linker sequence is not allowed
-      and it removes the unnecessary array structure.
+      The `Terminus` data class provides a structure for describing the end (terminus)
+      of a molecule. Structurally similar to Adjacency, but used for describing where
+      a molecule terminates (instead of adjoining another molecule).
     type: object
     properties:
       type:
         extends: type
-        const: SequenceTerminus
-        default: SequenceTerminus
-        description: MUST be "SequenceTerminus".
+        const: Terminus
+        default: Terminus
+        description: MUST be "Terminus".
       location:
         oneOf:
           - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
@@ -530,23 +561,23 @@ $defs:
     required:
       - location
 
-  DerivativeSequence:
+  DerivativeMolecule:
     maturity: draft
     ga4ghDigest:
-      prefix: DSQ
+      prefix: DM
       keys:
         - components
     inherits: MolecularVariation
     description: >-
-      The "Derivative Sequence" data class is a structure for describing a derivate sequence composed
-      from multiple sequence adjacencies.
+      A molecule derived from segments of multiple adjoined molecular sequences, typically resulting from
+      structural variation.
     type: object
     properties:
       type:
         extends: type
-        const: DerivativeSequence
-        default: DerivativeSequence
-        description: MUST be "DerivativeSequence".
+        const: DerivativeMolecule
+        default: DerivativeMolecule
+        description: MUST be "DerivativeMolecule".
       components:
         type: array
         uniqueItems: false
@@ -554,12 +585,39 @@ $defs:
         items:
           oneOf:
           - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
-          - $ref: "#/$defs/Adjacency"
-          - $ref: "#/$defs/Allele"
-          - $ref: "#/$defs/SequenceTerminus"
-          - $ref: "#/$defs/CisPhasedBlock"
+          - $ref: "#/$defs/TraversalBlock"
         description: >-
-          The sequence components that make up the derivative sequence.
+          The molecular components that constitute the derivative molecule.
         minItems: 2
     required:
       - components
+
+  TraversalBlock:
+    maturity: draft
+    inherits: gks.core-im:Entity
+    type: object
+    # protectedClassOf: DerivativeMolecule
+    description: >-
+      A component used to describe the orientation of a molecular variation within a
+      DerivativeMolecule.
+    properties:
+      type:
+        extends: type
+        const: TraversalBlock
+        default: TraversalBlock
+        description: MUST be "TraversalBlock".
+      component:
+        description: >-
+          The unoriented molecular variation component.
+        oneOf:
+          - $ref: "#/$defs/Allele"
+          - $ref: "#/$defs/CisPhasedBlock"
+          - $ref: "#/$defs/Adjacency"
+          - $ref: "#/$defs/Terminus"
+      orientation:
+        type: string
+        description: >-
+          The orientation of the molecular variation component.
+        enum:
+          - "forward"
+          - "reverse_complement"

@@ -1,17 +1,10 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/SequenceTerminus",
-   "title": "SequenceTerminus",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/TraversalBlock",
+   "title": "TraversalBlock",
    "type": "object",
    "maturity": "draft",
-   "ga4ghDigest": {
-      "prefix": "SQX",
-      "keys": [
-         "location",
-         "type"
-      ]
-   },
-   "description": "The `SequenceTerminus` data class provides a structure for describing the end (terminus) of a sequence. Structurally similar to Adjacency but the linker sequence is not allowed and it removes the unnecessary array structure.",
+   "description": "A component used to describe the orientation of a molecular variation within a DerivativeMolecule.",
    "properties": {
       "id": {
          "type": "string",
@@ -41,38 +34,39 @@
          },
          "description": "A list of extensions to the entity. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems."
       },
-      "digest": {
-         "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-         "type": "string",
-         "pattern": "^[0-9A-Za-z_\\-]{32}$"
-      },
-      "expressions": {
-         "type": "array",
-         "ordered": false,
-         "items": {
-            "$ref": "/ga4gh/schema/gks-common/1.x/data-types/json/Expression"
-         }
-      },
       "type": {
          "type": "string",
-         "const": "SequenceTerminus",
-         "default": "SequenceTerminus",
-         "description": "MUST be \"SequenceTerminus\"."
+         "const": "TraversalBlock",
+         "default": "TraversalBlock",
+         "description": "MUST be \"TraversalBlock\"."
       },
-      "location": {
+      "component": {
+         "description": "The unoriented molecular variation component.",
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceLocation"
+               "$ref": "/ga4gh/schema/vrs/2.x/json/Adjacency"
             },
             {
-               "$ref": "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
+               "$ref": "/ga4gh/schema/vrs/2.x/json/Allele"
+            },
+            {
+               "$ref": "/ga4gh/schema/vrs/2.x/json/CisPhasedBlock"
+            },
+            {
+               "$ref": "/ga4gh/schema/vrs/2.x/json/Terminus"
             }
-         ],
-         "description": "The location of the terminus."
+         ]
+      },
+      "orientation": {
+         "type": "string",
+         "description": "The orientation of the molecular variation component.",
+         "enum": [
+            "forward",
+            "reverse_complement"
+         ]
       }
    },
    "required": [
-      "location",
       "type"
    ],
    "additionalProperties": false

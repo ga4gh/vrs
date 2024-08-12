@@ -1,17 +1,17 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/DerivativeSequence",
-   "title": "DerivativeSequence",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/DerivativeMolecule",
+   "title": "DerivativeMolecule",
    "type": "object",
    "maturity": "draft",
    "ga4ghDigest": {
-      "prefix": "DSQ",
+      "prefix": "DM",
       "keys": [
          "components",
          "type"
       ]
    },
-   "description": "The \"Derivative Sequence\" data class is a structure for describing a derivate sequence composed from multiple sequence adjacencies.",
+   "description": "A molecule derived from segments of multiple adjoined molecular sequences, typically resulting from structural variation.",
    "properties": {
       "id": {
          "type": "string",
@@ -50,14 +50,14 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gks-common/1.x/data-types/json/Expression"
+            "$ref": "/ga4gh/schema/vrs/2.x/json/Expression"
          }
       },
       "type": {
          "type": "string",
-         "const": "DerivativeSequence",
-         "default": "DerivativeSequence",
-         "description": "MUST be \"DerivativeSequence\"."
+         "const": "DerivativeMolecule",
+         "default": "DerivativeMolecule",
+         "description": "MUST be \"DerivativeMolecule\"."
       },
       "components": {
          "type": "array",
@@ -66,23 +66,14 @@
          "items": {
             "oneOf": [
                {
-                  "$ref": "/ga4gh/schema/vrs/2.x/json/Adjacency"
-               },
-               {
-                  "$ref": "/ga4gh/schema/vrs/2.x/json/Allele"
-               },
-               {
-                  "$ref": "/ga4gh/schema/vrs/2.x/json/CisPhasedBlock"
-               },
-               {
-                  "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceTerminus"
+                  "$ref": "/ga4gh/schema/vrs/2.x/json/TraversalBlock"
                },
                {
                   "$ref": "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
                }
             ]
          },
-         "description": "The sequence components that make up the derivative sequence.",
+         "description": "The molecular components that constitute the derivative molecule.",
          "minItems": 2
       }
    },

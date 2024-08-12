@@ -1,18 +1,17 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/Allele",
-   "title": "Allele",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/Terminus",
+   "title": "Terminus",
    "type": "object",
    "maturity": "draft",
    "ga4ghDigest": {
-      "prefix": "VA",
+      "prefix": "TM",
       "keys": [
          "location",
-         "state",
          "type"
       ]
    },
-   "description": "The state of a molecule at a Location.",
+   "description": "The `Terminus` data class provides a structure for describing the end (terminus) of a molecule. Structurally similar to Adjacency, but used for describing where a molecule terminates (instead of adjoining another molecule).",
    "properties": {
       "id": {
          "type": "string",
@@ -56,9 +55,9 @@
       },
       "type": {
          "type": "string",
-         "const": "Allele",
-         "default": "Allele",
-         "description": "MUST be \"Allele\""
+         "const": "Terminus",
+         "default": "Terminus",
+         "description": "MUST be \"Terminus\"."
       },
       "location": {
          "oneOf": [
@@ -69,26 +68,11 @@
                "$ref": "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
             }
          ],
-         "description": "The location of the Allele"
-      },
-      "state": {
-         "description": "An expression of the sequence state",
-         "oneOf": [
-            {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/LengthExpression"
-            },
-            {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/LiteralSequenceExpression"
-            },
-            {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/ReferenceLengthExpression"
-            }
-         ]
+         "description": "The location of the terminus."
       }
    },
    "required": [
       "location",
-      "state",
       "type"
    ],
    "additionalProperties": false
