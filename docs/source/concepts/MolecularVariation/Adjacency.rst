@@ -9,7 +9,7 @@ Adjacency
 
 The adjacency class is a core concept for structural variation, representing the junction point of 
 two adjoined molecules. This class can be used on its own (e.g. for junctions of chimeric transcript fusions)
-or in higher order structures such as :ref:`DerivativeSequence` to represent molecules derived from multiple
+or in higher order structures such as :ref:`DerivativMolecule` to represent molecules derived from multiple
 adjacencies (e.g. for translocations).
 
 Definition and Information Model

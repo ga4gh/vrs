@@ -1,5 +1,5 @@
 id: terminal_breakend
-type: SequenceTerminus
+type: Terminus
 location:
   type: SequenceLocation
   sequenceReference:

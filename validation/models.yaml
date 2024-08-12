@@ -246,8 +246,8 @@ CisPhasedBlock:
       ga4gh_identify: ga4gh:CPB.YAWwnFF0e-T7fnuT4wRzZW4Lzg7jc-zQ
       ga4gh_serialize: '{"members":["VJIUKfuj7QCxPI-bplNjh5bv2Y8nkvW7","aYfm-2xhlRwkQdgcnJi8Wd0ILCuvsevm"],"type":"CisPhasedBlock"}'
 
-DerivativeSequence:
-  - name: "DerivativeSequence (order 1)" # Expect different digest for different order
+DerivativeMolecule:
+  - name: "DerivativeMolecule (order 1)" # Expect different digest for different order
     in:
       components:
         - type: Adjacency
@@ -280,12 +280,12 @@ DerivativeSequence:
                 residueAlphabet: na
                 id: NC_000001.10
               start: 10000
-      type: DerivativeSequence
+      type: DerivativeMolecule
     out:
       ga4gh_digest: WLqmdzbXBEOHltwMVGgj24GioZhAIyZa
-      ga4gh_identify: ga4gh:DSQ.WLqmdzbXBEOHltwMVGgj24GioZhAIyZa
-      ga4gh_serialize: '{"components":["OSbl1_-TZ08ggYKXSQMxAyN5kfj64Axu","lqoM5i-DPwNrC3cJxdTe0YXbzTFVvdgQ"],"type":"DerivativeSequence"}'
-  - name: "DerivativeSequence (order 2)" # Expect different digest for different order
+      ga4gh_identify: ga4gh:DM.WLqmdzbXBEOHltwMVGgj24GioZhAIyZa
+      ga4gh_serialize: '{"components":["OSbl1_-TZ08ggYKXSQMxAyN5kfj64Axu","lqoM5i-DPwNrC3cJxdTe0YXbzTFVvdgQ"],"type":"DerivativeMolecule"}'
+  - name: "DerivativeMolecule (order 2)" # Expect different digest for different order
     in:
       components:
         - type: Adjacency
@@ -318,13 +318,13 @@ DerivativeSequence:
                 residueAlphabet: na
                 id: NC_000002.11
               start: 500
-      type: DerivativeSequence
+      type: DerivativeMolecule
     out:
       ga4gh_digest: zUkDkzpmi1pcMcWQW4IMZ8GMbOXY4_W1
-      ga4gh_identify: ga4gh:DSQ.zUkDkzpmi1pcMcWQW4IMZ8GMbOXY4_W1
-      ga4gh_serialize: '{"components":["lqoM5i-DPwNrC3cJxdTe0YXbzTFVvdgQ","OSbl1_-TZ08ggYKXSQMxAyN5kfj64Axu"],"type":"DerivativeSequence"}'
+      ga4gh_identify: ga4gh:DM.zUkDkzpmi1pcMcWQW4IMZ8GMbOXY4_W1
+      ga4gh_serialize: '{"components":["lqoM5i-DPwNrC3cJxdTe0YXbzTFVvdgQ","OSbl1_-TZ08ggYKXSQMxAyN5kfj64Axu"],"type":"DerivativeMolecule"}'
 
-SequenceTerminus:
+Terminus:
   - in:
       location:
         end: 44908822
@@ -333,11 +333,11 @@ SequenceTerminus:
           type: SequenceReference
           refgetAccession: SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul
         type: SequenceLocation
-      type: SequenceTerminus
+      type: Terminus
     out:
       ga4gh_digest: 8RTmLpujNAjKeS4op4cBPCw-uIERA_Zl
-      ga4gh_identify: ga4gh:SQX.8RTmLpujNAjKeS4op4cBPCw-uIERA_Zl
-      ga4gh_serialize: '{"location":"4t6JnYWqHwYw9WzBT_lmWBb3tLQNalkT","type":"SequenceTerminus"}'
+      ga4gh_identify: ga4gh:TM.8RTmLpujNAjKeS4op4cBPCw-uIERA_Zl
+      ga4gh_serialize: '{"location":"4t6JnYWqHwYw9WzBT_lmWBb3tLQNalkT","type":"Terminus"}'
 
 CopyNumberCount:
   - name: ">=3 copies APOE"

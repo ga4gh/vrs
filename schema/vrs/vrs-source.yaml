@@ -597,6 +597,11 @@ $defs:
     inherits: gks.core-im:Entity
     type: object
     # protectedClassOf: DerivativeMolecule
+    ga4ghDigest:
+      keys:
+        - type
+        - component
+        - orientation
     description: >-
       A component used to describe the orientation of a molecular variation within a
       DerivativeMolecule.
