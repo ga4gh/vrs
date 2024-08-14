@@ -3,15 +3,11 @@
 LengthExpression
 !!!!!!!!!!!!!!!!
 
-.. TODO:: Add description of the LengthExpression class.
+A length expression is used to represent molecular sequences with known length
+but unknown sequence content, typically as determined by molecular weight assays
+(e.g. gel electrophoresis).
 
 Definition and Information Model
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .. include::  ../../def/LengthExpression.rst
-
-Implementation Guidance
-@@@@@@@@@@@@@@@@@@@@@@@
-
-.. TODO:: Add implementation guidance for the LengthExpression class.
-

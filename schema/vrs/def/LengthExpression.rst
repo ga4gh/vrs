@@ -43,4 +43,4 @@ Some LengthExpression attributes are inherited from :ref:`SequenceExpression`.
    *  - length
       - :ref:`Range` | integer
       - 0..1
-      - 
+      - The length of the sequence.

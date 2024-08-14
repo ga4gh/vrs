@@ -426,6 +426,7 @@ $defs:
         default: "LengthExpression"
         description: MUST be "LengthExpression"
       length:
+        description: The length of the sequence.
         oneOf:
           - $ref: "#/$defs/Range"
           - type: integer
