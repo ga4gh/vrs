@@ -388,7 +388,8 @@ $defs:
         - length
         - repeatSubunitLength
     description: >-
-      An expression of a length of a sequence from a repeating reference.
+      An expression of a sequence that is derived from repeating a subsequence
+      of an associated :ref:`SequenceLocation`.
     type: object
     properties:
       type:
@@ -403,7 +404,7 @@ $defs:
         description: The number of residues in the expressed sequence.
       sequence:
         $ref: "#/$defs/SequenceString"
-        description: the :ref:`Sequence` encoded by the Reference Length Expression.
+        description: the literal :ref:`Sequence` encoded by the Reference Length Expression.
       repeatSubunitLength:
         type: integer
         description: The number of residues in the repeat subunit.

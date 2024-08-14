@@ -11,7 +11,7 @@
          "type"
       ]
    },
-   "description": "An expression of a length of a sequence from a repeating reference.",
+   "description": "An expression of a sequence that is derived from repeating a subsequence of an associated SequenceLocation.",
    "properties": {
       "id": {
          "type": "string",
@@ -60,7 +60,7 @@
       },
       "sequence": {
          "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceString",
-         "description": "the Sequence encoded by the Reference Length Expression."
+         "description": "the literal Sequence encoded by the Reference Length Expression."
       },
       "repeatSubunitLength": {
          "type": "integer",

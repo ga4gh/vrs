@@ -1,6 +1,6 @@
 **Computational Definition**
 
-An expression of a length of a sequence from a repeating reference.
+An expression of a sequence that is derived from repeating a subsequence of an associated :ref:`SequenceLocation`.
 
 **Information Model**
 
@@ -47,7 +47,7 @@ Some ReferenceLengthExpression attributes are inherited from :ref:`SequenceExpre
    *  - sequence
       - :ref:`SequenceString`
       - 0..1
-      - the :ref:`Sequence` encoded by the Reference Length Expression.
+      - the literal :ref:`Sequence` encoded by the Reference Length Expression.
    *  - repeatSubunitLength
       - integer
       - 1..1
