@@ -76,6 +76,6 @@ Work Stream as common data classes.
 .. toctree::
    :titlesonly:
 
-   - Entity
-   - Extension
-   - IRI
+   Entity
+   Extension
+   IRI
