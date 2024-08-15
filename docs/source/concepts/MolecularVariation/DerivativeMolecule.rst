@@ -13,14 +13,17 @@ may be used to represent molecules resulting from genomic rearrangements such as
 Definition and Information Model
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.. include::  ../../def/DerivativeMolecule.rst
+.. include::  ../../def/vrs/DerivativeMolecule.rst
+
+Components
+@@@@@@@@@@
 
 .. _TraversalBlock:
 
-TraversalBlock
-@@@@@@@@@@@@@@
+Traversal Block
+###############
 
 The TraversalBlock is a key component of the `DerivativeMolecule` class, and is used for resolving the
 orientation of double-stranded nucleic acid molecules when assembled into a derivative molecule.
 
-.. include:: ../../def/TraversalBlock.rst
+.. include:: ../../def/vrs/TraversalBlock.rst

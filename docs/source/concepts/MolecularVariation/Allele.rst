@@ -10,7 +10,7 @@ in other contemporary genomic variant formats, such as SPDI, HGVS, and VCF.
 Definition and Information Model
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.. include::  ../../def/Allele.rst
+.. include::  ../../def/vrs/Allele.rst
 
 Implementation Guidance
 @@@@@@@@@@@@@@@@@@@@@@@

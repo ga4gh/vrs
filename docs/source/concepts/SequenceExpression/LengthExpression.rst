@@ -12,4 +12,4 @@ but unknown sequence content, typically as determined by molecular weight assays
 Definition and Information Model
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.. include::  ../../def/LengthExpression.rst
+.. include::  ../../def/vrs/LengthExpression.rst

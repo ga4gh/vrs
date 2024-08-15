@@ -1,7 +1,7 @@
 .. _SequenceExpression:
 
-SequenceExpression
-!!!!!!!!!!!!!!!!!!
+Sequence Expression
+!!!!!!!!!!!!!!!!!!!
 
 .. TODO:: Add a description of the SequenceExpression class.
 
@@ -12,6 +12,6 @@ SequenceExpression
 .. toctree::
     :titlesonly:
 
-    LengthExpression
     LiteralSequenceExpression
     ReferenceLengthExpression
+    LengthExpression

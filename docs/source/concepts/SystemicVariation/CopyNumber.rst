@@ -17,7 +17,7 @@ a :ref:`SequenceLocation` in a genome.
 Definition and Information Model
 ################################
 
-.. include::  ../../def/CopyNumberCount.rst
+.. include::  ../../def/vrs/CopyNumberCount.rst
 
 .. _CopyNumberChange:
 
@@ -29,4 +29,4 @@ A copy number change is used to represent the change in copy number of a sequenc
 Definition and Information Model
 ################################
 
-.. include::  ../../def/CopyNumberChange.rst
+.. include::  ../../def/vrs/CopyNumberChange.rst

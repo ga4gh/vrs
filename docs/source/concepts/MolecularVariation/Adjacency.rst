@@ -15,7 +15,7 @@ adjacencies (e.g. for translocations).
 Definition and Information Model
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.. include::  ../../def/Adjacency.rst
+.. include::  ../../def/vrs/Adjacency.rst
 
 Implementation Guidance
 @@@@@@@@@@@@@@@@@@@@@@@

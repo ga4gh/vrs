@@ -13,4 +13,4 @@ resulting from genomic rearrangements such as inversions or translocations.
 Definition and Information Model
 ################################
 
-.. include::  ../../def/Terminus.rst
+.. include::  ../../def/vrs/Terminus.rst

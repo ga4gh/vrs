@@ -20,4 +20,4 @@ derived from the reference in cases where it is convenient to do so.
 Definition and Information Model
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.. include::  ../../def/ReferenceLengthExpression.rst
+.. include::  ../../def/vrs/ReferenceLengthExpression.rst

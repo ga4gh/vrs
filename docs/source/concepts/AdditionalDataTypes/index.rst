@@ -27,7 +27,7 @@ GA4GH identifiable objects also have a defined GA4GH identifier type prefix (see
 Definition and Information Model
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-.. include::  ../../def/Ga4ghIdentifiableObject.rst
+.. include::  ../../def/vrs/Ga4ghIdentifiableObject.rst
 
 .. _Variation:
 
@@ -41,24 +41,41 @@ SPDI strings.
 Definition and Information Model
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-.. include::  ../../def/Variation.rst
+.. include::  ../../def/vrs/Variation.rst
 
+Components
+$$$$$$$$$$
+
+.. _Expression:
+
+Expression
+%%%%%%%%%%
+
+An `Expression` is a data class used only by :ref:`Variation` objects. It is used to
+represent variants using other syntaxes, including HGVS and SPDI.
+
+.. include::  ../../def/vrs/Expression.rst
 
 Supporting Classes
 @@@@@@@@@@@@@@@@@@
 
 Supporting data classes are used to support primary concept classes in VRS.
 
-.. _Expression:
+Primitive Types
+@@@@@@@@@@@@@@@
 
-Expression
-##########
+Primitive types represent simple values with syntactic or other
+constraints. They enable correctness for values stored in VRS.
 
-An `Expression` is a data class used only by `Variation` objects. It is used to
-represent variants using other syntaxes, including HGVS and SPDI.
+Imported Classes
+@@@@@@@@@@@@@@@@
 
-Definition and Information Model
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+The following classes are used by VRS but maintained by the GA4GH GKS
+Work Stream as common data classes.
 
-.. include::  ../../def/Ga4ghIdentifiableObject.rst
+.. toctree::
+   :titlesonly:
 
+   - Entity
+   - Extension
+   - IRI

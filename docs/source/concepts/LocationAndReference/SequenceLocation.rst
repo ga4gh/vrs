@@ -1,7 +1,7 @@
 .. _SequenceLocation:
 
-SequenceLocation
-!!!!!!!!!!!!!!!!
+Sequence Location
+!!!!!!!!!!!!!!!!!
 
 The sequence location class is a fundamental concept in VRS. Sequence locations are used to describe every form of :ref:`Variation`,
 and they have stand-alone utility for describing sequence locations in other (non-variation) contexts.
@@ -11,7 +11,7 @@ chromosome, transcript, or protein sequence.
 Definition and Information Model
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.. include::  ../../def/SequenceLocation.rst
+.. include::  ../../def/vrs/SequenceLocation.rst
 
 Implementation Guidance
 @@@@@@@@@@@@@@@@@@@@@@@

@@ -20,4 +20,7 @@ genetic markers that tend to be transmitted together. Unlike haplotypes, the
    find the `CisPhasedBlock` able to accommodate the same information content
    from v1 `Haplotypes`.
 
-.. include::  ../../def/CisPhasedBlock.rst
+Definition and Information Model
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+.. include::  ../../def/vrs/CisPhasedBlock.rst
