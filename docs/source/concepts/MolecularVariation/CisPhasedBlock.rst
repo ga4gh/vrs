@@ -1,14 +1,14 @@
 .. _CisPhasedBlock:
 
-CisPhasedBlock
-!!!!!!!!!!!!!!
+Cis-Phased Block
+!!!!!!!!!!!!!!!!
 
-The CisPhasedBlock is a set of Alleles that are found *in-cis*: occurring
-on the same physical molecule. The CisPhasedBlock structure is useful for 
+The Cis-Phased Block is a set of Alleles that are found *in-cis*: occurring
+on the same physical molecule. The `CisPhasedBlock` structure is useful for 
 representing genetic *Haplotypes*, which are commonly described with respect
 to locations on a gene, a set of nearby genes, or other physically proximal
 genetic markers that tend to be transmitted together. Unlike haplotypes, the
-CisPhasedBlock is not also used to convey information about genetic ancestry.
+`CisPhasedBlock` is not also used to convey information about genetic ancestry.
 
 .. admonition:: New in v2
 

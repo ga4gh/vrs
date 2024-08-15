@@ -3,7 +3,7 @@
 LiteralSequenceExpression
 !!!!!!!!!!!!!!!!!!!!!!!!!
 
-A LiteralSequenceExpression is a literal representation of a :ref:`Sequence`.
+A literal sequence expression is a literal representation of a :ref:`Sequence`.
 
 Definition and Information Model
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

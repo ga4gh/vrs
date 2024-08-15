@@ -87,6 +87,8 @@ Implementations MUST adhere to the following requirements:
 Digest Serialization
 @@@@@@@@@@@@@@@@@@@@
 
+.. TODO:: update digest serialization section to discuss ga4gh.keys
+
 Digest serialization converts a VRS object into a binary representation
 in preparation for computing a digest of the object.  The Digest
 Serialization specification ensures that all implementations serialize
@@ -218,10 +220,10 @@ three steps:
 
 
 .. _identify:
+.. _identifier-construction:
 
 Identifier Construction
 @@@@@@@@@@@@@@@@@@@@@@@
-
 
 The final step of generating a computed identifier for a VRS object is
 to generate a `W3C CURIE <https://www.w3.org/TR/curie/>`__ formatted identifier, which
@@ -237,6 +239,8 @@ The GA4GH VRS constructs computed identifiers as follows::
           type prefix.
 
 Type prefixes used by VRS are:
+
+.. TODO:: Update Prefix Table
 
 .. _type_prefixes:
 .. csv-table::
