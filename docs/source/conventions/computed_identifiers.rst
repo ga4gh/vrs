@@ -247,22 +247,20 @@ Type prefixes used by VRS are:
    :header: type_prefix, VRS class name
    :align: left
 
-   SQ, Sequence
    VA, Allele
-   VH, Haplotype
-   VAB, Abundance
-   VS, VariationSet
-   VSL, SequenceLocation
-   VCL, ChromosomeLocation
-   VT, Text
+   CPB, CisPhasedBlock
+   CN, CopyNumberCount
+   CX, CopyNumberChange
+   AJ, Adjacency
+   TM, Terminus
+   DM, DerivativeMolecule
+   SL, SequenceLocation
 
 For example, the identifer for the allele example under :ref:`digest-serialization` gives:
 
 .. parsed-literal::
 
    ga4gh\:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH\_
-
-
 
 
 References
