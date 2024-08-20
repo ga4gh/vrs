@@ -56,16 +56,32 @@ represent variants using other syntaxes, including HGVS and SPDI.
 
 .. include::  ../../def/vrs/Expression.rst
 
-Supporting Classes
-@@@@@@@@@@@@@@@@@@
-
-Supporting data classes are used to support primary concept classes in VRS.
-
 Primitive Types
 @@@@@@@@@@@@@@@
 
 Primitive types represent simple values with syntactic or other
 constraints. They enable correctness for values stored in VRS.
+
+.. _Range:
+
+Range
+#####
+
+.. include:: ../../def/vrs/Range.rst
+
+.. _Residue:
+
+Residue
+#######
+
+.. include:: ../../def/vrs/Residue.rst
+
+.. _SequenceString:
+
+SequenceString
+##############
+
+.. include:: ../../def/vrs/SequenceString.rst
 
 Imported Classes
 @@@@@@@@@@@@@@@@
