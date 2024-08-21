@@ -1,18 +1,15 @@
 .. _ga4gh-identifiers:
 
-Proposal for GA4GH-wide Computed Identifier Standard
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+GA4GH Computed Identifier Alignment
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-This appendix describes a proposal for creating a GA4GH-wide standard
+This appendix describes alignment on standard practices for
 for serializing data, computing digests on serialized data, and
 constructing CURIE identifiers from the digests.  Essentially, it is a
 generalization of the :ref:`computed-identifiers` section.
 
-This standard is proposed now because VRS needs a
-well-defined mechanism for generating identifiers.  Changing the
-identifier mechanism later will create significant issues for VR
-adopters.
-
+This mechanism for generating identifiers has been in place
+since VRS version 1.0.
 
 Background
 @@@@@@@@@@
@@ -25,12 +22,12 @@ for each identifier.  Traditionally, identifiers are assigned to
 entities, which means that disconnected groups must coordinate on
 identifier assignment.
 
-The computed identifier scheme proposed in VRS
-computes identifiers from the data itself.  Because identifers depend
-on the data, groups that independently generate the same variation
-will generate the same computed identifier for that entity, thereby
-obviating centralized identifier systems and enabling identifiers to
-be used in isolated settings such as clinical labs. 
+The computed identifier scheme proposed in VRS computes identifiers 
+from the data itself.  Because identifers depend on the data, groups 
+that independently generate the same variation will generate the same 
+computed identifier for that entity, thereby obviating centralized 
+identifier systems and enabling identifiers to be used in isolated 
+settings such as clinical labs. 
 
 The computed identifier mechanism is broadly applicable and useful to
 the entire GA4GH ecosystem.  Adopting a common identifier scheme will
@@ -40,15 +37,8 @@ will enable the entire organization to share common entity definitions
 share tooling that manipulate identified data.  In short, it provides
 an important consistency within the GA4GH ecosystem.
 
-As a result, we are proposing that the computed identifier scheme
-described in VRS be considered for adoption as a
-GA4GH-wide standard.  If the proposal is accepted by the GA4GH
-executive committee, the current VRS proposal will stand as-is; if the
-proposal is rejected, the VRS proposal will be modified to rescope the
-computed identifier mechanism to VRS and under admininstration of the
-VR team.
-
-
+Here we detail alignment between VRS and other GA4GH products to work
+towards consistent approaches to identifier design.
 
 Proposal
 @@@@@@@@
@@ -58,14 +48,21 @@ The following algorithmic processes, described in depth in the VRS
 reference:
 
 * **GA4GH Digest Serialization** is the process of converting an
-  object to a canonical binary form based on JSON and inspired by
-  similar (but unratified) JSON standards.  This serialization for is
-  used only for the purposes of computing a digest.
+  object to a canonical binary form based on JSON and the `RFC 8785`_
+  specification. This strategy was chosen for its visibility as an
+  independent standard (not IETF-endorsed) on the IETF site, and the
+  selection of this standard by the Sequence Collections draft standard.
 * **GA4GH Truncated Digest** is a convention for using `SHA-512`_,
-  truncated to 24 bytes, and encoding using `base64url`_.
+  truncated to 24 bytes, and encoding using `base64url`_. This convention
+  is shared with the `RefGet v2.0`_ specification.
 * **GA4GH Identification** is the CURIE-based syntax for constructing
-  a namespaced and typed identifier for an object.
+  a namespaced and typed identifier for an object. This convention is
+  shared with the `RefGet v2.0`_ specification, and the identifier syntax
+  has been approved by `GA4GH TASC`_.
 
+.. _RefGet v2.0: https://samtools.github.io/hts-specs/refget.html#refget-checksum-algorithm
+.. _GA4GH TASC: https://github.com/ga4gh/TASC/issues/16
+.. _RFC 8785: https://www.rfc-editor.org/rfc/rfc8785
 
 Type Prefixes
 @@@@@@@@@@@@@
@@ -85,15 +82,10 @@ We propose the following guidelines for type prefixes:
 
 * Prefixes SHOULD be short, approximately 2-4 characters.
 * Prefixes SHOULD be for concrete types, not polymorphic parent classes.
-* A prefix MUST map 1:1 with a schema type.
-* Variation Representation types SHOULD start with V.
-* Variation Annotation types SHOULD start with A.
+* A prefix MUST map 1:1 with a schema.
 
 
 Administration
-@@@@@@@@@@@@@@
+##############
 
-If accepted, administration of these guidelines should be transferred
-to a technical steering committee.  If not accepted, the VR team will
-assume administration of the existing prefixes.
-
+Type prefix administration is to be managed by the `GA4GH TASC`_.

@@ -94,8 +94,6 @@ Implementations MUST adhere to the following requirements:
 Digest Serialization
 @@@@@@@@@@@@@@@@@@@@
 
-.. TODO:: update digest serialization section to discuss ga4gh.keys
-
 Digest serialization converts a VRS object into a binary representation
 in preparation for computing a digest of the object.  The Digest
 Serialization specification ensures that all implementations serialize
