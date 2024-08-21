@@ -103,8 +103,7 @@ variation objects identically, and therefore that the digests will
 also be identical.  |VRS| provides validation tests to ensure
 compliance.
 
-VRS uses the JSON Canonicalization Scheme (\
-`RFC 8785 <https://datatracker.ietf.org/doc/html/rfc8785>`_) to
+VRS uses the JSON Canonicalization Scheme (`RFC 8785`_) to
 serialize JSON data, and includes additional preprocessing steps to
 ensure computed digests are not impacted by decorative metadata.
 
@@ -116,28 +115,27 @@ ensure computed digests are not impacted by decorative metadata.
     :ref:`ga4gh-digest-keys` for more.
 
 The first step in serialization is to generate message content.
-If an object has :ref:`ga4gh-digest-keys`, the first step is to filter out
-all fields not included in the `ga4gh.keys` array.
 
 If the object is an instance of a VRS class, implementations MUST:
 
     * ensure that objects are referenced with identifiers in the
       ``ga4gh`` namespace
     * replace each nested :term:`identifiable object` with their
-      corresponding *digests*.
+      corresponding *digests*
     * order arrays of digests and ids by Unicode Character Set values
-    * filter out fields that start with underscore (e.g., `_id`)
+    * filter out fields not included in the class :ref:`ga4gh-digest-keys`
+      (if defined)
     * filter out fields with null values
 
-The second step is to JSON serialize the message content with the
-following REQUIRED constraints:
+The second step is to JSON serialize the message content following the
+`RFC 8785`_ specification, which includes these REQUIRED constraints:
 
     * encode the serialization in UTF-8
-    * exclude insignificant whitespace, as defined in `RFC8259§2
-      <https://tools.ietf.org/html/rfc8259#section-2>`__
+    * exclude insignificant whitespace, as defined in `RFC8785§3.2.1
+      <https://datatracker.ietf.org/doc/html/rfc8785#section-3.2.1>`__
     * order all keys by Unicode Character Set values
-    * use two-char escape codes when available, as defined in
-      `RFC8259§7 <https://tools.ietf.org/html/rfc8259#section-7>`__
+    * use predefined JSON control character codes when available, 
+      as defined in `RFC8785§3.2.2.1 <https://datatracker.ietf.org/doc/html/rfc8785#section-3.2.2.2>`__
 
 The criteria for the digest serialization method was that it must be
 relatively easy and reliable to implement in any common computer
@@ -273,3 +271,5 @@ References
 			  One. 2020;15:
 			  e0239883. `doi:10.1371/journal.pone.0239883
 			  <https://journals.plos.org/plosone/article/comments?id=10.1371/journal.pone.0239883>`__
+
+.. _RFC 8785: https://datatracker.ietf.org/doc/html/rfc8785
