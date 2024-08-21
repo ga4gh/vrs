@@ -3,4 +3,4 @@
 IRI
 !!!
 
-.. include::  ../../../def/gks.common/data-types/IRI.rst
+.. include::  ../../def/gks.common/data-types/IRI.rst

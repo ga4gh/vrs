@@ -19,19 +19,20 @@ Contexts
 * **Conversion from other variant formats** When converting from other
   variation formats, implementations MUST translate primary database
   accessions or identifiers (|eg| ``NM_000551.3`` or
-  ``refseq:NM_000551.3``) to a GA4GH VRS sequence identifier (
-  ``ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_``)
+  ``refseq:NM_000551.3``) to a GA4GH RefGet sequence accession (
+  ``SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_``). Implementations MAY
+  choose to annotate :ref:`SequenceReference` objects with other public
+  accessions for the sequence.
 
 * **Conversion to other variant formats** When converting to other
-  variation formats, implementations SHOULD translate GA4GH VR
-  sequence identifiers ( ``ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_``)
+  variation formats, implementations SHOULD translate GA4GH RefGet
+  sequence accessions ( ``SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_``)
   to primary database identifiers (``refseq:NM_000551.3``) that will
   be more readily recognized by users.
 
 * **Normalization** During :ref:`normalization`, implementations will
   need access to sequence length and sequence contexts.
-
-
+  
 
 Data Services
 @@@@@@@@@@@@@
@@ -87,9 +88,7 @@ The :ref:`impl-vrs-python` `DataProxy class
 <https://github.com/ga4gh/vrs-python/blob/main/src/ga4gh/vrs/dataproxy.py>`__
 provides an example of this design pattern and sample replies.
 |vrs-python| implements the DataProxy interface using a local
-|seqrepo| instance backend and using a |seqrepo_rs| backend.  A GA4GH
-refget implementation has been started, but is pending interface
-changes to support lookup using primary database accessions.
+|seqrepo| instance backend and using a |seqrepo_rs| backend. 
 
 Examples
 ########

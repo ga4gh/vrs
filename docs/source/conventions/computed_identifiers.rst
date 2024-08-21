@@ -17,11 +17,9 @@ A VRS Computed Identifier for a VRS concept is computed as follows:
 * The object SHOULD be :ref:`normalized <normalization>`.
   Normalization formally applies to all VRS classes.
 
-* Generate binary data to digest. If the object is a :ref:`sequence`
-  string, encode it using UTF-8.  Otherwise, serialize the object
-  using :ref:`Digest Serialization <digest-serialization>`.
+* Generate binary data to digest through :ref:`digest-serialization`.
 
-* :ref:`Generate a truncated digest <truncated-digest>` from the binary data.
+* Generate a :ref:`truncated-digest` from the binary data.
 
 * :ref:`Construct an identifier <identify>` based on the digest and object type.
 
@@ -69,18 +67,27 @@ Implementations MUST adhere to the following requirements:
   normalization, serialization, or digest mechanism to generate a
   GA4GH Computed Identifier.
 
-* Implementations MUST ensure that all nested objects are identified
-  with GA4GH Computed Identifiers.  Implementations MAY NOT reference
-  nested objects using identifiers in any namespace other than
-  ``ga4gh``.
+* When computing identifiers, implementations MUST ensure that each 
+  nested :ref:`Ga4ghIdentifiableObject` is referenced with a GA4GH 
+  Computed Identifier.
 
 .. note:: The GA4GH schema MAY be used with identifiers from any
           namespace. For example, a SequenceLocation may be defined
           using a `sequence_id` = ``refseq:NC_000019.10``.  However,
           an implementation of the Computed Identifier algorithm MUST
-          first translate sequence accessions to GA4GH ``SQ``
+          first translate sequence accessions to GA4GH RefGet ``SQ``
           accessions to be compliant with this specification.
 
+.. admonition:: New in v2
+  
+    In VRS v2, all objects now inherit from :ref:`Entity`, providing a
+    means by which common expressions and accessions for VRS objects can 
+    be provided in other fields as decorative metadata, alongside object 
+    IDs. Implementations may freely implement such fields without impacting
+    computed identifiers. Implementations are therefore encouraged (but not
+    required) to use the ``ID`` field strictly for computed identifiers and 
+    use decorative fields for alternate accessions, to reduce computational
+    complexity.
 
 .. _digest-serialization:
 
@@ -96,25 +103,21 @@ variation objects identically, and therefore that the digests will
 also be identical.  |VRS| provides validation tests to ensure
 compliance.
 
-.. important:: Do not confuse Digest Serialization with JSON
-               serialization or other serialization forms.  Although
-               Digest Serialization and JSON serialization appear
-               similar, they are NOT interchangeable and will generate
-               different GA4GH Digests.
+VRS uses the JSON Canonicalization Scheme (\
+`RFC 8785 <https://datatracker.ietf.org/doc/html/rfc8785>`_) to
+serialize JSON data, and includes additional preprocessing steps to
+ensure computed digests are not impacted by decorative metadata.
 
-Although several proposals exist for serializing arbitrary data in a
-consistent manner ([Gibson]_, [OLPC]_, [JCS]_), none have been
-ratified. As a result, |VRS| defines a custom serialization format
-that is consistent with these proposals but does not rely on them for
-definition; it is hoped that a future ratified standard will be
-forward compatible with the process described here.
+.. admonition:: New in V2
+    
+    Beginning in VRS v2, object value data and descriptive metadata may be
+    passed in the same object, providing a means for sharing commonly
+    expected annotations (e.g. a "Ref Allele") on VRS objects. Read
+    :ref:`ga4gh-digest-keys` for more.
 
-The first step in serialization is to generate message content.  If
-the object is a string representing a :ref:`sequence`, the
-serialization is the UTF-8 encoding of the string.  Because this is a
-common operation, implementations are strongly encouraged to
-precompute GA4GH sequence identifiers as described in
-:ref:`required-data`.
+The first step in serialization is to generate message content.
+If an object has :ref:`ga4gh-digest-keys`, the first step is to filter out
+all fields not included in the `ga4gh.keys` array.
 
 If the object is an instance of a VRS class, implementations MUST:
 
@@ -240,8 +243,6 @@ The GA4GH VRS constructs computed identifiers as follows::
 
 Type prefixes used by VRS are:
 
-.. TODO:: Update Prefix Table
-
 .. _type_prefixes:
 .. csv-table::
    :header: type_prefix, VRS class name
@@ -255,6 +256,7 @@ Type prefixes used by VRS are:
    TM, Terminus
    DM, DerivativeMolecule
    SL, SequenceLocation
+   SQ, Sequence (`RefGet <https://samtools.github.io/hts-specs/refget.html#refget-checksum-algorithm:~:text=The%20addition%20of%20SQ.%20to%20the%20string>`_)
 
 For example, the identifer for the allele example under :ref:`digest-serialization` gives:
 
@@ -271,6 +273,3 @@ References
 			  One. 2020;15:
 			  e0239883. `doi:10.1371/journal.pone.0239883
 			  <https://journals.plos.org/plosone/article/comments?id=10.1371/journal.pone.0239883>`__
-.. [Gibson] `Gibson Canonical JSON <http://gibson042.github.io/canonicaljson-spec/>`__
-.. [OLPC] `OLPC Canonical JSON <http://wiki.laptop.org/go/Canonical_JSON>`__
-.. [JCS] `JSON Canonicalization Scheme <https://tools.ietf.org/html/draft-rundgren-json-canonicalization-scheme-05>`__
