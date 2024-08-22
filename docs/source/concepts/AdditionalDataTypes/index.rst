@@ -35,8 +35,8 @@ Variation
 #########
 
 The root of all variant data classes, `Variation` primarily plays a role as a common
-schema for representing variants and associated variant expressions, such as HGVS or
-SPDI strings.
+schema for representing variants and associated variant expressions, such as HGVS, ISCN,
+or SPDI strings.
 
 Definition and Information Model
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
