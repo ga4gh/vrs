@@ -23,8 +23,8 @@ Here we document the primary contributions of this specification for variation r
   compliance in downstream implementations.
 * **Conventions that promote reliable data sharing.** VRS recommends conventions regarding
   the use of the schema and that facilitate data sharing.  For example, VRS recommends
-  using fully justified allele normalization using an algorithm inspired by `NCBI's SPDI project
-  <https://www.biorxiv.org/content/10.1101/537449v1>`__.
+  using fully justified allele normalization using an algorithm extending `NCBI's SPDI model
+  <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7523648/>`__.
 * **Globally unique computed identifiers.** This specification also recommends a specific algorithm
   for constructing distributed and globally-unique identifiers for molecular variation. Importantly, this
   algorithm enables data providers and consumers to computationally generate consistent, globally
