@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/LengthExpression",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/LengthExpression",
    "title": "LengthExpression",
    "type": "object",
    "maturity": "draft",
@@ -50,7 +50,7 @@
          "description": "The length of the sequence.",
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/Range"
+               "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/Range"
             },
             {
                "type": "integer"

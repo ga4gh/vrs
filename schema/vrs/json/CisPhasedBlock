@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/CisPhasedBlock",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/CisPhasedBlock",
    "title": "CisPhasedBlock",
    "type": "object",
    "maturity": "draft",
@@ -50,7 +50,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/vrs/2.x/json/Expression"
+            "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/Expression"
          }
       },
       "type": {
@@ -67,7 +67,7 @@
          "items": {
             "oneOf": [
                {
-                  "$ref": "/ga4gh/schema/vrs/2.x/json/Allele"
+                  "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/Allele"
                },
                {
                   "$ref": "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
@@ -77,7 +77,7 @@
          "description": "A list of Alleles that are found in-cis on a shared molecule."
       },
       "sequenceReference": {
-         "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceReference",
+         "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/SequenceReference",
          "description": "An optional Sequence Reference on which all of the in-cis Alleles are found. When defined, this may be used to implicitly define the `sequenceReference` attribute for each of the CisPhasedBlock member Alleles."
       }
    },

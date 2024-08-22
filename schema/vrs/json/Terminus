@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/Terminus",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/Terminus",
    "title": "Terminus",
    "type": "object",
    "maturity": "draft",
@@ -50,7 +50,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/vrs/2.x/json/Expression"
+            "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/Expression"
          }
       },
       "type": {
@@ -62,7 +62,7 @@
       "location": {
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceLocation"
+               "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/SequenceLocation"
             },
             {
                "$ref": "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"

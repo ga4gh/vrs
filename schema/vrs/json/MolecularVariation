@@ -1,24 +1,24 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/MolecularVariation",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/MolecularVariation",
    "title": "MolecularVariation",
    "type": "object",
    "description": "A variation on a contiguous molecule.",
    "oneOf": [
       {
-         "$ref": "/ga4gh/schema/vrs/2.x/json/Adjacency"
+         "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/Adjacency"
       },
       {
-         "$ref": "/ga4gh/schema/vrs/2.x/json/Allele"
+         "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/Allele"
       },
       {
-         "$ref": "/ga4gh/schema/vrs/2.x/json/CisPhasedBlock"
+         "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/CisPhasedBlock"
       },
       {
-         "$ref": "/ga4gh/schema/vrs/2.x/json/DerivativeMolecule"
+         "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/DerivativeMolecule"
       },
       {
-         "$ref": "/ga4gh/schema/vrs/2.x/json/Terminus"
+         "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/Terminus"
       }
    ],
    "discriminator": {

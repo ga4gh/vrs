@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/SequenceLocation",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/SequenceLocation",
    "title": "SequenceLocation",
    "type": "object",
    "maturity": "draft",
@@ -57,7 +57,7 @@
       "sequenceReference": {
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceReference"
+               "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/SequenceReference"
             },
             {
                "$ref": "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
@@ -68,7 +68,7 @@
       "start": {
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/Range"
+               "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/Range"
             },
             {
                "type": "integer"
@@ -79,7 +79,7 @@
       "end": {
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/Range"
+               "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/Range"
             },
             {
                "type": "integer"
@@ -89,7 +89,7 @@
       },
       "sequence": {
          "description": "The literal sequence encoded by the `sequenceReference` at these coordinates.",
-         "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceString"
+         "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/SequenceString"
       }
    },
    "required": [
