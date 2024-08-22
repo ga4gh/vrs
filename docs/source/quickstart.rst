@@ -3,4 +3,4 @@
 Quick Start
 !!!!!!!!!!!
 
-.. TODO:: Add a quick start guide here.
+The best way to get started with VRS is to check out our educational |notebooks|.
