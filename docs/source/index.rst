@@ -25,6 +25,5 @@ implementation that promotes adoption of the standard.
    quickstart
    concepts/index
    conventions/index
-   profiles/index
    releases/index
    appendices/index
