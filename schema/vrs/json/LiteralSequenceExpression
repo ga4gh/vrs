@@ -3,7 +3,7 @@
    "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/LiteralSequenceExpression",
    "title": "LiteralSequenceExpression",
    "type": "object",
-   "maturity": "draft",
+   "maturity": "trial use",
    "ga4ghDigest": {
       "keys": [
          "sequence",

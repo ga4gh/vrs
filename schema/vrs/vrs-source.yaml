@@ -64,7 +64,7 @@ $defs:
 
   Expression:
     type: object
-    maturity: draft
+    maturity: trial use
     # protectedClassOf: Variation
     description: >-
       Representation of a variation by a specified nomenclature or syntax for a Variation object.
@@ -124,7 +124,7 @@ $defs:
   # Molecular Variation
 
   Allele:
-    maturity: draft
+    maturity: trial use
     ga4ghDigest:
       prefix: VA
       keys:
@@ -154,7 +154,7 @@ $defs:
     required: [ "location", "state" ]
 
   CisPhasedBlock:
-    maturity: draft
+    maturity: trial use
     ga4ghDigest:
       prefix: CPB
       keys:
@@ -210,7 +210,7 @@ $defs:
     heritableRequired: [ "location" ]
 
   CopyNumberCount:
-    maturity: draft
+    maturity: trial use
     ga4ghDigest:
       keys:
         - copies
@@ -236,7 +236,7 @@ $defs:
     required: [ "copies" ]
 
   CopyNumberChange:
-    maturity: draft
+    maturity: trial use
     ga4ghDigest:
       keys:
         - copyChange
@@ -273,7 +273,7 @@ $defs:
       propertyName: type
 
   SequenceLocation:
-    maturity: draft
+    maturity: trial use
     ga4ghDigest:
       keys:
         - start
@@ -317,7 +317,7 @@ $defs:
         $ref: "#/$defs/SequenceString"
 
   SequenceReference:
-    maturity: draft
+    maturity: trial use
     inherits: gks.core-im:Entity
     ga4ghDigest:
       keys:
@@ -381,7 +381,7 @@ $defs:
       - type
 
   ReferenceLengthExpression:
-    maturity: draft
+    maturity: trial use
     inherits: SequenceExpression
     ga4ghDigest:
       keys:
@@ -413,7 +413,7 @@ $defs:
       - repeatSubunitLength
 
   LengthExpression:
-    maturity: draft
+    maturity: trial use
     inherits: SequenceExpression
     ga4ghDigest:
       keys:
@@ -433,7 +433,7 @@ $defs:
           - type: integer
 
   LiteralSequenceExpression:
-    maturity: draft
+    maturity: trial use
     inherits: SequenceExpression
     ga4ghDigest:
       keys:
@@ -456,7 +456,7 @@ $defs:
   # Numerics, Comparators, and Ranges
 
   Range:
-    maturity: draft
+    maturity: trial use
     description: An inclusive range of values bounded by one or more integers.
     type: array
     ordered: true
@@ -468,7 +468,7 @@ $defs:
     minItems: 2
 
   Residue:
-    maturity: draft
+    maturity: trial use
     description: >-
       A character representing a specific residue (i.e., molecular species)
       or groupings of these ("ambiguity codes"), using `one-letter IUPAC
@@ -478,7 +478,7 @@ $defs:
     pattern: '[A-Z*\-]'
 
   SequenceString:
-    maturity: draft
+    maturity: trial use
     description: >-
       A character string of :ref:`Residues <Residue>` that represents a biological
       sequence using the conventional sequence order (5’-to-3’ for
@@ -495,7 +495,7 @@ $defs:
   # =============================================================================
 
   Adjacency:
-    maturity: draft
+    maturity: trial use
     ga4ghDigest:
       prefix: AJ
       keys:
@@ -537,7 +537,7 @@ $defs:
       - adjoinedSequences
 
   Terminus:
-    maturity: draft
+    maturity: trial use
     ga4ghDigest:
       prefix: TM
       keys:
@@ -563,7 +563,7 @@ $defs:
       - location
 
   DerivativeMolecule:
-    maturity: draft
+    maturity: trial use
     ga4ghDigest:
       prefix: DM
       keys:
@@ -598,7 +598,7 @@ $defs:
       - components
 
   TraversalBlock:
-    maturity: draft
+    maturity: trial use
     inherits: gks.core-im:Entity
     type: object
     # protectedClassOf: DerivativeMolecule

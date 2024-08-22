@@ -3,7 +3,7 @@
    "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/Expression",
    "title": "Expression",
    "type": "object",
-   "maturity": "draft",
+   "maturity": "trial use",
    "description": "Representation of a variation by a specified nomenclature or syntax for a Variation object. Common examples of expressions for the description of molecular variation include the HGVS and ISCN nomenclatures.",
    "properties": {
       "syntax": {
