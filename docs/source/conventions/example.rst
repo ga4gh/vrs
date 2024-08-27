@@ -29,7 +29,7 @@ sequence derived from another source.
 In this example, we will use a :ref:`SequenceLocation`, which is
 composed of a :ref:`SequenceReference` and start and end coordinates.
 
-In VRS, the :ref:`SequenceReference` object's ``refgetAccession``
+In VRS, the :ref:`SequenceReference` object's *refgetAccession*
 attribute MUST use a `GA4GH RefGet
 <http://samtools.github.io/hts-specs/refget.html>`_ identifier.
 Therefore, ``NC_000019.10`` MUST be written as the string
@@ -125,9 +125,9 @@ identifiers enables the use of custom reference sequences.
 
 .. important:: VRS permits the use of conventional sequence accessions
                from RefSeq, Ensembl, or other sources by annotating the
-               :ref:`SequenceReference` object's ``id`` attribute. When
+               :ref:`SequenceReference` object's *id* attribute. When
                generating computed identifiers, the
-               :ref:`SequenceReference` object's ``refgetAccession``
+               :ref:`SequenceReference` object's *refgetAccession*
                attribute MUST use a `GA4GH RefGet
                <http://samtools.github.io/hts-specs/refget.html>`_
                identifier.
@@ -166,7 +166,7 @@ following computed identifier for our example::
 Importantly, GA4GH computed identifiers may be used literally (without
 escaping) in URIs.
 
-Variation and Location objects contain an OPTIONAL ``id`` attribute
+Variation and Location objects contain an OPTIONAL *id* attribute
 which implementations may use to store any CURIE-formatted identifier.
 *If* an implementation returns a computed identifier with objects, the
 object might look like the following:
@@ -192,11 +192,11 @@ object might look like the following:
 
 This example provides a full VRS-compliant Allele with a computed identifier.
 
-.. note:: The ``id`` attribute is optional. If it is used, the value
+.. note:: The *id* attribute is optional. If it is used, the value
           MUST be a string, but it does NOT need to be a GA4GH Computed
           Identifier. Applications MAY choose to implement their own
           identifier scheme for private or public use. For example,
-          the above ``id`` could be a serial number assigned by an
+          the above *id* could be a serial number assigned by an
           application, such as ``acmecorp:v0000123``.
 
 
