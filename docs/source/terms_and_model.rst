@@ -51,26 +51,26 @@ Information Model Principles
 * **VRS objects are minimal** `value objects
   <https://en.wikipedia.org/wiki/Value_object>`_. Two objects are
   considered equal if and only if their respective attributes are
-  equal.  As value objects, VRS objects are used as primitive types
+  equal. As value objects, VRS objects are used as primitive types
   and MUST NOT be used as containers for related data, such as primary
   database accessions, representations in particular formats, or links
-  to external data.  Instead, related data should be associated with
-  VRS objects through identifiers.  See :ref:`computed-identifiers`.
+  to external data. Instead, related data should be associated with
+  VRS objects through identifiers. See :ref:`computed-identifiers`.
 
 * **VRS uses polymorphism.** VRS uses polymorphism extensively in
   order to provide a coherent top-down structure for variation while
-  enabling precise models for variation data.  For example, Allele is
+  enabling precise models for variation data. For example, Allele is
   a kind of Variation, SequenceLocation is a kind of Location, and
-  SequenceState is a kind of State.  See :ref:`future-plans` for the
-  roadmap of VRS data classes and relationships.  All VRS objects
+  SequenceState is a kind of State. See :ref:`future-plans` for the
+  roadmap of VRS data classes and relationships. All VRS objects
   contain a ``type`` attribute, which is used to discriminate
   polymorphic objects.
 
 * **Error handling is intentionally unspecified and delegated to
   implementation.**  VRS provides foundational data types that
-  enable significant flexibility.  Except where required by this
+  enable significant flexibility. Except where required by this
   specification, implementations may choose whether and how to
-  validate data.  For example, implementations MAY choose to validate
+  validate data. For example, implementations MAY choose to validate
   that particular combinations of objects are compatible, but such
   validation is not required.
 
@@ -79,4 +79,3 @@ Information Model Principles
   compound words.** Although the schema is currently JSON-based (which
   would typically use camelCase), VRS itself is intended to be neutral
   with respect to languages and database.
-
