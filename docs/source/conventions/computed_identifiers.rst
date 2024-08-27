@@ -78,7 +78,7 @@ Implementations MUST adhere to the following requirements:
     be provided in other fields as decorative metadata, alongside object
     IDs. Implementations may freely implement such fields without impacting
     computed identifiers. Implementations are therefore encouraged (but not
-    required) to use the ``id`` field strictly for computed identifiers and
+    required) to use the *id* field strictly for computed identifiers and
     use decorative fields for alternate accessions, to reduce computational
     complexity.
 
