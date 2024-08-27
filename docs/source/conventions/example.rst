@@ -21,13 +21,19 @@ In VRS, a contiguous change is represented using an :ref:`allele`
 object, which is composed of a :ref:`Location <location>` and of the
 :ref:`State <state>` at that location. Location and State are
 abstract concepts: VRS is designed to accommodate many kinds of
-Locations based on sequence position, gene names, cytogentic bands, or
+Locations based on sequence position, gene names, cytogenetic bands, or
 other ways of describing locations. Similarly, State may refer to a
 specific sequence change, a contiguous repeated sequence, or a
 sequence derived from another source.
 
 In this example, we will use a :ref:`SequenceLocation`, which is
-composed of a sequence identifier and a :ref:`SequenceInterval`.
+composed of a :ref:`SequenceReference` and start and end coordinates.
+
+In VRS, the :ref:`SequenceReference` object's ``refgetAccession``
+attribute MUST use a `GA4GH RefGet
+<http://samtools.github.io/hts-specs/refget.html>`_ identifier.
+Therefore, ``NC_000019.10`` MUST be written as the string
+``SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl``.
 
 VRS uses :ref:`inter-residue-coordinates-design`. Inter-residue
 coordinates *always* use intervals to refer to sequence spans. For
@@ -116,6 +122,15 @@ GRCh38:19, GRCh38.p13:19 would appear to be distinct variation; using
 a digest identifier will ensure that variation is reported on a single
 sequence identifier. Furthermore, using digest-based sequence
 identifiers enables the use of custom reference sequences.
+
+.. important:: VRS permits the use of conventional sequence accessions
+               from RefSeq, Ensembl, or other sources by annotating the
+               :ref:`SequenceReference` object's ``id`` attribute. When
+               generating computed identifiers, the
+               :ref:`SequenceReference` object's ``refgetAccession``
+               attribute MUST use a `GA4GH RefGet
+               <http://samtools.github.io/hts-specs/refget.html>`_
+               identifier.
 
 The first step in constructing a computed identifier is to create a
 binary digest serialization of the Allele. Details are provided in
