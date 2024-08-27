@@ -31,7 +31,7 @@ A VRS Computed Identifier for a VRS concept is computed as follows:
                a rationale.
 
 The following diagram depicts the operations necessary to generate a
-computed identifier.  These operations are described in detail in the
+computed identifier. These operations are described in detail in the
 subsequent sections.
 
 
@@ -41,17 +41,17 @@ subsequent sections.
    Serialization, Digest, and Computed Identifier Operations
 
    Entities are shown in gray boxes. Functions are denoted by bold
-   italics.  The yellow, green, and blue boxes, corresponding to the
+   italics. The yellow, green, and blue boxes, corresponding to the
    ``sha512t24u``, ``ga4gh_digest``, and ``ga4gh_identify`` functions
-   respectively, depict the dependencies among functions.  ``SHA512``
+   respectively, depict the dependencies among functions. ``SHA512``
    is `SHA-512`_ truncated to 24 bytes (192 bits), using the SHA-512
-   initialization vector.  base64url_ is the official name of the
+   initialization vector. base64url_ is the official name of the
    variant of `Base64`_ encoding that uses a URL-safe character
    set. [`figure source
    <https://www.draw.io/?page-id=M8V1EMsVyfZQDDbK8gNL&title=VR%20diagrams.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fharts.net%2Fuc%3Fid%3D1Qimkvi-Fnd1hhuixbd6aU4Se6zr5Nc1h%26export%3Ddownload>`__]
 
 .. note:: Most implementation users will need only the
-	  ``ga4gh_identify`` function.  We describe the
+	  ``ga4gh_identify`` function. We describe the
 	  ``ga4gh_serialize``, ``ga4gh_digest``, and ``sha512t24u``
 	  functions here primarily for implementers.
 
@@ -63,29 +63,22 @@ Implementations MUST adhere to the following requirements:
 
 * Implementations MUST use the normalization, serialization, and
   digest mechanisms described in this section when generating GA4GH
-  Computed Identifiers.  Implementations MUST NOT use any other
+  Computed Identifiers. Implementations MUST NOT use any other
   normalization, serialization, or digest mechanism to generate a
   GA4GH Computed Identifier.
 
-* When computing identifiers, implementations MUST ensure that each 
-  nested :ref:`Ga4ghIdentifiableObject` is referenced with a GA4GH 
+* When computing identifiers, implementations MUST ensure that each
+  nested :ref:`Ga4ghIdentifiableObject` is referenced with a GA4GH
   Computed Identifier.
 
-.. note:: The GA4GH schema MAY be used with identifiers from any
-          namespace. For example, a SequenceLocation may be defined
-          using a `sequence_id` = ``refseq:NC_000019.10``.  However,
-          an implementation of the Computed Identifier algorithm MUST
-          first translate sequence accessions to GA4GH RefGet ``SQ``
-          accessions to be compliant with this specification.
-
 .. admonition:: New in v2
-  
+
     In VRS v2, all objects now inherit from :ref:`Entity`, providing a
-    means by which common expressions and accessions for VRS objects can 
-    be provided in other fields as decorative metadata, alongside object 
+    means by which common expressions and accessions for VRS objects can
+    be provided in other fields as decorative metadata, alongside object
     IDs. Implementations may freely implement such fields without impacting
     computed identifiers. Implementations are therefore encouraged (but not
-    required) to use the ``ID`` field strictly for computed identifiers and 
+    required) to use the ``id`` field strictly for computed identifiers and
     use decorative fields for alternate accessions, to reduce computational
     complexity.
 
@@ -95,10 +88,10 @@ Digest Serialization
 @@@@@@@@@@@@@@@@@@@@
 
 Digest serialization converts a VRS object into a binary representation
-in preparation for computing a digest of the object.  The Digest
+in preparation for computing a digest of the object. The Digest
 Serialization specification ensures that all implementations serialize
 variation objects identically, and therefore that the digests will
-also be identical.  |VRS| provides validation tests to ensure
+also be identical. |VRS| provides validation tests to ensure
 compliance.
 
 VRS uses the JSON Canonicalization Scheme (`RFC 8785`_) to
@@ -106,7 +99,7 @@ serialize JSON data, and includes additional preprocessing steps to
 ensure computed digests are not impacted by decorative metadata.
 
 .. admonition:: New in V2
-    
+
     Beginning in VRS v2, object value data and descriptive metadata may be
     passed in the same object, providing a means for sharing commonly
     expected annotations (e.g. a "Ref Allele") on VRS objects. Read
@@ -132,7 +125,7 @@ The second step is to JSON serialize the message content following the
     * exclude insignificant whitespace, as defined in `RFC8785§3.2.1
       <https://datatracker.ietf.org/doc/html/rfc8785#section-3.2.1>`__
     * order all keys by Unicode Character Set values
-    * use predefined JSON control character codes when available, 
+    * use predefined JSON control character codes when available,
       as defined in `RFC8785§3.2.2.1 <https://datatracker.ietf.org/doc/html/rfc8785#section-3.2.2.2>`__
 
 The criteria for the digest serialization method was that it must be
@@ -145,39 +138,45 @@ language.
 
 .. code:: ipython3
 
-    allele = models.Allele(location=models.SequenceLocation(
-        sequence_id="ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
-        interval=simple_interval),
-        state=models.SequenceState(sequence="T"))
+    allele = models.Allele(
+      location=models.SequenceLocation(
+        end=44908822,
+        start=44908821,
+        sequenceReference=models.SequenceReference(
+          refgetAccession="SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"
+        )
+      ),
+      state=models.LiteralSequenceExpression(sequence=models.SequenceString("T"))
+    )
     ga4gh_serialize(allele)
 
 Gives the following *binary* (UTF-8 encoded) data:
 
 .. parsed-literal::
 
-    {"location":"u5fspwVbQ79QkX6GHLF8tXPCAXFJqRPx","state":{"sequence":"T","type":"SequenceState"},"type":"Allele"}
+    {"location":"wIlaGykfwHIpPY2Fcxtbx4TINbbODFVz","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}
 
 For comparison, here is one of many possible JSON serializations of the same object:
 
 .. code:: ipython3
 
-    allele.for_json()
+    allele.model_dump(exclude_none=True)
 
 .. parsed-literal::
 
     {
       "location": {
-        "interval": {
-          "end": 44908822,
+          "type": "SequenceLocation",
+          "sequenceReference": {
+            "type": "SequenceReference",
+            "refgetAccession": "SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"
+          },
           "start": 44908821,
-          "type": "SimpleInterval"
-        },
-        "sequence_id": "ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl",
-        "type": "SequenceLocation"
+          "end": 44908822
       },
       "state": {
-        "sequence": "T",
-        "type": "SequenceState"
+        "type": "LiteralSequenceExpression",
+        "sequence": "T"
       },
       "type": "Allele"
     }
@@ -190,7 +189,7 @@ Truncated Digest (sha512t24u)
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 The sha512t24u truncated digest algorithm [Hart2020]_ computes an ASCII digest
-from binary data.  The method uses two well-established standard
+from binary data. The method uses two well-established standard
 algorithms, the `SHA-512`_ hash function, which generates a binary
 digest from binary data, and a URL-safe variant of `Base64`_ encoding, which encodes
 binary data using printable characters.
@@ -199,7 +198,7 @@ Computing the sha512t24u truncated digest for binary data consists of
 three steps:
 
 1. Compute the `SHA-512`_ digest of a binary data.
-2. Truncate the digest to the left-most 24 bytes (192 bits).  See
+2. Truncate the digest to the left-most 24 bytes (192 bits). See
    :ref:`truncated-digest-collision-analysis` for the rationale for 24
    bytes.
 3. Encode the truncated digest as a base64url_ ASCII string.
@@ -254,11 +253,11 @@ Type prefixes used by VRS are:
    SL, SequenceLocation
    SQ, Sequence (`RefGet <https://samtools.github.io/hts-specs/refget.html#refget-checksum-algorithm:~:text=The%20addition%20of%20SQ.%20to%20the%20string>`_)
 
-For example, the identifer for the allele example under :ref:`digest-serialization` gives:
+For example, the identifier for the allele example under :ref:`digest-serialization` gives:
 
 .. parsed-literal::
 
-   ga4gh\:VA.EgHPXXhULTwoP4-ACfs-YCXaeUQJBjH\_
+   ga4gh\:VA.0AePZIWZUNsUlQTamyLrjm2HWUw2opLt\_
 
 
 References
