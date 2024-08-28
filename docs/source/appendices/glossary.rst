@@ -12,10 +12,10 @@ Glossary
       data.
 
    digest, ga4gh_digest
-      A digest is a digital fingerprint of a block of binary data.  A
+      A digest is a digital fingerprint of a block of binary data. A
       digest is always the same size, regardless of the size of the
-      input data.  It is statistically extremely unlikely for two
-      fingerprints to match when the underlying data are distinct. 
+      input data. It is statistically extremely unlikely for two
+      fingerprints to match when the underlying data are distinct.
 
    identifiable object
       An identifiable object in VRS is any data structure for

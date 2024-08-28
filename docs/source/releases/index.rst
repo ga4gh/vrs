@@ -1,7 +1,7 @@
 Releases
 !!!!!!!!
 
-.. note:: VRS follows `Semantic Versioning 2.0 <http://semver.org/>`_.  For a version
+.. note:: VRS follows `Semantic Versioning 2.0 <http://semver.org/>`_. For a version
    number MAJOR.MINOR.PATCH:
 
      * MAJOR version is incremented for incompatible API changes.
@@ -10,7 +10,7 @@ Releases
        new types of variation or extend existing types.
      * PATCH version is incremented for bug fixes. For VRS, examples
        are clarifications of documentation and bug fixes on property
-       constraints.  No changes to information models will occur in
+       constraints. No changes to information models will occur in
        PATCH releases.
 
    All planned work The `VRS Roadmap
