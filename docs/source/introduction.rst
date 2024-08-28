@@ -22,7 +22,7 @@ Here we document the primary contributions of this specification for variation r
   OpenAPI, and GraphQL). The schema repository includes language-agnostic tests for ensuring schema
   compliance in downstream implementations.
 * **Conventions that promote reliable data sharing.** VRS recommends conventions regarding
-  the use of the schema and that facilitate data sharing.  For example, VRS recommends
+  the use of the schema and that facilitate data sharing. For example, VRS recommends
   using fully justified allele normalization using an algorithm extending `NCBI's SPDI model
   <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7523648/>`__.
 * **Globally unique computed identifiers.** This specification also recommends a specific algorithm
@@ -32,7 +32,7 @@ Here we document the primary contributions of this specification for variation r
 * **A Python implementation.** We provide a Python package (`vrs-python
   <https://github.com/ga4gh/vrs-python/>`__) that demonstrates the above schema and algorithms, and
   supports translation of existing variant representation schemes into VRS for use in genomic data
-  sharing.  It may be used as the basis for development in Python, but it is not required in order
+  sharing. It may be used as the basis for development in Python, but it is not required in order
   to use VRS.
 
 The machine readable schema definitions and example code are available online at the VRS

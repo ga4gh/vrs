@@ -4,10 +4,10 @@ Required External Data
 !!!!!!!!!!!!!!!!!!!!!!
 
 All VRS implementations will require external data regarding
-sequences and sequence metadata.  The choices of data sources and
-access methods are left to implementations.  This section provides
+sequences and sequence metadata. The choices of data sources and
+access methods are left to implementations. This section provides
 guidance about how to implement required data and helps implementers
-estimate effort.  This section is descriptive only: it is not intended
+estimate effort. This section is descriptive only: it is not intended
 to impose requirements on interface to, or sources of, external data.
 For clarity and completeness, this section also describes the contexts
 in which external data are used.
@@ -32,14 +32,14 @@ Contexts
 
 * **Normalization** During :ref:`normalization`, implementations will
   need access to sequence length and sequence contexts.
-  
+
 
 Data Services
 @@@@@@@@@@@@@
 
 The following table summarizes data required in the above contexts:
 
-.. list-table:: Data Service Desciptions
+.. list-table:: Data Service Descriptions
    :header-rows: 1
    :class: reece-wrap
 
@@ -56,7 +56,7 @@ The following table summarizes data required in the above contexts:
      - normalization
    * - identifier translation
      - For a given sequence identifier and target namespace, return
-       all identifiers in the target namespace that are equivelent to
+       all identifiers in the target namespace that are equivalent to
        the given identifier.
      - Conversion to/from other formats
 
@@ -88,47 +88,63 @@ The :ref:`impl-vrs-python` `DataProxy class
 <https://github.com/ga4gh/vrs-python/blob/main/src/ga4gh/vrs/dataproxy.py>`__
 provides an example of this design pattern and sample replies.
 |vrs-python| implements the DataProxy interface using a local
-|seqrepo| instance backend and using a |seqrepo_rs| backend. 
+|seqrepo| instance backend and using a |seqrepo_rs| backend.
 
 Examples
 ########
 
 The following examples are taken from |notebooks|:
 
-.. code:: ipython3
-
-    from ga4gh.vrs.dataproxy import SeqRepoRESTDataProxy
-    seqrepo_rest_service_url = "http://localhost:5000/seqrepo"
-    dp = SeqRepoRESTDataProxy(base_url=seqrepo_rest_service_url)
-
-    def get_sequence(identifier, start=None, end=None):
-        """returns sequence for given identifier, optionally limited
-        to inter-residue <start, end> interval"""
-        return dp.get_sequence(identifier, start, end)
-    def get_sequence_length(identifier):
-        """return length of given sequence identifier"""
-        return dp.get_metadata(identifier)["length"]
-    def translate_sequence_identifier(identifier, namespace):
-        """return for given identifier, return *list* of equivalent identifiers in given namespace"""
-        return dp.translate_sequence_identifier(identifier, namespace)
+To create the SeqRepoDataProxy:
 
 .. code:: ipython3
 
-    get_sequence_length("ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl")
-    58617616
+    from ga4gh.vrs.dataproxy import create_dataproxy
+    seqrepo_rest_service_url = "seqrepo+https://services.genomicmedlab.org/seqrepo"
+    seqrepo_dataproxy = create_dataproxy(uri=seqrepo_rest_service_url)
+
+To get the RefGet accession from a public accession identifier:
 
 .. code:: ipython3
 
-    start, end = 44908821-25, 44908822+25
-    get_sequence("ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl", start, end)
-    'CCGCGATGCCGATGACCTGCAGAAGCGCCTGGCAGTGTACCAGGCCGGGGC'
+    seqrepo_dataproxy.derive_refget_accession("refseq:NM_002439.5")
+    'SQ.Pw3Ch0x3XWD6ljsnIfmk_NERcZCI9sNM'
+
+To get sequence length, aliases, and other optional information for a given identifier:
 
 .. code:: ipython3
 
-    translate_sequence_identifier("GRCh38:19", "ga4gh")
+    seqrepo_dataproxy.get_metadata("refseq:NM_000551.3")
+    {'added': '2016-08-24T05:03:11Z',
+    'aliases': ['MD5:215137b1973c1a5afcf86be7d999574a',
+      'NCBI:NM_000551.3',
+      'refseq:NM_000551.3',
+      'SEGUID:T12L0p2X5E8DbnL0+SwI4Wc1S6g',
+      'SHA1:4f5d8bd29d97e44f036e72f4f92c08e167354ba8',
+      'VMC:GS_v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_',
+      'sha512t24u:v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_',
+      'ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_'],
+    'alphabet': 'ACGT',
+    'length': 4560}
+
+To get the specified sequence or subsequence:
+
+.. code:: ipython3
+
+    identifier = "ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_"
+    seqrepo_dataproxy.get_sequence(identifier, start=0, end=51)
+    'CCTCGCCTCCGTTACAACGGCCTACGGTGCTGGAGGATCCTTCTGCGCACG'
+
+To translate an identifier to a list of identifiers in the ga4gh namespace:
+
+.. code:: ipython3
+
+    seqrepo_dataproxy.translate_sequence_identifier("GRCh38:19", "ga4gh")
     ['ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl']
 
+To translate an identifier to a list of identifiers in the GRCh38 namespace:
+
 .. code:: ipython3
 
-    translate_sequence_identifier("ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl", "GRCh38")
+    seqrepo_dataproxy.translate_sequence_identifier("ga4gh:SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl", "GRCh38")
     ['GRCh38:19', 'GRCh38:chr19']

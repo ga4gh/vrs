@@ -12,7 +12,7 @@ of truncation length.
   <https://github.com/biocommons/biocommons.seqrepo/blob/master/docs/Truncated%20Digest%20Collision%20Analysis.ipynb>`__
   in `Python SeqRepo library
   <https://github.com/biocommons/biocommons.seqrepo>`__ for code and
-  updates.  A fuller explanation is given in [Hart2020]_.
+  updates. A fuller explanation is given in [Hart2020]_.
 
 
 Conclusions
@@ -30,11 +30,11 @@ Conclusions
     import hashlib
     import math
     import timeit
-    
+
     from IPython.display import display, Markdown
-    
+
     from ga4gh.vrs.extras.utils import _format_time
-    
+
     algorithms = {'sha512', 'sha1', 'sha256', 'md5', 'sha224', 'sha384'}
 
 
@@ -49,16 +49,16 @@ basis for the Truncated Digest.
     def blob(l):
         """return binary blob of length l (POSIX only)"""
         return open("/dev/urandom", "rb").read(l)
-    
+
     def digest(alg, blob):
         md = hashlib.new(alg)
         md.update(blob)
         return md.digest()
-    
+
     def magic_run1(alg, blob):
         t = %timeit -o digest(alg, blob)
         return t
-    
+
     def magic_tfmt(t):
         """format TimeitResult for table"""
         return "{a} ± {s} ([{b}, {w}])".format(
@@ -159,7 +159,7 @@ in a corpus is difficult. Instead, we first seek to solve for
 the digests are unique). Because are only two outcomes,
 :math:`P + P' = 1` or, equivalently, :math:`P = 1 - P'`.
 
-For a corpus of size :math:`m=1`, the probabability that the digests of
+For a corpus of size :math:`m=1`, the probability that the digests of
 all :math:`m=1` messages are unique is (trivially) 1:
 
 .. math:: P' = s/s = 1
@@ -167,7 +167,7 @@ all :math:`m=1` messages are unique is (trivially) 1:
 because there are :math:`s` ways to choose the first digest from among
 :math:`s` possible values without a collision.
 
-For a corpus of size :math:`m=2`, the probabability that the digests of
+For a corpus of size :math:`m=2`, the probability that the digests of
 all :math:`m=2` messages are unique is:
 
 .. math:: P' = 1 \times (\frac{s-1}{s})
@@ -211,7 +211,7 @@ The Taylor series expansion of the exponential function is
 .. math:: e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + ...
 
 For :math:`|x| \ll 1`, the expansion is dominated by the first terms and
-therecore :math:`e^x \approx 1 + x`.
+therefore :math:`e^x \approx 1 + x`.
 
 In the above expression for :math:`P'`, note that the product term
 :math:`(s-i)/s` is equivalent to :math:`1-i/s`. Combining this with the
@@ -270,13 +270,13 @@ collisions.
      - Assumptions
      - Source/Comparison
    * - exact
-     - :math:`\prod_\nolimits{i=0}^{m-1} \frac{(s-i)}{s}`     
+     - :math:`\prod_\nolimits{i=0}^{m-1} \frac{(s-i)}{s}`
      - :math:`1-P'`
      - :math:`1 \le m\le s`
      - [1]
    * - Taylor approximation on #1
      - :math:`e^{-m(m-1)/2s}`
-     - :math:`1-P'` 
+     - :math:`1-P'`
      - :math:`m \ll s`
      - [1]
    * - Taylor approximation on #2
@@ -286,7 +286,7 @@ collisions.
      - [1]
    * - Large square approximation
      - :math:`1 - \frac{m^2}{2s}`
-     - :math:`\frac{m^2}{2s}` 
+     - :math:`\frac{m^2}{2s}`
      - (same)
      - [2] (where :math:`s=2^n`)
 
@@ -347,20 +347,20 @@ This equation is not used further in this analysis.
 
     def b2B3(b):
         """Convert bits b to Bytes, rounded up modulo 3
-    
+
         We report modulo 3 because the intent will be to use Base64 encoding, which is
         most efficient when inputs have a byte length modulo 3. (Otherwise, the resulting
         string is padded with characters that provide no information.)
-        
+
         """
         return math.ceil(b/8/3) * 3
-        
+
     def B(P, m):
         """return the number of bits needed to achieve a collision probability
         P for m messages
-    
+
         Assumes m << 2^b.
-        
+
         """
         b = math.log2(m**2 / P) - 1
         if b < 5 + math.log2(m):
@@ -417,4 +417,3 @@ digest length (bytes) required for expected collision probability :math:`P` over
 | 1e+ | 39  | 39  | 36  | 36  | 33  | 33  | 30  | 30  | 30  | 27  | 27  |
 | 30  |     |     |     |     |     |     |     |     |     |     |     |
 +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
-
