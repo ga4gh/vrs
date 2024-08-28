@@ -333,7 +333,7 @@ $defs:
         description: MUST be "SequenceReference"
       refgetAccession:
         description: >-
-          A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>` identifier for the referenced sequence,
+          A `GA4GH RefGet <http://samtools.github.io/hts-specs/refget.html>`_ identifier for the referenced sequence,
           using the sha512t24u digest.
         type: string
         pattern: '^SQ.[0-9A-Za-z_\-]{32}$'
