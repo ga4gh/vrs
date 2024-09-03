@@ -19,7 +19,7 @@ Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
    *  - id
       - string
       - 0..1
-      - The 'logical' identifier of the entity in the system of record, e.g. a UUID. This 'id' is unique within a given system. The identified entity may have a different 'id' in a different system, or may refer to an 'id' for the shared concept in another system (e.g. a CURIE).
+      - The 'logical' identifier of the Entity in the system of record, e.g. a UUID.  This 'id' is unique within a given system, but may or may not be globally unique outside the system. It is used within a system to reference an object from another.
    *  - type
       - string
       - 1..1
@@ -31,7 +31,7 @@ Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
    *  - description
       - string
       - 0..1
-      - A free-text description of the entity.
+      - A free-text description of the Entity.
    *  - alternativeLabels
       - string
       - 0..m
@@ -39,7 +39,7 @@ Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
    *  - extensions
       - `Extension </ga4gh/schema/gks-common/1.x/data-types/json/Extension>`_
       - 0..m
-      - A list of extensions to the entity. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems.
+      - A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.
    *  - digest
       - string
       - 0..1
