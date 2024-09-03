@@ -70,7 +70,7 @@ reference:
 GA4GH Digest Keys
 #################
 When creating computed identifiers from objects, VRS uses a custom schema
-attribute, ``ga4ghDigest``, that contains the keys used for filtering out
+attribute, *ga4ghDigest*, that contains the keys used for filtering out
 properties. For example, the Allele JSON Schema:
 
 .. parsed-literal::

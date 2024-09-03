@@ -63,7 +63,7 @@ Information Model Principles
   a kind of Variation, SequenceLocation is a kind of Location, and
   SequenceState is a kind of State. See :ref:`future-plans` for the
   roadmap of VRS data classes and relationships. All VRS objects
-  contain a ``type`` attribute, which is used to discriminate
+  contain a *type* attribute, which is used to discriminate
   polymorphic objects.
 
 * **Error handling is intentionally unspecified and delegated to

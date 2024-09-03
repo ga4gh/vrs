@@ -66,7 +66,7 @@ A :ref:`LiteralSequenceExpression` object consists simply of the replacement seq
       "type": "LiteralSequenceExpression"
     }
 
-The :ref:`Allele` object's ``location`` and ``state`` attributes may
+The :ref:`Allele` object's *location* and *state* attributes may
 then be constructed from the above SequenceLocation and
 LiteralSequenceExpressions respectively:
 
