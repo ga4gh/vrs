@@ -1,7 +1,7 @@
 .. _LiteralSequenceExpression:
 
-LiteralSequenceExpression
-!!!!!!!!!!!!!!!!!!!!!!!!!
+Literal Sequence Expression
+!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 A literal sequence expression is a literal representation of a :ref:`Sequence`.
 
