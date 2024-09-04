@@ -32,9 +32,10 @@ The VRS model is the product of the [GA4GH Variation Representation group](https
 
 ## Using the schema
 
-The schema is available in the [schema/](./schema/) directory, in both yaml and json versions.
-It conforms to JSON Schema draft-07. For a list of libraries that support JSON schema,
-see [JSONSchema>Implementations](https://json-schema.org/implementations.html).
+The schema is available in the [schema/](./schema/) directory, in both yaml and json versions. 
+It conforms to JSON Schema Draft 2020-12. For a list of
+libraries that support JSON schema, see
+[JSONSchema>Tools](https://json-schema.org/tools).
 
 ## Installing for development
 
@@ -52,15 +53,15 @@ If you already cloned the repo, but forgot to include `--recurse-submodules` you
 
 ## Contributing to the schema
 
-VRS uses [vrs-source.yaml](./schema//vrs/vrs-source.yaml) as the source document for JSON Schema.
+VRS uses [vrs-source.yaml](./schema/vrs/vrs-source.yaml) as the source document for JSON Schema.
 
 To create the corresponding def and json files after making changes to the source document, from the root directory:
 
     cd schema
     make all
 
-> _Note: We have a custom pre-commit hook to run these commands after you stage a source
-> document_
+> *Note: We have a custom pre-commit hook to run these commands after you stage a source
+> document*
 
 ## Contributing to the docs
 
