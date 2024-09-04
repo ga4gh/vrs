@@ -20,7 +20,7 @@ Overview
    GA4GH Sequence strings (not shown). While all VRS objects are Value
    Objects, only some objects are intended to be identifiable (Variation,
    Location, and Sequence). Conceptual inheritance relationships between
-   classes is indicated by connecting lines.  [`source
+   classes is indicated by connecting lines. [`source
    <https://app.diagrams.net/#G1Qimkvi-Fnd1hhuixbd6aU4Se6zr5Nc1h>`__]
 
 
@@ -35,7 +35,7 @@ The schema itself is written in YAML (|vrs_yaml|) and converted to JSON
 (|vrs_json|).
 
 Contributions to the schema MUST be written in the YAML document.
- 
+
 
 
 .. |vrs_json| replace:: :download:`vrs.json <_static/vrs.json>`

@@ -33,8 +33,8 @@ Major Changes
       for certain technical operations
 
   * New :ref:`SequenceExpressions <SequenceExpression>` subclasses
-    replace SequenceState.  Subtypes are:
-    
+    replace SequenceState. Subtypes are:
+
     * :ref:`DerivedSequenceExpression`, which representations sequence
       notionally derived from a SequenceLocation
     * :ref:`RepeatedSequenceExpression`, which represents contiguous
@@ -46,7 +46,7 @@ Major Changes
     copies of a molecule within a genome, and can be used to express
     concepts such as amplification and copy loss.
   * :ref:`Gene` enables reference to an external definition of a gene,
-    particularly for useas a subject of copy number expressions.
+    particularly for use as a subject of copy number expressions.
   * :ref:`DefiniteRange` and :ref:`IndefiniteRange` represent bounded
     and half-bounded ranges respectively. A new :ref:`Number` type
     wraps integers so that some attributes may assume values of any of
@@ -57,5 +57,5 @@ Minor Changes
 #############
 
   * Sequence strings are now formally defined by a :ref:`Sequence`
-    type, which is fundamentally also a string.  This change aids
+    type, which is fundamentally also a string. This change aids
     documentation but has no technical impact.

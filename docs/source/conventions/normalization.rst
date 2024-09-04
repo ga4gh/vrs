@@ -10,12 +10,12 @@ of variation across systems.
 
 In the sequencing community, "normalization" refers to the process of
 converting a given sequence variant into a canonical form, typically
-by left- or right-shuffling insertion/deletion variants.  VRS
+by left- or right-shuffling insertion/deletion variants. VRS
 normalization extends this concept to all classes of VRS Variation
 objects.
 
 Implementations MUST provide a normalize function that accepts *any*
-Variation object and returns a normalized Variation.  Guidelines for
+Variation object and returns a normalized Variation. Guidelines for
 these functions are below.
 
 
@@ -23,7 +23,7 @@ General Normalization Rules
 @@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 * Object types that do not have explicit VRS normalization rules below
-  are returned as-is.  That is, all types of Variation MUST be
+  are returned as-is. That is, all types of Variation MUST be
   supported, even if such objects are unchanged.
 * VRS normalization functions are idempotent: Normalizing a
   previously-normalized object returns an equivalent object.
@@ -148,9 +148,9 @@ the following normalization rules apply:
 
    #. If the Allele is an ambiguous insertion, determine if it is reference derived.
 
-      i. Determine the greatest factor `d` of the `seed length` such that `d` is less than or equal to the 
-         length of the modified `reference sequence`, and there exists a subsequence of length `d` 
-         derived from the modified `reference sequence` that can be circularly expanded to recreate 
+      i. Determine the greatest factor `d` of the `seed length` such that `d` is less than or equal to the
+         length of the modified `reference sequence`, and there exists a subsequence of length `d`
+         derived from the modified `reference sequence` that can be circularly expanded to recreate
          the modified `alternate sequence`.
 
       #. If a valid factor `d` is found, the insertion is reference-derived.
@@ -176,9 +176,9 @@ the following normalization rules apply:
 
 .. .. figure:: ../images/normalize.png
 
-..     A demonstration of fully justifying an insertion allele.
+..    A demonstration of fully justifying an insertion allele.
 
-..     Reproduced from [2]_
+..    Reproduced from [2]_
 
 **References**
 
@@ -207,7 +207,7 @@ Adjacency Normalization
    when sequence on either side of the adjacency is homologous. This is addressed through expanding
    the region on both sides. Precise algorithm to be described.
 
-When expressed on a double-stranded nucleic acid molecule, an adjacency can be represented in a forward 
+When expressed on a double-stranded nucleic acid molecule, an adjacency can be represented in a forward
 or reverse orientation. To ensure uniqueness of a computed identifier for these concepts, we require
 a convention for determining the preferred orientation of such adjacencies. The conventional orientation
 will be selected by meeting the following ordered criteria.
@@ -215,4 +215,3 @@ will be selected by meeting the following ordered criteria.
 1. The first of the adjoined sequences MUST have a forward orientation (location defined by `end`).
 2. The adjoined sequence accessions are equal or in ascending lexicographical order.
 3. The defined adjoined sequence coordinates are in ascending numerical order.
-

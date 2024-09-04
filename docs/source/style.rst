@@ -1,6 +1,6 @@
 :orphan:
 
-This page shows style conventions used in these docs.  It will be
+This page shows style conventions used in these docs. It will be
 built with other pages and you can view it (at
 docs/build/html/style.html). Unfortunately, because it's intentionally
 not included in the published docs, it generates the annoying warning
@@ -37,7 +37,7 @@ For example::
 To aid comprehension, the Text Styles section source looks like this::
 
     .. _text-styles-target:
-    
+
     Text Styles
     !!!!!!!!!!!
 
@@ -79,4 +79,3 @@ A cheat sheet for making references, links, and literals in sphinx.
 
   * ````literal```` renders as ``literal``
   * e.g., The :ref:`Allele` *type* attribute must be set to ``"Allele"``.
-
