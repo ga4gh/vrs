@@ -33,7 +33,7 @@ Some Adjacency attributes are inherited from :ref:`Variation`.
       - 0..m
       - Alternative name(s) for the Entity.
    *  - extensions
-      - `Extension </ga4gh/schema/gks-common/1.x/data-types/json/Extension>`_
+      - :ref:`Extension`
       - 0..m
       - A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.
    *  - digest
@@ -49,7 +49,7 @@ Some Adjacency attributes are inherited from :ref:`Variation`.
       - 1..1
       - MUST be "Adjacency".
    *  - adjoinedSequences
-      - `IRI </ga4gh/schema/gks-common/1.x/data-types/json/IRI>`_ | :ref:`Location`
+      - :ref:`IRI` | :ref:`Location`
       - 2..2
       - The terminal sequence or pair of adjoined sequences that defines in the adjacency.
    *  - linker
