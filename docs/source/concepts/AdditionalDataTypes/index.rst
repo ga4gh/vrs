@@ -95,3 +95,5 @@ Work Stream as common data classes.
    Entity
    Extension
    IRI
+   Coding
+   Code
