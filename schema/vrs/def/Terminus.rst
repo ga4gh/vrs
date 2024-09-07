@@ -33,7 +33,7 @@ Some Terminus attributes are inherited from :ref:`Variation`.
       - 0..m
       - Alternative name(s) for the Entity.
    *  - extensions
-      - :ref:`Extension`
+      - `Extension </ga4gh/schema/gks-common/1.0.0-ballot.2024.08.1/data-types/json/Extension>`_
       - 0..m
       - A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.
    *  - digest
@@ -49,6 +49,6 @@ Some Terminus attributes are inherited from :ref:`Variation`.
       - 1..1
       - MUST be "Terminus".
    *  - location
-      - :ref:`IRI` | :ref:`Location`
+      - `IRI </ga4gh/schema/gks-common/1.0.0-ballot.2024-08.1/data-types/json/IRI>`_ | :ref:`Location`
       - 1..1
       - The location of the terminus.

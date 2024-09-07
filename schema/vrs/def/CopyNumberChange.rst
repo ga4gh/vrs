@@ -33,7 +33,7 @@ Some CopyNumberChange attributes are inherited from :ref:`CopyNumber`.
       - 0..m
       - Alternative name(s) for the Entity.
    *  - extensions
-      - :ref:`Extension`
+      - `Extension </ga4gh/schema/gks-common/1.0.0-ballot.2024.08.1/data-types/json/Extension>`_
       - 0..m
       - A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.
    *  - digest
@@ -45,7 +45,7 @@ Some CopyNumberChange attributes are inherited from :ref:`CopyNumber`.
       - 0..m
       - 
    *  - location
-      - :ref:`IRI` | :ref:`Location`
+      - `IRI </ga4gh/schema/gks-common/1.0.0-ballot.2024-08.1/data-types/json/IRI>`_ | :ref:`Location`
       - 1..1
       - A location for which the number of systemic copies is described.
    *  - type
@@ -53,6 +53,6 @@ Some CopyNumberChange attributes are inherited from :ref:`CopyNumber`.
       - 1..1
       - MUST be "CopyNumberChange"
    *  - copyChange
-      - :ref:`Coding`
+      - `Coding <../data-types/data-types-source.json#/$defs/Coding>`_
       - 1..1
       - MUST be a `Coding` representing one of "EFO:0030069" (complete genomic loss), "EFO:0020073" (high-level loss), "EFO:0030068" (low-level loss), "EFO:0030067" (loss), "EFO:0030064" (regional base ploidy), "EFO:0030070" (gain), "EFO:0030071" (low-level gain), "EFO:0030072" (high-level gain).

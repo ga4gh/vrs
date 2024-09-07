@@ -3,6 +3,7 @@
    "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-ballot.2024-08.1/json/SystemicVariation",
    "title": "SystemicVariation",
    "type": "object",
+   "maturity": "trial use",
    "description": "A Variation of multiple molecules in the context of a system, e.g. a genome, sample, or homologous chromosomes.",
    "oneOf": [
       {

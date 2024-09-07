@@ -33,6 +33,7 @@ $defs:
 
   Ga4ghIdentifiableObject:
     inherits: gks.core-im:Entity
+    maturity: trial use
     description: >-
       An object for which a GA4GH computed identifier can be created.
     ga4ghDigest:
@@ -48,6 +49,7 @@ $defs:
 
   Variation:
     inherits: Ga4ghIdentifiableObject
+    maturity: trial use
     description: >-
       A representation of the state of one or more biomolecules.
     oneOf:
@@ -90,9 +92,9 @@ $defs:
       - syntax
       - value
 
-
   MolecularVariation:
     inherits: Variation
+    maturity: trial use
     description: >-
       A :ref:`variation` on a contiguous molecule.
     oneOf:
@@ -106,6 +108,7 @@ $defs:
 
   SystemicVariation:
     inherits: Variation
+    maturity: trial use
     description: >-
       A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
@@ -124,16 +127,16 @@ $defs:
   # Molecular Variation
 
   Allele:
+    type: object
+    inherits: MolecularVariation
     maturity: trial use
     ga4ghDigest:
       prefix: VA
       keys:
         - location
         - state
-    inherits: MolecularVariation
     description: >-
       The state of a molecule at a :ref:`Location`.
-    type: object
     properties:
       type:
         extends: type
@@ -143,7 +146,7 @@ $defs:
           MUST be "Allele"
       location:
         oneOf:
-          - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
+          - $ref: "/ga4gh/schema/gks-common/1.0.0-ballot.2024-08.1/data-types/json/IRI"
           - $ref: "#/$defs/Location"
         description: >-
           The location of the Allele
@@ -154,15 +157,15 @@ $defs:
     required: [ "location", "state" ]
 
   CisPhasedBlock:
+    type: object
+    inherits: MolecularVariation
     maturity: trial use
     ga4ghDigest:
       prefix: CPB
       keys:
         - members
-    inherits: MolecularVariation
     description: >-
       An ordered set of co-occurring :ref:`variants <Variation>` on the same molecule.
-    type: "object"
     properties:
       type:
         extends: type
@@ -178,7 +181,7 @@ $defs:
         items:
           oneOf:
             - $ref: "#/$defs/Allele"
-            - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI" 
+            - $ref: "/ga4gh/schema/gks-common/1.0.0-ballot.2024-08.1/data-types/json/IRI" 
         description: >-
           A list of :ref:`Alleles <Allele>` that are found in-cis on a shared molecule.
       sequenceReference:
@@ -194,29 +197,30 @@ $defs:
   # SystemicVariation
 
   CopyNumber:
+    inherits: SystemicVariation
+    maturity: trial use
     ga4ghDigest:
       keys:
         - location
-    inherits: SystemicVariation
     description: >-
       A measure of the copies of a :ref:`Location` within a system (e.g. genome, cell, etc.)
     heritableProperties:
       location:
         oneOf:
-          - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
+          - $ref: "/ga4gh/schema/gks-common/1.0.0-ballot.2024-08.1/data-types/json/IRI"
           - $ref: "#/$defs/Location"
         description: >-
           A location for which the number of systemic copies is described.
     heritableRequired: [ "location" ]
 
   CopyNumberCount:
+    type: object
+    inherits: CopyNumber
     maturity: trial use
     ga4ghDigest:
       keys:
         - copies
       prefix: CN
-    inherits: CopyNumber
-    type: object
     description: >-
       The absolute count of discrete copies of a :ref:`Location` or :ref:`Gene`,
       within a system (e.g. genome, cell, etc.).
@@ -236,13 +240,13 @@ $defs:
     required: [ "copies" ]
 
   CopyNumberChange:
+    type: object
+    inherits: CopyNumber
     maturity: trial use
     ga4ghDigest:
       keys:
         - copyChange
       prefix: CX
-    inherits: CopyNumber
-    type: object
     description: >-
       An assessment of the copy number of a :ref:`Location` or a :ref:`Gene` within a system (e.g. genome, cell,
       etc.) relative to a baseline ploidy.
@@ -266,6 +270,7 @@ $defs:
 
   Location:
     inherits: Ga4ghIdentifiableObject
+    maturity: trial use
     description: >-
       A contiguous segment of a biological sequence.
     $ref: "#/$defs/SequenceLocation"
@@ -273,6 +278,8 @@ $defs:
       propertyName: type
 
   SequenceLocation:
+    type: object
+    inherits: Location
     maturity: trial use
     ga4ghDigest:
       keys:
@@ -280,10 +287,8 @@ $defs:
         - end
         - sequenceReference
       prefix: SL
-    inherits: Location
     description: >-
       A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
-    type: object
     properties:
       type:
         extends: type
@@ -292,7 +297,7 @@ $defs:
         description: MUST be "SequenceLocation"
       sequenceReference:
         oneOf:
-          - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
+          - $ref: "/ga4gh/schema/gks-common/1.0.0-ballot.2024-08.1/data-types/json/IRI"
           - $ref: "#/$defs/SequenceReference"
         description: A reference to a :ref:`Sequence` on which the location is defined.
       start:
@@ -317,13 +322,13 @@ $defs:
         $ref: "#/$defs/SequenceString"
 
   SequenceReference:
-    maturity: trial use
+    type: object
     inherits: gks.core-im:Entity
+    maturity: trial use
     ga4ghDigest:
       keys:
         - refgetAccession
         - type
-    type: object
     description: A sequence of nucleic or amino acid character codes.
     properties:
       type:
@@ -361,6 +366,7 @@ $defs:
 
   SequenceExpression:
     inherits: gks.core-im:Entity
+    maturity: trial use
     ga4ghDigest:
       keys:
         - type
@@ -381,8 +387,9 @@ $defs:
       - type
 
   ReferenceLengthExpression:
-    maturity: trial use
+    type: object
     inherits: SequenceExpression
+    maturity: trial use
     ga4ghDigest:
       keys:
         - length
@@ -390,7 +397,6 @@ $defs:
     description: >-
       An expression of a sequence that is derived from repeating a subsequence
       of an associated :ref:`SequenceLocation`.
-    type: object
     properties:
       type:
         extends: type
@@ -413,12 +419,12 @@ $defs:
       - repeatSubunitLength
 
   LengthExpression:
-    maturity: trial use
+    type: object
     inherits: SequenceExpression
+    maturity: trial use
     ga4ghDigest:
       keys:
         - length
-    type: object
     description: A sequence expressed only by its length.
     properties:
       type:
@@ -433,13 +439,13 @@ $defs:
           - type: integer
 
   LiteralSequenceExpression:
-    maturity: trial use
+    type: object
     inherits: SequenceExpression
+    maturity: trial use
     ga4ghDigest:
       keys:
         - sequence
     description: An explicit expression of a Sequence.
-    type: object
     properties:
       type:
         extends: type
@@ -456,9 +462,9 @@ $defs:
   # Numerics, Comparators, and Ranges
 
   Range:
+    type: array
     maturity: trial use
     description: An inclusive range of values bounded by one or more integers.
-    type: array
     ordered: true
     items:
       oneOf:
@@ -468,23 +474,23 @@ $defs:
     minItems: 2
 
   Residue:
+    type: string
     maturity: trial use
     description: >-
       A character representing a specific residue (i.e., molecular species)
       or groupings of these ("ambiguity codes"), using `one-letter IUPAC
       abbreviations <https://en.wikipedia.org/wiki/International_Union_of_Pure_and_Applied_Chemistry#Amino_acid_and_nucleotide_base_codes>`_
       for nucleic acids and amino acids.
-    type: string
     pattern: '[A-Z*\-]'
 
   SequenceString:
+    type: string
     maturity: trial use
     description: >-
       A character string of :ref:`Residues <Residue>` that represents a biological
       sequence using the conventional sequence order (5’-to-3’ for
       nucleic acid sequences, and amino-to-carboxyl for amino acid
       sequences). IUPAC ambiguity codes are permitted in Sequence Strings.
-    type: string
     pattern: '^[A-Z*\-]*$'
 
 
@@ -495,18 +501,18 @@ $defs:
   # =============================================================================
 
   Adjacency:
+    type: object
+    inherits: MolecularVariation
     maturity: trial use
     ga4ghDigest:
       prefix: AJ
       keys:
         - adjoinedSequences
         - linker
-    inherits: MolecularVariation
     description: >-
       The `Adjacency` class can represent either the termination of a sequence
       or the adjoining of the end of a sequence with the beginning of an
       adjacent sequence, potentially with an intervening linker sequence.
-    type: object
     properties:
       type:
         extends: type
@@ -519,7 +525,7 @@ $defs:
         ordered: true
         items:
           oneOf:
-          - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
+          - $ref: "/ga4gh/schema/gks-common/1.0.0-ballot.2024-08.1/data-types/json/IRI"
           - $ref: "#/$defs/Location"
         description: The terminal sequence or pair of adjoined sequences that defines in the adjacency.
         minItems: 2
@@ -537,17 +543,17 @@ $defs:
       - adjoinedSequences
 
   Terminus:
+    type: object
+    inherits: MolecularVariation
     maturity: trial use
     ga4ghDigest:
       prefix: TM
       keys:
         - location
-    inherits: MolecularVariation
     description: >-
       The `Terminus` data class provides a structure for describing the end (terminus)
       of a molecule. Structurally similar to Adjacency, but used for describing where
       a molecule terminates (instead of adjoining another molecule).
-    type: object
     properties:
       type:
         extends: type
@@ -556,23 +562,23 @@ $defs:
         description: MUST be "Terminus".
       location:
         oneOf:
-          - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
+          - $ref: "/ga4gh/schema/gks-common/1.0.0-ballot.2024-08.1/data-types/json/IRI"
           - $ref: "#/$defs/Location"
         description: The location of the terminus.
     required:
       - location
 
   DerivativeMolecule:
+    type: object
+    inherits: MolecularVariation
     maturity: trial use
     ga4ghDigest:
       prefix: DM
       keys:
         - components
-    inherits: MolecularVariation
     description: >-
       A molecule derived from segments of multiple adjoined molecular sequences, typically resulting from
       structural variation.
-    type: object
     properties:
       type:
         extends: type
@@ -585,7 +591,7 @@ $defs:
         ordered: true
         items:
           oneOf:
-          - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
+          - $ref: "/ga4gh/schema/gks-common/1.0.0-ballot.2024-08.1/data-types/json/IRI"
           - $ref: "#/$defs/TraversalBlock"
         description: >-
           The molecular components that constitute the derivative molecule.
@@ -598,9 +604,9 @@ $defs:
       - components
 
   TraversalBlock:
-    maturity: trial use
-    inherits: gks.core-im:Entity
     type: object
+    inherits: gks.core-im:Entity
+    maturity: trial use
     # protectedClassOf: DerivativeMolecule
     ga4ghDigest:
       keys:
