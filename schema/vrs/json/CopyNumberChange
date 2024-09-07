@@ -74,7 +74,7 @@
          "description": "MUST be \"CopyNumberChange\""
       },
       "copyChange": {
-         "description": "MUST be a `Coding` representing one of \"EFO:0030069\" (complete genomic loss), \"EFO:0020073\" (high-level loss), \"EFO:0030068\" (low-level loss), \"EFO:0030067\" (loss), \"EFO:0030064\" (regional base ploidy), \"EFO:0030070\" (gain), \"EFO:0030071\" (low-level gain), \"EFO:0030072\" (high-level gain).",
+         "description": "MUST be a Coding representing one of \"EFO:0030069\" (complete genomic loss), \"EFO:0020073\" (high-level loss), \"EFO:0030068\" (low-level loss), \"EFO:0030067\" (loss), \"EFO:0030064\" (regional base ploidy), \"EFO:0030070\" (gain), \"EFO:0030071\" (low-level gain), \"EFO:0030072\" (high-level gain).",
          "$ref": "/ga4gh/schema/gks-common/1.0.0-ballot.2024.08.1/data-types/json/Coding"
       }
    },
