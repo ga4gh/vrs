@@ -33,7 +33,7 @@ Some SequenceLocation attributes are inherited from :ref:`Ga4ghIdentifiableObjec
       - 0..m
       - Alternative name(s) for the Entity.
    *  - extensions
-      - `Extension </ga4gh/schema/gks-common/1.0.0-ballot.2024.08.1/data-types/json/Extension>`_
+      - :ref:`Extension`
       - 0..m
       - A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.
    *  - digest
@@ -45,7 +45,7 @@ Some SequenceLocation attributes are inherited from :ref:`Ga4ghIdentifiableObjec
       - 1..1
       - MUST be "SequenceLocation"
    *  - sequenceReference
-      - `IRI </ga4gh/schema/gks-common/1.0.0-ballot.2024-08.1/data-types/json/IRI>`_ | :ref:`SequenceReference`
+      - :ref:`IRI` | :ref:`SequenceReference`
       - 0..1
       - A reference to a :ref:`Sequence` on which the location is defined.
    *  - start

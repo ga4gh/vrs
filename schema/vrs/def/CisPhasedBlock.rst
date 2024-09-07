@@ -33,7 +33,7 @@ Some CisPhasedBlock attributes are inherited from :ref:`Variation`.
       - 0..m
       - Alternative name(s) for the Entity.
    *  - extensions
-      - `Extension </ga4gh/schema/gks-common/1.0.0-ballot.2024.08.1/data-types/json/Extension>`_
+      - :ref:`Extension`
       - 0..m
       - A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.
    *  - digest
@@ -49,7 +49,7 @@ Some CisPhasedBlock attributes are inherited from :ref:`Variation`.
       - 1..1
       - MUST be "CisPhasedBlock"
    *  - members
-      - :ref:`Allele` | `IRI </ga4gh/schema/gks-common/1.0.0-ballot.2024-08.1/data-types/json/IRI>`_
+      - :ref:`Allele` | :ref:`IRI`
       - 2..m
       - A list of :ref:`Alleles <Allele>` that are found in-cis on a shared molecule.
    *  - sequenceReference
