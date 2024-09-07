@@ -42,7 +42,7 @@ ref sequence (derived from the :ref:SequenceReference at the location) using the
 .. admonition:: New in v2
 
    In VRS v1, sequence derived from the reference was not transmitted. This feature was added in VRS v2 due to
-   this common practice in other variant formats.
+   this common practice in other variant representation formats.
 
 Linear and Circular Sequence Coordinates
 ########################################
