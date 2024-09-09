@@ -1,0 +1,11 @@
+{
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/Location",
+   "title": "Location",
+   "type": "object",
+   "description": "A contiguous segment of a biological sequence.",
+   "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceLocation",
+   "discriminator": {
+      "propertyName": "type"
+   }
+}
