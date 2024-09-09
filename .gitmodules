@@ -1,4 +1,4 @@
 [submodule "schema/gks-common"]
 	path = submodules/gks-common
 	url = https://github.com/ga4gh/gks-common.git
-	branch = 1.x
+	branch = 1.0.0-ballot.2024-08
