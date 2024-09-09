@@ -1,78 +1,83 @@
 /* override table width restrictions */
 @media screen and (min-width: 767px) {
-
-   table.clean-wrap td {
-      /* !important prevents the common CSS stylesheets from overriding
+  table.clean-wrap td {
+    /* !important prevents the common CSS stylesheets from overriding
          this as on RTD they are loaded after this stylesheet */
-      white-space: normal !important;
-   }
-
-   table.reece-wrap {
-      overflow: visible !important;
-   }
-
-  .wy-table-responsive table.reece-wrap td, .wy-table-responsive table.reece-wrap th {
-      white-space: normal;
+    white-space: normal !important;
   }
 
+  table.reece-wrap {
+    overflow: visible !important;
+  }
+
+  .wy-table-responsive table.reece-wrap td,
+  .wy-table-responsive table.reece-wrap th {
+    white-space: normal;
+  }
 }
 
-
-
 h2 {
-    color: #2980B9;
-    border-top:  #2980B9 thin solid;
-    border-bottom:  #2980B9 thin solid;
+  color: #2980b9;
+  border-top: #2980b9 thin solid;
+  border-bottom: #2980b9 thin solid;
 }
 
 h3 {
-    color: #888;
-    text-decoration: underline;
+  color: #888;
+  text-decoration: underline;
 }
 
-div.figure {
-    border: thin solid #6ab0de;
-    padding: 2px;
+figure {
+  border: thin solid #6ab0de;
+  padding: 2px;
 }
 
-div.figure img {
-    margin-bottom: 5px;
+figure img {
+  margin-bottom: 5px;
 }
 
-div.figure p.caption::before {
-    content: "Figure: "
+figcaption {
+  margin: 0;
+  padding: 0;
 }
 
-div.figure p.caption {
-    background: #e7f2fa;
-    line-height: unset;
-    margin: unset;
-    padding: 3px;
-    font-weight: bold;
+figcaption p,
+figcaption div.legend {
+  background: #e7f2fa;
+  padding: 3px;
 }
 
-div.figure div.legend {
-    background: #e7f2fa;
-    padding: 3px;
+figcaption p .caption-text::before {
+  content: "Figure: ";
 }
 
-div.figure div.legend p {
-    font-size: smaller;
-    line-height: unset;
-    margin-bottom: 10px;
+figcaption p .caption-text {
+  font-weight: bold;
 }
 
-div.figure div.legend p:last-child {
-    margin-bottom: 0px;
+figcaption p {
+  line-height: unset;
+  margin: unset;
+  display: inline-block;
+  width: 100%;
 }
 
+.legend p {
+  font-size: smaller;
+  line-height: unset;
+  margin: 0;
+}
+
+.legend p:not(:last-child) {
+  margin-bottom: 10px;
+}
 
 /* nested ul leads to awkward spacing of list items.
    This change doesn't seem to induce any other odd spacing */
 .rst-content .section ul p {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 span.std-term::after {
-    content: " 🛈"
+  content: " 🛈";
 }
