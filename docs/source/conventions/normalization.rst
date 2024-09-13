@@ -215,3 +215,6 @@ will be selected by meeting the following ordered criteria.
 1. The first of the adjoined sequences MUST have a forward orientation (location defined by `end`).
 2. The adjoined sequence accessions are equal or in ascending lexicographical order.
 3. The defined adjoined sequence coordinates are in ascending numerical order.
+
+When adjacencies are used in the context of a :ref:`DerivativeMolecule`, the traversal
+direction is definitional and must be specified using a :ref:`TraversalBlock`.
