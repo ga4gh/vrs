@@ -216,5 +216,12 @@ will be selected by meeting the following ordered criteria.
 2. The adjoined sequence accessions are equal or in ascending lexicographical order.
 3. The defined adjoined sequence coordinates are in ascending numerical order.
 
-When adjacencies are used in the context of a :ref:`DerivativeMolecule`, the traversal
-direction is definitional and must be specified using a :ref:`TraversalBlock`.
+When adjacencies are used in the context of a :ref:`DerivativeMolecule`, the orientation
+is definitional and must be specified using a :ref:`TraversalBlock`.
+
+.. figure:: ../images/ex_adjacency_orientation.png
+
+   **The same pair of adjacencies can produce significantly different derivative molecules
+   depending on orientation.** In the top example, a 100-base sequence is deleted and
+   replaced by a 1000-base inverted sequence. In the bottom example, a 100-base inverted
+   sequence is inserted, and a 1000-base sequence is duplicated.
