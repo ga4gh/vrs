@@ -143,7 +143,7 @@ $defs:
           MUST be "Allele"
       location:
         oneOf:
-          - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
+          - $ref: "/ga4gh/schema/gks-common/1..0.0-connect.2024-09.1/data-types/json/IRI"
           - $ref: "#/$defs/Location"
         description: >-
           The location of the Allele
@@ -178,7 +178,7 @@ $defs:
         items:
           oneOf:
             - $ref: "#/$defs/Allele"
-            - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI" 
+            - $ref: "/ga4gh/schema/gks-common/1.0.0-connect.2024-09.1/data-types/json/IRI" 
         description: >-
           A list of :ref:`Alleles <Allele>` that are found in-cis on a shared molecule.
       sequenceReference:
@@ -203,7 +203,7 @@ $defs:
     heritableProperties:
       location:
         oneOf:
-          - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
+          - $ref: "/ga4gh/schema/gks-common/1.0.0-connect.2024-09.1/data-types/json/IRI"
           - $ref: "#/$defs/Location"
         description: >-
           A location for which the number of systemic copies is described.
@@ -292,7 +292,7 @@ $defs:
         description: MUST be "SequenceLocation"
       sequenceReference:
         oneOf:
-          - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
+          - $ref: "/ga4gh/schema/gks-common/1.0.0-connect.2024-09.1/data-types/json/IRI"
           - $ref: "#/$defs/SequenceReference"
         description: A reference to a :ref:`Sequence` on which the location is defined.
       start:
@@ -519,7 +519,7 @@ $defs:
         ordered: true
         items:
           oneOf:
-          - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
+          - $ref: "/ga4gh/schema/gks-common/1.0.0-connect.2024-09.1/data-types/json/IRI"
           - $ref: "#/$defs/Location"
         description: The terminal sequence or pair of adjoined sequences that defines in the adjacency.
         minItems: 2
@@ -556,7 +556,7 @@ $defs:
         description: MUST be "Terminus".
       location:
         oneOf:
-          - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
+          - $ref: "/ga4gh/schema/gks-common/1.0.0-connect.2024-09.1/data-types/json/IRI"
           - $ref: "#/$defs/Location"
         description: The location of the terminus.
     required:
@@ -585,7 +585,7 @@ $defs:
         ordered: true
         items:
           oneOf:
-          - $ref: "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
+          - $ref: "/ga4gh/schema/gks-common/1.0.0-connect.2024-09.1/data-types/json/IRI"
           - $ref: "#/$defs/TraversalBlock"
         description: >-
           The molecular components that constitute the derivative molecule.
