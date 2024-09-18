@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/ReferenceLengthExpression",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-connect.2024-09.1/json/ReferenceLengthExpression",
    "title": "ReferenceLengthExpression",
    "type": "object",
    "maturity": "draft",
@@ -38,7 +38,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gks-common/1.x/data-types/json/Extension"
+            "$ref": "/ga4gh/schema/gks-common/1.0.0-connect.2024-09.1/data-types/json/Extension"
          },
          "description": "A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.",
          "$comment": "Extension objects have a key-value data structure that allows definition of custom fields in the data itself. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems."
@@ -53,7 +53,7 @@
       "length": {
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/Range"
+               "$ref": "/ga4gh/schema/vrs/2.0.0-connect.2024-09.1/json/Range"
             },
             {
                "type": "integer"
@@ -62,7 +62,7 @@
          "description": "The number of residues in the expressed sequence."
       },
       "sequence": {
-         "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceString",
+         "$ref": "/ga4gh/schema/vrs/2.0.0-connect.2024-09.1/json/SequenceString",
          "description": "the literal Sequence encoded by the Reference Length Expression."
       },
       "repeatSubunitLength": {

@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/CopyNumberCount",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-connect.2024-09.1/json/CopyNumberCount",
    "title": "CopyNumberCount",
    "type": "object",
    "maturity": "draft",
@@ -39,7 +39,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gks-common/1.x/data-types/json/Extension"
+            "$ref": "/ga4gh/schema/gks-common/1.0.0-connect.2024-09.1/data-types/json/Extension"
          },
          "description": "A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.",
          "$comment": "Extension objects have a key-value data structure that allows definition of custom fields in the data itself. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems."
@@ -53,16 +53,16 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/vrs/2.x/json/Expression"
+            "$ref": "/ga4gh/schema/vrs/2.0.0-connect.2024-09.1/json/Expression"
          }
       },
       "location": {
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceLocation"
+               "$ref": "/ga4gh/schema/vrs/2.0.0-connect.2024-09.1/json/SequenceLocation"
             },
             {
-               "$ref": "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
+               "$ref": "/ga4gh/schema/gks-common/1.0.0-connect.2024-09.1/data-types/json/IRI"
             }
          ],
          "description": "A location for which the number of systemic copies is described."
@@ -76,7 +76,7 @@
       "copies": {
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/Range"
+               "$ref": "/ga4gh/schema/vrs/2.0.0-connect.2024-09.1/json/Range"
             },
             {
                "type": "integer"

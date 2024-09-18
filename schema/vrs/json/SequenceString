@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/SequenceString",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-connect.2024-09.1/json/SequenceString",
    "title": "SequenceString",
    "type": "string",
    "maturity": "draft",

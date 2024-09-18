@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/Allele",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-connect.2024-09.1/json/Allele",
    "title": "Allele",
    "type": "object",
    "maturity": "draft",
@@ -39,7 +39,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gks-common/1.x/data-types/json/Extension"
+            "$ref": "/ga4gh/schema/gks-common/1.0.0-connect.2024-09.1/data-types/json/Extension"
          },
          "description": "A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.",
          "$comment": "Extension objects have a key-value data structure that allows definition of custom fields in the data itself. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems."
@@ -53,7 +53,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/vrs/2.x/json/Expression"
+            "$ref": "/ga4gh/schema/vrs/2.0.0-connect.2024-09.1/json/Expression"
          }
       },
       "type": {
@@ -65,10 +65,10 @@
       "location": {
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceLocation"
+               "$ref": "/ga4gh/schema/vrs/2.0.0-connect.2024-09.1/json/SequenceLocation"
             },
             {
-               "$ref": "/ga4gh/schema/gks-common/1.x/data-types/json/IRI"
+               "$ref": "/ga4gh/schema/gks-common/1.0.0-connect.2024-09.1/data-types/json/IRI"
             }
          ],
          "description": "The location of the Allele"
@@ -77,13 +77,13 @@
          "description": "An expression of the sequence state",
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/LengthExpression"
+               "$ref": "/ga4gh/schema/vrs/2.0.0-connect.2024-09.1/json/LengthExpression"
             },
             {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/LiteralSequenceExpression"
+               "$ref": "/ga4gh/schema/vrs/2.0.0-connect.2024-09.1/json/LiteralSequenceExpression"
             },
             {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/ReferenceLengthExpression"
+               "$ref": "/ga4gh/schema/vrs/2.0.0-connect.2024-09.1/json/ReferenceLengthExpression"
             }
          ]
       }
