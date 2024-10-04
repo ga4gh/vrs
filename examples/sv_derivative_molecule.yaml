@@ -1,19 +1,16 @@
 id: sv_derivative_molecule
 type: DerivativeMolecule
 components:
-  - type: TraversalBlock
-    orientation: forward
-    component: 
-      id: 5-prime-terminus
-      type: Terminus
-      location:
-        type: SequenceLocation
-        sequenceReference:
-          type: SequenceReference
-          refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
-          residueAlphabet: na
-          id: NC_000001.10
-        end: 123
+  - id: 5-prime-terminus
+    type: Terminus
+    location:
+      type: SequenceLocation
+      sequenceReference:
+        type: SequenceReference
+        refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+        residueAlphabet: na
+        id: NC_000001.10
+      end: 123
   - type: TraversalBlock
     orientation: forward
     component: 
@@ -37,22 +34,19 @@ components:
       linker: 
         type: LiteralSequenceExpression
         sequence: GTC
-  - type: TraversalBlock
-    orientation: forward
-    component: 
-      type: Allele
-      location:
-        type: SequenceLocation
-        start: 601
-        end: 602
-        sequenceReference:
-          type: SequenceReference
-          refgetAccession: SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO
-          residueAlphabet: na
-          id: NC_000002.11
-      state:
-        type: LiteralSequenceExpression
-        sequence: C
+  - type: Allele
+    location:
+      type: SequenceLocation
+      start: 601
+      end: 602
+      sequenceReference:
+        type: SequenceReference
+        refgetAccession: SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO
+        residueAlphabet: na
+        id: NC_000002.11
+    state:
+      type: LiteralSequenceExpression
+      sequence: C
   - type: TraversalBlock
     orientation: forward
     component: 
@@ -73,19 +67,16 @@ components:
             residueAlphabet: na
             id: NC_000001.10
           end: 1000
-  - type: TraversalBlock
-    orientation: forward
-    component: 
-      id: 3-prime-terminus
-      type: Terminus
-      location:
-        type: SequenceLocation
-        sequenceReference:
-          type: SequenceReference
-          refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
-          residueAlphabet: na
-          id: NC_000001.10
-        start: 1000
+  - id: 3-prime-terminus
+    type: Terminus
+    location:
+      type: SequenceLocation
+      sequenceReference:
+        type: SequenceReference
+        refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+        residueAlphabet: na
+        id: NC_000001.10
+      start: 1000
 
 
 

@@ -41,7 +41,7 @@ Some TraversalBlock attributes are inherited from :ref:`gks.core-im:Entity`.
       - 1..1
       - MUST be "TraversalBlock".
    *  - component
-      - :ref:`Allele` | :ref:`CisPhasedBlock` | :ref:`Adjacency` | :ref:`Terminus`
+      - :ref:`Adjacency`
       - 0..1
       - The unoriented molecular variation component.
    *  - orientation
