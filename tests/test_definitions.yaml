@@ -46,3 +46,8 @@ tests:
     description: A simple RLE expansion from SPDI representation
     schema: vrs
     definition: Allele
+  - test_file: invalid_adjacency.yaml
+    description: An adjacency with an adjoinedSequence incorrectly containing both a start and end
+    schema: vrs
+    definition: Adjacency
+    shouldValidationFail: true
