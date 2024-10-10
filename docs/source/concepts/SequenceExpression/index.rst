@@ -9,7 +9,7 @@ representation of :ref:`Variation` state.
 Unlike :ref:`SequenceReference`, a sequence expression represents the
 content of a sequence, instead of representing a sequence by reference.
 
-.. include::  ../../def/SequenceExpression.rst
+.. include::  ../../def/vrs/SequenceExpression.rst
 
 **Subclasses**
 

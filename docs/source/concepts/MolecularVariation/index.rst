@@ -9,7 +9,7 @@ rearrangements that form derivative molecules.
 
 Collectively, these types of variation are called molecular variation.
 
-.. include::  ../../def/MolecularVariation.rst
+.. include::  ../../def/vrs/MolecularVariation.rst
 
 **Subclasses**
 
