@@ -49,7 +49,7 @@ Some DerivativeMolecule attributes are inherited from :ref:`Variation`.
       - 1..1
       - MUST be "DerivativeMolecule".
    *  - components
-      - :ref:`IRI` | :ref:`TraversalBlock`
+      - :ref:`IRI` | :ref:`Allele` | :ref:`CisPhasedBlock` | :ref:`Terminus` | :ref:`TraversalBlock`
       - 2..m
       - The molecular components that constitute the derivative molecule.
    *  - circular

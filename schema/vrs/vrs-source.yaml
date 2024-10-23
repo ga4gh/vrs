@@ -581,6 +581,9 @@ $defs:
         items:
           oneOf:
           - $ref: "/ga4gh/schema/gks-common/1.x/core-im/json/IRI"
+          - $ref: "#/$defs/Allele"
+          - $ref: "#/$defs/CisPhasedBlock"
+          - $ref: "#/$defs/Terminus"
           - $ref: "#/$defs/TraversalBlock"
         description: >-
           The molecular components that constitute the derivative molecule.
@@ -603,8 +606,8 @@ $defs:
         - component
         - orientation
     description: >-
-      A component used to describe the orientation of a molecular variation within a
-      DerivativeMolecule.
+      A component used to describe the orientation of applicable molecular variation
+      within a DerivativeMolecule.
     properties:
       type:
         extends: type
@@ -615,10 +618,7 @@ $defs:
         description: >-
           The unoriented molecular variation component.
         oneOf:
-          - $ref: "#/$defs/Allele"
-          - $ref: "#/$defs/CisPhasedBlock"
           - $ref: "#/$defs/Adjacency"
-          - $ref: "#/$defs/Terminus"
       orientation:
         type: string
         description: >-
