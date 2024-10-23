@@ -1,3 +1,9 @@
+
+.. warning:: This data class is at a **draft** maturity level and may change
+    significantly in future releases. Maturity levels are described in 
+    the :ref:`maturity-model`.
+                      
+                    
 **Computational Definition**
 
 The `Terminus` data class provides a structure for describing the end (terminus) of a molecule. Structurally similar to Adjacency, but used for describing where a molecule terminates (instead of adjoining another molecule).
