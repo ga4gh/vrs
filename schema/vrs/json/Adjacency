@@ -74,7 +74,13 @@
                {
                   "$ref": "/ga4gh/schema/gks-common/1.x/core-im/json/IRI"
                }
-            ]
+            ],
+            "not": {
+               "required": [
+                  "start",
+                  "end"
+               ]
+            }
          },
          "description": "The terminal sequence or pair of adjoined sequences that defines in the adjacency.",
          "minItems": 2,

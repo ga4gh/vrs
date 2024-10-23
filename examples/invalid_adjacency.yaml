@@ -1,0 +1,18 @@
+id: simple_breakpoint
+type: Adjacency
+adjoinedSequences:
+  - type: SequenceLocation
+    sequenceReference:
+      type: SequenceReference
+      refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+      residueAlphabet: na
+      id: NC_000001.10
+    start: 100
+    end: 200
+  - type: SequenceLocation
+    sequenceReference:
+      type: SequenceReference
+      refgetAccession: SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO
+      residueAlphabet: na
+      id: NC_000002.11
+    start: 456
