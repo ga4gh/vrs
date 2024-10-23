@@ -5,10 +5,15 @@ The additional information presented here are guidelines for issues,
 branches, commits, and pull requests. Before adding documentation, 
 please also review the [docs style guide](docs/source/style.rst).
 
+## Discussions
+[Discussions](https://github.com/ga4gh/vrs/discussions) are for feature 
+requests, release candidate discussions, and questions.
+
 ## Issues
-[Issues](https://github.com/ga4gh/vrs/issues) are for discussion, bug
-reports, and feature requests. When creating an issue, use sentence case
-for the issue title and avoid the use of periods at the end of titles.
+[Issues](https://github.com/ga4gh/vrs/issues) are for bug
+reports, and planned feature descriptions. When creating an issue, use 
+sentence casefor the issue title and avoid the use of periods at the end 
+of titles.
 
 ## Branches
 [Branches](https://github.com/ga4gh/vrs/branches) are used for
