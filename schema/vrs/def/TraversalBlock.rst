@@ -1,6 +1,12 @@
+
+.. warning:: This data class is at a **draft** maturity level and may change
+    significantly in future releases. Maturity levels are described in 
+    the :ref:`maturity-model`.
+                      
+                    
 **Computational Definition**
 
-A component used to describe the orientation of a molecular variation within a DerivativeMolecule.
+A component used to describe the orientation of applicable molecular variation within a DerivativeMolecule.
 
 **Information Model**
 

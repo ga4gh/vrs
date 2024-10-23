@@ -11,7 +11,7 @@
          "orientation"
       ]
    },
-   "description": "A component used to describe the orientation of a molecular variation within a DerivativeMolecule.",
+   "description": "A component used to describe the orientation of applicable molecular variation within a DerivativeMolecule.",
    "properties": {
       "id": {
          "type": "string",

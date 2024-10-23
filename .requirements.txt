@@ -3,7 +3,7 @@ jsonschema
 referencing
 ipython
 pyyaml
-ga4gh.gks.metaschema==0.3.0b13
+ga4gh.gks.metaschema==0.3.0b14
 sphinx ~= 7.2
 sphinx-rtd-theme ~= 1.2
 jupyterlab

@@ -1,3 +1,9 @@
+
+.. warning:: This data class is at a **draft** maturity level and may change
+    significantly in future releases. Maturity levels are described in 
+    the :ref:`maturity-model`.
+                      
+                    
 **Computational Definition**
 
 The `Adjacency` class can represent either the termination of a sequence or the adjoining of the end of a sequence with the beginning of an adjacent sequence, potentially with an intervening linker sequence.
