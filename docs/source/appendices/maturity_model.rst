@@ -97,7 +97,9 @@ survey includes:
 #. If (or if multiple, which) product feature(s) are suitable for advance to Trial Use
 #. Comments on response (e.g. explicit endorsement or description of gaps)
 
-There is a 4-week review period for Product Implementers to respond.
+There is a minimum 1-week review period for Product Implementers to respond, though this may
+be longer at the discretion of the product leads. More time for individual contributors may 
+be permitted on request.
 
 Advancing from Trial Use to Normative
 #####################################
