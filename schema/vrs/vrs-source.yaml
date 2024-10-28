@@ -348,6 +348,12 @@ $defs:
           $ref: "#/$defs/SequenceString"
         description: >-
           A :ref:`SequenceString` that is a literal representation of the referenced sequence.
+      moleculeType:
+        type: string
+        enum:
+          - genomic
+          - transcript
+          - protein
       circular:
         type: boolean
         description: >-
