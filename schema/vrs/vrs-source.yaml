@@ -343,6 +343,11 @@ $defs:
         enum:
           - aa
           - na
+      sequence:
+        type:
+          $ref: "#/$defs/SequenceString"
+        description: >-
+          A :ref:`SequenceString` that is a literal representation of the referenced sequence.
       circular:
         type: boolean
         description: >-
