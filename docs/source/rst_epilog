@@ -29,7 +29,7 @@
 .. |varnomen| replace:: `HGVS Variant Nomenclature <https://varnomen.hgvs.org/>`__
 .. |vrs-python| replace:: `GA4GH VRS Python Implementation <https://github.com/ga4gh/vrs-python/>`__
 .. |vrs| replace:: `VRS <https://github.com/ga4gh/vrs/>`__
-.. |gks-common| replace:: `GKS Common <https://github.com/ga4gh/gks-common/>`__
+.. |gks-core| replace:: `GKS Common <https://github.com/ga4gh/gks-core/>`__
 
 
 .. |eg| replace:: *e.g.,*

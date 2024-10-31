@@ -3,7 +3,7 @@
    "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/SequenceString",
    "title": "SequenceString",
    "type": "string",
-   "maturity": "draft",
+   "maturity": "trial use",
    "description": "A character string of Residues that represents a biological sequence using the conventional sequence order (5\u2019-to-3\u2019 for nucleic acid sequences, and amino-to-carboxyl for amino acid sequences). IUPAC ambiguity codes are permitted in Sequence Strings.",
    "pattern": "^[A-Z*\\-]*$"
 }

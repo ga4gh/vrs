@@ -3,6 +3,7 @@
    "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/SequenceExpression",
    "title": "SequenceExpression",
    "type": "object",
+   "maturity": "trial use",
    "description": "An expression describing a Sequence.",
    "oneOf": [
       {

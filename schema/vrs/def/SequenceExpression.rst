@@ -1,10 +1,15 @@
+
+.. note:: This data class is at a **trial use** maturity level and may change
+    in future releases. Maturity levels are described in the :ref:`maturity-model`.
+                      
+                    
 **Computational Definition**
 
 An expression describing a :ref:`Sequence`.
 
 **Information Model**
 
-Some SequenceExpression attributes are inherited from :ref:`gks.core-im:Entity`.
+Some SequenceExpression attributes are inherited from :ref:`gks-core:Entity`.
 
 .. list-table::
    :class: clean-wrap

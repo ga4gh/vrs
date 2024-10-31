@@ -1,7 +1,6 @@
 
-.. warning:: This data class is at a **draft** maturity level and may change
-    significantly in future releases. Maturity levels are described in 
-    the :ref:`maturity-model`.
+.. note:: This data class is at a **trial use** maturity level and may change
+    in future releases. Maturity levels are described in the :ref:`maturity-model`.
                       
                     
 **Computational Definition**
@@ -10,7 +9,7 @@ A sequence of nucleic or amino acid character codes.
 
 **Information Model**
 
-Some SequenceReference attributes are inherited from :ref:`gks.core-im:Entity`.
+Some SequenceReference attributes are inherited from :ref:`gks-core:Entity`.
 
 .. list-table::
    :class: clean-wrap

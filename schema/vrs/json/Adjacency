@@ -3,7 +3,7 @@
    "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/Adjacency",
    "title": "Adjacency",
    "type": "object",
-   "maturity": "draft",
+   "maturity": "trial use",
    "ga4ghDigest": {
       "prefix": "AJ",
       "keys": [
@@ -12,7 +12,7 @@
          "type"
       ]
    },
-   "description": "The `Adjacency` class can represent either the termination of a sequence or the adjoining of the end of a sequence with the beginning of an adjacent sequence, potentially with an intervening linker sequence.",
+   "description": "The `Adjacency` class represents the adjoining of the end of a sequence with the beginning of an adjacent sequence, potentially with an intervening linker sequence.",
    "properties": {
       "id": {
          "type": "string",
@@ -39,7 +39,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gks-common/1.x/core-im/json/Extension"
+            "$ref": "/ga4gh/schema/gks-core/1.x/json/Extension"
          },
          "description": "A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.",
          "$comment": "Extension objects have a key-value data structure that allows definition of custom fields in the data itself. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems."
@@ -72,7 +72,7 @@
                   "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceLocation"
                },
                {
-                  "$ref": "/ga4gh/schema/gks-common/1.x/core-im/json/IRI"
+                  "$ref": "/ga4gh/schema/gks-core/1.x/json/IRI"
                }
             ],
             "not": {
