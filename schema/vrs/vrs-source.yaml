@@ -456,7 +456,6 @@ $defs:
   # Numerics, Comparators, and Ranges
 
   Range:
-    inherits: gks-core:Element
     maturity: trial use
     description: An inclusive range of values bounded by one or more integers.
     type: array

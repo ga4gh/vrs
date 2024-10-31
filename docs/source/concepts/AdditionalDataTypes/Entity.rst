@@ -3,4 +3,4 @@
 Entity
 !!!!!!
 
-.. include::  ../../def/gks.common/core-im/Entity.rst
+.. include::  ../../def/gks-core/Entity.rst

@@ -3,4 +3,4 @@
 IRI
 !!!
 
-.. include::  ../../def/gks.common/core-im/IRI.rst
+.. include::  ../../def/gks-core/IRI.rst

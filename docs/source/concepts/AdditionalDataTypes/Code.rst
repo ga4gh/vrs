@@ -3,4 +3,4 @@
 Code
 !!!!
 
-.. include::  ../../def/gks.common/core-im/Code.rst
+.. include::  ../../def/gks-core/Code.rst

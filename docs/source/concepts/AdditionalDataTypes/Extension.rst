@@ -3,4 +3,4 @@
 Extension
 !!!!!!!!!
 
-.. include::  ../../def/gks.common/core-im/Extension.rst
+.. include::  ../../def/gks-core/Extension.rst
