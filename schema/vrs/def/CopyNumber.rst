@@ -55,6 +55,6 @@ Some CopyNumber attributes are inherited from :ref:`Variation`.
       - 0..m
       - 
    *  - location
-      - :ref:`IRI` | :ref:`Location`
+      - :ref:`iriReference` | :ref:`Location`
       - 1..1
       - A location for which the number of systemic copies is described.

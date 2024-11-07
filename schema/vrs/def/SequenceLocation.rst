@@ -50,7 +50,7 @@ Some SequenceLocation attributes are inherited from :ref:`Ga4ghIdentifiableObjec
       - 1..1
       - MUST be "SequenceLocation"
    *  - sequenceReference
-      - :ref:`IRI` | :ref:`SequenceReference`
+      - :ref:`iriReference` | :ref:`SequenceReference`
       - 0..1
       - A reference to a :ref:`Sequence` on which the location is defined.
    *  - start
@@ -62,6 +62,6 @@ Some SequenceLocation attributes are inherited from :ref:`Ga4ghIdentifiableObjec
       - 0..1
       - The end coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range greater than or equal to the value of `start`.
    *  - sequence
-      - :ref:`SequenceString`
+      - :ref:`sequenceString`
       - 0..1
       - The literal sequence encoded by the `sequenceReference` at these coordinates.

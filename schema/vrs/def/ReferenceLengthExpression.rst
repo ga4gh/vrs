@@ -50,7 +50,7 @@ Some ReferenceLengthExpression attributes are inherited from :ref:`SequenceExpre
       - 1..1
       - The number of residues in the expressed sequence.
    *  - sequence
-      - :ref:`SequenceString`
+      - :ref:`sequenceString`
       - 0..1
       - the literal :ref:`Sequence` encoded by the Reference Length Expression.
    *  - repeatSubunitLength

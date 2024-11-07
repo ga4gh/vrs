@@ -141,7 +141,7 @@ $defs:
           MUST be "Allele"
       location:
         oneOf:
-          - $ref: "/ga4gh/schema/gks-core/1.x/json/IRI"
+          - $ref: "/ga4gh/schema/gks-core/1.x/json/iriReference"
           - $ref: "#/$defs/Location"
         description: >-
           The location of the Allele
@@ -176,7 +176,7 @@ $defs:
         items:
           oneOf:
             - $ref: "#/$defs/Allele"
-            - $ref: "/ga4gh/schema/gks-core/1.x/json/IRI" 
+            - $ref: "/ga4gh/schema/gks-core/1.x/json/iriReference" 
         description: >-
           A list of :ref:`Alleles <Allele>` that are found in-cis on a shared molecule.
       sequenceReference:
@@ -202,7 +202,7 @@ $defs:
     heritableProperties:
       location:
         oneOf:
-          - $ref: "/ga4gh/schema/gks-core/1.x/json/IRI"
+          - $ref: "/ga4gh/schema/gks-core/1.x/json/iriReference"
           - $ref: "#/$defs/Location"
         description: >-
           A location for which the number of systemic copies is described.
@@ -291,7 +291,7 @@ $defs:
         description: MUST be "SequenceLocation"
       sequenceReference:
         oneOf:
-          - $ref: "/ga4gh/schema/gks-core/1.x/json/IRI"
+          - $ref: "/ga4gh/schema/gks-core/1.x/json/iriReference"
           - $ref: "#/$defs/SequenceReference"
         description: A reference to a :ref:`Sequence` on which the location is defined.
       start:
@@ -313,7 +313,7 @@ $defs:
       sequence:
         description: >-
           The literal sequence encoded by the `sequenceReference` at these coordinates.
-        $ref: "#/$defs/SequenceString"
+        $ref: "#/$defs/sequenceString"
 
   SequenceReference:
     maturity: trial use
@@ -403,7 +403,7 @@ $defs:
           - $ref: "#/$defs/Range"
         description: The number of residues in the expressed sequence.
       sequence:
-        $ref: "#/$defs/SequenceString"
+        $ref: "#/$defs/sequenceString"
         description: the literal :ref:`Sequence` encoded by the Reference Length Expression.
       repeatSubunitLength:
         type: integer
@@ -447,7 +447,7 @@ $defs:
         default: "LiteralSequenceExpression"
         description: MUST be "LiteralSequenceExpression"
       sequence:
-        $ref: "#/$defs/SequenceString"
+        $ref: "#/$defs/sequenceString"
         description: the literal sequence
     required:
       - sequence
@@ -467,7 +467,7 @@ $defs:
     maxItems: 2
     minItems: 2
 
-  Residue:
+  residue:
     maturity: trial use
     description: >-
       A character representing a specific residue (i.e., molecular species)
@@ -477,10 +477,10 @@ $defs:
     type: string
     pattern: '[A-Z*\-]'
 
-  SequenceString:
+  sequenceString:
     maturity: trial use
     description: >-
-      A character string of :ref:`Residues <Residue>` that represents a biological
+      A character string of :ref:`residues <residue>` that represents a biological
       sequence using the conventional sequence order (5’-to-3’ for
       nucleic acid sequences, and amino-to-carboxyl for amino acid
       sequences). IUPAC ambiguity codes are permitted in Sequence Strings.
@@ -519,7 +519,7 @@ $defs:
         ordered: true
         items:
           oneOf:
-          - $ref: "/ga4gh/schema/gks-core/1.x/json/IRI"
+          - $ref: "/ga4gh/schema/gks-core/1.x/json/iriReference"
           - $ref: "#/$defs/Location"
           not:
             required: ["start", "end"]
@@ -558,7 +558,7 @@ $defs:
         description: MUST be "Terminus".
       location:
         oneOf:
-          - $ref: "/ga4gh/schema/gks-core/1.x/json/IRI"
+          - $ref: "/ga4gh/schema/gks-core/1.x/json/iriReference"
           - $ref: "#/$defs/Location"
         description: The location of the terminus.
     required:
@@ -587,7 +587,7 @@ $defs:
         ordered: true
         items:
           oneOf:
-          - $ref: "/ga4gh/schema/gks-core/1.x/json/IRI"
+          - $ref: "/ga4gh/schema/gks-core/1.x/json/iriReference"
           - $ref: "#/$defs/Allele"
           - $ref: "#/$defs/CisPhasedBlock"
           - $ref: "#/$defs/Terminus"

@@ -72,7 +72,7 @@
                   "$ref": "/ga4gh/schema/vrs/2.x/json/Allele"
                },
                {
-                  "$ref": "/ga4gh/schema/gks-core/1.x/json/IRI"
+                  "$ref": "/ga4gh/schema/gks-core/1.x/json/iriReference"
                }
             ]
          },

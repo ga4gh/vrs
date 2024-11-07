@@ -54,7 +54,7 @@ Some CisPhasedBlock attributes are inherited from :ref:`Variation`.
       - 1..1
       - MUST be "CisPhasedBlock"
    *  - members
-      - :ref:`Allele` | :ref:`IRI`
+      - :ref:`Allele` | :ref:`iriReference`
       - 2..m
       - A list of :ref:`Alleles <Allele>` that are found in-cis on a shared molecule.
    *  - sequenceReference

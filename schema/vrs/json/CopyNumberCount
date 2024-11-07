@@ -62,7 +62,7 @@
                "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceLocation"
             },
             {
-               "$ref": "/ga4gh/schema/gks-core/1.x/json/IRI"
+               "$ref": "/ga4gh/schema/gks-core/1.x/json/iriReference"
             }
          ],
          "description": "A location for which the number of systemic copies is described."

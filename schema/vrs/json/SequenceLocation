@@ -62,7 +62,7 @@
                "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceReference"
             },
             {
-               "$ref": "/ga4gh/schema/gks-core/1.x/json/IRI"
+               "$ref": "/ga4gh/schema/gks-core/1.x/json/iriReference"
             }
          ],
          "description": "A reference to a Sequence on which the location is defined."
@@ -91,7 +91,7 @@
       },
       "sequence": {
          "description": "The literal sequence encoded by the `sequenceReference` at these coordinates.",
-         "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceString"
+         "$ref": "/ga4gh/schema/vrs/2.x/json/sequenceString"
       }
    },
    "required": [

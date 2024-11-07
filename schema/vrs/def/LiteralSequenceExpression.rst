@@ -46,6 +46,6 @@ Some LiteralSequenceExpression attributes are inherited from :ref:`SequenceExpre
       - 1..1
       - MUST be "LiteralSequenceExpression"
    *  - sequence
-      - :ref:`SequenceString`
+      - :ref:`sequenceString`
       - 1..1
       - the literal sequence
