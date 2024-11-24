@@ -12,7 +12,7 @@
       ],
       "prefix": "CN"
    },
-   "description": "The absolute count of discrete copies of a Location or Gene, within a system (e.g. genome, cell, etc.).",
+   "description": "The absolute count of discrete copies of a Location within a system (e.g. genome, cell, etc.).",
    "properties": {
       "id": {
          "type": "string",

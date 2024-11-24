@@ -4,7 +4,7 @@
 
 **Computational Definition**
 
-An assessment of the copy number of a :ref:`Location` or a :ref:`Gene` within a system (e.g. genome, cell, etc.) relative to a baseline ploidy.
+An assessment of the copy number of a :ref:`Location` within a system (e.g. genome, cell, etc.) relative to a baseline ploidy.
 
 **GA4GH Digest**
 

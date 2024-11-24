@@ -12,7 +12,7 @@
       ],
       "prefix": "CX"
    },
-   "description": "An assessment of the copy number of a Location or a Gene within a system (e.g. genome, cell, etc.) relative to a baseline ploidy.",
+   "description": "An assessment of the copy number of a Location within a system (e.g. genome, cell, etc.) relative to a baseline ploidy.",
    "properties": {
       "id": {
          "type": "string",

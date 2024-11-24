@@ -4,7 +4,7 @@
 
 **Computational Definition**
 
-The absolute count of discrete copies of a :ref:`Location` or :ref:`Gene`, within a system (e.g. genome, cell, etc.).
+The absolute count of discrete copies of a :ref:`Location` within a system (e.g. genome, cell, etc.).
 
 **GA4GH Digest**
 
