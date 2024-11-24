@@ -6,9 +6,22 @@
    "maturity": "draft",
    "ga4ghDigest": {
       "keys": [
-         "copyChange",
-         "location",
-         "type"
+         " ",
+         "-",
+         "C",
+         "a",
+         "c",
+         "e",
+         "g",
+         "h",
+         "i",
+         "l",
+         "n",
+         "o",
+         "p",
+         "t",
+         "type",
+         "y"
       ],
       "prefix": "CX"
    },
@@ -56,6 +69,12 @@
             "$ref": "/ga4gh/schema/vrs/2.x/json/Expression"
          }
       },
+      "type": {
+         "type": "string",
+         "const": "CopyNumberChange",
+         "default": "CopyNumberChange",
+         "description": "MUST be \"CopyNumberChange\""
+      },
       "location": {
          "oneOf": [
             {
@@ -65,13 +84,7 @@
                "$ref": "/ga4gh/schema/gks-core/1.x/json/iriReference"
             }
          ],
-         "description": "A location for which the number of systemic copies is described."
-      },
-      "type": {
-         "type": "string",
-         "const": "CopyNumberChange",
-         "default": "CopyNumberChange",
-         "description": "MUST be \"CopyNumberChange\""
+         "description": "The location of the subject of the copy change."
       },
       "copyChange": {
          "$ref": "/ga4gh/schema/gks-core/1.x/json/Coding",

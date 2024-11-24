@@ -1,5 +1,5 @@
-.. warning:: This data class is at a **draft** maturity level and may \
-    change significantly in future releases. Maturity \
+.. note:: This data class is at a **trial use** maturity level and may \
+    change in future releases. Maturity \
     levels are described in the :ref:`maturity-model`.
 
 **Computational Definition**
@@ -18,12 +18,12 @@ The absolute count of discrete copies of a :ref:`Location` or :ref:`Gene`, withi
        - Keys
 
     *  - CN
-       - ['copies', 'location', 'type']
+       - [' ', '-', 'a', 'c', 'e', 'i', 'l', 'n', 'o', 'p', 's', 't', 'type']
 
 
 **Information Model**
 
-Some CopyNumberCount attributes are inherited from :ref:`CopyNumber`.
+Some CopyNumberCount attributes are inherited from :ref:`Variation`.
 
 .. list-table::
    :class: clean-wrap
@@ -80,16 +80,16 @@ Some CopyNumberCount attributes are inherited from :ref:`CopyNumber`.
       - :ref:`Expression`
       - 0..m
       - 
-   *  - location
-      - 
-      - :ref:`iriReference` | :ref:`Location`
-      - 1..1
-      - A location for which the number of systemic copies is described.
    *  - type
       - 
       - string
       - 1..1
       - MUST be "CopyNumberCount"
+   *  - location
+      - 
+      - :ref:`iriReference` | :ref:`Location`
+      - 1..1
+      - The location of the subject of the copy count.
    *  - copies
       - 
       - integer | :ref:`Range`

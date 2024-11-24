@@ -18,12 +18,12 @@ An assessment of the copy number of a :ref:`Location` or a :ref:`Gene` within a 
        - Keys
 
     *  - CX
-       - ['copyChange', 'location', 'type']
+       - [' ', '-', 'C', 'a', 'c', 'e', 'g', 'h', 'i', 'l', 'n', 'o', 'p', 't', 'type', 'y']
 
 
 **Information Model**
 
-Some CopyNumberChange attributes are inherited from :ref:`CopyNumber`.
+Some CopyNumberChange attributes are inherited from :ref:`Variation`.
 
 .. list-table::
    :class: clean-wrap
@@ -80,16 +80,16 @@ Some CopyNumberChange attributes are inherited from :ref:`CopyNumber`.
       - :ref:`Expression`
       - 0..m
       - 
-   *  - location
-      - 
-      - :ref:`iriReference` | :ref:`Location`
-      - 1..1
-      - A location for which the number of systemic copies is described.
    *  - type
       - 
       - string
       - 1..1
       - MUST be "CopyNumberChange"
+   *  - location
+      - 
+      - :ref:`iriReference` | :ref:`Location`
+      - 1..1
+      - The location of the subject of the copy change.
    *  - copyChange
       - 
       - :ref:`Coding`

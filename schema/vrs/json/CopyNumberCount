@@ -3,11 +3,21 @@
    "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/CopyNumberCount",
    "title": "CopyNumberCount",
    "type": "object",
-   "maturity": "draft",
+   "maturity": "trial use",
    "ga4ghDigest": {
       "keys": [
-         "copies",
-         "location",
+         " ",
+         "-",
+         "a",
+         "c",
+         "e",
+         "i",
+         "l",
+         "n",
+         "o",
+         "p",
+         "s",
+         "t",
          "type"
       ],
       "prefix": "CN"
@@ -56,6 +66,12 @@
             "$ref": "/ga4gh/schema/vrs/2.x/json/Expression"
          }
       },
+      "type": {
+         "type": "string",
+         "const": "CopyNumberCount",
+         "default": "CopyNumberCount",
+         "description": "MUST be \"CopyNumberCount\""
+      },
       "location": {
          "oneOf": [
             {
@@ -65,13 +81,7 @@
                "$ref": "/ga4gh/schema/gks-core/1.x/json/iriReference"
             }
          ],
-         "description": "A location for which the number of systemic copies is described."
-      },
-      "type": {
-         "type": "string",
-         "const": "CopyNumberCount",
-         "default": "CopyNumberCount",
-         "description": "MUST be \"CopyNumberCount\""
+         "description": "The location of the subject of the copy count."
       },
       "copies": {
          "oneOf": [
