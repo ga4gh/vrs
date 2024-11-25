@@ -19,3 +19,14 @@ Definition and Information Model
 ################################
 
 .. include::  ../../def/vrs/SequenceReference.rst
+
+Example
+#######
+
+.. code-block:: json
+
+    {
+      "type": "SequenceReference",
+      "refgetAccession": "SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul",
+      "label": "NC_000007.14"
+    }    

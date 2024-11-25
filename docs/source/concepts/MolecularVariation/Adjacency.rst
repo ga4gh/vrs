@@ -17,6 +17,38 @@ Definition and Information Model
 
 .. include::  ../../def/vrs/Adjacency.rst
 
+Example
+@@@@@@@
+
+.. code-block:: json
+
+   {
+      "id": "ga4gh:AJ.O0IbSYyhnBAtUsR51bpdoqeSo4YaDMFo",
+      "type": "Adjacency",
+      "adjoinedSequences": [
+        {
+          "type": "SequenceLocation",
+          "sequenceReference": {
+              "type": "SequenceReference",
+              "refgetAccession": "SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO",
+              "residueAlphabet": "na",
+              "id": "NC_000002.11"
+          },
+          "start": 456
+        },
+        {
+          "type": "SequenceLocation",
+          "sequenceReference": {
+              "type": "SequenceReference",
+              "refgetAccession": "SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU",
+               "residueAlphabet": "na",
+               "id": "NC_000001.10"
+          },
+          "end": 123
+        }
+      ]
+   }
+
 Implementation Guidance
 @@@@@@@@@@@@@@@@@@@@@@@
 

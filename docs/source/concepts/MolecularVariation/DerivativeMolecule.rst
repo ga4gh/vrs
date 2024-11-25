@@ -27,3 +27,71 @@ The TraversalBlock is a key component of the `DerivativeMolecule` class, and is 
 orientation of double-stranded nucleic acid molecules when assembled into a derivative molecule.
 
 .. include:: ../../def/vrs/TraversalBlock.rst
+
+Example
+@@@@@@@
+
+.. code-block:: json
+
+   {
+      "id": "ga4gh:DM.wthhP9ryLEU1ueo6V25gqbSVJC8H4z-M",
+      "type": "DerivativeMolecule",
+      "components": [
+         {
+            "type": "TraversalBlock",
+            "orientation": "forward",
+            "component": {
+               "type": "Adjacency",
+               "linker": {
+                  "type": "LiteralSequenceExpression",
+                  "sequence": "GTC"
+               },
+               "adjoinedSequences": [
+                  {
+                     "type": "SequenceLocation",
+                     "sequenceReference": {
+                        "type": "SequenceReference",
+                        "refgetAccession": "SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU",
+                        "residueAlphabet": "na",
+                        "id": "NC_000001.10"
+                     },
+                     "end": 123
+                  },
+                  {
+                     "type": "SequenceLocation",
+                     "sequenceReference": {
+                        "type": "SequenceReference",
+                        "refgetAccession": "SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO",
+                        "residueAlphabet": "na",
+                        "id": "NC_000002.11"
+                     },
+                     "start": 500
+                  }
+               ]
+            }
+         },
+         {
+            "type": "TraversalBlock",
+            "orientation": "forward",
+            "component": {
+               "type": "Adjacency",
+               "adjoinedSequences": [
+                  {
+                     "type": "SequenceLocation",
+                     "end": 15000
+                  },
+                  {
+                     "type": "SequenceLocation",
+                     "sequenceReference": {
+                        "type": "SequenceReference",
+                        "refgetAccession": "SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU",
+                        "residueAlphabet": "na",
+                        "id": "NC_000001.10"
+                     },
+                     "start": 10000
+                  }
+               ]
+            }
+         }
+      ]
+   }

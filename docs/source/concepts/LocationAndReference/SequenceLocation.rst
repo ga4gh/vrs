@@ -13,6 +13,24 @@ Definition and Information Model
 
 .. include::  ../../def/vrs/SequenceLocation.rst
 
+Example
+@@@@@@@
+
+The :ref:`SequenceLocation` for the position ``44908822`` is:
+
+.. code-block:: json
+
+    {
+        "id": "ga4gh:SL.4t6JnYWqHwYw9WzBT_lmWBb3tLQNalkT",
+        "type": "SequenceLocation",
+        "sequenceReference": {
+            "type": "SequenceReference",
+            "refgetAccession": "SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul"
+        },
+        "start": 44908821,
+        "end": 44908822
+    }
+
 Implementation Guidance
 @@@@@@@@@@@@@@@@@@@@@@@
 

@@ -9,3 +9,13 @@ Definition and Information Model
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .. include::  ../../def/vrs/LiteralSequenceExpression.rst
+
+Example
+@@@@@@@
+
+.. code-block:: json
+
+  {
+    "sequence": "ACGT",
+    "type": "LiteralSequenceExpression"
+  }

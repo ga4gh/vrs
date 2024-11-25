@@ -13,3 +13,13 @@ Definition and Information Model
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .. include::  ../../def/vrs/LengthExpression.rst
+
+Example
+@@@@@@@
+
+.. code-block:: json
+
+  {
+    "type": "LengthExpression",
+    "length": 20000
+  }
