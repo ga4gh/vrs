@@ -18,7 +18,7 @@ The absolute count of discrete copies of a :ref:`Location` or :ref:`Gene`, withi
        - Keys
 
     *  - CN
-       - [' ', '-', 'a', 'c', 'e', 'i', 'l', 'n', 'o', 'p', 's', 't', 'type']
+       - ['copies', 'location', 'type']
 
 
 **Information Model**

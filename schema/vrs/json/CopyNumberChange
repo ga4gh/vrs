@@ -6,22 +6,9 @@
    "maturity": "draft",
    "ga4ghDigest": {
       "keys": [
-         " ",
-         "-",
-         "C",
-         "a",
-         "c",
-         "e",
-         "g",
-         "h",
-         "i",
-         "l",
-         "n",
-         "o",
-         "p",
-         "t",
-         "type",
-         "y"
+         "copyChange",
+         "location",
+         "type"
       ],
       "prefix": "CX"
    },

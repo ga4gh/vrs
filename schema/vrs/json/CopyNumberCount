@@ -6,18 +6,8 @@
    "maturity": "trial use",
    "ga4ghDigest": {
       "keys": [
-         " ",
-         "-",
-         "a",
-         "c",
-         "e",
-         "i",
-         "l",
-         "n",
-         "o",
-         "p",
-         "s",
-         "t",
+         "copies",
+         "location",
          "type"
       ],
       "prefix": "CN"

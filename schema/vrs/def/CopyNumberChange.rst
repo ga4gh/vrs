@@ -18,7 +18,7 @@ An assessment of the copy number of a :ref:`Location` or a :ref:`Gene` within a 
        - Keys
 
     *  - CX
-       - [' ', '-', 'C', 'a', 'c', 'e', 'g', 'h', 'i', 'l', 'n', 'o', 'p', 't', 'type', 'y']
+       - ['copyChange', 'location', 'type']
 
 
 **Information Model**

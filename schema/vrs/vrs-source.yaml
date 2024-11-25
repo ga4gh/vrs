@@ -196,7 +196,7 @@ $defs:
     maturity: trial use
     ga4ghDigest:
       keys:
-        -location
+        - location
         - copies
       prefix: CN
     inherits: SystemicVariation
@@ -229,7 +229,7 @@ $defs:
     maturity: draft
     ga4ghDigest:
       keys:
-        -location
+        - location
         - copyChange
       prefix: CX
     inherits: SystemicVariation
