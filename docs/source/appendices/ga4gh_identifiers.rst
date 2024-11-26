@@ -69,9 +69,9 @@ reference:
 
 GA4GH Digest Keys
 #################
-When creating computed identifiers from objects, VRS uses a custom schema
-attribute, *ga4ghDigest*, that contains the keys used for filtering out
-properties. For example, the Allele JSON Schema:
+When creating computed identifiers from objects, VRS uses a custom schema attribute, 
+*ga4gh.inherent*, that contains the property names used for computing digests. For example, 
+the Allele JSON Schema:
 
 .. parsed-literal::
 
@@ -81,9 +81,9 @@ properties. For example, the Allele JSON Schema:
    "title": "Allele",
    "type": "object",
    "maturity": "draft",
-   "ga4ghDigest": {
+   "ga4gh": {
       "prefix": "VA",
-      "keys": [
+      "inherent": [
          "location",
          "state",
          "type"
@@ -95,9 +95,8 @@ properties. For example, the Allele JSON Schema:
 
 .. note::
 
-  The `ga4ghDigest` property names are currently being aligned with the Sequence
-  Collections effort (see `SeqCol#84 <https://github.com/ga4gh/refget/issues/84>`_)
-  and may potentially change.
+  The `ga4gh` JSON Schema namespace is aligned with the Sequence Collections effort 
+  (see `SeqCol#84 <https://github.com/ga4gh/refget/issues/84>`_).
 
 GA4GH Type Prefixes
 @@@@@@@@@@@@@@@@@@@
@@ -122,4 +121,4 @@ We use the following guidelines for type prefixes:
 Administration
 ##############
 
-Type prefix administration is to be managed by the `GA4GH TASC`_.
+Type prefixes, pURL registration, and JSON Schema keyword administration are coordinated with the `GA4GH TASC`_.

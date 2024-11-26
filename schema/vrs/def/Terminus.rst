@@ -15,7 +15,7 @@ The `Terminus` data class provides a structure for describing the end (terminus)
     :widths: auto
 
     *  - Prefix
-       - Keys
+       - Inherent
 
     *  - TM
        - ['location', 'type']

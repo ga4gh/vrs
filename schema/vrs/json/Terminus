@@ -4,9 +4,9 @@
    "title": "Terminus",
    "type": "object",
    "maturity": "draft",
-   "ga4ghDigest": {
+   "ga4gh": {
       "prefix": "TM",
-      "keys": [
+      "inherent": [
          "location",
          "type"
       ]

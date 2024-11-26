@@ -15,7 +15,7 @@ The state of a molecule at a :ref:`Location`.
     :widths: auto
 
     *  - Prefix
-       - Keys
+       - Inherent
 
     *  - VA
        - ['location', 'state', 'type']

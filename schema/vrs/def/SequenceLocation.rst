@@ -15,7 +15,7 @@ A :ref:`Location` defined by an interval on a referenced :ref:`Sequence`.
     :widths: auto
 
     *  - Prefix
-       - Keys
+       - Inherent
 
     *  - SL
        - ['end', 'sequenceReference', 'start', 'type']

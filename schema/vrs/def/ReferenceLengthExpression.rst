@@ -15,7 +15,7 @@ An expression of a sequence that is derived from repeating a subsequence of an a
     :widths: auto
 
     *  - Prefix
-       - Keys
+       - Inherent
 
     *  - None
        - ['length', 'repeatSubunitLength', 'type']

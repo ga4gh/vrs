@@ -15,7 +15,7 @@ A component used to describe the orientation of applicable molecular variation w
     :widths: auto
 
     *  - Prefix
-       - Keys
+       - Inherent
 
     *  - None
        - ['type', 'component', 'orientation']

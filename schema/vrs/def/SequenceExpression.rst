@@ -15,7 +15,7 @@ An expression describing a :ref:`Sequence`.
     :widths: auto
 
     *  - Prefix
-       - Keys
+       - Inherent
 
     *  - None
        - ['type']

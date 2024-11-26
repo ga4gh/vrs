@@ -1,0 +1,16 @@
+2.0
+!!!
+
+2.0.0
+@@@@@
+
+Major Changes
+#############
+
+  * implements the :ref:`_maturity-model` for all data classes
+  * classes now support descriptive metadata
+  * digests now rely on inherent property descriptions
+  * object references now use IRI references instead of CURIEs
+  * supports structural variation
+  * imports from the GKS-core library for cross-specification alignment
+  * renames Haplotype to CisPhasedBlock

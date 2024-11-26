@@ -4,9 +4,9 @@
    "title": "Allele",
    "type": "object",
    "maturity": "trial use",
-   "ga4ghDigest": {
+   "ga4gh": {
       "prefix": "VA",
-      "keys": [
+      "inherent": [
          "location",
          "state",
          "type"

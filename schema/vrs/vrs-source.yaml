@@ -34,8 +34,8 @@ $defs:
     inherits: gks-core:Entity
     description: >-
       An object for which a GA4GH computed identifier can be created.
-    ga4ghDigest:
-      keys:
+    ga4gh:
+      inherent:
         - type
     heritableProperties:
       type:
@@ -128,9 +128,9 @@ $defs:
 
   Allele:
     maturity: trial use
-    ga4ghDigest:
+    ga4gh:
       prefix: VA
-      keys:
+      inherent:
         - location
         - state
     inherits: MolecularVariation
@@ -158,9 +158,9 @@ $defs:
 
   CisPhasedBlock:
     maturity: trial use
-    ga4ghDigest:
+    ga4gh:
       prefix: CPB
-      keys:
+      inherent:
         - members
     inherits: MolecularVariation
     description: >-
@@ -198,8 +198,8 @@ $defs:
 
   CopyNumberCount:
     maturity: trial use
-    ga4ghDigest:
-      keys:
+    ga4gh:
+      inherent:
         - location
         - copies
       prefix: CN
@@ -231,8 +231,8 @@ $defs:
 
   CopyNumberChange:
     maturity: draft
-    ga4ghDigest:
-      keys:
+    ga4gh:
+      inherent:
         - location
         - copyChange
       prefix: CX
@@ -276,8 +276,8 @@ $defs:
 
   SequenceLocation:
     maturity: trial use
-    ga4ghDigest:
-      keys:
+    ga4gh:
+      inherent:
         - start
         - end
         - sequenceReference
@@ -321,8 +321,8 @@ $defs:
   SequenceReference:
     maturity: trial use
     inherits: gks-core:Entity
-    ga4ghDigest:
-      keys:
+    ga4gh:
+      inherent:
         - refgetAccession
         - type
     type: object
@@ -378,8 +378,8 @@ $defs:
   SequenceExpression:
     maturity: trial use
     inherits: gks-core:Entity
-    ga4ghDigest:
-      keys:
+    ga4gh:
+      inherent:
         - type
     description: >-
       An expression describing a :ref:`Sequence`.
@@ -400,8 +400,8 @@ $defs:
   ReferenceLengthExpression:
     maturity: trial use
     inherits: SequenceExpression
-    ga4ghDigest:
-      keys:
+    ga4gh:
+      inherent:
         - length
         - repeatSubunitLength
     description: >-
@@ -432,8 +432,8 @@ $defs:
   LengthExpression:
     maturity: draft
     inherits: SequenceExpression
-    ga4ghDigest:
-      keys:
+    ga4gh:
+      inherent:
         - length
     type: object
     description: A sequence expressed only by its length.
@@ -452,8 +452,8 @@ $defs:
   LiteralSequenceExpression:
     maturity: trial use
     inherits: SequenceExpression
-    ga4ghDigest:
-      keys:
+    ga4gh:
+      inherent:
         - sequence
     description: An explicit expression of a Sequence.
     type: object
@@ -513,9 +513,9 @@ $defs:
 
   Adjacency:
     maturity: trial use
-    ga4ghDigest:
+    ga4gh:
       prefix: AJ
-      keys:
+      inherent:
         - adjoinedSequences
         - linker
     inherits: MolecularVariation
@@ -557,9 +557,9 @@ $defs:
 
   Terminus:
     maturity: draft
-    ga4ghDigest:
+    ga4gh:
       prefix: TM
-      keys:
+      inherent:
         - location
     inherits: MolecularVariation
     description: >-
@@ -583,9 +583,9 @@ $defs:
 
   DerivativeMolecule:
     maturity: draft
-    ga4ghDigest:
+    ga4gh:
       prefix: DM
-      keys:
+      inherent:
         - components
     inherits: MolecularVariation
     description: >-
@@ -624,8 +624,8 @@ $defs:
     inherits: gks-core:Entity
     type: object
     # protectedClassOf: DerivativeMolecule
-    ga4ghDigest:
-      keys:
+    ga4gh:
+      inherent:
         - type
         - component
         - orientation
