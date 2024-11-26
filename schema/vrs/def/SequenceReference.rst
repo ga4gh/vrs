@@ -86,7 +86,7 @@ Some SequenceReference attributes are inherited from :ref:`gks-core:Entity`.
       - 
       - {'$ref': '#/$defs/sequenceString'}
       - 0..1
-      - A :ref:`SequenceString` that is a literal representation of the referenced sequence.
+      - A :ref:`sequenceString` that is a literal representation of the referenced sequence.
    *  - moleculeType
       - 
       - string

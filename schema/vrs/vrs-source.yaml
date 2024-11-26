@@ -354,7 +354,7 @@ $defs:
         type:
           $ref: "#/$defs/sequenceString"
         description: >-
-          A :ref:`SequenceString` that is a literal representation of the referenced sequence.
+          A :ref:`sequenceString` that is a literal representation of the referenced sequence.
       moleculeType:
         type: string
         description: >-
