@@ -352,14 +352,17 @@ $defs:
           - na
       sequence:
         type:
-          $ref: "#/$defs/SequenceString"
+          $ref: "#/$defs/sequenceString"
         description: >-
           A :ref:`SequenceString` that is a literal representation of the referenced sequence.
       moleculeType:
         type: string
+        description: >-
+          Molecule types as `defined by RefSeq <https://www.ncbi.nlm.nih.gov/books/NBK21091/>`_ (see Table 1).
         enum:
           - genomic
-          - transcript
+          - RNA
+          - mRNA
           - protein
       circular:
         type: boolean
