@@ -82,6 +82,16 @@ Some SequenceReference attributes are inherited from :ref:`gks-core:Entity`.
       - string
       - 0..1
       - The interpretation of the character codes referred to by the refget accession, where "aa" specifies an amino acid character set, and "na" specifies a nucleic acid character set.
+   *  - sequence
+      - 
+      - {'$ref': '#/$defs/sequenceString'}
+      - 0..1
+      - A :ref:`sequenceString` that is a literal representation of the referenced sequence.
+   *  - moleculeType
+      - 
+      - string
+      - 0..1
+      - Molecule types as `defined by RefSeq <https://www.ncbi.nlm.nih.gov/books/NBK21091/>`_ (see Table 1).
    *  - circular
       - 
       - boolean

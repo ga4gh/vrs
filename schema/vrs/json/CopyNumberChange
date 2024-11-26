@@ -12,7 +12,7 @@
       ],
       "prefix": "CX"
    },
-   "description": "An assessment of the copy number of a Location or a Gene within a system (e.g. genome, cell, etc.) relative to a baseline ploidy.",
+   "description": "An assessment of the copy number of a Location within a system (e.g. genome, cell, etc.) relative to a baseline ploidy.",
    "properties": {
       "id": {
          "type": "string",
@@ -56,6 +56,12 @@
             "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-11.1/json/Expression"
          }
       },
+      "type": {
+         "type": "string",
+         "const": "CopyNumberChange",
+         "default": "CopyNumberChange",
+         "description": "MUST be \"CopyNumberChange\""
+      },
       "location": {
          "oneOf": [
             {
@@ -65,13 +71,7 @@
                "$ref": "/ga4gh/schema/gks-core/1.0.0-snapshot.2024-11.1/json/iriReference"
             }
          ],
-         "description": "A location for which the number of systemic copies is described."
-      },
-      "type": {
-         "type": "string",
-         "const": "CopyNumberChange",
-         "default": "CopyNumberChange",
-         "description": "MUST be \"CopyNumberChange\""
+         "description": "The location of the subject of the copy change."
       },
       "copyChange": {
          "description": "MUST use a `primaryCode` representing one of \"EFO:0030069\" (complete genomic loss), \"EFO:0020073\" (high-level loss), \"EFO:0030068\" (low-level loss), \"EFO:0030067\" (loss), \"EFO:0030064\" (regional base ploidy), \"EFO:0030070\" (gain), \"EFO:0030071\" (low-level gain), \"EFO:0030072\" (high-level gain).",

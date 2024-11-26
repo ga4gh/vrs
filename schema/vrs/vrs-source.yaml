@@ -196,33 +196,17 @@ $defs:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # SystemicVariation
 
-  CopyNumber:
-    maturity: draft
+  CopyNumberCount:
+    maturity: trial use
     ga4ghDigest:
       keys:
         - location
-    inherits: SystemicVariation
-    description: >-
-      A measure of the copies of a :ref:`Location` within a system (e.g. genome, cell, etc.)
-    heritableProperties:
-      location:
-        oneOf:
-          - $refCurie: gks.core:iriReference
-          - $ref: "#/$defs/Location"
-        description: >-
-          A location for which the number of systemic copies is described.
-    heritableRequired: [ "location" ]
-
-  CopyNumberCount:
-    maturity: draft
-    ga4ghDigest:
-      keys:
         - copies
       prefix: CN
-    inherits: CopyNumber
+    inherits: SystemicVariation
     type: object
     description: >-
-      The absolute count of discrete copies of a :ref:`Location` or :ref:`Gene`,
+      The absolute count of discrete copies of a :ref:`Location`
       within a system (e.g. genome, cell, etc.).
     properties:
       type:
@@ -231,24 +215,31 @@ $defs:
         default: "CopyNumberCount"
         description: >-
           MUST be "CopyNumberCount"
+      location:
+        oneOf:
+          - $refCurie: gks.core:iriReference
+          - $ref: "#/$defs/Location"
+        description: >-
+          The location of the subject of the copy count.
       copies:
         oneOf:
           - type: integer
           - $ref: "#/$defs/Range"
         description: >-
           The integral number of copies of the subject in a system
-    required: [ "copies" ]
+    required: [ "location", "copies" ]
 
   CopyNumberChange:
     maturity: draft
     ga4ghDigest:
       keys:
+        - location
         - copyChange
       prefix: CX
-    inherits: CopyNumber
+    inherits: SystemicVariation
     type: object
     description: >-
-      An assessment of the copy number of a :ref:`Location` or a :ref:`Gene` within a system (e.g. genome, cell,
+      An assessment of the copy number of a :ref:`Location` within a system (e.g. genome, cell,
       etc.) relative to a baseline ploidy.
     properties:
       type:
@@ -257,13 +248,19 @@ $defs:
         default: "CopyNumberChange"
         description: >-
           MUST be "CopyNumberChange"
+      location:
+        oneOf:
+          - $refCurie: gks.core:iriReference
+          - $ref: "#/$defs/Location"
+        description: >-
+          The location of the subject of the copy change.
       copyChange:
         $refCurie: gks.core:MappableConcept
         description: >-
           MUST use a `primaryCode` representing one of "EFO:0030069" (complete genomic loss), "EFO:0020073" (high-level loss),
           "EFO:0030068" (low-level loss), "EFO:0030067" (loss), "EFO:0030064" (regional base ploidy),
           "EFO:0030070" (gain), "EFO:0030071" (low-level gain), "EFO:0030072" (high-level gain).
-    required: [ "copyChange" ]
+    required: [ "location", "copyChange" ]
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Locations
@@ -350,6 +347,20 @@ $defs:
         enum:
           - aa
           - na
+      sequence:
+        type:
+          $ref: "#/$defs/sequenceString"
+        description: >-
+          A :ref:`sequenceString` that is a literal representation of the referenced sequence.
+      moleculeType:
+        type: string
+        description: >-
+          Molecule types as `defined by RefSeq <https://www.ncbi.nlm.nih.gov/books/NBK21091/>`_ (see Table 1).
+        enum:
+          - genomic
+          - RNA
+          - mRNA
+          - protein
       circular:
         type: boolean
         description: >-

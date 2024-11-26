@@ -62,6 +62,22 @@
             "na"
          ]
       },
+      "sequence": {
+         "type": {
+            "$ref": "/ga4gh/schema/vrs/2.x/json/sequenceString"
+         },
+         "description": "A sequenceString that is a literal representation of the referenced sequence."
+      },
+      "moleculeType": {
+         "type": "string",
+         "description": "Molecule types as [defined by RefSeq](https://www.ncbi.nlm.nih.gov/books/NBK21091/) (see Table 1).",
+         "enum": [
+            "genomic",
+            "RNA",
+            "mRNA",
+            "protein"
+         ]
+      },
       "circular": {
          "type": "boolean",
          "description": "A boolean indicating whether the molecule represented by the sequence is circular (true) or linear (false)."

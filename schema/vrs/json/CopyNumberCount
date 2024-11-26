@@ -3,7 +3,7 @@
    "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-ballot.2024-11.1/json/CopyNumberCount",
    "title": "CopyNumberCount",
    "type": "object",
-   "maturity": "draft",
+   "maturity": "trial use",
    "ga4ghDigest": {
       "keys": [
          "copies",
@@ -12,7 +12,7 @@
       ],
       "prefix": "CN"
    },
-   "description": "The absolute count of discrete copies of a Location or Gene, within a system (e.g. genome, cell, etc.).",
+   "description": "The absolute count of discrete copies of a Location within a system (e.g. genome, cell, etc.).",
    "properties": {
       "id": {
          "type": "string",
@@ -56,6 +56,12 @@
             "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-11.1/json/Expression"
          }
       },
+      "type": {
+         "type": "string",
+         "const": "CopyNumberCount",
+         "default": "CopyNumberCount",
+         "description": "MUST be \"CopyNumberCount\""
+      },
       "location": {
          "oneOf": [
             {
@@ -65,13 +71,7 @@
                "$ref": "/ga4gh/schema/gks-core/1.0.0-snapshot.2024-11.1/json/iriReference"
             }
          ],
-         "description": "A location for which the number of systemic copies is described."
-      },
-      "type": {
-         "type": "string",
-         "const": "CopyNumberCount",
-         "default": "CopyNumberCount",
-         "description": "MUST be \"CopyNumberCount\""
+         "description": "The location of the subject of the copy count."
       },
       "copies": {
          "oneOf": [

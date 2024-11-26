@@ -4,7 +4,7 @@
 
 **Computational Definition**
 
-An assessment of the copy number of a :ref:`Location` or a :ref:`Gene` within a system (e.g. genome, cell, etc.) relative to a baseline ploidy.
+An assessment of the copy number of a :ref:`Location` within a system (e.g. genome, cell, etc.) relative to a baseline ploidy.
 
 **GA4GH Digest**
 
@@ -23,7 +23,7 @@ An assessment of the copy number of a :ref:`Location` or a :ref:`Gene` within a 
 
 **Information Model**
 
-Some CopyNumberChange attributes are inherited from :ref:`CopyNumber`.
+Some CopyNumberChange attributes are inherited from :ref:`Variation`.
 
 .. list-table::
    :class: clean-wrap
@@ -80,16 +80,16 @@ Some CopyNumberChange attributes are inherited from :ref:`CopyNumber`.
       - :ref:`Expression`
       - 0..m
       - 
-   *  - location
-      - 
-      - :ref:`iriReference` | :ref:`Location`
-      - 1..1
-      - A location for which the number of systemic copies is described.
    *  - type
       - 
       - string
       - 1..1
       - MUST be "CopyNumberChange"
+   *  - location
+      - 
+      - :ref:`iriReference` | :ref:`Location`
+      - 1..1
+      - The location of the subject of the copy change.
    *  - copyChange
       - 
       - :ref:`MappableConcept`

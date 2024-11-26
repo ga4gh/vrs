@@ -21,3 +21,15 @@ Definition and Information Model
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .. include::  ../../def/vrs/ReferenceLengthExpression.rst
+
+Example
+@@@@@@@
+
+.. code-block:: json
+
+    {
+        "type": "ReferenceLengthExpression",
+        "length": 11,
+        "repeatSubunitLength": 3,
+        "sequence": "CTCCTCCTCCT"
+    }
