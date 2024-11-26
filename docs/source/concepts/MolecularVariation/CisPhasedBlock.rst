@@ -24,3 +24,45 @@ Definition and Information Model
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .. include::  ../../def/vrs/CisPhasedBlock.rst
+
+Example
+@@@@@@@
+
+.. code-block:: json
+
+   {
+      "id": "ga4gh:CPB.YAWwnFF0e-T7fnuT4wRzZW4Lzg7jc-zQ",
+      "type": "CisPhasedBlock",
+      "members": [
+         {
+            "location": {
+               "start": 601,
+               "end": 602,
+               "type": "SequenceLocation"
+            },
+            "state": {
+               "sequence": "C",
+               "type": "LiteralSequenceExpression"
+            },
+            "type": "Allele"
+         },
+         {
+            "location": {
+               "start": 701,
+               "end": 702,
+               "type": "SequenceLocation"
+            },
+            "state": {
+               "sequence": "C",
+               "type": "LiteralSequenceExpression"
+            },
+            "type": "Allele"
+         }
+      ],
+      "sequenceReference": {
+         "type": "SequenceReference",
+         "refgetAccession": "SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU",
+         "residueAlphabet": "na",
+         "id": "NC_000001.10"
+      }
+   }

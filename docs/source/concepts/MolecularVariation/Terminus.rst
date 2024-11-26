@@ -14,3 +14,22 @@ Definition and Information Model
 ################################
 
 .. include::  ../../def/vrs/Terminus.rst
+
+Example
+#######
+
+.. code-block:: json
+
+   {
+      "id": "ga4gh:TM.8xpg7Q826fQJJ_6rImuqufhTXj0mh5gV",
+      "type": "Terminus"
+      "location": {
+         "end": 44908822,
+         "start": 44908821,
+         "sequenceReference": {
+            "refgetAccession": "SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul",
+            "type": "SequenceReference"
+         },
+         "type": "SequenceLocation"
+      }
+   }

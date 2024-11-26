@@ -12,6 +12,37 @@ Definition and Information Model
 
 .. include::  ../../def/vrs/Allele.rst
 
+Example
+@@@@@@@
+
+.. code-block:: json
+
+    {
+        "id": "ga4gh:VA.Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT",
+        "type": "Allele",
+        "expressions": [
+            {
+                "syntax": "spdi",
+                "value": "NC_000001.11:40819438:CTCCTCCT:CTCCTCCTCCT"
+            }
+        ],
+        "location": {
+            "type": "SequenceLocation",
+            "sequenceReference": {
+                "refgetAccession": "SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO",
+                "residueAlphabet": "na",
+                "id": "NC_000001.11"
+            },
+            "start": 40819438,
+            "end": 40819446
+        },
+        "state": {
+            "type": "ReferenceLengthExpression",
+            "length": 11,
+            "repeatSubunitLength": 3
+        }
+    }
+
 Implementation Guidance
 @@@@@@@@@@@@@@@@@@@@@@@
 
