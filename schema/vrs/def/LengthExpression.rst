@@ -15,7 +15,7 @@ A sequence expressed only by its length.
     :widths: auto
 
     *  - Prefix
-       - Keys
+       - Inherent
 
     *  - None
        - ['length', 'type']

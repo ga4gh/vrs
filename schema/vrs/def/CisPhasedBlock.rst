@@ -15,7 +15,7 @@ An ordered set of co-occurring :ref:`variants <Variation>` on the same molecule.
     :widths: auto
 
     *  - Prefix
-       - Keys
+       - Inherent
 
     *  - CPB
        - ['members', 'type']

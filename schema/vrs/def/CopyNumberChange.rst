@@ -15,7 +15,7 @@ An assessment of the copy number of a :ref:`Location` within a system (e.g. geno
     :widths: auto
 
     *  - Prefix
-       - Keys
+       - Inherent
 
     *  - CX
        - ['copyChange', 'location', 'type']

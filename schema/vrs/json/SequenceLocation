@@ -4,8 +4,8 @@
    "title": "SequenceLocation",
    "type": "object",
    "maturity": "trial use",
-   "ga4ghDigest": {
-      "keys": [
+   "ga4gh": {
+      "inherent": [
          "end",
          "sequenceReference",
          "start",

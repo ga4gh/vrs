@@ -4,8 +4,8 @@
    "title": "LengthExpression",
    "type": "object",
    "maturity": "draft",
-   "ga4ghDigest": {
-      "keys": [
+   "ga4gh": {
+      "inherent": [
          "length",
          "type"
       ]

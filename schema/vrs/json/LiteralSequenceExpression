@@ -4,8 +4,8 @@
    "title": "LiteralSequenceExpression",
    "type": "object",
    "maturity": "trial use",
-   "ga4ghDigest": {
-      "keys": [
+   "ga4gh": {
+      "inherent": [
          "sequence",
          "type"
       ]

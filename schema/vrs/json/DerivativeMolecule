@@ -4,9 +4,9 @@
    "title": "DerivativeMolecule",
    "type": "object",
    "maturity": "draft",
-   "ga4ghDigest": {
+   "ga4gh": {
       "prefix": "DM",
-      "keys": [
+      "inherent": [
          "components",
          "type"
       ]

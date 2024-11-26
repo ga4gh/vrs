@@ -15,7 +15,7 @@ A molecule derived from segments of multiple adjoined molecular sequences, typic
     :widths: auto
 
     *  - Prefix
-       - Keys
+       - Inherent
 
     *  - DM
        - ['components', 'type']

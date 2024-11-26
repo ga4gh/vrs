@@ -4,9 +4,9 @@
    "title": "CisPhasedBlock",
    "type": "object",
    "maturity": "trial use",
-   "ga4ghDigest": {
+   "ga4gh": {
       "prefix": "CPB",
-      "keys": [
+      "inherent": [
          "members",
          "type"
       ]

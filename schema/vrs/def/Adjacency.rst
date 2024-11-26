@@ -15,7 +15,7 @@ The `Adjacency` class represents the adjoining of the end of a sequence with the
     :widths: auto
 
     *  - Prefix
-       - Keys
+       - Inherent
 
     *  - AJ
        - ['adjoinedSequences', 'linker', 'type']

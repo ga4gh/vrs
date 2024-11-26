@@ -15,7 +15,7 @@ A sequence of nucleic or amino acid character codes.
     :widths: auto
 
     *  - Prefix
-       - Keys
+       - Inherent
 
     *  - None
        - ['refgetAccession', 'type']

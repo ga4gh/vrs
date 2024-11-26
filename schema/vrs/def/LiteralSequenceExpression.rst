@@ -15,7 +15,7 @@ An explicit expression of a Sequence.
     :widths: auto
 
     *  - Prefix
-       - Keys
+       - Inherent
 
     *  - None
        - ['sequence', 'type']

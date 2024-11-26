@@ -15,7 +15,7 @@ The absolute count of discrete copies of a :ref:`Location` within a system (e.g.
     :widths: auto
 
     *  - Prefix
-       - Keys
+       - Inherent
 
     *  - CN
        - ['copies', 'location', 'type']
