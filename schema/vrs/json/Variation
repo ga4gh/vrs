@@ -3,6 +3,7 @@
    "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/Variation",
    "title": "Variation",
    "type": "object",
+   "maturity": "trial use",
    "description": "A representation of the state of one or more biomolecules.",
    "oneOf": [
       {

@@ -1,4 +1,3 @@
-[submodule "schema/gks-common"]
-	path = submodules/gks-common
-	url = https://github.com/ga4gh/gks-common.git
-	branch = 1.x
+[submodule "submodules/gks-core"]
+	path = submodules/gks-core
+	url = https://github.com/ga4gh/gks-core.git

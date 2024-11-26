@@ -69,19 +69,19 @@ Range
 
 .. include:: ../../def/vrs/Range.rst
 
-.. _Residue:
+.. _residue:
 
-Residue
+residue
 #######
 
-.. include:: ../../def/vrs/Residue.rst
+.. include:: ../../def/vrs/residue.rst
 
-.. _SequenceString:
+.. _sequenceString:
 
-SequenceString
+sequenceString
 ##############
 
-.. include:: ../../def/vrs/SequenceString.rst
+.. include:: ../../def/vrs/sequenceString.rst
 
 Imported Classes
 @@@@@@@@@@@@@@@@
@@ -93,7 +93,8 @@ Work Stream as common data classes.
    :titlesonly:
 
    Entity
+   Element
    Extension
-   IRI
    Coding
-   Code
+   code
+   iriReference

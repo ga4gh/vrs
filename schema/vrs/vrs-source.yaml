@@ -1,7 +1,7 @@
 # VRS uses yaml as the source document for json schema
 #
 # To convert vrs.yaml to vrs.json:
-#   make vrs.json
+#   make vrs.jsontype
 # You'll probably have to `pip install pyyaml` first.
 #
 # To watch for changes and update automatically:
@@ -15,7 +15,10 @@ type: object
 strict: true
 
 imports:
-  gks.core-im: ../core-im/core-im-source.yaml
+  gks-core: ../gks-core/gks-core-source.yaml
+
+namespaces:
+  gks.core: /ga4gh/schema/gks-core/1.x/json/
 
 $defs:
   # VRS definitions are presented top-down.  Everything rolls up to
@@ -28,7 +31,7 @@ $defs:
 
   Ga4ghIdentifiableObject:
     maturity: trial use
-    inherits: gks.core-im:Entity
+    inherits: gks-core:Entity
     description: >-
       An object for which a GA4GH computed identifier can be created.
     ga4ghDigest:
@@ -60,6 +63,7 @@ $defs:
       propertyName: type
 
   Expression:
+    inherits: gks-core:Element
     type: object
     maturity: trial use
     # protectedClassOf: Variation
@@ -90,6 +94,7 @@ $defs:
 
   MolecularVariation:
     inherits: Variation
+    maturity: trial use
     description: >-
       A :ref:`variation` on a contiguous molecule.
     oneOf:
@@ -103,6 +108,7 @@ $defs:
 
   SystemicVariation:
     inherits: Variation
+    maturity: trial use
     description: >-
       A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
@@ -140,7 +146,7 @@ $defs:
           MUST be "Allele"
       location:
         oneOf:
-          - $ref: "/ga4gh/schema/gks-common/1.x/core-im/json/IRI"
+          - $refCurie: gks.core:iriReference
           - $ref: "#/$defs/Location"
         description: >-
           The location of the Allele
@@ -175,7 +181,7 @@ $defs:
         items:
           oneOf:
             - $ref: "#/$defs/Allele"
-            - $ref: "/ga4gh/schema/gks-common/1.x/core-im/json/IRI" 
+            - $refCurie: gks.core:iriReference
         description: >-
           A list of :ref:`Alleles <Allele>` that are found in-cis on a shared molecule.
       sequenceReference:
@@ -201,7 +207,7 @@ $defs:
     heritableProperties:
       location:
         oneOf:
-          - $ref: "/ga4gh/schema/gks-common/1.x/core-im/json/IRI"
+          - $refCurie: gks.core:iriReference
           - $ref: "#/$defs/Location"
         description: >-
           A location for which the number of systemic copies is described.
@@ -252,9 +258,9 @@ $defs:
         description: >-
           MUST be "CopyNumberChange"
       copyChange:
-        $ref: "/ga4gh/schema/gks-common/1.x/core-im/json/Coding"
+        $refCurie: gks.core:MappableConcept
         description: >-
-          MUST be a :ref:`Coding` representing one of "EFO:0030069" (complete genomic loss), "EFO:0020073" (high-level loss),
+          MUST use a `primaryCode` representing one of "EFO:0030069" (complete genomic loss), "EFO:0020073" (high-level loss),
           "EFO:0030068" (low-level loss), "EFO:0030067" (loss), "EFO:0030064" (regional base ploidy),
           "EFO:0030070" (gain), "EFO:0030071" (low-level gain), "EFO:0030072" (high-level gain).
     required: [ "copyChange" ]
@@ -264,6 +270,7 @@ $defs:
 
   Location:
     inherits: Ga4ghIdentifiableObject
+    maturity: trial use
     description: >-
       A contiguous segment of a biological sequence.
     $ref: "#/$defs/SequenceLocation"
@@ -290,7 +297,7 @@ $defs:
         description: MUST be "SequenceLocation"
       sequenceReference:
         oneOf:
-          - $ref: "/ga4gh/schema/gks-common/1.x/core-im/json/IRI"
+          - $refCurie: gks.core:iriReference
           - $ref: "#/$defs/SequenceReference"
         description: A reference to a :ref:`Sequence` on which the location is defined.
       start:
@@ -312,11 +319,11 @@ $defs:
       sequence:
         description: >-
           The literal sequence encoded by the `sequenceReference` at these coordinates.
-        $ref: "#/$defs/SequenceString"
+        $ref: "#/$defs/sequenceString"
 
   SequenceReference:
     maturity: trial use
-    inherits: gks.core-im:Entity
+    inherits: gks-core:Entity
     ga4ghDigest:
       keys:
         - refgetAccession
@@ -370,7 +377,7 @@ $defs:
 
   SequenceExpression:
     maturity: trial use
-    inherits: gks.core-im:Entity
+    inherits: gks-core:Entity
     ga4ghDigest:
       keys:
         - type
@@ -413,7 +420,7 @@ $defs:
           - $ref: "#/$defs/Range"
         description: The number of residues in the expressed sequence.
       sequence:
-        $ref: "#/$defs/SequenceString"
+        $ref: "#/$defs/sequenceString"
         description: the literal :ref:`Sequence` encoded by the Reference Length Expression.
       repeatSubunitLength:
         type: integer
@@ -457,7 +464,7 @@ $defs:
         default: "LiteralSequenceExpression"
         description: MUST be "LiteralSequenceExpression"
       sequence:
-        $ref: "#/$defs/SequenceString"
+        $ref: "#/$defs/sequenceString"
         description: the literal sequence
     required:
       - sequence
@@ -477,7 +484,7 @@ $defs:
     maxItems: 2
     minItems: 2
 
-  Residue:
+  residue:
     maturity: trial use
     description: >-
       A character representing a specific residue (i.e., molecular species)
@@ -487,10 +494,10 @@ $defs:
     type: string
     pattern: '[A-Z*\-]'
 
-  SequenceString:
+  sequenceString:
     maturity: trial use
     description: >-
-      A character string of :ref:`Residues <Residue>` that represents a biological
+      A character string of :ref:`residues <residue>` that represents a biological
       sequence using the conventional sequence order (5’-to-3’ for
       nucleic acid sequences, and amino-to-carboxyl for amino acid
       sequences). IUPAC ambiguity codes are permitted in Sequence Strings.
@@ -529,7 +536,7 @@ $defs:
         ordered: true
         items:
           oneOf:
-          - $ref: "/ga4gh/schema/gks-common/1.x/core-im/json/IRI"
+          - $refCurie: gks.core:iriReference
           - $ref: "#/$defs/Location"
           not:
             required: ["start", "end"]
@@ -568,7 +575,7 @@ $defs:
         description: MUST be "Terminus".
       location:
         oneOf:
-          - $ref: "/ga4gh/schema/gks-common/1.x/core-im/json/IRI"
+          - $refCurie: gks.core:iriReference
           - $ref: "#/$defs/Location"
         description: The location of the terminus.
     required:
@@ -597,7 +604,7 @@ $defs:
         ordered: true
         items:
           oneOf:
-          - $ref: "/ga4gh/schema/gks-common/1.x/core-im/json/IRI"
+          - $refCurie: gks.core:iriReference
           - $ref: "#/$defs/Allele"
           - $ref: "#/$defs/CisPhasedBlock"
           - $ref: "#/$defs/Terminus"
@@ -614,7 +621,7 @@ $defs:
 
   TraversalBlock:
     maturity: draft
-    inherits: gks.core-im:Entity
+    inherits: gks-core:Entity
     type: object
     # protectedClassOf: DerivativeMolecule
     ga4ghDigest:

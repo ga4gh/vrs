@@ -43,8 +43,13 @@ adoption by the community.
     model, enabling adopters to engage at a time that is appropriate for their 
     organizational needs.*
 
+.. _feature-maturity-levels:
+
 Feature Maturity levels
 @@@@@@@@@@@@@@@@@@@@@@@
+
+It may be helpful to visualize the application of maturity levels by viewing the 
+current :ref:`classDiagram`.
 
 .. figure:: ../images/maturity_levels.png
     :width: 800
