@@ -348,8 +348,7 @@ $defs:
           - aa
           - na
       sequence:
-        type:
-          $ref: "#/$defs/sequenceString"
+        $ref: "#/$defs/sequenceString"
         description: >-
           A :ref:`sequenceString` that is a literal representation of the referenced sequence.
       moleculeType:
