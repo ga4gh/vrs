@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-ballot.2024-11.1/json/SequenceReference",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-ballot.2024-11.2/json/SequenceReference",
    "title": "SequenceReference",
    "type": "object",
    "maturity": "trial use",
@@ -63,7 +63,7 @@
          ]
       },
       "sequence": {
-         "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-11.1/json/sequenceString",
+         "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-11.2/json/sequenceString",
          "description": "A sequenceString that is a literal representation of the referenced sequence."
       },
       "moleculeType": {
