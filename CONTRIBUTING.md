@@ -12,7 +12,7 @@ requests, release candidate discussions, and questions.
 ## Issues
 [Issues](https://github.com/ga4gh/vrs/issues) are for bug
 reports, and planned feature descriptions. When creating an issue, use 
-sentence casefor the issue title and avoid the use of periods at the end 
+sentence case for the issue title and avoid the use of periods at the end
 of titles.
 
 ## Branches
