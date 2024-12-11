@@ -5,14 +5,14 @@ Resource Identifiers
 
 .. admonition:: New in v2
 
-    In VRS v1, references to VRS objects by :ref:`GA4GH Identifiers<ga4gh-identifiers>` 
+    In VRS v1, references to VRS objects by GA4GH :ref:`computed-identifiers` 
     were allowed in some data classes. In VRS v2, such references have been expanded to 
     include any :ref:`iriReference`, and consequently VRS now also supports references to 
-    objects from classes that do not have GA4GH Identifiers.
+    objects from classes that do not have GA4GH Computed Identifiers.
 
 Some VRS data classes, such as the :ref:`Allele`, may reference other classes by an
 :ref:`iriReference`. This enables data producers to reference other objects following
-the `rfc3987`_ standard. :ref:`GA4GH Identifiers<ga4gh-identifiers>` may serve as IRI
+the `rfc3987`_ standard. GA4GH :ref:`computed-identifiers` may serve as IRI
 references in VRS.
 
 .. _rfc3987: https://datatracker.ietf.org/doc/html/rfc3987
