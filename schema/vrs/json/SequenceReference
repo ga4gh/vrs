@@ -68,7 +68,7 @@
       },
       "moleculeType": {
          "type": "string",
-         "description": "Molecule types as [defined by RefSeq](https://www.ncbi.nlm.nih.gov/books/NBK21091/) (see Table 1).",
+         "description": "Molecule types as [defined by RefSeq](https://www.ncbi.nlm.nih.gov/books/NBK21091/) (see Table 1). MUST be one of \"genomic\", \"RNA\", \"mRNA\", or \"protein\".",
          "enum": [
             "genomic",
             "RNA",

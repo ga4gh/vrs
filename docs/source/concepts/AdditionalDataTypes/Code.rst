@@ -1,6 +1,6 @@
 .. _code:
 
-code
+Code
 !!!!
 
 .. include::  ../../def/gks-core/code.rst
