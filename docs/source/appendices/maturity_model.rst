@@ -124,6 +124,80 @@ and GA4GH processes.
 .. _landscape analysis of the problem domain: https://www.ga4gh.org/our-products/development-and-approval-process/#section_4
 .. _GA4GH Product Development 14.8.3: https://www.ga4gh.org/our-products/development-and-approval-process/#section_5:~:text=14.8.3%20implementations
 
+.. _versioning:
+
+Product Versioning and Releases
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Versions are used to identify releases of the entire specification, not to individual product features. 
+Technical specification development is intrinsically linked to policy surrounding major and minor version 
+identification, which follow [semantic versioning v2](https://semver.org) practices for API versioning.
+
+Versioning examples
+###################
+
+Version syntax follows SemVer syntax. Examples of how product features at different maturity levels are 
+applied to the SemVer major/minor/patch syntax as follows:
+
+Major Version Increment
+$$$$$$$$$$$$$$$$$$$$$$$
+
+- Backwards-incompatible changes to a normative product feature
+- Backwards-incompatible changes to property names of a previously-released normative data class
+- Backwards-incompatible changes to the definition of a previously-released normative data class
+- Backwards-incompatible changes to the digests of previously-released normative data class (as applicable)
+- Addition of required fields to previously-released normative data class
+
+Minor Version Increment
+$$$$$$$$$$$$$$$$$$$$$$$
+
+- Backwards-incompatible changes to a trial use product feature
+- Addition of optional fields to data models
+- Release of a new product feature at the trial use or normative level
+- Backwards-incompatible changes to property names of a previously-released trial use data class
+- Backwards-incompatible changes to the definition of a previously-released trial use data class
+- Backwards-incompatible changes to the digests of previously-released trial use data class (as applicable)
+- Addition of required fields to previously-released trial use data class
+
+Patch Version Increment
+$$$$$$$$$$$$$$$$$$$$$$$
+
+- A new product feature at the draft maturity level
+- Any changes made to draft product features
+- Addition of implementation guidance, tests, or other supporting product features that do not directly
+  affect data compatibility
+
+Versioning of approved GA4GH standards additionally follow the procedures for [GA4GH Product Updates](https://www.ga4gh.org/our-products/development-and-approval-process/#section_7). 
+Specifically, advancement of data classes to the trial use or normative levels must be accompanied by a 
+minor release increment, and therefore may only be included in a release following an appropriate community 
+and PRC consultation process ([GA4GH Product Development 32](https://www.ga4gh.org/our-products/development-and-approval-process/#section_7:~:text=32.%20Public%20comment,reduced%20or%20omitted.)).
+
+Releases
+########
+In order to support continuous development of a technical specification, pre-release snapshots are 
+allowed and must use the SemVer syntax for pre-releases. Pre-release snapshots may be created for 
+purpose at any time by the product leads. Pre-release snapshots should use the following pre-release 
+labels as version suffixes for the indicated purposes: 
+
+- connect.<YYYY>-<MM>[.<N>]
+  - for pre-releases to be evaluated at an upcoming GA4GH Connect meeting
+  - date corresponds to the month when the start of GA4GH Connect occurs
+  - expected 2x/yr
+  - .<N> extension may be used, as needed, for clarifying updates
+- ballot.<YYYY>-<MM>[.<N>]
+  - for community evaluation and review ahead of a minor or major version release
+  - used for implementer review, product review committee, and steering committee ballots
+  - N increments for successive rounds of review
+- snapshot.<YYYY>-<MM>[.<N>]
+  - for use as needed for all other purposes
+  - N increments for successive snapshots
+
+These pre-release labels are appended to the major, minor, and patch components to create 
+a pre-release version following the SemVer <MAJOR>.<MINOR>.<PATCH>-<LABEL> syntax. For example, 
+a pre-release of VRS 2.0 for discussion at Spring 2024 Connect would have a version identifier 
+like 2.0.0-connect.2024-04. Releases and pre-releases should use GitHub Releases for release 
+packaging and tracking (see [VRS releases](https://github.com/ga4gh/vrs/releases)). 
+
 Decision-maker roles
 @@@@@@@@@@@@@@@@@@@@
 
