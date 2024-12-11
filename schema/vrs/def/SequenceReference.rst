@@ -91,7 +91,7 @@ Some SequenceReference attributes are inherited from :ref:`gks-core:Entity`.
       - 
       - string
       - 0..1
-      - Molecule types as `defined by RefSeq <https://www.ncbi.nlm.nih.gov/books/NBK21091/>`_ (see Table 1).
+      - Molecule types as `defined by RefSeq <https://www.ncbi.nlm.nih.gov/books/NBK21091/>`_ (see Table 1). MUST be one of "genomic", "RNA", "mRNA", or "protein".
    *  - circular
       - 
       - boolean
