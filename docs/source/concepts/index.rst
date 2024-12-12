@@ -1,8 +1,8 @@
 Concepts
 !!!!!!!!
 
-VRS is a collection of data models or concepts that are used together to represent molecular 
-and systemic variation. An inhertiance view is available in the :ref:`ClassDiagram` appendix.
+VRS is a collection of data models or concepts that are used together to represent molecular
+and systemic variation. An inheritance view is available in the :ref:`ClassDiagram` appendix.
 These models exist across several related domains:
 
 - :ref:`MolecularVariation`: models that describe variation on a contiguous molecule
