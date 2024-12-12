@@ -95,6 +95,4 @@ Work Stream as common data classes.
    Entity
    Element
    Extension
-   Coding
-   code
    iriReference
