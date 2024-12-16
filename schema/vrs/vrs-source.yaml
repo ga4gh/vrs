@@ -304,7 +304,9 @@ $defs:
         description: >-
           The start coordinate or range of the SequenceLocation.
           The minimum value of this coordinate or range is 0.
-          MUST represent a coordinate or range less than or equal to the value of `end`.
+          For locations on linear sequences, this MUST represent a coordinate or range 
+          less than or equal to the value of `end`. For circular sequences, `start` is
+          greater than `end` when the location spans the sequence 0 coordinate.
       end:
         oneOf:
           - type: integer
@@ -312,7 +314,9 @@ $defs:
         description: >-
           The end coordinate or range of the SequenceLocation.
           The minimum value of this coordinate or range is 0.
-          MUST represent a coordinate or range greater than or equal to the value of `start`.
+          For locations on linear sequences, this MUST represent a coordinate or range 
+          grater than or equal to the value of `start`. For circular sequences, `end` is
+          less than `start` when the location spans the sequence 0 coordinate.
       sequence:
         description: >-
           The literal sequence encoded by the `sequenceReference` at these coordinates.
