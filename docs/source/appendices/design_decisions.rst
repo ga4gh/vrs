@@ -53,13 +53,42 @@ and can be easily converted to absolute IRIs when needed.
 VRS identifier syntax and versioning
 ------------------------------------
 
-The VRS identifier syntax is comprised of the following components:
+The :ref: `versioning` section describes the versioning and release naming conventions for the VRS product.
+Approved releases will be assigned to the version number alone, but connect, ballot and snapshot releases will
+include the context term and date in addition to the target version number. 
 
+During the GA4GH Connect April 2023 meeting the maturity model was discussed at length and the following
+proposal was presented for naming release version in the VRS identifier.
 
+.. image:: ../_static/vrs_identifier_syntax.png
+   :alt: VRS Identifier Syntax
+   :align: center
 
-There has been much discussion over the idea of including a version number in the VRS identifier.
+As an example, the Github JSON Schema URL ($id) for the VRS 2.0.0 Allele is:
 
+.. code-block:: json
 
+  {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0/json/Allele",
+    ...
+  }
 
+During the "release and versioning" discussion at the GA4GH Connect April 2023 meeting the proposal
+delved into the idea of including the major version number in the VRS identifier itself. Concern for the
+change in digests (and their derived identifiers) between major versions of the same VRS object will
+be clearly visible in the identifier itself if the major version is included in the identifier.
 
+The trade-off is that new identifiers would be required for every type of VRS object for every major
+version release. Meaning that even if a given type of object has no change that would result in a new
+digest, a new identifier would still be required for the new major version.
+
+After much discussion, the decision was made to not include the major version number in the VRS identifier
+itself. Therefore, the :ref: `identifier-construction` does NOT contain the version number as follows:
+
+CURIE namespace resolution
+  ga4gh:VA.Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT
+
+URI Syntax
+  https://w3id.org/ga4gh/vrs/VA.Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT
 
