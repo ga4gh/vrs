@@ -93,7 +93,7 @@ CisPhasedBlocks and the Inferred SequenceReference
 ##################################################
 
 When a :ref:`SequenceReference` is provided in a :ref:`CisPhasedBlock`, it is defined that all member
-:ref:`Allele` objects occur on that sequence. Consequently, `SequenceLocation` objects of those `Alleles`
-do not need to populate the `SequenceReference` property. There may be other contexts where this optional
-property may be omitted, but when this is done there SHOULD be a means of inferring the content of this
-property (as is explicitly described in `CisPhasedBlock`).
+:ref:`Allele` objects occur on that sequence. Consequently, the `SequenceLocation` object for each 
+:ref:`Allele` does not need to populate the `sequenceReference` property. There may be other contexts 
+where this optional property may be omitted, but when this is done there SHOULD be a means of inferring 
+the content of this property (as is explicitly described in :ref:`CisPhasedBlock`).
