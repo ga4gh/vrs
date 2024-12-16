@@ -64,16 +64,18 @@ As an example, the Github JSON Schema URL ($id) for the VRS 2.0.0 Allele is:
   }
 
 During the **release and versioning** discussion at the GA4GH Connect April 2023 meeting the proposal
-delved into the idea of including the major version number in the VRS identifier itself. Concern for the
-change in digests (and their derived identifiers) between major versions of the same VRS object will
-be clearly visible in the identifier itself if the major version is included in the identifier.
+delved into the idea of including the major version number in the VRS identifier itself. Proponents of 
+this approach cited concern for the change in digests (and their derived identifiers) between major 
+versions of the same VRS object, which would become clearly visible in the identifier itself if the 
+major version was included.
 
-The trade-off is that new identifiers would be required for every type of VRS object for every major
-version release. Meaning that even if a given type of object has no change that would result in a new
-digest, a new identifier would still be required for the new major version.
+Opponents of this approach argued that new identifiers would be required for every type of VRS object 
+for every major version release. Meaning that even if a given type of object has no change that would 
+result in a new digest, a new identifier would still be required for the new major version.
 
-After much discussion, the decision was made to not include the major version number in the VRS identifier
-itself. Therefore, the :ref:`identifier-construction` does NOT contain the version number as follows:
+After much discussion, the decision was made to NOT include the major version number in the VRS identifier
+itself. Therefore, the :ref:`identifier-construction` does NOT contain the version number, resulting in
+the following syntax:
 
 **CURIE namespace resolution**
 
