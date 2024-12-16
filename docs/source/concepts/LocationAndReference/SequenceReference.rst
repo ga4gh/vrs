@@ -16,12 +16,12 @@ such as the alphabet used (nucleic acid or amino acid), if the sequence represen
 and labels used to describe the sequence.
 
 Definition and Information Model
-################################
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .. include::  ../../def/vrs/SequenceReference.rst
 
 Example
-#######
+@@@@@@@
 
 .. code-block:: json
 
@@ -29,4 +29,4 @@ Example
       "type": "SequenceReference",
       "refgetAccession": "SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul",
       "label": "NC_000007.14"
-    }    
+    }
