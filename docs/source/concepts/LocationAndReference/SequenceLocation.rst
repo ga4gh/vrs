@@ -57,8 +57,8 @@ In some variant representation formats (e.g. HGVS, VCF) sequence variants are de
 (ref) and "alternate" (alt) alleles. When representing an Allele with VRS v2, it is also possible to describe the
 ref sequence (derived from the :ref:`SequenceReference` at the location) using the *sequence* property.
 
-The ``sequence`` property is **for describing the sequence derived from the SequenceLocation**, and not a substitute 
-for the ``sequenceReference`` property that references the sequence on which the location is defined.
+The ``sequence`` property is **for describing the sequence derived from the SequenceLocation**, and is not a 
+substitute for the ``sequenceReference`` property that references the sequence on which the location is defined.
 
 .. admonition:: New in v2
 
