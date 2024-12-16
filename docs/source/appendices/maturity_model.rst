@@ -131,7 +131,7 @@ Product Versioning and Releases
 
 Versions are used to identify releases of the entire specification, not to individual product features. 
 Technical specification development is intrinsically linked to policy surrounding major and minor version 
-identification, which follow [semantic versioning v2](https://semver.org) practices for API versioning.
+identification, which follow `semantic versioning v2 <https://semver.org>`__ practices for API versioning.
 
 Versioning examples
 ###################
@@ -167,10 +167,10 @@ $$$$$$$$$$$$$$$$$$$$$$$
 - Addition of implementation guidance, tests, or other supporting product features that do not directly
   affect data compatibility
 
-Versioning of approved GA4GH standards additionally follow the procedures for [GA4GH Product Updates](https://www.ga4gh.org/our-products/development-and-approval-process/#section_7). 
+Versioning of approved GA4GH standards additionally follow the procedures for `GA4GH Product Updates <https://www.ga4gh.org/our-products/development-and-approval-process/#section_7>`__. 
 Specifically, advancement of data classes to the trial use or normative levels must be accompanied by a 
 minor release increment, and therefore may only be included in a release following an appropriate community 
-and PRC consultation process ([GA4GH Product Development 32](https://www.ga4gh.org/our-products/development-and-approval-process/#section_7:~:text=32.%20Public%20comment,reduced%20or%20omitted.)).
+and PRC consultation process (`GA4GH Product Development 32 <https://www.ga4gh.org/our-products/development-and-approval-process/#section_7:~:text=32.%20Public%20comment,reduced%20or%20omitted.>`__).
 
 Releases
 ########
@@ -196,7 +196,7 @@ These pre-release labels are appended to the major, minor, and patch components 
 a pre-release version following the SemVer <MAJOR>.<MINOR>.<PATCH>-<LABEL> syntax. For example, 
 a pre-release of VRS 2.0 for discussion at Spring 2024 Connect would have a version identifier 
 like 2.0.0-connect.2024-04. Releases and pre-releases should use GitHub Releases for release 
-packaging and tracking (see [VRS releases](https://github.com/ga4gh/vrs/releases)). 
+packaging and tracking (see `VRS releases <https://github.com/ga4gh/vrs/releases>`__). 
 
 Decision-maker roles
 @@@@@@@@@@@@@@@@@@@@

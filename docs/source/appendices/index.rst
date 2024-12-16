@@ -9,4 +9,5 @@ Appendices
    ga4gh_identifiers
    resource_identifiers
    truncated_digest_collision_analysis
+   design_decisions
    glossary
