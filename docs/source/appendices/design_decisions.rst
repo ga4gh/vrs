@@ -5,21 +5,22 @@ Design Decisions
 
 The following design decisions were made in the development of the VRS:
 
-GA4GH Digest 'ga4gh.inherit' over value objects
------------------------------------------------
+GA4GH Inherent Properties over Value Objects
+--------------------------------------------
 
 In VRS 1.0 we operated under the principle that all identifiable objects in VRS (e.g. Allele, SequenceLocation, etc.)
-would be *true* value objects. This meant that they should be immutable and contain only required fields that are 
+would be *value objects*. This meant that they should be immutable and contain only required fields that are 
 necessary to uniquely identify the object. This approach somewhat simplified the ability to genertate the digests by
-allowing the computation of the digest to be based on the entire object.
+allowing the computation of the digest to be based on the entire object. An exception was made for properties with a
+leading underscore (namely, the *_id* property), which was removed from the object before a digest was calculated.
 
-In VRS 2.0 we deviated from this principle by allowing optional attributes to be added to VRS identifiable objects.
-This was done to allow for the VRS to be more flexible, easing implementers requirements to pass useful attributes
-as part of the identifiable objects without additional complexity.
+In VRS 2.0 we extended the principle of excepting designated attributes by explicitly defining *inherent properties*
+that constitute the properties used to compute an object digest. This was done to enable expressivity of VRS, 
+enabling implementations to pass common, descriptive metadata as part of the identifiable objects without sacrificing 
+the ability to create globally unique, federated identifiers from VRS 1.3.
 
-As a result, we had to introduce a new field in the digest model called *ga4gh.inherit* which is described in detail
-in the section on :ref:`ga4gh-inherent-properties`
-
+As a result, we had to introduce a new field in the digest model called *ga4gh.inherent* which is described in detail
+in the section on :ref:`ga4gh-inherent-properties`.
 
 IRIs over CURIEs
 ----------------
