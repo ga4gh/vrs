@@ -25,31 +25,19 @@ in the section on :ref:`ga4gh-inherent-properties`.
 IRIs over CURIEs
 ----------------
 
-In VRS 2.0 we moved away from the use of CURIEs in favor of |iris| or more specifically IRI-References. Several
-factors played a role in this decision.
+In VRS 2.0 we moved away from the use of CURIEs in favor of :ref:`iriReference`. Several factors played a role in 
+this decision.
 
-The main decision to move away from CURIEs occurred as a result of reviwing the approach the FHIR standard 
-has taken in their *CodeableConcept* datatype. The *Coding.system* attribute uses a URI instead of namespaces. 
-
-Using URIs instead of Namespaces when sharing data between organizations offers global uniqueness, explicitness,
-and interoperability. URIs avoid the ambiguity and context dependency of namespaces, align with modern web
-standards, and ensure seamless integration across heterogeneous and distributed systems. These advantages make
-URIs the superior choice for robust, scalable, and interoperable communication.
-
-Choosing to use IRIs over URIs was made because IRIs provide a more inclusive, flexible, and user-friendly
-approach to data sharing than URIs, particularly in internationalized or multilingual contexts. By supporting
-Unicode characters, IRIs reduce complexity, enhance readability, and align with modern web standards, making
-them the preferred choice for global data exchange.
-
-
+JSON Schema, the default data model for GKS specifications, does not allow for encoding of CURIE namespaces as is done 
+in other frameworks such as JSON-LD or XML. As a result, namespaces must be captured from custom data structures, API 
+endpoints, or documentation that may not persist as messages are exchanged between systems. To address this, references
+in GKS specs now use IRIs to reference objects explicitly. 
 
 IRI-References over IRIs
 ------------------------
 We opted for the general use of IRI-References as a way to provide a more flexible approach to the use of IRIs
-in the VRS and GKS messages. IRI-references (relative IRIs) benefit the users be allowing efficient, localized
-references within a document or local document system. IRI-References do not prohibit the use of absolute IRIs
-and can be easily converted to absolute IRIs when needed. 
-
+in most GKS message structures. IRI-references (relative IRIs) benefit the users allow for compact representation
+of concepts that are accessible within a system (e.g. a directory structure or web API).
 
 VRS identifier syntax and versioning
 ------------------------------------
