@@ -18,7 +18,7 @@ This was done to allow for the VRS to be more flexible, easing implementers requ
 as part of the identifiable objects without additional complexity.
 
 As a result, we had to introduce a new field in the digest model called *ga4gh.inherit* which is described in detail
-in the section on :ref: `ga4gh-inherent-properties``
+in the section on :ref:`ga4gh-inherent-properties`
 
 
 IRIs over CURIEs
@@ -28,7 +28,7 @@ In VRS 2.0 we moved away from the use of CURIEs in favor of |iris| or more speci
 factors played a role in this decision.
 
 The main decision to move away from CURIEs occurred as a result of reviwing the approach the FHIR standard 
-has taken in their *CodebaleConcept* datatype. The *Coding.system* attribute uses a URI instead of namespaces. 
+has taken in their *CodeableConcept* datatype. The *Coding.system* attribute uses a URI instead of namespaces. 
 
 Using URIs instead of Namespaces when sharing data between organizations offers global uniqueness, explicitness,
 and interoperability. URIs avoid the ambiguity and context dependency of namespaces, align with modern web
@@ -53,15 +53,15 @@ and can be easily converted to absolute IRIs when needed.
 VRS identifier syntax and versioning
 ------------------------------------
 
-The :ref: `versioning` section describes the versioning and release naming conventions for the VRS product.
+The :ref:`versioning` section describes the versioning and release naming conventions for the VRS product.
 Approved releases will be assigned to the version number alone, but connect, ballot and snapshot releases will
 include the context term and date in addition to the target version number. 
 
 During the GA4GH Connect April 2023 meeting the maturity model was discussed at length and the following
-proposal was presented for naming release version in the VRS identifier.
+proposal was presented for instance and class GKS identifiers.
 
-.. image:: ../_static/vrs_identifier_syntax.png
-   :alt: VRS Identifier Syntax
+.. image:: ../images/2023-connect-gks-identifier-proposal.png
+   :alt: GKS Identifiers Proposal from 2023 April Connect Session
    :align: center
 
 As an example, the Github JSON Schema URL ($id) for the VRS 2.0.0 Allele is:
@@ -74,7 +74,7 @@ As an example, the Github JSON Schema URL ($id) for the VRS 2.0.0 Allele is:
     ...
   }
 
-During the "release and versioning" discussion at the GA4GH Connect April 2023 meeting the proposal
+During the **release and versioning** discussion at the GA4GH Connect April 2023 meeting the proposal
 delved into the idea of including the major version number in the VRS identifier itself. Concern for the
 change in digests (and their derived identifiers) between major versions of the same VRS object will
 be clearly visible in the identifier itself if the major version is included in the identifier.
@@ -84,11 +84,17 @@ version release. Meaning that even if a given type of object has no change that 
 digest, a new identifier would still be required for the new major version.
 
 After much discussion, the decision was made to not include the major version number in the VRS identifier
-itself. Therefore, the :ref: `identifier-construction` does NOT contain the version number as follows:
+itself. Therefore, the :ref:`identifier-construction` does NOT contain the version number as follows:
 
-CURIE namespace resolution
+**CURIE namespace resolution**
+
+.. code-block::
+
   ga4gh:VA.Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT
 
-URI Syntax
+**URI Syntax**
+
+.. code-block::
+
   https://w3id.org/ga4gh/vrs/VA.Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT
 
