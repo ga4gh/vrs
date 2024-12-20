@@ -1,0 +1,22 @@
+name: checks
+on: [push, pull_request]
+jobs:
+  precommit_hooks:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        - cmd: "end-of-file-fixer"
+        - cmd: "trailing-whitespace"
+        - cmd: "mixed-line-ending"
+        - cmd: "update-json-def-files"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+
+      - uses: pre-commit/action@v3.0.1
+        with:
+          extra_args: ${{ matrix.cmd }} --all-files
