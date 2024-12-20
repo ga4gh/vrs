@@ -6,10 +6,9 @@
    "maturity": "trial use",
    "ga4gh": {
       "inherent": [
-         "end",
-         "sequenceReference",
          "start",
-         "type"
+         "end",
+         "sequenceReference"
       ],
       "prefix": "SL"
    },

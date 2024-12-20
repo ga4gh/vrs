@@ -6,8 +6,7 @@
    "maturity": "draft",
    "ga4gh": {
       "inherent": [
-         "length",
-         "type"
+         "length"
       ]
    },
    "description": "A sequence expressed only by its length.",

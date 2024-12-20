@@ -8,8 +8,7 @@
       "prefix": "VA",
       "inherent": [
          "location",
-         "state",
-         "type"
+         "state"
       ]
    },
    "description": "The state of a molecule at a Location.",

@@ -6,9 +6,8 @@
    "maturity": "trial use",
    "ga4gh": {
       "inherent": [
-         "copies",
          "location",
-         "type"
+         "copies"
       ],
       "prefix": "CN"
    },
