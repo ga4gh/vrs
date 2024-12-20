@@ -13,7 +13,7 @@ components:
       end: 123
   - type: TraversalBlock
     orientation: forward
-    component: 
+    component:
       id: adjacency1
       type: Adjacency
       adjoinedSequences:
@@ -31,7 +31,7 @@ components:
             residueAlphabet: na
             id: NC_000002.11
           start: 500
-      linker: 
+      linker:
         type: LiteralSequenceExpression
         sequence: GTC
   - type: Allele
@@ -49,7 +49,7 @@ components:
       sequence: C
   - type: TraversalBlock
     orientation: forward
-    component: 
+    component:
       id: adjacency2
       type: Adjacency
       adjoinedSequences:
@@ -77,8 +77,3 @@ components:
         residueAlphabet: na
         id: NC_000001.10
       start: 1000
-
-
-
-
-

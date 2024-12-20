@@ -21,7 +21,7 @@ Many VRS objects are GA4GH Identifiable Objects, which may be used to create
 :ref:`computed-identifiers`.
 
 In addition to having GA4GH serialization keys (see :ref:`digest-serialization`),
-GA4GH identifiable objects also have a defined GA4GH identifier type prefix (see 
+GA4GH identifiable objects also have a defined GA4GH identifier type prefix (see
 :ref:`identifier-construction`).
 
 Definition and Information Model

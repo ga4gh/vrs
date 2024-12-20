@@ -5,9 +5,9 @@ Resource Identifiers
 
 .. admonition:: New in v2
 
-    In VRS v1, references to VRS objects by GA4GH :ref:`computed-identifiers` 
-    were allowed in some data classes. In VRS v2, such references have been expanded to 
-    include any :ref:`iriReference`, and consequently VRS now also supports references to 
+    In VRS v1, references to VRS objects by GA4GH :ref:`computed-identifiers`
+    were allowed in some data classes. In VRS v2, such references have been expanded to
+    include any :ref:`iriReference`, and consequently VRS now also supports references to
     objects from classes that do not have GA4GH Computed Identifiers.
 
 Some VRS data classes, such as the :ref:`Allele`, may reference other classes by an
@@ -49,7 +49,7 @@ The three Alleles below share a :ref:`SequenceLocation` and define it by referen
             }]
     }
 
-This Sequence Location may be defined elsewhere (e.g. another API endpoint, document, or 
+This Sequence Location may be defined elsewhere (e.g. another API endpoint, document, or
 internal data structure) and retrievable by ID:
 
 .. code-block:: json

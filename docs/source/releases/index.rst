@@ -1,8 +1,8 @@
 Releases
 !!!!!!!!
 
-.. note:: 
-  
+.. note::
+
     VRS follows the :ref:`maturity-model`, which includes our standard
     Work Stream practices for :ref:`versioning`.
 
