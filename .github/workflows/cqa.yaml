@@ -5,11 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        - cmd: "check-added-large-files"
-        - cmd: "trailing-whitespace"
-        - cmd: "end-of-file-fixer"
-        - cmd: "mixed-line-ending"
-        - cmd: "update-json-def-files"
+        cmd:
+          - "check-added-large-files"
+          - "trailing-whitespace"
+          - "end-of-file-fixer"
+          - "mixed-line-ending"
+          - "update-json-def-files"
     steps:
       - uses: actions/checkout@v4
 
