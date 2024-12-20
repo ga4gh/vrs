@@ -6,21 +6,6 @@
 
 A representation of the state of one or more biomolecules.
 
-**GA4GH Digest**
-
-.. list-table::
-    :class: clean-wrap
-    :header-rows: 1
-    :align: left
-    :widths: auto
-
-    *  - Prefix
-       - Inherent
-
-    *  - None
-       - ['type']
-
-
 **Information Model**
 
 Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.

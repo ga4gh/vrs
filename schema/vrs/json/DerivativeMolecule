@@ -7,8 +7,7 @@
    "ga4gh": {
       "prefix": "DM",
       "inherent": [
-         "components",
-         "type"
+         "components"
       ]
    },
    "description": "A molecule derived from segments of multiple adjoined molecular sequences, typically resulting from structural variation.",

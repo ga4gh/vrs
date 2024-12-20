@@ -6,21 +6,6 @@
 
 The `Terminus` data class provides a structure for describing the end (terminus) of a molecule. Structurally similar to Adjacency, but used for describing where a molecule terminates (instead of adjoining another molecule).
 
-**GA4GH Digest**
-
-.. list-table::
-    :class: clean-wrap
-    :header-rows: 1
-    :align: left
-    :widths: auto
-
-    *  - Prefix
-       - Inherent
-
-    *  - TM
-       - ['location', 'type']
-
-
 **Information Model**
 
 Some Terminus attributes are inherited from :ref:`Variation`.

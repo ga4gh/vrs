@@ -6,21 +6,6 @@
 
 A sequence expressed only by its length.
 
-**GA4GH Digest**
-
-.. list-table::
-    :class: clean-wrap
-    :header-rows: 1
-    :align: left
-    :widths: auto
-
-    *  - Prefix
-       - Inherent
-
-    *  - None
-       - ['length', 'type']
-
-
 **Information Model**
 
 Some LengthExpression attributes are inherited from :ref:`SequenceExpression`.

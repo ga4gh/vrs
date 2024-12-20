@@ -6,21 +6,6 @@
 
 An ordered set of co-occurring :ref:`variants <Variation>` on the same molecule.
 
-**GA4GH Digest**
-
-.. list-table::
-    :class: clean-wrap
-    :header-rows: 1
-    :align: left
-    :widths: auto
-
-    *  - Prefix
-       - Inherent
-
-    *  - CPB
-       - ['members', 'type']
-
-
 **Information Model**
 
 Some CisPhasedBlock attributes are inherited from :ref:`Variation`.

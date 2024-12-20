@@ -6,21 +6,6 @@
 
 A component used to describe the orientation of applicable molecular variation within a DerivativeMolecule.
 
-**GA4GH Digest**
-
-.. list-table::
-    :class: clean-wrap
-    :header-rows: 1
-    :align: left
-    :widths: auto
-
-    *  - Prefix
-       - Inherent
-
-    *  - None
-       - ['type', 'component', 'orientation']
-
-
 **Information Model**
 
 Some TraversalBlock attributes are inherited from :ref:`gks-core:Entity`.

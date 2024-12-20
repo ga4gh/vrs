@@ -7,8 +7,7 @@
    "ga4gh": {
       "prefix": "CPB",
       "inherent": [
-         "members",
-         "type"
+         "members"
       ]
    },
    "description": "An ordered set of co-occurring variants on the same molecule.",

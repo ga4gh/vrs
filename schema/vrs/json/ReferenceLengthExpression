@@ -7,8 +7,7 @@
    "ga4gh": {
       "inherent": [
          "length",
-         "repeatSubunitLength",
-         "type"
+         "repeatSubunitLength"
       ]
    },
    "description": "An expression of a sequence that is derived from repeating a subsequence of an associated SequenceLocation.",
