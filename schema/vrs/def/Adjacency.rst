@@ -6,6 +6,21 @@
 
 The `Adjacency` class represents the adjoining of the end of a sequence with the beginning of an adjacent sequence, potentially with an intervening linker sequence.
 
+**GA4GH Digest**
+
+.. list-table::
+    :class: clean-wrap
+    :header-rows: 1
+    :align: left
+    :widths: auto
+
+    *  - Prefix
+       - Inherent
+
+    *  - AJ
+       - ['adjoinedSequences', 'linker', 'type']
+
+
 **Information Model**
 
 Some Adjacency attributes are inherited from :ref:`Variation`.

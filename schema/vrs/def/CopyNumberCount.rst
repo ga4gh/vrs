@@ -6,6 +6,21 @@
 
 The absolute count of discrete copies of a :ref:`Location` within a system (e.g. genome, cell, etc.).
 
+**GA4GH Digest**
+
+.. list-table::
+    :class: clean-wrap
+    :header-rows: 1
+    :align: left
+    :widths: auto
+
+    *  - Prefix
+       - Inherent
+
+    *  - CN
+       - ['copies', 'location', 'type']
+
+
 **Information Model**
 
 Some CopyNumberCount attributes are inherited from :ref:`Variation`.

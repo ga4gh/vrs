@@ -4,11 +4,6 @@
    "title": "SequenceExpression",
    "type": "object",
    "maturity": "trial use",
-   "ga4gh": {
-      "inherent": [
-         "type"
-      ]
-   },
    "description": "An expression describing a Sequence.",
    "oneOf": [
       {

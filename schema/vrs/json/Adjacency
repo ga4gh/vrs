@@ -8,7 +8,8 @@
       "prefix": "AJ",
       "inherent": [
          "adjoinedSequences",
-         "linker"
+         "linker",
+         "type"
       ]
    },
    "description": "The `Adjacency` class represents the adjoining of the end of a sequence with the beginning of an adjacent sequence, potentially with an intervening linker sequence.",

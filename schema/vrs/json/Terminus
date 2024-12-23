@@ -7,7 +7,8 @@
    "ga4gh": {
       "prefix": "TM",
       "inherent": [
-         "location"
+         "location",
+         "type"
       ]
    },
    "description": "The `Terminus` data class provides a structure for describing the end (terminus) of a molecule. Structurally similar to Adjacency, but used for describing where a molecule terminates (instead of adjoining another molecule).",

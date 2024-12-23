@@ -6,6 +6,21 @@
 
 An assessment of the copy number of a :ref:`Location` within a system (e.g. genome, cell, etc.) relative to a baseline ploidy.
 
+**GA4GH Digest**
+
+.. list-table::
+    :class: clean-wrap
+    :header-rows: 1
+    :align: left
+    :widths: auto
+
+    *  - Prefix
+       - Inherent
+
+    *  - CX
+       - ['copyChange', 'location', 'type']
+
+
 **Information Model**
 
 Some CopyNumberChange attributes are inherited from :ref:`Variation`.

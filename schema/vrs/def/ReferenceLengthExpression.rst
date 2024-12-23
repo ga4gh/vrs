@@ -6,6 +6,21 @@
 
 An expression of a sequence that is derived from repeating a subsequence of an associated :ref:`SequenceLocation`.
 
+**GA4GH Digest**
+
+.. list-table::
+    :class: clean-wrap
+    :header-rows: 1
+    :align: left
+    :widths: auto
+
+    *  - Prefix
+       - Inherent
+
+    *  - None
+       - ['length', 'repeatSubunitLength', 'type']
+
+
 **Information Model**
 
 Some ReferenceLengthExpression attributes are inherited from :ref:`SequenceExpression`.

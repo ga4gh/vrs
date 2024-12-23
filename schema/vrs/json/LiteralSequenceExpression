@@ -6,7 +6,8 @@
    "maturity": "trial use",
    "ga4gh": {
       "inherent": [
-         "sequence"
+         "sequence",
+         "type"
       ]
    },
    "description": "An explicit expression of a Sequence.",

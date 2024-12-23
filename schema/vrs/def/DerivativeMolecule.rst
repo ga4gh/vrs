@@ -6,6 +6,21 @@
 
 A molecule derived from segments of multiple adjoined molecular sequences, typically resulting from structural variation.
 
+**GA4GH Digest**
+
+.. list-table::
+    :class: clean-wrap
+    :header-rows: 1
+    :align: left
+    :widths: auto
+
+    *  - Prefix
+       - Inherent
+
+    *  - DM
+       - ['components', 'type']
+
+
 **Information Model**
 
 Some DerivativeMolecule attributes are inherited from :ref:`Variation`.

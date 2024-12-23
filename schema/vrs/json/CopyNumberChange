@@ -6,8 +6,9 @@
    "maturity": "draft",
    "ga4gh": {
       "inherent": [
+         "copyChange",
          "location",
-         "copyChange"
+         "type"
       ],
       "prefix": "CX"
    },
