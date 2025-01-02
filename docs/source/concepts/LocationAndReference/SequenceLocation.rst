@@ -57,7 +57,7 @@ In some variant representation formats (e.g. HGVS, VCF) sequence variants are de
 (ref) and "alternate" (alt) alleles. When representing an Allele with VRS v2, it is also possible to describe the
 ref sequence (derived from the :ref:`SequenceReference` at the location) using the *sequence* property.
 
-The ``sequence`` property is **for describing the sequence derived from the SequenceLocation**, and is not a 
+The ``sequence`` property is **for describing the sequence derived from the SequenceLocation**, and is not a
 substitute for the ``sequenceReference`` property that references the sequence on which the location is defined.
 
 .. admonition:: New in v2
@@ -93,7 +93,7 @@ CisPhasedBlocks and the Inferred SequenceReference
 ##################################################
 
 When a :ref:`SequenceReference` is provided in a :ref:`CisPhasedBlock`, it is defined that all member
-:ref:`Allele` objects occur on that sequence. Consequently, the ``SequenceLocation`` object for each 
-:ref:`Allele` does not need to populate the ``sequenceReference`` property. There may be other contexts 
-where this optional property may be omitted, but when this is done there SHOULD be a means of inferring 
+:ref:`Allele` objects occur on that sequence. Consequently, the ``SequenceLocation`` object for each
+:ref:`Allele` does not need to populate the ``sequenceReference`` property. There may be other contexts
+where this optional property may be omitted, but when this is done there SHOULD be a means of inferring
 the content of this property (as is explicitly described in :ref:`CisPhasedBlock`).

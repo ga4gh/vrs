@@ -42,7 +42,7 @@
 |Brian Walsh | [[10](#10)] |
 |Andrew D Yates | [[8](#8)] |
 
-See also 
+See also
 [VRS contributors](https://github.com/ga4gh/vrs/graphs/contributors) and
 [VRS Python contributors](https://github.com/ga4gh/vrs-python/graphs/contributors).
 

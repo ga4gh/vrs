@@ -6,6 +6,6 @@ by extension, :ref:`Sequence References<SequenceReference>`.
 
 .. toctree::
    :titlesonly:
-   
+
    SequenceLocation
    SequenceReference
