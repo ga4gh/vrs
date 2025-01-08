@@ -16,4 +16,5 @@ Collectively, these types of variation are called molecular variation.
 .. toctree::
    :titlesonly:
 
-   CopyNumber
+   CopyNumberCount
+   CopyNumberChange
