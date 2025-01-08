@@ -266,8 +266,8 @@ However, as described here, these identifiers are dependent upon the structure o
 the identifier is constructed. Consequently, there is no guarantee that VRS computed identifiers will
 remain stable across major version releases of VRS; for example, all VRS v1.x computed identifiers are
 distinct from all VRS v2.x identifiers. It is recommended that implementers heed the maturity level of
-data classes as defined by the :ref:`maturity-model` when gauging the stability of data classes–and
-therefore object identifiers from thoses classes–across releases of VRS.
+data classes as defined by the :ref:`maturity-model` when gauging the stability of data classes-and
+therefore object identifiers from those classes-across releases of VRS.
 
 References
 @@@@@@@@@@

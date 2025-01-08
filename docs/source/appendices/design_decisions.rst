@@ -10,7 +10,7 @@ GA4GH Inherent Properties over Value Objects
 
 In VRS 1.0 we operated under the principle that all identifiable objects in VRS (e.g. Allele, SequenceLocation, etc.)
 would be *value objects*. This meant that they should be immutable and contain only required fields that are
-necessary to uniquely identify the object. This approach somewhat simplified the ability to genertate the digests by
+necessary to uniquely identify the object. This approach somewhat simplified the ability to generate the digests by
 allowing the computation of the digest to be based on the entire object. An exception was made for properties with a
 leading underscore (namely, the *_id* property), which was removed from the object before a digest was calculated.
 
