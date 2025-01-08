@@ -23,7 +23,7 @@ An expression describing a :ref:`Sequence`.
 
 **Information Model**
 
-Some SequenceExpression attributes are inherited from :ref:`gks-core:Entity`.
+Some SequenceExpression attributes are inherited from :ref:`Entity`.
 
 .. list-table::
    :class: clean-wrap
