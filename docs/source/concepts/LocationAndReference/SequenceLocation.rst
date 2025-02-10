@@ -55,7 +55,10 @@ The "Ref" Allele
 
 In some variant representation formats (e.g. HGVS, VCF) sequence variants are described by both their "reference"
 (ref) and "alternate" (alt) alleles. When representing an Allele with VRS v2, it is also possible to describe the
-ref sequence (derived from the :ref:SequenceReference at the location) using the *sequence* property.
+ref sequence (derived from the :ref:`SequenceReference` at the location) using the *sequence* property.
+
+The *sequence* property is **for describing the sequence derived from the SequenceLocation**, and is not a
+substitute for the ``sequenceReference`` property that references the sequence on which the location is defined.
 
 .. admonition:: New in v2
 
@@ -65,7 +68,7 @@ ref sequence (derived from the :ref:SequenceReference at the location) using the
 Linear and Circular Sequence Coordinates
 ########################################
 
-When representing a linear sequence, it is expected that for a :ref:`Sequence` of length *n*, ``0 ≤ start ≤ end ≤ n``
+When representing a linear sequence, it is expected that for a :ref:`SequenceReference` of length *n*, ``0 ≤ start ≤ end ≤ n``
 
 For a circular sequence, ``0 ≤ end ≤ start ≤ n`` is also allowed. In cases where ``end < start``, this represents
 a location that spans the circular sequence origin coordinate.
@@ -85,3 +88,12 @@ chromosome sequence to which it aligns. VRS intentionally does not allow for *st
 that use an offset system to represent sequence not found on the :ref:`SequenceReference`.
 
 .. TODO:: Describe and add a ref to an intronic variant profile
+
+CisPhasedBlocks and the Inferred SequenceReference
+##################################################
+
+When a :ref:`SequenceReference` is provided in a :ref:`CisPhasedBlock`, it is defined that all member
+:ref:`Allele` objects occur on that sequence. Consequently, the ``SequenceLocation`` object for each
+:ref:`Allele` does not need to populate the ``sequenceReference`` property. There may be other contexts
+where this optional property may be omitted, but when this is done there SHOULD be a means of inferring
+the content of this property (as is explicitly described in :ref:`CisPhasedBlock`).

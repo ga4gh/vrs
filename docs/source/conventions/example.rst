@@ -103,7 +103,7 @@ VRS JSON Schema.
 
 
 Generate a computed identifier
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 A key feature of VRS is an easily-implemented algorithm to
 generate computed, digest-based identifiers for variation objects.

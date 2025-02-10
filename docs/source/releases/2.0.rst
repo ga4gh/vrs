@@ -7,7 +7,7 @@
 Major Changes
 #############
 
-  * implements the :ref:`_maturity-model` for all data classes
+  * implements the :ref:`maturity-model` for all data classes
   * classes now support descriptive metadata
   * digests now rely on inherent property descriptions
   * object references now use IRI references instead of CURIEs

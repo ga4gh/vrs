@@ -5,7 +5,7 @@ Reference Length Expression
 
 .. admonition:: New in v2
 
-    The `ReferenceLengthExpression` class is new in VRS v2, and was designed as a means for 
+    The `ReferenceLengthExpression` class is new in VRS v2, and was designed as a means for
     compact encoding of large ambiguous sequence states following VOCA normalization.
 
 Reference length expressions are used for expressing the state of :ref:`Alleles<Allele>`

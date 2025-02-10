@@ -371,7 +371,8 @@ CopyNumberCount:
 CopyNumberChange:
   - name: "Low-level copy gain of BRCA1"
     in:
-      copyChange: EFO:0030071
+      copyChange:
+        primaryCode: EFO:0030071
       location:
         sequenceReference:
           type: SequenceReference

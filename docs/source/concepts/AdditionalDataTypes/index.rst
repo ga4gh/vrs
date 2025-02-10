@@ -4,6 +4,8 @@ Additional Data Types
 !!!!!!!!!!!!!!!!!!!!!
 
 Below are the additional data types used by the VRS models.
+Any classes with the *imported* tag are used by VRS but maintained by the GA4GH GKS
+Work Stream as common data classes.
 
 Abstract Classes
 @@@@@@@@@@@@@@@@
@@ -21,7 +23,7 @@ Many VRS objects are GA4GH Identifiable Objects, which may be used to create
 :ref:`computed-identifiers`.
 
 In addition to having GA4GH serialization keys (see :ref:`digest-serialization`),
-GA4GH identifiable objects also have a defined GA4GH identifier type prefix (see 
+GA4GH identifiable objects also have a defined GA4GH identifier type prefix (see
 :ref:`identifier-construction`).
 
 Definition and Information Model
@@ -56,6 +58,62 @@ represent variants using other syntaxes, including HGVS and SPDI.
 
 .. include::  ../../def/vrs/Expression.rst
 
+.. _gks-core:Entity:
+.. _Entity:
+
+Entity
+######
+*imported*
+
+.. include::  ../../def/gks-core/Entity.rst
+
+.. _gks-core:Element:
+.. _Element:
+
+Element
+#######
+*imported*
+
+.. include::  ../../def/gks-core/Element.rst
+
+General Purposes Types
+@@@@@@@@@@@@@@@@@@@@@@
+
+General purpose data types.
+
+.. _Extension:
+
+Extension
+#########
+*imported*
+
+.. include::  ../../def/gks-core/Extension.rst
+
+.. _MappableConcept:
+
+Mappable Concept
+################
+*imported*
+
+.. include::  ../../def/gks-core/MappableConcept.rst
+
+.. _ConceptMapping:
+
+Concept Mapping
+###############
+*imported*
+
+.. include::  ../../def/gks-core/ConceptMapping.rst
+
+.. _Coding:
+
+Coding
+######
+*imported*
+
+.. include::  ../../def/gks-core/Coding.rst
+
+
 Primitive Types
 @@@@@@@@@@@@@@@
 
@@ -83,18 +141,18 @@ sequenceString
 
 .. include:: ../../def/vrs/sequenceString.rst
 
-Imported Classes
-@@@@@@@@@@@@@@@@
+.. _code:
 
-The following classes are used by VRS but maintained by the GA4GH GKS
-Work Stream as common data classes.
+code
+####
+*imported*
 
-.. toctree::
-   :titlesonly:
+.. include::  ../../def/gks-core/Code.rst
 
-   Entity
-   Element
-   Extension
-   Coding
-   code
-   iriReference
+.. _iriReference:
+
+iriReference
+############
+*imported*
+
+.. include::  ../../def/gks-core/iriReference.rst
