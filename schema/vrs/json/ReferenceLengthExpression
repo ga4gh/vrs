@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0/json/ReferenceLengthExpression",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-snapshot.2025-02.1/json/ReferenceLengthExpression",
    "title": "ReferenceLengthExpression",
    "type": "object",
    "maturity": "trial use",
@@ -53,7 +53,7 @@
       "length": {
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.0/json/Range"
+               "$ref": "/ga4gh/schema/vrs/2.0.0-snapshot.2025-02.1/json/Range"
             },
             {
                "type": "integer"
@@ -62,7 +62,7 @@
          "description": "The number of residues in the expressed sequence."
       },
       "sequence": {
-         "$ref": "/ga4gh/schema/vrs/2.0/json/sequenceString",
+         "$ref": "/ga4gh/schema/vrs/2.0.0-snapshot.2025-02.1/json/sequenceString",
          "description": "the literal Sequence encoded by the Reference Length Expression."
       },
       "repeatSubunitLength": {
