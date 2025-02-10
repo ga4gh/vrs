@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-ballot.2024-11.3/json/CopyNumberCount",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/CopyNumberCount",
    "title": "CopyNumberCount",
    "type": "object",
    "maturity": "trial use",
@@ -53,7 +53,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-11.3/json/Expression"
+            "$ref": "/ga4gh/schema/vrs/2.x/json/Expression"
          }
       },
       "type": {
@@ -65,7 +65,7 @@
       "location": {
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-11.3/json/SequenceLocation"
+               "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceLocation"
             },
             {
                "$ref": "/ga4gh/schema/gks-core/1.0.0-snapshot.2025-02.1/json/iriReference"
@@ -76,7 +76,7 @@
       "copies": {
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-11.3/json/Range"
+               "$ref": "/ga4gh/schema/vrs/2.x/json/Range"
             },
             {
                "type": "integer"
