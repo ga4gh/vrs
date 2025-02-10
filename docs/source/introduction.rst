@@ -39,6 +39,3 @@ The machine readable schema definitions and example code are available online at
 repository (https://github.com/ga4gh/vrs).
 
 Readers may wish to view a :ref:`complete example <example>` before reading the specification.
-
-For a discussion of VRS with respect to existing standards, such as HGVS, SPDI, and VCF, see
-:ref:`relationships`.

@@ -76,5 +76,5 @@ Expressions
 
 .. admonition:: New in v2
 
-    The v2 :ref:`variation` classes now support :ref:`expressions`. This is a convenient mechanism for annotating Alleles using
+    The v2 :ref:`Variation` classes now support :ref:`Expression`. This is a convenient mechanism for annotating Alleles using
     string syntaxes following the conventions other variant standards (e.g. HGVS, SPDI) and resources (e.g. ClinVar, gnomAD).

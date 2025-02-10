@@ -12,8 +12,6 @@ Definition and Information Model
 
 .. include::  ../../def/vrs/CopyNumberCount.rst
 
-.. _CopyNumberCount:
-
 Example
 @@@@@@@
 

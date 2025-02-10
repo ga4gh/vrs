@@ -57,7 +57,7 @@ In some variant representation formats (e.g. HGVS, VCF) sequence variants are de
 (ref) and "alternate" (alt) alleles. When representing an Allele with VRS v2, it is also possible to describe the
 ref sequence (derived from the :ref:`SequenceReference` at the location) using the *sequence* property.
 
-The ``sequence`` property is **for describing the sequence derived from the SequenceLocation**, and is not a
+The *sequence* property is **for describing the sequence derived from the SequenceLocation**, and is not a
 substitute for the ``sequenceReference`` property that references the sequence on which the location is defined.
 
 .. admonition:: New in v2
@@ -68,7 +68,7 @@ substitute for the ``sequenceReference`` property that references the sequence o
 Linear and Circular Sequence Coordinates
 ########################################
 
-When representing a linear sequence, it is expected that for a :ref:`Sequence` of length *n*, ``0 ≤ start ≤ end ≤ n``
+When representing a linear sequence, it is expected that for a :ref:`SequenceReference` of length *n*, ``0 ≤ start ≤ end ≤ n``
 
 For a circular sequence, ``0 ≤ end ≤ start ≤ n`` is also allowed. In cases where ``end < start``, this represents
 a location that spans the circular sequence origin coordinate.

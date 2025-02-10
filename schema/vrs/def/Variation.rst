@@ -46,7 +46,7 @@ Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
       - string
       - 1..1
       - 
-   *  - label
+   *  - name
       - 
       - string
       - 0..1
@@ -56,7 +56,7 @@ Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
       - string
       - 0..1
       - A free-text description of the Entity.
-   *  - alternativeLabels
+   *  - aliases
       - 
                         .. raw:: html
 
