@@ -66,11 +66,21 @@ reference:
 
 
 .. _ga4gh-digest-keys:
+.. _ga4gh-inherent-properties:
 
-GA4GH Digest Keys
-#################
-When creating computed identifiers from objects, VRS uses a custom schema attribute, 
-*ga4gh.inherent*, that contains the property names used for computing digests. For example, 
+GA4GH Inherent Properties
+#########################
+
+.. admonition:: New in v2
+
+    In VRS v1, data classes were limited to only inherent properties that contained the minimum
+    information for describing a variant or other identifiable object. In practice, this resulted
+    in frequent nesting of VRS objects inside descriptive containers, a complicated pattern for
+    implementations. VRS 2.0 addresses this limitation with the designation of inherent properties
+    for use with the computed identifier algorithm.
+
+When creating computed identifiers from objects, VRS uses a custom schema attribute,
+*ga4gh.inherent*, that contains the property names used for computing digests. For example,
 the Allele JSON Schema:
 
 .. parsed-literal::
@@ -95,7 +105,7 @@ the Allele JSON Schema:
 
 .. note::
 
-  The `ga4gh` JSON Schema namespace is aligned with the Sequence Collections effort 
+  The `ga4gh` JSON Schema namespace is aligned with the Sequence Collections effort
   (see `SeqCol#84 <https://github.com/ga4gh/refget/issues/84>`_).
 
 GA4GH Type Prefixes

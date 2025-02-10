@@ -4,7 +4,7 @@ Derivative Molecule
 !!!!!!!!!!!!!!!!!!!
 
 .. admonition:: New in v2
-   
+
    The `DerivativeMolecule` class was added in v2 to describe molecules resulting from structural variation.
 
 A derivative molecule is created by two or more adjoined molecular structures. The `DerivativeMolecule` class

@@ -259,6 +259,15 @@ For example, the identifier for the allele example under :ref:`digest-serializat
 
    ga4gh\:VA.0AePZIWZUNsUlQTamyLrjm2HWUw2opLt\_
 
+.. warning::
+
+GA4GH Computed Identifiers are a key mechanism for globally unique federated identification of variants.
+However, as described here, these identifiers are dependent upon the structure of the object from which
+the identifier is constructed. Consequently, there is no guarantee that VRS computed identifiers will
+remain stable across major version releases of VRS; for example, all VRS v1.x computed identifiers are
+distinct from all VRS v2.x identifiers. It is recommended that implementers heed the maturity level of
+data classes as defined by the :ref:`maturity-model` when gauging the stability of data classes-and
+therefore object identifiers from those classes-across releases of VRS.
 
 References
 @@@@@@@@@@

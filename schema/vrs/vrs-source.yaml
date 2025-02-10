@@ -9,7 +9,7 @@
 
 # https://json-schema.org/understanding-json-schema/reference/schema.html
 $schema: "https://json-schema.org/draft/2020-12/schema"
-$id: "https://w3id.org/ga4gh/schema/vrs/2.x/vrs-source.yaml"
+$id: "https://w3id.org/ga4gh/schema/vrs/2.0.0-ballot.2024-11.3/vrs-source.yaml"
 title: "GA4GH-VRS-Definitions"
 type: object
 strict: true
@@ -18,7 +18,7 @@ imports:
   gks-core: ../gks-core/gks-core-source.yaml
 
 namespaces:
-  gks.core: /ga4gh/schema/gks-core/1.x/json/
+  gks.core: /ga4gh/schema/gks-core/1.0.0-snapshot.2024-11.2/json/
 
 $defs:
   # VRS definitions are presented top-down.  Everything rolls up to
@@ -304,7 +304,9 @@ $defs:
         description: >-
           The start coordinate or range of the SequenceLocation.
           The minimum value of this coordinate or range is 0.
-          MUST represent a coordinate or range less than or equal to the value of `end`.
+          For locations on linear sequences, this MUST represent a coordinate or range
+          less than or equal to the value of `end`. For circular sequences, `start` is
+          greater than `end` when the location spans the sequence 0 coordinate.
       end:
         oneOf:
           - type: integer
@@ -312,7 +314,9 @@ $defs:
         description: >-
           The end coordinate or range of the SequenceLocation.
           The minimum value of this coordinate or range is 0.
-          MUST represent a coordinate or range greater than or equal to the value of `start`.
+          For locations on linear sequences, this MUST represent a coordinate or range
+          grater than or equal to the value of `start`. For circular sequences, `end` is
+          less than `start` when the location spans the sequence 0 coordinate.
       sequence:
         description: >-
           The literal sequence encoded by the `sequenceReference` at these coordinates.
@@ -348,14 +352,14 @@ $defs:
           - aa
           - na
       sequence:
-        type:
-          $ref: "#/$defs/sequenceString"
+        $ref: "#/$defs/sequenceString"
         description: >-
           A :ref:`sequenceString` that is a literal representation of the referenced sequence.
       moleculeType:
         type: string
         description: >-
           Molecule types as `defined by RefSeq <https://www.ncbi.nlm.nih.gov/books/NBK21091/>`_ (see Table 1).
+          MUST be one of "genomic", "RNA", "mRNA", or "protein".
         enum:
           - genomic
           - RNA

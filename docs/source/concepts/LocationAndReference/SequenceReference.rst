@@ -9,19 +9,19 @@ Sequence Reference
     objects. This made it difficult to indicate in a message that the referenced sequence was, for example, "GRCh38 chr11".
     The SequenceReference class was created to enable the addition of such metadata.
 
-The SequenceReference class is used to refer to a sequence by its 
+The SequenceReference class is used to refer to a sequence by its
 `refget <https://samtools.github.io/hts-specs/refget.html#refget-checksum-algorithm>`_ accession.
 The class also allows implementations to optionally specify extra characteristics about the sequence,
 such as the alphabet used (nucleic acid or amino acid), if the sequence represents a circular molecule,
 and labels used to describe the sequence.
 
 Definition and Information Model
-################################
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .. include::  ../../def/vrs/SequenceReference.rst
 
 Example
-#######
+@@@@@@@
 
 .. code-block:: json
 
@@ -29,4 +29,4 @@ Example
       "type": "SequenceReference",
       "refgetAccession": "SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul",
       "label": "NC_000007.14"
-    }    
+    }

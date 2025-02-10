@@ -19,4 +19,3 @@ These models exist across several related domains:
     LocationAndReference/index
     SequenceExpression/index
     AdditionalDataTypes/index
- 

@@ -1,6 +1,6 @@
 .. _iriReference:
 
-iriReference
-!!!!!!!!!!!!
+IRI Reference
+!!!!!!!!!!!!!
 
 .. include::  ../../def/gks-core/iriReference.rst

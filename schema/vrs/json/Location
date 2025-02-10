@@ -1,11 +1,11 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/Location",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-ballot.2024-11.3/json/Location",
    "title": "Location",
    "type": "object",
    "maturity": "trial use",
    "description": "A contiguous segment of a biological sequence.",
-   "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceLocation",
+   "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-11.3/json/SequenceLocation",
    "discriminator": {
       "propertyName": "type"
    }

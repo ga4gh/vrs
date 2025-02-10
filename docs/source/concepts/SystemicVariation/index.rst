@@ -3,11 +3,10 @@
 Systemic Variation
 !!!!!!!!!!!!!!!!!!
 
-VRS currently covers many classes of variation that are defined on a contiguous molecule such as single nucleotide
-variants (SNVs), multi-nucleotide variants (MNVs), indels, repeats, haplotypes, breakpoints, and sequence
-rearrangements that form derivative molecules.
+VRS currently covers many classes of variation that are defined on multiple molecules
+in the context of a system, e.g. a genome, sample, or homologous chromosomes.
 
-Collectively, these types of variation are called molecular variation.
+Collectively, these types of variation are called systemic variation.
 
 .. include::  ../../def/vrs/SystemicVariation.rst
 
@@ -16,4 +15,5 @@ Collectively, these types of variation are called molecular variation.
 .. toctree::
    :titlesonly:
 
-   CopyNumber
+   CopyNumberCount
+   CopyNumberChange

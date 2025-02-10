@@ -23,4 +23,3 @@ REQUIRED conventions for implementations of VRS.
    normalization
    computed_identifiers
    example
-  

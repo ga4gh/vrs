@@ -37,22 +37,22 @@ Some CopyNumberChange attributes are inherited from :ref:`Variation`.
       - Limits
       - Description
    *  - id
-      - 
+      -
       - string
       - 0..1
       - The 'logical' identifier of the Entity in the system of record, e.g. a UUID.  This 'id' is unique within a given system, but may or may not be globally unique outside the system. It is used within a system to reference an object from another.
    *  - label
-      - 
+      -
       - string
       - 0..1
       - A primary name for the entity.
    *  - description
-      - 
+      -
       - string
       - 0..1
       - A free-text description of the Entity.
    *  - alternativeLabels
-      - 
+      -
                         .. raw:: html
 
                             <span style="background-color: #B2DFEE; color: black; padding: 2px 6px; border: 1px solid black; border-radius: 3px; font-weight: bold; display: inline-block; margin-bottom: 5px;" title="Unordered">&#8942;</span>
@@ -60,7 +60,7 @@ Some CopyNumberChange attributes are inherited from :ref:`Variation`.
       - 0..m
       - Alternative name(s) for the Entity.
    *  - extensions
-      - 
+      -
                         .. raw:: html
 
                             <span style="background-color: #B2DFEE; color: black; padding: 2px 6px; border: 1px solid black; border-radius: 3px; font-weight: bold; display: inline-block; margin-bottom: 5px;" title="Unordered">&#8942;</span>
@@ -68,30 +68,30 @@ Some CopyNumberChange attributes are inherited from :ref:`Variation`.
       - 0..m
       - A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.
    *  - digest
-      - 
+      -
       - string
       - 0..1
       - A sha512t24u digest created using the VRS Computed Identifier algorithm.
    *  - expressions
-      - 
+      -
                         .. raw:: html
 
                             <span style="background-color: #B2DFEE; color: black; padding: 2px 6px; border: 1px solid black; border-radius: 3px; font-weight: bold; display: inline-block; margin-bottom: 5px;" title="Unordered">&#8942;</span>
       - :ref:`Expression`
       - 0..m
-      - 
+      -
    *  - type
-      - 
+      -
       - string
       - 1..1
       - MUST be "CopyNumberChange"
    *  - location
-      - 
+      -
       - :ref:`iriReference` | :ref:`Location`
       - 1..1
       - The location of the subject of the copy change.
    *  - copyChange
-      - 
+      -
       - :ref:`MappableConcept`
       - 1..1
       - MUST use a `primaryCode` representing one of "EFO:0030069" (complete genomic loss), "EFO:0020073" (high-level loss), "EFO:0030068" (low-level loss), "EFO:0030067" (loss), "EFO:0030064" (regional base ploidy), "EFO:0030070" (gain), "EFO:0030071" (low-level gain), "EFO:0030072" (high-level gain).

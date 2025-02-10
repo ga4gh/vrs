@@ -12,7 +12,7 @@ def test_examples():
         with open(examples_path / test['test_file']) as datafile:
             data = yaml.safe_load(datafile)
         class_validator = validator[test['definition']]
-        
+
         try:
             with raises(ValidationError) if test.get("shouldValidationFail") else nullcontext():
                 assert class_validator.validate(data) is None

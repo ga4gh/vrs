@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/SequenceLocation",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-ballot.2024-11.3/json/SequenceLocation",
    "title": "SequenceLocation",
    "type": "object",
    "maturity": "trial use",
@@ -40,7 +40,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gks-core/1.x/json/Extension"
+            "$ref": "/ga4gh/schema/gks-core/1.0.0-snapshot.2024-11.1/json/Extension"
          },
          "description": "A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.",
          "$comment": "Extension objects have a key-value data structure that allows definition of custom fields in the data itself. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems."
@@ -59,10 +59,10 @@
       "sequenceReference": {
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceReference"
+               "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-11.3/json/SequenceReference"
             },
             {
-               "$ref": "/ga4gh/schema/gks-core/1.x/json/iriReference"
+               "$ref": "/ga4gh/schema/gks-core/1.0.0-snapshot.2024-11.1/json/iriReference"
             }
          ],
          "description": "A reference to a Sequence on which the location is defined."
@@ -70,28 +70,28 @@
       "start": {
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/Range"
+               "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-11.3/json/Range"
             },
             {
                "type": "integer"
             }
          ],
-         "description": "The start coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range less than or equal to the value of `end`."
+         "description": "The start coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. For locations on linear sequences, this MUST represent a coordinate or range  less than or equal to the value of `end`. For circular sequences, `start` is greater than `end` when the location spans the sequence 0 coordinate."
       },
       "end": {
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.x/json/Range"
+               "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-11.3/json/Range"
             },
             {
                "type": "integer"
             }
          ],
-         "description": "The end coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. MUST represent a coordinate or range greater than or equal to the value of `start`."
+         "description": "The end coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. For locations on linear sequences, this MUST represent a coordinate or range  grater than or equal to the value of `start`. For circular sequences, `end` is less than `start` when the location spans the sequence 0 coordinate."
       },
       "sequence": {
          "description": "The literal sequence encoded by the `sequenceReference` at these coordinates.",
-         "$ref": "/ga4gh/schema/vrs/2.x/json/sequenceString"
+         "$ref": "/ga4gh/schema/vrs/2.0.0-ballot.2024-11.3/json/sequenceString"
       }
    },
    "required": [
