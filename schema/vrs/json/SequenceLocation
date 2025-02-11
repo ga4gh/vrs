@@ -40,7 +40,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gks-core/1.x/json/Extension"
+            "$ref": "/ga4gh/schema/gks-core/1.0.0-snapshot.2025-02.2/json/Extension"
          },
          "description": "A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.",
          "$comment": "Extension objects have a key-value data structure that allows definition of custom fields in the data itself. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems."
@@ -62,7 +62,7 @@
                "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceReference"
             },
             {
-               "$ref": "/ga4gh/schema/gks-core/1.x/json/iriReference"
+               "$ref": "/ga4gh/schema/gks-core/1.0.0-snapshot.2025-02.2/json/iriReference"
             }
          ],
          "description": "A reference to a SequenceReference on which the location is defined."
