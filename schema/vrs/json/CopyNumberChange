@@ -39,7 +39,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gks-core/1.0.0-snapshot.2025-02.1/json/Extension"
+            "$ref": "/ga4gh/schema/gks-core/1.x/json/Extension"
          },
          "description": "A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.",
          "$comment": "Extension objects have a key-value data structure that allows definition of custom fields in the data itself. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems."
@@ -68,14 +68,14 @@
                "$ref": "/ga4gh/schema/vrs/2.x/json/SequenceLocation"
             },
             {
-               "$ref": "/ga4gh/schema/gks-core/1.0.0-snapshot.2025-02.1/json/iriReference"
+               "$ref": "/ga4gh/schema/gks-core/1.x/json/iriReference"
             }
          ],
          "description": "The location of the subject of the copy change."
       },
       "copyChange": {
          "description": "MUST use a `primaryCode` representing one of \"EFO:0030069\" (complete genomic loss), \"EFO:0020073\" (high-level loss), \"EFO:0030068\" (low-level loss), \"EFO:0030067\" (loss), \"EFO:0030064\" (regional base ploidy), \"EFO:0030070\" (gain), \"EFO:0030071\" (low-level gain), \"EFO:0030072\" (high-level gain).",
-         "$ref": "/ga4gh/schema/gks-core/1.0.0-snapshot.2025-02.1/json/MappableConcept"
+         "$ref": "/ga4gh/schema/gks-core/1.x/json/MappableConcept"
       }
    },
    "required": [
