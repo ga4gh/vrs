@@ -9,7 +9,7 @@
 
 # https://json-schema.org/understanding-json-schema/reference/schema.html
 $schema: "https://json-schema.org/draft/2020-12/schema"
-$id: "https://w3id.org/ga4gh/schema/vrs/2.0.0-snapshot.2025-02.1/vrs-source.yaml"
+$id: "https://w3id.org/ga4gh/schema/vrs/2.0.0-snapshot.2025-02.2/vrs-source.yaml"
 title: "GA4GH-VRS-Definitions"
 type: object
 strict: true
@@ -18,7 +18,7 @@ imports:
   gks-core: ../gks-core/gks-core-source.yaml
 
 namespaces:
-  gks.core: /ga4gh/schema/gks-core/1.0.0-snapshot.2025-02.1/json/
+  gks.core: /ga4gh/schema/gks-core/1.0.0-snapshot.2025-02.2/json/
 
 $defs:
   # VRS definitions are presented top-down.  Everything rolls up to
