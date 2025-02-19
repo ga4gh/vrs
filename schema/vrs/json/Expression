@@ -30,7 +30,8 @@
             "hgvs.r",
             "iscn",
             "gnomad",
-            "spdi"
+            "spdi",
+            "beacon"
          ],
          "description": "The syntax used to describe the variation. The value should be one of the supported syntaxes."
       },
