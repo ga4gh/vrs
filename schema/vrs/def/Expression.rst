@@ -38,7 +38,7 @@ Some Expression attributes are inherited from :ref:`gks-core:Element`.
       -
       - string
       - 1..1
-      - The syntax used to describe the variation. The value should be one of the supported syntaxes.
+      - The syntax used to describe the variation. The value MUST be one of the supported syntaxes.
    *  - value
       -
       - string
