@@ -87,7 +87,7 @@ the Allele JSON Schema:
 
   {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.x/json/Allele",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0/json/Allele",
    "title": "Allele",
    "type": "object",
    "maturity": "draft",
