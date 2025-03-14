@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0/json/CisPhasedBlock",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0/json/CisPhasedBlock",
    "title": "CisPhasedBlock",
    "type": "object",
    "maturity": "trial use",
@@ -38,7 +38,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gks-core/1.0/json/Extension"
+            "$ref": "/ga4gh/schema/gks-core/1.0.0/json/Extension"
          },
          "description": "A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.",
          "$comment": "Extension objects have a key-value data structure that allows definition of custom fields in the data itself. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems."
@@ -52,7 +52,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/vrs/2.0/json/Expression"
+            "$ref": "/ga4gh/schema/vrs/2.0.0/json/Expression"
          }
       },
       "type": {
@@ -69,17 +69,17 @@
          "items": {
             "oneOf": [
                {
-                  "$ref": "/ga4gh/schema/vrs/2.0/json/Allele"
+                  "$ref": "/ga4gh/schema/vrs/2.0.0/json/Allele"
                },
                {
-                  "$ref": "/ga4gh/schema/gks-core/1.0/json/iriReference"
+                  "$ref": "/ga4gh/schema/gks-core/1.0.0/json/iriReference"
                }
             ]
          },
          "description": "A list of Alleles that are found in-cis on a shared molecule."
       },
       "sequenceReference": {
-         "$ref": "/ga4gh/schema/vrs/2.0/json/SequenceReference",
+         "$ref": "/ga4gh/schema/vrs/2.0.0/json/SequenceReference",
          "description": "An optional Sequence Reference on which all of the in-cis Alleles are found. When defined, this may be used to implicitly define the `sequenceReference` attribute for each of the CisPhasedBlock member Alleles."
       }
    },
