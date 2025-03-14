@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0-snapshot.2025-02.4/json/residue",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0/json/residue",
    "title": "residue",
    "type": "string",
    "maturity": "trial use",
