@@ -6,7 +6,7 @@ Design Decisions
 The following design decisions were made in the development of the VRS:
 
 GA4GH Inherent Properties over Value Objects
---------------------------------------------
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 In VRS 1.0 we operated under the principle that all identifiable objects in VRS (e.g. Allele, SequenceLocation, etc.)
 would be *value objects*. This meant that they should be immutable and contain only required fields that are
@@ -23,7 +23,7 @@ As a result, we had to introduce a new field in the digest model called *ga4gh.i
 in the section on :ref:`ga4gh-inherent-properties`.
 
 IRIs over CURIEs
-----------------
+@@@@@@@@@@@@@@@@
 
 In VRS 2.0 we moved away from the use of CURIEs in favor of :ref:`iriReference`. Several factors played a role in
 this decision.
@@ -34,13 +34,14 @@ endpoints, or documentation that may not persist as messages are exchanged betwe
 in GKS specs now use IRIs to reference objects explicitly.
 
 IRI-References over IRIs
-------------------------
+@@@@@@@@@@@@@@@@@@@@@@@@
+
 We opted for the general use of IRI-References as a way to provide a more flexible approach to the use of IRIs
 in most GKS message structures. IRI-references (relative IRIs) benefit the users allow for compact representation
 of concepts that are accessible within a system (e.g. a directory structure or web API).
 
 VRS identifier syntax and versioning
-------------------------------------
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 The :ref:`versioning` section describes the versioning and release naming conventions for the VRS product.
 Approved releases will be assigned to the version number alone, but connect, ballot and snapshot releases will
@@ -88,3 +89,19 @@ the following syntax:
 .. code-block::
 
   https://w3id.org/ga4gh/vrs/VA.Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT
+
+Use of value sets for VRS computed digests
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+The GKS Core model contains a ``MappableConcept`` data model which is usable in 
+places where one would expect general, externally-defined concepts such as 
+genes, diseases, or therapeutics. In VRS, we intentionally define value sets
+instead of using the ``MappableConcept`` model in places where such concepts are 
+used in calculated a computed digest. 
+
+For example, the :ref:`CopyNumberChange` model has a ``copyChange`` field that 
+describes whether the variant `Location` is systematically observed as a low-level 
+or high-level gain or loss. These concepts, though defined in the Experimental Factor 
+Ontology, are maintained internally such that changes to these concepts in EFO will 
+not affect their use in VRS (and therefore not affect the computed digests of 
+CopyNumberChange objects).
