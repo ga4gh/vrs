@@ -59,7 +59,7 @@ As an example, the Github JSON Schema URL ($id) for the VRS 2.0.0 Allele is:
 
   {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://w3id.org/ga4gh/schema/vrs/2.0/json/Allele",
+    "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0/json/Allele",
     ...
   }
 
