@@ -22,3 +22,4 @@ Summary of Changes
 ##################
 
   * updates :ref:`CopyNumberChange` draft to use named enum in lieu of MappableConcept
+  * adds controlled vocabulary of `CopyNumberChange` enum to class definitions
