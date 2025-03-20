@@ -22,3 +22,5 @@ Summary of Changes
 ##################
 
   * updates :ref:`CopyNumberChange` draft to use named enum in lieu of MappableConcept
+  * adds controlled vocabulary of `CopyNumberChange` enum to class definitions
+  * adds design decision for use of value sets over MappableConcept in VRS
