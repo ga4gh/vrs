@@ -371,8 +371,7 @@ CopyNumberCount:
 CopyNumberChange:
   - name: "Low-level copy gain of BRCA1"
     in:
-      copyChange:
-        primaryCode: EFO:0030071
+      copyChange: low-level gain
       location:
         sequenceReference:
           type: SequenceReference
@@ -382,6 +381,6 @@ CopyNumberChange:
         type: SequenceLocation
       type: CopyNumberChange
     out:
-      ga4gh_digest: 2_fT_6-IpUm5aS0wp8ZAkJ01MCE569L2
-      ga4gh_identify: ga4gh:CX.2_fT_6-IpUm5aS0wp8ZAkJ01MCE569L2
-      ga4gh_serialize: '{"copyChange":"EFO:0030071","location":"d9h3FkfTWFkJSH56L1A26y-N2oq_SSuB","type":"CopyNumberChange"}'
+      ga4gh_digest: _rPTdFeOE9elAozZsakJGTqCvlaiEyr6
+      ga4gh_identify: ga4gh:CX._rPTdFeOE9elAozZsakJGTqCvlaiEyr6
+      ga4gh_serialize: '{"copyChange":"low-level gain","location":"d9h3FkfTWFkJSH56L1A26y-N2oq_SSuB","type":"CopyNumberChange"}'

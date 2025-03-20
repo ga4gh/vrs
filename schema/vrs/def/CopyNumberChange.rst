@@ -92,6 +92,6 @@ Some CopyNumberChange attributes are inherited from :ref:`Variation`.
       - The location of the subject of the copy change.
    *  - copyChange
       -
-      - :ref:`MappableConcept`
+      - string
       - 1..1
-      - MUST use a `primaryCode` representing one of "EFO:0030069" (complete genomic loss), "EFO:0020073" (high-level loss), "EFO:0030068" (low-level loss), "EFO:0030067" (loss), "EFO:0030064" (regional base ploidy), "EFO:0030070" (gain), "EFO:0030071" (low-level gain), "EFO:0030072" (high-level gain).
+      - MUST use one of the defined enumerations that are based on the corresponding EFO ontological terms for copy number variation. See Implementation Guidance for more details.

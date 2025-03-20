@@ -14,3 +14,11 @@ Major Changes
   * supports structural variation
   * imports from the GKS-core library for cross-specification alignment
   * renames Haplotype to CisPhasedBlock
+
+2.0.1
+@@@@@
+
+Summary of Changes
+##################
+
+  * updates :ref:`CopyNumberChange` draft to use named enum in lieu of MappableConcept
