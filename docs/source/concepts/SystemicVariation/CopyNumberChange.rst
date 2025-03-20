@@ -13,7 +13,7 @@ Definition and Information Model
 Copy Change term definitions
 ############################
 
-The `CopyChange` attribute uses a valueset derived from the 
+The `CopyChange` attribute uses a valueset derived from the
 `Experimental Factor Ontology (EFO) <https://www.ebi.ac.uk/efo/>`_:
 
 * **gain** (`EFO:0030070 <http://www.ebi.ac.uk/efo/EFO_0030070>`_ - *copy number gain*):
@@ -26,9 +26,9 @@ The `CopyChange` attribute uses a valueset derived from the
   Copy number assessment of regional base ploidy.
 * **loss** (`EFO:0030067 <http://www.ebi.ac.uk/efo/EFO_0030067>`_ - *copy number loss*):
   Assessment of genomic copy number loss.
-    * **low-level loss** (`EFO:0030068 <http://www.ebi.ac.uk/efo/EFO_0030068>`_ - 
+    * **low-level loss** (`EFO:0030068 <http://www.ebi.ac.uk/efo/EFO_0030068>`_ -
       *low-level copy number loss*): Assessment of low-level genomic copy number loss.
-    * **high-level loss** (`EFO:0020073 <http://www.ebi.ac.uk/efo/EFO_0020073>`_ - 
+    * **high-level loss** (`EFO:0020073 <http://www.ebi.ac.uk/efo/EFO_0020073>`_ -
       *high-level copy number loss*): Assessment of high-level genomic copy number loss.
         * **complete genomic loss** (`EFO:0030069 <http://www.ebi.ac.uk/efo/EFO_0030069>`_ -
           *complete genomic deletion*: Assessment of complete genomic deletion.

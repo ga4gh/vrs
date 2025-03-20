@@ -93,15 +93,15 @@ the following syntax:
 Use of value sets for VRS computed digests
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-The GKS Core model contains a ``MappableConcept`` data model which is usable in 
-places where one would expect general, externally-defined concepts such as 
+The GKS Core model contains a ``MappableConcept`` data model which is usable in
+places where one would expect general, externally-defined concepts such as
 genes, diseases, or therapeutics. In VRS, we intentionally define value sets
-instead of using the ``MappableConcept`` model in places where such concepts are 
-used in calculated a computed digest. 
+instead of using the ``MappableConcept`` model in places where such concepts are
+used in calculated a computed digest.
 
-For example, the :ref:`CopyNumberChange` model has a ``copyChange`` field that 
-describes whether the variant `Location` is systematically observed as a low-level 
-or high-level gain or loss. These concepts, though defined in the Experimental Factor 
-Ontology, are maintained internally such that changes to these concepts in EFO will 
-not affect their use in VRS (and therefore not affect the computed digests of 
+For example, the :ref:`CopyNumberChange` model has a ``copyChange`` field that
+describes whether the variant `Location` is systematically observed as a low-level
+or high-level gain or loss. These concepts, though defined in the Experimental Factor
+Ontology, are maintained internally such that changes to these concepts in EFO will
+not affect their use in VRS (and therefore not affect the computed digests of
 CopyNumberChange objects).
