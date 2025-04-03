@@ -49,9 +49,9 @@ Other data model changes
 Documentation changes
 #####################
 
-  * Added :ref:`relationships` to describe how VRS relates to other
+  * Added relationships to describe how VRS relates to other
     standards.
   * Updated :ref:`normalization` to clarify handling of reference
     alleles and generalize terminology to apply to all VRS objects.
   * Updated current and future schema diagrams.
-  * Included a discussion of the :ref:`release-cycle`.
+  * Included a discussion of the release-cycle.

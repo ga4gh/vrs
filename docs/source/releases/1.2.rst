@@ -17,8 +17,7 @@ News
 Important
 #########
 
-  * :ref:`SimpleInterval and SequenceState are deprecated
-    <deprecations>`. They will be removed in VRS 2.0.
+  * SimpleInterval and SequenceState are deprecated. They will be removed in VRS 2.0.
 
 Major Changes
 #############
@@ -29,26 +28,26 @@ Major Changes
       contiguous molecule
     * :ref:`SystemicVariation` refers to variation in the context of a
       system, such as a genome, sample, or homologous chromosomes
-    * :ref:`UtilityVariation` classes provide useful representations
+    * UtilityVariation classes provide useful representations
       for certain technical operations
 
   * New :ref:`SequenceExpressions <SequenceExpression>` subclasses
     replace SequenceState. Subtypes are:
 
-    * :ref:`DerivedSequenceExpression`, which representations sequence
+    * DerivedSequenceExpression, which representations sequence
       notionally derived from a SequenceLocation
-    * :ref:`RepeatedSequenceExpression`, which represents contiguous
+    * RepeatedSequenceExpression, which represents contiguous
       repeats of a sequence
     * :ref:`LiteralSequenceExpression`, which
-      wraps a :ref:`Sequence` and provides data structure parity with
+      wraps a Sequence and provides data structure parity with
       other SequenceExpressions
-  * :ref:`CopyNumber`, a form of SystemicVariation, represents the
+  * CopyNumber, a form of SystemicVariation, represents the
     copies of a molecule within a genome, and can be used to express
     concepts such as amplification and copy loss.
-  * :ref:`Gene` enables reference to an external definition of a gene,
+  * Gene enables reference to an external definition of a gene,
     particularly for use as a subject of copy number expressions.
-  * :ref:`DefiniteRange` and :ref:`IndefiniteRange` represent bounded
-    and half-bounded ranges respectively. A new :ref:`Number` type
+  * DefiniteRange and IndefiniteRange represent bounded
+    and half-bounded ranges respectively. A new Number type
     wraps integers so that some attributes may assume values of any of
     these three types.
 
@@ -56,6 +55,6 @@ Major Changes
 Minor Changes
 #############
 
-  * Sequence strings are now formally defined by a :ref:`Sequence`
+  * Sequence strings are now formally defined by a Sequence
     type, which is fundamentally also a string. This change aids
     documentation but has no technical impact.
