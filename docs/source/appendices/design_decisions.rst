@@ -57,12 +57,13 @@ proposal was presented for instance and class GKS identifiers.
 As an example, the Github JSON Schema URL ($id) for the VRS 2.0.0 Allele is:
 
 .. code-block:: json
+   :force:
 
-  {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0/json/Allele",
-    ...
-  }
+   {
+     "$schema": "https://json-schema.org/draft/2020-12/schema",
+     "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.0/json/Allele",
+     ...
+   }
 
 During the **release and versioning** discussion at the GA4GH Connect April 2023 meeting the proposal
 delved into the idea of including the major version number in the VRS identifier itself. Proponents of
