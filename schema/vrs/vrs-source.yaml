@@ -99,6 +99,7 @@ $defs:
       A :ref:`variation` on a contiguous molecule.
     oneOf:
       - $ref: "#/$defs/Allele"
+      - $ref: "#/$defs/RelativeAllele"
       - $ref: "#/$defs/CisPhasedBlock"
       - $ref: "#/$defs/Adjacency"
       - $ref: "#/$defs/Terminus"
@@ -155,6 +156,35 @@ $defs:
         description: >-
           An expression of the sequence state
     required: [ "location", "state" ]
+
+  RelativeAllele:
+    maturity: draft
+    ga4gh:
+      prefix: RA
+      inherent:
+        - relativeState
+        - baseState
+        - relativeLocation
+    inherits: MolecularVariation
+    type: object
+    description: >-
+      An Allele defined on a location relative to another mapped location.
+      Often used to describe intronic variants.
+    properties:
+      type:
+        extends: type
+        const: "RelativeAllele"
+        default: "RelativeAllele"
+        description: >-
+          MUST be "RelativeAllele"
+      relativeState:
+        $ref: "#/$defs/SequenceExpression"
+      baseState:
+        $ref: "#/$defs/SequenceExpression"
+      relativeLocation:
+        oneOf:
+          - $ref: "#/$defs/RelativeSequenceLocation"
+          - $refCurie: gks.core:iriReference
 
   CisPhasedBlock:
     maturity: trial use
@@ -337,11 +367,13 @@ $defs:
     ga4gh:
       inherent:
         - baseSequenceLocation
-        - relativeSequenceLocation
+        - offsetLocation
+      prefix: RSL
     inherits: Location
     description: >-
-      A location on a base sequence and its position relative to a boundary offset on a mapped sequence gap.
-      Typically used to describe intronic variants that exist with respect to a mapping of an RNA transcript sequence.
+      A location on a base sequence and its position relative to a boundary 
+      offset on a mapped sequence gap. Typically used to describe intronic 
+      variants that exist with respect to a mapping of an RNA transcript sequence.
     type: object
     properties:
       type:
@@ -353,7 +385,7 @@ $defs:
         oneOf:
           - $ref: "#/$defs/SequenceLocation"
           - $refCurie: gks.core:iriReference
-      relativeSequenceLocation:
+      offsetLocation:
         oneOf:
           - $refCurie: gks.core:iriReference
           - $ref: "#/$defs/SequenceOffset"

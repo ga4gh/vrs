@@ -1,18 +1,19 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.1/json/RelativeSequenceLocation",
-   "title": "RelativeSequenceLocation",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.1/json/RelativeAllele",
+   "title": "RelativeAllele",
    "type": "object",
    "maturity": "draft",
    "ga4gh": {
+      "prefix": "RA",
       "inherent": [
-         "baseSequenceLocation",
-         "offsetLocation",
+         "baseState",
+         "relativeLocation",
+         "relativeState",
          "type"
-      ],
-      "prefix": "RSL"
+      ]
    },
-   "description": "A location on a base sequence and its position relative to a boundary  offset on a mapped sequence gap. Typically used to describe intronic  variants that exist with respect to a mapping of an RNA transcript sequence.",
+   "description": "An Allele defined on a location relative to another mapped location. Often used to describe intronic variants.",
    "properties": {
       "id": {
          "type": "string",
@@ -49,26 +50,49 @@
          "type": "string",
          "pattern": "^[0-9A-Za-z_\\-]{32}$"
       },
+      "expressions": {
+         "type": "array",
+         "ordered": false,
+         "items": {
+            "$ref": "/ga4gh/schema/vrs/2.0.1/json/Expression"
+         }
+      },
       "type": {
          "type": "string",
-         "const": "RelativeSequenceLocation",
-         "default": "RelativeSequenceLocation",
-         "description": "MUST be \"RelativeSequenceLocation\""
+         "const": "RelativeAllele",
+         "default": "RelativeAllele",
+         "description": "MUST be \"RelativeAllele\""
       },
-      "baseSequenceLocation": {
+      "relativeState": {
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.0.1/json/SequenceLocation"
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/LengthExpression"
             },
             {
-               "$ref": "/ga4gh/schema/gks-core/1.0.0/json/iriReference"
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/LiteralSequenceExpression"
+            },
+            {
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/ReferenceLengthExpression"
             }
          ]
       },
-      "offsetLocation": {
+      "baseState": {
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.0.1/json/SequenceOffset"
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/LengthExpression"
+            },
+            {
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/LiteralSequenceExpression"
+            },
+            {
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/ReferenceLengthExpression"
+            }
+         ]
+      },
+      "relativeLocation": {
+         "oneOf": [
+            {
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/RelativeSequenceLocation"
             },
             {
                "$ref": "/ga4gh/schema/gks-core/1.0.0/json/iriReference"

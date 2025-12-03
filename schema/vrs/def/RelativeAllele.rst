@@ -4,7 +4,7 @@
 
 **Computational Definition**
 
-A location on a base sequence and its position relative to a boundary  offset on a mapped sequence gap. Typically used to describe intronic  variants that exist with respect to a mapping of an RNA transcript sequence.
+An Allele defined on a location relative to another mapped location. Often used to describe intronic variants.
 
 **GA4GH Digest**
 
@@ -17,13 +17,13 @@ A location on a base sequence and its position relative to a boundary  offset on
     *  - Prefix
        - Inherent
 
-    *  - RSL
-       - ['baseSequenceLocation', 'offsetLocation', 'type']
+    *  - RA
+       - ['baseState', 'relativeLocation', 'relativeState', 'type']
 
 
 **Information Model**
 
-Some RelativeSequenceLocation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
+Some RelativeAllele attributes are inherited from :ref:`Variation`.
 
 .. list-table::
    :class: clean-wrap
@@ -72,18 +72,31 @@ Some RelativeSequenceLocation attributes are inherited from :ref:`Ga4ghIdentifia
       - string
       - 0..1
       - A sha512t24u digest created using the VRS Computed Identifier algorithm.
+   *  - expressions
+      -
+                        .. raw:: html
+
+                            <span style="background-color: #B2DFEE; color: black; padding: 2px 6px; border: 1px solid black; border-radius: 3px; font-weight: bold; display: inline-block; margin-bottom: 5px;" title="Unordered">&#8942;</span>
+      - :ref:`Expression`
+      - 0..m
+      -
    *  - type
       -
       - string
       - 1..1
-      - MUST be "RelativeSequenceLocation"
-   *  - baseSequenceLocation
+      - MUST be "RelativeAllele"
+   *  - relativeState
       -
-      - :ref:`SequenceLocation` | :ref:`iriReference`
+      - :ref:`SequenceExpression`
       - 0..1
       -
-   *  - offsetLocation
+   *  - baseState
       -
-      - :ref:`iriReference` | :ref:`SequenceOffset`
+      - :ref:`SequenceExpression`
+      - 0..1
+      -
+   *  - relativeLocation
+      -
+      - :ref:`RelativeSequenceLocation` | :ref:`iriReference`
       - 0..1
       -
