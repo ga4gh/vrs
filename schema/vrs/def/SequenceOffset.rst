@@ -1,29 +1,14 @@
-.. note:: This data class is at a **trial use** maturity level and may \
-    change in future releases. Maturity \
+.. warning:: This data class is at a **draft** maturity level and may \
+    change significantly in future releases. Maturity \
     levels are described in the :ref:`maturity-model`.
 
 **Computational Definition**
 
-The absolute count of discrete copies of a :ref:`Location` within a system (e.g. genome, cell, etc.).
-
-**GA4GH Digest**
-
-.. list-table::
-    :class: clean-wrap
-    :header-rows: 1
-    :align: left
-    :widths: auto
-
-    *  - Prefix
-       - Inherent
-
-    *  - CN
-       - ['copies', 'location', 'type']
-
+An offset from a known sequence anchor within a mapped gap to another sequence.
 
 **Information Model**
 
-Some CopyNumberCount attributes are inherited from :ref:`Variation`.
+Some SequenceOffset attributes are inherited from :ref:`gks-core:Entity`.
 
 .. list-table::
    :class: clean-wrap
@@ -67,31 +52,28 @@ Some CopyNumberCount attributes are inherited from :ref:`Variation`.
       - :ref:`Extension`
       - 0..m
       - A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.
-   *  - digest
-      -
-      - string
-      - 0..1
-      - A sha512t24u digest created using the VRS Computed Identifier algorithm.
-   *  - expressions
-      -
-                        .. raw:: html
-
-                            <span style="background-color: #B2DFEE; color: black; padding: 2px 6px; border: 1px solid black; border-radius: 3px; font-weight: bold; display: inline-block; margin-bottom: 5px;" title="Unordered">&#8942;</span>
-      - :ref:`Expression`
-      - 0..m
-      -
    *  - type
       -
       - string
       - 1..1
-      - MUST be "CopyNumberCount"
-   *  - location
+      - MUST be "SequenceOffset"
+   *  - sequenceReference
       -
-      - :ref:`iriReference` | :ref:`SequenceLocation`
-      - 1..1
-      - The location of the subject of the copy count.
-   *  - copies
+      - :ref:`SequenceReference` | :ref:`iriReference`
+      - 0..1
+      -
+   *  - anchor
+      -
+      - integer
+      - 0..1
+      -
+   *  - offsetStart
       -
       - integer | :ref:`Range`
-      - 1..1
-      - The integral number of copies of the subject in a system
+      - 0..1
+      -
+   *  - offsetEnd
+      -
+      - integer | :ref:`Range`
+      - 0..1
+      -

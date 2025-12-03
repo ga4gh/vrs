@@ -1,17 +1,10 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.1/json/Terminus",
-   "title": "Terminus",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.1/json/SequenceOffset",
+   "title": "SequenceOffset",
    "type": "object",
    "maturity": "draft",
-   "ga4gh": {
-      "prefix": "TM",
-      "inherent": [
-         "location",
-         "type"
-      ]
-   },
-   "description": "The `Terminus` data class provides a structure for describing the end (terminus) of a molecule. Structurally similar to Adjacency, but used for describing where a molecule terminates (instead of adjoining another molecule).",
+   "description": "An offset from a known sequence anchor within a mapped gap to another sequence.",
    "properties": {
       "id": {
          "type": "string",
@@ -43,41 +36,48 @@
          "description": "A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.",
          "$comment": "Extension objects have a key-value data structure that allows definition of custom fields in the data itself. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems."
       },
-      "digest": {
-         "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
-         "type": "string",
-         "pattern": "^[0-9A-Za-z_\\-]{32}$"
-      },
-      "expressions": {
-         "type": "array",
-         "ordered": false,
-         "items": {
-            "$ref": "/ga4gh/schema/vrs/2.0.1/json/Expression"
-         }
-      },
       "type": {
          "type": "string",
-         "const": "Terminus",
-         "default": "Terminus",
-         "description": "MUST be \"Terminus\"."
+         "description": "MUST be \"SequenceOffset\"",
+         "$comment": "MUST be the name of a concrete class from the data model.",
+         "const": "SequenceOffset",
+         "default": "SequenceOffset"
       },
-      "location": {
+      "sequenceReference": {
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.0.1/json/RelativeSequenceLocation"
-            },
-            {
-               "$ref": "/ga4gh/schema/vrs/2.0.1/json/SequenceLocation"
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/SequenceReference"
             },
             {
                "$ref": "/ga4gh/schema/gks-core/1.0.0/json/iriReference"
             }
-         ],
-         "description": "The location of the terminus."
+         ]
+      },
+      "anchor": {
+         "type": "integer"
+      },
+      "offsetStart": {
+         "oneOf": [
+            {
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/Range"
+            },
+            {
+               "type": "integer"
+            }
+         ]
+      },
+      "offsetEnd": {
+         "oneOf": [
+            {
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/Range"
+            },
+            {
+               "type": "integer"
+            }
+         ]
       }
    },
    "required": [
-      "location",
       "type"
    ],
    "additionalProperties": false

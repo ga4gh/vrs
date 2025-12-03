@@ -147,7 +147,7 @@ $defs:
       location:
         oneOf:
           - $refCurie: gks.core:iriReference
-          - $ref: "#/$defs/Location"
+          - $ref: "#/$defs/SequenceLocation"
         description: >-
           The location of the Allele
       state:
@@ -218,7 +218,7 @@ $defs:
       location:
         oneOf:
           - $refCurie: gks.core:iriReference
-          - $ref: "#/$defs/Location"
+          - $ref: "#/$defs/SequenceLocation"
         description: >-
           The location of the subject of the copy count.
       copies:
@@ -251,7 +251,7 @@ $defs:
       location:
         oneOf:
           - $refCurie: gks.core:iriReference
-          - $ref: "#/$defs/Location"
+          - $ref: "#/$defs/SequenceLocation"
         description: >-
           The location of the subject of the copy change.
       copyChange:
@@ -280,6 +280,7 @@ $defs:
       A contiguous segment of a biological sequence.
     oneOf:
       - $ref: "#/$defs/SequenceLocation"
+      - $ref: "#/$defs/RelativeSequenceLocation"
     discriminator:
       propertyName: type
 
@@ -330,6 +331,60 @@ $defs:
         description: >-
           The literal sequence encoded by the `sequenceReference` at these coordinates.
         $ref: "#/$defs/sequenceString"
+
+  RelativeSequenceLocation:
+    maturity: draft
+    ga4gh:
+      inherent:
+        - baseSequenceLocation
+        - relativeSequenceLocation
+    inherits: Location
+    description: >-
+      A location on a base sequence and its position relative to a boundary offset on a mapped sequence gap.
+      Typically used to describe intronic variants that exist with respect to a mapping of an RNA transcript sequence.
+    type: object
+    properties:
+      type:
+        extends: type
+        const: "RelativeSequenceLocation"
+        default: "RelativeSequenceLocation"
+        description: MUST be "RelativeSequenceLocation"
+      baseSequenceLocation:
+        oneOf:
+          - $ref: "#/$defs/SequenceLocation"
+          - $refCurie: gks.core:iriReference
+      relativeSequenceLocation:
+        oneOf:
+          - $refCurie: gks.core:iriReference
+          - $ref: "#/$defs/SequenceOffset"
+
+  SequenceOffset:
+    type: object
+    inherits: gks-core:Entity
+    maturity: draft
+    description: >-
+      An offset from a known sequence anchor within a mapped gap to another sequence.
+    properties:
+      type:
+        extends: type
+        const: "SequenceOffset"
+        default: "SequenceOffset"
+        description: MUST be "SequenceOffset"
+      sequenceReference:
+        oneOf:
+          - $ref: "#/$defs/SequenceReference"
+          - $refCurie: gks.core:iriReference
+      anchor:
+        type: integer
+      offsetStart:
+        oneOf:
+          - type: integer
+          - $ref: "#/$defs/Range"
+      offsetEnd:
+        oneOf:
+          - type: integer
+          - $ref: "#/$defs/Range"
+
 
   SequenceReference:
     maturity: trial use
