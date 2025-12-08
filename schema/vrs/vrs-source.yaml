@@ -18,7 +18,7 @@ imports:
   gks-core: ../gks-core/gks-core-source.yaml
 
 namespaces:
-  gks.core: /ga4gh/schema/gks-core/1.0.0/json/
+  gks.core: /ga4gh/schema/gks-core/1.1.0/json/
 
 $defs:
   # VRS definitions are presented top-down.  Everything rolls up to

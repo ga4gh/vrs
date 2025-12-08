@@ -1,4 +1,4 @@
 [submodule "submodules/gks-core"]
 	path = submodules/gks-core
 	url = https://github.com/ga4gh/gks-core.git
-	branch = 1.0
+	branch = 1.1
