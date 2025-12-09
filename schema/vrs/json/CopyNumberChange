@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.1/json/CopyNumberChange",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.0/json/CopyNumberChange",
    "title": "CopyNumberChange",
    "type": "object",
    "maturity": "draft",
@@ -53,7 +53,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/vrs/2.0.1/json/Expression"
+            "$ref": "/ga4gh/schema/vrs/2.1.0/json/Expression"
          }
       },
       "type": {
@@ -65,7 +65,7 @@
       "location": {
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.0.1/json/SequenceLocation"
+               "$ref": "/ga4gh/schema/vrs/2.1.0/json/SequenceLocation"
             },
             {
                "$ref": "/ga4gh/schema/gks-core/1.1.0/json/iriReference"

@@ -155,7 +155,7 @@ code
 ####
 *imported*
 
-.. include::  ../../def/gks-core/Code.rst
+.. include::  ../../def/gks-core/code.rst
 
 .. _iriReference:
 
