@@ -97,6 +97,14 @@ Mappable Concept
 
 .. include::  ../../def/gks-core/MappableConcept.rst
 
+.. _ConceptSet:
+
+ConceptSet
+##########
+*imported*
+
+.. include::  ../../def/gks-core/ConceptSet.rst
+
 .. _ConceptMapping:
 
 Concept Mapping
