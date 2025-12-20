@@ -13,7 +13,7 @@
          "type"
       ]
    },
-   "description": "An Allele defined on a location relative to another mapped location. Often used to describe intronic variants.",
+   "description": "An Allele defined on a mapped location relative to a base location. Often used to describe intronic variants.",
    "properties": {
       "id": {
          "type": "string",
@@ -64,6 +64,7 @@
          "description": "MUST be \"RelativeAllele\""
       },
       "relativeState": {
+         "description": "The state of the RelativeAllele as expressed on the mapped sequence. This will differ from the base state when mapping to a reverse complement sequence,  commonly observed when representing the state on transcripts mapped to the  \"negative strand\" of a chromosome.",
          "oneOf": [
             {
                "$ref": "/ga4gh/schema/vrs/2.0.1/json/LengthExpression"
@@ -77,6 +78,7 @@
          ]
       },
       "baseState": {
+         "description": "The state of the RelativeAllele as expressed on the base sequence.",
          "oneOf": [
             {
                "$ref": "/ga4gh/schema/vrs/2.0.1/json/LengthExpression"
@@ -90,6 +92,7 @@
          ]
       },
       "relativeLocation": {
+         "description": "The relative location at which the baseState and relativeState are expressed.",
          "oneOf": [
             {
                "$ref": "/ga4gh/schema/vrs/2.0.1/json/RelativeSequenceLocation"

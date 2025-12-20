@@ -4,11 +4,11 @@
 
 **Computational Definition**
 
-An offset from a known sequence anchor within a mapped gap to another sequence.
+A location defined by an offset relative to an anchor on a  mapped sequence reference.
 
 **Information Model**
 
-Some SequenceOffset attributes are inherited from :ref:`gks-core:Entity`.
+Some SequenceOffsetLocation attributes are inherited from :ref:`gks-core:Entity`.
 
 .. list-table::
    :class: clean-wrap
@@ -61,19 +61,24 @@ Some SequenceOffset attributes are inherited from :ref:`gks-core:Entity`.
       -
       - :ref:`SequenceReference` | :ref:`iriReference`
       - 0..1
-      -
+      - A sequence reference that has been mapped from which a relative location is defined.
    *  - anchor
       -
       - integer
       - 0..1
+      - The position on the sequence reference from which the relative location offset is calculated.
+   *  - anchorOrientation
       -
+      - string
+      - 0..1
+      - Indicates which side of a discontinuous anchor on the  sequenceReference is used as the reference point for  interpreting offsetStart/offsetEnd. The anchor is an  inter-residue coordinate on the sequenceReference. When  that anchor corresponds to a boundary whose realization  on a base sequence yields two distinct locations (e.g.,  an exon junction), this property disambiguates which  anchor side on the sequenceReference is intended.  `left` denotes the side immediately preceding the anchor  in sequenceReference coordinate order; `right` denotes the  side immediately following the anchor in sequenceReference  coordinate order.
    *  - offsetStart
       -
       - integer | :ref:`Range`
       - 0..1
-      -
+      - The start offset, in inter-residue coordinates, from the  anchor realization selected by anchorOrientation on the  sequenceReference.
    *  - offsetEnd
       -
       - integer | :ref:`Range`
       - 0..1
-      -
+      - The end offset, in inter-residue coordinates, from the  anchor realization selected by anchorOrientation on the  sequenceReference.

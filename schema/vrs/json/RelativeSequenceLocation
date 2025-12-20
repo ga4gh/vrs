@@ -12,7 +12,7 @@
       ],
       "prefix": "RSL"
    },
-   "description": "A location on a base sequence and its position relative to a boundary  offset on a mapped sequence gap. Typically used to describe intronic  variants that exist with respect to a mapping of an RNA transcript sequence.",
+   "description": "A location on a base sequence and its position relative to a boundary  offset on a mapped sequence gap. Typically used to describe intronic  locations that exist with respect to a mapped RNA transcript sequence.",
    "properties": {
       "id": {
          "type": "string",
@@ -56,6 +56,7 @@
          "description": "MUST be \"RelativeSequenceLocation\""
       },
       "baseSequenceLocation": {
+         "description": "An absolute location on a sequence.",
          "oneOf": [
             {
                "$ref": "/ga4gh/schema/vrs/2.0.1/json/SequenceLocation"
@@ -65,10 +66,11 @@
             }
          ]
       },
-      "offsetLocation": {
+      "mappedSequenceLocation": {
+         "description": "A location relative to an offset on a mapped sequence.",
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.0.1/json/SequenceOffset"
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/SequenceOffsetLocation"
             },
             {
                "$ref": "/ga4gh/schema/gks-core/1.0.0/json/iriReference"

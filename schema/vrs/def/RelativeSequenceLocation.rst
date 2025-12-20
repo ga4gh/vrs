@@ -4,7 +4,7 @@
 
 **Computational Definition**
 
-A location on a base sequence and its position relative to a boundary  offset on a mapped sequence gap. Typically used to describe intronic  variants that exist with respect to a mapping of an RNA transcript sequence.
+A location on a base sequence and its position relative to a boundary  offset on a mapped sequence gap. Typically used to describe intronic  locations that exist with respect to a mapped RNA transcript sequence.
 
 **GA4GH Digest**
 
@@ -81,9 +81,9 @@ Some RelativeSequenceLocation attributes are inherited from :ref:`Ga4ghIdentifia
       -
       - :ref:`SequenceLocation` | :ref:`iriReference`
       - 0..1
+      - An absolute location on a sequence.
+   *  - mappedSequenceLocation
       -
-   *  - offsetLocation
-      -
-      - :ref:`iriReference` | :ref:`SequenceOffset`
+      - :ref:`iriReference` | :ref:`SequenceOffsetLocation`
       - 0..1
-      -
+      - A location relative to an offset on a mapped sequence.
