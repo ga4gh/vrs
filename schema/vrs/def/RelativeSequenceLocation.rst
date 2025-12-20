@@ -4,7 +4,7 @@
 
 **Computational Definition**
 
-A location on a base sequence and its position relative to a boundary  offset on a mapped sequence gap. Typically used to describe intronic  locations that exist with respect to a mapped RNA transcript sequence.
+A location on a base sequence and its position relative to a boundary offset on a mapped sequence gap. Typically used to describe intronic locations that exist with respect to a mapped RNA transcript sequence.
 
 **GA4GH Digest**
 
