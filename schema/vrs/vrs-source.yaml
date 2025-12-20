@@ -99,6 +99,7 @@ $defs:
       A :ref:`variation` on a contiguous molecule.
     oneOf:
       - $ref: "#/$defs/Allele"
+      - $ref: "#/$defs/RelativeAllele"
       - $ref: "#/$defs/CisPhasedBlock"
       - $ref: "#/$defs/Adjacency"
       - $ref: "#/$defs/Terminus"
@@ -147,7 +148,7 @@ $defs:
       location:
         oneOf:
           - $refCurie: gks.core:iriReference
-          - $ref: "#/$defs/Location"
+          - $ref: "#/$defs/SequenceLocation"
         description: >-
           The location of the Allele
       state:
@@ -155,6 +156,44 @@ $defs:
         description: >-
           An expression of the sequence state
     required: [ "location", "state" ]
+
+  RelativeAllele:
+    maturity: draft
+    ga4gh:
+      prefix: RA
+      inherent:
+        - relativeState
+        - baseState
+        - relativeLocation
+    inherits: MolecularVariation
+    type: object
+    description: >-
+      An Allele defined on a mapped location relative to a base location.
+      Often used to describe intronic variants.
+    properties:
+      type:
+        extends: type
+        const: "RelativeAllele"
+        default: "RelativeAllele"
+        description: >-
+          MUST be "RelativeAllele"
+      relativeState:
+        description: >-
+          The state of the RelativeAllele as expressed on the mapped sequence. This will
+          differ from the base state when mapping to a reverse complement sequence,
+          commonly observed when representing the state on transcripts mapped to the
+          "negative strand" of a chromosome.
+        $ref: "#/$defs/SequenceExpression"
+      baseState:
+        description: >-
+          The state of the RelativeAllele as expressed on the base sequence.
+        $ref: "#/$defs/SequenceExpression"
+      relativeLocation:
+        description: >-
+          The relative location at which the baseState and relativeState are expressed.
+        oneOf:
+          - $ref: "#/$defs/RelativeSequenceLocation"
+          - $refCurie: gks.core:iriReference
 
   CisPhasedBlock:
     maturity: trial use
@@ -218,7 +257,7 @@ $defs:
       location:
         oneOf:
           - $refCurie: gks.core:iriReference
-          - $ref: "#/$defs/Location"
+          - $ref: "#/$defs/SequenceLocation"
         description: >-
           The location of the subject of the copy count.
       copies:
@@ -251,7 +290,7 @@ $defs:
       location:
         oneOf:
           - $refCurie: gks.core:iriReference
-          - $ref: "#/$defs/Location"
+          - $ref: "#/$defs/SequenceLocation"
         description: >-
           The location of the subject of the copy change.
       copyChange:
@@ -280,6 +319,7 @@ $defs:
       A contiguous segment of a biological sequence.
     oneOf:
       - $ref: "#/$defs/SequenceLocation"
+      - $ref: "#/$defs/RelativeSequenceLocation"
     discriminator:
       propertyName: type
 
@@ -330,6 +370,98 @@ $defs:
         description: >-
           The literal sequence encoded by the `sequenceReference` at these coordinates.
         $ref: "#/$defs/sequenceString"
+
+  RelativeSequenceLocation:
+    maturity: draft
+    ga4gh:
+      inherent:
+        - baseSequenceLocation
+        - offsetLocation
+      prefix: RSL
+    inherits: Location
+    description: >-
+      A location on a base sequence and its position relative to a boundary
+      offset on a mapped sequence gap. Typically used to describe intronic
+      locations that exist with respect to a mapped RNA transcript sequence.
+    type: object
+    properties:
+      type:
+        extends: type
+        const: "RelativeSequenceLocation"
+        default: "RelativeSequenceLocation"
+        description: MUST be "RelativeSequenceLocation"
+      baseSequenceLocation:
+        description: >-
+          An absolute location on a sequence.
+        oneOf:
+          - $ref: "#/$defs/SequenceLocation"
+          - $refCurie: gks.core:iriReference
+      mappedSequenceLocation:
+        description: >-
+          A location relative to an offset on a mapped sequence.
+        oneOf:
+          - $refCurie: gks.core:iriReference
+          - $ref: "#/$defs/SequenceOffsetLocation"
+
+  SequenceOffsetLocation:
+    type: object
+    inherits: gks-core:Entity
+    # protectedClassOf: RelativeSequenceLocation
+    maturity: draft
+    description: >-
+      A location defined by an offset relative to an anchor on a
+      mapped sequence reference.
+    properties:
+      type:
+        extends: type
+        const: "SequenceOffset"
+        default: "SequenceOffset"
+        description: MUST be "SequenceOffset"
+      sequenceReference:
+        description: >-
+          A sequence reference that has been mapped from which a
+          relative location is defined.
+        oneOf:
+          - $ref: "#/$defs/SequenceReference"
+          - $refCurie: gks.core:iriReference
+      anchor:
+        description: >-
+          The position on the sequence reference from which the
+          relative location offset is calculated.
+        type: integer
+      anchorOrientation:
+        description: >-
+          Indicates which side of a discontinuous anchor on the
+          sequenceReference is used as the reference point for
+          interpreting offsetStart/offsetEnd. The anchor is an
+          inter-residue coordinate on the sequenceReference. When
+          that anchor corresponds to a boundary whose realization
+          on a base sequence yields two distinct locations (e.g.,
+          an exon junction), this property disambiguates which
+          anchor side on the sequenceReference is intended.
+          `left` denotes the side immediately preceding the anchor
+          in sequenceReference coordinate order; `right` denotes the
+          side immediately following the anchor in sequenceReference
+          coordinate order.
+        type: string
+        enum: ['left', 'right']
+      offsetStart:
+        description: >-
+          The start offset, in inter-residue coordinates, from the
+          anchor realization selected by anchorOrientation on the
+          sequenceReference.
+        oneOf:
+          - type: integer
+          - $ref: "#/$defs/Range"
+      offsetEnd:
+        description: >-
+          The end offset, in inter-residue coordinates, from the
+          anchor realization selected by anchorOrientation on the
+          sequenceReference.
+        oneOf:
+          - type: integer
+          - $ref: "#/$defs/Range"
+
 
   SequenceReference:
     maturity: trial use

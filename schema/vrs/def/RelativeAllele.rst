@@ -1,10 +1,10 @@
-.. note:: This data class is at a **trial use** maturity level and may \
-    change in future releases. Maturity \
+.. warning:: This data class is at a **draft** maturity level and may \
+    change significantly in future releases. Maturity \
     levels are described in the :ref:`maturity-model`.
 
 **Computational Definition**
 
-The absolute count of discrete copies of a :ref:`Location` within a system (e.g. genome, cell, etc.).
+An Allele defined on a mapped location relative to a base location. Often used to describe intronic variants.
 
 **GA4GH Digest**
 
@@ -17,13 +17,13 @@ The absolute count of discrete copies of a :ref:`Location` within a system (e.g.
     *  - Prefix
        - Inherent
 
-    *  - CN
-       - ['copies', 'location', 'type']
+    *  - RA
+       - ['baseState', 'relativeLocation', 'relativeState', 'type']
 
 
 **Information Model**
 
-Some CopyNumberCount attributes are inherited from :ref:`Variation`.
+Some RelativeAllele attributes are inherited from :ref:`Variation`.
 
 .. list-table::
    :class: clean-wrap
@@ -84,14 +84,19 @@ Some CopyNumberCount attributes are inherited from :ref:`Variation`.
       -
       - string
       - 1..1
-      - MUST be "CopyNumberCount"
-   *  - location
+      - MUST be "RelativeAllele"
+   *  - relativeState
       -
-      - :ref:`iriReference` | :ref:`SequenceLocation`
-      - 1..1
-      - The location of the subject of the copy count.
-   *  - copies
+      - :ref:`SequenceExpression`
+      - 0..1
+      - The state of the RelativeAllele as expressed on the mapped sequence. This will differ from the base state when mapping to a reverse complement sequence, commonly observed when representing the state on transcripts mapped to the "negative strand" of a chromosome.
+   *  - baseState
       -
-      - integer | :ref:`Range`
-      - 1..1
-      - The integral number of copies of the subject in a system
+      - :ref:`SequenceExpression`
+      - 0..1
+      - The state of the RelativeAllele as expressed on the base sequence.
+   *  - relativeLocation
+      -
+      - :ref:`RelativeSequenceLocation` | :ref:`iriReference`
+      - 0..1
+      - The relative location at which the baseState and relativeState are expressed.

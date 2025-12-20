@@ -1,18 +1,19 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.1/json/Adjacency",
-   "title": "Adjacency",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.1/json/RelativeAllele",
+   "title": "RelativeAllele",
    "type": "object",
-   "maturity": "trial use",
+   "maturity": "draft",
    "ga4gh": {
-      "prefix": "AJ",
+      "prefix": "RA",
       "inherent": [
-         "adjoinedSequences",
-         "linker",
+         "baseState",
+         "relativeLocation",
+         "relativeState",
          "type"
       ]
    },
-   "description": "The `Adjacency` class represents the adjoining of the end of a sequence with the beginning of an adjacent sequence, potentially with an intervening linker sequence.",
+   "description": "An Allele defined on a mapped location relative to a base location. Often used to describe intronic variants.",
    "properties": {
       "id": {
          "type": "string",
@@ -39,7 +40,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gks-core/1.1.0/json/Extension"
+            "$ref": "/ga4gh/schema/gks-core/1.0.0/json/Extension"
          },
          "description": "A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.",
          "$comment": "Extension objects have a key-value data structure that allows definition of custom fields in the data itself. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems."
@@ -58,39 +59,12 @@
       },
       "type": {
          "type": "string",
-         "const": "Adjacency",
-         "default": "Adjacency",
-         "description": "MUST be \"Adjacency\"."
+         "const": "RelativeAllele",
+         "default": "RelativeAllele",
+         "description": "MUST be \"RelativeAllele\""
       },
-      "adjoinedSequences": {
-         "type": "array",
-         "uniqueItems": false,
-         "ordered": true,
-         "items": {
-            "oneOf": [
-               {
-                  "$ref": "/ga4gh/schema/vrs/2.0.1/json/RelativeSequenceLocation"
-               },
-               {
-                  "$ref": "/ga4gh/schema/vrs/2.0.1/json/SequenceLocation"
-               },
-               {
-                  "$ref": "/ga4gh/schema/gks-core/1.1.0/json/iriReference"
-               }
-            ],
-            "not": {
-               "required": [
-                  "start",
-                  "end"
-               ]
-            }
-         },
-         "description": "The terminal sequence or pair of adjoined sequences that defines in the adjacency.",
-         "minItems": 2,
-         "maxItems": 2
-      },
-      "linker": {
-         "description": "The sequence found between adjoined sequences.",
+      "relativeState": {
+         "description": "The state of the RelativeAllele as expressed on the mapped sequence. This will differ from the base state when mapping to a reverse complement sequence, commonly observed when representing the state on transcripts mapped to the \"negative strand\" of a chromosome.",
          "oneOf": [
             {
                "$ref": "/ga4gh/schema/vrs/2.0.1/json/LengthExpression"
@@ -103,14 +77,33 @@
             }
          ]
       },
-      "homology": {
-         "type": "boolean",
-         "maturity": "draft",
-         "description": "A flag indicating if coordinate ambiguity in the adjoined sequences is from sequence homology (true) or other uncertainty, such as instrument ambiguity (false)."
+      "baseState": {
+         "description": "The state of the RelativeAllele as expressed on the base sequence.",
+         "oneOf": [
+            {
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/LengthExpression"
+            },
+            {
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/LiteralSequenceExpression"
+            },
+            {
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/ReferenceLengthExpression"
+            }
+         ]
+      },
+      "relativeLocation": {
+         "description": "The relative location at which the baseState and relativeState are expressed.",
+         "oneOf": [
+            {
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/RelativeSequenceLocation"
+            },
+            {
+               "$ref": "/ga4gh/schema/gks-core/1.0.0/json/iriReference"
+            }
+         ]
       }
    },
    "required": [
-      "adjoinedSequences",
       "type"
    ],
    "additionalProperties": false
