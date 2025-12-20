@@ -1,10 +1,10 @@
-.. note:: This data class is at a **trial use** maturity level and may \
-    change in future releases. Maturity \
+.. warning:: This data class is at a **draft** maturity level and may \
+    change significantly in future releases. Maturity \
     levels are described in the :ref:`maturity-model`.
 
 **Computational Definition**
 
-The absolute count of discrete copies of a :ref:`Location` within a system (e.g. genome, cell, etc.).
+A location on a base sequence and its position relative to a boundary offset on a mapped sequence gap. Typically used to describe intronic locations that exist with respect to a mapped RNA transcript sequence.
 
 **GA4GH Digest**
 
@@ -17,13 +17,13 @@ The absolute count of discrete copies of a :ref:`Location` within a system (e.g.
     *  - Prefix
        - Inherent
 
-    *  - CN
-       - ['copies', 'location', 'type']
+    *  - RSL
+       - ['baseSequenceLocation', 'offsetLocation', 'type']
 
 
 **Information Model**
 
-Some CopyNumberCount attributes are inherited from :ref:`Variation`.
+Some RelativeSequenceLocation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
 
 .. list-table::
    :class: clean-wrap
@@ -72,26 +72,18 @@ Some CopyNumberCount attributes are inherited from :ref:`Variation`.
       - string
       - 0..1
       - A sha512t24u digest created using the VRS Computed Identifier algorithm.
-   *  - expressions
-      -
-                        .. raw:: html
-
-                            <span style="background-color: #B2DFEE; color: black; padding: 2px 6px; border: 1px solid black; border-radius: 3px; font-weight: bold; display: inline-block; margin-bottom: 5px;" title="Unordered">&#8942;</span>
-      - :ref:`Expression`
-      - 0..m
-      -
    *  - type
       -
       - string
       - 1..1
-      - MUST be "CopyNumberCount"
-   *  - location
+      - MUST be "RelativeSequenceLocation"
+   *  - baseSequenceLocation
       -
-      - :ref:`iriReference` | :ref:`SequenceLocation`
-      - 1..1
-      - The location of the subject of the copy count.
-   *  - copies
+      - :ref:`SequenceLocation` | :ref:`iriReference`
+      - 0..1
+      - An absolute location on a sequence.
+   *  - mappedSequenceLocation
       -
-      - integer | :ref:`Range`
-      - 1..1
-      - The integral number of copies of the subject in a system
+      - :ref:`iriReference` | :ref:`SequenceOffsetLocation`
+      - 0..1
+      - A location relative to an offset on a mapped sequence.

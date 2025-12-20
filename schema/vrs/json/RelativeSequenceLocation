@@ -1,17 +1,18 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.1/json/Terminus",
-   "title": "Terminus",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.1/json/RelativeSequenceLocation",
+   "title": "RelativeSequenceLocation",
    "type": "object",
    "maturity": "draft",
    "ga4gh": {
-      "prefix": "TM",
       "inherent": [
-         "location",
+         "baseSequenceLocation",
+         "offsetLocation",
          "type"
-      ]
+      ],
+      "prefix": "RSL"
    },
-   "description": "The `Terminus` data class provides a structure for describing the end (terminus) of a molecule. Structurally similar to Adjacency, but used for describing where a molecule terminates (instead of adjoining another molecule).",
+   "description": "A location on a base sequence and its position relative to a boundary offset on a mapped sequence gap. Typically used to describe intronic locations that exist with respect to a mapped RNA transcript sequence.",
    "properties": {
       "id": {
          "type": "string",
@@ -48,36 +49,36 @@
          "type": "string",
          "pattern": "^[0-9A-Za-z_\\-]{32}$"
       },
-      "expressions": {
-         "type": "array",
-         "ordered": false,
-         "items": {
-            "$ref": "/ga4gh/schema/vrs/2.0.1/json/Expression"
-         }
-      },
       "type": {
          "type": "string",
-         "const": "Terminus",
-         "default": "Terminus",
-         "description": "MUST be \"Terminus\"."
+         "const": "RelativeSequenceLocation",
+         "default": "RelativeSequenceLocation",
+         "description": "MUST be \"RelativeSequenceLocation\""
       },
-      "location": {
+      "baseSequenceLocation": {
+         "description": "An absolute location on a sequence.",
          "oneOf": [
-            {
-               "$ref": "/ga4gh/schema/vrs/2.0.1/json/RelativeSequenceLocation"
-            },
             {
                "$ref": "/ga4gh/schema/vrs/2.0.1/json/SequenceLocation"
             },
             {
                "$ref": "/ga4gh/schema/gks-core/1.0.0/json/iriReference"
             }
-         ],
-         "description": "The location of the terminus."
+         ]
+      },
+      "mappedSequenceLocation": {
+         "description": "A location relative to an offset on a mapped sequence.",
+         "oneOf": [
+            {
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/SequenceOffsetLocation"
+            },
+            {
+               "$ref": "/ga4gh/schema/gks-core/1.0.0/json/iriReference"
+            }
+         ]
       }
    },
    "required": [
-      "location",
       "type"
    ],
    "additionalProperties": false

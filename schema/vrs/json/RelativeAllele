@@ -1,17 +1,19 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.1/json/Terminus",
-   "title": "Terminus",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.1/json/RelativeAllele",
+   "title": "RelativeAllele",
    "type": "object",
    "maturity": "draft",
    "ga4gh": {
-      "prefix": "TM",
+      "prefix": "RA",
       "inherent": [
-         "location",
+         "baseState",
+         "relativeLocation",
+         "relativeState",
          "type"
       ]
    },
-   "description": "The `Terminus` data class provides a structure for describing the end (terminus) of a molecule. Structurally similar to Adjacency, but used for describing where a molecule terminates (instead of adjoining another molecule).",
+   "description": "An Allele defined on a mapped location relative to a base location. Often used to describe intronic variants.",
    "properties": {
       "id": {
          "type": "string",
@@ -57,27 +59,51 @@
       },
       "type": {
          "type": "string",
-         "const": "Terminus",
-         "default": "Terminus",
-         "description": "MUST be \"Terminus\"."
+         "const": "RelativeAllele",
+         "default": "RelativeAllele",
+         "description": "MUST be \"RelativeAllele\""
       },
-      "location": {
+      "relativeState": {
+         "description": "The state of the RelativeAllele as expressed on the mapped sequence. This will differ from the base state when mapping to a reverse complement sequence, commonly observed when representing the state on transcripts mapped to the \"negative strand\" of a chromosome.",
+         "oneOf": [
+            {
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/LengthExpression"
+            },
+            {
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/LiteralSequenceExpression"
+            },
+            {
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/ReferenceLengthExpression"
+            }
+         ]
+      },
+      "baseState": {
+         "description": "The state of the RelativeAllele as expressed on the base sequence.",
+         "oneOf": [
+            {
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/LengthExpression"
+            },
+            {
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/LiteralSequenceExpression"
+            },
+            {
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/ReferenceLengthExpression"
+            }
+         ]
+      },
+      "relativeLocation": {
+         "description": "The relative location at which the baseState and relativeState are expressed.",
          "oneOf": [
             {
                "$ref": "/ga4gh/schema/vrs/2.0.1/json/RelativeSequenceLocation"
             },
             {
-               "$ref": "/ga4gh/schema/vrs/2.0.1/json/SequenceLocation"
-            },
-            {
                "$ref": "/ga4gh/schema/gks-core/1.0.0/json/iriReference"
             }
-         ],
-         "description": "The location of the terminus."
+         ]
       }
    },
    "required": [
-      "location",
       "type"
    ],
    "additionalProperties": false
