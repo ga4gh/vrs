@@ -527,7 +527,7 @@ $defs:
       inherent:
         - type
     description: >-
-      An expression describing a :ref:`Sequence`.
+      An expression describing a :ref:`sequence <sequenceString>`.
     oneOf:
       - $ref: "#/$defs/LiteralSequenceExpression"
       - $ref: "#/$defs/ReferenceLengthExpression"
@@ -566,7 +566,7 @@ $defs:
         description: The number of residues in the expressed sequence.
       sequence:
         $ref: "#/$defs/sequenceString"
-        description: the literal :ref:`Sequence` encoded by the Reference Length Expression.
+        description: the literal :ref:`sequence <sequenceString>` encoded by the Reference Length Expression.
       repeatSubunitLength:
         type: integer
         description: The number of residues in the repeat subunit.
