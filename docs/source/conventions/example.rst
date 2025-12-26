@@ -198,22 +198,3 @@ This example provides a full VRS-compliant Allele with a computed identifier.
           identifier scheme for private or public use. For example,
           the above *id* could be a serial number assigned by an
           application, such as ``acmecorp:v0000123``.
-
-
-What's Next?
-@@@@@@@@@@@@
-
-This example has shown a full example for a relatively simple case.
-VRS provides a framework that will enable much more complex variation.
-Please see :ref:`future-plans` for a discussion of variation classes
-that are intended in the near future.
-
-The :ref:`implementations` section lists libraries and packages that
-implement VRS.
-
-VRS objects are `value objects
-<https://en.wikipedia.org/wiki/Value_object>`__. An important
-consequence of this design choice is that data should be associated
-*with* VRS objects via their identifiers rather than embedded *within*
-those objects. The appendix contains an example of :ref:`associating
-annotations with variation <associating_annotations>`.
