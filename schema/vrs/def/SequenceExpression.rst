@@ -4,7 +4,7 @@
 
 **Computational Definition**
 
-An expression describing a :ref:`Sequence`.
+An expression describing a :ref:`sequence <sequenceString>`.
 
 **GA4GH Digest**
 
