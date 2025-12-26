@@ -19,7 +19,7 @@ reference nucleotide ``C`` to ``T``.
 
 In VRS, a contiguous change is represented using an :ref:`allele`
 object, which is composed of a :ref:`Location <location>` and of the
-:ref:`State <state>` at that location. Location and State are
+:ref:`State <SequenceExpression>` at that location. Location and State are
 abstract concepts: VRS is designed to accommodate many kinds of
 Locations based on sequence position, gene names, cytogenetic bands, or
 other ways of describing locations. Similarly, State may refer to a
