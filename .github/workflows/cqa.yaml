@@ -22,3 +22,20 @@ jobs:
       - uses: pre-commit/action@v3.0.1
         with:
           extra_args: ${{ matrix.cmd }} --all-files
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: 3.13
+
+      - name: install dependencies
+        run: python3 -m pip install -r .requirements.txt
+
+      - name: attempt docs build
+        working-directory: docs
+        run: make all
