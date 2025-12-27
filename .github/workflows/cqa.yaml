@@ -38,7 +38,7 @@ jobs:
 
       - name: generate schema
         working-directory: schema
-        run: make schema
+        run: make all
 
       - name: attempt docs build
         working-directory: docs
