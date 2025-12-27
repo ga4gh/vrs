@@ -38,4 +38,4 @@ jobs:
 
       - name: attempt docs build
         working-directory: docs
-        run: make all
+        run: make all SPHINXOPTS="-W"
