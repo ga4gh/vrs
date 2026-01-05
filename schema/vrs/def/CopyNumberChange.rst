@@ -87,7 +87,7 @@ Some CopyNumberChange attributes are inherited from :ref:`Variation`.
       - MUST be "CopyNumberChange"
    *  - location
       -
-      - :ref:`iriReference` | :ref:`SequenceLocation`
+      - :ref:`iriReference` | :ref:`Location`
       - 1..1
       - The location of the subject of the copy change.
    *  - copyChange

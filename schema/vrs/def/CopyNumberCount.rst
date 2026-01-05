@@ -87,7 +87,7 @@ Some CopyNumberCount attributes are inherited from :ref:`Variation`.
       - MUST be "CopyNumberCount"
    *  - location
       -
-      - :ref:`iriReference` | :ref:`SequenceLocation`
+      - :ref:`iriReference` | :ref:`Location`
       - 1..1
       - The location of the subject of the copy count.
    *  - copies

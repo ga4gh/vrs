@@ -87,7 +87,7 @@ Some Allele attributes are inherited from :ref:`Variation`.
       - MUST be "Allele"
    *  - location
       -
-      - :ref:`iriReference` | :ref:`SequenceLocation`
+      - :ref:`iriReference` | :ref:`Location`
       - 1..1
       - The location of the Allele
    *  - state
