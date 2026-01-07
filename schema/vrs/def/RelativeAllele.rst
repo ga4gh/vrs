@@ -88,15 +88,15 @@ Some RelativeAllele attributes are inherited from :ref:`Variation`.
    *  - relativeState
       -
       - :ref:`SequenceExpression`
-      - 0..1
+      - 1..1
       - The state of the RelativeAllele as expressed on the mapped sequence. This will differ from the base state when mapping to a reverse complement sequence, commonly observed when representing the state on transcripts mapped to the "negative strand" of a chromosome.
    *  - baseState
       -
       - :ref:`SequenceExpression`
-      - 0..1
+      - 1..1
       - The state of the RelativeAllele as expressed on the base sequence.
    *  - relativeLocation
       -
       - :ref:`RelativeSequenceLocation` | :ref:`iriReference`
-      - 0..1
+      - 1..1
       - The relative location at which the baseState and relativeState are expressed.
