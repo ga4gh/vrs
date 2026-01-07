@@ -194,6 +194,10 @@ $defs:
         oneOf:
           - $ref: "#/$defs/RelativeSequenceLocation"
           - $refCurie: gks.core:iriReference
+    required:
+      - relativeLocation
+      - baseState
+      - relativeState
 
   CisPhasedBlock:
     maturity: trial use
@@ -402,6 +406,9 @@ $defs:
         oneOf:
           - $refCurie: gks.core:iriReference
           - $ref: "#/$defs/SequenceOffsetLocation"
+    required:
+      - baseSequenceLocation
+      - mappedSequenceLocation
 
   SequenceOffsetLocation:
     type: object
@@ -469,7 +476,10 @@ $defs:
         oneOf:
           - type: integer
           - $ref: "#/$defs/Range"
-
+    required:
+      - sequenceReference
+      - anchor
+      - anchorOrientation
 
   SequenceReference:
     maturity: trial use

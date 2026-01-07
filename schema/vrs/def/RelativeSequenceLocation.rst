@@ -80,10 +80,10 @@ Some RelativeSequenceLocation attributes are inherited from :ref:`Ga4ghIdentifia
    *  - baseSequenceLocation
       -
       - :ref:`SequenceLocation` | :ref:`iriReference`
-      - 0..1
+      - 1..1
       - An absolute location on a sequence.
    *  - mappedSequenceLocation
       -
       - :ref:`iriReference` | :ref:`SequenceOffsetLocation`
-      - 0..1
+      - 1..1
       - A location relative to an offset on a mapped sequence.
