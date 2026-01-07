@@ -408,6 +408,14 @@ $defs:
     inherits: gks-core:Entity
     # protectedClassOf: RelativeSequenceLocation
     maturity: draft
+    ga4gh:
+      inherent:
+        - type
+        - sequenceReference
+        - anchor
+        - anchorOrientation
+        - offsetStart
+        - offsetEnd
     description: >-
       A location defined by an offset relative to an anchor on a
       mapped sequence reference.
