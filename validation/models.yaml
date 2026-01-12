@@ -104,14 +104,14 @@ SequenceOffsetLocation:
         id: NM_001385641.1
         type: SequenceReference
         refgetAccession: SQ.cXRaN1IhgR6Mg9U-qafH2Be6IuQgB6Ox
-      anchor: 609
+      anchor: 610
       anchorOrientation: left
       offsetStart: 4
       offsetEnd: 5
     out:
       ga4gh_digest: null
       ga4gh_identify: null
-      ga4gh_serialize: '{"anchor":609,"anchorOrientation":"left","offsetEnd":5,"offsetStart":4,"sequenceReference":{"refgetAccession":"SQ.cXRaN1IhgR6Mg9U-qafH2Be6IuQgB6Ox","type":"SequenceReference"},"type":"SequenceOffsetLocation"}'
+      ga4gh_serialize: '{"anchor":610,"anchorOrientation":"left","offsetEnd":5,"offsetStart":4,"sequenceReference":{"refgetAccession":"SQ.cXRaN1IhgR6Mg9U-qafH2Be6IuQgB6Ox","type":"SequenceReference"},"type":"SequenceOffsetLocation"}'
   - name: NM_001385641.1:c.1058-6C>G
     in:
       type: SequenceOffsetLocation
@@ -119,14 +119,14 @@ SequenceOffsetLocation:
         id: NM_001385641.1
         type: SequenceReference
         refgetAccession: SQ.cXRaN1IhgR6Mg9U-qafH2Be6IuQgB6Ox
-      anchor: 1058
+      anchor: 1059
       anchorOrientation: right
       offsetStart: -6
       offsetEnd: -5
     out:
       ga4gh_digest: null
       ga4gh_identify: null
-      ga4gh_serialize: '{"anchor":1058,"anchorOrientation":"right","offsetEnd":-5,"offsetStart":-6,"sequenceReference":{"refgetAccession":"SQ.cXRaN1IhgR6Mg9U-qafH2Be6IuQgB6Ox","type":"SequenceReference"},"type":"SequenceOffsetLocation"}'
+      ga4gh_serialize: '{"anchor":1059,"anchorOrientation":"right","offsetEnd":-5,"offsetStart":-6,"sequenceReference":{"refgetAccession":"SQ.cXRaN1IhgR6Mg9U-qafH2Be6IuQgB6Ox","type":"SequenceReference"},"type":"SequenceOffsetLocation"}'
 
 RelativeSequenceLocation:
   - name: NC_000001(NM_012345):c.123+5G>A
