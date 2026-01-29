@@ -97,62 +97,63 @@ SequenceLocation:
       ga4gh_serialize: '{"end":[null,44908822],"sequenceReference":{"refgetAccession":"SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul","type":"SequenceReference"},"start":[44908721,44908821],"type":"SequenceLocation"}'
 
 SequenceOffsetLocation:
-  - name: NM_001385641.1:c.609+5G>A
+  - name: NM_001385641.1:c.609+13G>A
     in:
       type: SequenceOffsetLocation
       sequenceReference:
         id: NM_001385641.1
         type: SequenceReference
         refgetAccession: SQ.cXRaN1IhgR6Mg9U-qafH2Be6IuQgB6Ox
-      anchor: 610
+      anchor: 1118
       anchorOrientation: left
-      offsetStart: 4
-      offsetEnd: 5
+      offsetStart: 12
+      offsetEnd: 13
     out:
       ga4gh_digest: null
       ga4gh_identify: null
-      ga4gh_serialize: '{"anchor":610,"anchorOrientation":"left","offsetEnd":5,"offsetStart":4,"sequenceReference":{"refgetAccession":"SQ.cXRaN1IhgR6Mg9U-qafH2Be6IuQgB6Ox","type":"SequenceReference"},"type":"SequenceOffsetLocation"}'
-  - name: NM_001385641.1:c.1058-6C>G
+      ga4gh_serialize: '{"anchor":1118,"anchorOrientation":"left","offsetEnd":13,"offsetStart":12,"sequenceReference":{"refgetAccession":"SQ.cXRaN1IhgR6Mg9U-qafH2Be6IuQgB6Ox","type":"SequenceReference"},"type":"SequenceOffsetLocation"}'
+  - name: NM_005188.4:c.1096-1G>C
     in:
       type: SequenceOffsetLocation
       sequenceReference:
-        id: NM_001385641.1
+        id: NM_005188.4
         type: SequenceReference
-        refgetAccession: SQ.cXRaN1IhgR6Mg9U-qafH2Be6IuQgB6Ox
-      anchor: 1059
+        refgetAccession: SQ.sGOtbqhneKsAZHmQ47sgcLmcYPcVTRbd
+      anchor: 1174
       anchorOrientation: right
-      offsetStart: -6
-      offsetEnd: -5
+      offsetStart: -1
+      offsetEnd: 0
     out:
       ga4gh_digest: null
       ga4gh_identify: null
-      ga4gh_serialize: '{"anchor":1059,"anchorOrientation":"right","offsetEnd":-5,"offsetStart":-6,"sequenceReference":{"refgetAccession":"SQ.cXRaN1IhgR6Mg9U-qafH2Be6IuQgB6Ox","type":"SequenceReference"},"type":"SequenceOffsetLocation"}'
+      ga4gh_serialize: '{"anchor":1174,"anchorOrientation":"right","offsetEnd":0,"offsetStart":-1,"sequenceReference":{"refgetAccession":"SQ.sGOtbqhneKsAZHmQ47sgcLmcYPcVTRbd","type":"SequenceReference"},"type":"SequenceOffsetLocation"}'
 
 RelativeSequenceLocation:
-  - name: NC_000001(NM_012345):c.123+5G>A
+  - name: NC_000001.11(NM_001385641.1):c.609+13G>A
     in:
       type: RelativeSequenceLocation
       baseSequenceLocation:
         type: SequenceLocation
         sequenceReference:
           type: SequenceReference
-          id: NC_000001.9
-          refgetAccession: SQ.wOWodAo-KmcEcBduBW551pNahTwpqZMQ
-        start: 4025
-        end: 4026
+          id: NC_000001.11
+          refgetAccession: SQ.2NkFm8HK88MqeNkCgj78KidCAXgnsfV1
+        start: 926025
+        end: 926026
       mappedSequenceLocation:
+        type: SequenceOffsetLocation
         sequenceReference:
+          id: NM_001385641.1
           type: SequenceReference
-          id: NM_012345.3
-          refgetAccession: SQ.167YSdgs5QKJXnRZ8TNWZmDCUA9nDMQF
-        anchor: 123
+          refgetAccession: SQ.cXRaN1IhgR6Mg9U-qafH2Be6IuQgB6Ox
+        anchor: 1118
         anchorOrientation: left
-        offsetStart: 4
-        offsetEnd: 5
+        offsetStart: 12
+        offsetEnd: 13
     out:
-      ga4gh_digest: SDFtDnOrW04GOWwpozTU8rsL21rtC_3n
-      ga4gh_identify: ga4gh:RSL.SDFtDnOrW04GOWwpozTU8rsL21rtC_3n
-      ga4gh_serialize: '{"baseSequenceLocation":"qPMsNhgS87YInGDXhtxfgjekU6xErVH_","mappedSequenceLocation":{"anchor":123,"anchorOrientation":"left","offsetEnd":5,"offsetStart":4,"sequenceReference":{"refgetAccession":"SQ.167YSdgs5QKJXnRZ8TNWZmDCUA9nDMQF","type":"SequenceReference"},"type":"SequenceOffsetLocation"},"type":"RelativeSequenceLocation"}'
+      ga4gh_digest: 2g0z-upe9RFV5TT1yMy-B3R9leQoFhPt
+      ga4gh_identify: ga4gh:RSL.2g0z-upe9RFV5TT1yMy-B3R9leQoFhPt
+      ga4gh_serialize: '{"baseSequenceLocation":"NkDoyt4S2q2ulcDQliqPY5YTd93k8KeO","mappedSequenceLocation":{"anchor":1118,"anchorOrientation":"left","offsetEnd":13,"offsetStart":12,"sequenceReference":{"refgetAccession":"SQ.cXRaN1IhgR6Mg9U-qafH2Be6IuQgB6Ox","type":"SequenceReference"},"type":"SequenceOffsetLocation"},"type":"RelativeSequenceLocation"}'
 
 Adjacency:
   - name: "Ambiguous linker (order 1)" # Expect different digest for different order
@@ -245,38 +246,38 @@ Allele:
       ga4gh_serialize: '{"location":"nQGBuvRQOLEboA5TYtcz975fp_GulxbZ","state":{"length":11,"repeatSubunitLength":3,"type":"ReferenceLengthExpression"},"type":"Allele"}'
 
 RelativeAllele:
-  - name: NC_000001(NM_012345):c.123+5G>A
+  - name: NC_000001.11(NM_001385641.1):c.609+13G>A (positive strand)
     in:
       type: RelativeAllele
       relativeLocation:
-        type: RelativeSequenceLocation
         baseSequenceLocation:
           type: SequenceLocation
           sequenceReference:
             type: SequenceReference
-            id: NC_000001.9
-            refgetAccession: SQ.wOWodAo-KmcEcBduBW551pNahTwpqZMQ
-          start: 4025
-          end: 4026
+            id: NC_000001.11
+            refgetAccession: SQ.2NkFm8HK88MqeNkCgj78KidCAXgnsfV1
+          start: 926025
+          end: 926026
         mappedSequenceLocation:
+          type: SequenceOffsetLocation
           sequenceReference:
+            id: NM_001385641.1
             type: SequenceReference
-            id: NM_012345.3
-            refgetAccession: SQ.167YSdgs5QKJXnRZ8TNWZmDCUA9nDMQF
-          anchor: 123
+            refgetAccession: SQ.cXRaN1IhgR6Mg9U-qafH2Be6IuQgB6Ox
+          anchor: 1118
           anchorOrientation: left
-          offsetStart: 4
-          offsetEnd: 5
+          offsetStart: 12
+          offsetEnd: 13
       relativeState:
         type: LiteralSequenceExpression
         sequence: A
       baseState:
         type: LiteralSequenceExpression
-        sequence: T
+        sequence: A
     out:
-      ga4gh_digest: bQ_U-eS1-O4TaxKyDL0-UGhFCjp5lcr6
-      ga4gh_identify: ga4gh:RA.bQ_U-eS1-O4TaxKyDL0-UGhFCjp5lcr6
-      ga4gh_serialize: '{"baseState":{"sequence":"T","type":"LiteralSequenceExpression"},"relativeLocation":"SDFtDnOrW04GOWwpozTU8rsL21rtC_3n","relativeState":{"sequence":"A","type":"LiteralSequenceExpression"},"type":"RelativeAllele"}'
+      ga4gh_digest: 6mRArTo8R4uPuzuLFFQYfF4Q_i3IC30i
+      ga4gh_identify: ga4gh:RA.6mRArTo8R4uPuzuLFFQYfF4Q_i3IC30i
+      ga4gh_serialize: '{"baseState":{"sequence":"A","type":"LiteralSequenceExpression"},"relativeLocation":"2g0z-upe9RFV5TT1yMy-B3R9leQoFhPt","relativeState":{"sequence":"A","type":"LiteralSequenceExpression"},"type":"RelativeAllele"}'
 
 CisPhasedBlock:
   - name: "Simple CisPhasedBlock (order 1)" # Expect same digest for different order
