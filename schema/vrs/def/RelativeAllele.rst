@@ -18,7 +18,7 @@ An Allele defined on a mapped location relative to a base location. Often used t
        - Inherent
 
     *  - RA
-       - ['baseState', 'relativeLocation', 'relativeState', 'type']
+       - ['baseState', 'mappedState', 'relativeLocation', 'type']
 
 
 **Information Model**
@@ -85,7 +85,7 @@ Some RelativeAllele attributes are inherited from :ref:`Variation`.
       - string
       - 1..1
       - MUST be "RelativeAllele"
-   *  - relativeState
+   *  - mappedState
       -
       - :ref:`SequenceExpression`
       - 1..1
@@ -99,4 +99,4 @@ Some RelativeAllele attributes are inherited from :ref:`Variation`.
       -
       - :ref:`RelativeSequenceLocation` | :ref:`iriReference`
       - 1..1
-      - The relative location at which the baseState and relativeState are expressed.
+      - The relative location at which the baseState and mappedState are expressed.

@@ -8,8 +8,8 @@
       "prefix": "RA",
       "inherent": [
          "baseState",
+         "mappedState",
          "relativeLocation",
-         "relativeState",
          "type"
       ]
    },
@@ -63,7 +63,7 @@
          "default": "RelativeAllele",
          "description": "MUST be \"RelativeAllele\""
       },
-      "relativeState": {
+      "mappedState": {
          "description": "The state of the RelativeAllele as expressed on the mapped sequence. This will differ from the base state when mapping to a reverse complement sequence, commonly observed when representing the state on transcripts mapped to the \"negative strand\" of a chromosome.",
          "oneOf": [
             {
@@ -92,7 +92,7 @@
          ]
       },
       "relativeLocation": {
-         "description": "The relative location at which the baseState and relativeState are expressed.",
+         "description": "The relative location at which the baseState and mappedState are expressed.",
          "oneOf": [
             {
                "$ref": "/ga4gh/schema/vrs/2.0.1/json/RelativeSequenceLocation"
@@ -105,8 +105,8 @@
    },
    "required": [
       "baseState",
+      "mappedState",
       "relativeLocation",
-      "relativeState",
       "type"
    ],
    "additionalProperties": false
