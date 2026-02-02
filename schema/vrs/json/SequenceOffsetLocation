@@ -65,7 +65,7 @@
          ]
       },
       "anchor": {
-         "description": "The position on the sequence reference from which the relative location offset is calculated.",
+         "description": "The inter-residue position on the sequence reference from which the relative location offset is calculated.",
          "type": "integer"
       },
       "anchorOrientation": {

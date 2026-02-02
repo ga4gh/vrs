@@ -81,7 +81,7 @@ Some SequenceOffsetLocation attributes are inherited from :ref:`gks-core:Entity`
       -
       - integer
       - 1..1
-      - The position on the sequence reference from which the relative location offset is calculated.
+      - The inter-residue position on the sequence reference from which the relative location offset is calculated.
    *  - anchorOrientation
       -
       - string

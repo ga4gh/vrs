@@ -162,7 +162,7 @@ $defs:
     ga4gh:
       prefix: RA
       inherent:
-        - relativeState
+        - mappedState
         - baseState
         - relativeLocation
     inherits: MolecularVariation
@@ -177,7 +177,7 @@ $defs:
         default: "RelativeAllele"
         description: >-
           MUST be "RelativeAllele"
-      relativeState:
+      mappedState:
         description: >-
           The state of the RelativeAllele as expressed on the mapped sequence. This will
           differ from the base state when mapping to a reverse complement sequence,
@@ -190,14 +190,14 @@ $defs:
         $ref: "#/$defs/SequenceExpression"
       relativeLocation:
         description: >-
-          The relative location at which the baseState and relativeState are expressed.
+          The relative location at which the baseState and mappedState are expressed.
         oneOf:
           - $ref: "#/$defs/RelativeSequenceLocation"
           - $refCurie: gks.core:iriReference
     required:
       - relativeLocation
       - baseState
-      - relativeState
+      - mappedState
 
   CisPhasedBlock:
     maturity: trial use
@@ -441,8 +441,7 @@ $defs:
           - $refCurie: gks.core:iriReference
       anchor:
         description: >-
-          The position on the sequence reference from which the
-          relative location offset is calculated.
+          The inter-residue position on the sequence reference from which the relative location offset is calculated.
         type: integer
       anchorOrientation:
         description: >-
