@@ -268,16 +268,16 @@ RelativeAllele:
           anchorOrientation: left
           offsetStart: 12
           offsetEnd: 13
-      relativeState:
+      mappedState:
         type: LiteralSequenceExpression
         sequence: A
       baseState:
         type: LiteralSequenceExpression
         sequence: A
     out:
-      ga4gh_digest: 6mRArTo8R4uPuzuLFFQYfF4Q_i3IC30i
-      ga4gh_identify: ga4gh:RA.6mRArTo8R4uPuzuLFFQYfF4Q_i3IC30i
-      ga4gh_serialize: '{"baseState":{"sequence":"A","type":"LiteralSequenceExpression"},"relativeLocation":"2g0z-upe9RFV5TT1yMy-B3R9leQoFhPt","relativeState":{"sequence":"A","type":"LiteralSequenceExpression"},"type":"RelativeAllele"}'
+      ga4gh_digest: hqbFibmE4GBxm59a88DYjJ6dbYHjaZvE
+      ga4gh_identify: ga4gh:RA.hqbFibmE4GBxm59a88DYjJ6dbYHjaZvE
+      ga4gh_serialize: '{"baseState":{"sequence":"A","type":"LiteralSequenceExpression"},"mappedState":{"sequence":"A","type":"LiteralSequenceExpression"},"relativeLocation":"2g0z-upe9RFV5TT1yMy-B3R9leQoFhPt","type":"RelativeAllele"}'
 
 CisPhasedBlock:
   - name: "Simple CisPhasedBlock (order 1)" # Expect same digest for different order
