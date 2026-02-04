@@ -1,6 +1,16 @@
 2.0
 !!!
 
+2.0.1
+@@@@@
+
+Summary of Changes
+##################
+
+  * updates :ref:`CopyNumberChange` draft to use named enum in lieu of MappableConcept
+  * adds controlled vocabulary of `CopyNumberChange` enum to class definitions
+  * adds design decision for use of value sets over MappableConcept in VRS
+
 2.0.0
 @@@@@
 
@@ -14,13 +24,3 @@ Major Changes
   * supports structural variation
   * imports from the GKS-core library for cross-specification alignment
   * renames Haplotype to CisPhasedBlock
-
-2.0.1
-@@@@@
-
-Summary of Changes
-##################
-
-  * updates :ref:`CopyNumberChange` draft to use named enum in lieu of MappableConcept
-  * adds controlled vocabulary of `CopyNumberChange` enum to class definitions
-  * adds design decision for use of value sets over MappableConcept in VRS
