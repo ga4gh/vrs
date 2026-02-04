@@ -91,6 +91,34 @@ the following syntax:
 
   https://w3id.org/ga4gh/vrs/VA.Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT
 
+.. _inter-residue-coordinates-design:
+
+Inter-residue Coordinates
+@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Sequence ranges use an inter-residue coordinate system. Inter-residue
+coordinate conventions are used in this terminology because they
+provide conceptual consistency that is not possible with residue-based
+systems.
+
+.. important:: The choice of what to count — residue or inter-residue
+               positions — has significant semantic implications for
+               the interpretation of coordinates.  Although
+               inter-residue coordinates and the "0-based" residue
+               coordinates are often numerically identical, we favor
+               "inter-residue" to emphasize the meaning of these
+               coordinates.
+
+When humans refer to a range of residues within a sequence, the most
+common convention is to use an interval of ordinal residue positions
+in the sequence. While natural for humans, this convention has several
+shortcomings when dealing with sequence variation.
+
+For example, interval coordinates are interpreted as exclusive
+coordinates for insertions, but as inclusive coordinates for
+substitutions and deletions; in effect, the interpretation of
+coordinates depends on the variant type, which is an unfortunate
+coupling of distinct concepts.
 Use of value sets for VRS computed digests
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

@@ -75,7 +75,7 @@ or may emerge in the course of technical specification development. It is expect
 that the need for product features are first discussed in a community forum (e.g.
 GitHub Discussions, GKS Work Stream calls).
 
-**Process**: Follow the GKS :ref:`development-process`. As part of this process,
+**Process**: Follow the GKS development process. As part of this process,
 it is expected that consensus among the decision-makers was reached and major design
 decisions documented. Disagreements are resolved per Work Stream and GA4GH processes.
 

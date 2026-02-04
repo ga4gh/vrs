@@ -26,9 +26,8 @@ A VRS Computed Identifier for a VRS concept is computed as follows:
 .. important:: Normalizing objects is STRONGLY RECOMMENDED for
                interoperability. While normalization is not strictly
                required, automated validation mechanisms are
-               anticipated that will likely disqualify Variation that
-               is not normalized. See :ref:`should-normalize` for
-               a rationale.
+               anticipated that will likely disqualify variations that
+               are not normalized.
 
 The following diagram depicts the operations necessary to generate a
 computed identifier. These operations are described in detail in the
