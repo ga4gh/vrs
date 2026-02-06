@@ -25,9 +25,6 @@
          "$ref": "/ga4gh/schema/vrs/2.0.1/json/DerivativeMolecule"
       },
       {
-         "$ref": "/ga4gh/schema/vrs/2.0.1/json/RelativeAllele"
-      },
-      {
          "$ref": "/ga4gh/schema/vrs/2.0.1/json/Terminus"
       }
    ],
