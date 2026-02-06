@@ -62,7 +62,7 @@ Mapping relative to the anchor
 
 Offsets are applied relative to the anchor to identify the transcript-relative inter-residue interval corresponding to the HGVS position.
 
-Because the anchor corresponds to an exon junction, ``anchorOrientation`` is used to select which side of the anchor is used as the reference point. For this splice-acceptor variant, the anchor is oriented to the **right**, selecting the side of the anchor immediately following the exon boundary.
+Because the anchor represents the point at which an alignment gap occurs (e.g. an exon junction mapped to two sides of an intronic sequence), ``anchorOrientation`` is used to select which side of the anchor is used as the reference point. For this splice-acceptor variant, the anchor is oriented to the **right**, selecting the side of the anchor immediately following the intron-exon boundary.
 
 Offsets are expressed in inter-residue coordinates. In this example, ``offsetStart = -1`` and ``offsetEnd = 0`` select the single inter-residue interval immediately upstream of the anchor, corresponding to the nucleotide referenced by the HGVS expression.
 
