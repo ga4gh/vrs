@@ -84,13 +84,13 @@ The corresponding exon boundaries on the genomic reference are shown below for v
   :alt: UCSC Exon 16
   :target: https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr10%3A95384283%2D95384289&hgsid=3617902765_kvlU8kYxpPuUSmhZphrKM32aASQP
 
-  Exon 16 boundary in the UCSC Genome Browser.
+  `Exon 16 boundary in the UCSC Genome Browser <https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr10%3A95384283%2D95384289&hgsid=3617902765_kvlU8kYxpPuUSmhZphrKM32aASQP>`_
 
 .. figure:: ../../images/splice_variants/acceptor_downstream/ucsc-exon15.png
   :alt: UCSC Exon 15
   :target: https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr10%3A95394610%2D95394613&hgsid=3617902765_kvlU8kYxpPuUSmhZphrKM32aASQP
 
-  Exon 15 boundary in the UCSC Genome Browser.
+  `Exon 15 boundary in the UCSC Genome Browser <https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr10%3A95394610%2D95394613&hgsid=3617902765_kvlU8kYxpPuUSmhZphrKM32aASQP>`_
 
 Relative Allele representation
 ------------------------------
