@@ -35,7 +35,7 @@ The exon boundaries below provide the local transcript context used to interpret
 NCBI graphical sequence view
 ----------------------------
 
-The figure below shows the same region in the NCBI Sequence Viewer, which displays transcript structure and exon boundaries aligned to the reference sequence.
+The figure below shows the same region in the `NCBI Sequence Viewer <https://www.ncbi.nlm.nih.gov/nuccore/1878246542?report=graph&tracks=[key:sequence_track,name:Sequence,display_name:Sequence,id:STD649220238,annots:Sequence,ShowLabel:false,ColorGaps:false,shown:true,order:1][key:gene_model_track,name:Genes,display_name:Genes,id:STD3194982005,annots:Unnamed,Options:ShowAll,CDSProductFeats:true,NtRuler:true,AaRuler:true,HighlightMode:2,ShowLabel:true,shown:true,order:4][key:feature_track,name:Other features---misc_feature,display_name:misc_feature Features,id:STD3760889287,subkey:misc_feature,annots:Unnamed,shown:true,order:21][key:feature_track,name:Other features---polyA_site,display_name:polyA_site Features,id:STD3911386278,subkey:polyA_site,annots:Unnamed,shown:true,order:22][key:feature_track,name:Other features---regulatory,display_name:regulatory Features,id:STD2883984253,subkey:regulatory,annots:Unnamed,shown:true,order:23]&mk=1118|1118|blue|9&v=1096:1139&c=33CCCC&select=null&slim=0>`_, which displays transcript structure and exon boundaries aligned to the reference sequence.
 
 .. figure:: ../../images/splice_variants/donor_downstream/ncbi_reference_sequence.png
   :alt:  NCBI Sequence Viewer showing the splice donor region in NM_001385641.1
