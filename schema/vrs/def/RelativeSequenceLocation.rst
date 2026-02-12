@@ -18,7 +18,7 @@ A location on a base sequence and its position relative to a boundary offset on 
        - Inherent
 
     *  - RSL
-       - ['baseSequenceLocation', 'offsetLocation', 'type']
+       - ['baseSequenceLocation', 'mappedSequenceLocation', 'type']
 
 
 **Information Model**
