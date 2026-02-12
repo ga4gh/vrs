@@ -71,7 +71,7 @@ Some SequenceOffsetLocation attributes are inherited from :ref:`gks-core:Entity`
       -
       - string
       - 1..1
-      - MUST be "SequenceOffset"
+      - MUST be "SequenceOffsetLocation"
    *  - sequenceReference
       -
       - :ref:`SequenceReference` | :ref:`iriReference`
