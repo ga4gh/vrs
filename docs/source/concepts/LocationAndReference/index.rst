@@ -15,4 +15,6 @@ and, by extension all references are built on, :ref:`Sequence References<Sequenc
    :maxdepth: 1
 
    SequenceLocation
+   RelativeSequenceLocation
+   SequenceOffsetLocation
    SequenceReference
