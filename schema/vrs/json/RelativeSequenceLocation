@@ -7,7 +7,7 @@
    "ga4gh": {
       "inherent": [
          "baseSequenceLocation",
-         "offsetLocation",
+         "mappedSequenceLocation",
          "type"
       ],
       "prefix": "RSL"
