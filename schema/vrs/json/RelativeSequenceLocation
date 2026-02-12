@@ -1,18 +1,18 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.1/json/Adjacency",
-   "title": "Adjacency",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.1/json/RelativeSequenceLocation",
+   "title": "RelativeSequenceLocation",
    "type": "object",
-   "maturity": "trial use",
+   "maturity": "draft",
    "ga4gh": {
-      "prefix": "AJ",
       "inherent": [
-         "adjoinedSequences",
-         "linker",
+         "baseSequenceLocation",
+         "offsetLocation",
          "type"
-      ]
+      ],
+      "prefix": "RSL"
    },
-   "description": "The `Adjacency` class represents the adjoining of the end of a sequence with the beginning of an adjacent sequence, potentially with an intervening linker sequence.",
+   "description": "A location on a base sequence and its position relative to a boundary offset on a mapped sequence gap. Typically used to describe intronic locations that exist with respect to a mapped RNA transcript sequence.",
    "properties": {
       "id": {
          "type": "string",
@@ -49,68 +49,38 @@
          "type": "string",
          "pattern": "^[0-9A-Za-z_\\-]{32}$"
       },
-      "expressions": {
-         "type": "array",
-         "ordered": false,
-         "items": {
-            "$ref": "/ga4gh/schema/vrs/2.0.1/json/Expression"
-         }
-      },
       "type": {
          "type": "string",
-         "const": "Adjacency",
-         "default": "Adjacency",
-         "description": "MUST be \"Adjacency\"."
+         "const": "RelativeSequenceLocation",
+         "default": "RelativeSequenceLocation",
+         "description": "MUST be \"RelativeSequenceLocation\""
       },
-      "adjoinedSequences": {
-         "type": "array",
-         "uniqueItems": false,
-         "ordered": true,
-         "items": {
-            "oneOf": [
-               {
-                  "$ref": "/ga4gh/schema/vrs/2.0.1/json/RelativeSequenceLocation"
-               },
-               {
-                  "$ref": "/ga4gh/schema/vrs/2.0.1/json/SequenceLocation"
-               },
-               {
-                  "$ref": "/ga4gh/schema/gks-core/1.1.0/json/iriReference"
-               }
-            ],
-            "not": {
-               "required": [
-                  "start",
-                  "end"
-               ]
-            }
-         },
-         "description": "The terminal sequence or pair of adjoined sequences that defines in the adjacency.",
-         "minItems": 2,
-         "maxItems": 2
-      },
-      "linker": {
-         "description": "The sequence found between adjoined sequences.",
+      "baseSequenceLocation": {
+         "description": "An absolute location on a sequence.",
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.0.1/json/LengthExpression"
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/SequenceLocation"
             },
             {
-               "$ref": "/ga4gh/schema/vrs/2.0.1/json/LiteralSequenceExpression"
-            },
-            {
-               "$ref": "/ga4gh/schema/vrs/2.0.1/json/ReferenceLengthExpression"
+               "$ref": "/ga4gh/schema/gks-core/1.1.0/json/iriReference"
             }
          ]
       },
-      "homology": {
-         "type": "boolean",
-         "maturity": "draft",
-         "description": "A flag indicating if coordinate ambiguity in the adjoined sequences is from sequence homology (true) or other uncertainty, such as instrument ambiguity (false)."
+      "mappedSequenceLocation": {
+         "description": "A location relative to an offset on a mapped sequence.",
+         "oneOf": [
+            {
+               "$ref": "/ga4gh/schema/vrs/2.0.1/json/SequenceOffsetLocation"
+            },
+            {
+               "$ref": "/ga4gh/schema/gks-core/1.1.0/json/iriReference"
+            }
+         ]
       }
    },
    "required": [
-      "adjoinedSequences",
+      "baseSequenceLocation",
+      "mappedSequenceLocation",
       "type"
    ],
    "additionalProperties": false
