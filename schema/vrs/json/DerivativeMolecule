@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.1/json/DerivativeMolecule",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.1/json/DerivativeMolecule",
    "title": "DerivativeMolecule",
    "type": "object",
    "maturity": "draft",
@@ -52,7 +52,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/vrs/2.0.1/json/Expression"
+            "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.1/json/Expression"
          }
       },
       "type": {
@@ -68,16 +68,16 @@
          "items": {
             "oneOf": [
                {
-                  "$ref": "/ga4gh/schema/vrs/2.0.1/json/Allele"
+                  "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.1/json/Allele"
                },
                {
-                  "$ref": "/ga4gh/schema/vrs/2.0.1/json/CisPhasedBlock"
+                  "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.1/json/CisPhasedBlock"
                },
                {
-                  "$ref": "/ga4gh/schema/vrs/2.0.1/json/Terminus"
+                  "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.1/json/Terminus"
                },
                {
-                  "$ref": "/ga4gh/schema/vrs/2.0.1/json/TraversalBlock"
+                  "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.1/json/TraversalBlock"
                },
                {
                   "$ref": "/ga4gh/schema/gks-core/1.1.0/json/iriReference"
