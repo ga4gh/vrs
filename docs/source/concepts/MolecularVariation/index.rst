@@ -17,6 +17,7 @@ Collectively, these types of variation are called molecular variation.
    :titlesonly:
 
    Allele
+   RelativeAllele
    Adjacency
    CisPhasedBlock
    Terminus
