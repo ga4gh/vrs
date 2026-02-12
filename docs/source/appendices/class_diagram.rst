@@ -8,6 +8,7 @@ of the class inheritance only, not associations. Each class within the diagram i
 tagged with the maturity level of the class in the upper right corner. The maturity
 levels are defined in the :ref:`feature-maturity-levels` section.
 
-.. figure:: ../images/schema-current.png
+.. figure:: ../images/schema-current.drawio.svg
+   :align: center
 
    Current VRS Class Inheritance Diagram
