@@ -1,7 +1,7 @@
 # Variation Representation Specification (VRS)
 
 [![DOI](https://zenodo.org/badge/67005248.svg)](https://zenodo.org/badge/latestdoi/67005248)
-[![Read the Docs](https://img.shields.io/readthedocs/vr-spec/1.1)](https://vrs.ga4gh.org/)
+[![Read the Docs](https://img.shields.io/readthedocs/vr-spec)](https://vrs.ga4gh.org/)
 [![tests](https://github.com/ga4gh/vrs/actions/workflows/tests.yml/badge.svg)](https://github.com/ga4gh/vrs/actions/workflows/tests.yml)
 
 The [GA4GH](https://www.ga4gh.org/) [Variation Representation Specification](https://vrs.ga4gh.org/)
