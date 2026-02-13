@@ -1,34 +1,34 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.1/json/Variation",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.2/json/Variation",
    "title": "Variation",
    "type": "object",
    "maturity": "trial use",
    "description": "A representation of the state of one or more biomolecules.",
    "oneOf": [
       {
-         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.1/json/Adjacency"
+         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.2/json/Adjacency"
       },
       {
-         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.1/json/Allele"
+         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.2/json/Allele"
       },
       {
-         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.1/json/CisPhasedBlock"
+         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.2/json/CisPhasedBlock"
       },
       {
-         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.1/json/CopyNumberChange"
+         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.2/json/CopyNumberChange"
       },
       {
-         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.1/json/CopyNumberCount"
+         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.2/json/CopyNumberCount"
       },
       {
-         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.1/json/DerivativeMolecule"
+         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.2/json/DerivativeMolecule"
       },
       {
-         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.1/json/RelativeAllele"
+         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.2/json/RelativeAllele"
       },
       {
-         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.1/json/Terminus"
+         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.2/json/Terminus"
       }
    ],
    "discriminator": {

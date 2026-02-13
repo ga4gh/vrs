@@ -1,16 +1,16 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.1/json/Location",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.2/json/Location",
    "title": "Location",
    "type": "object",
    "maturity": "trial use",
    "description": "A contiguous segment of a biological sequence.",
    "oneOf": [
       {
-         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.1/json/RelativeSequenceLocation"
+         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.2/json/RelativeSequenceLocation"
       },
       {
-         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.1/json/SequenceLocation"
+         "$ref": "/ga4gh/schema/vrs/2.1.0-snapshot.2026-02.2/json/SequenceLocation"
       }
    ],
    "discriminator": {
