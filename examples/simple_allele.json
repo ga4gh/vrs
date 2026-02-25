@@ -1,11 +1,20 @@
-{'id': 'ga4gh:VA.ebezGL6HoAhtGJyVnB_mE5BH18ntKev4',
- 'type': 'Allele',
- 'digest': 'ebezGL6HoAhtGJyVnB_mE5BH18ntKev4',
- 'location': {'id': 'ga4gh:SL.JiLRuuyS5wefF_6-Vw7m3Yoqqb2YFkss',
-  'type': 'SequenceLocation',
-  'digest': 'JiLRuuyS5wefF_6-Vw7m3Yoqqb2YFkss',
-  'sequenceReference': {'type': 'SequenceReference',
-   'refgetAccession': 'SQ.aUiQCzCPZ2d0csHbMSbh2NzInhonSXwI'},
-  'start': 80656488,
-  'end': 80656489},
- 'state': {'type': 'LiteralSequenceExpression', 'sequence': 'T'}}
+{
+  "id": "simple_allele",
+  "type": "Allele",
+  "digest": "ebezGL6HoAhtGJyVnB_mE5BH18ntKev4",
+  "location": {
+    "id": "ga4gh:SL.JiLRuuyS5wefF_6-Vw7m3Yoqqb2YFkss",
+    "type": "SequenceLocation",
+    "digest": "JiLRuuyS5wefF_6-Vw7m3Yoqqb2YFkss",
+    "sequenceReference": {
+      "type": "SequenceReference",
+      "refgetAccession": "SQ.aUiQCzCPZ2d0csHbMSbh2NzInhonSXwI"
+    },
+    "start": 80656488,
+    "end": 80656489
+  },
+  "state": {
+    "type": "LiteralSequenceExpression",
+    "sequence": "T"
+  }
+}
