@@ -91,3 +91,7 @@ tools with VRS.
 To run the smoke tests:
 
     make test
+
+## Sample Data
+
+Example VRS objects, illustrating many variant types, are available in both YAML and JSON format in [examples](./examples).  These objects serve to both illustrate the variant types, and to serve as a starting point for developers who are incorporating VRS into their own software.
