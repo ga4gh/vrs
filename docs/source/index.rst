@@ -26,5 +26,6 @@ implementation that promotes adoption of the standard.
    concepts/index
    conventions/index
    examples/index
+   getting_involved
    releases/index
    appendices/index
