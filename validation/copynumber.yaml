@@ -31,3 +31,19 @@ CopyNumberChange:
       ga4gh_digest: _rPTdFeOE9elAozZsakJGTqCvlaiEyr6
       ga4gh_identify: ga4gh:CX._rPTdFeOE9elAozZsakJGTqCvlaiEyr6
       ga4gh_serialize: '{"copyChange":"low-level gain","location":"d9h3FkfTWFkJSH56L1A26y-N2oq_SSuB","type":"CopyNumberChange"}'
+
+# TODO
+# Exact Copy Numbers to be added
+# homozygous deletion (copies: 0)
+# hemizygous loss (copies: 1)
+# normal diploid (copies: 2)
+# high-level amplification (e.g., copies: 8)
+# better tests for the null-boundary vs. exact-integer distinction
+
+# Copy Number Changes to be added
+# complete loss
+# partial loss
+# copy neutral
+# low-level gain
+# high-level gain
+# regional base ploidy
