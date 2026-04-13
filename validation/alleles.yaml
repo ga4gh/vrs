@@ -146,6 +146,7 @@ Allele:
       state:
         length: 17
         type: ReferenceLengthExpression
+        repeatSubunitLength: 1
       type: Allele
     out:
       ga4gh_digest: RVcqUyVeIlmWaMGW1PmcQsDH5JdfYzyC
