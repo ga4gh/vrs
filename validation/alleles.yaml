@@ -41,3 +41,22 @@ Allele:
       ga4gh_digest: Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT
       ga4gh_identify: ga4gh:VA.Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT
       ga4gh_serialize: '{"location":"nQGBuvRQOLEboA5TYtcz975fp_GulxbZ","state":{"length":11,"repeatSubunitLength":3,"type":"ReferenceLengthExpression"},"type":"Allele"}'
+  - name: "NC_000017.10:g.43044295_43044296delinsAT 2-base MNV w/LiteralSequenceExpression"
+    in:
+      type: Allele
+      location:
+        type: SequenceLocation
+        sequenceReference:
+          refgetAccession: SQ.AjWXsI7AkTK35XW9pgd3UbjpC3MAevlz
+          residueAlphabet: na
+          id: NC_NC_000017.10
+          type: SequenceReference
+        start: 43044295
+        end: 43044296
+      state:
+        sequence: AT
+        type: LiteralSequenceExpression
+    out:
+      ga4gh_digest: jJJ7H5HnJl0J9K7QZupDitGpTCVwV8BU
+      ga4gh_identify: ga4gh:VA.jJJ7H5HnJl0J9K7QZupDitGpTCVwV8BU
+      ga4gh_serialize: ''
