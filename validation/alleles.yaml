@@ -1,4 +1,5 @@
 Allele:
+  # SNV 1 - rsid substitution literal seq expr
   - name: "rs7412@GRCh38>T w/LiteralSequenceExpression"
     in:
       location:
@@ -19,6 +20,7 @@ Allele:
       ga4gh_1_3_identify: ga4gh:VA.CxiA_hvYbkD8Vqwjhx5AYuyul4mtlkpD
       ga4gh_serialize: '{"location":"wIlaGykfwHIpPY2Fcxtbx4TINbbODFVz","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}'
       ga4gh_1_3_serialize: '{"location":"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}'
+  # SNV 2 - spdi rle seq expr
   - name: "NC_000001.11:40819438:CTCCTCCT:CTCCTCCTCCT w/ReferenceLengthExpression"
     in:
       type: Allele
@@ -113,7 +115,7 @@ Allele:
       ga4gh_digest: wqSJ6wZXwjensLdk5XNo2YldiDUYfrKa
       ga4gh_identify: ga4gh:VA.wqSJ6wZXwjensLdk5XNo2YldiDUYfrKa
       ga4gh_serialize: ''
-      - name: "NC_000008.11:g.38148689_38148693del"
+  - name: "NC_000008.11:g.38148689_38148693del"
     in:
       type: Allele
       location:
@@ -132,8 +134,8 @@ Allele:
     out:
       ga4gh_digest: 4GjeORfLxGnNzZhQrYQLL4SRt6teQJ2q
       ga4gh_identify: ga4gh:VA.4GjeORfLxGnNzZhQrYQLL4SRt6teQJ2q
-      ga4gh_serialize: ''      
-- name: "NC_000001.11:g.235470576_235470592="
+      ga4gh_serialize: ''
+  - name: "NC_000001.11:g.235470576_235470592="
     in:
       location:
         end: 235470592
@@ -150,8 +152,8 @@ Allele:
     out:
       ga4gh_digest: RVcqUyVeIlmWaMGW1PmcQsDH5JdfYzyC
       ga4gh_identify: ga4gh:VA.RVcqUyVeIlmWaMGW1PmcQsDH5JdfYzyC
-      ga4gh_serialize: ''    
-- name: "NC_000004.12:g.41745947_41746015del"
+      ga4gh_serialize: ''
+  - name: "NC_000004.12:g.41745947_41746015del"
     in:
       location:
         end: 41746015
@@ -171,3 +173,119 @@ Allele:
       ga4gh_digest: 70_wlPlnVy0bP8GxbBOn9xDU3YJTs_rA
       ga4gh_identify: ga4gh:VA.70_wlPlnVy0bP8GxbBOn9xDU3YJTs_rA
       ga4gh_serialize: ''
+
+  # INS 1- HGVS same as ref aka 0 length insertion in ClinVar:16769
+  #.  b38 chr 11 refget digest 2NkFm8HK88MqeNkCgj78KidCAXgnsfV1
+  - name: NC_000011.10:g.634826_636065=
+    in:
+      location:
+        end: 636065
+        start: 634825
+        sequenceReference:
+          id: NC_000011.10
+          type: SequenceReference
+          refgetAccession: SQ.2NkFm8HK88MqeNkCgj78KidCAXgnsfV1
+        type: SequenceLocation
+      state:
+        type: ReferenceLengthExpression,
+        length: 1240,
+        repeatSubunitLength: 1240
+      type: Allele
+    out:
+      ga4gh_digest: STI1ohAiBF1ewbGuhzgtiX93Jtpb7Yxx
+      ga4gh_identify: ga4gh:VA.STI1ohAiBF1ewbGuhzgtiX93Jtpb7Yxx
+      ga4gh_1_3_identify: tbd
+      ga4gh_serialize: tbd
+      ga4gh_1_3_serialize: tbd
+
+  # INS 2 - 20bp ins spdi clinvar:2754208 NC_000001.11:156114976:CGCTGTCGCCCA:CGCTGTCGCCCAGCCGGGTGCGCTGTCGCCCA
+  #  b38 chr 1 refget digest refgetAccession: SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO
+  - name: NC_000001.11:156114976:CGCTGTCGCCCA:CGCTGTCGCCCAGCCGGGTGCGCTGTCGCCCA
+    in:
+      location:
+        end: 156114976
+        start: 156114988
+        sequenceReference:
+          id: NC_000001.11
+          type: SequenceReference
+          refgetAccession: SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO
+        type: SequenceLocation
+      state:
+        type: LiteralSequenceExpression,
+        sequence: CGCTGTCGCCCAGCCGGGTGCGCTGTCGCCCA
+      type: Allele
+    out:
+      ga4gh_digest: aSGvaBA29kCllvlpVZ_K42zun-bUJr7P
+      ga4gh_identify: ga4gh:VA.aSGvaBA29kCllvlpVZ_K42zun-bUJr7P
+      ga4gh_1_3_identify: tbd
+      ga4gh_serialize: tbd
+      ga4gh_1_3_serialize: tbd
+
+  # INS 3 - clinvar:2505293 1bp ins hgvs NC_000001.11:g.171635973_171635974insG
+  #  b38 chr 1 refget digest 2NkFm8HK88MqeNkCgj78KidCAXgnsfV1
+  - name: NC_000001.11:g.171635973_171635974insG
+    in:
+      location:
+        end: 171635973
+        start: 171635973
+        sequenceReference:
+          id: NC_000001.11
+          type: SequenceReference
+          refgetAccession: SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO
+        type: SequenceLocation
+      state:
+        type: LiteralSequenceExpression,
+        sequence: G
+      type: Allele
+    out:
+      ga4gh_digest: u1Hf1ykStM6WPW8OZ3CDWQdT3r_IPkbo
+      ga4gh_identify: ga4gh:VA.u1Hf1ykStM6WPW8OZ3CDWQdT3r_IPkbo
+      ga4gh_1_3_identify: tbd
+      ga4gh_serialize: tbd
+      ga4gh_1_3_serialize: tbd
+
+  # INS 4 - clinvar:1456419 132bp ins spdi NC_000002.12:g.15277082_15277083insTTTTTTTTTTTTTTTTTTTTNNNNNNNNNNTTTCACCTTGTTAGCCAGGATGGTCTCGATCTCCTGACCTCATGATCCACCCGCCTCGGCCTCCCAAAGTGCTGGGATTACAGGCGTGAGGGCTCTATTTTC
+  #  b38 chr 2 refget digest ???
+  - name: NC_000002.12:g.15277082_15277083insTTTTTTTTTTTTTTTTTTTTNNNNNNNNNNTTTCACCTTGTTAGCCAGGATGGTCTCGATCTCCTGACCTCATGATCCACCCGCCTCGGCCTCCCAAAGTGCTGGGATTACAGGCGTGAGGGCTCTATTTTC
+    in:
+      location:
+        end:
+        start:
+        sequenceReference:
+          id: NC_000002.12
+          type: SequenceReference
+          refgetAccession:
+        type: SequenceLocation
+      state:
+        type: LiteralSequenceExpression,
+        sequence:
+      type: Allele
+    out:
+      ga4gh_digest: tbd
+      ga4gh_identify: tbd
+      ga4gh_1_3_identify: tbd
+      ga4gh_serialize: tbd
+      ga4gh_1_3_serialize: tbd
+
+  # INS 5 - clinvar:430672 36,978bp ins hgvs NC_000008.11:g.86688947_86688948ins[MF045863.1:g.1_36978]
+  #  b38 chr 8 refget digest
+  - name: NC_000008.11:g.86688947_86688948ins[MF045863.1:g.1_36978]
+    in:
+      location:
+        end:
+        start:
+        sequenceReference:
+          id: NC_000008.11
+          type: SequenceReference
+          refgetAccession:
+        type: SequenceLocation
+      state:
+        type: LiteralSequenceExpression,
+        sequence:
+      type: Allele
+    out:
+      ga4gh_digest: tbd
+      ga4gh_identify: tbd
+      ga4gh_1_3_identify: tbd
+      ga4gh_serialize: tbd
+      ga4gh_1_3_serialize: tbd
