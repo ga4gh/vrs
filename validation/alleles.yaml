@@ -189,7 +189,7 @@ Allele:
         type: SequenceLocation
       state:
         type: ReferenceLengthExpression,
-        length: 1240,
+        length: 1240
         repeatSubunitLength: 1240
       type: Allele
     out:
