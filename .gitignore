@@ -9,3 +9,4 @@ pyproject.toml
 .idea/
 .DS_Store
 schema/*/build/
+examples/build/
