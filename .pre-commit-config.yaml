@@ -22,3 +22,9 @@ repos:
         language: system
         files: ^examples/.*\.yaml$
         require_serial: true
+      - id: update-validation-files
+        name: Update json validation files
+        entry: pre-commit-hooks/update-validation.sh
+        language: system
+        files: ^validation/.*\.yaml$
+        require_serial: true

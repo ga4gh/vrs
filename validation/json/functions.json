@@ -1,0 +1,16 @@
+{
+  "sha512t24u": [
+    {
+      "in": {
+        "blob": ""
+      },
+      "out": "z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXc"
+    },
+    {
+      "in": {
+        "blob": "ACGT"
+      },
+      "out": "aKF498dAxcJAqme6QYQ7EZ07-fiw8Kw2"
+    }
+  ]
+}
