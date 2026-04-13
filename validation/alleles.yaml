@@ -49,7 +49,7 @@ Allele:
         sequenceReference:
           refgetAccession: SQ.AjWXsI7AkTK35XW9pgd3UbjpC3MAevlz
           residueAlphabet: na
-          id: NC_NC_000017.10
+          id: NC_000017.10
           type: SequenceReference
         start: 43044295
         end: 43044296
@@ -59,4 +59,21 @@ Allele:
     out:
       ga4gh_digest: jJJ7H5HnJl0J9K7QZupDitGpTCVwV8BU
       ga4gh_identify: ga4gh:VA.jJJ7H5HnJl0J9K7QZupDitGpTCVwV8BU
+      ga4gh_serialize: ''
+  - name: "NM_032635.4(TMEM147):c.542_543delinsCCACAG"
+    in:
+      type: Allele
+      location:
+        type: SequenceLocation
+        sequenceReference:
+          refgetAccession: SQ.7zfORBjp444qyMRKqvr0mCW1Kgtj82pH
+          type: SequenceReference
+        start: 655
+        end: 657
+      state:
+        sequence: CCACAG
+        type: LiteralSequenceExpression
+    out:
+      ga4gh_digest: lWcq5vDX0OIXR3CVDxVxU72aj-kU1UVt
+      ga4gh_identify: ga4gh:VA.lWcq5vDX0OIXR3CVDxVxU72aj-kU1UVt
       ga4gh_serialize: ''
