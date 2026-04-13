@@ -203,8 +203,8 @@ Allele:
   - name: NC_000001.11:156114976:CGCTGTCGCCCA:CGCTGTCGCCCAGCCGGGTGCGCTGTCGCCCA
     in:
       location:
-        end: 156114976
-        start: 156114988
+        end: 156114988
+        start: 156114976
         sequenceReference:
           id: NC_000001.11
           type: SequenceReference
