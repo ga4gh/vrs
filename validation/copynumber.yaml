@@ -1,0 +1,33 @@
+CopyNumberCount:
+  - name: ">=3 copies APOE"
+    in:
+      copies: [3, null]
+      location:
+        sequenceReference:
+          type: SequenceReference
+          refgetAccession: SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ
+        end: 44909393
+        start: 44905795
+        type: SequenceLocation
+      type: CopyNumberCount
+    out:
+      ga4gh_digest: ezEUXykQvIhX8jHADILwC9f8k-jp8tZC
+      ga4gh_identify: ga4gh:CN.ezEUXykQvIhX8jHADILwC9f8k-jp8tZC
+      ga4gh_serialize: '{"copies":[3,null],"location":"d9h3FkfTWFkJSH56L1A26y-N2oq_SSuB","type":"CopyNumberCount"}'
+
+CopyNumberChange:
+  - name: "Low-level copy gain of BRCA1"
+    in:
+      copyChange: low-level gain
+      location:
+        sequenceReference:
+          type: SequenceReference
+          refgetAccession: SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ
+        end: 44909393
+        start: 44905795
+        type: SequenceLocation
+      type: CopyNumberChange
+    out:
+      ga4gh_digest: _rPTdFeOE9elAozZsakJGTqCvlaiEyr6
+      ga4gh_identify: ga4gh:CX._rPTdFeOE9elAozZsakJGTqCvlaiEyr6
+      ga4gh_serialize: '{"copyChange":"low-level gain","location":"d9h3FkfTWFkJSH56L1A26y-N2oq_SSuB","type":"CopyNumberChange"}'
