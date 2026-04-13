@@ -113,3 +113,61 @@ Allele:
       ga4gh_digest: wqSJ6wZXwjensLdk5XNo2YldiDUYfrKa
       ga4gh_identify: ga4gh:VA.wqSJ6wZXwjensLdk5XNo2YldiDUYfrKa
       ga4gh_serialize: ''
+      - name: "NC_000008.11:g.38148689_38148693del"
+    in:
+      type: Allele
+      location:
+        type: SequenceLocation
+        sequenceReference:
+          id: NC_000008.11
+          refgetAccession: SQ.209Z7zJ-mFypBEWLk4rNC6S_OxY5p7bs
+          type: SequenceReference
+        start: 38148684
+        end: 38148693
+      state:
+        length: 4
+        type: ReferenceLengthExpression
+        sequence: GGGG
+        repeatSubunitLength: 5
+    out:
+      ga4gh_digest: 4GjeORfLxGnNzZhQrYQLL4SRt6teQJ2q
+      ga4gh_identify: ga4gh:VA.4GjeORfLxGnNzZhQrYQLL4SRt6teQJ2q
+      ga4gh_serialize: ''      
+- name: "NC_000001.11:g.235470576_235470592="
+    in:
+      location:
+        end: 235470592
+        start: 235470575
+        sequenceReference:
+          id: NC_000001.11
+          type: SequenceReference
+          refgetAccession: SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO
+        type: SequenceLocation
+      state:
+        length: 17
+        type: ReferenceLengthExpression
+      type: Allele
+    out:
+      ga4gh_digest: RVcqUyVeIlmWaMGW1PmcQsDH5JdfYzyC
+      ga4gh_identify: ga4gh:VA.RVcqUyVeIlmWaMGW1PmcQsDH5JdfYzyC
+      ga4gh_serialize: ''    
+- name: "NC_000004.12:g.41745947_41746015del"
+    in:
+      location:
+        end: 41746015
+        start: 41745945
+        sequenceReference:
+          id: NC_000004.12
+          type: SequenceReference
+          refgetAccession: SQ.HxuclGHh0XCDuF8x6yQrpHUBL7ZntAHc
+        type: SequenceLocation
+      state:
+        length: 1
+        type: ReferenceLengthExpression
+        repeatSubunitLength: 69
+        sequence: AAAAAAAAAAAAAAAAA
+      type: Allele
+    out:
+      ga4gh_digest: 70_wlPlnVy0bP8GxbBOn9xDU3YJTs_rA
+      ga4gh_identify: ga4gh:VA.70_wlPlnVy0bP8GxbBOn9xDU3YJTs_rA
+      ga4gh_serialize: ''
