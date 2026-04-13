@@ -1,0 +1,43 @@
+Allele:
+  - name: "rs7412@GRCh38>T w/LiteralSequenceExpression"
+    in:
+      location:
+        end: 44908822
+        start: 44908821
+        sequenceReference:
+          id: NC_0000019.10
+          type: SequenceReference
+          refgetAccession: SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl
+        type: SequenceLocation
+      state:
+        sequence: T
+        type: LiteralSequenceExpression
+      type: Allele
+    out:
+      ga4gh_digest: 0AePZIWZUNsUlQTamyLrjm2HWUw2opLt
+      ga4gh_identify: ga4gh:VA.0AePZIWZUNsUlQTamyLrjm2HWUw2opLt
+      ga4gh_1_3_identify: ga4gh:VA.CxiA_hvYbkD8Vqwjhx5AYuyul4mtlkpD
+      ga4gh_serialize: '{"location":"wIlaGykfwHIpPY2Fcxtbx4TINbbODFVz","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}'
+      ga4gh_1_3_serialize: '{"location":"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg","state":{"sequence":"T","type":"LiteralSequenceExpression"},"type":"Allele"}'
+  - name: "NC_000001.11:40819438:CTCCTCCT:CTCCTCCTCCT w/ReferenceLengthExpression"
+    in:
+      type: Allele
+      expressions:
+        - syntax: spdi
+          value: NC_000001.11:40819438:CTCCTCCT:CTCCTCCTCCT
+      location:
+        type: SequenceLocation
+        sequenceReference:
+          refgetAccession: SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO
+          residueAlphabet: na
+          id: NC_000001.11
+        start: 40819438
+        end: 40819446
+      state:
+        type: ReferenceLengthExpression
+        length: 11
+        repeatSubunitLength: 3
+    out:
+      ga4gh_digest: Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT
+      ga4gh_identify: ga4gh:VA.Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT
+      ga4gh_serialize: '{"location":"nQGBuvRQOLEboA5TYtcz975fp_GulxbZ","state":{"length":11,"repeatSubunitLength":3,"type":"ReferenceLengthExpression"},"type":"Allele"}'
