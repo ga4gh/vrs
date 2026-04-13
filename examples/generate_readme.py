@@ -33,7 +33,7 @@ def main():
             print(f"Warning: no 'type' field in {json_file}, skipping.", file=sys.stderr)
             continue
         
-        class_to_examples[class_type].append((class_type, json_file.name))
+        class_to_examples[class_type].append((json_file.stem, json_file.name))
 
     # Sort examples within each data_type alphabetically by name
     for class_type in class_to_examples:

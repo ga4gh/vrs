@@ -12,8 +12,8 @@ VRS is a collection of data models or concepts that are used together to represe
 
 | Class | Representative examples |
 | --- | --- |
-| Adjacency | [Adjacency](json/ambiguous_linker.json), [Adjacency](json/invalid_adjacency.json), [Adjacency](json/precise_linker.json), [Adjacency](json/revcomp_breakpoint.json), [Adjacency](json/sequence_homology.json), [Adjacency](json/simple_breakpoint.json) |
-| Allele | [Allele](json/SPDI_contraction.json), [Allele](json/SPDI_expansion.json) |
-| CisPhasedBlock | [CisPhasedBlock](json/simple_haplotype.json) |
-| DerivativeMolecule | [DerivativeMolecule](json/sv_derivative_molecule.json) |
-| Terminus | [Terminus](json/terminal_breakend.json) |
+| Adjacency | [ambiguous_linker](json/ambiguous_linker.json), [invalid_adjacency](json/invalid_adjacency.json), [precise_linker](json/precise_linker.json), [revcomp_breakpoint](json/revcomp_breakpoint.json), [sequence_homology](json/sequence_homology.json), [simple_breakpoint](json/simple_breakpoint.json) |
+| Allele | [SPDI_contraction](json/SPDI_contraction.json), [SPDI_expansion](json/SPDI_expansion.json) |
+| CisPhasedBlock | [simple_haplotype](json/simple_haplotype.json) |
+| DerivativeMolecule | [sv_derivative_molecule](json/sv_derivative_molecule.json) |
+| Terminus | [terminal_breakend](json/terminal_breakend.json) |
