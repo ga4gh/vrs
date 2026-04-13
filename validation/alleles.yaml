@@ -77,3 +77,39 @@ Allele:
       ga4gh_digest: lWcq5vDX0OIXR3CVDxVxU72aj-kU1UVt
       ga4gh_identify: ga4gh:VA.lWcq5vDX0OIXR3CVDxVxU72aj-kU1UVt
       ga4gh_serialize: ''
+  - name: "NM_007294.4(BRCA1):c.*528G>C 3 prime UTR"
+    in:
+      type: Allele
+      location:
+        type: SequenceLocation
+        sequenceReference:
+          refgetAccession: SQ.oR9jzdHf6J23TozeyuvTXtwlm6PpUHHl
+          type: SequenceReference
+        start: 6232
+        end: 6233
+      state:
+        sequence: C
+        type: LiteralSequenceExpression
+    out:
+      ga4gh_digest: 7DMgCvXnZCBIrm9FOFtS1JZyZ4RM5f9N
+      ga4gh_identify: ga4gh:VA.7DMgCvXnZCBIrm9FOFtS1JZyZ4RM5f9N
+      ga4gh_serialize: ''
+  - name: "NC_000017.11:43045571:GACAG:G 3 prime UTR"
+    in:
+      type: Allele
+      location:
+        type: SequenceLocation
+        sequenceReference:
+          refgetAccession: SQ.dLZ15tNO1Ur0IcGjwc3Sdi_0A6Yf4zm7
+          type: SequenceReference
+        start: 43045571
+        end: 43045576
+      state:
+        type: ReferenceLengthExpression
+        sequence: G
+        length: 1
+        repeatSubunitLength: 4
+    out:
+      ga4gh_digest: wqSJ6wZXwjensLdk5XNo2YldiDUYfrKa
+      ga4gh_identify: ga4gh:VA.wqSJ6wZXwjensLdk5XNo2YldiDUYfrKa
+      ga4gh_serialize: ''
