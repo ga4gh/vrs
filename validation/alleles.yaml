@@ -53,7 +53,7 @@ Allele:
           residueAlphabet: na
           id: NC_000017.10
           type: SequenceReference
-        start: 43044295
+        start: 43044294
         end: 43044296
       state:
         sequence: AT
