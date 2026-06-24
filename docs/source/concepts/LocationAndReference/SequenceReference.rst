@@ -28,5 +28,5 @@ Example
     {
       "type": "SequenceReference",
       "refgetAccession": "SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul",
-      "label": "NC_000007.14"
+      "name": "NC_000007.14"
     }
