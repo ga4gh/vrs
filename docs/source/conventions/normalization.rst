@@ -148,7 +148,7 @@ the following normalization rules apply:
 
    #. If the Allele is an ambiguous insertion, determine if it is reference derived.
 
-      i. Determine the greatest factor `d` of the `seed length` such that `d` is less than or equal to the
+      i. Determine the smallest factor `d` of the `seed length` such that `d` is less than or equal to the
          length of the modified `reference sequence`, and there exists a subsequence of length `d`
          derived from the modified `reference sequence` that can be circularly expanded to recreate
          the modified `alternate sequence`.
