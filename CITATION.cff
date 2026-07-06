@@ -1,0 +1,92 @@
+cff-version: 1.2.0
+message: >-
+  If you use GA4GH Variation Representation Specification (VRS), please cite it
+  using the metadata from this file.
+title: GA4GH Variation Representation Specification
+authors:
+  - name: GA4GH VRS Contributors
+license: Apache-2.0
+repository-code: 'https://github.com/ga4gh/vrs'
+url: 'https://vrs.ga4gh.org/'
+abstract: >-
+  The Variation Representation Specification (VRS, pronounced “verse”) is a
+  standard developed by the Global Alliance for Genomics and Health (GA4GH) to
+  facilitate and improve sharing of genetic information. The Specification
+  consists of a JSON Schema for representing many classes of genetic variation,
+  conventions to maximize the utility of the schema, and a Python implementation
+  that promotes adoption of the standard.
+keywords:
+  - GA4GH
+  - genomics
+  - variant annotation
+  - variant interpretation
+  - genomic knowledge standards
+  - clinical genomics
+  - information model
+preferred-citation:
+  type: article
+  title: >-
+    The GA4GH Variation Representation Specification: A computational framework
+    for variation representation and federated identification
+  authors:
+    - family-names: Wagner
+      given-names: Alex H.
+    - family-names: Babb
+      given-names: Lawrence
+    - family-names: Alterovitz
+      given-names: Gil
+    - family-names: Baudis
+      given-names: Michael
+    - family-names: Brush
+      given-names: Matthew
+    - family-names: Cameron
+      given-names: Daniel L.
+    - family-names: Cline
+      given-names: Melissa
+    - family-names: Griffith
+      given-names: Malachi
+    - family-names: Griffith
+      given-names: Obi L.
+    - family-names: Hunt
+      given-names: Sarah E.
+    - family-names: Kreda
+      given-names: David
+    - family-names: Lee
+      given-names: Jennifer M.
+    - family-names: Li
+      given-names: Stephanie
+    - family-names: Lopez
+      given-names: Javier
+    - family-names: Moyer
+      given-names: Eric
+    - family-names: Nelson
+      given-names: Tristan
+    - family-names: Patel
+      given-names: Ronak Y.
+    - family-names: Riehle
+      given-names: Kevin
+    - family-names: Robinson
+      given-names: Peter N.
+    - family-names: Rynearson
+      given-names: Shawn
+    - family-names: Schuilenburg
+      given-names: Helen
+    - family-names: Tsukanov
+      given-names: Kirill
+    - family-names: Walsh
+      given-names: Brian
+    - family-names: Konopko
+      given-names: Melissa
+    - family-names: Rehm
+      given-names: Heidi L.
+    - family-names: Yates
+      given-names: Andrew D.
+    - family-names: Freimuth
+      given-names: Robert R.
+    - family-names: Hart
+      given-names: Reece K.
+  journal: Cell Genomics
+  year: 2021
+  volume: 1
+  issue: 2
+  doi: 10.1016/j.xgen.2021.100027
