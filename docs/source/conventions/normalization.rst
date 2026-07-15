@@ -148,7 +148,7 @@ the following normalization rules apply:
 
    #. If the Allele is an ambiguous insertion, determine if it is reference derived.
 
-      i. Determine the greatest factor `d` of the `seed length` such that `d` is less than or equal to the
+      i. Determine the smallest factor `d` of the `seed length` such that `d` is less than or equal to the
          length of the modified `reference sequence`, and there exists a subsequence of length `d`
          derived from the modified `reference sequence` that can be circularly expanded to recreate
          the modified `alternate sequence`.
@@ -179,6 +179,23 @@ the following normalization rules apply:
 ..    A demonstration of fully justifying an insertion allele.
 
 ..    Reproduced from [2]_
+
+Relative Allele Normalization
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+The normalization algorithm for the base Allele representation of :ref:`RelativeAllele`
+instances is analogous to that of regular :ref:`Allele` instances, applied to the
+`base state` and `base sequence location`. Following the normalization of these components,
+one must assess two alternate, equivalent representations of the `mapped state` and
+`mapped sequence location` corresponding to the mappings from the left anchor or the right anchor.
+
+To select which anchor to normalize to, the following ordered criteria are applied:
+1) Select the anchor with the smaller maximum magnitude among the `start` and `end` coordinates.
+2) In the event the maximum magnitudes are equal, use the left anchor.
+
+For example, if the right anchor has a `start` of -100 and an `end` of -80, while the left anchor
+has a `start` of 1150 and an `end` of 1170, the right anchor would be selected because its maximum
+magnitude (100) is smaller than that of the maximum magnitude of the left anchor (1170).
 
 **References**
 
