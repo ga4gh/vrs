@@ -13,7 +13,7 @@ The SequenceReference class is used to refer to a sequence by its
 `refget <https://samtools.github.io/hts-specs/refget.html#refget-checksum-algorithm>`_ accession.
 The class also allows implementations to optionally specify extra characteristics about the sequence,
 such as the alphabet used (nucleic acid or amino acid), if the sequence represents a circular molecule,
-and labels used to describe the sequence.
+and names used to describe the sequence.
 
 Definition and Information Model
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -28,5 +28,5 @@ Example
     {
       "type": "SequenceReference",
       "refgetAccession": "SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul",
-      "label": "NC_000007.14"
+      "name": "NC_000007.14"
     }
