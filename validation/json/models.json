@@ -1,0 +1,576 @@
+{
+  "SequenceReference": [
+    {
+      "in": {
+        "type": "SequenceReference",
+        "refgetAccession": "SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul"
+      },
+      "out": {
+        "ga4gh_identify": null,
+        "ga4gh_digest": null,
+        "ga4gh_serialize": "{\"refgetAccession\":\"SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul\",\"type\":\"SequenceReference\"}"
+      }
+    }
+  ],
+  "LengthExpression": [
+    {
+      "in": {
+        "type": "LengthExpression",
+        "length": 20000
+      },
+      "out": {
+        "ga4gh_identify": null,
+        "ga4gh_digest": null,
+        "ga4gh_serialize": "{\"length\":20000,\"type\":\"LengthExpression\"}"
+      }
+    }
+  ],
+  "LiteralSequenceExpression": [
+    {
+      "in": {
+        "sequence": "ACGT",
+        "type": "LiteralSequenceExpression"
+      },
+      "out": {
+        "ga4gh_identify": null,
+        "ga4gh_digest": null,
+        "ga4gh_serialize": "{\"sequence\":\"ACGT\",\"type\":\"LiteralSequenceExpression\"}"
+      }
+    }
+  ],
+  "ReferenceLengthExpression": [
+    {
+      "in": {
+        "type": "ReferenceLengthExpression",
+        "length": 11,
+        "repeatSubunitLength": 3,
+        "sequence": "CTCCTCCTCCT"
+      },
+      "out": {
+        "ga4gh_identify": null,
+        "ga4gh_digest": null,
+        "ga4gh_serialize": "{\"length\":11,\"repeatSubunitLength\":3,\"type\":\"ReferenceLengthExpression\"}"
+      }
+    }
+  ],
+  "SequenceLocation": [
+    {
+      "name": "SequenceLocation w/ SequenceReference",
+      "in": {
+        "end": 44908822,
+        "start": 44908821,
+        "sequenceReference": {
+          "id": "NC_000007.14",
+          "type": "SequenceReference",
+          "refgetAccession": "SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul"
+        },
+        "type": "SequenceLocation"
+      },
+      "out": {
+        "ga4gh_digest": "4t6JnYWqHwYw9WzBT_lmWBb3tLQNalkT",
+        "ga4gh_identify": "ga4gh:SL.4t6JnYWqHwYw9WzBT_lmWBb3tLQNalkT",
+        "ga4gh_serialize": "{\"end\":44908822,\"sequenceReference\":{\"refgetAccession\":\"SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul\",\"type\":\"SequenceReference\"},\"start\":44908821,\"type\":\"SequenceLocation\"}",
+        "ga4gh_1_3_serialize": "{\"interval\":{\"end\":{\"type\":\"Number\",\"value\":44908822},\"start\":{\"type\":\"Number\",\"value\":44908821},\"type\":\"SequenceInterval\"},\"sequence_id\":\"F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul\",\"type\":\"SequenceLocation\"}"
+      }
+    },
+    {
+      "name": "SequenceLocation w/ SequenceReference and Ranges",
+      "in": {
+        "end": [
+          44908822,
+          44908922
+        ],
+        "start": [
+          44908721,
+          44908821
+        ],
+        "sequenceReference": {
+          "id": "NC_000007.14",
+          "type": "SequenceReference",
+          "refgetAccession": "SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul"
+        },
+        "type": "SequenceLocation"
+      },
+      "out": {
+        "ga4gh_digest": "8-sGv9AY7GJT6QVgqbxhMXFNamnWcFJu",
+        "ga4gh_identify": "ga4gh:SL.8-sGv9AY7GJT6QVgqbxhMXFNamnWcFJu",
+        "ga4gh_serialize": "{\"end\":[44908822,44908922],\"sequenceReference\":{\"refgetAccession\":\"SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul\",\"type\":\"SequenceReference\"},\"start\":[44908721,44908821],\"type\":\"SequenceLocation\"}"
+      }
+    },
+    {
+      "name": "SequenceLocation w/Definite and Indefinite Ranges",
+      "in": {
+        "end": [
+          44908822,
+          null
+        ],
+        "start": [
+          44908721,
+          44908821
+        ],
+        "sequenceReference": {
+          "id": "NC_000007.14",
+          "type": "SequenceReference",
+          "refgetAccession": "SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul"
+        },
+        "type": "SequenceLocation"
+      },
+      "out": {
+        "ga4gh_digest": "XQAXpesghmuDHziAcDCAmESBOPKTBhwD",
+        "ga4gh_identify": "ga4gh:SL.XQAXpesghmuDHziAcDCAmESBOPKTBhwD",
+        "ga4gh_1_3_identify": "ga4gh:VSL.zGh9Zy42Zu9R0sbyB1rXsxd33BIyiORk",
+        "ga4gh_serialize": "{\"end\":[44908822,null],\"sequenceReference\":{\"refgetAccession\":\"SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul\",\"type\":\"SequenceReference\"},\"start\":[44908721,44908821],\"type\":\"SequenceLocation\"}",
+        "ga4gh_1_3_serialize": "{\"interval\":{\"end\":{\"comparator\":\">=\",\"type\":\"IndefiniteRange\",\"value\":44908822},\"start\":{\"max\":44908821,\"min\":44908721,\"type\":\"DefiniteRange\"},\"type\":\"SequenceInterval\"},\"sequence_id\":\"F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul\",\"type\":\"SequenceLocation\"}"
+      }
+    },
+    {
+      "name": "SequenceLocation w/more Definite and Indefinite Ranges",
+      "in": {
+        "end": [
+          null,
+          44908822
+        ],
+        "start": [
+          44908721,
+          44908821
+        ],
+        "sequenceReference": {
+          "id": "NC_000007.14",
+          "type": "SequenceReference",
+          "refgetAccession": "SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul"
+        },
+        "type": "SequenceLocation"
+      },
+      "out": {
+        "ga4gh_digest": "OYplG0vkUojmK2hDejylSykx-np3HPFP",
+        "ga4gh_identify": "ga4gh:SL.OYplG0vkUojmK2hDejylSykx-np3HPFP",
+        "ga4gh_serialize": "{\"end\":[null,44908822],\"sequenceReference\":{\"refgetAccession\":\"SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul\",\"type\":\"SequenceReference\"},\"start\":[44908721,44908821],\"type\":\"SequenceLocation\"}"
+      }
+    }
+  ],
+  "Adjacency": [
+    {
+      "name": "Ambiguous linker (order 1)",
+      "in": {
+        "type": "Adjacency",
+        "adjoinedSequences": [
+          {
+            "type": "SequenceLocation",
+            "sequenceReference": {
+              "type": "SequenceReference",
+              "refgetAccession": "SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO",
+              "residueAlphabet": "na",
+              "id": "NC_000002.11"
+            },
+            "start": 456
+          },
+          {
+            "type": "SequenceLocation",
+            "sequenceReference": {
+              "type": "SequenceReference",
+              "refgetAccession": "SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU",
+              "residueAlphabet": "na",
+              "id": "NC_000001.10"
+            },
+            "end": 123
+          }
+        ]
+      },
+      "out": {
+        "ga4gh_digest": "O0IbSYyhnBAtUsR51bpdoqeSo4YaDMFo",
+        "ga4gh_identify": "ga4gh:AJ.O0IbSYyhnBAtUsR51bpdoqeSo4YaDMFo",
+        "ga4gh_serialize": "{\"adjoinedSequences\":[\"elmvUghL59i1XrD-Y7cwS__tBR6EEA98\",\"bv1nX0Bsy9udUKaOKAJ-SlrysigguPre\"],\"linker\":null,\"type\":\"Adjacency\"}"
+      }
+    },
+    {
+      "name": "Ambiguous linker (order 2)",
+      "in": {
+        "type": "Adjacency",
+        "adjoinedSequences": [
+          {
+            "type": "SequenceLocation",
+            "sequenceReference": {
+              "type": "SequenceReference",
+              "refgetAccession": "SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU",
+              "residueAlphabet": "na",
+              "id": "NC_000001.10"
+            },
+            "end": 123
+          },
+          {
+            "type": "SequenceLocation",
+            "sequenceReference": {
+              "type": "SequenceReference",
+              "refgetAccession": "SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO",
+              "residueAlphabet": "na",
+              "id": "NC_000002.11"
+            },
+            "start": 456
+          }
+        ]
+      },
+      "out": {
+        "ga4gh_digest": "8nZpyyB_ZRzvXIxWVdhTMRhxz0GlgkNU",
+        "ga4gh_identify": "ga4gh:AJ.8nZpyyB_ZRzvXIxWVdhTMRhxz0GlgkNU",
+        "ga4gh_serialize": "{\"adjoinedSequences\":[\"bv1nX0Bsy9udUKaOKAJ-SlrysigguPre\",\"elmvUghL59i1XrD-Y7cwS__tBR6EEA98\"],\"linker\":null,\"type\":\"Adjacency\"}"
+      }
+    }
+  ],
+  "Allele": [
+    {
+      "name": "rs7412@GRCh38>T w/LiteralSequenceExpression",
+      "in": {
+        "location": {
+          "end": 44908822,
+          "start": 44908821,
+          "sequenceReference": {
+            "id": "NC_0000019.10",
+            "type": "SequenceReference",
+            "refgetAccession": "SQ.IIB53T8CNeJJdUqzn9V_JnRtQadwWCbl"
+          },
+          "type": "SequenceLocation"
+        },
+        "state": {
+          "sequence": "T",
+          "type": "LiteralSequenceExpression"
+        },
+        "type": "Allele"
+      },
+      "out": {
+        "ga4gh_digest": "0AePZIWZUNsUlQTamyLrjm2HWUw2opLt",
+        "ga4gh_identify": "ga4gh:VA.0AePZIWZUNsUlQTamyLrjm2HWUw2opLt",
+        "ga4gh_1_3_identify": "ga4gh:VA.CxiA_hvYbkD8Vqwjhx5AYuyul4mtlkpD",
+        "ga4gh_serialize": "{\"location\":\"wIlaGykfwHIpPY2Fcxtbx4TINbbODFVz\",\"state\":{\"sequence\":\"T\",\"type\":\"LiteralSequenceExpression\"},\"type\":\"Allele\"}",
+        "ga4gh_1_3_serialize": "{\"location\":\"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg\",\"state\":{\"sequence\":\"T\",\"type\":\"LiteralSequenceExpression\"},\"type\":\"Allele\"}"
+      }
+    },
+    {
+      "name": "NC_000001.11:40819438:CTCCTCCT:CTCCTCCTCCT w/ReferenceLengthExpression",
+      "in": {
+        "type": "Allele",
+        "expressions": [
+          {
+            "syntax": "spdi",
+            "value": "NC_000001.11:40819438:CTCCTCCT:CTCCTCCTCCT"
+          }
+        ],
+        "location": {
+          "type": "SequenceLocation",
+          "sequenceReference": {
+            "refgetAccession": "SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO",
+            "residueAlphabet": "na",
+            "id": "NC_000001.11"
+          },
+          "start": 40819438,
+          "end": 40819446
+        },
+        "state": {
+          "type": "ReferenceLengthExpression",
+          "length": 11,
+          "repeatSubunitLength": 3
+        }
+      },
+      "out": {
+        "ga4gh_digest": "Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT",
+        "ga4gh_identify": "ga4gh:VA.Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT",
+        "ga4gh_serialize": "{\"location\":\"nQGBuvRQOLEboA5TYtcz975fp_GulxbZ\",\"state\":{\"length\":11,\"repeatSubunitLength\":3,\"type\":\"ReferenceLengthExpression\"},\"type\":\"Allele\"}"
+      }
+    }
+  ],
+  "CisPhasedBlock": [
+    {
+      "name": "Simple CisPhasedBlock (order 1)",
+      "in": {
+        "members": [
+          {
+            "location": {
+              "end": 602,
+              "start": 601,
+              "type": "SequenceLocation"
+            },
+            "state": {
+              "sequence": "C",
+              "type": "LiteralSequenceExpression"
+            },
+            "type": "Allele"
+          },
+          {
+            "location": {
+              "end": 702,
+              "start": 701,
+              "type": "SequenceLocation"
+            },
+            "state": {
+              "sequence": "C",
+              "type": "LiteralSequenceExpression"
+            },
+            "type": "Allele"
+          }
+        ],
+        "sequenceReference": {
+          "type": "SequenceReference",
+          "refgetAccession": "SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU",
+          "residueAlphabet": "na",
+          "id": "NC_000001.10"
+        },
+        "type": "CisPhasedBlock"
+      },
+      "out": {
+        "ga4gh_digest": "YAWwnFF0e-T7fnuT4wRzZW4Lzg7jc-zQ",
+        "ga4gh_identify": "ga4gh:CPB.YAWwnFF0e-T7fnuT4wRzZW4Lzg7jc-zQ",
+        "ga4gh_serialize": "{\"members\":[\"VJIUKfuj7QCxPI-bplNjh5bv2Y8nkvW7\",\"aYfm-2xhlRwkQdgcnJi8Wd0ILCuvsevm\"],\"type\":\"CisPhasedBlock\"}"
+      }
+    },
+    {
+      "name": "Simple CisPhasedBlock (order 2)",
+      "in": {
+        "members": [
+          {
+            "location": {
+              "end": 702,
+              "start": 701,
+              "type": "SequenceLocation"
+            },
+            "state": {
+              "sequence": "C",
+              "type": "LiteralSequenceExpression"
+            },
+            "type": "Allele"
+          },
+          {
+            "location": {
+              "end": 602,
+              "start": 601,
+              "type": "SequenceLocation"
+            },
+            "state": {
+              "sequence": "C",
+              "type": "LiteralSequenceExpression"
+            },
+            "type": "Allele"
+          }
+        ],
+        "sequenceReference": {
+          "type": "SequenceReference",
+          "refgetAccession": "SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU",
+          "residueAlphabet": "na",
+          "id": "NC_000001.10"
+        },
+        "type": "CisPhasedBlock"
+      },
+      "out": {
+        "ga4gh_digest": "YAWwnFF0e-T7fnuT4wRzZW4Lzg7jc-zQ",
+        "ga4gh_identify": "ga4gh:CPB.YAWwnFF0e-T7fnuT4wRzZW4Lzg7jc-zQ",
+        "ga4gh_serialize": "{\"members\":[\"VJIUKfuj7QCxPI-bplNjh5bv2Y8nkvW7\",\"aYfm-2xhlRwkQdgcnJi8Wd0ILCuvsevm\"],\"type\":\"CisPhasedBlock\"}"
+      }
+    }
+  ],
+  "DerivativeMolecule": [
+    {
+      "name": "DerivativeMolecule (order 1)",
+      "in": {
+        "components": [
+          {
+            "type": "TraversalBlock",
+            "orientation": "forward",
+            "component": {
+              "type": "Adjacency",
+              "linker": {
+                "type": "LiteralSequenceExpression",
+                "sequence": "GTC"
+              },
+              "adjoinedSequences": [
+                {
+                  "type": "SequenceLocation",
+                  "sequenceReference": {
+                    "type": "SequenceReference",
+                    "refgetAccession": "SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU",
+                    "residueAlphabet": "na",
+                    "id": "NC_000001.10"
+                  },
+                  "end": 123
+                },
+                {
+                  "type": "SequenceLocation",
+                  "sequenceReference": {
+                    "type": "SequenceReference",
+                    "refgetAccession": "SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO",
+                    "residueAlphabet": "na",
+                    "id": "NC_000002.11"
+                  },
+                  "start": 500
+                }
+              ]
+            }
+          },
+          {
+            "type": "TraversalBlock",
+            "orientation": "forward",
+            "component": {
+              "type": "Adjacency",
+              "adjoinedSequences": [
+                {
+                  "type": "SequenceLocation",
+                  "end": 15000
+                },
+                {
+                  "type": "SequenceLocation",
+                  "sequenceReference": {
+                    "type": "SequenceReference",
+                    "refgetAccession": "SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU",
+                    "residueAlphabet": "na",
+                    "id": "NC_000001.10"
+                  },
+                  "start": 10000
+                }
+              ]
+            }
+          }
+        ],
+        "type": "DerivativeMolecule"
+      },
+      "out": {
+        "ga4gh_digest": "wthhP9ryLEU1ueo6V25gqbSVJC8H4z-M",
+        "ga4gh_identify": "ga4gh:DM.wthhP9ryLEU1ueo6V25gqbSVJC8H4z-M"
+      }
+    },
+    {
+      "name": "DerivativeMolecule (order 2)",
+      "in": {
+        "components": [
+          {
+            "type": "TraversalBlock",
+            "orientation": "forward",
+            "component": {
+              "type": "Adjacency",
+              "adjoinedSequences": [
+                {
+                  "type": "SequenceLocation",
+                  "end": 15000
+                },
+                {
+                  "type": "SequenceLocation",
+                  "sequenceReference": {
+                    "type": "SequenceReference",
+                    "refgetAccession": "SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU",
+                    "residueAlphabet": "na",
+                    "id": "NC_000001.10"
+                  },
+                  "start": 10000
+                }
+              ]
+            }
+          },
+          {
+            "type": "TraversalBlock",
+            "orientation": "forward",
+            "component": {
+              "type": "Adjacency",
+              "linker": {
+                "type": "LiteralSequenceExpression",
+                "sequence": "GTC"
+              },
+              "adjoinedSequences": [
+                {
+                  "type": "SequenceLocation",
+                  "sequenceReference": {
+                    "type": "SequenceReference",
+                    "refgetAccession": "SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU",
+                    "residueAlphabet": "na",
+                    "id": "NC_000001.10"
+                  },
+                  "end": 123
+                },
+                {
+                  "type": "SequenceLocation",
+                  "sequenceReference": {
+                    "type": "SequenceReference",
+                    "refgetAccession": "SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO",
+                    "residueAlphabet": "na",
+                    "id": "NC_000002.11"
+                  },
+                  "start": 500
+                }
+              ]
+            }
+          }
+        ],
+        "type": "DerivativeMolecule"
+      },
+      "out": {
+        "ga4gh_digest": "NWTt9cZmyKf_tYn9vSJ-8PsAA-xChO4a",
+        "ga4gh_identify": "ga4gh:DM.NWTt9cZmyKf_tYn9vSJ-8PsAA-xChO4a"
+      }
+    }
+  ],
+  "Terminus": [
+    {
+      "in": {
+        "location": {
+          "end": 44908822,
+          "start": 44908821,
+          "sequenceReference": {
+            "type": "SequenceReference",
+            "refgetAccession": "SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul"
+          },
+          "type": "SequenceLocation"
+        },
+        "type": "Terminus"
+      },
+      "out": {
+        "ga4gh_digest": "8xpg7Q826fQJJ_6rImuqufhTXj0mh5gV",
+        "ga4gh_identify": "ga4gh:TM.8xpg7Q826fQJJ_6rImuqufhTXj0mh5gV",
+        "ga4gh_serialize": "{\"location\":\"4t6JnYWqHwYw9WzBT_lmWBb3tLQNalkT\",\"type\":\"Terminus\"}"
+      }
+    }
+  ],
+  "CopyNumberCount": [
+    {
+      "name": ">=3 copies APOE",
+      "in": {
+        "copies": [
+          3,
+          null
+        ],
+        "location": {
+          "sequenceReference": {
+            "type": "SequenceReference",
+            "refgetAccession": "SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ"
+          },
+          "end": 44909393,
+          "start": 44905795,
+          "type": "SequenceLocation"
+        },
+        "type": "CopyNumberCount"
+      },
+      "out": {
+        "ga4gh_digest": "ezEUXykQvIhX8jHADILwC9f8k-jp8tZC",
+        "ga4gh_identify": "ga4gh:CN.ezEUXykQvIhX8jHADILwC9f8k-jp8tZC",
+        "ga4gh_serialize": "{\"copies\":[3,null],\"location\":\"d9h3FkfTWFkJSH56L1A26y-N2oq_SSuB\",\"type\":\"CopyNumberCount\"}"
+      }
+    }
+  ],
+  "CopyNumberChange": [
+    {
+      "name": "Low-level copy gain of BRCA1",
+      "in": {
+        "copyChange": "low-level gain",
+        "location": {
+          "sequenceReference": {
+            "type": "SequenceReference",
+            "refgetAccession": "SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ"
+          },
+          "end": 44909393,
+          "start": 44905795,
+          "type": "SequenceLocation"
+        },
+        "type": "CopyNumberChange"
+      },
+      "out": {
+        "ga4gh_digest": "_rPTdFeOE9elAozZsakJGTqCvlaiEyr6",
+        "ga4gh_identify": "ga4gh:CX._rPTdFeOE9elAozZsakJGTqCvlaiEyr6",
+        "ga4gh_serialize": "{\"copyChange\":\"low-level gain\",\"location\":\"d9h3FkfTWFkJSH56L1A26y-N2oq_SSuB\",\"type\":\"CopyNumberChange\"}"
+      }
+    }
+  ]
+}

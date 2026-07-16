@@ -380,7 +380,7 @@ $defs:
     ga4gh:
       inherent:
         - baseSequenceLocation
-        - offsetLocation
+        - mappedSequenceLocation
       prefix: RSL
     inherits: Location
     description: >-
@@ -429,9 +429,9 @@ $defs:
     properties:
       type:
         extends: type
-        const: "SequenceOffset"
-        default: "SequenceOffset"
-        description: MUST be "SequenceOffset"
+        const: "SequenceOffsetLocation"
+        default: "SequenceOffsetLocation"
+        description: MUST be "SequenceOffsetLocation"
       sequenceReference:
         description: >-
           A sequence reference that has been mapped from which a
@@ -544,7 +544,7 @@ $defs:
       inherent:
         - type
     description: >-
-      An expression describing a :ref:`Sequence`.
+      An expression describing a :ref:`sequence <sequenceString>`.
     oneOf:
       - $ref: "#/$defs/LiteralSequenceExpression"
       - $ref: "#/$defs/ReferenceLengthExpression"
@@ -583,7 +583,7 @@ $defs:
         description: The number of residues in the expressed sequence.
       sequence:
         $ref: "#/$defs/sequenceString"
-        description: the literal :ref:`Sequence` encoded by the Reference Length Expression.
+        description: the literal :ref:`sequence <sequenceString>` encoded by the Reference Length Expression.
       repeatSubunitLength:
         type: integer
         description: The number of residues in the repeat subunit.

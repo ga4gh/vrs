@@ -81,7 +81,7 @@ Some ReferenceLengthExpression attributes are inherited from :ref:`SequenceExpre
       -
       - :ref:`sequenceString`
       - 0..1
-      - the literal :ref:`Sequence` encoded by the Reference Length Expression.
+      - the literal :ref:`sequence <sequenceString>` encoded by the Reference Length Expression.
    *  - repeatSubunitLength
       -
       - integer

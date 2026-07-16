@@ -48,10 +48,10 @@
       },
       "type": {
          "type": "string",
-         "description": "MUST be \"SequenceOffset\"",
+         "description": "MUST be \"SequenceOffsetLocation\"",
          "$comment": "MUST be the name of a concrete class from the data model.",
-         "const": "SequenceOffset",
-         "default": "SequenceOffset"
+         "const": "SequenceOffsetLocation",
+         "default": "SequenceOffsetLocation"
       },
       "sequenceReference": {
          "description": "A sequence reference that has been mapped from which a relative location is defined.",

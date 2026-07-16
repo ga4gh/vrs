@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: check-added-large-files
       - id: detect-private-key
@@ -15,3 +15,16 @@ repos:
         entry: pre-commit-hooks/update-json-def-files.sh
         language: system
         files: ^schema/.*/.*-source.yaml$
+        require_serial: true
+      - id: update-example-files
+        name: Update json and README example files
+        entry: pre-commit-hooks/update-examples.sh
+        language: system
+        files: ^examples/.*\.yaml$
+        require_serial: true
+      - id: update-validation-files
+        name: Update json validation files
+        entry: pre-commit-hooks/update-validation.sh
+        language: system
+        files: ^validation/.*\.yaml$
+        require_serial: true

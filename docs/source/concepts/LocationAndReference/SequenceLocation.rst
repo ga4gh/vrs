@@ -87,8 +87,6 @@ represents a coding transcript, then the coordinates refer to the coding transcr
 chromosome sequence to which it aligns. VRS intentionally does not allow for *start* or *end* values
 that use an offset system to represent sequence not found on the :ref:`SequenceReference`.
 
-.. TODO:: Describe and add a ref to an intronic variant profile
-
 CisPhasedBlocks and the Inferred SequenceReference
 ##################################################
 

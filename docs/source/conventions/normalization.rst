@@ -148,7 +148,7 @@ the following normalization rules apply:
 
    #. If the Allele is an ambiguous insertion, determine if it is reference derived.
 
-      i. Determine the greatest factor `d` of the `seed length` such that `d` is less than or equal to the
+      i. Determine the smallest factor `d` of the `seed length` such that `d` is less than or equal to the
          length of the modified `reference sequence`, and there exists a subsequence of length `d`
          derived from the modified `reference sequence` that can be circularly expanded to recreate
          the modified `alternate sequence`.
@@ -225,3 +225,30 @@ is definitional and must be specified using a :ref:`TraversalBlock`.
    depending on orientation.** In the top example, a 100-base sequence is deleted and
    replaced by a 1000-base inverted sequence. In the bottom example, a 100-base inverted
    sequence is inserted, and a 1000-base sequence is duplicated.
+
+
+
+.. _relative-allele-normalization:
+
+Relative Allele Normalization
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+.. admonition:: New in v2.1
+
+   The relativeAllele class was added in v2.1 to describe alleles relative to a mapped sequence
+   from a base sequence alignment.
+
+The normalization algorithm for the base Allele representation of :ref:`RelativeAllele`
+instances is analogous to that of regular :ref:`Allele` instances, applied to the
+`base state` and `base sequence location`. Following the normalization of these components,
+one must assess two alternate, equivalent representations of the `mapped state` and
+`mapped sequence location` (each adjusted to match the normalized base coordinates)
+corresponding to the mappings from the left anchor or the right anchor.
+
+To select which anchor to persist, the following ordered criteria are applied:
+1) Select the anchor with the smaller maximum magnitude among the `start` and `end` coordinates.
+2) In the event the maximum magnitudes are equal, use the left anchor.
+
+For example, if the right anchor has a `start` of -100 and an `end` of -80, while the left anchor
+has a `start` of 1150 and an `end` of 1170, the right anchor would be selected because its maximum
+magnitude (100) is smaller than that of the maximum magnitude of the left anchor (1170).
