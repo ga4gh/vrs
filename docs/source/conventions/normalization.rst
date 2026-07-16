@@ -148,7 +148,7 @@ the following normalization rules apply:
 
    #. If the Allele is an ambiguous insertion, determine if it is reference derived.
 
-      i. Determine the greatest factor `d` of the `seed length` such that `d` is less than or equal to the
+      i. Determine the smallest factor `d` of the `seed length` such that `d` is less than or equal to the
          length of the modified `reference sequence`, and there exists a subsequence of length `d`
          derived from the modified `reference sequence` that can be circularly expanded to recreate
          the modified `alternate sequence`.
@@ -238,54 +238,17 @@ Relative Allele Normalization
    The relativeAllele class was added in v2.1 to describe alleles relative to a mapped sequence
    from a base sequence alignment.
 
-:ref:`RelativeAllele` normalization differs fundamentally from Allele normalization. Allele normalization
-applies fully-justified expansion to resolve positional ambiguity for indels on a single reference
-sequence. In contrast, a RelativeAllele's location is anchored to a specific alignment boundary
-between two sequences. The anchor and offsets are structurally constrained by the transcript-to-genome
-mapping and are not subject to the same kind of positional ambiguity that fully-justified normalization
-addresses.
+The normalization algorithm for the base Allele representation of :ref:`RelativeAllele`
+instances is analogous to that of regular :ref:`Allele` instances, applied to the
+`base state` and `base sequence location`. Following the normalization of these components,
+one must assess two alternate, equivalent representations of the `mapped state` and
+`mapped sequence location` (each adjusted to match the normalized base coordinates)
+corresponding to the mappings from the left anchor or the right anchor.
 
-Therefore, Allele-style fully-justified normalization MUST NOT be applied to a :ref:`RelativeAllele` —
-doing so could shift the `baseSequenceLocation` away from the position that corresponds to the `anchor + offset`
-mapping, breaking the semantic relationship between the two sequences.
+To select which anchor to persist, the following ordered criteria are applied:
+1) Select the anchor with the smaller maximum magnitude among the `start` and `end` coordinates.
+2) In the event the maximum magnitudes are equal, use the left anchor.
 
-When normalizing a :ref:`RelativeAllele`, the following rules apply:
-
-0. **Preconditions.** Start with an unnormalized RelativeAllele containing a `relativeLocation`
-   (with `baseSequenceLocation` and `mappedSequenceLocation`), a `baseState`, and a `mappedState`.
-
-#. **Normalize nested identifiable objects.** All nested identifiable objects (e.g., SequenceLocation,
-   SequenceReference) MUST be expressed using GA4GH Computed Identifiers, consistent with the general
-   VRS computed identifier requirements.
-
-#. **Normalize the baseSequenceLocation as a SequenceLocation.** The `baseSequenceLocation` is a standard
-   VRS SequenceLocation and MUST be normalized according to SequenceLocation normalization rules
-   (e.g., ensuring refgetAccession is used). However, its `start` and `end` coordinates MUST NOT be altered
-   by Allele-style fully-justified expansion — they represent the resolved genomic position derived from
-   the anchor + offset mapping.
-
-#. **Validate state consistency.** The `baseState` and `mappedState` MUST be consistent with each other given
-   the strand orientation implied by the transcript-to-genome alignment. Specifically:
-
-   * If the mapped sequence is on the positive strand relative to the base sequence, `baseState` and `mappedState`
-     MUST be identical.
-   * If the mapped sequence is on the negative strand (reverse complement), `baseState` MUST be the reverse complement
-     of `mappedState`.
-
-If states are inconsistent, implementations SHOULD raise an error rather than silently correcting, since the
-inconsistency may indicate a data entry error.
-
-4. **Validate offset consistency.** The interval defined by `offsetStart` and `offsetEnd` MUST satisfy `offsetEnd
-   - offsetStart` equal to `end - start` of the `baseSequenceLocation`. That is, the length of the interval on the
-   mapped sequence must equal the length of the interval on the base sequence. Implementations SHOULD raise an
-   error if this constraint is violated.
-
-#. **Return the normalized RelativeAllele.** Construct and return a new RelativeAllele with all nested objects
-   expressed using computed identifiers.
-
-**What is NOT normalized**
-
-* **Anchor position** (`anchor`): Definitional. Determined by the exon boundary in the transcript alignment. Not subject to adjustment.
-* **Anchor orientation** (`anchorOrientation`): Definitional. Determined by splice context (left for donor, right for acceptor).
-* **Offsets** (`offsetStart`, `offsetEnd`): Definitional. Determined by the HGVS offset from the exon boundary.
-* **Base/mapped state sequences** : Not subject to trimming or expansion. The states represent the allele as expressed on their respective sequences and must remain paired.
+For example, if the right anchor has a `start` of -100 and an `end` of -80, while the left anchor
+has a `start` of 1150 and an `end` of 1170, the right anchor would be selected because its maximum
+magnitude (100) is smaller than that of the maximum magnitude of the left anchor (1170).
