@@ -1,3 +1,5 @@
+.. _splice-adjacent-examples:
+
 Splice-Adjacent HGVS Variant Examples
 =====================================
 
