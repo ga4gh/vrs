@@ -143,12 +143,12 @@ the following normalization rules apply:
 
       i. a `location` using the modified `start` and `end`.
 
-      #. a `ReferenceLengthExpression` for the `state` using the `seed length` as the `repeatSubunitLength`
+      #. a `ReferenceLengthExpression` for the `state` using the `seed_length` as the `repeatSubunitLength`
          and the length of the modified `alternate sequence` as the `length`.
 
    #. If the Allele is an ambiguous insertion, determine if it is reference derived.
 
-      i. Determine the smallest factor `d` of the `seed length` such that `d` is less than or equal to the
+      i. Determine the smallest factor `d` of the `seed_length` such that `d` is less than or equal to the
          length of the modified `reference sequence`, and there exists a subsequence of length `d`
          derived from the modified `reference sequence` that can be circularly expanded to recreate
          the modified `alternate sequence`.
