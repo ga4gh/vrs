@@ -1,0 +1,24 @@
+2.1
+!!!
+
+2.1.0
+@@@@@
+
+* docs: remove broken refs in releases by @jsstevenson in https://github.com/ga4gh/vrs/pull/647
+* docs: fix a few warnings, remove anonymous entries from search results by @jsstevenson in https://github.com/ga4gh/vrs/pull/646
+* chore: bump gks-core from 1.0.0 to 1.1.0 by @korikuzma in https://github.com/ga4gh/vrs/pull/664
+* docs: add `ConceptSet` and reorder changelog by @korikuzma in https://github.com/ga4gh/vrs/pull/666
+* docs: auto-update copyright year by @jsstevenson in https://github.com/ga4gh/vrs/pull/673
+* docs: fix refs, add warnings check to CI/CD by @jsstevenson in https://github.com/ga4gh/vrs/pull/671
+* docs: fix orphaned pages showing up in search results by @jsstevenson in https://github.com/ga4gh/vrs/pull/672
+* feat: add Intronic Positions by @korikuzma in https://github.com/ga4gh/vrs/pull/675
+* test: add tests for ensuring correct properties by @korikuzma in https://github.com/ga4gh/vrs/pull/686
+* fix: update type and ga4gh.inherent for intron positions by @korikuzma in https://github.com/ga4gh/vrs/pull/684
+* fix: use correct img.shields.io link for docs badge by @korikuzma in https://github.com/ga4gh/vrs/pull/685
+* #690: Quick start guidance by @brendanreardon in https://github.com/ga4gh/vrs/pull/693
+* minor cosmetic and doc updates by @larrybabb in https://github.com/ga4gh/vrs/pull/698
+* chore: add citation file by @jsstevenson in https://github.com/ga4gh/vrs/pull/701
+* Revise normalization algorithm to select smallest factor by @ahwagner in https://github.com/ga4gh/vrs/pull/700
+* docs: add RelativeAllele example and normalization rules by @larrybabb in https://github.com/ga4gh/vrs/pull/689
+* chore: remove this old unused TODO file by @jsstevenson in https://github.com/ga4gh/vrs/pull/703
+* Fix inconsistent seed_length formatting in normalization docs by @harshitmishra00182-ops in https://github.com/ga4gh/vrs/pull/702
