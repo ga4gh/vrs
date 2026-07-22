@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.0.1/json/RelativeAllele",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/RelativeAllele",
    "title": "RelativeAllele",
    "type": "object",
    "maturity": "draft",
@@ -40,7 +40,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gks-core/1.1.0/json/Extension"
+            "$ref": "/ga4gh/schema/gks-core/1.2.0-ballot.2026-07.1/json/Extension"
          },
          "description": "A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.",
          "$comment": "Extension objects have a key-value data structure that allows definition of custom fields in the data itself. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems."
@@ -54,7 +54,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/vrs/2.0.1/json/Expression"
+            "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/Expression"
          }
       },
       "type": {
@@ -67,13 +67,13 @@
          "description": "The state of the RelativeAllele as expressed on the mapped sequence. This will differ from the base state when mapping to a reverse complement sequence, commonly observed when representing the state on transcripts mapped to the \"negative strand\" of a chromosome.",
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.0.1/json/LengthExpression"
+               "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/LengthExpression"
             },
             {
-               "$ref": "/ga4gh/schema/vrs/2.0.1/json/LiteralSequenceExpression"
+               "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/LiteralSequenceExpression"
             },
             {
-               "$ref": "/ga4gh/schema/vrs/2.0.1/json/ReferenceLengthExpression"
+               "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/ReferenceLengthExpression"
             }
          ]
       },
@@ -81,13 +81,13 @@
          "description": "The state of the RelativeAllele as expressed on the base sequence.",
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.0.1/json/LengthExpression"
+               "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/LengthExpression"
             },
             {
-               "$ref": "/ga4gh/schema/vrs/2.0.1/json/LiteralSequenceExpression"
+               "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/LiteralSequenceExpression"
             },
             {
-               "$ref": "/ga4gh/schema/vrs/2.0.1/json/ReferenceLengthExpression"
+               "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/ReferenceLengthExpression"
             }
          ]
       },
@@ -95,10 +95,10 @@
          "description": "The relative location at which the baseState and mappedState are expressed.",
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.0.1/json/RelativeSequenceLocation"
+               "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/RelativeSequenceLocation"
             },
             {
-               "$ref": "/ga4gh/schema/gks-core/1.1.0/json/iriReference"
+               "$ref": "/ga4gh/schema/gks-core/1.2.0-ballot.2026-07.1/json/iriReference"
             }
          ]
       }
