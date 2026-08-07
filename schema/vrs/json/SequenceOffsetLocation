@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/SequenceOffsetLocation",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/v2/json/SequenceOffsetLocation",
    "title": "SequenceOffsetLocation",
    "type": "object",
    "maturity": "draft",
@@ -57,7 +57,7 @@
          "description": "A sequence reference that has been mapped from which a relative location is defined.",
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/SequenceReference"
+               "$ref": "/ga4gh/schema/vrs/v2/json/SequenceReference"
             },
             {
                "$ref": "/ga4gh/schema/gks-core/1.2.0-ballot.2026-07.1/json/iriReference"
@@ -80,7 +80,7 @@
          "description": "The start offset, in inter-residue coordinates, from the anchor realization selected by anchorOrientation on the sequenceReference.",
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/Range"
+               "$ref": "/ga4gh/schema/vrs/v2/json/Range"
             },
             {
                "type": "integer"
@@ -91,7 +91,7 @@
          "description": "The end offset, in inter-residue coordinates, from the anchor realization selected by anchorOrientation on the sequenceReference.",
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/Range"
+               "$ref": "/ga4gh/schema/vrs/v2/json/Range"
             },
             {
                "type": "integer"

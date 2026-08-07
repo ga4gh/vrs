@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/TraversalBlock",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/v2/json/TraversalBlock",
    "title": "TraversalBlock",
    "type": "object",
    "maturity": "draft",
@@ -54,7 +54,7 @@
          "description": "The unoriented molecular variation component.",
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/Adjacency"
+               "$ref": "/ga4gh/schema/vrs/v2/json/Adjacency"
             }
          ]
       },

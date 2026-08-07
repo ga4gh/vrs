@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/Adjacency",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/v2/json/Adjacency",
    "title": "Adjacency",
    "type": "object",
    "maturity": "trial use",
@@ -53,7 +53,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/Expression"
+            "$ref": "/ga4gh/schema/vrs/v2/json/Expression"
          }
       },
       "type": {
@@ -69,10 +69,10 @@
          "items": {
             "oneOf": [
                {
-                  "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/RelativeSequenceLocation"
+                  "$ref": "/ga4gh/schema/vrs/v2/json/RelativeSequenceLocation"
                },
                {
-                  "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/SequenceLocation"
+                  "$ref": "/ga4gh/schema/vrs/v2/json/SequenceLocation"
                },
                {
                   "$ref": "/ga4gh/schema/gks-core/1.2.0-ballot.2026-07.1/json/iriReference"
@@ -93,13 +93,13 @@
          "description": "The sequence found between adjoined sequences.",
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/LengthExpression"
+               "$ref": "/ga4gh/schema/vrs/v2/json/LengthExpression"
             },
             {
-               "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/LiteralSequenceExpression"
+               "$ref": "/ga4gh/schema/vrs/v2/json/LiteralSequenceExpression"
             },
             {
-               "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/ReferenceLengthExpression"
+               "$ref": "/ga4gh/schema/vrs/v2/json/ReferenceLengthExpression"
             }
          ]
       },
