@@ -23,7 +23,7 @@ An object for which a GA4GH computed identifier can be created.
 
 **Information Model**
 
-Some Ga4ghIdentifiableObject attributes are inherited from :ref:`gks-core:Entity`.
+Some Ga4ghIdentifiableObject attributes are inherited from :ref:`gkm-core:Entity`.
 
 .. list-table::
    :class: clean-wrap

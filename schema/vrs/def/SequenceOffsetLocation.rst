@@ -23,7 +23,7 @@ A location defined by an offset relative to an anchor on a mapped sequence refer
 
 **Information Model**
 
-Some SequenceOffsetLocation attributes are inherited from :ref:`gks-core:Entity`.
+Some SequenceOffsetLocation attributes are inherited from :ref:`gkm-core:Entity`.
 
 .. list-table::
    :class: clean-wrap

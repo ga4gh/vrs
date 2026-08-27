@@ -1,4 +1,4 @@
 [submodule "submodules/gks-core"]
 	path = submodules/gks-core
 	url = https://github.com/ga4gh/gks-core.git
-	branch = 1.2.0-ballot.2026-07
+	branch = rebrand/gks-core-to-gkm-core

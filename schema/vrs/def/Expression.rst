@@ -8,7 +8,7 @@ Representation of a variation by a specified nomenclature or syntax for a Variat
 
 **Information Model**
 
-Some Expression attributes are inherited from :ref:`gks-core:Element`.
+Some Expression attributes are inherited from :ref:`gkm-core:Element`.
 
 .. list-table::
    :class: clean-wrap
