@@ -4,21 +4,61 @@
 2.1.0
 @@@@@
 
-* docs: remove broken refs in releases by @jsstevenson in https://github.com/ga4gh/vrs/pull/647
-* docs: fix a few warnings, remove anonymous entries from search results by @jsstevenson in https://github.com/ga4gh/vrs/pull/646
-* chore: bump gks-core from 1.0.0 to 1.1.0 by @korikuzma in https://github.com/ga4gh/vrs/pull/664
-* docs: add `ConceptSet` and reorder changelog by @korikuzma in https://github.com/ga4gh/vrs/pull/666
-* docs: auto-update copyright year by @jsstevenson in https://github.com/ga4gh/vrs/pull/673
-* docs: fix refs, add warnings check to CI/CD by @jsstevenson in https://github.com/ga4gh/vrs/pull/671
-* docs: fix orphaned pages showing up in search results by @jsstevenson in https://github.com/ga4gh/vrs/pull/672
-* feat: add Intronic Positions by @korikuzma in https://github.com/ga4gh/vrs/pull/675
-* test: add tests for ensuring correct properties by @korikuzma in https://github.com/ga4gh/vrs/pull/686
-* fix: update type and ga4gh.inherent for intron positions by @korikuzma in https://github.com/ga4gh/vrs/pull/684
-* fix: use correct img.shields.io link for docs badge by @korikuzma in https://github.com/ga4gh/vrs/pull/685
-* #690: Quick start guidance by @brendanreardon in https://github.com/ga4gh/vrs/pull/693
-* minor cosmetic and doc updates by @larrybabb in https://github.com/ga4gh/vrs/pull/698
-* chore: add citation file by @jsstevenson in https://github.com/ga4gh/vrs/pull/701
-* Revise normalization algorithm to select smallest factor by @ahwagner in https://github.com/ga4gh/vrs/pull/700
-* docs: add RelativeAllele example and normalization rules by @larrybabb in https://github.com/ga4gh/vrs/pull/689
-* chore: remove this old unused TODO file by @jsstevenson in https://github.com/ga4gh/vrs/pull/703
-* Fix inconsistent seed_length formatting in normalization docs by @harshitmishra00182-ops in https://github.com/ga4gh/vrs/pull/702
+Version 2.1.0 of the GA4GH Variation Representation Specification (VRS)
+adds support for intronic positions, including new classes for relative sequence
+locations and relative alleles. It also revises the normalization algorithm for
+ambiguous insertions to select the smallest repeat-unit factor rather than the
+greatest, changing the normalized (and therefore digested) representation of
+affected trial-use Allele instances.
+
+Minor Version Increment
+#######################
+
+  * revises the :ref:`normalization` algorithm for ambiguous insertions to
+    select the *smallest* repeat-unit factor rather than the greatest,
+    changing the normalized (and therefore digested) representation of
+    affected trial-use :ref:`Allele` instances by @ahwagner in
+    https://github.com/ga4gh/vrs/pull/700
+
+Patch Version Increment
+#######################
+
+  * adds :ref:`RelativeSequenceLocation`, :ref:`SequenceOffsetLocation`, and
+    :ref:`RelativeAllele` to support intronic positions, all at draft
+    maturity, by @korikuzma in https://github.com/ga4gh/vrs/pull/675
+  * fixes ``type`` and ``ga4gh.inherent`` for the draft intronic position
+    classes by @korikuzma in https://github.com/ga4gh/vrs/pull/684
+  * adds tests for ensuring correct properties by @korikuzma in
+    https://github.com/ga4gh/vrs/pull/686
+  * adds a :ref:`RelativeAllele` example and intronic-position normalization
+    rules by @larrybabb in https://github.com/ga4gh/vrs/pull/689
+  * fixes inconsistent ``seed_length`` formatting in normalization docs by
+    @harshitmishra00182-ops in https://github.com/ga4gh/vrs/pull/702
+  * bumps the GKS-core submodule from 1.0.0 to 1.1.0 and, later, to
+    1.2.0-ballot.2026-07; the only classes touched upstream
+    (:ref:`MappableConcept`, :ref:`ConceptSet`) are not inherited or embedded
+    by any VRS class, so neither bump carries a data-compatibility impact
+    into VRS by @korikuzma and @ahwagner in
+    https://github.com/ga4gh/vrs/pull/664
+  * removes broken refs in releases by @jsstevenson in
+    https://github.com/ga4gh/vrs/pull/647
+  * fixes a few warnings, removes anonymous entries from search results by
+    @jsstevenson in https://github.com/ga4gh/vrs/pull/646
+  * adds :ref:`ConceptSet` and reorders changelog by @korikuzma in
+    https://github.com/ga4gh/vrs/pull/666
+  * auto-updates copyright year by @jsstevenson in
+    https://github.com/ga4gh/vrs/pull/673
+  * fixes refs, adds warnings check to CI/CD by @jsstevenson in
+    https://github.com/ga4gh/vrs/pull/671
+  * fixes orphaned pages showing up in search results by @jsstevenson in
+    https://github.com/ga4gh/vrs/pull/672
+  * fixes the img.shields.io link for the docs badge by @korikuzma in
+    https://github.com/ga4gh/vrs/pull/685
+  * adds quick start guidance by @brendanreardon in
+    https://github.com/ga4gh/vrs/pull/693
+  * minor cosmetic and doc updates by @larrybabb in
+    https://github.com/ga4gh/vrs/pull/698
+  * adds a citation file by @jsstevenson in
+    https://github.com/ga4gh/vrs/pull/701
+  * removes an old unused TODO file by @jsstevenson in
+    https://github.com/ga4gh/vrs/pull/703
