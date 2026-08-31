@@ -1,4 +1,4 @@
-[submodule "submodules/gks-core"]
-	path = submodules/gks-core
-	url = https://github.com/ga4gh/gks-core.git
+[submodule "submodules/gkm-core"]
+	path = submodules/gkm-core
+	url = https://github.com/ga4gh/gkm-core.git
 	branch = rebrand/gks-core-to-gkm-core
