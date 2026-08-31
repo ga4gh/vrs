@@ -23,7 +23,7 @@ A sequence of nucleic or amino acid character codes.
 
 **Information Model**
 
-Some SequenceReference attributes are inherited from :ref:`gks-core:Entity`.
+Some SequenceReference attributes are inherited from :ref:`gkm-core:Entity`.
 
 .. list-table::
    :class: clean-wrap

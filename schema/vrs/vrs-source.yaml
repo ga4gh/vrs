@@ -15,10 +15,10 @@ type: object
 strict: true
 
 imports:
-  gks-core: ../gks-core/gks-core-source.yaml
+  gkm-core: ../gkm-core/gkm-core-source.yaml
 
 namespaces:
-  gks.core: /ga4gh/schema/gks-core/1.2.0-ballot.2026-07.1/json/
+  gkm.core: /ga4gh/schema/gkm-core/1.2.0-ballot.2026-07.1/json/
 
 $defs:
   # VRS definitions are presented top-down.  Everything rolls up to
@@ -31,7 +31,7 @@ $defs:
 
   Ga4ghIdentifiableObject:
     maturity: trial use
-    inherits: gks-core:Entity
+    inherits: gkm-core:Entity
     description: >-
       An object for which a GA4GH computed identifier can be created.
     ga4gh:
@@ -63,7 +63,7 @@ $defs:
       propertyName: type
 
   Expression:
-    inherits: gks-core:Element
+    inherits: gkm-core:Element
     type: object
     maturity: trial use
     # protectedClassOf: Variation
@@ -147,7 +147,7 @@ $defs:
           MUST be "Allele"
       location:
         oneOf:
-          - $refCurie: gks.core:iriReference
+          - $refCurie: gkm.core:iriReference
           - $ref: "#/$defs/SequenceLocation"
         description: >-
           The location of the Allele
@@ -193,7 +193,7 @@ $defs:
           The relative location at which the baseState and mappedState are expressed.
         oneOf:
           - $ref: "#/$defs/RelativeSequenceLocation"
-          - $refCurie: gks.core:iriReference
+          - $refCurie: gkm.core:iriReference
     required:
       - relativeLocation
       - baseState
@@ -224,7 +224,7 @@ $defs:
         items:
           oneOf:
             - $ref: "#/$defs/Allele"
-            - $refCurie: gks.core:iriReference
+            - $refCurie: gkm.core:iriReference
         description: >-
           A list of :ref:`Alleles <Allele>` that are found in-cis on a shared molecule.
       sequenceReference:
@@ -260,7 +260,7 @@ $defs:
           MUST be "CopyNumberCount"
       location:
         oneOf:
-          - $refCurie: gks.core:iriReference
+          - $refCurie: gkm.core:iriReference
           - $ref: "#/$defs/SequenceLocation"
         description: >-
           The location of the subject of the copy count.
@@ -293,7 +293,7 @@ $defs:
           MUST be "CopyNumberChange"
       location:
         oneOf:
-          - $refCurie: gks.core:iriReference
+          - $refCurie: gkm.core:iriReference
           - $ref: "#/$defs/SequenceLocation"
         description: >-
           The location of the subject of the copy change.
@@ -347,7 +347,7 @@ $defs:
         description: MUST be "SequenceLocation"
       sequenceReference:
         oneOf:
-          - $refCurie: gks.core:iriReference
+          - $refCurie: gkm.core:iriReference
           - $ref: "#/$defs/SequenceReference"
         description: A reference to a :ref:`SequenceReference` on which the location is defined.
       start:
@@ -399,12 +399,12 @@ $defs:
           An absolute location on a sequence.
         oneOf:
           - $ref: "#/$defs/SequenceLocation"
-          - $refCurie: gks.core:iriReference
+          - $refCurie: gkm.core:iriReference
       mappedSequenceLocation:
         description: >-
           A location relative to an offset on a mapped sequence.
         oneOf:
-          - $refCurie: gks.core:iriReference
+          - $refCurie: gkm.core:iriReference
           - $ref: "#/$defs/SequenceOffsetLocation"
     required:
       - baseSequenceLocation
@@ -412,7 +412,7 @@ $defs:
 
   SequenceOffsetLocation:
     type: object
-    inherits: gks-core:Entity
+    inherits: gkm-core:Entity
     # protectedClassOf: RelativeSequenceLocation
     maturity: draft
     ga4gh:
@@ -438,7 +438,7 @@ $defs:
           relative location is defined.
         oneOf:
           - $ref: "#/$defs/SequenceReference"
-          - $refCurie: gks.core:iriReference
+          - $refCurie: gkm.core:iriReference
       anchor:
         description: >-
           The inter-residue position on the sequence reference from which the relative location offset is calculated.
@@ -482,7 +482,7 @@ $defs:
 
   SequenceReference:
     maturity: trial use
-    inherits: gks-core:Entity
+    inherits: gkm-core:Entity
     ga4gh:
       inherent:
         - refgetAccession
@@ -539,7 +539,7 @@ $defs:
 
   SequenceExpression:
     maturity: trial use
-    inherits: gks-core:Entity
+    inherits: gkm-core:Entity
     ga4gh:
       inherent:
         - type
@@ -698,7 +698,7 @@ $defs:
         ordered: true
         items:
           oneOf:
-          - $refCurie: gks.core:iriReference
+          - $refCurie: gkm.core:iriReference
           - $ref: "#/$defs/Location"
           not:
             required: ["start", "end"]
@@ -737,7 +737,7 @@ $defs:
         description: MUST be "Terminus".
       location:
         oneOf:
-          - $refCurie: gks.core:iriReference
+          - $refCurie: gkm.core:iriReference
           - $ref: "#/$defs/Location"
         description: The location of the terminus.
     required:
@@ -766,7 +766,7 @@ $defs:
         ordered: true
         items:
           oneOf:
-          - $refCurie: gks.core:iriReference
+          - $refCurie: gkm.core:iriReference
           - $ref: "#/$defs/Allele"
           - $ref: "#/$defs/CisPhasedBlock"
           - $ref: "#/$defs/Terminus"
@@ -783,7 +783,7 @@ $defs:
 
   TraversalBlock:
     maturity: draft
-    inherits: gks-core:Entity
+    inherits: gkm-core:Entity
     type: object
     # protectedClassOf: DerivativeMolecule
     ga4gh:

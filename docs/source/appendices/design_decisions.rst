@@ -28,16 +28,16 @@ IRIs over CURIEs
 In VRS 2.0 we moved away from the use of CURIEs in favor of :ref:`iriReference`. Several factors played a role in
 this decision.
 
-JSON Schema, the default data model for GKS specifications, does not allow for encoding of CURIE namespaces as is done
+JSON Schema, the default data model for GKM specifications, does not allow for encoding of CURIE namespaces as is done
 in other frameworks such as JSON-LD or XML. As a result, namespaces must be captured from custom data structures, API
 endpoints, or documentation that may not persist as messages are exchanged between systems. To address this, references
-in GKS specs now use IRIs to reference objects explicitly.
+in GKM specs now use IRIs to reference objects explicitly.
 
 IRI-References over IRIs
 @@@@@@@@@@@@@@@@@@@@@@@@
 
 We opted for the general use of IRI-References as a way to provide a more flexible approach to the use of IRIs
-in most GKS message structures. IRI-references (relative IRIs) benefit the users allow for compact representation
+in most GKM message structures. IRI-references (relative IRIs) benefit the users allow for compact representation
 of concepts that are accessible within a system (e.g. a directory structure or web API).
 
 VRS identifier syntax and versioning
@@ -48,7 +48,7 @@ Approved releases will be assigned to the version number alone, but connect, bal
 include the context term and date in addition to the target version number.
 
 During the GA4GH Connect April 2023 meeting the maturity model was discussed at length and the following
-proposal was presented for instance and class GKS identifiers.
+proposal was presented for instance and class GKM identifiers.
 
 .. image:: ../images/2023-connect-gks-identifier-proposal.png
    :alt: GKS Identifiers Proposal from 2023 April Connect Session
@@ -122,7 +122,7 @@ coupling of distinct concepts.
 Use of value sets for VRS computed digests
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-The GKS Core model contains a ``MappableConcept`` data model which is usable in
+The GKM Core model contains a ``MappableConcept`` data model which is usable in
 places where one would expect general, externally-defined concepts such as
 genes, diseases, or therapeutics. In VRS, we intentionally define value sets
 instead of using the ``MappableConcept`` model in places where such concepts are

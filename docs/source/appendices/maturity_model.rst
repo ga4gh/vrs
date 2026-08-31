@@ -1,9 +1,9 @@
 .. _maturity-model:
 
-GKS Maturity Model
+GKM Maturity Model
 !!!!!!!!!!!!!!!!!!
 
-The Genomic Knowledge Standards work stream is developing semantic data exchange
+The Genomic Knowledge Models work stream is developing semantic data exchange
 standards for federated genomic knowledge sharing. To address this, new technical
 specifications are required, such as the VRS standard, which must be developed
 and iterated upon through application across community implementations. This
@@ -15,15 +15,15 @@ of technical specifications are therefore of paramount importance to addressing
 this balance.
 
 A maturity model is a useful mechanism for communicating varying stability across
-product features (e.g. data classes or protocols) of a GKS standard. This is
+product features (e.g. data classes or protocols) of a GKM standard. This is
 needed to help data producers at each stage of the adoption lifecycle
 decide on the appropriate time to engage and implement the standard. Product
 features that have progressed through the maturity model should have an associated
-progression of support from the GKS specification maintainers for message
+progression of support from the GKM specification maintainers for message
 generation, translation, and validation tooling.
 
 Here we define the maturity model and release process for developing and
-maintaining GKS standards, with the goal of enabling  timely specification
+maintaining GKM standards, with the goal of enabling  timely specification
 adoption by the community.
 
 .. figure:: ../images/adoption_lifecycle.png
@@ -73,9 +73,9 @@ cases across multiple environments (aligned with `GA4GH Product Development 14.5
 Requirements may result directly from a `landscape analysis of the problem domain`_,
 or may emerge in the course of technical specification development. It is expected
 that the need for product features are first discussed in a community forum (e.g.
-GitHub Discussions, GKS Work Stream calls).
+GitHub Discussions, GKM Work Stream calls).
 
-**Process**: Follow the GKS development process. As part of this process,
+**Process**: Follow the GKM development process. As part of this process,
 it is expected that consensus among the decision-makers was reached and major design
 decisions documented. Disagreements are resolved per Work Stream and GA4GH processes.
 
@@ -201,7 +201,7 @@ packaging and tracking (see `VRS releases <https://github.com/ga4gh/vrs/releases
 Decision-maker roles
 @@@@@@@@@@@@@@@@@@@@
 
-A role is assumed by a person in developing GKS technical specifications and other
+A role is assumed by a person in developing GKM technical specifications and other
 GA4GH products. There are several roles relevant to this document:
 
 .. _feature-developers:

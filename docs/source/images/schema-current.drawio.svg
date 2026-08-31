@@ -1045,7 +1045,7 @@
                                         <span>
                                             <span style="font-size: 10px; line-height: 195%;">
                                                 <span style="font-size: 10px; color: light-dark(rgb(58, 65, 74), rgb(177, 183, 190));">
-                                                    GKS Core package
+                                                    GKM Core package
                                                 </span>
                                             </span>
                                         </span>
@@ -1136,7 +1136,7 @@
                                         <span style="text-align: left;">
                                             <span style="font-size: 8.3px; line-height: 225%;">
                                                 <span style="font-size: 8.3px; color: light-dark(rgb(42, 161, 152), rgb(41, 143, 136));">
-                                                    gks.core
+                                                    gkm.core
                                                 </span>
                                                 <span style="font-size: 8.3px; color: light-dark(rgb(58, 65, 74), rgb(177, 183, 190));">
                                                 </span>
@@ -1378,7 +1378,7 @@
                                     <div style="display: flex; justify-content: flex-start; text-align: left; align-items: baseline; font-size: 0; line-height: 1.25;margin-left: 0.8px;margin-top: -2px;">
                                         <span>
                                             <span style="font-size: 10px; color: light-dark(rgb(42, 161, 152), rgb(41, 143, 136));">
-                                                gks.core
+                                                gkm.core
                                             </span>
                                             <span style="font-size:13px;">
                                                 <br/>
@@ -1397,7 +1397,7 @@
                         </div>
                     </foreignObject>
                     <text x="150" y="15" fill="light-dark(#000000, #ffffff)" font-family="&quot;Helvetica&quot;" font-size="13px">
-                        gks.core...
+                        gkm.core...
                     </text>
                 </switch>
             </g>
@@ -1529,7 +1529,7 @@
                                         <span>
                                             <span style="font-size: 10px;">
                                                 <font style="color: light-dark(rgb(42, 161, 152), rgb(41, 143, 136));">
-                                                    gks.core
+                                                    gkm.core
                                                 </font>
                                                 <br/>
                                             </span>
@@ -1547,7 +1547,7 @@
                         </div>
                     </foreignObject>
                     <text x="350" y="332" fill="light-dark(#000000, #ffffff)" font-family="&quot;Helvetica&quot;" font-size="13px">
-                        gks.core...
+                        gkm.core...
                     </text>
                 </switch>
             </g>
@@ -1566,7 +1566,7 @@
                                         <span>
                                             <span style="font-size: 10px;">
                                                 <font style="color: light-dark(rgb(42, 161, 152), rgb(41, 143, 136));">
-                                                    gks.core
+                                                    gkm.core
                                                 </font>
                                                 <br/>
                                             </span>
@@ -1584,7 +1584,7 @@
                         </div>
                     </foreignObject>
                     <text x="350" y="366" fill="light-dark(#000000, #ffffff)" font-family="&quot;Helvetica&quot;" font-size="13px">
-                        gks.core...
+                        gkm.core...
                     </text>
                 </switch>
             </g>
@@ -1745,7 +1745,7 @@
                                         <span>
                                             <span style="font-size: 10px;">
                                                 <font style="color: light-dark(rgb(42, 161, 152), rgb(41, 143, 136));">
-                                                    gks.core
+                                                    gkm.core
                                                 </font>
                                                 <br/>
                                             </span>
@@ -1763,7 +1763,7 @@
                         </div>
                     </foreignObject>
                     <text x="371" y="464" fill="light-dark(#000000, #ffffff)" font-family="&quot;Helvetica&quot;" font-size="13px">
-                        gks.core...
+                        gkm.core...
                     </text>
                 </switch>
             </g>
@@ -1782,7 +1782,7 @@
                                         <span>
                                             <span style="font-size: 10px;">
                                                 <font style="color: light-dark(rgb(42, 161, 152), rgb(41, 143, 136));">
-                                                    gks.core
+                                                    gkm.core
                                                 </font>
                                                 <br/>
                                             </span>
@@ -1800,7 +1800,7 @@
                         </div>
                     </foreignObject>
                     <text x="371" y="498" fill="light-dark(#000000, #ffffff)" font-family="&quot;Helvetica&quot;" font-size="13px">
-                        gks.core...
+                        gkm.core...
                     </text>
                 </switch>
             </g>

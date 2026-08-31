@@ -58,23 +58,23 @@ represent variants using other syntaxes, including HGVS and SPDI.
 
 .. include::  ../../def/vrs/Expression.rst
 
-.. _gks-core:Entity:
+.. _gkm-core:Entity:
 .. _Entity:
 
 Entity
 ######
 *imported*
 
-.. include::  ../../def/gks-core/Entity.rst
+.. include::  ../../def/gkm-core/Entity.rst
 
-.. _gks-core:Element:
+.. _gkm-core:Element:
 .. _Element:
 
 Element
 #######
 *imported*
 
-.. include::  ../../def/gks-core/Element.rst
+.. include::  ../../def/gkm-core/Element.rst
 
 General Purposes Types
 @@@@@@@@@@@@@@@@@@@@@@
@@ -87,7 +87,7 @@ Extension
 #########
 *imported*
 
-.. include::  ../../def/gks-core/Extension.rst
+.. include::  ../../def/gkm-core/Extension.rst
 
 .. _MappableConcept:
 
@@ -95,7 +95,7 @@ Mappable Concept
 ################
 *imported*
 
-.. include::  ../../def/gks-core/MappableConcept.rst
+.. include::  ../../def/gkm-core/MappableConcept.rst
 
 .. _ConceptSet:
 
@@ -103,7 +103,7 @@ ConceptSet
 ##########
 *imported*
 
-.. include::  ../../def/gks-core/ConceptSet.rst
+.. include::  ../../def/gkm-core/ConceptSet.rst
 
 .. _ConceptMapping:
 
@@ -111,7 +111,7 @@ Concept Mapping
 ###############
 *imported*
 
-.. include::  ../../def/gks-core/ConceptMapping.rst
+.. include::  ../../def/gkm-core/ConceptMapping.rst
 
 .. _Coding:
 
@@ -119,7 +119,7 @@ Coding
 ######
 *imported*
 
-.. include::  ../../def/gks-core/Coding.rst
+.. include::  ../../def/gkm-core/Coding.rst
 
 
 Primitive Types
@@ -155,7 +155,7 @@ code
 ####
 *imported*
 
-.. include::  ../../def/gks-core/code.rst
+.. include::  ../../def/gkm-core/code.rst
 
 .. _iriReference:
 
@@ -163,4 +163,4 @@ iriReference
 ############
 *imported*
 
-.. include::  ../../def/gks-core/iriReference.rst
+.. include::  ../../def/gkm-core/iriReference.rst
