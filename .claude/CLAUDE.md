@@ -40,7 +40,7 @@ namespaces:
 
 - `inherits: gkm-core:Entity` and `$refCurie: gkm.core:iriReference` in the source YAML resolve through this submodule.
 - The generated VRS JSON files contain `$ref`s into `/ga4gh/schema/gkm-core/<version>/json/...`.
-- **Naming note (rebrand):** the schema tree, source file, and `$id`/`$ref` namespace use **`gkm-core`** (Genomic Knowledge Models). The git submodule *path* is still `submodules/gks-core` and the remote is still `github.com/ga4gh/gks-core.git` because the upstream GitHub repo has not been renamed yet; the submodule currently tracks the `rebrand/gks-core-to-gkm-core` branch. `schema/gkm-core` and `docs/source/def/gkm-core` are symlinks into `submodules/gks-core/schema/gkm-core`.
+- **Naming note (rebrand):** the upstream GitHub repo was renamed from `gks-core` to **`gkm-core`** (Genomic Knowledge Models), so the schema tree, source file, `$id`/`$ref` namespace, the git submodule *path* (`submodules/gkm-core`), and the remote (`github.com/ga4gh/gkm-core.git`) all use `gkm-core` now. The submodule tracks the `1.2.0-ballot.2026-07` branch. `schema/gkm-core` and `docs/source/def/gkm-core` are symlinks into `submodules/gkm-core/schema/gkm-core`.
 - Consequence: the pinned submodule commit and the `<version>` string in the namespace/`$ref`s must stay in sync. Bumping the core version means updating both the submodule pointer **and** the version strings in `vrs-source.yaml`, then regenerating.
 - Always clone with `--recurse-submodules` (or `git submodule update --init --recursive`), or the build cannot resolve imports.
 
@@ -72,4 +72,4 @@ cd docs && make clean watch &      # open docs/build/html/index.html
 
 - To change the model: edit `schema/vrs/vrs-source.yaml`, run `cd schema && make all`, and commit both source and regenerated `json/`+`def/` together.
 - To change examples: edit `examples/*.yaml` (the hook regenerates `examples/json/` and the examples README).
-- `$id`/version strings appear in many generated files; they originate from the source YAML header and the gks-core namespace — change them at the source, not in the generated output.
+- `$id`/version strings appear in many generated files; they originate from the source YAML header and the gkm-core namespace — change them at the source, not in the generated output.
