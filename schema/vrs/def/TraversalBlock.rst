@@ -23,7 +23,7 @@ A component used to describe the orientation of applicable molecular variation w
 
 **Information Model**
 
-Some TraversalBlock attributes are inherited from :ref:`gks-core:Entity`.
+Some TraversalBlock attributes are inherited from :ref:`gkm-core:Entity`.
 
 .. list-table::
    :class: clean-wrap

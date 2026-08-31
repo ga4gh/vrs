@@ -4,7 +4,9 @@ Releases
 .. note::
 
     VRS follows the :ref:`maturity-model`, which includes our standard
-    Work Stream practices for :ref:`versioning`.
+    Work Stream practices for :ref:`versioning`. Major/Minor/Patch version
+    increments below are assigned per the GA4GH TASC "Technical
+    Specification Development" policy.
 
     All planned and ongoing work may be found on the `VRS Roadmap
     <https://github.com/orgs/ga4gh/projects/12>`__.
@@ -14,6 +16,7 @@ Releases
    :maxdepth: 2
    :includehidden:
 
+   2.1.rst
    2.0.rst
    1.3.rst
    1.2.rst
