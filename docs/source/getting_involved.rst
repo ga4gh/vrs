@@ -15,6 +15,6 @@ can get involved:
 
 * Join the GA4GH VRS Slack channel to connect with the community.
 
-* Participate in the GA4GH Genomic Knowledge Models (GKM) Work Stream Think Tank meetings, where VRS issues and specification topics are often discussed. Information about GKM and participation opportunities is available on the `Genomic Knowledge Models Work Stream page <https://www.ga4gh.org/work_stream/genomic-knowledge-standards/>`_.
+* Participate in the GA4GH Genomic Knowledge Standards (GKS) Work Stream Think Tank meetings, where VRS issues and specification topics are often discussed. Information about GKS and participation opportunities is available on the `Genomic Knowledge Standards Work Stream page <https://www.ga4gh.org/work_stream/genomic-knowledge-standards/>`_.
 
 * Read the machine readable schema definitions, participate in Discussions, and raise Issues in the `VRS GitHub repository <https://github.com/ga4gh/vrs>`_.

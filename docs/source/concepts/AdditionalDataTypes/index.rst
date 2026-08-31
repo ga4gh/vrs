@@ -4,7 +4,7 @@ Additional Data Types
 !!!!!!!!!!!!!!!!!!!!!
 
 Below are the additional data types used by the VRS models.
-Any classes with the *imported* tag are used by VRS but maintained by the GA4GH GKM
+Any classes with the *imported* tag are used by VRS but maintained by the GA4GH GKS
 Work Stream as common data classes.
 
 Abstract Classes
