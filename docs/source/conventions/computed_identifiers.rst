@@ -125,7 +125,7 @@ The second step is to JSON serialize the message content following the
       <https://datatracker.ietf.org/doc/html/rfc8785#section-3.2.1>`__
     * order all keys by Unicode Character Set values
     * use predefined JSON control character codes when available,
-      as defined in `RFC8785§3.2.2.2 <https://datatracker.ietf.org/doc/html/rfc8785#section-3.2.2.2>`__
+      as defined in `RFC8785§3.2.2.1 <https://datatracker.ietf.org/doc/html/rfc8785#section-3.2.2.2>`__
 
 The criteria for the digest serialization method was that it must be
 relatively easy and reliable to implement in any common computer
