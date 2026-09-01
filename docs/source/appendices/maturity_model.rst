@@ -1,9 +1,19 @@
 .. _maturity-model:
 
-GKM Maturity Model
-!!!!!!!!!!!!!!!!!!
+GA4GH Maturity Model
+!!!!!!!!!!!!!!!!!!!!
 
-The Genomic Knowledge Models work stream is developing semantic data exchange
+.. note::
+
+    This page describes how the GA4GH maturity model is applied to the Genomic
+    Knowledge Models (GKM) — VRS, Cat-VRS, and VA-Spec — developed by the GA4GH
+    Genomic Knowledge Standards (GKS) Work Stream. The maturity model, its release
+    process, and its versioning policy are defined by the GA4GH Technical Alignment
+    Subcommittee (TASC) in the `Technical Specification Development`_ policy, which
+    is authoritative. Where this page adds detail, it does so within the bounds of
+    that policy.
+
+The GA4GH Genomic Knowledge Standards (GKS) Work Stream is developing semantic data exchange
 standards for federated genomic knowledge sharing. To address this, new technical
 specifications are required, such as the VRS standard, which must be developed
 and iterated upon through application across community implementations. This
@@ -14,22 +24,24 @@ resources. Mechanisms for communicating the stability, uptake, and development
 of technical specifications are therefore of paramount importance to addressing
 this balance.
 
-A maturity model is a useful mechanism for communicating varying stability across
-product features (e.g. data classes or protocols) of a GKM standard. This is
-needed to help data producers at each stage of the adoption lifecycle
-decide on the appropriate time to engage and implement the standard. Product
-features that have progressed through the maturity model should have an associated
-progression of support from the GKM specification maintainers for message
-generation, translation, and validation tooling.
+GA4GH addresses this need with a maturity model. As described in the GA4GH
+`Technical Specification Development`_ policy, a maturity model is a useful
+mechanism for communicating varying stability across product features (e.g. data
+classes or protocols) of a GA4GH standard. This is needed to help data producers at
+each stage of the adoption lifecycle decide on the appropriate time to engage and
+implement the standard. Product features that have progressed through the maturity
+model should have an associated progression of support from the GKM specification
+maintainers for message generation, translation, and validation tooling.
 
-Here we define the maturity model and release process for developing and
-maintaining GKM standards, with the goal of enabling  timely specification
-adoption by the community.
+Here we describe the GA4GH maturity model and release process as applied to the
+development and maintenance of GKM standards, with the goal of enabling timely
+specification adoption by the community.
 
 .. figure:: ../images/adoption_lifecycle.png
     :width: 800
 
-    The Innovation Adoption Lifecycle.
+    The Innovation Adoption Lifecycle (`source
+    <https://en.wikipedia.org/wiki/Technology_adoption_life_cycle>`__).
 
     *The Innovation Adoption Lifecycle illustrates adoption rates (y-axis) for
     new technologies over time (x-axis). Innovators (leftmost on the time axis)
@@ -43,18 +55,40 @@ adoption by the community.
     model, enabling adopters to engage at a time that is appropriate for their
     organizational needs.*
 
+Alignment with GA4GH Product Development Processes
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Developing a new GA4GH standard requires that the product go through the full
+`GA4GH Product Development and Approval Process`_. The GA4GH `Technical Specification
+Development`_ policy complements those processes by providing the maturity, release,
+and versioning strategy described on this page, which may be referenced by a product
+proposal for developing, maintaining, and extending standards using a maturity model
+for product features. These processes may also be applied to technical specifications
+that support downstream products but are not themselves GA4GH Standards, such as the
+`gkm-core`_ common library used by VRS.
+
+Not every category of product feature developed for a GKM technical specification is
+annotated with the maturity model: validation tests and documentation appendices, for
+example, are not annotated, while some categories — notably data classes and protocols —
+are expected to always be annotated with maturity levels. Generally, if a product
+feature would be sufficient for a major or minor version increment in the absence of a
+maturity system, it should be annotated with a maturity level using this system.
+
 .. _feature-maturity-levels:
 
 Feature Maturity levels
 @@@@@@@@@@@@@@@@@@@@@@@
 
+The maturity levels, the criteria for each level, and the commitments they carry are
+defined by the GA4GH `Technical Specification Development`_ policy and reproduced below.
 It may be helpful to visualize the application of maturity levels by viewing the
 current :ref:`classDiagram`.
 
 .. figure:: ../images/maturity_levels.png
     :width: 800
 
-    Product feature maturity level criteria and commitments.
+    Product feature maturity level criteria and commitments, reproduced from Table 1
+    of the GA4GH `Technical Specification Development`_ policy.
 
 Product feature maturity levels are to be reviewed and advanced by consensus among
 defined decision-makers following Work Stream and GA4GH processes, in consultation
@@ -66,23 +100,27 @@ availability of specification maintainers to provide the level of support requir
 Developing a Draft Product Feature
 ##################################
 
-**Decision-makers**: :ref:`feature-developers`, :ref:`product-leads`
+**Decision-makers**: :ref:`feature-developers`, :ref:`product-owners`
 
 **Criteria**: Draft product feature development work should be based on real use
 cases across multiple environments (aligned with `GA4GH Product Development 14.5`_).
 Requirements may result directly from a `landscape analysis of the problem domain`_,
 or may emerge in the course of technical specification development. It is expected
 that the need for product features are first discussed in a community forum (e.g.
-GitHub Discussions, GKM Work Stream calls).
+GitHub Discussions, GKS Work Stream calls).
 
-**Process**: Follow the GKM development process. As part of this process,
-it is expected that consensus among the decision-makers was reached and major design
+**Process**: Follow the GA4GH product feature development process described in the
+`Technical Specification Development`_ policy, which iterates on the general pattern
+of discussing issues (e.g. on the `VRS Discussion board`_), gathering requirements
+from prospective :ref:`product-implementers`, proposing solutions, and developing the
+product feature against a tracked `VRS issue`_. As part of this process, it is
+expected that consensus among the decision-makers was reached and major design
 decisions documented. Disagreements are resolved per Work Stream and GA4GH processes.
 
 Advancing from Draft to Trial Use
 #################################
 
-**Decision-makers**: :ref:`feature-developers`, :ref:`product-leads`, :ref:`product-implementers`
+**Decision-makers**: :ref:`feature-developers`, :ref:`product-owners`, :ref:`product-implementers`
 
 **Criteria**: Advancing a draft product feature to trial use should include at least two
 independent product implementers that commit to supporting the draft product feature once
@@ -103,13 +141,13 @@ survey includes:
 #. Comments on response (e.g. explicit endorsement or description of gaps)
 
 There is a minimum 1-week review period for Product Implementers to respond, though this may
-be longer at the discretion of the product leads. More time for individual contributors may
+be longer at the discretion of the product owners. More time for individual contributors may
 be permitted on request.
 
 Advancing from Trial Use to Normative
 #####################################
 
-**Decision-makers**: :ref:`feature-developers`, :ref:`product-leads`, :ref:`product-implementers`,
+**Decision-makers**: :ref:`feature-developers`, :ref:`product-owners`, :ref:`product-implementers`,
 :ref:`ws-leads`
 
 **Criteria**: A normative model should have demonstrated interoperability of multiple data
@@ -120,24 +158,66 @@ expected that consensus among the decision-makers was reached and major design d
 documented. Community consultation and disagreement resolution are handled per Work Stream
 and GA4GH processes.
 
+Data Class Inheritance and Property Maturity
+############################################
+
+Data models may (and often do) include child data classes that inherit properties from a
+parent data class. For example, the ``Entity`` data class from the `gkm-core`_ common
+library provides shared properties (e.g. ``id``, ``label``, ``extensions``) that are
+inherited by several child data classes across VRS and the Variant Annotation
+Specification.
+
+To address inheritance used in a data model, the GA4GH maturity model places two
+additional constraints on the maturity of data classes and their properties:
+
+* Child data classes may not have maturity levels greater than the upstream data classes
+  they inherit from.
+* The properties of a data class may not exceed the maturity of the data class as a whole.
+
+Together, these rules ensure that attention to the maturity of upstream classes is
+addressed first, and that less mature data classes do not artificially convey stability
+(in whole or in part) through inheritance of properties of more mature data classes. These
+rules also allow for extending more mature data classes with new properties that exist in
+a less mature state.
+
+Communicating Maturity Level
+############################
+
+Data classes, data class properties, protocols, and other important documentation are
+annotated with their corresponding maturity levels on this documentation site. Class
+definitions (e.g. :ref:`Allele`) carry a note indicating the maturity level of the class,
+and the :ref:`classDiagram` tags each class with its maturity level.
+
+In JSON Schema, maturity is communicated using the ``maturity`` keyword, applied either to
+a data class (see the `maturity annotation on the VRS Allele class
+<https://github.com/ga4gh/vrs/blob/main/schema/vrs/json/Allele>`__) or to an individual
+data class property.
+
+.. _GA4GH Product Development and Approval Process: https://www.ga4gh.org/our-products/development-and-approval-process/
 .. _GA4GH Product Development 14.5: https://www.ga4gh.org/our-products/development-and-approval-process/#section_5:~:text=14.5%20Development%20work%20should%20be%20based%20on%20real%20use%20cases%20across%20multiple%20environments.
 .. _landscape analysis of the problem domain: https://www.ga4gh.org/our-products/development-and-approval-process/#section_4
 .. _GA4GH Product Development 14.8.3: https://www.ga4gh.org/our-products/development-and-approval-process/#section_5:~:text=14.8.3%20implementations
+.. _Technical Specification Development: https://www.ga4gh.org/wp-content/uploads/2026/01/TASC-Technical-Specification-Development.pdf
+.. _gkm-core: https://github.com/ga4gh/gkm-core
+.. _VRS Discussion board: https://github.com/ga4gh/vrs/discussions
+.. _VRS issue: https://github.com/ga4gh/vrs/issues
 
 .. _versioning:
 
 Product Versioning and Releases
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-Versions are used to identify releases of the entire specification, not to individual product features.
-Technical specification development is intrinsically linked to policy surrounding major and minor version
-identification, which follow `semantic versioning v2 <https://semver.org>`__ practices for API versioning.
+Versions are used to identify releases of technical specifications, not individual product
+features. Technical specification development is intrinsically linked to policy surrounding
+major and minor version identification, which follow `semantic versioning v2
+<https://semver.org>`__ practices for API versioning.
 
 Versioning examples
 ###################
 
 Version syntax follows SemVer syntax. Examples of how product features at different maturity levels are
-applied to the SemVer major/minor/patch syntax as follows:
+applied to the SemVer major/minor/patch syntax, per the GA4GH `Technical Specification Development`_
+policy, are as follows:
 
 Major Version Increment
 $$$$$$$$$$$$$$$$$$$$$$$
@@ -152,7 +232,7 @@ Minor Version Increment
 $$$$$$$$$$$$$$$$$$$$$$$
 
 - Backwards-incompatible changes to a trial use product feature
-- Addition of optional fields to data models
+- Addition of optional fields to data models at the trial use or normative level
 - Release of a new product feature at the trial use or normative level
 - Backwards-incompatible changes to property names of a previously-released trial use data class
 - Backwards-incompatible changes to the definition of a previously-released trial use data class
@@ -167,42 +247,60 @@ $$$$$$$$$$$$$$$$$$$$$$$
 - Addition of implementation guidance, tests, or other supporting product features that do not directly
   affect data compatibility
 
-Versioning of approved GA4GH standards additionally follow the procedures for `GA4GH Product Updates <https://www.ga4gh.org/our-products/development-and-approval-process/#section_7>`__.
+Versioning of approved GA4GH standards should additionally follow the procedures for `GA4GH Product Updates <https://www.ga4gh.org/our-products/development-and-approval-process/#section_7>`__.
 Specifically, advancement of data classes to the trial use or normative levels must be accompanied by a
 minor release increment, and therefore may only be included in a release following an appropriate community
 and PRC consultation process (`GA4GH Product Development 32 <https://www.ga4gh.org/our-products/development-and-approval-process/#section_7:~:text=32.%20Public%20comment,reduced%20or%20omitted.>`__).
 
 Releases
 ########
-In order to support continuous development of a technical specification, pre-release snapshots are
-allowed and must use the SemVer syntax for pre-releases. Pre-release snapshots may be created for
-purpose at any time by the product leads. Pre-release snapshots should use the following pre-release
-labels as version suffixes for the indicated purposes:
 
-- connect.<YYYY>-<MM>[.<N>]
+A release of a technical specification contains all of the content of the specification
+repository. This includes all features, including data models (source and derived
+artifacts), linked upstream dependencies, documentation, implementation guidance,
+validation tests, and examples. Releases provide a comprehensive and static snapshot of a
+technical specification that may be referenced for adoption by downstream products and
+implementations. Releases and pre-releases should use GitHub Releases for release
+packaging and tracking (see `VRS releases <https://github.com/ga4gh/vrs/releases>`__).
+
+Pre-releases
+$$$$$$$$$$$$
+
+In order to support continuous development of a technical specification, pre-release
+snapshots are allowed and must use the SemVer syntax for pre-releases. Pre-release
+snapshots may be created for purpose at any time by the product owners. GKM specifications
+use the following pre-release labels as version suffixes for the indicated purposes:
+
+- ``connect.<YYYY>-<MM>[.<N>]``
+
   - for pre-releases to be evaluated at an upcoming GA4GH Connect meeting
   - date corresponds to the month when the start of GA4GH Connect occurs
   - expected 2x/yr
-  - .<N> extension may be used, as needed, for clarifying updates
-- ballot.<YYYY>-<MM>[.<N>]
+  - ``.<N>`` extension may be used, as needed, for clarifying updates
+
+- ``ballot.<YYYY>-<MM>[.<N>]``
+
   - for community evaluation and review ahead of a minor or major version release
   - used for implementer review, product review committee, and steering committee ballots
-  - N increments for successive rounds of review
-- snapshot.<YYYY>-<MM>[.<N>]
+  - ``N`` increments for successive rounds of review
+
+- ``snapshot.<YYYY>-<MM>[.<N>]``
+
   - for use as needed for all other purposes
-  - N increments for successive snapshots
+  - ``N`` increments for successive snapshots
 
 These pre-release labels are appended to the major, minor, and patch components to create
-a pre-release version following the SemVer <MAJOR>.<MINOR>.<PATCH>-<LABEL> syntax. For example,
-a pre-release of VRS 2.0 for discussion at Spring 2024 Connect would have a version identifier
-like 2.0.0-connect.2024-04. Releases and pre-releases should use GitHub Releases for release
-packaging and tracking (see `VRS releases <https://github.com/ga4gh/vrs/releases>`__).
+a pre-release version following the SemVer ``<MAJOR>.<MINOR>.<PATCH>-<LABEL>`` syntax. For
+example, a pre-release of VRS 2.0 for discussion at Spring 2024 Connect would have a
+version identifier like ``2.0.0-connect.2024-04``.
 
 Decision-maker roles
 @@@@@@@@@@@@@@@@@@@@
 
 A role is assumed by a person in developing GKM technical specifications and other
-GA4GH products. There are several roles relevant to this document:
+GA4GH products. There are several roles relevant to this document, which correspond
+to the decision-maker roles named in the GA4GH `Technical Specification Development`_
+policy:
 
 .. _feature-developers:
 
@@ -218,11 +316,11 @@ Representatives of teams that will develop implementations. These typically incl
 (but are not limited to) Driver Project representatives that have committed to developing
 the product as part of the GA4GH Product Development and Approval Process.
 
-.. _product-leads:
+.. _product-owners:
 
-Product Leads
-#############
-Designated leads of a product group, who are responsible for overseeing product development.
+Product Owners
+##############
+Designated owners of a product group, who are responsible for overseeing product development.
 
 .. _ws-leads:
 
