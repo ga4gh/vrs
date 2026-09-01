@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/RelativeSequenceLocation",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.0/json/RelativeSequenceLocation",
    "title": "RelativeSequenceLocation",
    "type": "object",
    "maturity": "draft",
@@ -39,7 +39,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gkm-core/1.2.0-ballot.2026-07.1/json/Extension"
+            "$ref": "/ga4gh/schema/gkm-core/1.2.0/json/Extension"
          },
          "description": "A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.",
          "$comment": "Extension objects have a key-value data structure that allows definition of custom fields in the data itself. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems."
@@ -59,10 +59,10 @@
          "description": "An absolute location on a sequence.",
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/SequenceLocation"
+               "$ref": "/ga4gh/schema/vrs/2.1.0/json/SequenceLocation"
             },
             {
-               "$ref": "/ga4gh/schema/gkm-core/1.2.0-ballot.2026-07.1/json/iriReference"
+               "$ref": "/ga4gh/schema/gkm-core/1.2.0/json/iriReference"
             }
          ]
       },
@@ -70,10 +70,10 @@
          "description": "A location relative to an offset on a mapped sequence.",
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/SequenceOffsetLocation"
+               "$ref": "/ga4gh/schema/vrs/2.1.0/json/SequenceOffsetLocation"
             },
             {
-               "$ref": "/ga4gh/schema/gkm-core/1.2.0-ballot.2026-07.1/json/iriReference"
+               "$ref": "/ga4gh/schema/gkm-core/1.2.0/json/iriReference"
             }
          ]
       }

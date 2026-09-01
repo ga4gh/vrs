@@ -1,16 +1,16 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/SystemicVariation",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.0/json/SystemicVariation",
    "title": "SystemicVariation",
    "type": "object",
    "maturity": "trial use",
    "description": "A Variation of multiple molecules in the context of a system, e.g. a genome, sample, or homologous chromosomes.",
    "oneOf": [
       {
-         "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/CopyNumberChange"
+         "$ref": "/ga4gh/schema/vrs/2.1.0/json/CopyNumberChange"
       },
       {
-         "$ref": "/ga4gh/schema/vrs/2.1.0-ballot.2026-07.1/json/CopyNumberCount"
+         "$ref": "/ga4gh/schema/vrs/2.1.0/json/CopyNumberCount"
       }
    ],
    "discriminator": {
