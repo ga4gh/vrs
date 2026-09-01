@@ -18,7 +18,7 @@ imports:
   gkm-core: ../gkm-core/gkm-core-source.yaml
 
 namespaces:
-  gkm.core: /ga4gh/schema/gkm-core/1.2.0-ballot.2026-07.1/json/
+  gkm.core: /ga4gh/schema/gkm-core/1.2.0/json/
 
 $defs:
   # VRS definitions are presented top-down.  Everything rolls up to
