@@ -18,7 +18,7 @@ imports:
   gkm-core: ../gkm-core/gkm-core-source.yaml
 
 namespaces:
-  gkm.core: /ga4gh/schema/gkm-core/1.2.0/json/
+  gkm.core: /ga4gh/schema/gkm-core/v1/json/
 
 $defs:
   # VRS definitions are presented top-down.  Everything rolls up to
@@ -31,13 +31,14 @@ $defs:
 
   Ga4ghIdentifiableObject:
     maturity: trial use
+    abstract: true
     inherits: gkm-core:Entity
     description: >-
       An object for which a GA4GH computed identifier can be created.
     ga4gh:
       inherent:
         - type
-    heritableProperties:
+    properties:
       type:
         type: string
       digest:
@@ -47,13 +48,14 @@ $defs:
 
   Variation:
     maturity: trial use
+    abstract: true
     inherits: Ga4ghIdentifiableObject
     description: >-
       A representation of the state of one or more biomolecules.
     oneOf:
       - $ref: "#/$defs/MolecularVariation"
       - $ref: "#/$defs/SystemicVariation"
-    heritableProperties:
+    properties:
       expressions:
         type: array
         ordered: false
@@ -64,7 +66,6 @@ $defs:
 
   Expression:
     inherits: gkm-core:Element
-    type: object
     maturity: trial use
     # protectedClassOf: Variation
     description: >-
@@ -95,6 +96,7 @@ $defs:
   MolecularVariation:
     inherits: Variation
     maturity: trial use
+    abstract: true
     description: >-
       A :ref:`variation` on a contiguous molecule.
     oneOf:
@@ -110,6 +112,7 @@ $defs:
   SystemicVariation:
     inherits: Variation
     maturity: trial use
+    abstract: true
     description: >-
       A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
@@ -137,10 +140,8 @@ $defs:
     inherits: MolecularVariation
     description: >-
       The state of a molecule at a :ref:`Location`.
-    type: object
     properties:
       type:
-        extends: type
         const: "Allele"
         default: "Allele"
         description: >-
@@ -166,13 +167,11 @@ $defs:
         - baseState
         - relativeLocation
     inherits: MolecularVariation
-    type: object
     description: >-
       An Allele defined on a mapped location relative to a base location.
       Often used to describe intronic variants.
     properties:
       type:
-        extends: type
         const: "RelativeAllele"
         default: "RelativeAllele"
         description: >-
@@ -208,10 +207,8 @@ $defs:
     inherits: MolecularVariation
     description: >-
       An ordered set of co-occurring :ref:`variants <Variation>` on the same molecule.
-    type: "object"
     properties:
       type:
-        extends: type
         const: "CisPhasedBlock"
         default: "CisPhasedBlock"
         description: >-
@@ -247,13 +244,11 @@ $defs:
         - copies
       prefix: CN
     inherits: SystemicVariation
-    type: object
     description: >-
       The absolute count of discrete copies of a :ref:`Location`
       within a system (e.g. genome, cell, etc.).
     properties:
       type:
-        extends: type
         const: "CopyNumberCount"
         default: "CopyNumberCount"
         description: >-
@@ -280,13 +275,11 @@ $defs:
         - copyChange
       prefix: CX
     inherits: SystemicVariation
-    type: object
     description: >-
       An assessment of the copy number of a :ref:`Location` within a system (e.g. genome, cell,
       etc.) relative to a baseline ploidy.
     properties:
       type:
-        extends: type
         const: "CopyNumberChange"
         default: "CopyNumberChange"
         description: >-
@@ -319,6 +312,7 @@ $defs:
   Location:
     inherits: Ga4ghIdentifiableObject
     maturity: trial use
+    abstract: true
     description: >-
       A contiguous segment of a biological sequence.
     oneOf:
@@ -338,10 +332,8 @@ $defs:
     inherits: Location
     description: >-
       A :ref:`Location` defined by an interval on a :ref:`SequenceReference`.
-    type: object
     properties:
       type:
-        extends: type
         const: "SequenceLocation"
         default: "SequenceLocation"
         description: MUST be "SequenceLocation"
@@ -387,10 +379,8 @@ $defs:
       A location on a base sequence and its position relative to a boundary
       offset on a mapped sequence gap. Typically used to describe intronic
       locations that exist with respect to a mapped RNA transcript sequence.
-    type: object
     properties:
       type:
-        extends: type
         const: "RelativeSequenceLocation"
         default: "RelativeSequenceLocation"
         description: MUST be "RelativeSequenceLocation"
@@ -411,7 +401,6 @@ $defs:
       - mappedSequenceLocation
 
   SequenceOffsetLocation:
-    type: object
     inherits: gkm-core:Entity
     # protectedClassOf: RelativeSequenceLocation
     maturity: draft
@@ -428,7 +417,6 @@ $defs:
       mapped sequence reference.
     properties:
       type:
-        extends: type
         const: "SequenceOffsetLocation"
         default: "SequenceOffsetLocation"
         description: MUST be "SequenceOffsetLocation"
@@ -487,11 +475,9 @@ $defs:
       inherent:
         - refgetAccession
         - type
-    type: object
     description: A sequence of nucleic or amino acid character codes.
     properties:
       type:
-        extends: type
         const: "SequenceReference"
         default: "SequenceReference"
         description: MUST be "SequenceReference"
@@ -539,6 +525,7 @@ $defs:
 
   SequenceExpression:
     maturity: trial use
+    abstract: true
     inherits: gkm-core:Entity
     ga4gh:
       inherent:
@@ -551,12 +538,11 @@ $defs:
       - $ref: "#/$defs/LengthExpression"
     discriminator:
       propertyName: type
-    heritableProperties:
+    properties:
       type:
-        extends: type
         description: >-
           The SequenceExpression class type. MUST match child class type.
-    heritableRequired:
+    required:
       - type
 
   ReferenceLengthExpression:
@@ -569,10 +555,8 @@ $defs:
     description: >-
       An expression of a sequence that is derived from repeating a subsequence
       of an associated :ref:`SequenceLocation`.
-    type: object
     properties:
       type:
-        extends: type
         const: "ReferenceLengthExpression"
         default: "ReferenceLengthExpression"
         description: MUST be "ReferenceLengthExpression"
@@ -597,11 +581,9 @@ $defs:
     ga4gh:
       inherent:
         - length
-    type: object
     description: A sequence expressed only by its length.
     properties:
       type:
-        extends: type
         const: "LengthExpression"
         default: "LengthExpression"
         description: MUST be "LengthExpression"
@@ -618,10 +600,8 @@ $defs:
       inherent:
         - sequence
     description: An explicit expression of a Sequence.
-    type: object
     properties:
       type:
-        extends: type
         const: "LiteralSequenceExpression"
         default: "LiteralSequenceExpression"
         description: MUST be "LiteralSequenceExpression"
@@ -685,10 +665,8 @@ $defs:
       The `Adjacency` class represents the adjoining of the end of a sequence with
       the beginning of an adjacent sequence, potentially with an intervening linker
       sequence.
-    type: object
     properties:
       type:
-        extends: type
         const: Adjacency
         default: Adjacency
         description: MUST be "Adjacency".
@@ -728,10 +706,8 @@ $defs:
       The `Terminus` data class provides a structure for describing the end (terminus)
       of a molecule. Structurally similar to Adjacency, but used for describing where
       a molecule terminates (instead of adjoining another molecule).
-    type: object
     properties:
       type:
-        extends: type
         const: Terminus
         default: Terminus
         description: MUST be "Terminus".
@@ -753,10 +729,8 @@ $defs:
     description: >-
       A molecule derived from segments of multiple adjoined molecular sequences, typically resulting from
       structural variation.
-    type: object
     properties:
       type:
-        extends: type
         const: DerivativeMolecule
         default: DerivativeMolecule
         description: MUST be "DerivativeMolecule".
@@ -784,7 +758,6 @@ $defs:
   TraversalBlock:
     maturity: draft
     inherits: gkm-core:Entity
-    type: object
     # protectedClassOf: DerivativeMolecule
     ga4gh:
       inherent:
@@ -796,7 +769,6 @@ $defs:
       within a DerivativeMolecule.
     properties:
       type:
-        extends: type
         const: TraversalBlock
         default: TraversalBlock
         description: MUST be "TraversalBlock".

@@ -2,6 +2,8 @@
     change in future releases. Maturity \
     levels are described in the :ref:`maturity-model`.
 
+**Abstract Class** — not instantiated directly; concrete subclasses inherit its attributes.
+
 **Computational Definition**
 
 An expression describing a :ref:`sequence <sequenceString>`.
@@ -41,6 +43,11 @@ Some SequenceExpression attributes are inherited from :ref:`gkm-core:Entity`.
       - string
       - 0..1
       - The 'logical' identifier of the Entity in the system of record, e.g. a UUID.  This 'id' is unique within a given system, but may or may not be globally unique outside the system. It is used within a system to reference an object from another.
+   *  - type
+      -
+      - string
+      - 1..1
+      - The SequenceExpression class type. MUST match child class type.
    *  - name
       -
       - string
@@ -67,8 +74,9 @@ Some SequenceExpression attributes are inherited from :ref:`gkm-core:Entity`.
       - :ref:`Extension`
       - 0..m
       - A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.
-   *  - type
-      -
-      - string
-      - 1..1
-      - The SequenceExpression class type. MUST match child class type.
+
+This class is defined as **one of** the following:
+
+* :ref:`LiteralSequenceExpression`
+* :ref:`ReferenceLengthExpression`
+* :ref:`LengthExpression`

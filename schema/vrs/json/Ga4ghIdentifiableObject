@@ -1,18 +1,15 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/v2/json/CopyNumberChange",
-   "title": "CopyNumberChange",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/v2/json/Ga4ghIdentifiableObject",
+   "title": "Ga4ghIdentifiableObject",
    "type": "object",
-   "maturity": "draft",
+   "maturity": "trial use",
+   "description": "An object for which a GA4GH computed identifier can be created.",
    "ga4gh": {
       "inherent": [
-         "copyChange",
-         "location",
          "type"
-      ],
-      "prefix": "CX"
+      ]
    },
-   "description": "An assessment of the copy number of a Location within a system (e.g. genome, cell, etc.) relative to a baseline ploidy.",
    "properties": {
       "id": {
          "type": "string",
@@ -21,10 +18,8 @@
       },
       "type": {
          "type": "string",
-         "description": "MUST be \"CopyNumberChange\"",
-         "$comment": "MUST be the name of a concrete class from the data model.",
-         "const": "CopyNumberChange",
-         "default": "CopyNumberChange"
+         "description": "The name of the class that is instantiated by a data object representing the Entity.",
+         "$comment": "MUST be the name of a concrete class from the data model."
       },
       "name": {
          "type": "string",
@@ -55,44 +50,9 @@
          "description": "A sha512t24u digest created using the VRS Computed Identifier algorithm.",
          "type": "string",
          "pattern": "^[0-9A-Za-z_\\-]{32}$"
-      },
-      "expressions": {
-         "type": "array",
-         "ordered": false,
-         "items": {
-            "$ref": "/ga4gh/schema/vrs/v2/json/Expression"
-         }
-      },
-      "location": {
-         "oneOf": [
-            {
-               "$ref": "/ga4gh/schema/gkm-core/v1/json/iriReference"
-            },
-            {
-               "$ref": "/ga4gh/schema/vrs/v2/json/SequenceLocation"
-            }
-         ],
-         "description": "The location of the subject of the copy change."
-      },
-      "copyChange": {
-         "type": "string",
-         "enum": [
-            "complete genomic loss",
-            "high-level loss",
-            "low-level loss",
-            "loss",
-            "regional base ploidy",
-            "gain",
-            "low-level gain",
-            "high-level gain"
-         ],
-         "description": "MUST use one of the defined enumerations that are based on the corresponding EFO ontological terms for copy number variation. See Implementation Guidance for more details."
       }
    },
    "required": [
-      "copyChange",
-      "location",
       "type"
-   ],
-   "additionalProperties": false
+   ]
 }

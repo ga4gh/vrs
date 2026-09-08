@@ -2,6 +2,8 @@
     change in future releases. Maturity \
     levels are described in the :ref:`maturity-model`.
 
+**Abstract Class** — not instantiated directly; concrete subclasses inherit its attributes.
+
 **Computational Definition**
 
 An object for which a GA4GH computed identifier can be created.
@@ -45,7 +47,7 @@ Some Ga4ghIdentifiableObject attributes are inherited from :ref:`gkm-core:Entity
       -
       - string
       - 1..1
-      -
+      - The name of the class that is instantiated by a data object representing the Entity.
    *  - name
       -
       - string

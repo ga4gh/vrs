@@ -2,6 +2,8 @@
     change in future releases. Maturity \
     levels are described in the :ref:`maturity-model`.
 
+**Abstract Class** — not instantiated directly; concrete subclasses inherit its attributes.
+
 **Computational Definition**
 
 A representation of the state of one or more biomolecules.
@@ -45,7 +47,7 @@ Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
       -
       - string
       - 1..1
-      -
+      - The name of the class that is instantiated by a data object representing the Entity.
    *  - name
       -
       - string
@@ -85,3 +87,8 @@ Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
       - :ref:`Expression`
       - 0..m
       -
+
+This class is defined as **one of** the following:
+
+* :ref:`MolecularVariation`
+* :ref:`SystemicVariation`
