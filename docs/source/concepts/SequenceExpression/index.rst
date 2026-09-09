@@ -11,9 +11,8 @@ content of a sequence, instead of representing a sequence by reference.
 
 .. include::  ../../def/vrs/SequenceExpression.rst
 
-**Subclasses**
-
 .. toctree::
+    :hidden:
     :titlesonly:
 
     LiteralSequenceExpression

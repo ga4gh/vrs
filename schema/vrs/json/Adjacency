@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/v2/json/Adjacency",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/Adjacency",
    "title": "Adjacency",
    "type": "object",
    "maturity": "trial use",
@@ -46,7 +46,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gkm-core/v1/json/Extension"
+            "$ref": "/ga4gh/schema/gkm-core/1.2.1-ballot.2026-09.1/json/Extension"
          },
          "description": "A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.",
          "$comment": "Extension objects have a key-value data structure that allows definition of custom fields in the data itself. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems."
@@ -60,7 +60,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/vrs/v2/json/Expression"
+            "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/Expression"
          }
       },
       "adjoinedSequences": {
@@ -70,10 +70,10 @@
          "items": {
             "oneOf": [
                {
-                  "$ref": "/ga4gh/schema/gkm-core/v1/json/iriReference"
+                  "$ref": "/ga4gh/schema/gkm-core/1.2.1-ballot.2026-09.1/json/iriReference"
                },
                {
-                  "$ref": "/ga4gh/schema/vrs/v2/json/Location"
+                  "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/Location"
                }
             ],
             "not": {
@@ -88,7 +88,7 @@
          "maxItems": 2
       },
       "linker": {
-         "$ref": "/ga4gh/schema/vrs/v2/json/SequenceExpression",
+         "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/SequenceExpression",
          "description": "The sequence found between adjoined sequences."
       },
       "homology": {
