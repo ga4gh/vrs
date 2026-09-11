@@ -1,6 +1,7 @@
-.. warning:: This data class is at a **draft** maturity level and may \
-    change significantly in future releases. Maturity \
-    levels are described in the :ref:`maturity-model`.
+.. admonition:: Draft
+    :class: warning
+
+    May change significantly in future releases. `Maturity Model </appendices/maturity_model.html>`_
 
 **Computational Definition**
 
@@ -90,3 +91,5 @@ Some Terminus attributes are inherited from :ref:`Variation`.
       - :ref:`iriReference` | :ref:`Location`
       - 1..1
       - The location of the terminus.
+
+**Used in:** :ref:`DerivativeMolecule`

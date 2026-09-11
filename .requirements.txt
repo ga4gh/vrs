@@ -3,7 +3,7 @@ jsonschema
 referencing
 ipython
 pyyaml
-ga4gh.gkm.metaschema @ git+https://github.com/ga4gh/gks-metaschema.git@5a6fe2b1f1b0e210229731249feb869230de2158
+ga4gh.gkm.metaschema == 0.4.0
 sphinx ~= 8.1.3
 sphinx-rtd-theme ~= 3.0.2
 jupyterlab

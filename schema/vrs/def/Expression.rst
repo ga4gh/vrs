@@ -1,6 +1,7 @@
-.. note:: This data class is at a **trial use** maturity level and may \
-    change in future releases. Maturity \
-    levels are described in the :ref:`maturity-model`.
+.. admonition:: Trial Use
+    :class: note
+
+    May change in future releases. `Maturity Model </appendices/maturity_model.html>`_
 
 **Computational Definition**
 
@@ -49,3 +50,5 @@ Some Expression attributes are inherited from :ref:`gkm-core:Element`.
       - string
       - 0..1
       - The version of the syntax used to describe the variation. This is particularly important for HGVS expressions, as the syntax has evolved over time.
+
+**Used in:** :ref:`Adjacency`, :ref:`Allele`, :ref:`CisPhasedBlock`, :ref:`CopyNumberChange`, :ref:`CopyNumberCount`, :ref:`DerivativeMolecule`, :ref:`MolecularVariation`, :ref:`RelativeAllele`, :ref:`SystemicVariation`, :ref:`Terminus`, :ref:`Variation`

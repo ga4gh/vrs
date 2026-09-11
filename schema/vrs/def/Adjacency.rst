@@ -1,6 +1,7 @@
-.. note:: This data class is at a **trial use** maturity level and may \
-    change in future releases. Maturity \
-    levels are described in the :ref:`maturity-model`.
+.. admonition:: Trial Use
+    :class: note
+
+    May change in future releases. `Maturity Model </appendices/maturity_model.html>`_
 
 **Computational Definition**
 
@@ -106,3 +107,5 @@ Some Adjacency attributes are inherited from :ref:`Variation`.
       - boolean
       - 0..1
       - A flag indicating if coordinate ambiguity in the adjoined sequences is from sequence homology (true) or other uncertainty, such as instrument ambiguity (false).
+
+**Used in:** :ref:`TraversalBlock`

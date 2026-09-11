@@ -1,6 +1,7 @@
-.. note:: This data class is at a **trial use** maturity level and may \
-    change in future releases. Maturity \
-    levels are described in the :ref:`maturity-model`.
+.. admonition:: Trial Use
+    :class: note
+
+    May change in future releases. `Maturity Model </appendices/maturity_model.html>`_
 
 **Abstract Class** — not instantiated directly; concrete subclasses inherit its attributes.
 
@@ -8,9 +9,4 @@
 
 A Variation of multiple molecules in the context of a system, e.g. a genome, sample, or homologous chromosomes.
 
-**Information Model**
-
-This class is defined as **one of** the following:
-
-* :ref:`CopyNumberCount`
-* :ref:`CopyNumberChange`
+**Subclasses:** :ref:`CopyNumberChange`, :ref:`CopyNumberCount`

@@ -1,6 +1,7 @@
-.. warning:: This data class is at a **draft** maturity level and may \
-    change significantly in future releases. Maturity \
-    levels are described in the :ref:`maturity-model`.
+.. admonition:: Draft
+    :class: warning
+
+    May change significantly in future releases. `Maturity Model </appendices/maturity_model.html>`_
 
 **Computational Definition**
 
@@ -97,3 +98,5 @@ Some SequenceOffsetLocation attributes are inherited from :ref:`gkm-core:Entity`
       - integer | :ref:`Range`
       - 0..1
       - The end offset, in inter-residue coordinates, from the anchor realization selected by anchorOrientation on the sequenceReference.
+
+**Used in:** :ref:`RelativeSequenceLocation`

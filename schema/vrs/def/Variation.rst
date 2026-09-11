@@ -1,27 +1,13 @@
-.. note:: This data class is at a **trial use** maturity level and may \
-    change in future releases. Maturity \
-    levels are described in the :ref:`maturity-model`.
+.. admonition:: Trial Use
+    :class: note
+
+    May change in future releases. `Maturity Model </appendices/maturity_model.html>`_
 
 **Abstract Class** — not instantiated directly; concrete subclasses inherit its attributes.
 
 **Computational Definition**
 
 A representation of the state of one or more biomolecules.
-
-**GA4GH Digest**
-
-.. list-table::
-    :class: clean-wrap
-    :header-rows: 1
-    :align: left
-    :widths: auto
-
-    *  - Prefix
-       - Inherent
-
-    *  - None
-       - ['type']
-
 
 **Information Model**
 
@@ -88,7 +74,10 @@ Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
       - 0..m
       -
 
-This class is defined as **one of** the following:
+This class must match **one of** the following:
 
 * :ref:`MolecularVariation`
 * :ref:`SystemicVariation`
+
+
+**Subclasses:** :ref:`MolecularVariation`, :ref:`SystemicVariation`

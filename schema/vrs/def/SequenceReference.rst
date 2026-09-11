@@ -1,6 +1,7 @@
-.. note:: This data class is at a **trial use** maturity level and may \
-    change in future releases. Maturity \
-    levels are described in the :ref:`maturity-model`.
+.. admonition:: Trial Use
+    :class: note
+
+    May change in future releases. `Maturity Model </appendices/maturity_model.html>`_
 
 **Computational Definition**
 
@@ -97,3 +98,5 @@ Some SequenceReference attributes are inherited from :ref:`gkm-core:Entity`.
       - boolean
       - 0..1
       - A boolean indicating whether the molecule represented by the sequence is circular (true) or linear (false).
+
+**Used in:** :ref:`CisPhasedBlock`, :ref:`SequenceLocation`, :ref:`SequenceOffsetLocation`

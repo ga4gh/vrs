@@ -1,6 +1,7 @@
-.. note:: This data class is at a **trial use** maturity level and may \
-    change in future releases. Maturity \
-    levels are described in the :ref:`maturity-model`.
+.. admonition:: Trial Use
+    :class: note
+
+    May change in future releases. `Maturity Model </appendices/maturity_model.html>`_
 
 **Computational Definition**
 
@@ -95,3 +96,5 @@ Some Allele attributes are inherited from :ref:`Variation`.
       - :ref:`SequenceExpression`
       - 1..1
       - An expression of the sequence state
+
+**Used in:** :ref:`CisPhasedBlock`, :ref:`DerivativeMolecule`

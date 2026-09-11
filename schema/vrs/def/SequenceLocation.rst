@@ -1,6 +1,7 @@
-.. note:: This data class is at a **trial use** maturity level and may \
-    change in future releases. Maturity \
-    levels are described in the :ref:`maturity-model`.
+.. admonition:: Trial Use
+    :class: note
+
+    May change in future releases. `Maturity Model </appendices/maturity_model.html>`_
 
 **Computational Definition**
 
@@ -97,3 +98,5 @@ Some SequenceLocation attributes are inherited from :ref:`Ga4ghIdentifiableObjec
       - :ref:`sequenceString`
       - 0..1
       - The literal sequence encoded by the `sequenceReference` at these coordinates.
+
+**Used in:** :ref:`Allele`, :ref:`CopyNumberChange`, :ref:`CopyNumberCount`, :ref:`RelativeSequenceLocation`
