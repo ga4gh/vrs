@@ -1,30 +1,15 @@
-.. admonition:: Draft
-    :class: warning
+.. admonition:: Trial Use
+    :class: note
 
-    May change significantly in future releases. See |maturity-model|.
+    May change in future releases. See |maturity-model|.
 
 **Computational Definition**
 
-An Allele defined on a mapped location relative to a base location. Often used to describe intronic variants.
-
-**GA4GH Digest**
-
-.. list-table::
-    :class: clean-wrap
-    :header-rows: 1
-    :align: left
-    :widths: auto
-
-    *  - Prefix
-       - Inherent
-
-    *  - RA
-       - ['baseState', 'mappedState', 'relativeLocation', 'type']
-
+A concept based on a primaryCoding and/or name that may be mapped to one or more other :ref:`Codings <Coding>`.
 
 **Information Model**
 
-Some RelativeAllele attributes are inherited from :ref:`Variation`.
+Some MappableConcept attributes are inherited from :ref:`Entity`.
 
 .. list-table::
    :class: clean-wrap
@@ -46,12 +31,12 @@ Some RelativeAllele attributes are inherited from :ref:`Variation`.
       -
       - string
       - 1..1
-      - MUST be "RelativeAllele"
+      - MUST be "MappableConcept".
    *  - name
       -
       - string
       - 0..1
-      - A primary name for the entity.
+      - A primary name for the concept.
    *  - description
       -
       - string
@@ -73,31 +58,29 @@ Some RelativeAllele attributes are inherited from :ref:`Variation`.
       - :ref:`Extension`
       - 0..m
       - A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.
-   *  - digest
+   *  - conceptType
       -
       - string
       - 0..1
-      - A sha512t24u digest created using the VRS Computed Identifier algorithm.
-   *  - expressions
+      - A term indicating the type of concept being represented by the MappableConcept.
+   *  - primaryCoding
+      -
+      - :ref:`Coding`
+      - 0..1
+      - A primary coding for the concept.
+   *  - mappings
       -
                         .. raw:: html
 
                             <span style="background-color: #B2DFEE; color: black; padding: 2px 6px; border: 1px solid black; border-radius: 3px; font-weight: bold; display: inline-block; margin-bottom: 5px;" title="Unordered">&#8942;</span>
-      - :ref:`Expression`
+      - :ref:`ConceptMapping`
       - 0..m
-      -
-   *  - mappedState
-      -
-      - :ref:`SequenceExpression`
-      - 1..1
-      - The state of the RelativeAllele as expressed on the mapped sequence. This will differ from the base state when mapping to a reverse complement sequence, commonly observed when representing the state on transcripts mapped to the "negative strand" of a chromosome.
-   *  - baseState
-      -
-      - :ref:`SequenceExpression`
-      - 1..1
-      - The state of the RelativeAllele as expressed on the base sequence.
-   *  - relativeLocation
-      -
-      - :ref:`RelativeSequenceLocation` | :ref:`iriReference`
-      - 1..1
-      - The relative location at which the baseState and mappedState are expressed.
+      - A list of mappings to concepts in terminologies or code systems. Each mapping should include a coding and a relation.
+
+This class must match **any of** the following:
+
+* an object with additional constraints
+* an object with additional constraints
+
+
+**Used in:** :ref:`ConceptSet`

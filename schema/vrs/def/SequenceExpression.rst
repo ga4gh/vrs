@@ -1,7 +1,7 @@
 .. admonition:: Trial Use
     :class: note
 
-    May change in future releases. `Maturity Model </appendices/maturity_model.html>`_
+    May change in future releases. See |maturity-model|.
 
 **Abstract Class** — not instantiated directly; concrete subclasses inherit its attributes.
 

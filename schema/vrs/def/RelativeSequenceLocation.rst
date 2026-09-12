@@ -1,7 +1,7 @@
 .. admonition:: Draft
     :class: warning
 
-    May change significantly in future releases. `Maturity Model </appendices/maturity_model.html>`_
+    May change significantly in future releases. See |maturity-model|.
 
 **Computational Definition**
 

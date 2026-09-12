@@ -65,7 +65,7 @@ Entity
 ######
 *imported*
 
-.. include::  ../../def/gkm-core/Entity.rst
+.. include::  ../../def/vrs/Entity.rst
 
 .. _gkm-core:Element:
 .. _Element:
@@ -74,7 +74,7 @@ Element
 #######
 *imported*
 
-.. include::  ../../def/gkm-core/Element.rst
+.. include::  ../../def/vrs/Element.rst
 
 General Purposes Types
 @@@@@@@@@@@@@@@@@@@@@@
@@ -87,7 +87,7 @@ Extension
 #########
 *imported*
 
-.. include::  ../../def/gkm-core/Extension.rst
+.. include::  ../../def/vrs/Extension.rst
 
 .. _MappableConcept:
 
@@ -95,7 +95,7 @@ Mappable Concept
 ################
 *imported*
 
-.. include::  ../../def/gkm-core/MappableConcept.rst
+.. include::  ../../def/vrs/MappableConcept.rst
 
 .. _ConceptSet:
 
@@ -103,7 +103,7 @@ ConceptSet
 ##########
 *imported*
 
-.. include::  ../../def/gkm-core/ConceptSet.rst
+.. include::  ../../def/vrs/ConceptSet.rst
 
 .. _ConceptMapping:
 
@@ -111,7 +111,7 @@ Concept Mapping
 ###############
 *imported*
 
-.. include::  ../../def/gkm-core/ConceptMapping.rst
+.. include::  ../../def/vrs/ConceptMapping.rst
 
 .. _Coding:
 
@@ -119,7 +119,7 @@ Coding
 ######
 *imported*
 
-.. include::  ../../def/gkm-core/Coding.rst
+.. include::  ../../def/vrs/Coding.rst
 
 
 Primitive Types
@@ -155,7 +155,7 @@ code
 ####
 *imported*
 
-.. include::  ../../def/gkm-core/code.rst
+.. include::  ../../def/vrs/code.rst
 
 .. _iriReference:
 
@@ -163,4 +163,4 @@ iriReference
 ############
 *imported*
 
-.. include::  ../../def/gkm-core/iriReference.rst
+.. include::  ../../def/vrs/iriReference.rst

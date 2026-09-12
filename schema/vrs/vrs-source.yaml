@@ -52,9 +52,6 @@ $defs:
     inherits: Ga4ghIdentifiableObject
     description: >-
       A representation of the state of one or more biomolecules.
-    oneOf:
-      - $ref: "#/$defs/MolecularVariation"
-      - $ref: "#/$defs/SystemicVariation"
     properties:
       expressions:
         type: array

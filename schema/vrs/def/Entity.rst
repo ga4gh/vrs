@@ -1,30 +1,16 @@
-.. admonition:: Draft
-    :class: warning
+.. admonition:: Trial Use
+    :class: note
 
-    May change significantly in future releases. See |maturity-model|.
+    May change in future releases. See |maturity-model|.
+
+**Abstract Class** — not instantiated directly; concrete subclasses inherit its attributes.
 
 **Computational Definition**
 
-A sequence expressed only by its length.
-
-**GA4GH Digest**
-
-.. list-table::
-    :class: clean-wrap
-    :header-rows: 1
-    :align: left
-    :widths: auto
-
-    *  - Prefix
-       - Inherent
-
-    *  - None
-       - ['length', 'type']
-
+Anything that exists, has existed, or will exist.
 
 **Information Model**
 
-Some LengthExpression attributes are inherited from :ref:`SequenceExpression`.
 
 .. list-table::
    :class: clean-wrap
@@ -46,7 +32,7 @@ Some LengthExpression attributes are inherited from :ref:`SequenceExpression`.
       -
       - string
       - 1..1
-      - MUST be "LengthExpression"
+      - The name of the class that is instantiated by a data object representing the Entity.
    *  - name
       -
       - string
@@ -73,8 +59,5 @@ Some LengthExpression attributes are inherited from :ref:`SequenceExpression`.
       - :ref:`Extension`
       - 0..m
       - A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.
-   *  - length
-      -
-      - :ref:`Range` | integer
-      - 0..1
-      - The length of the sequence.
+
+**Subclasses:** :ref:`ConceptSet`, :ref:`Ga4ghIdentifiableObject`, :ref:`MappableConcept`, :ref:`SequenceExpression`, :ref:`SequenceOffsetLocation`, :ref:`SequenceReference`, :ref:`TraversalBlock`

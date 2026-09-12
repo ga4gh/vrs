@@ -1,7 +1,7 @@
 .. admonition:: Trial Use
     :class: note
 
-    May change in future releases. `Maturity Model </appendices/maturity_model.html>`_
+    May change in future releases. See |maturity-model|.
 
 **Abstract Class** — not instantiated directly; concrete subclasses inherit its attributes.
 
@@ -73,11 +73,5 @@ Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
       - :ref:`Expression`
       - 0..m
       -
-
-This class must match **one of** the following:
-
-* :ref:`MolecularVariation`
-* :ref:`SystemicVariation`
-
 
 **Subclasses:** :ref:`MolecularVariation`, :ref:`SystemicVariation`
