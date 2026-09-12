@@ -51,3 +51,40 @@ tests:
     schema: vrs
     definition: Adjacency
     shouldValidationFail: true
+  # Negative cases: each MUST fail validation, asserting that required fields,
+  # closure (additionalProperties: false) and enums are actually enforced.
+  - test_file: invalid/allele-missing-state.yaml
+    description: Allele missing required `state`
+    schema: vrs
+    definition: Allele
+    shouldValidationFail: true
+  - test_file: invalid/allele-additional-property.yaml
+    description: Allele with an undefined property (closure)
+    schema: vrs
+    definition: Allele
+    shouldValidationFail: true
+  - test_file: invalid/copy-number-change-bad-copychange.yaml
+    description: CopyNumberChange with an out-of-enum `copyChange`
+    schema: vrs
+    definition: CopyNumberChange
+    shouldValidationFail: true
+  - test_file: invalid/copy-number-count-missing-copies.yaml
+    description: CopyNumberCount missing required `copies`
+    schema: vrs
+    definition: CopyNumberCount
+    shouldValidationFail: true
+  - test_file: invalid/sequence-reference-missing-refget.yaml
+    description: SequenceReference missing required `refgetAccession`
+    schema: vrs
+    definition: SequenceReference
+    shouldValidationFail: true
+  - test_file: invalid/sequence-location-additional-property.yaml
+    description: SequenceLocation with an undefined property (closure)
+    schema: vrs
+    definition: SequenceLocation
+    shouldValidationFail: true
+  - test_file: invalid/extension-missing-value.yaml
+    description: Imported gkm-core Extension missing required `value`
+    schema: vrs
+    definition: Extension
+    shouldValidationFail: true

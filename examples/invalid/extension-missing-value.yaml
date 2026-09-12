@@ -1,0 +1,4 @@
+# Imported gkm-core Extension missing required `value`. Also exercises the
+# schema/gkm-core/json $ref wiring that VRS depends on.
+type: Extension
+name: foo
