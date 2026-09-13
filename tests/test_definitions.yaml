@@ -46,6 +46,52 @@ tests:
     description: A simple RLE expansion from SPDI representation
     schema: vrs
     definition: Allele
+  # Concrete-class coverage: a minimal valid instance for every concrete class
+  # not otherwise exercised above (see tests/test_coverage.py).
+  - test_file: coverage/sequence_reference.yaml
+    description: A SequenceReference
+    schema: vrs
+    definition: SequenceReference
+  - test_file: coverage/sequence_location.yaml
+    description: A SequenceLocation with start/end on a SequenceReference
+    schema: vrs
+    definition: SequenceLocation
+  - test_file: coverage/sequence_offset_location.yaml
+    description: A SequenceOffsetLocation anchored on a transcript
+    schema: vrs
+    definition: SequenceOffsetLocation
+  - test_file: coverage/relative_sequence_location.yaml
+    description: A RelativeSequenceLocation mapping a base to a mapped location
+    schema: vrs
+    definition: RelativeSequenceLocation
+  - test_file: coverage/length_expression.yaml
+    description: A LengthExpression
+    schema: vrs
+    definition: LengthExpression
+  - test_file: coverage/literal_sequence_expression.yaml
+    description: A LiteralSequenceExpression
+    schema: vrs
+    definition: LiteralSequenceExpression
+  - test_file: coverage/reference_length_expression.yaml
+    description: A ReferenceLengthExpression
+    schema: vrs
+    definition: ReferenceLengthExpression
+  - test_file: coverage/relative_allele.yaml
+    description: A RelativeAllele with base and mapped states
+    schema: vrs
+    definition: RelativeAllele
+  - test_file: coverage/copy_number_count.yaml
+    description: A CopyNumberCount with an indefinite copies range
+    schema: vrs
+    definition: CopyNumberCount
+  - test_file: coverage/copy_number_change.yaml
+    description: A CopyNumberChange (low-level gain)
+    schema: vrs
+    definition: CopyNumberChange
+  - test_file: coverage/traversal_block.yaml
+    description: A TraversalBlock wrapping an Adjacency component
+    schema: vrs
+    definition: TraversalBlock
   - test_file: invalid_adjacency.yaml
     description: An adjacency with an adjoinedSequence incorrectly containing both a start and end
     schema: vrs
