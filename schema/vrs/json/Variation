@@ -4,6 +4,7 @@
    "title": "Variation",
    "type": "object",
    "maturity": "trial use",
+   "abstract": true,
    "description": "A representation of the state of one or more biomolecules.",
    "oneOf": [
       {

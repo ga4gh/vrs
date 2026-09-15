@@ -4,6 +4,7 @@
    "title": "Ga4ghIdentifiableObject",
    "type": "object",
    "maturity": "trial use",
+   "abstract": true,
    "description": "An object for which a GA4GH computed identifier can be created.",
    "ga4gh": {
       "inherent": [

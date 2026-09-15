@@ -4,6 +4,7 @@
    "title": "MolecularVariation",
    "type": "object",
    "maturity": "trial use",
+   "abstract": true,
    "description": "A variation on a contiguous molecule.",
    "oneOf": [
       {

@@ -4,6 +4,7 @@
    "title": "Location",
    "type": "object",
    "maturity": "trial use",
+   "abstract": true,
    "description": "A contiguous segment of a biological sequence.",
    "oneOf": [
       {

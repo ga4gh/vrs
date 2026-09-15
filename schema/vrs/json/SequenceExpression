@@ -4,6 +4,7 @@
    "title": "SequenceExpression",
    "type": "object",
    "maturity": "trial use",
+   "abstract": true,
    "ga4gh": {
       "inherent": [
          "type"
