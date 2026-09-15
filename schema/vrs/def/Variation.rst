@@ -74,4 +74,10 @@ Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
       - 0..m
       -
 
+This class must match **one of** the following:
+
+* :ref:`MolecularVariation`
+* :ref:`SystemicVariation`
+
+
 **Subclasses:** :ref:`MolecularVariation`, :ref:`SystemicVariation`

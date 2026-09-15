@@ -61,6 +61,13 @@ Some SequenceExpression attributes are inherited from :ref:`gkm-core:Entity`.
       - 0..m
       - A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.
 
+This class must match **one of** the following:
+
+* :ref:`LiteralSequenceExpression`
+* :ref:`ReferenceLengthExpression`
+* :ref:`LengthExpression`
+
+
 **Subclasses:** :ref:`LengthExpression`, :ref:`LiteralSequenceExpression`, :ref:`ReferenceLengthExpression`
 
 **Used in:** :ref:`Adjacency`, :ref:`Allele`, :ref:`RelativeAllele`

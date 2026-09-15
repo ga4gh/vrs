@@ -6,6 +6,14 @@
    "maturity": "trial use",
    "abstract": true,
    "description": "A representation of the state of one or more biomolecules.",
+   "oneOf": [
+      {
+         "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/MolecularVariation"
+      },
+      {
+         "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/SystemicVariation"
+      }
+   ],
    "properties": {
       "id": {
          "type": "string",
