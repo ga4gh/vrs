@@ -16,11 +16,12 @@ Everything is generated from **`*-source.yaml`** files. **Never hand-edit genera
   - `schema/vrs/def/*.rst` — per-class documentation includes used by the docs.
 - **Generator tooling** comes from the `ga4gh.gkm.metaschema` pip package (renamed from `ga4gh.gks.metaschema` in the GKS→GKM rebrand; pinned in `.requirements.txt` — currently `ga4gh.gkm.metaschema == 0.4.5` from PyPI, the "metaschema processor" release carrying this rename). The `schema/vrs/Makefile` invokes its console scripts: `source2classes`, `source2splitjs` (JSON), and `y2t` (rst def files). You will not find these scripts in this repo.
 - **Abstract-class convention (metaschema processor 0.4+):** abstract base classes are declared with `abstract: true` (+ `type: object`) and left *open* (no `additionalProperties`/`unevaluatedProperties`); concrete classes are *closed* (`additionalProperties: false`, or `unevaluatedProperties: false` when composed via inheritance). Inherited attributes are declared with plain `properties`/`required` on the base class (the old `heritableProperties`/`heritableRequired` keys are gone), and `extends:` has been removed — a subclass simply re-declares the property it narrows (e.g. a `type` `const`), subject to Liskov covariance. Concrete classes drop any explicit `type: object` (the processor injects it).
+- **Open subtype unions (VRS design decision):** the abstract classes (`Variation`, `MolecularVariation`, `SystemicVariation`, `Location`, `SequenceExpression`) carry **no** class-level `oneOf` subtype union and **no** `discriminator` — they are open extension points, so third-party implementations may define custom subtypes. GKM tooling then validates such instances only at the abstract level, not against a specific concrete subtype. Concrete classes still pin their `type` `const` and stay closed. (The many `oneOf`s that remain in the source are *use-site* property refs like `location: oneOf: [iriReference, SequenceLocation]`, not class-level unions.)
 
 To regenerate after editing source YAML:
 
 ```bash
-cd schema && make all      # iterates every schema/<name>/ subdir, runs its Makefile
+cd schema && make all      # top-level schema target just delegates to the vrs Makefile
 # or narrower:
 cd schema/vrs && make all
 cd schema/vrs && make clean # wipes build/, json/, def/ — regenerate after
@@ -57,7 +58,7 @@ pre-commit install                  # strongly recommended — keeps generated f
 
 Two distinct kinds:
 
-- **Smoke tests** — `tests/` (`make test` → `pytest tests/`). Confirm the schema parses and loads with tooling; `test_examples.py` validates `examples/` against the schema. Fast sanity check. Run a single test with `pytest tests/test_basic.py::<name>`.
+- **Smoke tests** — `tests/` (`make test` → `pytest tests/`). Confirm the schema parses/loads and enforces its invariants: `test_examples.py` validates `examples/` (including the `examples/invalid/` negative cases, flagged `shouldValidationFail` in `test_definitions.yaml`); `test_schema_invariants.py` asserts abstract classes stay open and concrete classes closed; `test_coverage.py` requires every concrete class to have a valid example under `examples/coverage/`; `test_ref_resolution.py` covers the gkm-core `$ref` version-token resolver. Run a single test with `pytest tests/test_basic.py::<name>`.
 - **Validation tests** — `validation/` (`models.yaml`, `functions.yaml`). Language-neutral conformance fixtures for implementers, not a pytest suite.
 
 ## Docs
