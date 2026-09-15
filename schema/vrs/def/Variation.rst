@@ -5,6 +5,8 @@
 
 **Abstract Class** — not instantiated directly; concrete subclasses inherit its attributes.
 
+**Sealed** — Variation has a closed, exhaustive set of concrete subclasses; every one is listed below. No other subclass is permitted, and a conforming instance must be exactly one of these types.
+
 **Computational Definition**
 
 A representation of the state of one or more biomolecules.
@@ -76,8 +78,16 @@ Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
 
 This class must match **one of** the following:
 
-* :ref:`MolecularVariation`
-* :ref:`SystemicVariation`
+* :ref:`Adjacency`
+* :ref:`Allele`
+* :ref:`CisPhasedBlock`
+* :ref:`CopyNumberChange`
+* :ref:`CopyNumberCount`
+* :ref:`DerivativeMolecule`
+* :ref:`RelativeAllele`
+* :ref:`Terminus`
 
+
+**Inherits:** :ref:`Ga4ghIdentifiableObject`
 
 **Subclasses:** :ref:`MolecularVariation`, :ref:`SystemicVariation`

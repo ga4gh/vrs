@@ -100,4 +100,6 @@ Some CisPhasedBlock attributes are inherited from :ref:`Variation`.
       - 0..1
       - An optional Sequence Reference on which all of the in-cis Alleles are found. When defined, this may be used to implicitly define the `sequenceReference` attribute for each of the CisPhasedBlock member Alleles.
 
+**Inherits:** :ref:`MolecularVariation`
+
 **Used in:** :ref:`DerivativeMolecule`

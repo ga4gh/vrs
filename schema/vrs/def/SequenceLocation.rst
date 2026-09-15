@@ -99,4 +99,6 @@ Some SequenceLocation attributes are inherited from :ref:`Ga4ghIdentifiableObjec
       - 0..1
       - The literal sequence encoded by the `sequenceReference` at these coordinates.
 
+**Inherits:** :ref:`Location`
+
 **Used in:** :ref:`Allele`, :ref:`CopyNumberChange`, :ref:`CopyNumberCount`, :ref:`RelativeSequenceLocation`

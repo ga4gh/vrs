@@ -96,3 +96,5 @@ Some CopyNumberCount attributes are inherited from :ref:`Variation`.
       - integer | :ref:`Range`
       - 1..1
       - The integral number of copies of the subject in a system
+
+**Inherits:** :ref:`SystemicVariation`

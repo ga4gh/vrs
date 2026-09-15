@@ -108,4 +108,6 @@ Some Adjacency attributes are inherited from :ref:`Variation`.
       - 0..1
       - A flag indicating if coordinate ambiguity in the adjoined sequences is from sequence homology (true) or other uncertainty, such as instrument ambiguity (false).
 
+**Inherits:** :ref:`MolecularVariation`
+
 **Used in:** :ref:`TraversalBlock`

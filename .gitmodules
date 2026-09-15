@@ -1,4 +1,4 @@
 [submodule "submodules/gkm-core"]
 	path = submodules/gkm-core
 	url = https://github.com/ga4gh/gkm-core.git
-	branch = 1.2.1-ballot.2026-09
+	branch = 1.3.0-ballot.2026-09

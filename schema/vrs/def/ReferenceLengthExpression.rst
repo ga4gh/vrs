@@ -88,3 +88,5 @@ Some ReferenceLengthExpression attributes are inherited from :ref:`SequenceExpre
       - integer
       - 1..1
       - The number of residues in the repeat subunit.
+
+**Inherits:** :ref:`SequenceExpression`

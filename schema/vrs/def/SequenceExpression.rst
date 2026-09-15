@@ -5,6 +5,8 @@
 
 **Abstract Class** — not instantiated directly; concrete subclasses inherit its attributes.
 
+**Sealed** — SequenceExpression has a closed, exhaustive set of concrete subclasses; every one is listed below. No other subclass is permitted, and a conforming instance must be exactly one of these types.
+
 **Computational Definition**
 
 An expression describing a :ref:`sequence <sequenceString>`.
@@ -63,10 +65,12 @@ Some SequenceExpression attributes are inherited from :ref:`gkm-core:Entity`.
 
 This class must match **one of** the following:
 
+* :ref:`LengthExpression`
 * :ref:`LiteralSequenceExpression`
 * :ref:`ReferenceLengthExpression`
-* :ref:`LengthExpression`
 
+
+**Inherits:** :ref:`Entity`
 
 **Subclasses:** :ref:`LengthExpression`, :ref:`LiteralSequenceExpression`, :ref:`ReferenceLengthExpression`
 

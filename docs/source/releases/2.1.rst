@@ -1,25 +1,6 @@
 2.1
 !!!
 
-2.1.1
-@@@@@
-
-Version 2.1.1 is a patch release: it makes no breaking changes to the
-representation or computed identifiers of any trial-use class. It adopts the
-renamed GKM metaschema processor and its abstract-class convention. (@larrybabb
-in https://github.com/ga4gh/vrs/pull/715)
-
-Patch Version Increment
-#######################
-
-  * adopts the renamed ``ga4gh.gkm.metaschema`` processor and its
-    abstract-class convention: abstract classes are left open, while concrete
-    classes are closed via ``additionalProperties``/``unevaluatedProperties:
-    false``.
-  * bumps the gkm-core submodule to ``1.2.1`` and retokenizes the schema
-    identity to ``2.1.1``; the upstream gkm-core changes do not alter any
-    class inherited or embedded by VRS.
-
 2.1.0
 @@@@@
 

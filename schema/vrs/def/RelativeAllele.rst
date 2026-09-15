@@ -101,3 +101,5 @@ Some RelativeAllele attributes are inherited from :ref:`Variation`.
       - :ref:`RelativeSequenceLocation` | :ref:`iriReference`
       - 1..1
       - The relative location at which the baseState and mappedState are expressed.
+
+**Inherits:** :ref:`MolecularVariation`

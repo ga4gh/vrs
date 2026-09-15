@@ -99,4 +99,6 @@ Some SequenceReference attributes are inherited from :ref:`gkm-core:Entity`.
       - 0..1
       - A boolean indicating whether the molecule represented by the sequence is circular (true) or linear (false).
 
+**Inherits:** :ref:`Entity`
+
 **Used in:** :ref:`CisPhasedBlock`, :ref:`SequenceLocation`, :ref:`SequenceOffsetLocation`

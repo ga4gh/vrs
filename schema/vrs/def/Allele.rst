@@ -97,4 +97,6 @@ Some Allele attributes are inherited from :ref:`Variation`.
       - 1..1
       - An expression of the sequence state
 
+**Inherits:** :ref:`MolecularVariation`
+
 **Used in:** :ref:`CisPhasedBlock`, :ref:`DerivativeMolecule`

@@ -78,3 +78,5 @@ Some LengthExpression attributes are inherited from :ref:`SequenceExpression`.
       - :ref:`Range` | integer
       - 0..1
       - The length of the sequence.
+
+**Inherits:** :ref:`SequenceExpression`

@@ -89,4 +89,6 @@ Some RelativeSequenceLocation attributes are inherited from :ref:`Ga4ghIdentifia
       - 1..1
       - A location relative to an offset on a mapped sequence.
 
+**Inherits:** :ref:`Location`
+
 **Used in:** :ref:`RelativeAllele`

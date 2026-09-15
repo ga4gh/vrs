@@ -96,3 +96,5 @@ Some CopyNumberChange attributes are inherited from :ref:`Variation`.
       - string
       - 1..1
       - MUST use one of the defined enumerations that are based on the corresponding EFO ontological terms for copy number variation. See Implementation Guidance for more details.
+
+**Inherits:** :ref:`SystemicVariation`

@@ -51,4 +51,6 @@ Some Extension attributes are inherited from :ref:`Element`.
       - 0..1
       - A description of the meaning or utility of the Extension, to explain the type of information it is meant to hold.
 
+**Inherits:** :ref:`Element`
+
 **Used in:** :ref:`Adjacency`, :ref:`Allele`, :ref:`CisPhasedBlock`, :ref:`Coding`, :ref:`ConceptMapping`, :ref:`ConceptSet`, :ref:`CopyNumberChange`, :ref:`CopyNumberCount`, :ref:`DerivativeMolecule`, :ref:`Entity`, :ref:`Expression`, :ref:`Ga4ghIdentifiableObject`, :ref:`LengthExpression`, :ref:`LiteralSequenceExpression`, :ref:`Location`, :ref:`MappableConcept`, :ref:`MolecularVariation`, :ref:`ReferenceLengthExpression`, :ref:`RelativeAllele`, :ref:`RelativeSequenceLocation`, :ref:`SequenceExpression`, :ref:`SequenceLocation`, :ref:`SequenceOffsetLocation`, :ref:`SequenceReference`, :ref:`SystemicVariation`, :ref:`Terminus`, :ref:`TraversalBlock`, :ref:`Variation`

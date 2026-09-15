@@ -1,19 +1,11 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/Variation",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/Variation",
    "title": "Variation",
    "type": "object",
    "maturity": "trial use",
    "abstract": true,
    "description": "A representation of the state of one or more biomolecules.",
-   "oneOf": [
-      {
-         "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/MolecularVariation"
-      },
-      {
-         "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/SystemicVariation"
-      }
-   ],
    "properties": {
       "id": {
          "type": "string",
@@ -43,7 +35,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gkm-core/1.2.1-ballot.2026-09.1/json/Extension"
+            "$ref": "/ga4gh/schema/gkm-core/1.3.0-ballot.2026-09.1/json/Extension"
          },
          "description": "A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model."
       },
@@ -56,13 +48,39 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/Expression"
+            "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/Expression"
          }
       }
    },
    "discriminator": {
       "propertyName": "type"
    },
+   "oneOf": [
+      {
+         "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/Adjacency"
+      },
+      {
+         "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/Allele"
+      },
+      {
+         "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/CisPhasedBlock"
+      },
+      {
+         "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/CopyNumberChange"
+      },
+      {
+         "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/CopyNumberCount"
+      },
+      {
+         "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/DerivativeMolecule"
+      },
+      {
+         "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/RelativeAllele"
+      },
+      {
+         "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/Terminus"
+      }
+   ],
    "ga4gh": {
       "inherent": [
          "type"

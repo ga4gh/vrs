@@ -78,3 +78,5 @@ Some LiteralSequenceExpression attributes are inherited from :ref:`SequenceExpre
       - :ref:`sequenceString`
       - 1..1
       - the literal sequence
+
+**Inherits:** :ref:`SequenceExpression`

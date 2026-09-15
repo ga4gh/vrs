@@ -16,6 +16,7 @@ Releases
    :maxdepth: 2
    :includehidden:
 
+   2.2.rst
    2.1.rst
    2.0.rst
    1.3.rst

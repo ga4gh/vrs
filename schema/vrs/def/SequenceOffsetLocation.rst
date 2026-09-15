@@ -99,4 +99,6 @@ Some SequenceOffsetLocation attributes are inherited from :ref:`gkm-core:Entity`
       - 0..1
       - The end offset, in inter-residue coordinates, from the anchor realization selected by anchorOrientation on the sequenceReference.
 
+**Inherits:** :ref:`Entity`
+
 **Used in:** :ref:`RelativeSequenceLocation`

@@ -5,6 +5,8 @@
 
 **Abstract Class** — not instantiated directly; concrete subclasses inherit its attributes.
 
+**Sealed** — Location has a closed, exhaustive set of concrete subclasses; every one is listed below. No other subclass is permitted, and a conforming instance must be exactly one of these types.
+
 **Computational Definition**
 
 A contiguous segment of a biological sequence.
@@ -13,9 +15,11 @@ A contiguous segment of a biological sequence.
 
 This class must match **one of** the following:
 
-* :ref:`SequenceLocation`
 * :ref:`RelativeSequenceLocation`
+* :ref:`SequenceLocation`
 
+
+**Inherits:** :ref:`Ga4ghIdentifiableObject`
 
 **Subclasses:** :ref:`RelativeSequenceLocation`, :ref:`SequenceLocation`
 

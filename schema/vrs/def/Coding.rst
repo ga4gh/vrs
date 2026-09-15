@@ -64,4 +64,6 @@ Some Coding attributes are inherited from :ref:`Element`.
       - 0..m
       - A list of IRIs that are associated with the coding. This can be used to provide additional context or to link to additional information about the concept.
 
+**Inherits:** :ref:`Element`
+
 **Used in:** :ref:`ConceptMapping`, :ref:`MappableConcept`

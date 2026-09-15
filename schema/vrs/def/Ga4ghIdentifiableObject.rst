@@ -66,4 +66,6 @@ Some Ga4ghIdentifiableObject attributes are inherited from :ref:`gkm-core:Entity
       - 0..1
       - A sha512t24u digest created using the VRS Computed Identifier algorithm.
 
+**Inherits:** :ref:`Entity`
+
 **Subclasses:** :ref:`Location`, :ref:`Variation`

@@ -51,4 +51,6 @@ Some Expression attributes are inherited from :ref:`gkm-core:Element`.
       - 0..1
       - The version of the syntax used to describe the variation. This is particularly important for HGVS expressions, as the syntax has evolved over time.
 
+**Inherits:** :ref:`Element`
+
 **Used in:** :ref:`Adjacency`, :ref:`Allele`, :ref:`CisPhasedBlock`, :ref:`CopyNumberChange`, :ref:`CopyNumberCount`, :ref:`DerivativeMolecule`, :ref:`MolecularVariation`, :ref:`RelativeAllele`, :ref:`SystemicVariation`, :ref:`Terminus`, :ref:`Variation`

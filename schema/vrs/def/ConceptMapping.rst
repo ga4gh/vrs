@@ -46,4 +46,6 @@ Some ConceptMapping attributes are inherited from :ref:`Element`.
       - 1..1
       - A mapping relation between concepts as defined by the Simple Knowledge Organization System (SKOS).
 
+**Inherits:** :ref:`Element`
+
 **Used in:** :ref:`MappableConcept`

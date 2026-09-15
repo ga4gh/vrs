@@ -84,4 +84,6 @@ Some TraversalBlock attributes are inherited from :ref:`gkm-core:Entity`.
       - 0..1
       - The orientation of the molecular variation component.
 
+**Inherits:** :ref:`Entity`
+
 **Used in:** :ref:`DerivativeMolecule`

@@ -83,4 +83,6 @@ This class must match **any of** the following:
 * an object with additional constraints
 
 
+**Inherits:** :ref:`Entity`
+
 **Used in:** :ref:`ConceptSet`
