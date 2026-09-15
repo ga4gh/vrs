@@ -1,0 +1,26 @@
+2.2
+!!!
+
+2.2.0
+@@@@@
+
+Version 2.2.0 adopts the renamed GKM metaschema processor and its
+abstract-class convention, and *seals* the abstract variation, location, and
+sequence-expression classes — each now declares a closed, exhaustive set of
+concrete subclasses. Concrete-class representations and computed identifiers
+are unchanged. (@larrybabb in https://github.com/ga4gh/vrs/pull/715)
+
+Minor Version Increment
+#######################
+
+  * seals :ref:`Variation`, :ref:`MolecularVariation`, :ref:`SystemicVariation`,
+    :ref:`Location`, and :ref:`SequenceExpression` (``sealed: true``): a
+    reference to one of these abstract classes must validate as exactly one of
+    its enumerated concrete subclasses, and the set is not extensible by
+    third-party implementations.
+  * adopts the renamed ``ga4gh.gkm.metaschema`` processor and its
+    abstract-class convention: abstract classes are left open unless sealed,
+    while concrete classes are closed to undefined properties (via
+    ``additionalProperties``/``unevaluatedProperties: false``).
+  * bumps the gkm-core submodule to ``1.3.0`` and retokenizes the schema
+    identity to ``2.2.0``.

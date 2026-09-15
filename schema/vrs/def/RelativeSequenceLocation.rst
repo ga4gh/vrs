@@ -1,6 +1,7 @@
-.. warning:: This data class is at a **draft** maturity level and may \
-    change significantly in future releases. Maturity \
-    levels are described in the :ref:`maturity-model`.
+.. admonition:: Draft
+    :class: warning
+
+    May change significantly in future releases. See |maturity-model|.
 
 **Computational Definition**
 
@@ -41,6 +42,11 @@ Some RelativeSequenceLocation attributes are inherited from :ref:`Ga4ghIdentifia
       - string
       - 0..1
       - The 'logical' identifier of the Entity in the system of record, e.g. a UUID.  This 'id' is unique within a given system, but may or may not be globally unique outside the system. It is used within a system to reference an object from another.
+   *  - type
+      -
+      - string
+      - 1..1
+      - MUST be "RelativeSequenceLocation"
    *  - name
       -
       - string
@@ -72,11 +78,6 @@ Some RelativeSequenceLocation attributes are inherited from :ref:`Ga4ghIdentifia
       - string
       - 0..1
       - A sha512t24u digest created using the VRS Computed Identifier algorithm.
-   *  - type
-      -
-      - string
-      - 1..1
-      - MUST be "RelativeSequenceLocation"
    *  - baseSequenceLocation
       -
       - :ref:`SequenceLocation` | :ref:`iriReference`
@@ -87,3 +88,7 @@ Some RelativeSequenceLocation attributes are inherited from :ref:`Ga4ghIdentifia
       - :ref:`iriReference` | :ref:`SequenceOffsetLocation`
       - 1..1
       - A location relative to an offset on a mapped sequence.
+
+**Inherits:** :ref:`Location`
+
+**Used in:** :ref:`RelativeAllele`

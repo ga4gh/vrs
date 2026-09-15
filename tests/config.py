@@ -12,7 +12,9 @@ examples_path = root_path / "examples"
 vrs_source_path = schema_path / "vrs" / "vrs-source.yaml"
 
 
-ga4gh_re = re.compile(r'.*\/ga4gh\/schema\/([\w\-\.]+)\/[\w\.]+\/(.*)$')
+# Match /ga4gh/schema/<module>/<version>/<local-path>. Both <module> (e.g.
+# `gkm-core`) and <version> (e.g. `2.2.0-ballot.2026-09.1`) may contain hyphens.
+ga4gh_re = re.compile(r'.*/ga4gh/schema/([\w.\-]+)/[\w.\-]+/(.*)$')
 
 
 def retrieve_rel_ref(ga4gh_ref: str):
@@ -30,14 +32,16 @@ js_registry = Registry(retrieve=retrieve_rel_ref)
 js_def = dict()
 validator = dict()
 
-for schema_path in schema_path.glob('*/json/*'):
-    content = json.loads(schema_path.read_text())
-    schema_uri = schema_path.as_uri()
+# NB: iterate with a distinct loop variable so the module-level `schema_path`
+# (the schema/ directory) is not rebound -- retrieve_rel_ref() relies on it.
+for schema_file in schema_path.glob('*/json/*'):
+    content = json.loads(schema_file.read_text())
+    schema_uri = schema_file.as_uri()
     content['id'] = schema_uri
     schema_resource = Resource(contents=content, specification=DRAFT202012)
-    js_def[schema_path.stem] = content
+    js_def[schema_file.stem] = content
     js_registry = js_registry.with_resources([
-        (schema_path.name, schema_resource),
+        (schema_file.name, schema_resource),
         (schema_uri, schema_resource)
     ])
 

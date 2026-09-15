@@ -1,6 +1,7 @@
-.. note:: This data class is at a **trial use** maturity level and may \
-    change in future releases. Maturity \
-    levels are described in the :ref:`maturity-model`.
+.. admonition:: Trial Use
+    :class: note
+
+    May change in future releases. See |maturity-model|.
 
 **Computational Definition**
 
@@ -41,6 +42,11 @@ Some SequenceLocation attributes are inherited from :ref:`Ga4ghIdentifiableObjec
       - string
       - 0..1
       - The 'logical' identifier of the Entity in the system of record, e.g. a UUID.  This 'id' is unique within a given system, but may or may not be globally unique outside the system. It is used within a system to reference an object from another.
+   *  - type
+      -
+      - string
+      - 1..1
+      - MUST be "SequenceLocation"
    *  - name
       -
       - string
@@ -72,11 +78,6 @@ Some SequenceLocation attributes are inherited from :ref:`Ga4ghIdentifiableObjec
       - string
       - 0..1
       - A sha512t24u digest created using the VRS Computed Identifier algorithm.
-   *  - type
-      -
-      - string
-      - 1..1
-      - MUST be "SequenceLocation"
    *  - sequenceReference
       -
       - :ref:`iriReference` | :ref:`SequenceReference`
@@ -97,3 +98,7 @@ Some SequenceLocation attributes are inherited from :ref:`Ga4ghIdentifiableObjec
       - :ref:`sequenceString`
       - 0..1
       - The literal sequence encoded by the `sequenceReference` at these coordinates.
+
+**Inherits:** :ref:`Location`
+
+**Used in:** :ref:`Allele`, :ref:`CopyNumberChange`, :ref:`CopyNumberCount`, :ref:`RelativeSequenceLocation`

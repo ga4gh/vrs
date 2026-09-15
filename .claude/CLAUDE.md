@@ -14,12 +14,14 @@ Everything is generated from **`*-source.yaml`** files. **Never hand-edit genera
 - **Generated from it:**
   - `schema/vrs/json/*` — split JSON Schema, one file per class (no extension).
   - `schema/vrs/def/*.rst` — per-class documentation includes used by the docs.
-- **Generator tooling** comes from the `ga4gh.gks.metaschema` pip package (pinned in `.requirements.txt`). The `schema/vrs/Makefile` invokes its console scripts: `source2classes`, `source2splitjs` (JSON), and `y2t` (rst def files). You will not find these scripts in this repo.
+- **Generator tooling** comes from the `ga4gh.gkm.metaschema` pip package (renamed from `ga4gh.gks.metaschema` in the GKS→GKM rebrand; pinned in `.requirements.txt` — currently `ga4gh.gkm.metaschema == 0.4.6` from PyPI, the "metaschema processor" release carrying this rename). The `schema/vrs/Makefile` invokes its console scripts: `source2classes`, `source2splitjs` (JSON), and `y2t` (rst def files). You will not find these scripts in this repo.
+- **Abstract-class convention (metaschema processor 0.4+):** abstract base classes are declared with `abstract: true` (+ `type: object`) and left *open* (no `additionalProperties`/`unevaluatedProperties`); concrete classes are *closed* (`additionalProperties: false`, or `unevaluatedProperties: false` when composed via inheritance). Inherited attributes are declared with plain `properties`/`required` on the base class (the old `heritableProperties`/`heritableRequired` keys are gone), and `extends:` has been removed — a subclass simply re-declares the property it narrows (e.g. a `type` `const`), subject to Liskov covariance. Concrete classes drop any explicit `type: object` (the processor injects it).
+- **Sealed subtype unions:** the abstract classes (`Variation`, `MolecularVariation`, `SystemicVariation`, `Location`, `SequenceExpression`) are declared `sealed: true` (a metaschema-processor 0.4.6 feature) plus a `discriminator: {propertyName: type}`. The processor auto-derives a class-level `oneOf` listing the class's **concrete descendants** (transitively via `inherits`), then strips `sealed` from the final JSON — so a `$ref` to the abstract class must validate as exactly one of those concrete subtypes. Do **not** hand-author the `oneOf`; declaring both `sealed` and a manual `oneOf`/`anyOf`/`allOf` is an error (and `sealed` requires `abstract: true` plus at least one concrete descendant). Concrete classes pin their `type` `const` and stay closed. (The `oneOf`s that remain hand-written in the source are *use-site* property refs like `location: oneOf: [iriReference, SequenceLocation]`, not class-level unions.)
 
 To regenerate after editing source YAML:
 
 ```bash
-cd schema && make all      # iterates every schema/<name>/ subdir, runs its Makefile
+cd schema && make all      # top-level schema target just delegates to the vrs Makefile
 # or narrower:
 cd schema/vrs && make all
 cd schema/vrs && make clean # wipes build/, json/, def/ — regenerate after
@@ -40,7 +42,7 @@ namespaces:
 
 - `inherits: gkm-core:Entity` and `$refCurie: gkm.core:iriReference` in the source YAML resolve through this submodule.
 - The generated VRS JSON files contain `$ref`s into `/ga4gh/schema/gkm-core/<version>/json/...`.
-- **Naming note (rebrand):** the upstream GitHub repo was renamed from `gks-core` to **`gkm-core`** (Genomic Knowledge Models), so the schema tree, source file, `$id`/`$ref` namespace, the git submodule *path* (`submodules/gkm-core`), and the remote (`github.com/ga4gh/gkm-core.git`) all use `gkm-core` now. The submodule tracks the `1.2.0-ballot.2026-07` branch. `schema/gkm-core` and `docs/source/def/gkm-core` are symlinks into `submodules/gkm-core/schema/gkm-core`.
+- **Naming note (rebrand):** the upstream GitHub repo was renamed from `gks-core` to **`gkm-core`** (Genomic Knowledge Models), so the schema tree, source file, `$id`/`$ref` namespace, the git submodule *path* (`submodules/gkm-core`), and the remote (`github.com/ga4gh/gkm-core.git`) all use `gkm-core` now. The submodule tracks the `1.3.0-ballot.2026-09` branch. `schema/gkm-core` is a real directory holding symlinks *only* to the imported `gkm-core-source.yaml` and `json/` under `submodules/gkm-core/schema/gkm-core` (for import resolution and test `$ref` resolution); the imported gkm-core class `def/*.rst` are generated locally into `schema/vrs/def/` rather than symlinked, so there is no `docs/source/def/gkm-core` symlink.
 - Consequence: the pinned submodule commit and the `<version>` string in the namespace/`$ref`s must stay in sync. Bumping the core version means updating both the submodule pointer **and** the version strings in `vrs-source.yaml`, then regenerating.
 - Always clone with `--recurse-submodules` (or `git submodule update --init --recursive`), or the build cannot resolve imports.
 
@@ -56,7 +58,7 @@ pre-commit install                  # strongly recommended — keeps generated f
 
 Two distinct kinds:
 
-- **Smoke tests** — `tests/` (`make test` → `pytest tests/`). Confirm the schema parses and loads with tooling; `test_examples.py` validates `examples/` against the schema. Fast sanity check. Run a single test with `pytest tests/test_basic.py::<name>`.
+- **Smoke tests** — `tests/` (`make test` → `pytest tests/`). Confirm the schema parses/loads and enforces its invariants: `test_examples.py` validates `examples/` (including the `examples/invalid/` negative cases, flagged `shouldValidationFail` in `test_definitions.yaml`); `test_schema_invariants.py` asserts abstract classes stay open and concrete classes closed; `test_coverage.py` requires every concrete class to have a valid example under `examples/coverage/`; `test_ref_resolution.py` covers the gkm-core `$ref` version-token resolver. Run a single test with `pytest tests/test_basic.py::<name>`.
 - **Validation tests** — `validation/` (`models.yaml`, `functions.yaml`). Language-neutral conformance fixtures for implementers, not a pytest suite.
 
 ## Docs
