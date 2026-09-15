@@ -21,6 +21,13 @@ jobs:
         with:
           python-version: 3.12
 
+      # update-json-def-files runs `make all`, which needs the metaschema
+      # console scripts (source2classes/source2splitjs/y2t); the other hooks
+      # don't. Install only for that matrix entry.
+      - name: Install schema-generation dependencies
+        if: matrix.cmd == 'update-json-def-files'
+        run: python3 -m pip install -r .requirements.txt
+
       - uses: pre-commit/action@v3.0.1
         with:
           extra_args: ${{ matrix.cmd }} --all-files
