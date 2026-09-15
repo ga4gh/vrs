@@ -52,9 +52,6 @@ $defs:
     inherits: Ga4ghIdentifiableObject
     description: >-
       A representation of the state of one or more biomolecules.
-    oneOf:
-      - $ref: "#/$defs/MolecularVariation"
-      - $ref: "#/$defs/SystemicVariation"
     properties:
       expressions:
         type: array
@@ -99,13 +96,6 @@ $defs:
     abstract: true
     description: >-
       A :ref:`variation` on a contiguous molecule.
-    oneOf:
-      - $ref: "#/$defs/Allele"
-      - $ref: "#/$defs/RelativeAllele"
-      - $ref: "#/$defs/CisPhasedBlock"
-      - $ref: "#/$defs/Adjacency"
-      - $ref: "#/$defs/Terminus"
-      - $ref: "#/$defs/DerivativeMolecule"
     discriminator:
       propertyName: type
 
@@ -116,9 +106,6 @@ $defs:
     description: >-
       A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
-    oneOf:
-      - $ref: "#/$defs/CopyNumberCount"
-      - $ref: "#/$defs/CopyNumberChange"
     discriminator:
       propertyName: type
 
@@ -315,9 +302,6 @@ $defs:
     abstract: true
     description: >-
       A contiguous segment of a biological sequence.
-    oneOf:
-      - $ref: "#/$defs/SequenceLocation"
-      - $ref: "#/$defs/RelativeSequenceLocation"
     discriminator:
       propertyName: type
 
@@ -532,10 +516,6 @@ $defs:
         - type
     description: >-
       An expression describing a :ref:`sequence <sequenceString>`.
-    oneOf:
-      - $ref: "#/$defs/LiteralSequenceExpression"
-      - $ref: "#/$defs/ReferenceLengthExpression"
-      - $ref: "#/$defs/LengthExpression"
     discriminator:
       propertyName: type
     properties:
