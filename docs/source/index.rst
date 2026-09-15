@@ -23,7 +23,7 @@ implementation that promotes adoption of the standard.
 
    introduction
    quickstart
-   concepts/index
+   model/index
    conventions/index
    examples/index
    getting_involved
