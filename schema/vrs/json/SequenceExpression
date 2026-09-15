@@ -22,6 +22,9 @@
          "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/LengthExpression"
       }
    ],
+   "discriminator": {
+      "propertyName": "type"
+   },
    "properties": {
       "id": {
          "type": "string",

@@ -61,6 +61,8 @@ $defs:
         ordered: false
         items:
           $ref: "#/$defs/Expression"
+    discriminator:
+      propertyName: type
 
   Expression:
     inherits: gkm-core:Element
@@ -104,6 +106,8 @@ $defs:
       - $ref: "#/$defs/Adjacency"
       - $ref: "#/$defs/Terminus"
       - $ref: "#/$defs/DerivativeMolecule"
+    discriminator:
+      propertyName: type
 
   SystemicVariation:
     inherits: Variation
@@ -115,6 +119,8 @@ $defs:
     oneOf:
       - $ref: "#/$defs/CopyNumberCount"
       - $ref: "#/$defs/CopyNumberChange"
+    discriminator:
+      propertyName: type
 
   # =============================================================================
   # IDENTIFIABLE TYPES
@@ -312,6 +318,8 @@ $defs:
     oneOf:
       - $ref: "#/$defs/SequenceLocation"
       - $ref: "#/$defs/RelativeSequenceLocation"
+    discriminator:
+      propertyName: type
 
   SequenceLocation:
     maturity: trial use
@@ -528,6 +536,8 @@ $defs:
       - $ref: "#/$defs/LiteralSequenceExpression"
       - $ref: "#/$defs/ReferenceLengthExpression"
       - $ref: "#/$defs/LengthExpression"
+    discriminator:
+      propertyName: type
     properties:
       type:
         description: >-

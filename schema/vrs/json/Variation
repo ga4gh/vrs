@@ -60,6 +60,9 @@
          }
       }
    },
+   "discriminator": {
+      "propertyName": "type"
+   },
    "ga4gh": {
       "inherent": [
          "type"
