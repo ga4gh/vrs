@@ -6,9 +6,6 @@
    "maturity": "trial use",
    "abstract": true,
    "description": "A contiguous segment of a biological sequence.",
-   "discriminator": {
-      "propertyName": "type"
-   },
    "ga4gh": {
       "inherent": [
          "type"

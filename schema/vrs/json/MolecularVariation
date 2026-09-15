@@ -6,9 +6,6 @@
    "maturity": "trial use",
    "abstract": true,
    "description": "A variation on a contiguous molecule.",
-   "discriminator": {
-      "propertyName": "type"
-   },
    "ga4gh": {
       "inherent": [
          "type"

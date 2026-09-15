@@ -58,8 +58,6 @@ $defs:
         ordered: false
         items:
           $ref: "#/$defs/Expression"
-    discriminator:
-      propertyName: type
 
   Expression:
     inherits: gkm-core:Element
@@ -96,8 +94,6 @@ $defs:
     abstract: true
     description: >-
       A :ref:`variation` on a contiguous molecule.
-    discriminator:
-      propertyName: type
 
   SystemicVariation:
     inherits: Variation
@@ -106,8 +102,6 @@ $defs:
     description: >-
       A Variation of multiple molecules in the context of a system, e.g.
       a genome, sample, or homologous chromosomes.
-    discriminator:
-      propertyName: type
 
   # =============================================================================
   # IDENTIFIABLE TYPES
@@ -302,8 +296,6 @@ $defs:
     abstract: true
     description: >-
       A contiguous segment of a biological sequence.
-    discriminator:
-      propertyName: type
 
   SequenceLocation:
     maturity: trial use
@@ -516,8 +508,6 @@ $defs:
         - type
     description: >-
       An expression describing a :ref:`sequence <sequenceString>`.
-    discriminator:
-      propertyName: type
     properties:
       type:
         description: >-
