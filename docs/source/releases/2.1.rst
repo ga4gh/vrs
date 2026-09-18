@@ -1,6 +1,75 @@
 2.1
 !!!
 
+2.1.1
+@@@@@
+
+Version 2.1.1 moves VRS to the renamed GKM metaschema processor
+(``ga4gh.gkm.metaschema``) and its abstract-class convention, and tracks the
+GKM Core 1.3.0 ballot. The abstract classes :ref:`Variation`,
+:ref:`MolecularVariation`, :ref:`SystemicVariation`, :ref:`Location`, and
+:ref:`SequenceExpression` are now declared *sealed*: the processor derives
+each class's closed set of concrete subclasses instead of relying on
+hand-maintained ``oneOf`` lists. The derived sets match 2.1.0 exactly, so the
+instances VRS accepts and their computed identifiers are unchanged. This
+release also renames the "Concepts" documentation section to "Model", aligns
+the maturity model page with GA4GH TASC policy, and substantially expands the
+test suite.
+
+Patch Version Increment
+#######################
+
+  * adopts the renamed ``ga4gh.gkm.metaschema`` processor (``0.4.8``) and its
+    abstract-class convention: abstract classes are marked ``abstract: true``
+    and left open, while concrete classes stay closed to undefined properties
+    (``additionalProperties``/``unevaluatedProperties: false``), as they
+    already were in 2.1.0, by @larrybabb in
+    https://github.com/ga4gh/vrs/pull/716
+  * declares :ref:`Variation`, :ref:`MolecularVariation`,
+    :ref:`SystemicVariation`, :ref:`Location`, and :ref:`SequenceExpression`
+    ``sealed: true``, replacing their hand-written ``oneOf`` unions with
+    processor-derived ones. The derived unions are identical to 2.1.0's.
+    Properties that previously inlined a ``oneOf`` over the sequence
+    expression classes (:ref:`Allele` ``state``, :ref:`RelativeAllele`
+    ``baseState``/``mappedState``, :ref:`Adjacency` ``linker``) now
+    reference :ref:`SequenceExpression` instead, which resolves to the same
+    three classes, by @larrybabb in https://github.com/ga4gh/vrs/pull/716
+  * publishes :ref:`Ga4ghIdentifiableObject` as a standalone, open JSON
+    Schema (``json/Ga4ghIdentifiableObject``) by @larrybabb in
+    https://github.com/ga4gh/vrs/pull/716
+  * bumps the gkm-core submodule from ``1.2.0`` to
+    ``1.3.0-ballot.2026-09.1``. The only data-model change in GKM Core
+    1.3.0 is a new optional ``ConceptSet.conceptSetType``, and no VRS class
+    uses :ref:`ConceptSet`. VRS classes that inherit from GKM Core's
+    ``Entity`` (:ref:`Ga4ghIdentifiableObject`, :ref:`SequenceExpression`,
+    :ref:`SequenceOffsetLocation`, :ref:`TraversalBlock`) or ``Element``
+    (:ref:`Expression`) see no property changes, since 1.3.0 only marks those
+    root classes abstract, by @larrybabb in
+    https://github.com/ga4gh/vrs/pull/716
+  * retokenizes the schema identity (``$id``) to ``2.1.1-ballot.2026-09.1``
+    by @larrybabb in https://github.com/ga4gh/vrs/pull/716
+  * aligns the :ref:`maturity-model` page with the GA4GH TASC "Technical
+    Specification Development" policy by @ahwagner in
+    https://github.com/ga4gh/vrs/pull/714
+  * renames the "Concepts" documentation section to "Model", generates the
+    imported GKM Core class definitions locally instead of linking them from
+    the submodule, and fixes the maturity model link, by @larrybabb in
+    https://github.com/ga4gh/vrs/pull/716
+  * expands the test suite with schema-invariant tests (abstract classes
+    open, concrete classes closed), negative examples
+    (``examples/invalid/``), concrete-class coverage for every instantiable
+    VRS class, and ``$ref`` version-token resolution tests. Also regenerates
+    the stale ``validation/json/models.json``, adding the missing fixtures
+    for the draft intronic-position classes, by @larrybabb in
+    https://github.com/ga4gh/vrs/pull/716
+  * updates the pre-commit CI job to check out submodules and install the
+    schema-build dependencies, and makes the ``update-json-def-files`` hook
+    fail on a ``make`` error, by @larrybabb in
+    https://github.com/ga4gh/vrs/pull/716
+  * references the GA4GH metaschema processor in the README and refreshes
+    contributor guidance (``.claude/CLAUDE.md``) by @larrybabb in
+    https://github.com/ga4gh/vrs/pull/716
+
 2.1.0
 @@@@@
 
