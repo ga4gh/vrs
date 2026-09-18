@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/RelativeSequenceLocation",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/RelativeSequenceLocation",
    "title": "RelativeSequenceLocation",
    "type": "object",
    "maturity": "draft",
@@ -57,7 +57,7 @@
          "description": "An absolute location on a sequence.",
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/SequenceLocation"
+               "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/SequenceLocation"
             },
             {
                "$ref": "/ga4gh/schema/gkm-core/1.3.0-ballot.2026-09.1/json/iriReference"
@@ -71,7 +71,7 @@
                "$ref": "/ga4gh/schema/gkm-core/1.3.0-ballot.2026-09.1/json/iriReference"
             },
             {
-               "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/SequenceOffsetLocation"
+               "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/SequenceOffsetLocation"
             }
          ]
       }

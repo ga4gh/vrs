@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/SystemicVariation",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/SystemicVariation",
    "title": "SystemicVariation",
    "type": "object",
    "maturity": "trial use",
@@ -11,10 +11,10 @@
    },
    "oneOf": [
       {
-         "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/CopyNumberChange"
+         "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/CopyNumberChange"
       },
       {
-         "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/CopyNumberCount"
+         "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/CopyNumberCount"
       }
    ],
    "ga4gh": {
@@ -64,7 +64,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/Expression"
+            "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/Expression"
          }
       }
    },

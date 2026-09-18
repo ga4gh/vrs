@@ -13,7 +13,7 @@ vrs_source_path = schema_path / "vrs" / "vrs-source.yaml"
 
 
 # Match /ga4gh/schema/<module>/<version>/<local-path>. Both <module> (e.g.
-# `gkm-core`) and <version> (e.g. `2.2.0-ballot.2026-09.1`) may contain hyphens.
+# `gkm-core`) and <version> (e.g. `2.1.1-ballot.2026-09.1`) may contain hyphens.
 ga4gh_re = re.compile(r'.*/ga4gh/schema/([\w.\-]+)/[\w.\-]+/(.*)$')
 
 

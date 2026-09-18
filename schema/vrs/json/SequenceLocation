@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/SequenceLocation",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/SequenceLocation",
    "title": "SequenceLocation",
    "type": "object",
    "maturity": "trial use",
@@ -60,7 +60,7 @@
                "$ref": "/ga4gh/schema/gkm-core/1.3.0-ballot.2026-09.1/json/iriReference"
             },
             {
-               "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/SequenceReference"
+               "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/SequenceReference"
             }
          ],
          "description": "A reference to a SequenceReference on which the location is defined."
@@ -71,7 +71,7 @@
                "type": "integer"
             },
             {
-               "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/Range"
+               "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/Range"
             }
          ],
          "description": "The start coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. For locations on linear sequences, this MUST represent a coordinate or range less than or equal to the value of `end`. For circular sequences, `start` is greater than `end` when the location spans the sequence 0 coordinate."
@@ -82,14 +82,14 @@
                "type": "integer"
             },
             {
-               "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/Range"
+               "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/Range"
             }
          ],
          "description": "The end coordinate or range of the SequenceLocation. The minimum value of this coordinate or range is 0. For locations on linear sequences, this MUST represent a coordinate or range greater than or equal to the value of `start`. For circular sequences, `end` is less than `start` when the location spans the sequence 0 coordinate."
       },
       "sequence": {
          "description": "The literal sequence encoded by the `sequenceReference` at these coordinates.",
-         "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/sequenceString"
+         "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/sequenceString"
       }
    },
    "required": [

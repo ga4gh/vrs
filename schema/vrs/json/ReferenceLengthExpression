@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/ReferenceLengthExpression",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/ReferenceLengthExpression",
    "title": "ReferenceLengthExpression",
    "type": "object",
    "maturity": "trial use",
@@ -53,13 +53,13 @@
                "type": "integer"
             },
             {
-               "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/Range"
+               "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/Range"
             }
          ],
          "description": "The number of residues in the expressed sequence."
       },
       "sequence": {
-         "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/sequenceString",
+         "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/sequenceString",
          "description": "the literal sequence encoded by the Reference Length Expression."
       },
       "repeatSubunitLength": {

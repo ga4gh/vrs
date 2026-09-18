@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/Allele",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/Allele",
    "title": "Allele",
    "type": "object",
    "maturity": "trial use",
@@ -57,7 +57,7 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/Expression"
+            "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/Expression"
          }
       },
       "location": {
@@ -66,13 +66,13 @@
                "$ref": "/ga4gh/schema/gkm-core/1.3.0-ballot.2026-09.1/json/iriReference"
             },
             {
-               "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/SequenceLocation"
+               "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/SequenceLocation"
             }
          ],
          "description": "The location of the Allele"
       },
       "state": {
-         "$ref": "/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/SequenceExpression",
+         "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/SequenceExpression",
          "description": "An expression of the sequence state"
       }
    },

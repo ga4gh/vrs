@@ -1,5 +1,5 @@
 """The GA4GH ``$ref`` fallback resolver must accept the hyphenated ballot
-version token (e.g. ``2.2.0-ballot.2026-09.1``) for both VRS and imported
+version token (e.g. ``2.1.1-ballot.2026-09.1``) for both VRS and imported
 gkm-core refs.
 
 Normal validation resolves ``$ref``s in-memory via each schema's ``$id``, so
@@ -15,10 +15,10 @@ from config import retrieve_rel_ref
     "ref, expected_class",
     [
         # bare absolute-path ref (VRS, hyphenated ballot version)
-        ("/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/SequenceReference",
+        ("/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/SequenceReference",
          "SequenceReference"),
         # fully-qualified w3id URL form
-        ("https://w3id.org/ga4gh/schema/vrs/2.2.0-ballot.2026-09.1/json/SequenceLocation",
+        ("https://w3id.org/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/SequenceLocation",
          "SequenceLocation"),
         # imported module whose name AND version both contain hyphens
         ("/ga4gh/schema/gkm-core/1.3.0-ballot.2026-09.1/json/Extension",
