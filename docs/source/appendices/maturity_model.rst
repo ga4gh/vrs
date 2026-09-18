@@ -197,7 +197,7 @@ data class property.
 .. _GA4GH Product Development 14.5: https://www.ga4gh.org/our-products/development-and-approval-process/#section_5:~:text=14.5%20Development%20work%20should%20be%20based%20on%20real%20use%20cases%20across%20multiple%20environments.
 .. _landscape analysis of the problem domain: https://www.ga4gh.org/our-products/development-and-approval-process/#section_4
 .. _GA4GH Product Development 14.8.3: https://www.ga4gh.org/our-products/development-and-approval-process/#section_5:~:text=14.8.3%20implementations
-.. _Technical Specification Development: https://www.ga4gh.org/wp-content/uploads/2026/01/TASC-Technical-Specification-Development.pdf
+.. _Technical Specification Development: https://www.ga4gh.org/document/tasc-technical-specification-development/
 .. _gkm-core: https://github.com/ga4gh/gkm-core
 .. _VRS Discussion board: https://github.com/ga4gh/vrs/discussions
 .. _VRS issue: https://github.com/ga4gh/vrs/issues

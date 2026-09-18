@@ -13,7 +13,8 @@ each class's closed set of concrete subclasses instead of relying on
 hand-maintained ``oneOf`` lists. The derived sets match 2.1.0 exactly, so the
 instances VRS accepts and their computed identifiers are unchanged. This
 release also renames the "Concepts" documentation section to "Model", aligns
-the maturity model page with GA4GH TASC policy, and substantially expands the
+the maturity model page with the GA4GH TASC `Technical Specification Development
+<https://www.ga4gh.org/document/tasc-technical-specification-development/>`__ policy, and substantially expands the
 test suite.
 
 Patch Version Increment
@@ -48,8 +49,8 @@ Patch Version Increment
     https://github.com/ga4gh/vrs/pull/718
   * retokenizes the schema identity (``$id``) to ``2.1.1-ballot.2026-09.1``
     by @ahwagner in https://github.com/ga4gh/vrs/pull/718
-  * aligns the :ref:`maturity-model` page with the GA4GH TASC "Technical
-    Specification Development" policy by @ahwagner in
+  * aligns the :ref:`maturity-model` page with the GA4GH TASC `Technical
+    Specification Development <https://www.ga4gh.org/document/tasc-technical-specification-development/>`__ policy by @ahwagner in
     https://github.com/ga4gh/vrs/pull/714
   * renames the "Concepts" documentation section to "Model", generates the
     imported GKM Core class definitions locally instead of linking them from
