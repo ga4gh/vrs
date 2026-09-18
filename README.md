@@ -63,6 +63,11 @@ To create the corresponding def and json files after making changes to the sourc
 > *Note: We have a custom pre-commit hook to run these commands after you stage a source
 > document*
 
+These commands are powered by the GA4GH metaschema processor
+([ga4gh/gkm-metaschema](https://github.com/ga4gh/gkm-metaschema)), which defines the
+`*-source.yaml` dialect and generates the split JSON Schema/RST files from it. See that
+repo for details on how source documents are processed.
+
 ## Contributing to the docs
 
 The VRS specification documentation is written in reStructuredText and located in [docs/source](docs/source/). Commits to this repo are built automatically at <https://vrs.ga4gh.org>.

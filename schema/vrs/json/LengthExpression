@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/v2/json/LengthExpression",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/LengthExpression",
    "title": "LengthExpression",
    "type": "object",
    "maturity": "draft",
@@ -14,8 +14,13 @@
    "properties": {
       "id": {
          "type": "string",
-         "description": "The 'logical' identifier of the Entity in the system of record, e.g. a UUID.  This 'id' is unique within a given system, but may or may not be globally unique outside the system. It is used within a system to reference an object from another.",
-         "$comment": "Note that it is common for implementers to create their own internal logical ids - typically a serially or randomly generated value like a UUID that is assigned to the data object as it is created in a system. But an implementer may choose to re-use an existing, globally unique id from an external system or authority for this purpose (e.g. an HGNC id for a Gene object) - as long as it is unique within the implementing system, and can be used to reference the identified object in this context."
+         "description": "The 'logical' identifier of the Entity in the system of record, e.g. a UUID.  This 'id' is unique within a given system, but may or may not be globally unique outside the system. It is used within a system to reference an object from another."
+      },
+      "type": {
+         "type": "string",
+         "description": "MUST be \"LengthExpression\"",
+         "const": "LengthExpression",
+         "default": "LengthExpression"
       },
       "name": {
          "type": "string",
@@ -37,23 +42,15 @@
          "type": "array",
          "ordered": false,
          "items": {
-            "$ref": "/ga4gh/schema/gkm-core/1.2.0/json/Extension"
+            "$ref": "/ga4gh/schema/gkm-core/1.3.0-ballot.2026-09.1/json/Extension"
          },
-         "description": "A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.",
-         "$comment": "Extension objects have a key-value data structure that allows definition of custom fields in the data itself. Extensions are not expected to be natively understood, but may be used for pre-negotiated exchange of message attributes between systems."
-      },
-      "type": {
-         "type": "string",
-         "description": "MUST be \"LengthExpression\"",
-         "$comment": "MUST be the name of a concrete class from the data model.",
-         "const": "LengthExpression",
-         "default": "LengthExpression"
+         "description": "A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model."
       },
       "length": {
          "description": "The length of the sequence.",
          "oneOf": [
             {
-               "$ref": "/ga4gh/schema/vrs/v2/json/Range"
+               "$ref": "/ga4gh/schema/vrs/2.1.1-ballot.2026-09.1/json/Range"
             },
             {
                "type": "integer"

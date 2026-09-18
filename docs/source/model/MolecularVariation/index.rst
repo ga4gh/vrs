@@ -11,9 +11,8 @@ Collectively, these types of variation are called molecular variation.
 
 .. include::  ../../def/vrs/MolecularVariation.rst
 
-**Subclasses**
-
 .. toctree::
+   :hidden:
    :titlesonly:
 
    Allele
