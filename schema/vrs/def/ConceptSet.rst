@@ -68,7 +68,7 @@ Some ConceptSet attributes are inherited from :ref:`Entity`.
                         .. raw:: html
 
                             <span style="background-color: #B2DFEE; color: black; padding: 2px 6px; border: 1px solid black; border-radius: 3px; font-weight: bold; display: inline-block; margin-bottom: 5px;" title="Unordered">&#8942;</span>
-      - :ref:`MappableConcept` | :ref:`ConceptSet`
+      - :ref:`MappableConcept` | :ref:`ConceptSet` | :ref:`iriReference`
       - 2..m
       - A list of concepts that are dependent (occurring together), or independent (existing separately), depending on the membership operator.
    *  - membershipOperator
