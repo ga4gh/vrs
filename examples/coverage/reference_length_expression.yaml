@@ -1,0 +1,4 @@
+type: ReferenceLengthExpression
+length: 11
+repeatSubunitLength: 3
+sequence: CTCCTCCTCCT

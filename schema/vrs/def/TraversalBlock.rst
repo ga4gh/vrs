@@ -1,6 +1,7 @@
-.. warning:: This data class is at a **draft** maturity level and may \
-    change significantly in future releases. Maturity \
-    levels are described in the :ref:`maturity-model`.
+.. admonition:: Draft
+    :class: warning
+
+    May change significantly in future releases. See |maturity-model|.
 
 **Computational Definition**
 
@@ -41,6 +42,11 @@ Some TraversalBlock attributes are inherited from :ref:`gkm-core:Entity`.
       - string
       - 0..1
       - The 'logical' identifier of the Entity in the system of record, e.g. a UUID.  This 'id' is unique within a given system, but may or may not be globally unique outside the system. It is used within a system to reference an object from another.
+   *  - type
+      -
+      - string
+      - 1..1
+      - MUST be "TraversalBlock".
    *  - name
       -
       - string
@@ -67,11 +73,6 @@ Some TraversalBlock attributes are inherited from :ref:`gkm-core:Entity`.
       - :ref:`Extension`
       - 0..m
       - A list of extensions to the Entity, that allow for capture of information not directly supported by elements defined in the model.
-   *  - type
-      -
-      - string
-      - 1..1
-      - MUST be "TraversalBlock".
    *  - component
       -
       - :ref:`Adjacency`
@@ -82,3 +83,7 @@ Some TraversalBlock attributes are inherited from :ref:`gkm-core:Entity`.
       - string
       - 0..1
       - The orientation of the molecular variation component.
+
+**Inherits:** :ref:`Entity`
+
+**Used in:** :ref:`DerivativeMolecule`

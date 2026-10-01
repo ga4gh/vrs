@@ -1,0 +1,17 @@
+type: RelativeSequenceLocation
+baseSequenceLocation:
+  type: SequenceLocation
+  sequenceReference:
+    type: SequenceReference
+    refgetAccession: SQ.2NkFm8HK88MqeNkCgj78KidCAXgnsfV1
+  start: 926025
+  end: 926026
+mappedSequenceLocation:
+  type: SequenceOffsetLocation
+  sequenceReference:
+    type: SequenceReference
+    refgetAccession: SQ.cXRaN1IhgR6Mg9U-qafH2Be6IuQgB6Ox
+  anchor: 1118
+  anchorOrientation: left
+  offsetStart: 12
+  offsetEnd: 13

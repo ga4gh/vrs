@@ -1,5 +1,5 @@
 import json
-from ga4gh.gks.metaschema.tools.source_proc import YamlSchemaProcessor
+from ga4gh.gkm.metaschema.tools.source_proc import YamlSchemaProcessor
 import pytest
 
 from config import vrs_source_path, validator, root_path
@@ -96,6 +96,11 @@ def test_ga4gh_inherent_properties_exist(json_schema):
 
 def test_type_property_matches_class_name(json_schema):
     for class_name, schema in json_schema.items():
+        # Abstract classes leave `type` open (no const) for concrete
+        # subclasses to narrow; only concrete classes fix a `type` const.
+        if class_name in p.defs and p.class_is_abstract(class_name):
+            continue
+
         properties = schema.get("properties", {})
 
         if "type" not in properties:

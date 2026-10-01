@@ -1,0 +1,9 @@
+# CopyNumberCount missing required `copies`.
+type: CopyNumberCount
+location:
+  type: SequenceLocation
+  sequenceReference:
+    type: SequenceReference
+    refgetAccession: SQ.9W6SPR3RMCHWCSGJLQHE6KBOD285V5SW
+  start: 100
+  end: 150

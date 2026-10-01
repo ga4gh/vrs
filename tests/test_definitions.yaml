@@ -46,8 +46,91 @@ tests:
     description: A simple RLE expansion from SPDI representation
     schema: vrs
     definition: Allele
+  # Concrete-class coverage: a minimal valid instance for every concrete class
+  # not otherwise exercised above (see tests/test_coverage.py).
+  - test_file: coverage/sequence_reference.yaml
+    description: A SequenceReference
+    schema: vrs
+    definition: SequenceReference
+  - test_file: coverage/sequence_location.yaml
+    description: A SequenceLocation with start/end on a SequenceReference
+    schema: vrs
+    definition: SequenceLocation
+  - test_file: coverage/sequence_offset_location.yaml
+    description: A SequenceOffsetLocation anchored on a transcript
+    schema: vrs
+    definition: SequenceOffsetLocation
+  - test_file: coverage/relative_sequence_location.yaml
+    description: A RelativeSequenceLocation mapping a base to a mapped location
+    schema: vrs
+    definition: RelativeSequenceLocation
+  - test_file: coverage/length_expression.yaml
+    description: A LengthExpression
+    schema: vrs
+    definition: LengthExpression
+  - test_file: coverage/literal_sequence_expression.yaml
+    description: A LiteralSequenceExpression
+    schema: vrs
+    definition: LiteralSequenceExpression
+  - test_file: coverage/reference_length_expression.yaml
+    description: A ReferenceLengthExpression
+    schema: vrs
+    definition: ReferenceLengthExpression
+  - test_file: coverage/relative_allele.yaml
+    description: A RelativeAllele with base and mapped states
+    schema: vrs
+    definition: RelativeAllele
+  - test_file: coverage/copy_number_count.yaml
+    description: A CopyNumberCount with an indefinite copies range
+    schema: vrs
+    definition: CopyNumberCount
+  - test_file: coverage/copy_number_change.yaml
+    description: A CopyNumberChange (low-level gain)
+    schema: vrs
+    definition: CopyNumberChange
+  - test_file: coverage/traversal_block.yaml
+    description: A TraversalBlock wrapping an Adjacency component
+    schema: vrs
+    definition: TraversalBlock
   - test_file: invalid_adjacency.yaml
     description: An adjacency with an adjoinedSequence incorrectly containing both a start and end
     schema: vrs
     definition: Adjacency
+    shouldValidationFail: true
+  # Negative cases: each MUST fail validation, asserting that required fields,
+  # closure (additionalProperties: false) and enums are actually enforced.
+  - test_file: invalid/allele-missing-state.yaml
+    description: Allele missing required `state`
+    schema: vrs
+    definition: Allele
+    shouldValidationFail: true
+  - test_file: invalid/allele-additional-property.yaml
+    description: Allele with an undefined property (closure)
+    schema: vrs
+    definition: Allele
+    shouldValidationFail: true
+  - test_file: invalid/copy-number-change-bad-copychange.yaml
+    description: CopyNumberChange with an out-of-enum `copyChange`
+    schema: vrs
+    definition: CopyNumberChange
+    shouldValidationFail: true
+  - test_file: invalid/copy-number-count-missing-copies.yaml
+    description: CopyNumberCount missing required `copies`
+    schema: vrs
+    definition: CopyNumberCount
+    shouldValidationFail: true
+  - test_file: invalid/sequence-reference-missing-refget.yaml
+    description: SequenceReference missing required `refgetAccession`
+    schema: vrs
+    definition: SequenceReference
+    shouldValidationFail: true
+  - test_file: invalid/sequence-location-additional-property.yaml
+    description: SequenceLocation with an undefined property (closure)
+    schema: vrs
+    definition: SequenceLocation
+    shouldValidationFail: true
+  - test_file: invalid/extension-missing-value.yaml
+    description: Imported gkm-core Extension missing required `value`
+    schema: vrs
+    definition: Extension
     shouldValidationFail: true

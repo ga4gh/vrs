@@ -1,6 +1,7 @@
-.. note:: This data class is at a **trial use** maturity level and may \
-    change in future releases. Maturity \
-    levels are described in the :ref:`maturity-model`.
+.. admonition:: Trial Use
+    :class: note
+
+    May change in future releases. See |maturity-model|.
 
 **Computational Definition**
 
@@ -41,6 +42,11 @@ Some Adjacency attributes are inherited from :ref:`Variation`.
       - string
       - 0..1
       - The 'logical' identifier of the Entity in the system of record, e.g. a UUID.  This 'id' is unique within a given system, but may or may not be globally unique outside the system. It is used within a system to reference an object from another.
+   *  - type
+      -
+      - string
+      - 1..1
+      - MUST be "Adjacency".
    *  - name
       -
       - string
@@ -80,11 +86,6 @@ Some Adjacency attributes are inherited from :ref:`Variation`.
       - :ref:`Expression`
       - 0..m
       -
-   *  - type
-      -
-      - string
-      - 1..1
-      - MUST be "Adjacency".
    *  - adjoinedSequences
       -
                         .. raw:: html
@@ -106,3 +107,7 @@ Some Adjacency attributes are inherited from :ref:`Variation`.
       - boolean
       - 0..1
       - A flag indicating if coordinate ambiguity in the adjoined sequences is from sequence homology (true) or other uncertainty, such as instrument ambiguity (false).
+
+**Inherits:** :ref:`MolecularVariation`
+
+**Used in:** :ref:`TraversalBlock`

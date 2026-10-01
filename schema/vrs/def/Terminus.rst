@@ -1,6 +1,7 @@
-.. warning:: This data class is at a **draft** maturity level and may \
-    change significantly in future releases. Maturity \
-    levels are described in the :ref:`maturity-model`.
+.. admonition:: Draft
+    :class: warning
+
+    May change significantly in future releases. See |maturity-model|.
 
 **Computational Definition**
 
@@ -41,6 +42,11 @@ Some Terminus attributes are inherited from :ref:`Variation`.
       - string
       - 0..1
       - The 'logical' identifier of the Entity in the system of record, e.g. a UUID.  This 'id' is unique within a given system, but may or may not be globally unique outside the system. It is used within a system to reference an object from another.
+   *  - type
+      -
+      - string
+      - 1..1
+      - MUST be "Terminus".
    *  - name
       -
       - string
@@ -80,13 +86,12 @@ Some Terminus attributes are inherited from :ref:`Variation`.
       - :ref:`Expression`
       - 0..m
       -
-   *  - type
-      -
-      - string
-      - 1..1
-      - MUST be "Terminus".
    *  - location
       -
       - :ref:`iriReference` | :ref:`Location`
       - 1..1
       - The location of the terminus.
+
+**Inherits:** :ref:`MolecularVariation`
+
+**Used in:** :ref:`DerivativeMolecule`

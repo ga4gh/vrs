@@ -1,0 +1,20 @@
+type: TraversalBlock
+orientation: forward
+component:
+  type: Adjacency
+  linker:
+    type: LiteralSequenceExpression
+    sequence: GTC
+  adjoinedSequences:
+    - type: SequenceLocation
+      sequenceReference:
+        type: SequenceReference
+        refgetAccession: SQ.S_KjnFVz-FE7M0W6yoaUDgYxLPc1jyWU
+        residueAlphabet: na
+      end: 123
+    - type: SequenceLocation
+      sequenceReference:
+        type: SequenceReference
+        refgetAccession: SQ.9KdcA9ZpY1Cpvxvg8bMSLYDUpsX6GDLO
+        residueAlphabet: na
+      start: 500

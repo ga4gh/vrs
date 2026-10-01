@@ -1,0 +1,9 @@
+type: CopyNumberCount
+copies: [3, null]
+location:
+  type: SequenceLocation
+  sequenceReference:
+    type: SequenceReference
+    refgetAccession: SQ.jdEWLvLvT8827O59m1Agh5H3n6kTzBsJ
+  start: 44905795
+  end: 44909393
