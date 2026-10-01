@@ -1,6 +1,6 @@
 {
    "$schema": "https://json-schema.org/draft/2020-12/schema",
-   "$id": "https://w3id.org/ga4gh/schema/vrs/2.1.1/json/Ga4ghIdentifiableObject",
+   "$id": "https://w3id.org/ga4gh/schema/vrs/v1/json/Ga4ghIdentifiableObject",
    "title": "Ga4ghIdentifiableObject",
    "type": "object",
    "maturity": "trial use",
