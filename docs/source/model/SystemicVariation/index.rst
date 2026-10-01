@@ -10,9 +10,8 @@ Collectively, these types of variation are called systemic variation.
 
 .. include::  ../../def/vrs/SystemicVariation.rst
 
-**Subclasses**
-
 .. toctree::
+   :hidden:
    :titlesonly:
 
    CopyNumberCount

@@ -1,0 +1,6 @@
+type: SequenceLocation
+sequenceReference:
+  type: SequenceReference
+  refgetAccession: SQ.F-LrLMe1SRpfUZHkQmvkVKFEGaoDeHul
+start: 44908821
+end: 44908822

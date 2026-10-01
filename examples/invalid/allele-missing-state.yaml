@@ -1,0 +1,9 @@
+# Allele missing required `state`.
+type: Allele
+location:
+  type: SequenceLocation
+  sequenceReference:
+    type: SequenceReference
+    refgetAccession: SQ.9W6SPR3RMCHWCSGJLQHE6KBOD285V5SW
+  start: 100
+  end: 150

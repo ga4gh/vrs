@@ -1,25 +1,15 @@
-.. note:: This data class is at a **trial use** maturity level and may \
-    change in future releases. Maturity \
-    levels are described in the :ref:`maturity-model`.
+.. admonition:: Trial Use
+    :class: note
+
+    May change in future releases. See |maturity-model|.
+
+**Abstract Class** — not instantiated directly; concrete subclasses inherit its attributes.
+
+**Sealed** — Variation has a closed, exhaustive set of concrete subclasses; every one is listed below. No other subclass is permitted, and a conforming instance must be exactly one of these types.
 
 **Computational Definition**
 
 A representation of the state of one or more biomolecules.
-
-**GA4GH Digest**
-
-.. list-table::
-    :class: clean-wrap
-    :header-rows: 1
-    :align: left
-    :widths: auto
-
-    *  - Prefix
-       - Inherent
-
-    *  - None
-       - ['type']
-
 
 **Information Model**
 
@@ -45,7 +35,7 @@ Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
       -
       - string
       - 1..1
-      -
+      - The name of the class that is instantiated by a data object representing the Entity.
    *  - name
       -
       - string
@@ -85,3 +75,19 @@ Some Variation attributes are inherited from :ref:`Ga4ghIdentifiableObject`.
       - :ref:`Expression`
       - 0..m
       -
+
+This class must match **one of** the following:
+
+* :ref:`Adjacency`
+* :ref:`Allele`
+* :ref:`CisPhasedBlock`
+* :ref:`CopyNumberChange`
+* :ref:`CopyNumberCount`
+* :ref:`DerivativeMolecule`
+* :ref:`RelativeAllele`
+* :ref:`Terminus`
+
+
+**Inherits:** :ref:`Ga4ghIdentifiableObject`
+
+**Subclasses:** :ref:`MolecularVariation`, :ref:`SystemicVariation`

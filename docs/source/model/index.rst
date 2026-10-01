@@ -1,5 +1,5 @@
-Concepts
-!!!!!!!!
+Model
+!!!!!
 
 VRS is a collection of data models or concepts that are used together to represent molecular
 and systemic variation. An inheritance view is available in the :ref:`ClassDiagram` appendix.

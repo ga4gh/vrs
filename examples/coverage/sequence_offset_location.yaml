@@ -1,0 +1,8 @@
+type: SequenceOffsetLocation
+sequenceReference:
+  type: SequenceReference
+  refgetAccession: SQ.cXRaN1IhgR6Mg9U-qafH2Be6IuQgB6Ox
+anchor: 1118
+anchorOrientation: left
+offsetStart: 12
+offsetEnd: 13

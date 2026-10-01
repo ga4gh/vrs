@@ -1,6 +1,7 @@
-.. note:: This data class is at a **trial use** maturity level and may \
-    change in future releases. Maturity \
-    levels are described in the :ref:`maturity-model`.
+.. admonition:: Trial Use
+    :class: note
+
+    May change in future releases. See |maturity-model|.
 
 **Computational Definition**
 
