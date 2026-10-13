@@ -44,7 +44,8 @@ Patch Version Increment
     allowed ``ConceptSet.concepts`` member, and no VRS class
     uses :ref:`ConceptSet`. VRS classes that inherit from GKM Core's
     ``Entity`` (:ref:`Ga4ghIdentifiableObject`, :ref:`SequenceExpression`,
-    :ref:`SequenceOffsetLocation`, :ref:`TraversalBlock`) or ``Element``
+    :ref:`SequenceOffsetLocation`, :ref:`SequenceReference`,
+    :ref:`TraversalBlock`) or ``Element``
     (:ref:`Expression`) see no property changes, since 1.3.0 only marks those
     root classes abstract, by @larrybabb in
     https://github.com/ga4gh/vrs/pull/718
@@ -108,7 +109,7 @@ Patch Version Increment
   * fixes inconsistent ``seed_length`` formatting in normalization docs by
     @harshitmishra00182-ops in https://github.com/ga4gh/vrs/pull/702
   * bumps the GKS-core submodule from 1.0.0 to 1.1.0 and, later, to
-    1.2.0-ballot.2026-07; the only classes touched upstream
+    1.2.0 (by then renamed GKM Core); the only classes touched upstream
     (:ref:`MappableConcept`, :ref:`ConceptSet`) are not inherited or embedded
     by any VRS class, so neither bump carries a data-compatibility impact
     into VRS by @korikuzma and @ahwagner in
@@ -117,8 +118,8 @@ Patch Version Increment
     https://github.com/ga4gh/vrs/pull/647
   * fixes a few warnings, removes anonymous entries from search results by
     @jsstevenson in https://github.com/ga4gh/vrs/pull/646
-  * adds :ref:`ConceptSet` and reorders changelog by @korikuzma in
-    https://github.com/ga4gh/vrs/pull/666
+  * documents the imported GKS-core :ref:`ConceptSet` class and reorders the
+    changelog by @korikuzma in https://github.com/ga4gh/vrs/pull/666
   * auto-updates copyright year by @jsstevenson in
     https://github.com/ga4gh/vrs/pull/673
   * fixes refs, adds warnings check to CI/CD by @jsstevenson in

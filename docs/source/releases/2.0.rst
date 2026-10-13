@@ -1,14 +1,6 @@
 2.0
 !!!
 
-2.0.2
-@@@@@
-
-Summary of Changes
-##################
-
-  * bumps GKS-core version to include :ref:`ConceptSet`
-
 2.0.1
 @@@@@
 
