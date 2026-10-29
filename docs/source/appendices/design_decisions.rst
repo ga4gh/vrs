@@ -119,6 +119,7 @@ coordinates for insertions, but as inclusive coordinates for
 substitutions and deletions; in effect, the interpretation of
 coordinates depends on the variant type, which is an unfortunate
 coupling of distinct concepts.
+
 Use of value sets for VRS computed digests
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
