@@ -67,14 +67,14 @@ sequence content extends left (decreases) on the :ref:`SequenceReference`.
 .. figure:: ../../images/ex_simple_breakpoint.png
 
    **An example simple Adjacency.** The chromosome 1 sequence extends left from position 1:123 and so is defined
-   by the location `start`. The chromosome 2 sequence extends right from position 2:456 and so is defined by the
-   location `end`.
+   by the location `end`. The chromosome 2 sequence extends right from position 2:456 and so is defined by the
+   location `start`.
 
 .. figure:: ../../images/ex_revcomp_breakpoint.png
 
    **An example Adjacency with a reverse complement partner.** The chromosome 1 sequence extends left from
-   position 1:87337011 and so is defined by the location `start`. The chromosome 10 sequence *also* extends left
-   from position 10:36119127 and so is *also* defined by the location `start`. Reading left-to-right along this
+   position 1:87337011 and so is defined by the location `end`. The chromosome 10 sequence *also* extends left
+   from position 10:36119127 and so is *also* defined by the location `end`. Reading left-to-right along this
    adjacency one would expect reference sequence up to the adjacency and reverse complement sequence following.
 
 Normalization
