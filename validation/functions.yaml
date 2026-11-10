@@ -1,5 +1,4 @@
 # Validation tests for VR-schema functions
-# See notebooks/appendices/Validation%20Tests.ipynb
 
 # top-level keys are function names
 # in subkey contains key-value pairs of constructor arguments
