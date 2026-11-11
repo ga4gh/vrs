@@ -14,3 +14,75 @@ sha512t24u:
     in:
       blob: "ACGT"
     out: "aKF498dAxcJAqme6QYQ7EZ07-fiw8Kw2"
+
+# Allele normalization (docs/source/conventions/normalization.rst).
+# Unlike the tests above, these require reference sequence, which may be
+# retrieved by refgetAccession from any refget service.
+# out is the normalized Allele. Optional properties that are not part of
+# the digest (e.g. ReferenceLengthExpression.sequence) are omitted, so
+# compare outputs on digest-relevant properties only. The digests of these
+# outputs are tested in models.yaml.
+normalize:
+  - name: "Insertion of AA into (A)9 selects repeatSubunitLength 1"
+    # NC_000001.11:[236900409,236900418) is (A)9. The seed_length is 2,
+    # and both 1 and 2 are valid factors; step 5.c.i selects the smallest.
+    in:
+      allele:
+        type: Allele
+        location:
+          type: SequenceLocation
+          sequenceReference:
+            type: SequenceReference
+            refgetAccession: SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO
+            id: NC_000001.11
+          start: 236900418
+          end: 236900418
+        state:
+          type: LiteralSequenceExpression
+          sequence: AA
+    out:
+      type: Allele
+      location:
+        type: SequenceLocation
+        sequenceReference:
+          type: SequenceReference
+          refgetAccession: SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO
+          id: NC_000001.11
+        start: 236900409
+        end: 236900418
+      state:
+        type: ReferenceLengthExpression
+        length: 11
+        repeatSubunitLength: 1
+  - name: "Insertion of GTGT into (GT)5 selects repeatSubunitLength 2"
+    # NC_000001.11:[1007173,1007183) is (GT)5. The seed_length is 4;
+    # factor 1 is not valid, while 2 and 4 are; step 5.c.i selects the
+    # smallest valid factor.
+    in:
+      allele:
+        type: Allele
+        location:
+          type: SequenceLocation
+          sequenceReference:
+            type: SequenceReference
+            refgetAccession: SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO
+            id: NC_000001.11
+          start: 1007183
+          end: 1007183
+        state:
+          type: LiteralSequenceExpression
+          sequence: GTGT
+    out:
+      type: Allele
+      location:
+        type: SequenceLocation
+        sequenceReference:
+          type: SequenceReference
+          refgetAccession: SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO
+          id: NC_000001.11
+        start: 1007173
+        end: 1007183
+      state:
+        type: ReferenceLengthExpression
+        length: 14
+        repeatSubunitLength: 2

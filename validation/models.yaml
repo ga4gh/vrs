@@ -244,6 +244,59 @@ Allele:
       ga4gh_digest: Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT
       ga4gh_identify: ga4gh:VA.Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT
       ga4gh_serialize: '{"location":"nQGBuvRQOLEboA5TYtcz975fp_GulxbZ","state":{"length":11,"repeatSubunitLength":3,"type":"ReferenceLengthExpression"},"type":"Allele"}'
+  # The next two Alleles are the normalized outputs of the normalize tests in
+  # functions.yaml. VRS 2.1 selects the smallest valid repeatSubunitLength for
+  # reference-derived insertions; VRS 2.0 selected the largest. The
+  # ga4gh_2_0_* outputs give the identifiers VRS 2.0 normalization produced
+  # for the same variants.
+  - name: "NC_000001.11:236900409:AAAAAAAAA:AAAAAAAAAAA w/ReferenceLengthExpression"
+    in:
+      type: Allele
+      expressions:
+        - syntax: spdi
+          value: NC_000001.11:236900409:AAAAAAAAA:AAAAAAAAAAA
+      location:
+        type: SequenceLocation
+        sequenceReference:
+          type: SequenceReference
+          refgetAccession: SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO
+          id: NC_000001.11
+        start: 236900409
+        end: 236900418
+      state:
+        type: ReferenceLengthExpression
+        length: 11
+        repeatSubunitLength: 1
+    out:
+      ga4gh_digest: b3Q0IQnr9q2zhTZtnn5vYvO1-wQL2yQv
+      ga4gh_identify: ga4gh:VA.b3Q0IQnr9q2zhTZtnn5vYvO1-wQL2yQv
+      ga4gh_serialize: '{"location":"shRADI_uRNo_P7bKGqD7Hrsw6iAkXciO","state":{"length":11,"repeatSubunitLength":1,"type":"ReferenceLengthExpression"},"type":"Allele"}'
+      ga4gh_2_0_identify: ga4gh:VA.ZaXCGjhs7Tu13b0azh6oIxiZzKfkLOhp
+      ga4gh_2_0_serialize: '{"location":"shRADI_uRNo_P7bKGqD7Hrsw6iAkXciO","state":{"length":11,"repeatSubunitLength":2,"type":"ReferenceLengthExpression"},"type":"Allele"}'
+  - name: "NC_000001.11:1007173:GTGTGTGTGT:GTGTGTGTGTGTGT w/ReferenceLengthExpression"
+    in:
+      type: Allele
+      expressions:
+        - syntax: spdi
+          value: NC_000001.11:1007173:GTGTGTGTGT:GTGTGTGTGTGTGT
+      location:
+        type: SequenceLocation
+        sequenceReference:
+          type: SequenceReference
+          refgetAccession: SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO
+          id: NC_000001.11
+        start: 1007173
+        end: 1007183
+      state:
+        type: ReferenceLengthExpression
+        length: 14
+        repeatSubunitLength: 2
+    out:
+      ga4gh_digest: ahwf1XfAC63L8RgfDNqv0jORnM-W31SC
+      ga4gh_identify: ga4gh:VA.ahwf1XfAC63L8RgfDNqv0jORnM-W31SC
+      ga4gh_serialize: '{"location":"LsIlhfQVh7OUnUZCACzXcZJXica-2Bn0","state":{"length":14,"repeatSubunitLength":2,"type":"ReferenceLengthExpression"},"type":"Allele"}'
+      ga4gh_2_0_identify: ga4gh:VA.kkbrHw87FMI-ePHgyzrCFAFTqVXJqTkQ
+      ga4gh_2_0_serialize: '{"location":"LsIlhfQVh7OUnUZCACzXcZJXica-2Bn0","state":{"length":14,"repeatSubunitLength":4,"type":"ReferenceLengthExpression"},"type":"Allele"}'
 
 RelativeAllele:
   - name: NC_000001.11(NM_001385641.1):c.609+13G>A (positive strand)
