@@ -73,16 +73,21 @@ In order to maximize portability and to insulate implementations from
 decisions about external data sources, implementers should consider
 writing an abstract data proxy interface to define a service, and
 then implement this interface for each data backend to be
-supported. The data proxy interface defines three methods:
+supported. The data proxy interface defines four methods:
 
 * ``get_sequence(identifier, start, end)``: Given a sequence
   identifier and start and end coordinates, return the corresponding
   sequence segment.
-* ``get_metadata(identifier)``: Given a sequence identifier, return a
-  dictionary of length, alphabet, and known aliases.
+* ``get_length(identifier)``: Given a sequence identifier, return the
+  length of the sequence as an integer.
+* ``get_aliases(identifier)``: Given a sequence identifier, return a
+  list of known aliases for the sequence.
 * ``translate_sequence_identifier(identifier, namespace)``: Given a
   sequence identifier, return all aliases in the specified
   namespace. Zero or more aliases may be returned.
+
+Implementations MAY provide additional metadata that is not required
+for VRS operations.
 
 The |vrs-python| `DataProxy class
 <https://github.com/ga4gh/vrs-python/blob/main/src/ga4gh/vrs/dataproxy.py>`__
@@ -110,22 +115,26 @@ To get the RefGet accession from a public accession identifier:
     seqrepo_dataproxy.derive_refget_accession("refseq:NM_002439.5")
     'SQ.Pw3Ch0x3XWD6ljsnIfmk_NERcZCI9sNM'
 
-To get sequence length, aliases, and other optional information for a given identifier:
+To get the sequence length for a given identifier:
 
 .. code:: ipython3
 
-    seqrepo_dataproxy.get_metadata("refseq:NM_000551.3")
-    {'added': '2016-08-24T05:03:11Z',
-    'aliases': ['MD5:215137b1973c1a5afcf86be7d999574a',
+    seqrepo_dataproxy.get_length("refseq:NM_000551.3")
+    4560
+
+To get the known aliases for a given identifier:
+
+.. code:: ipython3
+
+    seqrepo_dataproxy.get_aliases("refseq:NM_000551.3")
+    ['MD5:215137b1973c1a5afcf86be7d999574a',
       'NCBI:NM_000551.3',
       'refseq:NM_000551.3',
       'SEGUID:T12L0p2X5E8DbnL0+SwI4Wc1S6g',
       'SHA1:4f5d8bd29d97e44f036e72f4f92c08e167354ba8',
       'VMC:GS_v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_',
       'sha512t24u:v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_',
-      'ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_'],
-    'alphabet': 'ACGT',
-    'length': 4560}
+      'ga4gh:SQ.v_QTc1p-MUYdgrRv4LMT6ByXIOsdw3C_']
 
 To get the specified sequence or subsequence:
 
