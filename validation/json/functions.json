@@ -12,5 +12,87 @@
       },
       "out": "aKF498dAxcJAqme6QYQ7EZ07-fiw8Kw2"
     }
+  ],
+  "normalize": [
+    {
+      "name": "Insertion of AA into (A)9 selects repeatSubunitLength 1",
+      "in": {
+        "allele": {
+          "type": "Allele",
+          "location": {
+            "type": "SequenceLocation",
+            "sequenceReference": {
+              "type": "SequenceReference",
+              "refgetAccession": "SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO",
+              "id": "NC_000001.11"
+            },
+            "start": 236900418,
+            "end": 236900418
+          },
+          "state": {
+            "type": "LiteralSequenceExpression",
+            "sequence": "AA"
+          }
+        }
+      },
+      "out": {
+        "type": "Allele",
+        "location": {
+          "type": "SequenceLocation",
+          "sequenceReference": {
+            "type": "SequenceReference",
+            "refgetAccession": "SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO",
+            "id": "NC_000001.11"
+          },
+          "start": 236900409,
+          "end": 236900418
+        },
+        "state": {
+          "type": "ReferenceLengthExpression",
+          "length": 11,
+          "repeatSubunitLength": 1
+        }
+      }
+    },
+    {
+      "name": "Insertion of GTGT into (GT)5 selects repeatSubunitLength 2",
+      "in": {
+        "allele": {
+          "type": "Allele",
+          "location": {
+            "type": "SequenceLocation",
+            "sequenceReference": {
+              "type": "SequenceReference",
+              "refgetAccession": "SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO",
+              "id": "NC_000001.11"
+            },
+            "start": 1007183,
+            "end": 1007183
+          },
+          "state": {
+            "type": "LiteralSequenceExpression",
+            "sequence": "GTGT"
+          }
+        }
+      },
+      "out": {
+        "type": "Allele",
+        "location": {
+          "type": "SequenceLocation",
+          "sequenceReference": {
+            "type": "SequenceReference",
+            "refgetAccession": "SQ.Ya6Rs7DHhDeg7YaOSg1EoNi3U_nQ9SvO",
+            "id": "NC_000001.11"
+          },
+          "start": 1007173,
+          "end": 1007183
+        },
+        "state": {
+          "type": "ReferenceLengthExpression",
+          "length": 14,
+          "repeatSubunitLength": 2
+        }
+      }
+    }
   ]
 }
