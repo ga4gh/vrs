@@ -318,7 +318,9 @@
         "ga4gh_identify": "ga4gh:VA.0AePZIWZUNsUlQTamyLrjm2HWUw2opLt",
         "ga4gh_1_3_identify": "ga4gh:VA.CxiA_hvYbkD8Vqwjhx5AYuyul4mtlkpD",
         "ga4gh_serialize": "{\"location\":\"wIlaGykfwHIpPY2Fcxtbx4TINbbODFVz\",\"state\":{\"sequence\":\"T\",\"type\":\"LiteralSequenceExpression\"},\"type\":\"Allele\"}",
-        "ga4gh_1_3_serialize": "{\"location\":\"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg\",\"state\":{\"sequence\":\"T\",\"type\":\"LiteralSequenceExpression\"},\"type\":\"Allele\"}"
+        "ga4gh_1_3_serialize": "{\"location\":\"QrRSuBj-VScAGV_gEdxNgsnh41jYH1Kg\",\"state\":{\"sequence\":\"T\",\"type\":\"LiteralSequenceExpression\"},\"type\":\"Allele\"}",
+        "ga4gh_2_0_identify": "ga4gh:VA.0AePZIWZUNsUlQTamyLrjm2HWUw2opLt",
+        "ga4gh_2_0_serialize": "{\"location\":\"wIlaGykfwHIpPY2Fcxtbx4TINbbODFVz\",\"state\":{\"sequence\":\"T\",\"type\":\"LiteralSequenceExpression\"},\"type\":\"Allele\"}"
       }
     },
     {
@@ -350,7 +352,9 @@
       "out": {
         "ga4gh_digest": "Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT",
         "ga4gh_identify": "ga4gh:VA.Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT",
-        "ga4gh_serialize": "{\"location\":\"nQGBuvRQOLEboA5TYtcz975fp_GulxbZ\",\"state\":{\"length\":11,\"repeatSubunitLength\":3,\"type\":\"ReferenceLengthExpression\"},\"type\":\"Allele\"}"
+        "ga4gh_serialize": "{\"location\":\"nQGBuvRQOLEboA5TYtcz975fp_GulxbZ\",\"state\":{\"length\":11,\"repeatSubunitLength\":3,\"type\":\"ReferenceLengthExpression\"},\"type\":\"Allele\"}",
+        "ga4gh_2_0_identify": "ga4gh:VA.Oop4kjdTtKcg1kiZjIJAAR3bp7qi4aNT",
+        "ga4gh_2_0_serialize": "{\"location\":\"nQGBuvRQOLEboA5TYtcz975fp_GulxbZ\",\"state\":{\"length\":11,\"repeatSubunitLength\":3,\"type\":\"ReferenceLengthExpression\"},\"type\":\"Allele\"}"
       }
     },
     {
