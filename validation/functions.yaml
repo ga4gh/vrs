@@ -1,5 +1,14 @@
 # Validation tests for VR-schema functions
 
+# Recompute expected values independently of the implementations under test.
+# For models.yaml, follow the target schema and
+# docs/source/conventions/computed_identifiers.rst. Use the VRS 1.3 rules for
+# `ga4gh_1_3_*` entries.
+#
+# For `sha512t24u`, hash `in.blob` as UTF-8 with SHA-512 and encode the first
+# 24 bytes of the digest as unpadded base64url.
+# Run `make -C validation -B` from the repository root to refresh both JSON files.
+
 # top-level keys are function names
 # in subkey contains key-value pairs of constructor arguments
 # out subkey contains output of function on "in" arguments
