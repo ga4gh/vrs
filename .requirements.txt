@@ -1,6 +1,7 @@
 pytest
 jsonschema
 referencing
+ipython
 pyyaml
 ga4gh.gkm.metaschema == 0.4.8
 sphinx ~= 8.1.3
